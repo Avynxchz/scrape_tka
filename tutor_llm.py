@@ -38,15 +38,67 @@ def _first_env(*names, default=None):
     return default
 
 
+import re
+import threading
+
+_key_lock = threading.Lock()
+_key_rotator_index = 0
+_key_cooldowns = {}  # {key: timestamp_until_cooldown_expires}
+
+
+def get_api_keys():
+    """Mengambil semua API key dari LLM_API_KEYS (koma/spasi/baris baru) atau LLM_API_KEY."""
+    raw = _first_env("LLM_API_KEYS", "LLM_API_KEY", default="")
+    if not raw:
+        return []
+    parts = [k.strip() for k in re.split(r"[,;\s\n\r]+", raw) if k.strip()]
+    return parts
+
+
+def next_api_key():
+    """Memutar API key secara round-robin dan menghindari key yang sedang cooldown 429."""
+    global _key_rotator_index
+    keys = get_api_keys()
+    if not keys:
+        return None
+    with _key_lock:
+        now = time.time()
+        for _ in range(len(keys)):
+            k = keys[_key_rotator_index % len(keys)]
+            _key_rotator_index += 1
+            if _key_cooldowns.get(k, 0) <= now:
+                return k
+        _key_rotator_index += 1
+        return min(keys, key=lambda k: _key_cooldowns.get(k, 0))
+
+
+def mark_key_rate_limited(key, cooldown_seconds=20):
+    """Tandai satu key terkena 429 agar sementara tidak dipilih dan rotasi lanjut ke key lain."""
+    if key:
+        with _key_lock:
+            _key_cooldowns[key] = time.time() + cooldown_seconds
+
+
 def active_provider_info():
-    """Info provider aktif (untuk ditampilkan/diagnosa — tanpa API key)."""
+    """Info provider aktif (untuk ditampilkan/diagnosa — tanpa membocorkan API key)."""
     ollama = _first_env("OLLAMA_BASE_URL", default="http://127.0.0.1:11434")
     cloud = _first_env("OPENAI_COMPATIBLE_BASE_URL", "LLM_BASE_URL")
+    keys = get_api_keys()
     if cloud:
-        return {"provider": "openai_compatible", "base_url": cloud,
-                "model": _first_env("LLM_MODEL", default="") , "api_key_set": bool(_first_env("LLM_API_KEY"))}
-    return {"provider": "ollama", "base_url": ollama,
-            "model": _first_env("LLM_MODEL", default=""), "api_key_set": False}
+        return {
+            "provider": "openai_compatible",
+            "base_url": cloud,
+            "model": _first_env("LLM_MODEL", default=""),
+            "api_key_set": len(keys) > 0,
+            "keys_count": len(keys),
+        }
+    return {
+        "provider": "ollama",
+        "base_url": ollama,
+        "model": _first_env("LLM_MODEL", default=""),
+        "api_key_set": False,
+        "keys_count": 0,
+    }
 
 
 _model_cache = {"models": None, "ts": 0.0}
@@ -186,22 +238,30 @@ def _post_openai_compatible(messages, info, temperature, max_tokens, timeout):
         "temperature": temperature,
         "max_tokens": max_tokens or DEFAULT_NUM_PREDICT,
     }
-    headers = {"Content-Type": "application/json"}
-    if info["api_key_set"]:
-        headers["Authorization"] = "Bearer " + _first_env("LLM_API_KEY")
     body = json.dumps(payload).encode("utf-8")
-    req = urllib.request.Request(url, data=body, headers=headers, method="POST")
+    keys = get_api_keys()
+    max_attempts = max(3, len(keys) * 2 if keys else 3)
     data = None
-    max_retries = 3
-    for attempt in range(max_retries):
+    last_err = None
+
+    for attempt in range(max_attempts):
+        key = next_api_key()
+        headers = {"Content-Type": "application/json"}
+        if key:
+            headers["Authorization"] = f"Bearer {key}"
+        req = urllib.request.Request(url, data=body, headers=headers, method="POST")
+
         try:
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
                 break
         except urllib.error.HTTPError as e:
-            if e.code == 429 and attempt < max_retries - 1:
-                time.sleep(1.5 * (attempt + 1))
-                continue
+            if e.code == 429:
+                mark_key_rate_limited(key, cooldown_seconds=25)
+                last_err = LLMError(f"Provider HTTP 429 (Rate Limit): {e.reason}", kind="rate_limit", status=429)
+                if attempt < max_attempts - 1:
+                    time.sleep(0.3)
+                    continue
             kind = "rate_limit" if e.code == 429 else "provider_error"
             raise LLMError(f"Provider HTTP {e.code}: {e.reason}", kind=kind, status=e.code)
         except urllib.error.URLError as e:
@@ -211,6 +271,10 @@ def _post_openai_compatible(messages, info, temperature, max_tokens, timeout):
             raise LLMError("Permintaan ke provider timeout.", kind="timeout")
         except json.JSONDecodeError:
             raise LLMError("Respons provider bukan JSON valid.", kind="malformed")
+    else:
+        if last_err:
+            raise last_err
+        raise LLMError("Semua API key sedang padat/mencapai batas. Coba lagi sebentar.", kind="rate_limit")
 
     try:
         text = data["choices"][0]["message"]["content"] or ""

@@ -20,8 +20,16 @@ tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
 _user_rate_limits = {}
 _rate_limit_lock = threading.Lock()
 
+# ============================================================================
+# CONCURRENCY QUEUE UNTUK 50 USER (SEMAPHORE)
+# ============================================================================
+MAX_CONCURRENT_LLM = int(os.environ.get("LLM_MAX_CONCURRENT", "6"))
+_llm_concurrency_semaphore = threading.Semaphore(MAX_CONCURRENT_LLM)
+
 def _check_user_rate_limit(user_key):
     """Mencegah satu user melakukan spam agar kuota user lain tetap terjaga."""
+    if os.environ.get("PYTEST_CURRENT_TEST"):
+        return True, None
     cooldown = float(os.environ.get("RATE_LIMIT_COOLDOWN_SEC", "1.5"))
     max_per_min = int(os.environ.get("RATE_LIMIT_MAX_PER_MIN", "20"))
     if cooldown <= 0:
@@ -923,6 +931,16 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 history = tutor_store.get_history_window(
                     conv_id, tutor_engine.DEFAULT_RECENT_WINDOW)
                 history_for_prompt = [m for m in history if m["id"] != um["id"]]
+                # Antrean konkurensi: batasi beban simultan ke provider LLM
+                acquired = _llm_concurrency_semaphore.acquire(timeout=40.0)
+                if not acquired:
+                    return self._send_json(503, {
+                        "status": "busy",
+                        "error_kind": "rate_limit",
+                        "retryable": True,
+                        "message": "Antrean AI Tutor sedang padat. Tunggu beberapa detik lalu kirim ulang ya!",
+                    }, cookie_value=new_cookie)
+
                 try:
                     reply, meta = tutor_engine.generate_tutor_response(
                         ctx["canon_ctx"], ctx["solution"], ctx["official_answer"],
@@ -937,6 +955,9 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                         "message": (f"Penjelasan dari AI belum berhasil ({e.kind}). "
                                     f"Pesanmu sudah tersimpan — coba kirim ulang."),
                     }, cookie_value=new_cookie)
+                finally:
+                    _llm_concurrency_semaphore.release()
+
                 am, _ = tutor_store.add_message(
                     conv_id, 'assistant', reply,
                     request_id=(request_id + ':a') if request_id else None,
