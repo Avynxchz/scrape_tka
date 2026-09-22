@@ -1,8 +1,18 @@
 import json
 import os
 import re
+import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, BASE_DIR)
+
+# ============================ INVARIANT KUNCI ============================
+# AI enrichment boleh memperkaya soal (pembahasan, glosarium, tips,
+# soal_serupa, metadata belajar) tetapi TIDAK BOLEH menentukan atau
+# menimpa kunci_jawaban otoritatif. Lihat _key_guard.py.
+from _key_guard import enforce_answer_key_invariant, slug_from_output  # noqa: E402
+
+ALLOW_MISSING = False  # diisi via --allow-missing-keys di __main__
 
 def clean_html_and_text(text):
     if not text:
@@ -263,11 +273,11 @@ def enrich_dataset(subject_key, paket_num, raw_json_path, output_json_path):
 
         if subject_key == "matematika":
             # If already enriched, preserve existing rich pembahasan if available
+            # CATATAN: kunci_jawaban TIDAK PERNAH ditulis di sini (dulu "A" hardcoded — bug).
             pemb = q.get('pembahasan')
             if not pemb or not pemb.get('konsep_kunci'):
                 topik = "Matematika Terapan & Aljabar"
                 q['topik'] = topik
-                q['kunci_jawaban'] = "A"
                 q['pembahasan'] = {
                     "glosarium_simbol": [],
                     "mengapa_begini": "Analisis numerasi logis berbasis pemodelan data.",
@@ -283,9 +293,8 @@ def enrich_dataset(subject_key, paket_num, raw_json_path, output_json_path):
                 }
                 q['quick_prompts'] = ["Apa konsep utama soal ini?", "Bagaimana cara cepat menyelesaikannya?"]
         elif subject_key == "bahasa_inggris":
-            topic, key, glos, why, concept, steps, tips, sim, qp = get_english_pedagogy(q_num, stim_text, prompt_text, options, tipe)
+            topic, _key_not_used, glos, why, concept, steps, tips, sim, qp = get_english_pedagogy(q_num, stim_text, prompt_text, options, tipe)
             q['topik'] = topic
-            q['kunci_jawaban'] = key
             q['pembahasan'] = {
                 "glosarium_simbol": glos,
                 "mengapa_begini": why,
@@ -296,9 +305,8 @@ def enrich_dataset(subject_key, paket_num, raw_json_path, output_json_path):
             q['soal_serupa'] = sim
             q['quick_prompts'] = qp
         elif subject_key == "ekonomi":
-            topic, key, glos, why, concept, steps, tips, sim, qp = get_ekonomi_pedagogy(q_num, stim_text, prompt_text, options, tipe)
+            topic, _key_not_used, glos, why, concept, steps, tips, sim, qp = get_ekonomi_pedagogy(q_num, stim_text, prompt_text, options, tipe)
             q['topik'] = topic
-            q['kunci_jawaban'] = key
             q['pembahasan'] = {
                 "glosarium_simbol": glos,
                 "mengapa_begini": why,
@@ -309,9 +317,8 @@ def enrich_dataset(subject_key, paket_num, raw_json_path, output_json_path):
             q['soal_serupa'] = sim
             q['quick_prompts'] = qp
         elif subject_key == "kewirausahaan":
-            topic, key, glos, why, concept, steps, tips, sim, qp = get_kewirausahaan_pedagogy(q_num, stim_text, prompt_text, options, tipe)
+            topic, _key_not_used, glos, why, concept, steps, tips, sim, qp = get_kewirausahaan_pedagogy(q_num, stim_text, prompt_text, options, tipe)
             q['topik'] = topic
-            q['kunci_jawaban'] = key
             q['pembahasan'] = {
                 "glosarium_simbol": glos,
                 "mengapa_begini": why,
@@ -325,6 +332,15 @@ def enrich_dataset(subject_key, paket_num, raw_json_path, output_json_path):
         enriched_questions.append(q)
 
     raw_data['soal'] = enriched_questions
+
+    # INVARIANT: validasi kunci terhadap bukti resmi SEBELUM menulis file.
+    # Gagal keras bila ada kunci fabricated / bertentangan / resmi tak tersedia.
+    enforce_answer_key_invariant(
+        raw_data['soal'],
+        slug_from_output(output_json_path),
+        allow_missing=ALLOW_MISSING,
+    )
+
     os.makedirs(os.path.dirname(output_json_path), exist_ok=True)
     with open(output_json_path, 'w', encoding='utf-8') as f:
         json.dump(raw_data, f, ensure_ascii=False, indent=2)
@@ -354,4 +370,11 @@ def run_all():
         enrich_dataset(subj, pkg, raw_p, out_p)
 
 if __name__ == '__main__':
+    import argparse
+    ap = argparse.ArgumentParser(
+        description="Enrichment pedagogy (TANPA menyentuh kunci_jawaban — lihat _key_guard.py)")
+    ap.add_argument('--allow-missing-keys', action='store_true',
+                    help="Izinkan soal tanpa kunci resmi tetap diproses (tanpa kunci, TANPA mengarang)")
+    args = ap.parse_args()
+    ALLOW_MISSING = args.allow_missing_keys
     run_all()

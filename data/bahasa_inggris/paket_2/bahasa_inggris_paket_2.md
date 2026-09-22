@@ -53,7 +53,8 @@ Source:
 https://www.vedantu.com/stories/the-lion-and-the-mouse
 
 ### Pertanyaan:
-Which of the following statements best conveys the message of the story? There is more than one answer. Click on every correct answer!
+Which of the following statements best conveys the message of the story?
+There is more than one answer. Click on every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** We should never wake up a sleeping animal
@@ -113,7 +114,8 @@ Source:
 https://www.vedantu.com/stories/the-lion-and-the-mouse
 
 ### Pertanyaan:
-As you read the part where the lion let the mouse go, which of the following endings do you anticipate? There is more than one answer, click on every correct answer!
+As you read the part where the lion let the mouse go, which of the following endings do you anticipate?
+There is more than one answer, click on every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** The mouse forgets about the lion and never helps him
@@ -143,7 +145,8 @@ Source:
 https://www.vedantu.com/stories/the-lion-and-the-mouse
 
 ### Pertanyaan:
-Which of the following sentences from the story help you understand the lion’s character? There is more than one answer. Click on every correct answer!
+Which of the following sentences from the story help you understand the lion’s character?
+There is more than one answer. Click on every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** “The lion always took his afternoon nap under the shade of a big tree in the bushes.”
@@ -183,7 +186,11 @@ Effective Study Technique
 ![Diagram Stimulus Soal 7](images/soal_07_stimulus_01.png)
 
 ### Pertanyaan:
-Based on the infographic, determine whether each study technique listed on the left is categorized as Time Management or Self Management .
+Based on the infographic, determine whether each study technique listed on the left is categorized as
+Time Management
+or
+Self Management
+.
 
 ### Pilihan Jawaban:
 - **[A]** Technique
@@ -222,7 +229,8 @@ Effective Study Technique
 ![Diagram Stimulus Soal 9](images/soal_09_stimulus_01.png)
 
 ### Pertanyaan:
-Which of the following statements best reflect the author’s purpose in writing the text? There is more than one correct answer. Click on every correct answer!
+Which of the following statements best reflect the author’s purpose in writing the text?
+There is more than one correct answer. Click on every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** To help students find fun strategies to play after studying
@@ -242,7 +250,8 @@ Effective Study Technique
 ![Diagram Stimulus Soal 10](images/soal_10_stimulus_01.png)
 
 ### Pertanyaan:
-If you are preparing for an important exam and want to improve your study routine, which of the following techniques do you think can be implemented effectively in your personal study time? There is more than one correct answer. Click on every correct answer!
+If you are preparing for an important exam and want to improve your study routine, which of the following techniques do you think can be implemented effectively in your personal study time?
+There is more than one correct answer. Click on every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** Only study when you are in a group discussion with others
@@ -266,7 +275,8 @@ Adapted from:
 https://www.britannica.com/place/Great-Barrier-Reef
 
 ### Pertanyaan:
-Which of the following descriptions are mentioned clearly in the text? There are more than one correct answer. Click on every correct answer.
+Which of the following descriptions are mentioned clearly in the text?
+There are more than one correct answer. Click on every correct answer.
 
 ### Pilihan Jawaban:
 - **[A]** The reef was built by local communities over hundreds of years
@@ -362,7 +372,8 @@ Adapted from:
 https://www.britannica.com/place/Great-Barrier-Reef
 
 ### Pertanyaan:
-Which parts of the text best support the idea that the Great Barrier Reef is both beautiful and important? There is more than one correct answer. Click on every correct answer!
+Which parts of the text best support the idea that the Great Barrier Reef is both beautiful and important?
+There is more than one correct answer. Click on every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** The reef helps protect the coast from big waves
@@ -421,7 +432,8 @@ https://www.onefamily.com/savings/money-management-tips-for-teens/
 ![Diagram Stimulus Soal 17](images/soal_17_stimulus_01.png)
 
 ### Pertanyaan:
-According to the text, which of the following actions support smart money management for students? There is more than one correct answer. Click on every correct answer!
+According to the text, which of the following actions support smart money management for students?
+There is more than one correct answer. Click on every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** Tracking daily expenses using a notebook or app
@@ -451,7 +463,8 @@ https://www.onefamily.com/savings/money-management-tips-for-teens/
 ![Diagram Stimulus Soal 18](images/soal_18_stimulus_01.png)
 
 ### Pertanyaan:
-Who is most likely to be the target audience of this text? There is more than one correct answer. Click on every correct answer!
+Who is most likely to be the target audience of this text?
+There is more than one correct answer. Click on every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** Teenagers who are learning to manage their money
@@ -511,7 +524,8 @@ https://www.onefamily.com/savings/money-management-tips-for-teens/
 ![Diagram Stimulus Soal 20](images/soal_20_stimulus_01.png)
 
 ### Pertanyaan:
-Which of the following statements are supported by clear data or facts in the text and table? There is more than one correct answer. Click on every correct answer.
+Which of the following statements are supported by clear data or facts in the text and table?
+There is more than one correct answer. Click on every correct answer.
 
 ### Pilihan Jawaban:
 - **[A]** 45% of students save money regularly
@@ -567,7 +581,8 @@ https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion
 ![Diagram Stimulus Soal 22](images/soal_22_stimulus_01.png)
 
 ### Pertanyaan:
-What can we learn from the story of Hera and Shero? There is more than one correct answer. Click for every correct answer!
+What can we learn from the story of Hera and Shero?
+There is more than one correct answer. Click for every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** Everyone has something special to give, even if they are not the leader
@@ -623,7 +638,8 @@ https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion
 ![Diagram Stimulus Soal 24](images/soal_24_stimulus_01.png)
 
 ### Pertanyaan:
-If in the beginning of the story, Shero is a strong lion with a loud roar, just like Hera. What would happened in the end of the story? There is more than one correct answer. Click for every correct answer!
+If in the beginning of the story, Shero is a strong lion with a loud roar, just like Hera. What would happened in the end of the story?
+There is more than one correct answer. Click for every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** Shero and Hera would both scare the hyenas away together
@@ -653,7 +669,8 @@ https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion
 ![Diagram Stimulus Soal 25](images/soal_25_stimulus_02.png)
 
 ### Pertanyaan:
-Shero is clumsy and funny, this is shown when he .... There is more than one correct answer. Click for every correct answer!
+Shero is clumsy and funny, this is shown when he ....
+There is more than one correct answer. Click for every correct answer!
 
 ### Pilihan Jawaban:
 - **[A]** scares the hyenas away with his loud and powerful roar

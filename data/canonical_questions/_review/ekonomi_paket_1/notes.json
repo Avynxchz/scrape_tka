@@ -1,0 +1,58 @@
+{
+  "purpose": "vision_transcription_review_packet",
+  "slug": "ekonomi_paket_1",
+  "subject": "Ekonomi",
+  "package": 1,
+  "instructions": [
+    "You are transcribing question images from an Indonesian national exam (TKA).",
+    "Work ONLY from what is visibly printed in each image.",
+    "For each image, output one JSON object keyed by filename with fields:",
+    "  \"latex\": a LaTeX string if the image is a mathematical expression, formula,",
+    "     equation, inequality, fraction, root, exponent, set, or interval — otherwise null.",
+    "  \"description\": a faithful textual description if the image is a table, graph,",
+    "     diagram, or other meaningful visual — otherwise null.",
+    "Rules:",
+    "- Never solve, infer, simplify, or complete anything; do not guess unreadable parts.",
+    "- If something is unreadable, set the field to null and add \"note\" explaining why.",
+    "- Tables: output as Markdown table inside description.",
+    "- Graphs: describe axes, labels, scale, plotted lines/points, intercepts, legends.",
+    "- Diagrams: describe objects, labels, measures, positions, connections as shown.",
+    "- Keep numbers, symbols, and wording EXACTLY as printed (Indonesian decimal comma stays)."
+  ],
+  "questions": {
+    "2": [
+      {
+        "filename": "soal_02_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "15": [
+      {
+        "filename": "soal_15_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "16": [
+      {
+        "filename": "soal_16_stimulus_01.png",
+        "kind": "table",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_16_stimulus_02.png",
+        "kind": "table",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ]
+  }
+}

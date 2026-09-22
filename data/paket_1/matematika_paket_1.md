@@ -21,7 +21,9 @@ Twin Bed
 .
 
 ### Pertanyaan:
-Jika saat ini semua kamar di lantai tersebut kosong dan resepsionis memilih satu kamar secara acak untuk tamu yang baru datang, berapakah peluang tamu tersebut mendapatkan kamar dengan pemandangan laut atau tempat tidur Twin Bed ?
+Jika saat ini semua kamar di lantai tersebut kosong dan resepsionis memilih satu kamar secara acak untuk tamu yang baru datang, berapakah peluang tamu tersebut mendapatkan kamar dengan pemandangan laut atau tempat tidur
+Twin Bed
+?
 
 ### Pilihan Jawaban:
 - **[A]** $\frac {1} {5}$ ![Opsi A](images/soal_01_opsi_a.png)
@@ -56,7 +58,9 @@ gadget
 secara acak dari kelompok data tersebut untuk diuji efisiensi dayanya.
 
 ### Pertanyaan:
-Mana saja pernyataan-pernyataan berikut yang benar terkait nilai peluang terpilihnya jenis gadget tersebut?
+Mana saja pernyataan-pernyataan berikut yang benar terkait nilai peluang terpilihnya jenis
+gadget
+tersebut?
 Pilihlah semua pernyataan yang benar! Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
@@ -113,7 +117,10 @@ Perhatikan gambar berikut.
 ![Diagram Stimulus Soal 5](images/soal_05_stimulus_01.png)
 
 ### Pertanyaan:
-Daerah yang memenuhi sistem pertidaksamaan linear adalah ....
+Daerah yang memenuhi sistem pertidaksamaan linear
+adalah ....
+
+![Gambar Pertanyaan Soal 5](images/soal_05_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** I
@@ -149,7 +156,29 @@ Berapakah uang yang diperoleh Rina setelah jatuh tempo?
 ## Soal No. 7 `[Pilihan Ganda]`
 
 ### Pertanyaan:
-Diketahui fungsi f ( x ) = , dengan . Jika f –1 ( x ) adalah invers dari fungsi f ( x ), nilai dari f –1 (3) = ....
+Diketahui fungsi
+f
+(
+x
+) =
+, dengan
+. Jika
+f
+–1
+(
+x
+) adalah invers dari fungsi
+f
+(
+x
+), nilai dari
+f
+–1
+(3) = ....
+
+![Gambar Pertanyaan Soal 7](images/soal_07_prompt_01.png)
+
+![Gambar Pertanyaan Soal 7](images/soal_07_prompt_02.png)
 
 ### Pilihan Jawaban:
 - **[A]** $6$ ![Opsi A](images/soal_07_opsi_a.png)
@@ -164,7 +193,23 @@ Diketahui fungsi f ( x ) = , dengan . Jika f –1 ( x ) adalah invers dari fungs
 ## Soal No. 8 `[Pilihan Ganda]`
 
 ### Pertanyaan:
-Fungsi f : R -> R dan g  R -> R . Jika g (x) = x - 1 dan ( f  o g ) (x) = x 3 – 4x , nilai dari f (2) = ….
+Fungsi
+f : R -> R
+dan
+g  R -> R
+. Jika
+g
+(x) = x - 1
+dan (
+f  o
+g
+)
+(x) = x
+3
+– 4x
+, nilai dari
+f
+(2) = ….
 
 ### Pilihan Jawaban:
 - **[A]** 9
@@ -200,7 +245,10 @@ t
 ![Diagram Stimulus Soal 9](images/soal_09_stimulus_03.png)
 
 ### Pertanyaan:
-Namun, karena adanya rugi sistem sebesar  energi bersih yang dihasilkan menjadi E bersih= . maka energi bersih sama dengan ...
+Namun, karena adanya rugi sistem sebesar  energi bersih yang dihasilkan menjadi E bersih=
+. maka energi bersih sama dengan ...
+
+![Gambar Pertanyaan Soal 9](images/soal_09_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** ${2}^{8}\times \, {5}^{5}\, J$ ![Opsi A](images/soal_09_opsi_a.png)
@@ -221,7 +269,8 @@ Tatanan potongan buah tersebut belum selesai dan akan dilanjutkan.
 ![Diagram Stimulus Soal 10](images/soal_10_stimulus_01.png)
 
 ### Pertanyaan:
-Tentukan manakah banyak potongan buah yang mungkin pada susunan berikutnya? Pilihlah semua jawaban yang benar! Jawaban benar lebih dari satu.
+Tentukan manakah banyak potongan buah yang mungkin pada susunan berikutnya?
+Pilihlah semua jawaban yang benar! Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** 20 potongan buah
@@ -235,7 +284,10 @@ Tentukan manakah banyak potongan buah yang mungkin pada susunan berikutnya? Pili
 ## Soal No. 11 `[Pilihan Ganda]`
 
 ### Pertanyaan:
-Bentuk rasional dari adalah ....
+Bentuk rasional dari
+adalah ....
+
+![Gambar Pertanyaan Soal 11](images/soal_11_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** ![Opsi A](images/soal_11_opsi_a.png)
@@ -250,7 +302,13 @@ Bentuk rasional dari adalah ....
 ## Soal No. 12 `[Pilihan Ganda]`
 
 ### Pertanyaan:
-Seorang peneliti melakukan pengamatan terhadap bakteri tertentu. Setiap hari bakteri membelah diri menjadi dua. Pada awal pengamatan terdapat 2 bakteri. Jika setiap 2 hari dari jumlah bakteri mati, banyaknya bakteri setelah tiga hari adalah....
+Seorang peneliti melakukan pengamatan terhadap bakteri tertentu. Setiap
+hari bakteri membelah diri menjadi dua. Pada awal pengamatan terdapat 2 bakteri. Jika setiap 2 hari
+dari jumlah bakteri mati, banyaknya bakteri setelah tiga hari adalah....
+
+![Gambar Pertanyaan Soal 12](images/soal_12_prompt_01.png)
+
+![Gambar Pertanyaan Soal 12](images/soal_12_prompt_02.png)
 
 ### Pilihan Jawaban:
 - **[A]** 48 bakteri
@@ -303,6 +361,7 @@ Pilihlah semua jawaban yang benar! Jawaban benar lebih dari satu.
 ### Pertanyaan:
 Dari selembar karton berbentuk persegi yang berukuran sisi 30 cm akan dibuat kotak tanpa tutup, dengan cara menggunting empat persegi di setiap pojok karton, seperti pada gambar. Volume kotak terbesar yang dapat dibuat adalah ....
 
+![Gambar Pertanyaan Soal 14](images/soal_14_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** 2.000 cm³
@@ -323,7 +382,10 @@ sumber gambar: https://www.ufurnish.com/en-gb/p/a/16953815/decorotika-pisagor-co
 ![Diagram Stimulus Soal 15](images/soal_15_stimulus_01.png)
 
 ### Pertanyaan:
-Manakah perbandingan yang sama dengan ?
+Manakah perbandingan yang sama dengan
+?
+
+![Gambar Pertanyaan Soal 15](images/soal_15_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** $\frac {AC} {AB}$ ![Opsi A](images/soal_15_opsi_a.png)
@@ -415,7 +477,10 @@ Dengan anggaran maksimal Rp1.200.000,00 berapakah paling banyak kotak souvenir y
 ## Soal No. 19 `[Pilihan Ganda]`
 
 ### Pertanyaan:
-Diketahui sin A = , A adalah sudut tumpul. Nilai cos A = ….
+Diketahui sin A =
+, A adalah sudut tumpul. Nilai cos A = ….
+
+![Gambar Pertanyaan Soal 19](images/soal_19_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** $\frac {a} {\sqrt {{a}^{2\, }+1}}$ ![Opsi A](images/soal_19_opsi_a.png)
@@ -431,8 +496,9 @@ Diketahui sin A = , A adalah sudut tumpul. Nilai cos A = ….
 
 ### Pertanyaan:
 Diagram batang berikut menunjukkan produksi pakaian yang dikelola Bu Rahmi selama tahun 2020 dari bulan Januari sampai bulan Desember.
-
 Peningkatan tertinggi jumlah produksi pakaian Bu Rahmi terjadi pada bulan ....
+
+![Gambar Pertanyaan Soal 20](images/soal_20_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** April
@@ -513,7 +579,7 @@ Jika harga satu meter pita emas Rp5.000,00 dan UMKM tersebut akan memproduksi se
 ### Pertanyaan:
 Perhatikan data pada tabel nilai hasil ulangan matematika kelas XI SMA Z. Modus dari data tersebut adalah ....
 
-
+![Gambar Pertanyaan Soal 24](images/soal_24_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** 64,0
@@ -772,6 +838,8 @@ Bagaimana hubungan antara setiap rusuk atau setiap garis yang menghubungkan dua 
 
 ## Soal No. 35 `[Pilihan Ganda]`
 
+![Gambar Pertanyaan Soal 35](images/soal_35_prompt_01.png)
+
 ### Pilihan Jawaban:
 - **[A]** $\frac {8} {21}$ ![Opsi A](images/soal_35_opsi_a.png)
 - **[B]** $\frac {8} {11}$ ![Opsi B](images/soal_35_opsi_b.png)
@@ -808,7 +876,8 @@ Berdasarkan data tersebut, keuntungan pada bulan manakah yang mengalami penuruna
 Mirna akan memproduksi dua jenis kue dengan modal Rp8.000.000,00. Biaya produksi kue bolu sebesar Rp15.000,00 per kotak dan dijual dengan laba 40%. Sedangkan biaya produksi kue brownies sebesar Rp20.000,00 per kotak dan dijual dengan laba 35%. Setiap harinya, Mirna dapat memproduksi paling banyak 500 kotak kue.
 
 ### Pertanyaan:
-Apabila Mirna ingin memperoleh keuntungan maksimum, tentukan Benar atau Salah untuk setiap pernyataan berikut!
+Apabila Mirna ingin memperoleh keuntungan maksimum, tentukan
+Benar atau Salah untuk setiap pernyataan berikut!
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -863,7 +932,10 @@ Tentukan Benar atau Salah untuk setiap pernyataan berikut terkait dengan besar s
 ![Diagram Stimulus Soal 40](images/soal_40_stimulus_01.png)
 
 ### Pertanyaan:
-Putuskan apakah dengan tambahan informasi Pernyataan (1) dan Pernyataan (2) berikut cukup untuk menjawab pertanyaan tersebut! (1)  Luas trapesium ABCD = 24. (2)  BC = 10 dan CD = 5.
+Putuskan apakah dengan tambahan informasi Pernyataan (1) dan
+Pernyataan (2) berikut cukup untuk menjawab pertanyaan tersebut!
+(1)  Luas trapesium ABCD = 24.
+(2)  BC = 10 dan CD = 5.
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (2) SAJA tidak cukup.
@@ -921,7 +993,14 @@ Fungsi didefinisikan oleh
 ![Diagram Stimulus Soal 43](images/soal_43_stimulus_01.png)
 
 ### Pertanyaan:
-Tentukan Benar atau Salah pada setiap pernyataan berikut yang terkait dengan grafik fungsi !
+Tentukan
+Benar
+atau
+Salah
+pada setiap pernyataan berikut yang terkait dengan grafik fungsi
+!
+
+![Gambar Pertanyaan Soal 43](images/soal_43_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -975,7 +1054,11 @@ Pak Andi menempatkan proyektor dengan jarak yang menghasilkan skala pembesaran s
 
 ### Pertanyaan:
 Bagaimanakah tampilan desain gedung di layar?
-Tentukan Benar atau Salah pada setiap pernyataan berikut!
+Tentukan
+Benar
+atau
+Salah
+pada setiap pernyataan berikut!
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan

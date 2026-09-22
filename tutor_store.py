@@ -1,0 +1,346 @@
+# -*- coding: utf-8 -*-
+"""tutor_store.py — Persistensi percakapan AI Tutor (SQLite).
+
+Data percakapan adalah DATA PENGGUNA: tidak pernah disimpan ke learning JSON,
+kanonis, atau file solusi. Struktur:
+
+  ai_tutor_conversations : id, user_key, canonical_question_id, subject,
+                           paket, title, summary, message_count,
+                           created_at, updated_at, status
+  ai_tutor_messages      : id, conversation_id, role(user/assistant/system),
+                           content, seq, request_id (idempotency),
+                           created_at, metadata
+
+Identitas: aplikasi ini BELUM punya login/auth ( diverifikasi saat audit).
+Maka dipakai kunci pengguna anonim `user_key` yang dibuat browser per profil
+(ditandatangani server via HMAC, cookie HttpOnly). Ini memberi kontinuitas
+per-browser di satu mesin — BUKAN memori lintas perangkat permanen. Bila suatu
+saat auth login ditambahkan, cukup petakan user_key -> user_id; skema tabel
+sudah memakai kolom user_key yang bisa diisi user_id tanpa migrasi besar.
+
+Konteks lama (chatHistory di memori app.js) TIDAK diimpor: tidak ada sumber
+persisten sebelumnya (tidak ada localStorage pun).
+"""
+import hashlib
+import hmac
+import json
+import os
+import secrets
+import sqlite3
+import threading
+import time
+from contextlib import contextmanager
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DB_PATH = os.environ.get("TUTOR_DB_PATH", os.path.join(BASE_DIR, "data", "ai_tutor.db"))
+
+_SECRET_PATH = os.path.join(BASE_DIR, "data", ".tutor_session_secret")
+_lock = threading.Lock()
+
+
+# ---------------------------------------------------------------------------
+# Session secret (untuk menandatangani kunci pengguna anonim)
+# ---------------------------------------------------------------------------
+def _load_secret():
+    os.makedirs(os.path.dirname(_SECRET_PATH), exist_ok=True)
+    if os.path.exists(_SECRET_PATH):
+        with open(_SECRET_PATH, "rb") as f:
+            return f.read().strip()
+    s = secrets.token_hex(32)
+    with open(_SECRET_PATH, "wb") as f:
+        f.write(s.encode())
+    return s
+
+
+def _load_secret_cached():
+    global _secret_cache
+    if _secret_cache is None:
+        _secret_cache = _load_secret()
+    return _secret_cache
+
+
+_secret_cache = None
+
+
+def make_user_cookie_value():
+    """Kunci pengguna anonim baru yang ditandatangani (format: id.sig)."""
+    uid = secrets.token_hex(16)
+    sig = hmac.new(_load_secret_cached(), uid.encode(), hashlib.sha256).hexdigest()[:32]
+    return f"{uid}.{sig}"
+
+
+def validate_user_cookie_value(value):
+    """Validasi cookie sesi; kembalikan user_key bila tanda tangan sah, else None."""
+    if not value or "." not in value:
+        return None
+    uid, sig = value.rsplit(".", 1)
+    expect = hmac.new(_load_secret_cached(), uid.encode(), hashlib.sha256).hexdigest()[:32]
+    if hmac.compare_digest(sig, expect):
+        return uid
+    return None
+
+
+# ---------------------------------------------------------------------------
+# Koneksi & skema
+# ---------------------------------------------------------------------------
+def _connect():
+    os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
+    conn = sqlite3.connect(DB_PATH, timeout=10)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys = ON")
+    return conn
+
+
+@contextmanager
+def _db():
+    """Buka koneksi, commit bila sukses, SELALU tutup (wajib di Windows)."""
+    conn = _connect()
+    try:
+        with conn:
+            yield conn
+    finally:
+        conn.close()
+
+
+def init_db():
+    with _lock:
+        with _db() as conn:
+            conn.executescript(
+                """
+                CREATE TABLE IF NOT EXISTS ai_tutor_conversations (
+                    id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_key              TEXT NOT NULL,
+                    canonical_question_id TEXT NOT NULL,
+                    subject               TEXT NOT NULL,
+                    paket                 INTEGER NOT NULL,
+                    question_number       INTEGER NOT NULL,
+                    title                 TEXT,
+                    summary               TEXT,
+                    message_count         INTEGER NOT NULL DEFAULT 0,
+                    created_at            TEXT NOT NULL,
+                    updated_at            TEXT NOT NULL,
+                    status                TEXT NOT NULL DEFAULT 'active'
+                );
+                CREATE INDEX IF NOT EXISTS ix_conv_user_q
+                    ON ai_tutor_conversations(user_key, canonical_question_id);
+                CREATE TABLE IF NOT EXISTS ai_tutor_messages (
+                    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+                    conversation_id INTEGER NOT NULL REFERENCES ai_tutor_conversations(id),
+                    role            TEXT NOT NULL CHECK (role IN ('user','assistant','system')),
+                    content         TEXT NOT NULL,
+                    seq             INTEGER NOT NULL,
+                    request_id      TEXT,
+                    created_at      TEXT NOT NULL,
+                    metadata        TEXT
+                );
+                CREATE INDEX IF NOT EXISTS ix_msg_conv ON ai_tutor_messages(conversation_id, seq);
+                CREATE UNIQUE INDEX IF NOT EXISTS ux_msg_request
+                    ON ai_tutor_messages(conversation_id, request_id)
+                    WHERE request_id IS NOT NULL;
+                """
+            )
+
+
+# ---------------------------------------------------------------------------
+# Utilitas waktu
+# ---------------------------------------------------------------------------
+def _now():
+    return time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime()) + "Z"
+
+
+# ---------------------------------------------------------------------------
+# Operasi percakapan
+# ---------------------------------------------------------------------------
+def get_or_create_conversation(user_key, canonical_id, subject, paket, nomor,
+                               title=None, create=True):
+    """Ambil percakapan aktif user utk soal ini; buat baru bila belum ada.
+
+    Satu percakapan aktif per (user, soal). `create=False` -> tidak pernah
+    membuat (dipakai frontend utk mengecek riwayat saat panel dibuka).
+    """
+    with _db() as conn:
+        row = conn.execute(
+            "SELECT * FROM ai_tutor_conversations "
+            "WHERE user_key=? AND canonical_question_id=? AND status='active' "
+            "ORDER BY id DESC LIMIT 1",
+            (user_key, canonical_id),
+        ).fetchone()
+        if row:
+            return dict(row)
+        if not create:
+            return None
+        now = _now()
+        cur = conn.execute(
+            "INSERT INTO ai_tutor_conversations "
+            "(user_key, canonical_question_id, subject, paket, question_number, "
+            " title, summary, message_count, created_at, updated_at, status) "
+            "VALUES (?,?,?,?,?,?,?,?,?,?, 'active')",
+            (user_key, canonical_id, subject, paket, nomor,
+             title or f"Soal {nomor} — {subject} paket {paket}",
+             None, 0, now, now),
+        )
+        cid = cur.lastrowid
+        row = conn.execute("SELECT * FROM ai_tutor_conversations WHERE id=?", (cid,)).fetchone()
+        return dict(row)
+
+
+def start_new_conversation(user_key, canonical_id, subject, paket, nomor, title=None):
+    """Tutup percakapan aktif lama untuk soal ini lalu buat percakapan baru.
+
+    Riwayat lama TIDAK dihapus (status='archived') — hanya tidak lagi dilanjutkan.
+    """
+    with _lock:
+        with _db() as conn:
+            conn.execute(
+                "UPDATE ai_tutor_conversations SET status='archived', updated_at=? "
+                "WHERE user_key=? AND canonical_question_id=? AND status='active'",
+                (_now(), user_key, canonical_id),
+            )
+        conv = get_or_create_conversation(
+            user_key, canonical_id, subject, paket, nomor, title=title, create=True)
+    return conv
+
+
+def list_conversations(user_key, canonical_id=None, limit=50):
+    q = ("SELECT * FROM ai_tutor_conversations WHERE user_key=? "
+         + ("AND canonical_question_id=? " if canonical_id else "")
+         + "ORDER BY updated_at DESC LIMIT ?")
+    args = (user_key, canonical_id, limit) if canonical_id else (user_key, limit)
+    with _db() as conn:
+        return [dict(r) for r in conn.execute(q, args).fetchall()]
+
+
+# ---------------------------------------------------------------------------
+# Operasi pesan
+# ---------------------------------------------------------------------------
+def add_message(conversation_id, role, content, request_id=None, metadata=None):
+    """Tambah pesan; idempoten per (conversation, request_id).
+
+    Mengembalikan (row_dict, inserted_bool). Bila request_id sama dikirim ulang
+    (retry jaringan/double-click), pesan TIDAK diduplikasi.
+    """
+    with _lock:
+        with _db() as conn:
+            if request_id:
+                existing = conn.execute(
+                    "SELECT * FROM ai_tutor_messages WHERE conversation_id=? AND request_id=?",
+                    (conversation_id, request_id),
+                ).fetchone()
+                if existing:
+                    return dict(existing), False
+            seq_row = conn.execute(
+                "SELECT COALESCE(MAX(seq),0)+1 AS s FROM ai_tutor_messages WHERE conversation_id=?",
+                (conversation_id,),
+            ).fetchone()
+            seq = seq_row["s"]
+            cur = conn.execute(
+                "INSERT INTO ai_tutor_messages "
+                "(conversation_id, role, content, seq, request_id, created_at, metadata) "
+                "VALUES (?,?,?,?,?,?,?)",
+                (conversation_id, role, content, seq, request_id, _now(),
+                 json.dumps(metadata, ensure_ascii=False) if metadata else None),
+            )
+            mid = cur.lastrowid
+            conn.execute(
+                "UPDATE ai_tutor_conversations SET message_count=message_count+1, "
+                "updated_at=? WHERE id=?", (_now(), conversation_id),
+            )
+            row = conn.execute("SELECT * FROM ai_tutor_messages WHERE id=?", (mid,)).fetchone()
+            return dict(row), True
+
+
+def get_messages(conversation_id, limit=None):
+    """Pesan terurut seq naik. limit -> N pesan TERAKHIR (tetap urut naik)."""
+    q = "SELECT * FROM ai_tutor_messages WHERE conversation_id=?"
+    if limit:
+        q += f" ORDER BY seq DESC LIMIT {int(limit)}"
+    else:
+        q += " ORDER BY seq ASC"
+    with _db() as conn:
+        rows = [dict(r) for r in conn.execute(q, (conversation_id,)).fetchall()]
+    if limit:
+        rows.reverse()
+    return rows
+
+
+def get_history_window(conversation_id, recent_n=12):
+    """Jendela konteks: pesan terakhir (urut naik) untuk prompt LLM.
+
+    PERSISTEN = seluruh pesan tersimpan di DB; jendela ini hanya representasi
+    prompt, bukan batas penyimpanan.
+    """
+    return get_messages(conversation_id, limit=recent_n)
+
+
+def user_role_in_conversation(conversation_id, user_key):
+    with _db() as conn:
+        row = conn.execute(
+            "SELECT 1 FROM ai_tutor_conversations WHERE id=? AND user_key=?",
+            (conversation_id, user_key),
+        ).fetchone()
+    return bool(row)
+
+
+# ---------------------------------------------------------------------------
+# Ringkasan bergulir (rolling summary)
+# ---------------------------------------------------------------------------
+SUMMARY_TRIGGER = 12  # mulai/refresh ringkasan saat message_count mencapai ini
+
+
+def update_summary(conversation_id, summary_text):
+    with _lock:
+        with _db() as conn:
+            conn.execute(
+                "UPDATE ai_tutor_conversations SET summary=?, updated_at=? WHERE id=?",
+                (summary_text, _now(), conversation_id),
+            )
+
+
+def maybe_summarize(conversation_id, summarize_fn):
+    """Bila percakapan panjang & ringkasan basi, perbarui via summarize_fn.
+
+    summarize_fn(older_messages, existing_summary) -> str  (pemanggil yang
+    menentukan cara merangkum; store hanya memicu + menyimpan).
+    """
+    with _db() as conn:
+        conv = conn.execute(
+            "SELECT * FROM ai_tutor_conversations WHERE id=?", (conversation_id,)
+        ).fetchone()
+        if not conv:
+            return None
+        mc, updated = conv["message_count"], conv["updated_at"]
+    # cukup rangkum bila pesan baru bertambah sejak rangkuman terakhir
+    if mc < SUMMARY_TRIGGER:
+        return None
+    msgs = get_messages(conversation_id)
+    # pesan yang TIDAK lagi dalam jendela terakhir disarankan dirangkum
+    older = msgs[:-6] if len(msgs) > 6 else []
+    if not older:
+        return None
+    if conv["summary"] and updated and _summary_fresh(updated, len(msgs)):
+        return conv["summary"]
+    new_summary = summarize_fn(older, conv["summary"])
+    if new_summary:
+        update_summary(conversation_id, new_summary)
+        return new_summary
+    return conv["summary"]
+
+
+def _summary_fresh(updated_at, msg_count):
+    """Ringkasan dianggap basi bila >=4 pesan baru sejak pembaruan terakhir.
+
+    Estimasi murah: bandingkan selisih waktu pembaruan vs count saat ini;
+    untuk kesederhanaan pakai ambang pesan yang disimpan di metadata ringkasan.
+    """
+    return msg_count % 4 != 0
+
+
+# ---------------------------------------------------------------------------
+# Statistik (diagnostik)
+# ---------------------------------------------------------------------------
+def stats():
+    with _db() as conn:
+        c = conn.execute("SELECT COUNT(*) AS n FROM ai_tutor_conversations").fetchone()["n"]
+        m = conn.execute("SELECT COUNT(*) AS n FROM ai_tutor_messages").fetchone()["n"]
+        s = conn.execute("SELECT COUNT(*) AS n FROM ai_tutor_conversations WHERE summary IS NOT NULL").fetchone()["n"]
+    return {"conversations": c, "messages": m, "with_summary": s}

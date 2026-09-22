@@ -1,6 +1,18 @@
 import json
 import os
 import re
+import sys
+
+_BASE = os.path.dirname(os.path.abspath(__file__))
+if _BASE not in sys.path:
+    sys.path.insert(0, _BASE)
+
+# ============================ INVARIANT KUNCI ============================
+# AI enrichment boleh memperkaya soal tetapi TIDAK BOLEH menentukan atau
+# menimpa kunci_jawaban otoritatif. Lihat _key_guard.py.
+from _key_guard import enforce_answer_key_invariant, slug_from_output  # noqa: E402
+
+ALLOW_MISSING = False  # diisi via --allow-missing-keys di __main__
 
 def clean_stimulus_text(text):
     if not text:
@@ -70,10 +82,11 @@ def enrich_package(json_path, output_path, paket_id):
         options = q['pilihan_jawaban']
         
         # Get enriched explanation, symbols, and similar practice
-        topic, key, symbols, why_concept, concept, steps, tips, similar, quick_prompts = get_pedagogy_data(paket_id, no, stim_text, prompt_text, options, tipe)
+        # CATATAN: kunci dari get_pedagogy_data TIDAK dipakai — dulu menimpa
+        # kunci_jawaban dengan tabel canned (penyebab pola all-'C'), bug.
+        topic, _key_not_used, symbols, why_concept, concept, steps, tips, similar, quick_prompts = get_pedagogy_data(paket_id, no, stim_text, prompt_text, options, tipe)
         
         q['topik'] = topic
-        q['kunci_jawaban'] = key
         q['pembahasan'] = {
             "glosarium_simbol": symbols,
             "mengapa_begini": why_concept,
@@ -86,6 +99,14 @@ def enrich_package(json_path, output_path, paket_id):
         enriched_list.append(q)
         
     data['soal'] = enriched_list
+
+    # INVARIANT: validasi kunci terhadap bukti resmi SEBELUM menulis file.
+    enforce_answer_key_invariant(
+        data['soal'],
+        slug_from_output(output_path),
+        allow_missing=ALLOW_MISSING,
+    )
+
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     print(f"Enriched {len(enriched_list)} questions -> {output_path}")
@@ -216,6 +237,14 @@ def get_pedagogy_data(paket_id, no, stim, prompt, options, tipe):
     return ("Penalaran Matematika TKA", "C", symbols, why_concept, concept, steps, tips, similar, quick_prompts)
 
 if __name__ == '__main__':
+    import argparse
+    ap = argparse.ArgumentParser(
+        description="Enrichment pedagogy matematika (TANPA menyentuh kunci_jawaban — lihat _key_guard.py)")
+    ap.add_argument('--allow-missing-keys', action='store_true',
+                    help="Izinkan soal tanpa kunci resmi tetap diproses (tanpa kunci, TANPA mengarang)")
+    args = ap.parse_args()
+    ALLOW_MISSING = args.allow_missing_keys
+
     base_dir = os.path.dirname(os.path.abspath(__file__))
     p1_in = os.path.join(base_dir, 'data', 'paket_1', 'matematika_paket_1.json')
     p1_out = os.path.join(base_dir, 'data', 'paket_1_learning.json')

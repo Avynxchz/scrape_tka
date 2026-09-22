@@ -14,7 +14,9 @@ Perhatikan deskripsi produk berikut ini!
 ![Diagram Stimulus Soal 1](images/soal_01_stimulus_01.png)
 
 ### Pertanyaan:
-Berdasarkan informasi tersebut, unsur desain label produk yang tepat digunakan untuk menarik konsumen dan sesuai ketentuan label adalah....
+Berdasarkan informasi tersebut, unsur desain label produk yang
+tepat
+digunakan untuk menarik konsumen dan sesuai ketentuan label adalah....
 
 ### Pilihan Jawaban:
 - **[A]** Ilustrasi bunga yang artistik, logo modern, nama produk dalam bahasa asing.
@@ -52,7 +54,11 @@ Dania menjalankan usaha produksi pakaian dengan menggunakan nama dan logo yang m
 
 ### Pertanyaan:
 Apa yang dapat Dania lakukan agar masalah tersebut dapat terselesaikan dan usahanya tetap dapat berjalan?
-Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+Tentukan
+Benar
+atau
+Salah
+untuk setiap pernyataan berikut!
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -112,7 +118,11 @@ PT Mandala Foods perusahaan yang memproduksi makanan beku seperti nugget sayur, 
 
 ### Pertanyaan:
 Bagaimana perencanaan yang dilakukan PT Mandala Foods agar semua aspek berjalan dengan baik?
-Tentukan Benar atau Salah pasa setiap pernyataan berikut!
+Tentukan
+Benar
+atau
+Salah
+pasa setiap pernyataan berikut!
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -206,7 +216,11 @@ Ketergantungan berlebihan pada model produk lama dan basis pelanggan tradisional
 
 ### Pertanyaan:
 Manakah pernyataan berikut ini yang merupakan solusi tepat untuk mengatasi penyebab kegagalan tersebut?
-Tentukan Benar atau Salah pada setiap pernyataan berikut!
+Tentukan
+Benar
+atau
+Salah
+pada setiap pernyataan berikut!
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan

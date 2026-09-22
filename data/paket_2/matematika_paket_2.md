@@ -17,7 +17,10 @@ Diberikan tiga himpunan bilangan sebagai berikut:
 ![Diagram Stimulus Soal 1](images/soal_01_stimulus_03.png)
 
 ### Pertanyaan:
-Berdasarkan himpunan-himpunan tersebut, hasil dari adalah ....
+Berdasarkan himpunan-himpunan tersebut, hasil dari
+adalah ....
+
+![Gambar Pertanyaan Soal 1](images/soal_01_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** {2, 3, 5, 7}
@@ -32,7 +35,10 @@ Berdasarkan himpunan-himpunan tersebut, hasil dari adalah ....
 ## Soal No. 2 `[Pilihan Ganda]`
 
 ### Pertanyaan:
-Bentuk sederhana dari adalah ....
+Bentuk sederhana dari
+adalah ....
+
+![Gambar Pertanyaan Soal 2](images/soal_02_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** $\frac {1} {42}$ ![Opsi A](images/soal_02_opsi_a.png)
@@ -62,7 +68,14 @@ dan
 ![Diagram Stimulus Soal 3](images/soal_03_stimulus_04.png)
 
 ### Pertanyaan:
-Jika , tentukan Benar atau Salah pada setiap pernyataan berikut!
+Jika
+, tentukan
+Benar
+atau
+Salah
+pada setiap pernyataan berikut!
+
+![Gambar Pertanyaan Soal 3](images/soal_03_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -88,7 +101,9 @@ mewakili peningkatan suhu dalam derajat Celsius.
 ![Diagram Stimulus Soal 4](images/soal_04_stimulus_03.png)
 
 ### Pertanyaan:
-Pada tahun berapakah peningkatan suhu diperkirakan mencapai 0,7 o C?
+Pada tahun berapakah peningkatan suhu diperkirakan mencapai 0,7
+o
+C?
 
 ### Pilihan Jawaban:
 - **[A]** Tahun 2000.
@@ -164,7 +179,8 @@ Seorang pasien dengan kadar asam urat tinggi menjalani terapi menggunakan obat p
 - Pasien dianggap sembuh secara klinis jika kadar asam urat telah mencapai kurang dari 5 mg/dL.
 
 ### Pertanyaan:
-Pada hari keberapa berapa pasien merasa nyaman namun belum dianggap sembuh secara klinis? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+Pada hari keberapa berapa pasien merasa nyaman namun belum dianggap sembuh secara klinis?
+Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Hari ke-2
@@ -221,7 +237,10 @@ Perhatikan gambar berikut!
 ![Diagram Stimulus Soal 10](images/soal_10_stimulus_01.png)
 
 ### Pertanyaan:
-Berdasarkan gambar tersebut, pasangan sudut manakah yang membentuk sudut 180 o ? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+Berdasarkan gambar tersebut, pasangan sudut manakah yang membentuk sudut 180
+o
+?
+Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** ∠A dan ∠B
@@ -241,7 +260,8 @@ Zara ingin menata kembali kamarnya dengan menambahkan papan jadwal di dinding. P
 ![Diagram Stimulus Soal 11](images/soal_11_stimulus_01.png)
 
 ### Pertanyaan:
-Berdasarkan posisi yang diinginkan, pada dinding manakah papan jadwal akan diletakkan? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+Berdasarkan posisi yang diinginkan, pada dinding manakah papan jadwal akan diletakkan?
+Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** CDHG
@@ -261,7 +281,8 @@ Perhatikan gambar berikut!
 ![Diagram Stimulus Soal 12](images/soal_12_stimulus_01.png)
 
 ### Pertanyaan:
-Diketahui trapesium KLMN dan NMPO sebangun. Berdasarkan informasi tersebut, berapakah panjang sisi LM?
+Diketahui trapesium KLMN dan NMPO sebangun.
+Berdasarkan informasi tersebut, berapakah panjang sisi LM?
 
 ### Pilihan Jawaban:
 - **[A]** $6\sqrt {5\, }\, cm$ ![Opsi A](images/soal_12_opsi_a.png)
@@ -282,7 +303,11 @@ Ukuran diameter pot yang digunakan untuk jahe berukuran 15 cm, kunyit berukuran 
 ![Diagram Stimulus Soal 13](images/soal_13_stimulus_01.png)
 
 ### Pertanyaan:
-Berdasarkan ilustrasi, tentukan benar atau salah pernyataan berkaitan dengan ukuran sisi kebun yang ditanami tanaman toga tersebut!
+Berdasarkan ilustrasi, tentukan
+benar
+atau
+salah
+pernyataan berkaitan dengan ukuran sisi kebun yang ditanami tanaman toga tersebut!
 
 ### Pilihan Jawaban:
 - **[A]** Banyak Tanaman
@@ -342,7 +367,8 @@ Arif, seorang desain interior akan membuat suatu desain ornamen jam dinding baru
 ![Diagram Stimulus Soal 16](images/soal_16_stimulus_01.png)
 
 ### Pertanyaan:
-Di sekeliling ornamen jam tersebut akan ditempel kayu tipis untuk menambah efek tiga dimensi. Apabila Arif akan membuat dua buah ornamen jam dinding untuk dijadikan model contoh, berapa panjang kayu tipis yang ia perlukan?
+Di sekeliling ornamen jam tersebut akan ditempel kayu tipis untuk menambah efek tiga dimensi.
+Apabila Arif akan membuat dua buah ornamen jam dinding untuk dijadikan model contoh, berapa panjang kayu tipis yang ia perlukan?
 
 ### Pilihan Jawaban:
 - **[A]** 322,8 cm.
@@ -364,7 +390,11 @@ Berapakah keliling layang-layang tersebut?
 ![Diagram Stimulus Soal 17](images/soal_17_stimulus_01.png)
 
 ### Pertanyaan:
-Putuskan apakah pernyataan (1) dan pernyataan (2) berikut cukup untuk menjawab permasalahan dalam kotak tersebut! (1) Luas layang-layang adalah 160 cm 2 . (2) Panjang salah satu sisi layang-layang adalah 10 cm.
+Putuskan apakah pernyataan (1) dan pernyataan (2) berikut cukup untuk menjawab permasalahan dalam kotak tersebut!
+(1) Luas layang-layang adalah 160 cm
+2
+.
+(2) Panjang salah satu sisi layang-layang adalah 10 cm.
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.
@@ -405,7 +435,9 @@ Bu Sita, seorang desainer interior, sedang mengerjakan proyek pribadi untuk memp
 ![Diagram Stimulus Soal 19](images/soal_19_stimulus_01.png)
 
 ### Pertanyaan:
-Stiker vinil dijual dalam lembaran, dan harga satu lembarnya adalah Rp9.000,00. Setiap lembar stiker vinil mampu menutupi area seluas 300 cm 2 . Jika Bu Sita berencana membuat 8 buah hiasan lampu tidur, berapakah biaya minimal yang harus dikeluarkan Bu Sita untuk membeli stiker vinil tersebut?
+Stiker vinil dijual dalam lembaran, dan harga satu lembarnya adalah Rp9.000,00. Setiap lembar stiker vinil mampu menutupi area seluas 300 cm
+2
+. Jika Bu Sita berencana membuat 8 buah hiasan lampu tidur, berapakah biaya minimal yang harus dikeluarkan Bu Sita untuk membeli stiker vinil tersebut?
 
 ### Pilihan Jawaban:
 - **[A]** Rp72.000,00.
@@ -425,7 +457,14 @@ Perhatikan gambar berikut.
 ![Diagram Stimulus Soal 20](images/soal_20_stimulus_01.png)
 
 ### Pertanyaan:
-Jika diketahui nilai tentukan Benar atau Salah terkait perbandingan trigonometri berikut!
+Jika diketahui nilai
+tentukan
+Benar
+atau
+Salah
+terkait perbandingan trigonometri berikut!
+
+![Gambar Pertanyaan Soal 20](images/soal_20_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -444,7 +483,8 @@ Banyak siswa yang lulus di sekolah Yayasan Cahaya beragam setiap tahunnya. Berik
 ![Diagram Stimulus Soal 21](images/soal_21_stimulus_01.png)
 
 ### Pertanyaan:
-Berdasarkan grafik tersebut, berikut ini pernyataan mana saja yang tepat mendeskripsikan banyak lulusan di ketiga sekolah milik Yayasan Cahaya? Pilih setiap jawaban benar! Jawaban benar lebih dari satu.
+Berdasarkan grafik tersebut, berikut ini pernyataan mana saja yang tepat mendeskripsikan banyak lulusan di ketiga sekolah milik Yayasan Cahaya?
+Pilih setiap jawaban benar! Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Banyak siswa SMA 1 Bintang yang lulus selalu bertambah mulai tahun 2020.
@@ -488,7 +528,11 @@ Pada minggu ke-1 bulan Januari tersebut, diketahui informasi sebagai berikut:
 ![Diagram Stimulus Soal 23](images/soal_23_stimulus_01.png)
 
 ### Pertanyaan:
-Tentukan Benar atau Salah pada setiap pernyataan berikut terkait jumlah pengunjung perpustakaan pada minggu ke-1 bulan Januari tersebut!
+Tentukan
+Benar
+atau
+Salah
+pada setiap pernyataan berikut terkait jumlah pengunjung perpustakaan pada minggu ke-1 bulan Januari tersebut!
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -528,6 +572,8 @@ Hanya kertas yang kosong yang akan selalu dikembalikan lagi ke dalam kotak meski
 
 ### Pertanyaan:
 Kertas apa sajakah yang mungkin sudah terambil oleh orang-orang sebelumnya sehingga peluang Ani memperoleh minuman atau makanan adalah
+
+![Gambar Pertanyaan Soal 25](images/soal_25_prompt_01.png)
 
 ### Pilihan Jawaban:
 - **[A]** 1 minuman gratis, 1 makanan gratis, dan 2 kertas kosong.

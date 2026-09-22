@@ -177,6 +177,8 @@ def parse_and_save_exam(exam_html, paket_name, output_dir):
                     })
                     # Replace in html representation
                     img["src"] = rel_path
+                    # Preserve semantic math info carried by the image
+                    stimulus_images[-1]["data_latex"] = img.get("data-latex")
             stimulus_text = cont_div.get_text(separator="\n", strip=True)
             stimulus_html = str(cont_div)
         else:
@@ -191,15 +193,19 @@ def parse_and_save_exam(exam_html, paket_name, output_dir):
         has_checkbox = len(isi_div.find_all("input", {"type": "checkbox"})) > 0
         tipe_soal = "Pilihan Ganda Kompleks" if has_checkbox else "Pilihan Ganda"
         
-        # Separate prompt paragraph(s) from options table
-        prompt_paras = []
-        for p in isi_div.find_all("p", recursive=False):
-            prompt_paras.append(p.get_text(separator=" ", strip=True))
-        pertanyaan_text = "\n".join(prompt_paras) if prompt_paras else ""
+        # Options table is excluded from the prompt block
+        table = isi_div.find("table")
+        if table:
+            table.extract()
         
-        # Check for images in prompt
+        # Prompt text: all textual content of isi-soal outside the options table
+        pertanyaan_text = isi_div.get_text(separator="\n", strip=True)
+        
+        # Prompt images: ALL images remaining in the prompt block (recursive —
+        # inline formula images are usually nested inside <p> elements), keeping
+        # their semantic math attributes (data-latex)
         prompt_images = []
-        for p_img_idx, p_img in enumerate(isi_div.find_all("img", recursive=False)):
+        for p_img_idx, p_img in enumerate(isi_div.find_all("img")):
             src = p_img.get("src")
             if src:
                 ext = os.path.splitext(src.split("?")[0])[-1] or ".png"
@@ -207,15 +213,17 @@ def parse_and_save_exam(exam_html, paket_name, output_dir):
                 local_img_path = os.path.join(images_dir, img_filename)
                 download_image(src, local_img_path)
                 rel_path = f"images/{img_filename}"
+                p_img["src"] = rel_path
                 prompt_images.append({
                     "filename": img_filename,
                     "rel_path": rel_path,
-                    "remote_url": src if src.startswith("http") else f"{BASE_URL}{src}"
+                    "remote_url": src if src.startswith("http") else f"{BASE_URL}{src}",
+                    "data_latex": p_img.get("data-latex")
                 })
+        pertanyaan_html = str(isi_div)
         
         # 3. Extract Options from table
         options = []
-        table = isi_div.find("table")
         if table:
             rows = table.find_all("tr")
             for r_idx, row in enumerate(rows):
@@ -268,7 +276,8 @@ def parse_and_save_exam(exam_html, paket_name, output_dir):
             },
             "pertanyaan": {
                 "text": pertanyaan_text,
-                "images": prompt_images
+                "images": prompt_images,
+                "html": pertanyaan_html
             },
             "pilihan_jawaban": options
         })

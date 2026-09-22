@@ -213,7 +213,11 @@ Indonesia adalah negara dengan kekayaan sumber daya alam yang melimpah, seperti 
 Meskipun menghadapi tantangan seperti fluktuasi nilai tukar, hambatan impor, dan rendahnya daya saing produk lokal, kerja sama internasional tetap memberi manfaat berupa peningkatan devisa, transfer teknologi, serta pembukaan lapangan kerja baru.
 
 ### Pertanyaan:
-Tentukan Benar atau Salah pada pernyataan Hambatan Perdagangan Internasional!
+Tentukan
+Benar
+atau
+Salah
+pada pernyataan Hambatan Perdagangan Internasional!
 
 ### Pilihan Jawaban:
 - **[A]** Hambatan Perdagangan Nasional
@@ -232,7 +236,11 @@ Aset = Kewajiban + Ekuitas
 ).
 
 ### Pertanyaan:
-Tentukan Benar atau Salah untuk setiap transaksi berdasarkan persamaan akuntansi berikut.
+Tentukan
+Benar
+atau
+Salah
+untuk setiap transaksi berdasarkan persamaan akuntansi berikut.
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -277,7 +285,11 @@ Pengangguran merupakan salah satu permasalahan krusial yang terjadi di Indonesia
 
 ### Pertanyaan:
 Manakah solusi yang dapat diterapkan untuk menyelesaikan permasalahan tersebut?
-Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+Tentukan
+Benar
+atau
+Salah
+untuk setiap pernyataan berikut!
 
 ### Pilihan Jawaban:
 - **[A]** Solusi

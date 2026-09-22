@@ -59,7 +59,11 @@ The next day, Son Tinh arrived early with his gifts. The King kept his promise a
 Son Tinh stayed calm in his mountain palace. Whenever the water rose, he made his mountains higher. After many days of fighting, Thuy Tinh grew tired and ordered the waters to retreat. Still, he never accepted his defeat. Every year, he tried again to attack, and this is how monsoons came to Vietnam.
 
 ### Pertanyaan:
-After reading the text, we can see that Son tinh and Thuy tinh are different, but they also have some similarities. Decide if each trait shows a similarity or a difference .
+After reading the text, we can see that Son tinh and Thuy tinh are different, but they also have some similarities. Decide if each trait shows a
+similarity
+or a
+difference
+.
 
 ### Pilihan Jawaban:
 - **[A]** Traits
@@ -80,7 +84,9 @@ The next day, Son Tinh arrived early with his gifts. The King kept his promise a
 Son Tinh stayed calm in his mountain palace. Whenever the water rose, he made his mountains higher. After many days of fighting, Thuy Tinh grew tired and ordered the waters to retreat. Still, he never accepted his defeat. Every year, he tried again to attack, and this is how monsoons came to Vietnam.
 
 ### Pertanyaan:
-What does the phrase “kept his promise” in the text mean?
+What does the phrase
+“kept his promise”
+in the text mean?
 
 ### Pilihan Jawaban:
 - **[A]** Forgot about his decision.

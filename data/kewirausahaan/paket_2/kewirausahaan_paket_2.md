@@ -55,7 +55,9 @@ Keputusan produksi yang tepat untuk memastikan target tercapai adalah ....
 Sekelompok Murid SMK membuat produk tempat pensil berbahan bambu yang diberi lukisan motif etnik. Produk ini unik, ramah lingkungan, dan ditujukan untuk pelajar dan pecinta kerajinan lokal. Penjualan selama bazar sekolah cukup baik, namun menurun setelah bazar berakhir. Mereka juga berencana meningkatkan penjualan sampai luar sekolah. Berdasarkan hasil evaluasi, perlu dilakukan perbaikan strategi pemasaran.
 
 ### Pertanyaan:
-Tentukan Benar/Salah pernyataan berikut ini berdasarkan strategi yang paling tepat dalam memasarkan produk agar penjualan meningkat.
+Tentukan
+Benar/Salah
+pernyataan berikut ini berdasarkan strategi yang paling tepat dalam memasarkan produk agar penjualan meningkat.
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -72,7 +74,8 @@ Tentukan Benar/Salah pernyataan berikut ini berdasarkan strategi yang paling tep
 Anatama seorang wirausaha muda yang memproduksi sabun organik alami tanpa bahan kimia. Produk tersebut memiliki target pasar konsumen yang memiliki kesadaran menggunakan produk alami dengan rentang usia antara 20–40 tahun. Ia berencana menyusun strategi pemasaran secara online agar produknya menjangkau pasar yang lebih luas.
 
 ### Pertanyaan:
-Manakah strategi pemasaran online berikut yang paling relevan untuk diterapkan dalam memasarkan produk sabun organik tersebut? Tentukan jawaban yang benar. Jawaban benar lebih dari satu!
+Manakah strategi pemasaran online berikut yang paling relevan untuk diterapkan dalam memasarkan produk sabun organik tersebut?
+Tentukan jawaban yang benar. Jawaban benar lebih dari satu!
 
 ### Pilihan Jawaban:
 - **[A]** Membagikan konten edukatif dan visual di media sosial tentang manfaat sabun organik
@@ -214,7 +217,8 @@ Kesimpulan yang di dapat dari uji coba prototipe pertama sebagai berikut:
 - Kesulitan mengubah fungsi meja karena sistem geser yang berat
 
 ### Pertanyaan:
-Dari situasi tersebut, langkah manakah yang paling tepat dilakukan dalam tahapan pengembangan prototipe produk? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+Dari situasi tersebut, langkah manakah yang paling tepat dilakukan dalam tahapan pengembangan prototipe produk?
+Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Melakukan evaluasi pasar secara terbatas untuk mengetahui potensi minat konsumen
@@ -265,7 +269,8 @@ Perhatian dan peringatan :
 - Bila terkena mata, bilas dengan air bersih
 
 ### Pertanyaan:
-Berdasarkan informasi pada kemasan tersebut, manakah informasi yang sesuai dengan kemasan produk tersebut? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+Berdasarkan informasi pada kemasan tersebut, manakah informasi yang sesuai dengan kemasan produk tersebut?
+Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Perbandingan campuran adalah setengah sendok cairan dicampur dengan satu mangkok air
@@ -283,7 +288,8 @@ Berdasarkan informasi pada kemasan tersebut, manakah informasi yang sesuai denga
 Pada proses pengecekan kualitas produk lemari besi, ditemukan adanya pengelupasan cat pada bagian dinding lemari. Akibatnya, produk tersebut dinyatakan tidak lolos quality control dan tidak dapat dikirim ke pelanggan. Setelah dilakukan investigasi lebih lanjut, diketahui bahwa pengelupasan cat tersebut disebabkan oleh benturan atau gesekan yang terjadi saat proses pemindahan lemari dari area produksi ke gudang penyimpanan.
 
 ### Pertanyaan:
-Tindakan yang paling tepat untuk mengatasi dan mencegah masalah tersebut adalah…. Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+Tindakan yang paling tepat untuk mengatasi dan mencegah masalah tersebut adalah….
+Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Melatih ulang petugas pemindahan barang agar lebih berhati-hati dan menggunakan teknik angkat yang tepat
@@ -346,7 +352,8 @@ Berdasarkan situasi tersebut, kombinasi bahan baku mana untuk mendukung proses p
 Yuli dan Anita memproduksi minuman instan serbuk rasa buah tropis (mango-pineapple) yang terbuat dari sari buah dan gula alami. Produk tersebut dikemas dalam sachet kecil dan dipasarkan secara daring. Pada tiga bulan pertama, produk mendapatkan banyak ulasan positif dari konsumen karena cita rasanya yang segar serta kemasannya yang menarik. Namun, setelah beberapa bulan, muncul sejumlah keluhan seperti bubuk minuman yang menggumpal, aroma yang tidak lagi segar, dan perubahan rasa. Hasil penelusuran menunjukkan bahwa sebagian bahan baku disimpan di tempat lembap dan proses pengemasan dilakukan tanpa tahap penyaringan akhir untuk memisahkan partikel kasar.
 
 ### Pertanyaan:
-Berdasarkan kasus tersebut, manakah tindakan yang tepat untuk perbaikan pengendalian mutu produk minuman serbuk rasa buah tersebut? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+Berdasarkan kasus tersebut, manakah tindakan yang tepat untuk perbaikan pengendalian mutu produk minuman serbuk rasa buah tersebut?
+Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Menyimpan bahan baku di tempat yang kering dan bersuhu stabil
@@ -447,7 +454,8 @@ Business Model Canvas
 ![Diagram Stimulus Soal 22](images/soal_22_stimulus_01.png)
 
 ### Pertanyaan:
-Berdasarkan BMC usaha Tirta Botani, manakah dari pernyataan berikut yang menunjukkan hasil analisis SWOT? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+Berdasarkan BMC usaha Tirta Botani, manakah dari pernyataan berikut yang menunjukkan hasil analisis SWOT?
+Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Ketersediaan buah lokal segar merupakan kekuatan dalam produksi
@@ -465,7 +473,8 @@ Berdasarkan BMC usaha Tirta Botani, manakah dari pernyataan berikut yang menunju
 Cahya membuka usaha minuman kekinian berbasis susu dan buah lokal dengan merek “SegarKu”. Usaha ini dijalankan dari rumah dan dipasarkan melalui media sosial. Meskipun belum memiliki izin usaha resmi, produk SegarKu mulai dikenal di lingkungan sekitar karena rasanya yang segar dan unik. Namun, kapasitas produksinya masih terbatas karena alat yang digunakan bersifat manual dan belum modern. Lokasi rumah yang berada di dekat sekolah dan kawasan perumahan padat penduduk menjadi salah satu keunggulan usaha ini. Dalam jangka panjang, pelaku usaha berharap dapat mengembangkan usaha secara lebih profesional dan menjangkau konsumen yang lebih luas.
 
 ### Pertanyaan:
-Berdasarkan informasi tersebut, manakah dari pernyataan berikut ini yang merupakan bagian dari analisis SWOT usaha “SegarKu”? Tentukan jawaban yang benar. Jawaban benar lebih dari satu
+Berdasarkan informasi tersebut, manakah dari pernyataan berikut ini yang merupakan bagian dari analisis SWOT usaha “SegarKu”?
+Tentukan jawaban yang benar. Jawaban benar lebih dari satu
 
 ### Pilihan Jawaban:
 - **[A]** Promosi melalui media sosial berpotensi menjangkau pelanggan yang lebih luas
@@ -503,7 +512,13 @@ Kaligrafika
 ”, yaitu lukisan kaligrafi digital yang bisa dikustom sesuai nama pembeli. Mereka juga membuat desainnya menggunakan aplikasi grafis dan menjualnya melalui platform digital. Dalam sebuah diskusi, mereka menyadari pentingnya melindungi karya dari penjiplakan dengan mendaftarkannya ke sistem Hak Kekayaan Intelektual (HaKI).
 
 ### Pertanyaan:
-Tentukan Benar atau Salah pernyataan berikut ini berkaitan dengan jenis dan karakteristik HaKI yang mungkin relevan dengan usaha Kaligrafika .
+Tentukan
+Benar
+atau
+Salah
+pernyataan berikut ini berkaitan dengan jenis dan karakteristik HaKI yang mungkin relevan dengan usaha
+Kaligrafika
+.
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -539,7 +554,8 @@ Perhatikan laporan biaya produksi usaha minuman dari sebuah UMKM berikut.
 ![Diagram Stimulus Soal 27](images/soal_27_stimulus_01.png)
 
 ### Pertanyaan:
-Apabila UMKM menargetkan laba: 30-40% dari total biaya produksi, berapakah harga jual per botol yang sebaiknya ditetapkan? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+Apabila UMKM menargetkan laba: 30-40% dari total biaya produksi, berapakah harga jual per botol yang sebaiknya ditetapkan?
+Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Rp11.250,00
@@ -580,7 +596,8 @@ Usaha sablon tersebut masih memiliki sejumlah persediaan bahan yang menumpuk di 
 ![Diagram Stimulus Soal 29](images/soal_29_stimulus_01.png)
 
 ### Pertanyaan:
-Berdasarkan laporan keuangan tersebut, manakah langkah tindak lanjut yang paling tepat dilakukan oleh usaha sablon tersebut? Tentukan jawaban yang benar! Jawaban benar lebih dari satu.
+Berdasarkan laporan keuangan tersebut, manakah langkah tindak lanjut yang paling tepat dilakukan oleh usaha sablon tersebut?
+Tentukan jawaban yang benar! Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Meninkatkan biaya promosi agar volume penjualan bertambah

@@ -1,0 +1,428 @@
+{
+  "purpose": "vision_transcription_review_packet",
+  "slug": "matematika_paket_1",
+  "subject": "Matematika",
+  "package": 1,
+  "instructions": [
+    "You are transcribing question images from an Indonesian national exam (TKA).",
+    "Work ONLY from what is visibly printed in each image.",
+    "For each image, output one JSON object keyed by filename with fields:",
+    "  \"latex\": a LaTeX string if the image is a mathematical expression, formula,",
+    "     equation, inequality, fraction, root, exponent, set, or interval — otherwise null.",
+    "  \"description\": a faithful textual description if the image is a table, graph,",
+    "     diagram, or other meaningful visual — otherwise null.",
+    "Rules:",
+    "- Never solve, infer, simplify, or complete anything; do not guess unreadable parts.",
+    "- If something is unreadable, set the field to null and add \"note\" explaining why.",
+    "- Tables: output as Markdown table inside description.",
+    "- Graphs: describe axes, labels, scale, plotted lines/points, intercepts, legends.",
+    "- Diagrams: describe objects, labels, measures, positions, connections as shown.",
+    "- Keep numbers, symbols, and wording EXACTLY as printed (Indonesian decimal comma stays)."
+  ],
+  "questions": {
+    "4": [
+      {
+        "filename": "soal_04_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "5": [
+      {
+        "filename": "soal_05_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_05_prompt_01.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "6": [
+      {
+        "filename": "soal_06_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "9": [
+      {
+        "filename": "soal_09_stimulus_01.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_09_stimulus_02.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_09_stimulus_03.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_09_prompt_01.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "10": [
+      {
+        "filename": "soal_10_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "11": [
+      {
+        "filename": "soal_11_prompt_01.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_11_opsi_a.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_11_opsi_b.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_11_opsi_c.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_11_opsi_d.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_11_opsi_e.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "12": [
+      {
+        "filename": "soal_12_prompt_01.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_12_prompt_02.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "14": [
+      {
+        "filename": "soal_14_prompt_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "15": [
+      {
+        "filename": "soal_15_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_15_prompt_01.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "16": [
+      {
+        "filename": "soal_16_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "17": [
+      {
+        "filename": "soal_17_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "18": [
+      {
+        "filename": "soal_18_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "20": [
+      {
+        "filename": "soal_20_prompt_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "21": [
+      {
+        "filename": "soal_21_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "22": [
+      {
+        "filename": "soal_22_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "23": [
+      {
+        "filename": "soal_23_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "24": [
+      {
+        "filename": "soal_24_prompt_01.png",
+        "kind": "table",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "25": [
+      {
+        "filename": "soal_25_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "26": [
+      {
+        "filename": "soal_26_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "27": [
+      {
+        "filename": "soal_27_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "29": [
+      {
+        "filename": "soal_29_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "30": [
+      {
+        "filename": "soal_30_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "31": [
+      {
+        "filename": "soal_31_stimulus_01.png",
+        "kind": "table",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "32": [
+      {
+        "filename": "soal_32_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "34": [
+      {
+        "filename": "soal_34_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "36": [
+      {
+        "filename": "soal_36_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "38": [
+      {
+        "filename": "soal_38_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "39": [
+      {
+        "filename": "soal_39_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_39_opsi_b.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_39_opsi_c.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      },
+      {
+        "filename": "soal_39_opsi_d.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "40": [
+      {
+        "filename": "soal_40_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "41": [
+      {
+        "filename": "soal_41_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "43": [
+      {
+        "filename": "soal_43_opsi_c.png",
+        "kind": "formula",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "44": [
+      {
+        "filename": "soal_44_stimulus_04.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "45": [
+      {
+        "filename": "soal_45_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ],
+    "46": [
+      {
+        "filename": "soal_46_stimulus_01.png",
+        "kind": "diagram",
+        "location": "?",
+        "context": "?",
+        "current_marker": ""
+      }
+    ]
+  }
+}

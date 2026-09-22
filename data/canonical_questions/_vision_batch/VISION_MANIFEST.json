@@ -1,0 +1,2167 @@
+{
+  "purpose": "vision_transcription_batch (deduplicated by sha256; mapping preserved)",
+  "created_for": "single Claude Web pass — transcription only, no solving/inference",
+  "totals": {
+    "unresolved_references": 119,
+    "unique_visuals": 100,
+    "questions_with_unresolved": 95
+  },
+  "instructions": [
+    "TASK: visual transcription only. You are given images from an Indonesian",
+    "national exam (TKA) question bank. For each image, describe/transcribe EXACTLY",
+    "what is visibly printed. You must NOT solve questions, must NOT infer missing",
+    "information, must NOT complete unreadable parts, and must NOT fabricate",
+    "formulas, numbers, labels, axis values, or graph data.",
+    "",
+    "Return ONE JSON object with a single key \"visuals\": a list with EXACTLY one",
+    "entry per visual_id in VISION_MANIFEST.json, using this exact shape:",
+    "",
+    "  {",
+    "    \"visual_id\": \"V001\",",
+    "    \"representation_type\": \"formula|diagram|graph|table|text|mixed\",",
+    "    \"latex\": \"LaTeX string, or null\",",
+    "    \"description\": \"faithful textual description, or null\",",
+    "    \"confidence\": \"high|medium|low\",",
+    "    \"unresolved\": false,",
+    "    \"notes\": null",
+    "  }",
+    "",
+    "Field rules:",
+    "- latex: set ONLY when the image is a mathematical expression/formula",
+    "  (equation, inequality, fraction, root, exponent, set, interval). Keep",
+    "  Indonesian decimal commas (e.g. 0,5) and wording exactly as printed.",
+    "- description: set ONLY for tables (render as a Markdown table), graphs",
+    "  (axes, labels, scale, plotted lines/points, intercepts, legend), diagrams",
+    "  (objects, labels, measures, positions, connections as shown), or other",
+    "  meaningful visuals.",
+    "- representation_type: 'formula' if latex is set; otherwise the closest of",
+    "  diagram|graph|table|text|mixed.",
+    "- If any part is unreadable or ambiguous: keep what IS readable, set",
+    "  \"unresolved\": true, put the readable part in latex/description, and explain",
+    "  the ambiguity in \"notes\". NEVER guess.",
+    "- One image may repeat across several questions (deduplicated by content);",
+    "  transcribe it once — the manifest maps it back to every occurrence."
+  ],
+  "output_contract": {
+    "wrapper": {
+      "visuals": []
+    },
+    "per_visual_required_keys": [
+      "visual_id",
+      "representation_type",
+      "latex",
+      "description",
+      "confidence",
+      "unresolved",
+      "notes"
+    ],
+    "enums": {
+      "representation_type": [
+        "formula",
+        "diagram",
+        "graph",
+        "table",
+        "text",
+        "mixed"
+      ],
+      "confidence": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "rule": "one entry per visual_id; latex XOR description (or both null when unresolved)"
+  },
+  "visuals": [
+    {
+      "visual_id": "V001",
+      "sha256": "3aaba268f4d29a1792729bffd6af959453f5f76ad8261ba0e58eaf69fc9ac212",
+      "file": "images/V001__soal_04_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 146461,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 4,
+          "question_id": "mtk_p1_q04",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_04_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V002",
+      "sha256": "857fda7d888b07113d891a26d34ae68c2e23ead175f95ee85ece1550c31d4aa7",
+      "file": "images/V002__soal_05_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 53352,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 5,
+          "question_id": "mtk_p1_q05",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_05_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V003",
+      "sha256": "b9a8ef651b1196c4efdfa5d5afe5a85dc0fc986256c72b7b53fa67150989d7f1",
+      "file": "images/V003__soal_05_prompt_01.png",
+      "kind_hint": "formula",
+      "bytes": 7858,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 5,
+          "question_id": "mtk_p1_q05",
+          "question_type": "PG",
+          "section": "question",
+          "original_filename": "soal_05_prompt_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V004",
+      "sha256": "7ce59cccbcaabc51cc92c822df795748eb47a5c548363651459af9abe0e19167",
+      "file": "images/V004__soal_06_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 447395,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 6,
+          "question_id": "mtk_p1_q06",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_06_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V005",
+      "sha256": "f8fae705c7d606fa7c2da7cabcfbccd3baa8b0012edd8994f00f7c2b724ea6a7",
+      "file": "images/V005__soal_09_stimulus_01.png",
+      "kind_hint": "formula",
+      "bytes": 5186,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 9,
+          "question_id": "mtk_p1_q09",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_09_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V006",
+      "sha256": "e2373ea47a7d5830676bfbd4ba4f73121747ebace2cf28559016f6d3d6afc087",
+      "file": "images/V006__soal_09_stimulus_02.png",
+      "kind_hint": "formula",
+      "bytes": 4547,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 9,
+          "question_id": "mtk_p1_q09",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_09_stimulus_02.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V007",
+      "sha256": "9d4f389f0ed358f55a7b6963b68d6e9ee4524db279e6c8adf1e725284446b966",
+      "file": "images/V007__soal_09_stimulus_03.png",
+      "kind_hint": "formula",
+      "bytes": 3722,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 9,
+          "question_id": "mtk_p1_q09",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_09_stimulus_03.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V008",
+      "sha256": "48c9b73096d63de3af3259ab38a9d30fee37d048e5ed7674bf25417795a4be70",
+      "file": "images/V008__soal_09_prompt_01.png",
+      "kind_hint": "formula",
+      "bytes": 4907,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 9,
+          "question_id": "mtk_p1_q09",
+          "question_type": "PG",
+          "section": "question",
+          "original_filename": "soal_09_prompt_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V009",
+      "sha256": "afee1173dbf1422e149d0cfbc651f28e794ea35999914c86ba0eff0402b2cdfd",
+      "file": "images/V009__soal_10_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 307660,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 10,
+          "question_id": "mtk_p1_q10",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_10_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V010",
+      "sha256": "8f156f4afab94ca74cdcc2f1a3973b57da1521f7abb122f29b79527494e7a5ac",
+      "file": "images/V010__soal_11_prompt_01.png",
+      "kind_hint": "formula",
+      "bytes": 7472,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 11,
+          "question_id": "mtk_p1_q11",
+          "question_type": "PG",
+          "section": "question",
+          "original_filename": "soal_11_prompt_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V011",
+      "sha256": "f7268b021f7155b1aa9e33f17afba3a8dd99717be27257aeeabd7422d8f4d094",
+      "file": "images/V011__soal_11_opsi_a.png",
+      "kind_hint": "formula",
+      "bytes": 10055,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 11,
+          "question_id": "mtk_p1_q11",
+          "question_type": "PG",
+          "section": "option A",
+          "original_filename": "soal_11_opsi_a.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V012",
+      "sha256": "d5f972f2acbf91e719a4ab2c36d18a7d0d604c2920846ae294ba94977d823c15",
+      "file": "images/V012__soal_11_opsi_b.png",
+      "kind_hint": "formula",
+      "bytes": 9316,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 11,
+          "question_id": "mtk_p1_q11",
+          "question_type": "PG",
+          "section": "option B",
+          "original_filename": "soal_11_opsi_b.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V013",
+      "sha256": "4f719ae423071da064d05d9de1a758a9d137f7d89d9b42a942345b62b861e36f",
+      "file": "images/V013__soal_11_opsi_c.png",
+      "kind_hint": "formula",
+      "bytes": 11279,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 11,
+          "question_id": "mtk_p1_q11",
+          "question_type": "PG",
+          "section": "option C",
+          "original_filename": "soal_11_opsi_c.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V014",
+      "sha256": "148bf081db9b8d4aa6d0fff1dc3b56f50582db851cc1f054f2cabe4db51866e4",
+      "file": "images/V014__soal_11_opsi_d.png",
+      "kind_hint": "formula",
+      "bytes": 8918,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 11,
+          "question_id": "mtk_p1_q11",
+          "question_type": "PG",
+          "section": "option D",
+          "original_filename": "soal_11_opsi_d.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V015",
+      "sha256": "9855e3dfaf388ce75c1cd5aaea922b4eba4534bae030eed9eb1d0c532a98c3dc",
+      "file": "images/V015__soal_11_opsi_e.png",
+      "kind_hint": "formula",
+      "bytes": 9501,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 11,
+          "question_id": "mtk_p1_q11",
+          "question_type": "PG",
+          "section": "option E",
+          "original_filename": "soal_11_opsi_e.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V016",
+      "sha256": "185eeb87e598ffbbfa6d0a3b004e1fb09a9f4690d0c5571f4e8a49ca682dccad",
+      "file": "images/V016__soal_12_prompt_01.png",
+      "kind_hint": "formula",
+      "bytes": 1068,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 12,
+          "question_id": "mtk_p1_q12",
+          "question_type": "PG",
+          "section": "question",
+          "original_filename": "soal_12_prompt_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V017",
+      "sha256": "5be1dcc4cfb29092f03b5a347c9c698891efb3d775a8ffbed7a32eacb0ecb11f",
+      "file": "images/V017__soal_12_prompt_02.png",
+      "kind_hint": "formula",
+      "bytes": 1088,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 12,
+          "question_id": "mtk_p1_q12",
+          "question_type": "PG",
+          "section": "question",
+          "original_filename": "soal_12_prompt_02.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V018",
+      "sha256": "1c823499017114dbdecf18f2e1939f5431c7a23117c5a322d27915fa62e30216",
+      "file": "images/V018__soal_14_prompt_01.png",
+      "kind_hint": "diagram",
+      "bytes": 5149,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 14,
+          "question_id": "mtk_p1_q14",
+          "question_type": "PG",
+          "section": "question",
+          "original_filename": "soal_14_prompt_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V019",
+      "sha256": "0bf4aa8d3b408dc2e8176653059c77e1935b21e2f0599bc2d5f6e73d7f2375ec",
+      "file": "images/V019__soal_15_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 369606,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 15,
+          "question_id": "mtk_p1_q15",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_15_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V020",
+      "sha256": "af63e1f7a3299322b59467578cf0102e5242283d85d8ee35ec4351a61d576aaa",
+      "file": "images/V020__soal_15_prompt_01.png",
+      "kind_hint": "formula",
+      "bytes": 7014,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 15,
+          "question_id": "mtk_p1_q15",
+          "question_type": "PG",
+          "section": "question",
+          "original_filename": "soal_15_prompt_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V021",
+      "sha256": "7d66d4de64db36302a84afdabe66c7574b9a37c7a04a1b9c43abf47f79a9b36b",
+      "file": "images/V021__soal_16_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 122871,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 16,
+          "question_id": "mtk_p1_q16",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_16_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V022",
+      "sha256": "248d8aa542899215be05184f783b14c50070c413d733af553baea3f871fe491d",
+      "file": "images/V022__soal_17_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 261535,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 17,
+          "question_id": "mtk_p1_q17",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_17_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V023",
+      "sha256": "564db17f7a404d09d34b45d9c3e9c24c31a1186f8e294c39a17546b7a66b4e68",
+      "file": "images/V023__soal_18_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 232087,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 18,
+          "question_id": "mtk_p1_q18",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_18_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V024",
+      "sha256": "fb328a06a0f829f0f0390ff29a92d35f61f807ab41953aecaf2df745fa25f961",
+      "file": "images/V024__soal_20_prompt_01.png",
+      "kind_hint": "diagram",
+      "bytes": 62269,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 20,
+          "question_id": "mtk_p1_q20",
+          "question_type": "PG",
+          "section": "question",
+          "original_filename": "soal_20_prompt_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V025",
+      "sha256": "2880bf4668b6d6a677d20eb03f25fe12f1d0c22b1e30cb36029dd44e64e3c0d9",
+      "file": "images/V025__soal_21_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 747046,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 21,
+          "question_id": "mtk_p1_q21",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_21_stimulus_01.png"
+        },
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 25,
+          "question_id": "mtk_p1_q25",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_25_stimulus_01.png"
+        },
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 30,
+          "question_id": "mtk_p1_q30",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_30_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V026",
+      "sha256": "667d571093484bf1db9f2a3817452c19f4ba212bf727f792c989aabb6b112e2e",
+      "file": "images/V026__soal_22_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 307144,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 22,
+          "question_id": "mtk_p1_q22",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_22_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V027",
+      "sha256": "8c312ed458c09366eca7ee6a2f4cab9369687425c78cc3ef01358b7cf4ed1344",
+      "file": "images/V027__soal_23_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 417903,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 23,
+          "question_id": "mtk_p1_q23",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_23_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V028",
+      "sha256": "19bc4b140d5f4e567dcb3f3390253d5c3d869e4f3b6ed73e395cd55344d63ac4",
+      "file": "images/V028__soal_24_prompt_01.png",
+      "kind_hint": "table",
+      "bytes": 17141,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 24,
+          "question_id": "mtk_p1_q24",
+          "question_type": "PG",
+          "section": "question",
+          "original_filename": "soal_24_prompt_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V029",
+      "sha256": "f94b8cb5424b9079d28a10d3c33a80147abad223c8627be6fc8f98943ad3b71a",
+      "file": "images/V029__soal_26_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 319690,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 26,
+          "question_id": "mtk_p1_q26",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_26_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V030",
+      "sha256": "1fa3dfe4c70ff26fb82f9322521f3db328832a44ac96736946b0865e656edb3b",
+      "file": "images/V030__soal_27_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 65840,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 27,
+          "question_id": "mtk_p1_q27",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_27_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V031",
+      "sha256": "6c44124b5e091f4734cd6cb8e29fda960d11c5312a8fb3e31c2595e003245d32",
+      "file": "images/V031__soal_29_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 155555,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 29,
+          "question_id": "mtk_p1_q29",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_29_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V032",
+      "sha256": "4d06f3d335e55ac35cfac3d2e52d4d1d781b09d7a934ea3b5025d68dc480100f",
+      "file": "images/V032__soal_31_stimulus_01.png",
+      "kind_hint": "table",
+      "bytes": 52828,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 31,
+          "question_id": "mtk_p1_q31",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_31_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V033",
+      "sha256": "4eb3ce601b6a1cccce97d621ee4e4fef68b1c6f854393773804614289d72d45f",
+      "file": "images/V033__soal_32_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 246524,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 32,
+          "question_id": "mtk_p1_q32",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_32_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V034",
+      "sha256": "ab16c7b9e639ff402caf1160a2b6c30342b7a1e65e4beb180cf5f2fb8ac3fc52",
+      "file": "images/V034__soal_34_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 163849,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 34,
+          "question_id": "mtk_p1_q34",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_34_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V035",
+      "sha256": "510e99eea80ed726ac97a6edda9ea13506cc3c1b294e0e2821db7eb28be81def",
+      "file": "images/V035__soal_36_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 392009,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 36,
+          "question_id": "mtk_p1_q36",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_36_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V036",
+      "sha256": "9a8a914f49227c83f25e5523cfb84b53b6213e0b38a90afdd71f2f9406cd6363",
+      "file": "images/V036__soal_38_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 483733,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 38,
+          "question_id": "mtk_p1_q38",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_38_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V037",
+      "sha256": "58b750211528f517208b3a24acadcbadc1105bc5e75456f1ffc828cb1e66a1f7",
+      "file": "images/V037__soal_39_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 55285,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 39,
+          "question_id": "mtk_p1_q39",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_39_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V038",
+      "sha256": "3f6c8d18c317bfc232a6123e424f0f92501a856e8ce725bed9c4f9e6fa43c2dc",
+      "file": "images/V038__soal_39_opsi_b.png",
+      "kind_hint": "formula",
+      "bytes": 6279,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 39,
+          "question_id": "mtk_p1_q39",
+          "question_type": "BS",
+          "section": "statement A",
+          "original_filename": "soal_39_opsi_b.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V039",
+      "sha256": "339297289084dca380da1436f07f5d14921f1a29173f7d1de046ccf4e327c617",
+      "file": "images/V039__soal_39_opsi_c.png",
+      "kind_hint": "formula",
+      "bytes": 6147,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 39,
+          "question_id": "mtk_p1_q39",
+          "question_type": "BS",
+          "section": "statement B",
+          "original_filename": "soal_39_opsi_c.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V040",
+      "sha256": "089598e097b1efeb2862edffe8b74b9155e9b8f48cb6129dd18b30996b3c3186",
+      "file": "images/V040__soal_39_opsi_d.png",
+      "kind_hint": "formula",
+      "bytes": 6101,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 39,
+          "question_id": "mtk_p1_q39",
+          "question_type": "BS",
+          "section": "statement C",
+          "original_filename": "soal_39_opsi_d.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V041",
+      "sha256": "088e0b7be9c17d20a0cd8a907f528d7b95c0fb37e6e2dd2cc3e2af6c61ee65c2",
+      "file": "images/V041__soal_40_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 41572,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 40,
+          "question_id": "mtk_p1_q40",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_40_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V042",
+      "sha256": "d83ba471a6deaa3519a09c3f4f9045d5cbc31b944005ec1027c323f8c3ea2f61",
+      "file": "images/V042__soal_41_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 197428,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 41,
+          "question_id": "mtk_p1_q41",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_41_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V043",
+      "sha256": "5cd1ce88d1741d061b1f159ae19221c5ec3161f130dfa33ece6a74434eac27b2",
+      "file": "images/V043__soal_43_opsi_c.png",
+      "kind_hint": "formula",
+      "bytes": 7326,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 43,
+          "question_id": "mtk_p1_q43",
+          "question_type": "BS",
+          "section": "statement B",
+          "original_filename": "soal_43_opsi_c.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V044",
+      "sha256": "3189ab8752d653f4a39056f21ec6ffdfa19b33b197d546476bd197da1a0b75da",
+      "file": "images/V044__soal_44_stimulus_04.png",
+      "kind_hint": "diagram",
+      "bytes": 256094,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 44,
+          "question_id": "mtk_p1_q44",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_44_stimulus_04.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V045",
+      "sha256": "1d3266920ff2a86d1130a55327012d544f2c1ade9e1b1222da6f6fa949f71e68",
+      "file": "images/V045__soal_45_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 174842,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 45,
+          "question_id": "mtk_p1_q45",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_45_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V046",
+      "sha256": "ded25cc99b53d6ed1340ea16f0a7cf5f0f59631e4413cc7fcdc8d7cbf9d9db9d",
+      "file": "images/V046__soal_46_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 4893,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_1",
+          "subject": "Matematika",
+          "package": 1,
+          "question_number": 46,
+          "question_id": "mtk_p1_q46",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_46_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V047",
+      "sha256": "9ab0965e31a6a02986d053e371e41e01efc7e41ecd1a8999612dcedf94108c23",
+      "file": "images/V047__soal_02_prompt_01.png",
+      "kind_hint": "formula",
+      "bytes": 951,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 2,
+          "question_id": "mtk_p2_q02",
+          "question_type": "PG",
+          "section": "question",
+          "original_filename": "soal_02_prompt_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V048",
+      "sha256": "d3886bd11a6c18920f4a6406b7c669a59baa3fab86763642cd81d31122787898",
+      "file": "images/V048__soal_03_stimulus_01.png",
+      "kind_hint": "formula",
+      "bytes": 380,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 3,
+          "question_id": "mtk_p2_q03",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_03_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V049",
+      "sha256": "3e4b610b287a493689b5ed1aeff4c1b422a83696335ab81b2e40f286caffeb74",
+      "file": "images/V049__soal_03_stimulus_02.png",
+      "kind_hint": "formula",
+      "bytes": 1874,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 3,
+          "question_id": "mtk_p2_q03",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_03_stimulus_02.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V050",
+      "sha256": "cd77a13519bf10ef861ae90cfeb57c12c00890f6edb218bfbd6f478324f3ce2e",
+      "file": "images/V050__soal_03_prompt_01.png",
+      "kind_hint": "formula",
+      "bytes": 1730,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 3,
+          "question_id": "mtk_p2_q03",
+          "question_type": "BS",
+          "section": "question",
+          "original_filename": "soal_03_prompt_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V051",
+      "sha256": "40c8c95061f2a2b9785e0780d6b3e0c425007e3447cedc7c8f7a2c55482d995e",
+      "file": "images/V051__soal_03_opsi_d.png",
+      "kind_hint": "formula",
+      "bytes": 2476,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 3,
+          "question_id": "mtk_p2_q03",
+          "question_type": "BS",
+          "section": "statement C",
+          "original_filename": "soal_03_opsi_d.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V052",
+      "sha256": "d134970646718e3bc3bc31522a0a160a1f7d8e6958185c6f4fb2946035fbf3fc",
+      "file": "images/V052__soal_05_stimulus_06.png",
+      "kind_hint": "formula",
+      "bytes": 6064,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 5,
+          "question_id": "mtk_p2_q05",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_05_stimulus_06.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V053",
+      "sha256": "1b61f947acd998c17c267c56de4c7e97b478071713062f8dc6dfaaa7fcef58be",
+      "file": "images/V053__soal_08_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 140644,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 8,
+          "question_id": "mtk_p2_q08",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_08_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V054",
+      "sha256": "58685c8124c111750224e7c786b9791d9c1a87e572b22f03a470f74e77525503",
+      "file": "images/V054__soal_09_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 329770,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 9,
+          "question_id": "mtk_p2_q09",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_09_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V055",
+      "sha256": "e47983bc700bc83c86755a089fec2f0af95adec076c69b52a593ba3a22b8d258",
+      "file": "images/V055__soal_10_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 44515,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 10,
+          "question_id": "mtk_p2_q10",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_10_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V056",
+      "sha256": "058769574322194bad2a99fe7430c01fa1b954c39ae4ad3ee990b36b1d98e19c",
+      "file": "images/V056__soal_11_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 128707,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 11,
+          "question_id": "mtk_p2_q11",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_11_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V057",
+      "sha256": "fb98c4ac5fb598d3b9f77b28b977d02eccee66fc881a827824bac3435e2b1f0f",
+      "file": "images/V057__soal_12_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 29620,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 12,
+          "question_id": "mtk_p2_q12",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_12_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V058",
+      "sha256": "214477eae41b95fb5b2ec93889109bff9e1588e3cbb04ba39025f337d3f7fb8e",
+      "file": "images/V058__soal_13_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 667496,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 13,
+          "question_id": "mtk_p2_q13",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_13_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V059",
+      "sha256": "90aa4c1576517f5f938c43d404e0fd4c3e38e92a772fc0613d6896d95e0d524e",
+      "file": "images/V059__soal_14_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 55736,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 14,
+          "question_id": "mtk_p2_q14",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_14_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V060",
+      "sha256": "349f3d33b5a9e8d4e98c2c0641b41adb7923f1421355ffef27418ded55e2bffd",
+      "file": "images/V060__soal_14_opsi_a.png",
+      "kind_hint": "diagram",
+      "bytes": 53068,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 14,
+          "question_id": "mtk_p2_q14",
+          "question_type": "PG",
+          "section": "option A",
+          "original_filename": "soal_14_opsi_a.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V061",
+      "sha256": "6fd55d3eccfa6749aa6c8309ef4af39c5d6cc4f452ce36a6a8b693e9756c7b6f",
+      "file": "images/V061__soal_14_opsi_b.png",
+      "kind_hint": "diagram",
+      "bytes": 51044,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 14,
+          "question_id": "mtk_p2_q14",
+          "question_type": "PG",
+          "section": "option B",
+          "original_filename": "soal_14_opsi_b.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V062",
+      "sha256": "17ba86d24fd2417ae3ab4d51cfbc170ae07553e7bf444a9f6da826c2ee24fabe",
+      "file": "images/V062__soal_14_opsi_c.png",
+      "kind_hint": "diagram",
+      "bytes": 53942,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 14,
+          "question_id": "mtk_p2_q14",
+          "question_type": "PG",
+          "section": "option C",
+          "original_filename": "soal_14_opsi_c.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V063",
+      "sha256": "af7aa8de89cfb76390b2de2149139589d5700f78226b5aa58a4a56f1bc6f77dc",
+      "file": "images/V063__soal_14_opsi_d.png",
+      "kind_hint": "diagram",
+      "bytes": 50008,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 14,
+          "question_id": "mtk_p2_q14",
+          "question_type": "PG",
+          "section": "option D",
+          "original_filename": "soal_14_opsi_d.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V064",
+      "sha256": "f8e58180b11dd190c0ec051aeee4ab2e634b5e7863ce4203c78b7813470a20cd",
+      "file": "images/V064__soal_14_opsi_e.png",
+      "kind_hint": "diagram",
+      "bytes": 53797,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 14,
+          "question_id": "mtk_p2_q14",
+          "question_type": "PG",
+          "section": "option E",
+          "original_filename": "soal_14_opsi_e.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V065",
+      "sha256": "c20d8552f0939bc7ec27e960ad1eaef2f2a734da023443604645b6bed1d9bd26",
+      "file": "images/V065__soal_15_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 145433,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 15,
+          "question_id": "mtk_p2_q15",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_15_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V066",
+      "sha256": "fe5f6d4646a34f50c8f62441ed263005862696da8f021553ac165f22875e5bec",
+      "file": "images/V066__soal_16_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 200793,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 16,
+          "question_id": "mtk_p2_q16",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_16_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V067",
+      "sha256": "eb53c2f773877df899e1d560c817df3100bd7b2cd23c13a9a6b4884af2cfd8ba",
+      "file": "images/V067__soal_17_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 16477,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 17,
+          "question_id": "mtk_p2_q17",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_17_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V068",
+      "sha256": "3dd168438e21d2e7dac47fb3f7eef7a3706e3e34e54fd68bc57443aa7bd29c0c",
+      "file": "images/V068__soal_18_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 107701,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 18,
+          "question_id": "mtk_p2_q18",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_18_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V069",
+      "sha256": "de8b2e48aa33393656069e61ae0bd10703cb3d201d253ab6e51a91c3112e8f30",
+      "file": "images/V069__soal_19_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 1147370,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 19,
+          "question_id": "mtk_p2_q19",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_19_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V070",
+      "sha256": "c6e500a5cad6aaef3f4da8c4c51046613a24057498d9aefd186f012b0d730a78",
+      "file": "images/V070__soal_20_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 39597,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 20,
+          "question_id": "mtk_p2_q20",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_20_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V071",
+      "sha256": "7e943089df8daf9b700a0787d5846216cb796b347d21ce56118acffd39a8e6af",
+      "file": "images/V071__soal_21_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 63571,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 21,
+          "question_id": "mtk_p2_q21",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_21_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V072",
+      "sha256": "1980615a1063cfc6abce06b0df2794180c542d036507f78701a43d8516fb2b1d",
+      "file": "images/V072__soal_22_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 1146902,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 22,
+          "question_id": "mtk_p2_q22",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_22_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V073",
+      "sha256": "2e163d44e9524c742461be3680cea78607086e84be7ed9c909453285f870dc02",
+      "file": "images/V073__soal_23_stimulus_01.png",
+      "kind_hint": "formula",
+      "bytes": 3654,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 23,
+          "question_id": "mtk_p2_q23",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_23_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V074",
+      "sha256": "767451f156d4b0443469cfb848cb5d9a714c00130b1d87f72d8c458ead64aa71",
+      "file": "images/V074__soal_25_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 122792,
+      "occurrences": [
+        {
+          "slug": "matematika_paket_2",
+          "subject": "Matematika",
+          "package": 2,
+          "question_number": 25,
+          "question_id": "mtk_p2_q25",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_25_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V075",
+      "sha256": "1770ef80212bac7aaa706dd8a3af40092a867df2ef28b397db55ff92eff26568",
+      "file": "images/V075__soal_06_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 904818,
+      "occurrences": [
+        {
+          "slug": "bahasa_inggris_paket_1",
+          "subject": "Bahasa Inggris",
+          "package": 1,
+          "question_number": 6,
+          "question_id": "bing_p1_q06",
+          "question_type": "LABEL",
+          "section": "stimulus",
+          "original_filename": "soal_06_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_1",
+          "subject": "Bahasa Inggris",
+          "package": 1,
+          "question_number": 7,
+          "question_id": "bing_p1_q07",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_07_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_1",
+          "subject": "Bahasa Inggris",
+          "package": 1,
+          "question_number": 8,
+          "question_id": "bing_p1_q08",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_08_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_1",
+          "subject": "Bahasa Inggris",
+          "package": 1,
+          "question_number": 9,
+          "question_id": "bing_p1_q09",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_09_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_1",
+          "subject": "Bahasa Inggris",
+          "package": 1,
+          "question_number": 10,
+          "question_id": "bing_p1_q10",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_10_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V076",
+      "sha256": "d8245f35b7f123ddd600bedd83843cadab16387b2bbe3d1aee51058f964a6352",
+      "file": "images/V076__soal_06_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 457350,
+      "occurrences": [
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 6,
+          "question_id": "bing_p2_q06",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_06_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 7,
+          "question_id": "bing_p2_q07",
+          "question_type": "LABEL",
+          "section": "stimulus",
+          "original_filename": "soal_07_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 8,
+          "question_id": "bing_p2_q08",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_08_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 9,
+          "question_id": "bing_p2_q09",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_09_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 10,
+          "question_id": "bing_p2_q10",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_10_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V077",
+      "sha256": "6d0cac2c932e583b72dac2b089552bddf49657cf9d6a2e3a47bf38f8c1cb3164",
+      "file": "images/V077__soal_16_stimulus_01.png",
+      "kind_hint": "table",
+      "bytes": 24729,
+      "occurrences": [
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 16,
+          "question_id": "bing_p2_q16",
+          "question_type": "LABEL",
+          "section": "stimulus",
+          "original_filename": "soal_16_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 17,
+          "question_id": "bing_p2_q17",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_17_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 18,
+          "question_id": "bing_p2_q18",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_18_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 19,
+          "question_id": "bing_p2_q19",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_19_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 20,
+          "question_id": "bing_p2_q20",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_20_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V078",
+      "sha256": "03bc9246560af962089464785bc17a1567466be059b7b94a17e8c6a2e55ffe9d",
+      "file": "images/V078__soal_21_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 2113857,
+      "occurrences": [
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 21,
+          "question_id": "bing_p2_q21",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_21_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 22,
+          "question_id": "bing_p2_q22",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_22_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 23,
+          "question_id": "bing_p2_q23",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_23_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 24,
+          "question_id": "bing_p2_q24",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_24_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 25,
+          "question_id": "bing_p2_q25",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_25_stimulus_01.png"
+        },
+        {
+          "slug": "bahasa_inggris_paket_2",
+          "subject": "Bahasa Inggris",
+          "package": 2,
+          "question_number": 25,
+          "question_id": "bing_p2_q25",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_25_stimulus_02.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V079",
+      "sha256": "3f35462ec288436c14026e0cec10a76e85dfd255cc25f9c2d869cc2e16f8a835",
+      "file": "images/V079__soal_02_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 174540,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_1",
+          "subject": "Ekonomi",
+          "package": 1,
+          "question_number": 2,
+          "question_id": "eko_p1_q02",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_02_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V080",
+      "sha256": "44fa08d1b730df29ba9b2c9ddfe612b9f00d735fec7b263f74b2b6a4ca0123e8",
+      "file": "images/V080__soal_15_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 61839,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_1",
+          "subject": "Ekonomi",
+          "package": 1,
+          "question_number": 15,
+          "question_id": "eko_p1_q15",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_15_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V081",
+      "sha256": "a9b58fdc4480050b96e8626f014ec0e1af33b07db2c0e969b849aac49138df5e",
+      "file": "images/V081__soal_16_stimulus_01.png",
+      "kind_hint": "table",
+      "bytes": 42227,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_1",
+          "subject": "Ekonomi",
+          "package": 1,
+          "question_number": 16,
+          "question_id": "eko_p1_q16",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_16_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V082",
+      "sha256": "121028f2588b87425538fd5cc327a676e9338d3ffbe4dd36e9af0a8e4a6512f9",
+      "file": "images/V082__soal_16_stimulus_02.png",
+      "kind_hint": "table",
+      "bytes": 42113,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_1",
+          "subject": "Ekonomi",
+          "package": 1,
+          "question_number": 16,
+          "question_id": "eko_p1_q16",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_16_stimulus_02.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V083",
+      "sha256": "64b989103d526d84268c8e0b616cf71e32e246ce99b14c4dc9c23caf06d9ec74",
+      "file": "images/V083__soal_04_stimulus_01.png",
+      "kind_hint": "formula",
+      "bytes": 8120,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_2",
+          "subject": "Ekonomi",
+          "package": 2,
+          "question_number": 4,
+          "question_id": "eko_p2_q04",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_04_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V084",
+      "sha256": "bf4da047a71a5d41d80d15139cad8d462c7640f16b214bceb7ca0bedf5459c98",
+      "file": "images/V084__soal_06_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 58286,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_2",
+          "subject": "Ekonomi",
+          "package": 2,
+          "question_number": 6,
+          "question_id": "eko_p2_q06",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_06_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V085",
+      "sha256": "101e30998ee8ce4d5e126ce7747ac1ceb425bc088534c3b0d01b7da9a44fdc6b",
+      "file": "images/V085__soal_07_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 16822,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_2",
+          "subject": "Ekonomi",
+          "package": 2,
+          "question_number": 7,
+          "question_id": "eko_p2_q07",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_07_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V086",
+      "sha256": "8820a67745d76659341ed99a615887630e160f4ce06549f327d1fd02d3cbd1a0",
+      "file": "images/V086__soal_09_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 7985,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_2",
+          "subject": "Ekonomi",
+          "package": 2,
+          "question_number": 9,
+          "question_id": "eko_p2_q09",
+          "question_type": "BS",
+          "section": "stimulus",
+          "original_filename": "soal_09_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V087",
+      "sha256": "2179de468d64622b5c7136769266df2e7b0f2836c6081717780e449f2ecb7a77",
+      "file": "images/V087__soal_10_stimulus_01.png",
+      "kind_hint": "formula",
+      "bytes": 8701,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_2",
+          "subject": "Ekonomi",
+          "package": 2,
+          "question_number": 10,
+          "question_id": "eko_p2_q10",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_10_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V088",
+      "sha256": "63b3b73fc54ca8130e4b7fe2b7610a86cc1786a81b5df08fac886623c4b22fdb",
+      "file": "images/V088__soal_12_stimulus_01.png",
+      "kind_hint": "formula",
+      "bytes": 5045,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_2",
+          "subject": "Ekonomi",
+          "package": 2,
+          "question_number": 12,
+          "question_id": "eko_p2_q12",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_12_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V089",
+      "sha256": "91d80d567bfcec03b02f809648f02099b52d65d4913fd668b51fb27b3155df59",
+      "file": "images/V089__soal_14_stimulus_01.png",
+      "kind_hint": "formula",
+      "bytes": 7710,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_2",
+          "subject": "Ekonomi",
+          "package": 2,
+          "question_number": 14,
+          "question_id": "eko_p2_q14",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_14_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V090",
+      "sha256": "2d2f30dc4bce5bd06370a37257f82a50797b97a9b6d57a5ae8814e6956270bd5",
+      "file": "images/V090__soal_15_stimulus_01.png",
+      "kind_hint": "formula",
+      "bytes": 5920,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_2",
+          "subject": "Ekonomi",
+          "package": 2,
+          "question_number": 15,
+          "question_id": "eko_p2_q15",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_15_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V091",
+      "sha256": "792e71d4066d64da31dfb778fadef99b81b12998185f8e066bdea28529cfc7e1",
+      "file": "images/V091__soal_23_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 10443,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_2",
+          "subject": "Ekonomi",
+          "package": 2,
+          "question_number": 23,
+          "question_id": "eko_p2_q23",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_23_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V092",
+      "sha256": "e1ac54b9ba4bf78a9214a637b8b638bacc91c809decad456476cdb3f0f30d2e6",
+      "file": "images/V092__soal_29_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 8507,
+      "occurrences": [
+        {
+          "slug": "ekonomi_paket_2",
+          "subject": "Ekonomi",
+          "package": 2,
+          "question_number": 29,
+          "question_id": "eko_p2_q29",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_29_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V093",
+      "sha256": "eaf0fb100e9a6deddf008d3311ef2974add9367059a268b2b96c5040dcc22aaa",
+      "file": "images/V093__soal_01_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 67186,
+      "occurrences": [
+        {
+          "slug": "kewirausahaan_paket_1",
+          "subject": "Kewirausahaan",
+          "package": 1,
+          "question_number": 1,
+          "question_id": "pkwu_p1_q01",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_01_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V094",
+      "sha256": "fc77cc65175eb99054f1976f0e26b0a63b44f6e8090a4e24c3b793811159e1df",
+      "file": "images/V094__soal_07_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 865904,
+      "occurrences": [
+        {
+          "slug": "kewirausahaan_paket_2",
+          "subject": "Kewirausahaan",
+          "package": 2,
+          "question_number": 7,
+          "question_id": "pkwu_p2_q07",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_07_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V095",
+      "sha256": "81160af5179aa65af51c0d2ad2ea3b0503ceecf58eadd8fccaa73988464740ef",
+      "file": "images/V095__soal_12_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 17595,
+      "occurrences": [
+        {
+          "slug": "kewirausahaan_paket_2",
+          "subject": "Kewirausahaan",
+          "package": 2,
+          "question_number": 12,
+          "question_id": "pkwu_p2_q12",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_12_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V096",
+      "sha256": "3f4fea11651ccc9cb82477d44e7b156bc30bd8e6aadb504d07c3f47d49c50c72",
+      "file": "images/V096__soal_22_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 30851,
+      "occurrences": [
+        {
+          "slug": "kewirausahaan_paket_2",
+          "subject": "Kewirausahaan",
+          "package": 2,
+          "question_number": 22,
+          "question_id": "pkwu_p2_q22",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_22_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V097",
+      "sha256": "055a4dd4dc9aa4e007fe8f1c120c55794b787a4a91cdb79ba42c23bc949cbdf7",
+      "file": "images/V097__soal_27_stimulus_01.png",
+      "kind_hint": "formula",
+      "bytes": 8929,
+      "occurrences": [
+        {
+          "slug": "kewirausahaan_paket_2",
+          "subject": "Kewirausahaan",
+          "package": 2,
+          "question_number": 27,
+          "question_id": "pkwu_p2_q27",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_27_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V098",
+      "sha256": "d8cc2f678825a58f3afb238d6af60121362a0b0494e383ba388510583e08819a",
+      "file": "images/V098__soal_28_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 21946,
+      "occurrences": [
+        {
+          "slug": "kewirausahaan_paket_2",
+          "subject": "Kewirausahaan",
+          "package": 2,
+          "question_number": 28,
+          "question_id": "pkwu_p2_q28",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_28_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V099",
+      "sha256": "827740c2ebf689f7e77a85073bafb57a4bb08af90ee5b80678afab04c64b7081",
+      "file": "images/V099__soal_29_stimulus_01.png",
+      "kind_hint": "formula",
+      "bytes": 7090,
+      "occurrences": [
+        {
+          "slug": "kewirausahaan_paket_2",
+          "subject": "Kewirausahaan",
+          "package": 2,
+          "question_number": 29,
+          "question_id": "pkwu_p2_q29",
+          "question_type": "PGK",
+          "section": "stimulus",
+          "original_filename": "soal_29_stimulus_01.png"
+        }
+      ]
+    },
+    {
+      "visual_id": "V100",
+      "sha256": "5d18e275fca2a805622174244ba2cab024c8d86e671ebdaf9b2c443fd242f954",
+      "file": "images/V100__soal_30_stimulus_01.png",
+      "kind_hint": "diagram",
+      "bytes": 12332,
+      "occurrences": [
+        {
+          "slug": "kewirausahaan_paket_2",
+          "subject": "Kewirausahaan",
+          "package": 2,
+          "question_number": 30,
+          "question_id": "pkwu_p2_q30",
+          "question_type": "PG",
+          "section": "stimulus",
+          "original_filename": "soal_30_stimulus_01.png"
+        }
+      ]
+    }
+  ]
+}

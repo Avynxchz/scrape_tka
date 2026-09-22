@@ -79,7 +79,8 @@ Jika semua harga jual dari ketiga bahan tersebut naik sebesar Rp3.000,00/kg maka
 ## Soal No. 5 `[Pilihan Ganda Kompleks]`
 
 ### Pertanyaan:
-Pasar komoditas barang konsumsi X memiliki fungsi permintaan Qd = -20P + 500 dan fungsi penawaran Qs = 5P + 100. Pemerintah menetapkan pajak untuk barang tersebut yaitu sebesar Rp25,00 per unit. Manakah kesimpulan yang tepat berdasarkan kondisi tersebut? Klik jawaban yang benar dari setiap pernyataan. Jawaban benar lebih dari satu.
+Pasar komoditas barang konsumsi X memiliki fungsi permintaan Qd = -20P + 500 dan fungsi penawaran Qs = 5P + 100. Pemerintah menetapkan pajak untuk barang tersebut yaitu sebesar Rp25,00 per unit. Manakah kesimpulan yang tepat berdasarkan kondisi tersebut?
+Klik jawaban yang benar dari setiap pernyataan. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Kuantitas keseimbangan sebelum pajak yaitu sebesar 80 unit dan setelah pajak sebesar 180 unit.
@@ -119,7 +120,9 @@ Berikut ini data pendapatan nasional dari Negara “Alamanda” tahun 2025 (dala
 ![Diagram Stimulus Soal 7](images/soal_07_stimulus_01.png)
 
 ### Pertanyaan:
-Berdasarkan data tersebut, besarnya Disposible Income (DI) adalah ….
+Berdasarkan data tersebut, besarnya
+Disposible Income
+(DI) adalah ….
 
 ### Pilihan Jawaban:
 - **[A]** Rp1.030.000 miliar
@@ -137,7 +140,8 @@ Berdasarkan data tersebut, besarnya Disposible Income (DI) adalah ….
 Pertumbuhan ekonomi adalah aspek yang mendukung serta meningkatkan kemakmuran rakyat dalam suatu negara.
 
 ### Pertanyaan:
-Berdasarkan pernyataan tersebut, manakah faktor yang dapat memengaruhi pertumbuhan ekonomi suatu negara? Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+Berdasarkan pernyataan tersebut, manakah faktor yang dapat memengaruhi pertumbuhan ekonomi suatu negara?
+Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Munculnya inovasi dan penggunaan teknologi terbaru dalam kegiatan ekonomi.
@@ -157,7 +161,11 @@ Perhatikan data pertumbuhan ekonomi dan indeks gini di Indonesia tahun 2020 hing
 ![Diagram Stimulus Soal 9](images/soal_09_stimulus_01.png)
 
 ### Pertanyaan:
-Berdasarkan data di atas, lakukan analisis bagaimana keterkaitan pertumbuhan ekonomi dengan kesejahteraan masyarakat Indonesia dengan menentukan pernyataan berikut benar atau salah !
+Berdasarkan data di atas, lakukan analisis bagaimana keterkaitan pertumbuhan ekonomi dengan kesejahteraan masyarakat Indonesia dengan menentukan pernyataan berikut
+benar
+atau
+salah
+!
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -176,7 +184,8 @@ Berikut ini merupakan informasi terkait kondisi perekonomian negara Vietnam dan 
 ![Diagram Stimulus Soal 10](images/soal_10_stimulus_01.png)
 
 ### Pertanyaan:
-Berdasarkan informasi tersebut manakah pernyataan yang tepat terkait kondisi pembangunan ekonomi di kedua negara? Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+Berdasarkan informasi tersebut manakah pernyataan yang tepat terkait kondisi pembangunan ekonomi di kedua negara?
+Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Nilai Indeks Pembangunan Manusia (IPM) kedua negara termasuk dalam kategori tinggi yang mencerminkan tingginya tingkat pendidikan, tingkat kesehatan, dan kesejahteraan penduduknya.
@@ -199,7 +208,11 @@ Bagas menolak untuk menerima pekerjaan sebagai staf keuangan salah satu perusaha
 Andi mengalami pemutusan hubungan kerja karena perusahaan tempatnya bekerja mengalami kerugian akibat menurunnya permintaan barang yang diproduksi perusahaannya.
 
 ### Pertanyaan:
-Tentukan Benar atau Salah pernyataan berikut ini terkait jenis pengangguran yang dialami oleh masing-masing individu.
+Tentukan
+Benar
+atau
+Salah
+pernyataan berikut ini terkait jenis pengangguran yang dialami oleh masing-masing individu.
 
 ### Pilihan Jawaban:
 - **[A]** Pernyataan
@@ -219,7 +232,6 @@ Meskipun Tingkat Pengangguran Terbuka (TPT) secara nasional menurun menjadi 4,76
 ![Diagram Stimulus Soal 12](images/soal_12_stimulus_01.png)
 
 ### Pertanyaan:
-
 Berdasarkan informasi, solusi apa yang paling tepat untuk mengatasi permasalahan tersebut?
 
 ### Pilihan Jawaban:
@@ -293,7 +305,8 @@ Berdasarkan tabel tersebut, manakah sektor yang paling berdampak terhadap tingka
 ## Soal No. 16 `[Pilihan Ganda Kompleks]`
 
 ### Pertanyaan:
-Bank Sentral bertanggung jawab agar keuangan suatu negara tetap stabil. Berikut ini mana yang merupakan peran dan fungsi Bank Indonesia? Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+Bank Sentral bertanggung jawab agar keuangan suatu negara tetap stabil. Berikut ini mana yang merupakan peran dan fungsi Bank Indonesia?
+Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Mengatur suku bunga acuan untuk mengendalikan inflasi
@@ -384,7 +397,10 @@ Berdasarkan ilustrasi tersebut, manakah pernyataan berikut yang benar terkait je
 ## Soal No. 21 `[Pilihan Ganda Kompleks]`
 
 ### Pertanyaan:
-Taliukir adalah sebuah perusahaan yang bergerak di bidang kerajinan tangan berbahan dasar kulit, seperti tas, dompet, dan sabuk. CV. Taliukir sangat mengutamakan kualitas produk yang dibuat secara tradisional, sehingga setiap produk memiliki sentuhan unik dan nilai seni tinggi. Produk mereka beredar di pasar menengah atas dan turis. Meskipun produknya berkualitas, CV. Taliukir kesulitan mendapatkan modal besar untuk mengembangkan usaha, seperti membeli mesin modern untuk efisiensi produksi massal atau membuka cabang di kota besar. Selain itu pasokan kulit berkualitas tinggi mulai langka dan harganya terus naik. Hal ini disebabkan semakin ketatnya regulasi lingkungan yang membatasi industri penyamakan kulit dan peningkatan permintaan dari industri fesyen global. Solusi yang bisa dilakukan untuk mengatasi permasalahan tersebut yaitu …. Pilihlah jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+Taliukir adalah sebuah perusahaan yang bergerak di bidang kerajinan tangan berbahan dasar kulit, seperti tas, dompet, dan sabuk. CV. Taliukir sangat mengutamakan kualitas produk yang dibuat secara tradisional, sehingga setiap produk memiliki sentuhan unik dan nilai seni tinggi. Produk mereka beredar di pasar menengah atas dan turis. Meskipun produknya berkualitas, CV. Taliukir kesulitan mendapatkan modal besar untuk mengembangkan usaha, seperti membeli mesin modern untuk efisiensi produksi massal atau membuka cabang di kota besar. Selain itu pasokan kulit berkualitas tinggi mulai langka dan harganya terus naik. Hal ini disebabkan semakin ketatnya regulasi lingkungan yang membatasi industri penyamakan kulit dan peningkatan permintaan dari industri
+fesyen
+global. Solusi yang bisa dilakukan untuk mengatasi permasalahan tersebut yaitu ….
+Pilihlah jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** menghentikan produksi kerajinan kulit dan beralih ke kerajinan dengan bahan baku lain yang lebih mudah didapat.
@@ -479,7 +495,8 @@ countervailing duty
 (tarif subsidi). Jika tuduhan tersebut berlanjut dan pemerintah Amerika Serikat mengenakan bea masuk tambahan terhadap udang Indonesia.
 
 ### Pertanyaan:
-Manakah yang merupakan dampak logis terhadap daya saing ekspor udang Indonesia ke Amerika Serikat? Klik setiap pernyataan jawaban benar.Jawaban benar lebih dari satu.
+Manakah yang merupakan dampak logis terhadap daya saing ekspor udang Indonesia ke Amerika Serikat?
+Klik setiap pernyataan jawaban benar.Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Harga jual udang Indonesia menjadi lebih rendah di pasar Amerika Serikat dibandingkan pesaing seperti India atau Ekuador.
@@ -502,7 +519,8 @@ Pemilik menambahkan investasi pribadi ke dalam perusahaan sebesar Rp15.000.000,0
 Menerima tagihan listrik bulan ini sebesar Rp800.000,00 yang belum dibayar.
 
 ### Pertanyaan:
-Berdasarkan transaksi tersebut, manakah yang menyebabkan perubahan pada aset maupun kewajiban dalam persamaan dasar akuntansi? Klik pada semua jawaban yang benar! Jawaban benar lebih dari satu.
+Berdasarkan transaksi tersebut, manakah yang menyebabkan perubahan pada aset maupun kewajiban dalam persamaan dasar akuntansi?
+Klik pada semua jawaban yang benar! Jawaban benar lebih dari satu.
 
 ### Pilihan Jawaban:
 - **[A]** Transaksi 1

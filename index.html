@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulasi TKA Matematika - Platform Belajar Interaktif</title>
+  <title>Simulasi TKA - Platform Belajar Interaktif</title>
   <meta name="description" content="Platform belajar interaktif soal TKA Matematika Pusmendik Kemendikdasmen dilengkapi pembahasan langkah-demi-langkah dan latihan soal serupa.">
   
   <!-- Google Fonts: Poppins & Inter -->
@@ -20,7 +20,7 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body>
   <!-- Background Aura -->
@@ -34,20 +34,31 @@
           <i class="fa-solid fa-graduation-cap"></i>
         </div>
         <div class="brand-text">
-          <span class="brand-title">SIMULASI TKA MATEMATIKA</span>
+          <span class="brand-title" id="brandTitle">SIMULASI TKA MATEMATIKA</span>
           <span class="brand-subtitle">Platform Belajar & Pembahasan Mandiri SMK</span>
         </div>
+      </div>
+
+      <!-- Subject Selector -->
+      <div class="subject-select-wrap">
+        <i class="fa-solid fa-layer-group"></i>
+        <select class="subject-select" id="subjectSelect" onchange="switchSubject(this.value)" aria-label="Pilih Mata Pelajaran">
+          <option value="matematika">Matematika (Wajib)</option>
+          <option value="bahasa_inggris">Bahasa Inggris (Wajib)</option>
+          <option value="ekonomi">Ekonomi (Pilihan)</option>
+          <option value="kewirausahaan">Kewirausahaan / PKWU (Pilihan)</option>
+        </select>
       </div>
 
       <!-- Package Selector Buttons -->
       <div class="package-tabs" role="tablist">
         <button class="pkg-tab active" id="tabPkg1" onclick="switchPackage(1)">
           <i class="fa-solid fa-book-open"></i>
-          <span>Paket 1 <small>(46 Soal)</small></span>
+          <span id="tabPkg1Label">Paket 1</span>
         </button>
         <button class="pkg-tab" id="tabPkg2" onclick="switchPackage(2)">
           <i class="fa-solid fa-book-open"></i>
-          <span>Paket 2 <small>(25 Soal)</small></span>
+          <span id="tabPkg2Label">Paket 2</span>
         </button>
       </div>
 
@@ -162,7 +173,7 @@
         <div class="concept-box">
           <div class="box-icon"><i class="fa-solid fa-compass-drafting"></i></div>
           <div class="box-body">
-            <h4>Rumus & Teori Kunci:</h4>
+            <h4>Konsep & Teori Kunci:</h4>
             <div class="concept-text" id="conceptContainer"></div>
           </div>
         </div>
@@ -171,7 +182,7 @@
         <div class="symbols-box" id="symbolsBox">
           <div class="symbols-header">
             <i class="fa-solid fa-book-bookmark"></i>
-            <h4>Glosarium Simbol & Notasi Matematis:</h4>
+            <h4>Glosarium Istilah & Notasi Kunci:</h4>
           </div>
           <div class="symbols-grid" id="symbolsContainer">
             <!-- Rendered dynamically -->
@@ -195,6 +206,14 @@
           </div>
         </div>
 
+        <!-- Konteks Visual Kanonis (transkripsi teks dari gambar asli) -->
+        <div class="steps-container" id="canonicalVisualBox" style="display: none;">
+          <h4><i class="fa-solid fa-image"></i> Konteks Visual Soal (transkripsi teks):</h4>
+          <div class="timeline-steps" id="canonicalVisualList">
+            <!-- Rendered dynamically -->
+          </div>
+        </div>
+
         <!-- Pro Tips Box -->
         <div class="tips-box">
           <div class="tips-icon"><i class="fa-solid fa-bolt"></i></div>
@@ -211,11 +230,12 @@
           <div class="ai-tutor-title">
             <div class="ai-avatar"><i class="fa-solid fa-robot"></i></div>
             <div>
-              <h3>Tanya AI Tutor Matematika</h3>
-              <p>Belajar dua arah: Tanyakan konsep, simbol, atau langkah yang belum kamu pahami!</p>
+              <h3 id="aiTutorTitle">Tanya AI Tutor Matematika</h3>
+              <p>Belajar dua arah: Tanyakan konsep, istilah, atau langkah yang belum kamu pahami!</p>
             </div>
           </div>
           <span class="ai-badge"><i class="fa-solid fa-sparkles"></i> AI Tutor Aktif</span>
+          <button type="button" class="chip-btn" id="btnNewTutorChat" onclick="startNewTutorConversation()" title="Mulai percakapan baru untuk soal ini" style="margin-left:8px;">+ Chat Baru</button>
         </div>
 
         <!-- Quick Prompt Chips -->
@@ -231,14 +251,14 @@
           <div class="chat-bubble ai">
             <div class="bubble-avatar"><i class="fa-solid fa-robot"></i></div>
             <div class="bubble-content">
-              Halo! Saya <strong>AI Tutor TKA</strong>. Masih bingung dengan arti simbol $\cup$ atau $\cap$, atau kenapa angka irisan harus dikurangi? Klik pertanyaan cepat di atas atau ketik langsung pertanyaanmu di bawah ya!
+              <p class="ai-p">Halo! Saya <strong>AI Tutor TKA</strong>. Klik pertanyaan cepat di atas atau ketik langsung pertanyaanmu di bawah ya!</p>
             </div>
           </div>
         </div>
 
         <!-- Chat Input Form -->
         <form class="chat-input-form" id="chatForm" onsubmit="sendChatMessage(event)">
-          <input type="text" id="chatInput" placeholder="Ketik pertanyaanmu di sini... (contoh: Kenapa 6 harus dikurang bukan ditambah?)" autocomplete="off">
+          <input type="text" id="chatInput" placeholder="Ketik pertanyaanmu di sini..." autocomplete="off">
           <button type="submit" class="btn-send-chat" id="btnSendChat">
             <i class="fa-solid fa-paper-plane"></i>
             <span>Tanya AI</span>
@@ -305,7 +325,83 @@
     </div>
   </div>
 
+  <!-- Modal Konfirmasi Selesai Tes (mengikuti alur resmi Pusmendik) -->
+  <div class="modal-overlay" id="modalKonfirmasiSelesai" onclick="closeFinishModal()">
+    <div class="modal-content finish-modal" onclick="event.stopPropagation()">
+      <div class="finish-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+      <h2 class="finish-title">Konfirmasi Tes</h2>
+      <p class="finish-text" id="finishSummaryText"></p>
+      <div class="finish-actions">
+        <button class="btn-finish btn-finish-danger" onclick="selesaiTes()">
+          <i class="fa-solid fa-circle-check"></i> SELESAI TES
+        </button>
+        <button class="btn-finish btn-finish-back" onclick="closeFinishModal()">
+          <i class="fa-solid fa-rotate-left"></i> KEMBALI
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay Reviu Hasil Simulasi -->
+  <div class="review-overlay" id="reviewHasilOverlay">
+    <div class="review-container">
+      <div class="review-header">
+        <div>
+          <h2><i class="fa-solid fa-clipboard-check"></i> Reviu Hasil Simulasi</h2>
+          <p id="reviewMetaText"></p>
+        </div>
+        <button class="review-close" onclick="closeReviewHasil()" aria-label="Tutup reviu hasil">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="review-summary">
+        <div class="review-card review-card-benar">
+          <i class="fa-solid fa-circle-check"></i>
+          <span class="review-card-num" id="reviewScoreBenar">0</span>
+          <span class="review-card-label">Benar</span>
+        </div>
+        <div class="review-card review-card-salah">
+          <i class="fa-solid fa-circle-xmark"></i>
+          <span class="review-card-num" id="reviewScoreSalah">0</span>
+          <span class="review-card-label">Salah</span>
+        </div>
+        <div class="review-card review-card-kosong">
+          <i class="fa-regular fa-circle-question"></i>
+          <span class="review-card-num" id="reviewScoreKosong">0</span>
+          <span class="review-card-label">Kosong</span>
+        </div>
+        <div class="review-card review-card-persen">
+          <span class="review-persen" id="reviewScorePersen">0%</span>
+          <span class="review-card-label">Skor</span>
+        </div>
+      </div>
+
+      <div class="review-table-wrap">
+        <table class="review-table">
+          <thead>
+            <tr>
+              <th>NO.</th>
+              <th>JAWABAN ANDA</th>
+              <th>KUNCI JAWABAN</th>
+            </tr>
+          </thead>
+          <tbody id="reviewTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="review-actions">
+        <button class="btn-finish btn-finish-back" onclick="closeReviewHasil()">
+          <i class="fa-solid fa-book-open"></i> Kembali Belajar
+        </button>
+        <button class="btn-finish btn-finish-danger" onclick="resetSimulasi()">
+          <i class="fa-solid fa-rotate-right"></i> Ulangi Simulasi
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="app.js"></script>
+  <script src="app.js?v=4"></script>
 </body>
 </html>
