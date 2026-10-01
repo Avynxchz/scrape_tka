@@ -1,0 +1,355 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Pendidikan Pancasila & Kewarganegaraan (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sistem pemerintahan Indonesia terbagi antara pemerintah pusat dan pemerintah daerah yang hubungannya diatur sesuai peraturan perundang-undangan. Hubungan ini kerap menimbulkan berbagai tantangan, terutama dalam pelaksanaan otonomi daerah, pembagian anggaran, serta sinkronisasi kebijakan pusat dan daerah.
+
+PERTANYAAN:
+Berdasar ilustrasi tersebut, tantangan dari hubungan antara pemerintah pusat dan daerah, yakni….
+OPSI / PERNYATAAN:
+  - A. A. ketidakmampuan pemerintah pusat dalam memenuhi semua kebutuhan anggaran pemerintah daerah
+  - B. B. berbagai kebijakan pemerintah daerah kadangkala tidak sejalan dengan penerapan program nasional
+  - C. C. terbatasnya kewenangan pemerintah pusat dalam mengatur pembagian alokasi anggaran di daerah
+  - D. D. masih belum adanya sinkronisasi ruang lingkup otonomi antara pemerintah pusat dan daerah
+  - E. E. keterbatasan kewenangan dari pemerintah pusat dalam mengawasi pelaksanaan otonomi di daerah
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Sila pertama Pancasila berbunyi “Ketuhanan Yang Maha Esa”. Tentukan Benar (B) atau Salah (S) makna dari sila pertama Pancasila pada pernyataan berikut ini!
+OPSI / PERNYATAAN:
+  - A. Semua penganut agama dan kepercayaan mengembangkan ajaran agama secara bersama.
+  - B. Sila tersebut menjadi dasar penerapan toleransi dengan penganut kepercayaan yang sama.
+  - C. Prinsip sila pertama Pancasila menjamin kebebasan beribadah semua agama dan kepercayaan.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Masyarakat di seluruh wilayah tanah air Indonesia seharusnya memiliki kesadaran yang sama menjaga keutuhan NKRI, salah satunya dalam bidang pertahanan dan keamanan. Melemahnya peran masyarakat untuk menjaga pertanahan berdampak pada munculnya ancaman yang bisa datang dari dalam maupun luar. Berdasarkan ilustrasi di atas, tentukan alasan pentingnya masyarakat ikut serta dalam menjaga keutuhan NKRI!
+
+PERTANYAAN:
+Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. memperkuat peran masyarakat untuk terlibat dalam mengatur urusan kenegaraan
+  - B. B. membentuk lingkungan yang aman dan tertib untuk menjaga eksistensi NKRI
+  - C. C. menjaga wilayah kedaulatan teritorial NKRI sesuai dengan amanah konstitusi
+  - D. D. meringanan tugas aparat keamanan dalam menjaga ketertiban di wilayahnya
+  - E. E. mengimplementasikan peran masyarakat dalam sistem pertahanan negara
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Pada masa Orde Baru, pelaksanaan demokrasi Pancasila mengalami berbagai tantangan seperti pembatasan kebebasan berpendapat, dominasi partai politik tertentu, serta lemahnya fungsi pengawasan terhadap pemerintah. Upaya paling tepat untuk mencegah terulangnya kondisi tersebut adalah ….
+OPSI / PERNYATAAN:
+  - A. A. menyederhanakan sistem partai politik agar stabilitas politik terjaga
+  - B. B. memberikan kewenangan kepada pemerintah untuk urusan ketertiban
+  - C. C. mendorong keterlibatan masyarakat dalam pengambilan kebijakan publik
+  - D. D. menjaga ketertiban sosial dengan membatasi perbedaan cara pandang
+  - E. E. menjamin penyaluran aspirasi rakyat secara terpusat melalui satu partai
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Berdasarkan data dari Badan Nasional Penanggulangan Terorisme (BNPT) dan Kementerian Komunikasi dan Digital (Komdigi) terdapat sebanyak 180.954 konten bermuatan intoleransi, radikalisme, ekstremisme, dan terorisme di ruang siber. Oleh karena berbahaya bisa menimbulkan ancaman terhadap negara terutama bagi bhinneka tunggal ika, maka konten-konten tersebut telah diblokir.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, potensi akibat yang ditimbulkan dari ancaman tersebut, yaitu…
+OPSI / PERNYATAAN:
+  - A. A. turunnya kepercayaan masyarakat pada pemerintah karena tidak mampu mengatasi permasalahan akibat intoleransi dalam keberagaman
+  - B. B. bertambahnya aktivitas generasi muda dalam melakukan penelusuran berbagai berita terkait permasalahan intoleransi yang terjadi di masyarakat
+  - C. C. meningkatnya penyebaran paham ekstrem yang berakibat munculnya perpecahan dan konflik antaranggota masyarakat yang beragam
+  - D. D. menurunnya semangat warga negara dalam menjaga kebhinekaan karena terjadinya perilaku diskriminatif yang disebabkan intoleransi
+  - E. E. semakin banyaknya informasi yang mengandung konten negatif pada berbagai media internet yang mudah di konsumsi masyarakat
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Di suatu sekolah yang memiliki latar belakang yang beragam, Dimas aktif mengajak teman-temannya untuk saling menghargai perbedaan budaya dan tidak membeda-bedakan dalam bergaul. Ia juga mengingatkan agar tidak membuat konten media sosial yang dapat memecah belah.
+
+PERTANYAAN:
+Berdasarkan ilustrasi, tentukan hubungan antara perilaku tersebut dengan menjaga keutuhan NKRI!
+
+Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. menghargai budaya lain sebagai bentuk pengakuan terhadap perbedaan
+  - B. B. mengakui adanya perbedaan merupakan bentuk kewajiban warga negara
+  - C. C. selektif terhadap informasi di media sosial dapat menghindari berita hoaks
+  - D. D. berinteraksi tanpa membedakan asal usul dapat memperkuat kerukunan
+  - E. E. mempelajari budaya lain sebagai wujud kepatuhan rakyat terhadap pemerintah
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada suatu peringatan hari besar keagamaan semua masyarakat menghormati pelaksanaan ibadah dan memberikan kesempatan untuk merayakannya dengan khidmat.
+
+PERTANYAAN:
+Perilaku tersebut merupakan perwujudan Sila Pertama Pancasila yang penting dilakukan karena….
+OPSI / PERNYATAAN:
+  - A. A. membuat masyarakat agar tidak melupakan untuk selalu memperingati hari besar keagamaan
+  - B. B. setiap peringatan hari besar keagamaan harus dilaksanakan dalam suasana damai dan menyenangkan
+  - C. C. menjaga suasana agar tidak terjadi konflik dalam masyarakat pada saat memperingati hari raya
+  - D. D. kebebasan beribadah sesuai agama dan kepercayaan merupakan perwujudan perlindungan HAM
+  - E. E. pemerintah menjaga pelaksanaan peringatan hari besar keagaaman yang mayoritas di masyarakat
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada sebuah wilayah perbatasan, pembangunan infrastruktur belum merata dibandingkan daerah lainnya. Kondisi ini menimbulkan rasa ketidakadilan dan keluhan dari masyarakat setempat. Beberapa kelompok mulai menyuarakan sikap antipemerintah dan mempertanyakan komitmen negara terhadap kesejahteraan seluruh rakyat. Jika dibiarkan, situasi ini dapat berkembang menjadi ancaman serius bagi persatuan nasional.
+
+PERTANYAAN:
+Berdasar ilustrasi tersebut, solusi untuk mencegah dampak negatif dari kondisi tersebut terhadap persatuan bangsa, adalah….
+OPSI / PERNYATAAN:
+  - A. A. mengutamakan dialog terbuka agar warga perbatasan merasa didengar dan dihargai
+  - B. B. mendorong warga perbatasan untuk menunggu bantuan keuangan dari pemerintah
+  - C. C. mengirim aparat keamanan mensosialisasikan program pemerintah di perbatasan
+  - D. D. menunjuk tokoh adat untuk menjaga kondisi masyarakat agar tetap kondusif
+  - E. E. memberikan bantuan langsung tunai secara rutin kepada warga perbatasan
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Di suatu sekolah yang memiliki latar belakang yang beragam, Dimas aktif mengajak teman-temannya untuk saling menghargai perbedaan budaya dan tidak membeda-bedakan dalam bergaul. Ia juga mengingatkan agar tidak membuat konten media sosial yang dapat memecah belah.
+
+PERTANYAAN:
+Berdasarkan ilustrasi, tentukan hubungan antara perilaku tersebut dengan menjaga keutuhan NKRI!
+
+Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. menghargai budaya lain sebagai bentuk pengakuan terhadap perbedaan
+  - B. B. mengakui adanya perbedaan merupakan bentuk kewajiban warga negara
+  - C. C. selektif terhadap informasi di media sosial dapat menghindari berita hoaks
+  - D. D. berinteraksi tanpa membedakan asal usul dapat memperkuat kerukunan
+  - E. E. mempelajari budaya lain sebagai wujud kepatuhan rakyat terhadap pemerintah
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Pada masa berlakunya UUDS 1950, pemerintah sering berganti dan tidak stabil karena koalisi partai politik pecah yang menyebabkan pengambilan kebijakan negara menjadi tidak efektif. Berdasarkan peristiwa tersebut, pelaksanaan demokrasi tidak berjalan lancar karena ….
+OPSI / PERNYATAAN:
+  - A. A. sistem multipartai ekstrim dalam pelaksanaan demokrasi
+  - B. B. seluruh kekuasaan terpusat pada Presiden Indonesia
+  - C. C. negara mengakomodir seluruh kepentingan masyarakat
+  - D. D. rakyat dapat memilih secara langsung kepala negara
+  - E. E. keterlibatan rakyat dalam pemerintahan masih terbatas
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada awal kemerdekaan Indonesia, terdapat perdebatan tajam tentang dasar negara karena perbedaan keinginan antara negara berdasarkan agama tertentu, paham sekuler, dan sosialisme. Namun pada akhirnya, Pancasila dipilih sebagai dasar dan ideologi negara. Alasan utama Pancasila diterima sebagai ideologi negara dalam situasi keberagaman ideologis tersebut karena Pancasila ….
+
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A. menyatukan paham ideologi-ideologi yang berkembang di masyarakat
+  - B. B. berfungsi sebagai identitas nasional yang menghilangkan keberagaman
+  - C. C. menjadi dokumen resmi pertama yang ditulis dalam Pembukaan UUD 1945
+  - D. D. menyatukan perbedaan pandangan seluruh golongan masyarakat secara adil
+  - E. E. merupakan ideologi yang nilai-nilainya mudah diterapkan pada masa tersebut
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: ['B', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pada suatu masyarakat adat di suatu desa terpencil, terjadi penolakan terhadap pembangunan gedung pemerintah desa, karena merasa tidak membutuhkan fasilitas tersebut. Pemerintah daerah setempat berupaya mencari solusi agar pembangunan tetap berjalan dengan melakukan dialog dan bertemu dengan para tokoh masyarakat adat. Solusi yang dilakukan dengan mengangkat beberapa tokoh adat menjadi petugas di kantor desa tersebut.
+
+PERTANYAAN:
+Berdasarkan ilustrasi, tentukan alasan pentingnya dilakukan solusi atas kasus tersebut berdasarkan pernyataan berikut! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Menunjukkan kewenangan pemerintah pusat dalam mengendalikan masyarakat adat
+  - B. B. Memudahkan pemerintah untuk membantu memenuhi kebutuhan masyarakat adat
+  - C. C. Pemerintah menyadari masyarakat adat memiliki kekuasaan penuh pada daerahnya
+  - D. D. Hak masyarakat untuk mendapatkan pelayanan publik dapat dipenuhi secara merata
+  - E. E. Menghindari konflik yang dapat merusak hubungan pemerintah dan masyarakat adat
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Platform media sosial tidak hanya digunakan untuk hiburan, tetapi juga dijadikan sebagai sarana menyuarakan aspirasi politik, membentuk opini publik, bahkan memengaruhi kebijakan publik. Berdasarkan ilustrasi, dampak strategis tersebut terhadap eksistensi NKRI yaitu ….
+
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A. menguatkan stabilitas nasional dengan penyebaran informasi yang cepat dan merata ke seluruh wilayah
+  - B. B. mendorong kemandirian masyarakat daerah dalam menentukan kebijakan politik secara otonom
+  - C. C. meningkatkan risiko disintegrasi apabila informasi tersebut disalahgunakan oleh masyarakat
+  - D. D. menumbuhkan kesadaran politik masyarakat yang mampu mengurangi konflik antarwilayah
+  - E. E. menghasilkan kebijakan publik yang dapat menyerap seluruh keinginan dari masyarakat
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Gotong royong dilakukan oleh warga lintas suku dalam membersihkan lingkungan di wilayah perkotaan yang penduduknya berasal dari berbagai daerah. Kondisi masyarakat tersebut sesuai dengan penerapan dari Bhinneka Tunggal Ika.
+
+PERTANYAAN:
+Tentukan Benar atau Salah untuk setiap pernyataan di bawah ini terkait hal tersebut!
+OPSI / PERNYATAAN:
+  - A. Kegiatan gotong royong mencerminkan semangat persatuan dan keberagaman.
+  - B. Perilaku dalam ilustrasi aktualisasi nyata dari nilai Bhinneka Tunggal Ika.
+  - C. Kegiatan lintas suku tersebut mengontrol kepentingan masyarakat yang beragam.
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Pasca amandemen ketiga UUD NRI Tahun 1945 telah dibentuk Mahkamah Konstitusi (MK) sebagai salah satu lembaga yang melaksanakan kekuasaan kehakiman.
+
+PERTANYAAN:
+Tentukan Benar atau Salah untuk setiap pernyataan berikut terkait contoh penerapan kewenangan Mahkamah Konstitusi!
+OPSI / PERNYATAAN:
+  - A. Menguji Undang-Undang terhadap UUD NRI Tahun 1945.
+  - B. Mengawasi aktivitas organisasi lembaga partai politik.
+  - C. Memutuskan sengketa kewenangan organisasi masyarakat.
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada setiap penyusunan peraturan perundang-undangan, DPR bersama pemerintah secara musyawarah melakukan pembahasan dengan berpedoman pada Pancasila sebagai landasan filosofis. Hal tersebut merupakan salah satu perwujudan Pancasila sebagai dasar negara.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut pentingnya Pancasila sebagai dasar negara, yaitu….
+OPSI / PERNYATAAN:
+  - A. A. menjadi dasar dalam mengambil keputusan oleh para tokoh penting bangsa
+  - B. B. merupakan cita-cita hukum yang harus ditaati oleh seluruh bangsa Indonesia
+  - C. C. mengakui Pancasila sebagai ideologi negara yang telah ditetapkan pendiri bangsa
+  - D. D. manifestasi dari kesepakatan yang telah dirumuskan saat sebelum kemerdekaan
+  - E. E. menunjukkan kepada dunia bahwa ideologi Pancasila dihormati seluruh bangsa Indonesia
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pemerintah daerah di suatu kabupaten mengusulkan pembangunan rumah sakit baru di wilayah pegunungan. Usulan tersebut kemudian disetujui dan mendapatkan dukungan dana dari pemerintah pusat. Pembangunan berjalan lancar karena adanya hubungan dalam bentuk koordinasi dan komunikasi yang baik antara pemerintah pusat dan daerah.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, manfaat dari hubungan tersebut, yakni ….
+OPSI / PERNYATAAN:
+  - A. A. menguatkan peran pemerintah pusat di daerah karena kesehatan merupakan urusan wajib
+  - B. B. meningkatkan akses pelayanan kesehatan kepada semua masyarakat secara merata dan adil
+  - C. C. menjamin terlaksananya semua kewajiban pemerintah pusat di daerah pada urusan kesehatan
+  - D. D. memenuhi semua kebutuhan daerah dengan bantuan dana secara penuh oleh pemerintah pusat
+  - E. E. menyelenggarakan urusan kesehatan masyarakat yang modern dan lengkap untuk masyarakat
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Di sebuah desa yang beragam suku, agama, dan budaya, para pemudanya bekerja sama membangun balai desa. Mereka berbagi tugas secara adil dan saling menghargai perbedaan. Namun, sebagian warga enggan terlibat karena perbedaan pandangan.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, tentukan perilaku yang tepat untuk mendukung modal sosial dalam pembangunan nasional! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Pemuda bekerja sama tanpa mempersoalkan latar belakang masyarakat yang berbeda.
+  - B. B. Keterlibatan sebagian warga pada aktivitas desa menunjukkan kesatuan cara pandang.
+  - C. C. Mempelajari berbagai budaya yang ada sebagai wujud syukur terhadap keberagaman.
+  - D. D. Mengakui perbedaan cara pandang sebagai kewajiban dari anggota masyarakat desa.
+  - E. E. Berinteraksi dengan anggota masyarakat lain dengan menjunjung tinggi kesederajatan.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Di sebuah wilayah perbatasan Indonesia, muncul konflik horizontal yang dipicu oleh perbedaan suku dan kesenjangan ekonomi yang berpotensi mengganggu stabilitas nasional dan menimbulkan kerawanan keamanan.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, tentukan pernyataan berikut ini yang benar terkait dengan peran warga negara dalam mendukung sistem pertahanan dan keamanan! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. mendorong dialog antarkelompok untuk memperkuat solidaritas
+  - B. B. membentuk kelompok swadaya untuk menjaga keamanan lingkungan
+  - C. C. aktif menyebarluaskan seluruh informasi secara langsung kepada masyarakat
+  - D. D. mengajak komunikasi aktif dengan aparat keamanan di wilayah setempat
+  - E. E. menghindari keterlibatan dalam menyelesaikan konflik agar tetap netral
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Pasal 31 ayat (1) UUD NRI Tahun 1945 menjelaskan, bahwa  “Setiap warga negara berhak mendapatkan pendidikan”.
+
+PERTANYAAN:
+Tentukan Benar atau Salah pada setiap pernyataan berikut terkait makna dari pasal tersebut!
+OPSI / PERNYATAAN:
+  - A. Pasal tersebut menunjukkan bahwa negara bertanggung jawab atas pendidikan warga negaranya.
+  - B. Negara menjamin setiap warga negara untuk melanjutkan pendidikannya ke jenjang perguruan tinggi.
+  - C. Pasal tersebut menjadi dasar hukum bahwa pendidikan merupakan hak setiap warga tanpa diskriminasi.
+

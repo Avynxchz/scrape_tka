@@ -1,0 +1,175 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Pendidikan Pancasila & Kewarganegaraan (Paket 2)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: E
+Stimulus Teks: Pasal 27 ayat (3) UUD NRI Tahun 1945 menyatakan bahwa “Setiap warga negara berhak dan wajib ikut serta dalam upaya pembelaan negara.”
+Pertanyaan: Berdasarkan ilustrasi, hak warga negara yang mencerminkan pasal tersebut yaitu warga negara berhak....
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: ['A', 'C', 'D']
+Stimulus Teks: Pemerintah terus mendorong harmoni dalam keberagaman melalui berbagai program. Salah satunya adalah Festival Toleransi dan Budaya Pelajar yang melibatkan siswa SMA dari berbagai daerah. Kegiatan ini meliputi pertukaran budaya, pameran kearifan lokal, dan diskusi lintas suku, agama, serta bahasa.
+Pertanyaan: Berdasarkan informasi tersebut, pernyataan mana saja yang menunjukkan sikap positif sebagai modal sosial untuk pembangunan nasional? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: B
+Stimulus Teks: Penyebaran paham radikalisme di media sosial untuk merubah ideologi negara semakin marak terjadi. Hal ini memengaruhi generasi muda dan menciptakan konflik horizontal di masyarakat.
+Pertanyaan: Upaya terbaik untuk melindungi keutuhan NKRI dari dampak tersebut adalah...
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: B
+Stimulus Teks: Indonesia sebagai negara kepulauan yang multietnis menghadapi tantangan disintegrasi yang sering dipicu oleh isu ketidakadilan, diskriminasi, dan penyebaran hoaks.
+Pertanyaan: Cara warga negara dalam mengatasi tantangan tersebut dapat dilakukan dengan ….
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: A
+Stimulus Teks: Terjadi perdebatan sengit di masyarakat dan parlemen terkait wacana amandemen UUD 1945 di mana sebagian pihak mengusulkan agar pemilihan presiden dikembalikan ke MPR, sedangkan sebagian lain ingin mempertahankan sistem pemilihan langsung oleh rakyat. Ketegangan ini menimbulkan kekhawatiran akan mundurnya demokrasi di Indonesia.
+Pertanyaan: Berdasarkan ilustrasi, pentingnya Pancasila untuk memecahkan masalah tersebut karena ….
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: A
+Stimulus Teks: Salah satu bentuk kerja sama antara pemerintah pusat dan pemerintah daerah adalah dalam hal Penanggulangan Kemiskinan. Kerja sama dalam penanggulangan kemiskinan melibatkan pemerintah pusat yang memberikan kebijakan dan program, sementara pemerintah daerah melaksanakan program tersebut di tingkat daerah termasuk bantuan sosial, pelatihan, dan pengembangan usaha mikro.
+Pertanyaan: Bentuk kerja sama ini dilakukan karena...
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: ['A', 'B', 'E']
+Stimulus Teks: Keberagaman bangsa Indonesia merupakan salah satu kekuatan dan kekayaan bangsa, namun juga dapat menjadi tantangan dalam membangun kesatuan dan persatuan. Oleh karena itu, penting untuk meningkatkan sikap toleransi, saling menghormati, dan kerja sama antaretnis dan agama.
+Pertanyaan: Berdasarkan ilustrasi tersebut, Pernyataan mana saja yang menjelaskan tujuan integrasi nasional dalam bingkai Bhinneka Tunggal Ika? Klik pada pilihan jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: D
+Stimulus Teks: Panca gatra adalah aspek sosial kemasyarakatan dalam wawasan nusantara yang bersifat dinamis meliputi ideologi, politik, ekonomi, sosial budaya dan pertahanan keamanan. Gatra ekonomi sebagai salah satu aspek dalam wawasan nusantara merujuk pada aspek ekonomi yang menjadi bagian integral dari cara pandang bangsa Indonesia terhadap wilayah dan potensi negaranya. Wawasan nusantara dalam bidang ekonomi juga mengamanatkan pelaksanaan demokrasi ekonomi.
+Pertanyaan: Pentingnya hal tersebut dalam menjaga keutuhan NKRI adalah ….
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: B
+Stimulus Teks: Dalam negara demokrasi, pemilihan umum merupakan sarana utama mewujudkan kedaulatan rakyat. Pemilu merupakan proses penting dalam sistem demokrasi yang memungkinkan rakyat untuk memilih wakil-wakil mereka dalam pemerintahan.
+Pertanyaan: Perilaku yang mencerminkan hak asasi manusia sesuai dengan sila keempat Pancasila berdasarkan ilustrasi tersebut adalah....
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: B
+Stimulus Teks: Dalam pelaksanaan Pilkada Serentak tahun 2024 lalu, terjadi perselisihan hasil penghitungan suara salah satu daerah. Dua pasangan calon saling mengklaim kemenangan, sementara rekapitulasi suara oleh KPU daerah dituding tidak transparan. Salah satu pasangan calon kemudian menggugat hasil Pilkada tersebut karena diduga terjadi kecurangan yang bersifat terstruktur, sistematis, dan masif (TSM) yang dapat memengaruhi hasil akhir pemilihan.
+Pertanyaan: Berdasarkan sistem ketatanegaraan Indonesia, cara menyelesaikan permasalahan tersebut sesuai kewenangan lembaga negara adalah...
+---
+[SOAL ACUAN NO 11]
+Kunci Resmi: E
+Stimulus Teks: Diskriminasi adalah perlakuan yang tidak adil terhadap seseorang atau kelompok berdasarkan perbedaan suku, agama, ras, jenis kelamin, atau status sosial. Apabila dibiarkan, diskriminasi dapat memicu konflik dan menjadi ancaman serius bagi integrasi nasional Indonesia.
+Pertanyaan: Berdasarkan ilustrasi, upaya yang perlu dilakukan untuk menghadapi ancaman tersebut agar integrasi nasional tetap terjaga adalah....
+---
+[SOAL ACUAN NO 12]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Globalisasi ekonomi mendorong masuknya berbagai produk luar negeri ke pasar Indonesia. Apabila tidak disikapi dengan bijak, hal ini dapat menurunkan daya saing produk lokal dan mengancam perekonomian nasional.
+Pertanyaan: Berdasarkan ilustrasi, klik pada pilihan Benar atau Salah dari setiap pernyataan berikut yang menunjukkan peran warga negara dalam menjaga keutuhan NKRI berdasarkan dinamika tersebut!
+---
+[SOAL ACUAN NO 13]
+Kunci Resmi: D
+Stimulus Teks: Bunyi sila kedua dan keempat Pancasila yaitu “Kemanusiaan yang Adil dan Beradab” dan “Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan Perwakilan”.
+Pertanyaan: Perilaku yang berhubungan dengan kedua sila Pancasila tersebut adalah...
+---
+[SOAL ACUAN NO 14]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Salah']
+Stimulus Teks: Mahkamah Konstitusi (MK) adalah lembaga negara yang mempunyai wewenang sebagaimana di atur dalam Undang-Undang Dasar Negara RI Tahun 1945.
+Pertanyaan: Klik pada pilihan Benar atau Salah dari setiap pernyataan berikut berkaitan dengan Wewenang Mahkamah Konstitusi!
+---
+[SOAL ACUAN NO 15]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Bangsa Indonesia adalah bangsa yang memiliki keberagaman suku, agama, bahasa, adat istiadat, dan budaya yang hidup berdampingan. Kebinekaan dapat menjadi fondasi kokoh yang menopang persatuan dan kesatuan bangsa. Namun adanya perbedaan juga dapat menjadi ancaman persatuan dan kesatuan.
+Pertanyaan: Klik Benar atau Salah dari setiap pernyataan berikut yang menunjukkan upaya menjaga integrasi nasional dalam bingkai kebinekaan!
+---
+[SOAL ACUAN NO 16]
+Kunci Resmi: ['A:Salah', 'B:Benar', 'C:Benar']
+Stimulus Teks: Perubahan iklim dan lingkungan merupakan salah satu bagian dalam perkembangan masyarakat global yang dapat mengancam keberlangsungan hidup manusia dan ekosistem serta menciptakan ketidakstabilan sosial, ekonomi dan politik yang kerap memunculkan terjadinya konflik dalam masyarakat.
+Pertanyaan: Klik pada pilihan Benar atau Salah dari setiap pernyataan berikut yang menunjukkan bukti bahwa Bhinneka Tunggal Ika dapat mengatasi ancaman sebagaimana ilustrasi diatas!
+---
+[SOAL ACUAN NO 17]
+Kunci Resmi: C
+Stimulus Teks: Warga di sebuah lingkungan perumahan hidup berdampingan dalam keberagaman agama, budaya, dan latar belakang sosial. Mereka saling menghargai, aktif dalam kegiatan sosial bersama, dan menjaga ketertiban dengan mematuhi aturan yang berlaku.
+Pertanyaan: Berdasarkan ilustrasi, nilai Pancasila yang paling tepat telah diterapkan pada kondisi tersebut adalah ….
+---
+[SOAL ACUAN NO 18]
+Kunci Resmi: C
+Stimulus Teks: Sekelompok pedagang kecil mengalami masalah karena tempat mereka mencari nafkah tiba-tiba dilarang digunakan. Hal ini terjadi tanpa kesepakatan ganti rugi, sehingga mereka merasa telah terjadi pelanggaran hak dan pengingkaran kewajiban untuk saling menghormati kepentingan masing-masing.
+Pertanyaan: Berdasarkan ilustrasi, solusi untuk mengatasi pelanggaran tersebut yaitu ….
+---
+[SOAL ACUAN NO 19]
+Kunci Resmi: B
+Stimulus Teks: Kehidupan suku bangsa di Indonesia sangat kaya akan keberagaman, dipengaruhi oleh faktor geografis dan sejarah. Indonesia memiliki lebih dari 1.340 suku bangsa yang tersebar di berbagai pulau, masing-masing dengan bahasa, tradisi, dan adat istiadat yang unik.
+Pertanyaan: Berdasarkan ilustrasi, tantangan yang dihadapi dalam menjaga integrasi nasional dalam bingkai “Bhinneka Tunggal Ika” adalah ….
+---
+[SOAL ACUAN NO 20]
+Kunci Resmi: A
+Stimulus Teks: Pada sebuah desa, terjadi perselisihan antara dua kelompok warga terkait penggunaan lahan pertanian. Konflik ini mulai menimbulkan ketegangan sosial dan berpotensi mengganggu kerja sama antarwarga serta keutuhan desa.
+Pertanyaan: Berdasarkan ilustrasi, solusi penyelesaikan konflik yang terjadi sesuai dengan penerapan konsep wawasan nusantara yaitu dengan....
+---
+[SOAL ACUAN NO 21]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Perkembangan global menyebabkan Pancasila menjadi representasi dari keberagaman masyarakat dunia. Pancasila dengan nilai-nilai toleransi, persatuan, dan keadilan, menjadi solusi universal dalam mengatasi tantangan perbedaan budaya dan agama di dunia. Kondisi tersebut berpotensi menjadikan bangsa Indonesia sebagai role model dalam mempromosikan kerukunan dan harmoni dari keberagaman masyarakat dunia.
+Pertanyaan: Klik pada pilihan benar atau salah dari setiap pernyataan berikut terkait fungsi dari diterapkannya Pancasila dalam pergaulan kehidupan global berdasarkan ilustrasi tersebut!
+---
+[SOAL ACUAN NO 22]
+Kunci Resmi: B
+Stimulus Teks: Pasal 27 ayat (2) UUD NRI Tahun 1945 menyatakan bahwa tiap-tiap warga negara berhak atas pekerjaan dan penghidupan yang layak bagi kemanusiaan.
+Pertanyaan: Tantangan yang dihadapi dalam mengimplementasikan pasal tersebut adalah....
+---
+[SOAL ACUAN NO 23]
+Kunci Resmi: C
+Stimulus Teks: Reog Ponorogo merupakan bagian tak terpisahkan dari kehidupan budaya masyarakat Ponorogo, Jawa Timur. Seiring perkembangannya, Reog tidak hanya menjadi simbol budaya masyarakat Ponorogo, tetapi juga bagian dari identitas budaya nasional Indonesia. Pada tahun 2024, Reog Ponorogo resmi diakui sebagai warisan budaya takbenda oleh UNESCO, sebagai langkah penting dalam pelestarian warisan budaya bangsa dan menjadi modal sosial pembangunan Indonesia.
+Pertanyaan: Alasan pelestarian Reog Ponorogo menjadi modal sosial pembangunan Indonesia adalah....
+---
+[SOAL ACUAN NO 24]
+Kunci Resmi: B
+Stimulus Teks: Pemerintah Indonesia mengadakan kegiatan Festival Budaya Nusantara yang melibatkan berbagai komunitas dari seluruh provinsi. Kegiatan ini mencakup pameran seni, pertunjukan tradisional, serta diskusi tentang keberagaman budaya Indonesia.
+Pertanyaan: Alasan kegiatan tersebut dapat memperkukuh persatuan dan kesatuan bangsa adalah....
+---
+[SOAL ACUAN NO 25]
+Kunci Resmi: E
+Stimulus Teks: Dinamika masyarakat multikultural di Indonesia merupakan interaksi kompleks antarberbagai kelompok etnis, budaya, agama, dan sistem nilai, yang menghasilkan berbagai tantangan. Salah satu permasalahan yang dihadapi masyarakat multikultural di Indonesia adalah konflik antaragama.
+Pertanyaan: Peran Pancasila sebagai ideologi negara yang menjadi pemersatu dalam kehidupan berbangsa berdasarkan ilustrasi di atas adalah …
+---
+[SOAL ACUAN NO 26]
+Kunci Resmi: C
+Stimulus Teks: Seorang pengusaha membuang limbah pabrik ke sungai yang mengalir di dekat pemukiman warga. Akibatnya, air menjadi tercemar dan banyak warga mengalami gangguan kesehatan. Meskipun masyarakat sudah melaporkan hal ini kepada pihak berwenang, proses hukum berjalan sangat lambat. Bahkan, muncul kabar bahwa perusahaan tersebut memberikan “uang pelican” agar kasusnya tidak diproses lebih lanjut. Warga menjadi kecewa dan kehilangan kepercayaan    terhadap lembaga penegak hukum.
+Pertanyaan: Berdasarkan ilustrasi tersebut, tantangan utama dalam penegakan hukum yang ditunjukkan adalah....
+---
+[SOAL ACUAN NO 27]
+Kunci Resmi: ['A', 'B', 'D']
+Stimulus Teks: Dalam rangka menjaga kebinekaan, kerja sama dan toleransi merupakan konsep yang sangat penting dalam membangun hubungan yang harmonis dan damai antara individu, kelompok, dan masyarakat. Kerjasama dapat dilakukan dalam berbagai bidang, seperti ekonomi, politik, sosial, dan budaya untuk meningkatkan efisiensi, efektivitas, dan kualitas hasil kerja. Sedangkan toleransi dilakukan dalam rangka membangun hubungan yang harmonis dan damai antara individu dan kelompok yang berbeda.
+Pertanyaan: Berdasarkan ilustrasi tersebut, mana saja pernyataan berikut yang menunjukkan upaya menjaga kebinekaan untuk menjadi modal sosial pembangunan nasional? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 28]
+Kunci Resmi: ['A', 'C', 'E']
+Stimulus Teks: Menjelang pemilu serentak, pemerintah dan berbagai organisasi mengadakan sosialisasi untuk pemilih pemula di tingkat SMA. Reza seorang siswa kelas XII mengikuti kegiatan sosialisasi tersebut. Ia belajar pentingnya mengenali visi misi calon wakil rakyat, menghindari politik uang, dan menggunakan hak pilih dengan bijak. Reza juga mengajak teman-temannya untuk ikut serta dalam pemilu sebagai wujud tanggung jawab warga negara.
+Pertanyaan: Berdasarkan ilustrasi tersebut, pernyataan manakaah yang menunjukkan tujuan partisipasi pemilih pemula seperti Reza dalam pesta demokrasi?. Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 29]
+Kunci Resmi: A
+Stimulus Teks: Sejak 1957, Indonesia telah mengirim lebih dari 30.000 personel TNI ke berbagai negara konflik sebagai bagian dari misi perdamaian dunia. Peran serta Indonesia ini merupakan perwujudan nilai Pancasila dan amanat Pembukaan UUD NRI Tahun 1945 untuk mewujudkan perdamaian berdasarkan kemerdekaan, perdamaian abadi, dan keadilan sosial.
+Pertanyaan: Keunggulan nilai Pancasila dalam peran tersebut adalah....
+

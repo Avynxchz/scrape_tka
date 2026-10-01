@@ -1,0 +1,2088 @@
+<!DOCTYPE html><html lang="en"><head>
+	<title>Simulasi TKA</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-16x16.png">
+	<link rel="manifest" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/site.webmanifest">
+	<link rel="mask-icon" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/safari-pinned-tab.svg">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://pusmendik.kemendikdasmen.go.id/tka/_assets/css/icheck-bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120206082-3"></script>
+	<script>
+
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120206082-3');
+
+	</script> -->
+</head>
+<body>
+
+<div class="container-fluid text-white" style="background:#326698;background-size: contain;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/bg-top.png');background-repeat: no-repeat;background-position: left; height:150px;position:fixed;top:0px;left:0px;right:0px">
+	  <div class="row">
+		<div class="col pl-5 pt-1">
+			<table>
+				<tbody><tr>
+					<td>
+						<img style="margin:5px;height:70px" src="https://pusmendik.kemendikdasmen.go.id/tka/images/logo-kemdikbud-71x72.png">
+					</td>
+					<td>
+						<div><b>PUSMENDIK</b></div>
+						<div><small>APLIKASI ANBK<small></small></small></div><small><small>
+					</small></small></td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div class="col pl-5 pt-1 mt-4 pr-5 text-right">
+			<table align="right">
+				<tbody><tr>
+					<td style="vertical-align:top">
+						<div><small>P130100230 - PESERTA KIMIA_PAKET_2<small></small></small></div><small><small>
+					</small></small></td>
+					<td>
+						<div class="pl-1 pr-1 pt-1 pb-1" style="background:#74b9ff;border-radius:2px;color:#326698"><i class="fa fa-graduation-cap fa-flip-horizontal"></i></div>
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+	  </div>
+</div>
+
+<div class="container-fluid fadeInDown mb-5" style="margin-top:90px;">
+  <div class="row">
+	<div class="col-sm-12" style="border:0px solid red">
+		<div class="text-left pt-3 pb-5 mb-2" id="formContent" style="background-size: 300px;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/logo-w.png');background-repeat: no-repeat;background-position: top right; ">
+		  <div class="row row-atas"> 
+			<div class="col-sm-4"><span style="font-size:18px">Soal nomor</span> <span style="font-size:20px" id="noSoal">1</span></div>
+			<div class="col-sm-8 cont-btn-informasi">
+				<button class="btn-informasi btn btn-primary btn-round m" data-toggle="modal" data-target="#infoSoal" style="border-radius:30px;font-size:12px;"><i class="fa fa-info-circle d-sm-none"></i><span class="d-none d-sm-inline-block">INFORMASI SOAL<span></span></span></button>
+				<button class="btn-informasi btn  btn-outline-secondary  btn-round" style="border-radius:30px;font-size:12px;">Sisa Waktu : <b><span id="countdown">01:14:58</span></b></button>
+				<button class="btn-informasi btn btn-primary btn-round" data-toggle="modal" data-target="#myModal" style="border-radius:30px;font-size:12px"><span class="d-none d-sm-inline-block">Daftar Soal </span> <i class="fa fa-th-large"></i></button>
+			</div>
+		  </div>
+		  <div class="row pb-2  row-atas"> 
+			<div class="col-sm-6"><small>Ukuran font soal:</small> <span style="font-size:12px" class="ml-2 mr-1 cfont" id="c1" onclick="changeFont('12','c1')">A</span> <span style="font-size:16px" class="ml-2 mr-1 cfont" id="c2" onclick="changeFont('16','c2')">A</span> <span style="font-size:20px" class="ml-2 mr-1 cfont" id="c3" onclick="changeFont('18','c3')">A</span></div>
+			<div class="col-sm-6 mt-2 mataujian">
+				Kimia (Paket 2)			</div>
+		  </div>
+		  <div class="row pl-3 pr-3 pb-2 mb-1"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  <!-- isi soal -->
+		  <div class="row pl-3 pr-3 pb-2 mb-2"> 
+			<div class="col p-3 " id="isisoal" style="border:2px solid #eee; border-top:10px solid #eee;">
+				<div class="soal-soal row" style="" id="soal-no-1"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Alanin merupakan monomer salah satu asam amino esensial pembentuk protein. Protein sangat penting dalam tubuh karena berperan sebagai enzim, hormon, dan pembangun jaringan. Dalam industri farmasi dan makanan, alanin dapat diproduksi secara sintetik atau melalui fermentasi. Berikut merupakan struktur alanin:</p>
+<p style="text-align: center;">&nbsp;<img src="/tka/cbt_images/40319_69c9db5cbbb753da8ad88420b7b3af03.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan struktur alanin, berapa persentase massa karbon dalam molekul alanin?<br>(Diketahui Ar : C=12, H=1, N=14, O=16)</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','0');">
+													<input id="pilihan_1_0" onchange="pilihan('1','a','944')" pil="a" name="pilihan1" type="radio">
+													<label for="pilihan_1_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>7,87 %</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','1');">
+													<input id="pilihan_1_1" onchange="pilihan('1','b','944')" pil="b" name="pilihan1" type="radio">
+													<label for="pilihan_1_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>15,73 %</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','2');">
+													<input id="pilihan_1_2" onchange="pilihan('1','c','944')" pil="c" name="pilihan1" type="radio">
+													<label for="pilihan_1_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>35,96 %</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','3');">
+													<input id="pilihan_1_3" onchange="pilihan('1','d','944')" pil="d" name="pilihan1" type="radio">
+													<label for="pilihan_1_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>40,45 %</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','4');">
+													<input id="pilihan_1_4" onchange="pilihan('1','e','944')" pil="e" name="pilihan1" type="radio">
+													<label for="pilihan_1_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>40,90 %</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display: none;" id="soal-no-2"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penggunaan gas etana dan propana sebagai bahan bakar alternatif semakin meningkat di kawasan industri. Meski pembakarannya berlangsung sempurna, gas rumah kaca berupa CO<sub>2</sub> tetap dihasilkan yang berkontribusi terhadap pemanasan global.<br>Dalam suatu percobaan, campuran 10 liter etana (C<sub>2</sub>H<sub>6</sub>) dan propana (C<sub>3</sub>H<sub>8</sub>) dibakar sempurna menghasilkan gas karbon dioksida dan 36 L air. Reaksi pembakaran masing-masing gas sebagai berikut:</p>
+<p style="text-align: center;">C<sub>2</sub>H<sub>6 </sub>(g) + O<sub>2 </sub>(g) → CO<sub>2 </sub>(g) + H<sub>2</sub>O (g) (belum setara)<br>C<sub>3</sub>H<sub>8 </sub>(g) + O<sub>2 </sub>(g) → CO<sub>2 </sub>(g) + H<sub>2</sub>O (g) (belum setara)</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berapakah volume total gas CO<sub>2</sub> yang dihasilkan dari pembakaran campuran tersebut jika semua gas diukur pada suhu dan tekanan yang sama?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','0');">
+													<input id="pilihan_2_0" onchange="pilihan('2','a','950')" pil="a" name="pilihan2" type="radio">
+													<label for="pilihan_2_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>8 L</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','1');">
+													<input id="pilihan_2_1" onchange="pilihan('2','b','950')" pil="b" name="pilihan2" type="radio">
+													<label for="pilihan_2_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>18 L</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','2');">
+													<input id="pilihan_2_2" onchange="pilihan('2','c','950')" pil="c" name="pilihan2" type="radio">
+													<label for="pilihan_2_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>20 L</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','3');">
+													<input id="pilihan_2_3" onchange="pilihan('2','d','950')" pil="d" name="pilihan2" type="radio">
+													<label for="pilihan_2_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>26 L</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','4');">
+													<input id="pilihan_2_4" onchange="pilihan('2','e','950')" pil="e" name="pilihan2" type="radio">
+													<label for="pilihan_2_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>44 L</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-3"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sulfur dioksida (SO<sub>2</sub>) merupakan polutan udara berbahaya yang dihasilkan dari pembakaran bahan bakar fosil dan aktivitas industri. Gas SO<sub>2</sub> dapat menyebabkan hujan asam dan masalah pernapasan. Sebuah stasiun pemantau kualitas udara mengambil sampel udara di area industri sebanyak 6 liter pada suhu 25°C dan tekanan 1 atm. Hasil pengukuran menunjukkan konsentrasi sulfur dioksida di area industri sebanyak 0,0002% volume. Berapakah jumlah molekul SO<sub>2</sub> yang terdeteksi dalam sampel?<br>(Diketahui: Bilangan Avogadro: 6,02×10<sup>23</sup> molekul/mol)&nbsp;</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','0');">
+													<input id="pilihan_3_0" onchange="pilihan('3','a','949')" pil="a" name="pilihan3" type="radio">
+													<label for="pilihan_3_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>2,95 × 10<sup>17</sup>&nbsp;molekul</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','1');">
+													<input id="pilihan_3_1" onchange="pilihan('3','b','949')" pil="b" name="pilihan3" type="radio">
+													<label for="pilihan_3_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>12,02 x 10<sup>17</sup>&nbsp;molekul</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','2');">
+													<input id="pilihan_3_2" onchange="pilihan('3','c','949')" pil="c" name="pilihan3" type="radio">
+													<label for="pilihan_3_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>3,23 ×10<sup>18</sup>&nbsp;molekul</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','3');">
+													<input id="pilihan_3_3" onchange="pilihan('3','d','949')" pil="d" name="pilihan3" type="radio">
+													<label for="pilihan_3_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>1,51 × 10<sup>23</sup>&nbsp;molekul</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','4');">
+													<input id="pilihan_3_4" onchange="pilihan('3','e','949')" pil="e" name="pilihan3" type="radio">
+													<label for="pilihan_3_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>2,41 × 10<sup>24</sup>&nbsp;molekul</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-4"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tembaga (Cu) banyak dimanfaatkan dalam industri kelistrikan seperti pembuatan kabel, kumparan motor, dan komponen elektronik, karena memiliki konduktivitas listrik yang sangat tinggi. Salah satu cara mendapatkan tembaga murni adalah dengan mereduksi CuO menggunakan karbon. Reaksi berlangsung sebagai berikut:</p>
+<p style="text-align: center;">2CuO(s) + C(s) → 2Cu(s) + CO<sub>2</sub>(g)</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Di laboratorium sekolah seorang murid mereaksikan 39,75 gram CuO dan 3,0 gram karbon, berapa gram tembaga murni (Cu) maksimum yang dapat diperoleh?<br>(Diketahui: Ar: Cu = 63,5; O = 16; C = 12)</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','0');">
+													<input id="pilihan_4_0" onchange="pilihan('4','a','947')" pil="a" name="pilihan4" type="radio">
+													<label for="pilihan_4_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>16 gram</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','1');">
+													<input id="pilihan_4_1" onchange="pilihan('4','b','947')" pil="b" name="pilihan4" type="radio">
+													<label for="pilihan_4_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>23,8 gram</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','2');">
+													<input id="pilihan_4_2" onchange="pilihan('4','c','947')" pil="c" name="pilihan4" type="radio">
+													<label for="pilihan_4_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>25,4 gram</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','3');">
+													<input id="pilihan_4_3" onchange="pilihan('4','d','947')" pil="d" name="pilihan4" type="radio">
+													<label for="pilihan_4_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>31,75 gram</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','4');">
+													<input id="pilihan_4_4" onchange="pilihan('4','e','947')" pil="e" name="pilihan4" type="radio">
+													<label for="pilihan_4_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>47,62 gram</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-5"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kristal kalium klorida (KCl) merupakan garam penting yang memiliki banyak kegunaan, misalnya sebagai sumber suplemen kalium untuk mengatasi hipokalemia dan hipertensi, atau di bidang pertanian sebagai pupuk tanaman. Seorang peneliti bidang pertanian ingin membuat kristal kalium klorida (KCl) dari kalium hidroksida dan asam klorida. Persamaan reaksi yang terjadi:</p>
+<p style="text-align: center;">KOH(aq) + HCl(aq) → KCl(aq) + H<sub>2</sub>O(l)</p>
+<p>Tahapan reaksi mencakup reaksi netralisasi diikuti dengan pemisahan dan pemurnian produk dengan cara rekristalisasi.<br>Larutan yang tersedia di laboratorium adalah sebagai berikut</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/04607_abb5b191455bea5ff8ba5879da74cfda.png" alt=""></p>
+<p>(Diketahui Ar K = 39, Cl = 35,5)</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Secara teori, manakah komposisi berikut yang jika direaksikan akan menghasilkan tepat 29,8 gram kristal KCl? Tentukan&nbsp;<strong>Benar</strong>&nbsp;atau&nbsp;<strong>Salah</strong>&nbsp;pada setiap pernyataan!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>300 mL larutan dari botol B + 200 mL larutan dari botol C.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('5.','1','1');">
+															<input id="pilihan_5_1_1" name="pilihan_5_1" class="pilihan__1" onchange="pilihan3('5','3','943','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_5_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('5.','1','2');">
+															<input id="pilihan_5_1_2" name="pilihan_5_1" class="pilihan__1" onchange="pilihan3('5','3','943','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_5_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>200 mL larutan dari botol B + 300 mL larutan dari botol D.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('5.','2','1');">
+															<input id="pilihan_5_2_1" name="pilihan_5_2" class="pilihan__2" onchange="pilihan3('5','3','943','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_5_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('5.','2','2');">
+															<input id="pilihan_5_2_2" name="pilihan_5_2" class="pilihan__2" onchange="pilihan3('5','3','943','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_5_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>400 mL larutan dari botol A + 500 mL larutan dari botol C.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('5.','3','1');">
+															<input id="pilihan_5_3_1" name="pilihan_5_3" class="pilihan__3" onchange="pilihan3('5','3','943','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_5_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('5.','3','2');">
+															<input id="pilihan_5_3_2" name="pilihan_5_3" class="pilihan__3" onchange="pilihan3('5','3','943','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_5_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-6"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Minyak bumi merupakan campuran berbagai macam zat organik dengan komponen pokok senyawa hidrokarbon. Pemisahan minyak mentah dilakukan dalam kilang minyak melalui proses destilasi bertingkat berdasarkan perbedaan titik didih. Beberapa fraksi minyak bumi antara lain: senyawa P, senyawa Q , senyawa R , dan senyawa S memiliki kegunaan yang berbeda.</p>
+<p>Berikut disajikan grafik hubungan bobot molekul senyawa hidrokarbon P, Q, R, dan S dengan titik didihnya:</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/05748_56827b0f099f5b93f83567362a4219a1.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan grafik, tentukan pasangan senyawa hidrokarbon dengan potensi pemanfaatannya yang benar! Pilih semua jawaban benar. Jawaban benar lebih dari satu<strong>.</strong></p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('6.','0');">
+													<input id="pilihan_6_0" class="pilihan6" onchange="pilihan2('6','a','938')" pil="a" name="pilihan6" type="checkbox" value="A">
+													<label for="pilihan_6_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(6,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Senyawa Q dimanfaatkan sebagai bahan bakar kendaraan bermotor.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('6.','1');">
+													<input id="pilihan_6_1" class="pilihan6" onchange="pilihan2('6','b','938')" pil="b" name="pilihan6" type="checkbox" value="B">
+													<label for="pilihan_6_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(6,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Senyawa R dapat digunakan sebagai minyak pelumas.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('6.','2');">
+													<input id="pilihan_6_2" class="pilihan6" onchange="pilihan2('6','c','938')" pil="c" name="pilihan6" type="checkbox" value="C">
+													<label for="pilihan_6_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(6,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Senyawa P bermanfaat sebagai bahan bakar pesawat terbang.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('6.','3');">
+													<input id="pilihan_6_3" class="pilihan6" onchange="pilihan2('6','d','938')" pil="d" name="pilihan6" type="checkbox" value="D">
+													<label for="pilihan_6_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(6,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Senyawa S dapat digunakan sebagai bahan pembuatan lilin.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('6.','4');">
+													<input id="pilihan_6_4" class="pilihan6" onchange="pilihan2('6','e','938')" pil="e" name="pilihan6" type="checkbox" value="E">
+													<label for="pilihan_6_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(6,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Senyawa P dapat dimanfaatkan sebagai pelarut.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-7"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Suatu hidrokarbon pada suhu kamar berbentuk gas dan tidak berwarna, digunakan sebagai komponen utama <em>LPG</em> dan kompor portabel. Hasil pembakaran sempurna terhadap 2 mol hidrokarbon tersebut menghasilkan 8 mol CO<sub>2</sub> dan 10 mol H<sub>2</sub>O.<br>Senyawa hidrokarbon tersebut memiliki:</p>
+<ul>
+<li style="text-align: left;">2 atom C primer</li>
+<li>2 atom C sekunder</li>
+</ul>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Bagaimana hasil analisis terhadap senyawa hidrokarbon tersebut? Tentukan&nbsp;<strong>Benar</strong>&nbsp;atau&nbsp;<strong>Salah</strong>&nbsp;untuk setiap pernyataan berikut ini terkait senyawa hidrokarbon tersebut!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Rumus kimia hidrokarbon tersebut adalah C<sub>4</sub>H<sub>10</sub>.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','1','1');">
+															<input id="pilihan_7_1_1" name="pilihan_7_1" class="pilihan__1" onchange="pilihan3('7','3','948','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_7_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','1','2');">
+															<input id="pilihan_7_1_2" name="pilihan_7_1" class="pilihan__1" onchange="pilihan3('7','3','948','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_7_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Struktur hidrokarbon tersebut adalah:<br><img src="/tka/cbt_images/07572_6d97d660a605004f2851b90283857858.png" alt=""></p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','2','1');">
+															<input id="pilihan_7_2_1" name="pilihan_7_2" class="pilihan__2" onchange="pilihan3('7','3','948','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_7_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','2','2');">
+															<input id="pilihan_7_2_2" name="pilihan_7_2" class="pilihan__2" onchange="pilihan3('7','3','948','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_7_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Hidrokarbon tersebut diperkirakan memiliki titik didih lebih rendah dibandingkan pasangan isomernya.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','3','1');">
+															<input id="pilihan_7_3_1" name="pilihan_7_3" class="pilihan__3" onchange="pilihan3('7','3','948','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_7_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','3','2');">
+															<input id="pilihan_7_3_2" name="pilihan_7_3" class="pilihan__3" onchange="pilihan3('7','3','948','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_7_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-8"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Suatu perusahaan energi sedang meneliti dua senyawa hidrokarbon, yaitu 1-butena dan 2-metil 1-propena, untuk digunakan sebagai bahan bakar tambahan dalam campuran bensin ramah lingkungan.</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/52972_6d473de358f2583acb895a47a4f554ae.png" alt=""></p>
+<p style="text-align: left;">Tim peneliti ingin mengetahui senyawa mana yang memberikan energi pembakaran lebih besar per mol untuk meningkatkan efisiensi bahan bakar dengan cara membandingkan struktur kedua senyawa dan menganalisis reaksi pembakaran dari masing-masing isomer.<br> Saat keduanya dibakar sempurna diperoleh data perubahan entalpi pembakaran (ΔH<em><sub>c</sub></em>) masing-masing sebagai berikut.</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/34072_667948e323c11bbeecffe06fc515b14e.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Bagaimana hasil analisis terhadap kedua isomer tersebut? Tentukan&nbsp;<strong>Benar</strong>&nbsp;atau&nbsp;<strong>Salah</strong>&nbsp;pada setiap pernyataan berikut ini mengenai kedua isomer!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>1-butena memberikan efisiensi pembakaran yang lebih baik dibandingkan 2-metil 1-propena.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','1','1');">
+															<input id="pilihan_8_1_1" name="pilihan_8_1" class="pilihan__1" onchange="pilihan3('8','3','937','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_8_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','1','2');">
+															<input id="pilihan_8_1_2" name="pilihan_8_1" class="pilihan__1" onchange="pilihan3('8','3','937','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_8_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Secara termodinamika 2-metil 1-propena lebih stabil dan memiliki tingkat energi lebih rendah dibandingkan 1-butena.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','2','1');">
+															<input id="pilihan_8_2_1" name="pilihan_8_2" class="pilihan__2" onchange="pilihan3('8','3','937','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_8_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','2','2');">
+															<input id="pilihan_8_2_2" name="pilihan_8_2" class="pilihan__2" onchange="pilihan3('8','3','937','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_8_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Hibridisasi senyawa karbon hasil pembakaran adalah&nbsp;<em>sp<sup>3</sup></em>.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','3','1');">
+															<input id="pilihan_8_3_1" name="pilihan_8_3" class="pilihan__3" onchange="pilihan3('8','3','937','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_8_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','3','2');">
+															<input id="pilihan_8_3_2" name="pilihan_8_3" class="pilihan__3" onchange="pilihan3('8','3','937','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_8_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-9"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Dalam sebuah artikel ilmiah, dinyatakan bahwa "Penggunaan pupuk amonium berlebih dalam pertanian dapat meningkatkan keasaman tanah. Ion amonium (NH<sub>4</sub><sup>+</sup>) yang terhidrolisis akan menghasilkan ion hidronium (H<sub>3</sub>O<sup>+</sup>), yang dapat menurunkan pH tanah dan memengaruhi ketersediaan unsur hara bagi tanaman."<br>Tertarik dengan fenomena ini, Hayyan dan temannya mempelajari lebih lanjut. Dari hasil studi pustaka, mereka menemukan bahwa salah satu reaksi yang terjadi dalam tanah adalah:</p>
+<p style="text-align: center;"><strong>NH<sub>4</sub><sup>+</sup> + H<sub>2</sub>O <img src="/tka/cbt_images/64415_8d5f23b0a41814e63955ebbb5ac9a665.png" alt="" data-latex="\rightleftarrows "></strong><strong>&nbsp;NH<sub>3</sub> + H<sub>3</sub>O<sup>+</sup></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan reaksi dan teori Bronsted-Lowry, manakah yang merupakan pasangan asam-basa konjugasi yang tepat?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('9.','0');">
+													<input id="pilihan_9_0" onchange="pilihan('9','a','930')" pil="a" name="pilihan9" type="radio">
+													<label for="pilihan_9_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(9,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>NH<sub>4</sub><sup>+</sup>dan H<sub>2</sub>O</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('9.','1');">
+													<input id="pilihan_9_1" onchange="pilihan('9','b','930')" pil="b" name="pilihan9" type="radio">
+													<label for="pilihan_9_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(9,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>NH<sub>3&nbsp;</sub>dan H<sub>3</sub>O<sup>+</sup></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('9.','2');">
+													<input id="pilihan_9_2" onchange="pilihan('9','c','930')" pil="c" name="pilihan9" type="radio">
+													<label for="pilihan_9_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(9,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><sub>3</sub>O<sup>+</sup>&nbsp;dan NH<sub>4</sub><sup>+</sup></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('9.','3');">
+													<input id="pilihan_9_3" onchange="pilihan('9','d','930')" pil="d" name="pilihan9" type="radio">
+													<label for="pilihan_9_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(9,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>NH<sub>3&nbsp;</sub>dan H<sub>2</sub>O</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('9.','4');">
+													<input id="pilihan_9_4" onchange="pilihan('9','e','930')" pil="e" name="pilihan9" type="radio">
+													<label for="pilihan_9_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(9,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>NH<sub>4</sub><sup>+</sup>&nbsp;dan NH<sub>3</sub></p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-10"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Seorang peneliti lingkungan mengambil 5 sampel air limbah cair dari industri peternakan yang diduga mengandung spesi asam/basa. Peneliti melakukan analisis pada 5 sampel tersebut untuk membuktikan apakah benar pada masing-masing sampel mengandung spesi asam/basa sesuai dengan yang digunakan industri tersebut. Penelitian dilakukan dengan menggunakan indikator fenolftalein yang memiliki trayek pH 8,0-10,0 dengan perubahan warna dari tidak berwarna menjadi merah muda (merah) pada rentang pH tersebut.</p>
+<p>Berikut adalah tabel data kandungan senyawa pada sampel limbah berdasarkan dugaan peneliti:</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/78957_e7f75bbf6f5b059216d9ac44eb176e84.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan data tersebut, dugaan peneliti kemungkinan benar jika sampel tersebut ditetesi indikator fenolftalein menunjukkan warna ….</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','0');">
+													<input id="pilihan_10_0" onchange="pilihan('10','a','928')" pil="a" name="pilihan10" type="radio">
+													<label for="pilihan_10_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/78957_ce54fc4e4fabea249844ef2b670d24f7.png" alt="" width="611" height="90"></p>
+<p>&nbsp;</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','1');">
+													<input id="pilihan_10_1" onchange="pilihan('10','b','928')" pil="b" name="pilihan10" type="radio">
+													<label for="pilihan_10_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/78957_2a645e5a0dbc31caf2309955a6dd547c.png" alt="" width="611" height="88"></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','2');">
+													<input id="pilihan_10_2" onchange="pilihan('10','c','928')" pil="c" name="pilihan10" type="radio">
+													<label for="pilihan_10_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/78957_2c655e7c7f7292a39b1708af39cd06b8.png" alt="" width="610" height="87"></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','3');">
+													<input id="pilihan_10_3" onchange="pilihan('10','d','928')" pil="d" name="pilihan10" type="radio">
+													<label for="pilihan_10_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/78957_0cebef875570f442d86071a35dc2b8c4.png" alt="" width="614" height="89"></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','4');">
+													<input id="pilihan_10_4" onchange="pilihan('10','e','928')" pil="e" name="pilihan10" type="radio">
+													<label for="pilihan_10_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/78957_5163839fc76eb1de837992743c9f9e7a.png" alt="" width="611" height="88"></p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-11"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Deterjen cair memiliki beberapa keunggulan dibandingkan deterjen bubuk, terutama dalam hal kelarutan, kemudahan penggunaan, dan potensi residu pada pakaian dan mesin cuci. Deterjen cair juga relatif lebih aman bagi kulit sensitif. Annisa memeriksa komposisi deterjen cair di rumahnya dan menemukan senyawa basa Natrium hidroksida (NaOH) dengan kadar 0,1%, sesuai kadar alkali bebas maksimal yang ditentukan BSN. Annisa ingin menguji deterjen tersebut di laboratorium kimia sekolah. Ia mengambil 10 mL sampel deterjen lalu diencerkan dengan akuades sampai 100 mL. Kemudian 20 mL larutan encer dititrasi dengan larutan asam klorida HCl 0,1 M. Titrasi dilakukan tiga kali dan diperoleh data sebagai berikut:</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/27006_f3f7b4d34c3ead2af7a1ebcf56a6c731.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan hasil titrasi yang dilakukan, manakah pernyataan yang tepat mengenai kadar NaOH dalam deterjen cair tersebut?<br>(Ar Na= 23, O= 16, H=1)</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','0');">
+													<input id="pilihan_11_0" onchange="pilihan('11','a','935')" pil="a" name="pilihan11" type="radio">
+													<label for="pilihan_11_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kadar NaOH di bawah yang tercantum pada label, yaitu mengandung 0,04% NaOH.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','1');">
+													<input id="pilihan_11_1" onchange="pilihan('11','b','935')" pil="b" name="pilihan11" type="radio">
+													<label for="pilihan_11_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kadar NaOH sesuai dengan yang tercantum pada label, yaitu mengandung 0,1% NaOH.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','2');">
+													<input id="pilihan_11_2" onchange="pilihan('11','c','935')" pil="c" name="pilihan11" type="radio">
+													<label for="pilihan_11_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kadar NaOH melebihi yang tercantum pada label, yaitu mengandung 0,4% NaOH.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','3');">
+													<input id="pilihan_11_3" onchange="pilihan('11','d','935')" pil="d" name="pilihan11" type="radio">
+													<label for="pilihan_11_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kadar NaOH melebihi yang tercantum pada label, yaitu mengandung 0,16% NaOH.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','4');">
+													<input id="pilihan_11_4" onchange="pilihan('11','e','935')" pil="e" name="pilihan11" type="radio">
+													<label for="pilihan_11_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kadar NaOH melebihi yang tercantum pada label, yaitu mengandung 1,6% NaOH.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-12"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sekelompok siswa sedang melakukan praktikum untuk menguji daya hantar listrik larutan yang belum diketahui. Tiga senyawa yang belum diketahui (X, Y, dan Z) diuji daya hantar listriknya menggunakan indikator lampu. Hasil yang diperoleh dapat dilihat pada tabel pengamatan berikut.</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/35804_257d6d3b5fb3a2222f3006d2cda97519.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan data hasil percobaan, manakah kemungkinan pasangan zat/senyawa yang sesuai dengan hasil percobaan?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','0');">
+													<input id="pilihan_12_0" onchange="pilihan('12','a','933')" pil="a" name="pilihan12" type="radio">
+													<label for="pilihan_12_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Senyawa X adalah Na<sub>2</sub>S<sub>2</sub>O<sub>3</sub>&nbsp;dan senyawa Y adalah KI.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','1');">
+													<input id="pilihan_12_1" onchange="pilihan('12','b','933')" pil="b" name="pilihan12" type="radio">
+													<label for="pilihan_12_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Senyawa X adalah Na<sub>2</sub>S<sub>2</sub>O<sub>3</sub>&nbsp;dan senyawa Y adalah CH<sub>3</sub>COOH.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','2');">
+													<input id="pilihan_12_2" onchange="pilihan('12','c','933')" pil="c" name="pilihan12" type="radio">
+													<label for="pilihan_12_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Senyawa X adalah KI dan senyawa Z adalah CH<sub>3</sub>COOH.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','3');">
+													<input id="pilihan_12_3" onchange="pilihan('12','d','933')" pil="d" name="pilihan12" type="radio">
+													<label for="pilihan_12_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Senyawa Y adalah CH<sub>3</sub>COOH dan senyawa Z adalah Na<sub>2</sub>S<sub>2</sub>O<sub>3</sub>.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','4');">
+													<input id="pilihan_12_4" onchange="pilihan('12','e','933')" pil="e" name="pilihan12" type="radio">
+													<label for="pilihan_12_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Senyawa Y adalah HCl dan senyawa Z adalah Na<sub>2</sub>S<sub>2</sub>O<sub>3</sub>.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-13"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sebuah pabrik farmasi memproduksi sirup obat batuk untuk anak-anak. Berdasarkan formulasi, kandungan zat aktif dan bahan tambahan per botol (isi 50 ml) adalah sebagai berikut:</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/06113_3808bb5a55fc3788b8762170278c3f6e.png" alt=""></p>
+<p>Menurut pedoman keamanan obat untuk anak-anak, standar mutu aman (dalam persen massa per 100 mL) adalah:<br>- Dekstrometorfan HBr maksimal 1% (untuk mencegah overdosis)<br>- Gula (sukrosa) maksimal 15% (untuk mencegah kadar gula berlebih)<br>- Perisa buah sintetis maksimal 0,3% (agar rasa tidak berlebihan)</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pernyataan manakah yang paling tepat mengenai komposisi sirup tersebut? (Diketahui massa jenis sirup adalah 1 g/ml).</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','0');">
+													<input id="pilihan_13_0" onchange="pilihan('13','a','934')" pil="a" name="pilihan13" type="radio">
+													<label for="pilihan_13_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengandung dekstrometorfan HBr sebesar 2%, sudah tidak aman untuk digunakan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','1');">
+													<input id="pilihan_13_1" onchange="pilihan('13','b','934')" pil="b" name="pilihan13" type="radio">
+													<label for="pilihan_13_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengandung gula sebesar 20%, sudah melebihi batas aman untuk anak-anak.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','2');">
+													<input id="pilihan_13_2" onchange="pilihan('13','c','934')" pil="c" name="pilihan13" type="radio">
+													<label for="pilihan_13_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengandung perisa buah sintetis sebesar 0,2% masih pada batas aman.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','3');">
+													<input id="pilihan_13_3" onchange="pilihan('13','d','934')" pil="d" name="pilihan13" type="radio">
+													<label for="pilihan_13_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Semua kandungan zat aktif dan bahan tambahan berada pada batas aman sesuai standar mutu.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','4');">
+													<input id="pilihan_13_4" onchange="pilihan('13','e','934')" pil="e" name="pilihan13" type="radio">
+													<label for="pilihan_13_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kandungan dekstrometorfan HBr dan perisa buah masih berada pada batas aman untuk anak-anak.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-14"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Dalam upaya mempelajari proses pengolahan limbah rumah tangga, Anisa dan Kristin melakukan simulasi sederhana di laboratorium. Anisa dan Kristin melakukan percobaan dengan mencampurkan 100 mL CaBr<sub>2</sub> 0,01 M dengan 100 mL Na<sub>2</sub>SO<sub>4</sub> 0,02 M.</p>
+<p>Ion Ca<sup>2+</sup> dan SO<sub>4</sub><sup>2—</sup> dapat membentuk endapan CaSO<sub>4</sub> yang sukar larut, sehingga dimanfaatkan untuk mengisolasi ion sulfat pada air limbah rumah tangga.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan informasi tersebut, manakah pernyataan yang tepat mengenai kemungkinan terbentuknya endapan CaSO<sub>4</sub> pada percobaan yang dilakukan? (Diketahui K<sub>sp</sub> CaSO<sub>4</sub> = 2,4 x 10<sup>—&nbsp;</sup><sup>6</sup>)</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','0');">
+													<input id="pilihan_14_0" onchange="pilihan('14','a','927')" pil="a" name="pilihan14" type="radio">
+													<label for="pilihan_14_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Terbentuk endapan CaSO<sub>4</sub>&nbsp;karena Ksp lebih kecil dari harga Q.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','1');">
+													<input id="pilihan_14_1" onchange="pilihan('14','b','927')" pil="b" name="pilihan14" type="radio">
+													<label for="pilihan_14_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Garam CaSO<sub>4</sub>&nbsp;akan terus larut karena Ksp lebih besar dari harga Q.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','2');">
+													<input id="pilihan_14_2" onchange="pilihan('14','c','927')" pil="c" name="pilihan14" type="radio">
+													<label for="pilihan_14_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Larutan CaSO<sub>4</sub>&nbsp;tepat jenuh karena Ksp sama dengan harga Q.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','3');">
+													<input id="pilihan_14_3" onchange="pilihan('14','d','927')" pil="d" name="pilihan14" type="radio">
+													<label for="pilihan_14_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Terbentuk endapan CaSO<sub>4</sub>&nbsp;karena Ksp lebih besar dari harga Q.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','4');">
+													<input id="pilihan_14_4" onchange="pilihan('14','e','927')" pil="e" name="pilihan14" type="radio">
+													<label for="pilihan_14_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Garam CaSO<sub>4</sub>&nbsp;akan larut karena harga Q lebih besar dari Ksp.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-15"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perhatikan diagram P-T pelarut murni (H₂O) dan larutan KBr berikut.</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/09730_61a5e64ef23614b98cbe97a6123dddb5.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pernyataan yang tepat terkait diagram P-T pelarut murni (H₂O) dan KBr adalah …</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','0');">
+													<input id="pilihan_15_0" onchange="pilihan('15','a','931')" pil="a" name="pilihan15" type="radio">
+													<label for="pilihan_15_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Titik H menunjukkan titik didih H₂O pada tekanan 1 atm.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','1');">
+													<input id="pilihan_15_1" onchange="pilihan('15','b','931')" pil="b" name="pilihan15" type="radio">
+													<label for="pilihan_15_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Titik X merupakan titik tripel pelarut murni (H₂O).</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','2');">
+													<input id="pilihan_15_2" onchange="pilihan('15','c','931')" pil="c" name="pilihan15" type="radio">
+													<label for="pilihan_15_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Garis E–F menunjukkan kenaikan titik didih KBr.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','3');">
+													<input id="pilihan_15_3" onchange="pilihan('15','d','931')" pil="d" name="pilihan15" type="radio">
+													<label for="pilihan_15_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Garis G–H kedua zat berada dalam fase padat pada tekanan 1 atm.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','4');">
+													<input id="pilihan_15_4" onchange="pilihan('15','e','931')" pil="e" name="pilihan15" type="radio">
+													<label for="pilihan_15_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Titik S menunjukkan tekanan uap KBr pada suatu suhu.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-16"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Natrium klorida (NaCl), sukrosa (C<sub>12</sub>H<sub>22</sub>O<sub>11</sub>), dan&nbsp;metanol (CH<sub>3</sub>OH) memiliki peran yang berbeda dalam industri. Natrium klorida digunakan dalam proses produksi klorin dan soda kaustik. Metanol sebagai pelarut dan bahan baku untuk berbagai produk kimia dan industri, sedangkan sukrosa digunakan dalam industri makanan dan minuman. Natrium klorida (NaCl), sukrosa (C<sub>12</sub>H<sub>22</sub>O<sub>11</sub>), dan&nbsp;metanol (CH<sub>3</sub>OH) dalam jumlah sama dilarutkan dalam air dengan volume sama. Berikut disajikan ilustrasi ketiga larutan dengan komposisi dan nilai tekanan uapnya.</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/74416_3d4a33b394aa1b986af3bc27c16f9850.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan wacana, pernyataan berikut yang benar terkait tekanan uap dari ketiga larutan adalah ....</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','0');">
+													<input id="pilihan_16_0" onchange="pilihan('16','a','926')" pil="a" name="pilihan16" type="radio">
+													<label for="pilihan_16_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tekanan uap larutan A &lt; Larutan C &lt; Larutan B karena jumlah partikel NaCl&gt; CH<sub>3</sub>OH &gt;C<sub>12</sub>H<sub>22</sub>O<sub>11</sub></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','1');">
+													<input id="pilihan_16_1" onchange="pilihan('16','b','926')" pil="b" name="pilihan16" type="radio">
+													<label for="pilihan_16_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Larutan C memiliki tekanan uap tinggi karena metanol memperbesar kecenderungan molekul meninggalkan fase cair.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','2');">
+													<input id="pilihan_16_2" onchange="pilihan('16','c','926')" pil="c" name="pilihan16" type="radio">
+													<label for="pilihan_16_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Larutan A memiliki tekanan uap lebih rendah karena penambahan NaCl menyebabkan lebih banyak air yang diubah menjadi uap air.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','3');">
+													<input id="pilihan_16_3" onchange="pilihan('16','d','926')" pil="d" name="pilihan16" type="radio">
+													<label for="pilihan_16_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tekanan uap larutan C lebih tinggi dari larutan B karena jumlah partikel metanol lebih banyak meskipun jumlah molnya sama.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','4');">
+													<input id="pilihan_16_4" onchange="pilihan('16','e','926')" pil="e" name="pilihan16" type="radio">
+													<label for="pilihan_16_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penambahan sukrosa pada larutan B menyebabkan tekanan uap turun karena sukrosa merupakan partikel ionik.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-17"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tekanan osmotik memiliki beberapa aplikasi penting dalam bidang kesehatan, salah satu diantaranya adalah pembatas cairan infus dan proses dialisis. Kalium klorida adalah obat yang digunakan dalam pada pasien dengan gangguan elektrolit yang berat (kadar kalium darah dangat rendah) yang sering digunakan dokter ketika memberikan obat lain yang dapat menurunkan kadar kalium dalam darah. Ani, seorang peneliti di laboratorium farmasi membuat cairan infus yang diukur pada suhu 27<sup>o</sup>C. Ia mengambil sebanyak 14,9 g KCl (Mr = 74,5) dan melarutkannya ke dalam 1000 mL air. Berapakah tekanan osmotik larutan KCl tersebut?<br>(Diketahui: <em>R</em> = 0,082 L atm mol<sup>−&nbsp;</sup>K<sup>−</sup>)&nbsp;</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','0');">
+													<input id="pilihan_17_0" onchange="pilihan('17','a','932')" pil="a" name="pilihan17" type="radio">
+													<label for="pilihan_17_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>10,16 atm.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','1');">
+													<input id="pilihan_17_1" onchange="pilihan('17','b','932')" pil="b" name="pilihan17" type="radio">
+													<label for="pilihan_17_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>9,84 atm.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','2');">
+													<input id="pilihan_17_2" onchange="pilihan('17','c','932')" pil="c" name="pilihan17" type="radio">
+													<label for="pilihan_17_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>4,92 atm.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','3');">
+													<input id="pilihan_17_3" onchange="pilihan('17','d','932')" pil="d" name="pilihan17" type="radio">
+													<label for="pilihan_17_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>0,88 atm.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','4');">
+													<input id="pilihan_17_4" onchange="pilihan('17','e','932')" pil="e" name="pilihan17" type="radio">
+													<label for="pilihan_17_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>0,44 atm.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-18"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Larutan antibeku yang mengandung propilen glikol (C<sub>3</sub>H<sub>8</sub>O<sub>2</sub>) digunakan dalam pencairan es untuk menghilangkan salju, es, atau embun beku yang menempel pada permukaan pesawat seperti sayap dan ekor sebelum lepas landas yang dapat membahayakan penerbangan. Larutan antibeku ini juga digunakan untuk mencegah pembentukan es pada permukaan pesawat selama kondisi cuaca dingin yang disebut <em>anti-icing</em>. Sebelum pesawat lepas landas disemprotkan larutan antibeku yang mengandung 1140 g propilen glikol dalam 1 liter air.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan wacana, apakah larutan antibeku tersebut dapat mencegah pembentukan es ketika pesawat terbang di daerah dengan suhu –22,3<sup>o</sup>C?<br>(Diketahui Ar C = 12, H = 1, O =16, K<em><sub>f </sub></em>air = 1,86<sup>o</sup>C/molal)</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','0');">
+													<input id="pilihan_18_0" onchange="pilihan('18','a','929')" pil="a" name="pilihan18" type="radio">
+													<label for="pilihan_18_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Ya, karena titik beku larutan tersebut mencapai –18,6<sup>o</sup>C.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','1');">
+													<input id="pilihan_18_1" onchange="pilihan('18','b','929')" pil="b" name="pilihan18" type="radio">
+													<label for="pilihan_18_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Ya, karena titik beku larutan tersebut mencapai –22,3<sup>o</sup>C.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','2');">
+													<input id="pilihan_18_2" onchange="pilihan('18','c','929')" pil="c" name="pilihan18" type="radio">
+													<label for="pilihan_18_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Ya, karena titik beku larutan tersebut mencapai –27,9<sup>o</sup>C.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','3');">
+													<input id="pilihan_18_3" onchange="pilihan('18','d','929')" pil="d" name="pilihan18" type="radio">
+													<label for="pilihan_18_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tidak, karena titik beku larutan tersebut hanya 18,6<sup>o</sup>C.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','4');">
+													<input id="pilihan_18_4" onchange="pilihan('18','e','929')" pil="e" name="pilihan18" type="radio">
+													<label for="pilihan_18_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tidak, karena titik beku larutan tersebut hanya 27,9<sup>o</sup>C</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-19"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perhatikan grafik yang menggambarkan konsep laju reaksi dari suatu reaksi berikut.</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/01889_f6705a3c4d862787d8652eed6ed9d55d.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan grafik tersebut, reaktan dari reaksi tersebut adalah ….</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','0');">
+													<input id="pilihan_19_0" onchange="pilihan('19','a','945')" pil="a" name="pilihan19" type="radio">
+													<label for="pilihan_19_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>NO dan H<sub>2</sub>O</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','1');">
+													<input id="pilihan_19_1" onchange="pilihan('19','b','945')" pil="b" name="pilihan19" type="radio">
+													<label for="pilihan_19_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>NH<sub>3</sub>&nbsp;dan NO</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','2');">
+													<input id="pilihan_19_2" onchange="pilihan('19','c','945')" pil="c" name="pilihan19" type="radio">
+													<label for="pilihan_19_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>NH<sub>3</sub>&nbsp;dan O<sub>2</sub></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','3');">
+													<input id="pilihan_19_3" onchange="pilihan('19','d','945')" pil="d" name="pilihan19" type="radio">
+													<label for="pilihan_19_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>NH<sub>3&nbsp;</sub>dan H<sub>2</sub>O</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','4');">
+													<input id="pilihan_19_4" onchange="pilihan('19','e','945')" pil="e" name="pilihan19" type="radio">
+													<label for="pilihan_19_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>H<sub>2</sub>O dan O<sub>2</sub></p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-20"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Rania mencari informasi mengenai senyawa hidrokarbon yang memiliki 5 atom karbon. Hidrokarbon dengan atom karbon rendah banyak digunakan sebagai sumber bahan bakar. Berikut ini data entalpi pembakaran standar (ΔH<em><sub>c</sub></em>°) yang diperoleh Rania dari berbagai sumber:</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/88261_60798043b897ca38f8e7b80719bb47d1.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan data yang diperoleh, senyawa yang dapat dijadikan sebagai bahan bakar yang paling ramah lingkungan adalah …</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','0');">
+													<input id="pilihan_20_0" onchange="pilihan('20','a','936')" pil="a" name="pilihan20" type="radio">
+													<label for="pilihan_20_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>n-pentana karena menghasilkan CO₂ paling sedikit per energi yang sama.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','1');">
+													<input id="pilihan_20_1" onchange="pilihan('20','b','936')" pil="b" name="pilihan20" type="radio">
+													<label for="pilihan_20_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>1-pentena karena memiliki ikatan rangkap sehingga pembakaran lebih mudah.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','2');">
+													<input id="pilihan_20_2" onchange="pilihan('20','c','936')" pil="c" name="pilihan20" type="radio">
+													<label for="pilihan_20_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Siklopentana karena menghasilkan energi paling besar untuk setiap mol pembakaran.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','3');">
+													<input id="pilihan_20_3" onchange="pilihan('20','d','936')" pil="d" name="pilihan20" type="radio">
+													<label for="pilihan_20_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Semua sama karena masing-masing menghasilkan 5 mol CO₂ per mol.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','4');">
+													<input id="pilihan_20_4" onchange="pilihan('20','e','936')" pil="e" name="pilihan20" type="radio">
+													<label for="pilihan_20_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>1-pentena karena menghasilkan H₂O lebih banyak dibandingkan n pentana dan siklopentana.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-21"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Dalam industri bahan bakar ramah lingkungan, salah satu proses penting yaitu pengubahan etena (C<sub>2</sub>H<sub>4</sub>) menjadi etanol (C<sub>2</sub>H<sub>5</sub>OH) melalui reaksi kesetimbangan berikut:</p>
+<p style="text-align: center;"><strong>C<sub>2</sub>H<sub>4</sub>(g) + H<sub>2</sub>O (g)&nbsp;<img src="/tka/cbt_images/37016_8d5f23b0a41814e63955ebbb5ac9a665.png" alt="" data-latex="\rightleftarrows ">&nbsp;C<sub>2</sub>H<sub>5</sub>OH (g)</strong></p>
+<p>Reaksi tersebut dilakukan pada kondisi suhu dan tekanan tinggi dalam suatu reaktor. Operator ingin menentukan suhu optimal untuk memaksimalkan produksi etanol. Hasil pengamatan terhadap konsentrasi C<sub>2</sub>H<sub>4</sub> selama reaksi pada dua suhu (T) berbeda disajikan dalam grafik berikut:</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/37016_79be7e10234fd045aece4818d3f3eb5b.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Operator tersebut menggunakan reaktor yang sama pada suhu = 400 <sup>o</sup>C, ia memperoleh nilai <em>K</em><sub>c</sub> pada suhu tersebut = 0,9. Agar gas etanol yang dihasilkan meningkat, upaya terbaik yang dapat dilakukan selain menambah lebih banyak C<sub>2</sub>H<sub>4</sub> (reaktan) ke dalam reaktor adalah ...</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','0');">
+													<input id="pilihan_21_0" onchange="pilihan('21','a','942')" pil="a" name="pilihan21" type="radio">
+													<label for="pilihan_21_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menurunkan suhu hingga mendekati suhu kamar&nbsp;<u>+</u>25&nbsp;<sup>o</sup>C karena reaksinya bersifat eksoterm, sehingga nilai K<sub>c</sub>&nbsp;akan berkurang (K<sub>c</sub>&nbsp;&lt; 0,9).</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','1');">
+													<input id="pilihan_21_1" onchange="pilihan('21','b','942')" pil="b" name="pilihan21" type="radio">
+													<label for="pilihan_21_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menurunkan suhu dengan kisaran: 400&nbsp;<sup>o</sup>C &gt; T &gt; 300&nbsp;<sup>o</sup>C karena reaksinya bersifat eksoterm, sehingga nilai K<sub>c</sub>&nbsp;meningkat (K<sub>c</sub>&nbsp;&gt; 0,9).</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','2');">
+													<input id="pilihan_21_2" onchange="pilihan('21','c','942')" pil="c" name="pilihan21" type="radio">
+													<label for="pilihan_21_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menurunkan suhu dengan kisaran: 400&nbsp;<sup>o</sup>C &gt; T &gt; 25&nbsp;<sup>o</sup>C karena reaksinya bersifat eksoterm, sehingga nilai K<sub>c</sub>&nbsp;meningkat (K<sub>c</sub>&nbsp;&gt; 0,9).</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','3');">
+													<input id="pilihan_21_3" onchange="pilihan('21','d','942')" pil="d" name="pilihan21" type="radio">
+													<label for="pilihan_21_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Meningkatkan suhu dengan kisaran 500&nbsp;<sup>o</sup>C &gt; T &gt; 400&nbsp;<sup>o</sup>C karena reaksinya bersifat endoterm, sehingga nilai K<sub>c</sub>&nbsp;meningkat (K<sub>c</sub>&nbsp;&gt; 0,9).</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','4');">
+													<input id="pilihan_21_4" onchange="pilihan('21','e','942')" pil="e" name="pilihan21" type="radio">
+													<label for="pilihan_21_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Meningkatkan suhu dengan kisaran: 500&nbsp;<sup>o</sup>C &gt; T &gt; 400&nbsp;<sup>o</sup>C karena reaksinya bersifat eksoterm, sehingga nilai K<sub>c</sub>&nbsp;berkurang (K<sub>c</sub>&nbsp;&lt; 0,9).</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-22"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Seorang peneliti sedang melakukan studi reaksi kesetimbangan gas buang kendaraan di atmosfer. Reaksi kesetimbangan tersebut disajikan pada grafik berikut:</p>
+<p style="text-align: center;">&nbsp;<img src="/tka/cbt_images/14069_7911233a9559e3a2b4cd08acc6bd4b60.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan grafik reaksi kesetimbangan tersebut, apakah yang terjadi jika tekanan wadah dinaikkan dua kali lipat?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','0');">
+													<input id="pilihan_22_0" onchange="pilihan('22','a','941')" pil="a" name="pilihan22" type="radio">
+													<label for="pilihan_22_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesetimbangan reaksi bergeser ke kiri karena jumlah mol produk lebih kecil.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','1');">
+													<input id="pilihan_22_1" onchange="pilihan('22','b','941')" pil="b" name="pilihan22" type="radio">
+													<label for="pilihan_22_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesetimbangan reaksi bergeser ke kiri karena jumlah mol reaktan lebih besar.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','2');">
+													<input id="pilihan_22_2" onchange="pilihan('22','c','941')" pil="c" name="pilihan22" type="radio">
+													<label for="pilihan_22_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesetimbangan reaksi bergeser ke kanan karena jumlah mol produk lebih kecil.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','3');">
+													<input id="pilihan_22_3" onchange="pilihan('22','d','941')" pil="d" name="pilihan22" type="radio">
+													<label for="pilihan_22_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesetimbangan tidak akan bergeser, karena semua zat berwujud gas.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','4');">
+													<input id="pilihan_22_4" onchange="pilihan('22','e','941')" pil="e" name="pilihan22" type="radio">
+													<label for="pilihan_22_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesetimbangan akan bergeser ke kanan, karena konsentrasi semua zat meningkat.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-23"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Sel Volta (sel galvanik) merupakan dasar konsep baterai, termasuk sel kering seperti baterai Leclanche. Jenis-jenis baterai meliputi baterai alkalin, baterai biasa, dan baterai nikel-kadmium yang menggunakan nikel dan kadmium sebagai bahan aktif.</p>
+<ul>
+<li>Kelebihannya: cepat diisi ulang dan tahan suhu ekstrem.</li>
+<li>Kelemahannya: kapasitas menurun setelah siklus isi-ulang berulang.</li>
+</ul>
+<p>Baterai ini umum digunakan pada perangkat portabel seperti kamera, ponsel, dan laptop. Berikut reaksi pada baterai nikel-kadmium:<br>Cd(s) + NiO<sub>2</sub>(s) + 2H<sub>2</sub>O(l) → Cd(OH)<sub>2</sub>(s) + Ni(OH)<sub>2</sub>(s)</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Zat apakah yang berperan sebagai reduktor dalam reaksi pada baterai nikel-kadmium?&nbsp;</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','0');">
+													<input id="pilihan_23_0" onchange="pilihan('23','a','1262')" pil="a" name="pilihan23" type="radio">
+													<label for="pilihan_23_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,0);"><!--?xml encoding="utf-8" ?--><p>Cd</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','1');">
+													<input id="pilihan_23_1" onchange="pilihan('23','b','1262')" pil="b" name="pilihan23" type="radio">
+													<label for="pilihan_23_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,1);"><!--?xml encoding="utf-8" ?--><p>NiO<sub>2</sub></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','2');">
+													<input id="pilihan_23_2" onchange="pilihan('23','c','1262')" pil="c" name="pilihan23" type="radio">
+													<label for="pilihan_23_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,2);"><!--?xml encoding="utf-8" ?--><p>H<sub>2</sub>O</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','3');">
+													<input id="pilihan_23_3" onchange="pilihan('23','d','1262')" pil="d" name="pilihan23" type="radio">
+													<label for="pilihan_23_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,3);"><!--?xml encoding="utf-8" ?--><p>Cd(OH)<sub>2</sub></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','4');">
+													<input id="pilihan_23_4" onchange="pilihan('23','e','1262')" pil="e" name="pilihan23" type="radio">
+													<label for="pilihan_23_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,4);"><!--?xml encoding="utf-8" ?--><p>Ni(OH)<sub>2</sub></p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-24"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sebuah sel volta disusun menggunakan dua logam, X dan Y, yang dicelupkan ke dalam larutan berisi ion dari masing-masing logam. Rangkaian lengkapnya dapat dilihat pada gambar di bawah ini.</p>
+<p style="text-align: center;">&nbsp;<img src="/tka/cbt_images/80472_e070ed493286771fafe614b4a5dc79ea.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Dari informasi dan skema yang diberikan, manakah pernyataan berikut yang tepat mengenai reaksi reduksi dan oksidasi pada sel volta tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('24.','0');">
+													<input id="pilihan_24_0" onchange="pilihan('24','a','940')" pil="a" name="pilihan24" type="radio">
+													<label for="pilihan_24_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(24,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Elektroda X mengalami oksidasi, X(<em>s</em>) → X<sub>2</sub><sup>+</sup>(<em>aq</em>) + 2e.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('24.','1');">
+													<input id="pilihan_24_1" onchange="pilihan('24','b','940')" pil="b" name="pilihan24" type="radio">
+													<label for="pilihan_24_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(24,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Massa logam Y berkurang seiring waktu disebabkan Y mengalami oksidasi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('24.','2');">
+													<input id="pilihan_24_2" onchange="pilihan('24','c','940')" pil="c" name="pilihan24" type="radio">
+													<label for="pilihan_24_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(24,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Konsentrasi ion Y<sup>2+</sup>&nbsp;berkurang seiring waktu sebab ion ini mengalami reduksi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('24.','3');">
+													<input id="pilihan_24_3" onchange="pilihan('24','d','940')" pil="d" name="pilihan24" type="radio">
+													<label for="pilihan_24_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(24,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Elektroda Y berperan sebagai katoda, tempat terjadinya reaksi reduksi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('24.','4');">
+													<input id="pilihan_24_4" onchange="pilihan('24','e','940')" pil="e" name="pilihan24" type="radio">
+													<label for="pilihan_24_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(24,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Konsentrasi ion X<sup>2+&nbsp;</sup>bertambah seiring waktu karena oksidasi logam X.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div>			</div>
+		  </div>
+		  
+		  <div class="row pl-3 pr-3 pb-1 mb-0"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  
+		  <div class="row pb-0 pt-2 mt-2 btn-bawah"> 
+			<div class="col text-center" style="">
+				<button class="btn btn-danger btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="prevSoal()"><i class="fa fa-chevron-circle-left"></i> <span class="d-none d-sm-inline-block">Soal sebelumnya</span></button>
+			</div>
+			<div class="col text-center" style="">
+				<button class="btn btn-warning btn-round btn-md btn-navigasi" style="border-radius:30px;color:#fff;"><input type="checkbox" onclick="raguRagu()" id="c_ragu_ragu" value=""> <span class="d-none d-sm-inline-block">Ragu-ragu
+			</span></button></div>
+			<div class="col text-center" style="">
+				<button class="btn btn-primary btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="nextSoal()" id="nextSoal"> <span class="d-none d-sm-inline-block">Soal berikutnya</span> <i class="fa fa-chevron-circle-right"></i></button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	 
+  </div> 
+</div>
+
+<div class="modal fadeIn" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Daftar Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+		<form id="formJawaban">
+         				<span class="d-none" id="tmp_answer_1"></span>
+				<span class="d-none" id="ragu_answer_1"></span>
+				<input type="hidden" name="jawaban_no[1]" id="input_jawaban_no_1" value="1">
+								<div id="jawaban-no-1" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal btn-primary" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('1')">1					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer1" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_2"></span>
+				<span class="d-none" id="ragu_answer_2"></span>
+				<input type="hidden" name="jawaban_no[2]" id="input_jawaban_no_2" value="2">
+								<div id="jawaban-no-2" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('2')">2					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer2" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_3"></span>
+				<span class="d-none" id="ragu_answer_3"></span>
+				<input type="hidden" name="jawaban_no[3]" id="input_jawaban_no_3" value="3">
+								<div id="jawaban-no-3" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('3')">3					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer3" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_4"></span>
+				<span class="d-none" id="ragu_answer_4"></span>
+				<input type="hidden" name="jawaban_no[4]" id="input_jawaban_no_4" value="4">
+								<div id="jawaban-no-4" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('4')">4					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer4" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_5"></span>
+				<span class="d-none" id="ragu_answer_5"></span>
+				<input type="hidden" name="jawaban_no[5]" id="input_jawaban_no_5" value="5">
+								<div id="jawaban-no-5" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('5')">5					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer5" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_6"></span>
+				<span class="d-none" id="ragu_answer_6"></span>
+				<input type="hidden" name="jawaban_no[6]" id="input_jawaban_no_6" value="6">
+								<div id="jawaban-no-6" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('6')">6					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer6" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_7"></span>
+				<span class="d-none" id="ragu_answer_7"></span>
+				<input type="hidden" name="jawaban_no[7]" id="input_jawaban_no_7" value="7">
+								<div id="jawaban-no-7" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('7')">7					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer7" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_8"></span>
+				<span class="d-none" id="ragu_answer_8"></span>
+				<input type="hidden" name="jawaban_no[8]" id="input_jawaban_no_8" value="8">
+								<div id="jawaban-no-8" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('8')">8					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer8" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_9"></span>
+				<span class="d-none" id="ragu_answer_9"></span>
+				<input type="hidden" name="jawaban_no[9]" id="input_jawaban_no_9" value="9">
+								<div id="jawaban-no-9" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('9')">9					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer9" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_10"></span>
+				<span class="d-none" id="ragu_answer_10"></span>
+				<input type="hidden" name="jawaban_no[10]" id="input_jawaban_no_10" value="10">
+								<div id="jawaban-no-10" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('10')">10					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer10" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_11"></span>
+				<span class="d-none" id="ragu_answer_11"></span>
+				<input type="hidden" name="jawaban_no[11]" id="input_jawaban_no_11" value="11">
+								<div id="jawaban-no-11" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('11')">11					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer11" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_12"></span>
+				<span class="d-none" id="ragu_answer_12"></span>
+				<input type="hidden" name="jawaban_no[12]" id="input_jawaban_no_12" value="12">
+								<div id="jawaban-no-12" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('12')">12					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer12" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_13"></span>
+				<span class="d-none" id="ragu_answer_13"></span>
+				<input type="hidden" name="jawaban_no[13]" id="input_jawaban_no_13" value="13">
+								<div id="jawaban-no-13" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('13')">13					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer13" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_14"></span>
+				<span class="d-none" id="ragu_answer_14"></span>
+				<input type="hidden" name="jawaban_no[14]" id="input_jawaban_no_14" value="14">
+								<div id="jawaban-no-14" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('14')">14					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer14" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_15"></span>
+				<span class="d-none" id="ragu_answer_15"></span>
+				<input type="hidden" name="jawaban_no[15]" id="input_jawaban_no_15" value="15">
+								<div id="jawaban-no-15" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('15')">15					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer15" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_16"></span>
+				<span class="d-none" id="ragu_answer_16"></span>
+				<input type="hidden" name="jawaban_no[16]" id="input_jawaban_no_16" value="16">
+								<div id="jawaban-no-16" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('16')">16					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer16" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_17"></span>
+				<span class="d-none" id="ragu_answer_17"></span>
+				<input type="hidden" name="jawaban_no[17]" id="input_jawaban_no_17" value="17">
+								<div id="jawaban-no-17" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('17')">17					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer17" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_18"></span>
+				<span class="d-none" id="ragu_answer_18"></span>
+				<input type="hidden" name="jawaban_no[18]" id="input_jawaban_no_18" value="18">
+								<div id="jawaban-no-18" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('18')">18					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer18" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_19"></span>
+				<span class="d-none" id="ragu_answer_19"></span>
+				<input type="hidden" name="jawaban_no[19]" id="input_jawaban_no_19" value="19">
+								<div id="jawaban-no-19" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('19')">19					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer19" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_20"></span>
+				<span class="d-none" id="ragu_answer_20"></span>
+				<input type="hidden" name="jawaban_no[20]" id="input_jawaban_no_20" value="20">
+								<div id="jawaban-no-20" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('20')">20					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer20" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_21"></span>
+				<span class="d-none" id="ragu_answer_21"></span>
+				<input type="hidden" name="jawaban_no[21]" id="input_jawaban_no_21" value="21">
+								<div id="jawaban-no-21" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('21')">21					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer21" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_22"></span>
+				<span class="d-none" id="ragu_answer_22"></span>
+				<input type="hidden" name="jawaban_no[22]" id="input_jawaban_no_22" value="22">
+								<div id="jawaban-no-22" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('22')">22					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer22" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_23"></span>
+				<span class="d-none" id="ragu_answer_23"></span>
+				<input type="hidden" name="jawaban_no[23]" id="input_jawaban_no_23" value="23">
+								<div id="jawaban-no-23" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('23')">23					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer23" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_24"></span>
+				<span class="d-none" id="ragu_answer_24"></span>
+				<input type="hidden" name="jawaban_no[24]" id="input_jawaban_no_24" value="24">
+								<div id="jawaban-no-24" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('24')">24					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer24" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 		 </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="infoSoal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Informasi Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fadeIn" id="timeoutDialog" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-2 pt-5">
+		<h5 class="modal-title" style="text-align:center">PERHATIAN !!</h5>
+		<p>Waktu tes sudah habis !</p>
+      </div>
+	  <div class="modal-footer text-center">
+		<button class="btn btn-danger" onclick="selesaikanTes()">Ok, Lanjutkan !</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="c-svg" id="c-svg-1" style="display: none;"></div><div class="c-svg" id="c-svg-2" style="display: none;"></div><div class="c-svg" id="c-svg-3" style="display: none;"></div><div class="c-svg" id="c-svg-4" style="display: none;"></div><div class="c-svg" id="c-svg-5" style="display: none;"></div><div class="c-svg" id="c-svg-6" style="display: none;"></div><div class="c-svg" id="c-svg-7" style="display: none;"></div><div class="c-svg" id="c-svg-8" style="display: none;"></div><div class="c-svg" id="c-svg-9" style="display: none;"></div><div class="c-svg" id="c-svg-10" style="display: none;"></div><div class="c-svg" id="c-svg-11" style="display: none;"></div><div class="c-svg" id="c-svg-12" style="display: none;"></div><div class="c-svg" id="c-svg-13" style="display: none;"></div><div class="c-svg" id="c-svg-14" style="display: none;"></div><div class="c-svg" id="c-svg-15" style="display: none;"></div><div class="c-svg" id="c-svg-16" style="display: none;"></div><div class="c-svg" id="c-svg-17" style="display: none;"></div><div class="c-svg" id="c-svg-18" style="display: none;"></div><div class="c-svg" id="c-svg-19" style="display: none;"></div><div class="c-svg" id="c-svg-20" style="display: none;"></div><div class="c-svg" id="c-svg-21" style="display: none;"></div><div class="c-svg" id="c-svg-22" style="display: none;"></div><div class="c-svg" id="c-svg-23" style="display: none;"></div><div class="c-svg" id="c-svg-24" style="display: none;"></div>
+<div style="position: fixed; inset: 0px; background: rgb(255, 255, 255); opacity: 0.5; z-index: 99999; display: none;" id="loader">
+<img class="loader" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/images/loader2.gif">
+</div>
+
+
+<style>
+	
+	@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
+	@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+	@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+	@media (max-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.mataujian{text-align:left} 
+		#formContent{padding-left:10px;padding-right:10px}
+		.row-atas {text-align:center;}
+		#isisoal img {width:100%;}
+	}
+	@media (min-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.container-fluid{ padding-left:50px;padding-right:50px} 
+		.mataujian{text-align:right} 
+		#formContent{padding-left:50px;padding-right:50px} 
+		.btn-navigasi {width:180px;}
+		.cont-btn-informasi{text-align:right}
+		
+	}
+	@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+	@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+			
+	/* STRUCTURE */
+	.loader {
+	  margin: 0;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -ms-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+	
+	.wrapper {
+	  display: flex;
+	  align-items: center;
+	  flex-direction: column; 
+	  justify-content: center;
+	  width: 100%;
+	  min-height: 100%;
+	  padding: 20px;
+	  margin-top:-80px;
+	}
+
+	#formContent {
+	  -webkit-border-radius: 10px 10px 10px 10px;
+	  border-radius: 10px 10px 10px 10px;
+	  background: #fff;
+	  position: relative;
+	  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  text-align: center;
+	}
+
+	
+
+
+	/* TABS */
+
+	h2.inactive {
+	  color: #cccccc;
+	}
+
+	h2.active {
+	  color: #0d0d0d;
+	  border-bottom: 2px solid #5fbae9;
+	}
+	
+	input[type=text] {
+	  border: none;
+	  color: #0d0d0d;
+	  text-decoration: none;
+	  border-radius:0px;
+	  border-bottom:1px solid #eee;
+	  background:transparent;
+	}
+	
+
+	/* ANIMATIONS */
+
+	/* Simple CSS3 Fade-in-down Animation */
+	.fadeInDown {
+	  -webkit-animation-name: fadeInDown;
+	  animation-name: fadeInDown;
+	  -webkit-animation-duration: 1s;
+	  animation-duration: 1s;
+	  -webkit-animation-fill-mode: both;
+	  animation-fill-mode: both;
+	}
+
+	@-webkit-keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	@keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+	.fadeIn {
+	  opacity:0;
+	  -webkit-animation:fadeIn ease-in 1;
+	  -moz-animation:fadeIn ease-in 1;
+	  animation:fadeIn ease-in 1;
+
+	  -webkit-animation-fill-mode:forwards;
+	  -moz-animation-fill-mode:forwards;
+	  animation-fill-mode:forwards;
+
+	  -webkit-animation-duration:1s;
+	  -moz-animation-duration:1s;
+	  animation-duration:1s;
+	}
+
+	.fadeIn.first {
+	  -webkit-animation-delay: 0.4s;
+	  -moz-animation-delay: 0.4s;
+	  animation-delay: 0.4s;
+	}
+
+	.fadeIn.second {
+	  -webkit-animation-delay: 0.6s;
+	  -moz-animation-delay: 0.6s;
+	  animation-delay: 0.6s;
+	}
+
+	.fadeIn.third {
+	  -webkit-animation-delay: 0.8s;
+	  -moz-animation-delay: 0.8s;
+	  animation-delay: 0.8s;
+	}
+
+	.fadeIn.fourth {
+	  -webkit-animation-delay: 1s;
+	  -moz-animation-delay: 1s;
+	  animation-delay: 1s;
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	.underlineHover:after {
+	  display: block;
+	  left: 0;
+	  bottom: -10px;
+	  width: 0;
+	  height: 2px;
+	  background-color: #56baed;
+	  content: "";
+	  transition: width 0.2s;
+	}
+
+	.underlineHover:hover {
+	  color: #0d0d0d;
+	}
+
+	.underlineHover:hover:after{
+	  width: 100%;
+	}
+	
+	.cfont {
+		cursor:pointer;
+	}
+	
+	
+	///
+	
+</style>
+  
+<script type="text/javascript" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery/jquery.2.1.1.min.js"></script>
+<script src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery.timer.js"></script>
+  
+<script>
+	
+	$(document).ready(function() {
+		$('#loader').fadeOut();
+		var  w = $(window).width();
+				if (w > 800)  {
+			var ii = $('#isisoal').height();
+			var  h = $(window).height();
+			var  h = h-$('.cont-soal').position().top-380;
+			$('.cont-soal').css({
+				'height':h,
+				'overflow': 'auto'
+			});
+
+			$('.isi-soal').css({
+				'height':h,
+			 	'overflow': 'auto'
+			 });
+
+			// if (ii > h) {
+			// 	$('.cont-soal').css({
+			// 	'height':ii,
+			// 	'overflow': 'auto'
+			// 	});
+			// }
+		}
+		
+		window.setTimeout( lihatSoal(1), 5000 ); // 5 seconds
+	});
+	var selected = 1;
+	var jumlah_soal = 24;
+	function lihatSoal(nomor) {
+		$('.soal-soal').css('display','none');
+		if (nomor=='') {
+			nomor = selected;
+		} 
+		$('#soal-no-'+nomor).css('display','');
+		selected = nomor;
+		$('#noSoal').html(nomor);
+		
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+		}
+		
+		for (i=1;i<=jumlah_soal;i++){
+			var cccc= $('#tmp_answer_'+i).html();
+			if (cccc != '') $('#jawaban-no-'+i).addClass('btn-dark');
+			var cccc= $('#ragu_answer_'+i).html();
+			if (cccc != '') {
+				$('#jawaban-no-'+i).addClass('btn-warning');
+				$('#jawaban-no-'+i).removeClass('btn-dark');
+			}
+		}
+		//$('.btn-lihat-soal').removeClass('btn-dark');
+		$('#jawaban-no-'+nomor).removeClass('btn-warning');
+		$('#jawaban-no-'+nomor).removeClass('btn-dark');
+		$('.btn-lihat-soal').removeClass('btn-primary');
+		
+		$('#jawaban-no-'+nomor).addClass('btn-primary');
+		
+		window.scrollTo(0, 0);
+		$('.c-svg').fadeOut();
+		redrawline(selected);
+	}
+	
+	function nextSoal() {
+		if (selected < jumlah_soal) {
+			selected++;		
+			lihatSoal(selected);
+		} else {
+			
+			selesaikanTes();
+		}
+	}
+	
+	function prevSoal() {
+		if (selected > 1) {
+			selected--;
+			lihatSoal(selected);
+		}
+	}
+	
+	function raguRagu() {
+		if ($('#c_ragu_ragu').is(':checked')) {
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			$('#jawaban-no-'+selected).addClass('btn-warning');
+			$('#ragu_answer_'+selected).html('1');
+			save_ragu(selected,'1');
+		} else {
+			$('#ragu_answer_'+selected).html('');
+			$('#jawaban-no-'+selected).removeClass('btn-warning');
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			
+			if ($('#answer'+selected).html() == '')
+			{
+				$('#jawaban-no-'+selected).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+selected).addClass('btn-dark');
+			}
+			
+			save_ragu(selected,'');
+			
+		}
+	}
+	
+	function trigger_ragu(nomor)
+	{
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			$('#jawaban-no-'+nomor).addClass('btn-warning');
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+			$('#jawaban-no-'+nomor).removeClass('btn-warning');
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			
+			if ($('#answer'+nomor).html() == '')
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-dark');
+			}
+		}
+		
+	}
+	
+	lihatSoal(2);
+	
+	function selesaikanTes() {
+		$.ajax({ 
+		   type: "POST",
+		   dataType: "html",
+		   data : $('#formJawaban').serialize(),
+		   url: "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/finishtes?ses_id=ada448e5211fd3b77ad95e33ee89b98b743fecb0",
+		   cache: false, 
+		   beforeSend: function(){
+			   $('#nextSoal').prop('disabled',true);
+			   $('#nextSoal').html('Silahkan tunggu ... !');
+			   $('#loader').fadeIn();
+			},
+			complete: function(){
+			},
+			success: function(result){
+				//alert(result);
+				if (result=='error') {
+					alert('Oops ada kesalahan! \rSilahkan ulangi !');
+					$('#nextSoal').prop('disabled',false);
+					$('#nextSoal').prop('enabled',true);
+					$('#nextSoal').html('Soal berikutnya');
+					$('#loader').fadeOut();
+				}
+				else
+					window.location = result;
+		   }
+		});
+	}
+
+	function changeFont(s,d)
+	{
+		$('#isisoal').css("font-size", s + "px");
+		$('.cfont').css("font-weight", "normal");
+		$('#'+d).css("font-weight", "bold");
+	}
+			
+	var RemainTime = new (function() {
+		var $countdown;
+		var $form;
+		var incrementTime = 60;
+		var globalTime = 4500 * 1000; // 50 seconds (in milliseconds)
+		var currentTime = globalTime;
+		var DurationTime = 4500 * 60000; // 5 minutes (in milliseconds)
+
+
+		$(function() {
+
+			// Setup the timer
+			$countdown = $('#countdown');
+			RemainTime.Timer = $.timer(updateTimer, incrementTime, true);
+
+		});
+
+		function updateTimer() {
+
+			// Output timer position
+			var timeString = formatTime(currentTime);
+			$countdown.html(timeString);
+			// If timer is complete, trigger alert
+			if (currentTime == 0) {
+				jQuery.noConflict();
+				$('#timeoutDialog').modal();
+				//$('#timeoutDialog').modal('show');
+				RemainTime.Timer.stop();
+				//disable_all();
+				//bootbox_timeout();
+				
+				return;
+			}
+			// Increment timer position
+			currentTime -= incrementTime;
+			if (currentTime < 0) currentTime = 0;
+
+		}
+	});
+
+	// Common functions
+	function pad(number, length) {
+		var str = '' + number;
+		while (str.length < length) {str = '0' + str;}
+		return str;
+	}
+	function formatTime(time) {
+		time = time / 10;
+		var hour= parseInt(time / 360000),
+			min = parseInt(time / 6000) - (hour * 60),
+			sec = parseInt(time / 100) - (min * 60) - (hour * 3600),
+			hundredths = pad(time - (sec * 100) - (min * 6000) - (hour * 360000), 2);
+		return (hour > 0 ? pad(hour, 2) : "00") + ":" + (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + "";
+	}
+	
+	function KlikJawaban(no,i)
+	{
+		$('#pilihan_'+no+'_'+i).trigger('click');
+	}
+	
+	
+	function KlikJawaban2(no,i)
+	{
+		$('#pilihan_'+'_'+no+'_'+i).trigger('click');
+	}
+	
+	function KlikJawaban3(no,i,j)
+	{
+		$('#pilihan_'+'_'+no+'_'+i+'_'+j).trigger('click');
+	}
+	
+	
+	function pilihan(n,v,i) {
+		if (v.toUpperCase() == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(v.toUpperCase());
+		//$("#answer"+n).css('color','#000');
+		//pushPromise(i,v);
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+		$("#jawaban-no-"+n).addClass('btn-dark');
+		//$("#jawaban-no-"+n).addClass('text-white');
+		// $("#cont-answer"+n).css('color','#fff');
+
+		save_answer(n,v.toUpperCase());
+		trigger_ragu(selected);
+
+	}
+	
+	
+	function pilihan2(n,v,i) {
+		
+		var jawaban = $('.pilihan'+n+':checked')
+		   .map(function() { return $(this).val() })
+		   .get()
+		   .join(";");
+		
+		if (jawaban == '') {
+			$("#answer"+n).html('');
+			$("#jawaban-no-"+n).removeClass('btn-dark');
+			$("#jawaban-no-"+n).addClass('btn-outline-dark');
+		}
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+			$("#jawaban-no-"+n).addClass('btn-dark');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		
+		// pushPromise(i,jawaban);
+		
+		
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+
+	}
+	
+	function pilihan3(n,total,s, arr) {
+		var jawaban = '';
+		for (i=1;i<=total;i++)  {
+			var v = $('input[name="pilihan_'+n+'_'+i+'"]:checked').val();
+			if (v != undefined && v != null) jawaban += arr[(i-1)]+'|'+v + ';';
+		}
+		jawaban = jawaban.substring(0, jawaban.length-1);
+		
+		if (jawaban == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		// pushPromise(s,jawaban);
+		
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+	    $("#jawaban-no-"+n).addClass('btn-dark');
+			
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+	}
+	
+		
+	function pilih1(no, id, warna, order) {
+			
+			// if (window['right_'+no] == '') {
+				// $('.m-left-'+no).prop('checked', false);
+				// $('.tr-left-'+no).css('background','');
+			// }
+			//if (window['dipilih1_'+no].indexOf(id) >=0) window['free1_'+no]=false;
+			if (window['free1_'+no]) {
+				window['free1_'+no] = false;
+				$('#r_left_'+no+'_'+id).prop('checked', true);
+				$('#row1-'+no+'-'+id).css('background',warna);
+				window['pos1_'+no] = $('#r_left_'+no+'_'+id).offset();
+				window['pos11_'+no] = $('#r_left_'+no+'_'+id).position();
+				window['warna1_'+no] = warna;
+				window['id1_'+no] = id;
+				window['order1_'+no] = order;
+				window['dipilih1_'+no].push(id);
+				window['jawab_'+no] = id;
+			}
+			
+	}
+	
+	function removeA(arr) {
+		var what, a = arguments, L = a.length, ax;
+		while (L > 1 && arr.length) {
+			what = a[--L];
+			while ((ax= arr.indexOf(what)) !== -1) {
+				arr.splice(ax, 1);
+			}
+		}
+		return arr;
+	}
+	
+	function rgb2hex(rgb) {
+		rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+		function hex(x) {
+			return ("0" + parseInt(x).toString(16)).slice(-2);
+		}
+		return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+	}
+	
+	
+	
+	function pilih2(no, id,tipe,order,s, ps) {
+		var _c_pilih = $('#r_right_'+no+'_'+id).prop('checked');
+		if (_c_pilih==true) {
+			//alert('1');
+			
+			var id1 =  window['pasangan_'+no+'_'+id];
+			window['free1_'+no] = false;
+			//$('#r_left_'+no+'_'+id).prop('checked', true);
+			var warna11 = rgb2hex($('#row2-'+no+'-'+id).css('background-color'));
+			window['warna1_'+no] = warna11;
+			window['pos1_'+no] = $('#r_left_'+no+'_'+id1).offset();
+			window['pos11_'+no] = $('#r_left_'+no+'_'+id1).position();
+			var cc = id1+";"+id+'|';
+			var ddd = window['jawaban_'+no];
+			dd = ddd.replace(cc,"");
+			window['jawaban_'+no] = dd;
+			
+			window['id1_'+no] = id1;
+			window['free1_'+no] = false;
+			window['right_'+no] = '';
+			window['free_'+no] = true;
+			//delete window['dipilih2_'+no][id];
+			//window['dipilih2_'+no].remove(id);
+			removeA(window['dipilih2_'+no], id);
+			//$('#r_right_'+no+'_'+id).prop('checked', false);
+			//$('.line-'+no).css('display','none');
+			var xx = '#line_'+no+'_'+window['id1_'+no];
+			//alert(xx);
+			$(xx).css('display','none');
+			$('#r_right_'+no+'_'+id).prop('checked', false);
+			$('#row2-'+no+'-'+id).css('background','#ffffff');
+		}
+		else 
+		{
+			//alert('2');
+			window['free_'+no] = true;
+			if (window['dipilih2_'+no].indexOf(id) >=0) window['free_'+no]=false;
+			//alert(2);
+			
+			if ((window['id1_'+no] != '') && window['free_'+no] && (window['right_'+no] == '')) {
+				//alert(3);
+				window['free1_'+no] = true;
+				window['right_'+no] = '';
+				eval('var pasangan_'+no+'_'+id + '= "";');
+				window['pasangan_'+no+'_'+id] = window['id1_'+no];
+				window['jawaban_'+no] = window['jawaban_'+no]+ window['id1_'+no] +';'+ id +'|';
+				window['dipilih2_'+no].push(id);
+				$('#r_right_'+no+'_'+id).prop('checked', true);
+				$('#row2-'+no+'-'+id).css('background',window['warna1_'+no]);
+				$('#r_right_'+no+'_'+id).val(window['id1_'+no]+';'+id);
+				
+				pos2 = $('#r_right_'+no+'_'+id).offset();
+				pos22 = $('#r_right_'+no+'_'+id).position();
+				$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left);
+				$('#line_'+no+'_'+window['id1_'+no]).fadeIn();
+				if (window['pos1_'+no].top > pos2.top) {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',window['pos1_'+no].top-pos2.top)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',0)
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',pos2.top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				} else {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',0)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',Math.abs(window['pos1_'+no].top-pos2.top))
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',window['pos1_'+no].top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				}
+				
+				
+				window['id1_'+no] = '';
+				jawaban = window['jawaban_'+no];
+				n = no;
+				
+				if (jawaban == '')
+					$("#answer"+n).html('');
+				else {
+					$("#answer"+n).html('<i class="fa fa-check"></i>');
+					$("#answer"+n).removeClass('d-none');
+				}
+				
+				//$("#answer"+n).css('color','#000');
+				
+				
+					$("#tmp_answer_"+n).html(jawaban);
+					if (ps == '2')	   {
+						save_answer(n,jawaban);
+						//pushPromise(s,jawaban);
+					}
+				
+				// $("#cont-answer"+n).css('background','#000');
+				// $("#cont-answer"+n).css('color','#fff');
+				
+				trigger_ragu(selected);
+
+			} else {
+				if (tipe==2)
+				$('#r_right_'+no+'_'+id).prop('checked', false);
+			}
+		
+		}
+		
+	}
+	
+			eval('var tipesoal_pencocokan_1 = "1"');
+			eval('var tipesoal_pencocokan_2 = "1"');
+			eval('var tipesoal_pencocokan_3 = "1"');
+			eval('var tipesoal_pencocokan_4 = "1"');
+			eval('var tipesoal_pencocokan_5 = "3"');
+			eval('var tipesoal_pencocokan_6 = "2"');
+			eval('var tipesoal_pencocokan_7 = "3"');
+			eval('var tipesoal_pencocokan_8 = "3"');
+			eval('var tipesoal_pencocokan_9 = "1"');
+			eval('var tipesoal_pencocokan_10 = "1"');
+			eval('var tipesoal_pencocokan_11 = "1"');
+			eval('var tipesoal_pencocokan_12 = "1"');
+			eval('var tipesoal_pencocokan_13 = "1"');
+			eval('var tipesoal_pencocokan_14 = "1"');
+			eval('var tipesoal_pencocokan_15 = "1"');
+			eval('var tipesoal_pencocokan_16 = "1"');
+			eval('var tipesoal_pencocokan_17 = "1"');
+			eval('var tipesoal_pencocokan_18 = "1"');
+			eval('var tipesoal_pencocokan_19 = "1"');
+			eval('var tipesoal_pencocokan_20 = "1"');
+			eval('var tipesoal_pencocokan_21 = "1"');
+			eval('var tipesoal_pencocokan_22 = "1"');
+			eval('var tipesoal_pencocokan_23 = "1"');
+			eval('var tipesoal_pencocokan_24 = "1"');
+		
+	function redrawline(no) {
+		var tmp_tipesoal = window['tipesoal_pencocokan_'+no];
+		if (tmp_tipesoal == 5) {
+			resetKunci(no,'');
+			var tmp = $('#tmp_answer_'+no).html();//window['jawaban_pencocokan_'+no];
+			var tmp_warna = window['warna_pencocokan_'+no];
+			var tmp_soal = window['soal_pencocokan_'+no];
+			var arr_tmp = tmp.split('|');
+			for (i=0;i<arr_tmp.length;i++) {
+				if (arr_tmp[i].trim() != '') {
+					var arr_tmp2 = arr_tmp[i].split(';');
+					pilih1(no,arr_tmp2[0], tmp_warna[i], i);
+					pilih2(no,arr_tmp2[1], '2', arr_tmp2[1],tmp_soal,'1');
+				}
+			}
+			
+			$('#c-svg-'+no).fadeIn();
+		}
+	}
+	
+	
+	function resetKunci(no, tipe) {
+		left = '';
+		window['right_'+no] = '';
+		window['warna1_'+no] = '';
+		window['id1_'+no] = '';
+		window['pos1_'+no] = '';
+		window['pos11_'+no] = '';
+		window['free1_'+no] = true;
+		window['free_'+no] = true;
+		window['dipilih1_'+no] = [];
+		window['dipilih2_'+no] = [];
+		$('.tr-left-'+no).css('background','');
+		$('.tr-right-'+no).css('background','');
+		$('.line-'+no).css('display','none');
+		window['jawab_'+no] = '';
+		window['jawaban_'+no] = '';
+		window['order1_'+no] = '';
+		$('.m-left-'+no).prop('checked', false);
+		$('.m-right-'+no).prop('checked', false);
+		if (tipe == '1') $("#tmp_answer_"+no).html('');
+		$("#answer"+no).html('');
+		$("#jawaban-no-"+no).removeClass('btn-dark');
+		$("#jawaban-no-"+no).addClass('btn-outline-dark');
+		
+	};
+	
+	
+	$('.jawaban_essai').focusout(function() {
+		var no = this.title;
+		var jawaban = $('#jawaban_essai_'+no).val();					
+		var s = $('#jawaban_essai_'+no).attr('pre');					
+		
+		
+		if (jawaban == '')
+			$("#answer"+no).html('');
+		else {
+			$("#answer"+no).html('<i class="fa fa-check"></i>');
+			$("#answer"+no).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+no).html(jawaban);
+		
+		save_answer(no,jawaban);
+			   
+		// $("#answer"+no).css('color','#000');
+		
+			// $.post( "https://pusmendik.kemendikdasmen.go.id/tka/cbt/peserta/sv_ans",
+			// {
+				// id_soal: s,
+				// jawaban:jawaban,
+				// id_ujian: ,
+				// id_projek_ujian: 
+			// }, function(data) {
+		// });
+		// $("#cont-answer"+no).css('background','#000');
+		// $("#cont-answer"+no).css('color','#fff');
+		trigger_ragu(selected);
+			
+	}).blur(function() {});
+	
+	
+	function methodThatReturnsAPromise(i,jawaban) {
+		return new Promise((resolve, reject) => {
+			$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_jawaban", {nomor: i,jawaban:jawaban, }, function(data) {resolve();});
+		});
+	}
+	
+	var promises = [Promise.resolve()];
+	
+	function pushPromise(i,jawaban)
+	{
+	  promises.push(promises.pop().then(function(){
+		return methodThatReturnsAPromise(i,jawaban)}));
+	}
+	
+	function save_ragu(nomor,jawaban) {
+		$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_ragu", {nomor: nomor,jawaban:jawaban, }, function(data) {});
+	}
+	
+	function save_answer(nomor,jawaban) {
+		pushPromise(nomor,jawaban);
+	}
+</script>
+
+
+
+</body></html>

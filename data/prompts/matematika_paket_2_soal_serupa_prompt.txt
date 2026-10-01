@@ -1,0 +1,238 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Matematika (Paket 2)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Bentuk sederhana dari  adalah....
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: Operasi biner   didefinisikan sebagai   untuk setiap bilangan real tidak negatif  dan.
+Pertanyaan: Jika   , tentukan Benar atau Salah pada setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: D
+Stimulus Teks: Seorang peneliti memodelkan peningkatan suhu akibat pemanasan global yang terjadi dengan fungsi linear berikut:
+
+dengan  mewakili tahun dan  mewakili peningkatan suhu dalam derajat Celsius.
+[Isi Gambar Soal 26815_985a2067f0f9c74b4f1e4060ce5aeda9.png]:
+Diagram sebuah dinding atau bidang berbentuk trapesium siku-siku dengan barisan pot tanaman di sisi atas yang miring:- Dimensi ukuran:- Tinggi sisi tegak kiri: $500\text{ cm}$
+
+- Tinggi sisi tegak kanan: $350\text{ cm}$
+
+- Panjang alas horizontal: $360\text{ cm}$
+
+- Keterangan teks dan elemen:- Terdapat tanda panah melengkung berlabel teks verbatim 'Pot tanaman'.- Terdapat 7 buah pot tanaman berwarna terakota (cokelat bata) yang tersusun berurutan di sepanjang tepi miring bagian atas dinding.
+Pertanyaan: Pada tahun berapakah peningkatan suhu diperkirakan mencapai 0,7° C?
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: B
+Stimulus Teks: Tempat Les Pintarku memberikan potongan biaya kursus kepada 50 pendaftar pertama, sedangkan harga normal berlaku untuk pendaftar lainnya. Biaya kursus setelah mendapatkan potongan harga dapat dihitung dengan fungsi berikut:
+
+dengan  adalah biaya kursus mula-mula dan  adalah biaya setelah potongan harga. Selain itu, bagi siswa yang berprestasi akan mendapat tambahan potongan harga yang besarnya disesuaikan dengan nilai rapor mereka. Setelah mendapatkan tambahan potongan harga maka biaya akhir kursus menjadi sebagai berikut:
+
+dengan  adalah biaya akhir setelah tambahan diskon. Salah satu siswa bernama Fira, merupakan pendaftar ke-50 dan membayar biaya kursus sebesar Rp180.000,00. Setelah itu, datang empat siswa lainnya yang juga ingin mengikuti kursus dengan informasi berikut:
+[Isi Gambar Soal 32466_743d771d24a93692bce6d3ae018e3ac4.png]:
+Persamaan fungsi sepotong-sepotong (piecewise function): $g(y) = \begin{cases} 0{,}7y\text{, jika nilai rapor di atas } 90 \\ 0{,}8y\text{, jika nilai rapor } 85-90 \end{cases}$
+[Isi Gambar Soal 22958_020cf3d020ad6157b300236fe215acc4.png]:
+Diagram perspektif tiga dimensi sebuah ruangan berbentuk balok dengan rincian ukuran dan elemen interior:- Dimensi ruangan:- Lebar ruangan (dinding belakang): $4\text{ m}$
+
+- Panjang/kedalaman ruangan (dinding samping kanan): $6\text{ m}$
+
+- Tinggi ruangan (sudut vertikal): $5\text{ m}$
+
+- Elemen interior:- Dinding kiri memiliki papan pengumuman/bingkai cokelat.- Dinding kanan memiliki sebuah pintu berwarna kuning kecokelatan.- Lantai bermotif ubin/keramik persegi berwarna cokelat muda.- Elemen dekorasi:- Seutas tali (garis biru solid) dengan gantungan ornamen bintang warna-warni (biru toska, ungu muda, merah muda, kuning) terpasang melintang dari titik penambat (bulatan hijau) di bagian atas dinding kiri ke sudut atas antara dinding belakang dan dinding kanan.- Garis biru putus-putus membentang di bidang langit-langit dari titik penambat kiri atas ke sudut depan kanan langit-langit.
+Pertanyaan: Dengan uang yang dimiliki, siapakah siswa yang pasti dapat mengikuti kursus?
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: C
+Stimulus Teks: Pada saat pertandingan sepak bola Indonesia melawan Jepang, kelompok pendukung tim Indonesia akan duduk membentuk koreo dengan beberapa orang memegang kertas berwarna yang dibentangkan. Total kertas berwarna yang dipegang oleh pendukung di barisan kursi paling bawah adalah sebanyak 400 lembar, kemudian di baris kedua sebanyak 550 lembar, dan semakin bertambah pada barisan kursi berikutnya dengan pola penambahan yang sama.
+Pertanyaan: Jika pola penambahan tersebut berlaku sampai pada baris kursi ketujuh, maka berapa banyak penonton yang memegang kertas koreo di baris ke-5?
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: ['C', 'D']
+Stimulus Teks: Seorang pasien dengan kadar asam urat tinggi menjalani terapi menggunakan obat penurun kadar asam urat. Pada hari pertama, kadar asam urat dalam darah tercatat 13 mg/dL. Obat bekerja menurunkan kadar asam urat sebesar 20% setiap hari secara konsisten. Beberapa hal yang perlu diperhatikan dalam mengonsumsi obat penurun asam urat:- Pasien mulai merasa lebih nyaman saat kadar asam urat ada di bawah 7 mg/dL.- Pasien dianggap sembuh secara klinis jika kadar asam urat telah mencapai kurang dari 5 mg/dL.
+Pertanyaan: Pada hari keberapa berapa pasien merasa nyaman namun belum dianggap sembuh secara klinis? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 91959_ac5da8c280a93bc1b22188b3947f463f.png]:
+Grafik bidang koordinat Kartesius yang menampilkan daerah arsiran berbentuk segitiga $ABC$:- Sumbu koordinat: sumbu horizontal $x$ dan sumbu vertikal $y$.- Titik-titik sudut segitiga:- Titik $A$: terletak pada koordinat $(-4, 0)$ di sumbu- $x$.- Titik $B$: terletak pada koordinat $(0, 2)$ di sumbu- $y$.- Titik $C$: terletak pada koordinat $(2, 0)$ di sumbu- $x$.- Garis pembatas:- Garis $f$: garis lurus yang melalui titik $A(-4, 0)$ dan $B(0, 2)$ dengan persamaan $x - 2y = -4$.- Garis $g$: garis lurus yang melalui titik $B(0, 2)$ dan $C(2, 0)$ dengan persamaan $x + y = 2$.- Keterangan sisi:- Ruas garis $AB$ diberi label ' $c$ '.- Ruas garis $BC$ diberi label ' $a$ '.- Daerah segitiga $ABC$ diarsir abu-abu di atas sumbu- $x$ dengan alas di sepanjang rentang $-4 \le x \le 2$.
+Pertanyaan: Daerah yang diarsir pada gambar tersebut merupakan himpunan penyelesaian dari sistem pertidaksamaan....
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: D
+Stimulus Teks: Bu Silma adalah seorang perangkai bunga yang disusun dalam buket bunga. Di tokonya, ia memiliki bunga mawar, lili, dan anyelir. Harga buket ditentukan dari total harga bunga yang digunakan dalam buket tersebut. Adapun tiga jenis buket yang biasa ia siapkan dengan komposisi ketiga bunga beserta harga per buketnya diberikan pada gambar berikut.
+[Isi Gambar Soal 20079_44ab092f311777af1b78d9d26bbf826f.png]:
+Ilustrasi tiga jenis bunga beserta harga dan komposisi dari tiga jenis buket bunga:
+
+1. Referensi Jenis Bunga:- 'Bunga Mawar' (mawar merah berkuntum)- 'Bunga Lili' (lili putih mekar)- 'Bunga Anyelir' (anyelir merah muda mekar)
+
+2. Komposisi dan Harga Buket:- 'Buket Tipe A' (pembungkus jingga):- Harga: Rp85.000,00- Komposisi: 2 tangkai Bunga Mawar, 3 tangkai Bunga Lili, dan 1 tangkai Bunga Anyelir.- 'Buket Tipe B' (pembungkus hijau):- Harga: Rp70.000,00- Komposisi: 1 tangkai Bunga Mawar, 2 tangkai Bunga Lili, dan 2 tangkai Bunga Anyelir.- 'Buket Tipe C' (pembungkus biru):- Harga: Rp75.000,00- Komposisi: 3 tangkai Bunga Mawar, 1 tangkai Bunga Lili, dan 1 tangkai Bunga Anyelir.
+Pertanyaan: Bila seorang pembeli ingin membeli buket bunga tipe C namun ingin menambah 2 tangkai lili dan 1 tangkai anyelir dengan harga satuan, maka total harga yang harus dibayar pembeli tersebut adalah....
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: ['C', 'D', 'E']
+Stimulus Teks: Perhatikan gambar berikut!
+[Isi Gambar Soal 12234_36b722c7193a22a2f1fb15fe0568ee1e.png]:
+Diagram geometri yang menampilkan sebuah bangun segitiga siku-siku dengan dua garis horizontal sejajar (ditandai dengan simbol panah pada masing-masing garis):- Garis horizontal bawah merupakan alas segitiga.- Garis horizontal tengah memotong sisi tegak dan sisi miring (hipotenusa) segitiga.- Sudut-sudut yang diberi label:- Sudut $A$: sudut dalam di titik puncak segitiga (atas).- Sudut $C$: sudut dalam di alas kanan segitiga.- Pada perpotongan antara garis horizontal tengah dengan sisi miring, terbentuk empat sudut:- Sudut $F$: di kuadran kiri atas (sudut dalam segitiga bagian atas).- Sudut $E$: di kuadran kanan atas (sudut tumpul di atas garis horizontal).- Sudut $B$: di kuadran kiri bawah (sudut tumpul di bawah garis horizontal).- Sudut $D$: di kuadran kanan bawah (sudut lancip di bawah garis horizontal, sehadap dengan sudut $C$).
+Pertanyaan: Berdasarkan gambar tersebut, pasangan sudut manakah yang membentuk sudut 180°? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 11]
+Kunci Resmi: ['B', 'E']
+Stimulus Teks: Zara ingin menata kembali kamarnya dengan menambahkan papan jadwal di dinding. Papan jadwal tidak diletakkan pada dinding yang sejajar dengan rak buku gantung. Posisi rak buku gantung dapat dilihat pada gambar berikut.
+[Isi Gambar Soal 64733_fbe3ba5df8fbeb0908ff9708cd02a314.png]:
+Ilustrasi soal volume dan kapasitas muatan kardus ke dalam bak truk: 1. Boks kardus pembungkus helm:- Dimensi ukuran: tinggi $20\text{ cm}$, lebar $20\text{ cm}$, dan panjang $30\text{ cm}$. 2. Ruang kargo/bak boks truk (garis bantu biru):- Dimensi ukuran: tinggi $120\text{ cm}$, lebar $150\text{ cm}$, dan panjang $240\text{ cm}$. 3. Tanda panah melengkung hitam mengarah dari boks helm menuju bagian dalam boks truk, disertai ilustrasi seorang kurir yang sedang mengangkat kardus di dekat pintu belakang truk.
+Pertanyaan: Berdasarkan posisi yang diinginkan, pada dinding manakah papan jadwal akan diletakkan? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 12]
+Kunci Resmi: B
+Stimulus Teks: Perhatikan gambar berikut!
+[Isi Gambar Soal 14401_ad577987a31166011b00dd9fdb0a064f.png]:
+Diagram bangun datar trapesium siku-siku $OKLP$:- Ruas garis atas $OP = 18\text{ cm}$ sejajar dengan ruas garis alas $KL = 32\text{ cm}$, keduanya ditandai dengan tanda panah.- Sisi tegak $OK$ tegak lurus terhadap alas di titik $K$ (terdapat tanda siku-siku).- Titik $N$ terletak pada $OK$ dengan panjang ruas $KN = 16\text{ cm}$.- Garis horizontal $NM$ melalui titik $Q$ dan berakhir di sisi miring $PL$ pada titik $M$, sejajar dengan $OP$ dan $KL$ (ditandai dengan panah).- Garis vertikal $PR$ ditarik dari titik $P$ tegak lurus terhadap $KL$ di titik $R$, memotong ruas garis $NM$ di titik $Q$ sehingga $OKRP$ membentuk persegi panjang dan $PRL$ membentuk segitiga siku-siku.
+Pertanyaan: Diketahui trapesium KLMN dan NMPO sebangun. Berdasarkan informasi tersebut, berapakah panjang sisi LM?
+---
+[SOAL ACUAN NO 13]
+Kunci Resmi: ['A:Salah', 'B:Benar', 'C:Salah']
+Stimulus Teks: Tim adiwiyata SMA Gemilang sedang menata sayuran di kebun sekolah. Mereka menanam beberapa tanaman obat keluarga (toga) seperti jahe, kunyit dan lengkuas. Setiap tanaman ditempatkan di pot yang berbeda-beda ukurannya. Pot tersebut akan diletakkan di salah satu sisi kebun seperti pada ilustrasi berikut.
+
+Ukuran diameter pot yang digunakan untuk jahe berukuran 15 cm, kunyit berukuran 26 cm dan lengkuas berukuran 30 cm.
+[Isi Gambar Soal 26870_28d84b1c8bb4276207e514799580df77.png]:
+Grafik sistem koordinat Kartesius dua dimensi:- Rentang sumbu- $x$: dari $-6$ sampai $6$ dengan jarak antarkisi 1 satuan.- Rentang sumbu- $y$: dari $-6$ sampai $6$ dengan jarak antarkisi 1 satuan.- Terdapat sebuah titik bernama $B$ (lingkaran biru) yang terletak di kuadran IV pada koordinat $(4, -1)$.
+Pertanyaan: Berdasarkan ilustrasi, tentukan benar atau salah pernyataan berkaitan dengan ukuran sisi kebun yang ditanami tanaman toga tersebut!
+---
+[SOAL ACUAN NO 14]
+Kunci Resmi: B
+Stimulus Teks: Perhatikan gambar berikut.
+[Isi Gambar Soal 29003_da603e459c05c9a9e1a14a557262716e.png]:
+Grafik sistem koordinat Kartesius dua dimensi:- Rentang sumbu- $x$: dari $-6$ sampai $6$ dengan jarak antarkisi 1 satuan.- Rentang sumbu- $y$: dari $-6$ sampai $6$ dengan jarak antarkisi 1 satuan.- Terdapat sebuah titik berlabel $B'$ (titik hijau) yang terletak di kuadran II pada koordinat $(-4, 1)$.
+Pertanyaan: Titik B direfleksikan oleh garis y=1, kemudian dirotasi dengan pusat di O(0,0) sebesar 180º searah jarum jam. Titik B' pada gambar merupakan bayangan titik B hasil komposisi kedua transformasi tersebut. Gambar titik B yang sesuai adalah....
+---
+[SOAL ACUAN NO 15]
+Kunci Resmi: B
+Stimulus Teks: SD Jaya Makmur baru saja mendapat ruangan kelas baru. Murid-murid ingin menghias kelasnya dengan memasang tali hiasan pada bagian langit-langit kelas. Tali hiasan dipasang dari pojok dinding pintu masuk ke bagian tengah langit-langit dinding papan tulis seperti pada gambar berikut.
+
+Mereka akan membuat tali kedua yang sama seperti tali hiasan pertama untuk dipasang ke pojok yang lain pada dinding pintu.
+[Isi Gambar Soal 25190_7c3e03f350b87a561bc4c71568f97da4.png]:
+Persamaan garis linear: $y = 0{,}02x - 39{,}9$
+Pertanyaan: Apabila mereka membeli gulungan tali yang panjangnya 20 meter, berapakah sisa tali yang tidak terpakai?
+---
+[SOAL ACUAN NO 16]
+Kunci Resmi: D
+Stimulus Teks: Arif, seorang desain interior akan membuat suatu desain ornamen jam dinding baru. Ornamen tersebut memiliki bentuk dasar gabungan segitiga dan lingkaran. Adapun bentuk ornamen jam dan ukuran yang akan dibuat diberikan pada gambar berikut.
+[Isi Gambar Soal 13067_2686059096b60017046a9d87b7828ffd.png]:
+Diagram bangun geometris dekoratif berwarna toska yang memadukan bentuk segitiga/panah dan jam dinding:- Bagian atas: daerah segitiga putih berisi ilustrasi seekor burung berwarna merah muda yang sedang bernyanyi dengan simbol not balok.- Bagian bawah: bentuk setengah lingkaran/cincin yang melingkupi sebuah jam analog dengan jarum pendek di angka 7 dan jarum panjang di angka 12 (menunjukkan pukul 07.00).- Dimensi ukuran yang diberikan:- Tinggi total bangun: $70\text{ cm}$ (diindikasikan oleh garis panah vertikal di sebelah kanan).- Lebar diameter lingkaran jam: $20\text{ cm}$ (diindikasikan oleh garis panah horizontal di bawah lingkaran).- Lebar bentang maksimum (ujung sayap kiri ke ujung sayap kanan): $50\text{ cm}$ (diindikasikan oleh garis panah horizontal paling bawah).
+Pertanyaan: Di sekeliling ornamen jam tersebut akan ditempel kayu tipis untuk menambah efek tiga dimensi. Apabila Arif akan membuat dua buah ornamen jam dinding untuk dijadikan model contoh, berapa panjang kayu tipis yang ia perlukan?
+---
+[SOAL ACUAN NO 17]
+Kunci Resmi: C
+Stimulus Teks: Perhatikan permasalahan dalam kotak berikut!
+
+Panjang salah satu diagonal suatu layang-layang adalah 20 cm.
+
+Berapakah keliling layang-layang tersebut?
+[Isi Gambar Soal 59350_43c53b7b11969504259adbc792a4e868.png]:
+Diagram bangun datar layang-layang dalam orientasi mendatar (horizontal) beserta kedua diagonalnya:- Memiliki empat titik sudut: kiri, kanan, atas, dan bawah.- Garis diagonal horizontal membentang dari titik sudut kiri ke titik sudut kanan, berfungsi sebagai sumbu simetri lipat horizontal.- Garis diagonal vertikal menghubungkan titik sudut atas dan titik sudut bawah.- Kedua diagonal saling berpotongan tegak lurus di bagian dalam bangun, membagi layang-layang menjadi empat segitiga siku-siku.
+Pertanyaan: Putuskan apakah pernyataan (1) dan pernyataan (2) berikut cukup untuk menjawab permasalahan dalam kotak tersebut! (1) Luas layang-layang adalah 160 cm 2. (2) Panjang salah satu sisi layang-layang adalah 10 cm.
+---
+[SOAL ACUAN NO 18]
+Kunci Resmi: B
+Stimulus Teks: Pak Omar adalah seorang distributor helm. Hari ini, ia mendapat pesanan untuk mengirimkan helm yang sama dalam jumlah besar menggunakan truk. Agar kualitas terjaga, helm dikemas dalam wadah kardus helm. Adapun ukuran kardus helm dan bak truk diberikan pada gambar berikut.
+
+Pak Omar memberikan arahan pada kurir untuk mengatur posisi atas kardus helm tidak boleh dibalik (tempat masuk kepala harus menghadap ke bawah). Semua kardus helm disusun menghadap depan (seperti pada gambar) atau menghadap samping (apabila gambar diputar 90°). Namun, apabila masih terdapat ruang kosong yang mungkin, maka penyusunan kardus helm dengan posisi berbeda untuk mengisi ruang kosong tersebut dapat dilakukan.
+[Isi Gambar Soal 88891_672e667e0a5270d7c790f26f7053149a.png]:
+Ilustrasi suasana stan pasar sekolah:- Spanduk besar kain putih membentang horizontal yang ditopang dua tiang kayu, bertuliskan teks verbatim huruf kapital 'BAZAR SEKOLAH'.- Di bawah spanduk terdapat 5 buah stan (gerai/booth) pameran kayu yang identik, tersusun berjajar secara horizontal dari kiri ke kanan.- Masing-masing gerai memiliki atap tenda/kanopi berwarna hijau bergelombang, meja kayu penyaji, dan empat tiang/kaki penyangga.
+Pertanyaan: Berdasarkan posisi susunan tersebut, berapa paling banyak kardus helm yang dapat dimuat di truk tersebut?
+---
+[SOAL ACUAN NO 19]
+Kunci Resmi: D
+Stimulus Teks: Bu Sita, seorang desainer interior, sedang mengerjakan proyek pribadi untuk mempercantik kamar tidurnya. Ia berencana membuat beberapa hiasan lampu tidur dari bahan akrilik. Setiap hiasan akan berbentuk tabung berongga (tanpa alas dan tutup) dengan diameter 14 cm dan tinggi 25 cm. Bagian luar hiasan tabung ini akan dilapisi dengan stiker vinil motif bunga seperti pada gambar berikut.
+[Isi Gambar Soal 20080_8b17d82a6c1c5a16706642d9079560a6.png]:
+Tabel data nilai rapor dan jumlah uang yang dimiliki oleh empat orang siswa:
+
+| Nama | Nilai Rapor | Uang yang dimiliki (Rp) | |:--- |:---: |:---: | | Andi | 90 | 285.000 | | Budi | 92 | 286.000 | | Cici | 89 | 280.000 | | Dini | 95 | 287.000 |
+Pertanyaan: Stiker vinil dijual dalam lembaran, dan harga satu lembarnya adalah Rp9.000,00. Setiap lembar stiker vinil mampu menutupi area seluas 300 cm 2. Jika Bu Sita berencana membuat 8 buah hiasan lampu tidur, berapakah biaya minimal yang harus dikeluarkan Bu Sita untuk membeli stiker vinil tersebut?
+---
+[SOAL ACUAN NO 20]
+Kunci Resmi: ['A:Salah', 'B:Salah', 'C:Benar']
+Stimulus Teks: Perhatikan gambar berikut.
+[Isi Gambar Soal 14962_012e984631e677fca2f6c544689d4ef7.png]:
+Diagram segitiga $ABC$ dengan garis tinggi $AD$ yang tegak lurus terhadap sisi alas $BC$ di titik $D$ (ditandai dengan simbol sudut siku-siku):- Sisi $AB$ memiliki panjang $4\text{ cm}$ dan ditandai dengan tanda garis ganda ( $=$).- Ruas garis $DC$ pada alas juga memiliki tanda garis ganda ( $=$), yang menunjukkan bahwa panjang $DC = AB = 4\text{ cm}$.- Sudut $\angle ABD$ diberi label $\beta$.- Sudut $\angle CAD$ diberi label $\alpha$.
+[Isi Gambar Soal 14962_920ca2e608712f2ea6de4801adffb5a2.png]:
+Persamaan trigonometri: $\cos(a) = \frac{3}{5}$
+Pertanyaan: Jika diketahui nilai   tentukan Benar atau Salah terkait perbandingan trigonometri berikut!
+---
+[SOAL ACUAN NO 21]
+Kunci Resmi: ['A', 'D']
+Stimulus Teks: Banyak siswa yang lulus di sekolah Yayasan Cahaya beragam setiap tahunnya. Berikut adalah data banyak lulusan di tiga sekolah menengah swasta milik Yayasan Cahaya.
+[Isi Gambar Soal 54324_c1fcae756cc66f6899b3ea1ebbd1abbd.png]:
+Grafik garis tren dengan judul 'Data Banyak Lulusan Tahun 2017-2025':
+
+- Legenda:- Lingkaran hijau: SMA 1 Bintang- Lingkaran merah: SMA 2 Bintang- Lingkaran biru: SMK Kejora
+
+- Data koordinat nilai (Tahun vs Jumlah Lulusan):
+
+| Tahun | SMA 1 Bintang (Hijau) | SMA 2 Bintang (Merah) | SMK Kejora (Biru) | |:---: |:---: | | 2017 | 301 | 255 | 250 | | 2018 | 310 | 260 | 285 | | 2019 | 310 | 290 | 301 | | 2020 | 301 | 310 | 320 | | 2021 | 308 | 315 | 320 | | 2022 | 310 | 320 | 325 | | 2023 | 315 | 300 | 320 | | 2024 | 350 | 300 | 350 | | 2025 | 360 | 300 | 400 |
+Pertanyaan: Berdasarkan grafik tersebut, berikut ini pernyataan mana saja yang tepat mendeskripsikan banyak lulusan di ketiga sekolah milik Yayasan Cahaya? Pilih setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 22]
+Kunci Resmi: B
+Stimulus Teks: Di sebuah acara bazar yang diadakan oleh suatu sekolah, terdapat 5 stan yang masing-masing dikelola oleh pedagang yang berbeda.
+[Isi Gambar Soal 61144_bab2e2936f9906add5d8d3fc46fddaff.png]:
+Ilustrasi soal peluang dengan judul 'Jumlah Kertas di dalam Kotak Undian':- Kelompok 1 (kiri): 6 lembar kupon bertuliskan teks verbatim 'Minuman Gratis' dengan label kuning di bawahnya bertuliskan '6 kertas'.- Kelompok 2 (tengah): 4 lembar kupon makanan (3 lembar bertuliskan 'Makanan Gratis' dan 1 lembar bertuliskan 'Makanan Grati') dengan label kuning di bawahnya bertuliskan '4 kertas'.- Kelompok 3 (kanan): 5 lembar kupon kosong (tanpa tulisan) dengan label kuning di bawahnya bertuliskan '5 kertas'.- Total keseluruhan kupon: $6 + 4 + 5 = 15$ lembar kertas.
+Pertanyaan: Dalam bazar tersebut, stan pedagang C ingin berada di antara pedagang A dan pedagang D. Banyak kemungkinan susunan atau penataan stan sesuai keinginan pedagang C tersebut adalah....
+---
+[SOAL ACUAN NO 23]
+Kunci Resmi: ['A:Salah', 'B:Benar', 'C:Benar']
+Stimulus Teks: Perhatikan tabel distribusi data jumlah pengunjung perpustakaan Desa Sukamaju pada minggu ke-1 bulan Januari!
+
+Pada minggu ke-1 bulan Januari tersebut, diketahui informasi sebagai berikut: 1) rata-rata pengunjung perpustakaan setiap hari adalah 6 orang, 2) selalu ada minimal dua pengunjung perpustakaan namun tidak pernah melebihi 10 pengunjung pada setiap hari buka (Senin-Jumat), dan 3) median dari data pada tabel adalah 6.
+[Isi Gambar Soal 44740_626ada04625c9728ab8c9944c147be01.png]:
+Tabel data jumlah pengunjung pada Minggu ke-1:
+
+| Minggu ke-1 | Senin | Selasa | Rabu | Kamis | Jumat | |:---: |:---: |:---: | | Jumlah Pengunjung | 4 | p | 5 | r | 6 |
+Pertanyaan: Tentukan Benar atau Salah pada setiap pernyataan berikut terkait jumlah pengunjung perpustakaan pada minggu ke-1 bulan Januari tersebut!
+---
+[SOAL ACUAN NO 24]
+Kunci Resmi: C
+Stimulus Teks: Dalam rangka memperingati Tahun Baru Imlek, sebuah supermarket membuat kotak undian yang berisi hadiah untuk para pelanggannya. Terdapat 60 angpao yang dimasukkan ke dalam kotak tersebut. Hadiahnya terbagi dalam dua kategori, yaitu kupon belanja dan peralatan rumah tangga. Untuk hadiah kupon belanja, terdapat 15 angpao berisi kupon senilai Rp25.000,00 dan 12 angpao berisi kupon senilai Rp50.000,00. Untuk hadiah peralatan rumah tangga, terdapat 10 angpao berisi set sendok-garpu, 8 angpao berisi pemanas air, dan sisanya angpao kosong. Rini menjadi orang pertama yang berkesempatan mengambil satu angpao secara acak dari kotak tersebut
+Pertanyaan: Berapakah peluang Rini mengambil angpao yang kosong?
+---
+[SOAL ACUAN NO 25]
+Kunci Resmi: D
+Stimulus Teks: Sebuah kantin sekolah mengadakan undian berhadiah.
+
+Hanya kertas yang kosong yang akan selalu dikembalikan lagi ke dalam kotak meskipun terambil berkali-kali. Ani akan mengambil satu buah kertas dari kotak undian. Ani adalah orang kelima yang mengambil kertas undian.
+[Isi Gambar Soal 61924_dd8a2e5d09f6c81b8f5837d25999cfa5.png]:
+Ilustrasi isometrik sebuah kamar tidur yang dimodelkan dalam kerangka bangun ruang kubus/balok $ABCD.EFGH$:- Titik-titik sudut ruangan:- Lantai: titik A (sudut kiri), titik B (sudut depan), titik C (sudut kanan), titik D (sudut belakang).- Langit-langit: titik E (sudut kiri atas), titik F (sudut depan atas), titik G (sudut kanan atas), titik H (sudut belakang atas).- Perabotan dan elemen di dalam ruangan:- Tempat tidur dengan kasur putih dan selimut kuning/oranye berada di dekat titik D (dinding belakang).- Meja belajar lengkap dengan kursi, lampu meja, dan buku di dekat titik A (dinding kiri).- Jendela berpenutup tirai lipat oranye pada dinding kiri di atas meja belajar.- Lemari pakaian kayu dua pintu di dekat titik C (dinding kanan).- Meja kecil berpajangan televisi di lantai bagian depan kanan.- Karpet oranye bergaris di tengah lantai.- Rak gantung di dinding belakang atas tempat tidur yang memuat piala, piringan hitam, dan buku, ditunjuk dengan garis panah berlabel teks verbatim 'Rak Buku Gantung'.
+Pertanyaan: Kertas apa sajakah yang mungkin sudah terambil oleh orang-orang sebelumnya sehingga peluang Ani memperoleh minuman atau makanan adalah
+

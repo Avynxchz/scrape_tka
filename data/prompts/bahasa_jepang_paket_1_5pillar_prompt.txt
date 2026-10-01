@@ -1,0 +1,230 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Jepang (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+リカ  : けんたさん、まいあさ なにを たべますか。けんた:                  を たべます。
+OPSI / PERNYATAAN:
+  - A. A. ジュース
+  - B. B. たまご
+  - C. C. おちゃ
+  - D. D. ぎゅうにゅう
+  - E. E. みず
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+まいあさ、５じ                おきます。
+OPSI / PERNYATAAN:
+  - A. A. は
+  - B. B. が
+  - C. C. で
+  - D. D. と
+  - E. E. に
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+です / じゅう /  ねんせい / すみません / きょうしつ / は / の / どこ /か /
+
+PERTANYAAN:
+Susunlah kosakata tersebut menjadi kalimat padu!
+OPSI / PERNYATAAN:
+  - A. A. すみません じゅうの きょうしつ ねんせいは どこですか。
+  - B. B. すみません の きょうしつ じゅうねんせいは どこですか。
+  - C. C. すみません じゅうねんせいの きょうしつは どこですか。
+  - D. D. すみません どこ ねんせい じゅうの きょうしつは ですか。
+  - E. E. すみません どこ じゅうねんせいの きょうしつは ですか。
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 44788_89da835920303aea3f6109f43bf7ec5b.png]:
+Gambar menampilkan sebuah kalender dinding berbahasa Jepang untuk bulan Mei 2025 (2025 5月). Di pojok kiri atas terdapat kalender kecil bulan April (4) dan di pojok kanan atas terdapat kalender kecil bulan Juni (6). Di sebelah kiri terdapat sebuah balon kata bertuliskan 'kyou' (artinya 'hari ini' dalam bahasa Jepang) dengan ujung penunjuk mengarah ke kotak tanggal 6 Mei 2025 (hari Selasa / 火曜日).
+
+Rincian kalender Mei 2025: | 日 (Minggu, merah) | 月 (Senin) | 火 (Selasa) | 水 (Rabu) | 木 (Kamis) | 金 (Jumat) | 土 (Sabtu, biru) | |:---: |:---: |:---: |:---: | | 28 | 29 | 30 | 1 | 2 | 3 (merah, 憲法記念日) | | 4 (merah, みどりの日) | 5 (merah, こどもの日) | 6 (merah, 振替休日) | 7 | 8 | 9 | 10 (biru) | | 11 (merah) | 12 | 13 | 14 | 15 | 16 | 17 (biru) | | 18 (merah) | 19 | 20 | 21 | 22 | 23 | 24 (biru) | | 25 (merah) | 26 | 27 | 28 | 29 | 30 | 31 (biru) |
+PERTANYAAN:
+Bagaimana pernyataan yang tepat terkait ilustrasi gambar kalender tersebut?
+
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Ashita wa suiyoubi desu.
+  - B. Asatte wa yokka desu.
+  - C. Kinou wa yasumi deshita.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Teks untuk soal nomor 5 dan 6!
+
+Akiko san wa maishuu nichiyoubi ni oyogimasu.
+
+Kenta san wa maishuu kinyoubi ni badominton o shimasu.
+
+Maya san wa maishuu kinyoubi ni badominton o shimasu. Tokidoki oyogimasu.
+
+Anton san wa maishuu nichiyoubi ni sakkaa o shimasu. Tokidoki oyogimasu.
+
+PERTANYAAN:
+Bagaimana pernyataan kesimpulan yang tepat terkait teks tersebut?
+
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Minna wa supootsu ga suki desu.
+  - B. Akiko san wa nani mo dekimasen.
+  - C. Maya san wa badominton ga suki desu.
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 5 dan 6!
+
+Akiko san wa maishuu nichiyoubi ni oyogimasu.
+
+Kenta san wa maishuu kinyoubi ni badominton o shimasu.
+
+Maya san wa maishuu kinyoubi ni badominton o shimasu. Tokidoki oyogimasu.
+
+Anton san wa maishuu nichiyoubi ni sakkaa o shimasu. Tokidoki oyogimasu.
+
+PERTANYAAN:
+Mana saja informasi yang tepat terkait teks tersebut?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Akiko punya jadwal berenang setiap hari Minggu.
+  - B. B. Kenta dan Maya bermain badminton pada hari Jumat.
+  - C. C. Anton tidak suka bermain sepak bola.
+  - D. D. Maya dan Anton kadang-kadang berenang.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 62569_84ca57162e96216dbed0c86e56672af9.png]:
+Ilustrasi dua orang wanita sedang duduk mengobrol di sebuah meja bundar sambil masing-masing memegang cangkir minuman, dengan latar belakang jendela pemandangan pohon dan langit berawan.
+
+Terdapat balon percakapan di atas kedua tokoh:- Balon kata dari wanita berbaju merah muda di sebelah kiri berisi kalimat rumpang bertuliskan: 'きのう ______ か？'- Balon kata dari wanita berbaju ungu di sebelah kanan berisi jawaban: 'きのう　かようび でした。'
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A. かようび　でした
+  - B. B. なんようび　でした
+  - C. C. なんようび　です
+  - D. D. なんにち　でした
+  - E. E. なんにち　です
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Watashino gakkou wa hiroi desu. Sankai arimasu. Kouchoushitsu, shoukuinshitsu, hokenshitsu, jimushitsu wa ikkai ni arimasu.
+
+Kyoushitsu to toshoushitsu wa nikai to sankai ni arimasu. Watashi wa yasumi jikan no toki ni yoku toshoshitsu ni imasu.
+
+PERTANYAAN:
+Toshoshitsu de __________. Toshoshitsu wa shizukana tokoro desu. Kono tokorowa daisuki desu.
+OPSI / PERNYATAAN:
+  - A. A. うたを　うたいます。
+  - B. B. おんがくを　します。
+  - C. C. スポーツを　します。
+  - D. D. ほんを　よみます。
+  - E. E. ダンスを　します。
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+わたしの　かぞくは　ごにんです。ちちと　ははと　あねが　います。ははは びょういんで　はたらいています。ちちは　りょうりが　とくいです。まいしゅう、かぞくで　こうえんに　いきます。
+
+PERTANYAAN:
+おかあさんの　しごとは　なんですか。
+OPSI / PERNYATAAN:
+  - A. A. かいしゃいんです。
+  - B. B. きょうしです。
+  - C. C. かんごしです。
+  - D. D. コックです。
+  - E. E. しゅふです。
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+はじめまして。
+
+ぼくは アミルです。パキスタンじんです。
+
+サッカーが すきです。まいにち れんしゅうします。
+
+よろしく おねがいします。
+
+PERTANYAAN:
+アミルさんの　しゅみは　なんですか。
+OPSI / PERNYATAAN:
+  - A. A. サッカーです。
+  - B. B. スキーです。
+  - C. C. ダンスです。
+  - D. D. ピアノです。
+  - E. E. コンサートです。
+

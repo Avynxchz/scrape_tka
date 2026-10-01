@@ -1,0 +1,213 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Antropologi (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Seorang murid melakukan observasi terhadap komunitas adat yang masih melakukan ritual panen secara turun-temurun. Komunitas tersebut juga menolak teknologi pertanian modern karena dianggap mengganggu keseimbangan alam dan leluhur.
+[Konteks Visual Gambar 35372_d35dfd4a8e8ae3e8e2d223cd9a6b0d3f.png]:
+Foto lanskap permukiman adat Wae Rebo di Manggarai, Pulau Flores, Nusa Tenggara Timur. Terlihat deretan rumah adat tradisional berbentuk kerucut tinggi yang disebut Mbaru Niang dengan atap berbahan ijuk hitam, tersusun melingkar di atas halaman rumput hijau yang memiliki altar batu melingkar (compang) di tengahnya. Kawasan permukiman ini dikelilingi oleh lanskap lembah, pepohonan rimbun, dan pegunungan hijau yang megah di bawah langit cerah. Di sudut kanan bawah terdapat watermark 'detikcom'.
+PERTANYAAN:
+Manakah dari pernyataan berikut yang mencerminkan penerapan prinsip-prinsip dasar Antropologi yang dapat diterapkan oleh murid tersebut?
+OPSI / PERNYATAAN:
+  - A. Menghargai sistem kepercayaan komunitas sebagai bagian dari pandangan dunia mereka
+  - B. Menilai bahwa komunitas tersebut bersifat tradisional karena tidak mengikuti kemajuan zaman.
+  - C. Menggunakan pendekatan holistik untuk memahami hubungan antara ritual dan  sistem kepercayaan mereka.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Buku etnografi dengan judul Tempat Terbaik di Dunia mengisahkan kehidupan sehari-hari warga yang tinggal di kolong jembatan Jakarta, sebuah komunitas marginal yang kerap luput dari perhatian publik. Penulis buku tersebut, Roanne van Voorst, seorang antropolog asal Belanda, tinggal bersama komunitas ini selama beberapa waktu sebagai bagian dari penelitian lapangannya.
+
+Melalui pendekatan partisipatif dan observasi mendalam, Roanne merekam dinamika sosial, cara bertahan hidup, nilai kekeluargaan, solidaritas, serta harapan-harapan yang tumbuh di tengah kemiskinan ekstrem. Meski hidup dalam keterbatasan dan ancaman penggusuran, para penghuni kolong jembatan tidak memandang tempat tinggal mereka sebagai "neraka", melainkan sebagai tempat terbaik di dunia, karena di sanalah mereka menemukan komunitas, identitas, dan makna hidup.
+
+( Sumber: Nurcahyono, Okta Hadi. 2021. Buku murid Antropologi untuk Kelas SMA XI. Jakarta: Pusat Perbukuan Badan Standar, Kurikulum, dan Asesmen Pendidikan Kementerian Pendidikan, Kebudayaan, Riset, dan Teknologi)
+[Konteks Visual Gambar 61416_a39bfb8e261eb662c7a7df1bc616f88f.png]:
+Foto lanskap perbukitan persawahan berundak (terasering/subak) yang luas dengan hamparan padi yang menguning. Di sepanjang jalur pematang sawah di bagian depan dan kanan, berbaris rapi para warga/petani yang mengenakan pakaian adat tradisional dan penutup kepala (caping/udeng). Mereka sedang duduk bersila melaksanakan upacara ritual adat pertanian, ditandai dengan kepulan asap pembakaran dupa atau sesajen di sekitarnya di bawah naungan pohon kelapa dan vegetasi hijau.
+PERTANYAAN:
+Penelitian sebagaimana dijelaskan di atas merupakan jenis penelitian etnografis. Manakah dari pernyataan berikut yang sesuai dengan prinsip-prinsip dasar penelitian tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Membaur dengan masyarakat dan mengikuti kegiatan sehari- hari warga yang tinggal di kolong jembatan Jakarta.
+  - B. B. Menggunakan pendekatan observasi partisipatif untuk memahami praktik budaya secara langsung dari komunitas marjinal di Jakarta tersebut.
+  - C. C. Melakukan wawancara dengan aparat desa saja agar tidak mengganggu praktik sosial warga.
+  - D. D. Mencatat secara rinci dengan observasi mendalam makna simbolik dari praktik dinamika sosial, cara bertahan hidup, dan nilai kekeluargaan.
+  - E. E. Menghindari keterlibatan langsung karena peneliti harus menjaga jarak objektif dengan cara ke perpustakaan.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Masyarakat multikultural terdiri atas beragam suku, ras, agama, dan budaya, seperti masyarakat Indonesia yang dikenal kaya akan keberagaman.
+
+PERTANYAAN:
+Manakah contoh penerapan keberagaman masyarakat multikultural yang tepat dalam kehidupan sehari-hari?
+OPSI / PERNYATAAN:
+  - A. A. Tokoh masyarakat menjalankan tradisi lokal sesuai dengan budaya daerahnya.
+  - B. B. Masyarakat adat mengadakan upacara adat sesuai dengan kebiasaan nenek moyang.
+  - C. C. Masyarakat mengenakan pakaian batik dalam peringatan Hari Batik Nasional.
+  - D. D. Warga melakukan kegiatan jual beli di pasar tradisional setiap hari.
+  - E. E. Umat dari agama lain ikut membantu saat perayaan hari besar keagamaan suatu agama.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: ['A:Sesuai', 'B:Tidak Sesuai', 'C:Sesuai']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Sumber Foto: https:// www.tribunnews.com/pendidikan/2020/12/11/mengenal- warisan-budaya-subak-di-bali-pengertian-filosofi-dan-nilai-budaya-subak
+
+Di sebuah desa adat di Bali, masyarakat secara turun-temurun menjalankan tradisi Subak, yaitu sistem irigasi berbasis komunitas yang mengatur pembagian air untuk sawah secara adil. Sistem ini juga mengandung nilai spiritual karena melibatkan upacara dan koordinasi antar kelompok petani.
+
+Namun, dalam beberapa tahun terakhir, muncul tantangan: lahan pertanian banyak dijual untuk pembangunan vila, anak muda tidak lagi tertarik bertani, dan sistem teknologi irigasi modern perlahan menggantikan peran tradisional Subak.
+[Konteks Visual Gambar 56399_7c27bdb8d01a70d0828fceb0e8a129fd.png]:
+Ilustrasi edukatif bergaya kartun yang menggambarkan observasi lapangan oleh sekelompok murid sekolah dasar terhadap ritual adat masyarakat lokal. Di sisi kiri, empat anak mengenakan seragam SD merah-putih dan membawa tas ransel tampak memperhatikan prosesi adat; salah satu anak mencatat di buku catatan dan seorang anak perempuan menunjuk ke arah ritual. Di sisi kanan, sekelompok masyarakat adat mengenakan busana khas kain tenun garis merah-hitam serta ikat kepala merah sedang menggelar upacara panen di depan api unggun kecil. Seorang pria berdiri memegang seikat bulir padi, sementara anggota masyarakat lainnya duduk bersimpuh dengan tangan terkatup dalam sikap berdoa atau menghormati, dengan latar belakang persawahan menguning dan bukit.
+PERTANYAAN:
+Berdasarkan cerita tersebut, tentukan Sesuai atau Tidak Sesuai untuk setiap pernyataan berikut yang menggambarkan fungsi kearifan lokal dalam masyarakat!
+OPSI / PERNYATAAN:
+  - A. Alih fungsi lahan dan pembangunan vila menunjukkan tantangan kearifan lokal sebagai dampak pariwisata
+  - B. Resistensi anak muda terhadap sistem Subak merupakan bentuk pelestarian budaya sebagai bagian kearifan lokal
+  - C. Penggantian sistem Subak dengan irigasi modern dapat mengikis nilai-nilai  kolektivitas  dalam masyarakat.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Sumber: https:// www.detik.com/properti/arsitektur/d-6960277/mengenal- mbaru-niang-rumah-adat-di-ntt-beratap-kerucut-di-atas-ketinggian-1-117-meter
+
+Di Desa Wae Rebo, Nusa Tenggara Timur, masyarakat masih mempertahankan bentuk rumah adat Mbaru Niang dan sistem gotong royong dalam kehidupan sehari-hari. Dalam menghadapi arus pariwisata dan modernisasi, pemerintah daerah bekerja sama dengan antropolog untuk menjaga nilai-nilai budaya lokal sambil mengembangkan potensi ekonomi masyarakat
+[Konteks Visual Gambar 21099_b728cf5b9364c0cce33fd763e3ccb16d.png]:
+Sampul buku etnografi berjudul 'TEMPAT TERBAIK DI DUNIA' karya Roanne van Voorst. Teks pada sampul tertulis: 'ROANNE VAN VOORST' di bagian atas, judul utama berukuran besar berwarna kuning 'TEMPAT TERBAIK DI DUNIA', dan subjudul berwarna putih di bagian bawah: 'Pengalaman Seorang Antropolog Tinggal di Kawasan Kumuh Jakarta'. Ilustrasi sampul menampilkan seorang wanita berpenampilan antropolog dengan penutup kepala/scarf biru kehijauan, kaus tanpa lengan hitam, dan celana kargo berdiri di latar pemukiman padat/kumuh bantaran sungai yang dipenuhi jemuran pakaian, sampah, dan pepohonan.
+PERTANYAAN:
+Berdasarkan ilustrasi di atas, manakah yang merupakan bentuk penerapan Antropologi Sosial dan Antropologi Budaya sebagai Antropologi Terapan?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu
+OPSI / PERNYATAAN:
+  - A. A. Mengkaji struktur sosial dan sistem gotong royong masyarakat Wae Rebo untuk merancang kebijakan pembangunan yang sesuai.
+  - B. B. Meneliti makna simbolik rumah adat Mbaru Niang dan menjadikannya dasar pengembangan ekowisata berbasis budaya.
+  - C. C. Mengganti tradisi lokal dengan budaya global agar masyarakat dapat lebih cepat beradaptasi dengan pariwisata modern.
+  - D. D. Memberikan pelatihan kepada masyarakat tentang bagaimana mempertahankan identitas budaya di tengah arus wisatawan.
+  - E. E. Menstandarkan budaya lokal agar seragam dan mudah dipromosikan secara nasional
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Manakah pernyataan berikut yang paling tepat menggambarkan etnografi sebagai metode penelitian dalam antropologi?
+OPSI / PERNYATAAN:
+  - A. A. Etnografi adalah metode eksperimen yang menguji perilaku manusia secara kuantitatif di laboratorium.
+  - B. B. Etnografi adalah metode yang digunakan untuk menganalisis dokumen sejarah secara statistik
+  - C. C. Etnografi adalah metode yang melibatkan peneliti secara langsung dalam kehidupan masyarakat untuk memahami budaya mereka secara mendalam.
+  - D. D. Etnografi adalah metode pengumpulan data yang hanya dilakukan melalui kuesioner dan survei daring.
+  - E. E. Etnografi adalah pendekatan untuk membandingkan data genetik dalam kajian antropologi ragawi.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Globalisasi membawa arus informasi, teknologi, dan budaya yang melintasi batas-batas geografis dan budaya dengan sangat cepat. Dalam masyarakat multikultural, globalisasi berdampak pada pergeseran nilai, perubahan pola konsumsi budaya, serta gaya hidup global yang terkadang mengaburkan identitas budaya lokal. Di satu sisi, globalisasi mendorong toleransi, kolaborasi, dan keterbukaan antarbudaya. Namun di sisi lain, ia juga dapat memicu homogenisasi budaya, konflik identitas, dan ketimpangan akses sumberdaya global.
+
+PERTANYAAN:
+Manakah pernyataan yang mendeskripsikan dampak globalisasi pada ilustrasi tersebut?
+
+Tentukan Tepat atau Tidak Tepat pada setiap pernyataan terkait dampak globalisasi berikut!
+OPSI / PERNYATAAN:
+  - A. Keberagaman dalam masyarakat global dapat terhubung tanpa batas wilayah sehingga membentuk keterhubungan
+  - B. Masyarakat multikultural sulit untuk disatukan karena perbedaan warna dan karakteristik yang terlalu banyak
+  - C. Masyarakat multikultural dapat hidup rukun jika ada kesediaan untuk bersatu dan saling menghargai.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Dalam sepuluh tahun terakhir, sebuah desa di daerah terpencil mulai terhubung dengan dunia luar melalui internet dan pembangunan jalan baru. Anak-anak mulai mengenal teknologi digital, orang tua mulai mendorong pendidikan anak hingga ke kota, dan masyarakat perlahan meninggalkan kebiasaan adat yang dianggap menghambat kemajuan. Di sisi lain, anak muda mulai jarang berbicara dalam bahasa daerah, dan beberapa tradisi mulai ditinggalkan karena dianggap tidak relevan.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, manakah yang merupakan dampak positif dari perubahan sosial budaya bagi masyarakat?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Meningkatnya ketertarikan generasi muda terhadap budaya populer dari luar negeri.
+  - B. B. Masyarakat mulai terbuka terhadap pentingnya pendidikan formal.
+  - C. C. Meningkatnya akses terhadap teknologi komunikasi dan informasi.
+  - D. D. Anak-anak menjadi lebih akrab dengan budaya digital dan gaya hidup global.
+  - E. E. Adanya pergeseran nilai ke arah pemikiran yang lebih rasional dan modern.
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['A:Sesuai', 'B:Sesuai', 'C:Tidak Sesuai']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Antropologi terapan merupakan cabang antropologi yang menerapkan teori, konsep, dan metode antropologi untuk memecahkan persoalan praktis dalam kehidupan masyarakat. Dalam konteks sosial budaya, pendekatan antropologi terapan digunakan dalam berbagai bidang seperti pendidikan, kesehatan, pengembangan masyarakat, dan mitigasi konflik.
+
+PERTANYAAN:
+Manakah pernyataan yang mencerminkan penerapan antropologi sosial budaya dalam sistem sosial masyarakat?
+
+Tentukan Sesuai atau Tidak Sesuai pada setiap pernyataan yang mencerminkan penerapan antropologi sosial budaya dalam sistem sosial masyarakat berikut!
+OPSI / PERNYATAAN:
+  - A. Seorang tenaga kesehatan mempelajari kepercayaan masyarakat tentang penyakit sebelum menyusun program penyuluhan.
+  - B. Tim pengembangan desa mengidentifikasi struktur sosial dan adat lokal sebelum merancang program pembangunan masyarakat.
+  - C. Peneliti menilai efektivitas program sosial hanya berdasarkan indikator ekonomi tanpa memperhatikan nilai budaya
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Masyarakat kini mulai memanfaatkan media digital untuk memperkenalkan budaya lokal. Mereka membuat konten video tentang upacara adat, membagikan resep masakan tradisional melalui media sosial, serta mengadakan pelatihan daring untuk melestarikan keterampilan seperti membatik atau membuat kerajinan tangan.
+
+PERTANYAAN:
+Namun, sebagian ahli antropologi mempertanyakan apakah praktik semacam itu masih mencerminkan bentuk kearifan lokal. Mengapa para ahli berpendapat seperti itu?
+OPSI / PERNYATAAN:
+  - A. A. Kearifan lokal seharusnya hanya diwariskan secara lisan dari generasi ke generasi.
+  - B. B. Penggunaan media digital dianggap mengurangi nilai tradisi budaya secara otomatis.
+  - C. C. Kearifan lokal biasanya berkembang dari praktik dan nilai dalam masyarakat dalam waktu lama.
+  - D. D. Budaya digital berasal dari luar dan tidak memiliki unsur budaya sama sekali.
+  - E. E. Kearifan lokal hanya berlaku jika dilakukan secara langsung tanpa media teknologi.
+

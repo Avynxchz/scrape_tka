@@ -1,0 +1,561 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Ekonomi (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Safia baru saja menyelesaikan pendidikan S1. Setelah lulus kuliah, ia dihadapkan pada tiga pilihan, yaitu bekerja di salah satu perusahaan kolega orang tuanya dengan gaji Rp10.000.000,00 per bulan, menempuh pendidikan S2 di dalam negeri dengan jalur beasiswa dan mendapatkan uang saku sebesar Rp2.000.000,00 setiap bulannya, serta membuka usaha di bidang kuliner yaitu steak tendaan bersama salah satu temannya dengan perkiraan omset sebesar Rp16.000.000,00 per bulan.
+
+PERTANYAAN:
+Berapakah jumlah biaya peluang yang dikorbankan oleh Safia apabila ia memilih untuk membuka usaha di bidang kuliner?
+OPSI / PERNYATAAN:
+  - A. A. Rp18.000.000,00.
+  - B. B. Rp16.000.000,00.
+  - C. C. Rp12.000.000,00.
+  - D. D. Rp10.000.000,00.
+  - E. E. Rp2.000.000,00.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perusahaan minuman sehat “Segar Abadi” mengalami kenaikan harga bahan baku utama seperti jahe, madu, dan lemon akibat gagal panen di daerah penghasil. Jika perusahaan tetap menggunakan bahan yang sama, biaya produksi meningkat dan keuntungan menurun. Namun jika mengganti bahan baku dengan bahan sintetis, harga bisa ditekan, tetapi kualitas produk menurun dan kepercayaan konsumen bisa terganggu.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, manakah tindakan yang paling tepat diambil oleh perusahaan dengan mempertimbangkan prinsip ekonomi?
+OPSI / PERNYATAAN:
+  - A. A. Mencari alternatif bahan baku alami dari daerah lain dengan harga lebih kompetitif.
+  - B. B. Mengganti bahan alami dengan bahan sintetis agar biaya produksi murah dan harga produk tetap.
+  - C. C. Mengurangi produksi agar tidak mengalami kerugian besar sampai harga bahan baku kembali normal.
+  - D. D. Menurunkan kualitas produk untuk menjaga keuntungan dan keberlangsungan perusahaan.
+  - E. E. Menaikkan harga jual dua kali lipat agar perusahaan tetap memperoleh keuntungan dan keberlangsungan usaha tetap terjaga.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Perusahaan “Adiwastra Jaya” merupakan perusahaan yang memproduksi berbagai macam pakaian jadi dalam jumlah besar sehingga perusahaan tersebut memiliki tenaga kerja yang cukup banyak. Ketika pemerintah menetapkan Kenaikan Upah Minimum Provinsi (UMP) tahun 2025 sebesar 6,5% dari UMP tahun sebelumnya, maka biaya produksi Perusahaan “Adiwastra Jaya” mengalami kenaikan. Kenaikan biaya produksi tersebut akan berdampak pada keseimbangan pasar yaitu....
+OPSI / PERNYATAAN:
+  - A. A. harga naik dan jumlah barang tetap
+  - B. B. harga naik dan jumlah barang turun
+  - C. C. harga naik dan jumlah barang naik
+  - D. D. harga turun dan jumlah barang naik
+  - E. E. harga turun dan jumlah barang turun
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Toko “Kue Impian” merupakan toko bahan-bahan kue yang terkenal di daerahnya. Toko ini menjual berbagai macam kebutuhan untuk membuat kue seperti halnya tepung, telur, dan gula. Berikut ini fungsi penawaran dan harga dari ketiga bahan tersebut.
+[Konteks Visual Gambar 02602_6fe87c5c4132c17b1076023af7f049ca.png]:
+Tabel fungsi penawaran dan harga jual komoditas:
+
+| No | Nama | Fungsi Penawaran | Harga Jual | |:-: |:--- |:--- |:--- | | 1 | Tepung | $Qs = -1250 + 0,25P$ | Rp15.000,00/kg | | 2 | Telur | $Qs = 500 + 0,04P$ | Rp30.000,00/kg | | 3 | Gula | $Qs = -1200 + 0,3P$ | Rp20.000,00/kg |
+PERTANYAAN:
+Jika semua harga jual dari ketiga bahan tersebut naik sebesar Rp3.000,00/kg maka berapakah jumlah tepung, telur, dan gula yang ditawarkan Toko “Kue Impian”?
+OPSI / PERNYATAAN:
+  - A. A. Tepung 3.250kg, Telur 1.820kg, dan Gula 5.700kg.
+  - B. B. Tepung 3.250kg, Telur 1.700kg, dan Gula 5.700kg.
+  - C. C. Tepung 3.250kg, Telur 1.700kg, dan Gula 4.800kg.
+  - D. D. Tepung 2.500kg, Telur 1.700kg, dan Gula 4.800kg.
+  - E. E. Tepung 2.500kg, Telur 1.820kg, dan Gula 4.800kg.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: ['C', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Pasar komoditas barang konsumsi X memiliki fungsi permintaan Qd = -20P + 500 dan fungsi penawaran Qs = 5P + 100. Pemerintah menetapkan pajak untuk barang tersebut yaitu sebesar Rp25,00 per unit. Manakah kesimpulan yang tepat berdasarkan kondisi tersebut? Klik jawaban yang benar dari setiap pernyataan. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Kuantitas keseimbangan sebelum pajak yaitu sebesar 80 unit dan setelah pajak sebesar 180 unit.
+  - B. B. Terjadi penurunan harga barang sebesar Rp4,00 .
+  - C. C. Terjadi kenaikan harga barang sebesar Rp3,00.
+  - D. D. Kuantitas barang mengalami penurunan sebanyak 60 unit.
+  - E. E. Titik harga keseimbangan sebelum pajak yaitu Rp16,00 dan setelah pajak yaitu 19.
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan kurva permintaan sepeda motor berikut ini.
+[Konteks Visual Gambar 61876_a12c09ba96f10a97b5069e9126bb67af.png]:
+Grafik kurva permintaan dalam sumbu koordinat harga ( $P$) dan kuantitas ( $Q$):- Terdapat 3 garis lurus menurun miring ke kanan berwarna cokelat yang masing-masing memiliki titik-titik hijau (kurva permintaan individual/bergeser).- Terdapat kurva tebal berwarna hitam yang merepresentasikan kurva permintaan patah/berkink (kinked demand curve) atau gabungan kurva permintaan yang mendatar pada tingkat harga $P1$ dari sebelah kiri hingga titik $D1$, kemudian melengkung ke atas melewati titik $D2$ pada tingkat harga $P2$.- Titik-titik kunci bertanda lingkaran merah: * Titik $D3$: Terletak pada garis permintaan paling kiri bawah dengan koordinat $(Q3, P1)$. * Titik $D1$: Terletak pada garis permintaan tengah dengan koordinat $(Q1, P1)$. * Titik $D2$: Terletak pada garis permintaan paling kanan atas dengan koordinat $(Q2, P2)$.- Garis putus-putus biru memproyeksikan titik-titik merah tersebut ke sumbu vertikal ( $P$) pada nilai $P1$ dan $P2$, serta ke sumbu horizontal ( $Q$) pada nilai $Q3$, $Q1$, dan $Q2$.
+PERTANYAAN:
+Pada awalnya, kurva permintaan sepeda motor berada pada titik D1. Sepeda motor dan BBM merupakan barang komplementer sehingga ketika terjadi kenaikan harga BBM, maka analisis perubahan permintaan sepeda motor yang baru adalah....
+OPSI / PERNYATAAN:
+  - A. A. kurva permintaan sepeda motor bergerak ke atas (D2)
+  - B. B. kurva permintaan sepeda motor bergerak kebawah (D3)
+  - C. C. jumlah permintaan sepeda motor bergeser ke kanan (Q2)
+  - D. D. jumlah permintaan sepeda motor bergeser ke kiri (Q3)
+  - E. E. jumlah permintaan tetap, tidak mengalami perubahan (Q1)
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Berikut ini data pendapatan nasional dari Negara “Alamanda” tahun 2025 (dalam miliar):
+[Konteks Visual Gambar 13586_8d3c2d54ad86f95b9e347da0a54ff2db.png]:
+Tabel data komponen pendapatan nasional:
+
+| Komponen Pendapatan Nasional | Jumlah | |:--- |:--- | | Produk domestik bruto (PDB) | Rp 1.200.000 | | Produk netto luar negeri | Rp 80.000 | | Pajak langsung | Rp 30.000 | | Pajak tidak langsung | Rp 10.000 | | Penyusutan barang modal | Rp 15.000 | | Iuran asuransi | Rp 30.000 | | Laba ditahan | Rp 8.000 | | Pajak perseroan | Rp 9.000 | | Transfer payment | Rp 12.000 | | Komsumsi Rumah Tangga | Rp 750.000 | | Investasi | Rp 100.000 | | Pengeluaran Pemerintah | Rp 100.000 | | Ekspor | Rp 500.000 | | Impor | Rp 250.000 |
+PERTANYAAN:
+Berdasarkan data tersebut, besarnya Disposible Income (DI) adalah ….
+OPSI / PERNYATAAN:
+  - A. A. Rp1.030.000 miliar
+  - B. B. Rp1.166.000 miliar
+  - C. C. Rp1.190.000 miliar
+  - D. D. Rp1.220.000 miliar
+  - E. E. Rp1.284.000 miliar
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pertumbuhan ekonomi adalah aspek yang mendukung serta meningkatkan kemakmuran rakyat dalam suatu negara.
+
+PERTANYAAN:
+Berdasarkan pernyataan tersebut, manakah faktor yang dapat memengaruhi pertumbuhan ekonomi suatu negara? Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Munculnya inovasi dan penggunaan teknologi terbaru dalam kegiatan ekonomi.
+  - B. B. Peningkatan dan pemerataan akses pendidikan di seluruh wilayah.
+  - C. C. Meningkatnya akses layanan perbankan terutama dalam penyaluran kredit usaha.
+  - D. D. Peningkatan pemberian bantuan sosial untuk masyarakat menengah bawah.
+  - E. E. Kestabilan harga barang kebutuhan pokok dalam perekonomian negara
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Perhatikan data pertumbuhan ekonomi dan indeks gini di Indonesia tahun 2020 hingga 2024 berdasarkan data dari Badan Pusat Statistik (BPS):
+[Konteks Visual Gambar 26430_50eeee4af1242975469596c49c38168c.png]:
+Tabel data pertumbuhan ekonomi dan indeks Gini tahun 2020-2024:
+
+| Tahun | Pertumbuhan Ekonomi (%) | Indeks Gini | |:---: |:---: |:---: | | 2020 | -2.07 | 0.381 | | 2021 | 3.70 | 0.384 | | 2022 | 5.31 | 0.384 | | 2023 | 5.05 | 0.388 | | 2024 | 5.03 | 0.379 |
+PERTANYAAN:
+Berdasarkan data di atas, lakukan analisis bagaimana keterkaitan pertumbuhan ekonomi dengan kesejahteraan masyarakat Indonesia dengan menentukan pernyataan berikut benar atau salah!
+OPSI / PERNYATAAN:
+  - A. Peningkatan pertumbuhan ekonomi dari tahun 2021 hingga 2023 diikuti oleh peningkatan Indeks Gini, yang menunjukkan bahwa ketimpangan pendapatan.
+  - B. Penurunan Indeks Gini pada tahun 2024 menunjukkan bahwa pertumbuhan ekonomi yang stabil mulai dirasakan lebih merata oleh masyarakat.
+  - C. Setiap kali pertumbuhan ekonomi meningkat, Indeks Gini selalu menurun, menandakan distribusi pendapatan yang lebih merata.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Berikut ini merupakan informasi terkait kondisi perekonomian negara Vietnam dan Indonesia pada tahun 2024.
+[Konteks Visual Gambar 51470_e43ec269afbc4a4aad4e1ddd9329db96.png]:
+Tabel indikator pembangunan ekonomi antara Negara Vietnam dan Negara Indonesia:
+
+| Indikator Pembangunan Ekonomi | Negara Vietnam | Negara Indonesia | |:--- |:---: |:---: | | Produk Domestik Bruto (PDB) | 7,09% | 5,03% | | Pendapatan per kapita | US $4.700 | US$ 4.960 | | Indeks Pembangunan Manusia | 0,766 | 0,750 |
+PERTANYAAN:
+Berdasarkan informasi tersebut manakah pernyataan yang tepat terkait kondisi pembangunan ekonomi di kedua negara? Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Nilai Indeks Pembangunan Manusia (IPM) kedua negara termasuk dalam kategori tinggi yang mencerminkan tingginya tingkat pendidikan, tingkat kesehatan, dan kesejahteraan penduduknya.
+  - B. B. Tingkat laju pertumbuhan ekonomi pada Negara Indonesia lebih pesat dibandingkan dengan Negara Vietnam meningkat sebesar 2%.
+  - C. C. Kedua negara termasuk dalam kategori negara berpendapatan menengah atas meskipun tingkat kesejahteraan penduduk negara Indonesia lebih tinggi dibandingkan negara Vietnam.
+  - D. D. Tingkat kesejahateraan pada penduduk Negara Vietnam lebih tinggi dibandingkan penduduk Negara Indonesia.
+  - E. E. Kapasitas produksi barang dan jasa kedua negara tersebut terbilang pesat sehingga mencerminkan terjadinya pembangunan ekonomi.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Perhatikan pernyataan tentang kondisi pengangguran berikut ini.
+
+Mely baru saja lulus kuliah jurusan ekonomi pembangunan dari salah satu universitas ternama di kotanya, dan sedang berusaha mendapatkan pekerjaan pertamanya.
+
+Yoga seorang lulusan SMA yang sedang mencoba melamar beberapa pekerjaan, namun Yoga belum juga mendapatkan panggilan akibat tidak memenuhi kualifikasi perusahaan.
+
+Pratiwi mengundurkan diri dari pekerjaannya sebagai pegawai pemerintah daerah karena harus pindah ke luar kota mengikuti keluarganya.
+
+Bagas menolak untuk menerima pekerjaan sebagai staf keuangan salah satu perusahaan karena upah yang ditawarkan perusahaan tidak sesuai dengan harapannya.
+
+Andi mengalami pemutusan hubungan kerja karena perusahaan tempatnya bekerja mengalami kerugian akibat menurunnya permintaan barang yang diproduksi perusahaannya.
+
+PERTANYAAN:
+Tentukan Benar atau Salah pernyataan berikut ini terkait jenis pengangguran yang dialami oleh masing-masing individu.
+OPSI / PERNYATAAN:
+  - A. Mely dan Yoga merupakan pengangguran siklis.
+  - B. Mely dan Bagas merupakan pengangguran friksional.
+  - C. Andy dan Pratiwi merupakan pengangguran struktural.
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan data BPS per Februari 2025 tentang Tingkat Pengangguran Terbuka (TPT) berdasarkan umur berikut ini!
+
+Meskipun Tingkat Pengangguran Terbuka (TPT) secara nasional menurun menjadi 4,76%, kelompok usia muda (15-24 Tahun) tetap menjadi penyumbang tertinggi pengangguran dengan TPT mencapai 16,16%. Kondisi ini menunjukkan adanya permasalah serius terkait ketidaksesuaian antara keterampilan lulusan muda dan kebutuhan dunia kerja.
+[Konteks Visual Gambar 51977_7f7d11496e2d59d4a80cb1ae33e34351.png]:
+Tabel data tingkat pengangguran terbuka berdasarkan kelompok umur:
+
+| No | Umur | Tingkat Pengangguran Terbuka | |:-: |:--- |:---: | | 1 | 15-24 Tahun | 16,16% | | 2 | 25-59 Tahun | 3,04% | | 3 | >60 Tahun | 1,67% |
+PERTANYAAN:
+Berdasarkan informasi, solusi apa yang paling tepat untuk mengatasi permasalahan tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Memberikan bantuan keuangan rutin kepada lulusan muda hingga mendapat pekerjaan tetap.
+  - B. B. Menurunkan batas usia minimum bekerja agar remaja dapat memasuki dunia kerja lebih awal.
+  - C. C. Mewajibkan perusahaan swasta mempekerjakan lulusan muda tanpa persyaratan memiliki pengalaman kerja.
+  - D. D. Membangun lebih banyak industri padat karya di daerah dengan tingkat pengangguran muda yang tinggi.
+  - E. E. Menyediakan pelatihan keterampilan di bidang kewirausahaan industri melalui integrasi dalam sistem pendidikan.
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada kuartal pertama tahun ini, Badan Pusat Statistik (BPS) mencatat lonjakan harga pada sejumlah bahan pokok seperti beras, minyak goreng, telur ayam, dan cabai rawit di berbagai daerah di Indonesia. Kenaikan harga ini terjadi menjelang bulan Ramadan, di mana konsumsi masyarakat meningkat pesat. Di sisi lain, hasil panen beberapa komoditas menurun akibat curah hujan yang sangat tinggi dan banjir di sejumlah sentra pertanian.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, faktor utama yang menyebabkan inflasi adalah ….
+OPSI / PERNYATAAN:
+  - A. A. melemahnya nilai tukar Rupiah terhadap dolar Amerika Serikat
+  - B. B. kenaikan upah buruh dan harga bahan baku industri
+  - C. C. peningkatan biaya distribusi karena kenaikan harga Bahan Bakar Minyak (BBM)
+  - D. D. penurunan produksi akibat perpindahan tenaga kerja ke sektor jasa
+  - E. E. peningkatan permintaan barang yang lebih cepat dari pasokannya
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan data harga bahan pokok di daerah Adidaya berikut ini.
+[Konteks Visual Gambar 01473_cbf8ae4af0a4f0e271e86276e8d01353.png]:
+Tabel perbandingan harga barang pada tahun 2024 dan tahun 2025:
+
+| Nama barang | Harga barang (Rp) Tahun 2024 | Harga barang (Rp) Tahun 2025 | |:--- |:---: |:---: | | Daging ayam (Kg) | 40.000 | 45.000 | | Telur (Kg) | 24.000 | 26.000 | | Gula (Kg) | 22.000 | 25.000 | | Cabai merah (Kg) | 14.000 | 19.000 |
+PERTANYAAN:
+Besarnya nilai Indeks Harga Konsumen (IHK) tahun 2025 dengan metode agregatif sederhana adalah....
+OPSI / PERNYATAAN:
+  - A. A. 115%
+  - B. B. 111,62%
+  - C. C. 110%
+  - D. D. 95,6%
+  - E. E. 90,9%
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan data Indeks Harga Konsumen (IHK) berikut, berdasarkan tiga sektor dalam empat periode. Dengan tahun 2022 sebagai indeks harga tahun dasar.
+[Konteks Visual Gambar 24425_e738441f7959c716a5bd9552cb524b51.png]:
+Tabel data sektor pariwisata, transportasi, dan kesehatan dari tahun 2022 sampai 2025:
+
+| Tahun | Sektor Pariwisata | Sektor Transportasi | Sektor Kesehatan | |:---: |:---: | | 2022 | 100 | 100 | 100 | | 2023 | 110 | 107 | 109 | | 2024 | 112 | 115 | 114 | | 2025 | 117 | 116 | 118 |
+PERTANYAAN:
+Berdasarkan tabel tersebut, manakah sektor yang paling berdampak terhadap tingkat inflasi?
+OPSI / PERNYATAAN:
+  - A. A. Sektor pariwisata memberikan dampak tertinggi terhadap inflasi karena mengalami kenaikan IHK sebesar 17% selama periode 2022–2025.
+  - B. B. Sektor transportasi menjadi penyumbang inflasi terbesar karena memiliki lonjakan indeks paling tajam pada tahun 2024.
+  - C. C. Kenaikan indeks sektor kesehatan relatif rendah, sehingga tidak signifikan terhadap inflasi nasional.
+  - D. D. Semua sektor mengalami kenaikan IHK yang sama, sehingga dampaknya terhadap inflasi dianggap setara.
+  - E. E. Sektor kesehatan memberikan dampak terbesar karena mengalami kenaikan indeks harga tertinggi selama periode 2022–2025.
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Bank Sentral bertanggung jawab agar keuangan suatu negara tetap stabil. Berikut ini mana yang merupakan peran dan fungsi Bank Indonesia? Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Mengatur suku bunga acuan untuk mengendalikan inflasi
+  - B. B. Menyediakan layanan giro, tabungan, dan deposito untuk masyarakat
+  - C. C. Mengawasi kelancaran sistem pembayaran nasional
+  - D. D. Menyalurkan kredit langsung kepada pelaku usaha kecil
+  - E. E. Menjaga stabilitas sistem keuangan nasional
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['A', 'B']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Di Indonesia, momen Hari Raya telah menjadi bagian penting dari siklus ekonomi tahunan. Pada periode ini, terjadi peningkatan aktivitas ekonomi masyarakat yang ditandai dengan percepatan peredaran uang dan peningkatan konsumsi rumah tangga. Efek kenaikan upah dari THR (Tunjangan Hari Raya) mendorong peningkatan konsumsi yang kemudian berimbas pada kenaikan harga. Hari Raya juga identik dengan meningkatnya belanja di kalangan masyarakat. Hampir setiap rumah tangga mengalokasikan anggaran konsumsi untuk berbagai hal. Berbagai aktivitas masyarakat di masa Lebaran ini terpotret dari arus perputaran uang yang lebih cepat dibandingkan dengan hari biasa sehingga memicu terjadinya inflasi.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, kebijakan moneter apa yang sesuai untuk mengantisipasi kondisi tersebut? Klik semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Menaikkan suku bunga simpanan untuk mendorong peningkatan tabungan masyarakat di perbankan.
+  - B. B. Menjual surat berharga untuk menarik dana masyarakat dan mendukung pembiayaan fiskal.
+  - C. C. Menurunkan suku bunga simpanan guna mengalihkan preferensi masyarakat dari menabung ke investasi.
+  - D. D. Melonggarkan kebijakan kredit untuk meningkatkan akses pembiayaan bagi sektor rumah tangga dan industri.
+  - E. E. Menurunkan rasio cadangan wajib minimum (reserve requirement) agar bank memiliki ruang likuiditas lebih besar untuk menyalurkan kredit dan investasi.
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pertumbuhan ekonomi Indonesia pada kuartal I-2025 hanya mencapai 4,87%, mengalami penurunan dibanding kuartal-kuartal sebelumnya. Penurunan ini terutama disebabkan oleh lesunya konsumsi rumah tangga, yang hanya tumbuh 4,89% (YOY), meskipun kontribusinya terhadap PDB masih sangat besar, yaitu sekitar 54,53%. Penurunan konsumsi ini erat kaitannya dengan melemahnya daya beli dan penyusutan kelas menengah dari 57,33 juta orang pada 2019 menjadi hanya 47,85 juta orang pada 2024. Untuk merespons situasi tersebut, Bank Indonesia (BI) mengambil langkah menurunkan rasio Cadangan Wajib Minimum (GWM).
+
+PERTANYAAN:
+Manakah pernyataan berikut yang tepat menggambarkan konsekuensi dan efektivitas dari kebijakan tersebut? Klik semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Langkah yang diambil BI dapat memperluas ruang likuiditas perbankan sehingga memperkuat kemampuan pembiayaan terhadap konsumsi rumah tangga.
+  - B. B. Kebijakan yang dilakukan BI berisiko gagal meningkatkan konsumsi jika tidak dibarengi dengan perbaikan sisi permintaan seperti kenaikan pendapatan riil Masyarakat.
+  - C. C. Kebijakan yang dilakukan BI dapat menjadi sinyal ekspansi moneter, namun dampaknya terbatas bila perbankan memilih menahan kredit karena kehati-hatian terhadap risiko gagal bayar.
+  - D. D. Langkah BI ini akan secara otomatis meningkatkan konsumsi karena dana murah akan terserap langsung oleh rumah tangga menengah bawah.
+  - E. E. Kebijakan yang diambil BI dengan pengawasan alokasi kredit dapat membuat dana justru terserap ke sektor spekulatif seperti aset finansial dan property.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Rokok, minuman beralkohol, dan kendaraan berbahan bakar fosil merupakan barang yang dikategorikan sebagai demerit goods karena dapat membahayakan kesehatan. Oleh karena, pemerintah menerapkan kebijakan fungsi regulasi pajak, yakni menaikkan tarif pajak atas produk-produk yang memiliki eksternalitas negatif. Sebagai pelengkap, pemerintah juga memberikan insentif pajak kepada industri yang mengembangkan alternatif ramah lingkungan seperti kendaraan listrik dan produk substitusi non-alkohol.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, dampak yang paling tepat dari penerapan fungsi regulasi pajak adalah....
+OPSI / PERNYATAAN:
+  - A. A. terhambatnya ekspansi industri berbasis energi fosil akibat insentif yang tidak merata
+  - B. B. perubahan preferensi konsumsi masyarakat menuju barang yang lebih sehat dan ramah lingkungan
+  - C. C. meningkatnya ketergantungan fiskal terhadap sektor barang dengan dampak eksternalitas tinggi
+  - D. D. penurunan pendapatan masyarakat akibat meningkatnya harga barang konsumsi umum
+  - E. E. peningkatan keuntungan produsen barang substitusi sebagai akibat dari kenaikan permintaan
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: ['A', 'B']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pak Andi seorang karyawan swasta. Gaji bulanannya dipotong secara otomatis untuk membayar Pajak Penghasilan (PPh) Pasal 21, yang disetorkan oleh perusahaannya ke kas negara. Ia memiliki Nomor Pokok Wajib Pajak (NPWP) dan rutin melaporkan SPT Tahunan secara online. Sedangkan Ibu Rani seorang pemilik toko kelontong. Ia menjual barang-barang kebutuhan rumah tangga dan secara berkala menyetorkan Pajak Pertambahan Nilai (PPN) atas penjualannya serta membayar PPh Final UMKM. Uang pajak yang disetorkan oleh Pak Andi dan Ibu Rani digunakan untuk membangun fasilitas umum seperti puskesmas dan sekolah, serta membayar gaji pegawai Aparatur Sipil Negara (ASN).
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, manakah pernyataan berikut yang benar terkait jenis pajak, peran, fungsi, dan prinsip pajak? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Pak Andi membayar pajak langsung, sedangkan Ibu Rani membayar pajak tidak langsung. Keduanya menerapkan prinsip kemudahan dalam pembayaran pajak.
+  - B. B. Pajak yang dibayarkan keduanya menunjukkan penerapan fungsi budgeter karena uang pajak digunakan untuk membiayai pengeluaran negara.
+  - C. C. Pak Andi membayar pajak tidak langsung dengan prinsip kemudahan, sedangkan Ibu Rani membayar pajak langsung dengan prinsip efisiensi karena rendahnya biaya yang dikeluarkan untuk membayar pajak.
+  - D. D. Pajak yang dibayarkan keduanya menunjukkan penerapan fungsi distribusi karena uang yang diterima pemerintah dialokasikan ke berbagai sektor pembangunan dan perluasan lapangan pekerjaan.
+  - E. E. Pak Andi dan Ibu Rani membayar pajak langsung dengan prinsip keadilan karena besarnya jumlah pajak yang dibayarkan keduanya sama tanpa memperhatikan objek pajaknya.
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: ['B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Taliukir adalah sebuah perusahaan yang bergerak di bidang kerajinan tangan berbahan dasar kulit, seperti tas, dompet, dan sabuk. CV. Taliukir sangat mengutamakan kualitas produk yang dibuat secara tradisional, sehingga setiap produk memiliki sentuhan unik dan nilai seni tinggi. Produk mereka beredar di pasar menengah atas dan turis. Meskipun produknya berkualitas, CV. Taliukir kesulitan mendapatkan modal besar untuk mengembangkan usaha, seperti membeli mesin modern untuk efisiensi produksi massal atau membuka cabang di kota besar. Selain itu pasokan kulit berkualitas tinggi mulai langka dan harganya terus naik. Hal ini disebabkan semakin ketatnya regulasi lingkungan yang membatasi industri penyamakan kulit dan peningkatan permintaan dari industri fesyen global. Solusi yang bisa dilakukan untuk mengatasi permasalahan tersebut yaitu …. Pilihlah jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. menghentikan produksi kerajinan kulit dan beralih ke kerajinan dengan bahan baku lain yang lebih mudah didapat.
+  - B. B. membentuk kerjasama dengan peternak sapi atau industri pengolahan kulit mentah untuk memastikan pasokan kulit, dan mencari investor dengan skema bagi hasil.
+  - C. C. menimbun kulit berkualitas tinggi dalam jumlah besar saat tersedia, meskipun harganya mahal, dan mengajukan pinjaman bank dengan agunan aset pribadi pemilik CV.
+  - D. D. berinvestasi dalam riset dan pengembangan untuk menemukan bahan kulit sintetis berkualitas tinggi yang menyerupai kulit asli.
+  - E. E. mengurangi standar kualitas produk agar bisa menggunakan bahan baku kulit dengan kualitas lebih rendah dan biaya produksi lebih murah.
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+CV Surya Karya, sebuah badan usaha jasa interior, menghadapi masalah keuangan dalam tiga bulan terakhir. Meski pendapatan meningkat karena banyaknya proyek, perusahaan justru mengalami kesulitan membayar gaji karyawan dan tagihan vendor tepat waktu. Setelah dilakukan penelusuran, diketahui bahwa manajer keuangan sering menggunakan dana masuk untuk membayar utang lama tanpa membuat perencanaan arus kas yang jelas. Selain itu, tidak ada pemisahan dana antara proyek satu dengan proyek lainnya, sehingga dana dari satu proyek sering digunakan untuk kebutuhan proyek lain. Akibatnya, banyak pengeluaran tidak terkontrol dan laporan keuangan sulit disusun secara akurat.
+
+PERTANYAAN:
+Berdasarkan uraian tersebut, solusi yang paling tepat untuk mengatasi permasalahan manajemen keuangan yang terjadi adalah...
+OPSI / PERNYATAAN:
+  - A. A. menambah jumlah staf administrasi keuangan agar pengelolaan dana lebih terdistribusi.
+  - B. B. mengajukan pinjaman jangka pendek ke bank agar kebutuhan operasional segera terpenuhi.
+  - C. C. meningkatkan pemasaran agar pemasukan lebih besar dan menutupi kekurangan kas.
+  - D. D. menyusun sistem pengelolaan arus kas yang terencana dan pemisahan dana untuk setiap proyek.
+  - E. E. mengurangi proyek yang dikerjakan agar fokus pengelolaan keuangan tidak tersebar.
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan data laporan keuangan Koperasi Kilau Gemitang berikut ini.
+[Konteks Visual Gambar 43711_2fd7d7c1282a657b5d194e274321dddb.png]:
+Tabel data keuangan dan alokasi Sisa Hasil Usaha (SHU) koperasi:
+
+| Uraian | Nilai/Persentase | |:--- |:--- | | Jumlah Simpanan anggota | Rp80.000.000,00 | | Jumlah penjualan selama satu tahun | Rp250.000.000,00 | | SHU tahun berjalan | Rp200.000.000,00 | | Jasa usaha | 50% | | Jasa modal | 30% | | Jasa pengurus | 15% | | Dana lain-lain | 5% |
+PERTANYAAN:
+Berdasarkan data tersebut, jika jumlah pengurus koperasi sebanyak 20 orang, dan Pak Faiz merupakan salah satu pengurus dengan total simpanan Rp1.000.000,00 serta transaksi penjualan Rp2.000.000,00, maka total SHU yang diterima pak Faiz pada akhir tahun 2025 adalah....
+OPSI / PERNYATAAN:
+  - A. A. Rp4.550.000,00
+  - B. B. Rp3.400.000,00
+  - C. C. Rp3.230.000,00
+  - D. D. Rp3.050.000,00
+  - E. E. Rp3.000.000,00
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Beberapa negara di Asia Tenggara termasuk Indonesia membentuk sebuah organisasi yang bertujuan mempererat hubungan politik, ekonomi, dan sosial di kawasan mereka. Sementara itu, Indonesia juga menjalin perjanjian perdagangan barang dan jasa dengan Korea Selatan yang hanya melibatkan kedua negara tersebut. Di sisi lain, ada organisasi global yang anggotanya berasal dari berbagai negara di seluruh dunia yang fokus pada masalah perdagangan internasional. Berdasarkan ilustrasi tersebut, apa jenis kerja sama internasional yang tepat?
+OPSI / PERNYATAAN:
+  - A. A. Kerja sama bilateral untuk ASEAN, kerja sama regional untuk perjanjian Indonesia-Korea, dan kerja sama multilateral untuk organisasi perdagangan global.
+  - B. B. Kerja sama multilateral untuk ASEAN, kerja sama bilateral untuk perjanjian Indonesia-Korea, dan kerja sama multilateral untuk organisasi perdagangan global.
+  - C. C. Kerja sama regional untuk ASEAN, kerja sama multilateral untuk perjanjian Indonesia-Korea, dan kerja sama bilateral untuk organisasi perdagangan global.
+  - D. D. Kerja sama bilateral untuk ASEAN, kerja sama multilateral untuk perjanjian Indonesia-Korea, dan kerja sama regional untuk organisasi perdagangan global.
+  - E. E. Kerja sama regional untuk ASEAN, kerja sama bilateral untuk perjanjian Indonesia-Korea, dan kerja sama multilateral untuk organisasi perdagangan global.
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Selama beberapa tahun terakhir, Negara X mengalami defisit neraca perdagangan yang semakin memburuk. Sebagai negara berkembang, negara X bergantung pada ekspor sumber daya alam seperti kelapa sawit, batubara, dan karet. Nilai ekspor negara tersebut stagnan bahkan cenderung mengalami penurunan karena rendahnya kualitas dan inovasi produk domestik. Rendahnya nilai ekspor juga dipengaruhi oleh tingginya biaya logistik sehingga menyebabkan harga produk ekspor menjadi tinggi. Di sisi lain, negara X juga dibanjiri produk impor. Tingginya volume impor barang konsumsi seperti tekstil dan makanan olahan menyebabkan produk lokal kehilangan daya saing. Sementara itu, Pemerintah ingin mengambil kebijakan perdagangan internasional yang tepat untuk menyeimbangkan kembali kondisi tersebut dan melindungi industri nasional.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, manakah kebijakan perdagangan internasional yang paling tepat untuk mengatasi permasalahan Negara X?
+OPSI / PERNYATAAN:
+  - A. A. Meningkatkan kuota impor barang konsumsi agar harga barang di dalam negeri lebih stabil dan tercukupinya kebutuhan masyarakat.
+  - B. B. Menghapus semua hambatan perdagangan agar negara lebih terbuka terhadap investasi asing, sehingga terciptanya lapangan pekerjaan.
+  - C. C. Memberikan subsidi dan insentif kepada industri lokal serta melakukan diversifikasi produk agar lebih kompetitif di pasar global.
+  - D. D. Menurunkan nilai tukar mata uang secara drastis untuk mendorong ekspor, sehingga neraca perdagangan kembali surplus.
+  - E. E. Menurunkan tarif impor agar masyarakat menikmati barang konsumsi impor dengan harga murah sehingga daya beli masyarakat meningkat.
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pada Oktober 2023, American Shrimp Processors Association (ASPA) mengajukan petisi kepada Departemen Perdagangan Amerika Serikat (USDOC) dan Komisi Perdagangan Internasional Amerika Serikat (USITC). Petisi tersebut menuduh bahwa Indonesia melakukan praktik dumping dan menerima subsidi tidak adil dalam ekspor udang tropis beku, yang dianggap merugikan industri udang lokal di Amerika Serikat. Akibat tuduhan ini, ekspor udang Indonesia menghadapi risiko dikenai bea masuk anti-dumping dan countervailing duty (tarif subsidi). Jika tuduhan tersebut berlanjut dan pemerintah Amerika Serikat mengenakan bea masuk tambahan terhadap udang Indonesia.
+
+PERTANYAAN:
+Manakah yang merupakan dampak logis terhadap daya saing ekspor udang Indonesia ke Amerika Serikat? Klik setiap pernyataan jawaban benar.Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Harga jual udang Indonesia menjadi lebih rendah di pasar Amerika Serikat dibandingkan pesaing seperti India atau Ekuador.
+  - B. B. Dapat menurunkan kepercayaan pembeli dan mencoreng reputasi produk perikanan Indonesia di pasar global.
+  - C. C. Eksportir Indonesia harus meningkatkan sertifikasi perdagangan untuk menghindari diskriminasi tarif di masa mendatang.
+  - D. D. Dapat menjadi peluang bagi Indonesia untuk mendominasi pasar udang beku karena dianggap memiliki harga yang kompetitif.
+  - E. E. Dapat memicu negara tujuan lain untuk melakukan penyelidikan serupa terhadap produk ekspor Indonesia.
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: ['C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Perhatikan beberapa transaksi keuangan berikut yang terjadi di PT Solusi Jasa Mandiri bergerak di perusahaan jasa konsultan teknologi:
+
+Diterima pembayaran tunai sebesar Rp10.000.000,00 dari klien atas jasa yang telah diberikan.
+
+Dibayar sewa kantor untuk 3 bulan ke depan sebesar Rp6.000.000,00 secara tunai.
+
+Membeli peralatan kantor senilai Rp12.000.000,00 secara kredit.
+
+Pemilik menambahkan investasi pribadi ke dalam perusahaan sebesar Rp15.000.000,00 melalui rekening bank perusahaan.
+
+Menerima tagihan listrik bulan ini sebesar Rp800.000,00 yang belum dibayar.
+
+PERTANYAAN:
+Berdasarkan transaksi tersebut, manakah yang menyebabkan perubahan pada aset maupun kewajiban dalam persamaan dasar akuntansi? Klik pada semua jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Transaksi 1
+  - B. B. Transaksi 2
+  - C. C. Transaksi 3
+  - D. D. Transaksi 4
+  - E. E. Transaksi 5
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Data keuangan Bengkel Tuan Akhtar periode Desember 2024 sebagai berikut:
+
+Kas Rp10.000.000,00
+
+Piutang Rp7.000.000,00
+
+Sewa dibayar dimuka Rp6.000.000,00
+
+Peralatan Rp8.500.000,00
+
+Utang usaha Rp8.000.000,00
+
+Modal Rp23.500.000,00.
+
+PERTANYAAN:
+Apabila perusahaan membayar utang sebesar Rp2.000.000,00 dan biaya bunga sebesar Rp50.000,00 maka perubahan persamaan dasar akuntansi yang benar adalah....
+OPSI / PERNYATAAN:
+  - A. A. harta berkurang menjadi Rp23.450.000,00, utang berkurang menjadi Rp6.000.000,00, dan modal bertambah menjadi Rp29.450.000,00
+  - B. B. harta berkurang menjadi Rp29.450.000,00, utang berkurang menjadi Rp6.000.000,00, dan modal berkurang menjadi Rp23.450.000,00
+  - C. C. harta berkurang menjadi Rp29.500.000,00, utang berkurang menjadi Rp6.000.000,00, dan modal tetap sebesar Rp23.500.000,00
+  - D. D. harta bertambah menjadi Rp31.500.000,00, utang bertambah menjadi Rp8.000.000,00, dan modal tetap sebesar Rp23.500.000,00
+  - E. E. harta bertambah menjadi Rp33.550.000,00, utang bertambah menjadi Rp10.000.000,00, dan modal bertambah menjadi Rp23.550.000,00
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Diketahui data keuangan rental kendaraan “Sat Set” pada bulan Desember 2024 sebagai berikut!
+[Konteks Visual Gambar 67589_31c3fa3118d325ed671d57795c34e1b4.png]:
+Tabel akun dan nilai saldo laporan keuangan/ekuitas:
+
+| Akun | Jumlah | |:--- |:--- | | Pendapatan operasional | Rp93.000.000,00 | | Pendapatan non operasional | Rp300.000,00 | | Beban operasional | Rp17.950.000,00 | | Beban non operasional | Rp3.050.000,00 | | Prive | Rp2.500.000,00 | | Modal akhir | Rp195.000.000,00 |
+PERTANYAAN:
+Berdasarkan data tersebut, besarnya modal awal adalah ….
+OPSI / PERNYATAAN:
+  - A. A. Rp120.200.000,00
+  - B. B. Rp122.700.000,00
+  - C. C. Rp125.200.000,00
+  - D. D. Rp267.300.000,00
+  - E. E. Rp269.800.000,00
+

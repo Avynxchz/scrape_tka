@@ -1,0 +1,547 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Sejarah (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "<Kutipan/konteks kalimat atau variabel yang diketahui>",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Banten pada awalnya merupakan daerah kekuasaan Kerajaan Pajajaran, namun berhasil ditaklukkan Demak di bawah pimpinan Fatahillah. Peristiwa ini menjadi jalan bagi cepatnya perkembangan Islam di wilayah tersebut. Banten segera tumbuh menjadi pelabuhan penting di Selat Sunda setelah Malaka jatuh ke tangan Portugis pada tahun 1511.
+
+PERTANYAAN:
+Apa saja faktor yang mempengaruhi perkembangan ekonomi Kerajaan Banten sehingga menjadi pelabuhan penting pada periode tersebut? Klik jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Pedagang India dan Arab tidak berlabuh lagi di Malaka setelah dikuasai Portugis
+  - B. B. Banten menjadi tujuan pedagang karena menghasilkan lada dan pala yang banyak
+  - C. C. Pedagang dari wilayah bagian Timur Nusantara banyak yang datang ke Banten
+  - D. D. Situasi Majapahit memburuk, sehingga Banten menjadi pusat baru
+  - E. E. Banten merupakan pelabuhan khusus bagi para pedagang dari Eropa
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada bulan April 1595, Belanda memulai pelayaran menuju Nusantara di bawah pimpinan Cornelis de Houtman. Belanda menempuh rute Pantai Barat Afrika – Tanjung Harapan–Samudra Hindia–Selat Sunda–Banten. Belanda akhirnya sampai di Nusantara melalui Selat Sunda dan merapat di Banten pada tahun 1596.
+[Konteks Visual Gambar 60443_2c1d6404e3fa485c047f5fddf86c79c0.png]:
+Lukisan sejarah (schoolplaat karya pelukis Belanda Adriaan Groenewegen, ca. 1904) berjudul 'De eerste O.I. vaarders op de reede van Bantam' yang merepresentasikan pendaratan pertama ekspedisi dagang Belanda di bawah pimpinan Cornelis de Houtman di Kesultanan Banten pada Juni 1596:
+
+1. Rombongan Belanda (Sisi Kiri dan Tengah):- Tokoh utama di bagian tengah (Cornelis de Houtman) tampak membungkukkan badan memberikan salam penghormatan kepada pejabat lokal Banten. Ia mengenakan busana Eropa abad ke-16 bergaya Renaisans: doublet hijau beraksen emas, celana pendek mengembang (trunk hose) bermotif merah-kuning keemasan, kaus kaki panjang (stocking) kuning, dan pedang terpasang di pinggang.- Di belakang Cornelis de Houtman berdiri rombongan perwira dan anak buah kapal yang mengenakan busana pelaut dan bangsawan Eropa abad ke-16 dengan ciri khas kerah lipit putih (ruff), atasan berlapis aneka warna (merah, biru, cokelat, hijau), celana selutut gelap, stoking putih, dan topi bertepi lebar (wide-brimmed hat).- Di tepi pantai sebelah kiri tampak perahu sekoci kayu pendarat beserta sejumlah awak kapal yang sedang merapat ke pantai berpasir.
+
+2. Pihak Kesultanan Banten / Penduduk Pribumi (Sisi Kanan):- Seorang tokoh pembesar atau pejabat Kesultanan Banten (utusan sultan/syahbandar) berdiri menyambut dengan tangan terbuka. Ia mengenakan busana berupa jubah/kain bermotif merah berpadu kain kuning keemasan yang disampirkan di pundak serta penutup kepala/sorban.- Seorang pelayan pribumi berdiri di belakangnya menaungi pejabat tersebut dengan payung kebesaran istana berwarna kuning emas (pajong/songsong) bertangkai panjang.- Di samping pembesar lokal berdiri dua orang pria pribumi bertelanjang dada dengan lilitan kain putih (sarung/cawat) di pinggang, serta sekelompok pengiring lainnya yang berdiri di bawah naungan pohon kelapa mengamati pertemuan tersebut.
+
+3. Latar Belakang Lanskap dan Armada Kapal:- Garis pantai berpasir dengan vegetasi tropis berupa jajaran pohon kelapa yang menjulang ke arah langit cerah berawan putih.- Di perairan lepas Teluk Banten, terlihat empat kapal layar bertiang tinggi armada ekspedisi Belanda (Mauritius, Hollandia, Amsterdam, dan Duyfken) yang sedang berlabuh membuang sauh, lengkap dengan kibaran bendera triwarna Belanda (Prinsenvlag) dan panji-panji kuning di puncak tiangnya.- Tampak pula perahu-perahu kecil (sampan/jukung) penduduk lokal yang berlayar di sekitar kapal-kapal besar dan perairan dangkal dekat pantai.
+
+4. Teks pada Gambar:- Tidak terdapat teks tertulis pada gambar.
+PERTANYAAN:
+Apa tujuan utama Bangsa Belanda datang ke Nusantara?
+OPSI / PERNYATAAN:
+  - A. A. Membuktikan kegemilangan dunia Timur
+  - B. B. Menunjukkan kehebatan Eropa di mata Asia
+  - C. C. Menguasai bandar perdagangan di Malaka
+  - D. D. Mencari sumber penghasil rempah-rempah
+  - E. E. Melakukan eksplorasi untuk kepentingan Belanda
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: ['A', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Ki Hajar Dewantara dikenal sebagai tokoh pergerakan nasional yang gigih memperjuangkan kemerdekaan melalui jalur pendidikan, pers, dan diplomasi. Ia mendirikan Taman Siswa sebagai bentuk perlawanan terhadap diskriminasi pendidikan kolonial dan aktif menyuarakan pentingnya pendidikan nasional melalui tulisan-tulisan kritis di media. Gagasan dan nilai perjuangannya tetap relevan hingga masa kini.
+
+PERTANYAAN:
+Manakah pernyataan berikut yang mencerminkan ide Ki Hajar Dewantara dan masih relevan untuk kehidupan masa kini? Klik jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Pentingnya pendidikan sebagai alat membangun bangsa.
+  - B. B. Menggunakan segala cara untuk mencapai tujuan yang diinginkan.
+  - C. C. Mempertahankan semua tradisi yang diturunkan oleh generasi sebelumnya.
+  - D. D. Mendorong penggunaan media sosial untuk menyebarkan informasi yang benar.
+  - E. E. Menjaga persatuan dan semangat nasionalisme di tengah keberagaman Indonesia.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Tritura merupakan respons mahasiswa terhadap situasi politik dan ekonomi Indonesia pasca peristiwa G30S 1965. Tergambar pada tabel berikut:
+
+Sumber: Hapsari & Adil, 2023:169
+[Konteks Visual Gambar 62489_2518fad05df6f4d54a750ab79fdff6a2.png]:
+Tabel berisi ringkasan isi dan makna tuntutan TRITURA (Tri Tuntutan Rakyat):
+
+| Isi Tritura | Makna Tuntutan | |:--- |:--- | | 1. Bubarkan PKI | Menghapus pengaruh komunisme dari kehidupan politik nasional | | 2. Turunkan harga-harga | Menanggapi krisis ekonomi dan inflasi tinggi | | 3. Perombakan kabinet | Mengganti tokoh-tokoh yang dianggap bertanggungjawab |
+PERTANYAAN:
+Manakah yang termasuk dalam peristiwa penting terkait titik awal lahirnya Orde Baru? Klik pilihan Benar atau Salah untuk setiap pernyataan di bawah ini!
+OPSI / PERNYATAAN:
+  - A. Dikeluarkannya Surat Perintah Sebelas Maret oleh Presiden Soekarno.
+  - B. Letjen Soeharto membubarkan Partai Komunis Indonesia (PKI).
+  - C. Penetapan Dewan Jenderal oleh Presiden Soekarno.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Menurut pendapat Herodotus bahwa sejarah tidak berkembang ke arah depan dengan tujuan yang pasti, tetapi bergerak seperti garis lingkaran yang tinggi rendahnya diakibatkan oleh keadaan manusia.
+
+PERTANYAAN:
+Apakah fokus pengertian sejarah menurut pendapat tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Hasil penafsiran subjektif dari para penulis masa lalu.
+  - B. B. Kumpulan fakta masa lampau yang dikaji secara sistematis.
+  - C. C. Bentuk ekspresi imajinatif dalam bentuk tulisan atau sastra.
+  - D. D. Cerita turun-temurun yang dituturkan melalui narasi rakyat.
+  - E. E. Peristiwa yang berlangsung dan berulang dalam kehidupan manusia.
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Demak awalnya merupakan bagian dari wilayah kerajaan Majapahit. Setelah keruntuhan Majapahit, Raden Fatah mendirikan kerajaan Islam Demak. Perkembangan politik ini membuat Demak berperan penting dalam ekonomi.
+
+PERTANYAAN:
+Apa saja faktor yang membuat Demak memiliki peran penting dalam bidang ekonomi? Klik jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Demak terkenal sebagai penghasil beras yang mempunyai daerah pertanian luas.
+  - B. B. Situasi politik dan ekonomi Banten sangat kacau sehingga Demak menjadi pusat baru.
+  - C. C. Demak memiliki komoditas ekspor seperti beras, kain tenun, lilin, kayu jati, dan garam.
+  - D. D. Demak tidak menerapkan pajak masuk bagi kapal-kapal yang singgah dan berdagang.
+  - E. E. Demak menjadi pelabuhan penghubung antara wilayah timur dan barat Nusantara.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Dalam meneliti peristiwa Konferensi Asia Afrika 1955, seorang siswa membaca naskah pidato asli Presiden Soekarno dan buku sejarah kontemporer yang membahas dampak konferensi tersebut. Naskah pidato ditulis pada saat acara berlangsung, sedangkan buku ditulis oleh sejarawan pada tahun 2015. Siswa tersebut membandingkan kedua sumber tersebut untuk memahami isi peristiwa dan sudut pandang masa kini.
+
+PERTANYAAN:
+Bagaimana perbedaan karakteristik antara dua bahan yang digunakan siswa tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Keduanya memiliki bobot yang sama karena membahas topik yang identik dan ditulis oleh narasumber yang kompeten.
+  - B. B. Buku memiliki kelebihan karena ditulis dengan jarak waktu yang cukup untuk menilai secara objektif peristiwa masa lalu.
+  - C. C. Naskah pidato lebih akurat karena ditulis oleh tokoh penting, sedangkan buku hanya hasil telaah dari generasi selanjutnya.
+  - D. D. Buku lebih mendalam karena menggabungkan banyak sudut pandang, sedangkan naskah hanya mewakili satu pendapat tokoh.
+  - E. E. Naskah pidato pandangan langsung pelaku sejarah, sedangkan buku berisi retrospektif (interpretasi akurat peristiwa masa lalu) dari penulis.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perlawanan Aceh yang dipimpin oleh Teuku Abdul Jalil adalah salah satu bentuk perlawanan menghadapi pendudukan Jepang. Pasukan Jepang dikerahkan dari Bireun, Lhok Sukon, Lhokseumawe. Blang Kampong Teungah juga diserbu Jepang pada 13 November 1942. Teuku Abdul Djalil dan 19 orang pengikutnya meninggal.
+
+PERTANYAAN:
+Apakah yang menjadi alasan perlawanan Teuku Abdul Jalil terhadap Jepang di Aceh?
+OPSI / PERNYATAAN:
+  - A. A. Didirikannya guseikanbu (pusat militer).
+  - B. B. Penerapan Seikerei (membungkuk kearah timur matahari).
+  - C. C. Praktik Jugun Ianfu (perbudakan perempuan).
+  - D. D. Dibentuknya Kumiai (Lembaga ekonomi).
+  - E. E. Kewajiban Tencosetsu (hari raya ulang tahun kaisar).
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Candi Borobudur dihiasi ribuan panel relief yang mengisahkan ajaran Buddha dan kehidupan sehari-hari masyarakat Jawa kuno. Gambar ini memperlihatkan Relief Karmawibhangga Panel nomor 65 di Candi Borobudur yang menggambarkan aktivitas masyarakat Jawa Kuno.
+
+Sumber gambar: https://kebudayaan.kemdikbud.go.id/bkborobudur/wp-content/uploads/sites/12/2019/04/IMG_20190411_093937-e1554951877688.jpg
+[Konteks Visual Gambar 29554_9459f33523f83345d713fa24ac439441.png]:
+Berdasarkan analisis visual yang sangat teliti terhadap relief batu candi (diduga kuat berasal dari relief dasar tersembunyi *Karmawibhangga* di Candi Borobudur), berikut adalah deskripsi ilmiah dan struktural dari panel relief tersebut:
+
+### **Deskripsi Struktur Komposisi Relief**
+
+Secara spasial, relief ini dibagi menjadi tiga zona naratif utama yang menggambarkan hubungan sebab-akibat (*karma*) terkait aktivitas pertanian, perlindungan, dan status sosial-ekonomi:
+
+#### **1. Zona Kiri (Sektor Domestik dan Perlindungan)**
+*   **Bagian Atas (Bangunan/Gubuk):** Terdapat sebuah struktur bangunan sederhana bertiang kayu dengan atap pelana. Di dalamnya digambarkan dua figur manusia (pasangan suami-istri atau penjaga) yang sedang berinteraksi dalam posisi duduk. Di sebelah kiri luar bangunan, tampak vegetasi berupa pohon pisang (*Musa sp.*) dengan detail daun yang lebar.
+*   **Bagian Bawah (Penjagaan):** Di bawah kolong bangunan gubuk, terdapat seekor hewan penjaga yang diidentifikasi sebagai anjing (*Canis lupus familiaris*) dalam posisi berbaring siaga, melambangkan perlindungan terhadap area domestik atau hasil panen.
+
+#### **2. Zona Tengah (Sektor Pertanian/Ekologi)**
+*   **Representasi Flora:** Bagian tengah didominasi oleh vegetasi tanaman padi (*Oryza sativa*) yang digambarkan sangat lebat dengan bulir-bulir padi yang merunduk, mengindikasikan fase siap panen (fase generatif matang).
+*   **Representasi Fauna (Hama/Interaksi Ekologis):** Di sela-sela rumpun padi bagian bawah, terdapat beberapa figur hewan pengerat seperti tikus (*Rattus argentiventer*) atau celeng/babi hutan yang sedang memakan bulir padi, menggambarkan tantangan ekologis dalam pertanian kuno.
+
+#### **3. Zona Kanan (Sektor Sosial-Ekonomi dan Stratifikasi)**
+Zona ini dibagi secara horizontal menjadi dua tingkat (*register*):
+*   **Register Atas (Kelompok Bangsawan/Tuan Tanah):**
+    *   Terdapat sekelompok figur manusia (sekitar 6-7 orang) dengan hiasan kepala (*upavita* atau mahkota sederhana) dan perhiasan yang menunjukkan status sosial tinggi.
+    *   Mereka duduk di atas balai-balai beratap (pendopo) dalam posisi santai (*lalitasana*), sedang melakukan diskusi atau transaksi.
+*   **Register Bawah (Kelompok Pelayan/Penyimpan Harta):**
+    *   Terdapat tiga figur manusia dengan gestur menghormat (menyembah/anjali mudra) atau duduk bersila dengan pakaian lebih sederhana.
+    *   Di sebelah kanan mereka, terdapat representasi peti-peti penyimpanan barang berharga atau hasil bumi (berupa peti kayu bertali pengikat) dan wadah silindris, melambangkan akumulasi kekayaan atau upeti hasil panen.
+PERTANYAAN:
+Apa penggambaran yang tepat dari Relief Karmawibhangga Panel nomor 65 tentang kehidupan sosial masyarakat?
+OPSI / PERNYATAAN:
+  - A. A. Masyarakat menjadikan anjing sebagai penjaga sawah dari serangan hama yang memakan padi.
+  - B. B. Masyarakat belum mengenal metode penyimpanan padi, sehingga padi langsung dikonsumsi.
+  - C. C. Padi menjadi satu-satunya tanaman yang sudah bisa dibudidayakan oleh masyarakat Mataram kuno.
+  - D. D. Masyarakat menjadikan padi sebagai persembahan kepada Dewa, sehingga ditemukan pada relief candi.
+  - E. E. Masyarakat Jawa Kuno sudah menghadapi hama tikus ketika membudidayakan padi di sawah.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Agama Islam masuk ke Nusantara melalui berbagai cara, salah satunya adalah melalui jalur perdagangan. Beberapa ahli berpendapat bahwa Islam dibawa oleh para pedagang dari Gujarat.
+
+PERTANYAAN:
+Apa bukti yang mendukung teori Gujarat tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Makam Sunan Ampel di Surabaya.
+  - B. B. Nisan Syekh Rukunuddin di Barus.
+  - C. C. Nisan Syekh Jumadil Kubro di Troloyo.
+  - D. D. Makam Fatimah Binti Maimun di Gresik.
+  - E. E. Nisan Sultan Malik Al-Saleh di Samura Pasai.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sumpah Pemuda terjadi pada tanggal 28 Oktober 1928, merupakan momen yang penting dalam sejarah perjuangan kemerdekaan Indonesia. Peristiwa ini merupakan hasil dari Kongres Pemuda II yang diselenggarakan di Jakarta. Hal ini menjadi tonggak penting dalam menyatukan para pemuda dari berbagai latar belakang suku, dan bahasa sebagai satu identitas, bangsa Indonesia. Persatuan ini yang menjadi modal dalam berjuang menggapai kemerdekaan Indonesia.
+
+PERTANYAAN:
+Berdasarkan informasi diatas, bagaimana perbandingan persatuan dan nasionalisme di masyarakat sebelum dan sesudah Sumpah Pemuda?
+OPSI / PERNYATAAN:
+  - A. A. Sebelum adanya Sumpah Pemuda, masyarakat berjuang untuk daerahnya masing-masing, sedangkan sesudahnya muncul perasaan sebagai sebuah bangsa yang satu
+  - B. B. Sebelum adanya Sumpah Pemuda, masyarakat berjuang untuk kolonialisme, sedangkan sesudahnya masyarakat berjuang untuk kelompoknya masing-masing
+  - C. C. Sebelum adanya Sumpah Pemuda, masyarakat berjuang untuk daerahnya masing-masing, sedangkan sesudahnya tidak ada perubahan dalam tujuan berjuang
+  - D. D. Sebelum adanya Sumpah Pemuda, masyarakat telah berjuang bersama-sama sebagai sebuah bangsa, sedangkan sesudahnya tidak ada perbedaan yang signifikan
+  - E. E. Sebelum adanya Sumpah Pemuda, muncul perasaan sebagai sebuah bangsa yang satu, sedangkan sesudahnya perasaan itu semakin kuat dan kokoh
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pada awal abad ke-17, Surabaya adalah kota pelabuhan yang makmur dengan jaringan perdagangan kuat. Namun, kota ini ditaklukkan oleh Kesultanan Mataram di bawah kepemimpinan Sultan Agung setelah pengepungan panjang dari tahun 1620 hingga 1625.
+
+PERTANYAAN:
+Bagaimanakah pengaruh konflik antara Mataram dengan Surabaya terhadap kehidupan ekonomi di Nusantara? Klik jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Mataram menjadi pusat baru perekonomian melalui perdangan dan pelayaran rempah dari Indonesia Timur.
+  - B. B. Surabaya yang tidak lagi menjadi pelabuhan penting dan telah kehilangan dominasinya atas Jawa Timur.
+  - C. C. Terjadi kemunduran perekonomian di pesisir akibat penghancuran kota-kota sekutu dari Surabaya oleh Mataram.
+  - D. D. Menguatnya Kesultanan Makassar sebagai pusat perdagangan rempah-rempah di Nusantara dari Indonesia Timur.
+  - E. E. Mataram menjadi pusat pelayaran dan perdagangan antarregional menggantikan Surabaya yang telah berhasil ditaklukkan.
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Gajah Mada, Mahapatih Majapahit, mengucapkan Sumpah Palapa untuk menyatukan Nusantara. Sumpah ini membawa Majapahit mencapai puncak kejayaannya sebagai kekuatan yang disegani. Sejarawan George Coedes menuliskan bahwa Gajah Mada merupakan tokoh penting dalam perluasan supremasi/kekuasaan tertinggi Majapahit pada masa Hayam Wuruk.
+
+PERTANYAAN:
+Berdasarkan informasi di atas, manakah penafsiran yang paling tepat mengenai Sumpah Palapa bagi Majapahit? Pilih tepat atau tidak tepat mengenai pentingnya Sumpah Palapa bagi Majapahit!
+OPSI / PERNYATAAN:
+  - A. Sumpah Palapa tujuan menyatukan nusantara.
+  - B. Sumpah Palapa berfokus perluasan wilayah daratan.
+  - C. Sumpah Palapa mencerminkan luhur cita-cita Majapahit.
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Bangsa Spanyol sebagai salah satu bangsa Eropa yang melakukan penjelajahan Samudera. Beberapa tokoh penjelajahan samudera dari negara ini di antaranya adalah Christophorus Columbus, Francisco Pizarro dan Magellan.
+
+PERTANYAAN:
+Manakah jalur pelayaran Bangsa Spanyol sehingga sampai di Nusantara?
+OPSI / PERNYATAAN:
+  - A. A. Eropa-Samudra Atlantik-Benua Amerika-Samudra Pasifik-Filipina-Malaka
+  - B. B. Eropa-Samudra Atlantik-Benua Amerika-Samudera Pasifik-Filipina-Maluku
+  - C. C. Eropa-Samudera Atlantik-Benua Amerika-Samudera Pasifik-Goa India-Malaka
+  - D. D. Eropa-Pantai Barat Afrika-Tanjung Harapan- Pantai Timur Afrika-Kalikut India-Malaka
+  - E. E. Eropa-Pantai Barat Afrika-Tanjung Harapan- Pantai Timur Afrika-Kalikut India-Maluku-Malaka
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: ['A:Tepat', 'B:Tepat', 'C:Tidak Tepat']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Walisongo, sebutan bagi kelompok yang berperan penting dalam penyebaran Islam di Pulau Jawa. Wali Songo memperkenalkan agama Islam melalui berbagai pendekatan kepada masyarakat. Wali Songo menggunakan berbagai pendekatan budaya untuk menyebarkan Islam di Jawa, seperti cerita pewayangan dengan tokoh Islam dan pertunjukan seni.
+
+PERTANYAAN:
+Manakah dari pernyataan berikut yang menunjukkan fakta yang tepat dan tidak tepat tentang jejak budaya Islam di Jawa? Klik pilihan Tepat atau Tidak Tepat untuk setiap pernyataan di bawah ini!
+OPSI / PERNYATAAN:
+  - A. Pembaharuan bentuk wayang yang sebelumnya berbentuk gambar manusia menjadi gambar dekoratif
+  - B. Menggunakan tembang-tembang Jawa dalam menyampaikan tuntunan-tuntunan hidup
+  - C. Pertunjukan tari Sanghyang saat melakukan upacara keagamaan tradisional
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Gambar ini menunjukkan ilustrasi pelaksanaan hukuman yang dikenal sebagai poenale sanctie yang banyak dilakukakan pada perkebunan kolonial di Sumatera Timur pada akhir abad ke-19. Praktik seperti ini diterapkan kepada pekerja perkebunan yang dianggap melanggar peraturan.
+
+Sumber: Raden Roro Mei/Pusmendik, 2025
+[Konteks Visual Gambar 60049_b81a83a3cdd8c73151140e195fb114f5.png]:
+Ilustrasi berwarna yang menggambarkan praktik hukuman fisik (kekerasan) terhadap seorang kuli atau pekerja perkebunan pada masa kolonial Hindia Belanda (berkaitan dengan penerapan Poenale Sanctie dalam Koelie Ordonnantie):
+
+1. Korban (Tengah): Seorang kuli pribumi dalam posisi berlutut dengan kedua tangan terikat ke belakang punggung, bertelanjang dada mengenakan celana pendek gelap. Tampak luka-luka memar dan goresan cambukan berwarna merah di punggung, bahu, dan wajahnya dengan ekspresi menahan rasa sakit. 2. Pelaku Hukuman/Mandor (Kiri dan Kanan Korban): Dua orang mandor pribumi mengenakan pakaian seragam safari berlengan panjang warna cokelat dan penutup kepala (blangkon/peci). Mandor di sebelah kanan tampak mengayunkan tongkat kayu panjang ke arah tubuh korban (ditandai dengan efek garis ayunan pukulan dan kilatan kuning), sedangkan mandor di sebelah kiri berdiri tegak mengangkat tongkat kayu bersiap untuk memukul. 3. Pengawas/Tuan Kebun Eropa (Sisi Kiri dan Kanan Terluar): Dua pria berkulit putih (Belanda) berambut pirang dengan setelan pakaian dinas serba putih khas kolonial (sosok di kanan mengenakan helm tropis/topi putih). Keduanya berdiri dengan posisi melipat tangan di dada (bersedekap), mengamati hukuman fisik tersebut secara dingin tanpa campur tangan. 4. Latar Belakang: Area perkebunan dengan deretan pohon kelapa/sawit, vegetasi semak hijau, dan langit cerah.
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, manakah di antara pernyataan berikut yang paling tepat menunjukkan pengaruh praktik poenale sanctie terhadap kehidupan pekerja pada masa kolonial?
+OPSI / PERNYATAAN:
+  - A. A. Membuat para pekerja kehilangan kemerdekaannya
+  - B. B. Menurunkan produktivitas dan kesejahteraan para kuli perkebunan
+  - C. C. Menciptakan kesenjangan baru antara para kuli dengan pegawai Eropa
+  - D. D. Menjadi bentuk eksploitasi pekerja karena mereka tidak bisa istirahat atau libur
+  - E. E. Menjadi bentuk penindasan yang menimbulkan ketakutan di kalangan pekerja perkebunan
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Perang Tellumpoccoe terjadi pada 1582–1611 di Sulawesi Selatan sebagai konflik antara Kesultanan Gowa-Tallo dan aliansi kerajaan-kerajaan Bugis (Bone, Wajo, Soppeng).
+
+PERTANYAAN:
+Bagaimana dampak perang tersebut dalam kehidupan ekonomi di Nusantara? Klik jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Kemenangan Gowa-Tallo memperkuat kontrol atas jalur perdagangan rempah di Indonesia Timur
+  - B. B. Perang tersebut memperkuat posisi kerajaan-kerajaan Bugis dalam perdagangan internasional
+  - C. C. Gowa-Tallo menjadi penguasa perekonomian di jalur pelayaran sekitar Sulawesi Selatan
+  - D. D. Perdagangan lokal di kawasan Sulawesi bagian selatan menjadi lebih bebas dan tidak terpusat
+  - E. E. Pengaruh Bone di bidang ekonomi melemah setelah kekalahannya dengan kerajaan Gowa-Tallo
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Kehidupan global semakin berkembang dengan maraknya penjelajahan samudra orang-orang Eropa ke dunia Timur. Begitu juga peristiwa di kawasan Laut Tengah pada tahun 1453 turut meramaikan kedatangan bangsa Eropa ke Nusantara.
+
+PERTANYAAN:
+Peristiwa apa yang terjadi di Laut Tengah sehingga melatarbelakangi kedatangan bangsa Eropa ke Nusantara?
+OPSI / PERNYATAAN:
+  - A. A. Terjadi persaingan dagang sesama bangsa Eropa
+  - B. B. Mencari sumber daya alam lain seperti logam mulia
+  - C. C. Bangsa Eropa ingin memperluas wilayah kekuasaannya
+  - D. D. Semangat dan dorongan untuk melanjutkan Perang Salib
+  - E. E. Jatuhnya kekuasaan Konstantinopel ke tangan Turki Usmani
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Mohammad Hatta dikenal sebagai tokoh nasionalis yang memperjuangkan kemerdekaan Indonesia melalui jalur diplomasi dan pendidikan. Ia juga menekankan pentingnya koperasi sebagai pilar ekonomi kerakyatan.
+
+PERTANYAAN:
+Jika Anda adalah seorang pemuda yang ingin menghidupkan semangat Mohammad Hatta di masa kini, manakah tindakan yang tepat yang mencerminkan semangat tersebut? klik jawaban benar! Jawaban benar lebih dari satu
+OPSI / PERNYATAAN:
+  - A. A. Mendirikan koperasi digital untuk memberdayakan UMKM lokal
+  - B. B. Aktif berdiplomasi dan berdialog dalam organisasi internasional pemuda
+  - C. C. Menggalang dana dari investor asing untuk dominasi pasar lokal
+  - D. D. Menyebarkan nilai-nilai ekonomi kerakyatan dengan memahami literasi keuangan
+  - E. E. Mendorong penguasaan pasar oleh korporasi besar agar efisien
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Persaingan Portugis dan Spanyol di Maluku diakhiri dengan perjanjian Saragosa 1529. Portugis tetap di Maluku, sementara Spanyol harus bergerak ke Filipina. Portugis semakin berkuasa dengan melakukan monopoli perdagangan di Maluku. Hal ini mengancam kedudukan raja-raja di Maluku.
+
+PERTANYAAN:
+Strategi apa yang digunakan rakyat Maluku untuk melawan Portugis? Pilihlah benar atau salah dari pernyataan tentang strategi perlawanan yang dilakukan rakyat Maluku dalam menghadapi Portugis!
+OPSI / PERNYATAAN:
+  - A. Menyeimbangkan pengaruh asing melalui kerjasama dengan penguasa wilayah Papua, Jawa, dan Sumatra
+  - B. Melakukan perlawanan terbuka melalui serangan militer baik darat maupun laut pada Portugis
+  - C. Melakukan hubungan diplomasi melalui perjanjian monopoli dengan Portugis
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perlawanan yang dipimpin oleh Kiai Zainal Mustafa meletus pada bulan Februari 1944. Dia seorang tokoh dari Singaparna, Tasik Malaya, Jawa Barat. Ia sangat menentang kebijakan-kebijakan Jepang.
+
+PERTANYAAN:
+Apakah yang mendorong perlawanan Kiai Zainal Mustafa kepada Jepang di Singaparna?
+OPSI / PERNYATAAN:
+  - A. A. Perlakuan militer Jepang yang menyebabkan penderitaan rakyat
+  - B. B. Kewajiban rakyat untuk menanam jenis tanaman pangan tertentu
+  - C. C. Rakyat wajib membayar pajak kepada Jepang dalam bentuk uang
+  - D. D. Sistem sewa tanah yang mengakibatkan rakyat terjerat banyak hutang
+  - E. E. Kelaparan akibat adanya kebijakan tanam paksa atau disebut Cultuur stelsel
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Setelah berhasil memproklamsikan kemerdekaan Indonesia pada tanggal 17 Agustus 1945, Bangsa Indonesia harus berjuang mempertahankan kemerdekaan. Ancaman dari luar maupun dari dalam mengancam tegaknya kedaulatan Negara Republik Indonesia yang baru saja berdiri. Ancaman dari luar muncul dari Belanda yang tidak mau mengakui kedaulatan Indonesia.
+
+PERTANYAAN:
+Perjuangan fisik apa saja yang dilakukan oleh rakyat Indonesia untuk mempertahankan kemerdekaan menghadapi Belanda yang ingin menguasai kembali Indonesia? Klik pada semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Pertempuran 10 November 1945
+  - B. B. Pertempuran 5 Hari di Semarang
+  - C. C. Serangan Umum 1 Maret 1949
+  - D. D. Pemberontakan Andi Azis
+  - E. E. Pemberontakan Republik Maluku Selatan
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Jepang menjadi negara industri karena keberhasilan Restorasi Meiji/kebangkitan modernisasi. Kebutuhan akan modal pada kegiatan industri memicu Jepang melakukan ekspansi ke Indonesia.
+
+PERTANYAAN:
+Bagaimana karakteristik kebijakan Jepang pada masyarakat saat menjajah Indonesia? Pilihlah Benar atau Salah pada pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Mengutamakan kegiatan ekonomi untuk kepentingan militer
+  - B. Jepang membagi wilayah Indonesia menjadi tiga pemerintahan militer
+  - C. Lebih mementingkan peperangan dalam mengeksploitasi sumber daya alam
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: ['A:Sesuai', 'B:Tidak Sesuai', 'C:Sesuai']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Tabel: Kondisi Ekonomi Masa Demokrasi Liberal
+
+Sumber Tabel: Kementerian Pendidikan dan Kebudayaan. 2015. Sejarah Indonesia Untuk SMA/MA Kelas XII. Jakarta: Kemendikbud, halaman 70-75
+[Konteks Visual Gambar 32910_029d22acd6d42a587f4d6694d37840e0.png]:
+Berikut adalah hasil transkripsi data tabel dari gambar:
+
+| No | Nama Program | Kebijakan | Dampak |
+| :-: | :--- | :--- | :--- |
+| 1 | Program Benteng | Memberikan lisensi impor untuk kaum pribumi | Pengusaha pribumi kurang memiliki jiwa wirausaha |
+| 2 | Rencana Sumitro | Melaksanakan industrialisasi dengan pembangunan industri dasar | Muncul perusahaan-perusahaan yang melayani kepentingan umum |
+| 3 | Biro Perancang Negara | Merancang RPLT (Rencana Program Lima Tahun) | Meningkatnya defisit anggaran pemerintah dari 20 persen tahun 1950 menjadi 100 persen tahun 1960 |
+PERTANYAAN:
+Berdasarkan data tersebut, manakah dampak negatif akibat kebijakan pemerintah pada masa Demokrasi Parlementer? Klik sesuai atau tidak sesuai dari dari dampak negatif kebijakan pemerintah pada masa Demokrasi Parlementer!
+OPSI / PERNYATAAN:
+  - B. Rencana Sumitro merupakan program yang berkontribusi bagi seluruh lapisan masyarakat
+  - C. Pemberian lisensi impor dari Program Gerakan Benteng tidak efektif membangkitkan jiwa wirausaha kaum pribumi
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: ['C', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Ekonomi Kerakyatan digagas oleh Mohammad Hatta, yang bertujuan untuk membangun perekonomian rakyat melalui koperasi, dengan prinsip kebersamaan, kekuasaan milik rakyat, dan lebih mementingkan kepentingan umum. Namun, fakta saat ini jurang sosial melebar antara buruh dan pemilik modal. Pemerintah membuat proyek sosial ekonomi untuk menjembatani kesenjangan tersebut.
+
+PERTANYAAN:
+Manakah yang mencerminkan nilai-nilai dari semangat ekonomi Bung Hatta? Pilih jawaban benar lebih dari satu
+OPSI / PERNYATAAN:
+  - A. A. Pemberian progam investasi gratis untuk kalangan pengusaha makro
+  - B. B. Deregulasi total yang mengabaikan perlindungan usaha mikro
+  - C. C. Pengembangan koperasi pekerja di sektor informal
+  - D. D. Pelatihan kewirausahaan berbasis komunitas lokal
+  - E. E. Kolaborasi antara UMKM dan koperasi digital
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Agresi Militer Belanda II dimulai pada tanggal 10 Desember 1948, ketika Belanda menyerbu Yogyakarta dan menawan Presiden serta Wakil Presiden. Sedangkan Syafruddin Prawiranegara membentuk Pemerintahan Darurat Republik Indonesia (PDRI) di Sumatera Barat saat situasi genting. Panglima Soedirman melanjutkan perjuangan melalui gerilya. Sementara itu, diplomasi Indonesia tetap berjalan di forum internasional.
+
+Sumber: Buku Sejarah untuk SMA/MA Kelas XII (Kemdikbud, 2022)
+
+PERTANYAAN:
+Apa bentuk respons strategis bangsa Indonesia dalam mempertahankan kemerdekaan setelah Agresi Militer Belanda II?
+OPSI / PERNYATAAN:
+  - A. A. Mendirikan pemerintahan federal di luar Jawa untuk mendapatkan pengakuan Belanda.
+  - B. B. Menawarkan pembentukan negara bersama di bawah pengawasan Dewan keamanan PBB.
+  - C. C. Menyelamatkan struktur pemerintahan melalui PDRI, bergerilya, dan menekan Belanda dengan diplomasi.
+  - D. D. Menjalin aliansi pertahanan dengan negara-negara boneka yang dibentuk oleh pemerintahan Belanda.
+  - E. E. Mengalihkan pusat kekuasaan ke negara bagian yang belum diduduki dan menandatangani perjanjian lokal.
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Supersemar atau Surat Perintah 11 Maret 1966 merupakan surat yang dikeluarkan oleh Presiden Sukarno dan memberikan wewenang luas kepada Letjen Soeharto untuk menjaga stabilitas negara dan menyelamatkan revolusi. Surat ini menjadi titik balik sejarah Indonesia karena memberi dasar legitimasi bagi Soeharto untuk mengambil langkah-langkah strategis selanjutnya.
+
+PERTANYAAN:
+Bagaimana akibat Supersemar sehingga mendorong lahirnya Orde Baru? Pilih tepat atau tidak tepat setiap fakta kelahiran Orde Baru
+OPSI / PERNYATAAN:
+  - A. Soeharto leluasa menahan para menteri yang ada di kabinet karena dianggap terlibat dalam Gerakan 30 September1965
+  - B. Supersemar secara langsung memberikan mandat kepada Soeharto sebagai Presiden Republik Indonesia
+  - C. Soeharto menjadi leluasa untuk mengambil tidakan dalam melakukan pelarangan dan pembubaran terhadap PKI
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan kutipan berikut! “Pembangunan mercusuar dianggap sebagai cara menunjukkan keunggulan Indonesia di mata dunia, namun biaya besar yang dikeluarkan menyebabkan krisis ekonomi semakin parah.” Sumber: Kahin, Nationalism and Revolution in Indonesia, 2010.
+
+PERTANYAAN:
+Berdasarkan kutipan tersebut, apa kelemahan utama dari kebijakan Politik Mercusuar yang dilaksanakan oleh Presiden Soekarno?
+OPSI / PERNYATAAN:
+  - A. A. Proyek besar gagal menarik dukungan negara-negara Blok Timur
+  - B. B. Dana pembangunan dialihkan untuk subsidi pangan dan stabilisasi harga
+  - C. C. Citra internasional Indonesia menguat, tetapi perekonomian rakyat memburuk
+  - D. D. Proyek pembangunan skala nasional berhasil menurunkan laju inflasi secara cepat
+  - E. E. Pemerintah berhasil mengintegrasikan petani dan buruh dalam proyek-proyek mercusuar
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Tabel: Terkait dualisme kepemimpinan nasional pada awal Orde Baru
+
+Presiden Soeharto diharapkan segera melakukan pemilu pada tahun 1968. Namun karena berbagai pertimbangan politik dan keamanan, pemilu baru dapat diselenggarakan pada tahun 1971. Setelah pemilu tahun 1971, pemerintah melemparkan gagasan penyederhanaan partai politik. Banyaknya partai politik dianggap tidak memudahkan pembangunan, justru menambah permasalahan.
+[Konteks Visual Gambar 15910_37f233767376ad7f287d4231327ee46b.png]:
+Berikut adalah hasil transkripsi tabel data sejarah politik Indonesia berdasarkan gambar yang diberikan:
+
+| Tahun | Peristiwa Politik | Dampak |
+| :--- | :--- | :--- |
+| Maret 1967 | MPRS mengangkat Soeharto sebagai Pejabat Presiden | Dualisme Kepemimpinan Nasional |
+| Maret 1968 | MPRS menetapkan Soeharto sebagai Presiden | Berakhirnya Dualisme Kepemimpinan Nasional |
+PERTANYAAN:
+Apa saja langkah-langkah pemerintah dalam mengatasi masalah partai politik? Klik pada jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Menciptakan kekuatan politik sipil baru yaitu Sekretariat Bersama (Sekber) Golongan Karya
+  - B. B. Empat partai berhaluan Islam bergabung dalam Partai Persatuan Pembangunan (PPP)
+  - C. C. Lima partai non Islam, bergabung dalam Partai Demokrasi Indonesia (PDI)
+  - D. D. Mendorong dibentuknya Badan Pengawas Pemilu tingkat nasional dan daerah
+  - E. E. Calon presiden dan wakil presiden dari usulan sepuluh partai politik
+

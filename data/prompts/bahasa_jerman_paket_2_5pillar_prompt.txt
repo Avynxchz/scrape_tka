@@ -1,0 +1,695 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Jerman (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: ['A:Falsch', 'B:Richtig', 'C:Richtig']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Gerdas Freizeitaktivitäten am Sonntag.
+
+Lies den Freizeitplan von Gerda! Die Freizeitaktivitäten von Gerda am Sonntag.
+
+07:45 Uhr – aufstehen 09:30 Uhr – mit Mama frühstücken 10:00 Uhr – das Zimmer aufräumen 11:30 Uhr – Mittagessen 14:00 Uhr – in die Stadt gehen 17:15 Uhr – Mama beim Kochen helfen 18:00 Uhr – Hausaufgaben machen 20:00 Uhr – für den Test morgen lernen 21:00 Uhr – ins Bett gehen
+
+PERTANYAAN:
+Ist das richtig oder falsch? Klick auf Richtig oder Falsch!
+OPSI / PERNYATAAN:
+  - A. Gerda steht um Viertel vor sieben auf.
+  - B. Am Vormittag muss Gerda ihr Zimmer putzen.
+  - C. Vor dem Schlafen muss Gerda noch lernen.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Gerdas Freizeitaktivitäten am Sonntag.
+
+Lies den Freizeitplan von Gerda! Die Freizeitaktivitäten von Gerda am Sonntag.
+
+07:45 Uhr – aufstehen 09:30 Uhr – mit Mama frühstücken 10:00 Uhr – das Zimmer aufräumen 11:30 Uhr – Mittagessen 14:00 Uhr – in die Stadt gehen 17:15 Uhr – Mama beim Kochen helfen 18:00 Uhr – Hausaufgaben machen 20:00 Uhr – für den Test morgen lernen 21:00 Uhr – ins Bett gehen
+
+PERTANYAAN:
+Welche Aussagen sind richtig? Zwei Antworten sind richtig. Klick auf zwei Antworten!
+OPSI / PERNYATAAN:
+  - A. A. Gerda isst eine halbe Stunde zum Frühstück.
+  - B. B. Gerda hat keine Zeit, der Mutter zu helfen.
+  - C. C. Gerda geht ins Bett vor dem Lernen.
+  - D. D. Vor dem Schlafen lernt Gerda für den Test.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lies die folgende Anzeige!
+[Konteks Visual Gambar 93228_54223a98b5630af795daeea3e62ff0d0.png]:
+Poster pengumuman pementasan drama sekolah:
+
+Judul utama dalam papan lampu neon: 'Theater in unserer Schule!'
+
+Teks isi poster: 'Titel der Theater: „Abunawas und der geizige König“ Ein lustiges Theaterstück von den Schülern!
+
+Datum: Freitag, 16. Mai 2025 Uhrzeit: 18:00 Uhr Ort: Schulhof der Schule
+
+Worum geht’s? Wer kennt Abunawas nicht? Er ist ein Junge, der schlau und sehr humorvoll ist. Durch seine Schlauheit versucht Abunawas den geizigen König zu besiegen. Dieses Theater ist viel Spaß garantiert.
+
+Eintritt: Kostenfrei Snacks und Getränke werden in der Schule auch verkauft.
+
+Kommt doch mit! Wir freuen uns auf euch!'
+PERTANYAAN:
+Was darf man bei dem Theaterstück machen? Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. Spaß garantieren
+  - B. B. Die Eintrittkarte kaufen
+  - C. C. Den König besiegen
+  - D. D. Sich auf die Schüler freuen
+  - E. E. Getränke und Scnacks kaufen
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: ['A:Falsch', 'B:Richtig', 'C:Richtig']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Lies den folgende Text!
+
+Betreff (Subjekt): Endlich Sonne und Strand! Von: emilio.meier@email.de An: levi.schule@email.de Hallo Tom, hurra…endlich Ferien! Ich bin mit meiner Cousine in Spanien– wir wohnen bei unserer Tante am Strand. Das Wetter ist so perfekt: jeden Tag Sonne, kein Regen! Morgens gehen wir oft an den Strand, laufen den Strand entlang oder nehmen wir ein Sonnenbad. Abends grillen wir Fisch oder spielen Karten. Gestern haben wir Meeresfrüchte gegessen. Das schmeckt total lecker. Dieser Ort ist wie ein Paradies, ganz unvergesslich.
+
+Leider sind nächste Woche die Schulferien zu Ende. So schnell vergeht ja die Zeit.
+
+Viele Grüße
+
+Emilio
+
+PERTANYAAN:
+Ist das richtig oder falsch? Klick auf Richtig oder Falsch!
+OPSI / PERNYATAAN:
+  - A. Emilio ist gelangweilt in den Schulferien.
+  - B. In den Ferien übernachtet Emilo bei Verwandten.
+  - C. Emilio ist traurig, weil die Schule bald beginnt.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Der Musikkurs "Doremi"
+
+Lies die folgende Anzeige!
+[Konteks Visual Gambar 48449_9dcfbc5c6a562505be324c711ebe0188.png]:
+Brosur tempat kursus musik berlatar biru toska dengan teks:
+
+'Musik ist dein Leben? Dann komm zu uns!'
+
+Poin keunggulan:- Für Anfänger und Fortgeschrittene gut geeignet- Einzel- oder Gruppenklasse
+
+Informasi pada lembaran putih: 'Neue Kurse ab 15. Juni 2025' 'Ab 10 Jahre' 'Kostenlose Schnupperstunde'
+
+Pilihan instrumen/vokal:- Klavier- Schlagzeug- Gitarre- Singen
+
+Informasi pendaftaran dan kontak di bagian bawah: 'Jetzt anmelden - die ersten 10 bekommen 10% Rabbat!' 'Ruf uns unter 0691 769036 an!' 'DOREMI MUSIK' 'Beethovenstr. 15 Velbert'
+
+Ilustrasi: Sekelompok remaja memainkan instrumen drum, kibor, gitar, dan bernyanyi dengan mikrofon.
+PERTANYAAN:
+Wann beginnen die neuen Kurse? Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. Ab August 2025
+  - B. B. Ab sofort
+  - C. C. Am 10. Juni 2025
+  - D. D. Am 15. Juni 2025
+  - E. E. Jeden Montag
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Der Musikkurs "Doremi"
+
+Lies die folgende Anzeige!
+[Konteks Visual Gambar 17882_9dcfbc5c6a562505be324c711ebe0188.png]:
+Brosur tempat kursus musik berlatar biru toska dengan teks:
+
+'Musik ist dein Leben? Dann komm zu uns!'
+
+Poin informasi:- Für Anfänger und Fort error An internal error has occurred. 27s
+PERTANYAAN:
+"Für Anfänger und Fortgeschrittene gut geeignet". Was bedeutet das? Klicke auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. Anfänger und Erwachsene können an dem Kurs teilnehmen.
+  - B. B. Anfänger und Fortgeschrittene können an dem Kurs teilnehmen.
+  - C. C. Jugendliche und Erwachsene können an dem Kurs teilnehmen.
+  - D. D. Kinder und Fortgeschrittene können an dem Kurs teilnehmen.
+  - E. E. Kinder und Jugendliche können an dem Kurs teilnehmen.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Der Musikkurs "Doremi"
+
+Lies die folgende Anzeige!
+[Konteks Visual Gambar 36299_9dcfbc5c6a562505be324c711ebe0188.png]:
+Brosur tempat kursus musik berlatar biru toska dengan teks:
+
+'Musik ist dein Leben? Dann komm zu uns!'
+
+Poin informasi:- Für Anfänger und Fortgeschrittene gut geeignet- Einzel- oder Gruppenklasse
+
+Informasi dalam kertas putih: 'Neue Kurse ab 15. Juni 2025' 'Ab 10 Jahre' 'Kostenlose Schnupperstunde' Pilihan alat musik / vokal:- Klavier- Schlagzeug- Gitarre- Singen
+
+Bagian bawah: 'Jetzt anmelden - die ersten 10 bekommen 10% Rabbat!' 'Ruf uns unter 0691 769036 an!' 'DOREMI MUSIK' 'Beethovenstr. 15 Velbert'
+PERTANYAAN:
+Wie soll die Anzeige aussehen? Ordne die folgenden Sätze in die richtige Reihenfolge.
+
+Der Kurs ist gut für Anfänger und Fortgeschrittene.
+
+Ist Musik für dich wichtig?
+
+Du kannst auch eine freie Kennenlernstunde haben.
+
+Bei uns kannst du einige Musikinstrumente lernen.
+
+Man kann allein oder in einer Gruppe Kurs machen.
+OPSI / PERNYATAAN:
+  - A. A. 1 - 2 - 5 - 4 - 3
+  - B. B. 1 - 3 - 2 - 4 - 5
+  - C. C. 2 - 4 - 1 - 5 - 3
+  - D. D. 2 - 4 - 3 - 5 - 1
+  - E. E. 4 - 2 - 1 - 3 - 5
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: ['B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Dienstag in der Schule
+
+Lies den folgenden Text!
+
+Dienstag in der Schule
+
+Hallo, ich bin Saskia. Am Dienstag habe ich fünf Stunden in der Schule. Der Tag beginnt um sieben Uhr. Meine erste Stunde ist Chemie. Chemie finde ich schwer. Danach habe ich Englisch. Die Lehrerin ist sehr nett, aber die Grammatik ist manchmal schwer. In der dritten Stunde habe ich Biologie. Ich lerne über Pflanzen und Blumen. Das ist interessant. Nach der Pause haben wir Deutsch. Das ist mein Lieblingsfach! Ich mag die Sprache und wir machen oft Spiele oder Dialoge. Unser Lehrer ist lustig und erklärt alles gut. Die letzte Stunde ist Sport. Ich spiele gern Badminton oder machen Gymnastik.
+
+PERTANYAAN:
+Welche Aussagen sind richtig? Zwei Antworten sind richtig. Klick die richtigen Antworten!
+OPSI / PERNYATAAN:
+  - A. A. Zu Beginn ist Grammatikunterricht.
+  - B. B. Die zweite Stunde ist Englisch.
+  - C. C. Am Dienstag endet der Unterricht mit Sport.
+  - D. D. Nach der Pause spielen die Schüler.
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Dienstag in der Schule
+
+Lies den folgenden Text!
+
+Dienstag in der Schule Hallo, ich bin Saskia. Am Dienstag habe ich fünf Stunden in der Schule. Der Tag beginnt um sieben Uhr. Meine erste Stunde ist Chemie. Chemie finde ich schwer. Danach habe ich Englisch. Die Lehrerin ist sehr nett, aber die Grammatik ist manchmal schwer. In der dritten Stunde habe ich Biologie. Ich lerne über Pflanzen und Blumen. Das ist interessant. Nach der Pause haben wir Deutsch. Das ist mein Lieblingsfach! Ich mag die Sprache und wir machen oft Spiele oder Dialoge. Unser Lehrer ist lustig und erklärt alles gut. Die letzte Stunde ist Sport. Ich spiele gern Badminton oder machen Gymnastik.
+
+PERTANYAAN:
+Wer erklärt gut? Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. Biologielehrer
+  - B. B. Deutschlehrer
+  - C. C. Chemielehrer
+  - D. D. Sportlehrer
+  - E. E. Englischlehrer
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lies das folgende Interview!
+[Konteks Visual Gambar 96385_ed994e48129fdf171209c2d8f28b9454.png]:
+Teks percakapan singkat dalam kotak berbingkai ganda:
+
+'Andrea: Haben Sie kurz Zeit? Nur ein paar Fragen. Ich bin Andrea Arnold.' 'Nina: Ich heiße Nina Weber.' 'Andrea: Frau Weber, was machen Sie gern?' 'Nina: Hm, ich schwimme gern. Und ich gehe sehr gern ins Kino.' 'Andrea: Chatten Sie auch gern?' 'Nina: Nein, das mache ich nicht gern. Ich chatte nicht oft.' 'Andrea: Vielen Dank, Frau Weber.' 'Nina: Bitte, gern.'
+PERTANYAAN:
+Was macht Nina Weber in der Freizeit? Ordne die folgenden Sätze in die richtige Reihenfolge!
+
+Sie schwimmt gerne in ihrer Freizeit
+
+Aber sie macht nicht so viel mit ihrem Handy.
+
+Nina Weber spricht über ihre Freizietaktivitäten.
+
+Sie mag nicht gern chatten.
+
+Sie sieht auch gern Filme.
+OPSI / PERNYATAAN:
+  - A. A. 3-1-5-2-4
+  - B. B. 3-1-4-2-5
+  - C. C. 3-2-1-5-4
+  - D. D. 3-4-5-2-1
+  - E. E. 3-5-1-2-4
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lies den folgenden Text.
+
+Meine Großeltern heißen August und Sigrid. Sie wohnen in einem kleinen Dorf in Nordrhein-Westfalen, nicht weit von Düsseldorf. Mein Opa ist 78 Jahre alt. Er ist Rentner, aber er arbeitet gern im Garten. Er pflanzt gern Gemüse. Meine Oma ist 70 Jahre alt. Sie ist auch Rentnerin. Sie backt leckeren Kuchen sehr gern, besonders vor Weihnachten. Mein Opa und meine Oma gehen oft am Wochenende spazieren.
+
+Im Sommer besuchen wir unsere Großeltern und grillen zusammen im Garten. Auch spielen wir zusammen Karten oder ein Brettspiel. Unser Opa ist Profi-Spieler. Er gewinnt oft das Spiel. Wir lieben unsere Großeltern und vermissen sie immer.
+
+PERTANYAAN:
+Was macht die Familie zusammen? Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. Gemüse pflanzen
+  - B. B. Im Garten arbeiten
+  - C. C. Karten spielen
+  - D. D. Kuchen backen
+  - E. E. spazieren gehen
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: ['A', 'B']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lies den folgenden Stammbaum!
+[Konteks Visual Gambar 02492_b25df923a8b6e5896c5ef49144783670.png]:
+Bagan silsilah keluarga (Stammbaum): 1. Generasi Kakek-Nenek (atas):- Kakek: Thomas Müller- Nenek: Agatha Müller
+
+2. Generasi Orang Tua (tengah):- Pasangan 1: Max Weber menikah dengan Brigitta Müller (anak perempuan Thomas dan Agatha Müller).- Pasangan 2: Frederick Müller (anak laki-laki Thomas dan Agatha Müller) menikah dengan Beate Wagner.
+
+3. Generasi Anak / Cucu (bawah):- Anak dari Max Weber dan Brigitta Müller: * Benno (laki-laki) * Lea (perempuan) * Heidi (perempuan)- Anak dari Frederick Müller dan Beate Wagner: * Mindy (perempuan) * Elias (laki-laki)
+PERTANYAAN:
+Welche Aussagen sind richtig? Zwei Antworten sind richtig. Klicke auf die richtigen Antworten!
+OPSI / PERNYATAAN:
+  - A. A. Benno und Heidi sind Geschwister.
+  - B. B. Brigitta und Frederich sind die zweite Generation.
+  - C. C. Die Familie besteht aus zwei Generationen.
+  - D. D. Die Familie ist eine Patchworkfamilie.
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Jimmy. S_Unsere Schul-AGs
+
+Lies den folgenden Text!
+
+Unsere Schul-AGs
+
+An unserer Schule gibt es viele interessante Arbeitsgemeinschaften (AGs). Die Theater-AG trifft sich jeden Dienstag und Donnerstag. Schüler*innen,die gern Sport machen, können die Fußball-AG oder die Volleyball-AG besuchen. Für Musikfans gibt es eine Band-AG, die sich einmal pro Woche trifft. Die Teilnahme an den AGs ist nicht notwendig aber viele Schüler*innen machen gern mit.
+[Konteks Visual Gambar 46698_3a9b332dfe1ad0e4ba31a6aaf60c4eec.png]:
+Poster kegiatan ekstrakurikuler sekolah (AG / Arbeitsgemeinschaft): 1. 'Die Fußball-AG': Menampilkan ilustrasi pemain sepak bola yang sedang menendang bola. 2. 'Die Band-AG': Menampilkan ilustrasi tiga anak muda memainkan musik dalam grup band (dua gitaris dan satu vokalis). 3. 'Die Theater-AG': Menampilkan ilustrasi simbol topeng teater (senyum dan sedih) serta papan clapperboard sutradara. 4. 'DIE VOLLEYBALL-AG': Menampilkan siluet seorang pemain bola voli wanita yang sedang melompat melakukan smash terhadap bola voli.
+PERTANYAAN:
+Welche AG trifft sich zweimal pro Woche? Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. Die Fußball-AG
+  - B. B. Die Volleyball-AG
+  - C. C. Die Theater-AG
+  - D. D. Die Band-AG
+  - E. E. Die Musik-AG
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Jimmy. S_Unsere Schul-AGs
+
+Lies den folgenden Text!
+
+Unsere Schul-AGs
+
+An unserer Schule gibt es viele interessante Arbeitsgemeinschaften (AGs). Die Theater-AG trifft sich jeden Dienstag und Donnerstag. Schüler*innen,die gern Sport machen, können die Fußball-AG oder die Volleyball-AG besuchen. Für Musikfans gibt es eine Band-AG, die sich einmal pro Woche trifft. Die Teilnahme an den AGs ist nicht notwendig aber viele Schüler*innen machen gern mit.
+[Konteks Visual Gambar 48644_3a9b332dfe1ad0e4ba31a6aaf60c4eec.png]:
+Gambar pengenalan kegiatan ekstrakurikuler sekolah (AG / Arbeitsgemeinschaft): 1. 'Die Fußball-AG': Ilustrasi pemain sepak bola menendang bola ke arah gawang. 2. 'Die Band-AG': Ilustrasi kelompok musik yang terdiri atas vokalis wanita dan dua pemain gitar/bass. 3. 'Die Theater-AG': Ilustrasi dua topeng teater (ekspresi senang dan sedih) serta papan clapperboard adegan film. 4. 'DIE VOLLEYBALL-AG': Siluet atlet bola voli wanita yang sedang melompat melakukan servis atau smes terhadap bola.
+PERTANYAAN:
+Die Teilnahme an den AGs ist ___, aber viele Schüler*innen machen gern mit. Ergänz den Satz! Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. notwendig
+  - B. B. freiwillig
+  - C. C. kostenlos
+  - D. D. anstrengend
+  - E. E. schwierig
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Jimmy. S_Unsere Schul-AGs
+
+Lies den folgenden Text!
+
+Unsere Schul-AGs
+
+An unserer Schule gibt es viele interessante Arbeitsgemeinschaften (AGs). Die Theater-AG trifft sich jeden Dienstag und Donnerstag. Schüler*innen,die gern Sport machen, können die Fußball-AG oder die Volleyball-AG besuchen. Für Musikfans gibt es eine Band-AG, die sich einmal pro Woche trifft. Die Teilnahme an den AGs ist nicht notwendig aber viele Schüler*innen machen gern mit.
+[Konteks Visual Gambar 16386_3a9b332dfe1ad0e4ba31a6aaf60c4eec.png]:
+Gambar ilustrasi kegiatan ekstrakurikuler sekolah (AG / Arbeitsgemeinschaft): 1. 'Die Fußball-AG': Gambar pemain sepak bola sedang menendang bola. 2. 'Die Band-AG': Gambar tiga orang memainkan musik (vokalis dan pemain gitar/bass). 3. 'Die Theater-AG': Gambar topeng teater (komedi dan tragedi) serta papan clapperboard film. 4. 'DIE VOLLEYBALL-AG': Siluet pemain voli wanita sedang melompat untuk memukul/smash bola.
+PERTANYAAN:
+Welche Aussage passt zu dem Text? Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. Die Theater-AG trifft sich einmal pro Woche.
+  - B. B. Die Band-AG trifft sich jeden Dienstag.
+  - C. C. Die Schul-AGs sind nur für Jugendlicher.
+  - D. D. Fußball- oder Volleyball-AG ist für Sportfans.
+  - E. E. Die Schüler*innen müssen mitmachen.
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lies das folgende Menü und den Dialog!
+[Konteks Visual Gambar 06662_0b602305731c6fae4c2b1faed1cf77a3.png]:
+Daftar menu makanan bertuliskan 'SPEISEN' yang diapit tiga bintang di bagian atas dan bawah, berisi daftar menu beserta harga dalam mata uang Euro (€):
+
+| Speise | Preis | |:--- |:--- | | Bratwurst | 2,20 € | | Currywurst | 2,50 € | | Hamburger | 2,70 € | | Wurstbrot | 1,90 € | | Schinkenbrot | 1,90 € | | Frikadelle | 2,30 € | | Kartoffelsalat | 2,10 € | | Pommes | 1,70 € |
+PERTANYAAN:
+Welche Speise kostet 1,90 €? Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. CurrywurstCurrywurst
+  - B. B. Frikadelle
+  - C. C. Hamburger
+  - D. D. Pommes
+  - E. E. Schinkenbrot
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lies die folgende Statistik!
+[Konteks Visual Gambar 10170_8fa781df91c6350f0677130111f0a195.png]:
+Infografik konsumsi pangan harian di Jerman bertajuk: 'Das isst Deutschland in Real-Time' 'Lebensmittelkonsum der Deutschen in Real-Time'
+
+Pertanyaan di lingkaran pusat: 'Was essen die Deutschen pro Tag?'
+
+Rincian data konsumsi per hari:- Fleisch in Kg: 0,24- Gemüse in Kg: 0,30- Obst in Kg: 0,18- Getreideprodukte in Kg: 0,24- Milchprodukte in Liter: 0,31- Wasser in Liter: 0,40
+PERTANYAAN:
+Welche Aussagen sind richtig? Zwei Antworten sind richtig. Klick auf die richtigen Antworten!
+OPSI / PERNYATAAN:
+  - A. A. Die Deutschen konsumieren täglich Fleisch und Getreideprodukte.
+  - B. B. Viele Deutsche essen nur wenig Gemüse.
+  - C. C. Die Deutschen trinken jeden Tag wenige Wasser.
+  - D. D. Die Deutschen essen jeden Tag nur wenig Obst.
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lies den folgenden Text!
+
+Ein gesunder Körper braucht ausreichend Nährstoffe. Dazu zählen Obst, Gemüse, Vollkornprodukte, Milchprodukte und viel Wasser. Diese Lebensmittel sind reich an Vitaminen, Mineralstoffen und Ballaststoffen. Wer sich gesund ernähren möchte, sollte frische Lebensmittel zubereiten, nur natürliche Zutaten verwenden und Fast Food möglichst vermeiden. Fast Food ist lecker, aber nicht gesund. Es enthält in der Regel viel Fett, Zucker und Salz. Ein regelmäßiger Konsum von Fast Food kann zu Übergewicht, Diabetes oder Herzerkrankungen führen.
+
+PERTANYAAN:
+Welche Aussagen sind richtig? Zwei Antworten sind richtig. Klick auf die richtigen Antworten!
+OPSI / PERNYATAAN:
+  - A. A. Bananen, Äpfel, Spinat, Salat haben sehr wenig Vitaminen und Mineralstoffen.
+  - B. B. Früchte, Spinat, Joghurt, Käse und Butter sind gesunde Lebensmittel.
+  - C. C. Hamburger, Pizza und Döner Kebap sind lecker und gesund.
+  - D. D. Wer viel Fast Food isst, hat später probleme mit dem Herz.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: ['A:Laura', 'B:Cem', 'C:Lena']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Lies den folgenden Text!
+[Konteks Visual Gambar 02754_8b335277bace44be861cae510d1e223f.png]:
+Teks bacaan bahasa Jerman berjudul 'Was esst ihr gern zum Frühstück?':
+
+1. Laura (Hamburg, kotak hijau toska): 'Zum Frühstück esse ich gern Brot mit Marmelade. Manchmal esse ich auch ein Ei. Ich trinke immer Tee dazu. Viele Grüße aus Hamburg, Laura.'
+
+2. Lena (Bern, kotak merah muda/salmon): 'Hallo! Bei uns gibt es oft Joghurt mit Müsli oder manchmal Bananen. Ich esse auch gern Obst, zum Beispiel Apfel oder Traube. Liebe Grüße aus Bern, Lena.'
+
+3. Cem (Ankara, kotak hijau muda): 'Ich bin aus der Türkei. Wir essen morgens Käse, ein Ei und Oliven. Dazu trinken wir schwarzen Tee. Grüße aus Ankara, Cem.'
+
+Sumber di bagian bawah kanan: 'Quelle: Prima Kursbuch S. 23 (Modifiziert)'
+PERTANYAAN:
+Wer sagt was? Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. Ich frühstücke normalerweise ohne Obst.
+  - B. Ich esse zum Frühstück eher salzig.
+  - C. Ich nehme oft Cerealien mit Milchprodukten.
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lies die folgende Grafik!
+[Konteks Visual Gambar 17961_43002b7272438d76f2ccae80d4256dd9.png]:
+Diagram donat (donut chart) mengenai cita-cita anak-anak dengan judul 'Was willst du werden, wenn du groß bist?' dan keterangan responden 'Deutsche Schüler 6-12 Jahre alt':
+
+| Pilihan Profesi (Berufswunsch) | Persentase (%) | |:--- |:--- | | Profifußballer | 35.3% | | Pilot | 23.5% | | Ingenieur | 17.6% | | Arzt | 11.8% | | Lehrer | 11.8% |
+
+Total keseluruhan persentase adalah 100%.
+PERTANYAAN:
+Worum geht es imText? Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. Die Berufe in Deutschland
+  - B. B. Die Traumberufe von den Kindern in Deutschland
+  - C. C. Die Berufe für die Jugendliche in Deutschland
+  - D. D. Die Sommerferienjobs in Deutschland
+  - E. E. Die Traumberufe in die ganzen Welt
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: ['A:Richtig', 'B:Falsch', 'C:Falsch']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Lies den folgenden Dialog!
+[Konteks Visual Gambar 63991_7bcc70a235de5a295c86681ed344ba9d.png]:
+Kotak soal yang memuat percakapan rumpang di sebelah kiri dan ilustrasi toko daging ('METZGEREI') di sebelah kanan:
+
+Percakapan: 'Mutti: Jonas, kannst du mir helfen?' 'Jonas: Gerne.' 'Mutti: Geh in die Metzgerei und kannst du bitte ___ kaufen?' 'Jonas: OK, dann gehe ich jetzt in die Metzgerei.'
+
+Deskripsi gambar: Ilustrasi suasana toko daging ('METZGEREI') dengan seorang tukang jagal memegang golok daging di balik meja kasir dan timbangan, etalase yang berisi aneka macam sosis dan daging segar, serta potongan daging yang digantung di dinding.
+PERTANYAAN:
+Was muss Jonas in der Metzgerei kaufen?
+
+Klick auf richtig oder falsch!
+OPSI / PERNYATAAN:
+  - A. Fleisch und Wurst
+  - B. Torte und Kuchen.
+  - C. Obst und Gemüse
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: ['B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lies bitte die folgende Grafik!
+[Konteks Visual Gambar 20386_ddfedc0eaf1f7984e125006cfd8149ea.png]:
+Diagram batang berjudul 'Wohnsituation in Deutschland 2024':
+
+Data grafik: | Kategori | Jumlah (dalam Juta) | |:--- |:--- | | Wohngemeinschaft | 14,7 Millionen | | Miete | 37,54 Millionen |
+
+Teks keterangan di samping grafik: '2024 wohnten etwa 14,7 Millionen Menschen in einer WG. Etwa 37,5 Millionen Menschen mieteten ein Haus oder eine Wohnung. Seit 2019 besitzen mehr Menschen eine eigene Wohnung.'
+PERTANYAAN:
+Wie war die Wohnsituation im Jahr 2024? Zwei Antworten sind richtig. Klick auf die richtgen Antworten!
+OPSI / PERNYATAAN:
+  - A. A. Mehr Leute lebten in der Wohngemeinschaft.
+  - B. B. Mehr Leute mieteten eine Wohnung oder ein Haus.
+  - C. C. Viele Leute hatten ein eigenes Haus im Jahr 2019.
+  - D. D. Seit 2019 haben mehr Leute eine Wohnung.
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lies das folgende Poster!
+[Konteks Visual Gambar 30003_f336a5b0992f3f714c039d9ad4cc3bc1.png]:
+Poster paket wisata berjudul 'REISEN nach Bali':
+
+- Harga: 'Rp 400.000 pro Person'- Rencana perjalanan harian (gambar): * 1.Tag: Pura Ulun Danu Beratan * 2.Tag: Tebing pantai / pulau karang (Nusa Penida) * 3.Tag: Pemandangan pesisir pantai berpasir putih- Fasilitas tertera pada 'Einrichtung': * Hotel * Essen und trinken * Eintrittskarte * Dokumentation * Reiseleiter- Diskon: 'Rabatt 20 %'- Situs web: 'www.reiseninbali.com'
+PERTANYAAN:
+Was ist richtig? Klick auf die richtige Antwort!
+OPSI / PERNYATAAN:
+  - A. A. Die Reise dauert nur zwei Tage.
+  - B. B. Die Reise kostet 400.000 für zwei Personen.
+  - C. C. Bei dieser Reise muss man selbst fotografieren.
+  - D. D. Die Reiseleiter kostet extra.
+  - E. E. Die Reise bietet Discount an.
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: ['B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lies den folgenden Text!
+[Konteks Visual Gambar 42781_935b23fbff598f3d53bcd31dc20280c8.png]:
+Teks cerita perayaan ulang tahun nenek yang dilengkapi ilustrasi nenek berusia 80 tahun meniup lilin kue ulang tahun:
+
+'Oma Karlson hat Geburtstag. Sie wird 80 Jahre alt. Die Familie Müller macht eine Geburtstagsparty. Alle kommen zu ihr nach Hause. Die Kinder, die Eltern und auch die Enkel sind da.
+
+Im Garten stehen Tische und Stühle. Es gibt Kuchen, Saft und Kaffee. Alle sprechen, lachen und essen zusammen. Die Kinder spielen im Garten.
+
+Opa Karl spielt mit den Enkeln Fußball. Am Nachmittag gibt es Geschenke für Oma. Sie freut sich sehr.
+
+Die Familie feiert zusammen und alle sind glücklich.'
+PERTANYAAN:
+Welche Aussagen sind richtig? Zwei Antworten sind richtig. Klick auf die richtigen Antworten!
+OPSI / PERNYATAAN:
+  - A. A. Die Familie feiert Opa Karls Geburtstag.
+  - B. B. Die Familie macht im Garten eine Geburtstagsparty.
+  - C. C. Die ganze Familie kommt zusammen.
+  - D. D. Oma mag die Geschenke nicht.
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lies die folgende Einladungskarte!
+[Konteks Visual Gambar 82732_98734cbe21a5b729f7d1f40f082a0c3d.png]:
+Kartu undangan perpisahan sekolah berhiaskan ilustrasi bunga monokrom dengan teks rumpang:
+
+'Abschluss Party'
+
+'Wir laden herzlich ein zur Schulabschluss -Party'
+
+'20. JUNI' '17.00 UHR'
+
+'In Meeta-Saalbau in Hanau'
+
+'Wir ______ uns auf euch'
+
+'DER ABSCHLUSSJAHRGANG 2025'
+PERTANYAAN:
+Es fehlt noch: Wir____ uns auf euch. Ergänz die Einladungskarte! Klick auf das richtige Wort!
+OPSI / PERNYATAAN:
+  - A. A. interessieren
+  - B. B. treffen
+  - C. C. beschäftigen
+  - D. D. verabschieden
+  - E. E. freuen
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 45177_b99ecedd5aa858eeef55e650e35f9345.png]:
+Teks percakapan/wawancara tentang mata pelajaran favorit:
+
+Keterangan pengantar: 'Tanja Lahm ist Reporterin bei der Schülerzeitung Schulblick. Sie besucht die Klasse 10 und spricht mit drei Schülern über ihr Lieblingsfach.'
+
+Isi percakapan:- Tanja Lahm: Hallo! Ich mache ein Interview für unsere Schülerzeitung. Was ist dein Lieblingsfach?- Lina Schäffer: Ich mag Biologie sehr.- Tanja Lahm: Oh, das klingt interessant! Warum?- Lina Schäffer: Ich finde den menschlichen Körper spannend. Und unsere Lehrerin ist super!- Tanja Lahm: Und du, Hasan?- Hasan Aslan: Mein Lieblingsfach ist Mathe. Ich löse gern Aufgaben und rechne viel. Es macht mir Spaß.- Tanja Lahm: Super! Viele finden Mathe schwierig, aber toll, dass du es gern machst. Und Sofia, welches Schulfach findest du am besten?- Sofia Klammer: Ich liebe Kunst, denn ich male und zeichne gern. Mir gefällt der Unterricht, weil er ruhig ist und ich kreativ arbeiten kann.- Tanja Lahm: Das ist schön! Kreativer Unterricht macht bestimmt viel Spaß. Danke euch und viel Erfolg in der Schule!
+PERTANYAAN:
+Worum geht es im Text? Klicke auf die richtige Antwort.
+OPSI / PERNYATAAN:
+  - A. A. Die besten Lehrerinnen und Lehrer.
+  - B. B. Warum Schüler bestimmte Fächer mögen.
+  - C. C. Warum Schüler Mathe nicht interessant finden.
+  - D. D. Wie Schüler in der Schule täglich lernen.
+  - E. E. Wie viele Fächer die Schüler lernen müssen.
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: ['A', 'B']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lies die folgende Anzeige!
+[Konteks Visual Gambar 12864_7008a625ab8788ff5e60f11f31881757.png]:
+Poster promosi toko bahan makanan dengan teks:
+
+'FRISCH UND SCHNELL' 'UNSER VERKAUFSPRINZIP' 'Willkommen bei Frisch & Schnell!'
+
+Bagian tengah kotak hijau: 'FRISCHE PRODUKTE - DIREKT VOM BAUERNHOF' 'Wir verkaufen täglich Obst, Gemüse und frisches Brot aus der Region.'
+
+Bagian promo diskon: 'JEDEN ERSTEN SAMSTAG IM MONAT' '10% RABATT' 'AUF ALLES'
+
+Bagian bawah: 'Kommen Sie vorbei! Wir sind bereit Ihnen zu helfen'
+PERTANYAAN:
+Welche Aussagen sind richtig? Zwei Antworten sind richtig. Klick auf die richtigen Antworten!
+OPSI / PERNYATAAN:
+  - A. A. Jeden Tag produziert der lokale Bauer frisches Brot.
+  - B. B. Einmal pro Monat gibt es Rabatt für die Kunde.
+  - C. C. Es gibt nur Rabatt auf Obst und Brot.
+  - D. D. Jedes Wochenende kauft man billiger ein.
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: ['A:Falsch', 'B:Falsch', 'C:Richtig']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Lies die folgenden Aussagen!
+[Konteks Visual Gambar 43103_539cee0d1955c17ee6353a5aeba83c09.png]:
+Teks informasi tempat tinggal tiga orang:
+
+1. Maja: 'Sie wohnt in einer kleinen Wohnung in der Stadt. Sie hat keinen Garten, aber sie kann zu Fuß ins Kino gehen. Die Straßen sind immer laut.'
+
+2. Tom: 'Er wohnt mit seiner Familie in einem Haus auf dem Land. Er hat einen großen Garten mit Blumen und Bäumen. Er fährt mit dem Bus zur Schule.'
+
+3. Sarah: 'Sie wohnt in einer WG mit drei Freundinnen. Ihre Wohnung liegt im zweiten Stock. Sie hat einen Balkon und kauft oft zusammen im Supermarkt ein.'
+PERTANYAAN:
+Welche Aussage passt zu dem text? Klick auf richtig oder falsch!
+OPSI / PERNYATAAN:
+  - A. Maja hat einen Garten hinter dem Haus.
+  - B. Tom lebt allein in einer kleinen Wohnung.
+  - C. Sarah wohnt nicht im Erdgeschoss.
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: ['A:Anna', 'B:Jonas', 'C:Anna']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Lies die folgenden Texte!
+[Konteks Visual Gambar 19839_3408b469bb8bf594a9702912a563d77e.png]:
+Teks bacaan dalam tabel berjudul 'Meine Sommerreisen':
+
+Anna in Wien: 'Ich war im Juli für vier Tage in Wien. Ich bin mit dem Zug gekommen. Die Stadt war lebendig und es war sehr warm. Ich habe den Stephansdom besichtigt und ein klassisches Konzert in einem alten Saal gehört. Tagsüber bin ich oft durch die Parks gegangen. Ich habe auch Wiener Schnitzel probiert – sehr lecker! Ich war mit meiner Freundin dort, wir hatten viel Spaß.'
+
+Jonas in Salzburg: 'Meine Sommerferien habe ich in Salzburg verbracht. Ich bin mit dem Fahrrad angekommen, weil ich in der Nähe wohne. Das Wetter war nicht zu heiß, genau richtig. Ich habe die Festung Hohensalzburg besucht und ein Museum über Mozart. Abends habe ich oft draußen gegessen und Musik gehört. Ich war alleine unterwegs, aber ich habe viele nette Leute kennengelernt.'
+PERTANYAAN:
+Wer sagt was? Klick auf die richtige Person!
+OPSI / PERNYATAAN:
+  - A. Die Person war mit jemandem unterwegs.
+  - B. Die Person hat neue Kontakte im Urlaub gemacht.
+  - C. Die Person hat eine Musikveranstaltung besucht.
+

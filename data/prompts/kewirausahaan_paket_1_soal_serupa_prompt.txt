@@ -1,0 +1,133 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Kewirausahaan / PKK (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: D
+Stimulus Teks: Sebuah kelompok siswa SMK merancang usaha kerajinan dari bahan daur ulang, berupa tas dan dompet yang dibuat dari limbah plastik. Dalam proposal usaha mereka, dijelaskan bahwa produk tersebut ditujukan kepada konsumen berusia 15–30 tahun, baik laki-laki maupun perempuan, yang memiliki kesadaran tinggi terhadap isu lingkungan.
+
+Penjualan dilakukan secara langsung di sekolah dan komunitas lokal, serta secara daring melalui berbagai platform media sosial. Kelompok ini juga menyajikan keunggulan produk mereka dibanding kompetitor, seperti desain yang unik, proses produksi ramah lingkungan, dan harga yang terjangkau bagi pelajar.
+Pertanyaan: Informasi tersebut merupakan rancangan yang terdapat dalam proposal usaha pada komponen....
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Dania menjalankan usaha produksi pakaian dengan menggunakan nama dan logo yang menyerupai milik sebuah merek terkenal. Strategi ini ia pilih agar produknya lebih cepat dikenal dan menarik minat konsumen. Namun, tindakan tersebut justru menimbulkan kebingungan di kalangan masyarakat dan berpotensi merugikan perusahaan asli. Akibatnya, ia dianggap telah melanggar hak kekayaan intelektual.
+Pertanyaan: Apa yang dapat Dania lakukan agar masalah tersebut dapat terselesaikan dan usahanya tetap dapat berjalan?
+
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: ['A', 'B', 'D']
+Stimulus Teks: Andi, Citra, dan Feti memiliki usaha minuman kopi instan berbahan alami tanpa pengawet. Produk tersebut dikemas dalam bentuk serbuk siap seduh dan ditujukan untuk remaja dan dewasa yang menginginkan kopi praktis dan sehat. Mereka memasarkan produk secara langsung melalui toko kelontong dan minimarket, serta memanfaatkan media sosial untuk promosi digital. Sesekali, mereka juga berpartisipasi dalam bazar guna meningkatkan penjualan.
+
+Setelah peluncuran awal yang mendapat respon positif, penjualan mengalami penurunan yang signifikan dalam dua bulan terakhir. Mereka pun mengidentifikasi beberapa kendala sebagai berikut:
+
+Harga produk dianggap terlalu tinggi dibandingkan merek kopi komersial yang sudah dikenal luas.
+
+Informasi pada kemasan masih terbatas.
+
+Penjualan melalui media sosial belum mencapai target.
+
+Distribusi produk masih belum menjangkau berbagai lokasi penjualan potensial.
+Pertanyaan: Berdasarkan situasi tersebut, manakah strategi yang dapat diterapkan agar usaha kopi tersebut dapat berkembang dan berkelanjutan?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: C
+Stimulus Teks: Sebuah tim wirausaha muda ingin membuat aplikasi layanan laundry online. Mereka telah melakukan diskusi dan survei dengan calon pengguna dan mengidentifikasi kebutuhan utama, seperti penjadwalan penjemputan, notifikasi status cucian, dan metode pembayaran digital. Mereka juga sudah membuat sketsa desain aplikasi secara sederhana berdasarkan hasil identifikasi kebutuhan tersebut.
+Pertanyaan: Tahapan selanjutnya yang dapat dilakukan oleh tim tersebut adalah....
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: PT Mandala Foods perusahaan yang memproduksi makanan beku seperti nugget sayur, sosis tempe, dan bakso ikan. Menjelang libur akhir tahun, permintaan meningkat hingga 3 kali lipat dari bulan-bulan sebelumnya. Untuk mengantisipasi lonjakan ini, manajemen merancang perencanaan produksi jangka pendek.
+Pertanyaan: Bagaimana perencanaan yang dilakukan PT Mandala Foods agar semua aspek berjalan dengan baik?
+
+Tentukan Benar atau Salah pasa setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: C
+Stimulus Teks: Kelompok siswa SMK membuka usaha kuliner inovatif bernama NASPO (Nasi Populer), yang menjual nasi ayam bumbu bakar kemasan instan siap panaskan. Mereka menargetkan segmen pasar pekerja kantoran yang sering tidak sempat makan siang di luar.
+
+Untuk memenuhi permintaan pelanggan selama 5 hari kerja, mereka memproduksi 250 boks NASPO per minggu. Berikut adalah rincian biaya produksi:
+
+Komponen Biaya Produksi
+
+Jumlah
+
+Bahan baku langsung (per 250 box)
+
+Beras: Rp350.000,00
+
+Ayam dan bumbu: Rp550.000,00
+
+Kemasan foodgrade: Rp250.000,00
+
+Tenaga kerja langsung
+
+2 orang × Rp150.000,00 × 2 hari = Rp600.000,00
+
+Overhead produksi
+
+Listrik & air: Rp150.000,00
+
+Gas & peralatan: Rp200.000,00
+
+Biaya transportasi logistik: Rp100.000,00
+
+Mereka juga mencatat bahwa sekitar 10 boks rusak atau tidak layak jual akibat kesalahan pengemasan dan overcook, sehingga hanya 240 boks yang layak dijual ke konsumen.
+Pertanyaan: Berdasarkan informasi tersebut, berapakah biaya produksi per unit (per boks) NASPO yang layak jual?
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: C
+Stimulus Teks: Sebuah kelompok murid SMK memproduksi sabun cuci piring ramah lingkungan. Produk tersebut mereka jual langsung ke teman-teman sekolah, guru, dan tetangga tanpa melalui perantara. Mereka juga membuka pemesanan lewat media sosial.
+Pertanyaan: Berdasarkan contoh tersebut, jenis saluran distribusi yang digunakan oleh murid termasuk dalam ….
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: ['B', 'C', 'D']
+Stimulus Teks: Perusahaan Raffa yang bergerak di bidang manufaktur menyusun proposal usaha dengan rencana produksi yang dilakukan secara bertahap, dimulai dari pemilahan bahan baku, proses pengolahan, pengemasan, hingga pelabelan produk. Bahan baku utama diperoleh dari mitra lokal, sehingga mempermudah proses pengiriman ke pabrik. Untuk meningkatkan efisiensi, kegiatan produksi dijadwalkan setiap hari kerja, dengan target awal sebanyak 200 unit per bulan menggunakan peralatan semi-manual yang sesuai dengan skala usaha kecil menengah.
+Pertanyaan: Apa alasan aspek produksi dalam rencana usaha tersebut dianggap layak?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Salah']
+Stimulus Teks: Perusahaan Y-Mobile pernah menjadi pelopor dalam komunikasi mobile dengan fitur unggulan dan desain fisik yang khas. Namun, perusahaan ini gagal beradaptasi terhadap perubahan tren teknologi ketika kompetitor mulai memperkenalkan fitur yang lebih canggih. Y-Mobile tetap bertahan dengan desain lama dan mengandalkan loyalitas pelanggan lama. Akibatnya, perusahaan tertinggal jauh dan akhirnya kehilangan pangsa pasar secara signifikan.
+
+Perusahaan kemudian mengidentifikasi penyebab utama kegagalan sebagai berikut:
+
+Keterlambatan dalam merespons inovasi teknologi.
+
+Kegagalan membangun ekosistem digital yang kompetitif.
+
+Ketergantungan berlebihan pada model produk lama dan basis pelanggan tradisional.
+Pertanyaan: Manakah pernyataan berikut ini yang merupakan solusi tepat untuk mengatasi penyebab kegagalan tersebut?
+
+Tentukan Benar atau Salah pada setiap pernyataan berikut!
+

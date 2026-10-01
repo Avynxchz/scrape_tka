@@ -13,6 +13,7 @@ dilempar apa adanya agar UI bisa menampilkan state retry yang jujur.
 """
 import json
 import os
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -28,6 +29,29 @@ class LLMError(Exception):
         super().__init__(message)
         self.kind = kind          # timeout | rate_limit | connection | malformed | provider_error
         self.status = status
+
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def _auto_load_env():
+    if "pytest" in sys.modules or os.environ.get("PYTEST_CURRENT_TEST"):
+        return
+    for fname in [".env", ".env.example"]:
+        fpath = os.path.join(BASE_DIR, fname)
+        if os.path.isfile(fpath):
+            try:
+                with open(fpath, "r", encoding="utf-8") as f:
+                    for line in f:
+                        line = line.strip()
+                        if line and not line.startswith("#") and "=" in line:
+                            k, v = line.split("=", 1)
+                            k, v = k.strip(), v.strip()
+                            if k and k not in os.environ and v:
+                                os.environ[k] = v
+            except Exception:
+                pass
+
+_auto_load_env()
 
 
 def _first_env(*names, default=None):
@@ -79,11 +103,92 @@ def mark_key_rate_limited(key, cooldown_seconds=20):
             _key_cooldowns[key] = time.time() + cooldown_seconds
 
 
+_gemini_key_lock = threading.Lock()
+_gemini_rotator_index = 0
+_gemini_cooldowns = {}
+
+
+def get_gemini_api_keys():
+    """Mengambil semua Gemini API key dari GEMINI_API_KEYS (koma/spasi/baris baru) serta GEMINI_TUTOR_API_KEY & GEMINI_API_KEY."""
+    keys = []
+    raw = _first_env("GEMINI_API_KEYS", default="")
+    if raw:
+        keys.extend([k.strip() for k in re.split(r"[,;\s\n\r]+", raw) if k.strip()])
+    for env_name in ("GEMINI_TUTOR_API_KEY", "GEMINI_API_KEY"):
+        val = os.environ.get(env_name)
+        if val and val.strip() and val.strip() not in keys:
+            keys.append(val.strip())
+    return keys
+
+
+def next_gemini_api_key():
+    """Rotasi Gemini API key round-robin dengan deteksi cooldown 429."""
+    global _gemini_rotator_index
+    keys = get_gemini_api_keys()
+    if not keys:
+        return None
+    with _gemini_key_lock:
+        now = time.time()
+        for _ in range(len(keys)):
+            k = keys[_gemini_rotator_index % len(keys)]
+            _gemini_rotator_index += 1
+            if _gemini_cooldowns.get(k, 0) <= now:
+                return k
+        _gemini_rotator_index += 1
+        return min(keys, key=lambda k: _gemini_cooldowns.get(k, 0))
+
+
+def mark_gemini_key_rate_limited(key, cooldown_seconds=45):
+    """Tandai satu key Gemini terkena 429 agar sementara tidak dipilih dan rotasi lanjut ke key lain."""
+    if key:
+        with _gemini_key_lock:
+            _gemini_cooldowns[key] = time.time() + cooldown_seconds
+
+
+def get_gemini_api_key():
+    """Mengambil Google Gemini API key aktif."""
+    return next_gemini_api_key()
+
+
 def active_provider_info():
     """Info provider aktif (untuk ditampilkan/diagnosa — tanpa membocorkan API key)."""
-    ollama = _first_env("OLLAMA_BASE_URL", default="http://127.0.0.1:11434")
-    cloud = _first_env("OPENAI_COMPATIBLE_BASE_URL", "LLM_BASE_URL")
+    gemini_key = get_gemini_api_key()
     keys = get_api_keys()
+    cloud = _first_env("OPENAI_COMPATIBLE_BASE_URL", "LLM_BASE_URL")
+    ollama = _first_env("OLLAMA_BASE_URL", default="http://127.0.0.1:11434")
+
+    model_options = []
+    if cloud and keys:
+        model_options.append({
+            "id": "qwen-groq",
+            "name": "Qwen 2.5 27B (Groq Fast)",
+            "tier": "cloud",
+            "default": not bool(gemini_key)
+        })
+    if gemini_key:
+        model_options.append({
+            "id": "gemini-flash",
+            "name": "Gemini 3.8 Flash (Vision Multimodal)",
+            "tier": "paid",
+            "default": not model_options
+        })
+        model_options.append({
+            "id": "gemini-pro",
+            "name": "Gemini Pro (Advanced)",
+            "tier": "paid",
+            "default": False
+        })
+
+    if gemini_key:
+        return {
+            "provider": "google_gemini",
+            "base_url": cloud or ollama,
+            "model": "gemini-3.8-flash",
+            "api_key_set": True,
+            "has_gemini": True,
+            "has_groq": bool(cloud and keys),
+            "model_options": model_options,
+        }
     if cloud:
         return {
             "provider": "openai_compatible",
@@ -91,6 +196,9 @@ def active_provider_info():
             "model": _first_env("LLM_MODEL", default=""),
             "api_key_set": len(keys) > 0,
             "keys_count": len(keys),
+            "has_gemini": False,
+            "has_groq": True,
+            "model_options": model_options,
         }
     return {
         "provider": "ollama",
@@ -98,6 +206,9 @@ def active_provider_info():
         "model": _first_env("LLM_MODEL", default=""),
         "api_key_set": False,
         "keys_count": 0,
+        "has_gemini": False,
+        "has_groq": False,
+        "model_options": model_options,
     }
 
 
@@ -136,26 +247,81 @@ def resolve_ollama_model():
     return models[0], None
 
 
-def generate(messages, *, temperature=0.7, max_tokens=None, timeout=None):
+def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tokens=None, timeout=None, return_meta=False):
     """Kirim daftar pesan {role, content} ke provider aktif, balas teks murni.
 
+    Bila return_meta=True, kembalikan tuple (text, {"model": actual_model, "provider": provider}).
     Melempar LLMError dengan `kind` yang jelas agar pemanggil bisa
     menampilkan pesan retry yang tepat tanpa mengorupsi riwayat.
+
+    Failover lintas-provider: bila rute utama gagal karena kesalahan sementara
+    (rate_limit / timeout / connection / provider_error), rute cadangan
+    dikonfigurasi akan dicoba. Gemini 429 -> Qwen/Groq (chat teks tetap
+    tersedia), Qwen/Groq 429 -> Gemini (sekaligus membawa gambar vision).
+    Gambar hanya dapat dikirim ke rute multimodal; fallback tanpa gambar
+    tetap berfungsi karena konteks gambar sudah terwakili transkripsi teks.
     """
-    timeout = timeout or _first_env("LLM_TIMEOUT", default=DEFAULT_TIMEOUT, )
+    timeout = timeout or _first_env("LLM_TIMEOUT", default=DEFAULT_TIMEOUT)
     try:
         timeout = float(timeout)
     except (TypeError, ValueError):
         timeout = DEFAULT_TIMEOUT
 
-    info = active_provider_info()
-    if info["provider"] == "openai_compatible":
-        return _post_openai_compatible(messages, info, temperature, max_tokens, timeout)
-    model, err = resolve_ollama_model()
-    if err:
-        raise LLMError(err, kind="provider_error")
-    info["model"] = model
-    return _post_ollama(messages, info, temperature, max_tokens, timeout)
+    gemini_key = get_gemini_api_key()
+    cloud = _first_env("OPENAI_COMPATIBLE_BASE_URL", "LLM_BASE_URL")
+    cloud_keys = get_api_keys()
+
+    want_gemini = (model and "gemini" in model.lower()) or (not model and gemini_key)
+    want_qwen = ((model and "qwen" in model.lower())
+                 or (not model and not gemini_key and cloud and cloud_keys))
+
+    routes = []
+    if want_gemini and gemini_key:
+        routes.append("gemini")
+    if (want_qwen or (cloud and cloud_keys)) and cloud:
+        routes.append("qwen")
+    if "gemini" not in routes and gemini_key:
+        routes.append("gemini")
+
+    last_err = None
+    for i, route in enumerate(routes):
+        try:
+            if route == "gemini":
+                model_choice = model or "gemini-flash"
+                text, actual_model = _post_gemini(messages, model_choice=model_choice,
+                                                  image_paths=image_paths,
+                                                  temperature=temperature,
+                                                  max_tokens=max_tokens, timeout=timeout)
+                if return_meta:
+                    return text, {"model": actual_model, "provider": "google_gemini"}
+                return text
+            # Rute openai-compatible (Qwen/Groq) — teks murni, gambar tidak terkirim
+            if image_paths:
+                print(f"[tutor_llm] Catatan: fallback ke provider teks — {len(image_paths)} "
+                      f"gambar tidak dikirim (konteks gambar terwakili transkripsi).")
+            info = {"provider": "openai_compatible", "base_url": cloud,
+                    "model": _first_env("LLM_MODEL", default="qwen/qwen3.8-27b")}
+            text, actual_model = _post_openai_compatible(messages, info, temperature,
+                                                         max_tokens, timeout)
+            if return_meta:
+                return text, {"model": actual_model, "provider": "openai_compatible"}
+            return text
+        except LLMError as e:
+            last_err = e
+            # Gagal fatal (malformed / pesan tidak layak) tidak dicoba ke provider lain
+            if e.kind not in ("rate_limit", "timeout", "connection", "provider_error"):
+                raise
+            if i < len(routes) - 1:
+                print(f"[tutor_llm] Rute {route} gagal ({e.kind}) — mencoba rute cadangan...",
+                      flush=True)
+            continue
+    raise last_err or LLMError("Tidak ada provider LLM yang terkonfigurasi.", kind="provider_error")
+
+
+def generate_with_meta(messages, **kwargs):
+    """Kembalikan tuple (text, metadata) termasuk nama model yang sebenarnya merespons."""
+    kwargs["return_meta"] = True
+    return generate(messages, **kwargs)
 
 
 # ---------------------------------------------------------------------------
@@ -227,7 +393,8 @@ def _post_ollama(messages, info, temperature, max_tokens, timeout):
     text = _clean_think(text)
     if not text.strip():
         raise LLMError("Ollama mengembalikan konten kosong.", kind="malformed")
-    return text
+    actual_model = data.get("model") or info.get("model") or "ollama"
+    return text, actual_model
 
 
 def _post_openai_compatible(messages, info, temperature, max_tokens, timeout):
@@ -246,7 +413,7 @@ def _post_openai_compatible(messages, info, temperature, max_tokens, timeout):
 
     for attempt in range(max_attempts):
         key = next_api_key()
-        headers = {"Content-Type": "application/json"}
+        headers = {"Content-Type": "application/json", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) CBT-TKA-Tutor/1.0"}
         if key:
             headers["Authorization"] = f"Bearer {key}"
         req = urllib.request.Request(url, data=body, headers=headers, method="POST")
@@ -262,6 +429,16 @@ def _post_openai_compatible(messages, info, temperature, max_tokens, timeout):
                 if attempt < max_attempts - 1:
                     time.sleep(0.3)
                     continue
+            elif e.code == 404:
+                # Model tidak ditemukan / tidak tersedia di provider: otomatis fallback
+                for fallback_m in ("qwen/qwen3.8-27b", "openai/gpt-oss-120b", "openai/gpt-oss-20b"):
+                    if fallback_m != payload.get("model"):
+                        payload["model"] = fallback_m
+                        body = json.dumps(payload).encode("utf-8")
+                        break
+                else:
+                    raise LLMError(f"Provider HTTP 404 (Model tidak ditemukan): {e.reason}", kind="provider_error", status=404)
+                continue
             kind = "rate_limit" if e.code == 429 else "provider_error"
             raise LLMError(f"Provider HTTP {e.code}: {e.reason}", kind=kind, status=e.code)
         except urllib.error.URLError as e:
@@ -283,7 +460,156 @@ def _post_openai_compatible(messages, info, temperature, max_tokens, timeout):
     text = _clean_think(text)
     if not text.strip():
         raise LLMError("Provider mengembalikan konten kosong.", kind="malformed")
-    return text
+    raw_m = str(data.get("model") or payload.get("model") or info.get("model") or "qwen").lower()
+    actual_model = "Qwen 2.5 27B" if "qwen" in raw_m else (data.get("model") or payload.get("model") or "AI Model")
+    return text, actual_model
+
+
+GEMINI_FLASH_CANDIDATES = [
+    "gemini-3.8-flash",
+    "gemini-3.7-flash",
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+]
+
+GEMINI_PRO_CANDIDATES = [
+    "gemini-3.8-flash",
+    "gemini-3.7-flash",
+    "gemini-3.6-flash",
+    "gemini-3.5-flash",
+]
+
+
+def _post_gemini(messages, model_choice="gemini-3.8-flash", image_paths=None, temperature=0.7, max_tokens=None, timeout=120):
+    """Kirim percakapan + gambar diagram visual ke Google Gemini API dengan auto-failover multi-model & key rotation."""
+    import base64
+    import mimetypes
+
+    keys = get_gemini_api_keys()
+    if not keys:
+        raise LLMError("GEMINI_API_KEY belum dikonfigurasi di .env", kind="provider_error")
+
+    parts = []
+
+    # 1. Lampirkan gambar visual diagram lokal (multimodal)
+    if image_paths:
+        for p in image_paths:
+            if os.path.isfile(p):
+                try:
+                    mime, _ = mimetypes.guess_type(p)
+                    mime = mime or "image/png"
+                    with open(p, "rb") as img_f:
+                        img_b64 = base64.b64encode(img_f.read()).decode("utf-8")
+                    parts.append({
+                        "inline_data": {
+                            "mime_type": mime,
+                            "data": img_b64
+                        }
+                    })
+                except Exception as ex:
+                    print(f"[tutor_llm] Warning: Gagal membaca gambar {p}: {ex}")
+
+    # 2. Susun prompt teks lengkap
+    full_prompt_chunks = []
+    for m in messages:
+        role = m.get("role", "user")
+        content = (m.get("content") or "").strip()
+        if not content:
+            continue
+        if role == "system":
+            full_prompt_chunks.append(f"{content}\n")
+        elif role == "user":
+            full_prompt_chunks.append(f"Siswa: {content}")
+        elif role == "assistant":
+            full_prompt_chunks.append(f"Tutor: {content}")
+
+    full_prompt = "\n\n".join(full_prompt_chunks).strip()
+    parts.append({"text": full_prompt})
+
+    out_tokens = max_tokens or 16384
+    payload = {
+        "contents": [{"parts": parts}],
+        "generationConfig": {
+            "temperature": float(temperature),
+            "maxOutputTokens": out_tokens,
+            "thinkingConfig": {"thinkingBudget": 0}
+        }
+    }
+    req_body = json.dumps(payload).encode("utf-8")
+
+    models_to_try = [model_choice] if model_choice else []
+    for m in GEMINI_FLASH_CANDIDATES:
+        if m not in models_to_try:
+            models_to_try.append(m)
+
+    last_error = None
+
+    for model_name in models_to_try:
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent"
+        max_attempts = max(3, len(keys))
+
+        for attempt in range(max_attempts):
+            gemini_key = next_gemini_api_key()
+            headers = {
+                "Content-Type": "application/json",
+                "x-goog-api-key": gemini_key,
+                "User-Agent": "CBT-TKA-Tutor/1.0"
+            }
+            req = urllib.request.Request(url, data=req_body, headers=headers, method="POST")
+
+            try:
+                with urllib.request.urlopen(req, timeout=timeout) as resp:
+                    data = json.loads(resp.read().decode("utf-8"))
+                    cands = data.get("candidates", [])
+                    if not cands:
+                        raise LLMError(f"Gemini ({model_name}) tidak memberikan respons.", kind="provider_error")
+
+                    cand = cands[0]
+                    content_parts = cand.get("content", {}).get("parts", [])
+                    text_pieces = [p.get("text", "") for p in content_parts if "text" in p]
+                    text = "".join(text_pieces).strip()
+                    text = _clean_think(text)
+                    if not text:
+                        raise LLMError(f"Gemini ({model_name}) mengembalikan respons teks kosong.", kind="malformed")
+
+                    human_model_name = f"Gemini {model_name.replace('gemini-', '').replace('-', ' ').title()}"
+                    return text, human_model_name
+            except urllib.error.HTTPError as e:
+                last_error = e
+                err_body = ""
+                try:
+                    err_body = e.read().decode("utf-8", errors="ignore")
+                except Exception:
+                    pass
+
+                if e.code in (429, 503):
+                    delay = 3.0
+                    m_delay = re.search(r'"retryDelay":\s*"(\d+)s"', err_body)
+                    if m_delay:
+                        delay = float(m_delay.group(1))
+                    mark_gemini_key_rate_limited(gemini_key, cooldown_seconds=int(delay) + 2)
+                    # Jika 429 quota habis permanen untuk model ini, langsung coba model berikutnya
+                    if "exceeded your current quota" in err_body:
+                        break
+                    time.sleep(min(delay, 5.0))
+                    continue
+                elif e.code == 404:
+                    # Model tidak tersedia, coba kandidat model berikutnya
+                    break
+                else:
+                    raise LLMError(f"Gemini API HTTP {e.code}: {e.reason}", kind="provider_error", status=e.code)
+            except urllib.error.URLError as e:
+                raise LLMError(f"Tidak dapat menghubungi Google Gemini API: {e.reason}", kind="connection")
+            except TimeoutError:
+                raise LLMError("Permintaan ke Google Gemini API timeout.", kind="timeout")
+            except json.JSONDecodeError:
+                raise LLMError("Respons Google Gemini API bukan JSON valid.", kind="malformed")
+
+    if last_error:
+        if last_error.code == 429:
+            raise LLMError("Batas kecepatan Google Gemini API tercapai sementara pada semua model.", kind="rate_limit", status=429)
+        raise LLMError(f"Google Gemini gagal ({last_error.code}): {last_error.reason}", kind="provider_error", status=last_error.code)
+    raise LLMError("Seluruh model Google Gemini Flash gagal merespons.", kind="provider_error")
 
 
 def wait_until_ready(wait_seconds=10, poll=0.5):

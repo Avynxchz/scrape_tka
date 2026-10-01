@@ -1,0 +1,2134 @@
+<!DOCTYPE html><html lang="en"><head>
+	<title>Simulasi TKA</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-16x16.png">
+	<link rel="manifest" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/site.webmanifest">
+	<link rel="mask-icon" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/safari-pinned-tab.svg">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://pusmendik.kemendikdasmen.go.id/tka/_assets/css/icheck-bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120206082-3"></script>
+	<script>
+
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120206082-3');
+
+	</script> -->
+</head>
+<body>
+
+<div class="container-fluid text-white" style="background:#326698;background-size: contain;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/bg-top.png');background-repeat: no-repeat;background-position: left; height:150px;position:fixed;top:0px;left:0px;right:0px">
+	  <div class="row">
+		<div class="col pl-5 pt-1">
+			<table>
+				<tbody><tr>
+					<td>
+						<img style="margin:5px;height:70px" src="https://pusmendik.kemendikdasmen.go.id/tka/images/logo-kemdikbud-71x72.png">
+					</td>
+					<td>
+						<div><b>PUSMENDIK</b></div>
+						<div><small>APLIKASI ANBK<small></small></small></div><small><small>
+					</small></small></td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div class="col pl-5 pt-1 mt-4 pr-5 text-right">
+			<table align="right">
+				<tbody><tr>
+					<td style="vertical-align:top">
+						<div><small>P130100230 - PESERTA BAHASA_INGGRIS_PAKET_2<small></small></small></div><small><small>
+					</small></small></td>
+					<td>
+						<div class="pl-1 pr-1 pt-1 pb-1" style="background:#74b9ff;border-radius:2px;color:#326698"><i class="fa fa-graduation-cap fa-flip-horizontal"></i></div>
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+	  </div>
+</div>
+
+<div class="container-fluid fadeInDown mb-5" style="margin-top:90px;">
+  <div class="row">
+	<div class="col-sm-12" style="border:0px solid red">
+		<div class="text-left pt-3 pb-5 mb-2" id="formContent" style="background-size: 300px;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/logo-w.png');background-repeat: no-repeat;background-position: top right; ">
+		  <div class="row row-atas"> 
+			<div class="col-sm-4"><span style="font-size:18px">Soal nomor</span> <span style="font-size:20px" id="noSoal">1</span></div>
+			<div class="col-sm-8 cont-btn-informasi">
+				<button class="btn-informasi btn btn-primary btn-round m" data-toggle="modal" data-target="#infoSoal" style="border-radius:30px;font-size:12px;"><i class="fa fa-info-circle d-sm-none"></i><span class="d-none d-sm-inline-block">INFORMASI SOAL<span></span></span></button>
+				<button class="btn-informasi btn  btn-outline-secondary  btn-round" style="border-radius:30px;font-size:12px;">Sisa Waktu : <b><span id="countdown">01:14:58</span></b></button>
+				<button class="btn-informasi btn btn-primary btn-round" data-toggle="modal" data-target="#myModal" style="border-radius:30px;font-size:12px"><span class="d-none d-sm-inline-block">Daftar Soal </span> <i class="fa fa-th-large"></i></button>
+			</div>
+		  </div>
+		  <div class="row pb-2  row-atas"> 
+			<div class="col-sm-6"><small>Ukuran font soal:</small> <span style="font-size:12px" class="ml-2 mr-1 cfont" id="c1" onclick="changeFont('12','c1')">A</span> <span style="font-size:16px" class="ml-2 mr-1 cfont" id="c2" onclick="changeFont('16','c2')">A</span> <span style="font-size:20px" class="ml-2 mr-1 cfont" id="c3" onclick="changeFont('18','c3')">A</span></div>
+			<div class="col-sm-6 mt-2 mataujian">
+				Bahasa Inggris (Paket 2)			</div>
+		  </div>
+		  <div class="row pl-3 pr-3 pb-2 mb-1"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  <!-- isi soal -->
+		  <div class="row pl-3 pr-3 pb-2 mb-2"> 
+			<div class="col p-3 " id="isisoal" style="border:2px solid #eee; border-top:10px solid #eee;">
+				<div class="soal-soal row" style="" id="soal-no-1"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The Lion and the Mouse</strong></p>
+<p style="text-align: justify;">Once upon a time, in a thick jungle in Africa, there lived a strong and fierce lion. Every afternoon, the lion would rest under the cool shade of a big tree after walking through the forest.<br>One day, while he was sleeping, a playful little mouse passed by. The mouse saw the lion’s thick mane and was curious. He climbed up and began to jump around on the lion’s head, playing in his mane.<br>The lion woke up suddenly and was not happy at all. He quickly caught the mouse in his big paw and roared, “Who dares to wake me up?” He was very angry and almost killed the mouse.<br>Scared and shaking, the mouse begged the lion, “Please don’t kill me! I didn’t mean to bother you. If you let me go, I promise I’ll help you one day.”<br>The lion laughed loudly. “You? Help me? That’s funny.” But the lion was feeling kind, so he let the mouse go free.<br>A few days later, the lion was walking through the jungle again when he fell into a trap. A net set by hunters caught him, and he couldn’t escape. He tried to bite and tear the ropes, but they were too strong. The lion roared loudly, hoping someone would come.<br>The mouse heard the roar and ran to help. He saw the lion trapped and quickly started to chew the ropes with his sharp teeth. After some time, the net broke, and the lion was free.<br>The lion looked at the mouse with surprise and said, “Thank you! You really saved my life.”<br>The mouse smiled and said, “I told you I would help you one day.”<br>From that moment on, the lion and the mouse became close friends. The lion learned that even small creatures can do great things, and we all need help sometimes.</p>
+<p><span style="font-size: 11px;"><em>Source: <span style="color: #0000ff;">https://www.vedantu.com/stories/the-lion-and-the-mouse</span></em></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which option best summarizes the story?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','0');">
+													<input id="pilihan_1_0" onchange="pilihan('1','a','754')" pil="a" name="pilihan1" type="radio">
+													<label for="pilihan_1_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><strong>Beginning:</strong> A lion was walking through the jungle.<br><strong>Problem:</strong> The mouse got lost and couldn't find food.<br><strong>Solution:</strong> The lion gave food to the mouse.<br><strong>Lesson:</strong> Always be generous to those in need.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','1');">
+													<input id="pilihan_1_1" onchange="pilihan('1','b','754')" pil="b" name="pilihan1" type="radio">
+													<label for="pilihan_1_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><strong>Beginning:</strong> A mouse accidentally disturbed a sleeping lion.<br><strong>Problem:</strong> The lion was caught in a hunter’s net.<br><strong>Solution:</strong> The mouse chewed through the net and set the lion free.<br><strong>Lesson:</strong> Even the smallest creature can be a great help.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','2');">
+													<input id="pilihan_1_2" onchange="pilihan('1','c','754')" pil="c" name="pilihan1" type="radio">
+													<label for="pilihan_1_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><strong>Beginning:</strong> The lion and mouse were best friends.<br><strong>Problem:</strong> The lion got hurt in a fight.<br><strong>Solution:</strong> The mouse helped him find water.<br><strong>Lesson:</strong> Friendship is built on adventure.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','3');">
+													<input id="pilihan_1_3" onchange="pilihan('1','d','754')" pil="d" name="pilihan1" type="radio">
+													<label for="pilihan_1_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><strong>Beginning:</strong> A mouse was building a home near a tree.<br><strong>Problem:</strong> A storm destroyed the tree and trapped the lion.<br><strong>Solution:</strong> The mouse called for help from the jungle.<br><strong>Lesson:</strong> Teamwork solves big problems.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','4');">
+													<input id="pilihan_1_4" onchange="pilihan('1','e','754')" pil="e" name="pilihan1" type="radio">
+													<label for="pilihan_1_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><strong>Beginning:</strong> A lion was hungry and searching for food.<br><strong>Problem:</strong> He couldn’t catch any prey.<br><strong>Solution:</strong> The mouse helped him find food.<br><strong>Lesson:</strong> Hunger teaches humility.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display: none;" id="soal-no-2"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The Lion and the Mouse</strong></p>
+<p style="text-align: justify;">Once upon a time, in a thick jungle in Africa, there lived a strong and fierce lion. Every afternoon, the lion would rest under the cool shade of a big tree after walking through the forest.<br>One day, while he was sleeping, a playful little mouse passed by. The mouse saw the lion’s thick mane and was curious. He climbed up and began to jump around on the lion’s head, playing in his mane.<br>The lion woke up suddenly and was not happy at all. He quickly caught the mouse in his big paw and roared, “Who dares to wake me up?” He was very angry and almost killed the mouse.<br>Scared and shaking, the mouse begged the lion, “Please don’t kill me! I didn’t mean to bother you. If you let me go, I promise I’ll help you one day.”<br>The lion laughed loudly. “You? Help me? That’s funny.” But the lion was feeling kind, so he let the mouse go free.<br>A few days later, the lion was walking through the jungle again when he fell into a trap. A net set by hunters caught him, and he couldn’t escape. He tried to bite and tear the ropes, but they were too strong. The lion roared loudly, hoping someone would come.<br>The mouse heard the roar and ran to help. He saw the lion trapped and quickly started to chew the ropes with his sharp teeth. After some time, the net broke, and the lion was free.<br>The lion looked at the mouse with surprise and said, “Thank you! You really saved my life.”<br>The mouse smiled and said, “I told you I would help you one day.”<br>From that moment on, the lion and the mouse became close friends. The lion learned that even small creatures can do great things, and we all need help sometimes.</p>
+<p><span style="font-size: 11px;"><em>Source: <span style="color: #0000ff;">https://www.vedantu.com/stories/the-lion-and-the-mouse</span></em></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which of the following statements best conveys the message of the story?<br>There is more than one answer. Click on every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('2.','0');">
+													<input id="pilihan_2_0" class="pilihan2" onchange="pilihan2('2','a','756')" pil="a" name="pilihan2" type="checkbox" value="A">
+													<label for="pilihan_2_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(2,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>We should never wake up a sleeping animal</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('2.','1');">
+													<input id="pilihan_2_1" class="pilihan2" onchange="pilihan2('2','b','756')" pil="b" name="pilihan2" type="checkbox" value="B">
+													<label for="pilihan_2_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(2,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Even the small and weak can help the strong</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('2.','2');">
+													<input id="pilihan_2_2" class="pilihan2" onchange="pilihan2('2','c','756')" pil="c" name="pilihan2" type="checkbox" value="C">
+													<label for="pilihan_2_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(2,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>It’s always good to ask for help when we need it</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('2.','3');">
+													<input id="pilihan_2_3" class="pilihan2" onchange="pilihan2('2','d','756')" pil="d" name="pilihan2" type="checkbox" value="D">
+													<label for="pilihan_2_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(2,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lions are dangerous animals and should be avoided</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('2.','4');">
+													<input id="pilihan_2_4" class="pilihan2" onchange="pilihan2('2','e','756')" pil="e" name="pilihan2" type="checkbox" value="E">
+													<label for="pilihan_2_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(2,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Never trust anyone who plays with your hair</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-3"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The Lion and the Mouse</strong></p>
+<p style="text-align: justify;">Once upon a time, in a thick jungle in Africa, there lived a strong and fierce lion. Every afternoon, the lion would rest under the cool shade of a big tree after walking through the forest.<br>One day, while he was sleeping, a playful little mouse passed by. The mouse saw the lion’s thick mane and was curious. He climbed up and began to jump around on the lion’s head, playing in his mane.<br>The lion woke up suddenly and was not happy at all. He quickly caught the mouse in his big paw and roared, “Who dares to wake me up?” He was very angry and almost killed the mouse.<br>Scared and shaking, the mouse begged the lion, “Please don’t kill me! I didn’t mean to bother you. If you let me go, I promise I’ll help you one day.”<br>The lion laughed loudly. “You? Help me? That’s funny.” But the lion was feeling kind, so he let the mouse go free.<br>A few days later, the lion was walking through the jungle again when he fell into a trap. A net set by hunters caught him, and he couldn’t escape. He tried to bite and tear the ropes, but they were too strong. The lion roared loudly, hoping someone would come.<br>The mouse heard the roar and ran to help. He saw the lion trapped and quickly started to chew the ropes with his sharp teeth. After some time, the net broke, and the lion was free.<br>The lion looked at the mouse with surprise and said, “Thank you! You really saved my life.”<br>The mouse smiled and said, “I told you I would help you one day.”<br>From that moment on, the lion and the mouse became close friends. The lion learned that even small creatures can do great things, and we all need help sometimes.</p>
+<p><span style="font-size: 11px;"><em>Source:&nbsp;<span style="color: #0000ff;">https://www.vedantu.com/stories/the-lion-and-the-mouse</span></em></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Why did the lion trust the mouse and decide to let him go instead of eating him?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','0');">
+													<input id="pilihan_3_0" onchange="pilihan('3','a','757')" pil="a" name="pilihan3" type="radio">
+													<label for="pilihan_3_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The lion was too tired to eat the mouse</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','1');">
+													<input id="pilihan_3_1" onchange="pilihan('3','b','757')" pil="b" name="pilihan3" type="radio">
+													<label for="pilihan_3_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The mouse told the lion he might help him one day</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','2');">
+													<input id="pilihan_3_2" onchange="pilihan('3','c','757')" pil="c" name="pilihan3" type="radio">
+													<label for="pilihan_3_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The lion was felling happy to see the mouse</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','3');">
+													<input id="pilihan_3_3" onchange="pilihan('3','d','757')" pil="d" name="pilihan3" type="radio">
+													<label for="pilihan_3_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The lion heard someone coming and got scared</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','4');">
+													<input id="pilihan_3_4" onchange="pilihan('3','e','757')" pil="e" name="pilihan3" type="radio">
+													<label for="pilihan_3_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The mouse promised to bring food for the lion</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-4"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The Lion and the Mouse</strong></p>
+<p style="text-align: justify;">Once upon a time, in a thick jungle in Africa, there lived a strong and fierce lion. Every afternoon, the lion would rest under the cool shade of a big tree after walking through the forest.<br>One day, while he was sleeping, a playful little mouse passed by. The mouse saw the lion’s thick mane and was curious. He climbed up and began to jump around on the lion’s head, playing in his mane.<br>The lion woke up suddenly and was not happy at all. He quickly caught the mouse in his big paw and roared, “Who dares to wake me up?” He was very angry and almost killed the mouse.<br>Scared and shaking, the mouse begged the lion, “Please don’t kill me! I didn’t mean to bother you. If you let me go, I promise I’ll help you one day.”<br>The lion laughed loudly. “You? Help me? That’s funny.” But the lion was feeling kind, so he let the mouse go free.<br>A few days later, the lion was walking through the jungle again when he fell into a trap. A net set by hunters caught him, and he couldn’t escape. He tried to bite and tear the ropes, but they were too strong. The lion roared loudly, hoping someone would come.<br>The mouse heard the roar and ran to help. He saw the lion trapped and quickly started to chew the ropes with his sharp teeth. After some time, the net broke, and the lion was free.<br>The lion looked at the mouse with surprise and said, “Thank you! You really saved my life.”<br>The mouse smiled and said, “I told you I would help you one day.”<br>From that moment on, the lion and the mouse became close friends. The lion learned that even small creatures can do great things, and we all need help sometimes.</p>
+<p style="text-align: justify;"><span style="font-size: 11px;"><em>Source: <span style="color: #0000ff;">https://www.vedantu.com/stories/the-lion-and-the-mouse</span></em></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>As you read the part where the lion let the mouse go, which of the following endings do you anticipate?<br>There is more than one answer, click on every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('4.','0');">
+													<input id="pilihan_4_0" class="pilihan4" onchange="pilihan2('4','a','758')" pil="a" name="pilihan4" type="checkbox" value="A">
+													<label for="pilihan_4_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(4,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The mouse forgets about the lion and never helps him</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('4.','1');">
+													<input id="pilihan_4_1" class="pilihan4" onchange="pilihan2('4','b','758')" pil="b" name="pilihan4" type="checkbox" value="B">
+													<label for="pilihan_4_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(4,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The lion gets into trouble and no one helps him</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('4.','2');">
+													<input id="pilihan_4_2" class="pilihan4" onchange="pilihan2('4','c','758')" pil="c" name="pilihan4" type="checkbox" value="C">
+													<label for="pilihan_4_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(4,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The lion becomes angry at all small animals</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('4.','3');">
+													<input id="pilihan_4_3" class="pilihan4" onchange="pilihan2('4','d','758')" pil="d" name="pilihan4" type="checkbox" value="D">
+													<label for="pilihan_4_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(4,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The mouse spreads the lion's kindnes to other animals</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('4.','4');">
+													<input id="pilihan_4_4" class="pilihan4" onchange="pilihan2('4','e','758')" pil="e" name="pilihan4" type="checkbox" value="E">
+													<label for="pilihan_4_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(4,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The mouse becomes the lion’s loyal assistant</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-5"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The Lion and the Mouse</strong></p>
+<p style="text-align: justify;">Once upon a time, in a thick jungle in Africa, there lived a strong and fierce lion. Every afternoon, the lion would rest under the cool shade of a big tree after walking through the forest.<br>One day, while he was sleeping, a playful little mouse passed by. The mouse saw the lion’s thick mane and was curious. He climbed up and began to jump around on the lion’s head, playing in his mane.<br>The lion woke up suddenly and was not happy at all. He quickly caught the mouse in his big paw and roared, “Who dares to wake me up?” He was very angry and almost killed the mouse.<br>Scared and shaking, the mouse begged the lion, “Please don’t kill me! I didn’t mean to bother you. If you let me go, I promise I’ll help you one day.”<br>The lion laughed loudly. “You? Help me? That’s funny.” But the lion was feeling kind, so he let the mouse go free.<br>A few days later, the lion was walking through the jungle again when he fell into a trap. A net set by hunters caught him, and he couldn’t escape. He tried to bite and tear the ropes, but they were too strong. The lion roared loudly, hoping someone would come.<br>The mouse heard the roar and ran to help. He saw the lion trapped and quickly started to chew the ropes with his sharp teeth. After some time, the net broke, and the lion was free.<br>The lion looked at the mouse with surprise and said, “Thank you! You really saved my life.”<br>The mouse smiled and said, “I told you I would help you one day.”<br>From that moment on, the lion and the mouse became close friends. The lion learned that even small creatures can do great things, and we all need help sometimes.</p>
+<p style="text-align: justify;"><span style="font-size: 11px;"><em>Source: <span style="color: #0000ff;">https://www.vedantu.com/stories/the-lion-and-the-mouse</span></em></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which of the following sentences from the story help you understand the lion’s character?<br>There is more than one answer. Click on every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('5.','0');">
+													<input id="pilihan_5_0" class="pilihan5" onchange="pilihan2('5','a','759')" pil="a" name="pilihan5" type="checkbox" value="A">
+													<label for="pilihan_5_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(5,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>“The lion always took his afternoon nap under the shade of a big tree in the bushes.”</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('5.','1');">
+													<input id="pilihan_5_1" class="pilihan5" onchange="pilihan2('5','b','759')" pil="b" name="pilihan5" type="checkbox" value="B">
+													<label for="pilihan_5_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(5,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>“He caught the mouse and questioned him for interrupting his nap.”</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('5.','2');">
+													<input id="pilihan_5_2" class="pilihan5" onchange="pilihan2('5','c','759')" pil="c" name="pilihan5" type="checkbox" value="C">
+													<label for="pilihan_5_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(5,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>“The lion was amused at the mouse’s words and decided to spare his life.”</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('5.','3');">
+													<input id="pilihan_5_3" class="pilihan5" onchange="pilihan2('5','d','759')" pil="d" name="pilihan5" type="checkbox" value="D">
+													<label for="pilihan_5_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(5,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>“With his sharp teeth, the mouse nibbled through the net.”</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('5.','4');">
+													<input id="pilihan_5_4" class="pilihan5" onchange="pilihan2('5','e','759')" pil="e" name="pilihan5" type="checkbox" value="E">
+													<label for="pilihan_5_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(5,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>“The lion thanked the mouse immensely for his help.”</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-6"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Effective Study Technique</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/86328_258f74df4430580ef40c593c4a6bc632.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Based on the information given, we can keep our mind focused and fresh by ….</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','0');">
+													<input id="pilihan_6_0" onchange="pilihan('6','a','760')" pil="a" name="pilihan6" type="radio">
+													<label for="pilihan_6_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>knowing your learning style</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','1');">
+													<input id="pilihan_6_1" onchange="pilihan('6','b','760')" pil="b" name="pilihan6" type="radio">
+													<label for="pilihan_6_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>using Pomodoro Technique</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','2');">
+													<input id="pilihan_6_2" onchange="pilihan('6','c','760')" pil="c" name="pilihan6" type="radio">
+													<label for="pilihan_6_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>using online quizzes apps</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','3');">
+													<input id="pilihan_6_3" onchange="pilihan('6','d','760')" pil="d" name="pilihan6" type="radio">
+													<label for="pilihan_6_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>by reviewing materials</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','4');">
+													<input id="pilihan_6_4" onchange="pilihan('6','e','760')" pil="e" name="pilihan6" type="radio">
+													<label for="pilihan_6_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>by creating mind maps</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-7"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Effective Study Technique</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/86920_258f74df4430580ef40c593c4a6bc632.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Based on the infographic, determine whether each study technique listed on the left is categorized as <strong>Time Management</strong> or <strong>Self Management</strong>.</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Technique</td><td class="text-center" style="width:100px">Time Management</td><td class="text-center" style="width:100px">Self Management</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Be patient and persistent</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','1','1');">
+															<input id="pilihan_7_1_1" name="pilihan_7_1" class="pilihan__1" onchange="pilihan3('7','3','761','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_7_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','1','2');">
+															<input id="pilihan_7_1_2" name="pilihan_7_1" class="pilihan__1" onchange="pilihan3('7','3','761','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_7_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Use the Pomodoro technique</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','2','1');">
+															<input id="pilihan_7_2_1" name="pilihan_7_2" class="pilihan__2" onchange="pilihan3('7','3','761','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_7_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','2','2');">
+															<input id="pilihan_7_2_2" name="pilihan_7_2" class="pilihan__2" onchange="pilihan3('7','3','761','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_7_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Set a consistent study schedule</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','3','1');">
+															<input id="pilihan_7_3_1" name="pilihan_7_3" class="pilihan__3" onchange="pilihan3('7','3','761','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_7_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','3','2');">
+															<input id="pilihan_7_3_2" name="pilihan_7_3" class="pilihan__3" onchange="pilihan3('7','3','761','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_7_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-8"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Effective Study Technique</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/47420_258f74df4430580ef40c593c4a6bc632.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>From the options provided, choose the sequence that best reflects the information in the infographic “Effective Study Techniques”.</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','0');">
+													<input id="pilihan_8_0" onchange="pilihan('8','a','762')" pil="a" name="pilihan8" type="radio">
+													<label for="pilihan_8_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Set your goal → Watch lessons videos → Sleep well → Have group chat with friends → Eat nutritious meal</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','1');">
+													<input id="pilihan_8_1" onchange="pilihan('8','b','762')" pil="b" name="pilihan8" type="radio">
+													<label for="pilihan_8_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Plan study time → Join a study group → Take long breaks → Write a to do list&nbsp; → Write important points</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','2');">
+													<input id="pilihan_8_2" onchange="pilihan('8','c','762')" pil="c" name="pilihan8" type="radio">
+													<label for="pilihan_8_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Know your learning style → Find a quiet area → Set a timetable → Use less gadgets → Be patient and persistent</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','3');">
+													<input id="pilihan_8_3" onchange="pilihan('8','d','762')" pil="d" name="pilihan8" type="radio">
+													<label for="pilihan_8_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Know your study style → Plan your study time → Practice and repeat → Take a break → Watch lessons videos</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','4');">
+													<input id="pilihan_8_4" onchange="pilihan('8','e','762')" pil="e" name="pilihan8" type="radio">
+													<label for="pilihan_8_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Take notes → Join a study groups → Use different medias → Play music you like → Have good meal while studying</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-9"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Effective Study Technique</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/89625_258f74df4430580ef40c593c4a6bc632.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which of the following statements best reflect the author’s purpose in writing the text?<br>There is more than one correct answer. Click on every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','0');">
+													<input id="pilihan_9_0" class="pilihan9" onchange="pilihan2('9','a','763')" pil="a" name="pilihan9" type="checkbox" value="A">
+													<label for="pilihan_9_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>To help students find fun strategies to play after studying</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','1');">
+													<input id="pilihan_9_1" class="pilihan9" onchange="pilihan2('9','b','763')" pil="b" name="pilihan9" type="checkbox" value="B">
+													<label for="pilihan_9_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>To offer students guidance on how to learn more efficiently</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','2');">
+													<input id="pilihan_9_2" class="pilihan9" onchange="pilihan2('9','c','763')" pil="c" name="pilihan9" type="checkbox" value="C">
+													<label for="pilihan_9_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>To encourage students to use simple habits to improve their learning</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','3');">
+													<input id="pilihan_9_3" class="pilihan9" onchange="pilihan2('9','d','763')" pil="d" name="pilihan9" type="checkbox" value="D">
+													<label for="pilihan_9_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>To explain why studying tips is difficult for most students</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','4');">
+													<input id="pilihan_9_4" class="pilihan9" onchange="pilihan2('9','e','763')" pil="e" name="pilihan9" type="checkbox" value="E">
+													<label for="pilihan_9_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>To show students that they can manage their time and focus better</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-10"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Effective Study Technique</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/08697_258f74df4430580ef40c593c4a6bc632.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>If you are preparing for an important exam and want to improve your study routine, which of the following techniques do you think can be implemented effectively in your personal study time?<br>There is more than one correct answer. Click on every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','0');">
+													<input id="pilihan_10_0" class="pilihan10" onchange="pilihan2('10','a','764')" pil="a" name="pilihan10" type="checkbox" value="A">
+													<label for="pilihan_10_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Only study when you are in a group discussion with others</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','1');">
+													<input id="pilihan_10_1" class="pilihan10" onchange="pilihan2('10','b','764')" pil="b" name="pilihan10" type="checkbox" value="B">
+													<label for="pilihan_10_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Use technology during all study sessions in or outside class</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','2');">
+													<input id="pilihan_10_2" class="pilihan10" onchange="pilihan2('10','c','764')" pil="c" name="pilihan10" type="checkbox" value="C">
+													<label for="pilihan_10_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Use the Pomodoro Technique to structure your study and break time</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','3');">
+													<input id="pilihan_10_3" class="pilihan10" onchange="pilihan2('10','d','764')" pil="d" name="pilihan10" type="checkbox" value="D">
+													<label for="pilihan_10_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Practice and repeat study material regularly to retain information</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','4');">
+													<input id="pilihan_10_4" class="pilihan10" onchange="pilihan2('10','e','764')" pil="e" name="pilihan10" type="checkbox" value="E">
+													<label for="pilihan_10_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Create a quiet and comfortable study space to improve focus</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-11"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The Great Barrier Reef</strong></p>
+<p style="text-align: justify;">The Great Barrier Reef is one of the most beautiful places in the world. It is located in the Pacific Ocean, near the northeast coast of Australia. The reef is very big. It stretches over 2,000 kilometers and can even be seen from space. There are many small coral islands and clear, warm waters around the reef.<br>This reef is full of life. There are many kinds of colorful fish, sea turtles, dolphins, and even sharks. Coral of different shapes and colors grows under the water. Sea birds fly over the reef and nest on small islands. People can see this beauty by swimming, diving, or joining a boat tour.<br>The colors under the water are amazing. Coral comes in red, yellow, green, and blue. Some coral looks like trees, and some looks like big round stones. Small fish swim in and out of the coral like they are playing a game. In some places, soft coral moves with the water like grass in the wind. When the sun shines, the reef looks bright and full of light. It feels like a different world under the sea.<br>The reef is not only beautiful, but also very important. It helps protect the coast from big waves and storms. It is a home for sea animals and a place where plants can grow. Many people also get food and jobs from the sea near the reef. Without the reef, the ocean would not be the same.</p>
+<p><span style="font-size: 11px;">Adapted from: <span style="color: #0000ff;">https://www.britannica.com/place/Great-Barrier-Reef</span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which of the following descriptions are mentioned clearly in the text?<br>There are more than one correct answer. Click on every correct answer.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('11.','0');">
+													<input id="pilihan_11_0" class="pilihan11" onchange="pilihan2('11','a','765')" pil="a" name="pilihan11" type="checkbox" value="A">
+													<label for="pilihan_11_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(11,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef was built by local communities over hundreds of years</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('11.','1');">
+													<input id="pilihan_11_1" class="pilihan11" onchange="pilihan2('11','b','765')" pil="b" name="pilihan11" type="checkbox" value="B">
+													<label for="pilihan_11_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(11,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef is located in the Pacific Ocean near Australia</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('11.','2');">
+													<input id="pilihan_11_2" class="pilihan11" onchange="pilihan2('11','c','765')" pil="c" name="pilihan11" type="checkbox" value="C">
+													<label for="pilihan_11_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(11,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef can help protect the coast from big waves</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('11.','3');">
+													<input id="pilihan_11_3" class="pilihan11" onchange="pilihan2('11','d','765')" pil="d" name="pilihan11" type="checkbox" value="D">
+													<label for="pilihan_11_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(11,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef is home to sea turtles and dolphins</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('11.','4');">
+													<input id="pilihan_11_4" class="pilihan11" onchange="pilihan2('11','e','765')" pil="e" name="pilihan11" type="checkbox" value="E">
+													<label for="pilihan_11_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(11,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef has more than 10,000 coral islands</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-12"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The Great Barrier Reef</strong></p>
+<p style="text-align: justify;">The Great Barrier Reef is one of the most beautiful places in the world. It is located in the Pacific Ocean, near the northeast coast of Australia. The reef is very big. It stretches over 2,000 kilometers and can even be seen from space. There are many small coral islands and clear, warm waters around the reef.<br>This reef is full of life. There are many kinds of colorful fish, sea turtles, dolphins, and even sharks. Coral of different shapes and colors grows under the water. Sea birds fly over the reef and nest on small islands. People can see this beauty by swimming, diving, or joining a boat tour.<br>The colors under the water are amazing. Coral comes in red, yellow, green, and blue. Some coral looks like trees, and some looks like big round stones. Small fish swim in and out of the coral like they are playing a game. In some places, soft coral moves with the water like grass in the wind. When the sun shines, the reef looks bright and full of light. It feels like a different world under the sea.<br>The reef is not only beautiful, but also very important. It helps protect the coast from big waves and storms. It is a home for sea animals and a place where plants can grow. Many people also get food and jobs from the sea near the reef. Without the reef, the ocean would not be the same.</p>
+<p><span style="font-size: 11px;">Adapted from: <span style="color: #0000ff;">https://www.britannica.com/place/Great-Barrier-Reef</span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The author mentioned “It feels like a different world under the sea”. What does the phrase "a different world under the sea" most likely mean?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','0');">
+													<input id="pilihan_12_0" onchange="pilihan('12','a','766')" pil="a" name="pilihan12" type="radio">
+													<label for="pilihan_12_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>A safe place that has bright reef</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','1');">
+													<input id="pilihan_12_1" onchange="pilihan('12','b','766')" pil="b" name="pilihan12" type="radio">
+													<label for="pilihan_12_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>A peaceful place where people can live under water</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','2');">
+													<input id="pilihan_12_2" onchange="pilihan('12','c','766')" pil="c" name="pilihan12" type="radio">
+													<label for="pilihan_12_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>A colorful place that looks the same as the land</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','3');">
+													<input id="pilihan_12_3" onchange="pilihan('12','d','766')" pil="d" name="pilihan12" type="radio">
+													<label for="pilihan_12_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>A shining reef that is quiet</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','4');">
+													<input id="pilihan_12_4" onchange="pilihan('12','e','766')" pil="e" name="pilihan12" type="radio">
+													<label for="pilihan_12_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>A calm place that looks beautiful and unique</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-13"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The Great Barrier Reef</strong></p>
+<p style="text-align: justify;">The Great Barrier Reef is one of the most beautiful places in the world. It is located in the Pacific Ocean, near the northeast coast of Australia. The reef is very big. It stretches over 2,000 kilometers and can even be seen from space. There are many small coral islands and clear, warm waters around the reef.<br>This reef is full of life. There are many kinds of colorful fish, sea turtles, dolphins, and even sharks. Coral of different shapes and colors grows under the water. Sea birds fly over the reef and nest on small islands. People can see this beauty by swimming, diving, or joining a boat tour.<br>The colors under the water are amazing. Coral comes in red, yellow, green, and blue. Some coral looks like trees, and some looks like big round stones. Small fish swim in and out of the coral like they are playing a game. In some places, soft coral moves with the water like grass in the wind. When the sun shines, the reef looks bright and full of light. It feels like a different world under the sea.<br>The reef is not only beautiful, but also very important. It helps protect the coast from big waves and storms. It is a home for sea animals and a place where plants can grow. Many people also get food and jobs from the sea near the reef. Without the reef, the ocean would not be the same.</p>
+<p style="text-align: justify;"><span style="font-size: 11px;">Adapted from: <span style="color: #0000ff;">https://www.britannica.com/place/Great-Barrier-Reef</span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which of the following best represents the main idea implied by the text?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','0');">
+													<input id="pilihan_13_0" onchange="pilihan('13','a','767')" pil="a" name="pilihan13" type="radio">
+													<label for="pilihan_13_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef is useful for fishing and shipping</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','1');">
+													<input id="pilihan_13_1" onchange="pilihan('13','b','767')" pil="b" name="pilihan13" type="radio">
+													<label for="pilihan_13_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef is large, but not important to people</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','2');">
+													<input id="pilihan_13_2" onchange="pilihan('13','c','767')" pil="c" name="pilihan13" type="radio">
+													<label for="pilihan_13_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef is a natural treasure that must be cared for</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','3');">
+													<input id="pilihan_13_3" onchange="pilihan('13','d','767')" pil="d" name="pilihan13" type="radio">
+													<label for="pilihan_13_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef is only for scientists and researchers to explore</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','4');">
+													<input id="pilihan_13_4" onchange="pilihan('13','e','767')" pil="e" name="pilihan13" type="radio">
+													<label for="pilihan_13_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef is a protected area that should be closed to visitors</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-14"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The Great Barrier Reef</strong></p>
+<p style="text-align: justify;">The Great Barrier Reef is one of the most beautiful places in the world. It is located in the Pacific Ocean, near the northeast coast of Australia. The reef is very big. It stretches over 2,000 kilometers and can even be seen from space. There are many small coral islands and clear, warm waters around the reef.<br>This reef is full of life. There are many kinds of colorful fish, sea turtles, dolphins, and even sharks. Coral of different shapes and colors grows under the water. Sea birds fly over the reef and nest on small islands. People can see this beauty by swimming, diving, or joining a boat tour.<br>The colors under the water are amazing. Coral comes in red, yellow, green, and blue. Some coral looks like trees, and some looks like big round stones. Small fish swim in and out of the coral like they are playing a game. In some places, soft coral moves with the water like grass in the wind. When the sun shines, the reef looks bright and full of light. It feels like a different world under the sea.<br>The reef is not only beautiful, but also very important. It helps protect the coast from big waves and storms. It is a home for sea animals and a place where plants can grow. Many people also get food and jobs from the sea near the reef. Without the reef, the ocean would not be the same.</p>
+<p style="text-align: justify;"><span style="font-size: 11px;">Adapted from:<span style="color: #0000ff;"> https://www.britannica.com/place/Great-Barrier-Reef</span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which detail would best encourage people to visit the Great Barrier Reef?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','0');">
+													<input id="pilihan_14_0" onchange="pilihan('14','a','768')" pil="a" name="pilihan14" type="radio">
+													<label for="pilihan_14_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Visitors can see an Australian national park</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','1');">
+													<input id="pilihan_14_1" onchange="pilihan('14','b','768')" pil="b" name="pilihan14" type="radio">
+													<label for="pilihan_14_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Visitors can stay in hotels around the reef</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','2');">
+													<input id="pilihan_14_2" onchange="pilihan('14','c','768')" pil="c" name="pilihan14" type="radio">
+													<label for="pilihan_14_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Visitors can get there by boat or short flights</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','3');">
+													<input id="pilihan_14_3" onchange="pilihan('14','d','768')" pil="d" name="pilihan14" type="radio">
+													<label for="pilihan_14_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Visitors can protect the coral and the animals</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','4');">
+													<input id="pilihan_14_4" onchange="pilihan('14','e','768')" pil="e" name="pilihan14" type="radio">
+													<label for="pilihan_14_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Visitors can see the coral by diving or swimming</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-15"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The Great Barrier Reef</strong></p>
+<p style="text-align: justify;">The Great Barrier Reef is one of the most beautiful places in the world. It is located in the Pacific Ocean, near the northeast coast of Australia. The reef is very big. It stretches over 2,000 kilometers and can even be seen from space. There are many small coral islands and clear, warm waters around the reef.<br>This reef is full of life. There are many kinds of colorful fish, sea turtles, dolphins, and even sharks. Coral of different shapes and colors grows under the water. Sea birds fly over the reef and nest on small islands. People can see this beauty by swimming, diving, or joining a boat tour.<br>The colors under the water are amazing. Coral comes in red, yellow, green, and blue. Some coral looks like trees, and some looks like big round stones. Small fish swim in and out of the coral like they are playing a game. In some places, soft coral moves with the water like grass in the wind. When the sun shines, the reef looks bright and full of light. It feels like a different world under the sea.<br>The reef is not only beautiful, but also very important. It helps protect the coast from big waves and storms. It is a home for sea animals and a place where plants can grow. Many people also get food and jobs from the sea near the reef. Without the reef, the ocean would not be the same.</p>
+<p style="text-align: justify;"><span style="font-size: 11px;">Adapted from:<span style="color: #0000ff;"> https://www.britannica.com/place/Great-Barrier-Reef</span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which parts of the text best support the idea that the Great Barrier Reef is both beautiful and important?<br>There is more than one correct answer. Click on every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('15.','0');">
+													<input id="pilihan_15_0" class="pilihan15" onchange="pilihan2('15','a','769')" pil="a" name="pilihan15" type="checkbox" value="A">
+													<label for="pilihan_15_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(15,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef helps protect the coast from big waves</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('15.','1');">
+													<input id="pilihan_15_1" class="pilihan15" onchange="pilihan2('15','b','769')" pil="b" name="pilihan15" type="checkbox" value="B">
+													<label for="pilihan_15_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(15,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>It is home to sea turtles, dolphins, and colorful fish</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('15.','2');">
+													<input id="pilihan_15_2" class="pilihan15" onchange="pilihan2('15','c','769')" pil="c" name="pilihan15" type="checkbox" value="C">
+													<label for="pilihan_15_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(15,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The coral reefs grow best in cold, deep water</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('15.','3');">
+													<input id="pilihan_15_3" class="pilihan15" onchange="pilihan2('15','d','769')" pil="d" name="pilihan15" type="checkbox" value="D">
+													<label for="pilihan_15_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(15,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Some areas of the reef are damaged by starfish and warm water</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('15.','4');">
+													<input id="pilihan_15_4" class="pilihan15" onchange="pilihan2('15','e','769')" pil="e" name="pilihan15" type="checkbox" value="E">
+													<label for="pilihan_15_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(15,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The reef was discovered by sailors in the 1800s</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-16"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Why Teenagers Should Learn to Manage Their Money</strong></p>
+<p style="text-align: justify;">Many young people today often spend money on things they like, such as snacks, clothes, or fun activities. But learning to handle money from a young age is very important. Good money habits can help students make a better future.<br>Having a clear plan for the future can show teenagers how to use their money. Students should think about short-term goals, like getting a new phone, and long-term goals, like saving for college or starting a business. Writing these goals down can help students stay motivated and focused.<br>A budget helps students see where their money goes every month. It's important to list basic needs like food and travel, and also other costs like clothes or presents. A budget makes it easier to decide how much money to save, spend, or keep for unexpected problems.<br>Sometimes, students don't know how much they spend on small things. Keeping track of spending with notes or apps can help students understand their habits. This helps them stay within their budget and make changes if needed.<br>Teenagers should also learn the difference between saving money and investing money. Saving is safer but slower, while investing has more risk but can earn more money. Knowing both can help students choose the best way for their money goals.<br>To sum up, students who learn to plan, budget, track, and understand saving choices are more ready for the future. That is why learning about money should start early and be done often.<br>Table 1. How do students manage their money?<br><img src="/tka/cbt_images/83205_e4b0cb4717fe82cd23be2f17a262a998.png" alt=""></p>
+<p style="text-align: justify;"><span style="font-size: 11px;">(Adapted from <span style="color: #0000ff;">https://www.onefamily.com/savings/money-management-tips-for-teens/</span>)</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Based on the text, choose the activity that best fits the description</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Description</td><td class="text-center" style="width:100px">Short-term financial goals</td><td class="text-center" style="width:100px">Long-term financial goals</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Saving money for university</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('16.','1','1');">
+															<input id="pilihan_16_1_1" name="pilihan_16_1" class="pilihan__1" onchange="pilihan3('16','3','770','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_16_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('16.','1','2');">
+															<input id="pilihan_16_1_2" name="pilihan_16_1" class="pilihan__1" onchange="pilihan3('16','3','770','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_16_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Saving to buy a new phone</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('16.','2','1');">
+															<input id="pilihan_16_2_1" name="pilihan_16_2" class="pilihan__2" onchange="pilihan3('16','3','770','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_16_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('16.','2','2');">
+															<input id="pilihan_16_2_2" name="pilihan_16_2" class="pilihan__2" onchange="pilihan3('16','3','770','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_16_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Starting a business</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('16.','3','1');">
+															<input id="pilihan_16_3_1" name="pilihan_16_3" class="pilihan__3" onchange="pilihan3('16','3','770','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_16_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('16.','3','2');">
+															<input id="pilihan_16_3_2" name="pilihan_16_3" class="pilihan__3" onchange="pilihan3('16','3','770','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_16_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-17"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Why Teenagers Should Learn to Manage Their Money</strong></p>
+<p style="text-align: justify;">Many young people today often spend money on things they like, such as snacks, clothes, or fun activities. But learning to handle money from a young age is very important. Good money habits can help students make a better future.<br>Having a clear plan for the future can show teenagers how to use their money. Students should think about short-term goals, like getting a new phone, and long-term goals, like saving for college or starting a business. Writing these goals down can help students stay motivated and focused.<br>A budget helps students see where their money goes every month. It's important to list basic needs like food and travel, and also other costs like clothes or presents. A budget makes it easier to decide how much money to save, spend, or keep for unexpected problems.<br>Sometimes, students don't know how much they spend on small things. Keeping track of spending with notes or apps can help students understand their habits. This helps them stay within their budget and make changes if needed.<br>Teenagers should also learn the difference between saving money and investing money. Saving is safer but slower, while investing has more risk but can earn more money. Knowing both can help students choose the best way for their money goals.<br>To sum up, students who learn to plan, budget, track, and understand saving choices are more ready for the future. That is why learning about money should start early and be done often.<br>Table 1. How do students manage their money?<br><img src="/tka/cbt_images/69804_e4b0cb4717fe82cd23be2f17a262a998.png" alt=""></p>
+<p style="text-align: justify;"><span style="font-size: 11px;">(Adapted from <span style="color: #0000ff;">https://www.onefamily.com/savings/money-management-tips-for-teens/</span>)</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>According to the text, which of the following actions support smart money management for students?<br>There is more than one correct answer. Click on every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('17.','0');">
+													<input id="pilihan_17_0" class="pilihan17" onchange="pilihan2('17','a','771')" pil="a" name="pilihan17" type="checkbox" value="A">
+													<label for="pilihan_17_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(17,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tracking daily expenses using a notebook or app</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('17.','1');">
+													<input id="pilihan_17_1" class="pilihan17" onchange="pilihan2('17','b','771')" pil="b" name="pilihan17" type="checkbox" value="B">
+													<label for="pilihan_17_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(17,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Spending more money than the monthly budget allows</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('17.','2');">
+													<input id="pilihan_17_2" class="pilihan17" onchange="pilihan2('17','c','771')" pil="c" name="pilihan17" type="checkbox" value="C">
+													<label for="pilihan_17_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(17,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Setting financial goals for the short and long term</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('17.','3');">
+													<input id="pilihan_17_3" class="pilihan17" onchange="pilihan2('17','d','771')" pil="d" name="pilihan17" type="checkbox" value="D">
+													<label for="pilihan_17_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(17,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Borrowing money whenever there is not enough left</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('17.','4');">
+													<input id="pilihan_17_4" class="pilihan17" onchange="pilihan2('17','e','771')" pil="e" name="pilihan17" type="checkbox" value="E">
+													<label for="pilihan_17_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(17,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Dividing money into saving, spending, and emergency funds</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-18"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Why Teenagers Should Learn to Manage Their Money</strong></p>
+<p style="text-align: justify;">Many young people today often spend money on things they like, such as snacks, clothes, or fun activities. But learning to handle money from a young age is very important. Good money habits can help students make a better future.<br>Having a clear plan for the future can show teenagers how to use their money. Students should think about short-term goals, like getting a new phone, and long-term goals, like saving for college or starting a business. Writing these goals down can help students stay motivated and focused.<br>A budget helps students see where their money goes every month. It's important to list basic needs like food and travel, and also other costs like clothes or presents. A budget makes it easier to decide how much money to save, spend, or keep for unexpected problems.<br>Sometimes, students don't know how much they spend on small things. Keeping track of spending with notes or apps can help students understand their habits. This helps them stay within their budget and make changes if needed.<br>Teenagers should also learn the difference between saving money and investing money. Saving is safer but slower, while investing has more risk but can earn more money. Knowing both can help students choose the best way for their money goals.<br>To sum up, students who learn to plan, budget, track, and understand saving choices are more ready for the future. That is why learning about money should start early and be done often.<br>Table 1. How do students manage their money?<br><img src="/tka/cbt_images/79536_e4b0cb4717fe82cd23be2f17a262a998.png" alt=""></p>
+<p style="text-align: justify;"><span style="font-size: 11px;">(Adapted from <span style="color: #0000ff;">https://www.onefamily.com/savings/money-management-tips-for-teens/</span>)</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Who is most likely to be the target audience of this text?<br>There is more than one correct answer. Click on every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('18.','0');">
+													<input id="pilihan_18_0" class="pilihan18" onchange="pilihan2('18','a','772')" pil="a" name="pilihan18" type="checkbox" value="A">
+													<label for="pilihan_18_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(18,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Teenagers who are learning to manage their money</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('18.','1');">
+													<input id="pilihan_18_1" class="pilihan18" onchange="pilihan2('18','b','772')" pil="b" name="pilihan18" type="checkbox" value="B">
+													<label for="pilihan_18_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(18,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Parents looking for tips on how to control their children’s spending</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('18.','2');">
+													<input id="pilihan_18_2" class="pilihan18" onchange="pilihan2('18','c','772')" pil="c" name="pilihan18" type="checkbox" value="C">
+													<label for="pilihan_18_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(18,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Students who want to plan for their financial future</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('18.','3');">
+													<input id="pilihan_18_3" class="pilihan18" onchange="pilihan2('18','d','772')" pil="d" name="pilihan18" type="checkbox" value="D">
+													<label for="pilihan_18_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(18,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>High school readers who need to understand saving and budgeting</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('18.','4');">
+													<input id="pilihan_18_4" class="pilihan18" onchange="pilihan2('18','e','772')" pil="e" name="pilihan18" type="checkbox" value="E">
+													<label for="pilihan_18_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(18,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Bankers and financial experts</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-19"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Why Teenagers Should Learn to Manage Their Money</strong></p>
+<p style="text-align: justify;">Many young people today often spend money on things they like, such as snacks, clothes, or fun activities. But learning to handle money from a young age is very important. Good money habits can help students make a better future.<br>Having a clear plan for the future can show teenagers how to use their money. Students should think about short-term goals, like getting a new phone, and long-term goals, like saving for college or starting a business. Writing these goals down can help students stay motivated and focused.<br>A budget helps students see where their money goes every month. It's important to list basic needs like food and travel, and also other costs like clothes or presents. A budget makes it easier to decide how much money to save, spend, or keep for unexpected problems.<br>Sometimes, students don't know how much they spend on small things. Keeping track of spending with notes or apps can help students understand their habits. This helps them stay within their budget and make changes if needed.<br>Teenagers should also learn the difference between saving money and investing money. Saving is safer but slower, while investing has more risk but can earn more money. Knowing both can help students choose the best way for their money goals.<br>To sum up, students who learn to plan, budget, track, and understand saving choices are more ready for the future. That is why learning about money should start early and be done often.<br>Table 1. How do students manage their money?<br><img src="/tka/cbt_images/93749_e4b0cb4717fe82cd23be2f17a262a998.png" alt=""></p>
+<p style="text-align: justify;"><span style="font-size: 11px;">(Adapted from <span style="color: #0000ff;">https://www.onefamily.com/savings/money-management-tips-for-teens/</span>)</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which information would make the text more informative about student spending habits?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','0');">
+													<input id="pilihan_19_0" onchange="pilihan('19','a','773')" pil="a" name="pilihan19" type="radio">
+													<label for="pilihan_19_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>A paragraph about the history of financial education in schools</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','1');">
+													<input id="pilihan_19_1" onchange="pilihan('19','b','773')" pil="b" name="pilihan19" type="radio">
+													<label for="pilihan_19_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>A table showing common monthly high school students expenses</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','2');">
+													<input id="pilihan_19_2" onchange="pilihan('19','c','773')" pil="c" name="pilihan19" type="radio">
+													<label for="pilihan_19_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>A graph comparing saving habits between teenagers and adults</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','3');">
+													<input id="pilihan_19_3" onchange="pilihan('19','d','773')" pil="d" name="pilihan19" type="radio">
+													<label for="pilihan_19_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>A chart listing popular entertainment choices among students</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','4');">
+													<input id="pilihan_19_4" onchange="pilihan('19','e','773')" pil="e" name="pilihan19" type="radio">
+													<label for="pilihan_19_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>A paragraph about students' experiences in managing budget</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-20"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Why Teenagers Should Learn to Manage Their Money</strong></p>
+<p style="text-align: justify;">Many young people today often spend money on things they like, such as snacks, clothes, or fun activities. But learning to handle money from a young age is very important. Good money habits can help students make a better future.<br>Having a clear plan for the future can show teenagers how to use their money. Students should think about short-term goals, like getting a new phone, and long-term goals, like saving for college or starting a business. Writing these goals down can help students stay motivated and focused.<br>A budget helps students see where their money goes every month. It's important to list basic needs like food and travel, and also other costs like clothes or presents. A budget makes it easier to decide how much money to save, spend, or keep for unexpected problems.<br>Sometimes, students don't know how much they spend on small things. Keeping track of spending with notes or apps can help students understand their habits. This helps them stay within their budget and make changes if needed.<br>Teenagers should also learn the difference between saving money and investing money. Saving is safer but slower, while investing has more risk but can earn more money. Knowing both can help students choose the best way for their money goals.<br>To sum up, students who learn to plan, budget, track, and understand saving choices are more ready for the future. That is why learning about money should start early and be done often.<br>Table 1. How do students manage their money?<br><img src="/tka/cbt_images/40609_e4b0cb4717fe82cd23be2f17a262a998.png" alt=""></p>
+<p style="text-align: justify;"><span style="font-size: 11px;">(Adapted from <span style="color: #0000ff;">https://www.onefamily.com/savings/money-management-tips-for-teens/</span>)</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which of the following statements are supported by clear data or facts in the text and table?<br>There is more than one correct answer. Click on every correct answer.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('20.','0');">
+													<input id="pilihan_20_0" class="pilihan20" onchange="pilihan2('20','a','774')" pil="a" name="pilihan20" type="checkbox" value="A">
+													<label for="pilihan_20_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(20,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>45% of students save money regularly</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('20.','1');">
+													<input id="pilihan_20_1" class="pilihan20" onchange="pilihan2('20','b','774')" pil="b" name="pilihan20" type="checkbox" value="B">
+													<label for="pilihan_20_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(20,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tracking expenses can help understand spending habits</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('20.','2');">
+													<input id="pilihan_20_2" class="pilihan20" onchange="pilihan2('20','c','774')" pil="c" name="pilihan20" type="checkbox" value="C">
+													<label for="pilihan_20_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(20,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Most students do not care about money at all</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('20.','3');">
+													<input id="pilihan_20_3" class="pilihan20" onchange="pilihan2('20','d','774')" pil="d" name="pilihan20" type="checkbox" value="D">
+													<label for="pilihan_20_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(20,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Saving 10% of allowance is a good practice</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('20.','4');">
+													<input id="pilihan_20_4" class="pilihan20" onchange="pilihan2('20','e','774')" pil="e" name="pilihan20" type="checkbox" value="E">
+													<label for="pilihan_20_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(20,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Spending on fun activities is always better than saving</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-21"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The False Lion King</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/06060_e9d47a075979b49c3775de9e395395ac.png" alt=""></strong></p>
+<p style="text-align: justify;">Once upon a time, in Africa, there lived two lion kings. One was named Hera and the other was Shero. Hera was very strong and handsome. All the animals loved and respected him. He was a great leader. Shero was not like Hera. He had a small mane and a funny, squeaky voice. Shero liked to pretend he was as powerful as Hera. He often copied Hera’s roar, but it made the other animals laugh.<br>One day, the animals heard that some hyenas were causing trouble near the river. Hera quickly gathered his followers to stop the hyenas. Shero also wanted to come. He wanted to show everyone that he was strong too.<br>When they reached the river, Hera roared loudly. His roar was so powerful that the hyenas got scared. Shero also tried to roar, but his voice was high and silly. The hyenas laughed at him. Their leader, Hank the Hyena, made jokes about Shero.<br>Hera stayed calm and smiled. Shero did not give up. He said, “I am just as strong as Hera!” The hyenas laughed even louder. Shero tried to show his power by jumping on a small dirt hill. But he tripped and fell into the ground. The hyenas laughed so much they cried. Even Hera laughed a little.<br>At the end of the day, the hyenas left, still laughing about Shero. Hera told Shero, “You are not like me, but you make everyone happy with your jokes.” Shero smiled and understood that he had his own special gift.<br>From that day, Shero became the kingdom’s jester. He and Hera ruled together — one with strength, and one with laughter. The animals learned that both power and fun are important in life.</p>
+<p><span style="font-size: 11px;">Adapted from:&nbsp;<span style="color: #0000ff;"><strong>https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion%20King</strong></span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Which statement provides the most accurate chronological summary of the story's main events?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','0');">
+													<input id="pilihan_21_0" onchange="pilihan('21','a','775')" pil="a" name="pilihan21" type="radio">
+													<label for="pilihan_21_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero falls into the dirt.<br>The hyenas cause trouble at the river.<br>Hera tells Shero that he is funny.<br>Shero copies Hera’s roar.<br>Shero becomes the kingdom's funny helper.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','1');">
+													<input id="pilihan_21_1" onchange="pilihan('21','b','775')" pil="b" name="pilihan21" type="radio">
+													<label for="pilihan_21_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Hera is a strong lion king.<br>Shero likes to pretend to be strong.<br>The hyenas cause trouble near the river.<br>Hera scares the hyenas, but Shero makes them laugh.<br>Shero learns that making others happy is special.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','2');">
+													<input id="pilihan_21_2" onchange="pilihan('21','c','775')" pil="c" name="pilihan21" type="radio">
+													<label for="pilihan_21_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Hera and Shero are both strong leaders.<br>The hyenas come to help the lions.<br>Shero tells funny stories to the hyenas.<br>Hera is angry with Shero.<br>The lions and hyenas become friends.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','3');">
+													<input id="pilihan_21_3" onchange="pilihan('21','d','775')" pil="d" name="pilihan21" type="radio">
+													<label for="pilihan_21_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero is a strong lion king.<br>Hera is jealous of Shero.<br>The hyenas attack the lions.<br>Shero defeats the hyenas.<br>Shero becomes the new king.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','4');">
+													<input id="pilihan_21_4" onchange="pilihan('21','e','775')" pil="e" name="pilihan21" type="radio">
+													<label for="pilihan_21_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero wants to be king and fights Hera.<br>The hyenas help Shero.<br>Hera leaves the kingdom.<br>Shero becomes king.<br>Hera returns to forgive Shero.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-22"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The False Lion King</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/82144_e9d47a075979b49c3775de9e395395ac.png" alt=""></strong></p>
+<p style="text-align: justify;">Once upon a time, in Africa, there lived two lion kings. One was named Hera and the other was Shero. Hera was very strong and handsome. All the animals loved and respected him. He was a great leader. Shero was not like Hera. He had a small mane and a funny, squeaky voice. Shero liked to pretend he was as powerful as Hera. He often copied Hera’s roar, but it made the other animals laugh.<br>One day, the animals heard that some hyenas were causing trouble near the river. Hera quickly gathered his followers to stop the hyenas. Shero also wanted to come. He wanted to show everyone that he was strong too.<br>When they reached the river, Hera roared loudly. His roar was so powerful that the hyenas got scared. Shero also tried to roar, but his voice was high and silly. The hyenas laughed at him. Their leader, Hank the Hyena, made jokes about Shero.<br>Hera stayed calm and smiled. Shero did not give up. He said, “I am just as strong as Hera!” The hyenas laughed even louder. Shero tried to show his power by jumping on a small dirt hill. But he tripped and fell into the ground. The hyenas laughed so much they cried. Even Hera laughed a little.<br>At the end of the day, the hyenas left, still laughing about Shero. Hera told Shero, “You are not like me, but you make everyone happy with your jokes.” Shero smiled and understood that he had his own special gift.<br>From that day, Shero became the kingdom’s jester. He and Hera ruled together — one with strength, and one with laughter. The animals learned that both power and fun are important in life.</p>
+<p><span style="font-size: 11px;">Adapted from:&nbsp;<span style="color: #0000ff;"><strong>https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion%20King</strong></span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>What can we learn from the story of Hera and Shero?<br>There is more than one correct answer. Click for every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('22.','0');">
+													<input id="pilihan_22_0" class="pilihan22" onchange="pilihan2('22','a','776')" pil="a" name="pilihan22" type="checkbox" value="A">
+													<label for="pilihan_22_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(22,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Everyone has something special to give, even if they are not the leader</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('22.','1');">
+													<input id="pilihan_22_1" class="pilihan22" onchange="pilihan2('22','b','776')" pil="b" name="pilihan22" type="checkbox" value="B">
+													<label for="pilihan_22_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(22,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Being funny and making others smile is just as important as being strong</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('22.','2');">
+													<input id="pilihan_22_2" class="pilihan22" onchange="pilihan2('22','c','776')" pil="c" name="pilihan22" type="checkbox" value="C">
+													<label for="pilihan_22_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(22,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Good friends will support you and help you see your real strengths</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('22.','3');">
+													<input id="pilihan_22_3" class="pilihan22" onchange="pilihan2('22','d','776')" pil="d" name="pilihan22" type="checkbox" value="D">
+													<label for="pilihan_22_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(22,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Working together is better when people use their different talents</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('22.','4');">
+													<input id="pilihan_22_4" class="pilihan22" onchange="pilihan2('22','e','776')" pil="e" name="pilihan22" type="checkbox" value="E">
+													<label for="pilihan_22_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(22,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Trying your best to help others is more important than always being perfect</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-23"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The False Lion King</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/26298_e9d47a075979b49c3775de9e395395ac.png" alt=""></strong></p>
+<p style="text-align: justify;">Once upon a time, in Africa, there lived two lion kings. One was named Hera and the other was Shero. Hera was very strong and handsome. All the animals loved and respected him. He was a great leader. Shero was not like Hera. He had a small mane and a funny, squeaky voice. Shero liked to pretend he was as powerful as Hera. He often copied Hera’s roar, but it made the other animals laugh.<br>One day, the animals heard that some hyenas were causing trouble near the river. Hera quickly gathered his followers to stop the hyenas. Shero also wanted to come. He wanted to show everyone that he was strong too.<br>When they reached the river, Hera roared loudly. His roar was so powerful that the hyenas got scared. Shero also tried to roar, but his voice was high and silly. The hyenas laughed at him. Their leader, Hank the Hyena, made jokes about Shero.<br>Hera stayed calm and smiled. Shero did not give up. He said, “I am just as strong as Hera!” The hyenas laughed even louder. Shero tried to show his power by jumping on a small dirt hill. But he tripped and fell into the ground. The hyenas laughed so much they cried. Even Hera laughed a little.<br>At the end of the day, the hyenas left, still laughing about Shero. Hera told Shero, “You are not like me, but you make everyone happy with your jokes.” Shero smiled and understood that he had his own special gift.<br>From that day, Shero became the kingdom’s jester. He and Hera ruled together — one with strength, and one with laughter. The animals learned that both power and fun are important in life.</p>
+<p><span style="font-size: 11px;">Adapted from:&nbsp;<span style="color: #0000ff;"><strong>https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion%20King</strong></span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The hyenas laugh so much when Shero tries to roar like Hera because ....</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','0');">
+													<input id="pilihan_23_0" onchange="pilihan('23','a','777')" pil="a" name="pilihan23" type="radio">
+													<label for="pilihan_23_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero tries to roar in a serious way and surprises the hyenas</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','1');">
+													<input id="pilihan_23_1" onchange="pilihan('23','b','777')" pil="b" name="pilihan23" type="radio">
+													<label for="pilihan_23_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero’s roar is funny, which the hyenas think he is joking</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','2');">
+													<input id="pilihan_23_2" onchange="pilihan('23','c','777')" pil="c" name="pilihan23" type="radio">
+													<label for="pilihan_23_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Hera tells a joke about Shero to make the hyenas laugh</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','3');">
+													<input id="pilihan_23_3" onchange="pilihan('23','d','777')" pil="d" name="pilihan23" type="radio">
+													<label for="pilihan_23_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero is acting like Hera, and it's absolutely brilliant</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','4');">
+													<input id="pilihan_23_4" onchange="pilihan('23','e','777')" pil="e" name="pilihan23" type="radio">
+													<label for="pilihan_23_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero trips and falls when trying to show his strength</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-24"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The False Lion King</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/97208_e9d47a075979b49c3775de9e395395ac.png" alt=""></strong></p>
+<p style="text-align: justify;">Once upon a time, in Africa, there lived two lion kings. One was named Hera and the other was Shero. Hera was very strong and handsome. All the animals loved and respected him. He was a great leader. Shero was not like Hera. He had a small mane and a funny, squeaky voice. Shero liked to pretend he was as powerful as Hera. He often copied Hera’s roar, but it made the other animals laugh.<br>One day, the animals heard that some hyenas were causing trouble near the river. Hera quickly gathered his followers to stop the hyenas. Shero also wanted to come. He wanted to show everyone that he was strong too.<br>When they reached the river, Hera roared loudly. His roar was so powerful that the hyenas got scared. Shero also tried to roar, but his voice was high and silly. The hyenas laughed at him. Their leader, Hank the Hyena, made jokes about Shero.<br>Hera stayed calm and smiled. Shero did not give up. He said, “I am just as strong as Hera!” The hyenas laughed even louder. Shero tried to show his power by jumping on a small dirt hill. But he tripped and fell into the ground. The hyenas laughed so much they cried. Even Hera laughed a little.<br>At the end of the day, the hyenas left, still laughing about Shero. Hera told Shero, “You are not like me, but you make everyone happy with your jokes.” Shero smiled and understood that he had his own special gift.<br>From that day, Shero became the kingdom’s jester. He and Hera ruled together — one with strength, and one with laughter. The animals learned that both power and fun are important in life.</p>
+<p><span style="font-size: 11px;">Adapted from:<span style="color: #0000ff;">&nbsp;<strong>https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion%20King</strong></span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>If in the beginning of the story, Shero is a strong lion with a loud roar, just like Hera. What would happened in the end of the story?<br>There is more than one correct answer. Click for every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','0');">
+													<input id="pilihan_24_0" class="pilihan24" onchange="pilihan2('24','a','778')" pil="a" name="pilihan24" type="checkbox" value="A">
+													<label for="pilihan_24_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero and Hera would both scare the hyenas away together</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','1');">
+													<input id="pilihan_24_1" class="pilihan24" onchange="pilihan2('24','b','778')" pil="b" name="pilihan24" type="checkbox" value="B">
+													<label for="pilihan_24_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero would become the king, and Hera would leave the savannah</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','2');">
+													<input id="pilihan_24_2" class="pilihan24" onchange="pilihan2('24','c','778')" pil="c" name="pilihan24" type="checkbox" value="C">
+													<label for="pilihan_24_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero would get respect from the other animals for his strength</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','3');">
+													<input id="pilihan_24_3" class="pilihan24" onchange="pilihan2('24','d','778')" pil="d" name="pilihan24" type="checkbox" value="D">
+													<label for="pilihan_24_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>The hyenas would still laugh at Shero because he is funny</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','4');">
+													<input id="pilihan_24_4" class="pilihan24" onchange="pilihan2('24','e','778')" pil="e" name="pilihan24" type="checkbox" value="E">
+													<label for="pilihan_24_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero would try to take Hera’s place as the only lion king</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-25"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>The False Lion King</strong></p>
+<p style="text-align: center;"><img src="/tka/cbt_images/79027_e9d47a075979b49c3775de9e395395ac.png" alt=""><strong><img src="/tka/cbt_images/79027_e9d47a075979b49c3775de9e395395ac_e9d47a075979b49c3775de9e395395ac.png" alt=""></strong></p>
+<p style="text-align: justify;">Once upon a time, in Africa, there lived two lion kings. One was named Hera and the other was Shero. Hera was very strong and handsome. All the animals loved and respected him. He was a great leader. Shero was not like Hera. He had a small mane and a funny, squeaky voice. Shero liked to pretend he was as powerful as Hera. He often copied Hera’s roar, but it made the other animals laugh.<br>One day, the animals heard that some hyenas were causing trouble near the river. Hera quickly gathered his followers to stop the hyenas. Shero also wanted to come. He wanted to show everyone that he was strong too.<br>When they reached the river, Hera roared loudly. His roar was so powerful that the hyenas got scared. Shero also tried to roar, but his voice was high and silly. The hyenas laughed at him. Their leader, Hank the Hyena, made jokes about Shero.<br>Hera stayed calm and smiled. Shero did not give up. He said, “I am just as strong as Hera!” The hyenas laughed even louder. Shero tried to show his power by jumping on a small dirt hill. But he tripped and fell into the ground. The hyenas laughed so much they cried. Even Hera laughed a little.<br>At the end of the day, the hyenas left, still laughing about Shero. Hera told Shero, “You are not like me, but you make everyone happy with your jokes.” Shero smiled and understood that he had his own special gift.<br>From that day, Shero became the kingdom’s jester. He and Hera ruled together — one with strength, and one with laughter. The animals learned that both power and fun are important in life.</p>
+<p><span style="font-size: 11px;">Adapted from:<span style="color: #0000ff;">&nbsp;<strong>https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion%20King</strong></span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Shero is clumsy and funny, this is shown when he ....<br>There is more than one correct answer. Click for every correct answer!</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('25.','0');">
+													<input id="pilihan_25_0" class="pilihan25" onchange="pilihan2('25','a','779')" pil="a" name="pilihan25" type="checkbox" value="A">
+													<label for="pilihan_25_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(25,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>scares the hyenas away with his loud and powerful roar</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('25.','1');">
+													<input id="pilihan_25_1" class="pilihan25" onchange="pilihan2('25','b','779')" pil="b" name="pilihan25" type="checkbox" value="B">
+													<label for="pilihan_25_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(25,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>makes the other animals smile by pretending to be a great king</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('25.','2');">
+													<input id="pilihan_25_2" class="pilihan25" onchange="pilihan2('25','c','779')" pil="c" name="pilihan25" type="checkbox" value="C">
+													<label for="pilihan_25_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(25,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>tries to roar like Hera, but his voice is small and makes the hyenas laugh</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('25.','3');">
+													<input id="pilihan_25_3" class="pilihan25" onchange="pilihan2('25','d','779')" pil="d" name="pilihan25" type="checkbox" value="D">
+													<label for="pilihan_25_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(25,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>walks with Hera to confront the hyenas, acting as if he is an important king too</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('25.','4');">
+													<input id="pilihan_25_4" class="pilihan25" onchange="pilihan2('25','e','779')" pil="e" name="pilihan25" type="checkbox" value="E">
+													<label for="pilihan_25_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(25,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>tells the hyenas that he is as mighty as King Hera, even though no one believes him</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div>			</div>
+		  </div>
+		  
+		  <div class="row pl-3 pr-3 pb-1 mb-0"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  
+		  <div class="row pb-0 pt-2 mt-2 btn-bawah"> 
+			<div class="col text-center" style="">
+				<button class="btn btn-danger btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="prevSoal()"><i class="fa fa-chevron-circle-left"></i> <span class="d-none d-sm-inline-block">Soal sebelumnya</span></button>
+			</div>
+			<div class="col text-center" style="">
+				<button class="btn btn-warning btn-round btn-md btn-navigasi" style="border-radius:30px;color:#fff;"><input type="checkbox" onclick="raguRagu()" id="c_ragu_ragu" value=""> <span class="d-none d-sm-inline-block">Ragu-ragu
+			</span></button></div>
+			<div class="col text-center" style="">
+				<button class="btn btn-primary btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="nextSoal()" id="nextSoal"> <span class="d-none d-sm-inline-block">Soal berikutnya</span> <i class="fa fa-chevron-circle-right"></i></button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	 
+  </div> 
+</div>
+
+<div class="modal fadeIn" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Daftar Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+		<form id="formJawaban">
+         				<span class="d-none" id="tmp_answer_1"></span>
+				<span class="d-none" id="ragu_answer_1"></span>
+				<input type="hidden" name="jawaban_no[1]" id="input_jawaban_no_1" value="1">
+								<div id="jawaban-no-1" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal btn-primary" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('1')">1					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer1" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_2"></span>
+				<span class="d-none" id="ragu_answer_2"></span>
+				<input type="hidden" name="jawaban_no[2]" id="input_jawaban_no_2" value="2">
+								<div id="jawaban-no-2" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('2')">2					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer2" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_3"></span>
+				<span class="d-none" id="ragu_answer_3"></span>
+				<input type="hidden" name="jawaban_no[3]" id="input_jawaban_no_3" value="3">
+								<div id="jawaban-no-3" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('3')">3					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer3" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_4"></span>
+				<span class="d-none" id="ragu_answer_4"></span>
+				<input type="hidden" name="jawaban_no[4]" id="input_jawaban_no_4" value="4">
+								<div id="jawaban-no-4" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('4')">4					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer4" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_5"></span>
+				<span class="d-none" id="ragu_answer_5"></span>
+				<input type="hidden" name="jawaban_no[5]" id="input_jawaban_no_5" value="5">
+								<div id="jawaban-no-5" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('5')">5					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer5" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_6"></span>
+				<span class="d-none" id="ragu_answer_6"></span>
+				<input type="hidden" name="jawaban_no[6]" id="input_jawaban_no_6" value="6">
+								<div id="jawaban-no-6" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('6')">6					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer6" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_7"></span>
+				<span class="d-none" id="ragu_answer_7"></span>
+				<input type="hidden" name="jawaban_no[7]" id="input_jawaban_no_7" value="7">
+								<div id="jawaban-no-7" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('7')">7					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer7" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_8"></span>
+				<span class="d-none" id="ragu_answer_8"></span>
+				<input type="hidden" name="jawaban_no[8]" id="input_jawaban_no_8" value="8">
+								<div id="jawaban-no-8" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('8')">8					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer8" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_9"></span>
+				<span class="d-none" id="ragu_answer_9"></span>
+				<input type="hidden" name="jawaban_no[9]" id="input_jawaban_no_9" value="9">
+								<div id="jawaban-no-9" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('9')">9					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer9" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_10"></span>
+				<span class="d-none" id="ragu_answer_10"></span>
+				<input type="hidden" name="jawaban_no[10]" id="input_jawaban_no_10" value="10">
+								<div id="jawaban-no-10" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('10')">10					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer10" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_11"></span>
+				<span class="d-none" id="ragu_answer_11"></span>
+				<input type="hidden" name="jawaban_no[11]" id="input_jawaban_no_11" value="11">
+								<div id="jawaban-no-11" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('11')">11					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer11" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_12"></span>
+				<span class="d-none" id="ragu_answer_12"></span>
+				<input type="hidden" name="jawaban_no[12]" id="input_jawaban_no_12" value="12">
+								<div id="jawaban-no-12" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('12')">12					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer12" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_13"></span>
+				<span class="d-none" id="ragu_answer_13"></span>
+				<input type="hidden" name="jawaban_no[13]" id="input_jawaban_no_13" value="13">
+								<div id="jawaban-no-13" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('13')">13					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer13" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_14"></span>
+				<span class="d-none" id="ragu_answer_14"></span>
+				<input type="hidden" name="jawaban_no[14]" id="input_jawaban_no_14" value="14">
+								<div id="jawaban-no-14" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('14')">14					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer14" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_15"></span>
+				<span class="d-none" id="ragu_answer_15"></span>
+				<input type="hidden" name="jawaban_no[15]" id="input_jawaban_no_15" value="15">
+								<div id="jawaban-no-15" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('15')">15					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer15" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_16"></span>
+				<span class="d-none" id="ragu_answer_16"></span>
+				<input type="hidden" name="jawaban_no[16]" id="input_jawaban_no_16" value="16">
+								<div id="jawaban-no-16" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('16')">16					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer16" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_17"></span>
+				<span class="d-none" id="ragu_answer_17"></span>
+				<input type="hidden" name="jawaban_no[17]" id="input_jawaban_no_17" value="17">
+								<div id="jawaban-no-17" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('17')">17					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer17" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_18"></span>
+				<span class="d-none" id="ragu_answer_18"></span>
+				<input type="hidden" name="jawaban_no[18]" id="input_jawaban_no_18" value="18">
+								<div id="jawaban-no-18" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('18')">18					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer18" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_19"></span>
+				<span class="d-none" id="ragu_answer_19"></span>
+				<input type="hidden" name="jawaban_no[19]" id="input_jawaban_no_19" value="19">
+								<div id="jawaban-no-19" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('19')">19					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer19" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_20"></span>
+				<span class="d-none" id="ragu_answer_20"></span>
+				<input type="hidden" name="jawaban_no[20]" id="input_jawaban_no_20" value="20">
+								<div id="jawaban-no-20" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('20')">20					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer20" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_21"></span>
+				<span class="d-none" id="ragu_answer_21"></span>
+				<input type="hidden" name="jawaban_no[21]" id="input_jawaban_no_21" value="21">
+								<div id="jawaban-no-21" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('21')">21					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer21" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_22"></span>
+				<span class="d-none" id="ragu_answer_22"></span>
+				<input type="hidden" name="jawaban_no[22]" id="input_jawaban_no_22" value="22">
+								<div id="jawaban-no-22" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('22')">22					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer22" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_23"></span>
+				<span class="d-none" id="ragu_answer_23"></span>
+				<input type="hidden" name="jawaban_no[23]" id="input_jawaban_no_23" value="23">
+								<div id="jawaban-no-23" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('23')">23					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer23" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_24"></span>
+				<span class="d-none" id="ragu_answer_24"></span>
+				<input type="hidden" name="jawaban_no[24]" id="input_jawaban_no_24" value="24">
+								<div id="jawaban-no-24" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('24')">24					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer24" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_25"></span>
+				<span class="d-none" id="ragu_answer_25"></span>
+				<input type="hidden" name="jawaban_no[25]" id="input_jawaban_no_25" value="25">
+								<div id="jawaban-no-25" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('25')">25					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer25" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 		 </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="infoSoal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Informasi Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fadeIn" id="timeoutDialog" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-2 pt-5">
+		<h5 class="modal-title" style="text-align:center">PERHATIAN !!</h5>
+		<p>Waktu tes sudah habis !</p>
+      </div>
+	  <div class="modal-footer text-center">
+		<button class="btn btn-danger" onclick="selesaikanTes()">Ok, Lanjutkan !</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="c-svg" id="c-svg-1" style="display: none;"></div><div class="c-svg" id="c-svg-2" style="display: none;"></div><div class="c-svg" id="c-svg-3" style="display: none;"></div><div class="c-svg" id="c-svg-4" style="display: none;"></div><div class="c-svg" id="c-svg-5" style="display: none;"></div><div class="c-svg" id="c-svg-6" style="display: none;"></div><div class="c-svg" id="c-svg-7" style="display: none;"></div><div class="c-svg" id="c-svg-8" style="display: none;"></div><div class="c-svg" id="c-svg-9" style="display: none;"></div><div class="c-svg" id="c-svg-10" style="display: none;"></div><div class="c-svg" id="c-svg-11" style="display: none;"></div><div class="c-svg" id="c-svg-12" style="display: none;"></div><div class="c-svg" id="c-svg-13" style="display: none;"></div><div class="c-svg" id="c-svg-14" style="display: none;"></div><div class="c-svg" id="c-svg-15" style="display: none;"></div><div class="c-svg" id="c-svg-16" style="display: none;"></div><div class="c-svg" id="c-svg-17" style="display: none;"></div><div class="c-svg" id="c-svg-18" style="display: none;"></div><div class="c-svg" id="c-svg-19" style="display: none;"></div><div class="c-svg" id="c-svg-20" style="display: none;"></div><div class="c-svg" id="c-svg-21" style="display: none;"></div><div class="c-svg" id="c-svg-22" style="display: none;"></div><div class="c-svg" id="c-svg-23" style="display: none;"></div><div class="c-svg" id="c-svg-24" style="display: none;"></div><div class="c-svg" id="c-svg-25" style="display: none;"></div>
+<div style="position: fixed; inset: 0px; background: rgb(255, 255, 255); opacity: 0.5; z-index: 99999; display: none;" id="loader">
+<img class="loader" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/images/loader2.gif">
+</div>
+
+
+<style>
+	
+	@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
+	@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+	@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+	@media (max-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.mataujian{text-align:left} 
+		#formContent{padding-left:10px;padding-right:10px}
+		.row-atas {text-align:center;}
+		#isisoal img {width:100%;}
+	}
+	@media (min-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.container-fluid{ padding-left:50px;padding-right:50px} 
+		.mataujian{text-align:right} 
+		#formContent{padding-left:50px;padding-right:50px} 
+		.btn-navigasi {width:180px;}
+		.cont-btn-informasi{text-align:right}
+		
+	}
+	@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+	@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+			
+	/* STRUCTURE */
+	.loader {
+	  margin: 0;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -ms-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+	
+	.wrapper {
+	  display: flex;
+	  align-items: center;
+	  flex-direction: column; 
+	  justify-content: center;
+	  width: 100%;
+	  min-height: 100%;
+	  padding: 20px;
+	  margin-top:-80px;
+	}
+
+	#formContent {
+	  -webkit-border-radius: 10px 10px 10px 10px;
+	  border-radius: 10px 10px 10px 10px;
+	  background: #fff;
+	  position: relative;
+	  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  text-align: center;
+	}
+
+	
+
+
+	/* TABS */
+
+	h2.inactive {
+	  color: #cccccc;
+	}
+
+	h2.active {
+	  color: #0d0d0d;
+	  border-bottom: 2px solid #5fbae9;
+	}
+	
+	input[type=text] {
+	  border: none;
+	  color: #0d0d0d;
+	  text-decoration: none;
+	  border-radius:0px;
+	  border-bottom:1px solid #eee;
+	  background:transparent;
+	}
+	
+
+	/* ANIMATIONS */
+
+	/* Simple CSS3 Fade-in-down Animation */
+	.fadeInDown {
+	  -webkit-animation-name: fadeInDown;
+	  animation-name: fadeInDown;
+	  -webkit-animation-duration: 1s;
+	  animation-duration: 1s;
+	  -webkit-animation-fill-mode: both;
+	  animation-fill-mode: both;
+	}
+
+	@-webkit-keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	@keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+	.fadeIn {
+	  opacity:0;
+	  -webkit-animation:fadeIn ease-in 1;
+	  -moz-animation:fadeIn ease-in 1;
+	  animation:fadeIn ease-in 1;
+
+	  -webkit-animation-fill-mode:forwards;
+	  -moz-animation-fill-mode:forwards;
+	  animation-fill-mode:forwards;
+
+	  -webkit-animation-duration:1s;
+	  -moz-animation-duration:1s;
+	  animation-duration:1s;
+	}
+
+	.fadeIn.first {
+	  -webkit-animation-delay: 0.4s;
+	  -moz-animation-delay: 0.4s;
+	  animation-delay: 0.4s;
+	}
+
+	.fadeIn.second {
+	  -webkit-animation-delay: 0.6s;
+	  -moz-animation-delay: 0.6s;
+	  animation-delay: 0.6s;
+	}
+
+	.fadeIn.third {
+	  -webkit-animation-delay: 0.8s;
+	  -moz-animation-delay: 0.8s;
+	  animation-delay: 0.8s;
+	}
+
+	.fadeIn.fourth {
+	  -webkit-animation-delay: 1s;
+	  -moz-animation-delay: 1s;
+	  animation-delay: 1s;
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	.underlineHover:after {
+	  display: block;
+	  left: 0;
+	  bottom: -10px;
+	  width: 0;
+	  height: 2px;
+	  background-color: #56baed;
+	  content: "";
+	  transition: width 0.2s;
+	}
+
+	.underlineHover:hover {
+	  color: #0d0d0d;
+	}
+
+	.underlineHover:hover:after{
+	  width: 100%;
+	}
+	
+	.cfont {
+		cursor:pointer;
+	}
+	
+	
+	///
+	
+</style>
+  
+<script type="text/javascript" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery/jquery.2.1.1.min.js"></script>
+<script src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery.timer.js"></script>
+  
+<script>
+	
+	$(document).ready(function() {
+		$('#loader').fadeOut();
+		var  w = $(window).width();
+				if (w > 800)  {
+			var ii = $('#isisoal').height();
+			var  h = $(window).height();
+			var  h = h-$('.cont-soal').position().top-380;
+			$('.cont-soal').css({
+				'height':h,
+				'overflow': 'auto'
+			});
+
+			$('.isi-soal').css({
+				'height':h,
+			 	'overflow': 'auto'
+			 });
+
+			// if (ii > h) {
+			// 	$('.cont-soal').css({
+			// 	'height':ii,
+			// 	'overflow': 'auto'
+			// 	});
+			// }
+		}
+		
+		window.setTimeout( lihatSoal(1), 5000 ); // 5 seconds
+	});
+	var selected = 1;
+	var jumlah_soal = 25;
+	function lihatSoal(nomor) {
+		$('.soal-soal').css('display','none');
+		if (nomor=='') {
+			nomor = selected;
+		} 
+		$('#soal-no-'+nomor).css('display','');
+		selected = nomor;
+		$('#noSoal').html(nomor);
+		
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+		}
+		
+		for (i=1;i<=jumlah_soal;i++){
+			var cccc= $('#tmp_answer_'+i).html();
+			if (cccc != '') $('#jawaban-no-'+i).addClass('btn-dark');
+			var cccc= $('#ragu_answer_'+i).html();
+			if (cccc != '') {
+				$('#jawaban-no-'+i).addClass('btn-warning');
+				$('#jawaban-no-'+i).removeClass('btn-dark');
+			}
+		}
+		//$('.btn-lihat-soal').removeClass('btn-dark');
+		$('#jawaban-no-'+nomor).removeClass('btn-warning');
+		$('#jawaban-no-'+nomor).removeClass('btn-dark');
+		$('.btn-lihat-soal').removeClass('btn-primary');
+		
+		$('#jawaban-no-'+nomor).addClass('btn-primary');
+		
+		window.scrollTo(0, 0);
+		$('.c-svg').fadeOut();
+		redrawline(selected);
+	}
+	
+	function nextSoal() {
+		if (selected < jumlah_soal) {
+			selected++;		
+			lihatSoal(selected);
+		} else {
+			
+			selesaikanTes();
+		}
+	}
+	
+	function prevSoal() {
+		if (selected > 1) {
+			selected--;
+			lihatSoal(selected);
+		}
+	}
+	
+	function raguRagu() {
+		if ($('#c_ragu_ragu').is(':checked')) {
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			$('#jawaban-no-'+selected).addClass('btn-warning');
+			$('#ragu_answer_'+selected).html('1');
+			save_ragu(selected,'1');
+		} else {
+			$('#ragu_answer_'+selected).html('');
+			$('#jawaban-no-'+selected).removeClass('btn-warning');
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			
+			if ($('#answer'+selected).html() == '')
+			{
+				$('#jawaban-no-'+selected).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+selected).addClass('btn-dark');
+			}
+			
+			save_ragu(selected,'');
+			
+		}
+	}
+	
+	function trigger_ragu(nomor)
+	{
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			$('#jawaban-no-'+nomor).addClass('btn-warning');
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+			$('#jawaban-no-'+nomor).removeClass('btn-warning');
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			
+			if ($('#answer'+nomor).html() == '')
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-dark');
+			}
+		}
+		
+	}
+	
+	lihatSoal(2);
+	
+	function selesaikanTes() {
+		$.ajax({ 
+		   type: "POST",
+		   dataType: "html",
+		   data : $('#formJawaban').serialize(),
+		   url: "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/finishtes?ses_id=427c909e27a769c525baae8318fb665a0bb26e36",
+		   cache: false, 
+		   beforeSend: function(){
+			   $('#nextSoal').prop('disabled',true);
+			   $('#nextSoal').html('Silahkan tunggu ... !');
+			   $('#loader').fadeIn();
+			},
+			complete: function(){
+			},
+			success: function(result){
+				//alert(result);
+				if (result=='error') {
+					alert('Oops ada kesalahan! \rSilahkan ulangi !');
+					$('#nextSoal').prop('disabled',false);
+					$('#nextSoal').prop('enabled',true);
+					$('#nextSoal').html('Soal berikutnya');
+					$('#loader').fadeOut();
+				}
+				else
+					window.location = result;
+		   }
+		});
+	}
+
+	function changeFont(s,d)
+	{
+		$('#isisoal').css("font-size", s + "px");
+		$('.cfont').css("font-weight", "normal");
+		$('#'+d).css("font-weight", "bold");
+	}
+			
+	var RemainTime = new (function() {
+		var $countdown;
+		var $form;
+		var incrementTime = 60;
+		var globalTime = 4500 * 1000; // 50 seconds (in milliseconds)
+		var currentTime = globalTime;
+		var DurationTime = 4500 * 60000; // 5 minutes (in milliseconds)
+
+
+		$(function() {
+
+			// Setup the timer
+			$countdown = $('#countdown');
+			RemainTime.Timer = $.timer(updateTimer, incrementTime, true);
+
+		});
+
+		function updateTimer() {
+
+			// Output timer position
+			var timeString = formatTime(currentTime);
+			$countdown.html(timeString);
+			// If timer is complete, trigger alert
+			if (currentTime == 0) {
+				jQuery.noConflict();
+				$('#timeoutDialog').modal();
+				//$('#timeoutDialog').modal('show');
+				RemainTime.Timer.stop();
+				//disable_all();
+				//bootbox_timeout();
+				
+				return;
+			}
+			// Increment timer position
+			currentTime -= incrementTime;
+			if (currentTime < 0) currentTime = 0;
+
+		}
+	});
+
+	// Common functions
+	function pad(number, length) {
+		var str = '' + number;
+		while (str.length < length) {str = '0' + str;}
+		return str;
+	}
+	function formatTime(time) {
+		time = time / 10;
+		var hour= parseInt(time / 360000),
+			min = parseInt(time / 6000) - (hour * 60),
+			sec = parseInt(time / 100) - (min * 60) - (hour * 3600),
+			hundredths = pad(time - (sec * 100) - (min * 6000) - (hour * 360000), 2);
+		return (hour > 0 ? pad(hour, 2) : "00") + ":" + (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + "";
+	}
+	
+	function KlikJawaban(no,i)
+	{
+		$('#pilihan_'+no+'_'+i).trigger('click');
+	}
+	
+	
+	function KlikJawaban2(no,i)
+	{
+		$('#pilihan_'+'_'+no+'_'+i).trigger('click');
+	}
+	
+	function KlikJawaban3(no,i,j)
+	{
+		$('#pilihan_'+'_'+no+'_'+i+'_'+j).trigger('click');
+	}
+	
+	
+	function pilihan(n,v,i) {
+		if (v.toUpperCase() == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(v.toUpperCase());
+		//$("#answer"+n).css('color','#000');
+		//pushPromise(i,v);
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+		$("#jawaban-no-"+n).addClass('btn-dark');
+		//$("#jawaban-no-"+n).addClass('text-white');
+		// $("#cont-answer"+n).css('color','#fff');
+
+		save_answer(n,v.toUpperCase());
+		trigger_ragu(selected);
+
+	}
+	
+	
+	function pilihan2(n,v,i) {
+		
+		var jawaban = $('.pilihan'+n+':checked')
+		   .map(function() { return $(this).val() })
+		   .get()
+		   .join(";");
+		
+		if (jawaban == '') {
+			$("#answer"+n).html('');
+			$("#jawaban-no-"+n).removeClass('btn-dark');
+			$("#jawaban-no-"+n).addClass('btn-outline-dark');
+		}
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+			$("#jawaban-no-"+n).addClass('btn-dark');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		
+		// pushPromise(i,jawaban);
+		
+		
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+
+	}
+	
+	function pilihan3(n,total,s, arr) {
+		var jawaban = '';
+		for (i=1;i<=total;i++)  {
+			var v = $('input[name="pilihan_'+n+'_'+i+'"]:checked').val();
+			if (v != undefined && v != null) jawaban += arr[(i-1)]+'|'+v + ';';
+		}
+		jawaban = jawaban.substring(0, jawaban.length-1);
+		
+		if (jawaban == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		// pushPromise(s,jawaban);
+		
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+	    $("#jawaban-no-"+n).addClass('btn-dark');
+			
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+	}
+	
+		
+	function pilih1(no, id, warna, order) {
+			
+			// if (window['right_'+no] == '') {
+				// $('.m-left-'+no).prop('checked', false);
+				// $('.tr-left-'+no).css('background','');
+			// }
+			//if (window['dipilih1_'+no].indexOf(id) >=0) window['free1_'+no]=false;
+			if (window['free1_'+no]) {
+				window['free1_'+no] = false;
+				$('#r_left_'+no+'_'+id).prop('checked', true);
+				$('#row1-'+no+'-'+id).css('background',warna);
+				window['pos1_'+no] = $('#r_left_'+no+'_'+id).offset();
+				window['pos11_'+no] = $('#r_left_'+no+'_'+id).position();
+				window['warna1_'+no] = warna;
+				window['id1_'+no] = id;
+				window['order1_'+no] = order;
+				window['dipilih1_'+no].push(id);
+				window['jawab_'+no] = id;
+			}
+			
+	}
+	
+	function removeA(arr) {
+		var what, a = arguments, L = a.length, ax;
+		while (L > 1 && arr.length) {
+			what = a[--L];
+			while ((ax= arr.indexOf(what)) !== -1) {
+				arr.splice(ax, 1);
+			}
+		}
+		return arr;
+	}
+	
+	function rgb2hex(rgb) {
+		rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+		function hex(x) {
+			return ("0" + parseInt(x).toString(16)).slice(-2);
+		}
+		return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+	}
+	
+	
+	
+	function pilih2(no, id,tipe,order,s, ps) {
+		var _c_pilih = $('#r_right_'+no+'_'+id).prop('checked');
+		if (_c_pilih==true) {
+			//alert('1');
+			
+			var id1 =  window['pasangan_'+no+'_'+id];
+			window['free1_'+no] = false;
+			//$('#r_left_'+no+'_'+id).prop('checked', true);
+			var warna11 = rgb2hex($('#row2-'+no+'-'+id).css('background-color'));
+			window['warna1_'+no] = warna11;
+			window['pos1_'+no] = $('#r_left_'+no+'_'+id1).offset();
+			window['pos11_'+no] = $('#r_left_'+no+'_'+id1).position();
+			var cc = id1+";"+id+'|';
+			var ddd = window['jawaban_'+no];
+			dd = ddd.replace(cc,"");
+			window['jawaban_'+no] = dd;
+			
+			window['id1_'+no] = id1;
+			window['free1_'+no] = false;
+			window['right_'+no] = '';
+			window['free_'+no] = true;
+			//delete window['dipilih2_'+no][id];
+			//window['dipilih2_'+no].remove(id);
+			removeA(window['dipilih2_'+no], id);
+			//$('#r_right_'+no+'_'+id).prop('checked', false);
+			//$('.line-'+no).css('display','none');
+			var xx = '#line_'+no+'_'+window['id1_'+no];
+			//alert(xx);
+			$(xx).css('display','none');
+			$('#r_right_'+no+'_'+id).prop('checked', false);
+			$('#row2-'+no+'-'+id).css('background','#ffffff');
+		}
+		else 
+		{
+			//alert('2');
+			window['free_'+no] = true;
+			if (window['dipilih2_'+no].indexOf(id) >=0) window['free_'+no]=false;
+			//alert(2);
+			
+			if ((window['id1_'+no] != '') && window['free_'+no] && (window['right_'+no] == '')) {
+				//alert(3);
+				window['free1_'+no] = true;
+				window['right_'+no] = '';
+				eval('var pasangan_'+no+'_'+id + '= "";');
+				window['pasangan_'+no+'_'+id] = window['id1_'+no];
+				window['jawaban_'+no] = window['jawaban_'+no]+ window['id1_'+no] +';'+ id +'|';
+				window['dipilih2_'+no].push(id);
+				$('#r_right_'+no+'_'+id).prop('checked', true);
+				$('#row2-'+no+'-'+id).css('background',window['warna1_'+no]);
+				$('#r_right_'+no+'_'+id).val(window['id1_'+no]+';'+id);
+				
+				pos2 = $('#r_right_'+no+'_'+id).offset();
+				pos22 = $('#r_right_'+no+'_'+id).position();
+				$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left);
+				$('#line_'+no+'_'+window['id1_'+no]).fadeIn();
+				if (window['pos1_'+no].top > pos2.top) {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',window['pos1_'+no].top-pos2.top)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',0)
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',pos2.top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				} else {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',0)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',Math.abs(window['pos1_'+no].top-pos2.top))
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',window['pos1_'+no].top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				}
+				
+				
+				window['id1_'+no] = '';
+				jawaban = window['jawaban_'+no];
+				n = no;
+				
+				if (jawaban == '')
+					$("#answer"+n).html('');
+				else {
+					$("#answer"+n).html('<i class="fa fa-check"></i>');
+					$("#answer"+n).removeClass('d-none');
+				}
+				
+				//$("#answer"+n).css('color','#000');
+				
+				
+					$("#tmp_answer_"+n).html(jawaban);
+					if (ps == '2')	   {
+						save_answer(n,jawaban);
+						//pushPromise(s,jawaban);
+					}
+				
+				// $("#cont-answer"+n).css('background','#000');
+				// $("#cont-answer"+n).css('color','#fff');
+				
+				trigger_ragu(selected);
+
+			} else {
+				if (tipe==2)
+				$('#r_right_'+no+'_'+id).prop('checked', false);
+			}
+		
+		}
+		
+	}
+	
+			eval('var tipesoal_pencocokan_1 = "1"');
+			eval('var tipesoal_pencocokan_2 = "2"');
+			eval('var tipesoal_pencocokan_3 = "1"');
+			eval('var tipesoal_pencocokan_4 = "2"');
+			eval('var tipesoal_pencocokan_5 = "2"');
+			eval('var tipesoal_pencocokan_6 = "1"');
+			eval('var tipesoal_pencocokan_7 = "3"');
+			eval('var tipesoal_pencocokan_8 = "1"');
+			eval('var tipesoal_pencocokan_9 = "2"');
+			eval('var tipesoal_pencocokan_10 = "2"');
+			eval('var tipesoal_pencocokan_11 = "2"');
+			eval('var tipesoal_pencocokan_12 = "1"');
+			eval('var tipesoal_pencocokan_13 = "1"');
+			eval('var tipesoal_pencocokan_14 = "1"');
+			eval('var tipesoal_pencocokan_15 = "2"');
+			eval('var tipesoal_pencocokan_16 = "3"');
+			eval('var tipesoal_pencocokan_17 = "2"');
+			eval('var tipesoal_pencocokan_18 = "2"');
+			eval('var tipesoal_pencocokan_19 = "1"');
+			eval('var tipesoal_pencocokan_20 = "2"');
+			eval('var tipesoal_pencocokan_21 = "1"');
+			eval('var tipesoal_pencocokan_22 = "2"');
+			eval('var tipesoal_pencocokan_23 = "1"');
+			eval('var tipesoal_pencocokan_24 = "2"');
+			eval('var tipesoal_pencocokan_25 = "2"');
+		
+	function redrawline(no) {
+		var tmp_tipesoal = window['tipesoal_pencocokan_'+no];
+		if (tmp_tipesoal == 5) {
+			resetKunci(no,'');
+			var tmp = $('#tmp_answer_'+no).html();//window['jawaban_pencocokan_'+no];
+			var tmp_warna = window['warna_pencocokan_'+no];
+			var tmp_soal = window['soal_pencocokan_'+no];
+			var arr_tmp = tmp.split('|');
+			for (i=0;i<arr_tmp.length;i++) {
+				if (arr_tmp[i].trim() != '') {
+					var arr_tmp2 = arr_tmp[i].split(';');
+					pilih1(no,arr_tmp2[0], tmp_warna[i], i);
+					pilih2(no,arr_tmp2[1], '2', arr_tmp2[1],tmp_soal,'1');
+				}
+			}
+			
+			$('#c-svg-'+no).fadeIn();
+		}
+	}
+	
+	
+	function resetKunci(no, tipe) {
+		left = '';
+		window['right_'+no] = '';
+		window['warna1_'+no] = '';
+		window['id1_'+no] = '';
+		window['pos1_'+no] = '';
+		window['pos11_'+no] = '';
+		window['free1_'+no] = true;
+		window['free_'+no] = true;
+		window['dipilih1_'+no] = [];
+		window['dipilih2_'+no] = [];
+		$('.tr-left-'+no).css('background','');
+		$('.tr-right-'+no).css('background','');
+		$('.line-'+no).css('display','none');
+		window['jawab_'+no] = '';
+		window['jawaban_'+no] = '';
+		window['order1_'+no] = '';
+		$('.m-left-'+no).prop('checked', false);
+		$('.m-right-'+no).prop('checked', false);
+		if (tipe == '1') $("#tmp_answer_"+no).html('');
+		$("#answer"+no).html('');
+		$("#jawaban-no-"+no).removeClass('btn-dark');
+		$("#jawaban-no-"+no).addClass('btn-outline-dark');
+		
+	};
+	
+	
+	$('.jawaban_essai').focusout(function() {
+		var no = this.title;
+		var jawaban = $('#jawaban_essai_'+no).val();					
+		var s = $('#jawaban_essai_'+no).attr('pre');					
+		
+		
+		if (jawaban == '')
+			$("#answer"+no).html('');
+		else {
+			$("#answer"+no).html('<i class="fa fa-check"></i>');
+			$("#answer"+no).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+no).html(jawaban);
+		
+		save_answer(no,jawaban);
+			   
+		// $("#answer"+no).css('color','#000');
+		
+			// $.post( "https://pusmendik.kemendikdasmen.go.id/tka/cbt/peserta/sv_ans",
+			// {
+				// id_soal: s,
+				// jawaban:jawaban,
+				// id_ujian: ,
+				// id_projek_ujian: 
+			// }, function(data) {
+		// });
+		// $("#cont-answer"+no).css('background','#000');
+		// $("#cont-answer"+no).css('color','#fff');
+		trigger_ragu(selected);
+			
+	}).blur(function() {});
+	
+	
+	function methodThatReturnsAPromise(i,jawaban) {
+		return new Promise((resolve, reject) => {
+			$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_jawaban", {nomor: i,jawaban:jawaban, }, function(data) {resolve();});
+		});
+	}
+	
+	var promises = [Promise.resolve()];
+	
+	function pushPromise(i,jawaban)
+	{
+	  promises.push(promises.pop().then(function(){
+		return methodThatReturnsAPromise(i,jawaban)}));
+	}
+	
+	function save_ragu(nomor,jawaban) {
+		$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_ragu", {nomor: nomor,jawaban:jawaban, }, function(data) {});
+	}
+	
+	function save_answer(nomor,jawaban) {
+		pushPromise(nomor,jawaban);
+	}
+</script>
+
+
+
+</body></html>

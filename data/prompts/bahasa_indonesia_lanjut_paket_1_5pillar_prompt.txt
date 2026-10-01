@@ -1,0 +1,475 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Indonesia Tingkat Lanjut (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: ['A:Sesuai', 'B:Sesuai', 'C:Tidak Sesuai']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+PROPOSAL KEGIATAN
+
+Pemanfaatan Teknologi Digital untuk Meningkatkan Daya Saing UKM Pangan Lokal
+
+Dalam beberapa tahun terakhir, perkembangan teknologi digital telah membuka peluang besar bagi pelaku Usaha Kecil dan Menengah (UKM), khususnya di sektor pangan lokal. Namun, banyak UKM yang belum mampu memanfaatkan teknologi secara optimal karena keterbatasan akses informasi, pelatihan, dan pendanaan. Berdasarkan survei yang dilakukan oleh Dinas Koperasi dan UKM Provinsi Jawa Barat pada 2023, hanya 35% UKM pangan yang aktif menggunakan platform digital untuk pemasaran.
+
+Seiring dengan meningkatnya penggunaan internet dan perangkat digital, konsumen semakin bergeser ke transaksi daring sekitar 60% lebih. Fenomena ini menjadi peluang besar yang belum dimaksimalkan oleh UKM pangan lokal. Misalnya, banyak produk makanan olahan khas daerah memiliki potensi pasar nasional dan bahkan internasional, tetapi belum memiliki strategi pemasaran digital yang memadai. Di sisi lain, persaingan dengan produk pangan dari industri besar dan waralaba semakin ketat, sehingga inovasi digital menjadi kebutuhan mendesak.
+
+Oleh karena itu, kami mengajukan program pelatihan bertema “Digitalisasi UKM Pangan Lokal” yang bertujuan untuk meningkatkan literasi digital, pemahaman e-commerce, serta keterampilan penggunaan dompet digital dan media sosial sebagai sarana promosi. Program ini dirancang untuk menjangkau 50% pelaku UKM di tiga kabupaten, dengan metode blended learning (daring dan luring), serta pendampingan usaha selama 3 bulan.
+
+Program ini penting karena teknologi digital tidak hanya memperluas pasar, tetapi juga menekan biaya distribusi, meningkatkan efisiensi, dan mempercepat proses transaksi. Berdasarkan data Bank Indonesia, nilai transaksi e-commerce Indonesia pada 2022 mencapai Rp476 triliun, yang 60% didominasi oleh produk konsumsi rumah tangga, termasuk pangan. Data tersebut menunjukkan adanya kebutuhan akan peningkatan kapasitas pelaku UKM dalam mengakses ekosistem digital.
+
+Dengan adanya pelatihan ini, diharapkan pelaku UKM pangan lokal dapat bersaing secara sehat di pasar digital yang terus berkembang. Usulan program ini akan disampaikan kepada Kementerian Koperasi dan UKM dengan anggaran sebesar Rp450 juta, yang mencakup biaya pelatihan, honor narasumber, pembuatan modul, serta pengembangan platform daring lokal. Program ini juga mendukung Tujuan Pembangunan Berkelanjutan (SDG's), khususnya poin 8 tentang pekerjaan layak dan pertumbuhan ekonomi, serta poin 9 tentang industri, inovasi, dan infrastruktur.
+
+Sumber: www.pusedi.or.id/ecommerce-ukm2022 dengan penyesuaian oleh penulis soal
+
+PERTANYAAN:
+Dari pernyataan-pernyataan berikut, manakah pernyataan yang mengungkapkan kesesuaian antara usulan program dan data pendukung sesuai teks proposal tersebut?
+
+Tentukan Sesuai atau Tidak Sesuai untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Usulan Program: Mengajukan program pelatihan digitalisasi bagi 100 pelaku UKM di tiga kabupaten. Data Pendukung: Hanya 35% UKM pangan aktif menggunakan platform digital.
+  - B. Usulan Program: Mengusulkan pelatihan e commerce, promosi digital, dan penggunaan dompet digital. Data Pendukung: Nilai transaksi e-commerce nasional mencapai 476 triliun rupiah dan didominasi produk konsumsi termasuk pangan.
+  - C. Usulan Program: Meminta Kementerian turun langsung ke lapangan sebelum menyetujui usulan. Data Pendukung: Data survei telah menunjukkan kebutuhan pelatihan tanpa menyebut perlunya kunjungan langsung oleh kementerian.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+PROPOSAL KEGIATAN
+
+Pemanfaatan Teknologi Digital untuk Meningkatkan Daya Saing UKM Pangan Lokal
+
+Dalam beberapa tahun terakhir, perkembangan teknologi digital telah membuka peluang besar bagi pelaku Usaha Kecil dan Menengah (UKM), khususnya di sektor pangan lokal. Namun, banyak UKM yang belum mampu memanfaatkan teknologi secara optimal karena keterbatasan akses informasi, pelatihan, dan pendanaan. Berdasarkan survei yang dilakukan oleh Dinas Koperasi dan UKM Provinsi Jawa Barat pada 2023, hanya 35% UKM pangan yang aktif menggunakan platform digital untuk pemasaran.
+
+Seiring dengan meningkatnya penggunaan internet dan perangkat digital, konsumen semakin bergeser ke transaksi daring sekitar 60% lebih. Fenomena ini menjadi peluang besar yang belum dimaksimalkan oleh UKM pangan lokal. Misalnya, banyak produk makanan olahan khas daerah memiliki potensi pasar nasional dan bahkan internasional, tetapi belum memiliki strategi pemasaran digital yang memadai. Di sisi lain, persaingan dengan produk pangan dari industri besar dan waralaba semakin ketat, sehingga inovasi digital menjadi kebutuhan mendesak.
+
+Oleh karena itu, kami mengajukan program pelatihan bertema “Digitalisasi UKM Pangan Lokal” yang bertujuan untuk meningkatkan literasi digital, pemahaman e-commerce, serta keterampilan penggunaan dompet digital dan media sosial sebagai sarana promosi. Program ini dirancang untuk menjangkau 50% pelaku UKM di tiga kabupaten, dengan metode blended learning (daring dan luring), serta pendampingan usaha selama 3 bulan.
+
+Program ini penting karena teknologi digital tidak hanya memperluas pasar, tetapi juga menekan biaya distribusi, meningkatkan efisiensi, dan mempercepat proses transaksi. Berdasarkan data Bank Indonesia, nilai transaksi e-commerce Indonesia pada 2022 mencapai Rp476 triliun, yang 60% didominasi oleh produk konsumsi rumah tangga, termasuk pangan. Data tersebut menunjukkan adanya kebutuhan akan peningkatan kapasitas pelaku UKM dalam mengakses ekosistem digital.
+
+Dengan adanya pelatihan ini, diharapkan pelaku UKM pangan lokal dapat bersaing secara sehat di pasar digital yang terus berkembang. Usulan program ini akan disampaikan kepada Kementerian Koperasi dan UKM dengan anggaran sebesar Rp450 juta, yang mencakup biaya pelatihan, honor narasumber, pembuatan modul, serta pengembangan platform daring lokal. Program ini juga mendukung Tujuan Pembangunan Berkelanjutan (SDG's), khususnya poin 8 tentang pekerjaan layak dan pertumbuhan ekonomi, serta poin 9 tentang industri, inovasi, dan infrastruktur.
+
+Sumber: www.pusedi.or.id/ecommerce-ukm2022 dengan penyesuaian oleh penulis soal
+
+PERTANYAAN:
+Hubungan koherensi antara paragraf ke-2 dan ke-3 adalah....
+OPSI / PERNYATAAN:
+  - A. A. alasan pengajuan proposal yang diperinci dengan contoh UKM
+  - B. B. alasan pengajuan program pelatihan yang diperkuat tujuan
+  - C. C. akibat dari maraknya fenomena digitalisasi UKM di daerah
+  - D. D. akibat dari program literasi digital yang disertai tujuan
+  - E. E. alasan pengajuan proposal program dengan persyaratan
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: ['A:Tidak Logi', 'B:Logis', 'C:Logis']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+PROPOSAL KEGIATAN
+
+Pemanfaatan Teknologi Digital untuk Meningkatkan Daya Saing UKM Pangan Lokal
+
+Dalam beberapa tahun terakhir, perkembangan teknologi digital telah membuka peluang besar bagi pelaku Usaha Kecil dan Menengah (UKM), khususnya di sektor pangan lokal. Namun, banyak UKM yang belum mampu memanfaatkan teknologi secara optimal karena keterbatasan akses informasi, pelatihan, dan pendanaan. Berdasarkan survei yang dilakukan oleh Dinas Koperasi dan UKM Provinsi Jawa Barat pada 2023, hanya 35% UKM pangan yang aktif menggunakan platform digital untuk pemasaran.
+
+Seiring dengan meningkatnya penggunaan internet dan perangkat digital, konsumen semakin bergeser ke transaksi daring sekitar 60% lebih. Fenomena ini menjadi peluang besar yang belum dimaksimalkan oleh UKM pangan lokal. Misalnya, banyak produk makanan olahan khas daerah memiliki potensi pasar nasional dan bahkan internasional, tetapi belum memiliki strategi pemasaran digital yang memadai. Di sisi lain, persaingan dengan produk pangan dari industri besar dan waralaba semakin ketat, sehingga inovasi digital menjadi kebutuhan mendesak.
+
+Oleh karena itu, kami mengajukan program pelatihan bertema “Digitalisasi UKM Pangan Lokal” yang bertujuan untuk meningkatkan literasi digital, pemahaman e-commerce, serta keterampilan penggunaan dompet digital dan media sosial sebagai sarana promosi. Program ini dirancang untuk menjangkau 50% pelaku UKM di tiga kabupaten, dengan metode blended learning (daring dan luring), serta pendampingan usaha selama 3 bulan.
+
+Program ini penting karena teknologi digital tidak hanya memperluas pasar, tetapi juga menekan biaya distribusi, meningkatkan efisiensi, dan mempercepat proses transaksi. Berdasarkan data Bank Indonesia, nilai transaksi e-commerce Indonesia pada 2022 mencapai Rp476 triliun, yang 60% didominasi oleh produk konsumsi rumah tangga, termasuk pangan. Data tersebut menunjukkan adanya kebutuhan akan peningkatan kapasitas pelaku UKM dalam mengakses ekosistem digital.
+
+Dengan adanya pelatihan ini, diharapkan pelaku UKM pangan lokal dapat bersaing secara sehat di pasar digital yang terus berkembang. Usulan program ini akan disampaikan kepada Kementerian Koperasi dan UKM dengan anggaran sebesar Rp450 juta, yang mencakup biaya pelatihan, honor narasumber, pembuatan modul, serta pengembangan platform daring lokal. Program ini juga mendukung Tujuan Pembangunan Berkelanjutan (SDG's), khususnya poin 8 tentang pekerjaan layak dan pertumbuhan ekonomi, serta poin 9 tentang industri, inovasi, dan infrastruktur.
+
+Sumber: www.pusedi.or.id/ecommerce-ukm2022 dengan penyesuaian oleh penulis soal
+
+PERTANYAAN:
+Berdasarkan teks, manakah argumen yang logis dari pernyataan- pernyataan berikut?
+
+Tentukan Logis atau Tidak Logis untuk setiap argumen berikut!
+OPSI / PERNYATAAN:
+  - A. Program pelatihan penting karena teknologi digital pasti memperluas jejaring.
+  - B. Program pelatihan penting karena teknologi digital pasti memperluas jejaring.
+  - C. Usulan program didasarkan pada data survei dan kebutuhan nyata di lapangan.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Kutipan puisi untuk soal nomor 4 - 6! Huesca jiwa di dunia yang hilang jiwa jiwa sayang,kenangan padamu adalah derita di sisiku bayangan yang bikin tinjauan beku
+
+angin bangkit ketika senja ngingatkan musim gugur akan tiba aku cemas bisa kehilangan kau aku cemas pada kecemasanku sendiri
+
+di batu penghabisan ke Huesca batas terakhir dari kebanggaan kita kenanglah sayang, dengan mesra kau kubayangkan di sisiku ada
+
+dan jika untung malang menghamparkan aku dalam kuburan dangkal ingatlah sebisamu segala yang indah dan cintaku yang kekal
+
+(Puisi Huesca karya John Cornford diterjemahkan oleh Chairil Anwar)
+
+PERTANYAAN:
+di batu penghabisan ke Huesca batas terakhir dari kebanggaan kita
+
+Makna kiasan batu penghabisan dan batas terakhir memperjelas kondisi yang dialami aku lirik (penyair) tentang....
+OPSI / PERNYATAAN:
+  - A. A. perpisahan antara penyair dengan orang yang dikasihi
+  - B. B. situasi kejiwaan yang penuh dinamika kehidupan
+  - C. C. setiap perjumpaan akan dibatasi dengan perpisahan
+  - D. D. semua ikhtiar harus dilakukan sampai batas kemampuan
+  - E. E. apa pun hasil akhirnya harus disikapi dengan kebanggaan
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Kutipan puisi untuk soal nomor 4 - 6! Huesca jiwa di dunia yang hilang jiwa jiwa sayang,kenangan padamu adalah derita di sisiku bayangan yang bikin tinjauan beku
+
+angin bangkit ketika senja ngingatkan musim gugur akan tiba aku cemas bisa kehilangan kau aku cemas pada kecemasanku sendiri
+
+di batu penghabisan ke Huesca batas terakhir dari kebanggaan kita kenanglah sayang, dengan mesra kau kubayangkan di sisiku ada
+
+dan jika untung malang menghamparkan aku dalam kuburan dangkal ingatlah sebisamu segala yang indah dan cintaku yang kekal
+
+(Puisi Huesca karya John Cornford diterjemahkan oleh Chairil Anwar)
+
+PERTANYAAN:
+angin bangkit ketika senja ngingatkan musim gugur akan tiba
+
+Makna citraan penglihatan ketika senja dan musim gugur mengkonkretkan gagasan penyair tentang ….
+OPSI / PERNYATAAN:
+  - A. A. pergantian hari dan musim
+  - B. B. batas akhir aktivitas manusia
+  - C. C. suasana kedukaan di ujung waktu
+  - D. D. siap menghadapi perubahan waktu
+  - E. E. kondisi menjelang akhir kehidupan
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Kutipan puisi untuk soal nomor 4 - 6! Huesca jiwa di dunia yang hilang jiwa jiwa sayang,kenangan padamu adalah derita di sisiku bayangan yang bikin tinjauan beku
+
+angin bangkit ketika senja ngingatkan musim gugur akan tiba aku cemas bisa kehilangan kau aku cemas pada kecemasanku sendiri
+
+di batu penghabisan ke Huesca batas terakhir dari kebanggaan kita kenanglah sayang, dengan mesra kau kubayangkan di sisiku ada
+
+dan jika untung malang menghamparkan aku dalam kuburan dangkal ingatlah sebisamu segala yang indah dan cintaku yang kekal
+
+(Puisi Huesca karya John Cornford diterjemahkan oleh Chairil Anwar )
+
+PERTANYAAN:
+angin bangkit ketika senja ngingatkan musim gugur akan tiba aku cemas bisa kehilangan kau aku cemas pada kecemasanku sendiri
+
+Suasana hati yang muncul setelah membaca bait puisi tersebut adalah ….
+OPSI / PERNYATAAN:
+  - A. A. keriangan hati saat musim gugur sudah tiba
+  - B. B. kemuraman saat senja hari di musim gugur
+  - C. C. keadaan gersang karena daun berguguran
+  - D. D. kesedihan karena takut kehilangan orang terkasih
+  - E. E. kebimbangan hati menunggu pergantian musim
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 7 s.d. 10!
+
+Teks Digital: Ulasan Pengunjung: Eksplorasi Budaya di Kampung Adat Ciptagelar
+
+⭐ 4.8/5 dari 87 ulasan
+
+👤 Rini Kartika – ★★★★★
+
+Kunjungan: Agustus 2024
+
+Pengalaman saya di Kampung Adat Ciptagelar sungguh luar biasa. Udara sejuk dan pemandangan hutan di kaki Gunung Halimun sangat menenangkan. Penduduknya sangat ramah dan terbuka terhadap tamu, tetapi tetap menjaga adat dan tata krama mereka. Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam. Sistem pertanian mereka yang masih tradisional sangat menarik untuk dipelajari. Tempat ini cocok untuk siapa pun yang ingin rehat dari hiruk-pikuk kota dan belajar budaya lokal.
+
+👤 Arif Nugroho – ★★★★☆
+
+Kunjungan: Juli 2023
+
+Saya sangat mengapresiasi bagaimana masyarakat Ciptagelar menjaga nilai-nilai adat mereka. Tidak ada listrik atau televisi di rumah-rumah penduduk, tapi justru itu yang membuat suasananya begitu tenang dan damai. Namun, saya merasa beberapa informasi tentang aturan kunjungan dan transportasi masih kurang tersedia secara daring. Semoga ke depan bisa dibuat panduan digital agar lebih mudah bagi wisatawan.
+
+👤 Linda Mariana – ★★★★★
+
+Kunjungan: Mei 2023
+
+Kampung ini sungguh unik! Saya mengikuti tur budaya singkat dan berbincang dengan salah satu sesepuh adat. Beliau menjelaskan filosofi hidup mereka yang sangat dalam dan menyentuh hati. Foto-foto yang saya ambil tidak bisa menggambarkan sepenuhnya keindahan dan kedalaman makna yang saya rasakan. Tempat ini lebih dari sekadar wisata, ini adalah pengalaman spiritual dan edukatif.
+
+👤 Bagas Permana – ★★★★☆
+
+Kunjungan: Desember 2022
+
+Saya menyukai artikel dan informasi yang saya baca sebelum ke sana, tetapi saat sampai, saya merasa ada sedikit perbedaan. Penulis artikel bilang “semua orang pasti jatuh cinta pada Ciptagelar”, tapi menurut saya itu terlalu berlebihan. Tempat ini memang menarik, tapi mungkin tidak semua orang nyaman dengan keterbatasan teknologi dan fasilitas. Namun, tetap patut dikunjungi jika ingin mengenal budaya Sunda secara mendalam.
+
+👤 Melati Dewi – ★★★★★
+
+Kunjungan: Oktober 2023
+
+Sangat merekomendasikan! Saya ke sana bersama komunitas pecinta budaya, dan kami benar-benar menikmati tiap detik. Bahkan saat tidak ada sinyal ponsel, kami bisa fokus sepenuhnya pada pengalaman. Saya senang karena penduduk memberi edukasi tentang larangan dan ritual adat secara terbuka. Jangan lupa datang saat ada upacara adat, karena itu momen paling berkesan!
+
+Teks Cetak: Eksplorasi Budaya yang Otentik di Kampung Adat Ciptagelar
+
+Kampung Adat Ciptagelar, yang terletak di kawasan Gunung Halimun, Sukabumi, Jawa Barat, menjadi salah satu destinasi wisata budaya yang menyuguhkan pengalaman autentik dan reflektif bagi para pengunjung. Berada di ketinggian dengan udara yang sejuk serta lanskap hutan yang asri, kampung ini menawarkan kehidupan masyarakat adat Sunda yang masih memegang teguh nilai-nilai dan tata cara warisan leluhur.
+
+Dalam ulasan dari berbagai pengunjung, kesan yang muncul begitu kuat adalah ketenangan dan kedalaman spiritual yang dirasakan selama berada di kampung tersebut. Rini Kartika, salah satu pengunjung, menggambarkan pengalamannya seperti “kembali ke masa lalu dan hidup dalam harmoni dengan alam.” Ia menyoroti keramahan warga serta sistem pertanian tradisional yang masih dijalankan tanpa bantuan teknologi modern. Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.
+
+Hal serupa disampaikan oleh Arif Nugroho, yang mengapresiasi bagaimana masyarakat Ciptagelar menolak penggunaan listrik dan televisi sebagai bagian dari pelestarian adat. Namun, ia juga mencatat perlunya peningkatan informasi daring terkait aturan kunjungan agar wisatawan baru lebih siap dan nyaman. Kritik ini menjadi masukan berharga bagi pengelola wisata berbasis komunitas.
+
+Salah satu keunikan Ciptagelar terletak pada filosofi hidup warganya, sebagaimana diungkapkan oleh Linda Mariana. Ia mengikuti tur budaya yang dipandu oleh sesepuh adat, dan merasakan kedalaman nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat. Dalam ulasannya, ia menegaskan bahwa tempat ini bukan sekadar destinasi, tetapi ruang untuk menyelami makna hidup yang sederhana namun bermakna.
+
+Meski mendapat pujian, tidak semua pengunjung sepenuhnya setuju dengan pandangan idealis tentang kampung ini. Bagas Permana, misalnya, menyampaikan bahwa kenyataan di lapangan tidak selalu sesuai dengan ekspektasi yang dibangun dari artikel promosi. Menurutnya, tidak semua orang akan nyaman dengan keterbatasan fasilitas dan teknologi. Namun ia tetap menyatakan bahwa Ciptagelar layak dikunjungi bagi siapa pun yang ingin mengenal budaya Sunda lebih dalam.
+
+Rekomendasi datang dari Melati Dewi, yang menekankan pentingnya datang saat upacara adat seperti Seren Taun berlangsung. Ia dan komunitasnya merasa sangat dihargai sebagai tamu, dan menyatakan bahwa pengalaman berinteraksi langsung dengan masyarakat adat memberikan kesan yang sulit dilupakan.
+
+Secara keseluruhan, Kampung Adat Ciptagelar tidak hanya menghadirkan keindahan alam dan budaya, tetapi juga membuka ruang refleksi bagi siapa pun yang mengunjunginya. Ulasan-ulasan tersebut menunjukkan bahwa kekuatan desa ini bukan pada fasilitas wisata modern, melainkan pada kesederhanaan hidup yang penuh makna. Bagi pecinta budaya dan pelancong yang mencari kedalaman, Ciptagelar adalah destinasi yang layak untuk dijelajahi.
+
+PERTANYAAN:
+Manakah kalimat yang menyatakan evaluasi dalam teks ulasan cetak dan ulasan digital tersebut?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam.
+  - B. B. Artikel ini menyajikan informasi lengkap tentang rute menuju Kampung Ciptagelar.
+  - C. C. Menurut saya, pernyataan ‘semua orang pasti jatuh cinta’ terlalu menggeneralisasi.
+  - D. D. Tokoh adat menjelaskan larangan penggunaan listrik di rumah-rumah warga.
+  - E. E. Kekuatan desa ini bukan pada fasilitas wisata modern, melainkan pada kesederhanaan hidup yang penuh makna.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: ['A:Tepat', 'B:Tepat', 'C:Tidak Tepat']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Teks untuk soal nomor 7 s.d. 10!
+
+Teks Digital: Ulasan Pengunjung: Eksplorasi Budaya di Kampung Adat Ciptagelar
+
+⭐  4.8/5 dari 87 ulasan
+
+👤  Rini Kartika – ★★★★★
+
+Kunjungan: Agustus 2024
+
+Pengalaman saya di Kampung Adat Ciptagelar sungguh luar biasa. Udara sejuk dan pemandangan hutan di kaki Gunung Halimun sangat menenangkan. Penduduknya sangat ramah dan terbuka terhadap tamu, tetapi tetap menjaga adat dan tata krama mereka. Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam. Sistem pertanian mereka yang masih tradisional sangat menarik untuk dipelajari. Tempat ini cocok untuk siapa pun yang ingin rehat dari hiruk-pikuk kota dan belajar budaya lokal.
+
+👤  Arif Nugroho – ★★★★☆
+
+Kunjungan: Juli 2023
+
+Saya sangat mengapresiasi bagaimana masyarakat Ciptagelar menjaga nilai-nilai adat mereka. Tidak ada listrik atau televisi di rumah-rumah penduduk, tapi justru itu yang membuat suasananya begitu tenang dan damai. Namun, saya merasa beberapa informasi tentang aturan kunjungan dan transportasi masih kurang tersedia secara daring. Semoga ke depan bisa dibuat panduan digital agar lebih mudah bagi wisatawan.
+
+👤  Linda Mariana – ★★★★★
+
+Kunjungan: Mei 2023
+
+Kampung ini sungguh unik! Saya mengikuti tur budaya singkat dan berbincang dengan salah satu sesepuh adat. Beliau menjelaskan filosofi hidup mereka yang sangat dalam dan menyentuh hati. Foto-foto yang saya ambil tidak bisa menggambarkan sepenuhnya keindahan dan kedalaman makna yang saya rasakan. Tempat ini lebih dari sekadar wisata, ini adalah pengalaman spiritual dan edukatif.
+
+👤  Bagas Permana – ★★★★☆
+
+Kunjungan: Desember 2022
+
+Saya menyukai artikel dan informasi yang saya baca sebelum ke sana, tetapi saat sampai, saya merasa ada sedikit perbedaan. Penulis artikel bilang “semua orang pasti jatuh cinta pada Ciptagelar”, tapi menurut saya itu terlalu berlebihan. Tempat ini memang menarik, tapi mungkin tidak semua orang nyaman dengan keterbatasan teknologi dan fasilitas. Namun, tetap patut dikunjungi jika ingin mengenal budaya Sunda secara mendalam.
+
+👤  Melati Dewi – ★★★★★
+
+Kunjungan: Oktober 2023
+
+Sangat merekomendasikan! Saya ke sana bersama komunitas pecinta budaya, dan kami benar-benar menikmati tiap detik. Bahkan saat tidak ada sinyal ponsel, kami bisa fokus sepenuhnya pada pengalaman. Saya senang karena penduduk memberi edukasi tentang larangan dan ritual adat secara terbuka. Jangan lupa datang saat ada upacara adat, karena itu momen paling berkesan!
+
+Teks Cetak: Eksplorasi Budaya yang Otentik di Kampung Adat Ciptagelar
+
+Kampung Adat Ciptagelar, yang terletak di kawasan Gunung Halimun, Sukabumi, Jawa Barat, menjadi salah satu destinasi wisata budaya yang menyuguhkan pengalaman autentik dan reflektif bagi para pengunjung. Berada di ketinggian dengan udara yang sejuk serta lanskap hutan yang asri, kampung ini menawarkan kehidupan masyarakat adat Sunda yang masih memegang teguh nilai-nilai dan tata cara warisan leluhur.
+
+Dalam ulasan dari berbagai pengunjung, kesan yang muncul begitu kuat adalah ketenangan dan kedalaman spiritual yang dirasakan selama berada di kampung tersebut. Rini Kartika, salah satu pengunjung, menggambarkan pengalamannya seperti “kembali ke masa lalu dan hidup dalam harmoni dengan alam.” Ia menyoroti keramahan warga serta sistem pertanian tradisional yang masih dijalankan tanpa bantuan teknologi modern. Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.
+
+Hal serupa disampaikan oleh Arif Nugroho, yang mengapresiasi bagaimana masyarakat Ciptagelar menolak penggunaan listrik dan televisi sebagai bagian dari pelestarian adat. Namun, ia juga mencatat perlunya peningkatan informasi daring terkait aturan kunjungan agar wisatawan baru lebih siap dan nyaman. Kritik ini menjadi masukan berharga bagi pengelola wisata berbasis komunitas.
+
+Salah satu keunikan Ciptagelar terletak pada filosofi hidup warganya, sebagaimana diungkapkan oleh Linda Mariana. Ia mengikuti tur budaya yang dipandu oleh sesepuh adat, dan merasakan kedalaman nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat. Dalam ulasannya, ia menegaskan bahwa tempat ini bukan sekadar destinasi, tetapi ruang untuk menyelami makna hidup yang sederhana namun bermakna.
+
+Meski mendapat pujian, tidak semua pengunjung sepenuhnya setuju dengan pandangan idealis tentang kampung ini. Bagas Permana, misalnya, menyampaikan bahwa kenyataan di lapangan tidak selalu sesuai dengan ekspektasi yang dibangun dari artikel promosi. Menurutnya, tidak semua orang akan nyaman dengan keterbatasan fasilitas dan teknologi. Namun ia tetap menyatakan bahwa Ciptagelar layak dikunjungi bagi siapa pun yang ingin mengenal budaya Sunda lebih dalam.
+
+Rekomendasi datang dari Melati Dewi, yang menekankan pentingnya datang saat upacara adat seperti Seren Taun berlangsung. Ia dan komunitasnya merasa sangat dihargai sebagai tamu, dan menyatakan bahwa pengalaman berinteraksi langsung dengan masyarakat adat memberikan kesan yang sulit dilupakan.
+
+Secara keseluruhan, Kampung Adat Ciptagelar tidak hanya menghadirkan keindahan alam dan budaya, tetapi juga membuka ruang refleksi bagi siapa pun yang mengunjunginya. Ulasan-ulasan tersebut menunjukkan bahwa kekuatan desa ini bukan pada fasilitas wisata modern, melainkan pada kesederhanaan hidup yang penuh makna. Bagi pecinta budaya dan pelancong yang mencari kedalaman, Ciptagelar adalah destinasi yang layak untuk dijelajahi.
+
+PERTANYAAN:
+Manakah pilihan kata yang tepat untuk menggambarkan kesederhanaan Kampung Ciptagelar?
+
+Tentukan Tepat atau Tidak Tepat pada setiap kalimat berikut!
+OPSI / PERNYATAAN:
+  - A. Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.
+  - B. Tempat ini bukan sekadar destinasi, tetapi ruang untuk menyelami makna hidup yang sederhana namun bermakna.
+  - C. Kampung ini menawarkan kehidupan masyarakat adat Sunda yang masih memegang teguh nilai-nilai dan tata cara warisan leluhur.
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['A', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 7 s.d. 10!
+
+Teks Digital: Ulasan Pengunjung: Eksplorasi Budaya di Kampung Adat Ciptagelar
+
+⭐ 4.8/5 dari 87 ulasan
+
+👤 Rini Kartika – ★★★★★
+
+Kunjungan: Agustus 2024
+
+Pengalaman saya di Kampung Adat Ciptagelar sungguh luar biasa. Udara sejuk dan pemandangan hutan di kaki Gunung Halimun sangat menenangkan. Penduduknya sangat ramah dan terbuka terhadap tamu, tetapi tetap menjaga adat dan tata krama mereka. Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam. Sistem pertanian mereka yang masih tradisional sangat menarik untuk dipelajari. Tempat ini cocok untuk siapa pun yang ingin rehat dari hiruk-pikuk kota dan belajar budaya lokal.
+
+👤 Arif Nugroho – ★★★★☆
+
+Kunjungan: Juli 2023
+
+Saya sangat mengapresiasi bagaimana masyarakat Ciptagelar menjaga nilai-nilai adat mereka. Tidak ada listrik atau televisi di rumah-rumah penduduk, tapi justru itu yang membuat suasananya begitu tenang dan damai. Namun, saya merasa beberapa informasi tentang aturan kunjungan dan transportasi masih kurang tersedia secara daring. Semoga ke depan bisa dibuat panduan digital agar lebih mudah bagi wisatawan.
+
+👤 Linda Mariana – ★★★★★
+
+Kunjungan: Mei 2023
+
+Kampung ini sungguh unik! Saya mengikuti tur budaya singkat dan berbincang dengan salah satu sesepuh adat. Beliau menjelaskan filosofi hidup mereka yang sangat dalam dan menyentuh hati. Foto-foto yang saya ambil tidak bisa menggambarkan sepenuhnya keindahan dan kedalaman makna yang saya rasakan. Tempat ini lebih dari sekadar wisata, ini adalah pengalaman spiritual dan edukatif.
+
+👤 Bagas Permana – ★★★★☆
+
+Kunjungan: Desember 2022
+
+Saya menyukai artikel dan informasi yang saya baca sebelum ke sana, tetapi saat sampai, saya merasa ada sedikit perbedaan. Penulis artikel bilang “semua orang pasti jatuh cinta pada Ciptagelar”, tapi menurut saya itu terlalu berlebihan. Tempat ini memang menarik, tapi mungkin tidak semua orang nyaman dengan keterbatasan teknologi dan fasilitas. Namun, tetap patut dikunjungi jika ingin mengenal budaya Sunda secara mendalam.
+
+👤 Melati Dewi – ★★★★★
+
+Kunjungan: Oktober 2023
+
+Sangat merekomendasikan! Saya ke sana bersama komunitas pecinta budaya, dan kami benar-benar menikmati tiap detik. Bahkan saat tidak ada sinyal ponsel, kami bisa fokus sepenuhnya pada pengalaman. Saya senang karena penduduk memberi edukasi tentang larangan dan ritual adat secara terbuka. Jangan lupa datang saat ada upacara adat, karena itu momen paling berkesan!
+
+Teks Cetak: Eksplorasi Budaya yang Otentik di Kampung Adat Ciptagelar
+
+Kampung Adat Ciptagelar, yang terletak di kawasan Gunung Halimun, Sukabumi, Jawa Barat, menjadi salah satu destinasi wisata budaya yang menyuguhkan pengalaman autentik dan reflektif bagi para pengunjung. Berada di ketinggian dengan udara yang sejuk serta lanskap hutan yang asri, kampung ini menawarkan kehidupan masyarakat adat Sunda yang masih memegang teguh nilai-nilai dan tata cara warisan leluhur.
+
+Dalam ulasan dari berbagai pengunjung, kesan yang muncul begitu kuat adalah ketenangan dan kedalaman spiritual yang dirasakan selama berada di kampung tersebut. Rini Kartika, salah satu pengunjung, menggambarkan pengalamannya seperti “kembali ke masa lalu dan hidup dalam harmoni dengan alam.” Ia menyoroti keramahan warga serta sistem pertanian tradisional yang masih dijalankan tanpa bantuan teknologi modern. Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.
+
+Hal serupa disampaikan oleh Arif Nugroho, yang mengapresiasi bagaimana masyarakat Ciptagelar menolak penggunaan listrik dan televisi sebagai bagian dari pelestarian adat. Namun, ia juga mencatat perlunya peningkatan informasi daring terkait aturan kunjungan agar wisatawan baru lebih siap dan nyaman. Kritik ini menjadi masukan berharga bagi pengelola wisata berbasis komunitas.
+
+Salah satu keunikan Ciptagelar terletak pada filosofi hidup warganya, sebagaimana diungkapkan oleh Linda Mariana. Ia mengikuti tur budaya yang dipandu oleh sesepuh adat, dan merasakan kedalaman nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat. Dalam ulasannya, ia menegaskan bahwa tempat ini bukan sekadar destinasi, tetapi ruang untuk menyelami makna hidup yang sederhana namun bermakna.
+
+Meski mendapat pujian, tidak semua pengunjung sepenuhnya setuju dengan pandangan idealis tentang kampung ini. Bagas Permana, misalnya, menyampaikan bahwa kenyataan di lapangan tidak selalu sesuai dengan ekspektasi yang dibangun dari artikel promosi. Menurutnya, tidak semua orang akan nyaman dengan keterbatasan fasilitas dan teknologi. Namun ia tetap menyatakan bahwa Ciptagelar layak dikunjungi bagi siapa pun yang ingin mengenal budaya Sunda lebih dalam.
+
+Rekomendasi datang dari Melati Dewi, yang menekankan pentingnya datang saat upacara adat seperti Seren Taun berlangsung. Ia dan komunitasnya merasa sangat dihargai sebagai tamu, dan menyatakan bahwa pengalaman berinteraksi langsung dengan masyarakat adat memberikan kesan yang sulit dilupakan.
+
+Secara keseluruhan, Kampung Adat Ciptagelar tidak hanya menghadirkan keindahan alam dan budaya, tetapi juga membuka ruang refleksi bagi siapa pun yang mengunjunginya. Ulasan-ulasan tersebut menunjukkan bahwa kekuatan desa ini bukan pada fasilitas wisata modern, melainkan pada kesederhanaan hidup yang penuh makna. Bagi pecinta budaya dan pelancong yang mencari kedalaman, Ciptagelar adalah destinasi yang layak untuk dijelajahi.
+
+PERTANYAAN:
+Manakah kalimat yang merupakan kalimat majemuk setara dalam teks ulasan digital dan cetak tersebut?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.
+  - B. B. Namun, ia juga mencatat perlunya peningkatan informasi daring terkait aturan kunjungan agar wisatawan baru lebih siap dan nyaman.
+  - C. C. Meski mendapat pujian, tidak semua pengunjung sepenuhnya setuju dengan pandangan idealis tentang kampung ini.
+  - D. D. Kami merasa sangat dihargai sebagai tamu, dan pengalaman berinteraksi langsung dengan masyarakat adat memberikan kesan yang sulit dilupakan.
+  - E. E. Ia mengikuti tur budaya yang dipandu oleh sesepuh adat dan merasakan kedalaman nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: ['A:Sesuai', 'B:Tidak Sesuai', 'C:Sesuai']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Teks untuk soal nomor 7 s.d. 10!
+
+Teks Digital: Ulasan Pengunjung: Eksplorasi Budaya di Kampung Adat Ciptagelar
+
+⭐  4.8/5 dari 87 ulasan
+
+👤  Rini Kartika – ★★★★★
+
+Kunjungan: Agustus 2024
+
+Pengalaman saya di Kampung Adat Ciptagelar sungguh luar biasa. Udara sejuk dan pemandangan hutan di kaki Gunung Halimun sangat menenangkan. Penduduknya sangat ramah dan terbuka terhadap tamu, tetapi tetap menjaga adat dan tata krama mereka. Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam. Sistem pertanian mereka yang masih tradisional sangat menarik untuk dipelajari. Tempat ini cocok untuk siapa pun yang ingin rehat dari hiruk-pikuk kota dan belajar budaya lokal.
+
+👤  Arif Nugroho – ★★★★☆
+
+Kunjungan: Juli 2023
+
+Saya sangat mengapresiasi bagaimana masyarakat Ciptagelar menjaga nilai-nilai adat mereka. Tidak ada listrik atau televisi di rumah-rumah penduduk, tapi justru itu yang membuat suasananya begitu tenang dan damai. Namun, saya merasa beberapa informasi tentang aturan kunjungan dan transportasi masih kurang tersedia secara daring. Semoga ke depan bisa dibuat panduan digital agar lebih mudah bagi wisatawan.
+
+👤  Linda Mariana – ★★★★★
+
+Kunjungan: Mei 2023
+
+Kampung ini sungguh unik! Saya mengikuti tur budaya singkat dan berbincang dengan salah satu sesepuh adat. Beliau menjelaskan filosofi hidup mereka yang sangat dalam dan menyentuh hati. Foto-foto yang saya ambil tidak bisa menggambarkan sepenuhnya keindahan dan kedalaman makna yang saya rasakan. Tempat ini lebih dari sekadar wisata, ini adalah pengalaman spiritual dan edukatif.
+
+👤  Bagas Permana – ★★★★☆
+
+Kunjungan: Desember 2022
+
+Saya menyukai artikel dan informasi yang saya baca sebelum ke sana, tetapi saat sampai, saya merasa ada sedikit perbedaan. Penulis artikel bilang “semua orang pasti jatuh cinta pada Ciptagelar”, tapi menurut saya itu terlalu berlebihan. Tempat ini memang menarik, tapi mungkin tidak semua orang nyaman dengan keterbatasan teknologi dan fasilitas. Namun, tetap patut dikunjungi jika ingin mengenal budaya Sunda secara mendalam.
+
+👤  Melati Dewi – ★★★★★
+
+Kunjungan: Oktober 2023
+
+Sangat merekomendasikan! Saya ke sana bersama komunitas pecinta budaya, dan kami benar-benar menikmati tiap detik. Bahkan saat tidak ada sinyal ponsel, kami bisa fokus sepenuhnya pada pengalaman. Saya senang karena penduduk memberi edukasi tentang larangan dan ritual adat secara terbuka. Jangan lupa datang saat ada upacara adat, karena itu momen paling berkesan!
+
+Teks Cetak: Eksplorasi Budaya yang Otentik di Kampung Adat Ciptagelar
+
+Kampung Adat Ciptagelar, yang terletak di kawasan Gunung Halimun, Sukabumi, Jawa Barat, menjadi salah satu destinasi wisata budaya yang menyuguhkan pengalaman autentik dan reflektif bagi para pengunjung. Berada di ketinggian dengan udara yang sejuk serta lanskap hutan yang asri, kampung ini menawarkan kehidupan masyarakat adat Sunda yang masih memegang teguh nilai-nilai dan tata cara warisan leluhur.
+
+Dalam ulasan dari berbagai pengunjung, kesan yang muncul begitu kuat adalah ketenangan dan kedalaman spiritual yang dirasakan selama berada di kampung tersebut. Rini Kartika, salah satu pengunjung, menggambarkan pengalamannya seperti “kembali ke masa lalu dan hidup dalam harmoni dengan alam.” Ia menyoroti keramahan warga serta sistem pertanian tradisional yang masih dijalankan tanpa bantuan teknologi modern. Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.
+
+Hal serupa disampaikan oleh Arif Nugroho, yang mengapresiasi bagaimana masyarakat Ciptagelar menolak penggunaan listrik dan televisi sebagai bagian dari pelestarian adat. Namun, ia juga mencatat perlunya peningkatan informasi daring terkait aturan kunjungan agar wisatawan baru lebih siap dan nyaman. Kritik ini menjadi masukan berharga bagi pengelola wisata berbasis komunitas.
+
+Salah satu keunikan Ciptagelar terletak pada filosofi hidup warganya, sebagaimana diungkapkan oleh Linda Mariana. Ia mengikuti tur budaya yang dipandu oleh sesepuh adat, dan merasakan kedalaman nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat. Dalam ulasannya, ia menegaskan bahwa tempat ini bukan sekadar destinasi, tetapi ruang untuk menyelami makna hidup yang sederhana namun bermakna.
+
+Meski mendapat pujian, tidak semua pengunjung sepenuhnya setuju dengan pandangan idealis tentang kampung ini. Bagas Permana, misalnya, menyampaikan bahwa kenyataan di lapangan tidak selalu sesuai dengan ekspektasi yang dibangun dari artikel promosi. Menurutnya, tidak semua orang akan nyaman dengan keterbatasan fasilitas dan teknologi. Namun ia tetap menyatakan bahwa Ciptagelar layak dikunjungi bagi siapa pun yang ingin mengenal budaya Sunda lebih dalam.
+
+Rekomendasi datang dari Melati Dewi, yang menekankan pentingnya datang saat upacara adat seperti Seren Taun berlangsung. Ia dan komunitasnya merasa sangat dihargai sebagai tamu, dan menyatakan bahwa pengalaman berinteraksi langsung dengan masyarakat adat memberikan kesan yang sulit dilupakan.
+
+Secara keseluruhan, Kampung Adat Ciptagelar tidak hanya menghadirkan keindahan alam dan budaya, tetapi juga membuka ruang refleksi bagi siapa pun yang mengunjunginya. Ulasan-ulasan tersebut menunjukkan bahwa kekuatan desa ini bukan pada fasilitas wisata modern, melainkan pada kesederhanaan hidup yang penuh makna. Bagi pecinta budaya dan pelancong yang mencari kedalaman, Ciptagelar adalah destinasi yang layak untuk dijelajahi.
+
+PERTANYAAN:
+Manakah pernyataan yang mengungkapkan kesesuaian antara ulasan dan fakta dalam teks ulasan digital dan cetak tersebut?
+
+Tentukan Sesuai atau Tidak Sesuai pada setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Ulasan: Tempat ini cocok untuk siapa pun yang ingin rehat dari hiruk-pikuk kota. Fakta: Suasana kampung yang tenang, sejuk, dan jauh dari kebisingan kota.
+  - B. Ulasan: Semua orang pasti akan jatuh cinta pada keunikan Ciptagelar. Fakta: Tidak semua pengunjung merasa nyaman, seperti ulasan Bagas Permana.
+  - C. Ulasan: Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam. Fakta: Kehidupan tradisional tanpa listrik, penuh nilai adat dan kesederhanaan.
+

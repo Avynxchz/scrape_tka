@@ -1,0 +1,192 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Sejarah (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "<Kutipan/konteks kalimat atau variabel yang diketahui>",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perlawanan yang dipimpin oleh Kiai Zainal Mustafa meletus pada bulan Februari 1944. Dia seorang tokoh dari Singaparna, Tasik Malaya, Jawa Barat. Ia sangat menentang kebijakan-kebijakan Jepang.
+
+PERTANYAAN:
+Apakah yang mendorong perlawanan Kiai Zainal Mustafa kepada Jepang di Singaparna?
+OPSI / PERNYATAAN:
+  - A. A. Perlakuan militer Jepang yang menyebabkan penderitaan rakyat
+  - B. B. Kewajiban rakyat untuk menanam jenis tanaman pangan tertentu
+  - C. C. Rakyat wajib membayar pajak kepada Jepang dalam bentuk uang
+  - D. D. Sistem sewa tanah yang mengakibatkan rakyat terjerat banyak hutang
+  - E. E. Kelaparan akibat adanya kebijakan tanam paksa atau disebut Cultuur stelsel
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Setelah berhasil memproklamsikan kemerdekaan Indonesia pada tanggal 17 Agustus 1945, Bangsa Indonesia harus berjuang mempertahankan kemerdekaan. Ancaman dari luar maupun dari dalam mengancam tegaknya kedaulatan Negara Republik Indonesia yang baru saja berdiri. Ancaman dari luar muncul dari Belanda yang tidak mau mengakui kedaulatan Indonesia.
+
+PERTANYAAN:
+Perjuangan fisik apa saja yang dilakukan oleh rakyat Indonesia untuk mempertahankan kemerdekaan menghadapi Belanda yang ingin menguasai kembali Indonesia? Klik pada semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Pertempuran 10 November 1945
+  - B. B. Pertempuran 5 Hari di Semarang
+  - C. C. Serangan Umum 1 Maret 1949
+  - D. D. Pemberontakan Andi Azis
+  - E. E. Pemberontakan Republik Maluku Selatan
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Jepang menjadi negara industri karena keberhasilan Restorasi Meiji/kebangkitan modernisasi. Kebutuhan akan modal pada kegiatan industri memicu Jepang melakukan ekspansi ke Indonesia.
+
+PERTANYAAN:
+Bagaimana karakteristik kebijakan Jepang pada masyarakat saat menjajah Indonesia? Pilihlah Benar atau Salah pada pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Mengutamakan kegiatan ekonomi untuk kepentingan militer
+  - B. Jepang membagi wilayah Indonesia menjadi tiga pemerintahan militer
+  - C. Lebih mementingkan peperangan dalam mengeksploitasi sumber daya alam
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: ['A:Sesuai', 'B:Tidak Sesuai', 'C:Sesuai']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Tabel: Kondisi Ekonomi Masa Demokrasi Liberal
+
+Sumber Tabel: Kementerian Pendidikan dan Kebudayaan. 2015. Sejarah Indonesia Untuk SMA/MA Kelas XII. Jakarta: Kemendikbud, halaman 70-75
+[Konteks Visual Gambar 32910_029d22acd6d42a587f4d6694d37840e0.png]:
+Berikut adalah hasil transkripsi data tabel dari gambar:
+
+| No | Nama Program | Kebijakan | Dampak |
+| :-: | :--- | :--- | :--- |
+| 1 | Program Benteng | Memberikan lisensi impor untuk kaum pribumi | Pengusaha pribumi kurang memiliki jiwa wirausaha |
+| 2 | Rencana Sumitro | Melaksanakan industrialisasi dengan pembangunan industri dasar | Muncul perusahaan-perusahaan yang melayani kepentingan umum |
+| 3 | Biro Perancang Negara | Merancang RPLT (Rencana Program Lima Tahun) | Meningkatnya defisit anggaran pemerintah dari 20 persen tahun 1950 menjadi 100 persen tahun 1960 |
+PERTANYAAN:
+Berdasarkan data tersebut, manakah dampak negatif akibat kebijakan pemerintah pada masa Demokrasi Parlementer? Klik sesuai atau tidak sesuai dari dari dampak negatif kebijakan pemerintah pada masa Demokrasi Parlementer!
+OPSI / PERNYATAAN:
+  - B. Rencana Sumitro merupakan program yang berkontribusi bagi seluruh lapisan masyarakat
+  - C. Pemberian lisensi impor dari Program Gerakan Benteng tidak efektif membangkitkan jiwa wirausaha kaum pribumi
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: ['C', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Ekonomi Kerakyatan digagas oleh Mohammad Hatta, yang bertujuan untuk membangun perekonomian rakyat melalui koperasi, dengan prinsip kebersamaan, kekuasaan milik rakyat, dan lebih mementingkan kepentingan umum. Namun, fakta saat ini jurang sosial melebar antara buruh dan pemilik modal. Pemerintah membuat proyek sosial ekonomi untuk menjembatani kesenjangan tersebut.
+
+PERTANYAAN:
+Manakah yang mencerminkan nilai-nilai dari semangat ekonomi Bung Hatta? Pilih jawaban benar lebih dari satu
+OPSI / PERNYATAAN:
+  - A. A. Pemberian progam investasi gratis untuk kalangan pengusaha makro
+  - B. B. Deregulasi total yang mengabaikan perlindungan usaha mikro
+  - C. C. Pengembangan koperasi pekerja di sektor informal
+  - D. D. Pelatihan kewirausahaan berbasis komunitas lokal
+  - E. E. Kolaborasi antara UMKM dan koperasi digital
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Agresi Militer Belanda II dimulai pada tanggal 10 Desember 1948, ketika Belanda menyerbu Yogyakarta dan menawan Presiden serta Wakil Presiden. Sedangkan Syafruddin Prawiranegara membentuk Pemerintahan Darurat Republik Indonesia (PDRI) di Sumatera Barat saat situasi genting. Panglima Soedirman melanjutkan perjuangan melalui gerilya. Sementara itu, diplomasi Indonesia tetap berjalan di forum internasional.
+
+Sumber: Buku Sejarah untuk SMA/MA Kelas XII (Kemdikbud, 2022)
+
+PERTANYAAN:
+Apa bentuk respons strategis bangsa Indonesia dalam mempertahankan kemerdekaan setelah Agresi Militer Belanda II?
+OPSI / PERNYATAAN:
+  - A. A. Mendirikan pemerintahan federal di luar Jawa untuk mendapatkan pengakuan Belanda.
+  - B. B. Menawarkan pembentukan negara bersama di bawah pengawasan Dewan keamanan PBB.
+  - C. C. Menyelamatkan struktur pemerintahan melalui PDRI, bergerilya, dan menekan Belanda dengan diplomasi.
+  - D. D. Menjalin aliansi pertahanan dengan negara-negara boneka yang dibentuk oleh pemerintahan Belanda.
+  - E. E. Mengalihkan pusat kekuasaan ke negara bagian yang belum diduduki dan menandatangani perjanjian lokal.
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Supersemar atau Surat Perintah 11 Maret 1966 merupakan surat yang dikeluarkan oleh Presiden Sukarno dan memberikan wewenang luas kepada Letjen Soeharto untuk menjaga stabilitas negara dan menyelamatkan revolusi. Surat ini menjadi titik balik sejarah Indonesia karena memberi dasar legitimasi bagi Soeharto untuk mengambil langkah-langkah strategis selanjutnya.
+
+PERTANYAAN:
+Bagaimana akibat Supersemar sehingga mendorong lahirnya Orde Baru? Pilih tepat atau tidak tepat setiap fakta kelahiran Orde Baru
+OPSI / PERNYATAAN:
+  - A. Soeharto leluasa menahan para menteri yang ada di kabinet karena dianggap terlibat dalam Gerakan 30 September1965
+  - B. Supersemar secara langsung memberikan mandat kepada Soeharto sebagai Presiden Republik Indonesia
+  - C. Soeharto menjadi leluasa untuk mengambil tidakan dalam melakukan pelarangan dan pembubaran terhadap PKI
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan kutipan berikut! “Pembangunan mercusuar dianggap sebagai cara menunjukkan keunggulan Indonesia di mata dunia, namun biaya besar yang dikeluarkan menyebabkan krisis ekonomi semakin parah.” Sumber: Kahin, Nationalism and Revolution in Indonesia, 2010.
+
+PERTANYAAN:
+Berdasarkan kutipan tersebut, apa kelemahan utama dari kebijakan Politik Mercusuar yang dilaksanakan oleh Presiden Soekarno?
+OPSI / PERNYATAAN:
+  - A. A. Proyek besar gagal menarik dukungan negara-negara Blok Timur
+  - B. B. Dana pembangunan dialihkan untuk subsidi pangan dan stabilisasi harga
+  - C. C. Citra internasional Indonesia menguat, tetapi perekonomian rakyat memburuk
+  - D. D. Proyek pembangunan skala nasional berhasil menurunkan laju inflasi secara cepat
+  - E. E. Pemerintah berhasil mengintegrasikan petani dan buruh dalam proyek-proyek mercusuar
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Tabel: Terkait dualisme kepemimpinan nasional pada awal Orde Baru
+
+Presiden Soeharto diharapkan segera melakukan pemilu pada tahun 1968. Namun karena berbagai pertimbangan politik dan keamanan, pemilu baru dapat diselenggarakan pada tahun 1971. Setelah pemilu tahun 1971, pemerintah melemparkan gagasan penyederhanaan partai politik. Banyaknya partai politik dianggap tidak memudahkan pembangunan, justru menambah permasalahan.
+[Konteks Visual Gambar 15910_37f233767376ad7f287d4231327ee46b.png]:
+Berikut adalah hasil transkripsi tabel data sejarah politik Indonesia berdasarkan gambar yang diberikan:
+
+| Tahun | Peristiwa Politik | Dampak |
+| :--- | :--- | :--- |
+| Maret 1967 | MPRS mengangkat Soeharto sebagai Pejabat Presiden | Dualisme Kepemimpinan Nasional |
+| Maret 1968 | MPRS menetapkan Soeharto sebagai Presiden | Berakhirnya Dualisme Kepemimpinan Nasional |
+PERTANYAAN:
+Apa saja langkah-langkah pemerintah dalam mengatasi masalah partai politik? Klik pada jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Menciptakan kekuatan politik sipil baru yaitu Sekretariat Bersama (Sekber) Golongan Karya
+  - B. B. Empat partai berhaluan Islam bergabung dalam Partai Persatuan Pembangunan (PPP)
+  - C. C. Lima partai non Islam, bergabung dalam Partai Demokrasi Indonesia (PDI)
+  - D. D. Mendorong dibentuknya Badan Pengawas Pemilu tingkat nasional dan daerah
+  - E. E. Calon presiden dan wakil presiden dari usulan sepuluh partai politik
+

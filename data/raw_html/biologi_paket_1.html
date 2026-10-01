@@ -1,0 +1,2150 @@
+<!DOCTYPE html><html lang="en"><head>
+	<title>Simulasi TKA</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-16x16.png">
+	<link rel="manifest" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/site.webmanifest">
+	<link rel="mask-icon" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/safari-pinned-tab.svg">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://pusmendik.kemendikdasmen.go.id/tka/_assets/css/icheck-bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120206082-3"></script>
+	<script>
+
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120206082-3');
+
+	</script> -->
+</head>
+<body>
+
+<div class="container-fluid text-white" style="background:#326698;background-size: contain;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/bg-top.png');background-repeat: no-repeat;background-position: left; height:150px;position:fixed;top:0px;left:0px;right:0px">
+	  <div class="row">
+		<div class="col pl-5 pt-1">
+			<table>
+				<tbody><tr>
+					<td>
+						<img style="margin:5px;height:70px" src="https://pusmendik.kemendikdasmen.go.id/tka/images/logo-kemdikbud-71x72.png">
+					</td>
+					<td>
+						<div><b>PUSMENDIK</b></div>
+						<div><small>APLIKASI ANBK<small></small></small></div><small><small>
+					</small></small></td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div class="col pl-5 pt-1 mt-4 pr-5 text-right">
+			<table align="right">
+				<tbody><tr>
+					<td style="vertical-align:top">
+						<div><small>P130100230 - PESERTA BIOLOGI_PAKET_1<small></small></small></div><small><small>
+					</small></small></td>
+					<td>
+						<div class="pl-1 pr-1 pt-1 pb-1" style="background:#74b9ff;border-radius:2px;color:#326698"><i class="fa fa-graduation-cap fa-flip-horizontal"></i></div>
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+	  </div>
+</div>
+
+<div class="container-fluid fadeInDown mb-5" style="margin-top:90px;">
+  <div class="row">
+	<div class="col-sm-12" style="border:0px solid red">
+		<div class="text-left pt-3 pb-5 mb-2" id="formContent" style="background-size: 300px;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/logo-w.png');background-repeat: no-repeat;background-position: top right; ">
+		  <div class="row row-atas"> 
+			<div class="col-sm-4"><span style="font-size:18px">Soal nomor</span> <span style="font-size:20px" id="noSoal">1</span></div>
+			<div class="col-sm-8 cont-btn-informasi">
+				<button class="btn-informasi btn btn-primary btn-round m" data-toggle="modal" data-target="#infoSoal" style="border-radius:30px;font-size:12px;"><i class="fa fa-info-circle d-sm-none"></i><span class="d-none d-sm-inline-block">INFORMASI SOAL<span></span></span></button>
+				<button class="btn-informasi btn  btn-outline-secondary  btn-round" style="border-radius:30px;font-size:12px;">Sisa Waktu : <b><span id="countdown">01:14:58</span></b></button>
+				<button class="btn-informasi btn btn-primary btn-round" data-toggle="modal" data-target="#myModal" style="border-radius:30px;font-size:12px"><span class="d-none d-sm-inline-block">Daftar Soal </span> <i class="fa fa-th-large"></i></button>
+			</div>
+		  </div>
+		  <div class="row pb-2  row-atas"> 
+			<div class="col-sm-6"><small>Ukuran font soal:</small> <span style="font-size:12px" class="ml-2 mr-1 cfont" id="c1" onclick="changeFont('12','c1')">A</span> <span style="font-size:16px" class="ml-2 mr-1 cfont" id="c2" onclick="changeFont('16','c2')">A</span> <span style="font-size:20px" class="ml-2 mr-1 cfont" id="c3" onclick="changeFont('18','c3')">A</span></div>
+			<div class="col-sm-6 mt-2 mataujian">
+				Biologi (Paket 1)			</div>
+		  </div>
+		  <div class="row pl-3 pr-3 pb-2 mb-1"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  <!-- isi soal -->
+		  <div class="row pl-3 pr-3 pb-2 mb-2"> 
+			<div class="col p-3 " id="isisoal" style="border:2px solid #eee; border-top:10px solid #eee;">
+				<div class="soal-soal row" style="" id="soal-no-1"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Malaria merupakan salah satu penyakit yang pernah menyerang jutaan penduduk di berbagai belahan dunia. Untuk mengatasi penyakit malaria, dilakukan beberapa tindakan yang terbukti berhasil, yaitu memberikan obat kina dan pembasmian nyamuk dengan menyemprotkan DDT. Tabel berikut merupakan hasil penelitian tentang efektivitas pemberian obat kina dan penyemprotan DDT dalam menurunkan angka penderita malaria di dua wilayah berbeda.</p>
+<table style="width: 468.969px;">
+<tbody>
+<tr>
+<td style="width: 125px;">
+<p><strong>Metode</strong></p>
+</td>
+<td style="width: 131px;">
+<p><strong>Wilayah A (tanpa resistensi)</strong></p>
+</td>
+<td style="width: 166.969px;">
+<p><strong>Wilayah B (dengan resistensi nyamuk)</strong></p>
+</td>
+</tr>
+<tr>
+<td style="width: 125px;">
+<p>Pemberian Kina 3 hari</p>
+</td>
+<td style="width: 131px;">
+<p>50% sembuh</p>
+</td>
+<td style="width: 166.969px;">
+<p>48% sembuh</p>
+</td>
+</tr>
+<tr>
+<td style="width: 125px;">
+<p>Pemberian Kina 5 hari</p>
+</td>
+<td style="width: 131px;">
+<p>76% sembuh</p>
+</td>
+<td style="width: 166.969px;">
+<p>72% sembuh</p>
+</td>
+</tr>
+<tr>
+<td style="width: 125px;">
+<p>Pemberian Kina 7 hari</p>
+</td>
+<td style="width: 131px;">
+<p>87% sembuh</p>
+</td>
+<td style="width: 166.969px;">
+<p>82% sembuh</p>
+</td>
+</tr>
+<tr>
+<td style="width: 125px;">
+<p>Penyemprotan DDT</p>
+</td>
+<td style="width: 131px;">
+<p>90% menurunkan infeksi</p>
+</td>
+<td style="width: 166.969px;">
+<p>60% menurunkan infeksi</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Berdasarkan data tersebut, strategi apa yang paling tepat untuk menurunkan jumlah penderita malaria di kedua wilayah? Tentukanlah apakah pernyataan-pernyataan berikut Tepat atau Tidak Tepat sesuai dengan hasil analisis data tersebut!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Tepat</td><td class="text-center" style="width:100px">Tidak Tepat</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengandalkan DDT di kedua wilayah, karena efektivitasnya paling tinggi dibandingkan obat kina.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','1','1');">
+															<input id="pilihan_1_1_1" name="pilihan_1_1" class="pilihan__1" onchange="pilihan3('1','3','426','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_1_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','1','2');">
+															<input id="pilihan_1_1_2" name="pilihan_1_1" class="pilihan__1" onchange="pilihan3('1','3','426','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_1_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menggunakan DDT di wilayah A untuk hasil cepat, dan memperpanjang pemberian kina di wilayah B karena efektivitas DDT menurun akibat resistensi.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','2','1');">
+															<input id="pilihan_1_2_1" name="pilihan_1_2" class="pilihan__2" onchange="pilihan3('1','3','426','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_1_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','2','2');">
+															<input id="pilihan_1_2_2" name="pilihan_1_2" class="pilihan__2" onchange="pilihan3('1','3','426','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_1_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengutamakan kina 3 hari di wilayah A maupun B, karena tingkat kesembuhannya cukup tinggi dan tidak memerlukan waktu lama.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','3','1');">
+															<input id="pilihan_1_3_1" name="pilihan_1_3" class="pilihan__3" onchange="pilihan3('1','3','426','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_1_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','3','2');">
+															<input id="pilihan_1_3_2" name="pilihan_1_3" class="pilihan__3" onchange="pilihan3('1','3','426','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_1_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display: none;" id="soal-no-2"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Paus (<em>Balaenoptera musculus</em>) dan ikan hiu (<em>Carcharodon carcharias</em>) sama-sama hidup di laut, memiliki sirip dan ekor, serta bentuk tubuh yang lancip di ujung depan dan ujung belakang sehingga efisien untuk berenang. Namun, paus bernapas dengan paru-paru dan menyusui anaknya, sedangkan ikan hiu bernapas dengan insang dan sebagian besar bertelur. Meskipun memiliki bentuk luar yang mirip, dalam sistem klasifikasi keduanya ditempatkan pada kelompok yang berbeda.</p>
+<p>Apa prinsip utama yang digunakan dalam pengelompokan tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','0');">
+													<input id="pilihan_2_0" onchange="pilihan('2','a','430')" pil="a" name="pilihan2" type="radio">
+													<label for="pilihan_2_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kedua makhluk hidup tersebut hidup di ekosistem laut yang berbeda.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','1');">
+													<input id="pilihan_2_1" onchange="pilihan('2','b','430')" pil="b" name="pilihan2" type="radio">
+													<label for="pilihan_2_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mereka memiliki peran yang berbeda dalam rantai makanan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','2');">
+													<input id="pilihan_2_2" onchange="pilihan('2','c','430')" pil="c" name="pilihan2" type="radio">
+													<label for="pilihan_2_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pengelompokan didasarkan pada habitat dan perilaku makan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','3');">
+													<input id="pilihan_2_3" onchange="pilihan('2','d','430')" pil="d" name="pilihan2" type="radio">
+													<label for="pilihan_2_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Klasifikasi didasarkan pada persamaan dan perbedaan ciri.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','4');">
+													<input id="pilihan_2_4" onchange="pilihan('2','e','430')" pil="e" name="pilihan2" type="radio">
+													<label for="pilihan_2_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Paus dan ikan hiu memiliki massa tubuh yang berbeda secara alami.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-3"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Seorang wanita datang ke dokter spesialis kandungan berniat memasang IUD (<em>Intra Uterine Device</em>). Pemasangan IUD merupakan cara kontrasepsi jangka panjang. IUD berupa alat kecil terdiri dari bahan plastik yang lentur yang dimasukkan ke dalam rongga rahim, yang harus diganti jika sudah digunakan selama periode tertentu.&nbsp;</p>
+<p>Tujuan penggunaan IUD ini adalah .... <br>Pilih semua jawaban benar! Jawaban benar lebih dari satu.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('3.','0');">
+													<input id="pilihan_3_0" class="pilihan3" onchange="pilihan2('3','a','432')" pil="a" name="pilihan3" type="checkbox" value="A">
+													<label for="pilihan_3_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(3,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mencegah terjadinya fertilisasi dengan mengganggu pergerakan sperma atau mencegah sperma mencapai sel telur.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('3.','1');">
+													<input id="pilihan_3_1" class="pilihan3" onchange="pilihan2('3','b','432')" pil="b" name="pilihan3" type="checkbox" value="B">
+													<label for="pilihan_3_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(3,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menghentikan kesuburan pada seorang wanita secara permanen sehingga tidak dapat hamil lagi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('3.','2');">
+													<input id="pilihan_3_2" class="pilihan3" onchange="pilihan2('3','c','432')" pil="c" name="pilihan3" type="checkbox" value="C">
+													<label for="pilihan_3_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(3,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menghambat proses implantasi hasil pembuahan dengan menciptakan kondisi rahim yang kurang sesuai bagi embrio.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('3.','3');">
+													<input id="pilihan_3_3" class="pilihan3" onchange="pilihan2('3','d','432')" pil="d" name="pilihan3" type="checkbox" value="D">
+													<label for="pilihan_3_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(3,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menghalangi proses pembuahan dengan mencegah pelepasan sel telur di saluran reproduksi wanita.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('3.','4');">
+													<input id="pilihan_3_4" class="pilihan3" onchange="pilihan2('3','e','432')" pil="e" name="pilihan3" type="checkbox" value="E">
+													<label for="pilihan_3_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(3,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menurunkan kemampuan sperma dalam membuahi sel telur melalui pengaruh ion tembaga atau hormon pada alat tersebut.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-4"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Masalah gizi di Indonesia saat ini masih sangat kompleks, tidak hanya masalah kekurangan gizi, masalah kelebihan gizi juga menjadi persoalan yang harus ditangani secara serius. Pada anak-anak kondisi stunting (pendek) sering ditemukan disebabkan karena asupan gizi yang tidak sesuai dengan kebutuhan gizinya dalam waktu yang lama.&nbsp; Hal itu terjadi sejak di dalam kandungan dan akan terlihat pada anak berusia 2 tahun, mengakibatkan perkembangan fisik maupun kognitif tidak maksimal, mudah terserang penyakit, serta berdaya saing rendah.</p>
+<p>Langkah pertama untuk memecahkan permasalahan tersebut menggunakan metode ilmiah yang tepat adalah ....</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','0');">
+													<input id="pilihan_4_0" onchange="pilihan('4','a','435')" pil="a" name="pilihan4" type="radio">
+													<label for="pilihan_4_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>mengumpulkan informasi dari berbagai referensi terkait pengaruh faktor gizi terhadap pertumbuhan sebagai dasar untuk mengidentifikasi permasalahan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','1');">
+													<input id="pilihan_4_1" onchange="pilihan('4','b','435')" pil="b" name="pilihan4" type="radio">
+													<label for="pilihan_4_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>merumuskan masalah dengan memperjelas batasan permasalahan yang akan dipecahkan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','2');">
+													<input id="pilihan_4_2" onchange="pilihan('4','c','435')" pil="c" name="pilihan4" type="radio">
+													<label for="pilihan_4_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>melakukan pendataan bagi keluarga yang memiliki anak rendah gizi atau bergizi buruk</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','3');">
+													<input id="pilihan_4_3" onchange="pilihan('4','d','435')" pil="d" name="pilihan4" type="radio">
+													<label for="pilihan_4_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>mengadakan sosialisasi program pentingnya makanan bergizi bagi ibu dan anak bagi masyarakat</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','4');">
+													<input id="pilihan_4_4" onchange="pilihan('4','e','435')" pil="e" name="pilihan4" type="radio">
+													<label for="pilihan_4_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>pemberian makanan bergizi seimbang bagi seluruh anak balita dan usia anak sekolah dasar</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-5"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kecepatan pernapasan orang yang sedang berolahraga lebih tinggi dibandingkan dengan orang yang sedang duduk. Perbedaan kecepatan pernapasan ini disebabkan oleh ....</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','0');">
+													<input id="pilihan_5_0" onchange="pilihan('5','a','439')" pil="a" name="pilihan5" type="radio">
+													<label for="pilihan_5_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>orang yang sedang berolahraga membutuhkan energi lebih banyak daripada orang yang sedang duduk. Energi dihasilkan dari penguraian zat makanan dengan bantuan oksigen yang masuk melalui pernafasan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','1');">
+													<input id="pilihan_5_1" onchange="pilihan('5','b','439')" pil="b" name="pilihan5" type="radio">
+													<label for="pilihan_5_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>orang yang sedang berolahraga membutuhkan oksigen lebih sedikit dari pada orang yang sedang duduk. Energi dihasilkan dari penguraian zat makanan dengan bantuan oksigen dan menghasilkan karbondioksida lebih sedikit</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','2');">
+													<input id="pilihan_5_2" onchange="pilihan('5','c','439')" pil="c" name="pilihan5" type="radio">
+													<label for="pilihan_5_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>orang yang sedang berolahraga membutuhkan energi lebih banyak dari pada orang yang sedang duduk. Energi dihasilkan dari penguraian zat makanan dengan bantuan karbondioksida</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','3');">
+													<input id="pilihan_5_3" onchange="pilihan('5','d','439')" pil="d" name="pilihan5" type="radio">
+													<label for="pilihan_5_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>orang yang berolah raga membutuhkan oksigen lebih sedikit dari pada orang yang duduk, energi dihasilkan dari penguraian zat makanan dengan bantuan oksigen yang masuk melalui pernapasan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','4');">
+													<input id="pilihan_5_4" onchange="pilihan('5','e','439')" pil="e" name="pilihan5" type="radio">
+													<label for="pilihan_5_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>orang yang sedang berolahraga membutuhkan oksigen lebih sedikit dari pada orang yang sedang duduk, energi dihasilkan dari penguraian zat makanan dengan bantuan oksigen dan menghasilkan karbondioksida lebih banyak</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-6"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kelenjar tiroid menghasilkan tiroksin yang berperan ....</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','0');">
+													<input id="pilihan_6_0" onchange="pilihan('6','a','425')" pil="a" name="pilihan6" type="radio">
+													<label for="pilihan_6_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>mengatur metabolisme tubuh</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','1');">
+													<input id="pilihan_6_1" onchange="pilihan('6','b','425')" pil="b" name="pilihan6" type="radio">
+													<label for="pilihan_6_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>menurunkan kadar kalsium dalam darah</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','2');">
+													<input id="pilihan_6_2" onchange="pilihan('6','c','425')" pil="c" name="pilihan6" type="radio">
+													<label for="pilihan_6_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>meningkatkan kadar kalsium dalam darah</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','3');">
+													<input id="pilihan_6_3" onchange="pilihan('6','d','425')" pil="d" name="pilihan6" type="radio">
+													<label for="pilihan_6_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>merangsang lepasnya kalsium dari tulang keras</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','4');">
+													<input id="pilihan_6_4" onchange="pilihan('6','e','425')" pil="e" name="pilihan6" type="radio">
+													<label for="pilihan_6_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>mengatur metabolisme mineral dan glukosa</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-7"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Coba perhatikan gambar alat reproduksi laki-laki berikut!</p>
+<p><img src="/tka/cbt_images/23147_51eba1b92b7e1bb69f6f2764b924e1b9.png" alt="" width="301" height="200"></p>
+<p>Pak Tono mengalami nyeri hebat di bagian alat reproduksinya. Setelah diperiksa oleh dokter, diketahui bahwa terjadi penyumbatan pada bagian X seperti yang ditunjukkan pada gambar. Berdasarkan kondisi tersebut, apa kemungkinan yang akan terjadi pada pembentukan atau penyaluran sperma Pak Tono?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('7.','0');">
+													<input id="pilihan_7_0" onchange="pilihan('7','a','427')" pil="a" name="pilihan7" type="radio">
+													<label for="pilihan_7_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(7,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Produksi sperma tidak dapat terjadi karena fungsi reproduksi sepenuhnya terhenti.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('7.','1');">
+													<input id="pilihan_7_1" onchange="pilihan('7','b','427')" pil="b" name="pilihan7" type="radio">
+													<label for="pilihan_7_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(7,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sel sperma yang telah diproduksi akan dikeluarkan bersamaan dengan urin.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('7.','2');">
+													<input id="pilihan_7_2" onchange="pilihan('7','c','427')" pil="c" name="pilihan7" type="radio">
+													<label for="pilihan_7_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(7,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Ejakulasi tidak dapat terjadi sama sekali meskipun sperma tetap dapat diproduksi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('7.','3');">
+													<input id="pilihan_7_3" onchange="pilihan('7','d','427')" pil="d" name="pilihan7" type="radio">
+													<label for="pilihan_7_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(7,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Cairan semen ejakulasi tetap dikeluarkan, tetapi tidak mengandung sel-sel sperma.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('7.','4');">
+													<input id="pilihan_7_4" onchange="pilihan('7','e','427')" pil="e" name="pilihan7" type="radio">
+													<label for="pilihan_7_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(7,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Proses pematangan terganggu sehingga ekor sperma tidak terbentuk sempurna.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-8"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pada sebuah sel hewan, terdapat beberapa organel yang memiliki fungsi penting dalam mendukung kehidupan sel tersebut. Jika sebuah sel kekurangan mitokondria, maka manakah yang paling mungkin terjadi pada sel tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','0');">
+													<input id="pilihan_8_0" onchange="pilihan('8','a','428')" pil="a" name="pilihan8" type="radio">
+													<label for="pilihan_8_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kekurangan energi untuk menjalankan proses metabolisme yang vital.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','1');">
+													<input id="pilihan_8_1" onchange="pilihan('8','b','428')" pil="b" name="pilihan8" type="radio">
+													<label for="pilihan_8_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tidak mampu mencerna zat asing sehingga limbah menumpuk di sel.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','2');">
+													<input id="pilihan_8_2" onchange="pilihan('8','c','428')" pil="c" name="pilihan8" type="radio">
+													<label for="pilihan_8_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengalami hambatan pada sintesis protein dan pengeluaran zat dari sel.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','3');">
+													<input id="pilihan_8_3" onchange="pilihan('8','d','428')" pil="d" name="pilihan8" type="radio">
+													<label for="pilihan_8_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Terganggu dalam penyimpanan dan pengaturan informasi genetik.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','4');">
+													<input id="pilihan_8_4" onchange="pilihan('8','e','428')" pil="e" name="pilihan8" type="radio">
+													<label for="pilihan_8_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kehilangan kemampuan dalam menjaga bentuk dan fungsi sel.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-9"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sudah 2 minggu Amir merasakan gangguan pada kesehatannya dengan gejala pucat, lesu, demam dan sering terjadi pendarahan pada hidungnya. Setelah diperiksa, dokter meminta Amir untuk melakukan uji darah di laboratorium dan diperoleh hasil seperti pada tabel berikut:</p>
+<table style="width: 694px;">
+<tbody>
+<tr>
+<td style="width: 173px; text-align: center;">
+<p><strong>Pemeriksaan</strong></p>
+</td>
+<td style="width: 126.445px; text-align: center;">
+<p><strong>Hasil</strong></p>
+</td>
+<td style="width: 146.555px; text-align: center;">
+<p><strong>Nilai Rujukan</strong></p>
+</td>
+<td style="width: 183px; text-align: center;">
+<p><strong>Satuan</strong></p>
+</td>
+<td style="width: 10px; text-align: center;">
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td style="width: 639px; text-align: center;" colspan="5">
+<p><strong>Hematologi Rutin</strong></p>
+</td>
+</tr>
+<tr>
+<td style="width: 173px; text-align: center;">
+<p>Trombosit</p>
+</td>
+<td style="width: 126.445px; text-align: center;">
+<p>279</p>
+</td>
+<td style="width: 146.555px; text-align: center;">
+<p>150 – 440</p>
+</td>
+<td style="width: 183px; text-align: center;">
+<p>ribu sel/µL</p>
+</td>
+<td style="width: 10px; text-align: center;">
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td style="width: 173px; text-align: center;">
+<p>Hematokrit</p>
+</td>
+<td style="width: 126.445px; text-align: center;">
+<p>32,6</p>
+</td>
+<td style="width: 146.555px; text-align: center;">
+<p>35 – 47</p>
+</td>
+<td style="width: 183px; text-align: center;">
+<p>%</p>
+</td>
+<td style="width: 10px; text-align: center;">
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td style="width: 173px; text-align: center;">
+<p>Hemoglobin</p>
+</td>
+<td style="width: 126.445px; text-align: center;">
+<p>12,4</p>
+</td>
+<td style="width: 146.555px; text-align: center;">
+<p>11,7 – 15,5</p>
+</td>
+<td style="width: 183px; text-align: center;">
+<p>g/dL</p>
+</td>
+<td style="width: 10px; text-align: center;">
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td style="width: 173px; text-align: center;">
+<p>Eritrosit</p>
+</td>
+<td style="width: 126.445px; text-align: center;">
+<p>4,18</p>
+</td>
+<td style="width: 146.555px; text-align: center;">
+<p>3,8 – 5,2</p>
+</td>
+<td style="width: 183px; text-align: center;">
+<p>juta sel/µL</p>
+</td>
+<td style="width: 10px; text-align: center;">
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td style="width: 173px; text-align: center;">
+<p>Leukosit</p>
+</td>
+<td style="width: 126.445px; text-align: center;">
+<p>14,92</p>
+</td>
+<td style="width: 146.555px; text-align: center;">
+<p>3,6 – 11,0</p>
+</td>
+<td style="width: 183px; text-align: center;">
+<p>ribu sel/µL</p>
+</td>
+<td style="width: 10px; text-align: center;">
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td style="width: 639px; text-align: center;" colspan="5">
+<p><strong>Jenis Leukosit</strong></p>
+</td>
+</tr>
+<tr>
+<td style="width: 173px; text-align: center;">
+<p>Neutrofil</p>
+</td>
+<td style="width: 126.445px; text-align: center;">
+<p>76,5</p>
+</td>
+<td style="width: 146.555px; text-align: center;">
+<p>50 – 70</p>
+</td>
+<td style="width: 183px; text-align: center;">
+<p>%</p>
+</td>
+<td style="width: 10px; text-align: center;">
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td style="width: 173px; text-align: center;">
+<p>Limfosit</p>
+</td>
+<td style="width: 126.445px; text-align: center;">
+<p>6</p>
+</td>
+<td style="width: 146.555px; text-align: center;">
+<p>24 – 40</p>
+</td>
+<td style="width: 183px; text-align: center;">
+<p>%</p>
+</td>
+<td style="width: 10px; text-align: center;">
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td style="width: 173px; text-align: center;">
+<p>Monosit</p>
+</td>
+<td style="width: 126.445px; text-align: center;">
+<p>6,4</p>
+</td>
+<td style="width: 146.555px; text-align: center;">
+<p>2 – 8</p>
+</td>
+<td style="width: 183px; text-align: center;">
+<p>%</p>
+</td>
+<td style="width: 10px; text-align: center;">
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td style="width: 173px; text-align: center;">
+<p>Esinofil</p>
+</td>
+<td style="width: 126.445px; text-align: center;">
+<p>0,9</p>
+</td>
+<td style="width: 146.555px; text-align: center;">
+<p>2 - 4</p>
+</td>
+<td style="width: 183px; text-align: center;">
+<p>%</p>
+</td>
+<td style="width: 10px; text-align: center;">
+<p>&nbsp;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Manakah pernyataan yang tepat terkait hasil uji laboratorium klinis darah Amir tersebut?</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','0');">
+													<input id="pilihan_9_0" class="pilihan9" onchange="pilihan2('9','a','431')" pil="a" name="pilihan9" type="checkbox" value="A">
+													<label for="pilihan_9_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Amir mengalami gangguan fungsi jantung sehingga sel darah putih diproduksi dalam jumlah tinggi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','1');">
+													<input id="pilihan_9_1" class="pilihan9" onchange="pilihan2('9','b','431')" pil="b" name="pilihan9" type="checkbox" value="B">
+													<label for="pilihan_9_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Amir mengalami kondisi produksi sel darah putih melebihi batas normal akibat gangguan pada sumsum tulang belakang.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','2');">
+													<input id="pilihan_9_2" class="pilihan9" onchange="pilihan2('9','c','431')" pil="c" name="pilihan9" type="checkbox" value="C">
+													<label for="pilihan_9_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Amir mengalami gangguan fungsi hati sehingga perombakan sel darah putih berlangsung lambat</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','3');">
+													<input id="pilihan_9_3" class="pilihan9" onchange="pilihan2('9','d','431')" pil="d" name="pilihan9" type="checkbox" value="D">
+													<label for="pilihan_9_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Terjadi penyumbatan pada pembuluh darah dan terjadi hemolisis (pecah) sehingga sel darah putih aktif diproduksi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','4');">
+													<input id="pilihan_9_4" class="pilihan9" onchange="pilihan2('9','e','431')" pil="e" name="pilihan9" type="checkbox" value="E">
+													<label for="pilihan_9_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Terjadi penghancuran sel-sel darah merah dalam hati yang terlalu cepat dan banyak sehingga beberapa jenis leukosit jumlahnya lebih banyak.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-10"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sindrom Stevens-Johnson (SSJ) merupakan penyakit kulit dan mukosa yang berbahaya dan dapat mengakibatkan kematian. Sel-sel kulit bagian epidermis mengelupas dan memisahkan diri dari dermis, dengan gejala bercak kemerahan, perdarahan di bawah kulit, melepuh seperti luka bakar, sampai terkelupas. SSJ bukan merupakan penyakit menular, tetapi dipicu antara lain oleh hipersensitivitas terhadap obat tertentu.</p>
+<p>Bagaimana mekanisme pertahanan tubuh pada penderita sindrom tersebut?</p>
+<p>Pilih semua jawaban benar! Jawaban benar lebih dari satu.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','0');">
+													<input id="pilihan_10_0" class="pilihan10" onchange="pilihan2('10','a','433')" pil="a" name="pilihan10" type="checkbox" value="A">
+													<label for="pilihan_10_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Immunoglobulin G berperan dalam pertahanan tubuh sekunder terhadap antigen yang sama ketika masuk lagi ke dalam tubuh.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','1');">
+													<input id="pilihan_10_1" class="pilihan10" onchange="pilihan2('10','b','433')" pil="b" name="pilihan10" type="checkbox" value="B">
+													<label for="pilihan_10_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Immunoglobulin M mengikat antigen menjadi gumpalan atau di aglutinasi agar mudah di fagositosis oleh makrofag.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','2');">
+													<input id="pilihan_10_2" class="pilihan10" onchange="pilihan2('10','c','433')" pil="c" name="pilihan10" type="checkbox" value="C">
+													<label for="pilihan_10_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Imunoglobulin E yang menempel pada sel mast dan bereaksi dengan antigen sehingga memicu reaksi alergi pada jaringan tubuh.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','3');">
+													<input id="pilihan_10_3" class="pilihan10" onchange="pilihan2('10','d','433')" pil="d" name="pilihan10" type="checkbox" value="D">
+													<label for="pilihan_10_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sel yang terinfeksi antigen menghasilkan sejenis protein yang akan berikatan dengan sel yang tidak terinfeksi untuk mencegah perbanyakan antigen.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','4');">
+													<input id="pilihan_10_4" class="pilihan10" onchange="pilihan2('10','e','433')" pil="e" name="pilihan10" type="checkbox" value="E">
+													<label for="pilihan_10_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Antibodi yang terbentuk dalam plasma bekerja sama dengan protein komplemen untuk melisis sel asing yang masuk ke tubuh.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-11"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Dalam sebuah ekosistem laut, terdapat beberapa organisme berikut:</p>
+<p><img src="/tka/cbt_images/32130_6bf07069850b906f83bef099704339cf.png" alt="" width="481" height="297"></p>
+<p>Jika populasi ikan kecil menurun drastis, maka manakah dampak yang paling mungkin terjadi dalam jaring-jaring makanan pada ekosistem laut tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','0');">
+													<input id="pilihan_11_0" onchange="pilihan('11','a','187')" pil="a" name="pilihan11" type="radio">
+													<label for="pilihan_11_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Jumlah fitoplankton akan meningkat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','1');">
+													<input id="pilihan_11_1" onchange="pilihan('11','b','187')" pil="b" name="pilihan11" type="radio">
+													<label for="pilihan_11_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Populasi paus biru akan menurun.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','2');">
+													<input id="pilihan_11_2" onchange="pilihan('11','c','187')" pil="c" name="pilihan11" type="radio">
+													<label for="pilihan_11_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Anjing laut akan meningkat populasinya.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','3');">
+													<input id="pilihan_11_3" onchange="pilihan('11','d','187')" pil="d" name="pilihan11" type="radio">
+													<label for="pilihan_11_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Ledakan populasi zooplankton.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','4');">
+													<input id="pilihan_11_4" onchange="pilihan('11','e','187')" pil="e" name="pilihan11" type="radio">
+													<label for="pilihan_11_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Populasi penguin akan berkurang.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-12"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Dalam sebuah penelitian mengenai penyakit pada sel, para ilmuwan menemukan bahwa pada beberapa sel tubuh pasien, retikulum endoplasma kasar (RE kasar) dan retikulum endoplasma halus (RE halus) mengalami kerusakan parah. Hal ini menghambat beberapa fungsi penting dalam sel tersebut.</p>
+<p>Berdasarkan peranan RE kasar dan RE halus, apa kemungkinan yang dapat terjadi pada sel-sel pasien tersebut?</p>
+<p>Pilih semua jawaban yang benar! Jawaban benar lebih dari satu.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('12.','0');">
+													<input id="pilihan_12_0" class="pilihan12" onchange="pilihan2('12','a','188')" pil="a" name="pilihan12" type="checkbox" value="A">
+													<label for="pilihan_12_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(12,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Produksi protein terganggu, mengakibatkan sel tidak dapat melakukan fungsi-fungsi penting yang membutuhkan protein.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('12.','1');">
+													<input id="pilihan_12_1" class="pilihan12" onchange="pilihan2('12','b','188')" pil="b" name="pilihan12" type="checkbox" value="B">
+													<label for="pilihan_12_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(12,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sintesis lipid terhambat, sehingga kemampuan sel untuk memproduksi membran dan melakukan detoksifikasi berkurang.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('12.','2');">
+													<input id="pilihan_12_2" class="pilihan12" onchange="pilihan2('12','c','188')" pil="c" name="pilihan12" type="checkbox" value="C">
+													<label for="pilihan_12_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(12,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sel mengalami kesulitan dalam menyimpan kalsium, yang berpotensi mempengaruhi aktivitas seluler yang bergantung pada kalsium, seperti kontraksi otot.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('12.','3');">
+													<input id="pilihan_12_3" class="pilihan12" onchange="pilihan2('12','d','188')" pil="d" name="pilihan12" type="checkbox" value="D">
+													<label for="pilihan_12_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(12,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penurunan produksi ATP yang signifikan terjadi, karena sel tidak dapat menghasilkan energi dengan efisien.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('12.','4');">
+													<input id="pilihan_12_4" class="pilihan12" onchange="pilihan2('12','e','188')" pil="e" name="pilihan12" type="checkbox" value="E">
+													<label for="pilihan_12_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(12,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Gangguan dalam pengangkutan protein dan sintesis lipid menyebabkan berbagai proses seluler terganggu.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-13"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berikut adalah grafik data banyaknya kasus penderita Covid-19 sejak Maret 2020 hingga Mei 2025. Selama pandemi dilaksanakan pemberian vaksin kepada masyarakat. Vaksin primer diberikan mulai tanggal 13 Januari 2021 dan Vaksin booster 1 diberikan mulai Januari 2022. Terjadi tren penurunan kasus Covid 19 setelah dilaksanakannya vaksinasi. Data ini menunjukkan pentingnya vaksinasi dalam menurunkan resiko terinfeksi virus korona.</p>
+<p><img src="/tka/cbt_images/26825_2a593e0140eaca5b9df5150ed09bbce9.png" alt="" width="541" height="315"></p>
+<p>Berdasarkan data dan pengetahuanmu tentang sistem imun, manakah pernyataan berikut yang logis dan didukung data tersebut?</p>
+<p>Pilih semua jawaban yang benar! Jawaban benar lebih dari satu.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('13.','0');">
+													<input id="pilihan_13_0" class="pilihan13" onchange="pilihan2('13','a','189')" pil="a" name="pilihan13" type="checkbox" value="A">
+													<label for="pilihan_13_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(13,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penurunan jumlah kasus setelah Januari 2022 menunjukkan bahwa booster memiliki dampak besar terhadap kekebalan seseorang.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('13.','1');">
+													<input id="pilihan_13_1" class="pilihan13" onchange="pilihan2('13','b','189')" pil="b" name="pilihan13" type="checkbox" value="B">
+													<label for="pilihan_13_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(13,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Jika vaksin booster tidak diberikan, kemungkinan jumlah kasus tetap menurun karena vaksin primer sudah cukup efektif.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('13.','2');">
+													<input id="pilihan_13_2" class="pilihan13" onchange="pilihan2('13','c','189')" pil="c" name="pilihan13" type="checkbox" value="C">
+													<label for="pilihan_13_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(13,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Vaksin primer dan booster bekerja sama membentuk kekebalan kolektif, sehingga menurunkan jumlah kasus secara bertahap.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('13.','3');">
+													<input id="pilihan_13_3" class="pilihan13" onchange="pilihan2('13','d','189')" pil="d" name="pilihan13" type="checkbox" value="D">
+													<label for="pilihan_13_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(13,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penurunan jumlah kasus terjadi secara alami karena vaksin primer menyebabkan virus tidak terlalu ganas.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('13.','4');">
+													<input id="pilihan_13_4" class="pilihan13" onchange="pilihan2('13','e','189')" pil="e" name="pilihan13" type="checkbox" value="E">
+													<label for="pilihan_13_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(13,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Vaksin booster sudah efektif menurunkan jumlah kasus, namun perlu vaksin booster lanjutan untuk imunitas jangka panjang.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-14"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Seorang perempuan mengalami gangguan kehamilan yang cukup serius. Setelah dilakukan pemeriksaan, dokter menyatakan bahwa zigot tidak berkembang di dalam rahim, melainkan di luar rongga rahim. Kondisi ini dikenal dengan kehamilan ektopik (hamil di luar kandungan).</p>
+<p>Dari kasus tersebut, tentukan <strong>Benar</strong> atau <strong>Salah</strong> untuk setiap peryataan berikut mengenai penjelasan paling logis yang dapat mendukung diagnosis dokter terkait penyebab kehamilan ektopik tersebut!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan </td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembuahan tetap terjadi di tuba falopi, namun gangguan pada silia tuba menyebabkan zigot gagal mencapai rahim.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('14.','1','1');">
+															<input id="pilihan_14_1_1" name="pilihan_14_1" class="pilihan__1" onchange="pilihan3('14','3','190','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_14_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('14.','1','2');">
+															<input id="pilihan_14_1_2" name="pilihan_14_1" class="pilihan__1" onchange="pilihan3('14','3','190','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_14_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Zigot yang tertanam di tuba falopi menunjukkan adanya masalah pada mekanisme transportasi embrio menuju rahim.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('14.','2','1');">
+															<input id="pilihan_14_2_1" name="pilihan_14_2" class="pilihan__2" onchange="pilihan3('14','3','190','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_14_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('14.','2','2');">
+															<input id="pilihan_14_2_2" name="pilihan_14_2" class="pilihan__2" onchange="pilihan3('14','3','190','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_14_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sel telur dan sel sperma bertemu di vagina sehingga zigot tidak dapat menuju rahim dan berkembang di vagina.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('14.','3','1');">
+															<input id="pilihan_14_3_1" name="pilihan_14_3" class="pilihan__3" onchange="pilihan3('14','3','190','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_14_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('14.','3','2');">
+															<input id="pilihan_14_3_2" name="pilihan_14_3" class="pilihan__3" onchange="pilihan3('14','3','190','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_14_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-15"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Seorang petani jagung membeli benih jagung sebanyak 1 kg di toko pertanian. Harga benih jagung tersebut ternyata beberapa kali lipat lebih mahal dari harga jagung di pasaran. Karena alasan mahalnya benih jagung di toko pertanian, pada saat panen petani tersebut memilih jagung yang kualitasnya bagus untuk dijadikan benih. Tetangganya yang sudah pernah menanam jagung dari benih hasil panen sendiri memberikan nasehat agar tidak melakukan hal itu karena hasil panennya tidak akan bagus. Penasaran dengan&nbsp;ungkapan tetangganya, petani tersebut ingin membuktikan ucapan tetangganya.</p>
+<p>Tentukan kegiatan yang Tepat Dilakukan atau Tidak Tepat Dilakukan oleh petani untuk membuktikan ucapan tetangganya!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Kegiatan</td><td class="text-center" style="width:100px">Tepat  Dilakukan</td><td class="text-center" style="width:100px">Tidak Tepat  Dilakukan</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menguji satu benih toko dan satu benih hasil panen di lahan yang sama, lalu membandingkan hasilnya.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','1','1');">
+															<input id="pilihan_15_1_1" name="pilihan_15_1" class="pilihan__1" onchange="pilihan3('15','3','191','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_15_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','1','2');">
+															<input id="pilihan_15_1_2" name="pilihan_15_1" class="pilihan__1" onchange="pilihan3('15','3','191','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_15_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Melakukan penanaman beberapa benih toko dan beberapa benih hasil panen di lahan yang sama, tetapi diberi pupuk yang berbeda, lalu membandingkan hasilnya.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','2','1');">
+															<input id="pilihan_15_2_1" name="pilihan_15_2" class="pilihan__2" onchange="pilihan3('15','3','191','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_15_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','2','2');">
+															<input id="pilihan_15_2_2" name="pilihan_15_2" class="pilihan__2" onchange="pilihan3('15','3','191','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_15_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menanam beberapa benih toko dan beberapa benih hasil panen di lahan yang sama, diberi pupuk yang sama, kemudian membandingkan hasilnya.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','3','1');">
+															<input id="pilihan_15_3_1" name="pilihan_15_3" class="pilihan__3" onchange="pilihan3('15','3','191','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_15_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','3','2');">
+															<input id="pilihan_15_3_2" name="pilihan_15_3" class="pilihan__3" onchange="pilihan3('15','3','191','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_15_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-16"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Seorang murid mengikuti lomba membuat produk pangan fermentasi di sekolah, yaitu membuat yogurt. Murid tersebut bertanggung jawab untuk memastikan proses produksi berjalan dengan baik. Salah satu tahap penting dalam pembuatan yogurt adalah penambahan bakteri.</p>
+<p>Apa langkah pertama yang perlu dilakukan untuk memastikan bakteri yang digunakan dalam fermentasi berfungsi dengan optimal?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','0');">
+													<input id="pilihan_16_0" onchange="pilihan('16','a','331')" pil="a" name="pilihan16" type="radio">
+													<label for="pilihan_16_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menambahkan bakteri ke dalam susu sebelum proses pasteurisasi dilakukan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','1');">
+													<input id="pilihan_16_1" onchange="pilihan('16','b','331')" pil="b" name="pilihan16" type="radio">
+													<label for="pilihan_16_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Meningkatkan jumlah bakteri dalam campuran untuk mempercepat proses produksi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','2');">
+													<input id="pilihan_16_2" onchange="pilihan('16','c','331')" pil="c" name="pilihan16" type="radio">
+													<label for="pilihan_16_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menggunakan bakteri yang dapat mengurangi kandungan protein dalam yogurt.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','3');">
+													<input id="pilihan_16_3" onchange="pilihan('16','d','331')" pil="d" name="pilihan16" type="radio">
+													<label for="pilihan_16_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mencampur banyak jenis bakteri untuk menambah rasa yang lebih manis pada yogurt.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','4');">
+													<input id="pilihan_16_4" onchange="pilihan('16','e','331')" pil="e" name="pilihan16" type="radio">
+													<label for="pilihan_16_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Memasukkan bakteri pada saat susu memiliki suhu 40-45°C sehingga bakteri aktif.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-17"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Seorang atlet mengalami kelelahan otot setelah latihan intensif. Pelatihnya menjelaskan bahwa sel-sel otot sedang mengalami peningkatan aktivitas metabolik untuk memenuhi kebutuhan energi. Salah satu mekanisme utama yang terjadi dalam sel otot tersebut adalah proses katabolisme.</p>
+<p>Berdasarkan situasi tersebut, proses manakah yang paling tepat dikategorikan sebagai katabolisme?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','0');">
+													<input id="pilihan_17_0" onchange="pilihan('17','a','332')" pil="a" name="pilihan17" type="radio">
+													<label for="pilihan_17_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penyusunan protein baru untuk memperbaiki kerusakan otot akibat latihan berat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','1');">
+													<input id="pilihan_17_1" onchange="pilihan('17','b','332')" pil="b" name="pilihan17" type="radio">
+													<label for="pilihan_17_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penggabungan molekul glukosa menjadi glikogen untuk penyimpanan energi di otot.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','2');">
+													<input id="pilihan_17_2" onchange="pilihan('17','c','332')" pil="c" name="pilihan17" type="radio">
+													<label for="pilihan_17_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pemecahan glukosa menjadi asam piruvat untuk menghasilkan energi cepat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','3');">
+													<input id="pilihan_17_3" onchange="pilihan('17','d','332')" pil="d" name="pilihan17" type="radio">
+													<label for="pilihan_17_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembentukan lemak dari gliserol dan asam lemak untuk penyimpanan cadangan energi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','4');">
+													<input id="pilihan_17_4" onchange="pilihan('17','e','332')" pil="e" name="pilihan17" type="radio">
+													<label for="pilihan_17_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sintesis ATP dari ADP dan fosfat sebagai hasil akhir reaksi metabolisme energi.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-18"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Setelah berlari selama 30 menit tanpa henti, seorang murid merasa nafasnya menjadi lebih cepat dan dalam. Hal ini terjadi karena tubuhnya membutuhkan lebih banyak oksigen dan harus membuang karbon dioksida lebih cepat.</p>
+<p>Untuk membantu tubuh kembali ke kondisi normal dan mendukung proses pernapasan yang optimal, aktivitas apa saja yang sebaiknya dilakukan oleh pelari dalam situasi tersebut?</p>
+<p>Tentukan <strong>Benar</strong> atau <strong>Salah</strong> pada setiap pernyataan berikut terkait aktivitas yang sebaiknya dilakukan pelari!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Melakukan pendinginan dengan berjalan perlahan untuk menormalkan laju pernapasan.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('18.','1','1');">
+															<input id="pilihan_18_1_1" name="pilihan_18_1" class="pilihan__1" onchange="pilihan3('18','3','333','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_18_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('18.','1','2');">
+															<input id="pilihan_18_1_2" name="pilihan_18_1" class="pilihan__1" onchange="pilihan3('18','3','333','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_18_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengatur napas dengan teknik pernapasan dalam (<em>deep breathing</em>) secara perlahan.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('18.','2','1');">
+															<input id="pilihan_18_2_1" name="pilihan_18_2" class="pilihan__2" onchange="pilihan3('18','3','333','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_18_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('18.','2','2');">
+															<input id="pilihan_18_2_2" name="pilihan_18_2" class="pilihan__2" onchange="pilihan3('18','3','333','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_18_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Langsung duduk atau berbaring tanpa bergerak agar tubuh cepat beristirahat.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('18.','3','1');">
+															<input id="pilihan_18_3_1" name="pilihan_18_3" class="pilihan__3" onchange="pilihan3('18','3','333','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_18_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('18.','3','2');">
+															<input id="pilihan_18_3_2" name="pilihan_18_3" class="pilihan__3" onchange="pilihan3('18','3','333','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_18_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-19"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan survei Ikatan Dokter Anak Indonesia, terjadi peningkatan kasus kerusakan ginjal pada anak usia 12-18 tahun di sepanjang tahun 2024. Penderita kerusakan ginjal yang parah perlu dibantu dengan cuci darah. Seorang murid bertanya, “Mengapa ginjalnya yang rusak, tetapi darahnya yang “dicuci?”.</p>
+<p>Apa penjelasan ilmiah secara fisiologis yang paling tepat untuk menjawab pertanyaan murid tersebut?</p>
+<p>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('19.','0');">
+													<input id="pilihan_19_0" class="pilihan19" onchange="pilihan2('19','a','334')" pil="a" name="pilihan19" type="checkbox" value="A">
+													<label for="pilihan_19_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(19,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kerusakan ginjal mengganggu sirkulasi darah dan kemampuan sel darah merah dalam mengikat oksigen.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('19.','1');">
+													<input id="pilihan_19_1" class="pilihan19" onchange="pilihan2('19','b','334')" pil="b" name="pilihan19" type="checkbox" value="B">
+													<label for="pilihan_19_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(19,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Ketika ginjal tidak berfungsi dengan baik, darah menjadi kotor karena adanya sel-sel darah yang mati.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('19.','2');">
+													<input id="pilihan_19_2" class="pilihan19" onchange="pilihan2('19','c','334')" pil="c" name="pilihan19" type="checkbox" value="C">
+													<label for="pilihan_19_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(19,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kegagalan ginjal dalam menyaring zat sisa pencernaan memungkinkan limbah tersebut masuk ke dalam pembuluh darah.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('19.','3');">
+													<input id="pilihan_19_3" class="pilihan19" onchange="pilihan2('19','d','334')" pil="d" name="pilihan19" type="checkbox" value="D">
+													<label for="pilihan_19_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(19,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Terganggunya fungsi ginjal menyebabkan sisa metabolisme tidak dapat tersaring dan terbuang dalam urin.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('19.','4');">
+													<input id="pilihan_19_4" class="pilihan19" onchange="pilihan2('19','e','334')" pil="e" name="pilihan19" type="checkbox" value="E">
+													<label for="pilihan_19_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(19,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Karena ginjal tidak mampu menyaring darah, maka zat-zat sisa seperti urea dan kreatinin tetap berada dalam darah.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-20"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?-->
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Seorang anak merasa kesal karena kolam ikan hias di halaman rumahnya sering ada kecebong. Untuk menjaga agar katak tidak lagi bertelur di kolam ikan hiasnya, anak tersebut memindahkan katak ke selokan di belakang rumahnya. Sekalipun dia sudah sering memindahkan katak dari kolam, akan tetapi hampir setiap menjelang malam ada katak yang bernyanyi di tepi kolam. Hari ini, anak itu melakukan sesuatu yang belum pernah dilakukannya. Sebelum memindahkan katak dia menandai katak-katak tersebut dengan angka-angka.</p>
+<p>Pertanyaan apa yang menurut kalian ingin diketahui anak tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','0');">
+													<input id="pilihan_20_0" onchange="pilihan('20','a','335')" pil="a" name="pilihan20" type="radio">
+													<label for="pilihan_20_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Siapakah yang datang ke kolam itu, katak jantan ataukah betina?</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','1');">
+													<input id="pilihan_20_1" onchange="pilihan('20','b','335')" pil="b" name="pilihan20" type="radio">
+													<label for="pilihan_20_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Katak manakah yang pertama kali datang ke arah kolam itu?</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','2');">
+													<input id="pilihan_20_2" onchange="pilihan('20','c','335')" pil="c" name="pilihan20" type="radio">
+													<label for="pilihan_20_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Apakah katak yang datang ke kolam itu adalah yang pernah dipindah?</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','3');">
+													<input id="pilihan_20_3" onchange="pilihan('20','d','335')" pil="d" name="pilihan20" type="radio">
+													<label for="pilihan_20_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Dengan cara apakah katak-katak itu datang menuju kolam?</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','4');">
+													<input id="pilihan_20_4" onchange="pilihan('20','e','335')" pil="e" name="pilihan20" type="radio">
+													<label for="pilihan_20_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengapa selalu ada katak yang datang ke kolam setiap waktu?</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div>			</div>
+		  </div>
+		  
+		  <div class="row pl-3 pr-3 pb-1 mb-0"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  
+		  <div class="row pb-0 pt-2 mt-2 btn-bawah"> 
+			<div class="col text-center" style="">
+				<button class="btn btn-danger btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="prevSoal()"><i class="fa fa-chevron-circle-left"></i> <span class="d-none d-sm-inline-block">Soal sebelumnya</span></button>
+			</div>
+			<div class="col text-center" style="">
+				<button class="btn btn-warning btn-round btn-md btn-navigasi" style="border-radius:30px;color:#fff;"><input type="checkbox" onclick="raguRagu()" id="c_ragu_ragu" value=""> <span class="d-none d-sm-inline-block">Ragu-ragu
+			</span></button></div>
+			<div class="col text-center" style="">
+				<button class="btn btn-primary btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="nextSoal()" id="nextSoal"> <span class="d-none d-sm-inline-block">Soal berikutnya</span> <i class="fa fa-chevron-circle-right"></i></button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	 
+  </div> 
+</div>
+
+<div class="modal fadeIn" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Daftar Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+		<form id="formJawaban">
+         				<span class="d-none" id="tmp_answer_1"></span>
+				<span class="d-none" id="ragu_answer_1"></span>
+				<input type="hidden" name="jawaban_no[1]" id="input_jawaban_no_1" value="1">
+								<div id="jawaban-no-1" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal btn-primary" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('1')">1					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer1" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_2"></span>
+				<span class="d-none" id="ragu_answer_2"></span>
+				<input type="hidden" name="jawaban_no[2]" id="input_jawaban_no_2" value="2">
+								<div id="jawaban-no-2" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('2')">2					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer2" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_3"></span>
+				<span class="d-none" id="ragu_answer_3"></span>
+				<input type="hidden" name="jawaban_no[3]" id="input_jawaban_no_3" value="3">
+								<div id="jawaban-no-3" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('3')">3					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer3" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_4"></span>
+				<span class="d-none" id="ragu_answer_4"></span>
+				<input type="hidden" name="jawaban_no[4]" id="input_jawaban_no_4" value="4">
+								<div id="jawaban-no-4" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('4')">4					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer4" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_5"></span>
+				<span class="d-none" id="ragu_answer_5"></span>
+				<input type="hidden" name="jawaban_no[5]" id="input_jawaban_no_5" value="5">
+								<div id="jawaban-no-5" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('5')">5					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer5" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_6"></span>
+				<span class="d-none" id="ragu_answer_6"></span>
+				<input type="hidden" name="jawaban_no[6]" id="input_jawaban_no_6" value="6">
+								<div id="jawaban-no-6" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('6')">6					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer6" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_7"></span>
+				<span class="d-none" id="ragu_answer_7"></span>
+				<input type="hidden" name="jawaban_no[7]" id="input_jawaban_no_7" value="7">
+								<div id="jawaban-no-7" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('7')">7					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer7" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_8"></span>
+				<span class="d-none" id="ragu_answer_8"></span>
+				<input type="hidden" name="jawaban_no[8]" id="input_jawaban_no_8" value="8">
+								<div id="jawaban-no-8" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('8')">8					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer8" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_9"></span>
+				<span class="d-none" id="ragu_answer_9"></span>
+				<input type="hidden" name="jawaban_no[9]" id="input_jawaban_no_9" value="9">
+								<div id="jawaban-no-9" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('9')">9					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer9" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_10"></span>
+				<span class="d-none" id="ragu_answer_10"></span>
+				<input type="hidden" name="jawaban_no[10]" id="input_jawaban_no_10" value="10">
+								<div id="jawaban-no-10" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('10')">10					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer10" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_11"></span>
+				<span class="d-none" id="ragu_answer_11"></span>
+				<input type="hidden" name="jawaban_no[11]" id="input_jawaban_no_11" value="11">
+								<div id="jawaban-no-11" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('11')">11					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer11" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_12"></span>
+				<span class="d-none" id="ragu_answer_12"></span>
+				<input type="hidden" name="jawaban_no[12]" id="input_jawaban_no_12" value="12">
+								<div id="jawaban-no-12" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('12')">12					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer12" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_13"></span>
+				<span class="d-none" id="ragu_answer_13"></span>
+				<input type="hidden" name="jawaban_no[13]" id="input_jawaban_no_13" value="13">
+								<div id="jawaban-no-13" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('13')">13					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer13" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_14"></span>
+				<span class="d-none" id="ragu_answer_14"></span>
+				<input type="hidden" name="jawaban_no[14]" id="input_jawaban_no_14" value="14">
+								<div id="jawaban-no-14" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('14')">14					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer14" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_15"></span>
+				<span class="d-none" id="ragu_answer_15"></span>
+				<input type="hidden" name="jawaban_no[15]" id="input_jawaban_no_15" value="15">
+								<div id="jawaban-no-15" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('15')">15					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer15" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_16"></span>
+				<span class="d-none" id="ragu_answer_16"></span>
+				<input type="hidden" name="jawaban_no[16]" id="input_jawaban_no_16" value="16">
+								<div id="jawaban-no-16" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('16')">16					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer16" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_17"></span>
+				<span class="d-none" id="ragu_answer_17"></span>
+				<input type="hidden" name="jawaban_no[17]" id="input_jawaban_no_17" value="17">
+								<div id="jawaban-no-17" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('17')">17					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer17" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_18"></span>
+				<span class="d-none" id="ragu_answer_18"></span>
+				<input type="hidden" name="jawaban_no[18]" id="input_jawaban_no_18" value="18">
+								<div id="jawaban-no-18" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('18')">18					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer18" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_19"></span>
+				<span class="d-none" id="ragu_answer_19"></span>
+				<input type="hidden" name="jawaban_no[19]" id="input_jawaban_no_19" value="19">
+								<div id="jawaban-no-19" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('19')">19					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer19" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_20"></span>
+				<span class="d-none" id="ragu_answer_20"></span>
+				<input type="hidden" name="jawaban_no[20]" id="input_jawaban_no_20" value="20">
+								<div id="jawaban-no-20" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('20')">20					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer20" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>		 </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="infoSoal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Informasi Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fadeIn" id="timeoutDialog" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-2 pt-5">
+		<h5 class="modal-title" style="text-align:center">PERHATIAN !!</h5>
+		<p>Waktu tes sudah habis !</p>
+      </div>
+	  <div class="modal-footer text-center">
+		<button class="btn btn-danger" onclick="selesaikanTes()">Ok, Lanjutkan !</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="c-svg" id="c-svg-1" style="display: none;"></div><div class="c-svg" id="c-svg-2" style="display: none;"></div><div class="c-svg" id="c-svg-3" style="display: none;"></div><div class="c-svg" id="c-svg-4" style="display: none;"></div><div class="c-svg" id="c-svg-5" style="display: none;"></div><div class="c-svg" id="c-svg-6" style="display: none;"></div><div class="c-svg" id="c-svg-7" style="display: none;"></div><div class="c-svg" id="c-svg-8" style="display: none;"></div><div class="c-svg" id="c-svg-9" style="display: none;"></div><div class="c-svg" id="c-svg-10" style="display: none;"></div><div class="c-svg" id="c-svg-11" style="display: none;"></div><div class="c-svg" id="c-svg-12" style="display: none;"></div><div class="c-svg" id="c-svg-13" style="display: none;"></div><div class="c-svg" id="c-svg-14" style="display: none;"></div><div class="c-svg" id="c-svg-15" style="display: none;"></div><div class="c-svg" id="c-svg-16" style="display: none;"></div><div class="c-svg" id="c-svg-17" style="display: none;"></div><div class="c-svg" id="c-svg-18" style="display: none;"></div><div class="c-svg" id="c-svg-19" style="display: none;"></div><div class="c-svg" id="c-svg-20" style="display: none;"></div>
+<div style="position: fixed; inset: 0px; background: rgb(255, 255, 255); opacity: 0.5; z-index: 99999; display: none;" id="loader">
+<img class="loader" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/images/loader2.gif">
+</div>
+
+
+<style>
+	
+	@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
+	@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+	@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+	@media (max-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.mataujian{text-align:left} 
+		#formContent{padding-left:10px;padding-right:10px}
+		.row-atas {text-align:center;}
+		#isisoal img {width:100%;}
+	}
+	@media (min-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.container-fluid{ padding-left:50px;padding-right:50px} 
+		.mataujian{text-align:right} 
+		#formContent{padding-left:50px;padding-right:50px} 
+		.btn-navigasi {width:180px;}
+		.cont-btn-informasi{text-align:right}
+		
+	}
+	@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+	@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+			
+	/* STRUCTURE */
+	.loader {
+	  margin: 0;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -ms-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+	
+	.wrapper {
+	  display: flex;
+	  align-items: center;
+	  flex-direction: column; 
+	  justify-content: center;
+	  width: 100%;
+	  min-height: 100%;
+	  padding: 20px;
+	  margin-top:-80px;
+	}
+
+	#formContent {
+	  -webkit-border-radius: 10px 10px 10px 10px;
+	  border-radius: 10px 10px 10px 10px;
+	  background: #fff;
+	  position: relative;
+	  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  text-align: center;
+	}
+
+	
+
+
+	/* TABS */
+
+	h2.inactive {
+	  color: #cccccc;
+	}
+
+	h2.active {
+	  color: #0d0d0d;
+	  border-bottom: 2px solid #5fbae9;
+	}
+	
+	input[type=text] {
+	  border: none;
+	  color: #0d0d0d;
+	  text-decoration: none;
+	  border-radius:0px;
+	  border-bottom:1px solid #eee;
+	  background:transparent;
+	}
+	
+
+	/* ANIMATIONS */
+
+	/* Simple CSS3 Fade-in-down Animation */
+	.fadeInDown {
+	  -webkit-animation-name: fadeInDown;
+	  animation-name: fadeInDown;
+	  -webkit-animation-duration: 1s;
+	  animation-duration: 1s;
+	  -webkit-animation-fill-mode: both;
+	  animation-fill-mode: both;
+	}
+
+	@-webkit-keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	@keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+	.fadeIn {
+	  opacity:0;
+	  -webkit-animation:fadeIn ease-in 1;
+	  -moz-animation:fadeIn ease-in 1;
+	  animation:fadeIn ease-in 1;
+
+	  -webkit-animation-fill-mode:forwards;
+	  -moz-animation-fill-mode:forwards;
+	  animation-fill-mode:forwards;
+
+	  -webkit-animation-duration:1s;
+	  -moz-animation-duration:1s;
+	  animation-duration:1s;
+	}
+
+	.fadeIn.first {
+	  -webkit-animation-delay: 0.4s;
+	  -moz-animation-delay: 0.4s;
+	  animation-delay: 0.4s;
+	}
+
+	.fadeIn.second {
+	  -webkit-animation-delay: 0.6s;
+	  -moz-animation-delay: 0.6s;
+	  animation-delay: 0.6s;
+	}
+
+	.fadeIn.third {
+	  -webkit-animation-delay: 0.8s;
+	  -moz-animation-delay: 0.8s;
+	  animation-delay: 0.8s;
+	}
+
+	.fadeIn.fourth {
+	  -webkit-animation-delay: 1s;
+	  -moz-animation-delay: 1s;
+	  animation-delay: 1s;
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	.underlineHover:after {
+	  display: block;
+	  left: 0;
+	  bottom: -10px;
+	  width: 0;
+	  height: 2px;
+	  background-color: #56baed;
+	  content: "";
+	  transition: width 0.2s;
+	}
+
+	.underlineHover:hover {
+	  color: #0d0d0d;
+	}
+
+	.underlineHover:hover:after{
+	  width: 100%;
+	}
+	
+	.cfont {
+		cursor:pointer;
+	}
+	
+	
+	///
+	
+</style>
+  
+<script type="text/javascript" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery/jquery.2.1.1.min.js"></script>
+<script src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery.timer.js"></script>
+  
+<script>
+	
+	$(document).ready(function() {
+		$('#loader').fadeOut();
+		var  w = $(window).width();
+				if (w > 800)  {
+			var ii = $('#isisoal').height();
+			var  h = $(window).height();
+			var  h = h-$('.cont-soal').position().top-380;
+			$('.cont-soal').css({
+				'height':h,
+				'overflow': 'auto'
+			});
+
+			$('.isi-soal').css({
+				'height':h,
+			 	'overflow': 'auto'
+			 });
+
+			// if (ii > h) {
+			// 	$('.cont-soal').css({
+			// 	'height':ii,
+			// 	'overflow': 'auto'
+			// 	});
+			// }
+		}
+		
+		window.setTimeout( lihatSoal(1), 5000 ); // 5 seconds
+	});
+	var selected = 1;
+	var jumlah_soal = 20;
+	function lihatSoal(nomor) {
+		$('.soal-soal').css('display','none');
+		if (nomor=='') {
+			nomor = selected;
+		} 
+		$('#soal-no-'+nomor).css('display','');
+		selected = nomor;
+		$('#noSoal').html(nomor);
+		
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+		}
+		
+		for (i=1;i<=jumlah_soal;i++){
+			var cccc= $('#tmp_answer_'+i).html();
+			if (cccc != '') $('#jawaban-no-'+i).addClass('btn-dark');
+			var cccc= $('#ragu_answer_'+i).html();
+			if (cccc != '') {
+				$('#jawaban-no-'+i).addClass('btn-warning');
+				$('#jawaban-no-'+i).removeClass('btn-dark');
+			}
+		}
+		//$('.btn-lihat-soal').removeClass('btn-dark');
+		$('#jawaban-no-'+nomor).removeClass('btn-warning');
+		$('#jawaban-no-'+nomor).removeClass('btn-dark');
+		$('.btn-lihat-soal').removeClass('btn-primary');
+		
+		$('#jawaban-no-'+nomor).addClass('btn-primary');
+		
+		window.scrollTo(0, 0);
+		$('.c-svg').fadeOut();
+		redrawline(selected);
+	}
+	
+	function nextSoal() {
+		if (selected < jumlah_soal) {
+			selected++;		
+			lihatSoal(selected);
+		} else {
+			
+			selesaikanTes();
+		}
+	}
+	
+	function prevSoal() {
+		if (selected > 1) {
+			selected--;
+			lihatSoal(selected);
+		}
+	}
+	
+	function raguRagu() {
+		if ($('#c_ragu_ragu').is(':checked')) {
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			$('#jawaban-no-'+selected).addClass('btn-warning');
+			$('#ragu_answer_'+selected).html('1');
+			save_ragu(selected,'1');
+		} else {
+			$('#ragu_answer_'+selected).html('');
+			$('#jawaban-no-'+selected).removeClass('btn-warning');
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			
+			if ($('#answer'+selected).html() == '')
+			{
+				$('#jawaban-no-'+selected).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+selected).addClass('btn-dark');
+			}
+			
+			save_ragu(selected,'');
+			
+		}
+	}
+	
+	function trigger_ragu(nomor)
+	{
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			$('#jawaban-no-'+nomor).addClass('btn-warning');
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+			$('#jawaban-no-'+nomor).removeClass('btn-warning');
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			
+			if ($('#answer'+nomor).html() == '')
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-dark');
+			}
+		}
+		
+	}
+	
+	lihatSoal(2);
+	
+	function selesaikanTes() {
+		$.ajax({ 
+		   type: "POST",
+		   dataType: "html",
+		   data : $('#formJawaban').serialize(),
+		   url: "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/finishtes?ses_id=84aaae3e9172e65322df04fda4599b036104fcc3",
+		   cache: false, 
+		   beforeSend: function(){
+			   $('#nextSoal').prop('disabled',true);
+			   $('#nextSoal').html('Silahkan tunggu ... !');
+			   $('#loader').fadeIn();
+			},
+			complete: function(){
+			},
+			success: function(result){
+				//alert(result);
+				if (result=='error') {
+					alert('Oops ada kesalahan! \rSilahkan ulangi !');
+					$('#nextSoal').prop('disabled',false);
+					$('#nextSoal').prop('enabled',true);
+					$('#nextSoal').html('Soal berikutnya');
+					$('#loader').fadeOut();
+				}
+				else
+					window.location = result;
+		   }
+		});
+	}
+
+	function changeFont(s,d)
+	{
+		$('#isisoal').css("font-size", s + "px");
+		$('.cfont').css("font-weight", "normal");
+		$('#'+d).css("font-weight", "bold");
+	}
+			
+	var RemainTime = new (function() {
+		var $countdown;
+		var $form;
+		var incrementTime = 60;
+		var globalTime = 4500 * 1000; // 50 seconds (in milliseconds)
+		var currentTime = globalTime;
+		var DurationTime = 4500 * 60000; // 5 minutes (in milliseconds)
+
+
+		$(function() {
+
+			// Setup the timer
+			$countdown = $('#countdown');
+			RemainTime.Timer = $.timer(updateTimer, incrementTime, true);
+
+		});
+
+		function updateTimer() {
+
+			// Output timer position
+			var timeString = formatTime(currentTime);
+			$countdown.html(timeString);
+			// If timer is complete, trigger alert
+			if (currentTime == 0) {
+				jQuery.noConflict();
+				$('#timeoutDialog').modal();
+				//$('#timeoutDialog').modal('show');
+				RemainTime.Timer.stop();
+				//disable_all();
+				//bootbox_timeout();
+				
+				return;
+			}
+			// Increment timer position
+			currentTime -= incrementTime;
+			if (currentTime < 0) currentTime = 0;
+
+		}
+	});
+
+	// Common functions
+	function pad(number, length) {
+		var str = '' + number;
+		while (str.length < length) {str = '0' + str;}
+		return str;
+	}
+	function formatTime(time) {
+		time = time / 10;
+		var hour= parseInt(time / 360000),
+			min = parseInt(time / 6000) - (hour * 60),
+			sec = parseInt(time / 100) - (min * 60) - (hour * 3600),
+			hundredths = pad(time - (sec * 100) - (min * 6000) - (hour * 360000), 2);
+		return (hour > 0 ? pad(hour, 2) : "00") + ":" + (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + "";
+	}
+	
+	function KlikJawaban(no,i)
+	{
+		$('#pilihan_'+no+'_'+i).trigger('click');
+	}
+	
+	
+	function KlikJawaban2(no,i)
+	{
+		$('#pilihan_'+'_'+no+'_'+i).trigger('click');
+	}
+	
+	function KlikJawaban3(no,i,j)
+	{
+		$('#pilihan_'+'_'+no+'_'+i+'_'+j).trigger('click');
+	}
+	
+	
+	function pilihan(n,v,i) {
+		if (v.toUpperCase() == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(v.toUpperCase());
+		//$("#answer"+n).css('color','#000');
+		//pushPromise(i,v);
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+		$("#jawaban-no-"+n).addClass('btn-dark');
+		//$("#jawaban-no-"+n).addClass('text-white');
+		// $("#cont-answer"+n).css('color','#fff');
+
+		save_answer(n,v.toUpperCase());
+		trigger_ragu(selected);
+
+	}
+	
+	
+	function pilihan2(n,v,i) {
+		
+		var jawaban = $('.pilihan'+n+':checked')
+		   .map(function() { return $(this).val() })
+		   .get()
+		   .join(";");
+		
+		if (jawaban == '') {
+			$("#answer"+n).html('');
+			$("#jawaban-no-"+n).removeClass('btn-dark');
+			$("#jawaban-no-"+n).addClass('btn-outline-dark');
+		}
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+			$("#jawaban-no-"+n).addClass('btn-dark');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		
+		// pushPromise(i,jawaban);
+		
+		
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+
+	}
+	
+	function pilihan3(n,total,s, arr) {
+		var jawaban = '';
+		for (i=1;i<=total;i++)  {
+			var v = $('input[name="pilihan_'+n+'_'+i+'"]:checked').val();
+			if (v != undefined && v != null) jawaban += arr[(i-1)]+'|'+v + ';';
+		}
+		jawaban = jawaban.substring(0, jawaban.length-1);
+		
+		if (jawaban == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		// pushPromise(s,jawaban);
+		
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+	    $("#jawaban-no-"+n).addClass('btn-dark');
+			
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+	}
+	
+		
+	function pilih1(no, id, warna, order) {
+			
+			// if (window['right_'+no] == '') {
+				// $('.m-left-'+no).prop('checked', false);
+				// $('.tr-left-'+no).css('background','');
+			// }
+			//if (window['dipilih1_'+no].indexOf(id) >=0) window['free1_'+no]=false;
+			if (window['free1_'+no]) {
+				window['free1_'+no] = false;
+				$('#r_left_'+no+'_'+id).prop('checked', true);
+				$('#row1-'+no+'-'+id).css('background',warna);
+				window['pos1_'+no] = $('#r_left_'+no+'_'+id).offset();
+				window['pos11_'+no] = $('#r_left_'+no+'_'+id).position();
+				window['warna1_'+no] = warna;
+				window['id1_'+no] = id;
+				window['order1_'+no] = order;
+				window['dipilih1_'+no].push(id);
+				window['jawab_'+no] = id;
+			}
+			
+	}
+	
+	function removeA(arr) {
+		var what, a = arguments, L = a.length, ax;
+		while (L > 1 && arr.length) {
+			what = a[--L];
+			while ((ax= arr.indexOf(what)) !== -1) {
+				arr.splice(ax, 1);
+			}
+		}
+		return arr;
+	}
+	
+	function rgb2hex(rgb) {
+		rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+		function hex(x) {
+			return ("0" + parseInt(x).toString(16)).slice(-2);
+		}
+		return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+	}
+	
+	
+	
+	function pilih2(no, id,tipe,order,s, ps) {
+		var _c_pilih = $('#r_right_'+no+'_'+id).prop('checked');
+		if (_c_pilih==true) {
+			//alert('1');
+			
+			var id1 =  window['pasangan_'+no+'_'+id];
+			window['free1_'+no] = false;
+			//$('#r_left_'+no+'_'+id).prop('checked', true);
+			var warna11 = rgb2hex($('#row2-'+no+'-'+id).css('background-color'));
+			window['warna1_'+no] = warna11;
+			window['pos1_'+no] = $('#r_left_'+no+'_'+id1).offset();
+			window['pos11_'+no] = $('#r_left_'+no+'_'+id1).position();
+			var cc = id1+";"+id+'|';
+			var ddd = window['jawaban_'+no];
+			dd = ddd.replace(cc,"");
+			window['jawaban_'+no] = dd;
+			
+			window['id1_'+no] = id1;
+			window['free1_'+no] = false;
+			window['right_'+no] = '';
+			window['free_'+no] = true;
+			//delete window['dipilih2_'+no][id];
+			//window['dipilih2_'+no].remove(id);
+			removeA(window['dipilih2_'+no], id);
+			//$('#r_right_'+no+'_'+id).prop('checked', false);
+			//$('.line-'+no).css('display','none');
+			var xx = '#line_'+no+'_'+window['id1_'+no];
+			//alert(xx);
+			$(xx).css('display','none');
+			$('#r_right_'+no+'_'+id).prop('checked', false);
+			$('#row2-'+no+'-'+id).css('background','#ffffff');
+		}
+		else 
+		{
+			//alert('2');
+			window['free_'+no] = true;
+			if (window['dipilih2_'+no].indexOf(id) >=0) window['free_'+no]=false;
+			//alert(2);
+			
+			if ((window['id1_'+no] != '') && window['free_'+no] && (window['right_'+no] == '')) {
+				//alert(3);
+				window['free1_'+no] = true;
+				window['right_'+no] = '';
+				eval('var pasangan_'+no+'_'+id + '= "";');
+				window['pasangan_'+no+'_'+id] = window['id1_'+no];
+				window['jawaban_'+no] = window['jawaban_'+no]+ window['id1_'+no] +';'+ id +'|';
+				window['dipilih2_'+no].push(id);
+				$('#r_right_'+no+'_'+id).prop('checked', true);
+				$('#row2-'+no+'-'+id).css('background',window['warna1_'+no]);
+				$('#r_right_'+no+'_'+id).val(window['id1_'+no]+';'+id);
+				
+				pos2 = $('#r_right_'+no+'_'+id).offset();
+				pos22 = $('#r_right_'+no+'_'+id).position();
+				$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left);
+				$('#line_'+no+'_'+window['id1_'+no]).fadeIn();
+				if (window['pos1_'+no].top > pos2.top) {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',window['pos1_'+no].top-pos2.top)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',0)
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',pos2.top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				} else {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',0)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',Math.abs(window['pos1_'+no].top-pos2.top))
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',window['pos1_'+no].top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				}
+				
+				
+				window['id1_'+no] = '';
+				jawaban = window['jawaban_'+no];
+				n = no;
+				
+				if (jawaban == '')
+					$("#answer"+n).html('');
+				else {
+					$("#answer"+n).html('<i class="fa fa-check"></i>');
+					$("#answer"+n).removeClass('d-none');
+				}
+				
+				//$("#answer"+n).css('color','#000');
+				
+				
+					$("#tmp_answer_"+n).html(jawaban);
+					if (ps == '2')	   {
+						save_answer(n,jawaban);
+						//pushPromise(s,jawaban);
+					}
+				
+				// $("#cont-answer"+n).css('background','#000');
+				// $("#cont-answer"+n).css('color','#fff');
+				
+				trigger_ragu(selected);
+
+			} else {
+				if (tipe==2)
+				$('#r_right_'+no+'_'+id).prop('checked', false);
+			}
+		
+		}
+		
+	}
+	
+			eval('var tipesoal_pencocokan_1 = "3"');
+			eval('var tipesoal_pencocokan_2 = "1"');
+			eval('var tipesoal_pencocokan_3 = "2"');
+			eval('var tipesoal_pencocokan_4 = "1"');
+			eval('var tipesoal_pencocokan_5 = "1"');
+			eval('var tipesoal_pencocokan_6 = "1"');
+			eval('var tipesoal_pencocokan_7 = "1"');
+			eval('var tipesoal_pencocokan_8 = "1"');
+			eval('var tipesoal_pencocokan_9 = "2"');
+			eval('var tipesoal_pencocokan_10 = "2"');
+			eval('var tipesoal_pencocokan_11 = "1"');
+			eval('var tipesoal_pencocokan_12 = "2"');
+			eval('var tipesoal_pencocokan_13 = "2"');
+			eval('var tipesoal_pencocokan_14 = "3"');
+			eval('var tipesoal_pencocokan_15 = "3"');
+			eval('var tipesoal_pencocokan_16 = "1"');
+			eval('var tipesoal_pencocokan_17 = "1"');
+			eval('var tipesoal_pencocokan_18 = "3"');
+			eval('var tipesoal_pencocokan_19 = "2"');
+			eval('var tipesoal_pencocokan_20 = "1"');
+		
+	function redrawline(no) {
+		var tmp_tipesoal = window['tipesoal_pencocokan_'+no];
+		if (tmp_tipesoal == 5) {
+			resetKunci(no,'');
+			var tmp = $('#tmp_answer_'+no).html();//window['jawaban_pencocokan_'+no];
+			var tmp_warna = window['warna_pencocokan_'+no];
+			var tmp_soal = window['soal_pencocokan_'+no];
+			var arr_tmp = tmp.split('|');
+			for (i=0;i<arr_tmp.length;i++) {
+				if (arr_tmp[i].trim() != '') {
+					var arr_tmp2 = arr_tmp[i].split(';');
+					pilih1(no,arr_tmp2[0], tmp_warna[i], i);
+					pilih2(no,arr_tmp2[1], '2', arr_tmp2[1],tmp_soal,'1');
+				}
+			}
+			
+			$('#c-svg-'+no).fadeIn();
+		}
+	}
+	
+	
+	function resetKunci(no, tipe) {
+		left = '';
+		window['right_'+no] = '';
+		window['warna1_'+no] = '';
+		window['id1_'+no] = '';
+		window['pos1_'+no] = '';
+		window['pos11_'+no] = '';
+		window['free1_'+no] = true;
+		window['free_'+no] = true;
+		window['dipilih1_'+no] = [];
+		window['dipilih2_'+no] = [];
+		$('.tr-left-'+no).css('background','');
+		$('.tr-right-'+no).css('background','');
+		$('.line-'+no).css('display','none');
+		window['jawab_'+no] = '';
+		window['jawaban_'+no] = '';
+		window['order1_'+no] = '';
+		$('.m-left-'+no).prop('checked', false);
+		$('.m-right-'+no).prop('checked', false);
+		if (tipe == '1') $("#tmp_answer_"+no).html('');
+		$("#answer"+no).html('');
+		$("#jawaban-no-"+no).removeClass('btn-dark');
+		$("#jawaban-no-"+no).addClass('btn-outline-dark');
+		
+	};
+	
+	
+	$('.jawaban_essai').focusout(function() {
+		var no = this.title;
+		var jawaban = $('#jawaban_essai_'+no).val();					
+		var s = $('#jawaban_essai_'+no).attr('pre');					
+		
+		
+		if (jawaban == '')
+			$("#answer"+no).html('');
+		else {
+			$("#answer"+no).html('<i class="fa fa-check"></i>');
+			$("#answer"+no).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+no).html(jawaban);
+		
+		save_answer(no,jawaban);
+			   
+		// $("#answer"+no).css('color','#000');
+		
+			// $.post( "https://pusmendik.kemendikdasmen.go.id/tka/cbt/peserta/sv_ans",
+			// {
+				// id_soal: s,
+				// jawaban:jawaban,
+				// id_ujian: ,
+				// id_projek_ujian: 
+			// }, function(data) {
+		// });
+		// $("#cont-answer"+no).css('background','#000');
+		// $("#cont-answer"+no).css('color','#fff');
+		trigger_ragu(selected);
+			
+	}).blur(function() {});
+	
+	
+	function methodThatReturnsAPromise(i,jawaban) {
+		return new Promise((resolve, reject) => {
+			$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_jawaban", {nomor: i,jawaban:jawaban, }, function(data) {resolve();});
+		});
+	}
+	
+	var promises = [Promise.resolve()];
+	
+	function pushPromise(i,jawaban)
+	{
+	  promises.push(promises.pop().then(function(){
+		return methodThatReturnsAPromise(i,jawaban)}));
+	}
+	
+	function save_ragu(nomor,jawaban) {
+		$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_ragu", {nomor: nomor,jawaban:jawaban, }, function(data) {});
+	}
+	
+	function save_answer(nomor,jawaban) {
+		pushPromise(nomor,jawaban);
+	}
+</script>
+
+
+
+</body></html>

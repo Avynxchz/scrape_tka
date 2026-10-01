@@ -1,0 +1,913 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Indonesia Tingkat Lanjut (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Wacana 1
+
+Robohnya Surau Kami
+
+Di surau tua yang hampir roboh itu, aku duduk bersila di samping seorang kakek tua, kurus, dan berjanggut putih. Hujan baru saja reda. Dari jendela kayu yang lapuk, sinar matahari sore menyusup masuk, menyinari lantai yang sudah keropos. Kami berbicara pelan, membahas hidup, mati, dan dunia yang sedang kacau. “Aku hanya ingin selamat di akhirat, Nak. Hidup di dunia ini hanya sebentar," katanya sambil menatap lantai. Aku bertanya, “Tapi, Kek… bagaimana dengan orang miskin, anak-anak yang kelaparan, atau tetangga kita yang tak bisa beli obat? Apakah semua itu bukan urusan kita?” Ia diam. Lama. Matanya menerawang jauh. Kemudian ia menjawab lirih, "Aku takut urusan dunia ini menyesatkan…” Malamnya, surau itu sepi. Keesokan paginya, kakek ditemukan telah meninggal di dalamnya. Surau itu pun tak lama kemudian benar-benar roboh. Aku berdiri memandangi bangunan yang sudah menjadi puing itu, dengan banyak tanya yang belum sempat kujawab. (Diadaptasi dari cerpen Robohnya Surau Kami karya A.A. Navis dengan pengubahan seperlunya)
+
+Wacana 2
+
+To Kill a Mockingbird
+
+“Scout, kamu tak akan pernah benar-benar mengerti seseorang sampai kamu mencoba melihat segala sesuatunya dari sudut pandangnya… sampai kamu masuk ke dalam kulitnya dan berjalan di dalamnya,” kata Atticus, ayahku. Aku masih kecil, tapi aku mencoba memahami mengapa orang-orang menertawakan kami. Ayahku, seorang pengacara kulit putih, membela seorang pria kulit hitam di pengadilan. Malam itu, aku duduk di beranda rumah sambil memeluk lututku. Rasanya dunia orang dewasa begitu rumit. Tapi, aku ingat kata ayah, “Apa yang benar tetap benar, meski semua orang mengatakan itu salah.” Ayah mengajarkanku bahwa keadilan tak boleh diam. Ia tahu membela orang yang tertindas tidak selalu membuatmu diterima. Tapi ia juga tahu, kalau diam, dunia tak akan berubah. Dari sanalah aku belajar: keberanian sejati bukan hanya soal kekuatan, tapi soal memilih untuk tetap berdiri meski sendirian. (Diadaptasi dari novel To Kill a Mockingbird karya Harper Lee dengan pengubahan seperlunya)
+
+PERTANYAAN:
+Tindakan Atticus dalam novel To Kill a Mockingbird adalah membela seorang terdakwa kulit hitam, meskipun mendapat tekanan dan celaan dari masyarakat sekitarnya. Mengapa tindakan tersebut relevan dengan norma sosial masyarakat saat ini? Klik pada pilihan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Mencerminkan keberanian dalam memperjuangkan keadilan sosial.
+  - B. Mempresentasikan nilai antirasisme yang penting di dunia modern.
+  - C. Membahayakan posisi dan kelas sosialnya di masyarakat.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Wacana 1
+
+Robohnya Surau Kami
+
+Di surau tua yang hampir roboh itu, aku duduk bersila di samping seorang kakek tua, kurus, dan berjanggut putih. Hujan baru saja reda. Dari jendela kayu yang lapuk, sinar matahari sore menyusup masuk, menyinari lantai yang sudah keropos. Kami berbicara pelan, membahas hidup, mati, dan dunia yang sedang kacau. “Aku hanya ingin selamat di akhirat, Nak. Hidup di dunia ini hanya sebentar," katanya sambil menatap lantai. Aku bertanya, “Tapi, Kek… bagaimana dengan orang miskin, anak-anak yang kelaparan, atau tetangga kita yang tak bisa beli obat? Apakah semua itu bukan urusan kita?” Ia diam. Lama. Matanya menerawang jauh. Kemudian ia menjawab lirih, "Aku takut urusan dunia ini menyesatkan…” Malamnya, surau itu sepi. Keesokan paginya, kakek ditemukan telah meninggal di dalamnya. Surau itu pun tak lama kemudian benar-benar roboh. Aku berdiri memandangi bangunan yang sudah menjadi puing itu, dengan banyak tanya yang belum sempat kujawab. (Diadaptasi dari cerpen Robohnya Surau Kami karya A.A. Navis dengan pengubahan seperlunya)
+
+Wacana 2
+
+To Kill a Mockingbird
+
+“Scout, kamu tak akan pernah benar-benar mengerti seseorang sampai kamu mencoba melihat segala sesuatunya dari sudut pandangnya… sampai kamu masuk ke dalam kulitnya dan berjalan di dalamnya,” kata Atticus, ayahku. Aku masih kecil, tapi aku mencoba memahami mengapa orang-orang menertawakan kami. Ayahku, seorang pengacara kulit putih, membela seorang pria kulit hitam di pengadilan. Malam itu, aku duduk di beranda rumah sambil memeluk lututku. Rasanya dunia orang dewasa begitu rumit. Tapi, aku ingat kata ayah, “Apa yang benar tetap benar, meski semua orang mengatakan itu salah.” Ayah mengajarkanku bahwa keadilan tak boleh diam. Ia tahu membela orang yang tertindas tidak selalu membuatmu diterima. Tapi ia juga tahu, kalau diam, dunia tak akan berubah. Dari sanalah aku belajar: keberanian sejati bukan hanya soal kekuatan, tapi soal memilih untuk tetap berdiri meski sendirian. (Diadaptasi dari novel To Kill a Mockingbird karya Harper Lee dengan pengubahan seperlunya)
+
+PERTANYAAN:
+Respons emosional tokoh Aku terhadap jawaban tokoh kakek pada wacana 1 adalah...
+OPSI / PERNYATAAN:
+  - A. A. Marah karena kakek terlalu pasrah pada nasib.
+  - B. B. Cemas dengan kakek yang tenang di tengah penderitaan.
+  - C. C. Merasa simpati sekaligus mempertanyakan sikap kakek.
+  - D. D. Takut jika kelak akan mengikuti jejak hidup kakek.
+  - E. E. Kecewa karena tidak sempat mengubah pandangan kakek.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Wacana 1
+
+Robohnya Surau Kami
+
+Di surau tua yang hampir roboh itu, aku duduk bersila di samping seorang kakek tua, kurus, dan berjanggut putih. Hujan baru saja reda. Dari jendela kayu yang lapuk, sinar matahari sore menyusup masuk, menyinari lantai yang sudah keropos. Kami berbicara pelan, membahas hidup, mati, dan dunia yang sedang kacau. “Aku hanya ingin selamat di akhirat, Nak. Hidup di dunia ini hanya sebentar," katanya sambil menatap lantai. Aku bertanya, “Tapi, Kek… bagaimana dengan orang miskin, anak-anak yang kelaparan, atau tetangga kita yang tak bisa beli obat? Apakah semua itu bukan urusan kita?” Ia diam. Lama. Matanya menerawang jauh. Kemudian ia menjawab lirih, "Aku takut urusan dunia ini menyesatkan…” Malamnya, surau itu sepi. Keesokan paginya, kakek ditemukan telah meninggal di dalamnya. Surau itu pun tak lama kemudian benar-benar roboh. Aku berdiri memandangi bangunan yang sudah menjadi puing itu, dengan banyak tanya yang belum sempat kujawab. (Diadaptasi dari cerpen Robohnya Surau Kami karya A.A. Navis dengan pengubahan seperlunya)
+
+Wacana 2
+
+To Kill a Mockingbird
+
+“Scout, kamu tak akan pernah benar-benar mengerti seseorang sampai kamu mencoba melihat segala sesuatunya dari sudut pandangnya… sampai kamu masuk ke dalam kulitnya dan berjalan di dalamnya,” kata Atticus, ayahku. Aku masih kecil, tapi aku mencoba memahami mengapa orang-orang menertawakan kami. Ayahku, seorang pengacara kulit putih, membela seorang pria kulit hitam di pengadilan. Malam itu, aku duduk di beranda rumah sambil memeluk lututku. Rasanya dunia orang dewasa begitu rumit. Tapi, aku ingat kata ayah, “Apa yang benar tetap benar, meski semua orang mengatakan itu salah.” Ayah mengajarkanku bahwa keadilan tak boleh diam. Ia tahu membela orang yang tertindas tidak selalu membuatmu diterima. Tapi ia juga tahu, kalau diam, dunia tak akan berubah. Dari sanalah aku belajar: keberanian sejati bukan hanya soal kekuatan, tapi soal memilih untuk tetap berdiri meski sendirian. (Diadaptasi dari novel To Kill a Mockingbird karya Harper Lee dengan pengubahan seperlunya)
+
+PERTANYAAN:
+Apa yang dirasakan tokoh Aku dalam cerpen Robohnya Surau Kami saat berada di surau yang sunyi bersama kakek?
+OPSI / PERNYATAAN:
+  - A. A. Merasa damai dan tenang karena menjalani hidup apa adanya.
+  - B. B. Tidak nyaman dan sedih karena tempat itu penuh kenangan masa lalu.
+  - C. C. Sedih dan mulai merenungkan peran manusia dalam membantu sesama.
+  - D. D. Khawatir dan takut akan kematian yang dibicarakan kakek.
+  - E. E. Jenuh dan kecewa karena kakek tidak menjawab pertanyaannya dengan tegas.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Hikayat Sa-ijaan dan Ikan Todak
+
+Hatta, ketika laut tenang, seekor ikan besar tiba-tiba muncul dari permukaan laut dan terbang menyerangnya. Tanpa beringsut dari tempat duduk maupun membuka mata, Datu Mabrur menepis serangan mendadak itu. Ikan itu terpelanting dan jatuh di karang. Setelah jatuh ke air, ikan itu menyerang lagi. Demikian berulang-ulang. Di sekeliling karang, ribuan ikan lain mengepung, memperlihatkan gigi mereka yang panjang dan tajam, seakan prajurit siap tempur. Pada serangannya yang terakhir, ikan itu terpelanting jatuh persis saat Datu Mabrur membuka matanya. “Hai, ikan! Apa maksudmu mengganggu samadiku? Ikan apa kamu?” “Aku ikan todak, Raja Ikan Todak yang menguasai perairan ini. Samadimu membuat lautan bergelora. Kami terusik, dan aku memutuskan untuk menyerangmu. Tapi, engkau memang sakti, Datu Mabrur. Aku takluk,” katanya, megap-megap. Matanya berkedip-kedip menahan sakit. Tubuhnya terjepit di sela-sela karang tajam. “Jadi, itu rakyatmu?” Datu Mabrur menunjuk ribuan ikan yang mengepung karang. “Ya, Datu. Tapi, sebelum menyerangmu tadi, kami telah bersepakat. Kalau aku kalah, kami akan menyerah dan mematuhi apa pun perintahmu.” “Datu, tolonglah aku. Obati luka-lukaku dan kembalikanlah aku ke laut. Kalau terlalu lama di darat, aku bisa mati. Atas nama rakyatku, aku berjanji akan mengabdi padamu, bila engkau menolongku...” Raja Ikan Todak mengiba-iba. Seolah sulit bernapas, insangnya membuka dan menutup. “Baiklah,” Datu Mabrur berdiri. “Sebagai sesama makhluk ciptaan-Nya, aku akan menolongmu.” “Apa pun permintaanmu, kami akan memenuhinya. Datu ingin istana bawah laut yang terbuat dari emas dan permata, dilayani ikan duyung dan gurita? Ingin berkeliling dunia, bersama ikan paus dan lumba-lumba?” “Tidak. Aku tak punya keinginan pribadi, tapi untuk masa depan anak-cucuku nanti....” Lalu, Datu Mabrur menceritakan maksud pertapaannya selama ini. “Akan kukerahkan rakyatku, seluruh penghuni lautan dan samudera. Sebelum matahari terbit esok pagi, impianmu akan terwujud. Aku bersumpah!” jawab Raja Ikan Todak. Datu Mabrur tak dapat membayangkan, bagaimana Raja Ikan Todak akan memenuhi sumpahnya itu. “Baiklah. Tapi kita harus membuat perjanjian. Sejak sekarang kita harus sa-ijaan, seiring sejalan. Seia sekata, sampai ke anak-cucu kita. Kita harus rakat mufakat, bantu membantu, bahu membahu. Setuju?” “Setuju, Datu...,” sahut Raja Ikan Todak yang tergolek lemah.
+
+Sumber: https://ebook.smkmuda.id/ebooks/cerdas-cergas-berbahasa-dan-bersastra-indonesia-untuk-sma-smk-kelas-x
+
+PERTANYAAN:
+Urutan peristiwa yang tepat sesuai dengan isi hikayat tersebut adalah ….
+OPSI / PERNYATAAN:
+  - A. A. Raja Ikan Todak muncul — Datu Mabrur dan Raja Ikan Todak berkelahi — Raja Ikan Todak menyerah — perjanjian disepakati
+  - B. B. Raja Ikan Todak menyerang — Raja Ikan Todak menyerah — Datu Mabrur bertapa — laut menjadi tenang kembali
+  - C. C. Ribuan ikan mengepung — Raja Ikan Todak menyerang — Datu Mabrur mengusulkan perjanjian — perjanjian disepakati
+  - D. D. Raja Ikan Todak menyerang — Datu Mabrur menolong Raja Ikan Todak — ikan-ikan mengepung — perjanjian dibuat
+  - E. E. Raja ikan menyerang Datu Mabrur — Datu Mabrur mengusulkan perjanjian — perjanjian dibuat — Raja Ikan Todak mengiba
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Hikayat Sa-ijaan dan Ikan Todak
+
+Hatta, ketika laut tenang, seekor ikan besar tiba-tiba muncul dari permukaan laut dan terbang menyerangnya. Tanpa beringsut dari tempat duduk maupun membuka mata, Datu Mabrur menepis serangan mendadak itu. Ikan itu terpelanting dan jatuh di karang. Setelah jatuh ke air, ikan itu menyerang lagi. Demikian berulang-ulang. Di sekeliling karang, ribuan ikan lain mengepung, memperlihatkan gigi mereka yang panjang dan tajam, seakan prajurit siap tempur. Pada serangannya yang terakhir, ikan itu terpelanting jatuh persis saat Datu Mabrur membuka matanya. “Hai, ikan! Apa maksudmu mengganggu samadiku? Ikan apa kamu?” “Aku ikan todak, Raja Ikan Todak yang menguasai perairan ini. Samadimu membuat lautan bergelora. Kami terusik, dan aku memutuskan untuk menyerangmu. Tapi, engkau memang sakti, Datu Mabrur. Aku takluk,” katanya, megap-megap. Matanya berkedip-kedip menahan sakit. Tubuhnya terjepit di sela-sela karang tajam. “Jadi, itu rakyatmu?” Datu Mabrur menunjuk ribuan ikan yang mengepung karang. “Ya, Datu. Tapi, sebelum menyerangmu tadi, kami telah bersepakat. Kalau aku kalah, kami akan menyerah dan mematuhi apa pun perintahmu.” “Datu, tolonglah aku. Obati luka-lukaku dan kembalikanlah aku ke laut. Kalau terlalu lama di darat, aku bisa mati. Atas nama rakyatku, aku berjanji akan mengabdi padamu, bila engkau menolongku...” Raja Ikan Todak mengiba-iba. Seolah sulit bernapas, insangnya membuka dan menutup. “Baiklah,” Datu Mabrur berdiri. “Sebagai sesama makhluk ciptaan-Nya, aku akan menolongmu.” “Apa pun permintaanmu, kami akan memenuhinya. Datu ingin istana bawah laut yang terbuat dari emas dan permata, dilayani ikan duyung dan gurita? Ingin berkeliling dunia, bersama ikan paus dan lumba-lumba?” “Tidak. Aku tak punya keinginan pribadi, tapi untuk masa depan anak-cucuku nanti....” Lalu, Datu Mabrur menceritakan maksud pertapaannya selama ini. “Akan kukerahkan rakyatku, seluruh penghuni lautan dan samudera. Sebelum matahari terbit esok pagi, impianmu akan terwujud. Aku bersumpah!” jawab Raja Ikan Todak. Datu Mabrur tak dapat membayangkan, bagaimana Raja Ikan Todak akan memenuhi sumpahnya itu. “Baiklah. Tapi kita harus membuat perjanjian. Sejak sekarang kita harus  sa-ijaan, seiring sejalan. Seia sekata, sampai ke anak-cucu kita. Kita harus rakat mufakat, bantu membantu, bahu membahu. Setuju?” “Setuju, Datu...,” sahut Raja Ikan Todak yang tergolek lemah.
+
+Sumber: https://ebook.smkmuda.id/ebooks/cerdas-cergas-berbahasa-dan-bersastra-indonesia-untuk-sma-smk-kelas-x
+
+PERTANYAAN:
+Peristiwa penting yang terjadi setelah Datu Mabrur menolong Raja Ikan Todak adalah...
+OPSI / PERNYATAAN:
+  - A. A. Raja Ikan Todak melanggar janjinya dan kembali menyerang
+  - B. B. Datu Mabrur meminta harta dan singgasana bawah laut
+  - C. C. Raja Ikan Todak berjanji akan memenuhi permintaan Datu Mabrur
+  - D. D. Datu Mabrur mengajak semua ikan menyerang kerajaan manusia
+  - E. E. Raja Ikan Todak mengangkat Datu Mabrur menjadi raja laut
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Hikayat Sa-ijaan dan Ikan Todak
+
+Hatta, ketika laut tenang, seekor ikan besar tiba-tiba muncul dari permukaan laut dan terbang menyerangnya. Tanpa beringsut dari tempat duduk maupun membuka mata, Datu Mabrur menepis serangan mendadak itu. Ikan itu terpelanting dan jatuh di karang. Setelah jatuh ke air, ikan itu menyerang lagi. Demikian berulang-ulang. Di sekeliling karang, ribuan ikan lain mengepung, memperlihatkan gigi mereka yang panjang dan tajam, seakan prajurit siap tempur. Pada serangannya yang terakhir, ikan itu terpelanting jatuh persis saat Datu Mabrur membuka matanya. “Hai, ikan! Apa maksudmu mengganggu samadiku? Ikan apa kamu?” “Aku ikan todak, Raja Ikan Todak yang menguasai perairan ini. Samadimu membuat lautan bergelora. Kami terusik, dan aku memutuskan untuk menyerangmu. Tapi, engkau memang sakti, Datu Mabrur. Aku takluk,” katanya, megap-megap. Matanya berkedip-kedip menahan sakit. Tubuhnya terjepit di sela-sela karang tajam. “Jadi, itu rakyatmu?” Datu Mabrur menunjuk ribuan ikan yang mengepung karang. “Ya, Datu. Tapi, sebelum menyerangmu tadi, kami telah bersepakat. Kalau aku kalah, kami akan menyerah dan mematuhi apa pun perintahmu.” “Datu, tolonglah aku. Obati luka-lukaku dan kembalikanlah aku ke laut. Kalau terlalu lama di darat, aku bisa mati. Atas nama rakyatku, aku berjanji akan mengabdi padamu, bila engkau menolongku...” Raja Ikan Todak mengiba-iba. Seolah sulit bernapas, insangnya membuka dan menutup. “Baiklah,” Datu Mabrur berdiri. “Sebagai sesama makhluk ciptaan-Nya, aku akan menolongmu.” “Apa pun permintaanmu, kami akan memenuhinya. Datu ingin istana bawah laut yang terbuat dari emas dan permata, dilayani ikan duyung dan gurita? Ingin berkeliling dunia, bersama ikan paus dan lumba-lumba?” “Tidak. Aku tak punya keinginan pribadi, tapi untuk masa depan anak-cucuku nanti....” Lalu, Datu Mabrur menceritakan maksud pertapaannya selama ini. “Akan kukerahkan rakyatku, seluruh penghuni lautan dan samudera. Sebelum matahari terbit esok pagi, impianmu akan terwujud. Aku bersumpah!” jawab Raja Ikan Todak. Datu Mabrur tak dapat membayangkan, bagaimana Raja Ikan Todak akan memenuhi sumpahnya itu. “Baiklah. Tapi kita harus membuat perjanjian. Sejak sekarang kita harus  sa-ijaan, seiring sejalan. Seia sekata, sampai ke anak-cucu kita. Kita harus rakat mufakat, bantu membantu, bahu membahu. Setuju?” “Setuju, Datu...,” sahut Raja Ikan Todak yang tergolek lemah.
+
+Sumber: https://ebook.smkmuda.id/ebooks/cerdas-cergas-berbahasa-dan-bersastra-indonesia-untuk-sma-smk-kelas-x
+
+PERTANYAAN:
+Mengapa tindakan Raja Ikan Todak yang ingin mengerahkan rakyatnya untuk memenuhi permintaan Datu Mabrur masih relevan dengan norma sosial saat ini? Klik pada pilihan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Menggambarkan sikap balas budi terhadap orang yang telah berjasa dalam hidup kita
+  - B. Menunjukkan sikap suka menolong terhadap semua orang yang membutuhkan pertolongan
+  - C. Mencerminkan sikap pandai berterima kasih terhadap orang yang telah menolong.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pahlawan Tak Dikenal
+
+Sepuluh tahun yang lalu dia terbaring Tetapi bukan tidur, saying Sebuah lubang peluru bundar di dadanya Senyum bekunya mau berkata, kita sedang perang
+
+Dia tidak ingat bilamana dia datang Kedua lengannya memeluk senapan Dia tidak tahu untuk siapa dia datang Kemudian dia terbaring, tapi bukan tidur sayang
+
+Wajah sunyi setengah tengadah Menangkap sepi padang senja Dunia tambah beku di tengah derap dan suara merdu Dia masih sangat muda
+
+Hari itu 10 November, hujanpun mulai turun Orang-orang ingin kembali memandangnya Sambil merangkai karangan bunga Tapi yang nampak, wajah-wajahnya sendiri yang tak dikenalnya
+
+Sepuluh tahun yang lalu dia terbaring Tetapi bukan tidur, sayang Sebuah peluru bundar di dadanya Senyum bekunya mau berkata: aku sangat muda.
+
+Karya: Toto Sudarto Bachtiar
+
+PERTANYAAN:
+Mengapa larik “Dia tidak tahu untuk siapa dia datang” sudah tepat menguatkan gambaran tentang pahlawan?
+OPSI / PERNYATAAN:
+  - A. A. Latar belakang daerah tidaklah penting untuk menjadi pahlawan
+  - B. B. Seorang pejuang tidak memerlukan bantuan dari pihak mana pun
+  - C. C. Pengorbanan dilakukan untuk tanah air bukan untuk orang tertentu
+  - D. D. Figur pejuang sering kali tidak dihargai oleh generasi muda saat ini
+  - E. E. Gambaran ketidaktahuan kita dalam menghormati seorang pahlawan
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pahlawan Tak Dikenal
+
+Sepuluh tahun yang lalu dia terbaring Tetapi bukan tidur, saying Sebuah lubang peluru bundar di dadanya Senyum bekunya mau berkata, kita sedang perang
+
+Dia tidak ingat bilamana dia datang Kedua lengannya memeluk senapan Dia tidak tahu untuk siapa dia datang Kemudian dia terbaring, tapi bukan tidur sayang
+
+Wajah sunyi setengah tengadah Menangkap sepi padang senja Dunia tambah beku di tengah derap dan suara merdu Dia masih sangat muda
+
+Hari itu 10 November, hujanpun mulai turun Orang-orang ingin kembali memandangnya Sambil merangkai karangan bunga Tapi yang nampak, wajah-wajahnya sendiri yang tak dikenalnya
+
+Sepuluh tahun yang lalu dia terbaring Tetapi bukan tidur, sayang Sebuah peluru bundar di dadanya Senyum bekunya mau berkata: aku sangat muda.
+
+Karya: Toto Sudarto Bachtiar
+
+PERTANYAAN:
+Mengapa penyair menggunakan majas repetisi (pengulangan) pada bait awal dan akhir puisinya? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Menguatkan gambaran tentang pahlawan yang tewas tertembak
+  - B. B. Menguatkan tentang adanya perjuangan di Batavia pada masa itu
+  - C. C. Menegaskan tentang adanya pahlawan yang gugur demi tanah air
+  - D. D. Menggambarkan kondisi peperangan yang pecah pada masa itu
+  - E. E. Mengisyaratkan pengorbanan pahlawan yang tewas tanpa tanda jasa
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pahlawan Tak Dikenal
+
+Sepuluh tahun yang lalu dia terbaring Tetapi bukan tidur, saying Sebuah lubang peluru bundar di dadanya Senyum bekunya mau berkata, kita sedang perang
+
+Dia tidak ingat bilamana dia datang Kedua lengannya memeluk senapan Dia tidak tahu untuk siapa dia datang Kemudian dia terbaring, tapi bukan tidur sayang
+
+Wajah sunyi setengah tengadah Menangkap sepi padang senja Dunia tambah beku di tengah derap dan suara merdu Dia masih sangat muda
+
+Hari itu 10 November, hujanpun mulai turun Orang-orang ingin kembali memandangnya Sambil merangkai karangan bunga Tapi yang nampak, wajah-wajahnya sendiri yang tak dikenalnya
+
+Sepuluh tahun yang lalu dia terbaring Tetapi bukan tidur, sayang Sebuah peluru bundar di dadanya Senyum bekunya mau berkata: aku sangat muda.
+
+Karya: Toto Sudarto Bachtiar
+
+PERTANYAAN:
+Makna simbolik pada larik “Sambil merangkai karangan bunga” pada puisi tersebut adalah …
+OPSI / PERNYATAAN:
+  - A. A. Menyusun bunga untuk orang yang dicintai
+  - B. B. Menghormati jasa para pahlawan yang gugur
+  - C. C. Menaruh hormat pada setiap orang yang ditemui
+  - D. D. Menghargai nilai keindahan yang ada pada bunga
+  - E. E. Menata beberapa tangkai bunga untuk pahlawan
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Metode Bercocok Tanam di Lahan Sempit
+
+Urbanisasi yang terjadi secara masif menimbulkan berbagai tantangan serius, terutama dalam hal penyediaan pangan dan keterbatasan lahan. Seiring dengan pertumbuhan populasi yang pesat, kebutuhan akan makanan segar meningkat, sementara lahan perkotaan semakin sempit karena dialokasikan untuk pembangunan infrastruktur, perumahan, dan fasilitas publik. Situasi ini menyebabkan ketergantungan tinggi pada pasokan dari luar kota yang rentan terhadap gangguan distribusi dan peningkatan biaya. Kondisi ini menuntut adanya inovasi dalam sistem produksi pangan agar kebutuhan masyarakat tetap terpenuhi. Perlu metode bercocok tanam yang dapat diterapkan di dalam ruang terbatas. Inovasi metode bercocok tanam yang dapat mengatasi keterbatasan lahan di kota besar, yaitu pertanian vertikal. Metode ini dilakukan dengan menyusun tanaman dalam rak-rak bertingkat di lingkungan yang terkontrol. Metode ini memanfaatkan teknologi modern seperti hidroponik, aeroponik, dan pencahayaan LED. Sistem ini memungkinkan produksi pangan dilakukan dalam ruang terbatas secara efisien sehingga sangat cocok diterapkan di wilayah perkotaan. Selain menghemat lahan, pertanian vertikal juga dapat mengurangi penggunaan air, pestisida, serta tidak tergantung pada musim. Namun demikian, pengembangan pertanian vertikal masih menghadapi sejumlah tantangan. Biaya awal pembangunan fasilitas ini tergolong tinggi karena membutuhkan peralatan canggih seperti sistem irigasi otomatis, kontrol suhu, dan pencahayaan khusus. Selain itu, konsumsi energi yang tinggi menjadi isu penting, meskipun teknologi energi terbarukan seperti panel surya mulai digunakan untuk mengatasi hal ini. Indonesia sebagai negara dengan jumlah penduduk yang besar dan tingkat urbanisasi yang terus meningkat memiliki potensi dalam pengembangan pertanian vertikal. Kota-kota besar seperti Jakarta, Surabaya, dan Bandung menghadapi tekanan besar dalam pemenuhan kebutuhan pangan masyarakatnya. Pertanian vertikal bukan hanya sekadar solusi teknis, melainkan juga mencerminkan perubahan cara pandang dalam memproduksi pangan secara berkelanjutan. Dengan dukungan teknologi dan kreativitas, pertanian vertikal dapat menjadi jalan menuju masa depan yang lebih tangguh dalam menghadapi tantangan urbanisasi dan krisis pangan global.
+
+Referensi https://radarmukomuko.bacakoran.co/read/10342/inovasi-pertanian-vertikal-masa-depan-ketahanan-pangan-di-kota-besar https://kumparan.com/anggia-tifany/urban-farming-dan-pertanian-vertikal-sebagai-inovasi-pangan-23xGcZIcMaU/4
+
+PERTANYAAN:
+Setelah memahami fenomena dalam teks, bagaimana kalimat yang tepat untuk menyampaikan pemecahan masalah?
+OPSI / PERNYATAAN:
+  - A. A. Meningkatnya urbanisasi harus dibiarkan agar masyarakat kota terbiasa dengan keterbatasan pangan.
+  - B. B. Ketergantungan kota pada pasokan luar dapat dikurangi dengan menerapkan pertanian vertikal di ruang terbatas.
+  - C. C. Krisis pangan di kota besar tidak perlu dikhawatirkan karena dapat diatasi dengan menambah impor bahan pangan.
+  - D. D. Pembangunan kota harus diutamakan dibanding penyediaan ruang untuk pertanian atau tanaman pangan.
+  - E. E. Penduduk kota harus dibiasakan untuk mengurangi konsumsi makanan segar dan beralih ke makanan instan.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Metode Bercocok Tanam di Lahan Sempit
+
+Urbanisasi yang terjadi secara masif menimbulkan berbagai tantangan serius, terutama dalam hal penyediaan pangan dan keterbatasan lahan. Seiring dengan pertumbuhan populasi yang pesat, kebutuhan akan makanan segar meningkat, sementara lahan perkotaan semakin sempit karena dialokasikan untuk pembangunan infrastruktur, perumahan, dan fasilitas publik. Situasi ini menyebabkan ketergantungan tinggi pada pasokan dari luar kota yang rentan terhadap gangguan distribusi dan peningkatan biaya. Kondisi ini menuntut adanya inovasi dalam sistem produksi pangan agar kebutuhan masyarakat tetap terpenuhi. Perlu metode bercocok tanam yang dapat diterapkan di dalam ruang terbatas. Inovasi metode bercocok tanam yang dapat mengatasi keterbatasan lahan di kota besar, yaitu pertanian vertikal. Metode ini dilakukan dengan menyusun tanaman dalam rak-rak bertingkat di lingkungan yang terkontrol. Metode ini memanfaatkan teknologi modern seperti hidroponik, aeroponik, dan pencahayaan LED. Sistem ini memungkinkan produksi pangan dilakukan dalam ruang terbatas secara efisien sehingga sangat cocok diterapkan di wilayah perkotaan. Selain menghemat lahan, pertanian vertikal juga dapat mengurangi penggunaan air, pestisida, serta tidak tergantung pada musim. Namun demikian, pengembangan pertanian vertikal masih menghadapi sejumlah tantangan. Biaya awal pembangunan fasilitas ini tergolong tinggi karena membutuhkan peralatan canggih seperti sistem irigasi otomatis, kontrol suhu, dan pencahayaan khusus. Selain itu, konsumsi energi yang tinggi menjadi isu penting, meskipun teknologi energi terbarukan seperti panel surya mulai digunakan untuk mengatasi hal ini. Indonesia sebagai negara dengan jumlah penduduk yang besar dan tingkat urbanisasi yang terus meningkat memiliki potensi dalam pengembangan pertanian vertikal. Kota-kota besar seperti Jakarta, Surabaya, dan Bandung menghadapi tekanan besar dalam pemenuhan kebutuhan pangan masyarakatnya. Pertanian vertikal bukan hanya sekadar solusi teknis, melainkan juga mencerminkan perubahan cara pandang dalam memproduksi pangan secara berkelanjutan. Dengan dukungan teknologi dan kreativitas, pertanian vertikal dapat menjadi jalan menuju masa depan yang lebih tangguh dalam menghadapi tantangan urbanisasi dan krisis pangan global.
+
+Referensi https://radarmukomuko.bacakoran.co/read/10342/inovasi-pertanian-vertikal-masa-depan-ketahanan-pangan-di-kota-besar https://kumparan.com/anggia-tifany/urban-farming-dan-pertanian-vertikal-sebagai-inovasi-pangan-23xGcZIcMaU/4
+
+PERTANYAAN:
+Cermati paragraf 1 kalimat 1! Mengapa frasa “urbanisasi yang terjadi secara masif” tepat sebagai pengisi fungsi subjek?
+OPSI / PERNYATAAN:
+  - A. A. Menyatakan akibat dari suatu peristiwa
+  - B. B. Berbentuk verba yang menempati posisi predikat
+  - C. C. Merupakan frasa kerja yang menjelaskan objek
+  - D. D. Berbentuk frasa nomina dan berperan sebagai pelaku
+  - E. E. Mengandung keterangan tempat yang lengkap
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Metode Bercocok Tanam di Lahan Sempit
+
+Urbanisasi yang terjadi secara masif menimbulkan berbagai tantangan serius, terutama dalam hal penyediaan pangan dan keterbatasan lahan. Seiring dengan pertumbuhan populasi yang pesat, kebutuhan akan makanan segar meningkat, sementara lahan perkotaan semakin sempit karena dialokasikan untuk pembangunan infrastruktur, perumahan, dan fasilitas publik. Situasi ini menyebabkan ketergantungan tinggi pada pasokan dari luar kota yang rentan terhadap gangguan distribusi dan peningkatan biaya. Kondisi ini menuntut adanya inovasi dalam sistem produksi pangan agar kebutuhan masyarakat tetap terpenuhi. Perlu metode bercocok tanam yang dapat diterapkan di dalam ruang terbatas. Inovasi metode bercocok tanam yang dapat mengatasi keterbatasan lahan di kota besar, yaitu pertanian vertikal. Metode ini dilakukan dengan menyusun tanaman dalam rak-rak bertingkat di lingkungan yang terkontrol. Metode ini memanfaatkan teknologi modern seperti hidroponik, aeroponik, dan pencahayaan LED. Sistem ini memungkinkan produksi pangan dilakukan dalam ruang terbatas secara efisien sehingga sangat cocok diterapkan di wilayah perkotaan. Selain menghemat lahan, pertanian vertikal juga dapat mengurangi penggunaan air, pestisida, serta tidak tergantung pada musim. Namun demikian, pengembangan pertanian vertikal masih menghadapi sejumlah tantangan. Biaya awal pembangunan fasilitas ini tergolong tinggi karena membutuhkan peralatan canggih seperti sistem irigasi otomatis, kontrol suhu, dan pencahayaan khusus. Selain itu, konsumsi energi yang tinggi menjadi isu penting, meskipun teknologi energi terbarukan seperti panel surya mulai digunakan untuk mengatasi hal ini. Indonesia sebagai negara dengan jumlah penduduk yang besar dan tingkat urbanisasi yang terus meningkat memiliki potensi dalam pengembangan pertanian vertikal. Kota-kota besar seperti Jakarta, Surabaya, dan Bandung menghadapi tekanan besar dalam pemenuhan kebutuhan pangan masyarakatnya. Pertanian vertikal bukan hanya sekadar solusi teknis, melainkan juga mencerminkan perubahan cara pandang dalam memproduksi pangan secara berkelanjutan. Dengan dukungan teknologi dan kreativitas, pertanian vertikal dapat menjadi jalan menuju masa depan yang lebih tangguh dalam menghadapi tantangan urbanisasi dan krisis pangan global.
+
+Referensi https://radarmukomuko.bacakoran.co/read/10342/inovasi-pertanian-vertikal-masa-depan-ketahanan-pangan-di-kota-besar https://kumparan.com/anggia-tifany/urban-farming-dan-pertanian-vertikal-sebagai-inovasi-pangan-23xGcZIcMaU/4
+
+PERTANYAAN:
+Mengapa penggunaan istilah “urbanisasi” tepat digunakan dalam teks tersebut? Klik pada setiap pernyataan yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Berhubungan dengan peningkatan jumlah penduduk di wilayah perkotaan
+  - B. B. Menunjukkan metode pertanian modern yang cocok diterapkan di kota
+  - C. C. Menyebabkan tantangan serius dalam penyediaan pangan di kota
+  - D. D. Menjadi pemicu perlu adanya inovasi, seperti pertanian vertikal
+  - E. E. Menjelaskan cara pendistribusian hasil pangan dari desa ke kota
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Beranjak dari Kemiskinan
+
+Sejauh mana masyarakat bisa memenuhi hak-hak dasar dan mengakses sumber daya? Kedua hal itu berkaitan dengan kemiskinan dan ketimpangan. Menurut Badan Pusat Statistik (BPS), nilai rasio Gini, yang berkaitan dengan ketimpangan pengeluaran, berkisar 0-1. Nilai 0 artinya setiap orang atau kelompok menerima pendapatan yang sama. Adapun rasio Gini 1 artinya ketimpangan pendapatan timpang sempurna atau pendapatan hanya diterima satu orang atau kelompok. Rasio Gini mendekati 1 menunjukkan kondisi yang kian timpang. Di Indonesia, rasio Gini pada tahun 2024 sebesar 0,381. Berikut tabel yang menjelaskan angka kemiskinan di Indonesia dalam 5 tahun terakhir.
+
+Seseorang dikatakan miskin jika pengeluaran per kapita per bulan di bawah garis kemiskinan. Garis kemiskinan berupa nilai pengeluaran minimal, yang terdiri dari kebutuhan makanan dan bukan makanan, yang harus dipenuhi agar tidak dikategorikan miskin. Pada September 2024, garis kemiskinan Rp595.242,00 per kapita per bulan. Sementara menurut Bank Dunia, garis kemiskinan bagi negara berpendapatan menengah ke atas adalah 6,85 dollar AS per kapita per hari. Dengan nilai tukar Rp15.000,00 per dollar AS, nilai tersebut setara Rp102.750,00. Adapun garis kemiskinan ekstrem 2,15 dollar AS per kapita per hari atau Rp32.250,00. Di perkotaan dan perdesaan Indonesia, beras berkontribusi 20-an persen terhadap garis kemiskinan atau sebagai komoditas yang berperan paling besar. Maka, harga beras berpengaruh signifikan terhadap kemampuan masyarakat membeli kebutuhan makanan dan bukan makanan. Harga kebutuhan makanan dan bukan makanan memengaruhi kemampuan masyarakat membeli barang. Di sisi lain, pendapatan yang tiba-tiba hilang akibat pemutusan hubungan kerja mengakibatkan masyarakat tak mampu memenuhi kebutuhan hidup. Tanpa tabungan dan aset memadai, masyarakat yang kehilangan pekerjaan bisa jatuh miskin. Negara mana pun, termasuk Indonesia, berupaya menekan kemiskinan. Indonesia sudah memiliki Badan Percepatan Pengentasan Kemiskinan. Langkah awal adalah membentuk protokol data tunggal sebagai basis berbagai program untuk menekan angka kemiskinan. Keberadaan data ini diharapkan mendukung target menekan angka kemiskinan menjadi 4,5-5 persen dari jumlah penduduk. Meski demikian, bantuan sosial saja tak cukup untuk membuat kemiskinan menjauh. Data BPS menunjukkan bahwa meskipun bantuan sosial terus digulirkan dalam lima tahun terakhir, jumlah penduduk miskin tetap tinggi, yakni mencapai 24,06 juta jiwa pada 2024. Bahkan, sebagian besar penerima bantuan sosial masih berada dalam kategori miskin setelah lebih dari tiga tahun mendapatkan bantuan. Penurunan jumlah penduduk miskin dari tahun ke tahun relatif lambat dan tidak cukup signifikan tanpa dukungan akses terhadap sumber daya produktif. Akses terhadap sumber daya, antara lain fasilitas pendidikan dan kesehatan, juga harus terjamin. Selain itu, tersedia lapangan kerja yang memberikan pendapatan layak bagi masyarakat.
+
+Sumber: https://www.kompas.id/artikel/beranjak-dari-kemiskinan?utm_source=link&utm_medium=shared&utm_campaign=tpd_-_android_traffic (dengan pengubahan seperlunya)
+[Konteks Visual Gambar 28323_eee29eee6e62872dcd5c64473c0ade4b.png]:
+Berikut adalah transkripsi data tabel pada gambar:
+
+### **Tabel Angka Kemiskinan di Indonesia dalam 5 Tahun Terakhir**
+
+| Tahun | Jumlah Penduduk Miskin | Persentase Penduduk Miskin |
+| :---: | :---: | :---: |
+| 2020 | 27,55 juta | 10,19 % |
+| 2021 | 26,50 juta | 9,71 % |
+| 2022 | 26,35 juta | 9,57 % |
+| 2023 | 25,90 juta | 9,36 % |
+| 2024 | 24,06 juta | 8,57 % |
+PERTANYAAN:
+Perhatikan kalimat berikut! Agar sejahtera, masyarakat mesti melepaskan dari kemiskinan. Mengapa konstruksi frasa verba "mesti melepaskan" tidak sesuai dengan konteks kalimat tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Kata melepaskan merupakan verba transitif yang memerlukan objek langsung
+  - B. B. Seharusnya kata mesti tidak perlu digunakan dalam konstruksi frasa tersebut
+  - C. C. Frasa mesti melepaskan bukanlah frasa verba karena memiliki inti nomina
+  - D. D. Frasa mesti melepaskan bukanlah frasa verba tidak hanya menduduki satu fungsi
+  - E. E. Kata melepaskan sudah tepat penggunaannya tanpa perlu tambahan objek
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Beranjak dari Kemiskinan
+
+Sejauh mana masyarakat bisa memenuhi hak-hak dasar dan mengakses sumber daya? Kedua hal itu berkaitan dengan kemiskinan dan ketimpangan. Menurut Badan Pusat Statistik (BPS), nilai rasio Gini, yang berkaitan dengan ketimpangan pengeluaran, berkisar 0-1. Nilai 0 artinya setiap orang atau kelompok menerima pendapatan yang sama. Adapun rasio Gini 1 artinya ketimpangan pendapatan timpang sempurna atau pendapatan hanya diterima satu orang atau kelompok. Rasio Gini mendekati 1 menunjukkan kondisi yang kian timpang. Di Indonesia, rasio Gini pada tahun 2024 sebesar 0,381. Berikut tabel yang menjelaskan angka kemiskinan di Indonesia dalam 5 tahun terakhir.
+
+Seseorang dikatakan miskin jika pengeluaran per kapita per bulan di bawah garis kemiskinan. Garis kemiskinan berupa nilai pengeluaran minimal, yang terdiri dari kebutuhan makanan dan bukan makanan, yang harus dipenuhi agar tidak dikategorikan miskin. Pada September 2024, garis kemiskinan Rp595.242,00 per kapita per bulan. Sementara menurut Bank Dunia, garis kemiskinan bagi negara berpendapatan menengah ke atas adalah 6,85 dollar AS per kapita per hari. Dengan nilai tukar Rp15.000,00 per dollar AS, nilai tersebut setara Rp102.750,00. Adapun garis kemiskinan ekstrem 2,15 dollar AS per kapita per hari atau Rp32.250,00. Di perkotaan dan perdesaan Indonesia, beras berkontribusi 20-an persen terhadap garis kemiskinan atau sebagai komoditas yang berperan paling besar. Maka, harga beras berpengaruh signifikan terhadap kemampuan masyarakat membeli kebutuhan makanan dan bukan makanan. Harga kebutuhan makanan dan bukan makanan memengaruhi kemampuan masyarakat membeli barang. Di sisi lain, pendapatan yang tiba-tiba hilang akibat pemutusan hubungan kerja mengakibatkan masyarakat tak mampu memenuhi kebutuhan hidup. Tanpa tabungan dan aset memadai, masyarakat yang kehilangan pekerjaan bisa jatuh miskin. Negara mana pun, termasuk Indonesia, berupaya menekan kemiskinan. Indonesia sudah memiliki Badan Percepatan Pengentasan Kemiskinan. Langkah awal adalah membentuk protokol data tunggal sebagai basis berbagai program untuk menekan angka kemiskinan. Keberadaan data ini diharapkan mendukung target menekan angka kemiskinan menjadi 4,5-5 persen dari jumlah penduduk. Meski demikian, bantuan sosial saja tak cukup untuk membuat kemiskinan menjauh. Data BPS menunjukkan bahwa meskipun bantuan sosial terus digulirkan dalam lima tahun terakhir, jumlah penduduk miskin tetap tinggi, yakni mencapai 24,06 juta jiwa pada 2024. Bahkan, sebagian besar penerima bantuan sosial masih berada dalam kategori miskin setelah lebih dari tiga tahun mendapatkan bantuan. Penurunan jumlah penduduk miskin dari tahun ke tahun relatif lambat dan tidak cukup signifikan tanpa dukungan akses terhadap sumber daya produktif. Akses terhadap sumber daya, antara lain fasilitas pendidikan dan kesehatan, juga harus terjamin. Selain itu, tersedia lapangan kerja yang memberikan pendapatan layak bagi masyarakat.
+
+Sumber: https://www.kompas.id/artikel/beranjak-dari-kemiskinan?utm_source=link&utm_medium=shared&utm_campaign=tpd_-_android_traffic (dengan pengubahan seperlunya)
+[Konteks Visual Gambar 26003_13652959ca72be72640b9a9755a53ee1.png]:
+Berikut adalah transkripsi data dari gambar dalam bentuk Markdown Table:
+
+### **Tabel Angka Kemiskinan di Indonesia dalam 5 Tahun Terakhir**
+
+| Tahun | Jumlah Penduduk Miskin | Persentase Penduduk Miskin |
+| :---: | :---: | :---: |
+| 2020 | 27,55 juta | 10,19 % |
+| 2021 | 26,50 juta | 9,71 % |
+| 2022 | 26,35 juta | 9,57 % |
+| 2023 | 25,90 juta | 9,36 % |
+| 2024 | 24,06 juta | 8,57 % |
+PERTANYAAN:
+Pernyataan paling tepat berdasarkan informasi tabel dalam teks tersebut adalah...
+OPSI / PERNYATAAN:
+  - A. A. Jumlah penduduk miskin di Indonesia terus mengalami peningkatan sejak tahun 2020 hingga tahun 2024.
+  - B. B. Persentase penduduk miskin tertinggi terjadi pada tahun 2022, yaitu sebesar 9,57% dari tahun sebelumnya.
+  - C. C. Penurunan jumlah penduduk miskin paling besar terjadi antara tahun 2023 dan 2024, yaitu sebesar 1,84 juta jiwa.
+  - D. D. Jumlah penduduk miskin pada tahun 2021 lebih tinggi dibandingkan tahun 2020, yaitu 26,50 juta jiwa.
+  - E. E. Jumlah penduduk miskin pada tahun 2022 mengalami peningkatan sebesar 1,35 juta jiwa dibandingkan tahun 2020.
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Beranjak dari Kemiskinan
+
+Sejauh mana masyarakat bisa memenuhi hak-hak dasar dan mengakses sumber daya? Kedua hal itu berkaitan dengan kemiskinan dan ketimpangan. Menurut Badan Pusat Statistik (BPS), nilai rasio Gini, yang berkaitan dengan ketimpangan pengeluaran, berkisar 0-1. Nilai 0 artinya setiap orang atau kelompok menerima pendapatan yang sama. Adapun rasio Gini 1 artinya ketimpangan pendapatan timpang sempurna atau pendapatan hanya diterima satu orang atau kelompok. Rasio Gini mendekati 1 menunjukkan kondisi yang kian timpang. Di Indonesia, rasio Gini pada tahun 2024 sebesar 0,381. Berikut tabel yang menjelaskan angka kemiskinan di Indonesia dalam 5 tahun terakhir.
+
+Seseorang dikatakan miskin jika pengeluaran per kapita per bulan di bawah garis kemiskinan. Garis kemiskinan berupa nilai pengeluaran minimal, yang terdiri dari kebutuhan makanan dan bukan makanan, yang harus dipenuhi agar tidak dikategorikan miskin. Pada September 2024, garis kemiskinan Rp595.242,00 per kapita per bulan. Sementara menurut Bank Dunia, garis kemiskinan bagi negara berpendapatan menengah ke atas adalah 6,85 dollar AS per kapita per hari. Dengan nilai tukar Rp15.000,00 per dollar AS, nilai tersebut setara Rp102.750,00. Adapun garis kemiskinan ekstrem 2,15 dollar AS per kapita per hari atau Rp32.250,00. Di perkotaan dan perdesaan Indonesia, beras berkontribusi 20-an persen terhadap garis kemiskinan atau sebagai komoditas yang berperan paling besar. Maka, harga beras berpengaruh signifikan terhadap kemampuan masyarakat membeli kebutuhan makanan dan bukan makanan. Harga kebutuhan makanan dan bukan makanan memengaruhi kemampuan masyarakat membeli barang. Di sisi lain, pendapatan yang tiba-tiba hilang akibat pemutusan hubungan kerja mengakibatkan masyarakat tak mampu memenuhi kebutuhan hidup. Tanpa tabungan dan aset memadai, masyarakat yang kehilangan pekerjaan bisa jatuh miskin. Negara mana pun, termasuk Indonesia, berupaya menekan kemiskinan. Indonesia sudah memiliki Badan Percepatan Pengentasan Kemiskinan. Langkah awal adalah membentuk protokol data tunggal sebagai basis berbagai program untuk menekan angka kemiskinan. Keberadaan data ini diharapkan mendukung target menekan angka kemiskinan menjadi 4,5-5 persen dari jumlah penduduk. Meski demikian, bantuan sosial saja tak cukup untuk membuat kemiskinan menjauh. Data BPS menunjukkan bahwa meskipun bantuan sosial terus digulirkan dalam lima tahun terakhir, jumlah penduduk miskin tetap tinggi, yakni mencapai 24,06 juta jiwa pada 2024. Bahkan, sebagian besar penerima bantuan sosial masih berada dalam kategori miskin setelah lebih dari tiga tahun mendapatkan bantuan. Penurunan jumlah penduduk miskin dari tahun ke tahun relatif lambat dan tidak cukup signifikan tanpa dukungan akses terhadap sumber daya produktif. Akses terhadap sumber daya, antara lain fasilitas pendidikan dan kesehatan, juga harus terjamin. Selain itu, tersedia lapangan kerja yang memberikan pendapatan layak bagi masyarakat.
+
+Sumber: https://www.kompas.id/artikel/beranjak-dari-kemiskinan?utm_source=link&utm_medium=shared&utm_campaign=tpd_-_android_traffic (dengan pengubahan seperlunya)
+[Konteks Visual Gambar 97995_eee29eee6e62872dcd5c64473c0ade4b.png]:
+Berikut adalah transkripsi data tabel dari gambar:
+
+### **Tabel Angka Kemiskinan di Indonesia dalam 5 Tahun Terakhir**
+
+| Tahun | Jumlah Penduduk Miskin | Persentase Penduduk Miskin |
+| :---: | :---: | :---: |
+| 2020 | 27,55 juta | 10,19 % |
+| 2021 | 26,50 juta | 9,71 % |
+| 2022 | 26,35 juta | 9,57 % |
+| 2023 | 25,90 juta | 9,36 % |
+| 2024 | 24,06 juta | 8,57 % |
+PERTANYAAN:
+Perhatikan kalimat berikut! Meski demikian, bantuan sosial saja tak cukup untuk membuat kemiskinan menjauh. Mengapa kalimat argumentasi tersebut sesuai dengan data yang diberikan penulis dalam teks? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Bantuan sosial belum mampu menurunkan angka kemiskinan secara signifikan
+  - B. B. Bantuan sosial yang diberikan tidak menyentuh akar persoalan kemiskinan
+  - C. C. Bantuan sosial harus dikombinasikan dengan pendidikan dan pemberdayaan ekonomi
+  - D. D. Bantuan sosial menciptakan ketergantungan yang justru memperpanjang kemiskinan
+  - E. E. Bantuan sosial membuat masyarakat memiliki kemandirian untuk lepas dari kemiskinan
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Batik, Pakaian Resmi, dan Aspek Keberlanjutan
+
+Fenomena menarik terjadi saat penyelenggaraan Research and Development 20 Summer School 2024 tentang transisi energi. Peserta dari negara empat musim tampak kedinginan di ballroom hotel meskipun berasal dari negara dingin. Hal ini terjadi karena ketidaksesuaian antara pengaturan suhu ruangan dengan pakaian yang dikenakan. Dalam konsep kenyamanan termal, pakaian menjadi salah satu faktor penting. Menurut ASHRAE, pakaian dengan nilai clo rendah tidak cocok untuk suhu ruang yang disetel dingin. Di negara tropis, pengaturan suhu yang terlalu rendah dapat menyebabkan pemborosan energi. Hal ini terjadi karena biasanya orang-orang memakai pakaian tebal, seperti jas. Ironisnya, budaya berpakaian formal di Indonesia masih mengandalkan jas sebagai standar, padahal penggunaan jas kurang sesuai dengan iklim tropis. Batik telah diakui UNESCO sebagai Warisan Budaya Tak Benda bisa menjadi solusi elegan sekaligus ramah lingkungan. Batik memiliki bahan dan corak yang lebih sesuai dengan suhu tropis. Selain itu, penggunaan batik juga dapat mendukung efisiensi energi dan tidak menuntut suhu ruangan yang terlalu rendah. Penyesuaian ini bukan hanya tentang kenyamanan dalam mengenakan pakaian, melainkan juga tentang keberlanjutan. Penurunan suhu ruangan satu derajat celcius bisa menghasilkan emisi 160 kg CO 2 per tahun. Bayangkan dampaknya jika diterapkan di hotel atau gedung perkantoran. Setiap lembar batik yang dikenakan menghidupi pengrajin, pelestari budaya, dan sektor UMKM kreatif. Bagi industri lokal, penggunaan batik secara luas dapat menjadi dorongan agar berkembang lebih pesat. Pemerintah dapat mendorong perubahan ini dengan menetapkan kebijakan yang memprioritaskan batik dalam acara resmi. Lembaga pendidikan dan instansi pemerintah juga bisa menjadi pelopor gerakan batik harian. Selain efisiensi energi, langkah ini juga memperkuat identitas nasional. Budaya bisa menjadi solusi atas krisis global, termasuk krisis iklim. Batik bukan sekadar pakaian, tetapi pernyataan sikap atas masa depan yang lestari. Sudah saatnya, Indonesia menetapkan batik sebagai pakaian resmi dalam berbagai forum formal. Bahkan, batik akan lebih kuat jika digunakan dalam acara pelantikan, bukan jas. Hal ini akan menjadi simbol kuat keberlanjutan sekaligus kebanggaan nasional. Dengan memilih batik, kita tidak hanya melestarikan budaya, tetapi juga mengambil langkah konkret dalam menjaga bumi bagi generasi mendatang.
+
+Glosarium: ASHRAE: The American Society of Heating, Refrigerating and Air-Conditioning Engineers clo: satuan yang digunakan untuk mengukur termal yang diberikan oleh pakaian.
+
+PERTANYAAN:
+Berdasarkan teks tersebut, manakah tanggapan yang sesuai dengan norma sosial dan budaya?
+OPSI / PERNYATAAN:
+  - A. A. Sudah saatnya Indonesia menetapkan batik sebagai pakaian resmi dalam berbagai forum formal.
+  - B. B. Penurunan suhu ruangan satu derajat celcius bisa menghasilkan emisi 160 kg CO 2 per tahun.
+  - C. C. Di negara tropis, pengaturan suhu yang terlalu rendah dapat menyebabkan pemborosan energi.
+  - D. D. Menurut ASHRAE, pakaian dengan nilai clo rendah tidak cocok untuk suhu ruang yang disetel dingin.
+  - E. E. Peserta dari negara empat musim kedinginan di ballroom hotel, meskipun berasal dari negara dingin.
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Batik, Pakaian Resmi, dan Aspek Keberlanjutan
+
+Fenomena menarik terjadi saat penyelenggaraan Research and Development 20 Summer School 2024 tentang transisi energi. Peserta dari negara empat musim tampak kedinginan di  ballroom  hotel meskipun berasal dari negara dingin. Hal ini terjadi karena ketidaksesuaian antara pengaturan suhu ruangan dengan pakaian yang dikenakan. Dalam konsep kenyamanan termal, pakaian menjadi salah satu faktor penting. Menurut ASHRAE, pakaian dengan nilai  clo  rendah tidak cocok untuk suhu ruang yang disetel dingin. Di negara tropis, pengaturan suhu yang terlalu rendah dapat menyebabkan pemborosan energi. Hal ini terjadi karena biasanya orang-orang memakai pakaian tebal, seperti jas. Ironisnya, budaya berpakaian formal di Indonesia masih mengandalkan jas sebagai standar, padahal penggunaan jas kurang sesuai dengan iklim tropis. Batik telah diakui UNESCO sebagai Warisan Budaya Tak Benda bisa menjadi solusi elegan sekaligus ramah lingkungan. Batik memiliki bahan dan corak yang lebih sesuai dengan suhu tropis. Selain itu, penggunaan batik juga dapat mendukung efisiensi energi dan tidak menuntut suhu ruangan yang terlalu rendah. Penyesuaian ini bukan hanya tentang kenyamanan dalam mengenakan pakaian, melainkan juga tentang keberlanjutan. Penurunan suhu ruangan satu derajat celcius bisa menghasilkan emisi 160 kg CO 2  per tahun. Bayangkan dampaknya jika diterapkan di hotel atau gedung perkantoran. Setiap lembar batik yang dikenakan menghidupi pengrajin, pelestari budaya, dan sektor UMKM kreatif. Bagi industri lokal, penggunaan batik secara luas dapat menjadi dorongan agar berkembang lebih pesat. Pemerintah dapat mendorong perubahan ini dengan menetapkan kebijakan yang memprioritaskan batik dalam acara resmi. Lembaga pendidikan dan instansi pemerintah juga bisa menjadi pelopor gerakan batik harian. Selain efisiensi energi, langkah ini juga memperkuat identitas nasional. Budaya bisa menjadi solusi atas krisis global, termasuk krisis iklim. Batik bukan sekadar pakaian, tetapi pernyataan sikap atas masa depan yang lestari. Sudah saatnya, Indonesia menetapkan batik sebagai pakaian resmi dalam berbagai forum formal. Bahkan, batik akan lebih kuat jika digunakan dalam acara pelantikan, bukan jas. Hal ini akan menjadi simbol kuat keberlanjutan sekaligus kebanggaan nasional. Dengan memilih batik, kita tidak hanya melestarikan budaya, tetapi juga mengambil langkah konkret dalam menjaga bumi bagi generasi mendatang.
+
+Glosarium: ASHRAE: The American Society of Heating, Refrigerating and Air-Conditioning Engineers clo  : satuan yang digunakan untuk mengukur termal yang diberikan oleh pakaian.
+
+PERTANYAAN:
+“Dengan memilih batik, kita tidak hanya melestarikan budaya, tetapi juga mengambil langkah konkret dalam menjaga Bumi bagi generasi mendatang.” Makna kalimat tersebut diperjelas melalui penggunaan unsur kalimat berupa ….
+OPSI / PERNYATAAN:
+  - A. A. penggunaan majas hiperbola untuk memberikan efek dramatis
+  - B. B. pengulangan frasa inti untuk penekanan maksud pertanyaan
+  - C. C. penempatan subjek utama di awal kalimat untuk fokus aksi
+  - D. D. penggunaan pola hubungan sebab-akibat untuk penjelasan utama
+  - E. E. penggunaan konjungsi korelatif untuk menghubungkan dua manfaat
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Batik, Pakaian Resmi, dan Aspek Keberlanjutan
+
+Fenomena menarik terjadi saat penyelenggaraan Research and Development 20 Summer School 2024 tentang transisi energi. Peserta dari negara empat musim tampak kedinginan di  ballroom  hotel meskipun berasal dari negara dingin. Hal ini terjadi karena ketidaksesuaian antara pengaturan suhu ruangan dengan pakaian yang dikenakan. Dalam konsep kenyamanan termal, pakaian menjadi salah satu faktor penting. Menurut ASHRAE, pakaian dengan nilai  clo  rendah tidak cocok untuk suhu ruang yang disetel dingin. Di negara tropis, pengaturan suhu yang terlalu rendah dapat menyebabkan pemborosan energi. Hal ini terjadi karena biasanya orang-orang memakai pakaian tebal, seperti jas. Ironisnya, budaya berpakaian formal di Indonesia masih mengandalkan jas sebagai standar, padahal penggunaan jas kurang sesuai dengan iklim tropis. Batik telah diakui UNESCO sebagai Warisan Budaya Tak Benda bisa menjadi solusi elegan sekaligus ramah lingkungan. Batik memiliki bahan dan corak yang lebih sesuai dengan suhu tropis. Selain itu, penggunaan batik juga dapat mendukung efisiensi energi dan tidak menuntut suhu ruangan yang terlalu rendah. Penyesuaian ini bukan hanya tentang kenyamanan dalam mengenakan pakaian, melainkan juga tentang keberlanjutan. Penurunan suhu ruangan satu derajat celcius bisa menghasilkan emisi 160 kg CO 2  per tahun. Bayangkan dampaknya jika diterapkan di hotel atau gedung perkantoran. Setiap lembar batik yang dikenakan menghidupi pengrajin, pelestari budaya, dan sektor UMKM kreatif. Bagi industri lokal, penggunaan batik secara luas dapat menjadi dorongan agar berkembang lebih pesat. Pemerintah dapat mendorong perubahan ini dengan menetapkan kebijakan yang memprioritaskan batik dalam acara resmi. Lembaga pendidikan dan instansi pemerintah juga bisa menjadi pelopor gerakan batik harian. Selain efisiensi energi, langkah ini juga memperkuat identitas nasional. Budaya bisa menjadi solusi atas krisis global, termasuk krisis iklim. Batik bukan sekadar pakaian, tetapi pernyataan sikap atas masa depan yang lestari. Sudah saatnya, Indonesia menetapkan batik sebagai pakaian resmi dalam berbagai forum formal. Bahkan, batik akan lebih kuat jika digunakan dalam acara pelantikan, bukan jas. Hal ini akan menjadi simbol kuat keberlanjutan sekaligus kebanggaan nasional. Dengan memilih batik, kita tidak hanya melestarikan budaya, tetapi juga mengambil langkah konkret dalam menjaga bumi bagi generasi mendatang.
+
+Glosarium: ASHRAE: The American Society of Heating, Refrigerating and Air-Conditioning Engineers clo  : satuan yang digunakan untuk mengukur termal yang diberikan oleh pakaian.
+
+PERTANYAAN:
+Manakah pernyataan berikut yang menunjukkan pandangan logis berdasarkan isi teks? Klik pada pilihan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Penggunaan pakaian ringan seperti batik dapat mengurangi kebutuhan energi untuk pendingin ruangan.
+  - B. Penggunaan jas dalam acara resmi di Indonesia perlu dipertahankan karena sudah menjadi standar formal.
+  - C. Penggunaan batik sebagai pakaian resmi hanya berdampak pada pelestarian budaya, bukan pada isu lingkungan.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Inflasi Daerah-Daerah Indonesia
+
+Kajian mengenai fenomena persistensi menjadi sangat penting untuk dilakukan dalam rangka mendukung perumusan kebijakan moneter yang efektif. Hal ini agar efektivitas kebijakan moneter dapat mendukung pertumbuhan ekonomi yang berkesinambungan dalam rangka meningkatkan kesejahteraan masyarakat. Inflasi yang tinggi akan memberikan dampak negatif terhadap perekonomian. Daya beli masyarakat menurun dan pelaku dunia usaha akan diliputi ketidakpastian yang tinggi. Implikasi dari persistensi inflasi tersebut juga akan dirasakan di tingkat daerah sehingga perlu mendapat perhatian pemerintah daerah setempat untuk dapat berperan aktif dalam mengendalikan inflasi. Kajian tersebut pada akhirnya diperlukan untuk merumuskan strategi pengendalian inflasi. Sumber tekanan inflasi yang menyebabkan persistensi inflasi perlu dianalisis secara lebih tajam sehingga dapat dibedakan sumber tekanan inflasi yang bersifat fundamental dan yang hanya bersifat sementara atau temporer. Kebijakan moneter tidak dapat digunakan sepenuhnya untuk merespon tekanan inflasi dari kejutan di sisi pasokan. Diperlukan kebijakan sektoral dan regional untuk mengurangi tekanan inflasi dari faktor-faktor nonfundamental. Beberapa studi persistensi inflasi yang telah dilakukan sebelumnya di Indonesia lebih difokuskan pada skala nasional. Inflasi nasional merupakan rata-rata tertimbang dari inflasi daerah di Indonesia, maka dirasa perlu untuk mempelajari perilaku inflasi di tingkat daerah, termasuk mengukur dan mencari penyebabnya, serta mengetahui implikasinya terhadap pengendalian inflasi daerah dengan fokus kota Jakarta. Pemilihan wilayah Jakarta didasarkan pada dominasinya terhadap bobot inflasi nasional dibandingkan dengan daerah lainnya di Indonesia. Meskipun terdapat kecenderungan yang menurun, bobot inflasi kota Jakarta masih merupakan yang terbesar di antara 66 kota yang diukur melalui Survei Biaya Hidup (SBH). Data tahun 2007 menunjukkan bahwa bobot Jakarta mencapai 22,49% dari bobot nasional (Grafik 1), menurun dari 27,66% berdasarkan SBH tahun 2002. Alasan lainnya adalah pergerakan volume distribusi barang kebutuhan pokok yang sangat tinggi di Jakarta. Selanjutnya, perilaku inflasi di Jakarta tersebut akan dibandingkan secara nasional dengan panel 10 daerah yang memiliki kontribusi inflasi tertinggi di Indonesia. Untuk menjawab tujuan penelitian, cakupan rentang waktu studi meliputi periode Januari 2000 s.d. Mei 2008 (Jakarta) dan Januari 2000 s.d. Desember 2009 (nasional). Hal ini terkait dengan ketersediaan data dari BPS hingga di level komoditinya yang dapat dilihat pada tabel berikut.
+[Konteks Visual Gambar 30082_1029b149611b2b89ae864866c7edcb6c.png]:
+Berikut adalah ekstrak data dari tabel pada gambar:
+
+### **Tabel Bobot Inflasi Kota Menurut SBH 200**
+
+| Wilayah | Bobot Inflasi (%) |
+| :--- | :---: |
+| Jakarta | $22,49$ |
+| Surabaya | $6,47$ |
+| Semarang | $3,48$ |
+| Makassar | $2,56$ |
+| Palembang | $2,96$ |
+| Padang | $1,69$ |
+| Banjarmasin | $1,54$ |
+| Denpasar | $1,53$ |
+| Gabungan 56 Kota Lainnya | $47,23$ |
+PERTANYAAN:
+Frasa “tekanan inflasi dari kejutan di sisi pasokan” merupakan frasa yang kompleks. Manakah analisis konstruksi frasa yang paling tepat untuk frasa tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Frasa "tekanan inflasi" merupakan frasa nomina, sedangkan frasa "dari kejutan" dan "di sisi pasokan" merupakan frasa pronomina.
+  - B. B. Frasa "tekanan inflasi" merupakan frasa nomina, sedangkan frasa "dari kejutan" dan "di sisi pasokan" merupakan frasa preposisional.
+  - C. C. Frasa "tekanan inflasi" merupakan frasa pronomina, sedangkan frasa "dari kejutan" dan "di sisi pasokan" merupakan frasa preposisional.
+  - D. D. Frasa "tekanan inflasi" merupakan frasa preposisional, sedangkan frasa "dari kejutan" dan "di sisi pasokan" merupakan frasa preposisional.
+  - E. E. Frasa "tekanan inflasi" merupakan frasa verba, sedangkan frasa "dari kejutan" dan "di sisi pasokan" merupakan frasa preposisional.
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Inflasi Daerah-Daerah Indonesia
+
+Kajian mengenai fenomena persistensi menjadi sangat penting untuk dilakukan dalam rangka mendukung perumusan kebijakan moneter yang efektif. Hal ini agar efektivitas kebijakan moneter dapat mendukung pertumbuhan ekonomi yang berkesinambungan dalam rangka meningkatkan kesejahteraan masyarakat. Inflasi yang tinggi akan memberikan dampak negatif terhadap perekonomian. Daya beli masyarakat menurun dan pelaku dunia usaha akan diliputi ketidakpastian yang tinggi. Implikasi dari persistensi inflasi tersebut juga akan dirasakan di tingkat daerah sehingga perlu mendapat perhatian pemerintah daerah setempat untuk dapat berperan aktif dalam mengendalikan inflasi. Kajian tersebut pada akhirnya diperlukan untuk merumuskan strategi pengendalian inflasi. Sumber tekanan inflasi yang menyebabkan persistensi inflasi perlu dianalisis secara lebih tajam sehingga dapat dibedakan sumber tekanan inflasi yang bersifat fundamental dan yang hanya bersifat sementara atau temporer. Kebijakan moneter tidak dapat digunakan sepenuhnya untuk merespon tekanan inflasi dari kejutan di sisi pasokan. Diperlukan kebijakan sektoral dan regional untuk mengurangi tekanan inflasi dari faktor-faktor nonfundamental. Beberapa studi persistensi inflasi yang telah dilakukan sebelumnya di Indonesia lebih difokuskan pada skala nasional. Inflasi nasional merupakan rata-rata tertimbang dari inflasi daerah di Indonesia, maka dirasa perlu untuk mempelajari perilaku inflasi di tingkat daerah, termasuk mengukur dan mencari penyebabnya, serta mengetahui implikasinya terhadap pengendalian inflasi daerah dengan fokus kota Jakarta. Pemilihan wilayah Jakarta didasarkan pada dominasinya terhadap bobot inflasi nasional dibandingkan dengan daerah lainnya di Indonesia. Meskipun terdapat kecenderungan yang menurun, bobot inflasi kota Jakarta masih merupakan yang terbesar di antara 66 kota yang diukur melalui Survei Biaya Hidup (SBH). Data tahun 2007 menunjukkan bahwa bobot Jakarta mencapai 22,49% dari bobot nasional (Grafik 1), menurun dari 27,66% berdasarkan SBH tahun 2002. Alasan lainnya adalah pergerakan volume distribusi barang kebutuhan pokok yang sangat tinggi di Jakarta. Selanjutnya, perilaku inflasi di Jakarta tersebut akan dibandingkan secara nasional dengan panel 10 daerah yang memiliki kontribusi inflasi tertinggi di Indonesia. Untuk menjawab tujuan penelitian, cakupan rentang waktu studi meliputi periode Januari 2000 s.d. Mei 2008 (Jakarta) dan Januari 2000 s.d. Desember 2009 (nasional). Hal ini terkait dengan ketersediaan data dari BPS hingga di level komoditinya yang dapat dilihat pada tabel berikut.
+[Konteks Visual Gambar 77707_1029b149611b2b89ae864866c7edcb6c.png]:
+Berikut adalah transkripsi data tabel dari gambar:
+
+### **Tabel Bobot Inflasi Kota Menurut SBH 200**
+
+| Wilayah | Bobot Inflasi (%) |
+| :--- | :---: |
+| Jakarta | 22,49 |
+| Surabaya | 6,47 |
+| Semarang | 3,48 |
+| Makassar | 2,56 |
+| Palembang | 2,96 |
+| Padang | 1,69 |
+| Banjarmasin | 1,54 |
+| Denpasar | 1,53 |
+| Gabungan 56 Kota Lainnya | 47,23 |
+PERTANYAAN:
+Manakah pernyataan berikut yang paling tepat menggambarkan isi tabel secara logis dan informatif?
+OPSI / PERNYATAAN:
+  - A. A. Tabel menunjukkan bahwa seluruh kota besar di Indonesia memiliki bobot inflasi yang merata, dengan rata-rata sekitar 3%.
+  - B. B. Bobot inflasi kota Jakarta paling tinggi dibandingkan kota lainnya, yaitu mencapai 22,49%, lebih dari tiga kali lipat bobot inflasi Surabaya.
+  - C. C. Tabel menunjukkan bahwa gabungan kota selain Jakarta menyumbang bobot inflasi yang lebih rendah daripada Jakarta sendiri.
+  - D. D. Data menunjukkan bahwa inflasi di Pulau Jawa secara keseluruhan menyumbang hampir 90% dari bobot inflasi nasional.
+  - E. E. Data menunjukkan bahwa inflasi di Pulau Jawa secara keseluruhan menyumbang hampir 90% dari bobot inflasi nasional.
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Inflasi Daerah-Daerah Indonesia
+
+Kajian mengenai fenomena persistensi menjadi sangat penting untuk dilakukan dalam rangka mendukung perumusan kebijakan moneter yang efektif. Hal ini agar efektivitas kebijakan moneter dapat mendukung pertumbuhan ekonomi yang berkesinambungan dalam rangka meningkatkan kesejahteraan masyarakat. Inflasi yang tinggi akan memberikan dampak negatif terhadap perekonomian. Daya beli masyarakat menurun dan pelaku dunia usaha akan diliputi ketidakpastian yang tinggi. Implikasi dari persistensi inflasi tersebut juga akan dirasakan di tingkat daerah sehingga perlu mendapat perhatian pemerintah daerah setempat untuk dapat berperan aktif dalam mengendalikan inflasi. Kajian tersebut pada akhirnya diperlukan untuk merumuskan strategi pengendalian inflasi. Sumber tekanan inflasi yang menyebabkan persistensi inflasi perlu dianalisis secara lebih tajam sehingga dapat dibedakan sumber tekanan inflasi yang bersifat fundamental dan yang hanya bersifat sementara atau temporer. Kebijakan moneter tidak dapat digunakan sepenuhnya untuk merespon tekanan inflasi dari kejutan di sisi pasokan. Diperlukan kebijakan sektoral dan regional untuk mengurangi tekanan inflasi dari faktor-faktor nonfundamental. Beberapa studi persistensi inflasi yang telah dilakukan sebelumnya di Indonesia lebih difokuskan pada skala nasional. Inflasi nasional merupakan rata-rata tertimbang dari inflasi daerah di Indonesia, maka dirasa perlu untuk mempelajari perilaku inflasi di tingkat daerah, termasuk mengukur dan mencari penyebabnya, serta mengetahui implikasinya terhadap pengendalian inflasi daerah dengan fokus kota Jakarta. Pemilihan wilayah Jakarta didasarkan pada dominasinya terhadap bobot inflasi nasional dibandingkan dengan daerah lainnya di Indonesia. Meskipun terdapat kecenderungan yang menurun, bobot inflasi kota Jakarta masih merupakan yang terbesar di antara 66 kota yang diukur melalui Survei Biaya Hidup (SBH). Data tahun 2007 menunjukkan bahwa bobot Jakarta mencapai 22,49% dari bobot nasional (Grafik 1), menurun dari 27,66% berdasarkan SBH tahun 2002. Alasan lainnya adalah pergerakan volume distribusi barang kebutuhan pokok yang sangat tinggi di Jakarta. Selanjutnya, perilaku inflasi di Jakarta tersebut akan dibandingkan secara nasional dengan panel 10 daerah yang memiliki kontribusi inflasi tertinggi di Indonesia. Untuk menjawab tujuan penelitian, cakupan rentang waktu studi meliputi periode Januari 2000 s.d. Mei 2008 (Jakarta) dan Januari 2000 s.d. Desember 2009 (nasional). Hal ini terkait dengan ketersediaan data dari BPS hingga di level komoditinya yang dapat dilihat pada tabel berikut.
+[Konteks Visual Gambar 18400_1029b149611b2b89ae864866c7edcb6c.png]:
+Berikut adalah transkripsi data tabel dari gambar:
+
+### **Tabel Bobot Inflasi Kota Menurut SBH 200**
+
+| Wilayah | Bobot Inflasi (%) |
+| :--- | :---: |
+| Jakarta | $22{,}49$ |
+| Surabaya | $6{,}47$ |
+| Semarang | $3{,}48$ |
+| Makassar | $2{,}56$ |
+| Palembang | $2{,}96$ |
+| Padang | $1{,}69$ |
+| Banjarmasin | $1{,}54$ |
+| Denpasar | $1{,}53$ |
+| Gabungan 56 Kota Lainnya | $47{,}23$ |
+PERTANYAAN:
+Manakah pernyataan berikut yang berkaitan dengan argumentasi dan data pada teks tersebut? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Kajian mengenai persistensi inflasi penting dilakukan agar kebijakan moneter mampu mendukung pertumbuhan ekonomi secara berkelanjutan.
+  - B. B. Jakarta dipilih sebagai fokus studi karena pergerakan distribusi barang kebutuhan pokok di kota ini tergolong rendah dan stabil.
+  - C. C. Bobot inflasi Jakarta mencapai 22,49% berdasarkan SBH 2007, menjadikannya kota dengan pengaruh tertinggi terhadap inflasi nasional.
+  - D. D. Kebijakan moneter tidak cukup untuk mengatasi tekanan inflasi yang berasal dari sisi pasokan sehingga diperlukan strategi sektoral dan regional.
+  - E. E. Seluruh studi mengenai persistensi inflasi di Indonesia selama ini sudah menyertakan data dari daerah, termasuk kota Jakarta dan kota-kota besar lainnya.
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: ['C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Wacana 1
+
+Latifah F ⭐⭐⭐⭐ Pantai yang Pas untuk Keluarga Maret 2025 • Pasangan Pantai Karang Jahe cocok untuk liburan bersama keluarga atau pasangan. Aksesnya mudah dengan petunjuk arah yang jelas. Tiket masuknya terjangkau dan suasananya tidak kalah dengan pantai lain. Pantai ini layak untuk dikunjungi kembali. Andi Permana ⭐⭐⭐⭐⭐ Teduh dan Nyaman untuk Semua Usia Februari 2025 • Keluarga Pantai ini teduh dengan banyak pohon cemara yang tertata rapi. Cocok untuk semua kalangan, mulai dari anak-anak hingga dewasa. Kebersihan dan keamanan terjaga. Banyak wahana yang bisa dinikmati sehingga menjadikannya tempat liburan keluarga yang menyenangkan. Indah Wulandari ⭐⭐⭐⭐ Pantai Lengkap dan Terjangkau di Pesisir Utara Jawa Januari 2025 • Keluarga Tiket masuk hanya Rp10.000/ orang. Tersedia berbagai wahana seperti perahu karet, ATV, banana boat hingga kereta kuda. Area pantainya teduh dengan hutan cemara, sangat cocok untuk anak-anak dan keluarga. Agung Tjahjadi ⭐⭐⭐ Pantai Baru dengan Wahana Seru Desember 2024 • Teman Pantai Karang Jahe yang tidak jauh dari Lasem menyuguhkan pilihan rekreasi seperti perahu karet dan ATV. Sangat seru untuk liburan bersama teman-teman meskipun saat itu fasilitas belum selengkap sekarang.
+
+https://www.tripadvisor.co.id/Attraction_Review-g8721723-d12105633-Reviews-Karang_Jahe_Beach-Rembang_Central_Java_Java.html ( *dengan perubahan)
+
+Wacana 2
+
+Pantai Karang Jahe: Wisata Pasir Putih yang Ramah Keluarga
+
+Pantai Karang Jahe di Rembang, Jawa Tengah, semakin diminati wisatawan sejak 2024. Dengan hamparan pasir putih lembut, ombak tenang, serta deretan pohon cemara yang meneduhkan, pantai ini menjadi destinasi favorit keluarga dan pasangan. Beragam aktivitas menarik tersedia, mulai dari bermain pasir, berenang, hingga naik wahana seperti banana boat dan kereta kuda. Fasilitas yang lengkap dan akses jalan yang mudah menambah kenyamanan berlibur. Tabel Informasi Fasilitas dan Tarif di Pantai Karang Jahe
+
+Pantai Karang Jahe adalah pilihan tepat untuk liburan hemat dan menyenangkan. Pemandangan indah, berbagai wahana seru, serta fasilitas lengkap membuatnya cocok untuk keluarga ataupun pasangan. Dengan akses mudah dan harga bersahabat, pantai ini pantas menjadi salah satu destinasi unggulan di pesisir utara Jawa Tengah.
+
+Sumber: https://visitjawatengah.jatengprov.go.id/id/artikel/pantai-karang-jahe-rembang-jawa-tengah-surga-pasir-putih-yang-wajib-kamu-kunjungi-di-2024 ( *dengan perubahan)
+[Konteks Visual Gambar 09015_a0fd71308aabbf29ffd79972257f6888.png]:
+Gambar merupakan tangkapan layar antarmuka ulasan destinasi wisata daring, bukan soal sains dengan diagram atau rumus ilmiah. Berikut transkripsi data teks dan visual yang relevan:
+
+### Ekstraksi Teks (OCR)
+* **Judul Destinasi:** Pantai Karang Jahe *(Status: Belum diklaim)*
+* **Peringkat/Ulasan:** $4{,}0$ / $5{,}0$ (16 ulasan)
+* **Peringkat Lokal:** #4 dari 18 hal yang dapat dilakukan di Rembang
+* **Kategori:** Pantai
+* **Bagian Informasi ("Tentang"):**
+  * **Durasi Kunjungan:** 1–2 jam
+  * *Teks Bantuan:* "Beri saran perbaikan untuk menyempurnakan tampilan kami. Sempurnakan daftar ini"
+* **Fitur UI Lain:** Tombol *Simpan*, *Tulis ulasan*, serta indikator jumlah foto ($32$).
+
+---
+
+### Deskripsi Visual Gambar Terlampir
+* **Objek:** Pemandangan pesisir pantai pada waktu senja (*sunset/twilight*).
+* **Fitur Utama:**
+  * Siluet beberapa perahu nelayan tradisional yang bersandar di perairan dangkal dekat garis pantai.
+  * Terdapat bendera merah putih terpasang pada beberapa tiang perahu.
+  * Siluet struktur gazebo/pendopo di tepi pantai sebelah kiri.
+  * Gradasi warna langit dari jingga/merah muda di ufuk barat menuju biru tua di bagian atas.
+[Konteks Visual Gambar 09015_fdc02e20db066299c2ba8abd466cc4b7.png]:
+Berikut adalah transkripsi data tabel dari gambar:
+
+| Fasilitas / Wahana | Keterangan | Tarif |
+| :--- | :--- | :--- |
+| Tiket Masuk | Termasuk biaya parkir | Rp10.000,00/orang |
+| Sewa Banana Boat | Wahana air untuk 5 orang | Rp200.000,00/5 orang |
+| Sewa Perahu Kayu | Keliling sekitar pantai | Rp20.000,00/orang |
+| ATV / Motor Trail | Disewakan untuk area pantai | Rp25.000,00/30 menit |
+| Gazebo | Tempat istirahat keluarga | Rp30.000,00/gazebo |
+PERTANYAAN:
+Manakah paragraf singkat yang menjelaskan informasi berdasarkan tabel pada wacana 2? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Pengunjung hanya perlu membayar tiket masuk pantai sebesar Rp10.000,00 per orang, yang sudah termasuk biaya parkir. Bagi pengunjung yang ingin mencoba wahana air seru, tersedia banana boat dengan tarif Rp200.000,00 untuk empat orang. Kemudian, ada sewa perahu kayu untuk keliling pantai seharga Rp20.000,00 per orang.
+  - B. B. Untuk masuk ke kawasan pantai, pengunjung cukup membayar Rp10.000,00 per orang dan belum termasuk biaya parkir. Bagi pecinta wahana air, tersedia banana boat yang dapat dinikmati lima orang dengan tarif Rp200.000,00. Selain itu, ada perahu kayu yang bisa disewa seharga Rp20.000,00 per orang untuk berkeliling di sekitar pantai.
+  - C. C. Tiket masuk ke kawasan pantai ini hanya Rp10.000,00 per orang, sudah termasuk biaya parkir. Ada banana boat yang dapat dinaiki lima orang dengan tarif Rp200.000,00 bagi pengunjung yang suka bermain air. Lalu, ada juga penyewaan perahu kayu untuk keliling pantai seharga Rp20.000,00 per orang.
+  - D. D. Pengunjung cukup membayar tiket masuk pantai sebesar Rp10.000,00 per orang yang termasuk biaya parkir kendaraan. Bagi pecinta aktivitas air, tersedia wahana banana boat untuk lima orang seharga Rp200.000,00. Di sana, tersedia juga jasa sewa perahu kayu untuk keliling pantai seharga Rp25.000,00 per orang.
+  - E. E. Dengan membayar Rp10.000,00 per orang dan sudah termasuk biaya parkir, pengunjung sudah bisa masuk ke area pantai. Di sana, juga tersedia wahana banana boat seharga Rp200.000,00 untuk lima orang. Ada juga penyewaan perahu kayu untuk keliling pantai dengan tarif Rp20.000,00 per orang.
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Wacana 1
+
+Latifah F  ⭐⭐⭐⭐ Pantai yang Pas untuk Keluarga Maret 2025 • Pasangan Pantai Karang Jahe cocok untuk liburan bersama keluarga atau pasangan. Aksesnya mudah dengan petunjuk arah yang jelas. Tiket masuknya terjangkau dan suasananya tidak kalah dengan pantai lain. Pantai ini layak untuk dikunjungi kembali. Andi Permana  ⭐⭐⭐⭐⭐ Teduh dan Nyaman untuk Semua Usia Februari 2025 • Keluarga Pantai ini teduh dengan banyak pohon cemara yang tertata rapi. Cocok untuk semua kalangan, mulai dari anak-anak hingga dewasa. Kebersihan dan keamanan terjaga. Banyak wahana yang bisa dinikmati sehingga menjadikannya tempat liburan keluarga yang menyenangkan. Indah Wulandari  ⭐⭐⭐⭐ Pantai Lengkap dan Terjangkau di Pesisir Utara Jawa Januari 2025 • Keluarga Tiket masuk hanya Rp10.000/ orang. Tersedia berbagai wahana seperti perahu karet, ATV,  banana boat  hingga kereta kuda. Area pantainya teduh dengan hutan cemara, sangat cocok untuk anak-anak dan keluarga. Agung Tjahjadi  ⭐⭐⭐ Pantai Baru dengan Wahana Seru Desember 2024 • Teman Pantai Karang Jahe yang tidak jauh dari Lasem menyuguhkan pilihan rekreasi seperti perahu karet dan ATV. Sangat seru untuk liburan bersama teman-teman meskipun saat itu fasilitas belum selengkap sekarang.
+
+https://www.tripadvisor.co.id/Attraction_Review-g8721723-d12105633-Reviews-Karang_Jahe_Beach-Rembang_Central_Java_Java.html ( *dengan perubahan)
+
+Wacana 2
+
+Pantai Karang Jahe: Wisata Pasir Putih yang Ramah Keluarga
+
+Pantai Karang Jahe di Rembang, Jawa Tengah, semakin diminati wisatawan sejak 2024. Dengan hamparan pasir putih lembut, ombak tenang, serta deretan pohon cemara yang meneduhkan, pantai ini menjadi destinasi favorit keluarga dan pasangan. Beragam aktivitas menarik tersedia, mulai dari bermain pasir, berenang, hingga naik wahana seperti  banana boat  dan kereta kuda. Fasilitas yang lengkap dan akses jalan yang mudah menambah kenyamanan berlibur. Tabel Informasi Fasilitas dan Tarif di Pantai Karang Jahe
+
+Pantai Karang Jahe adalah pilihan tepat untuk liburan hemat dan menyenangkan. Pemandangan indah, berbagai wahana seru, serta fasilitas lengkap membuatnya cocok untuk keluarga ataupun pasangan. Dengan akses mudah dan harga bersahabat, pantai ini pantas menjadi salah satu destinasi unggulan di pesisir utara Jawa Tengah.
+
+Sumber: https://visitjawatengah.jatengprov.go.id/id/artikel/pantai-karang-jahe-rembang-jawa-tengah-surga-pasir-putih-yang-wajib-kamu-kunjungi-di-2024 ( *dengan perubahan)
+[Konteks Visual Gambar 24196_a0fd71308aabbf29ffd79972257f6888.png]:
+Berikut adalah transkripsi data tekstual dan deskripsi elemen pada gambar:
+
+---
+
+### **Transkripsi Teks (Metadata Halaman)**
+
+* **Nama Objek Wisata:** Pantai Karang Jahe
+* **Status Kepemilikan:** Belum diklaim
+* **Rating:** $4,0$ / $5,0$ (berdasarkan 16 ulasan)
+* **Peringkat & Kategori:** 
+  * $\#4$ dari 18 hal yang dapat dilakukan di Rembang
+  * Kategori: Pantai
+* **Bagian "Tentang":**
+  * **Estimasi Durasi Kunjungan:** $1\text{--}2\text{ jam}$
+  * *Teks interaktif:* "Beri saran perbaikan untuk menyempurnakan tampilan kami." / "Sempurnakan daftar ini"
+
+---
+
+### **Deskripsi Visual**
+* **Konten Foto:** Lanskap pesisir pantai pada waktu senja (*twilight/sunset*) dengan gradasi langit ungu-oranye. Terdapat beberapa perahu nelayan tradisional berbendera Merah Putih yang bersandar di perairan dangkal serta struktur gazebo di sisi kiri pantai.
+* **Indikator Galeri:** 32 foto
+[Konteks Visual Gambar 24196_fdc02e20db066299c2ba8abd466cc4b7.png]:
+Berikut adalah transkripsi tabel data dari gambar dalam format Markdown:
+
+| Fasilitas / Wahana | Keterangan | Tarif |
+| :--- | :--- | :--- |
+| Tiket Masuk | Termasuk biaya parkir | $\text{Rp}10.000,00/\text{orang}$ |
+| Sewa Banana Boat | Wahana air untuk $5\text{ orang}$ | $\text{Rp}200.000,00/5\text{ orang}$ |
+| Sewa Perahu Kayu | Keliling sekitar pantai | $\text{Rp}20.000,00/\text{orang}$ |
+| ATV / Motor Trail | Disewakan untuk area pantai | $\text{Rp}25.000,00/30\text{ menit}$ |
+| Gazebo | Tempat istirahat keluarga | $\text{Rp}30.000,00/\text{gazebo}$ |
+PERTANYAAN:
+Apa simpulan yang didapatkan dari tabel pada wacana 2?
+OPSI / PERNYATAAN:
+  - A. A. Pantai Karang Jahe memiliki berbagai fasilitas dan wahana dengan jumlah yang banyak.
+  - B. B. Fasilitas dan wahana yang disediakan pengelola Pantai Karang Jahe berbayar semua.
+  - C. C. Pengunjung Pantai Karang Jahe wajib memesan wahana yang disediakan oleh pengelola.
+  - D. D. Pantai Karang Jahe memiliki pendapatan yang cukup memadai dari hasil penyewaan.
+  - E. E. Wahana Pantai Karang Jahe dapat disewa oleh pengunjung pantai dengan sistem paket.
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Benar', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Wacana 1
+
+Latifah F  ⭐⭐⭐⭐ Pantai yang Pas untuk Keluarga Maret 2025 • Pasangan Pantai Karang Jahe cocok untuk liburan bersama keluarga atau pasangan. Aksesnya mudah dengan petunjuk arah yang jelas. Tiket masuknya terjangkau dan suasananya tidak kalah dengan pantai lain. Pantai ini layak untuk dikunjungi kembali. Andi Permana  ⭐⭐⭐⭐⭐ Teduh dan Nyaman untuk Semua Usia Februari 2025 • Keluarga Pantai ini teduh dengan banyak pohon cemara yang tertata rapi. Cocok untuk semua kalangan, mulai dari anak-anak hingga dewasa. Kebersihan dan keamanan terjaga. Banyak wahana yang bisa dinikmati sehingga menjadikannya tempat liburan keluarga yang menyenangkan. Indah Wulandari  ⭐⭐⭐⭐ Pantai Lengkap dan Terjangkau di Pesisir Utara Jawa Januari 2025 • Keluarga Tiket masuk hanya Rp10.000/ orang. Tersedia berbagai wahana seperti perahu karet, ATV,  banana boat  hingga kereta kuda. Area pantainya teduh dengan hutan cemara, sangat cocok untuk anak-anak dan keluarga. Agung Tjahjadi  ⭐⭐⭐ Pantai Baru dengan Wahana Seru Desember 2024 • Teman Pantai Karang Jahe yang tidak jauh dari Lasem menyuguhkan pilihan rekreasi seperti perahu karet dan ATV. Sangat seru untuk liburan bersama teman-teman meskipun saat itu fasilitas belum selengkap sekarang.
+
+https://www.tripadvisor.co.id/Attraction_Review-g8721723-d12105633-Reviews-Karang_Jahe_Beach-Rembang_Central_Java_Java.html ( *dengan perubahan)
+
+Wacana 2
+
+Pantai Karang Jahe: Wisata Pasir Putih yang Ramah Keluarga
+
+Pantai Karang Jahe di Rembang, Jawa Tengah, semakin diminati wisatawan sejak 2024. Dengan hamparan pasir putih lembut, ombak tenang, serta deretan pohon cemara yang meneduhkan, pantai ini menjadi destinasi favorit keluarga dan pasangan. Beragam aktivitas menarik tersedia, mulai dari bermain pasir, berenang, hingga naik wahana seperti  banana boat  dan kereta kuda. Fasilitas yang lengkap dan akses jalan yang mudah menambah kenyamanan berlibur. Tabel Informasi Fasilitas dan Tarif di Pantai Karang Jahe
+
+Pantai Karang Jahe adalah pilihan tepat untuk liburan hemat dan menyenangkan. Pemandangan indah, berbagai wahana seru, serta fasilitas lengkap membuatnya cocok untuk keluarga ataupun pasangan. Dengan akses mudah dan harga bersahabat, pantai ini pantas menjadi salah satu destinasi unggulan di pesisir utara Jawa Tengah.
+
+Sumber: https://visitjawatengah.jatengprov.go.id/id/artikel/pantai-karang-jahe-rembang-jawa-tengah-surga-pasir-putih-yang-wajib-kamu-kunjungi-di-2024 ( *dengan perubahan)
+[Konteks Visual Gambar 70193_a0fd71308aabbf29ffd79972257f6888.png]:
+Berikut adalah transkripsi data tekstual dan deskripsi visual dari gambar:
+
+### **1. Informasi Teks (Data Wisata)**
+* **Nama Objek:** Pantai Karang Jahe (Status: *Belum diklaim*)
+* **Rating:** $4{,}0 / 5{,}0$ (berdasarkan $16$ ulasan)
+* **Peringkat & Kategori:** #4 dari 18 hal yang dapat dilakukan di Rembang • Pantai
+* **Bagian "Tentang":**
+  * **Estimasi Durasi Kunjungan:** $1\text{--}2\text{ jam}$
+  * **Opsi Pengguna:** *Beri saran perbaikan untuk menyempurnakan tampilan kami.* / *Sempurnakan daftar ini*
+
+---
+
+### **2. Deskripsi Visual Gambar**
+* **Subjek:** Pemandangan pesisir Pantai Karang Jahe saat senja (*sunset/twilight*).
+* **Komposisi:**
+  * Deretan perahu nelayan tradisional berlabuh di bibir pantai dan perairan dangkal, sebagian dilengkapi bendera Merah Putih.
+  * Terdapat struktur gazebo/dermaga kayu kecil di sisi kiri garis pantai.
+  * Latar langit menampilkan gradasi warna jingga kemerahan (pantulan matahari terbenam) hingga biru gelap pada bagian atas.
+  * Total arsip foto tertera: $32$ foto.
+[Konteks Visual Gambar 70193_fdc02e20db066299c2ba8abd466cc4b7.png]:
+Berikut adalah transkripsi data tabel dari gambar:
+
+| Fasilitas / Wahana | Keterangan | Tarif |
+| :--- | :--- | :--- |
+| Tiket Masuk | Termasuk biaya parkir | $\text{Rp}10.000,00/\text{orang}$ |
+| Sewa Banana Boat | Wahana air untuk $5$ orang | $\text{Rp}200.000,00/5\text{ orang}$ |
+| Sewa Perahu Kayu | Keliling sekitar pantai | $\text{Rp}20.000,00/\text{orang}$ |
+| ATV / Motor Trail | Disewakan untuk area pantai | $\text{Rp}25.000,00/30\text{ menit}$ |
+| Gazebo | Tempat istirahat keluarga | $\text{Rp}30.000,00/\text{gazebo}$ |
+PERTANYAAN:
+Pernyataan manakah yang secara logis sesuai dengan isi ulasan para pengunjung pada wacana pertama? Klik pada pilihan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Para pengunjung Pantai Karang Jahe wajib akan mencoba semua wahana yang ada di sana.
+  - B. Pantai Karang Jahe menjadi tujuan favorit pengunjung untuk berekreasi bersama keluarga.
+  - C. Pantai Karang Jahe akan banyak dikunjungi karena harga tiket masuknya yang terjangkau.
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Wacana 1
+
+Latifah F  ⭐⭐⭐⭐ Pantai yang Pas untuk Keluarga Maret 2025 • Pasangan Pantai Karang Jahe cocok untuk liburan bersama keluarga atau pasangan. Aksesnya mudah dengan petunjuk arah yang jelas. Tiket masuknya terjangkau dan suasananya tidak kalah dengan pantai lain. Pantai ini layak untuk dikunjungi kembali. Andi Permana  ⭐⭐⭐⭐⭐ Teduh dan Nyaman untuk Semua Usia Februari 2025 • Keluarga Pantai ini teduh dengan banyak pohon cemara yang tertata rapi. Cocok untuk semua kalangan, mulai dari anak-anak hingga dewasa. Kebersihan dan keamanan terjaga. Banyak wahana yang bisa dinikmati sehingga menjadikannya tempat liburan keluarga yang menyenangkan. Indah Wulandari  ⭐⭐⭐⭐ Pantai Lengkap dan Terjangkau di Pesisir Utara Jawa Januari 2025 • Keluarga Tiket masuk hanya Rp10.000/ orang. Tersedia berbagai wahana seperti perahu karet, ATV,  banana boat  hingga kereta kuda. Area pantainya teduh dengan hutan cemara, sangat cocok untuk anak-anak dan keluarga. Agung Tjahjadi  ⭐⭐⭐ Pantai Baru dengan Wahana Seru Desember 2024 • Teman Pantai Karang Jahe yang tidak jauh dari Lasem menyuguhkan pilihan rekreasi seperti perahu karet dan ATV. Sangat seru untuk liburan bersama teman-teman meskipun saat itu fasilitas belum selengkap sekarang.
+
+https://www.tripadvisor.co.id/Attraction_Review-g8721723-d12105633-Reviews-Karang_Jahe_Beach-Rembang_Central_Java_Java.html ( *dengan perubahan)
+
+Wacana 2
+
+Pantai Karang Jahe: Wisata Pasir Putih yang Ramah Keluarga
+
+Pantai Karang Jahe di Rembang, Jawa Tengah, semakin diminati wisatawan sejak 2024. Dengan hamparan pasir putih lembut, ombak tenang, serta deretan pohon cemara yang meneduhkan, pantai ini menjadi destinasi favorit keluarga dan pasangan. Beragam aktivitas menarik tersedia, mulai dari bermain pasir, berenang, hingga naik wahana seperti  banana boat  dan kereta kuda. Fasilitas yang lengkap dan akses jalan yang mudah menambah kenyamanan berlibur. Tabel Informasi Fasilitas dan Tarif di Pantai Karang Jahe
+
+Pantai Karang Jahe adalah pilihan tepat untuk liburan hemat dan menyenangkan. Pemandangan indah, berbagai wahana seru, serta fasilitas lengkap membuatnya cocok untuk keluarga ataupun pasangan. Dengan akses mudah dan harga bersahabat, pantai ini pantas menjadi salah satu destinasi unggulan di pesisir utara Jawa Tengah.
+
+Sumber: https://visitjawatengah.jatengprov.go.id/id/artikel/pantai-karang-jahe-rembang-jawa-tengah-surga-pasir-putih-yang-wajib-kamu-kunjungi-di-2024 ( *dengan perubahan)
+[Konteks Visual Gambar 86751_a0fd71308aabbf29ffd79972257f6888.png]:
+Berikut adalah transkripsi teks dan informasi dari gambar:
+
+### **Informasi Tempat Wisata (TripAdvisor)**
+
+* **Nama Tempat:** Pantai Karang Jahe
+* **Status Klaim:** Belum diklaim
+* **Rating:** $4{,}0$ / $5{,}0$ (berdasarkan 16 ulasan)
+* **Peringkat:** #4 dari 18 hal yang dapat dilakukan di Rembang
+* **Kategori:** Pantai
+* **Estimasi Durasi Kunjungan:** 1–2 jam
+
+---
+
+### **Deskripsi Visual Gambar**
+* **Objek:** Pemandangan pesisir pantai pada waktu senja (matahari terbenam/senja).
+* **Elemen:**
+  * Deretan perahu nelayan tradisional yang berlabuh di tepi pantai/air dangkal, beberapa di antaranya mengibarkan bendera Merah Putih.
+  * Terdapat struktur gazebo/dermaga kecil di sisi kiri.
+  * Langit menampilkan gradasi warna jingga kemerahan menuju biru tua (efek hamburan Rayleigh saat senja).
+[Konteks Visual Gambar 86751_fdc02e20db066299c2ba8abd466cc4b7.png]:
+Berikut adalah ekstrak data tabel dari gambar:
+
+| Fasilitas / Wahana | Keterangan | Tarif |
+| :--- | :--- | :--- |
+| Tiket Masuk | Termasuk biaya parkir | Rp10.000,00/orang |
+| Sewa Banana Boat | Wahana air untuk 5 orang | Rp200.000,00/5 orang |
+| Sewa Perahu Kayu | Keliling sekitar pantai | Rp20.000,00/orang |
+| ATV / Motor Trail | Disewakan untuk area pantai | Rp25.000,00/30 menit |
+| Gazebo | Tempat istirahat keluarga | Rp30.000,00/gazebo |
+PERTANYAAN:
+Manakah pernyataan berikut yang menunjukkan kesesuaian informasi pada kedua wacana tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Kedua wacana membahas kemudahan akses jalan ke Pantai Karang Jahe sehingga direkomendasikan bagi keluarga yang mempunyai kendaraan pribadi.
+  - B. B. Kedua wacana menjelaskan keadaan Pantai Karang Jahe yang asri dengan fasilitas memadai sehingga menjadikannya pilihan untuk bersantai dengan sanak famili.
+  - C. C. Wacana 1 dan 2 menyebutkan rincian biaya akomodasi yang ada di Pantai Karang Jahe yang memudahkan bagi pembaca yang ingin mengunjungi pantai tersebut.
+  - D. D. Wacana 1 dan 2 menyebutkan secara langsung bahwa Pantai Karang Jahe dapat dinikmati oleh sahabat ataupun keluarga besar dengan banyak anggota keluarga.
+  - E. E. Baik wacana 1 maupun 2 menjelaskan hamparan pasir putih yang terbentang di Pantai Karang Jahe menjadi ciri khas tersendiri dari pantai-pantai lain di Pulau Jawa.
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Wacana 1
+
+Hujan Bulan Juni
+
+Ia berdiri di ambang jendela, membiarkan tetesan hujan menari di kaca. Suara rintik yang pelan menusuk kesunyian, menyusup ke dalam rongga batinnya yang diam. Ruang tamu itu tampak seperti biasa—perabot masih di tempatnya, lampu redup menyala, dan aroma kayu tua masih bertahan di udara. Namun, semua itu terasa lain. Ada kehampaan yang tidak dapat dijelaskan. Seolah hujan membawa pulang sepi dari tempat-tempat jauh dan menumpahkannya di dalam kepalanya. Hening semacam ini membuatnya sadar, bahwa kesedihan bukanlah sesuatu yang keras atau menjerit. Ia datang pelan, seperti kabut, merayap dan menyelimuti segalanya. Ia merasa tidak ingin lari. Ia ingin duduk bersama perasaannya, membiarkannya hadir, menyapa, lalu melewatinya. Ia tidak menangis. Ia tidak marah. Tapi ia tahu, kehilangan akan selalu menyisakan ruang—dan dari ruang itulah ia perlahan belajar menjadi utuh kembali. (Kutipan dari Novel Hujan Bulan Juni karya Sapardi Djoko Damono)
+
+Wacana 2
+
+The Book Thief
+
+Liesel berdiri di samping jendela. Di luar, salju turun perlahan, membungkus atap rumah, jalan setapak, dan halaman. Ia mencoba menghitung butiran yang jatuh, tapi terlalu banyak. Setiap butir tampak pecah dan menyatu kembali saat menyentuh tanah, seolah memiliki kehidupan sendiri. Ia tidak merasa dingin. Aneh, pikirnya. Biasanya udara seperti ini menusuk kulit, tapi kini justru menghangatkannya. Rasa sunyi yang memenuhi ruang itu tidak membuatnya takut. Sebaliknya, ia merasa dekat dengan dirinya sendiri. Ada ruang kosong di dadanya, retakan yang belum bisa ia tambal, tetapi itu bukan berarti ia hancur. Ia menyadari, kehilangan bukan sekadar tentang apa yang pergi. Kadang, kehilangan adalah pintu yang membawamu pada versi dirimu yang lebih kuat. Ia menarik napas panjang. Ia tahu, tidak semua orang bisa memahami itu. Tapi ia bisa. (Kutipan dari novel The Book Thief karya Markus Zusak. Diterjemahkan ke dalam bahasa Indonesia oleh Gita Yuliani K.)
+
+PERTANYAAN:
+Persamaan nilai sosial yang terkandung dalam kedua kutipan wacana tersebut adalah ….
+OPSI / PERNYATAAN:
+  - A. A. pentingnya menjaga hubungan keluarga dalam menghadapi kabar duka
+  - B. B. kesadaran bahwa kehilangan adalah bagian dari proses pendewasaan diri
+  - C. C. kewajiban menyembunyikan kesedihan agar tidak membebani orang lain
+  - D. D. perasaan marah dan kecewa sebagai reaksi wajar terhadap kehilangan
+  - E. E. dukungan sosial dari lingkungan sekitar membantu penyembuhan luka batin
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Wacana 1
+
+Hujan Bulan Juni
+
+Ia berdiri di ambang jendela, membiarkan tetesan hujan menari di kaca. Suara rintik yang pelan menusuk kesunyian, menyusup ke dalam rongga batinnya yang diam. Ruang tamu itu tampak seperti biasa—perabot masih di tempatnya, lampu redup menyala, dan aroma kayu tua masih bertahan di udara. Namun, semua itu terasa lain. Ada kehampaan yang tidak dapat dijelaskan. Seolah hujan membawa pulang sepi dari tempat-tempat jauh dan menumpahkannya di dalam kepalanya. Hening semacam ini membuatnya sadar, bahwa kesedihan bukanlah sesuatu yang keras atau menjerit. Ia datang pelan, seperti kabut, merayap dan menyelimuti segalanya. Ia merasa tidak ingin lari. Ia ingin duduk bersama perasaannya, membiarkannya hadir, menyapa, lalu melewatinya. Ia tidak menangis. Ia tidak marah. Tapi ia tahu, kehilangan akan selalu menyisakan ruang—dan dari ruang itulah ia perlahan belajar menjadi utuh kembali. (Kutipan dari Novel Hujan Bulan Juni karya Sapardi Djoko Damono)
+
+Wacana 2
+
+The Book Thief
+
+Liesel berdiri di samping jendela. Di luar, salju turun perlahan, membungkus atap rumah, jalan setapak, dan halaman. Ia mencoba menghitung butiran yang jatuh, tapi terlalu banyak. Setiap butir tampak pecah dan menyatu kembali saat menyentuh tanah, seolah memiliki kehidupan sendiri. Ia tidak merasa dingin. Aneh, pikirnya. Biasanya udara seperti ini menusuk kulit, tapi kini justru menghangatkannya. Rasa sunyi yang memenuhi ruang itu tidak membuatnya takut. Sebaliknya, ia merasa dekat dengan dirinya sendiri. Ada ruang kosong di dadanya, retakan yang belum bisa ia tambal, tetapi itu bukan berarti ia hancur. Ia menyadari, kehilangan bukan sekadar tentang apa yang pergi. Kadang, kehilangan adalah pintu yang membawamu pada versi dirimu yang lebih kuat. Ia menarik napas panjang. Ia tahu, tidak semua orang bisa memahami itu. Tapi ia bisa. (Kutipan dari novel The Book Thief karya Markus Zusak. Diterjemahkan ke dalam bahasa Indonesia oleh Gita Yuliani K.)
+
+PERTANYAAN:
+Dalam kutipan novel The Book Thief, Liesel memilih untuk diam dan menyendiri dalam menghadapi kesedihan akibat kehilangan. Mengapa tindakan tersebut relevan dengan norma sosial masyarakat saat ini? Klik pada pilihan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Masyarakat modern mulai menyadari pentingnya ruang pribadi ketika memproses emosi.
+  - B. Masyarakat saat ini cenderung harus terbuka secara emosional di media sosial dan komunitasnya.
+  - C. Masyarakat saat ini mengutakaman empati dan menghargai pilihan individu dalam mengelola kesedihan.
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Wacana 1
+
+Hujan Bulan Juni
+
+Ia berdiri di ambang jendela, membiarkan tetesan hujan menari di kaca. Suara rintik yang pelan menusuk kesunyian, menyusup ke dalam rongga batinnya yang diam. Ruang tamu itu tampak seperti biasa—perabot masih di tempatnya, lampu redup menyala, dan aroma kayu tua masih bertahan di udara. Namun, semua itu terasa lain. Ada kehampaan yang tidak dapat dijelaskan. Seolah hujan membawa pulang sepi dari tempat-tempat jauh dan menumpahkannya di dalam kepalanya. Hening semacam ini membuatnya sadar, bahwa kesedihan bukanlah sesuatu yang keras atau menjerit. Ia datang pelan, seperti kabut, merayap dan menyelimuti segalanya. Ia merasa tidak ingin lari. Ia ingin duduk bersama perasaannya, membiarkannya hadir, menyapa, lalu melewatinya. Ia tidak menangis. Ia tidak marah. Tapi ia tahu, kehilangan akan selalu menyisakan ruang—dan dari ruang itulah ia perlahan belajar menjadi utuh kembali. (Kutipan dari Novel Hujan Bulan Juni karya Sapardi Djoko Damono)
+
+Wacana 2
+
+The Book Thief
+
+Liesel berdiri di samping jendela. Di luar, salju turun perlahan, membungkus atap rumah, jalan setapak, dan halaman. Ia mencoba menghitung butiran yang jatuh, tapi terlalu banyak. Setiap butir tampak pecah dan menyatu kembali saat menyentuh tanah, seolah memiliki kehidupan sendiri. Ia tidak merasa dingin. Aneh, pikirnya. Biasanya udara seperti ini menusuk kulit, tapi kini justru menghangatkannya. Rasa sunyi yang memenuhi ruang itu tidak membuatnya takut. Sebaliknya, ia merasa dekat dengan dirinya sendiri. Ada ruang kosong di dadanya, retakan yang belum bisa ia tambal, tetapi itu bukan berarti ia hancur. Ia menyadari, kehilangan bukan sekadar tentang apa yang pergi. Kadang, kehilangan adalah pintu yang membawamu pada versi dirimu yang lebih kuat. Ia menarik napas panjang. Ia tahu, tidak semua orang bisa memahami itu. Tapi ia bisa. (Kutipan dari novel The Book Thief karya Markus Zusak. Diterjemahkan ke dalam bahasa Indonesia oleh Gita Yuliani K.)
+
+PERTANYAAN:
+Repons emosional tokoh Liesel terhadap peristiwa kehilangan adalah ….
+OPSI / PERNYATAAN:
+  - A. A. marah dan merasa tidak terima akan kenyataan
+  - B. B. kebingungan dan menangis terus menerus
+  - C. C. tenang dan mencoba menemukan keheningan
+  - D. D. tertekan hingga merasa tidak bisa melakukan apa pun
+  - E. E. merasa cemas akan masa depan hingga hilang kendali
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Wacana 1
+
+Hujan Bulan Juni
+
+Ia berdiri di ambang jendela, membiarkan tetesan hujan menari di kaca. Suara rintik yang pelan menusuk kesunyian, menyusup ke dalam rongga batinnya yang diam. Ruang tamu itu tampak seperti biasa—perabot masih di tempatnya, lampu redup menyala, dan aroma kayu tua masih bertahan di udara. Namun, semua itu terasa lain. Ada kehampaan yang tidak dapat dijelaskan. Seolah hujan membawa pulang sepi dari tempat-tempat jauh dan menumpahkannya di dalam kepalanya. Hening semacam ini membuatnya sadar, bahwa kesedihan bukanlah sesuatu yang keras atau menjerit. Ia datang pelan, seperti kabut, merayap dan menyelimuti segalanya. Ia merasa tidak ingin lari. Ia ingin duduk bersama perasaannya, membiarkannya hadir, menyapa, lalu melewatinya. Ia tidak menangis. Ia tidak marah. Tapi ia tahu, kehilangan akan selalu menyisakan ruang—dan dari ruang itulah ia perlahan belajar menjadi utuh kembali. (Kutipan dari Novel Hujan Bulan Juni karya Sapardi Djoko Damono)
+
+Wacana 2
+
+The Book Thief
+
+Liesel berdiri di samping jendela. Di luar, salju turun perlahan, membungkus atap rumah, jalan setapak, dan halaman. Ia mencoba menghitung butiran yang jatuh, tapi terlalu banyak. Setiap butir tampak pecah dan menyatu kembali saat menyentuh tanah, seolah memiliki kehidupan sendiri. Ia tidak merasa dingin. Aneh, pikirnya. Biasanya udara seperti ini menusuk kulit, tapi kini justru menghangatkannya. Rasa sunyi yang memenuhi ruang itu tidak membuatnya takut. Sebaliknya, ia merasa dekat dengan dirinya sendiri. Ada ruang kosong di dadanya, retakan yang belum bisa ia tambal, tetapi itu bukan berarti ia hancur. Ia menyadari, kehilangan bukan sekadar tentang apa yang pergi. Kadang, kehilangan adalah pintu yang membawamu pada versi dirimu yang lebih kuat. Ia menarik napas panjang. Ia tahu, tidak semua orang bisa memahami itu. Tapi ia bisa. (Kutipan dari novel The Book Thief karya Markus Zusak. Diterjemahkan ke dalam bahasa Indonesia oleh Gita Yuliani K.)
+
+PERTANYAAN:
+Apa yang dirasakan tokoh dalam kutipan novel Hujan Bulan Juni saat menyaksikan hujan turun perlahan dan kesunyian memenuhi ruang?
+OPSI / PERNYATAAN:
+  - A. A. Tertekan oleh suasana yang hampa dan merasa kehilangan arah.
+  - B. B. Merasakan ironi karena suasana damai tidak mencerminkan perasaannya.
+  - C. C. Seolah ditarik kembali ke masa lalu dan terjebak hingga tidak bisa bergerak maju.
+  - D. D. Bahagia karena kini bisa sepenuhnya menghindari perasaan duka tersebut.
+  - E. E. Merasa tenang dan mampu menerima perasaannya dengan reflektif.
+

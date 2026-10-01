@@ -1,0 +1,814 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Indonesia (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. HINDARI LANGKAH GENERIK / BOILERPLATE. Setiap langkah harus spesifik pada konteks bacaan/soal dan opsi yang bersangkutan. Penjelasan langkah antar-soal TIDAK BOLEH meniru atau menduplikasi langkah soal lain.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+5. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "<Kutipan/konteks kalimat atau variabel yang diketahui>",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tradisi Buwuhan: Antara Gotong Royong dan Utang Piutang
+Tradisi buwuhan merupakan bagian dari budaya masyarakat Jawa, khususnya di kota-kota besar seperti Surabaya. Tradisi ini dilakukan ketika ada acara penting seperti pernikahan atau khitanan yang diadakan di daerah tersebut. Buwuhan merujuk pada kegiatan memberi bantuan, baik berupa barang, uang, maupun tenaga kepada seseorang yang sedang mengadakan hajatan, atau bisa juga disebut sebagai kegiatan menyumbang. Tradisi ini mencerminkan nilai gotong royong dan solidaritas sosial karena keluarga dan tetangga saling bahu-membahu dalam membantu sesama.
+Namun, praktik buwuhan tidak lepas dari unsur pertukaran atau dipandang sebagai utang. Masyarakat meyakini bahwa segala bentuk bantuan yang diberikan akan kembali dalam bentuk yang setara ketika si pemberi mengadakan hajatan serupa. Hal ini menyebabkan buwuhan tidak lagi dipandang murni sebagai hibah atau sedekah, tetapi sebagai bentuk "utang tidak tertulis" yang menimbulkan kewajiban moral untuk membalas.
+Dalam praktiknya, buwuhan memang meringankan beban tuan rumah, tetapi dapat menimbulkan tekanan psikologis bagi penerima bantuan. Rasa malu dan kekhawatiran kehilangan harga diri mendorong sebagian orang untuk berutang demi mengembalikan buwuhan. Hal ini menyebabkan terbaginya cara pandang terhadap buwuhan. Ada yang melihatnya sebagai bentuk tolong-menolong, tetapi ada juga yang justru menganggapnya menjadi sistem utang piutang berbasis sosial. Sebagian pihak berpendapat bahwa buwuhan adalah hibah karena tujuannya adalah untuk membantu. Namun, apabila ada keharusan pengembalian, maka secara hukum dan etika, buwuhan telah bergeser dari semangat gotong royong menjadi sebuah kewajiban ekonomi yang membebani. Oleh karena itu, pemahaman masyarakat terhadap tradisi buwuhan perlu diluruskan agar nilai luhur tolong-menolong tetap terjaga tanpa menimbulkan beban yang tidak perlu.
+Sumber:
+Rachmawati, S. A., & Anwar, M. K. (2021). Budaya dan Tradisi Buwuh sebagai Utang Piutang dalam Adat Pernikahan di Kota Surabaya. Jurnal Ekonomika dan Bisnis Islam, 4(3), hl 69–83.
+
+PERTANYAAN:
+Apa makna kata
+hajatan
+pada teks tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Kegiatan kerja bakti membersihkan lingkungan sekitar.
+  - B. B. Pertemuan rutin warga untuk membahas masalah lingkungan.
+  - C. C. Diskusi keluarga besar untuk menentukan pembagian warisan.
+  - D. D. Permohonan bantuan yang dilakukan tuan rumah kepada tetangga.
+  - E. E. Acara atau pesta yang diadakan untuk memperingati hal penting.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tradisi Buwuhan: Antara Gotong Royong dan Utang Piutang
+Tradisi buwuhan merupakan bagian dari budaya masyarakat Jawa, khususnya di kota-kota besar seperti Surabaya. Tradisi ini dilakukan ketika ada acara penting seperti pernikahan atau khitanan yang diadakan di daerah tersebut. Buwuhan merujuk pada kegiatan memberi bantuan, baik berupa barang, uang, maupun tenaga kepada seseorang yang sedang mengadakan hajatan, atau bisa juga disebut sebagai kegiatan menyumbang. Tradisi ini mencerminkan nilai gotong royong dan solidaritas sosial karena keluarga dan tetangga saling bahu-membahu dalam membantu sesama.
+Namun, praktik buwuhan tidak lepas dari unsur pertukaran atau dipandang sebagai utang. Masyarakat meyakini bahwa segala bentuk bantuan yang diberikan akan kembali dalam bentuk yang setara ketika si pemberi mengadakan hajatan serupa. Hal ini menyebabkan buwuhan tidak lagi dipandang murni sebagai hibah atau sedekah, tetapi sebagai bentuk "utang tidak tertulis" yang menimbulkan kewajiban moral untuk membalas.
+Dalam praktiknya, buwuhan memang meringankan beban tuan rumah, tetapi dapat menimbulkan tekanan psikologis bagi penerima bantuan. Rasa malu dan kekhawatiran kehilangan harga diri mendorong sebagian orang untuk berutang demi mengembalikan buwuhan. Hal ini menyebabkan terbaginya cara pandang terhadap buwuhan. Ada yang melihatnya sebagai bentuk tolong-menolong, tetapi ada juga yang justru menganggapnya menjadi sistem utang piutang berbasis sosial. Sebagian pihak berpendapat bahwa buwuhan adalah hibah karena tujuannya adalah untuk membantu. Namun, apabila ada keharusan pengembalian, maka secara hukum dan etika, buwuhan telah bergeser dari semangat gotong royong menjadi sebuah kewajiban ekonomi yang membebani. Oleh karena itu, pemahaman masyarakat terhadap tradisi buwuhan perlu diluruskan agar nilai luhur tolong-menolong tetap terjaga tanpa menimbulkan beban yang tidak perlu.
+Sumber:
+Rachmawati, S. A., & Anwar, M. K. (2021). Budaya dan Tradisi Buwuh sebagai Utang Piutang dalam Adat Pernikahan di Kota Surabaya. Jurnal Ekonomika dan Bisnis Islam, 4(3), hl 69–83.
+
+PERTANYAAN:
+Manakah gagasan yang mendukung ide pokok bahwa buwuhan adalah bentuk utang?
+OPSI / PERNYATAAN:
+  - A. A. Praktik buwuhan disertai dengan perjanjian utang piutang secara tertulis.
+  - B. B. Buwuhan disertai kesepakatan untuk selalu memberi lebih dari yang diterima.
+  - C. C. Bentuk buwuhan dapat berupa sedekah atau hibah yang harus dibayar kembali.
+  - D. D. Buwuhan dilakukan oleh tetangga dan kerabat sebagai bentuk pertukaran solidaritas.
+  - E. E. Penerima buwuhan merasa harus mengembalikan bantuan yang diterima di kemudian hari.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tradisi Buwuhan: Antara Gotong Royong dan Utang Piutang
+Tradisi buwuhan merupakan bagian dari budaya masyarakat Jawa, khususnya di kota-kota besar seperti Surabaya. Tradisi ini dilakukan ketika ada acara penting seperti pernikahan atau khitanan yang diadakan di daerah tersebut. Buwuhan merujuk pada kegiatan memberi bantuan, baik berupa barang, uang, maupun tenaga kepada seseorang yang sedang mengadakan hajatan, atau bisa juga disebut sebagai kegiatan menyumbang. Tradisi ini mencerminkan nilai gotong royong dan solidaritas sosial karena keluarga dan tetangga saling bahu-membahu dalam membantu sesama.
+Namun, praktik buwuhan tidak lepas dari unsur pertukaran atau dipandang sebagai utang. Masyarakat meyakini bahwa segala bentuk bantuan yang diberikan akan kembali dalam bentuk yang setara ketika si pemberi mengadakan hajatan serupa. Hal ini menyebabkan buwuhan tidak lagi dipandang murni sebagai hibah atau sedekah, tetapi sebagai bentuk "utang tidak tertulis" yang menimbulkan kewajiban moral untuk membalas.
+Dalam praktiknya, buwuhan memang meringankan beban tuan rumah, tetapi dapat menimbulkan tekanan psikologis bagi penerima bantuan. Rasa malu dan kekhawatiran kehilangan harga diri mendorong sebagian orang untuk berutang demi mengembalikan buwuhan. Hal ini menyebabkan terbaginya cara pandang terhadap buwuhan. Ada yang melihatnya sebagai bentuk tolong-menolong, tetapi ada juga yang justru menganggapnya menjadi sistem utang piutang berbasis sosial. Sebagian pihak berpendapat bahwa buwuhan adalah hibah karena tujuannya adalah untuk membantu. Namun, apabila ada keharusan pengembalian, maka secara hukum dan etika, buwuhan telah bergeser dari semangat gotong royong menjadi sebuah kewajiban ekonomi yang membebani. Oleh karena itu, pemahaman masyarakat terhadap tradisi buwuhan perlu diluruskan agar nilai luhur tolong-menolong tetap terjaga tanpa menimbulkan beban yang tidak perlu.
+Sumber:
+Rachmawati, S. A., & Anwar, M. K. (2021). Budaya dan Tradisi Buwuh sebagai Utang Piutang dalam Adat Pernikahan di Kota Surabaya. Jurnal Ekonomika dan Bisnis Islam, 4(3), hl 69–83.
+
+PERTANYAAN:
+Hubungan makna paragraf kedua dan ketiga adalah ….
+OPSI / PERNYATAAN:
+  - A. A. perbedaan jenis buwuhan berdasarkan jenis acara yang dilangsungkan
+  - B. B. penjelasan sebab dan akibat dari perbedaan pandangan mengenai buwuhan
+  - C. C. penjelasan dampak buruk dari adanya pandangan buwuhan sebagai sedekah
+  - D. D. perbedaan tata cara buwuhan pada beberapa kelurahan atau desa di Surabaya
+  - E. E. penjelasan hubungan hukum agama dengan pengertian masyarakat terhadap buwuhan
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tradisi Buwuhan: Antara Gotong Royong dan Utang Piutang
+Tradisi buwuhan merupakan bagian dari budaya masyarakat Jawa, khususnya di kota-kota besar seperti Surabaya. Tradisi ini dilakukan ketika ada acara penting seperti pernikahan atau khitanan yang diadakan di daerah tersebut. Buwuhan merujuk pada kegiatan memberi bantuan, baik berupa barang, uang, maupun tenaga kepada seseorang yang sedang mengadakan hajatan, atau bisa juga disebut sebagai kegiatan menyumbang. Tradisi ini mencerminkan nilai gotong royong dan solidaritas sosial karena keluarga dan tetangga saling bahu-membahu dalam membantu sesama.
+Namun, praktik buwuhan tidak lepas dari unsur pertukaran atau dipandang sebagai utang. Masyarakat meyakini bahwa segala bentuk bantuan yang diberikan akan kembali dalam bentuk yang setara ketika si pemberi mengadakan hajatan serupa. Hal ini menyebabkan buwuhan tidak lagi dipandang murni sebagai hibah atau sedekah, tetapi sebagai bentuk "utang tidak tertulis" yang menimbulkan kewajiban moral untuk membalas.
+Dalam praktiknya, buwuhan memang meringankan beban tuan rumah, tetapi dapat menimbulkan tekanan psikologis bagi penerima bantuan. Rasa malu dan kekhawatiran kehilangan harga diri mendorong sebagian orang untuk berutang demi mengembalikan buwuhan. Hal ini menyebabkan terbaginya cara pandang terhadap buwuhan. Ada yang melihatnya sebagai bentuk tolong-menolong, tetapi ada juga yang justru menganggapnya menjadi sistem utang piutang berbasis sosial. Sebagian pihak berpendapat bahwa buwuhan adalah hibah karena tujuannya adalah untuk membantu. Namun, apabila ada keharusan pengembalian, maka secara hukum dan etika, buwuhan telah bergeser dari semangat gotong royong menjadi sebuah kewajiban ekonomi yang membebani. Oleh karena itu, pemahaman masyarakat terhadap tradisi buwuhan perlu diluruskan agar nilai luhur tolong-menolong tetap terjaga tanpa menimbulkan beban yang tidak perlu.
+Sumber:
+Rachmawati, S. A., & Anwar, M. K. (2021). Budaya dan Tradisi Buwuh sebagai Utang Piutang dalam Adat Pernikahan di Kota Surabaya. Jurnal Ekonomika dan Bisnis Islam, 4(3), hl 69–83.
+
+PERTANYAAN:
+“Oleh karena itu, pemahaman masyarakat terhadap tradisi buwuhan perlu diluruskan agar nilai luhur tolong-menolong tetap terjaga tanpa menimbulkan beban yang tidak perlu.”
+Kalimat tersebut dapat menjadi kesimpulan yang sesuai teks argumentasi tersebut karena ….
+OPSI / PERNYATAAN:
+  - A. A. merangkum sebab-akibat dari adanya tradisi buwuhan di wilayah Surabaya
+  - B. B. menyimpulkan ketidaksetujuan masyarakat terhadap penghapusan tradisi buwuhan
+  - C. C. menyangkal pandangan negatif yang ada di masyarakat untuk pelestarian buwuhan
+  - D. D. menyimpulkan berbagai pandangan masyarakat terhadap konsep buwuhan
+  - E. E. menggarisbawahi solusi untuk melestarikan tradisi buwuhan di seluruh wilayah Jawa
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Layur, Teruslah Berlayar
+“Bapak, pulanglah,” lirih Layur berharap. Ini hari keenam. Tiga hari adalah waktu terlama nelayan berada di laut. Dengan susah payah, Layur berpindah duduk ke dalam sebuah perahu tua. Penyangga kedua kaki Layur yang tak utuh ia letakkan di sampingnya.
+"Jangan-jangan..."
+"Tidak ... Aku tidak boleh berpikiran buruk. Bapak pasti pulang dengan selamat. Aku akan tetap menunggunya di sini sambil berdoa."
+Layur masih ingat masa-masa dulu, ketika Bapak berlayar pada malam hari dan keesokan harinya sudah merapat kembali di pantai dengan membawa ikan berlimpah.
+“Ayo! Siapa mau udang?” panggil Bapak. Layur berlari kencang bersama teman-temannya. Namun, itu adalah kenangan sepuluh tahun silam. Kini, udang dan ikan kecil adalah anugerah besar. Itu pun harus dijaring di tengah laut.
+Layur ingat betul, Bapak adalah pembuat bondet paling disegani, juga berpengaruh di dusun. Setiap hari, nelayan silih berganti datang ke rumah memesan bondet. Hasil panen ikan berlimpah. Tinggal melemparkan bondet ke dalam laut dan ...
+bum
+! Berkuintal-kuintal ikan terapung tinggal diserok menggunakan jaring.
+Sampai suatu ketika ...
+DUAAAR!
+Separuh rumah Layur luluh lantak karena simpanan bondet di gudang meledak. Ledakan bondet di gudang tak hanya merusak rumah tetapi juga mencelakai anak semata wayang. Ia berteriak minta tolong, menepuk-nepuk dadanya, dan menangis. Itulah titik balik yang amat disesali Bapak. Sejak itu, Bapak meninggalkan usaha pembuatan bondet. Demikian pula dengan warga Dusun Prau tempat mereka berdiam berangsur-angsur meninggalkan cara menangkap ikan dengan bondet.
+Lamat-lamat terlihat kibaran layar bercorak biru. Layur beringsut menuruni perahu tempatnya duduk. Lambaian tangan bapaknya semakin jelas dan semakin dekat.
+“Bapak dari mana? Bapak sudah tiga hari telat pulang!” Seru Layur kesal. Matanya berkaca-kaca, menahan rindu, dan cemas.
+Karya Anang YB
+Daftar Istillah
+:
+Bondet: istilah lokal yang merujuk pada bahan peledak rakitan, sering disebut juga bom ikan.
+Sumber:
+https://buku.kemdikbud.go.id/katalog/layur-tetaplah-berlayar (dengan pengubahan)
+
+PERTANYAAN:
+Berdasarkan teks tersebut, bagaimana sifat yang dimiliki oleh Layur?
+OPSI / PERNYATAAN:
+  - A. A. Nekat dan optimis
+  - B. B. Mudah cemas dan tabah
+  - C. C. Penuh harap dan kasih sayang
+  - D. D. Suka menyendiri dan tegas
+  - E. E. Cepat panik dan menyalahkan keadaan
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Layur, Teruslah Berlayar
+“Bapak, pulanglah,” lirih Layur berharap. Ini hari keenam. Tiga hari adalah waktu terlama nelayan berada di laut. Dengan susah payah, Layur berpindah duduk ke dalam sebuah perahu tua. Penyangga kedua kaki Layur yang tak utuh ia letakkan di sampingnya.
+"Jangan-jangan..."
+"Tidak ... Aku tidak boleh berpikiran buruk. Bapak pasti pulang dengan selamat. Aku akan tetap menunggunya di sini sambil berdoa."
+Layur masih ingat masa-masa dulu, ketika Bapak berlayar pada malam hari dan keesokan harinya sudah merapat kembali di pantai dengan membawa ikan berlimpah.
+“Ayo! Siapa mau udang?” panggil Bapak. Layur berlari kencang bersama teman-temannya. Namun, itu adalah kenangan sepuluh tahun silam. Kini, udang dan ikan kecil adalah anugerah besar. Itu pun harus dijaring di tengah laut.
+Layur ingat betul, Bapak adalah pembuat bondet paling disegani, juga berpengaruh di dusun. Setiap hari, nelayan silih berganti datang ke rumah memesan bondet. Hasil panen ikan berlimpah. Tinggal melemparkan bondet ke dalam laut dan ...
+bum
+! Berkuintal-kuintal ikan terapung tinggal diserok menggunakan jaring.
+Sampai suatu ketika ...
+DUAAAR!
+Separuh rumah Layur luluh lantak karena simpanan bondet di gudang meledak. Ledakan bondet di gudang tak hanya merusak rumah tetapi juga mencelakai anak semata wayang. Ia berteriak minta tolong, menepuk-nepuk dadanya, dan menangis. Itulah titik balik yang amat disesali Bapak. Sejak itu, Bapak meninggalkan usaha pembuatan bondet. Demikian pula dengan warga Dusun Prau tempat mereka berdiam berangsur-angsur meninggalkan cara menangkap ikan dengan bondet.
+Lamat-lamat terlihat kibaran layar bercorak biru. Layur beringsut menuruni perahu tempatnya duduk. Lambaian tangan bapaknya semakin jelas dan semakin dekat.
+“Bapak dari mana? Bapak sudah tiga hari telat pulang!” Seru Layur kesal. Matanya berkaca-kaca, menahan rindu, dan cemas.
+Karya Anang YB
+Daftar Istillah
+:
+Bondet: istilah lokal yang merujuk pada bahan peledak rakitan, sering disebut juga bom ikan.
+Sumber:
+https://buku.kemdikbud.go.id/katalog/layur-tetaplah-berlayar (dengan pengubahan)
+
+PERTANYAAN:
+Apa yang menyebabkan Layur kesal kepada Bapak?
+OPSI / PERNYATAAN:
+  - A. A. Tidak pamit kepada Layur saat hendak berlayar
+  - B. B. Tidak membawa banyak ikan dari laut
+  - C. C. Tidak setuju Layur menunggu terlalu lama di pantai
+  - D. D. Tidak kunjung pulang setelah enam hari melaut
+  - E. E. Tidak menepati janjinya untuk pulang tepat waktu ketika melaut
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Layur, Teruslah Berlayar
+“Bapak, pulanglah,” lirih Layur berharap. Ini hari keenam. Tiga hari adalah waktu terlama nelayan berada di laut. Dengan susah payah, Layur berpindah duduk ke dalam sebuah perahu tua. Penyangga kedua kaki Layur yang tak utuh ia letakkan di sampingnya.
+"Jangan-jangan..."
+"Tidak ... Aku tidak boleh berpikiran buruk. Bapak pasti pulang dengan selamat. Aku akan tetap menunggunya di sini sambil berdoa."
+Layur masih ingat masa-masa dulu, ketika Bapak berlayar pada malam hari dan keesokan harinya sudah merapat kembali di pantai dengan membawa ikan berlimpah.
+“Ayo! Siapa mau udang?” panggil Bapak. Layur berlari kencang bersama teman-temannya. Namun, itu adalah kenangan sepuluh tahun silam. Kini, udang dan ikan kecil adalah anugerah besar. Itu pun harus dijaring di tengah laut.
+Layur ingat betul, Bapak adalah pembuat bondet paling disegani, juga berpengaruh di dusun. Setiap hari, nelayan silih berganti datang ke rumah memesan bondet. Hasil panen ikan berlimpah. Tinggal melemparkan bondet ke dalam laut dan ...
+bum
+! Berkuintal-kuintal ikan terapung tinggal diserok menggunakan jaring.
+Sampai suatu ketika ...
+DUAAAR!
+Separuh rumah Layur luluh lantak karena simpanan bondet di gudang meledak. Ledakan bondet di gudang tak hanya merusak rumah tetapi juga mencelakai anak semata wayang. Ia berteriak minta tolong, menepuk-nepuk dadanya, dan menangis. Itulah titik balik yang amat disesali Bapak. Sejak itu, Bapak meninggalkan usaha pembuatan bondet. Demikian pula dengan warga Dusun Prau tempat mereka berdiam berangsur-angsur meninggalkan cara menangkap ikan dengan bondet.
+Lamat-lamat terlihat kibaran layar bercorak biru. Layur beringsut menuruni perahu tempatnya duduk. Lambaian tangan bapaknya semakin jelas dan semakin dekat.
+“Bapak dari mana? Bapak sudah tiga hari telat pulang!” Seru Layur kesal. Matanya berkaca-kaca, menahan rindu, dan cemas.
+Karya Anang YB
+Daftar Istillah
+:
+Bondet: istilah lokal yang merujuk pada bahan peledak rakitan, sering disebut juga bom ikan.
+Sumber:
+https://buku.kemdikbud.go.id/katalog/layur-tetaplah-berlayar (dengan pengubahan)
+
+PERTANYAAN:
+Bagaimana kisah yang sesuai untuk menutup cerita Layur merasa lega pada cerita tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Bapak meminta maaf pada Layur dan menceritakan penyebabnya pulang terlambat
+  - B. B. Bapak membimbing Layur pulang dan berjanji untuk tidak pulang terlambat lagi
+  - C. C. Bapak memeluk Layur dan merasa senang karena akhirnya ia bisa bertemu putrinya kembali
+  - D. D. Layur membereskan sampan dan memberikan hasil tangkapan yang tidak seberapa kepada Bapak
+  - E. E. Layur berterima kasih kepada Bapak karena telah menunggunya pulang dari melaut berhari-hari
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Layur, Teruslah Berlayar
+“Bapak, pulanglah,” lirih Layur berharap. Ini hari keenam. Tiga hari adalah waktu terlama nelayan berada di laut. Dengan susah payah, Layur berpindah duduk ke dalam sebuah perahu tua. Penyangga kedua kaki Layur yang tak utuh ia letakkan di sampingnya.
+"Jangan-jangan..."
+"Tidak ... Aku tidak boleh berpikiran buruk. Bapak pasti pulang dengan selamat. Aku akan tetap menunggunya di sini sambil berdoa."
+Layur masih ingat masa-masa dulu, ketika Bapak berlayar pada malam hari dan keesokan harinya sudah merapat kembali di pantai dengan membawa ikan berlimpah.
+“Ayo! Siapa mau udang?” panggil Bapak. Layur berlari kencang bersama teman-temannya. Namun, itu adalah kenangan sepuluh tahun silam. Kini, udang dan ikan kecil adalah anugerah besar. Itu pun harus dijaring di tengah laut.
+Layur ingat betul, Bapak adalah pembuat bondet paling disegani, juga berpengaruh di dusun. Setiap hari, nelayan silih berganti datang ke rumah memesan bondet. Hasil panen ikan berlimpah. Tinggal melemparkan bondet ke dalam laut dan ...
+bum
+! Berkuintal-kuintal ikan terapung tinggal diserok menggunakan jaring.
+Sampai suatu ketika ...
+DUAAAR!
+Separuh rumah Layur luluh lantak karena simpanan bondet di gudang meledak. Ledakan bondet di gudang tak hanya merusak rumah tetapi juga mencelakai anak semata wayang. Ia berteriak minta tolong, menepuk-nepuk dadanya, dan menangis. Itulah titik balik yang amat disesali Bapak. Sejak itu, Bapak meninggalkan usaha pembuatan bondet. Demikian pula dengan warga Dusun Prau tempat mereka berdiam berangsur-angsur meninggalkan cara menangkap ikan dengan bondet.
+Lamat-lamat terlihat kibaran layar bercorak biru. Layur beringsut menuruni perahu tempatnya duduk. Lambaian tangan bapaknya semakin jelas dan semakin dekat.
+“Bapak dari mana? Bapak sudah tiga hari telat pulang!” Seru Layur kesal. Matanya berkaca-kaca, menahan rindu, dan cemas.
+Karya Anang YB
+Daftar Istillah
+:
+Bondet: istilah lokal yang merujuk pada bahan peledak rakitan, sering disebut juga bom ikan.
+Sumber:
+https://buku.kemdikbud.go.id/katalog/layur-tetaplah-berlayar (dengan pengubahan)
+
+PERTANYAAN:
+Bagaimana reaksi yang ditunjukkan oleh Bapak ketika rumahnya luluh lantak dan bondet buatannya melukai Layur?
+OPSI / PERNYATAAN:
+  - A. A. Merasa trauma dan membutuhkan waktu untuk menyendiri
+  - B. B. Menunjukkan respons yang biasa seperti tidak terjadi apa-apa
+  - C. C. Sangat terkejut dan sungguh menyesal atas apa yang dilakukan
+  - D. D. Marah terhadap orang lain dan merasa panik yang luar biasa
+  - E. E. Bingung dan berusaha mencerna terhadap apa yang telah terjadi
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pantai Bersih Tanpa Sampah
+Di sebuah daerah wisata yang terkenal dengan pantainya yang indah, pemerintah setempat gencar mengampanyekan "Pantai Bersih Tanpa Sampah." Spanduk dan papan peringatan terpampang di berbagai sudut. Namun, kenyataannya seringkali berbeda.
+Suatu sore, Pak Wayan, seorang nelayan tua yang sudah puluhan tahun melaut, sedang membersihkan jaringnya di tepi pantai. Di sampingnya, sekelompok turis muda asyik berpose untuk berfoto. Mereka mengenakan topi pantai yang modis, kacamata hitam, dan membawa botol minum berwarna-warni.
+"Wah, pantainya bersih banget ya,
+guys
+!" seru salah satu turis sambil memegang ponselnya. "Pas banget buat konten 'liburan ramah lingkungan'!"
+Temannya menimpali, "Iya! Nanti
+caption-
+nya 'Menikmati keindahan alam tanpa jejak, menjaga bumi kita tercinta!'"
+Setelah puas berfoto dari berbagai sudut dengan beragam filter, mereka beranjak pergi. Namun mereka meninggalkan botol minuman plastik kosong, bungkus keripik, dan beberapa puntung rokok yang disembunyikan di balik semak-semak. Mereka bahkan tidak berusaha mencari tempat sampah yang hanya berjarak beberapa meter.
+Pak Wayan hanya bisa menggelengkan kepala. Ia berjalan mendekat dan memungut sampah-sampah itu satu per satu. Ia sudah terbiasa dengan pemandangan ini. Para turis datang untuk menikmati keindahan, berfoto, membuat konten, lalu pergi meninggalkan "kenangan" dalam bentuk sampah.
+Tak lama kemudian, seorang petugas kebersihan berseragam oranye datang dengan sapu dan karung. "Pak Wayan, sudah banyak lagi ya sampahnya?" tanyanya sambil menghela napas.
+"Sudah biasa, Nak," jawab Pak Wayan. "Ini namanya 'sampah estetik'. Cuma bagus di foto, tapi busuk di mata dan bau di hidung."
+Petugas itu tersenyum masam. "Iya, Pak. Kata mereka peduli lingkungan, tapi pedulinya cuma di
+caption
+media sosial."
+Malam harinya, di akun media sosial Pak Wayan—yang diajari cucunya—ia, ia melihat foto-foto pantai yang diunggah para turis tadi. Pantai tampak bersih sempurna, dihiasi filter matahari terbenam yang memukau. Ia membaca
+caption-
+nya
+:
+"Surgaku, jangan kau kotori!"
+Pak Wayan hanya bisa tersenyum getir. Sepertinya, slogan "Pantai Bersih Tanpa Sampah" itu hanya berlaku untuk kamera dan media sosial. Sementara di balik layar, jejak yang ditinggalkan justru lebih nyata dan memprihatinkan daripada gambar yang dipamerkan.
+[Konteks Visual Gambar 97300_03c2f200424e7466a907a3311d5834f2.png]:
+Berikut adalah deskripsi dan transkripsi visual dari gambar:
+
+### **Transkripsi Teks (Papan Informasi)**
+$$\text{PANTAI}$$
+$$\text{BERSIH}$$
+$$\text{TANPA}$$
+$$\text{SAMPAH}$$
+
+---
+
+### **Deskripsi Elemen Visual & Konteks Gambar**
+* **Objek Teks:** Papan kayu bertuliskan **"PANTAI BERSIH TANPA SAMPAH"** tertancap di pasir pantai.
+* **Kelompok Kanan (Objek Utama):** Empat orang pemuda/remaja (dua laki-laki, dua perempuan) berpose ceria dan antusias:
+  * Satu perempuan memegang *smartphone* untuk berswafoto (*selfie*).
+  * Satu laki-laki di belakang memegang kamera video (*handycam*).
+  * Dua lainnya tersenyum dan melambaikan tangan ke arah kamera ponsel.
+* **Objek Kiri (Kontras Sosial):** Seorang pria lanjut usia memakai topi caping/rimba dan kemeja putih, terduduk dengan postur membungkuk dan ekspresi wajah lelah/murung di samping papan.
+* **Latar Belakang:** Area pesisir pantai dengan garis pantai, air laut, dan siluet dua orang pengunjung lain di kejauhan.
+PERTANYAAN:
+Manakah urutan peristiwa berikut yang paling sesuai dengan isi teks?
+OPSI / PERNYATAAN:
+  - A. A. Pak Wayan melihat foto turis di media social → petugas kebersihan datang → turis membuat konten
+  - B. B. Turis berfoto dan membuat konten → Pak Wayan memungut sampah → petugas kebersihan datang
+  - C. C. Pemerintah mengampanyekan kebersihan → Pak Wayan melihat foto turis → petugas kebersihan datang
+  - D. D. Petugas kebersihan datang → turis membuat konten di media soal → Pak Wayan memungut sampah
+  - E. E. Pak Wayan memungut sampah → turis membuat konten → pemerintah mengampanyekan kebersihan
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pantai Bersih Tanpa Sampah
+Di sebuah daerah wisata yang terkenal dengan pantainya yang indah, pemerintah setempat gencar mengampanyekan "Pantai Bersih Tanpa Sampah." Spanduk dan papan peringatan terpampang di berbagai sudut. Namun, kenyataannya seringkali berbeda.
+Suatu sore, Pak Wayan, seorang nelayan tua yang sudah puluhan tahun melaut, sedang membersihkan jaringnya di tepi pantai. Di sampingnya, sekelompok turis muda asyik berpose untuk berfoto. Mereka mengenakan topi pantai yang modis, kacamata hitam, dan membawa botol minum berwarna-warni.
+"Wah, pantainya bersih banget ya,
+guys
+!" seru salah satu turis sambil memegang ponselnya. "Pas banget buat konten 'liburan ramah lingkungan'!"
+Temannya menimpali, "Iya! Nanti
+caption-
+nya 'Menikmati keindahan alam tanpa jejak, menjaga bumi kita tercinta!'"
+Setelah puas berfoto dari berbagai sudut dengan beragam filter, mereka beranjak pergi. Namun mereka meninggalkan botol minuman plastik kosong, bungkus keripik, dan beberapa puntung rokok yang disembunyikan di balik semak-semak. Mereka bahkan tidak berusaha mencari tempat sampah yang hanya berjarak beberapa meter.
+Pak Wayan hanya bisa menggelengkan kepala. Ia berjalan mendekat dan memungut sampah-sampah itu satu per satu. Ia sudah terbiasa dengan pemandangan ini. Para turis datang untuk menikmati keindahan, berfoto, membuat konten, lalu pergi meninggalkan "kenangan" dalam bentuk sampah.
+Tak lama kemudian, seorang petugas kebersihan berseragam oranye datang dengan sapu dan karung. "Pak Wayan, sudah banyak lagi ya sampahnya?" tanyanya sambil menghela napas.
+"Sudah biasa, Nak," jawab Pak Wayan. "Ini namanya 'sampah estetik'. Cuma bagus di foto, tapi busuk di mata dan bau di hidung."
+Petugas itu tersenyum masam. "Iya, Pak. Kata mereka peduli lingkungan, tapi pedulinya cuma di
+caption
+media sosial."
+Malam harinya, di akun media sosial Pak Wayan—yang diajari cucunya—ia, ia melihat foto-foto pantai yang diunggah para turis tadi. Pantai tampak bersih sempurna, dihiasi filter matahari terbenam yang memukau. Ia membaca
+caption-
+nya
+:
+"Surgaku, jangan kau kotori!"
+Pak Wayan hanya bisa tersenyum getir. Sepertinya, slogan "Pantai Bersih Tanpa Sampah" itu hanya berlaku untuk kamera dan media sosial. Sementara di balik layar, jejak yang ditinggalkan justru lebih nyata dan memprihatinkan daripada gambar yang dipamerkan.
+[Konteks Visual Gambar 97300_03c2f200424e7466a907a3311d5834f2.png]:
+Berikut adalah deskripsi dan transkripsi visual dari gambar:
+
+### **Transkripsi Teks (Papan Informasi)**
+$$\text{PANTAI}$$
+$$\text{BERSIH}$$
+$$\text{TANPA}$$
+$$\text{SAMPAH}$$
+
+---
+
+### **Deskripsi Elemen Visual & Konteks Gambar**
+* **Objek Teks:** Papan kayu bertuliskan **"PANTAI BERSIH TANPA SAMPAH"** tertancap di pasir pantai.
+* **Kelompok Kanan (Objek Utama):** Empat orang pemuda/remaja (dua laki-laki, dua perempuan) berpose ceria dan antusias:
+  * Satu perempuan memegang *smartphone* untuk berswafoto (*selfie*).
+  * Satu laki-laki di belakang memegang kamera video (*handycam*).
+  * Dua lainnya tersenyum dan melambaikan tangan ke arah kamera ponsel.
+* **Objek Kiri (Kontras Sosial):** Seorang pria lanjut usia memakai topi caping/rimba dan kemeja putih, terduduk dengan postur membungkuk dan ekspresi wajah lelah/murung di samping papan.
+* **Latar Belakang:** Area pesisir pantai dengan garis pantai, air laut, dan siluet dua orang pengunjung lain di kejauhan.
+PERTANYAAN:
+Apa pesan moral yang disiratkan melalui dialog antara Pak Wayan dan petugas kebersihan?
+OPSI / PERNYATAAN:
+  - A. A. Menjaga kebersihan pantai adalah tanggung jawab utama pemerintah dan petugas kebersihan
+  - B. B. Wisatawan seringkali menikmati keindahan alam tanpa memiliki kepedulian yang mendalam
+  - C. C. Kesadaran lingkungan sejati harus dibuktikan lewat tindakan, bukan hanya kata-kata di media sosial
+  - D. D. Media sosial bisa menjadi sarana positif untuk mengampanyekan kepedulian terhadap lingkungan
+  - E. E. Nelayan dan petugas kebersihan sering kali menjadi pihak yang terdampak langsung oleh sampah
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pantai Bersih Tanpa Sampah
+Di sebuah daerah wisata yang terkenal dengan pantainya yang indah, pemerintah setempat gencar mengampanyekan "Pantai Bersih Tanpa Sampah." Spanduk dan papan peringatan terpampang di berbagai sudut. Namun, kenyataannya seringkali berbeda.
+Suatu sore, Pak Wayan, seorang nelayan tua yang sudah puluhan tahun melaut, sedang membersihkan jaringnya di tepi pantai. Di sampingnya, sekelompok turis muda asyik berpose untuk berfoto. Mereka mengenakan topi pantai yang modis, kacamata hitam, dan membawa botol minum berwarna-warni.
+"Wah, pantainya bersih banget ya,
+guys
+!" seru salah satu turis sambil memegang ponselnya. "Pas banget buat konten 'liburan ramah lingkungan'!"
+Temannya menimpali, "Iya! Nanti
+caption-
+nya 'Menikmati keindahan alam tanpa jejak, menjaga bumi kita tercinta!'"
+Setelah puas berfoto dari berbagai sudut dengan beragam filter, mereka beranjak pergi. Namun mereka meninggalkan botol minuman plastik kosong, bungkus keripik, dan beberapa puntung rokok yang disembunyikan di balik semak-semak. Mereka bahkan tidak berusaha mencari tempat sampah yang hanya berjarak beberapa meter.
+Pak Wayan hanya bisa menggelengkan kepala. Ia berjalan mendekat dan memungut sampah-sampah itu satu per satu. Ia sudah terbiasa dengan pemandangan ini. Para turis datang untuk menikmati keindahan, berfoto, membuat konten, lalu pergi meninggalkan "kenangan" dalam bentuk sampah.
+Tak lama kemudian, seorang petugas kebersihan berseragam oranye datang dengan sapu dan karung. "Pak Wayan, sudah banyak lagi ya sampahnya?" tanyanya sambil menghela napas.
+"Sudah biasa, Nak," jawab Pak Wayan. "Ini namanya 'sampah estetik'. Cuma bagus di foto, tapi busuk di mata dan bau di hidung."
+Petugas itu tersenyum masam. "Iya, Pak. Kata mereka peduli lingkungan, tapi pedulinya cuma di
+caption
+media sosial."
+Malam harinya, di akun media sosial Pak Wayan—yang diajari cucunya—ia, ia melihat foto-foto pantai yang diunggah para turis tadi. Pantai tampak bersih sempurna, dihiasi filter matahari terbenam yang memukau. Ia membaca
+caption-
+nya
+:
+"Surgaku, jangan kau kotori!"
+Pak Wayan hanya bisa tersenyum getir. Sepertinya, slogan "Pantai Bersih Tanpa Sampah" itu hanya berlaku untuk kamera dan media sosial. Sementara di balik layar, jejak yang ditinggalkan justru lebih nyata dan memprihatinkan daripada gambar yang dipamerkan.
+[Konteks Visual Gambar 97300_03c2f200424e7466a907a3311d5834f2.png]:
+Berikut adalah deskripsi dan transkripsi visual dari gambar:
+
+### **Transkripsi Teks (Papan Informasi)**
+$$\text{PANTAI}$$
+$$\text{BERSIH}$$
+$$\text{TANPA}$$
+$$\text{SAMPAH}$$
+
+---
+
+### **Deskripsi Elemen Visual & Konteks Gambar**
+* **Objek Teks:** Papan kayu bertuliskan **"PANTAI BERSIH TANPA SAMPAH"** tertancap di pasir pantai.
+* **Kelompok Kanan (Objek Utama):** Empat orang pemuda/remaja (dua laki-laki, dua perempuan) berpose ceria dan antusias:
+  * Satu perempuan memegang *smartphone* untuk berswafoto (*selfie*).
+  * Satu laki-laki di belakang memegang kamera video (*handycam*).
+  * Dua lainnya tersenyum dan melambaikan tangan ke arah kamera ponsel.
+* **Objek Kiri (Kontras Sosial):** Seorang pria lanjut usia memakai topi caping/rimba dan kemeja putih, terduduk dengan postur membungkuk dan ekspresi wajah lelah/murung di samping papan.
+* **Latar Belakang:** Area pesisir pantai dengan garis pantai, air laut, dan siluet dua orang pengunjung lain di kejauhan.
+PERTANYAAN:
+Manakah relevansi paling kuat antara sindiran dalam teks dengan realitas kehidupan sehari-hari, terutama terkait kesadaran lingkungan dan pencitraan?
+OPSI / PERNYATAAN:
+  - A. A. Kritik terhadap kampanye "Pantai Bersih" yang hanya menjadi slogan, menunjukkan kurangnya efektivitas program pemerintah
+  - B. B. Sindiran bagi pembuat konten "liburan ramah lingkungan" hanya untuk pencitraan semata karena tetap membuang sampah sembarangan
+  - C. C. Penggambaran turis yang kewalahan dan menghela napas mencerminkan beban kerja yang berat karena perilaku abai para pengunjung
+  - D. D. Keadaan Pak Wayan yang terbiasa dengan pemandangan sampah di pantai menunjukkan adanya budaya pasrah terhadap masalah lingkungan
+  - E. E. Kontras antara spanduk "Bersih Tanpa Sampah" dengan sampah kenangan yang ditinggalkan, menunjukkan perlunya pengawasan ketat
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pulihkan Ekosistem, Menjaga Planet Kita dari Generasi ke Generasi
+Berdasarkan hasil riset LIPI (Lembaga Ilmu Pengetahuan Indonesia) terjadi peningkatan sampah plastik selama pandemik. Hal ini disebabkan oleh penggunaan layanan
+delivery
+makanan lewat jasa transportasi
+online
+, 96% paket dibungkus dengan plastik yang tebal dan ditambah dengan
+bubble wrap
+. Selain itu selotip, bungkus plastik, dan
+bubble wrap
+merupakan pembungkus berbahan plastik yang paling sering ditemukan. Sampah medis juga melonjak. Kementerian Lingkungan Hidup dan Kehutanan (KLHK) menyatakan bahwa selama pandemi, terjadi peningkatan timbunan sampah medis sebesar 30% hingga 50%. Dari data tersebut, Indonesia merupakan negara ke-2 penyumbang polusi sampah di lautan (3,22 metrik ton per tahun).
+Salah satu faktor penyebab dari pemasalahan tersebut adalah dengan pertambahan jumlah penduduk akan terjadi peningkatan aktivitas manusia dan daya konsumsi yang melonjak. Hal itu menyebabkan meningkatnya jumlah dan jenis limbah sehingga menyebabkan lingkungan menjadi tercemar. Selain sampah, penebangan pohon secara liar sampai pada kebakaran hutan menjadi penyumbang terbesar dalam kerusakan ekosistem. Banyak aktivitas manusia yang mengancam pelestarian lingkungan sehingga menyebabkan ketidakseimbangan ekosistem. Manusia punya peran besar dalam menjaga keseimbangan ekosistem, bukan cuma untuk sekarang, tapi juga untuk generasi mendatang. Tanggung jawab dalam menjaga lingkungan, tentunya bukan hanya dibebankan oleh pemerintah saja, tetapi seluruh elemen masyarakat harus bahu-membahu dalam menjaga dan melestarikan lingkungan.
+Bertepatan dengan peringatan Hari Lingkungan Hidup Sedunia, yang tidak hanya sebagai seremonial belaka, tentunya menjadi sebuah harapan dalam meningkatkan kesadaran menjaga dan melestarikan lingkungan. Selain itu, memberikan semangat baru bagi kita semua untuk komitmen menjaga lingkungan. Dengan memulai dari diri sendiri dan hal paling kecil, yaitu tidak membuang sampah sembarangan, terutama sampah plastik karena merusak ekosistem laut, tidak menebang pohon dengan liar hingga membuat gundul hutan. Mari bersama merobohkan jurang ekologi, memulihkan ekosistem bumi dengan pendekatan pengelolaan sumber daya alam yang adil dan berkelanjutan.
+Sumber:
+https://uiad.ac.id/2021/06/06/opini-pulihkan-ekosistem-menjaga-planet-kita-dari-generasi-ke-generasi/ (dengan pengubahan)
+
+PERTANYAAN:
+Bagaimana hubungan makna antara paragraf 1 dan paragraf 2 dalam teks tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Paragraf 2 menjelaskan akibat dari fenomena sampah yang diuraikan di paragraf 1
+  - B. B. Paragraf 2 menyajikan solusi awal untuk permasalahan yang diperkenalkan di paragraf 1
+  - C. C. Paragraf 2 memberikan contoh spesifik dari jenis sampah yang disebutkan di paragraf 1
+  - D. D. Paragraf 2 mengkritisi data yang rancu tentang sampah yang disajikan di paragraf 1
+  - E. E. Paragraf 2 menguraikan penyebab dari permasalahan yang dijabarkan di paragraf 1
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Pulihkan Ekosistem, Menjaga Planet Kita dari Generasi ke Generasi
+Berdasarkan hasil riset LIPI (Lembaga Ilmu Pengetahuan Indonesia) terjadi peningkatan sampah plastik selama pandemik. Hal ini disebabkan oleh penggunaan layanan
+delivery
+makanan lewat jasa transportasi
+online
+, 96% paket dibungkus dengan plastik yang tebal dan ditambah dengan
+bubble wrap
+. Selain itu selotip, bungkus plastik, dan
+bubble wrap
+merupakan pembungkus berbahan plastik yang paling sering ditemukan. Sampah medis juga melonjak. Kementerian Lingkungan Hidup dan Kehutanan (KLHK) menyatakan bahwa selama pandemi, terjadi peningkatan timbunan sampah medis sebesar 30% hingga 50%. Dari data tersebut, Indonesia merupakan negara ke-2 penyumbang polusi sampah di lautan (3,22 metrik ton per tahun).
+Salah satu faktor penyebab dari pemasalahan tersebut adalah dengan pertambahan jumlah penduduk akan terjadi peningkatan aktivitas manusia dan daya konsumsi yang melonjak. Hal itu menyebabkan meningkatnya jumlah dan jenis limbah sehingga menyebabkan lingkungan menjadi tercemar. Selain sampah, penebangan pohon secara liar sampai pada kebakaran hutan menjadi penyumbang terbesar dalam kerusakan ekosistem. Banyak aktivitas manusia yang mengancam pelestarian lingkungan sehingga menyebabkan ketidakseimbangan ekosistem. Manusia punya peran besar dalam menjaga keseimbangan ekosistem, bukan cuma untuk sekarang, tapi juga untuk generasi mendatang. Tanggung jawab dalam menjaga lingkungan, tentunya bukan hanya dibebankan oleh pemerintah saja, tetapi seluruh elemen masyarakat harus bahu-membahu dalam menjaga dan melestarikan lingkungan.
+Bertepatan dengan peringatan Hari Lingkungan Hidup Sedunia, yang tidak hanya sebagai seremonial belaka, tentunya menjadi sebuah harapan dalam meningkatkan kesadaran menjaga dan melestarikan lingkungan. Selain itu, memberikan semangat baru bagi kita semua untuk komitmen menjaga lingkungan. Dengan memulai dari diri sendiri dan hal paling kecil, yaitu tidak membuang sampah sembarangan, terutama sampah plastik karena merusak ekosistem laut, tidak menebang pohon dengan liar hingga membuat gundul hutan. Mari bersama merobohkan jurang ekologi, memulihkan ekosistem bumi dengan pendekatan pengelolaan sumber daya alam yang adil dan berkelanjutan.
+Sumber:
+https://uiad.ac.id/2021/06/06/opini-pulihkan-ekosistem-menjaga-planet-kita-dari-generasi-ke-generasi/ (dengan pengubahan)
+
+PERTANYAAN:
+Aktivitas manusia memberikan dampak besar terhadap pencemaran lingkungan di Indonesia.
+Data apa saja yang mendukung opini penulis tersebut?
+Klik pilihan
+Benar
+atau
+Salah
+untuk setiap pernyataan sesuai isi teks!
+OPSI / PERNYATAAN:
+  - A. Peningkatan aktivitas manusia yang menyebabkan lingkungan tercemar didukung oleh data lonjakan timbunan sampah medis sebesar 30-50%
+  - B. Tingginya jumlah dan jenis limbah didukung oleh data bahwa 96% paket dibungkus dengan plastik tebal dan bubble wrap
+  - C. Kebakaran hutan yang merusak ekosistem didukung data bahwa Indonesia merupakan negara ke-2 penyumbang sampah
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pulihkan Ekosistem, Menjaga Planet Kita dari Generasi ke Generasi
+Berdasarkan hasil riset LIPI (Lembaga Ilmu Pengetahuan Indonesia) terjadi peningkatan sampah plastik selama pandemik. Hal ini disebabkan oleh penggunaan layanan
+delivery
+makanan lewat jasa transportasi
+online
+, 96% paket dibungkus dengan plastik yang tebal dan ditambah dengan
+bubble wrap
+. Selain itu selotip, bungkus plastik, dan
+bubble wrap
+merupakan pembungkus berbahan plastik yang paling sering ditemukan. Sampah medis juga melonjak. Kementerian Lingkungan Hidup dan Kehutanan (KLHK) menyatakan bahwa selama pandemi, terjadi peningkatan timbunan sampah medis sebesar 30% hingga 50%. Dari data tersebut, Indonesia merupakan negara ke-2 penyumbang polusi sampah di lautan (3,22 metrik ton per tahun).
+Salah satu faktor penyebab dari pemasalahan tersebut adalah dengan pertambahan jumlah penduduk akan terjadi peningkatan aktivitas manusia dan daya konsumsi yang melonjak. Hal itu menyebabkan meningkatnya jumlah dan jenis limbah sehingga menyebabkan lingkungan menjadi tercemar. Selain sampah, penebangan pohon secara liar sampai pada kebakaran hutan menjadi penyumbang terbesar dalam kerusakan ekosistem. Banyak aktivitas manusia yang mengancam pelestarian lingkungan sehingga menyebabkan ketidakseimbangan ekosistem. Manusia punya peran besar dalam menjaga keseimbangan ekosistem, bukan cuma untuk sekarang, tapi juga untuk generasi mendatang. Tanggung jawab dalam menjaga lingkungan, tentunya bukan hanya dibebankan oleh pemerintah saja, tetapi seluruh elemen masyarakat harus bahu-membahu dalam menjaga dan melestarikan lingkungan.
+Bertepatan dengan peringatan Hari Lingkungan Hidup Sedunia, yang tidak hanya sebagai seremonial belaka, tentunya menjadi sebuah harapan dalam meningkatkan kesadaran menjaga dan melestarikan lingkungan. Selain itu, memberikan semangat baru bagi kita semua untuk komitmen menjaga lingkungan. Dengan memulai dari diri sendiri dan hal paling kecil, yaitu tidak membuang sampah sembarangan, terutama sampah plastik karena merusak ekosistem laut, tidak menebang pohon dengan liar hingga membuat gundul hutan. Mari bersama merobohkan jurang ekologi, memulihkan ekosistem bumi dengan pendekatan pengelolaan sumber daya alam yang adil dan berkelanjutan.
+Sumber:
+https://uiad.ac.id/2021/06/06/opini-pulihkan-ekosistem-menjaga-planet-kita-dari-generasi-ke-generasi/ (dengan pengubahan)
+
+PERTANYAAN:
+Mengapa penulis memilih istilah 'bahu-membahu' untuk menggambarkan peran semua pihak dalam upaya pelestarian lingkungan?
+OPSI / PERNYATAAN:
+  - A. A. Memperkuat makna pentingnya kolaborasi berbagai pihak untuk mencapai tujuan
+  - B. B. Memberikan sedikit kesan informal yang mungkin kurang pas untuk teks opini
+  - C. C. Mengindikasikan bahwa idiom lebih cocok digunakan untuk konteks fisik
+  - D. D. Menyiratkan adanya paksaan atau tekanan dari satu pihak kepada pihak lain
+  - E. E. Menunjukkan bahwa konteks ini terlalu ambigu dan tidak ada definisi yang jelas
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Prospek Ekonomi Global di Tengah Ketidakpastian
+Jakarta, Senin, 16 Juni 2025 – Perekonomian global terus menghadapi tantangan signifikan di tengah ketidakpastian geopolitik dan tekanan inflasi yang persisten. Analisis terbaru yang dirilis pada (Senin, 2/6/2025), oleh Dana Moneter Internasional (IMF) menunjukkan adanya divergensi dalam laju pemulihan ekonomi antarwilayah, di mana beberapa negara seperti Amerika Serikat dan India menunjukkan ketahanan yang lebih baik, sementara negara-negara di Eropa dan Tiongkok masih berjuang mengatasi dampak guncangan eksternal.
+Kenaikan harga energi dan pangan tetap menjadi pendorong utama inflasi di banyak negara, dipicu oleh gangguan rantai pasok global dan konflik di Ukraina, memaksa bank sentral untuk mempertahankan kebijakan moneter yang ketat. Upaya ini, meskipun esensial untuk mengendalikan kenaikan harga, berpotensi mengerem pertumbuhan ekonomi. Para pengambil kebijakan dihadapkan pada dilema sulit: menyeimbangkan kebutuhan untuk meredam inflasi tanpa memicu resesi yang dalam.
+"Kami melihat adanya perlambatan pertumbuhan global yang signifikan di tahun ini, dan risiko resesi menjadi lebih nyata jika bank sentral terlalu agresif dalam menaikkan suku bunga," ujar seorang ekonom senior dari Bank Dunia, dalam sebuah webinar yang diadakan, (Rabu, 11/6).
+Di sisi lain, sektor manufaktur global menunjukkan tanda-tanda perlambatan, tercermin dari menurunnya indeks manajer pembelian (PMI) di beberapa ekonomi besar seperti Jerman dan Jepang. Penurunan permintaan ekspor dan gangguan rantai pasok masih menjadi perhatian utama bagi produsen. Namun, sektor jasa justru menunjukkan resiliensi yang lebih kuat, didukung oleh kembali normalnya aktivitas setelah pandemi, sebuah tren yang mulai terlihat sejak awal Desember 2024.
+Pasar tenaga kerja di beberapa negara maju masih relatif ketat, dengan tingkat pengangguran yang rendah. Kondisi ini memberikan dukungan terhadap daya beli konsumen, meskipun tekanan biaya hidup yang tinggi dapat mengikis dampaknya. Sementara itu, investasi langsung asing (FDI) cenderung melambat, mencerminkan kehati-hatian investor di tengah prospek ekonomi yang tidak menentu.
+Ke depan, koordinasi kebijakan ekonomi antarnegara akan menjadi kunci untuk menstabilkan kondisi global. Reformasi struktural yang bertujuan meningkatkan produktivitas dan daya saing juga dianggap krusial untuk memastikan pertumbuhan yang berkelanjutan dalam jangka panjang. Para ekonom memprediksi bahwa prospek ekonomi akan sangat bergantung pada evolusi inflasi, respons kebijakan moneter, dan perkembangan situasi geopolitik di seluruh dunia. Bagi Indonesia, kondisi ini menuntut kewaspadaan dan diversifikasi ekonomi agar tidak terlalu rentan terhadap gejolak global dalam kurun waktu tiga hingga enam bulan ke depan, terhitung sejak (16/6/2025).
+Sumber: Disadur dan diadaptasi dari rilis pers dan laporan Global Economic Prospects, Juni 2025 oleh World Bank (Bank Dunia).
+
+PERTANYAAN:
+Fenomena yang menggambarkan "
+inflasi
+" berdasarkan teks di atas adalah ...
+OPSI / PERNYATAAN:
+  - A. A. Pengencangan anggaran negara karena kurangnya barang dan jasa
+  - B. B. Kenaikan harga barang dan jasa secara terus menerus dalam kurun waktu tertentu
+  - C. C. Biaya yang mendorong kemandirian ekonomi hingga mampu bersaing secara global
+  - D. D. Pergeseran tren pasar global terhadap produk-produk dari Indonesia
+  - E. E. Lambatnya sektor manufaktur global akibat menurunnya pembelian
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Prospek Ekonomi Global di Tengah Ketidakpastian
+Jakarta, Senin, 16 Juni 2025 – Perekonomian global terus menghadapi tantangan signifikan di tengah ketidakpastian geopolitik dan tekanan inflasi yang persisten. Analisis terbaru yang dirilis pada (Senin, 2/6/2025), oleh Dana Moneter Internasional (IMF) menunjukkan adanya divergensi dalam laju pemulihan ekonomi antarwilayah, di mana beberapa negara seperti Amerika Serikat dan India menunjukkan ketahanan yang lebih baik, sementara negara-negara di Eropa dan Tiongkok masih berjuang mengatasi dampak guncangan eksternal.
+Kenaikan harga energi dan pangan tetap menjadi pendorong utama inflasi di banyak negara, dipicu oleh gangguan rantai pasok global dan konflik di Ukraina, memaksa bank sentral untuk mempertahankan kebijakan moneter yang ketat. Upaya ini, meskipun esensial untuk mengendalikan kenaikan harga, berpotensi mengerem pertumbuhan ekonomi. Para pengambil kebijakan dihadapkan pada dilema sulit: menyeimbangkan kebutuhan untuk meredam inflasi tanpa memicu resesi yang dalam.
+"Kami melihat adanya perlambatan pertumbuhan global yang signifikan di tahun ini, dan risiko resesi menjadi lebih nyata jika bank sentral terlalu agresif dalam menaikkan suku bunga," ujar seorang ekonom senior dari Bank Dunia, dalam sebuah webinar yang diadakan, (Rabu, 11/6).
+Di sisi lain, sektor manufaktur global menunjukkan tanda-tanda perlambatan, tercermin dari menurunnya indeks manajer pembelian (PMI) di beberapa ekonomi besar seperti Jerman dan Jepang. Penurunan permintaan ekspor dan gangguan rantai pasok masih menjadi perhatian utama bagi produsen. Namun, sektor jasa justru menunjukkan resiliensi yang lebih kuat, didukung oleh kembali normalnya aktivitas setelah pandemi, sebuah tren yang mulai terlihat sejak awal Desember 2024.
+Pasar tenaga kerja di beberapa negara maju masih relatif ketat, dengan tingkat pengangguran yang rendah. Kondisi ini memberikan dukungan terhadap daya beli konsumen, meskipun tekanan biaya hidup yang tinggi dapat mengikis dampaknya. Sementara itu, investasi langsung asing (FDI) cenderung melambat, mencerminkan kehati-hatian investor di tengah prospek ekonomi yang tidak menentu.
+Ke depan, koordinasi kebijakan ekonomi antarnegara akan menjadi kunci untuk menstabilkan kondisi global. Reformasi struktural yang bertujuan meningkatkan produktivitas dan daya saing juga dianggap krusial untuk memastikan pertumbuhan yang berkelanjutan dalam jangka panjang. Para ekonom memprediksi bahwa prospek ekonomi akan sangat bergantung pada evolusi inflasi, respons kebijakan moneter, dan perkembangan situasi geopolitik di seluruh dunia. Bagi Indonesia, kondisi ini menuntut kewaspadaan dan diversifikasi ekonomi agar tidak terlalu rentan terhadap gejolak global dalam kurun waktu tiga hingga enam bulan ke depan, terhitung sejak (16/6/2025).
+Sumber: Disadur dan diadaptasi dari rilis pers dan laporan Global Economic Prospects, Juni 2025 oleh World Bank (Bank Dunia).
+
+PERTANYAAN:
+Peristiwa yang menggambarkan tantangan perekonomian global adalah ...
+OPSI / PERNYATAAN:
+  - A. A. Bank sentral di seluruh dunia mengesampingkan kebijakan moneter demi pertumbuhan ekonomi global
+  - B. B. Geopolitik berperan penting dalam menjaga kestabilan dan kekuatan perekonomian pada skala global
+  - C. C. Pertumbuhan ekonomi melambat sehingga memicu terjadinya resesi yang dialami masyarakat secara global
+  - D. D. Harga energi, pangan, dan komoditas lainnya yang tidak menentu terus menekan daya beli masyarakat
+  - E. E. Geopolitik memperlancar jalur perdagangan dan produksi sehingga menciptakan inflasi besar-besaran
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Prospek Ekonomi Global di Tengah Ketidakpastian
+Jakarta, Senin, 16 Juni 2025 – Perekonomian global terus menghadapi tantangan signifikan di tengah ketidakpastian geopolitik dan tekanan inflasi yang persisten. Analisis terbaru yang dirilis pada (Senin, 2/6/2025), oleh Dana Moneter Internasional (IMF) menunjukkan adanya divergensi dalam laju pemulihan ekonomi antarwilayah, di mana beberapa negara seperti Amerika Serikat dan India menunjukkan ketahanan yang lebih baik, sementara negara-negara di Eropa dan Tiongkok masih berjuang mengatasi dampak guncangan eksternal.
+Kenaikan harga energi dan pangan tetap menjadi pendorong utama inflasi di banyak negara, dipicu oleh gangguan rantai pasok global dan konflik di Ukraina, memaksa bank sentral untuk mempertahankan kebijakan moneter yang ketat. Upaya ini, meskipun esensial untuk mengendalikan kenaikan harga, berpotensi mengerem pertumbuhan ekonomi. Para pengambil kebijakan dihadapkan pada dilema sulit: menyeimbangkan kebutuhan untuk meredam inflasi tanpa memicu resesi yang dalam.
+"Kami melihat adanya perlambatan pertumbuhan global yang signifikan di tahun ini, dan risiko resesi menjadi lebih nyata jika bank sentral terlalu agresif dalam menaikkan suku bunga," ujar seorang ekonom senior dari Bank Dunia, dalam sebuah webinar yang diadakan, (Rabu, 11/6).
+Di sisi lain, sektor manufaktur global menunjukkan tanda-tanda perlambatan, tercermin dari menurunnya indeks manajer pembelian (PMI) di beberapa ekonomi besar seperti Jerman dan Jepang. Penurunan permintaan ekspor dan gangguan rantai pasok masih menjadi perhatian utama bagi produsen. Namun, sektor jasa justru menunjukkan resiliensi yang lebih kuat, didukung oleh kembali normalnya aktivitas setelah pandemi, sebuah tren yang mulai terlihat sejak awal Desember 2024.
+Pasar tenaga kerja di beberapa negara maju masih relatif ketat, dengan tingkat pengangguran yang rendah. Kondisi ini memberikan dukungan terhadap daya beli konsumen, meskipun tekanan biaya hidup yang tinggi dapat mengikis dampaknya. Sementara itu, investasi langsung asing (FDI) cenderung melambat, mencerminkan kehati-hatian investor di tengah prospek ekonomi yang tidak menentu.
+Ke depan, koordinasi kebijakan ekonomi antarnegara akan menjadi kunci untuk menstabilkan kondisi global. Reformasi struktural yang bertujuan meningkatkan produktivitas dan daya saing juga dianggap krusial untuk memastikan pertumbuhan yang berkelanjutan dalam jangka panjang. Para ekonom memprediksi bahwa prospek ekonomi akan sangat bergantung pada evolusi inflasi, respons kebijakan moneter, dan perkembangan situasi geopolitik di seluruh dunia. Bagi Indonesia, kondisi ini menuntut kewaspadaan dan diversifikasi ekonomi agar tidak terlalu rentan terhadap gejolak global dalam kurun waktu tiga hingga enam bulan ke depan, terhitung sejak (16/6/2025).
+Sumber: Disadur dan diadaptasi dari rilis pers dan laporan Global Economic Prospects, Juni 2025 oleh World Bank (Bank Dunia).
+
+PERTANYAAN:
+Manakah pernyataan yang dapat menjadi kelanjutan teks tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Peran aktif IMF dan Bank Dunia dalam menanggulangi krisis ekonomi dan pembentukan SDM di negara berkembang secara global
+  - B. B. Dampak langsung kebijakan suku bunga bank sentral terhadap tingkat pengangguran di setiap negara dan menjadi masalah global
+  - C. C. Analisis mendalam mengenai skenario dan kemungkinan-kemungkinan terkait evolusi inflasi, respons kebijakan, serta situasi geopolitik
+  - D. D. Analisis mengenai skenario dan kemungkinan-kemungkinan terkait evolusi inflasi, respons kebijakan, serta situasi geopolitik global
+  - E. E. Pentingnya investasi di sektor manufaktur untuk meningkatkan ekspor dan mengurangi gangguan rantai pasok secara global
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Roh Meratus
+……………
+Kami kembali berjalan pulang. Kondisiku sudah sepenuhnya normal. Tetua melangkah di depanku. Tak kusangka, dalam keadaan kritis ternyata kami telah sangat jauh memasuki belantara. Aku memperhatikan pohon-pohon besar yang kami lewati. Sinar matahari bahkan hampir tak bisa menembus ke bawah.
+Aku merasa asing di tempat ini. Pohon-pohon yang berlumut itu, sulur-sulur yang bergantungan, semak-semak yang rimbun itu. Oh… ternyata belantara ini adalah tempat menakjubkan. Bayangkan, di lumut batang pohon itu udang-udang kecil berloncatan lincah. Belum pernah aku melihat udang hidup di batang pohon!
+“Kau tahu anak muda, tempat ini merasa terancam dengan keberadaan…” tetua menghentikan langkahnya dan mengambil sesuatu dalam
+butah
+. “Roh Meratus meniupkan
+wisa
+ke tubuh kalian, sayang kawan-kawanmu yang lain terlambat,” sambungnya kemudian melemparkan gulungan kertas yang diambil dari
+butah
+. Sigap kutangkap gulungan itu.
+“Itu peta yang kuambil dari ranselmu. Ternyata kalian memasang patok-patok dan memberi tanda pohon-pohon besar untuk ditebang. Dan perlu kau ketahui anak muda, tempat ini juga termasuk wilayah yang akan kalian pasangi patok-patok itu,” katanya dingin.
+Perlahan kubuka gulungan peta di tanganku. Dari peta terlihat jelas, pekerjaan kami tinggal sedikit lagi. Jika saja semuanya lancar, maka kami akan sampai di tempat ini dan selesailah kontrak kerja kami. Dalam waktu singkat, mungkin alat-alat berat akan didatangkan! Pohon-pohon ini, sulur-sulur ini, lumut-lumut ini, udang-udang ini…akan bagaimana?
+“Tetua, izinkan aku tinggal di sini dan bersama kaummu menjaga tempat ini…” Akhirnya setelah lama hanya diam, aku menatap mata tetua mantap.
+(Cerpen karya Zaidinoor)
+Glosarium
+Butah: wadah atau tempat yang digunakan untuk membawa sesuatu, biasanya terbuat dari anyaman rotan atau bambu
+Wisa: bisa atau racun
+
+PERTANYAAN:
+Latar tempat yang tergambar dalam cerita tersebut adalah ….
+OPSI / PERNYATAAN:
+  - A. A. sebuah perkampungan penduduk adat
+  - B. B. daerah perkotaan yang ramai
+  - C. C. pegunungan batu yang tandus
+  - D. D. hutan belantara yang lebat
+  - E. E. pantai dengan pasir putih
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Roh Meratus
+……………
+Kami kembali berjalan pulang. Kondisiku sudah sepenuhnya normal. Tetua melangkah di depanku. Tak kusangka, dalam keadaan kritis ternyata kami telah sangat jauh memasuki belantara. Aku memperhatikan pohon-pohon besar yang kami lewati. Sinar matahari bahkan hampir tak bisa menembus ke bawah.
+Aku merasa asing di tempat ini. Pohon-pohon yang berlumut itu, sulur-sulur yang bergantungan, semak-semak yang rimbun itu. Oh… ternyata belantara ini adalah tempat menakjubkan. Bayangkan, di lumut batang pohon itu udang-udang kecil berloncatan lincah. Belum pernah aku melihat udang hidup di batang pohon!
+“Kau tahu anak muda, tempat ini merasa terancam dengan keberadaan…” tetua menghentikan langkahnya dan mengambil sesuatu dalam
+butah
+. “Roh Meratus meniupkan
+wisa
+ke tubuh kalian, sayang kawan-kawanmu yang lain terlambat,” sambungnya kemudian melemparkan gulungan kertas yang diambil dari
+butah
+. Sigap kutangkap gulungan itu.
+“Itu peta yang kuambil dari ranselmu. Ternyata kalian memasang patok-patok dan memberi tanda pohon-pohon besar untuk ditebang. Dan perlu kau ketahui anak muda, tempat ini juga termasuk wilayah yang akan kalian pasangi patok-patok itu,” katanya dingin.
+Perlahan kubuka gulungan peta di tanganku. Dari peta terlihat jelas, pekerjaan kami tinggal sedikit lagi. Jika saja semuanya lancar, maka kami akan sampai di tempat ini dan selesailah kontrak kerja kami. Dalam waktu singkat, mungkin alat-alat berat akan didatangkan! Pohon-pohon ini, sulur-sulur ini, lumut-lumut ini, udang-udang ini…akan bagaimana?
+“Tetua, izinkan aku tinggal di sini dan bersama kaummu menjaga tempat ini…” Akhirnya setelah lama hanya diam, aku menatap mata tetua mantap.
+(Cerpen karya Zaidinoor)
+Glosarium
+Butah: wadah atau tempat yang digunakan untuk membawa sesuatu, biasanya terbuat dari anyaman rotan atau bambu
+Wisa: bisa atau racun
+
+PERTANYAAN:
+Apa yang menyebabkan konflik dalam kutipan cerpen tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Tokoh utama dan kawan-kawan tersesat di tengah hutan belantara
+  - B. B. Kawan-kawan tokoh utama mengalami hal buruk karena wisa yang ditiupkan
+  - C. C. Tetua menemukan peta dari ransel tokoh utama
+  - D. D. Ketua adat tidak menyukai kehadiran orang luar di wilayahnya
+  - E. E. Kelompok tokoh utama dianggap mengancam kelestarian hutan
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Roh Meratus
+……………
+Kami kembali berjalan pulang. Kondisiku sudah sepenuhnya normal. Tetua melangkah di depanku. Tak kusangka, dalam keadaan kritis ternyata kami telah sangat jauh memasuki belantara. Aku memperhatikan pohon-pohon besar yang kami lewati. Sinar matahari bahkan hampir tak bisa menembus ke bawah.
+Aku merasa asing di tempat ini. Pohon-pohon yang berlumut itu, sulur-sulur yang bergantungan, semak-semak yang rimbun itu. Oh… ternyata belantara ini adalah tempat menakjubkan. Bayangkan, di lumut batang pohon itu udang-udang kecil berloncatan lincah. Belum pernah aku melihat udang hidup di batang pohon!
+“Kau tahu anak muda, tempat ini merasa terancam dengan keberadaan…” tetua menghentikan langkahnya dan mengambil sesuatu dalam
+butah
+. “Roh Meratus meniupkan
+wisa
+ke tubuh kalian, sayang kawan-kawanmu yang lain terlambat,” sambungnya kemudian melemparkan gulungan kertas yang diambil dari
+butah
+. Sigap kutangkap gulungan itu.
+“Itu peta yang kuambil dari ranselmu. Ternyata kalian memasang patok-patok dan memberi tanda pohon-pohon besar untuk ditebang. Dan perlu kau ketahui anak muda, tempat ini juga termasuk wilayah yang akan kalian pasangi patok-patok itu,” katanya dingin.
+Perlahan kubuka gulungan peta di tanganku. Dari peta terlihat jelas, pekerjaan kami tinggal sedikit lagi. Jika saja semuanya lancar, maka kami akan sampai di tempat ini dan selesailah kontrak kerja kami. Dalam waktu singkat, mungkin alat-alat berat akan didatangkan! Pohon-pohon ini, sulur-sulur ini, lumut-lumut ini, udang-udang ini…akan bagaimana?
+“Tetua, izinkan aku tinggal di sini dan bersama kaummu menjaga tempat ini…” Akhirnya setelah lama hanya diam, aku menatap mata tetua mantap.
+(Cerpen karya Zaidinoor)
+Glosarium
+Butah: wadah atau tempat yang digunakan untuk membawa sesuatu, biasanya terbuat dari anyaman rotan atau bambu
+Wisa: bisa atau racun
+
+PERTANYAAN:
+Apa yang akan dilakukan tokoh utama setelah mengalami peristiwa tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Meninggalkan pekerjaannya dan bergabung dengan tetua untuk melindungi hutan
+  - B. B. Menyelesaikan proyek sesuai rencana agar kontrak kerja tidak batal
+  - C. C. Meninggalkan hutan tanpa memberi tahu tetua untuk menghindari konflik
+  - D. D. Menyampaikan laporan kepada perusahaan untuk mempercepat pengerahan alat berat
+  - E. E. Mencari orang pintar untuk mengusir Roh Meratus yang berada di hutan tersebut
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Roh Meratus
+……………
+Kami kembali berjalan pulang. Kondisiku sudah sepenuhnya normal. Tetua melangkah di depanku. Tak kusangka, dalam keadaan kritis ternyata kami telah sangat jauh memasuki belantara. Aku memperhatikan pohon-pohon besar yang kami lewati. Sinar matahari bahkan hampir tak bisa menembus ke bawah.
+Aku merasa asing di tempat ini. Pohon-pohon yang berlumut itu, sulur-sulur yang bergantungan, semak-semak yang rimbun itu. Oh… ternyata belantara ini adalah tempat menakjubkan. Bayangkan, di lumut batang pohon itu udang-udang kecil berloncatan lincah. Belum pernah aku melihat udang hidup di batang pohon!
+“Kau tahu anak muda, tempat ini merasa terancam dengan keberadaan…” tetua menghentikan langkahnya dan mengambil sesuatu dalam
+butah
+. “Roh Meratus meniupkan
+wisa
+ke tubuh kalian, sayang kawan-kawanmu yang lain terlambat,” sambungnya kemudian melemparkan gulungan kertas yang diambil dari
+butah
+. Sigap kutangkap gulungan itu.
+“Itu peta yang kuambil dari ranselmu. Ternyata kalian memasang patok-patok dan memberi tanda pohon-pohon besar untuk ditebang. Dan perlu kau ketahui anak muda, tempat ini juga termasuk wilayah yang akan kalian pasangi patok-patok itu,” katanya dingin.
+Perlahan kubuka gulungan peta di tanganku. Dari peta terlihat jelas, pekerjaan kami tinggal sedikit lagi. Jika saja semuanya lancar, maka kami akan sampai di tempat ini dan selesailah kontrak kerja kami. Dalam waktu singkat, mungkin alat-alat berat akan didatangkan! Pohon-pohon ini, sulur-sulur ini, lumut-lumut ini, udang-udang ini…akan bagaimana?
+“Tetua, izinkan aku tinggal di sini dan bersama kaummu menjaga tempat ini…” Akhirnya setelah lama hanya diam, aku menatap mata tetua mantap.
+(Cerpen karya Zaidinoor)
+Glosarium
+Butah: wadah atau tempat yang digunakan untuk membawa sesuatu, biasanya terbuat dari anyaman rotan atau bambu
+Wisa: bisa atau racun
+
+PERTANYAAN:
+Perubahan sikap tokoh utama ditunjukkan melalui tindakannya di akhir kutipan.
+Manakah pernyataan yang paling tepat untuk menilai kesesuaian antara karakter tokoh dan tindakannya?
+Klik
+Benar
+atau
+Salah
+pada setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Tindakan tokoh utama sesuai karena ia menunjukkan kepedulian terhadap kelestarian hutan setelah mengalami perubahan pandangan
+  - B. Tindakan tokoh utama tidak sesuai karena ia telah meninggalkan kewajiban dalam menyelesaikan kontrak kerja
+  - C. Tindakan tokoh utama sesuai karena ia ingin membuktikan bahwa ia mampu memimpin proyek tanpa menggunakan alat berat
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tradisi Belis: Simbol Budaya yang Menyimpan Beban Finansial di Era Modern
+Belis adalah tradisi di wilayah Indonesia bagian timur seperti Nusa Tenggara Timur, yang secara umum di Indonesia dikenal dengan mas kawin atau mahar. Tradisi ini melambangkan penghormatan kepada wanita dan penyatuan keluarga. Namun, di balik nilainya, belis sering menjadi beban finansial berat bagi pihak laki-laki, yang kadang memicu tekanan psikologis dan mengganggu hubungan kekeluargaan. Beberapa pihak, terutama para sesepuh desa atau orang-orang tua, kadang terlalu kukuh untuk mempertahankan tradisi dan membuat tekanan dengan nilai yang semakin naik.
+Belis memiliki makna yang mendalam dan dianggap sebagai bentuk pengakuan atas peran penting seorang perempuan di dalam keluarga. Belis merupakan representasi keseriusan dan komitmen seorang pria untuk membangun keluarga. Proses penyerahan belis tidak hanya dimaknai sebagai pertukaran materi, tetapi juga sebagai simbol penyatuan dua komunitas besar, yakni keluarga kedua belah pihak. Pada masyarakat Lamaholot misalnya, belis diwujudkan dalam bentuk gading gajah atau bala, yang besarnya disesuaikan dengan status sosial seorang perempuan. Selain itu, disertakan juga pelengkap belis seperti sarung tenun sutra dan ternak. Uniknya, meskipun belis dari pihak laki-laki, pihak keluarga perempuan memberikan balasan simbolis kepada pihak laki-laki dalam bentuk barang berharga lainnya. Tradisi ini mengajarkan keseimbangan dan saling menghargai di antara kedua belah pihak.
+Meskipun belis mengandung nilai-nilai yang positif, tantangannya saat ini adalah menjaga agar tradisi tersebut tidak menjadi beban finansial yang berat. Tuntutan belis yang tinggi sering kali menjadi sumber tekanan, terutama bagi keluarga laki-laki. Dalam beberapa kasus, perkara belis dapat berimbas pada kesehatan mental hingga memicu tindakan tragis, seperti yang pernah terjadi di Kupang. Selain menjadi tantangan finansial, besarnya tuntutan materi untuk belis juga sering kali menimbulkan ketegangan dan konflik di antara pasangan dan keluarganya. Ketika keluarga perempuan menetapkan nominal belis yang tinggi, tidak jarang hal ini membangkitkan sentimen negatif dari pihak laki-laki yang merasa tertekan dan kehilangan martabat jika tidak mampu memenuhinya. Alhasil, penundaan pernikahan diambil guna memenuhi permintaan belis. Konflik semacam ini bisa merusak hubungan dua keluarga yang harusnya harmonis.
+Sumber:
+https://beritakini.co.id/detail/36671/tradisi-belis-simbol-budaya-yang-menyimpan-beban-finansial-di-era-modern
+https://www.krajan.id/belis-dalam-pernikahan-adat-ntt-simbol-budaya-atau-beban-sosial/#google_vignette
+
+PERTANYAAN:
+Apa makna kata
+sesepuh
+pada teks tersebut?
+OPSI / PERNYATAAN:
+  - A. A. keluarga yang dihormati oleh seluruh warga desa
+  - B. B. orang yang dituakan atau dijadikan pemimpin
+  - C. C. masyarakat yang memiliki peran penting
+  - D. D. pengurus atau perangkat desa yang sudah tua
+  - E. E. laki-laki yang sudah menikah dan memiliki anak
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tradisi Belis: Simbol Budaya yang Menyimpan Beban Finansial di Era Modern
+Belis adalah tradisi di wilayah Indonesia bagian timur seperti Nusa Tenggara Timur, yang secara umum di Indonesia dikenal dengan mas kawin atau mahar. Tradisi ini melambangkan penghormatan kepada wanita dan penyatuan keluarga. Namun, di balik nilainya, belis sering menjadi beban finansial berat bagi pihak laki-laki, yang kadang memicu tekanan psikologis dan mengganggu hubungan kekeluargaan. Beberapa pihak, terutama para sesepuh desa atau orang-orang tua, kadang terlalu kukuh untuk mempertahankan tradisi dan membuat tekanan dengan nilai yang semakin naik.
+Belis memiliki makna yang mendalam dan dianggap sebagai bentuk pengakuan atas peran penting seorang perempuan di dalam keluarga. Belis merupakan representasi keseriusan dan komitmen seorang pria untuk membangun keluarga. Proses penyerahan belis tidak hanya dimaknai sebagai pertukaran materi, tetapi juga sebagai simbol penyatuan dua komunitas besar, yakni keluarga kedua belah pihak. Pada masyarakat Lamaholot misalnya, belis diwujudkan dalam bentuk gading gajah atau bala, yang besarnya disesuaikan dengan status sosial seorang perempuan. Selain itu, disertakan juga pelengkap belis seperti sarung tenun sutra dan ternak. Uniknya, meskipun belis dari pihak laki-laki, pihak keluarga perempuan memberikan balasan simbolis kepada pihak laki-laki dalam bentuk barang berharga lainnya. Tradisi ini mengajarkan keseimbangan dan saling menghargai di antara kedua belah pihak.
+Meskipun belis mengandung nilai-nilai yang positif, tantangannya saat ini adalah menjaga agar tradisi tersebut tidak menjadi beban finansial yang berat. Tuntutan belis yang tinggi sering kali menjadi sumber tekanan, terutama bagi keluarga laki-laki. Dalam beberapa kasus, perkara belis dapat berimbas pada kesehatan mental hingga memicu tindakan tragis, seperti yang pernah terjadi di Kupang. Selain menjadi tantangan finansial, besarnya tuntutan materi untuk belis juga sering kali menimbulkan ketegangan dan konflik di antara pasangan dan keluarganya. Ketika keluarga perempuan menetapkan nominal belis yang tinggi, tidak jarang hal ini membangkitkan sentimen negatif dari pihak laki-laki yang merasa tertekan dan kehilangan martabat jika tidak mampu memenuhinya. Alhasil, penundaan pernikahan diambil guna memenuhi permintaan belis. Konflik semacam ini bisa merusak hubungan dua keluarga yang harusnya harmonis.
+Sumber:
+https://beritakini.co.id/detail/36671/tradisi-belis-simbol-budaya-yang-menyimpan-beban-finansial-di-era-modern
+https://www.krajan.id/belis-dalam-pernikahan-adat-ntt-simbol-budaya-atau-beban-sosial/#google_vignette
+
+PERTANYAAN:
+Tradisi belis memiliki banyak nilai positif.
+Manakah gagasan penjelas yang mendukung gagasan pokok tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Jumlah belis ditentukan secara sepihak oleh keluarga perempuan.
+  - B. B. Belis merupakan simbol keseriusan dan ketulusan dari pihak perempuan.
+  - C. C. Balasan dari keluarga perempuan biasanya permintaan dari pihak laki-laki.
+  - D. D. Belis menjadi wahana penghormatan dan juga penyatuan kedua pihak keluarga.
+  - E. E. Belis harus berupa gading gajah dan tidak bisa digantikan dengan benda lain.
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tradisi Belis: Simbol Budaya yang Menyimpan Beban Finansial di Era Modern
+Belis adalah tradisi di wilayah Indonesia bagian timur seperti Nusa Tenggara Timur, yang secara umum di Indonesia dikenal dengan mas kawin atau mahar. Tradisi ini melambangkan penghormatan kepada wanita dan penyatuan keluarga. Namun, di balik nilainya, belis sering menjadi beban finansial berat bagi pihak laki-laki, yang kadang memicu tekanan psikologis dan mengganggu hubungan kekeluargaan. Beberapa pihak, terutama para sesepuh desa atau orang-orang tua, kadang terlalu kukuh untuk mempertahankan tradisi dan membuat tekanan dengan nilai yang semakin naik.
+Belis memiliki makna yang mendalam dan dianggap sebagai bentuk pengakuan atas peran penting seorang perempuan di dalam keluarga. Belis merupakan representasi keseriusan dan komitmen seorang pria untuk membangun keluarga. Proses penyerahan belis tidak hanya dimaknai sebagai pertukaran materi, tetapi juga sebagai simbol penyatuan dua komunitas besar, yakni keluarga kedua belah pihak. Pada masyarakat Lamaholot misalnya, belis diwujudkan dalam bentuk gading gajah atau bala, yang besarnya disesuaikan dengan status sosial seorang perempuan. Selain itu, disertakan juga pelengkap belis seperti sarung tenun sutra dan ternak. Uniknya, meskipun belis dari pihak laki-laki, pihak keluarga perempuan memberikan balasan simbolis kepada pihak laki-laki dalam bentuk barang berharga lainnya. Tradisi ini mengajarkan keseimbangan dan saling menghargai di antara kedua belah pihak.
+Meskipun belis mengandung nilai-nilai yang positif, tantangannya saat ini adalah menjaga agar tradisi tersebut tidak menjadi beban finansial yang berat. Tuntutan belis yang tinggi sering kali menjadi sumber tekanan, terutama bagi keluarga laki-laki. Dalam beberapa kasus, perkara belis dapat berimbas pada kesehatan mental hingga memicu tindakan tragis, seperti yang pernah terjadi di Kupang. Selain menjadi tantangan finansial, besarnya tuntutan materi untuk belis juga sering kali menimbulkan ketegangan dan konflik di antara pasangan dan keluarganya. Ketika keluarga perempuan menetapkan nominal belis yang tinggi, tidak jarang hal ini membangkitkan sentimen negatif dari pihak laki-laki yang merasa tertekan dan kehilangan martabat jika tidak mampu memenuhinya. Alhasil, penundaan pernikahan diambil guna memenuhi permintaan belis. Konflik semacam ini bisa merusak hubungan dua keluarga yang harusnya harmonis.
+Sumber:
+https://beritakini.co.id/detail/36671/tradisi-belis-simbol-budaya-yang-menyimpan-beban-finansial-di-era-modern
+https://www.krajan.id/belis-dalam-pernikahan-adat-ntt-simbol-budaya-atau-beban-sosial/#google_vignette
+
+PERTANYAAN:
+Bagaimana hubungan makna antara paragraf kedua dan ketiga pada teks tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Paragraf kedua mempertentangkan mengenai pelestarian tradisi belis beserta contohnya di paragraf ketiga.
+  - B. B. Paragraf kedua memberikan penjelasan alasan tradisi belis yang digambarkan perlu dipertahankan di paragraf ketiga.
+  - C. C. Paragraf ketiga memberikan perbandingan penerapan tradisi belis di beberapa daerah yang dijelaskan di paragraf kedua.
+  - D. D. Paragraf ketiga menjelaskan tata laksana tradisi belis berdasarkan filosofinya seperti yang diurakan di paragraf kedua.
+  - E. E. Paragraf ketiga memaparkan dampak negatif tradisi belis, meskipun maknanya baik seperti yang dijelaskan di paragraf kedua.
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tradisi Belis: Simbol Budaya yang Menyimpan Beban Finansial di Era Modern
+Belis adalah tradisi di wilayah Indonesia bagian timur seperti Nusa Tenggara Timur, yang secara umum di Indonesia dikenal dengan mas kawin atau mahar. Tradisi ini melambangkan penghormatan kepada wanita dan penyatuan keluarga. Namun, di balik nilainya, belis sering menjadi beban finansial berat bagi pihak laki-laki, yang kadang memicu tekanan psikologis dan mengganggu hubungan kekeluargaan. Beberapa pihak, terutama para sesepuh desa atau orang-orang tua, kadang terlalu kukuh untuk mempertahankan tradisi dan membuat tekanan dengan nilai yang semakin naik.
+Belis memiliki makna yang mendalam dan dianggap sebagai bentuk pengakuan atas peran penting seorang perempuan di dalam keluarga. Belis merupakan representasi keseriusan dan komitmen seorang pria untuk membangun keluarga. Proses penyerahan belis tidak hanya dimaknai sebagai pertukaran materi, tetapi juga sebagai simbol penyatuan dua komunitas besar, yakni keluarga kedua belah pihak. Pada masyarakat Lamaholot misalnya, belis diwujudkan dalam bentuk gading gajah atau bala, yang besarnya disesuaikan dengan status sosial seorang perempuan. Selain itu, disertakan juga pelengkap belis seperti sarung tenun sutra dan ternak. Uniknya, meskipun belis dari pihak laki-laki, pihak keluarga perempuan memberikan balasan simbolis kepada pihak laki-laki dalam bentuk barang berharga lainnya. Tradisi ini mengajarkan keseimbangan dan saling menghargai di antara kedua belah pihak.
+Meskipun belis mengandung nilai-nilai yang positif, tantangannya saat ini adalah menjaga agar tradisi tersebut tidak menjadi beban finansial yang berat. Tuntutan belis yang tinggi sering kali menjadi sumber tekanan, terutama bagi keluarga laki-laki. Dalam beberapa kasus, perkara belis dapat berimbas pada kesehatan mental hingga memicu tindakan tragis, seperti yang pernah terjadi di Kupang. Selain menjadi tantangan finansial, besarnya tuntutan materi untuk belis juga sering kali menimbulkan ketegangan dan konflik di antara pasangan dan keluarganya. Ketika keluarga perempuan menetapkan nominal belis yang tinggi, tidak jarang hal ini membangkitkan sentimen negatif dari pihak laki-laki yang merasa tertekan dan kehilangan martabat jika tidak mampu memenuhinya. Alhasil, penundaan pernikahan diambil guna memenuhi permintaan belis. Konflik semacam ini bisa merusak hubungan dua keluarga yang harusnya harmonis.
+Sumber:
+https://beritakini.co.id/detail/36671/tradisi-belis-simbol-budaya-yang-menyimpan-beban-finansial-di-era-modern
+https://www.krajan.id/belis-dalam-pernikahan-adat-ntt-simbol-budaya-atau-beban-sosial/#google_vignette
+
+PERTANYAAN:
+“Dengan demikian, perlu untuk memikirkan ulang makna belis dan menetapkan cara ataupun perhitungan besaran belis yang lebih fleksibel.”
+Kalimat tersebut dapat menjadi kesimpulan yang sesuai teks argumentasi tersebut karena ….
+OPSI / PERNYATAAN:
+  - A. A. menekankan pentingnya menjaga tradisi belis agar tidak hilang ditelan zaman
+  - B. B. mengusulkan agar tradisi belis dihapuskan sepenuhnya demi kesejahteraan keluarga
+  - C. C. menegaskan bahwa belis adalah pertukaran materi semata dan tidak memiliki makna lain
+  - D. D. merangkum masalah utama yang ditimbulkan oleh belis yang kaku, yaitu konflik dan tekanan
+  - E. E. menyimpulkan solusi konkret untuk masalah yang dibahas, yaitu beban finansial akibat belis
+

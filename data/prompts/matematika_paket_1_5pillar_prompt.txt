@@ -1,0 +1,1038 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Matematika (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sebuah hotel memiliki 30 kamar yang tersedia di lantai 5. Manajer operasional mencatat fasilitas kamar tersebut sebagai berikut.
+
+18 kamar memiliki pemandangan ke arah laut.
+
+10 kamar memiliki fasilitas tempat tidur  Twin Bed.
+
+6 kamar di antaranya adalah kamar dengan pemandangan laut yang juga memiliki tempat tidur  Twin Bed.
+
+Sisanya adalah kamar standar yang tidak memiliki pemandangan laut maupun fasilitas  Twin Bed.
+
+PERTANYAAN:
+Jika saat ini semua kamar di lantai tersebut kosong dan resepsionis memilih satu kamar secara acak untuk tamu yang baru datang, berapakah peluang tamu tersebut mendapatkan kamar dengan pemandangan laut atau tempat tidur  Twin Bed?
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Dalam sebuah konferensi teknologi, dipaparkan sejumlah data bahwa dalam satu kelompok data yaitu setiap 10 gadget ramah lingkungan yang diproduksi oleh perusahaan X, rata-rata jenisnya adalah sebagai berikut:
+
+4 unit ponsel pintar ( smartphone );
+
+3 unit jam tangan pintar ( smartwatch );
+
+2 unit komputer tablet; dan
+
+sisanya adalah unit pelacak lokasi ( smart tag ).
+
+Seorang petugas quality control memilih 1 unit gadget secara acak dari kelompok data tersebut untuk diuji efisiensi dayanya.
+
+PERTANYAAN:
+Mana saja pernyataan-pernyataan berikut yang benar terkait nilai peluang terpilihnya jenis gadget tersebut?
+
+Pilihlah semua pernyataan yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Peluang terpilihnya ponsel pintar adalah 40%.
+  - B. B. Peluang terpilihnya gadget bukan komputer tablet adalah 0,2.
+  - C. C. Peluang terpilihnya unit pelacak lokasi adalah
+  - D. D. Peluang terpilihnya gadget bukan jam tangan pintar adalah 70%.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Harga 3 buah buku dan 2 buah penggaris Rp18.000,00. Jika harga sebuah buku Rp1.000,00 lebih mahal dari sebuah penggaris, harga 2 buah buku dan 5 buah penggaris adalah....
+OPSI / PERNYATAAN:
+  - A. A. Rp19.000,00
+  - B. B. Rp23.000,00
+  - C. C. Rp25.000,00
+  - D. D. Rp27.000,00
+  - E. E. Rp30.000,00
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pengusaha di Provinsi Jingga
+
+Pemerintah Provinsi Jingga mendata banyaknya pengusaha yang ada di Provinsi Jingga. Terdapat 7 kota di Provinsi Jingga. Berikut disajikan data banyak pengusaha pada masing – masing kota di Provinsi Jingga pada tahun 2026:
+
+Informasi mengenai banyaknya pengusaha di Kota E hilang, namun Pemerintah Provinsi Jingga sudah mengetahui jumlah total pengusaha di Provinsi Jingga sebanyak 25.000 orang.
+[Konteks Visual Gambar 05896_3ad4d2bbdad03e9487f6080ec1c06b63.png]:
+Gambar ilustrasi teknik sipil mengenai uji beban jembatan yang terbagi menjadi dua bagian: 1. Foto di sebelah kiri: Pengujian beban pada jalan jembatan menggunakan deretan truk bermuatan tanah di atas gelagar jembatan yang disaksikan oleh para pekerja proyek bertopi keselamatan. 2. Diagram penampang di sebelah kanan: Ilustrasi 3D struktur jembatan beton dan baja. Terdapat panah merah mengarah ke bawah di atas lintasan mobil yang merepresentasikan beban kendaraan, label 'GIRDER' yang menunjuk ke balok penopang baja/beton di bawah lantai jembatan, serta panah-panah merah vertikal pada pilar beton jembatan yang merepresentasikan gaya yang disalurkan ke pilar. Sebuah panah merah melengkung menghubungkan bagian bawah gelagar jembatan pada foto ke ilustrasi 3D girder di sebelah kanan.
+PERTANYAAN:
+Berdasarkan informasi tersebut, banyak pengusaha di Kota E adalah ….
+OPSI / PERNYATAAN:
+  - A. A. 500 orang
+  - B. B. 1.500 orang
+  - C. C. 2.000 orang
+  - D. D. 2.500 orang
+  - E. E. 3.000 orang
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan gambar berikut.
+[Konteks Visual Gambar 88819_6837a3202add4799943b1f2837c58003.png]:
+Ilustrasi kerangka geometris bangun ruang kubus $PQRS.TUVW$:- Rusuk-rusuk kubus digambarkan dengan garis tebal berwarna merah marun dengan titik sudut hitam.- Bidang alas terdiri dari titik-titik $P$ (kiri depan), $Q$ (kanan depan), $R$ (kanan belakang), dan $S$ (kiri belakang).- Bidang atas terdiri dari titik-titik $T$ (kiri depan), $U$ (kanan depan), $V$ (kanan belakang), dan $W$ (kiri belakang).- Pada bidang alas $PQRS$, terdapat dua garis diagonal alas berwarna abu-abu yaitu ruas garis $PR$ dan $QS$ yang berpotongan di titik tengah alas berlabel titik $O$.
+[Konteks Visual Gambar 95089_d25340b2a7ed58e850e0298630c96c79.png]:
+Sistem pertidaksamaan linear dua variabel: $x + y \le 4; \; x + 3y \ge 6; \; x \ge 0; \; y \ge 0$
+PERTANYAAN:
+Daerah yang memenuhi sistem pertidaksamaan linear  adalah....
+OPSI / PERNYATAAN:
+  - A. A. I
+  - B. B. II
+  - C. C. III
+  - D. D. IV
+  - E. E. V
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Rina mulai berinvestasi melalui aplikasi Bobin. Terdapat beberapa pilihan produk investasi yang ditawarkan di aplikasi Bobin. Rina memilih produk investasi tipe B2026 karena pada setiap akhir tahun, bunga yang diperoleh langsung ditambahkan ke tabungan. Berikut disajikan brosur mengenai produk investasi tipe B2026:
+
+Rina membeli produk investasi B2026 sebesar Rp7.000.000,00 dan berencana menyimpannya sampai jatuh tempo.
+[Konteks Visual Gambar 89491_620b7db474defbf5dbec6e442d36408a.png]:
+Gambar pengujian beban jembatan dan visualisasi struktur girder: 1. Bagian kiri: Foto proses uji pembebanan jembatan jalan raya yang sedang dibangun dengan deretan truk tanah terparkir di atas bentang jembatan, disaksikan oleh para insinyur/pekerja berhelm. 2. Bagian kanan: Ilustrasi 3D penampang struktur jembatan beton dan baja:- Panah merah vertikal mengarah ke bawah di atas lintasan mobil yang merepresentasikan beban lalu lintas.- Label 'GIRDER' mengarah ke balok-balok penopang baja I-beam (gelagar) di bawah pelat lantai jembatan.- Tiga panah vertikal merah bolak-balik pada pilar jembatan yang menunjukkan transmisi beban tekan dan reaksi tumpuan pilar. Panah lengkung merah menghubungkan gelagar jembatan pada foto ke model 3D girder di bagian kanan.
+PERTANYAAN:
+Berapakah uang yang diperoleh Rina setelah jatuh tempo?
+OPSI / PERNYATAAN:
+  - A. A. Rp8.470.000,00
+  - B. B. Rp9.100.000,00
+  - C. C. Rp9.240.000,00
+  - D. D. Rp9.261.000,00
+  - E. E. Rp9.317.000,00
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Diketahui fungsi f ( x ) =   , dengan   . Jika f –1 ( x ) adalah invers dari fungsi f ( x ), nilai dari f –1 (3) =....
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Fungsi  f: R -> R dan g  R -> R . Jika g (x) = x - 1   dan ( f  o   g ) (x) = x 3 – 4x, nilai dari   f (2) = ….
+OPSI / PERNYATAAN:
+  - A. A. 9
+  - B. B. 13
+  - C. C. 15
+  - D. D. 17
+  - E. E. 25
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Seorang teknisi di bidang energi menghitung konsumsi energi sebuah alat listrik. Diketahui tegangan listrik sebesar  volt, arus listrik sebesar    ampere, dan waktu pemakaian selama  detik. Energi listrik dirumuskan dengan E= V x I x t.
+
+dengan keterangan:
+
+E = energi listrik (Joule/J)
+
+V = tegangan listrik (Volt/V)
+
+I = kuat arus listrik (Ampere/A)
+
+t = waktu penggunaan listrik (detik)
+[Konteks Visual Gambar 85516_5975721b148e4664bb3c600c729fd869.png]:
+Operasi perkalian bilangan berpangkat: $2^4 \times 5^2$
+[Konteks Visual Gambar 85516_f0f5a94ba74a3089516e6e0e79e97e2b.png]:
+Operasi perkalian bilangan berpangkat negatif: $2^{-1} \times 5^{-1}$
+[Konteks Visual Gambar 85516_59b0b45bb957f09c3d31ac68b8568046.png]:
+Operasi perkalian bilangan berpangkat: $2^3 \times 5$
+[Konteks Visual Gambar 85516_ccaddfb64d7186332352e10eee87f6a5.png]:
+Pilihan jawaban yang memuat operasi pecahan bilangan berpangkat: $\text{E } \times \frac{1}{2^2 \cdot 5}$
+
+(Menampilkan huruf 'E' diikuti simbol kali 'x' dan pecahan $\frac{1}{2^2 \cdot 5}$).
+PERTANYAAN:
+Namun, karena adanya rugi sistem sebesar  energi bersih yang dihasilkan menjadi E bersih=   . maka energi bersih sama dengan...
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: ['C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Sebuah piring besar akan ditata potongan buah dengan susunan melingkar seperti pada gambar berikut.
+
+Tatanan potongan buah tersebut belum selesai dan akan dilanjutkan.
+[Konteks Visual Gambar 48351_dde5b9762f31a2a2adec2c56f1c35c8c.png]:
+Diagram penataan irisan buah secara melingkar konsentris pada piring saji bundar beserta legendanya:- Keterangan legenda: * Irisan melon hijau = 'susunan pertama' (lapisan lingkaran terdalam/pusat, terdiri atas 4 potong melon). * Potongan segitiga semangka merah = 'susunan kedua' (lapisan lingkaran tengah, terdiri atas 8 potong semangka). * Cincin nanas kuning berlubang = 'susunan ketiga' (lapisan lingkaran terluar, terdiri atas 16 irisan nanas). Susunan buah tersebut membentuk barisan geometri dengan pola jumlah potongan $4, 8, 16$.
+PERTANYAAN:
+Tentukan manakah banyak potongan buah yang mungkin pada susunan berikutnya?
+
+Pilihlah semua jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. 20 potongan buah
+  - B. B. 24 potongan buah
+  - C. C. 32 potongan buah
+  - D. D. 64 potongan buah
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 46140_227a812ca3946080be12cea54f468d36.png]:
+Bentuk pecahan aljabar dengan penyebut dan pembilang memuat bentuk akar: $\frac{2 + \sqrt{2}}{\sqrt{6} - \sqrt{2}}$
+PERTANYAAN:
+Bentuk rasional dari    adalah....
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Seorang peneliti melakukan pengamatan terhadap bakteri tertentu. Setiap  hari bakteri membelah diri menjadi dua. Pada awal pengamatan terdapat 2 bakteri. Jika setiap 2 hari    dari jumlah bakteri mati, banyaknya bakteri setelah tiga hari adalah....
+OPSI / PERNYATAAN:
+  - A. A. 48 bakteri
+  - B. B. 64 bakteri
+  - C. C. 96 bakteri
+  - D. D. 128 bakteri
+  - E. E. 192 bakteri
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Proses pelumasan pada mesin merupakan hal penting yang harus dilakukan untuk menjaga performa kerja mesin. Kekentalan pelumas akan menurun seiring bertambahnya waktu operasi mesin. Hubungan antara waktu operasi   (jam) dan tingkat kekentalan pelumas    dapat dinyatakan oleh fungsi:
+
+Adapun untuk keperluan pemeliharaan mesin, nilai kekentalan tersebut dapat dikategorikan menjadi tiga interval berikut:
+
+Interval Nilai
+
+Indikator Kekentalan
+
+Interpretasi
+
+Tinggi
+
+Pelumas masih sangat kental, kondisi sangat baik
+
+Sedang
+
+Pelumas masih layak digunakan
+
+Rendah
+
+Pelumas mulai encer, perlu dipertimbangkan untuk diganti
+[Konteks Visual Gambar 08227_8f224c2bc94e2ef3cf730b4601ccf5a0.png]:
+Teks berupa pertidaksamaan aljabar satu variabel: $V(x) \le 12$
+PERTANYAAN:
+Setelah mesin beroperasi berapa lamakah kekentalan pelumas pada mesin tersebut masuk pada indikator sedang?
+
+Pilihlah semua jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. 1 jam
+  - B. B. 2 jam
+  - C. C. 3 jam
+  - D. D. 4 jam
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 62193_925f43a370cc2bcce192c20158ee0776.png]:
+Diagram selembar bahan karton persegi untuk membuat kotak tanpa tutup:- Panjang sisi persegi adalah $30\text{ cm}$ (ditunjukkan oleh tanda ukuran di sisi kiri).- Keempat sudutnya dipotong berbentuk persegi berukuran $x \times x$ dengan arsiran garis miring diagonal.- Terdapat tanda garis pembagi kecil di tengah masing-masing sisi luar.
+PERTANYAAN:
+Dari selembar karton berbentuk persegi yang berukuran sisi 30 cm akan dibuat kotak tanpa tutup, dengan cara menggunting empat persegi di setiap pojok karton, seperti pada gambar. Volume kotak terbesar yang dapat dibuat adalah....
+OPSI / PERNYATAAN:
+  - A. A. 2.000 cm³
+  - B. B. 3.000 cm³
+  - C. C. 4.000 cm³
+  - D. D. 5.000 cm³
+  - E. E. 6.000 cm³
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan desain rak buku berikut!
+
+sumber gambar: https://www.ufurnish.com/en-gb/p/a/16953815/decorotika-pisagor-corner-bookcase-shelving-unit-black-oak
+[Konteks Visual Gambar 77237_b3910350d0b2ab699ee398b3188cd24f.png]:
+Foto rak buku/pajangan berbentuk segitiga bermotif marmer hitam yang dimodelkan dengan garis putus-putus oranye membentuk kesebangunan segitiga siku-siku:- Titik puncak rak diberi label $A$.- Garis tinggi vertikal di tengah rak menghubungkan $A - C - E - G - I$, dengan titik $I$ berada di lantai tengah dasar rak.- Sisi miring kiri rak menghubungkan titik-titik $A - B - D - F - H$, dengan titik $H$ berada di sudut kiri bawah lantai.- Papan ambalan horizontal rak membentuk segmen garis $BC$, $DE$, $FG$, dan $HI$ yang saling sejajar dan tegak lurus terhadap tiang tengah $AI$.- Membentuk empat segitiga siku-siku sebangun: $\triangle ABC$, $\triangle ADE$, $\triangle AFG$, dan $\triangle AHI$.
+[Konteks Visual Gambar 77237_7996117de11f7ac86c535847971555ec.png]:
+Pecahan perbandingan trigonometri/panjang sisi: $\frac{AB}{AC}$
+PERTANYAAN:
+Manakah perbandingan yang sama dengan?
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Seorang teknisi sedang menyambung beberapa pipa untuk membuat saluran air lurus. Setiap pipa yang disambungkan tidak menambah panjang penuh, karena sebagian ujung pipa masuk ke dalam sambungan pipa sebelumnya sehingga panjang saluran pipa mengalami penambahan tetap. Berikut gambar panjang 1 pipa, 2 pipa yang tersambung, dan 3 pipa yang tersambung.
+[Konteks Visual Gambar 18987_928b89a174eaca98e50e61a96cb57443.png]:
+Ilustrasi susunan pipa vertikal yang disambungkan: 1. Pipa tunggal (1 buah pipa): memiliki panjang $400\text{ cm}$. 2. Dua buah pipa yang disambungkan (dengan 1 sambungan cincin/soket di tengah): memiliki panjang total $795\text{ cm}$. 3. Tiga buah pipa yang disambungkan (dengan 2 sambungan cincin/soket): memiliki panjang total $1190\text{ cm}$.
+PERTANYAAN:
+Berapa panjang pipa saluran air jika terdapat 8 pipa yang tersambung?
+OPSI / PERNYATAAN:
+  - A. A. 3.200 cm
+  - B. B. 3.170 cm
+  - C. C. 3.165 cm
+  - D. D. 3.100 cm
+  - E. E. 2.770 cm
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Pak Budi ingin membuka cabang baru kafe dalam waktu 12 bulan. Modal awal yang ia miliki saat ini adalah Rp50.000.000,00. Total dana yang dibutuhkan untuk pembukaan cabang baru adalah Rp200.000.000,00.
+
+Untuk mencapai target tersebut, Pak Budi akan menyisihkan laba usahanya mulai bulan depan yaitu bulan Januari. Tabungan awal Pak Budi adalah Rp5.000.000,00. Karena bisnisnya sedang berkembang, ia berkomitmen untuk meningkatkan besar tabungannya secara tetap yaitu selalu bertambah sebesar Rp1.500.000,00 setiap bulannya. Berikut disajikan informasi mengenai hambatan yang dialami oleh Pak Budi:
+
+Pada bulan ke-5 dan ke-9, Pak Budi harus mengeluarkan Rp5.000.000,00 dari tabungannya untuk biaya tak terduga.
+
+Mulai bulan ke-7, kenaikan tabungan per bulan berkurang sebesar 20% dari kenaikan awal karena persaingan usaha.
+
+Pak Budi hanya dapat membuka cabang baru jika total tabungan (termasuk modal awal) mencapai minimal Rp200.000.000,00 tanpa memperhitungkan uang yang sudah terpakai.
+[Konteks Visual Gambar 52132_2d7067e75b56c6829bcd92bb3c5d6085.png]:
+Ilustrasi infografis perencanaan target keuangan usaha:- Seorang pemuda berkaus biru dengan pose berpikir memegang dagu.- Di sebelah kiri terdapat rincian target keuangan: * 'Modal Awal: Rp50.000.000,00.' dengan bilah kemajuan (progress bar) hijau terisi sekitar 25%. * 'Target yang dibutuhkan: Rp200.000.000,00.' dengan bilah kemajuan biru penuh (100%). * 'Dalam waktu 12 bulan.'- Di sebelah kanan atas terdapat gelembung impian (thought bubble) memuat teks 'Membuka cabang kafe', ilustrasi kedai bertuliskan 'Kafe', secangkir kopi panas, serta ikon kalender bertuliskan angka '12' dan 'bulan'.
+PERTANYAAN:
+Kondisi seperti apakah yang dapat membuat Pak Budi membuka cabang baru kafe dalam waktu 12 bulan?
+
+Tentukan benar atau salah pada setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Dengan kendala yang ada, Pak Budi tetap dapat membuka cabang baru.
+  - B. Pak Budi dapat membuka cabang baru dan membayar semua pengeluaran tak terduga jika tidak ada persaingan usaha.
+  - C. Dengan meningkatkan jumlah tabungan secara tetap yaitu menjadi selalu bertambah sebesar Rp1.700.000,00 per bulan maka Pak Budi dapat membuka cabang baru dan membayar semua pengeluaran tak terduganya.
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Seorang desainer percetakan digital diminta membuat kemasan souvenir berikut yang akan dicetak menggunakan kertas laminasi.
+
+Kemasan souvenir tersebut harus didesain pola bentuk (jaring-jaring) yang belum dirakit terlebih dahulu. Desainer bisa memodifikasi pola kemasan souvenir yang belum dirakit agar bisa dicetak tidak lebih dari 1 kertas untuk pola yang sama. Satu pola kemasan utuh yang belum dirakit hanya boleh dibuat posisi horizontal atau vertikal (tidak boleh diagonal). Tersedia pilihan kertas laminasi sebagai berikut.
+
+Jenis Kertas
+
+Ukuran (cm)
+
+Harga per lembar
+
+A3
+
+29,7 x 42
+
+Rp6.000,00
+
+A3+
+
+32,9 x 48,3
+
+Rp8.000,00
+
+Plano
+
+61 x 86
+
+Rp15.000,00
+[Konteks Visual Gambar 72299_db97533fa1e7b6a0094191e657d75c62.png]:
+Ilustrasi dimensi kotak kemasan suvenir (paper box) bermotif jendela dan sepeda dengan bagian atas mengerucut (limas) yang diikat pita hijau:- Bentuk gabungan balok dan limas segi empat beralas persegi.- Panjang alas balok: $8\text{ cm}$.- Lebar alas balok: $8\text{ cm}$.- Tinggi bagian balok: $12\text{ cm}$.- Tinggi sisi tegak segitiga atap (apotema/kemiringan sisi limas yang ditunjukkan garis putus-putus hitam): $3\text{ cm}$.
+PERTANYAAN:
+Dengan anggaran maksimal Rp1.200.000,00 berapakah paling banyak kotak souvenir yang bisa dibuat?
+OPSI / PERNYATAAN:
+  - A. A. 150 kotak kemasan.
+  - B. B. 160 kotak kemasan.
+  - C. C. 200 kotak kemasan.
+  - D. D. 300 kotak kemasan.
+  - E. E. 400 kotak kemasan.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Diketahui sin A = , A adalah sudut tumpul. Nilai cos A = ….
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 20035_8290fb5c5d179db0ca8d6f0a8a445d0d.png]:
+Diagram batang vertikal dengan pola arsir yang menunjukkan data frekuensi setiap bulan. Sumbu vertikal berskala 0 hingga 180 dengan kelipatan 20, dan sumbu horizontal memuat nama bulan. Di sebelah kanan terdapat legenda bertuliskan 'frekuensi'.
+
+Rincian data per bulan: | Bulan | Frekuensi | |:---: |:---: | | Jan | 122 | | Feb | 136 | | Mar | 112 | | Apr | 151 | | Mei | 18 | | Jun | 81 | | Jul | 133 | | Agt | 150 | | Sept | 166 | | Okt | 87 | | Nov | 153 | | Des | 131 |
+PERTANYAAN:
+Diagram batang berikut menunjukkan produksi pakaian yang dikelola Bu Rahmi selama tahun 2020 dari bulan Januari sampai bulan Desember.
+
+Peningkatan tertinggi jumlah produksi pakaian Bu Rahmi terjadi pada bulan....
+OPSI / PERNYATAAN:
+  - A. A. April
+  - B. B. Juni
+  - C. C. Juli
+  - D. D. September
+  - E. E. November
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Analisis Pembebanan Struktur Jembatan
+
+Dalam proyek pembangunan jembatan layang, tim insinyur struktur melakukan uji beban bertahap pada rangkaian balok penyangga (girder). Uji beban ini dilakukan dengan menempatkan beban statis di sepanjang titik tumpuan secara berurutan untuk melihat respons lendutan material.
+
+(sumber: https://sindomakassar.com/read/sulsel/4974/uji-beban-240-ton-fly-over-pt-bms-dinilai-layak-digunakan-1697033442)
+
+Pada tiga titik tumpuan pertama, beban yang diaplikasikan secara berturut-turut adalah 500 kg, 1.000 kg, 2.000 kg. Tim ahli mencatat bahwa peningkatan beban di setiap titik tumpuan berikutnya direncanakan mengikuti pola tertentu untuk menguji batas elastisitas tertinggi dari beton pracetak yang digunakan.
+[Konteks Visual Gambar 87028_e8135501b7e77cdf4d8c5124c5fb4cea.png]:
+Grafik daerah penyelesaian sistem pertidaksamaan linear pada bidang koordinat Cartesius:- Sumbu horizontal $X$ dan sumbu vertikal $Y$.- Garis pertama melalui titik $(0, 4)$ dan $(4, 0)$ yang merepresentasikan persamaan garis $x + y = 4$.- Garis kedua melalui titik $(0, 2)$ dan $(6, 0)$ yang merepresentasikan persamaan garis $x + 3y = 6$.- Titik potong kedua garis berada pada koordinat $(3, 1)$.- Daerah terbagi menjadi beberapa bagian yang diberi label angka Romawi: * Daerah I: Daerah di bawah kedua garis pada kuadran I (memuat titik asal $(0,0)$). * Daerah II: Daerah segitiga yang dibatasi sumbu $Y$ dari $y=2$ hingga $y=4$, di bawah garis $x + y = 4$, dan di atas garis $x + 3y = 6$. * Daerah III: Daerah di atas titik potong kedua garis. * Daerah IV: Daerah segitiga yang dibatasi sumbu $X$ dari $x=4$ hingga $x=6$, di bawah garis $x + 3y = 6$, dan di atas garis $x + y = 4$. * Daerah V: Daerah di sebelah kiri sumbu $Y$ (kuadran II).
+PERTANYAAN:
+Berdasarkan pola berat beban yang diaplikasikan tersebut, beban pada titik tumpuan ke-4, 5, dan 6 berturut-turut adalah....
+OPSI / PERNYATAAN:
+  - A. A. 3.000, 4.000, 5.000
+  - B. B. 3.000, 6.000, 12.000
+  - C. C. 4.000, 6.000, 8.000
+  - D. D. 4.000, 6.000, 12.000
+  - E. E. 4.000, 8.000, 16.000
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Toko Jaya menjual alat tulis sekolah. Tiga murid SMK Merdeka yaitu Maya, Sella, dan Elang membeli alat tulis di Toko Jaya dengan rincian sebagai berikut:
+[Konteks Visual Gambar 91913_5dce045a546b929279ad74c2f5f37f66.png]:
+Ilustrasi soal sistem persamaan linear tiga variabel (SPLTV) di toko alat tulis 'Toko Jaya':
+
+Rincian pembelian tiga orang siswa: 1. Maya:- 2 Buku Tulis- 1 Bulpoin- 3 Pensil- Membayar Rp19.000,00 2. Sella:- 1 Buku Tulis- 2 Bulpoin- 2 Pensil- Membayar Rp17.000,00 3. Elang:- 3 Buku Tulis- 2 Bulpoin- 1 Pensil- Membayar Rp20.000,00
+PERTANYAAN:
+Apabila Nurul, murid dari sekolah yang sama ingin membeli ketiga alat tulis tersebut masing-masing 1 buah, maka banyaknya uang yang harus dibayarkan oleh Nurul adalah...
+OPSI / PERNYATAAN:
+  - A. A. Rp9.000,00
+  - B. B. Rp10.000,00
+  - C. C. Rp10.500,00
+  - D. D. Rp11.000,00
+  - E. E. Rp12.000,00
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+UMKM mendapatkan pesanan membuat alas piring untuk di meja makan seperti gambar berikut.
+
+Ukuran diameter alas piring yang dibuat adalah 35 cm. Agar tampilan menjadi lebih menarik, di sekeliling alas tersebut akan dihiasi dengan pita berwarna emas.
+[Konteks Visual Gambar 12490_c19935772156d9752ac0194f4dd74b01.png]:
+Foto penataan meja makan (table setting) dari sudut pandang atas:- Panah merah menunjuk pada kain bundar berwarna cokelat/karamel dengan tepian berlipit-lipit (pleated) dengan label teks 'Alas piring'.- Di atas alas piring diletakkan sebuah piring keramik bundar, serbet bermotif kotak-kotak hitam-putih yang diberi simpul pita kain cokelat, sepasang sendok dan garpu berwarna emas dengan gagang hitam, serta cangkir putih berpenampang lingkaran dengan tatakannya di bagian atas.
+PERTANYAAN:
+Jika harga satu meter pita emas Rp5.000,00 dan UMKM tersebut akan memproduksi sebanyak 180 buah, biaya yang dibutuhkan untuk membeli pita emas adalah....
+OPSI / PERNYATAAN:
+  - A. A. Rp6.930.000,00
+  - B. B. Rp1.980.000,00
+  - C. C. Rp1.000.000,00
+  - D. D. Rp990.000,00
+  - E. E. Rp900.000,00
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 17865_03efca3015969271cc01dd691c5df6f3.png]:
+Tabel distribusi frekuensi nilai data berkelompok:
+
+| Nilai | $f$ | |:---: |:-: | | 58 - 60 | 2 | | 61 - 63 | 6 | | 64 - 66 | 9 | | 67 - 69 | 6 | | 70 - 72 | 4 | | 73 - 75 | 3 |
+PERTANYAAN:
+Perhatikan data pada tabel nilai hasil ulangan matematika kelas XI SMA Z. Modus dari data tersebut adalah....
+OPSI / PERNYATAAN:
+  - A. A. 64,0
+  - B. B. 64,5
+  - C. C. 65,0
+  - D. D. 65,5
+  - E. E. 66,0
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Analisis Pembebanan Struktur Jembatan
+
+Dalam proyek pembangunan jembatan layang, tim insinyur struktur melakukan uji beban bertahap pada rangkaian balok penyangga (girder). Uji beban ini dilakukan dengan menempatkan beban statis di sepanjang titik tumpuan secara berurutan untuk melihat respons lendutan material.
+
+(sumber: https://sindomakassar.com/read/sulsel/4974/uji-beban-240-ton-fly-over-pt-bms-dinilai-layak-digunakan-1697033442)
+
+Pada tiga titik tumpuan pertama, beban yang diaplikasikan secara berturut-turut adalah 500 kg, 1.000 kg, 2.000 kg. Tim ahli mencatat bahwa peningkatan beban di setiap titik tumpuan berikutnya direncanakan mengikuti pola tertentu untuk menguji batas elastisitas tertinggi dari beton pracetak yang digunakan.
+[Konteks Visual Gambar 05322_e8135501b7e77cdf4d8c5124c5fb4cea.png]:
+Diagram batang dengan judul 'DATA BANYAK PENGUSAHA DI PROVINSI JINGGA'. Sumbu vertikal menunjukkan 'Banyak Orang (Ratus)' berskala 0 hingga 70 (kelipatan 10), sedangkan sumbu horizontal menunjukkan 'Nama Kota' (A sampai G).
+
+Data nilai pada diagram:- Kota A: 65 ratus (6.500 orang)- Kota B: 40 ratus (4.000 orang)- Kota C: 25 ratus (2.500 orang)- Kota D: 20 ratus (2.000 orang)- Kota E: 0 (tidak ada batang data)- Kota F: 35 ratus (3.500 orang)- Kota G: 50 ratus (5.000 orang)
+PERTANYAAN:
+Standar Keamanan Bangunan menetapkan bahwa beton pracetak tersebut akan mengalami retak struktur jika diberi beban tunggal yang melampaui 128 ton pada satu titik. Pada titik tumpuan ke-berapakah beban yang diberikan untuk pertama kalinya mencapai batas keamanan struktur?
+OPSI / PERNYATAAN:
+  - A. A. Titik ke-7
+  - B. B. Titik ke-8
+  - C. C. Titik ke-9
+  - D. D. Titik ke-10
+  - E. E. Titik ke-11
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: ['B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Sebuah perusahaan mebel "Awet" memproduksi dua jenis produk yaitu meja dan kursi. Mengenai kebutuhan bahan dan tenaga kerja kedua produk tersebut. Berikut ini disajikan informasi mengenai kebutuhan bahan baku (kayu) dan tenaga kerja untuk pembuatan 1 unit meja dan 1 unit kursi:
+
+Total kayu yang tersedia setiap harinya terbatas, yaitu maksimal 20 m 2 per hari dan total waktu yang tersedia adalah maksimal 48 jam per hari. Keuntungan bersih dari penjualan 1 unit meja adalah Rp500.000,00 dan keuntungan bersih dari penjualan 1 unit kursi adalah Rp300.000,00.
+[Konteks Visual Gambar 99632_c7e1264856316d53457c41f7dc820c36.png]:
+Ilustrasi soal program linear mengenai produksi furnitur kayu yang menampilkan dua jenis produk beserta kebutuhan bahan baku dan waktu produksinya:
+
+1. 'Meja Kayu':- Ilustrasi: Sebuah meja kayu berkaki empat berwarna cokelat.- Kebutuhan Kayu = $2\text{ m}^2$
+
+- Lama pengerjaan oleh 1 orang pekerja = $4\text{ jam}$
+
+2. 'Kursi Kayu':- Ilustrasi: Sebuah kursi kayu dengan sandaran berwarna cokelat.- Kebutuhan Kayu = $1\text{ m}^2$
+
+- Lama pengerjaan oleh 1 orang pekerja = $3\text{ jam}$
+
+Ringkasan data: | Jenis Furnitur | Kebutuhan Kayu | Waktu Pengerjaan (1 Pekerja) | |:--- |:---: |:---: | | Meja Kayu | $2\text{ m}^2$ | 4 jam | | Kursi Kayu | $1\text{ m}^2$ | 3 jam |
+PERTANYAAN:
+Berdasarkan kondisi tersebut, manakah pernyataan yang benar mengenai banyak meja dan kursi yang dapat diproduksi serta keuntungan yang diperoleh?
+
+Pilihlah semua jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Mebel tidak dapat memproduksi 6 unit meja dan 5 unit kursi secara bersamaan.
+  - B. B. Jika mebel hanya memproduksi kursi, jumlah maksimum yang dapat dihasilkan adalah 16 unit.
+  - C. C. Memproduksi 2 meja dan 10 kursi menghasilkan keuntungan yang lebih besar daripada memproduksi 8 meja saja.
+  - D. D. Keuntungan maksimum yang diperoleh adalah sebesar Rp5.400.00,00.
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan kubus PQRS.TUVW berikut!
+
+Panjang rusuk kubus tersebut 12 cm. Pada gambar terlihat bahwa titik O berada tepat pada perpotongan diagonal garis PR dan QS.
+[Konteks Visual Gambar 88970_012bf9a66a3f32ff58813cb9b14595a0.png]:
+Infografis promosi produk investasi aplikasi 'BOBIN':- Header: 'BOBIN APP', logo roket 'BOBIN', judul 'PROMO ISTIMEWA: INVESTASI PASTI B2026', serta lencana 'Tipe Produk: B2026'.- Tiga kartu rincian investasi: 1. 'JANGKA WAKTU': ikon kalender '2024-2026' dengan nilai '3 TAHUN'. 2. 'BESAR KEUNTUNGAN': ikon grafik tren naik dengan nilai '10% PER TAHUN'. 3. 'MODAL AWAL MINIMAL': ikon uang tunai dengan nilai 'Rp5.000.000'.- Teks penutup di bagian bawah: 'Wujudkan Impianmu Bersama BOBIN B2026! Investasi Aman & Menguntungkan.' serta tombol 'Download Sekarang!' di samping ilustrasi aplikasi pada telepon genggam.
+PERTANYAAN:
+Jarak titik V ke O adalah....
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Sekolah P akan mengirim 2 perwakilan grup band untuk Pentas Musik Nusantara pada peringatan Hari Sumpah Pemuda. Sekolah tersebut memiliki 6 grup band putra dan 4 grup band putri. Berdasarkan penilaian, kemampuan grup band tersebut merata sehingga penentuan kedua perwakilan grup  band dilakukan dengan cara mengambil secara acak satu persatu. Peluang terambil grup band putra pada pengambilan pertama dan grup band putri pada pengambilan kedua adalah....
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada tahun 2025, sebuah perusahaan keju memproduksi dua jenis keju kemasan berbentuk gabungan bangun ruang seperti pada gambar berikut.
+
+Karena permintaan pasar meningkat, manajer produksi mengusulkan aturan baru, yaitu:
+
+"Mulai bulan Januari tahun depan, setiap kemasan akan diisi menjadi 75% volumenya tanpa mengubah ukuran kemasan".
+
+Pada bulan Maret 2026, sebuah supermarket memesan 150 keju kemasan A dan 200 keju kemasan B.
+[Konteks Visual Gambar 16935_736554a8003d65af408a8ca39de98869.png]:
+Ilustrasi dimensi dua model bangun ruang kemasan produk keju:
+
+1. 'Kemasan Keju A' (Gabungan tabung dan kerucut):- Diameter alas tabung dan kerucut: $d = 8\text{ cm}$ (jari-jari $r = 4\text{ cm}$).- Tinggi tabung: $t_{\text{tabung}} = 10\text{ cm}$.- Tinggi kerucut: $t_{\text{kerucut}} = 6\text{ cm}$.- Label biru melingkar pada tabung bertuliskan 'KEJU' dengan logo keju.
+
+2. 'Kemasan Keju B' (Gabungan prisma segi empat/balok dan limas segi empat):- Alas balok dan limas berbentuk persegi dengan ukuran: $8\text{ cm} \times 8\text{ cm}$.- Tinggi balok: $t_{\text{balok}} = 10\text{ cm}$.- Tinggi limas: $t_{\text{limas}} = 6\text{ cm}$.- Label oranye melingkar pada balok bertuliskan 'KEJU' dengan logo keju.
+PERTANYAAN:
+Apabila adonan keju yang tersedia adalah 220 liter, apakah usulan manajer produksi tersebut dapat diterapkan untuk memenuhi seluruh pesanan?
+OPSI / PERNYATAAN:
+  - A. A. Usulan tersebut tepat, karena meskipun aturan pengisian berubah, kebutuhan adonan tetap kurang dari 220 liter sehingga persediaan masih mencukupi.
+  - B. B. Usulan tersebut tepat, karena penurunan volume hanya terjadi pada Keju Kemasan A sehingga tidak memengaruhi kecukupan persediaan secara keseluruhan.
+  - C. C. Usulan tersebut kurang tepat, karena peningkatan aturan pengisian menyebabkan kebutuhan adonan bertambah, tetapi persediaan 220 liter masih mencukupi.
+  - D. D. Usulan tersebut tidak tepat, karena peningkatan pengisian pada kedua jenis kemasan menyebabkan kebutuhan adonan melebihi 220 liter.
+  - E. E. Usulan tersebut tidak tepat, karena perubahan aturan pengisian tidak memengaruhi kebutuhan adonan, melainkan hanya mengubah bentuk kemasan.
+
+---
+[SOAL NO 30]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Analisis Pembebanan Struktur Jembatan
+
+Dalam proyek pembangunan jembatan layang, tim insinyur struktur melakukan uji beban bertahap pada rangkaian balok penyangga (girder). Uji beban ini dilakukan dengan menempatkan beban statis di sepanjang titik tumpuan secara berurutan untuk melihat respons lendutan material.
+
+(sumber: https://sindomakassar.com/read/sulsel/4974/uji-beban-240-ton-fly-over-pt-bms-dinilai-layak-digunakan-1697033442)
+
+Pada tiga titik tumpuan pertama, beban yang diaplikasikan secara berturut-turut adalah 500 kg, 1.000 kg, 2.000 kg. Tim ahli mencatat bahwa peningkatan beban di setiap titik tumpuan berikutnya direncanakan mengikuti pola tertentu untuk menguji batas elastisitas tertinggi dari beton pracetak yang digunakan.
+[Konteks Visual Gambar 29810_e8135501b7e77cdf4d8c5124c5fb4cea.png]:
+Gambar pengujian beban dan komponen struktur jembatan: 1. Foto di sebelah kiri: Pengujian beban nyata pada jembatan yang sedang dibangun menggunakan iringan truk bermuatan tanah yang berjejer di atas badan jembatan dan disaksikan oleh pekerja proyek berhelm. 2. Ilustrasi 3D di sebelah kanan: Penampang struktur jembatan beton dan gelagar baja. Menampilkan panah merah ke bawah yang merepresentasikan beban lalu lintas/kendaraan, label 'GIRDER' yang menunjuk balok penopang lantai jembatan, serta panah-panah merah vertikal pada pilar beton penyangga. Tanda panah merah melengkung menghubungkan bagian bawah gelagar pada foto jembatan ke gambar 3D girder di kanan.
+PERTANYAAN:
+Konsultan pengawas ingin menghitung total akumulasi beban (tonase total) yang ditahan oleh jembatan selama pengujian di 5 hingga 7 titik tumpuan pertama untuk memastikan kekuatan fondasi dasar. Tim logistik kemudian menyiapkan beban statis seberat 32 ton. Pilihlah semua pernyataan yang benar terkait dengan tonase total dan persediaan beban statis tersebut. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Beban statis yang disediakan tim logistik cukup untuk pengujian tonase hingga titik tumpuan ke-6.
+  - B. B. Diperlukan tambahan beban statis sebesar 30 ton apabila pengujian tonase dilakukan hingga titik tumpuan ke-7.
+  - C. C. Terdapat sisa beban sebesar 15,5 ton setelah proses alokasi pengujian tonase hingga titik tumpuan ke-5 selesai.
+  - D. D. Beton melewati batas beban setelah titik tumpuan ke-5 saat batas elastisitas kumulatif beton pracetak adalah 20 ton.
+
+---
+[SOAL NO 31]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Manajer pemasaran sebuah biro perjalanan di Pulau Wisata Numerasi sedang merancang strategi promosi untuk periode berikutnya. Ia harus memastikan bahwa anggaran iklan yang terbatas dialokasikan pada target pasar yang memiliki potensi jumlah wisatawan paling besar. Manajer tersebut menggunakan dua data berikut.
+
+Tabel Aktivitas Favorit berdasarkan Negara Asal.
+
+Negara Asal
+
+Aktivitas Favorit
+
+Australia
+
+80% Wisata Budaya dan 20% Berselancar dan Pantai
+
+China
+
+40% Belanja dan 60% Wisata Kuliner
+
+Malaysia
+
+90% Perawatan Tubuh dan 10% Wisata Budaya
+
+Jepang
+
+70% Wisata Kuliner dan 30% Belanja
+[Konteks Visual Gambar 92407_88954bddd7cd548d82e63fb1a1fcf3c9.png]:
+Diagram batang berjudul 'Data Jumlah Kunjungan Wisatawan Mancanegara':- Sumbu vertikal: 'Banyak Pengunjung (Dalam Ribuan)' berskala 0 hingga 130 dengan interval 10.- Sumbu horizontal: 'Negara Asal Pengunjung'.
+
+Data tabel: | Negara Asal Pengunjung | Banyak Pengunjung (Ribu) | |:--- |:---: | | Australia | 120 | | China | 85 | | Malaysia | 65 | | Jepang | 40 |
+PERTANYAAN:
+Berdasarkan data yang diberikan, bagaimana potensi jumlah wisatawan pada biro perjalanan tersebut?
+
+Tentukan Benar atau Salah pada setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Peningkatan iklan Berselancar untuk wisatawan Australia berpotensi mendatangkan volume wisatawan lebih besar daripada iklan Wisata Kuliner untuk wisatawan Jepang.
+  - B. Target pasar wisatawan Perawatan Tubuh asal Malaysia lebih besar dibandingkan wisatawan Kuliner asal China.
+  - C. Potensi wisatawan Belanja asal Jepang lebih kecil dibandingkan potensi wisatawan Belanja asal China.
+
+---
+[SOAL NO 32]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perusahaan Kertas "Mayang" sedang merapikan data gaji bulanan karyawan tahun 2025 untuk bahan penyusunan laporan pajak. Namun, data pada salah satu rentang gaji tidak terbaca. Berikut data gaji bulanan karyawan di Perusahaan Kertas "Mayang":
+
+Diketahui bahwa modus gaji karyawan di Perusahaan Kertas “Mayang” adalah Rp15.750.000,00.
+[Konteks Visual Gambar 80296_bde963b0a490040f5d41d735f15f2108.png]:
+Tabel distribusi frekuensi dengan judul: 'Data Gaji Bulanan Karyawan di Perusahaan Kertas 'Mayang''
+
+| Rentang Gaji (Juta Rupiah) | Frekuensi | |:---: |:---: | | 5 - 7 | 4 | | 8 - 10 | 9 | | 11 - 13 | Tidak terbaca (?) | | 14 - 16 | 24 | | 17 - 19 | 18 | | 20 - 22 | 3 |
+PERTANYAAN:
+Berapakah nilai data yang tidak terbaca tersebut?
+OPSI / PERNYATAAN:
+  - A. A. 6
+  - B. B. 14
+  - C. C. 20
+  - D. D. 21
+  - E. E. 28
+
+---
+[SOAL NO 33]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Dalam sebuah acara pameran wisata internasional, panitia penyelenggara menyediakan  doorprize  untuk para pengunjung. Pengunjung yang berkesempatan mendapatkan hadiah  doorprize  adalah mereka yang termasuk 40 pengunjung pertama. Mereka akan diminta mengambil satu kupon secara acak. Apabila beruntung, kupon yang diperoleh bertuliskan salah satu jenis hadiah, sedangkan apabila belum beruntung maka akan memperoleh  voucher  kosong. Apabila kupon yang terambil adalah  voucher  kosong, maka kupon dimasukkan lagi ke dalam wadah.
+
+Kupon  doorprize  yang disediakan adalah sebagai berikut:
+
+5 tiket gratis pp Jakarta-Kuala Lumpur
+
+5 tiket gratis pp Jakarta-Bangkok
+
+10  voucher menginap 3 malam di hotel bintang lima
+
+10  voucher  menginap 3 malam di hotel bintang empat
+
+10  voucher kosong
+
+Anto adalah orang ke-6 yang berkesempatan mengambil hadiah  doorprize. Diketahui bahwa 1 tiket pp Jakarta-Kuala Lumpur, 1 tiket pp Jakarta-Bangkok, dan 2  voucher  menginap di hotel bintang empat sudah terambil. Adapun satu orang lainnya gagal mendapatkan  doorprize.
+
+Selanjutnya Anto yang berkesempatan mengambil satu hadiah secara acak.
+
+PERTANYAAN:
+Berapa peluang Anto mendapatkan tiket gratis pp Jakarta-Kuala Lumpur?
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 34]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Diketahui kubus ABCDEFGH seperti pada gambar.
+[Konteks Visual Gambar 31359_01a355f701338519cca03bb689b03427.png]:
+Ilustrasi kerangka geometris bangun ruang kubus $ABCD.EFGH$:- Rusuk-rusuk kubus digambarkan dengan garis berwarna hijau terang.- Titik-titik sudut bidang alas diberi label $A$, $B$, $C$, dan $D$.- Titik-titik sudut bidang atas diberi label $E$, $F$, $G$, dan $H$.- Titik sudut $B$ dan $C$ disorot khusus dengan bulatan berwarna biru/ungu serta label huruf berwarna biru, sedangkan titik-titik sudut lainnya ( $A$, $D$, $E$, $F$, $G$, $H$) berwarna abu-abu.
+PERTANYAAN:
+Bagaimana hubungan antara setiap rusuk atau setiap garis yang menghubungkan dua titik pada sudut tersebut?
+OPSI / PERNYATAAN:
+  - A. AD tegak lurus FG
+  - B. BC sejajar EH
+  - C. EF memotong CG
+
+---
+[SOAL NO 35]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 36]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Amel memiliki toko bunga. Amel selalu mencatat hasil penjualannya. Hasil penjualannya digunakan untuk bahan evaluasi dan pertimbangan saat membeli bunga. Berikut disajikan data mengenai keuntungan dari penjualan bunga dari bulan Januari sampai Juli 2025:
+[Konteks Visual Gambar 45908_139c8958a1a3b453dee84e634a3e27d0.png]:
+Tabel laporan keuangan dengan judul 'Catatan Keuangan Toko Bunga Amel':
+
+| Bulan | Keuntungan | |:--- |:--- | | Januari | Rp1.100.000,00 | | Februari | Rp1.450.000,00 | | Maret | Rp1.200.000,00 | | April | Rp1.530.000,00 | | Mei | Rp2.120.000,00 | | Juni | Rp1.509.000,00 | | Juli | Rp2.090.000,00 |
+
+Di bagian bawah tabel terdapat ilustrasi tumpukan uang koin emas, uang kertas rupiah, grafik batang/garis tren naik berwarna hijau, kantong uang bertuliskan 'Rp', serta bunga tulip hias.
+PERTANYAAN:
+Berdasarkan data tersebut, keuntungan pada bulan manakah yang mengalami penurunan signifikan?
+OPSI / PERNYATAAN:
+  - A. A. Februari
+  - B. B. Maret
+  - C. C. April
+  - D. D. Mei
+  - E. E. Juni
+
+---
+[SOAL NO 37]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Mirna akan memproduksi dua jenis kue dengan modal Rp8.000.000,00. Biaya produksi kue bolu sebesar Rp15.000,00 per kotak dan dijual dengan laba 40%. Sedangkan biaya produksi kue brownies sebesar Rp20.000,00 per kotak dan dijual dengan laba 35%. Setiap harinya, Mirna dapat memproduksi paling banyak 500 kotak kue.
+
+PERTANYAAN:
+Apabila Mirna ingin memperoleh keuntungan maksimum, tentukan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Mirna harus memproduksi 200 kotak kue bolu.
+  - B. Mirna  harus  memproduksi  kue  brownies lebih banyak.
+  - C. Keuntungan maksimum  yang dapat diperoleh Mirna adalah Rp3.100.000,00.
+
+---
+[SOAL NO 38]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Desain jendela kaca dari sebuah komplek perumahan ( cluster ) yang akan segera dibangun beserta ukurannya diberikan pada gambar berikut
+
+Pihak pengembang konstruksi berencana akan membangun 20 rumah di dalam komplek tersebut. Setiap rumah memiliki satu desain jendela seperti pada gambar.
+[Konteks Visual Gambar 62210_455b29c0883de19eb39a076e22a81983.png]:
+Foto dan diagram dimensi sebuah jendela berbingkai hitam dengan bentuk segi lima (gabungan persegi panjang di bagian bawah dan segitiga di bagian atas):- Lebar dasar jendela: $4\text{ m}$.- Tinggi dinding samping tegak (bagian persegi panjang): $2\text{ m}$.- Tinggi puncak atap segitiga (dari batas atas persegi panjang ke puncak runcing): $1,5\text{ m}$.- Bingkai jendela terbagi menjadi 4 bagian vertikal sama lebar serta dipisahkan oleh palang horizontal pada batas ketinggian $2\text{ m}$.
+PERTANYAAN:
+Berdasarkan jumlah rumah dan desain jendela yang akan dibangun, maka total luas kebutuhan kaca yang harus dipersiapkan pihak pengembang adalah....
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 39]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 65502_c1f1ffe270f76a3a1535bde803228b4d.png]:
+Teks soal dan diagram bangun datar trapesium sama kaki:
+
+Teks verbatim: 'Pada trapesium berikut, $AD = BC$, $\overline{AB}$ sejajar $\overline{DC}$, $AB > DC$,, dan.'
+
+Deskripsi diagram geometri:- Trapesium $ABCD$ dengan sisi-sisi berwarna hijau.- Sisi sejajar $\overline{AB}$ (alas bawah) dan $\overline{DC}$ (sisi atas) masing-masing memiliki simbol panah horizontal tunggal yang menunjukkan $\overline{AB} \parallel \overline{DC}$.- Sisi miring $AD$ dan $BC$ diberi tanda strip ganda ( $=$) yang menandakan panjangnya sama ( $AD = BC$).- Sebuah garis diagonal berwarna biru tua ditarik dari titik sudut $D$ ke titik sudut $B$.
+PERTANYAAN:
+Tentukan Benar atau Salah untuk setiap pernyataan berikut terkait dengan besar sudut pada trapesium ABCD!
+OPSI / PERNYATAAN:
+  - A. 
+  - B. 
+  - C. 
+
+---
+[SOAL NO 40]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 67107_be11e2276f265c5b6e2674d8ba2d2c3d.png]:
+Diagram geometri trapesium siku-siku $ABCD$ beserta teks pertanyaan:
+
+Deskripsi bangun:- Trapesium siku-siku dengan sudut siku-siku di titik $A$ dan titik $B$.- Sisi horizontal atas adalah $AD$, dan sisi horizontal bawah adalah $BC$.- Sisi tegak vertikal kiri adalah $AB$, dan sisi miring adalah $CD$.
+
+Teks verbatim: 'Pada trapesium siku-siku tersebut, AB = 3 dan AD ≤ BC Apakah keliling trapesium tersebut lebih dari 25?'
+PERTANYAAN:
+Putuskan apakah dengan tambahan informasi Pernyataan (1) dan Pernyataan (2) berikut cukup untuk menjawab pertanyaan tersebut! (1)  Luas trapesium ABCD = 24. (2)  BC = 10 dan CD = 5.
+OPSI / PERNYATAAN:
+  - A. A. Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (2) SAJA tidak cukup.
+  - B. B. Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi Pernyataan (1) SAJA tidak cukup.
+  - C. C. DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup.
+  - D. D. Pernyataan (1) SAJA cukup untuk menjawab pertanyaan dan Pernyataan (2) SAJA cukup.
+  - E. E. Pernyataan (1) dan Pernyataan (2) tidak cukup untuk menjawab pertanyaan.
+
+---
+[SOAL NO 41]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Suatu tangga dengan panjang 6 meter disandarkan pada dinding vertikal. Sudut yang dibentuk tangga dengan lantai adalah 60°.
+[Konteks Visual Gambar 62066_59d3ef955657eaf8f5a160bbd6c2b198.png]:
+Foto sebuah tangga kayu yang disandarkan miring pada dinding abu-abu:- Tangga memiliki 10 anak tangga horizontal.- Tangga membentuk sudut kemiringan tertentu terhadap lantai dan dinding, dengan bayangan tangga tampak jatuh di permukaan dinding sebelah kanan (konteks masalah trigonometri atau teorema Pythagoras).
+PERTANYAAN:
+Tinggi dinding yang disentuh ujung atas tangga adalah....
+OPSI / PERNYATAAN:
+  - A. A. 3 meter
+  - B. B. 3√2 meter
+  - C. C. 3√3 meter
+  - D. D. 4√2 meter
+  - E. E. 4√3 meter
+
+---
+[SOAL NO 42]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Rata-rata nilai ulangan 17 murid dari skala 100 adalah 83. Ada 3 murid yang mengikuti ujian susulan sehingga rata-rata nilai ulangan dari 20 murid menjadi 82.
+
+PERTANYAAN:
+Tentukan semua pernyataan berikut yang benar terkait dengan nilai ketiga murid yang mengikuti ujian susulan! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Jumlah nilai ketiga murid yang mengikuti ujian susulan adalah 229.
+  - B. B. Rata-rata nilai ketiga murid yang mengikuti ujian susulan lebih dari 70.
+  - C. C. Nilai terendah dari ketiga murid yang mengikuti ujian susulan tidak kurang dari 29.
+  - D. D. Nilai tertinggi dari ketiga murid yang mengikuti ujian susulan lebih dari 76.
+  - E. E. Jangkauan data nilai ketiga murid yang mengikuti ujian susulan lebih dari dari 72.
+
+---
+[SOAL NO 43]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Fungsi didefinisikan oleh
+[Konteks Visual Gambar 58301_e1f215c43d145ce6d57d8f93cf319473.png]:
+Fungsi kuadrat matematika: $f(x) = 4(x^2 - 8x + 12)$
+PERTANYAAN:
+Tentukan Benar atau Salah pada setiap pernyataan berikut yang terkait dengan grafik fungsi !
+OPSI / PERNYATAAN:
+  - A. Grafik fungsi ƒ terbuka ke atas.
+  - B. Grafik fungsi ƒ  memotong garis
+  - C. Grafik fungsi ƒ  tidak melalui kuadran tiga.
+
+---
+[SOAL NO 44]
+KUNCI RESMI PUSMENDIK: ['A', 'B']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Tagihan listrik bulanan di sebuah apartemen dihitung berdasarkan jumlah energi listrik (dalam kWh) yang digunakan. Apartemen tersebut masih menggunakan meteran listrik yang berbeda dari penggunaan token.
+
+Biaya tagihan listrik dihitung dengan rumus:
+
+Keterangan:
+
+: total tagihan listrik (dalam rupiah)
+
+: jumlah pemakaian energi listrik (kwh)
+
+Andi merupakan salah satu penghuni apartemen tersebut yang menerima tagihan pembayaran listrik seperti terlihat pada gambar berikut:
+
+Dia menyadari bahwa penggunaan listrik sebulan terakhir lebih dari penggunaan listrik biasanya.
+[Konteks Visual Gambar 44044_164f5392e1e6f44c3a774f14c12d5e37.png]:
+Persamaan fungsi linear: $f(x) = 1.350x + 25.000$
+[Konteks Visual Gambar 44044_e631f09a579b3dc314ca01f2f776555c.png]:
+Gambar terdiri dari dua panel: 1. Panel kiri: Ilustrasi kWh meter (meteran listrik) analog dengan tampilan angka '0000', komponen kumparan di dalam kotak kaca, dan sakelar MCB berwarna biru di bagian bawah. 2. Panel kanan: Lembar tagihan listrik dengan header 'TAGIHAN LISTRIK' dan ikon petir kuning. Teks pada lembar tagihan:- 'INV/No.11111'- 'Diterbitkan: 22 Maret 2025'- 'Jatuh Tempo: 24 Maret 2025'- 'Tagihan Rp160.000,00'- 'Total Rp160.000,00'- 'Metode Pembayaran'- 'Transfer Bank'- '0123 4567 8901'- 'Perusahaan Listrik Kita'
+PERTANYAAN:
+Berdasarkan informasi tersebut, biasanya berapa besar penggunaan listrik di apartemen Andi?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. 85 kWh
+  - B. B. 90 kWh
+  - C. C. 100 kWh
+  - D. D. 120 kWh
+  - E. E. 137 kWh
+
+---
+[SOAL NO 45]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Pak Andi akan mempresentasikan desain gedung berukuran 60 cm × 60 cm menggunakan proyektor ke layar berukuran 2,4 meter × 1,8 meter yang dipasang di depan ruang rapat (orientasi horizontal). Proyektor menghasilkan pembesaran proporsional tergantung jaraknya dari layar.
+
+Pak Andi menempatkan proyektor dengan jarak yang menghasilkan skala pembesaran seperti terlihat pada gambar berikut:
+[Konteks Visual Gambar 10404_f9c9ac794c654d40d2df88cf5ad4c586.png]:
+Diagram proyeksi gambar menggunakan proyektor:- Layar proyeksi memiliki lebar $2,4\text{ m}$.- Pada layar terdapat '[PROYEKSI GAMBAR]' yang menampilkan ilustrasi gedung perkotaan.- Proyektor berada pada jarak tertentu dengan indikasi ukuran '3 meter'.- Terdapat teks keterangan: 'Skala pembesaran: $0,6 \times \text{jarak (m)}$ '.- Di sudut kanan bawah terdapat gambar asli gedung dengan keterangan: 'Ukuran gambar asli: $60\text{ cm} \times 60\text{ cm}$ '.
+PERTANYAAN:
+Bagaimanakah tampilan desain gedung di layar?
+
+Tentukan Benar atau Salah pada setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Perbandingan ukuran tampilan desain di layar adalah 1 : 1.
+  - B. Ukuran panjang dan lebar tampilan desain pada layar adalah lebih dari 1 meter.
+  - C. Terdapat bagian gambar asli desain yang terpotong dalam tampilan pada layar.
+
+---
+[SOAL NO 46]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Luki adalah panitia bazar di sekolahnya. Dia mendapat tugas dari ketua pelaksana untuk membuat kupon. Dia ingin di setiap kupon memiliki kode akses yang unik. Kode akses kupon bazar itu memiliki lima karakter dengan format sebagai berikut:
+[Konteks Visual Gambar 21232_49c208306a27969b494b0ae6af1cdaab.png]:
+Sebuah kotak persegi dengan batas garis hitam tebal, di dalamnya terdapat teks huruf kapital hitam: 'AXBYC'
+PERTANYAAN:
+dengan A, B, dan C menyatakan huruf, serta X dan Y menyatakan angka. Tidak boleh ada angka dan huruf yang diulang. Berapakah berapa banyak kode akses berbeda yang dapat dibuat?
+OPSI / PERNYATAAN:
+  - A. A. 1.263.600
+  - B. B. 1.352.000
+  - C. C. 1.404.000
+  - D. D. 1.423.656
+  - E. E. 1.757.600
+

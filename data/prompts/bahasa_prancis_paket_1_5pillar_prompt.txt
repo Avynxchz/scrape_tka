@@ -1,0 +1,293 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Prancis (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: ['B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Au parc
+
+Léo               : Salut Emma! Ça va?
+
+Emma         : Oui, ça va bien, merci. Et toi?
+
+Leo               : Ça va aussi! Je te présente mon cousin Paul
+
+Emma         : Enchantée, Paul! Tu viens d’où?
+
+Paul             : Enchanté, Emma! Je viens de Lyon.
+
+Emma         : Tu habites à Lyon aussi?
+
+Paul             : Non, j’habite à Paris.
+
+PERTANYAAN:
+Qui est Paul?
+
+Cliquez sur chaque bonne réponse! Il y a plus d’une bonne réponse.
+OPSI / PERNYATAAN:
+  - A. A. Il est parisien.
+  - B. B. Il habite à Paris.
+  - C. C. Il habite à Lyon.
+  - D. D. Il est lyonnais.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: ['A:Vrai', 'B:Vrai', 'C:Fraux']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Lisez ce texte ci-dessous!
+
+Comprendre les panneaux et les signes
+
+Sur le chemin de l’école, Léa voit plusieurs panneaux et signes. Devant le passage piéton, un panneau indique aux voitures de s’arrêter. Près du parc, un autre panneau interdit l’entrée aux chiens. À côté du supermarché, un panneau bleu avec un "P" montre qu’il y a un parking. Léa regarde aussi les feux tricolores avant de traverser la rue. Quand le feu pour piétons est rouge, elle attend patiemment. À l’arrêt de bus, elle lit un panneau qui affiche les horaires des bus. Elle comprend que le prochain bus arrivera dans cinq minutes. Léa sait maintenant que les panneaux et les signes l’aident à se déplacer en toute sécurité
+
+PERTANYAAN:
+Cochez la bonne réponse à la question posée!
+
+Choisissez Vrai ou Faux pour chaque affirmation!
+OPSI / PERNYATAAN:
+  - A. Léa attend patiemment quand le feu pour piétons est rouge.
+  - B. Il y a un panneau interdit l’entrée aux chiens près du parc.
+  - C. Léa voit un panneau et un signe devant le passage piéton.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: ['C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lisez ce texte ci-dessous!
+
+Comprendre les panneaux et les signes
+
+Sur le chemin de l’école, Léa voit plusieurs panneaux et signes. Devant le passage piéton, un panneau indique aux voitures de s’arrêter. Près du parc, un autre panneau interdit l’entrée aux chiens. À côté du supermarché, un panneau bleu avec un "P" montre qu’il y a un parking. Léa regarde aussi les feux tricolores avant de traverser la rue. Quand le feu pour piétons est rouge, elle attend patiemment. À l’arrêt de bus, elle lit un panneau qui affiche les horaires des bus. Elle comprend que le prochain bus arrivera dans cinq minutes. Léa sait maintenant que les panneaux et les signes l’aident à se déplacer en toute sécurité.
+
+PERTANYAAN:
+De quoi parle ce texte?
+
+Cliquez sur chaque bonne réponse! Il y a plus d’une bonne réponse.
+OPSI / PERNYATAAN:
+  - A. A. Au supermarché, il n'y a pas de
+  - B. B. À côté du parc, on peut amener des
+  - C. C. Il y a beaucoup de panneaux et signes sur le chemin de l’école.
+  - D. D. Léa lit les horaires et elle attend le prochain bus dans 5
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lisez le texte attentivement!
+
+Hier, c'était un grand jour pour Marie. Elle a reçu un prix pour ses excellents résultats en mathématiques. Ses amis l'ont félicitée en disant: « Bravo, Marie! Tu es vraiment                       en mathématiques! » Marie était très heureuse et a remercié tout le monde pour leur soutien.
+
+PERTANYAAN:
+Complétez la phrase en cochant la bonne réponse.
+OPSI / PERNYATAAN:
+  - A. A. mauvaise
+  - B. B. bonne.
+  - C. C. lente.
+  - D. D. contente.
+  - E. E. belle.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Remettez-les dans le bon ordre.
+
+Ensuite, elle prend son petit-déjeuner et se prépare pour aller au lycée.
+
+Après les cours, elle rentre chez elle, fait ses devoirs et regarde une série.
+
+Claire se réveille à 6h30 chaque.
+
+À midi, elle déjeune avec ses amis à la.
+
+Le soir, elle dîne avec sa famille et se couche vers.
+
+Elle commence ses cours à 8h et a plusieurs matières dans la journée.
+
+PERTANYAAN:
+Quel est l’ordre correct du message?
+OPSI / PERNYATAAN:
+  - A. A. 1 - 3 - 6 - 4 - 2 - 5
+  - B. B. 3 - 1 - 6 - 4 - 2 - 5
+  - C. C. 3 - 6 - 1 - 4 - 2 - 5
+  - D. D. 3 - 1 - 4 - 6 - 2 - 5
+  - E. E. 3 - 2 - 1 - 5 - 6 - 4
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lisez le texte attentivement!
+
+Ma meilleure amie s'appelle Sophie. Elle est très belle et a les cheveux longs et blonds. Ses yeux sont bleus et elle a un sourire très gentil. Elle est aussi grande et assez sportive. Elle aime porter des vêtements de couleur claire. Tout le monde dit qu’elle a un style très élégant.
+
+PERTANYAAN:
+Cliquez sur chaque bonne réponse! Il y a plus d’une bonne réponse.
+
+Sophie a les cheveux ____.
+OPSI / PERNYATAAN:
+  - A. A. courts
+  - B. B. blonds
+  - C. C. longs
+  - D. D. bouclés
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Complétez ce dialogue ci-dessous!
+
+Pierre rencontre Lisa à l’école.
+
+Pierre: Bonjour, Lisa.
+
+Lisa  : Bonjour, Pierre! ___?
+
+Pierre: Ça va bien, merci. Et toi?
+
+Lisa  : Ça va bien aussi. Merci.
+OPSI / PERNYATAAN:
+  - A. A. Tu t'appelles comment ?
+  - B. B. Comment ça va ?
+  - C. C. Tu habites où ?
+  - D. D. Où vas-tu ?
+  - E. E. D’où viens-tu?
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lisez les dialogues  en désordre ci-dessous.
+
+Thomas: J’ai adoré les effets spéciaux, ils étaient impressionnants!
+
+Thomas: Tu as raison, mais le scénario était intéressant, mais un peu prévisible.
+
+Julien: Salut Thomas! Alors, qu’as-tu pensé du film d’hier soir?
+
+Julien: Oui, c’est vrai. Mais les acteurs ont très bien joué!
+
+Thomas: Oui, ils ont bien joué mais par contre, la musique ne m’a pas trop plu, elle était un peu répétitive.
+
+Julien: Moi aussi, j’ai bien aimé, mais j’ai trouvé la fin un peu trop rapide.
+
+PERTANYAAN:
+Quel est le bon ordre du dialogue?
+OPSI / PERNYATAAN:
+  - A. A. 3 - 6 - 2 - 1 - 5 - 4
+  - B. B. 3 - 4 - 5 - 1 - 6 - 2
+  - C. C. 3 - 2 - 6 - 1 - 5 - 4
+  - D. D. 3 - 1 - 5 - 2 - 4 - 6
+  - E. E. 3 - 1 - 6 - 2 - 4 - 5
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['A:Faux', 'B:Vrai', 'C:Vrai']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Léo             : Bonjour, excusez-moi, savez-vous où est la pharmacie?
+
+Sophie       : Oui, bien sûr, vous voyez la boulangerie au bout de la rue?
+
+Léo             : Oui, je la vois.
+
+Sophie       : Très bien. Juste après, il y a une banque. La pharmacie est en face de la banque.
+
+Léo             : D’accord, donc après la boulangerie, je traverse la rue et c’est là?
+
+Sophie        : Exactement!
+
+Léo             : Merci beaucoup pour votre aide!
+
+Sophie        : Avec plaisir, bonne journée.
+
+PERTANYAAN:
+Cochez la bonne réponse à la question posée: Vrai ou Faux!
+OPSI / PERNYATAAN:
+  - A. La pharmacie est à côté de la boulangerie
+  - B. La banque est à côté de la boulangerie
+  - C. Léo doit traverser la rue.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lisez attentivement la conversation entre Léa et Thomas!
+
+Léa            : Regarde ce panneau bleu avec un P. On peut se garer ici, non?
+
+Thomas     : Oui, c’est un parking, mais il faut vérifier s’il est payant ou gratuit.
+
+Léa            : Et ce panneau rouge avec un vélo barré, ça veut dire Quoi?
+
+Thomas     : Ça signifie que les vélos n’ont pas le droit de passer par ici.
+
+Léa             : D’accord, et ce panneau en forme de triangle avec des enfants?
+
+Thomas     : C’est pour indiquer qu’il y a une école à proximité, donc il faut faire attention aux enfants qui traversent.
+
+Léa            : Ah, je comprends! Il est important de bien lire les panneaux pour éviter les dangers.
+[Konteks Visual Gambar 22959_ad9cf64f66715b39c6570786a72eff7f.png]:
+Rambu lalu lintas berbentuk persegi bersudut tumpul (persegi bundar) dengan latar belakang berwarna biru tua dan bingkai garis ganda berwarna putih serta biru. Di tengahnya terdapat huruf kapital 'P' berwarna putih tebal. Rambu ini merupakan rambu petunjuk fasilitas yang menandakan lokasi atau tempat parkir kendaraan.
+[Konteks Visual Gambar 22959_84d77733fd16e7960dcac428dc6b31b7.png]:
+Rambu lalu lintas berbentuk lingkaran dengan batas pinggir berwarna merah tebal dan garis diagonal merah menyilang dari kiri atas ke kanan bawah. Di dalamnya terdapat latar belakang putih dengan siluet sepeda berwarna hitam di bagian tengah. Rambu ini merupakan rambu larangan yang menandakan larangan masuk atau melintas bagi pengendara sepeda (jalur dilarang untuk sepeda).
+[Konteks Visual Gambar 22959_a13bcbf95f44a69200dc7626961825e5.png]:
+Rambu lalu lintas berbentuk segitiga sama sisi dengan ujung menghadap ke atas, berbingkai merah tebal dan berlatar belakang putih. Di bagian tengah terdapat gambar siluet berwarna hitam yang menggambarkan dua anak (seorang anak perempuan berpakaian terusan dan seorang anak laki-laki) sedang berjalan sambil bergandengan tangan ke arah kiri. Rambu ini merupakan rambu peringatan yang menandakan adanya area penyeberangan anak-anak sekolah atau banyak anak-anak melintas.
+PERTANYAAN:
+Que peut-on déduire de la conversation?
+OPSI / PERNYATAAN:
+  - A. A. Le parking est toujours gratuit.
+  - B. B. Chaque panneau a sa propre signification
+  - C. C. Tous les panneaux indiquent des parkings.
+  - D. D. Un panneau bleu signifie toujours une interdiction.
+  - E. E. Les enfants ne peuvent pas traverser près des écoles
+

@@ -1,0 +1,2276 @@
+<!DOCTYPE html><html lang="en"><head>
+	<title>Simulasi TKA</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-16x16.png">
+	<link rel="manifest" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/site.webmanifest">
+	<link rel="mask-icon" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/safari-pinned-tab.svg">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://pusmendik.kemendikdasmen.go.id/tka/_assets/css/icheck-bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120206082-3"></script>
+	<script>
+
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120206082-3');
+
+	</script> -->
+</head>
+<body>
+
+<div class="container-fluid text-white" style="background:#326698;background-size: contain;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/bg-top.png');background-repeat: no-repeat;background-position: left; height:150px;position:fixed;top:0px;left:0px;right:0px">
+	  <div class="row">
+		<div class="col pl-5 pt-1">
+			<table>
+				<tbody><tr>
+					<td>
+						<img style="margin:5px;height:70px" src="https://pusmendik.kemendikdasmen.go.id/tka/images/logo-kemdikbud-71x72.png">
+					</td>
+					<td>
+						<div><b>PUSMENDIK</b></div>
+						<div><small>APLIKASI ANBK<small></small></small></div><small><small>
+					</small></small></td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div class="col pl-5 pt-1 mt-4 pr-5 text-right">
+			<table align="right">
+				<tbody><tr>
+					<td style="vertical-align:top">
+						<div><small>P130100230 - PESERTA BAHASA_PRANCIS_PAKET_2<small></small></small></div><small><small>
+					</small></small></td>
+					<td>
+						<div class="pl-1 pr-1 pt-1 pb-1" style="background:#74b9ff;border-radius:2px;color:#326698"><i class="fa fa-graduation-cap fa-flip-horizontal"></i></div>
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+	  </div>
+</div>
+
+<div class="container-fluid fadeInDown mb-5" style="margin-top:90px;">
+  <div class="row">
+	<div class="col-sm-12" style="border:0px solid red">
+		<div class="text-left pt-3 pb-5 mb-2" id="formContent" style="background-size: 300px;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/logo-w.png');background-repeat: no-repeat;background-position: top right; ">
+		  <div class="row row-atas"> 
+			<div class="col-sm-4"><span style="font-size:18px">Soal nomor</span> <span style="font-size:20px" id="noSoal">1</span></div>
+			<div class="col-sm-8 cont-btn-informasi">
+				<button class="btn-informasi btn btn-primary btn-round m" data-toggle="modal" data-target="#infoSoal" style="border-radius:30px;font-size:12px;"><i class="fa fa-info-circle d-sm-none"></i><span class="d-none d-sm-inline-block">INFORMASI SOAL<span></span></span></button>
+				<button class="btn-informasi btn  btn-outline-secondary  btn-round" style="border-radius:30px;font-size:12px;">Sisa Waktu : <b><span id="countdown">01:14:57</span></b></button>
+				<button class="btn-informasi btn btn-primary btn-round" data-toggle="modal" data-target="#myModal" style="border-radius:30px;font-size:12px"><span class="d-none d-sm-inline-block">Daftar Soal </span> <i class="fa fa-th-large"></i></button>
+			</div>
+		  </div>
+		  <div class="row pb-2  row-atas"> 
+			<div class="col-sm-6"><small>Ukuran font soal:</small> <span style="font-size:12px" class="ml-2 mr-1 cfont" id="c1" onclick="changeFont('12','c1')">A</span> <span style="font-size:16px" class="ml-2 mr-1 cfont" id="c2" onclick="changeFont('16','c2')">A</span> <span style="font-size:20px" class="ml-2 mr-1 cfont" id="c3" onclick="changeFont('18','c3')">A</span></div>
+			<div class="col-sm-6 mt-2 mataujian">
+				Bahasa Prancis (Paket 2)			</div>
+		  </div>
+		  <div class="row pl-3 pr-3 pb-2 mb-1"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  <!-- isi soal -->
+		  <div class="row pl-3 pr-3 pb-2 mb-2"> 
+			<div class="col p-3 " id="isisoal" style="border:2px solid #eee; border-top:10px solid #eee;">
+				<div class="soal-soal row" style="" id="soal-no-1"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Emma, Léo, et Nina se rencontrent</strong></p>
+<p><strong>Lisez le dialogue !<br></strong>Emma : Bonjour Léo !<br>Léo : Bonjour Emma ! Ça va ?<br>Emma : Oui, ça va bien. Et toi ?<br>Léo : Ça va, merci.<br>Nina : Salut tout le monde !<br>Emma et Leo : Salut Nina !<br>Nina : Bon, j’ai un cours de musique. À bientôt !<br>Léo : D’accord, à bientôt !<br>Emma : Bonne journée, Nina !<strong><br></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lisez les affirmations et choisissez <strong>vrai</strong> ou <strong>faux</strong> selon le dialogue!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Les affirmations</td><td class="text-center" style="width:100px">Vrai</td><td class="text-center" style="width:100px">Faux</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Emma dit « Bonjour » à Léo</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','1','1');">
+															<input id="pilihan_1_1_1" name="pilihan_1_1" class="pilihan__1" onchange="pilihan3('1','3','1197','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_1_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','1','2');">
+															<input id="pilihan_1_1_2" name="pilihan_1_1" class="pilihan__1" onchange="pilihan3('1','3','1197','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_1_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Léo a un cours de musique</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','2','1');">
+															<input id="pilihan_1_2_1" name="pilihan_1_2" class="pilihan__2" onchange="pilihan3('1','3','1197','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_1_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','2','2');">
+															<input id="pilihan_1_2_2" name="pilihan_1_2" class="pilihan__2" onchange="pilihan3('1','3','1197','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_1_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Nina a un cours de musique</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','3','1');">
+															<input id="pilihan_1_3_1" name="pilihan_1_3" class="pilihan__3" onchange="pilihan3('1','3','1197','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_1_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','3','2');">
+															<input id="pilihan_1_3_2" name="pilihan_1_3" class="pilihan__3" onchange="pilihan3('1','3','1197','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_1_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display: none;" id="soal-no-2"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Lisez le dialogue !<br></strong>Noah : Salut Adam! Ça va aujourd’hui ?<br>Adam : Salut! Oui, un peu mieux.<br>Noah : Le docteur dit quelque chose ?<br>Adam : Oui, Il me dit de rester au lit et de boire beaucoup d’eau.<br>Noah : _____, repose-toi bien.<br>Adam : Merci.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Choisissez la bonne réponse selon le dialogue !</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','0');">
+													<input id="pilihan_2_0" onchange="pilihan('2','a','1198')" pil="a" name="pilihan2" type="radio">
+													<label for="pilihan_2_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,0);"><!--?xml encoding="utf-8" ?--><p>Bonne fête</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','1');">
+													<input id="pilihan_2_1" onchange="pilihan('2','b','1198')" pil="b" name="pilihan2" type="radio">
+													<label for="pilihan_2_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,1);"><!--?xml encoding="utf-8" ?--><p>Bon appétit</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','2');">
+													<input id="pilihan_2_2" onchange="pilihan('2','c','1198')" pil="c" name="pilihan2" type="radio">
+													<label for="pilihan_2_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,2);"><!--?xml encoding="utf-8" ?--><p>Bonne route</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','3');">
+													<input id="pilihan_2_3" onchange="pilihan('2','d','1198')" pil="d" name="pilihan2" type="radio">
+													<label for="pilihan_2_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,3);"><!--?xml encoding="utf-8" ?--><p>Bon anniversaire</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','4');">
+													<input id="pilihan_2_4" onchange="pilihan('2','e','1198')" pil="e" name="pilihan2" type="radio">
+													<label for="pilihan_2_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,4);"><!--?xml encoding="utf-8" ?--><p>Bon rétablissement</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-3"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Complétez le dialogue !<br></strong>Clara : Salut Hugo ! Salut Salim !<br>Hugo : Salut Clara !<br>Salim : Salut !<br>Clara : Aujourd'hui, c’est l’anniversaire de Madame Lila, notre professeur de biologie !<br>Hugo : Oui, j’ai un cadeau pour elle.<br>Salim : Moi aussi, j’ai une carte.<br>Clara : On chante “Joyeux anniversaire” ?<br>Hugo : _____ !<br>Salim : Je suis d'accord. C'est génial !<br>Hugo : Elle arrive !<br>Clara : Chut ! surprise !</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Choisissez la bonne réponse !</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','0');">
+													<input id="pilihan_3_0" onchange="pilihan('3','a','1199')" pil="a" name="pilihan3" type="radio">
+													<label for="pilihan_3_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,0);"><!--?xml encoding="utf-8" ?--><p>Je ne veux pas chanter</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','1');">
+													<input id="pilihan_3_1" onchange="pilihan('3','b','1199')" pil="b" name="pilihan3" type="radio">
+													<label for="pilihan_3_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,1);"><!--?xml encoding="utf-8" ?--><p>Ce n’est pas vrai</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','2');">
+													<input id="pilihan_3_2" onchange="pilihan('3','c','1199')" pil="c" name="pilihan3" type="radio">
+													<label for="pilihan_3_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,2);"><!--?xml encoding="utf-8" ?--><p>Bonne idée</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','3');">
+													<input id="pilihan_3_3" onchange="pilihan('3','d','1199')" pil="d" name="pilihan3" type="radio">
+													<label for="pilihan_3_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,3);"><!--?xml encoding="utf-8" ?--><p>C’est nul</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','4');">
+													<input id="pilihan_3_4" onchange="pilihan('3','e','1199')" pil="e" name="pilihan3" type="radio">
+													<label for="pilihan_3_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,4);"><!--?xml encoding="utf-8" ?--><p>Ce n’est pas important</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-4"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: justify;"><strong>Lisez le texte !<br></strong>J’ai un emploi du temps assez chargé pendant la semaine. Du lundi au vendredi, j’ai cours à l’université de 8h à 16h. Le matin, j’ai des cours de mathématiques et de littérature. L’après-midi, j’étudie l’histoire, la biologie, et le français. Le mercredi, je termine plus tôt à 13h. Le week-end, je me repose, je fais mes devoirs et je passe du temps avec ma famille. C’est important d’avoir un emploi du temps bien organisé pour réussir mes études.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>À quelle heure termine-t-il son emploi au Mercredi?<br>Choisissez un bon réponse !</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','0');">
+													<input id="pilihan_4_0" onchange="pilihan('4','a','1200')" pil="a" name="pilihan4" type="radio">
+													<label for="pilihan_4_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,0);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/48318_1b4893f086f275a3567834badf0d2d02.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','1');">
+													<input id="pilihan_4_1" onchange="pilihan('4','b','1200')" pil="b" name="pilihan4" type="radio">
+													<label for="pilihan_4_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,1);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/48318_d65203a16bb834cc4e3bc7dfdcf7a9c7.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','2');">
+													<input id="pilihan_4_2" onchange="pilihan('4','c','1200')" pil="c" name="pilihan4" type="radio">
+													<label for="pilihan_4_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,2);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/48318_5d9ea5093b5476bd36e66af79228d14c.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','3');">
+													<input id="pilihan_4_3" onchange="pilihan('4','d','1200')" pil="d" name="pilihan4" type="radio">
+													<label for="pilihan_4_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,3);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/48318_d23aefa83aea9e0d7ae569bebb83b1af.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','4');">
+													<input id="pilihan_4_4" onchange="pilihan('4','e','1200')" pil="e" name="pilihan4" type="radio">
+													<label for="pilihan_4_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,4);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/48318_7e5aa80b876206568736bb9ed14ece5e.png" alt=""></p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-5"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Lisez le dialogue !<br></strong>Client : Bonjour, _____ ce sac ?<br>Vendeur : Bonjour ! Il coûte 80 euros.<br>Client : Ah, c’est un peu cher. Avez-vous quelque chose de moins cher ?<br>Vendeur : Oui, regardez celui-ci. Il est à 50 euros.<br>Client : D’accord. Je voudrais celui-là.<br>Vendeur : Très bien, je vous fais un paquet cadeau ?<br>Client : Oui, merci.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Quelle expression convient pour compléter le dialogue ?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','0');">
+													<input id="pilihan_5_0" onchange="pilihan('5','a','1208')" pil="a" name="pilihan5" type="radio">
+													<label for="pilihan_5_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,0);"><!--?xml encoding="utf-8" ?--><p>Quelle est la taille</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','1');">
+													<input id="pilihan_5_1" onchange="pilihan('5','b','1208')" pil="b" name="pilihan5" type="radio">
+													<label for="pilihan_5_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,1);"><!--?xml encoding="utf-8" ?--><p>Qu’est-ce que c'est</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','2');">
+													<input id="pilihan_5_2" onchange="pilihan('5','c','1208')" pil="c" name="pilihan5" type="radio">
+													<label for="pilihan_5_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,2);"><!--?xml encoding="utf-8" ?--><p>Combien coûte</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','3');">
+													<input id="pilihan_5_3" onchange="pilihan('5','d','1208')" pil="d" name="pilihan5" type="radio">
+													<label for="pilihan_5_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,3);"><!--?xml encoding="utf-8" ?--><p>Qu’est-ce qu'il y a</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','4');">
+													<input id="pilihan_5_4" onchange="pilihan('5','e','1208')" pil="e" name="pilihan5" type="radio">
+													<label for="pilihan_5_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,4);"><!--?xml encoding="utf-8" ?--><p>C’est qui</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-6"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Regardez le tableau !</strong></p>
+<p><strong><img src="/tka/cbt_images/74138_aed45f04717ba92f59c227e3846a41b8.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Quel est le prix d'une jupe ?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','0');">
+													<input id="pilihan_6_0" onchange="pilihan('6','a','1209')" pil="a" name="pilihan6" type="radio">
+													<label for="pilihan_6_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,0);"><!--?xml encoding="utf-8" ?--><p>48,20 €</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','1');">
+													<input id="pilihan_6_1" onchange="pilihan('6','b','1209')" pil="b" name="pilihan6" type="radio">
+													<label for="pilihan_6_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,1);"><!--?xml encoding="utf-8" ?--><p>50,15 €</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','2');">
+													<input id="pilihan_6_2" onchange="pilihan('6','c','1209')" pil="c" name="pilihan6" type="radio">
+													<label for="pilihan_6_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,2);"><!--?xml encoding="utf-8" ?--><p>65 €</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','3');">
+													<input id="pilihan_6_3" onchange="pilihan('6','d','1209')" pil="d" name="pilihan6" type="radio">
+													<label for="pilihan_6_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,3);"><!--?xml encoding="utf-8" ?--><p>70,30 €</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','4');">
+													<input id="pilihan_6_4" onchange="pilihan('6','e','1209')" pil="e" name="pilihan6" type="radio">
+													<label for="pilihan_6_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,4);"><!--?xml encoding="utf-8" ?--><p>83,20 €</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-7"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Petite Annonce 1</strong></p>
+<p><strong>Observez chaque annonce à l'image ci-dessous!</strong></p>
+<p><strong><img src="/tka/cbt_images/71376_999306bd12b25820b488ad500806034f.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>En lisant les annonces “TROUVÉ” et “URGENT”, que est-ce qu'on peut comprendre de la situation ?<br>Choisissez les bonnes réponses ! Plusieurs réponses possibles !</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('7.','0');">
+													<input id="pilihan_7_0" class="pilihan7" onchange="pilihan2('7','a','1211')" pil="a" name="pilihan7" type="checkbox" value="A">
+													<label for="pilihan_7_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(7,0);"><!--?xml encoding="utf-8" ?--><p>Madame Dubois est probablement une secrétaire ou une employée de l'école</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('7.','1');">
+													<input id="pilihan_7_1" class="pilihan7" onchange="pilihan2('7','b','1211')" pil="b" name="pilihan7" type="checkbox" value="B">
+													<label for="pilihan_7_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(7,1);"><!--?xml encoding="utf-8" ?--><p>Sarah se trouve dans une situation stressante et a besoin d'aide rapidement</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('7.','2');">
+													<input id="pilihan_7_2" class="pilihan7" onchange="pilihan2('7','c','1211')" pil="c" name="pilihan7" type="checkbox" value="C">
+													<label for="pilihan_7_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(7,2);"><!--?xml encoding="utf-8" ?--><p>La personne qui a trouvé les clés a décidé de les garder pour elle</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('7.','3');">
+													<input id="pilihan_7_3" class="pilihan7" onchange="pilihan2('7','d','1211')" pil="d" name="pilihan7" type="checkbox" value="D">
+													<label for="pilihan_7_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(7,3);"><!--?xml encoding="utf-8" ?--><p>Sarah a perdu son téléphone en même temps que les clés ont été trouvées</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-8"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Petite Annonce 1</strong></p>
+<p><strong>Observez chaque annonce à l'image ci-dessous!</strong></p>
+<p><strong><img src="/tka/cbt_images/74602_999306bd12b25820b488ad500806034f.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Quelle image correspond le mieux à l'annonce de Chloé ?<br>Choisissez la bonne réponse !</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','0');">
+													<input id="pilihan_8_0" onchange="pilihan('8','a','1213')" pil="a" name="pilihan8" type="radio">
+													<label for="pilihan_8_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,0);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/74602_10686e4d1e011849dbc364a39ee5d995.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','1');">
+													<input id="pilihan_8_1" onchange="pilihan('8','b','1213')" pil="b" name="pilihan8" type="radio">
+													<label for="pilihan_8_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,1);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/74602_fe6be69ca0f530012496d96fb17d7dc7.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','2');">
+													<input id="pilihan_8_2" onchange="pilihan('8','c','1213')" pil="c" name="pilihan8" type="radio">
+													<label for="pilihan_8_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,2);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/74602_b0b7ca8bbf5ba4823f806b38b4147097.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','3');">
+													<input id="pilihan_8_3" onchange="pilihan('8','d','1213')" pil="d" name="pilihan8" type="radio">
+													<label for="pilihan_8_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,3);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/74602_710929293f9ffde8c8515b978dc478cf.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','4');">
+													<input id="pilihan_8_4" onchange="pilihan('8','e','1213')" pil="e" name="pilihan8" type="radio">
+													<label for="pilihan_8_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,4);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/74602_d81d00ecd34390cd02a1866c387a77fd.png" alt=""></p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-9"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Observez la carte d'invitation !</strong></p>
+<p><strong><img src="/tka/cbt_images/34541_65c8eeb158384d614e9466de63d273ec.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>À quelle heure est-ce que la fête commence?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('9.','0');">
+													<input id="pilihan_9_0" onchange="pilihan('9','a','1215')" pil="a" name="pilihan9" type="radio">
+													<label for="pilihan_9_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(9,0);"><!--?xml encoding="utf-8" ?--><p>À dix heures</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('9.','1');">
+													<input id="pilihan_9_1" onchange="pilihan('9','b','1215')" pil="b" name="pilihan9" type="radio">
+													<label for="pilihan_9_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(9,1);"><!--?xml encoding="utf-8" ?--><p>À treize heures</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('9.','2');">
+													<input id="pilihan_9_2" onchange="pilihan('9','c','1215')" pil="c" name="pilihan9" type="radio">
+													<label for="pilihan_9_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(9,2);"><!--?xml encoding="utf-8" ?--><p>À quatorze heures</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('9.','3');">
+													<input id="pilihan_9_3" onchange="pilihan('9','d','1215')" pil="d" name="pilihan9" type="radio">
+													<label for="pilihan_9_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(9,3);"><!--?xml encoding="utf-8" ?--><p>À quinze heures</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('9.','4');">
+													<input id="pilihan_9_4" onchange="pilihan('9','e','1215')" pil="e" name="pilihan9" type="radio">
+													<label for="pilihan_9_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(9,4);"><!--?xml encoding="utf-8" ?--><p>À dix huit heures</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-10"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Lisez le texte !</strong></p>
+<p style="text-align: justify;">Marta se lève toujours à six heures et quart. Ensuite, elle prend le petit-déjeuner et elle réveille sa fille, Léa. Puis, elle se douche, elle s’habille et elle part travailler au lycée. Elle a cours avec ses élèves à huit heures pile. À midi, elle ne rentre jamais chez elle et elle déjeune à la cantine. Après, elle corrige les devoirs de ses élèves ou elle a des réunions avec les autres profs. Le soir, elle arrive chez elle. Elle dîne avec sa fille vers huit heures et, après, elles regardent la télé ensemble et, souvent, elles lisent. Marta adore les romans historiques : la lecture, c’est relaxant ! Elle se couche à dix heures et demie du soir. Et voilà sa journée !</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Quelle est la profession de Marta ?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','0');">
+													<input id="pilihan_10_0" onchange="pilihan('10','a','1216')" pil="a" name="pilihan10" type="radio">
+													<label for="pilihan_10_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,0);"><!--?xml encoding="utf-8" ?--><p>Elle est actrice</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','1');">
+													<input id="pilihan_10_1" onchange="pilihan('10','b','1216')" pil="b" name="pilihan10" type="radio">
+													<label for="pilihan_10_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,1);"><!--?xml encoding="utf-8" ?--><p>Elle est avocate</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','2');">
+													<input id="pilihan_10_2" onchange="pilihan('10','c','1216')" pil="c" name="pilihan10" type="radio">
+													<label for="pilihan_10_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,2);"><!--?xml encoding="utf-8" ?--><p>Elle est professeur</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','3');">
+													<input id="pilihan_10_3" onchange="pilihan('10','d','1216')" pil="d" name="pilihan10" type="radio">
+													<label for="pilihan_10_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,3);"><!--?xml encoding="utf-8" ?--><p>Elle est chanteuse</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','4');">
+													<input id="pilihan_10_4" onchange="pilihan('10','e','1216')" pil="e" name="pilihan10" type="radio">
+													<label for="pilihan_10_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,4);"><!--?xml encoding="utf-8" ?--><p>Elle est sportive</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-11"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Lisez le dialogue !<br></strong>Claire : Salut Léa ! Qu’est-ce que tu fais pendant ton temps libre ?<br> Léa : J’aime lire des romans, surtout le week-end. Et toi ?<br> Claire : Moi, je fais souvent du vélo avec mon frère.<br> Léa : C’est cool ! Tu fais du sport aussi ?<br> Claire : Oui, je vais à la piscine le samedi matin. Et toi, tu fais du sport ?<br> Léa : Non, pas trop. Je préfère rester à la maison.<strong><br></strong></p>
+<p><strong>Voici quelques informations aléatoires tirées du dialogue (mais elles ne sont pas dans le bon ordre) :<br> </strong>1. Claire va à la piscine le samedi matin.<br> 2. Léa préfère rester à la maison.<br> 3. Claire fait du vélo avec son frère.<br> 4. Léa aime lire des romans le week-end.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Quel est le bon ordre des phrases selon le dialogue ?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','0');">
+													<input id="pilihan_11_0" onchange="pilihan('11','a','1218')" pil="a" name="pilihan11" type="radio">
+													<label for="pilihan_11_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,0);"><!--?xml encoding="utf-8" ?--><p>4 – 3 – 1 – 2</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','1');">
+													<input id="pilihan_11_1" onchange="pilihan('11','b','1218')" pil="b" name="pilihan11" type="radio">
+													<label for="pilihan_11_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,1);"><!--?xml encoding="utf-8" ?--><p>4 – 2 – 3 – 1</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','2');">
+													<input id="pilihan_11_2" onchange="pilihan('11','c','1218')" pil="c" name="pilihan11" type="radio">
+													<label for="pilihan_11_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,2);"><!--?xml encoding="utf-8" ?--><p>3 – 1 – 2 – 4</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','3');">
+													<input id="pilihan_11_3" onchange="pilihan('11','d','1218')" pil="d" name="pilihan11" type="radio">
+													<label for="pilihan_11_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,3);"><!--?xml encoding="utf-8" ?--><p>2 – 4 – 3 – 1</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','4');">
+													<input id="pilihan_11_4" onchange="pilihan('11','e','1218')" pil="e" name="pilihan11" type="radio">
+													<label for="pilihan_11_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,4);"><!--?xml encoding="utf-8" ?--><p>1 – 3 – 4 – 2</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-12"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Complétez le texte !<br></strong>Je m'appelle Sylvie. J'aime bien mon école. À l’école, j’ _____ (1) les mathématiques. Le cours de maths, c'est super ! À la pause, on mange à la cantine et je discute avec mon ami. À la fin du cours, je dis au professeur : _____ (2) Madame !</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Choisissez la bonne réponse !</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','0');">
+													<input id="pilihan_12_0" onchange="pilihan('12','a','1219')" pil="a" name="pilihan12" type="radio">
+													<label for="pilihan_12_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,0);"><!--?xml encoding="utf-8" ?--><p>(1) étudie, (2) Bon appétit</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','1');">
+													<input id="pilihan_12_1" onchange="pilihan('12','b','1219')" pil="b" name="pilihan12" type="radio">
+													<label for="pilihan_12_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,1);"><!--?xml encoding="utf-8" ?--><p>(1) joue, (2) À demain</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','2');">
+													<input id="pilihan_12_2" onchange="pilihan('12','c','1219')" pil="c" name="pilihan12" type="radio">
+													<label for="pilihan_12_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,2);"><!--?xml encoding="utf-8" ?--><p>(1) apprends, (2) Bonne nuit</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','3');">
+													<input id="pilihan_12_3" onchange="pilihan('12','d','1219')" pil="d" name="pilihan12" type="radio">
+													<label for="pilihan_12_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,3);"><!--?xml encoding="utf-8" ?--><p>(1) étudie, (2) Merci</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','4');">
+													<input id="pilihan_12_4" onchange="pilihan('12','e','1219')" pil="e" name="pilihan12" type="radio">
+													<label for="pilihan_12_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,4);"><!--?xml encoding="utf-8" ?--><p>(1) fais, (2) Bonsoir</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-13"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>La famille de Charlotte</strong></p>
+<p style="text-align: justify;"><strong>Lisez bien le texte !<br>B</strong>onjour! Je vous présente. Moi, je m'appelle Charlotte. J'ai 16 ans. Je veux vous parler de ma famille. Mon père s'appelle Michel, Il a 45 ans. Ma mère s'appelle Élise, elle a 41 ans. Mes parents ont 3 enfants. Le premier enfant est Pierre. Moi, je suis la deuxième. La plus petite s’appelle Nadine, elle a 12 ans. Mon père a une sœur, elle s’appelle Jeanne. Elle a 40 ans. Elle s'est mariée avec Daniel. Ils ont deux enfants : Claire a 12 ans et Thierry a 7 ans. Mon grand-père, Victor et sa femme, Christine. Il a 73 ans et elle a 70 ans, vivent avec nous à Toulouse.<strong><br></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Quelle image correspond avec l'arbre généalogique de La famille de Charlotte?<br>Choisissez la bonne réponse!</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','0');">
+													<input id="pilihan_13_0" onchange="pilihan('13','a','1220')" pil="a" name="pilihan13" type="radio">
+													<label for="pilihan_13_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,0);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/15443_20c1d1075eca4d8a67e61b321ae88769.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','1');">
+													<input id="pilihan_13_1" onchange="pilihan('13','b','1220')" pil="b" name="pilihan13" type="radio">
+													<label for="pilihan_13_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,1);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/15443_7fca955fe5dd3ef099dea437ec384204.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','2');">
+													<input id="pilihan_13_2" onchange="pilihan('13','c','1220')" pil="c" name="pilihan13" type="radio">
+													<label for="pilihan_13_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,2);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/15443_4216dac9d01f4798c2e28dd23db31349.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','3');">
+													<input id="pilihan_13_3" onchange="pilihan('13','d','1220')" pil="d" name="pilihan13" type="radio">
+													<label for="pilihan_13_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,3);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/15443_c99e4c2e6deb5295530887b1e5c421dd.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','4');">
+													<input id="pilihan_13_4" onchange="pilihan('13','e','1220')" pil="e" name="pilihan13" type="radio">
+													<label for="pilihan_13_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,4);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/15443_d8bf057f1115fb8b93e381e0ee63ca35.png" alt=""></p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-14"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>La famille de Charlotte</strong></p>
+<p style="text-align: justify;"><strong>Lisez bien le texte !<br></strong>Bonjour! Je vous présente. Moi, je m'appelle Charlotte. J'ai 16 ans. Je veux vous parler de ma famille. Mon père s'appelle Michel, Il a 45 ans. Ma mère s'appelle Élise, elle a 41 ans. Mes parents ont 3 enfants. Le premier enfant est Pierre. Moi, je suis la deuxième. La plus petite s’appelle Nadine, elle a 12 ans. Mon père a une sœur, elle s’appelle Jeanne. Elle a 40 ans. Elle s'est mariée avec Daniel. Ils ont deux enfants : Claire a 12 ans et Thierry a 7 ans. Mon grand-père, Victor et sa femme, Christine. Il a 73 ans et elle a 70 ans, vivent avec nous à Toulouse.<strong><br></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Selon le texte, choisissez la bonne réponse pour compléter la phrase !<br>Quel âge a le grand-père de Charlotte ? Il a ____ .</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','0');">
+													<input id="pilihan_14_0" onchange="pilihan('14','a','1221')" pil="a" name="pilihan14" type="radio">
+													<label for="pilihan_14_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,0);"><!--?xml encoding="utf-8" ?--><p>40 ans</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','1');">
+													<input id="pilihan_14_1" onchange="pilihan('14','b','1221')" pil="b" name="pilihan14" type="radio">
+													<label for="pilihan_14_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,1);"><!--?xml encoding="utf-8" ?--><p>41 ans</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','2');">
+													<input id="pilihan_14_2" onchange="pilihan('14','c','1221')" pil="c" name="pilihan14" type="radio">
+													<label for="pilihan_14_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,2);"><!--?xml encoding="utf-8" ?--><p>45 ans</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','3');">
+													<input id="pilihan_14_3" onchange="pilihan('14','d','1221')" pil="d" name="pilihan14" type="radio">
+													<label for="pilihan_14_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,3);"><!--?xml encoding="utf-8" ?--><p>70 ans</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','4');">
+													<input id="pilihan_14_4" onchange="pilihan('14','e','1221')" pil="e" name="pilihan14" type="radio">
+													<label for="pilihan_14_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,4);"><!--?xml encoding="utf-8" ?--><p>73 ans</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-15"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Regardez bien le plan !</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/86894_786a0560b18ff9d230d584ab0db424c4.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Choisissez la bonne affirmation basée sur le plan !</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','0');">
+													<input id="pilihan_15_0" onchange="pilihan('15','a','1222')" pil="a" name="pilihan15" type="radio">
+													<label for="pilihan_15_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Il faut marcher très loin du cinéma pour aller au commissariat de police</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','1');">
+													<input id="pilihan_15_1" onchange="pilihan('15','b','1222')" pil="b" name="pilihan15" type="radio">
+													<label for="pilihan_15_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>La banque, le bureau de poste, et le théâtre, se trouvent dans la même rue</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','2');">
+													<input id="pilihan_15_2" onchange="pilihan('15','c','1222')" pil="c" name="pilihan15" type="radio">
+													<label for="pilihan_15_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Le jardin public se trouve au coin de la Rue de la Mairie</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','3');">
+													<input id="pilihan_15_3" onchange="pilihan('15','d','1222')" pil="d" name="pilihan15" type="radio">
+													<label for="pilihan_15_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Les lycéens doivent traverser la rue des Rosiers pour aller à la gare</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','4');">
+													<input id="pilihan_15_4" onchange="pilihan('15','e','1222')" pil="e" name="pilihan15" type="radio">
+													<label for="pilihan_15_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>La rue de la Mairie est très loin de la rue Leclerc</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-16"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Lisez le dialogue !<br></strong><u>Une famille est dans une voiture<br></u>Papa : Il fait beau aujourd’hui. On va au parc ?<br>La fille : Oui, c'est une bonne idée Papa.<br>Papa : D’accord, on arrive tout de suite. Je vais garer la voiture devant cet arbre.<br>Maman : Mais non Papa, regarde le panneau ! C’est interdit de faire le parking.<br>Papa : Ah oui, c’est vrai. Allez, on cherche le parking.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Quel panneau est-ce qu’ils voient ?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','0');">
+													<input id="pilihan_16_0" onchange="pilihan('16','a','1223')" pil="a" name="pilihan16" type="radio">
+													<label for="pilihan_16_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,0);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/81583_95d6372c64d8bce12c962f0d66a9d192.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','1');">
+													<input id="pilihan_16_1" onchange="pilihan('16','b','1223')" pil="b" name="pilihan16" type="radio">
+													<label for="pilihan_16_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,1);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/81583_8ba89619004a663c080ce07f009ac1dd.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','2');">
+													<input id="pilihan_16_2" onchange="pilihan('16','c','1223')" pil="c" name="pilihan16" type="radio">
+													<label for="pilihan_16_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,2);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/81583_f844da39aed2f4f49daf8e284a265f65.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','3');">
+													<input id="pilihan_16_3" onchange="pilihan('16','d','1223')" pil="d" name="pilihan16" type="radio">
+													<label for="pilihan_16_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,3);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/81583_3acf3fbf0e3490d920c0f810cb46973a.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','4');">
+													<input id="pilihan_16_4" onchange="pilihan('16','e','1223')" pil="e" name="pilihan16" type="radio">
+													<label for="pilihan_16_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,4);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/81583_50f0d8cd6bbe34fbd4df18832d33c57c.png" alt=""></p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-17"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><strong>Observez l'annonce !</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/24503_1beaf720199357dc582fe4d13c07a283.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>À quelle heure commence le programme Bibliothèque Vivante ?<br>À partir de _____.</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','0');">
+													<input id="pilihan_17_0" onchange="pilihan('17','a','1224')" pil="a" name="pilihan17" type="radio">
+													<label for="pilihan_17_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>1h30 de l’après-midi</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','1');">
+													<input id="pilihan_17_1" onchange="pilihan('17','b','1224')" pil="b" name="pilihan17" type="radio">
+													<label for="pilihan_17_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>2h00 de l’après-midi</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','2');">
+													<input id="pilihan_17_2" onchange="pilihan('17','c','1224')" pil="c" name="pilihan17" type="radio">
+													<label for="pilihan_17_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>2h30 de l’après-midi</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','3');">
+													<input id="pilihan_17_3" onchange="pilihan('17','d','1224')" pil="d" name="pilihan17" type="radio">
+													<label for="pilihan_17_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>2h00 du matin</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','4');">
+													<input id="pilihan_17_4" onchange="pilihan('17','e','1224')" pil="e" name="pilihan17" type="radio">
+													<label for="pilihan_17_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>2h30 du matin</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-18"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Ma Copine Aimée</strong></p>
+<p style="text-align: justify;"><strong>Lisez le texte !<br></strong>Salut ! C’est Fantine et je voudrais vous présenter une personne spéciale dans ma vie. J’ai une copine aimée dans la classe. Elle s’appelle Mia. Elle est d’origine allemande. Elle est la première personne qui me salue lors de mon déménagement dans cette école au milieu du semestre. Avec elle, je peux parler de tout et de rien. Elle m'écoute avec attention sans juger. Elle offre souvent des soutiens et m’encourage dans mes moments difficiles. J’ai de la chance d’avoir une amie comme elle.<strong> <br></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Quelles affirmations sont correctes selon le texte ?<br>Plusieurs réponses possibles !</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('18.','0');">
+													<input id="pilihan_18_0" class="pilihan18" onchange="pilihan2('18','a','1225')" pil="a" name="pilihan18" type="checkbox" value="A">
+													<label for="pilihan_18_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(18,0);"><!--?xml encoding="utf-8" ?--><p>Mia est une fille bavarde</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('18.','1');">
+													<input id="pilihan_18_1" class="pilihan18" onchange="pilihan2('18','b','1225')" pil="b" name="pilihan18" type="checkbox" value="B">
+													<label for="pilihan_18_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(18,1);"><!--?xml encoding="utf-8" ?--><p>Fantine est nouvelle dans cette école</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('18.','2');">
+													<input id="pilihan_18_2" class="pilihan18" onchange="pilihan2('18','c','1225')" pil="c" name="pilihan18" type="checkbox" value="C">
+													<label for="pilihan_18_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(18,2);"><!--?xml encoding="utf-8" ?--><p>Mia est une personne attentive</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('18.','3');">
+													<input id="pilihan_18_3" class="pilihan18" onchange="pilihan2('18','d','1225')" pil="d" name="pilihan18" type="checkbox" value="D">
+													<label for="pilihan_18_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(18,3);"><!--?xml encoding="utf-8" ?--><p>Fantine est triste de connaître Mia</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-19"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Ma Copine Aimée</strong></p>
+<p style="text-align: justify;"><strong>Lisez le texte !<br></strong>Salut ! C’est Fantine et je voudrais vous présenter une personne spéciale dans ma vie. J’ai une copine aimée dans la classe. Elle s’appelle Mia. Elle est d’origine allemande. Elle est la première personne qui me salue lors de mon déménagement dans cette école au milieu du semestre. Avec elle, je peux parler de tout et de rien. Elle m'écoute avec attention sans juger. Elle offre souvent des soutiens et m’encourage dans mes moments difficiles. J’ai de la chance d’avoir une amie comme elle.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Selon le texte, Mia est _____.</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','0');">
+													<input id="pilihan_19_0" onchange="pilihan('19','a','1227')" pil="a" name="pilihan19" type="radio">
+													<label for="pilihan_19_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,0);"><!--?xml encoding="utf-8" ?--><p>intelligente</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','1');">
+													<input id="pilihan_19_1" onchange="pilihan('19','b','1227')" pil="b" name="pilihan19" type="radio">
+													<label for="pilihan_19_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,1);"><!--?xml encoding="utf-8" ?--><p>indifférente</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','2');">
+													<input id="pilihan_19_2" onchange="pilihan('19','c','1227')" pil="c" name="pilihan19" type="radio">
+													<label for="pilihan_19_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,2);"><!--?xml encoding="utf-8" ?--><p>rigide</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','3');">
+													<input id="pilihan_19_3" onchange="pilihan('19','d','1227')" pil="d" name="pilihan19" type="radio">
+													<label for="pilihan_19_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,3);"><!--?xml encoding="utf-8" ?--><p>gentille</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','4');">
+													<input id="pilihan_19_4" onchange="pilihan('19','e','1227')" pil="e" name="pilihan19" type="radio">
+													<label for="pilihan_19_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,4);"><!--?xml encoding="utf-8" ?--><p>généreuse</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-20"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Observez l’image !</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/93752_f98ced69d53c56aeb7d3c518a1ec7334.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Qu'est-ce qu'on fait dans ce lieu ?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','0');">
+													<input id="pilihan_20_0" onchange="pilihan('20','a','1228')" pil="a" name="pilihan20" type="radio">
+													<label for="pilihan_20_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>On fait des devoirs</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','1');">
+													<input id="pilihan_20_1" onchange="pilihan('20','b','1228')" pil="b" name="pilihan20" type="radio">
+													<label for="pilihan_20_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>On peint la mer</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','2');">
+													<input id="pilihan_20_2" onchange="pilihan('20','c','1228')" pil="c" name="pilihan20" type="radio">
+													<label for="pilihan_20_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>On voit des œuvres d'art</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','3');">
+													<input id="pilihan_20_3" onchange="pilihan('20','d','1228')" pil="d" name="pilihan20" type="radio">
+													<label for="pilihan_20_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>On emprunte des livres</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','4');">
+													<input id="pilihan_20_4" onchange="pilihan('20','e','1228')" pil="e" name="pilihan20" type="radio">
+													<label for="pilihan_20_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>On joue de la guitare</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-21"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Lisez le texte !<br></strong>C’est un endroit privé dans la maison. Il y a un lit, une lampe de chevet, une armoire, et parfois un bureau. Il y a aussi une fenêtre. Les murs sont décorés avec des photos et des affiches. Pendant la journée, On fait souvent des devoirs et on étudie dans cette pièce. La nuit, on dort et on se repose.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Quelle pièce est décrite sur le texte ?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','0');">
+													<input id="pilihan_21_0" onchange="pilihan('21','a','1230')" pil="a" name="pilihan21" type="radio">
+													<label for="pilihan_21_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,0);"><!--?xml encoding="utf-8" ?--><p>La cuisine</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','1');">
+													<input id="pilihan_21_1" onchange="pilihan('21','b','1230')" pil="b" name="pilihan21" type="radio">
+													<label for="pilihan_21_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,1);"><!--?xml encoding="utf-8" ?--><p>La chambre</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','2');">
+													<input id="pilihan_21_2" onchange="pilihan('21','c','1230')" pil="c" name="pilihan21" type="radio">
+													<label for="pilihan_21_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,2);"><!--?xml encoding="utf-8" ?--><p>Le garage</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','3');">
+													<input id="pilihan_21_3" onchange="pilihan('21','d','1230')" pil="d" name="pilihan21" type="radio">
+													<label for="pilihan_21_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,3);"><!--?xml encoding="utf-8" ?--><p>La salle de bains</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','4');">
+													<input id="pilihan_21_4" onchange="pilihan('21','e','1230')" pil="e" name="pilihan21" type="radio">
+													<label for="pilihan_21_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,4);"><!--?xml encoding="utf-8" ?--><p>La salle à manger</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-22"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>L'activité&nbsp;dans&nbsp;un&nbsp;bureau</strong></p>
+<p><strong>Lisez le dialogue !<br></strong>Femme : Bonjour.<br>Employé : Bonjour, Madame. Est-ce que je peux vous aider ?<br>Femme : Je voudrais des informations pour inscrire mon fils à l’école, s’il vous plaît.<br>Employé : Bien sûr. Votre enfant a quel âge ?<br>Femme : Il a 5 ans.<br>Employé : Et vous habitez dans quel quartier ?<br>Femme : J’habite dans le quartier Saint-Paul, rue Victor Hugo.<br>Employé : D’accord. L’école du secteur est l’école maternelle Saint-Paul. Voici la liste des documents à fournir.<br>Femme : Merci beaucoup.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Qu'est-ce que la femme demande ?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','0');">
+													<input id="pilihan_22_0" onchange="pilihan('22','a','1231')" pil="a" name="pilihan22" type="radio">
+													<label for="pilihan_22_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,0);"><!--?xml encoding="utf-8" ?--><p>L’acte de naissance</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','1');">
+													<input id="pilihan_22_1" onchange="pilihan('22','b','1231')" pil="b" name="pilihan22" type="radio">
+													<label for="pilihan_22_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,1);"><!--?xml encoding="utf-8" ?--><p>L’horaire d’ouverture</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','2');">
+													<input id="pilihan_22_2" onchange="pilihan('22','c','1231')" pil="c" name="pilihan22" type="radio">
+													<label for="pilihan_22_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,2);"><!--?xml encoding="utf-8" ?--><p>L’inscription scolaire</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','3');">
+													<input id="pilihan_22_3" onchange="pilihan('22','d','1231')" pil="d" name="pilihan22" type="radio">
+													<label for="pilihan_22_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,3);"><!--?xml encoding="utf-8" ?--><p>La carte d’identité</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','4');">
+													<input id="pilihan_22_4" onchange="pilihan('22','e','1231')" pil="e" name="pilihan22" type="radio">
+													<label for="pilihan_22_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,4);"><!--?xml encoding="utf-8" ?--><p>L’attestation de domicile</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-23"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>L'activité&nbsp;dans&nbsp;un&nbsp;bureau</strong></p>
+<p><strong>Lisez le dialogue !<br></strong>Femme : Bonjour.<br>Employé : Bonjour, Madame. Est-ce que je peux vous aider ?<br>Femme : Je voudrais des informations pour inscrire mon fils à l’école, s’il vous plaît.<br>Employé : Bien sûr. Votre enfant a quel âge ?<br>Femme : Il a 5 ans.<br>Employé : Et vous habitez dans quel quartier ?<br>Femme : J’habite dans le quartier Saint-Paul, rue Victor Hugo.<br>Employé : D’accord. L’école du secteur est l’école maternelle Saint-Paul. Voici la liste des documents à fournir.<br>Femme : Merci beaucoup.<strong><br></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Lisez les affirmations et choisissez <strong>vrai</strong> ou <strong>faux</strong> selon le dialogue !</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Affirmations</td><td class="text-center" style="width:100px">Vrai</td><td class="text-center" style="width:100px">Faux</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>L’enfant de la femme a cinq ans.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','1','1');">
+															<input id="pilihan_23_1_1" name="pilihan_23_1" class="pilihan__1" onchange="pilihan3('23','3','1233','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_23_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','1','2');">
+															<input id="pilihan_23_1_2" name="pilihan_23_1" class="pilihan__1" onchange="pilihan3('23','3','1233','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_23_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>La femme n’habite pas dans la rue Victor Hugo.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','2','1');">
+															<input id="pilihan_23_2_1" name="pilihan_23_2" class="pilihan__2" onchange="pilihan3('23','3','1233','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_23_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','2','2');">
+															<input id="pilihan_23_2_2" name="pilihan_23_2" class="pilihan__2" onchange="pilihan3('23','3','1233','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_23_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>La femme veut s’inscrire à l'école maternelle.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','3','1');">
+															<input id="pilihan_23_3_1" name="pilihan_23_3" class="pilihan__3" onchange="pilihan3('23','3','1233','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_23_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','3','2');">
+															<input id="pilihan_23_3_2" name="pilihan_23_3" class="pilihan__3" onchange="pilihan3('23','3','1233','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_23_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-24"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Observez le forum de discussion !</strong></p>
+<p><strong><img src="/tka/cbt_images/97731_37f79fd3b9621113803265fd01ddee03.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Qui sont d'accord avec l'utilisation de l'uniforme scolaire ?<br>Choisissez les bonnes réponses ! Plusieurs réponses sont possibles !</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','0');">
+													<input id="pilihan_24_0" class="pilihan24" onchange="pilihan2('24','a','1235')" pil="a" name="pilihan24" type="checkbox" value="A">
+													<label for="pilihan_24_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,0);"><!--?xml encoding="utf-8" ?--><p>Danielle</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','1');">
+													<input id="pilihan_24_1" class="pilihan24" onchange="pilihan2('24','b','1235')" pil="b" name="pilihan24" type="checkbox" value="B">
+													<label for="pilihan_24_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,1);"><!--?xml encoding="utf-8" ?--><p>Camille</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','2');">
+													<input id="pilihan_24_2" class="pilihan24" onchange="pilihan2('24','c','1235')" pil="c" name="pilihan24" type="checkbox" value="C">
+													<label for="pilihan_24_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,2);"><!--?xml encoding="utf-8" ?--><p>Jeremy</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','3');">
+													<input id="pilihan_24_3" class="pilihan24" onchange="pilihan2('24','d','1235')" pil="d" name="pilihan24" type="checkbox" value="D">
+													<label for="pilihan_24_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,3);"><!--?xml encoding="utf-8" ?--><p>Tomas</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-25"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: justify;"><strong>Complétez le texte !<br></strong>Bonjour, je m’appelle Gilbert, j’ai 55 ans, je suis directeur d’une entreprise d'export-import. Je suis marié avec Nathalie, professeure. Nous avons 2 enfants, une fille, Nadine, 19 ans et un fils, Nicolas, 15 ans. Nadine est _____, elle étudie la biologie dans une université à Paris. Et Nicolas va passer son baccalaureat bientôt. Voilà ma famille.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Choisissez la bonne réponse&nbsp;!</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('25.','0');">
+													<input id="pilihan_25_0" onchange="pilihan('25','a','1237')" pil="a" name="pilihan25" type="radio">
+													<label for="pilihan_25_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(25,0);"><!--?xml encoding="utf-8" ?--><p>professeure</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('25.','1');">
+													<input id="pilihan_25_1" onchange="pilihan('25','b','1237')" pil="b" name="pilihan25" type="radio">
+													<label for="pilihan_25_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(25,1);"><!--?xml encoding="utf-8" ?--><p>lycéenne</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('25.','2');">
+													<input id="pilihan_25_2" onchange="pilihan('25','c','1237')" pil="c" name="pilihan25" type="radio">
+													<label for="pilihan_25_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(25,2);"><!--?xml encoding="utf-8" ?--><p>collégienne</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('25.','3');">
+													<input id="pilihan_25_3" onchange="pilihan('25','d','1237')" pil="d" name="pilihan25" type="radio">
+													<label for="pilihan_25_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(25,3);"><!--?xml encoding="utf-8" ?--><p>directrice</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('25.','4');">
+													<input id="pilihan_25_4" onchange="pilihan('25','e','1237')" pil="e" name="pilihan25" type="radio">
+													<label for="pilihan_25_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(25,4);"><!--?xml encoding="utf-8" ?--><p>étudiante</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-26"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: justify;"><strong>LIsez le texte !<br></strong>Alex travaille dans une entreprise très connue. Le matin, il commence par une réunion à 9 h. Ensuite, à 10 h, il a un appel téléphonique important. À midi, il déjeune rapidement tout seul, puis il retourne au travail. L'après-midi, il a une présentation à 14h. Après la présentation, il doit répondre aux e-mails. À 16 h, il a encore une réunion avec son équipe. Enfin, à 18 h, il termine sa journée de travail, mais il doit encore organiser son agenda pour le lendemain.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Qu'est-ce qu'Alex fait pendant sa journée du travail ?<br>Choisissez les bonnes réponses ! Plusieurs réponses possibles !</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('26.','0');">
+													<input id="pilihan_26_0" class="pilihan26" onchange="pilihan2('26','a','1238')" pil="a" name="pilihan26" type="checkbox" value="A">
+													<label for="pilihan_26_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(26,0);"><!--?xml encoding="utf-8" ?--><p>Il participe à une réunion</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('26.','1');">
+													<input id="pilihan_26_1" class="pilihan26" onchange="pilihan2('26','b','1238')" pil="b" name="pilihan26" type="checkbox" value="B">
+													<label for="pilihan_26_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(26,1);"><!--?xml encoding="utf-8" ?--><p>Il déjeune avec ses collègues</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('26.','2');">
+													<input id="pilihan_26_2" class="pilihan26" onchange="pilihan2('26','c','1238')" pil="c" name="pilihan26" type="checkbox" value="C">
+													<label for="pilihan_26_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(26,2);"><!--?xml encoding="utf-8" ?--><p>Il répond aux courriels</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('26.','3');">
+													<input id="pilihan_26_3" class="pilihan26" onchange="pilihan2('26','d','1238')" pil="d" name="pilihan26" type="checkbox" value="D">
+													<label for="pilihan_26_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(26,3);"><!--?xml encoding="utf-8" ?--><p>Il donne une présentation</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-27"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Lisez le dialogue !<br></strong>Emma : Salut Lucas ! Ça va ?<br>Lucas : Salut ! Ça va très bien. Et toi ?<br>Emma : Moi aussi, ça va, merci. Tu écoutes toujours du rock ?<br>Lucas : Oui, j’adore le rock. Mais en ce moment, j’écoute aussi un peu de jazz.<br>Emma : Ah bon ? Moi, je préfère la pop.<br>Lucas : J’aime bien aussi la pop, surtout les chansons anglaises.<br>Emma : Tu joues d’un instrument ?<br>Lucas : Oui, je joue de la guitare. Et toi ?<br>Emma : Moi, je ne joue pas d’instrument, mais je chante dans une chorale.<br>Lucas : Super !<strong><br></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Lisez les affirmations et choisissez <strong>vrai</strong> ou <strong>faux</strong> selon le dialogue !</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Les affirmations</td><td class="text-center" style="width:100px">Vrai</td><td class="text-center" style="width:100px">Faux</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Lucas déteste la musique pop</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','1','1');">
+															<input id="pilihan_27_1_1" name="pilihan_27_1" class="pilihan__1" onchange="pilihan3('27','3','1240','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_27_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','1','2');">
+															<input id="pilihan_27_1_2" name="pilihan_27_1" class="pilihan__1" onchange="pilihan3('27','3','1240','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_27_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Emma aime chanter</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','2','1');">
+															<input id="pilihan_27_2_1" name="pilihan_27_2" class="pilihan__2" onchange="pilihan3('27','3','1240','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_27_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','2','2');">
+															<input id="pilihan_27_2_2" name="pilihan_27_2" class="pilihan__2" onchange="pilihan3('27','3','1240','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_27_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Lucas joue d’un instrument</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','3','1');">
+															<input id="pilihan_27_3_1" name="pilihan_27_3" class="pilihan__3" onchange="pilihan3('27','3','1240','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_27_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','3','2');">
+															<input id="pilihan_27_3_2" name="pilihan_27_3" class="pilihan__3" onchange="pilihan3('27','3','1240','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_27_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-28"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Observez les phrases !<br></strong></p>
+<ol>
+<li>Je me réveille à six heures.</li>
+<li>Les cours commencent à sept heures trente.</li>
+<li>Je prends une douche à six heures quinze.</li>
+<li>Le soir, je me couche vers vingt-deux heures.</li>
+<li>À midi, je mange à la cantine avec mes amis.</li>
+<li>Puis je m’habille.</li>
+<li>Je prends mon petit-déjeuner.</li>
+<li>Après l’école, je fais mes devoirs.</li>
+<li>9. Je vais à l’école à sept heures.</li>
+</ol>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Mettez les phrases dans le bon ordre pour former un texte logique !</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('28.','0');">
+													<input id="pilihan_28_0" onchange="pilihan('28','a','1242')" pil="a" name="pilihan28" type="radio">
+													<label for="pilihan_28_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(28,0);"><!--?xml encoding="utf-8" ?--><p>4 – 1 – 2 – 3 – 5 – 6 – 8 – 7 – 9</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('28.','1');">
+													<input id="pilihan_28_1" onchange="pilihan('28','b','1242')" pil="b" name="pilihan28" type="radio">
+													<label for="pilihan_28_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(28,1);"><!--?xml encoding="utf-8" ?--><p>3 – 1 – 2 – 4 – 5 – 6 – 7 – 8 – 9</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('28.','2');">
+													<input id="pilihan_28_2" onchange="pilihan('28','c','1242')" pil="c" name="pilihan28" type="radio">
+													<label for="pilihan_28_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(28,2);"><!--?xml encoding="utf-8" ?--><p>2 – 1 – 3 – 4 – 5 – 7 – 6 – 9 – 8</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('28.','3');">
+													<input id="pilihan_28_3" onchange="pilihan('28','d','1242')" pil="d" name="pilihan28" type="radio">
+													<label for="pilihan_28_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(28,3);"><!--?xml encoding="utf-8" ?--><p>1 – 3 – 6 – 7 – 9 – 2 – 5 – 8 – 4</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('28.','4');">
+													<input id="pilihan_28_4" onchange="pilihan('28','e','1242')" pil="e" name="pilihan28" type="radio">
+													<label for="pilihan_28_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(28,4);"><!--?xml encoding="utf-8" ?--><p>1 – 3 – 2 – 5 – 4 – 6 – 8 – 7 – 9</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-29"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Lisez le mail !</strong></p>
+<p><strong><img src="/tka/cbt_images/67261_fe38506a33632887022d4f158c65db11.png" alt=""></strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Choisissez le plan correct pour aller à la bibliothèque selon les indices du mail.</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','0');">
+													<input id="pilihan_29_0" onchange="pilihan('29','a','1245')" pil="a" name="pilihan29" type="radio">
+													<label for="pilihan_29_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,0);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/67261_0a06a339463e0c39fd871882d228505c.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','1');">
+													<input id="pilihan_29_1" onchange="pilihan('29','b','1245')" pil="b" name="pilihan29" type="radio">
+													<label for="pilihan_29_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,1);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/67261_2aeb1b9aeb857915b3888825b59c9811.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','2');">
+													<input id="pilihan_29_2" onchange="pilihan('29','c','1245')" pil="c" name="pilihan29" type="radio">
+													<label for="pilihan_29_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,2);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/67261_8bbee8b3c527ce967391972d750b1572.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','3');">
+													<input id="pilihan_29_3" onchange="pilihan('29','d','1245')" pil="d" name="pilihan29" type="radio">
+													<label for="pilihan_29_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,3);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/67261_dfbd44feba0b9cc84ae893d14b3842ee.png" alt=""></p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','4');">
+													<input id="pilihan_29_4" onchange="pilihan('29','e','1245')" pil="e" name="pilihan29" type="radio">
+													<label for="pilihan_29_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,4);"><!--?xml encoding="utf-8" ?--><p><img src="/tka/cbt_images/67261_66ae5a5954c85047467b95ff98c4fffb.png" alt=""></p>
+</td></tr>											</tbody></table>
+															</div>
+				</div>			</div>
+		  </div>
+		  
+		  <div class="row pl-3 pr-3 pb-1 mb-0"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  
+		  <div class="row pb-0 pt-2 mt-2 btn-bawah"> 
+			<div class="col text-center" style="">
+				<button class="btn btn-danger btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="prevSoal()"><i class="fa fa-chevron-circle-left"></i> <span class="d-none d-sm-inline-block">Soal sebelumnya</span></button>
+			</div>
+			<div class="col text-center" style="">
+				<button class="btn btn-warning btn-round btn-md btn-navigasi" style="border-radius:30px;color:#fff;"><input type="checkbox" onclick="raguRagu()" id="c_ragu_ragu" value=""> <span class="d-none d-sm-inline-block">Ragu-ragu
+			</span></button></div>
+			<div class="col text-center" style="">
+				<button class="btn btn-primary btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="nextSoal()" id="nextSoal"> <span class="d-none d-sm-inline-block">Soal berikutnya</span> <i class="fa fa-chevron-circle-right"></i></button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	 
+  </div> 
+</div>
+
+<div class="modal fadeIn" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Daftar Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+		<form id="formJawaban">
+         				<span class="d-none" id="tmp_answer_1"></span>
+				<span class="d-none" id="ragu_answer_1"></span>
+				<input type="hidden" name="jawaban_no[1]" id="input_jawaban_no_1" value="1">
+								<div id="jawaban-no-1" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal btn-primary" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('1')">1					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer1" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_2"></span>
+				<span class="d-none" id="ragu_answer_2"></span>
+				<input type="hidden" name="jawaban_no[2]" id="input_jawaban_no_2" value="2">
+								<div id="jawaban-no-2" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('2')">2					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer2" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_3"></span>
+				<span class="d-none" id="ragu_answer_3"></span>
+				<input type="hidden" name="jawaban_no[3]" id="input_jawaban_no_3" value="3">
+								<div id="jawaban-no-3" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('3')">3					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer3" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_4"></span>
+				<span class="d-none" id="ragu_answer_4"></span>
+				<input type="hidden" name="jawaban_no[4]" id="input_jawaban_no_4" value="4">
+								<div id="jawaban-no-4" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('4')">4					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer4" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_5"></span>
+				<span class="d-none" id="ragu_answer_5"></span>
+				<input type="hidden" name="jawaban_no[5]" id="input_jawaban_no_5" value="5">
+								<div id="jawaban-no-5" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('5')">5					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer5" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_6"></span>
+				<span class="d-none" id="ragu_answer_6"></span>
+				<input type="hidden" name="jawaban_no[6]" id="input_jawaban_no_6" value="6">
+								<div id="jawaban-no-6" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('6')">6					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer6" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_7"></span>
+				<span class="d-none" id="ragu_answer_7"></span>
+				<input type="hidden" name="jawaban_no[7]" id="input_jawaban_no_7" value="7">
+								<div id="jawaban-no-7" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('7')">7					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer7" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_8"></span>
+				<span class="d-none" id="ragu_answer_8"></span>
+				<input type="hidden" name="jawaban_no[8]" id="input_jawaban_no_8" value="8">
+								<div id="jawaban-no-8" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('8')">8					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer8" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_9"></span>
+				<span class="d-none" id="ragu_answer_9"></span>
+				<input type="hidden" name="jawaban_no[9]" id="input_jawaban_no_9" value="9">
+								<div id="jawaban-no-9" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('9')">9					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer9" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_10"></span>
+				<span class="d-none" id="ragu_answer_10"></span>
+				<input type="hidden" name="jawaban_no[10]" id="input_jawaban_no_10" value="10">
+								<div id="jawaban-no-10" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('10')">10					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer10" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_11"></span>
+				<span class="d-none" id="ragu_answer_11"></span>
+				<input type="hidden" name="jawaban_no[11]" id="input_jawaban_no_11" value="11">
+								<div id="jawaban-no-11" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('11')">11					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer11" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_12"></span>
+				<span class="d-none" id="ragu_answer_12"></span>
+				<input type="hidden" name="jawaban_no[12]" id="input_jawaban_no_12" value="12">
+								<div id="jawaban-no-12" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('12')">12					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer12" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_13"></span>
+				<span class="d-none" id="ragu_answer_13"></span>
+				<input type="hidden" name="jawaban_no[13]" id="input_jawaban_no_13" value="13">
+								<div id="jawaban-no-13" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('13')">13					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer13" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_14"></span>
+				<span class="d-none" id="ragu_answer_14"></span>
+				<input type="hidden" name="jawaban_no[14]" id="input_jawaban_no_14" value="14">
+								<div id="jawaban-no-14" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('14')">14					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer14" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_15"></span>
+				<span class="d-none" id="ragu_answer_15"></span>
+				<input type="hidden" name="jawaban_no[15]" id="input_jawaban_no_15" value="15">
+								<div id="jawaban-no-15" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('15')">15					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer15" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_16"></span>
+				<span class="d-none" id="ragu_answer_16"></span>
+				<input type="hidden" name="jawaban_no[16]" id="input_jawaban_no_16" value="16">
+								<div id="jawaban-no-16" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('16')">16					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer16" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_17"></span>
+				<span class="d-none" id="ragu_answer_17"></span>
+				<input type="hidden" name="jawaban_no[17]" id="input_jawaban_no_17" value="17">
+								<div id="jawaban-no-17" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('17')">17					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer17" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_18"></span>
+				<span class="d-none" id="ragu_answer_18"></span>
+				<input type="hidden" name="jawaban_no[18]" id="input_jawaban_no_18" value="18">
+								<div id="jawaban-no-18" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('18')">18					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer18" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_19"></span>
+				<span class="d-none" id="ragu_answer_19"></span>
+				<input type="hidden" name="jawaban_no[19]" id="input_jawaban_no_19" value="19">
+								<div id="jawaban-no-19" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('19')">19					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer19" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_20"></span>
+				<span class="d-none" id="ragu_answer_20"></span>
+				<input type="hidden" name="jawaban_no[20]" id="input_jawaban_no_20" value="20">
+								<div id="jawaban-no-20" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('20')">20					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer20" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_21"></span>
+				<span class="d-none" id="ragu_answer_21"></span>
+				<input type="hidden" name="jawaban_no[21]" id="input_jawaban_no_21" value="21">
+								<div id="jawaban-no-21" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('21')">21					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer21" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_22"></span>
+				<span class="d-none" id="ragu_answer_22"></span>
+				<input type="hidden" name="jawaban_no[22]" id="input_jawaban_no_22" value="22">
+								<div id="jawaban-no-22" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('22')">22					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer22" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_23"></span>
+				<span class="d-none" id="ragu_answer_23"></span>
+				<input type="hidden" name="jawaban_no[23]" id="input_jawaban_no_23" value="23">
+								<div id="jawaban-no-23" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('23')">23					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer23" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_24"></span>
+				<span class="d-none" id="ragu_answer_24"></span>
+				<input type="hidden" name="jawaban_no[24]" id="input_jawaban_no_24" value="24">
+								<div id="jawaban-no-24" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('24')">24					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer24" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_25"></span>
+				<span class="d-none" id="ragu_answer_25"></span>
+				<input type="hidden" name="jawaban_no[25]" id="input_jawaban_no_25" value="25">
+								<div id="jawaban-no-25" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('25')">25					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer25" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_26"></span>
+				<span class="d-none" id="ragu_answer_26"></span>
+				<input type="hidden" name="jawaban_no[26]" id="input_jawaban_no_26" value="26">
+								<div id="jawaban-no-26" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('26')">26					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer26" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_27"></span>
+				<span class="d-none" id="ragu_answer_27"></span>
+				<input type="hidden" name="jawaban_no[27]" id="input_jawaban_no_27" value="27">
+								<div id="jawaban-no-27" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('27')">27					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer27" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_28"></span>
+				<span class="d-none" id="ragu_answer_28"></span>
+				<input type="hidden" name="jawaban_no[28]" id="input_jawaban_no_28" value="28">
+								<div id="jawaban-no-28" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('28')">28					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer28" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_29"></span>
+				<span class="d-none" id="ragu_answer_29"></span>
+				<input type="hidden" name="jawaban_no[29]" id="input_jawaban_no_29" value="29">
+								<div id="jawaban-no-29" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('29')">29					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer29" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 		 </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="infoSoal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Informasi Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fadeIn" id="timeoutDialog" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-2 pt-5">
+		<h5 class="modal-title" style="text-align:center">PERHATIAN !!</h5>
+		<p>Waktu tes sudah habis !</p>
+      </div>
+	  <div class="modal-footer text-center">
+		<button class="btn btn-danger" onclick="selesaikanTes()">Ok, Lanjutkan !</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="c-svg" id="c-svg-1" style="display: none;"></div><div class="c-svg" id="c-svg-2" style="display: none;"></div><div class="c-svg" id="c-svg-3" style="display: none;"></div><div class="c-svg" id="c-svg-4" style="display: none;"></div><div class="c-svg" id="c-svg-5" style="display: none;"></div><div class="c-svg" id="c-svg-6" style="display: none;"></div><div class="c-svg" id="c-svg-7" style="display: none;"></div><div class="c-svg" id="c-svg-8" style="display: none;"></div><div class="c-svg" id="c-svg-9" style="display: none;"></div><div class="c-svg" id="c-svg-10" style="display: none;"></div><div class="c-svg" id="c-svg-11" style="display: none;"></div><div class="c-svg" id="c-svg-12" style="display: none;"></div><div class="c-svg" id="c-svg-13" style="display: none;"></div><div class="c-svg" id="c-svg-14" style="display: none;"></div><div class="c-svg" id="c-svg-15" style="display: none;"></div><div class="c-svg" id="c-svg-16" style="display: none;"></div><div class="c-svg" id="c-svg-17" style="display: none;"></div><div class="c-svg" id="c-svg-18" style="display: none;"></div><div class="c-svg" id="c-svg-19" style="display: none;"></div><div class="c-svg" id="c-svg-20" style="display: none;"></div><div class="c-svg" id="c-svg-21" style="display: none;"></div><div class="c-svg" id="c-svg-22" style="display: none;"></div><div class="c-svg" id="c-svg-23" style="display: none;"></div><div class="c-svg" id="c-svg-24" style="display: none;"></div><div class="c-svg" id="c-svg-25" style="display: none;"></div><div class="c-svg" id="c-svg-26" style="display: none;"></div><div class="c-svg" id="c-svg-27" style="display: none;"></div><div class="c-svg" id="c-svg-28" style="display: none;"></div><div class="c-svg" id="c-svg-29" style="display: none;"></div>
+<div style="position: fixed; inset: 0px; background: rgb(255, 255, 255); opacity: 0.5; z-index: 99999; display: none;" id="loader">
+<img class="loader" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/images/loader2.gif">
+</div>
+
+
+<style>
+	
+	@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
+	@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+	@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+	@media (max-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.mataujian{text-align:left} 
+		#formContent{padding-left:10px;padding-right:10px}
+		.row-atas {text-align:center;}
+		#isisoal img {width:100%;}
+	}
+	@media (min-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.container-fluid{ padding-left:50px;padding-right:50px} 
+		.mataujian{text-align:right} 
+		#formContent{padding-left:50px;padding-right:50px} 
+		.btn-navigasi {width:180px;}
+		.cont-btn-informasi{text-align:right}
+		
+	}
+	@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+	@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+			
+	/* STRUCTURE */
+	.loader {
+	  margin: 0;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -ms-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+	
+	.wrapper {
+	  display: flex;
+	  align-items: center;
+	  flex-direction: column; 
+	  justify-content: center;
+	  width: 100%;
+	  min-height: 100%;
+	  padding: 20px;
+	  margin-top:-80px;
+	}
+
+	#formContent {
+	  -webkit-border-radius: 10px 10px 10px 10px;
+	  border-radius: 10px 10px 10px 10px;
+	  background: #fff;
+	  position: relative;
+	  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  text-align: center;
+	}
+
+	
+
+
+	/* TABS */
+
+	h2.inactive {
+	  color: #cccccc;
+	}
+
+	h2.active {
+	  color: #0d0d0d;
+	  border-bottom: 2px solid #5fbae9;
+	}
+	
+	input[type=text] {
+	  border: none;
+	  color: #0d0d0d;
+	  text-decoration: none;
+	  border-radius:0px;
+	  border-bottom:1px solid #eee;
+	  background:transparent;
+	}
+	
+
+	/* ANIMATIONS */
+
+	/* Simple CSS3 Fade-in-down Animation */
+	.fadeInDown {
+	  -webkit-animation-name: fadeInDown;
+	  animation-name: fadeInDown;
+	  -webkit-animation-duration: 1s;
+	  animation-duration: 1s;
+	  -webkit-animation-fill-mode: both;
+	  animation-fill-mode: both;
+	}
+
+	@-webkit-keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	@keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+	.fadeIn {
+	  opacity:0;
+	  -webkit-animation:fadeIn ease-in 1;
+	  -moz-animation:fadeIn ease-in 1;
+	  animation:fadeIn ease-in 1;
+
+	  -webkit-animation-fill-mode:forwards;
+	  -moz-animation-fill-mode:forwards;
+	  animation-fill-mode:forwards;
+
+	  -webkit-animation-duration:1s;
+	  -moz-animation-duration:1s;
+	  animation-duration:1s;
+	}
+
+	.fadeIn.first {
+	  -webkit-animation-delay: 0.4s;
+	  -moz-animation-delay: 0.4s;
+	  animation-delay: 0.4s;
+	}
+
+	.fadeIn.second {
+	  -webkit-animation-delay: 0.6s;
+	  -moz-animation-delay: 0.6s;
+	  animation-delay: 0.6s;
+	}
+
+	.fadeIn.third {
+	  -webkit-animation-delay: 0.8s;
+	  -moz-animation-delay: 0.8s;
+	  animation-delay: 0.8s;
+	}
+
+	.fadeIn.fourth {
+	  -webkit-animation-delay: 1s;
+	  -moz-animation-delay: 1s;
+	  animation-delay: 1s;
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	.underlineHover:after {
+	  display: block;
+	  left: 0;
+	  bottom: -10px;
+	  width: 0;
+	  height: 2px;
+	  background-color: #56baed;
+	  content: "";
+	  transition: width 0.2s;
+	}
+
+	.underlineHover:hover {
+	  color: #0d0d0d;
+	}
+
+	.underlineHover:hover:after{
+	  width: 100%;
+	}
+	
+	.cfont {
+		cursor:pointer;
+	}
+	
+	
+	///
+	
+</style>
+  
+<script type="text/javascript" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery/jquery.2.1.1.min.js"></script>
+<script src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery.timer.js"></script>
+  
+<script>
+	
+	$(document).ready(function() {
+		$('#loader').fadeOut();
+		var  w = $(window).width();
+				if (w > 800)  {
+			var ii = $('#isisoal').height();
+			var  h = $(window).height();
+			var  h = h-$('.cont-soal').position().top-380;
+			$('.cont-soal').css({
+				'height':h,
+				'overflow': 'auto'
+			});
+
+			$('.isi-soal').css({
+				'height':h,
+			 	'overflow': 'auto'
+			 });
+
+			// if (ii > h) {
+			// 	$('.cont-soal').css({
+			// 	'height':ii,
+			// 	'overflow': 'auto'
+			// 	});
+			// }
+		}
+		
+		window.setTimeout( lihatSoal(1), 5000 ); // 5 seconds
+	});
+	var selected = 1;
+	var jumlah_soal = 29;
+	function lihatSoal(nomor) {
+		$('.soal-soal').css('display','none');
+		if (nomor=='') {
+			nomor = selected;
+		} 
+		$('#soal-no-'+nomor).css('display','');
+		selected = nomor;
+		$('#noSoal').html(nomor);
+		
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+		}
+		
+		for (i=1;i<=jumlah_soal;i++){
+			var cccc= $('#tmp_answer_'+i).html();
+			if (cccc != '') $('#jawaban-no-'+i).addClass('btn-dark');
+			var cccc= $('#ragu_answer_'+i).html();
+			if (cccc != '') {
+				$('#jawaban-no-'+i).addClass('btn-warning');
+				$('#jawaban-no-'+i).removeClass('btn-dark');
+			}
+		}
+		//$('.btn-lihat-soal').removeClass('btn-dark');
+		$('#jawaban-no-'+nomor).removeClass('btn-warning');
+		$('#jawaban-no-'+nomor).removeClass('btn-dark');
+		$('.btn-lihat-soal').removeClass('btn-primary');
+		
+		$('#jawaban-no-'+nomor).addClass('btn-primary');
+		
+		window.scrollTo(0, 0);
+		$('.c-svg').fadeOut();
+		redrawline(selected);
+	}
+	
+	function nextSoal() {
+		if (selected < jumlah_soal) {
+			selected++;		
+			lihatSoal(selected);
+		} else {
+			
+			selesaikanTes();
+		}
+	}
+	
+	function prevSoal() {
+		if (selected > 1) {
+			selected--;
+			lihatSoal(selected);
+		}
+	}
+	
+	function raguRagu() {
+		if ($('#c_ragu_ragu').is(':checked')) {
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			$('#jawaban-no-'+selected).addClass('btn-warning');
+			$('#ragu_answer_'+selected).html('1');
+			save_ragu(selected,'1');
+		} else {
+			$('#ragu_answer_'+selected).html('');
+			$('#jawaban-no-'+selected).removeClass('btn-warning');
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			
+			if ($('#answer'+selected).html() == '')
+			{
+				$('#jawaban-no-'+selected).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+selected).addClass('btn-dark');
+			}
+			
+			save_ragu(selected,'');
+			
+		}
+	}
+	
+	function trigger_ragu(nomor)
+	{
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			$('#jawaban-no-'+nomor).addClass('btn-warning');
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+			$('#jawaban-no-'+nomor).removeClass('btn-warning');
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			
+			if ($('#answer'+nomor).html() == '')
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-dark');
+			}
+		}
+		
+	}
+	
+	lihatSoal(2);
+	
+	function selesaikanTes() {
+		$.ajax({ 
+		   type: "POST",
+		   dataType: "html",
+		   data : $('#formJawaban').serialize(),
+		   url: "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/finishtes?ses_id=5875ef063cbd49ba105b79a7acf1f5ae0f33bdb8",
+		   cache: false, 
+		   beforeSend: function(){
+			   $('#nextSoal').prop('disabled',true);
+			   $('#nextSoal').html('Silahkan tunggu ... !');
+			   $('#loader').fadeIn();
+			},
+			complete: function(){
+			},
+			success: function(result){
+				//alert(result);
+				if (result=='error') {
+					alert('Oops ada kesalahan! \rSilahkan ulangi !');
+					$('#nextSoal').prop('disabled',false);
+					$('#nextSoal').prop('enabled',true);
+					$('#nextSoal').html('Soal berikutnya');
+					$('#loader').fadeOut();
+				}
+				else
+					window.location = result;
+		   }
+		});
+	}
+
+	function changeFont(s,d)
+	{
+		$('#isisoal').css("font-size", s + "px");
+		$('.cfont').css("font-weight", "normal");
+		$('#'+d).css("font-weight", "bold");
+	}
+			
+	var RemainTime = new (function() {
+		var $countdown;
+		var $form;
+		var incrementTime = 60;
+		var globalTime = 4499 * 1000; // 50 seconds (in milliseconds)
+		var currentTime = globalTime;
+		var DurationTime = 4499 * 60000; // 5 minutes (in milliseconds)
+
+
+		$(function() {
+
+			// Setup the timer
+			$countdown = $('#countdown');
+			RemainTime.Timer = $.timer(updateTimer, incrementTime, true);
+
+		});
+
+		function updateTimer() {
+
+			// Output timer position
+			var timeString = formatTime(currentTime);
+			$countdown.html(timeString);
+			// If timer is complete, trigger alert
+			if (currentTime == 0) {
+				jQuery.noConflict();
+				$('#timeoutDialog').modal();
+				//$('#timeoutDialog').modal('show');
+				RemainTime.Timer.stop();
+				//disable_all();
+				//bootbox_timeout();
+				
+				return;
+			}
+			// Increment timer position
+			currentTime -= incrementTime;
+			if (currentTime < 0) currentTime = 0;
+
+		}
+	});
+
+	// Common functions
+	function pad(number, length) {
+		var str = '' + number;
+		while (str.length < length) {str = '0' + str;}
+		return str;
+	}
+	function formatTime(time) {
+		time = time / 10;
+		var hour= parseInt(time / 360000),
+			min = parseInt(time / 6000) - (hour * 60),
+			sec = parseInt(time / 100) - (min * 60) - (hour * 3600),
+			hundredths = pad(time - (sec * 100) - (min * 6000) - (hour * 360000), 2);
+		return (hour > 0 ? pad(hour, 2) : "00") + ":" + (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + "";
+	}
+	
+	function KlikJawaban(no,i)
+	{
+		$('#pilihan_'+no+'_'+i).trigger('click');
+	}
+	
+	
+	function KlikJawaban2(no,i)
+	{
+		$('#pilihan_'+'_'+no+'_'+i).trigger('click');
+	}
+	
+	function KlikJawaban3(no,i,j)
+	{
+		$('#pilihan_'+'_'+no+'_'+i+'_'+j).trigger('click');
+	}
+	
+	
+	function pilihan(n,v,i) {
+		if (v.toUpperCase() == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(v.toUpperCase());
+		//$("#answer"+n).css('color','#000');
+		//pushPromise(i,v);
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+		$("#jawaban-no-"+n).addClass('btn-dark');
+		//$("#jawaban-no-"+n).addClass('text-white');
+		// $("#cont-answer"+n).css('color','#fff');
+
+		save_answer(n,v.toUpperCase());
+		trigger_ragu(selected);
+
+	}
+	
+	
+	function pilihan2(n,v,i) {
+		
+		var jawaban = $('.pilihan'+n+':checked')
+		   .map(function() { return $(this).val() })
+		   .get()
+		   .join(";");
+		
+		if (jawaban == '') {
+			$("#answer"+n).html('');
+			$("#jawaban-no-"+n).removeClass('btn-dark');
+			$("#jawaban-no-"+n).addClass('btn-outline-dark');
+		}
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+			$("#jawaban-no-"+n).addClass('btn-dark');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		
+		// pushPromise(i,jawaban);
+		
+		
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+
+	}
+	
+	function pilihan3(n,total,s, arr) {
+		var jawaban = '';
+		for (i=1;i<=total;i++)  {
+			var v = $('input[name="pilihan_'+n+'_'+i+'"]:checked').val();
+			if (v != undefined && v != null) jawaban += arr[(i-1)]+'|'+v + ';';
+		}
+		jawaban = jawaban.substring(0, jawaban.length-1);
+		
+		if (jawaban == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		// pushPromise(s,jawaban);
+		
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+	    $("#jawaban-no-"+n).addClass('btn-dark');
+			
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+	}
+	
+		
+	function pilih1(no, id, warna, order) {
+			
+			// if (window['right_'+no] == '') {
+				// $('.m-left-'+no).prop('checked', false);
+				// $('.tr-left-'+no).css('background','');
+			// }
+			//if (window['dipilih1_'+no].indexOf(id) >=0) window['free1_'+no]=false;
+			if (window['free1_'+no]) {
+				window['free1_'+no] = false;
+				$('#r_left_'+no+'_'+id).prop('checked', true);
+				$('#row1-'+no+'-'+id).css('background',warna);
+				window['pos1_'+no] = $('#r_left_'+no+'_'+id).offset();
+				window['pos11_'+no] = $('#r_left_'+no+'_'+id).position();
+				window['warna1_'+no] = warna;
+				window['id1_'+no] = id;
+				window['order1_'+no] = order;
+				window['dipilih1_'+no].push(id);
+				window['jawab_'+no] = id;
+			}
+			
+	}
+	
+	function removeA(arr) {
+		var what, a = arguments, L = a.length, ax;
+		while (L > 1 && arr.length) {
+			what = a[--L];
+			while ((ax= arr.indexOf(what)) !== -1) {
+				arr.splice(ax, 1);
+			}
+		}
+		return arr;
+	}
+	
+	function rgb2hex(rgb) {
+		rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+		function hex(x) {
+			return ("0" + parseInt(x).toString(16)).slice(-2);
+		}
+		return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+	}
+	
+	
+	
+	function pilih2(no, id,tipe,order,s, ps) {
+		var _c_pilih = $('#r_right_'+no+'_'+id).prop('checked');
+		if (_c_pilih==true) {
+			//alert('1');
+			
+			var id1 =  window['pasangan_'+no+'_'+id];
+			window['free1_'+no] = false;
+			//$('#r_left_'+no+'_'+id).prop('checked', true);
+			var warna11 = rgb2hex($('#row2-'+no+'-'+id).css('background-color'));
+			window['warna1_'+no] = warna11;
+			window['pos1_'+no] = $('#r_left_'+no+'_'+id1).offset();
+			window['pos11_'+no] = $('#r_left_'+no+'_'+id1).position();
+			var cc = id1+";"+id+'|';
+			var ddd = window['jawaban_'+no];
+			dd = ddd.replace(cc,"");
+			window['jawaban_'+no] = dd;
+			
+			window['id1_'+no] = id1;
+			window['free1_'+no] = false;
+			window['right_'+no] = '';
+			window['free_'+no] = true;
+			//delete window['dipilih2_'+no][id];
+			//window['dipilih2_'+no].remove(id);
+			removeA(window['dipilih2_'+no], id);
+			//$('#r_right_'+no+'_'+id).prop('checked', false);
+			//$('.line-'+no).css('display','none');
+			var xx = '#line_'+no+'_'+window['id1_'+no];
+			//alert(xx);
+			$(xx).css('display','none');
+			$('#r_right_'+no+'_'+id).prop('checked', false);
+			$('#row2-'+no+'-'+id).css('background','#ffffff');
+		}
+		else 
+		{
+			//alert('2');
+			window['free_'+no] = true;
+			if (window['dipilih2_'+no].indexOf(id) >=0) window['free_'+no]=false;
+			//alert(2);
+			
+			if ((window['id1_'+no] != '') && window['free_'+no] && (window['right_'+no] == '')) {
+				//alert(3);
+				window['free1_'+no] = true;
+				window['right_'+no] = '';
+				eval('var pasangan_'+no+'_'+id + '= "";');
+				window['pasangan_'+no+'_'+id] = window['id1_'+no];
+				window['jawaban_'+no] = window['jawaban_'+no]+ window['id1_'+no] +';'+ id +'|';
+				window['dipilih2_'+no].push(id);
+				$('#r_right_'+no+'_'+id).prop('checked', true);
+				$('#row2-'+no+'-'+id).css('background',window['warna1_'+no]);
+				$('#r_right_'+no+'_'+id).val(window['id1_'+no]+';'+id);
+				
+				pos2 = $('#r_right_'+no+'_'+id).offset();
+				pos22 = $('#r_right_'+no+'_'+id).position();
+				$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left);
+				$('#line_'+no+'_'+window['id1_'+no]).fadeIn();
+				if (window['pos1_'+no].top > pos2.top) {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',window['pos1_'+no].top-pos2.top)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',0)
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',pos2.top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				} else {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',0)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',Math.abs(window['pos1_'+no].top-pos2.top))
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',window['pos1_'+no].top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				}
+				
+				
+				window['id1_'+no] = '';
+				jawaban = window['jawaban_'+no];
+				n = no;
+				
+				if (jawaban == '')
+					$("#answer"+n).html('');
+				else {
+					$("#answer"+n).html('<i class="fa fa-check"></i>');
+					$("#answer"+n).removeClass('d-none');
+				}
+				
+				//$("#answer"+n).css('color','#000');
+				
+				
+					$("#tmp_answer_"+n).html(jawaban);
+					if (ps == '2')	   {
+						save_answer(n,jawaban);
+						//pushPromise(s,jawaban);
+					}
+				
+				// $("#cont-answer"+n).css('background','#000');
+				// $("#cont-answer"+n).css('color','#fff');
+				
+				trigger_ragu(selected);
+
+			} else {
+				if (tipe==2)
+				$('#r_right_'+no+'_'+id).prop('checked', false);
+			}
+		
+		}
+		
+	}
+	
+			eval('var tipesoal_pencocokan_1 = "3"');
+			eval('var tipesoal_pencocokan_2 = "1"');
+			eval('var tipesoal_pencocokan_3 = "1"');
+			eval('var tipesoal_pencocokan_4 = "1"');
+			eval('var tipesoal_pencocokan_5 = "1"');
+			eval('var tipesoal_pencocokan_6 = "1"');
+			eval('var tipesoal_pencocokan_7 = "2"');
+			eval('var tipesoal_pencocokan_8 = "1"');
+			eval('var tipesoal_pencocokan_9 = "1"');
+			eval('var tipesoal_pencocokan_10 = "1"');
+			eval('var tipesoal_pencocokan_11 = "1"');
+			eval('var tipesoal_pencocokan_12 = "1"');
+			eval('var tipesoal_pencocokan_13 = "1"');
+			eval('var tipesoal_pencocokan_14 = "1"');
+			eval('var tipesoal_pencocokan_15 = "1"');
+			eval('var tipesoal_pencocokan_16 = "1"');
+			eval('var tipesoal_pencocokan_17 = "1"');
+			eval('var tipesoal_pencocokan_18 = "2"');
+			eval('var tipesoal_pencocokan_19 = "1"');
+			eval('var tipesoal_pencocokan_20 = "1"');
+			eval('var tipesoal_pencocokan_21 = "1"');
+			eval('var tipesoal_pencocokan_22 = "1"');
+			eval('var tipesoal_pencocokan_23 = "3"');
+			eval('var tipesoal_pencocokan_24 = "2"');
+			eval('var tipesoal_pencocokan_25 = "1"');
+			eval('var tipesoal_pencocokan_26 = "2"');
+			eval('var tipesoal_pencocokan_27 = "3"');
+			eval('var tipesoal_pencocokan_28 = "1"');
+			eval('var tipesoal_pencocokan_29 = "1"');
+		
+	function redrawline(no) {
+		var tmp_tipesoal = window['tipesoal_pencocokan_'+no];
+		if (tmp_tipesoal == 5) {
+			resetKunci(no,'');
+			var tmp = $('#tmp_answer_'+no).html();//window['jawaban_pencocokan_'+no];
+			var tmp_warna = window['warna_pencocokan_'+no];
+			var tmp_soal = window['soal_pencocokan_'+no];
+			var arr_tmp = tmp.split('|');
+			for (i=0;i<arr_tmp.length;i++) {
+				if (arr_tmp[i].trim() != '') {
+					var arr_tmp2 = arr_tmp[i].split(';');
+					pilih1(no,arr_tmp2[0], tmp_warna[i], i);
+					pilih2(no,arr_tmp2[1], '2', arr_tmp2[1],tmp_soal,'1');
+				}
+			}
+			
+			$('#c-svg-'+no).fadeIn();
+		}
+	}
+	
+	
+	function resetKunci(no, tipe) {
+		left = '';
+		window['right_'+no] = '';
+		window['warna1_'+no] = '';
+		window['id1_'+no] = '';
+		window['pos1_'+no] = '';
+		window['pos11_'+no] = '';
+		window['free1_'+no] = true;
+		window['free_'+no] = true;
+		window['dipilih1_'+no] = [];
+		window['dipilih2_'+no] = [];
+		$('.tr-left-'+no).css('background','');
+		$('.tr-right-'+no).css('background','');
+		$('.line-'+no).css('display','none');
+		window['jawab_'+no] = '';
+		window['jawaban_'+no] = '';
+		window['order1_'+no] = '';
+		$('.m-left-'+no).prop('checked', false);
+		$('.m-right-'+no).prop('checked', false);
+		if (tipe == '1') $("#tmp_answer_"+no).html('');
+		$("#answer"+no).html('');
+		$("#jawaban-no-"+no).removeClass('btn-dark');
+		$("#jawaban-no-"+no).addClass('btn-outline-dark');
+		
+	};
+	
+	
+	$('.jawaban_essai').focusout(function() {
+		var no = this.title;
+		var jawaban = $('#jawaban_essai_'+no).val();					
+		var s = $('#jawaban_essai_'+no).attr('pre');					
+		
+		
+		if (jawaban == '')
+			$("#answer"+no).html('');
+		else {
+			$("#answer"+no).html('<i class="fa fa-check"></i>');
+			$("#answer"+no).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+no).html(jawaban);
+		
+		save_answer(no,jawaban);
+			   
+		// $("#answer"+no).css('color','#000');
+		
+			// $.post( "https://pusmendik.kemendikdasmen.go.id/tka/cbt/peserta/sv_ans",
+			// {
+				// id_soal: s,
+				// jawaban:jawaban,
+				// id_ujian: ,
+				// id_projek_ujian: 
+			// }, function(data) {
+		// });
+		// $("#cont-answer"+no).css('background','#000');
+		// $("#cont-answer"+no).css('color','#fff');
+		trigger_ragu(selected);
+			
+	}).blur(function() {});
+	
+	
+	function methodThatReturnsAPromise(i,jawaban) {
+		return new Promise((resolve, reject) => {
+			$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_jawaban", {nomor: i,jawaban:jawaban, }, function(data) {resolve();});
+		});
+	}
+	
+	var promises = [Promise.resolve()];
+	
+	function pushPromise(i,jawaban)
+	{
+	  promises.push(promises.pop().then(function(){
+		return methodThatReturnsAPromise(i,jawaban)}));
+	}
+	
+	function save_ragu(nomor,jawaban) {
+		$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_ragu", {nomor: nomor,jawaban:jawaban, }, function(data) {});
+	}
+	
+	function save_answer(nomor,jawaban) {
+		pushPromise(nomor,jawaban);
+	}
+</script>
+
+
+
+</body></html>

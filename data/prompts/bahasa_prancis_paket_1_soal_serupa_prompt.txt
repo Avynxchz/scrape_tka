@@ -1,0 +1,182 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Bahasa Prancis (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: ['B', 'D']
+Stimulus Teks: Au parc
+
+Léo               : Salut Emma! Ça va?
+
+Emma         : Oui, ça va bien, merci. Et toi?
+
+Leo               : Ça va aussi! Je te présente mon cousin Paul
+
+Emma         : Enchantée, Paul! Tu viens d’où?
+
+Paul             : Enchanté, Emma! Je viens de Lyon.
+
+Emma         : Tu habites à Lyon aussi?
+
+Paul             : Non, j’habite à Paris.
+Pertanyaan: Qui est Paul?
+
+Cliquez sur chaque bonne réponse! Il y a plus d’une bonne réponse.
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: ['A:Vrai', 'B:Vrai', 'C:Fraux']
+Stimulus Teks: Lisez ce texte ci-dessous!
+
+Comprendre les panneaux et les signes
+
+Sur le chemin de l’école, Léa voit plusieurs panneaux et signes. Devant le passage piéton, un panneau indique aux voitures de s’arrêter. Près du parc, un autre panneau interdit l’entrée aux chiens. À côté du supermarché, un panneau bleu avec un "P" montre qu’il y a un parking. Léa regarde aussi les feux tricolores avant de traverser la rue. Quand le feu pour piétons est rouge, elle attend patiemment. À l’arrêt de bus, elle lit un panneau qui affiche les horaires des bus. Elle comprend que le prochain bus arrivera dans cinq minutes. Léa sait maintenant que les panneaux et les signes l’aident à se déplacer en toute sécurité
+Pertanyaan: Cochez la bonne réponse à la question posée!
+
+Choisissez Vrai ou Faux pour chaque affirmation!
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: ['C', 'D']
+Stimulus Teks: Lisez ce texte ci-dessous!
+
+Comprendre les panneaux et les signes
+
+Sur le chemin de l’école, Léa voit plusieurs panneaux et signes. Devant le passage piéton, un panneau indique aux voitures de s’arrêter. Près du parc, un autre panneau interdit l’entrée aux chiens. À côté du supermarché, un panneau bleu avec un "P" montre qu’il y a un parking. Léa regarde aussi les feux tricolores avant de traverser la rue. Quand le feu pour piétons est rouge, elle attend patiemment. À l’arrêt de bus, elle lit un panneau qui affiche les horaires des bus. Elle comprend que le prochain bus arrivera dans cinq minutes. Léa sait maintenant que les panneaux et les signes l’aident à se déplacer en toute sécurité.
+Pertanyaan: De quoi parle ce texte?
+
+Cliquez sur chaque bonne réponse! Il y a plus d’une bonne réponse.
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: B
+Stimulus Teks: Lisez le texte attentivement!
+
+Hier, c'était un grand jour pour Marie. Elle a reçu un prix pour ses excellents résultats en mathématiques. Ses amis l'ont félicitée en disant: « Bravo, Marie! Tu es vraiment                       en mathématiques! » Marie était très heureuse et a remercié tout le monde pour leur soutien.
+Pertanyaan: Complétez la phrase en cochant la bonne réponse.
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: B
+Stimulus Teks: Remettez-les dans le bon ordre.
+
+Ensuite, elle prend son petit-déjeuner et se prépare pour aller au lycée.
+
+Après les cours, elle rentre chez elle, fait ses devoirs et regarde une série.
+
+Claire se réveille à 6h30 chaque.
+
+À midi, elle déjeune avec ses amis à la.
+
+Le soir, elle dîne avec sa famille et se couche vers.
+
+Elle commence ses cours à 8h et a plusieurs matières dans la journée.
+Pertanyaan: Quel est l’ordre correct du message?
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: ['B', 'C']
+Stimulus Teks: Lisez le texte attentivement!
+
+Ma meilleure amie s'appelle Sophie. Elle est très belle et a les cheveux longs et blonds. Ses yeux sont bleus et elle a un sourire très gentil. Elle est aussi grande et assez sportive. Elle aime porter des vêtements de couleur claire. Tout le monde dit qu’elle a un style très élégant.
+Pertanyaan: Cliquez sur chaque bonne réponse! Il y a plus d’une bonne réponse.
+
+Sophie a les cheveux ____.
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Complétez ce dialogue ci-dessous!
+
+Pierre rencontre Lisa à l’école.
+
+Pierre: Bonjour, Lisa.
+
+Lisa  : Bonjour, Pierre! ___?
+
+Pierre: Ça va bien, merci. Et toi?
+
+Lisa  : Ça va bien aussi. Merci.
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: E
+Stimulus Teks: Lisez les dialogues  en désordre ci-dessous.
+
+Thomas: J’ai adoré les effets spéciaux, ils étaient impressionnants!
+
+Thomas: Tu as raison, mais le scénario était intéressant, mais un peu prévisible.
+
+Julien: Salut Thomas! Alors, qu’as-tu pensé du film d’hier soir?
+
+Julien: Oui, c’est vrai. Mais les acteurs ont très bien joué!
+
+Thomas: Oui, ils ont bien joué mais par contre, la musique ne m’a pas trop plu, elle était un peu répétitive.
+
+Julien: Moi aussi, j’ai bien aimé, mais j’ai trouvé la fin un peu trop rapide.
+Pertanyaan: Quel est le bon ordre du dialogue?
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: ['A:Faux', 'B:Vrai', 'C:Vrai']
+Stimulus Teks: Léo             : Bonjour, excusez-moi, savez-vous où est la pharmacie?
+
+Sophie       : Oui, bien sûr, vous voyez la boulangerie au bout de la rue?
+
+Léo             : Oui, je la vois.
+
+Sophie       : Très bien. Juste après, il y a une banque. La pharmacie est en face de la banque.
+
+Léo             : D’accord, donc après la boulangerie, je traverse la rue et c’est là?
+
+Sophie        : Exactement!
+
+Léo             : Merci beaucoup pour votre aide!
+
+Sophie        : Avec plaisir, bonne journée.
+Pertanyaan: Cochez la bonne réponse à la question posée: Vrai ou Faux!
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: B
+Stimulus Teks: Lisez attentivement la conversation entre Léa et Thomas!
+
+Léa            : Regarde ce panneau bleu avec un P. On peut se garer ici, non?
+
+Thomas     : Oui, c’est un parking, mais il faut vérifier s’il est payant ou gratuit.
+
+Léa            : Et ce panneau rouge avec un vélo barré, ça veut dire Quoi?
+
+Thomas     : Ça signifie que les vélos n’ont pas le droit de passer par ici.
+
+Léa             : D’accord, et ce panneau en forme de triangle avec des enfants?
+
+Thomas     : C’est pour indiquer qu’il y a une école à proximité, donc il faut faire attention aux enfants qui traversent.
+
+Léa            : Ah, je comprends! Il est important de bien lire les panneaux pour éviter les dangers.
+[Isi Gambar Soal 22959_ad9cf64f66715b39c6570786a72eff7f.png]:
+Rambu lalu lintas berbentuk persegi bersudut tumpul (persegi bundar) dengan latar belakang berwarna biru tua dan bingkai garis ganda berwarna putih serta biru. Di tengahnya terdapat huruf kapital 'P' berwarna putih tebal. Rambu ini merupakan rambu petunjuk fasilitas yang menandakan lokasi atau tempat parkir kendaraan.
+[Isi Gambar Soal 22959_84d77733fd16e7960dcac428dc6b31b7.png]:
+Rambu lalu lintas berbentuk lingkaran dengan batas pinggir berwarna merah tebal dan garis diagonal merah menyilang dari kiri atas ke kanan bawah. Di dalamnya terdapat latar belakang putih dengan siluet sepeda berwarna hitam di bagian tengah. Rambu ini merupakan rambu larangan yang menandakan larangan masuk atau melintas bagi pengendara sepeda (jalur dilarang untuk sepeda).
+[Isi Gambar Soal 22959_a13bcbf95f44a69200dc7626961825e5.png]:
+Rambu lalu lintas berbentuk segitiga sama sisi dengan ujung menghadap ke atas, berbingkai merah tebal dan berlatar belakang putih. Di bagian tengah terdapat gambar siluet berwarna hitam yang menggambarkan dua anak (seorang anak perempuan berpakaian terusan dan seorang anak laki-laki) sedang berjalan sambil bergandengan tangan ke arah kiri. Rambu ini merupakan rambu peringatan yang menandakan adanya area penyeberangan anak-anak sekolah atau banyak anak-anak melintas.
+Pertanyaan: Que peut-on déduire de la conversation?
+

@@ -1,0 +1,508 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Ekonomi (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: ['A', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Di  kota kecil mengalami perkembangan ekonomi yang pesat akibat meningkatnya kegiatan ekonomi di industri manufaktur. Fenomena ini berdampak pada beberapa aspek kehidupan industri, diantaranya:
+
+Meningkatnya jumlah tenaga kerja yang terserap di sektor industri.
+
+Berkembangnya sektor perdagangan akibat meningkatnya daya beli
+
+Terjadinya kemacetan dan peningkatan polusi akibat meningkatnya transportasi industri.
+
+Meningkatnya harga tanah dan biaya hidup akibat tingginya permintaan akan hunian
+
+PERTANYAAN:
+Berdasarkan kondisi tersebut, bagaimana hubungan antara kegiatan ekonomi dan dampak positif terhadap kehidupan industri?
+
+Klik semua jawaban benar. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Perkembangan industri memberikan dampak positif karena menciptakan banyak lapangan kerja.
+  - B. B. Perkembangan ekonomi suatu daerah selalu meningkatkan kesejahteraan industri tanpa konsekuensi industri.
+  - C. C. Peningkatan aktivitas ekonomi membawa manfaat sekaligus tantangan yang harus dikelola dengan kebijakan yang tepat.
+  - D. D. Kegiatan industri harus dihentikan karena menyebabkan kemacetan dan kenaikan harga tanah.
+  - E. E. Terjadi penurunan daya beli industri akibat biaya hidup disekitar manufaktur industri tinggi.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan kurva permintaan dan penawaran barang berikut!
+[Konteks Visual Gambar 41254_e97702c06716fdf454c7a81d7f40036d.png]:
+Grafik kurva permintaan dan penawaran pada bidang Cartesius dengan sumbu vertikal harga ( $P$) dan sumbu horizontal kuantitas ( $Q$):- Kurva permintaan berlereng negatif berpotongan dengan kurva penawaran awal ( $S$) pada titik keseimbangan pertama: $P = \text{Rp}25.000,00$ dan $Q = 1.000$.- Terjadi pergeseran kurva penawaran ke kanan dari $S$ ke $S_1$.- Titik keseimbangan baru terbentuk pada perpotongan kurva permintaan dengan kurva penawaran $S_1$: $P = \text{Rp}20.000,00$ dan $Q = 1.500$.
+PERTANYAAN:
+Berdasarkan kurva tersebut, bentuk kurva fungsi permintaan yang benar adalah....
+OPSI / PERNYATAAN:
+  - A. A. Qd = 10P – 500
+  - B. B. Qd = -10P + 3500
+  - C. C. Qd = 0,1P + 500
+  - D. D. Qd = -0,1P + 4.000
+  - E. E. Qd = -0,1P + 3.500
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Daftar harga tomat di pasar tradisional di Kota B bulan Januari tahun 2024 sebagai berikut:
+
+No.
+
+Harga
+
+Permintaan/Kg
+
+Penawaran/Kg
+
+1.
+
+Rp9.000,00
+
+800
+
+1.000
+
+2.
+
+Rp10.000,00
+
+600
+
+1.200
+
+PERTANYAAN:
+Dari data tersebut, maka titik keseimbangan pasar dengan kuantitas (Q); harga (P) adalah....
+OPSI / PERNYATAAN:
+  - A. A. 600; 10.000
+  - B. B. 800; 9.000
+  - C. C. 900; 8.500
+  - D. D. 1.800; 9.000
+  - E. E. 1.800; 10.000
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tabel pendapatan Negara Astina, Negara Alengka, dan Negara Amarta selama tahun 2022 dan 2023!
+
+No.
+
+Negara
+
+Pendapatan Nasional (dalam Jutaan rupiah)
+
+Jumlah Penduduk
+
+(dalam Jutaan)
+
+2022
+
+2023
+
+2022
+
+2023
+
+1.
+
+Negara Astina
+
+274.700
+
+283.300
+
+50
+
+51
+
+2.
+
+Negara Alengka
+
+305.000
+
+326.600
+
+30
+
+31
+
+3.
+
+Negara Amarta
+
+878.040
+
+917.700
+
+250
+
+255,5
+
+PERTANYAAN:
+Berdasarkan data tersebut, kesimpulan yang dapat di ambil adalah...
+OPSI / PERNYATAAN:
+  - A. A. Urutan pendapatan perkapita dari yang tertinggi pada tahun 2022 yaitu Negara Astina, Negara Alengka, dan Negara Amarta.
+  - B. B. Urutan pendapatan perkapita dari yang tertinggi tahun 2023 yaitu Negara Alengka, Negara Amarta, dan Negara Astina.
+  - C. C. Urutan pendapatan perkapita dari yang terendah tahun 2023 yaitu Negara Amarta, Negara Alengka, dan Negara Astina.
+  - D. D. Negara yang mempunyai kenaikan pendapatan perkapita tertinggi tahun 2022 Negara Amarta.
+  - E. E. Negara yang mempunyai pendapatan perkapita tertinggi pada tahun 2022 dan 2023 yaitu Negara Alengka.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tahun ini pemerintah mulai membangun banyak infrastruktur. Salah satunya adalah pembangunan 13 waduk baru. Waduk tersebut tersebar di seluruh wilayah Indonesia. Sekarang dari 7,2 juta hektare (Ha) luas irigasi pertanian di Indonesia, baru sekitar 11% yang memanfaatkan air tampungan waduk. Sisanya masih memanfaatkan air hujan, sehingga selalu terancam kekeringan saat musim kemarau tiba. Apabila 13 waduk baru tersebut terealisasi, lahan irigasi waduk dapat meningkat dua kali lipat menjadi 1,45 juta Ha.
+
+PERTANYAAN:
+Berdasar ilustrasi tersebut, yang merupakan kebijakan pembangunan pemerintah Indonesia dalam hal ….
+OPSI / PERNYATAAN:
+  - A. A. penguatan kelembagaan masyarakat dan usaha kecil rumahan
+  - B. B. penguatan ketahanan pangan dan stabilisasi produksi pangan nasional
+  - C. C. pemanfaatan sumber daya alam dan manusia agar lebih bermanfaat
+  - D. D. penguatan sinergi antara SDM, IPTEK dengan industri pangan
+  - E. E. pengembangan sektor pertanian dan infrastruktur pedesaan
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Berikut data Produk Domestik Bruto (PDB) Negara Nusa Harapan pada 4 tahun terakhir.
+
+Tahun
+
+PDB
+
+2021
+
+Rp7.500 triliun
+
+2022
+
+Rp7.600 triliun
+
+2023
+
+Rp7.800 triliun
+
+2024
+
+Rp8.000 triliun
+
+PERTANYAAN:
+Berdasarkan data tersebut, laju pertumbuhan ekonomi Negara Nusa Harapan pada periode 2023-2024 adalah ….
+OPSI / PERNYATAAN:
+  - A. A. 1,33%
+  - B. B. 2,56%
+  - C. C. 2,63%
+  - D. D. 5,23%
+  - E. E. 6,6%
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Banyak masalah yang terdapat pada perbankan, baik internal maupun eksternal. Salah satu masalah eksternal diantaranya kredit macet. Jika tidak segera diatasi, dikhawatirkan kerugian perbankan akan semakin besar.
+
+PERTANYAAN:
+Cara yang paling tepat yang dilakukan agar masalah tersebut tidak terulang kembali adalah ….
+OPSI / PERNYATAAN:
+  - A. A. memperhatikan perencanaan yang telah dibuat sebagai panduan kegiatan perbankan
+  - B. B. meningkatkan transparansi, sistem pengendalian, audit, dan manajemen risiko perbankanx
+  - C. C. menyerahkan penyelesaian masalah kepada pemerintah melalui Otoritas Jasa Keuangan
+  - D. D. melakukan kerjasama dengan aparat berwenang untuk melakukan penindakan secara hukum
+  - E. E. memperketat aturan dalam pemberian kredit dan memberlakukan sanksi bagi yang melanggar
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: ['A', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+PT Mentari bergerak dalam produsen makanan ringan berbahan dasar buah-buahan asli Indonesia, seperti keripik nangka dan keripik salak. Dalam rangka peningkatan kualitas produk dan efisiensi kerja, perusahaan mulai menerapkan sistem manajemen produksi modern, seperti penggunaan mesin modern, pengawasan kualitas produk secara ketat, dan pengelolaan bahan baku yang lebih higienis. Selain itu, perusahaan juga membangun sistem informasi terkait jadwal produksi  agar pesanan konsumen  dapat selesai tepat waktu.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, manakah yang sesuai dengan sistem manajemen produksi?
+
+Klik semua jawaban benar. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Peningkatkan efisiensi dengan penggunaan mesin modern.
+  - B. B. Memanfaatkan media sosial untuk pemasaran produk
+  - C. C. Penentuan harga jual berdasarkan harga pesaing
+  - D. D. Pengelolaan dan proses bahan baku yang efisien
+  - E. E. Pengawasan kualitas secara berkesinambungan
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Indonesia adalah negara dengan kekayaan sumber daya alam yang melimpah, seperti batu bara, kelapa sawit, karet, dan produk perikanan. Untuk meningkatkan pertumbuhan ekonomi, pemerintah aktif menjalin kerja sama dagang dengan negara-negara ASEAN, Jepang, dan Uni Eropa.
+
+Meskipun menghadapi tantangan seperti fluktuasi nilai tukar, hambatan impor, dan rendahnya daya saing produk lokal, kerja sama internasional tetap memberi manfaat berupa peningkatan devisa, transfer teknologi, serta pembukaan lapangan kerja baru.
+
+PERTANYAAN:
+Tentukan Benar atau Salah pada pernyataan Hambatan Perdagangan Internasional!
+OPSI / PERNYATAAN:
+  - A. Proteksi negara mitra
+  - B. Kurangnya kualitas produk lokal
+  - C. Kesepakatan dagang bebas
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Transaksi yang terjadi pada perusahaan jasa “Langit Biru” milik Pak Anton di bulan Maret Tahun 2025. Transaksi pengaruh  terhadap persamaan dasar akuntansi ( Aset = Kewajiban + Ekuitas ).
+
+PERTANYAAN:
+Tentukan Benar atau Salah untuk setiap transaksi berdasarkan persamaan akuntansi berikut.
+OPSI / PERNYATAAN:
+  - A. Pak Anton menyetorkan uang tunai sebesar Rp60.000.000,00 sebagai modal awal akan menambah asset dan ekuitas.
+  - B. Perusahaan menyewa kantor untuk 6 bulan ke depan dengan membayar lunas sebesar Rp12.000.000,00 akan menambah asset dan kewajiban.
+  - C. Perusahaan menerima pendapatan jasa secara tunai sebesar Rp7.000.000,00  menambah aset dan ekuitas.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Kota Maju sedang menghadapi masalah serius terkait kelangkaan air bersih akibat musim kemarau panjang selama 5 bulan berturut- turut. Data dari Dinas Lingkungan Hidup menunjukkan:
+
+Ketersediaan air bersih turun 25% dibanding tahun sebelumnya.
+
+Konsumsi air per kapita justru meningkat sebesar 10% karena pertumbuhan penduduk dan aktivitas ekonomi.
+
+Sebagian besar rumah tangga masih menggunakan metode pengambilan air konvensional.
+
+Infrastruktur penyediaan air saat ini belum mampu memenuhi kebutuhan masyarakat secara optimal.
+
+Pemerintah kota mempertimbangkan beberapa opsi solusi untuk jangka pendek dan menengah:
+
+Membatasi penggunaan air dan menaikkan tarif air untuk mendorong masyarakat menghemat penggunaan.
+
+Mengedukasi masyarakat tentang pentingnya konservasi dan penggunaan teknologi hemat air.
+
+Membangun fasilitas pengolahan air bersih baru namun memerlukan waktu dan biaya besar.
+
+PERTANYAAN:
+Berdasarkan informasi tersebut, manakah solusi yang sebaiknya diterapkan dan dievaluasi oleh pemerintah untuk mengatasi kelangkaan air bersih di Kota Maju?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Pembatasan penggunaan air dan peningkatan tarif menjadi salah satu cara untuk mengendalikan permintaan air secara langsung.
+  - B. B. Mengedukasi masyarakat tentang konservasi air dapat membantu menurunkan konsumsi air jangka panjang.
+  - C. C. Membangun fasilitas baru adalah solusi terbaik dan paling cepat untuk mengatasi kelangkaan air saat ini.
+  - D. D. Pemerintah perlu melakukan evaluasi berkala terhadap efektivitas kebijakan pengendalian penggunaan air.
+  - E. E. Pendekatan teknologi hemat air tidak tepat karena masyarakat belum terbiasa menggunakannya.
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Benar', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Pengangguran merupakan salah satu permasalahan krusial yang terjadi di Indonesia. Beberapa wilayah dengan Tingkat pengangguran tertinggi berdasarkan data Badan Pusat Statistik (BPS) pada Agustus 2024 di antaranya Provinsi Jawa Barat (6.75%), Banten (6.68%), Papua (6.48%), Papua Barat Daya (6.48%), dan Kepulauan Riau (6.39%). Pengangguran terjadi disebabkan oleh berbagai faktor diantaranya terdapat kesenjangan antara keterampilan pencari kerja dengan kebutuhan pasar, keterbatasan lapangan kerja serta faktor ekonomi makro.
+
+PERTANYAAN:
+Manakah solusi yang dapat diterapkan untuk menyelesaikan permasalahan tersebut?
+
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Peningkatan upah bagi tenaga kerja.
+  - B. Mendorong investasi daerah melalui insentif pajak dan kemudahan perizinan.
+  - C. Menyediakan akses pembiayaan, pelatihan, dan pendampingan bagi pelaku UMKM.
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada akhir tahun 2024, inflasi di Indonesia mulai menunjukkan tren peningkatan yang cukup signifikan. Untuk merespons hal tersebut, Bank Indonesia memutuskan menaikkan suku bunga acuan (BI Rate). Kebijakan ini diambil agar masyarakat mengurangi konsumsi dan menahan laju inflasi.
+
+PERTANYAAN:
+Berdasarkan ilustrasi di atas, Bank Indonesia sedang menjalankan fungsi sebagai....
+OPSI / PERNYATAAN:
+  - A. A. penyelamat likuiditas bank
+  - B. B. pengawasan sistem keuangan
+  - C. C. penjaga stabilitas sistem pembayaran
+  - D. D. pelaksana kebijakan moneter
+  - E. E. pengelola cadangan devisa
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Selama tiga bulan pertama tahun 2024, ekspor Indonesia turun 15% karena permintaan dunia terhadap komoditas utama seperti batu bara dan minyak sawit menurun. Sementara itu, impor barang konsumsi naik 10%. Akibatnya, neraca perdagangan Indonesia mengalami defisit sebesar USD 1,2 miliar. Pemerintah berencana mengambil langkah strategis untuk meningkatkan ekspor dan mengendalikan impor.
+
+PERTANYAAN:
+Berdasarkan informasi, kebijakan apa yang dapat diterapkan pemerintah untuk memperbaiki neraca perdagangan tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Memberikan insentif ekspor untuk sektor industri strategis dan mengenakan tarif tinggi untuk semua barang impor.
+  - B. B. Meningkatkan ekspor produk manufaktur dan mengurangi ketergantungan pada ekspor komoditas mentah.
+  - C. C. Menurunkan suku bunga agar masyarakat lebih konsumtif sehingga meningkatkan impor.
+  - D. D. Meningkatkan belanja negara produk manufaktur agar mendorong lebih banyak konsumsi barang impor.
+  - E. E. Menghentikan semua impor barang modal untuk mengurangi pengeluaran devisa.
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Berikut adalah data keuangan PT Sejahtera Makmur per  31 Desember 2023:
+[Konteks Visual Gambar 78009_bb253ed760c8c5d3c378288e22db8b6c.png]:
+Tabel data keuangan perusahaan:
+
+| Akun / Keterangan | Nilai | |:--- |:--- | | Pendapatan usaha | Rp120.000.000,00 | | Beban gaji karyawan | Rp25.000.000,00 | | Beban listrik dan air | Rp5.000.000,00 | | Beban penyusutan peralatan | Rp10.000.000,00 | | Beban sewa gedung | Rp15.000.000,00 | | Aset lancar | Rp80.000.000,00 | | Aset tetap | Rp150.000.000,00 | | Utang jangka pendek | Rp30.000.000,00 | | Utang jangka panjang | Rp50.000.000,00 | | Modal awal pemilik | Rp100.000.000,00 |
+PERTANYAAN:
+Berdasarkan data tersebut, berapakah laba bersih yang diperoleh perusahaan?
+OPSI / PERNYATAAN:
+  - A. A. Rp50.000.000,00.
+  - B. B. Rp58.000.000,00.
+  - C. C. Rp65.000.000,00.
+  - D. D. Rp72.000.000,00.
+  - E. E. Rp80.000.000,00.
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: ['A', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Berikut ini  data permintaan kopi di Kafe Milenial pada Bulan Juni 2024.
+
+Pada Bulan ini, Kafe Milenial memberikan promo sesuai tabel berikut:
+[Konteks Visual Gambar 32945_04fc99f7eafb8bc578f9d4ee01fca562.png]:
+Tabel data permintaan kopi:
+
+| Menu Kopi | Harga | Jumlah Permintaan/Cup | |:--- |:--- |:--- | | Kopi Nusantara | Rp22.000,00 | 500 | | Kopi Mantap | Rp21.000,00 | 600 | | Kopi Sejuk | Rp20.000,00 | 700 | | Kopi Rakyat | Rp18.000,00 | 850 | | Kopi Hemat | Rp16.000,00 | 1.000 |
+[Konteks Visual Gambar 32945_9c6f7c934e72cf9785c2ba402eda2e48.png]:
+Tabel data perubahan permintaan kopi:
+
+| Menu Kopi | Harga | Jumlah Permintaan/Cup | |:--- |:--- |:--- | | Kopi Nusantara | Rp20.000,00 | 700 | | Kopi Mantap | Rp19.000,00 | 700 | | Kopi Sejuk | Rp18.000,00 | 850 | | Kopi Rakyat | Rp16.000,00 | 1.100 | | Kopi Hemat | Rp14.000,00 | 1.200 |
+PERTANYAAN:
+Berdasarkan data tersebut, tentukan pernyataan berikut ini yang benar berdasarkan prinsip ekonomi! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Penurunan harga kopi meningkatkan jumlah permintaan karena permintaan bersifat elastis terhadap harga.
+  - B. B. Penurunan harga selalu menurunkan pendapatan total produsen, karena harga per unit turun.
+  - C. C. Adanya penurunan harga kopi dapat meningkatkan loyalitas konsumen dan volume penjualan.
+  - D. D. Pendapatan Kafe Milenial menurun karena permintaan kopi bersifat inelastis terhadap harga.
+  - E. E. Adanya promo menyebabkan jumlah permintaan kopi meningkat, sehingga tidak sesuai dengan hukum permintaan.
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Berdasarkan data Badan Pusat Statistik, Indeks Harga Konsumen (IHK) di suatu wilayah tercatat sebesar 112 pada tahun 2022 dan meningkat menjadi 118 pada tahun 2023. Di sisi lain, IHK pada tahun 2024 naik kembali menjadi 125.
+
+PERTANYAAN:
+Berdasarkan data tersebut, manakah pernyataan berikut yang paling tepat mengenai perkembangan laju inflasi dari tahun ke tahun?
+OPSI / PERNYATAAN:
+  - A. A. Inflasi tahun 2023 lebih tinggi dibandingkan tahun 2024.
+  - B. B. Inflasi tahun 2023 dan 2024 menunjukkan tren penurunan.
+  - C. C. Inflasi tahun 2024 lebih tinggi dibandingkan tahun 2023.
+  - D. D. Inflasi pada tahun 2023 mencapai tertinggi adalah 7%.
+  - E. E. Tingkat inflasi tahun 2024 yaitu 5% lebih rendah dari tahun sebelumnya.
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pada triwulan kedua tahun 2024, tingkat inflasi nasional melonjak menjadi 7,5% year-on-year, jauh melampaui target inflasi 3%. Kenaikan inflasi disebabkan oleh kombinasi dari:
+
+Gangguan distribusi pangan domestik akibat cuaca ekstrem dan konflik logistik.
+
+Depresiasi nilai tukar rupiah terhadap dolar AS sebesar 12% dalam tiga bulan terakhir.
+
+Lonjakan harga energi global akibat ketegangan geopolitik.
+
+Ekspektasi inflasi yang meningkat di kalangan pelaku usaha dan konsumen, yang tercermin dari kenaikan upah dan harga-harga secara luas.
+
+Di sisi lain, pertumbuhan ekonomi nasional pada saat yang sama melambat ke level 4,2% (di bawah target 5,5%), dan angka pengangguran terbuka naik menjadi 6,8%
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, manakah kebijakan moneter yang tepat untuk mengatasi masalah tersebut? Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Menaikkan suku bunga acuan (BI Rate).
+  - B. B. Menurunkan Giro Wajib Minimum (GWM) perbankan.
+  - C. C. Menjual Surat Berharga Negara (SBN) di pasar terbuka.
+  - D. D. Melakukan intervensi di pasar valas untuk menstabilkan rupiah.
+  - E. E. Meningkatkan jumlah uang beredar untuk menjaga konsumsi masyarakat.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+PT Perkebunan Nusantara (PTPN) merupakan sebuah Badan Usaha Milik Negara (BUMN) di sektor perkebunan, melakukan ekspansi usaha dengan membuka lahan baru dan membangun pabrik pengolahan sawit di beberapa daerah tertinggal. Langkah ini menciptakan lapangan kerja baru bagi masyarakat sekitar, meningkatkan pendapatan petani lokal melalui kemitraan, serta meningkatkan ekspor hasil perkebunan ke mancanegara.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, manakah dampak dari peran badan usaha PTPN terhadap perekonomian Indonesia? Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Meningkatkan kesempatan kerja di wilayah tertinggal.
+  - B. B. Meningkatkan potensi impor hasil perkebunan.
+  - C. C. Mendorong pemerataan pembangunan antarwilayah.
+  - D. D. Meningkatkan penerimaan devisa negara dari ekspor.
+  - E. E. Melemahkan daya saing petani lokal dalam jangka panjang.
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Perusahaan dagang “Toko Berkah” milik Bapak Rahmat melakukan beberapa transaksi selama minggu pertama bulan Februari 2025. Manakah transaksi-transaksi yang mempengaruhi komponen ekuitas dalam persamaan dasar akuntansi?
+
+PERTANYAAN:
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Menyetorkan modal awal ke rekening perusahaan sebesar Rp75.000.000,00.
+  - B. B. Membeli persediaan barang dagang secara kredit senilai Rp30.000.000,00.
+  - C. C. Membayar sewa toko bulan Februari sebesar Rp5.000.000,00.
+  - D. D. Menjual barang dagangan senilai Rp15.000.000,00 secara tunai (harga pokok penjualan: Rp9.000.000,00).
+  - E. E. Membayar utang usaha sebesar Rp10.000.000,00.
+

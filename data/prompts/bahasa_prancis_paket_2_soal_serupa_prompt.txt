@@ -1,0 +1,249 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Bahasa Prancis (Paket 2)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: ['A:Vrai', 'B:Faux', 'C:Vrai']
+Stimulus Teks: Emma, Léo, et Nina se rencontrent
+
+Lisez le dialogue! Emma: Bonjour Léo! Léo: Bonjour Emma! Ça va? Emma: Oui, ça va bien. Et toi? Léo: Ça va, merci. Nina: Salut tout le monde! Emma et Leo: Salut Nina! Nina: Bon, j’ai un cours de musique. À bientôt! Léo: D’accord, à bientôt! Emma: Bonne journée, Nina!
+Pertanyaan: Lisez les affirmations et choisissez vrai ou faux selon le dialogue!
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: E
+Stimulus Teks: Lisez le dialogue! Noah: Salut Adam! Ça va aujourd’hui? Adam: Salut! Oui, un peu mieux. Noah: Le docteur dit quelque chose? Adam: Oui, Il me dit de rester au lit et de boire beaucoup d’eau. Noah: _____, repose-toi bien. Adam: Merci.
+Pertanyaan: Choisissez la bonne réponse selon le dialogue!
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: C
+Stimulus Teks: Complétez le dialogue! Clara: Salut Hugo! Salut Salim! Hugo: Salut Clara! Salim: Salut! Clara: Aujourd'hui, c’est l’anniversaire de Madame Lila, notre professeur de biologie! Hugo: Oui, j’ai un cadeau pour elle. Salim: Moi aussi, j’ai une carte. Clara: On chante “Joyeux anniversaire”? Hugo: _____! Salim: Je suis d'accord. C'est génial! Hugo: Elle arrive! Clara: Chut! surprise!
+Pertanyaan: Choisissez la bonne réponse!
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: C
+Stimulus Teks: Lisez le texte! J’ai un emploi du temps assez chargé pendant la semaine. Du lundi au vendredi, j’ai cours à l’université de 8h à 16h. Le matin, j’ai des cours de mathématiques et de littérature. L’après-midi, j’étudie l’histoire, la biologie, et le français. Le mercredi, je termine plus tôt à 13h. Le week-end, je me repose, je fais mes devoirs et je passe du temps avec ma famille. C’est important d’avoir un emploi du temps bien organisé pour réussir mes études.
+Pertanyaan: À quelle heure termine-t-il son emploi au Mercredi? Choisissez un bon réponse!
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: C
+Stimulus Teks: Lisez le dialogue! Client: Bonjour, _____ ce sac? Vendeur: Bonjour! Il coûte 80 euros. Client: Ah, c’est un peu cher. Avez-vous quelque chose de moins cher? Vendeur: Oui, regardez celui-ci. Il est à 50 euros. Client: D’accord. Je voudrais celui-là. Vendeur: Très bien, je vous fais un paquet cadeau? Client: Oui, merci.
+Pertanyaan: Quelle expression convient pour compléter le dialogue?
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: E
+Stimulus Teks: Regardez le tableau!
+[Isi Gambar Soal 74138_aed45f04717ba92f59c227e3846a41b8.png]:
+Katalog promosi penjualan perlengkapan olahraga berjudul 'FOIRE SPORTIF' dengan motif bendera balap kotak-kotak catur serta akun Instagram '@foiresportiflyon' di bagian bawah. Daftar produk dan harga:
+
+| Kolom Kiri (Produk) | Harga | Kolom Kanan (Produk) | Harga | |:--- |:--- | | Kaos polo hitam | 70, 30 € | Celana pendek olahraga hitam | 50, 15 € | | Sepatu sepak bola ungu | 90 € | Sepatu olahraga/tenis putih bersol biru | 105 € | | Rok tenis motif garis biru-kuning-navy | 83, 20 € | Kaos polo olahraga wanita warna oranye kemerahan | 65 € | | Topi olahraga navy ('SPORTS') | 48, 20 € | Topi visor olahraga putih bertali merah | 50 € |
+Pertanyaan: Quel est le prix d'une jupe?
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: ['A', 'B']
+Stimulus Teks: Petite Annonce 1
+
+Observez chaque annonce à l'image ci-dessous!
+[Isi Gambar Soal 71376_999306bd12b25820b488ad500806034f.png]:
+Papan pengumuman gabus berbingkai kayu dengan tiga kertas catatan tempel (sticky notes) berwarna kuning berisi pengumuman berbahasa Prancis: 1. Catatan kiri (kehilangan): 'PERDU! Mon écharpe bleue. Elle est dans la cantine. C’est un cadeau de ma grand-mère. Mon nom est Chloé.'
+
+2. Catatan kanan atas (ditemukan): 'TROUVÉ Des clés sur une table dans la bibliothèque. Les clés sont au bureau du directeur. Demandez à Madame Dubois.'
+
+3. Catatan kanan bawah (mendesak): 'URGENT! Je cherche mon téléphone. La batterie est presque vide. Aidez-moi, s’il vous plaît!– Sarah –'
+Pertanyaan: En lisant les annonces “TROUVÉ” et “URGENT”, que est-ce qu'on peut comprendre de la situation? Choisissez les bonnes réponses! Plusieurs réponses possibles!
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: C
+Stimulus Teks: Petite Annonce 1
+
+Observez chaque annonce à l'image ci-dessous!
+[Isi Gambar Soal 74602_999306bd12b25820b488ad500806034f.png]:
+Papan pengumuman gabus berbingkai kayu dengan tiga kertas catatan tempel kuning bertuliskan teks pengumuman dalam bahasa Prancis: 1. Catatan kiri (PERDU!): 'PERDU! Mon écharpe bleue. Elle est dans la cantine. C’est un cadeau de ma grand-mère. Mon nom est Chloé.'
+
+2. Catatan kanan atas (TROUVÉ): 'TROUVÉ Des clés sur une table dans la bibliothèque. Les clés sont au bureau du directeur. Demandez à Madame Dubois.'
+
+3. Catatan kanan bawah (URGENT!): 'URGENT! Je cherche mon téléphone. La batterie est presque vide. Aidez-moi, s’il vous plaît!– Sarah –'
+Pertanyaan: Quelle image correspond le mieux à l'annonce de Chloé? Choisissez la bonne réponse!
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: D
+Stimulus Teks: Observez la carte d'invitation!
+[Isi Gambar Soal 34541_65c8eeb158384d614e9466de63d273ec.png]:
+Kartu undangan ulang tahun bernuansa ungu dengan hiasan balon, topi pesta, bendera warna-warni, kado, dan kue ulang tahun bertingkat dua dengan lilin serta stroberi di atasnya. Teks pada undangan:- 'JE T\'INVITE À MON ANNIVERSAIRE!'- 'SAMEDI 10 AVRIL 2018'- 'A PARTIR DE 15H JUSQU\'À 18H'- Kotak informasi kuning: 'ARTHUR', '9 RUE DES PÂTISSERIES', '96520 NOGENT SUR MARNE'- Informasi RSVP (kiri bawah): 'J\'attends ta réponse au 06 99 99 99 99'
+Pertanyaan: À quelle heure est-ce que la fête commence?
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: C
+Stimulus Teks: Lisez le texte!
+
+Marta se lève toujours à six heures et quart. Ensuite, elle prend le petit-déjeuner et elle réveille sa fille, Léa. Puis, elle se douche, elle s’habille et elle part travailler au lycée. Elle a cours avec ses élèves à huit heures pile. À midi, elle ne rentre jamais chez elle et elle déjeune à la cantine. Après, elle corrige les devoirs de ses élèves ou elle a des réunions avec les autres profs. Le soir, elle arrive chez elle. Elle dîne avec sa fille vers huit heures et, après, elles regardent la télé ensemble et, souvent, elles lisent. Marta adore les romans historiques: la lecture, c’est relaxant! Elle se couche à dix heures et demie du soir. Et voilà sa journée!
+Pertanyaan: Quelle est la profession de Marta?
+---
+[SOAL ACUAN NO 11]
+Kunci Resmi: A
+Stimulus Teks: Lisez le dialogue! Claire: Salut Léa! Qu’est-ce que tu fais pendant ton temps libre? Léa: J’aime lire des romans, surtout le week-end. Et toi? Claire: Moi, je fais souvent du vélo avec mon frère. Léa: C’est cool! Tu fais du sport aussi? Claire: Oui, je vais à la piscine le samedi matin. Et toi, tu fais du sport? Léa: Non, pas trop. Je préfère rester à la maison.
+
+Voici quelques informations aléatoires tirées du dialogue (mais elles ne sont pas dans le bon ordre): 1. Claire va à la piscine le samedi matin. 2. Léa préfère rester à la maison. 3. Claire fait du vélo avec son frère. 4. Léa aime lire des romans le week-end.
+Pertanyaan: Quel est le bon ordre des phrases selon le dialogue?
+---
+[SOAL ACUAN NO 12]
+Kunci Resmi: D
+Stimulus Teks: Complétez le texte! Je m'appelle Sylvie. J'aime bien mon école. À l’école, j’ _____ (1) les mathématiques. Le cours de maths, c'est super! À la pause, on mange à la cantine et je discute avec mon ami. À la fin du cours, je dis au professeur: _____ (2) Madame!
+Pertanyaan: Choisissez la bonne réponse!
+---
+[SOAL ACUAN NO 13]
+Kunci Resmi: B
+Stimulus Teks: La famille de Charlotte
+
+Lisez bien le texte! B onjour! Je vous présente. Moi, je m'appelle Charlotte. J'ai 16 ans. Je veux vous parler de ma famille. Mon père s'appelle Michel, Il a 45 ans. Ma mère s'appelle Élise, elle a 41 ans. Mes parents ont 3 enfants. Le premier enfant est Pierre. Moi, je suis la deuxième. La plus petite s’appelle Nadine, elle a 12 ans. Mon père a une sœur, elle s’appelle Jeanne. Elle a 40 ans. Elle s'est mariée avec Daniel. Ils ont deux enfants: Claire a 12 ans et Thierry a 7 ans. Mon grand-père, Victor et sa femme, Christine. Il a 73 ans et elle a 70 ans, vivent avec nous à Toulouse.
+Pertanyaan: Quelle image correspond avec l'arbre généalogique de La famille de Charlotte? Choisissez la bonne réponse!
+---
+[SOAL ACUAN NO 14]
+Kunci Resmi: E
+Stimulus Teks: La famille de Charlotte
+
+Lisez bien le texte! Bonjour! Je vous présente. Moi, je m'appelle Charlotte. J'ai 16 ans. Je veux vous parler de ma famille. Mon père s'appelle Michel, Il a 45 ans. Ma mère s'appelle Élise, elle a 41 ans. Mes parents ont 3 enfants. Le premier enfant est Pierre. Moi, je suis la deuxième. La plus petite s’appelle Nadine, elle a 12 ans. Mon père a une sœur, elle s’appelle Jeanne. Elle a 40 ans. Elle s'est mariée avec Daniel. Ils ont deux enfants: Claire a 12 ans et Thierry a 7 ans. Mon grand-père, Victor et sa femme, Christine. Il a 73 ans et elle a 70 ans, vivent avec nous à Toulouse.
+Pertanyaan: Selon le texte, choisissez la bonne réponse pour compléter la phrase! Quel âge a le grand-père de Charlotte? Il a ____.
+---
+[SOAL ACUAN NO 15]
+Kunci Resmi: D
+Stimulus Teks: Regardez bien le plan!
+[Isi Gambar Soal 86894_786a0560b18ff9d230d584ab0db424c4.png]:
+Ilustrasi peta tata kota bergaya kartun dalam bahasa Prancis yang berpusat pada sebuah bundaran dengan air mancur bernama 'la place':- Nama-nama jalan (papan persegi kuning):- 'RUE DE LA MAIRIE' (kiri atas)- 'RUE LECLERC' (kiri bawah)- 'RUE DES ROSIERS' (bawah tengah)- 'AVENUE DES LILAS' (kanan bawah)- 'RUE DANTON' (kanan atas)- 'un coin' (menunjuk sudut persimpangan antara Rue Leclerc dan Rue des Rosiers)- Bangunan dan fasilitas umum yang diberi label:- 'un restaurant' (restoran di Rue de la Mairie)- 'un cinéma' (bioskop dengan papan nama 'ODÉON')- 'le commissariat de police' (kantor polisi gedung biru bertingkat)- 'la mairie' (balai kota kuning berbendera Prancis)- 'la bibliothèque' (perpustakaan bata merah di belakang balai kota)- 'une église' (gereja dengan menara salib)- 'le bureau de poste' (kantor pos gedung abu-abu)- 'une banque' (bank gedung kuning oranye)- 'le jardin public' (taman kota dengan pepohonan hijau)- 'une école primaire' (sekolah dasar abu-abu)- 'la gare' (stasiun kereta api beratap biru dengan rel yang memanjang ke bawah)- 'un lycée' (sekolah menengah atas gedung bertingkat cokelat)- 'l’hôpital' (rumah sakit modern bertingkat abu-abu)- 'le théâtre' (gedung teater berwarna hijau)- 'le musée' (museum dengan patung di depannya)
+Pertanyaan: Choisissez la bonne affirmation basée sur le plan!
+---
+[SOAL ACUAN NO 16]
+Kunci Resmi: B
+Stimulus Teks: Lisez le dialogue! Une famille est dans une voiture Papa: Il fait beau aujourd’hui. On va au parc? La fille: Oui, c'est une bonne idée Papa. Papa: D’accord, on arrive tout de suite. Je vais garer la voiture devant cet arbre. Maman: Mais non Papa, regarde le panneau! C’est interdit de faire le parking. Papa: Ah oui, c’est vrai. Allez, on cherche le parking.
+Pertanyaan: Quel panneau est-ce qu’ils voient?
+---
+[SOAL ACUAN NO 17]
+Kunci Resmi: C
+Stimulus Teks: Observez l'annonce!
+[Isi Gambar Soal 24503_1beaf720199357dc582fe4d13c07a283.png]:
+Poster pengumuman acara dalam bahasa Prancis:- Bagian kiri atas (kotak merah): 'L\'association AVEC présente la BIBLIOTHÈQUE VIVANTE'- Bagian kanan atas (balon ucapan putih): 'SAMEDI 21 MAI 2022 DE 14H30 À 16H30'- Teks utama tengah: 'LES HABITANTS SONT DES LIVRES VIVANTS' dengan subjudul 'Venez découvrir leur récit de vie et partager un moment convivial!'- Informasi lokasi (balon ucapan di tengah): 'Médiathèque Saint-Exupéry', 'Métro Bagatelle - Ligne A', '37, rue du Lot'- Ilustrasi: Dua orang wanita sedang duduk berhadapan mengobrol di sebuah meja bundar sambil menikmati minuman.- Bagian bawah poster: 'PLUS D\'INFOS SUR WWW.ASSOAVEC.ORG' serta kontak 'Contactez-nous: 06 98 03 24 55', 'avec.asso31@gmail.com', dan logo media sosial.- Teks vertikal tepi kiri: '© Conception/réalisation maquette: www.audemonarque.com'- Logo sponsor di bagian paling bawah: Mairie de Toulouse, Préfet de la région Occitanie, Ministère chargé de la ville, Région Occitanie, HG Conseil Départemental, Toulouse Métropole, Toulouse Impact, Caf, Fondation BNP Paribas, Service Civique.
+Pertanyaan: À quelle heure commence le programme Bibliothèque Vivante? À partir de _____.
+---
+[SOAL ACUAN NO 18]
+Kunci Resmi: ['B', 'C']
+Stimulus Teks: Ma Copine Aimée
+
+Lisez le texte! Salut! C’est Fantine et je voudrais vous présenter une personne spéciale dans ma vie. J’ai une copine aimée dans la classe. Elle s’appelle Mia. Elle est d’origine allemande. Elle est la première personne qui me salue lors de mon déménagement dans cette école au milieu du semestre. Avec elle, je peux parler de tout et de rien. Elle m'écoute avec attention sans juger. Elle offre souvent des soutiens et m’encourage dans mes moments difficiles. J’ai de la chance d’avoir une amie comme elle.
+Pertanyaan: Quelles affirmations sont correctes selon le texte? Plusieurs réponses possibles!
+---
+[SOAL ACUAN NO 19]
+Kunci Resmi: D
+Stimulus Teks: Ma Copine Aimée
+
+Lisez le texte! Salut! C’est Fantine et je voudrais vous présenter une personne spéciale dans ma vie. J’ai une copine aimée dans la classe. Elle s’appelle Mia. Elle est d’origine allemande. Elle est la première personne qui me salue lors de mon déménagement dans cette école au milieu du semestre. Avec elle, je peux parler de tout et de rien. Elle m'écoute avec attention sans juger. Elle offre souvent des soutiens et m’encourage dans mes moments difficiles. J’ai de la chance d’avoir une amie comme elle.
+Pertanyaan: Selon le texte, Mia est _____.
+---
+[SOAL ACUAN NO 20]
+Kunci Resmi: C
+Stimulus Teks: Observez l’image!
+[Isi Gambar Soal 93752_f98ced69d53c56aeb7d3c518a1ec7334.png]:
+Ilustrasi ruang galeri seni atau museum lukisan:- Pengunjung:- Di sebelah kiri: Seorang pengunjung mengenakan topi kupluk merah, mantel oranye, dan rok motif kotak-kotak hijau-hitam, sedang membungkuk mengamati lukisan besar di dinding kiri.- Di sebelah kanan: Seorang pria tampak belakang mengenakan atasan merah dan celana panjang ungu muda, berdiri mengamati lukisan potret pria berkumis yang sedang mengisap pipa tembakau.- Lukisan yang dipajang di dinding: 1. Lukisan besar di dinding kiri dengan perspektif ruangan, cangkir kopi, lilin, dan goresan pusaran warna tebal kuning, biru, dan merah (bergaya khas Van Gogh). 2. Lukisan bergaya 'Mona Lisa' di bagian kiri atas. 3. Lukisan sebuah kursi di dalam ruangan berbingkai emas. 4. Sketthumb_upthumb_down 7m5.7s
+Pertanyaan: Qu'est-ce qu'on fait dans ce lieu?
+---
+[SOAL ACUAN NO 21]
+Kunci Resmi: B
+Stimulus Teks: Lisez le texte! C’est un endroit privé dans la maison. Il y a un lit, une lampe de chevet, une armoire, et parfois un bureau. Il y a aussi une fenêtre. Les murs sont décorés avec des photos et des affiches. Pendant la journée, On fait souvent des devoirs et on étudie dans cette pièce. La nuit, on dort et on se repose.
+Pertanyaan: Quelle pièce est décrite sur le texte?
+---
+[SOAL ACUAN NO 22]
+Kunci Resmi: C
+Stimulus Teks: L'activité dans un bureau
+
+Lisez le dialogue! Femme: Bonjour. Employé: Bonjour, Madame. Est-ce que je peux vous aider? Femme: Je voudrais des informations pour inscrire mon fils à l’école, s’il vous plaît. Employé: Bien sûr. Votre enfant a quel âge? Femme: Il a 5 ans. Employé: Et vous habitez dans quel quartier? Femme: J’habite dans le quartier Saint-Paul, rue Victor Hugo. Employé: D’accord. L’école du secteur est l’école maternelle Saint-Paul. Voici la liste des documents à fournir. Femme: Merci beaucoup.
+Pertanyaan: Qu'est-ce que la femme demande?
+---
+[SOAL ACUAN NO 23]
+Kunci Resmi: ['A:Vrai', 'B:Faux', 'C:Faux']
+Stimulus Teks: L'activité dans un bureau
+
+Lisez le dialogue! Femme: Bonjour. Employé: Bonjour, Madame. Est-ce que je peux vous aider? Femme: Je voudrais des informations pour inscrire mon fils à l’école, s’il vous plaît. Employé: Bien sûr. Votre enfant a quel âge? Femme: Il a 5 ans. Employé: Et vous habitez dans quel quartier? Femme: J’habite dans le quartier Saint-Paul, rue Victor Hugo. Employé: D’accord. L’école du secteur est l’école maternelle Saint-Paul. Voici la liste des documents à fournir. Femme: Merci beaucoup.
+Pertanyaan: Lisez les affirmations et choisissez vrai ou faux selon le dialogue!
+---
+[SOAL ACUAN NO 24]
+Kunci Resmi: ['B', 'C']
+Stimulus Teks: Observez le forum de discussion!
+[Isi Gambar Soal 97731_37f79fd3b9621113803265fd01ddee03.png]:
+Tabel teks forum diskusi berbahasa Prancis mengenai penggunaan seragam sekolah ('l\'uniforme scolaire'):
+
+| Pembicara | Teks Pernyataan | |:--- |:--- | | Germa | Bonjour! Demain c'est la rentrée scolaire. Je dois porter mon uniforme scolaire. Est-ce que vous devez aussi porter l'uniforme chez vous? | | Danielle | Non, c'est trop classique. Je veux mettre n'importe quel vêtement. | | Camille | Pour moi, c'est important de porter l'uniforme pour montrer l'identité de notre école. | | Jeremy | Oui, moi aussi. Mon école a un uniforme très cool! | | Tomas | Heureusement, chez moi, je ne dois pas porter l'uniforme. On est tous libres de choisir les vêtements. |
+Pertanyaan: Qui sont d'accord avec l'utilisation de l'uniforme scolaire? Choisissez les bonnes réponses! Plusieurs réponses sont possibles!
+---
+[SOAL ACUAN NO 25]
+Kunci Resmi: E
+Stimulus Teks: Complétez le texte! Bonjour, je m’appelle Gilbert, j’ai 55 ans, je suis directeur d’une entreprise d'export-import. Je suis marié avec Nathalie, professeure. Nous avons 2 enfants, une fille, Nadine, 19 ans et un fils, Nicolas, 15 ans. Nadine est _____, elle étudie la biologie dans une université à Paris. Et Nicolas va passer son baccalaureat bientôt. Voilà ma famille.
+Pertanyaan: Choisissez la bonne réponse !
+---
+[SOAL ACUAN NO 26]
+Kunci Resmi: ['A', 'C', 'D']
+Stimulus Teks: LIsez le texte! Alex travaille dans une entreprise très connue. Le matin, il commence par une réunion à 9 h. Ensuite, à 10 h, il a un appel téléphonique important. À midi, il déjeune rapidement tout seul, puis il retourne au travail. L'après-midi, il a une présentation à 14h. Après la présentation, il doit répondre aux e-mails. À 16 h, il a encore une réunion avec son équipe. Enfin, à 18 h, il termine sa journée de travail, mais il doit encore organiser son agenda pour le lendemain.
+Pertanyaan: Qu'est-ce qu'Alex fait pendant sa journée du travail? Choisissez les bonnes réponses! Plusieurs réponses possibles!
+---
+[SOAL ACUAN NO 27]
+Kunci Resmi: ['A:Faux', 'B:Vrai', 'C:Vrai']
+Stimulus Teks: Lisez le dialogue! Emma: Salut Lucas! Ça va? Lucas: Salut! Ça va très bien. Et toi? Emma: Moi aussi, ça va, merci. Tu écoutes toujours du rock? Lucas: Oui, j’adore le rock. Mais en ce moment, j’écoute aussi un peu de jazz. Emma: Ah bon? Moi, je préfère la pop. Lucas: J’aime bien aussi la pop, surtout les chansons anglaises. Emma: Tu joues d’un instrument? Lucas: Oui, je joue de la guitare. Et toi? Emma: Moi, je ne joue pas d’instrument, mais je chante dans une chorale. Lucas: Super!
+Pertanyaan: Lisez les affirmations et choisissez vrai ou faux selon le dialogue!
+---
+[SOAL ACUAN NO 28]
+Kunci Resmi: D
+Stimulus Teks: Observez les phrases!
+
+Je me réveille à six heures.
+
+Les cours commencent à sept heures trente.
+
+Je prends une douche à six heures quinze.
+
+Le soir, je me couche vers vingt-deux heures.
+
+À midi, je mange à la cantine avec mes amis.
+
+Puis je m’habille.
+
+Je prends mon petit-déjeuner.
+
+Après l’école, je fais mes devoirs.
+
+9. Je vais à l’école à sept heures.
+Pertanyaan: Mettez les phrases dans le bon ordre pour former un texte logique!
+---
+[SOAL ACUAN NO 29]
+Kunci Resmi: B
+Stimulus Teks: Lisez le mail!
+[Isi Gambar Soal 67261_fe38506a33632887022d4f158c65db11.png]:
+Tangkapan layar tampilan kotak pesan email dalam bahasa Prancis:- Pengirim: 'De: manu@email.com'- Penerima: 'À: patricia@email.com'- Subjek: 'Objet: Itinéraire pour la bibliothèque'- Isi pesan: 'Salut! Pour trouver la bibliothèque, c'est facile. Prends la rue Rollin et continue tout droit. Tu vas voir un marché sur ta droite. La bibliothèque est juste après le marché, aussi sur ta droite. Elle est à côté d'une pâtisserie. En face de la bibliothèque, il y a un grand jardin.
+
+À bientôt,
+
+Manu'
+Pertanyaan: Choisissez le plan correct pour aller à la bibliothèque selon les indices du mail.
+

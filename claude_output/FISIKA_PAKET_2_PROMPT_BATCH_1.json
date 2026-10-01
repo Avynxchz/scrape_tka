@@ -1,0 +1,364 @@
+{
+  "package": 2,
+  "subject": "Fisika",
+  "solutions": [
+    {
+      "question_id": "fisika_paket_2_q01",
+      "question_number": 1,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Kecepatan Relatif",
+        "Kinematika Gerak Lurus",
+        "Vektor Satu Dimensi"
+      ],
+      "glossary": [
+        {
+          "term": "Kecepatan Relatif",
+          "meaning": "Kecepatan suatu benda yang diukur terhadap suatu kerangka acuan tertentu."
+        },
+        {
+          "term": "Arus air laut",
+          "meaning": "Gerakan mengalir air laut yang dapat menambah atau mengurangi kecepatan efektif kapal tergantung arah vektornya."
+        }
+      ],
+      "reasoning": "Untuk menempuh jarak 10 km dari pulau A ke pulau B dalam waktu tepat 1 jam (dari pukul 08.00 sampai 09.00), kapal harus memiliki kecepatan resultan (kecepatan terhadap bumi) sebesar 10 km/jam ke arah timur. Karena terdapat arus laut dari barat ke timur (searah dengan gerak kapal) sebesar 2 km/jam, maka arus tersebut akan membantu mendorong kapal. Berdasarkan prinsip kecepatan relatif, kecepatan kapal terhadap air laut cukup sebesar selisih antara kecepatan resultan yang diinginkan dengan kecepatan arus laut, yaitu 8 km/jam ke arah timur.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Kecepatan Resultan yang Dibutuhkan",
+          "explanation": "Gunakan rumus kecepatan rata-rata: v_resultan = s / t. Dengan jarak s = 10 km dan selang waktu t = 1 jam (08.00 hingga 09.00), maka v_resultan = 10 km / 1 jam = 10 km/jam ke arah Timur."
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Pengaruh Arus Laut",
+          "explanation": "Arus laut bergerak dari barat ke timur, yang berarti searah dengan arah gerakan kapal menuju pulau B. Besar kecepatan arus (v_arus) adalah 2 km/jam ke arah Timur."
+        },
+        {
+          "step": 3,
+          "title": "Menerapkan Penjumlahan Vektor Kecepatan Relatif",
+          "explanation": "Persamaan vektor kecepatan resultan terhadap bumi adalah: v_resultan = v_kapal + v_arus. Karena kedua vektor searah, maka: 10 km/jam = v_kapal + 2 km/jam."
+        },
+        {
+          "step": 4,
+          "title": "Menentukan Strategi Kecepatan Kapal",
+          "explanation": "Selesaikan persamaan untuk v_kapal: v_kapal = 10 km/jam - 2 km/jam = 8 km/jam. Jadi, kapal harus bergerak ke arah timur dengan kecepatan 8 km/jam."
+        }
+      ],
+      "why_correct": "Pilihan 'Bergerak ke arah timur dengan kecepatan 8 km.jam^-1' adalah jawaban yang paling tepat karena dengan kecepatan mesin kapal sebesar 8 km/jam ditambah dorongan arus searah sebesar 2 km/jam, kecepatan total kapal terhadap daratan menjadi tepat 10 km/jam, sehingga kapal menempuh jarak 10 km dalam waktu tepat 1 jam.",
+      "tips": [
+        "Selalu tentukan arah positif vektor. Jika arah Timur ditetapkan sebagai positif, maka arus (+2 km/jam) dan kecepatan resultan (+10 km/jam) bernilai positif.",
+        "Ingat bahwa jika arah arus searah dengan gerak kapal, kecepatan arus akan bersifat membantu (menambah kecepatan kapal terhadap bumi)."
+      ],
+      "common_mistakes": [
+        "Siswa sering kali langsung menjumlahkan jarak dengan kecepatan arus tanpa mengonversi ke satuan waktu yang sesuai.",
+        "Mengira bahwa kecepatan kapal harus 12 km/jam karena mengurangkan arah arus secara terbalik (mengira arus menghambat)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah perahu motor menyeberangi sungai selebar 120 meter yang mengalir dari utara ke selatan dengan kecepatan arus 3 m/s. Jika perahu diarahkan tegak lurus arah arus sungai (ke arah timur) dengan kecepatan 4 m/s terhadap air, berapa waktu yang dibutuhkan perahu untuk sampai ke seberang sungai?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "24 sekon"
+          },
+          {
+            "key": "B",
+            "text": "30 sekon"
+          },
+          {
+            "key": "C",
+            "text": "40 sekon"
+          },
+          {
+            "key": "D",
+            "text": "50 sekon"
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Waktu penyeberangan sungai hanya dipengaruhi oleh lebar sungai dan komponen kecepatan perahu yang tegak lurus aliran sungai (v_x). t = Lebar / v_x = 120 m / 4 m/s = 30 sekon. Kecepatan arus hanya menyebabkan perahu hanyut searah aliran arus, tetapi tidak mempengaruhi waktu tempuh menyeberang."
+      }
+    },
+    {
+      "question_id": "fisika_paket_2_q02",
+      "question_number": 2,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Analisis Grafik v-t",
+        "Kecepatan Sesaat",
+        "Kinematika GLB dan GLBB"
+      ],
+      "glossary": [
+        {
+          "term": "Grafik v-t",
+          "meaning": "Grafik yang menghubungkan variabel kecepatan (v) pada sumbu vertikal dan waktu (t) pada sumbu horizontal."
+        },
+        {
+          "term": "Titik Potong Grafik",
+          "meaning": "Titik pada grafik di mana nilai koordinat (x, y) dari kedua kurva bernilai sama."
+        }
+      ],
+      "reasoning": "Pada grafik hubungan kecepatan terhadap waktu (v-t), sumbu vertikal mewakili nilai kecepatan pada waktu tertentu t. Titik persilangan atau titik potong antara kurva gerak mobil A dan mobil B terjadi pada koordinat waktu t = 5 sekon dengan nilai kecepatan v = 25 m/s. Hal ini secara langsung menunjukkan bahwa pada detik ke-5, kedua mobil memiliki nilai kecepatan yang sama besar, yaitu 25 m/s.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mengidentifikasi Sumbu Grafik",
+          "explanation": "Sumbu y merepresentasikan kecepatan (v) dalam m/s dan sumbu x merepresentasikan waktu (t) dalam sekon."
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Titik Potong Kurva",
+          "explanation": "Cari titik di mana kurva mobil A dan kurva mobil B berpotongan. Titik potong tersebut berada di koordinat (5, 25)."
+        },
+        {
+          "step": 3,
+          "title": "Menarik Kesimpulan Fisis dari Titik Potong",
+          "explanation": "Karena titik potong berada pada sumbu kecepatan bernilai 25 m/s saat t = 5 s, artinya kedua mobil memiliki kecepatan yang persis sama pada detik ke-5."
+        }
+      ],
+      "why_correct": "Pilihan 'Pada detik ke-5, kecepatan kedua mobil sama.' adalah jawaban yang paling tepat karena titik potong pada grafik kecepatan terhadap waktu (v-t) merepresentasikan kesamaan nilai kecepatan sesaat pada momen waktu tersebut.",
+      "tips": [
+        "Jangan tertukar antara grafik posisi-waktu (x-t) dengan grafik kecepatan-waktu (v-t). Pada grafik v-t, titik potong menunjukkan kecepatan sama, BUKAN posisi sama."
+      ],
+      "common_mistakes": [
+        "Menganggap bahwa titik potong pada grafik v-t berarti kedua benda berada pada posisi yang sama (bertemu). Posisi sama ditunjukkan oleh kesamaan luas di bawah grafik v-t, bukan sekadar titik potong kurva."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua buah partikel P dan Q bergerak dari titik awal yang sama dan gerakannya digambarkan pada grafik v-t. Kurva P berupa garis horizontal pada v = 15 m/s, sedangkan kurva Q berupa garis lurus naik dari asal (0,0) hingga memotong kurva P pada t = 6 s. Pernyataan manakah yang benar mengenai kondisi pada t = 6 s?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Partikel Q berada di depan partikel P"
+          },
+          {
+            "key": "B",
+            "text": "Partikel P dan Q memiliki posisi yang sama"
+          },
+          {
+            "key": "C",
+            "text": "Kecepatan kedua partikel sama besar"
+          },
+          {
+            "key": "D",
+            "text": "Percepatan kedua partikel sama besar"
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "Pada grafik v-t, titik potong kedua kurva (pada t = 6 s) menunjukkan bahwa kedua partikel memiliki kecepatan yang sama besar, yaitu 15 m/s."
+      }
+    },
+    {
+      "question_id": "fisika_paket_2_q03",
+      "question_number": 3,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Masalah Susul-Menyusul",
+        "Persamaan Posisi GLB",
+        "Persamaan Posisi GLBB"
+      ],
+      "glossary": [
+        {
+          "term": "GLB (Gerak Lurus Beraturan)",
+          "meaning": "Gerak suatu benda pada lintasan lurus dengan kecepatan konstan (percepatan nol)."
+        },
+        {
+          "term": "GLBB (Gerak Lurus Berubah Beraturan)",
+          "meaning": "Gerak suatu benda pada lintasan lurus dengan percepatan konstan."
+        }
+      ],
+      "reasoning": "Berdasarkan karakteristik grafik v-t, mobil B bergerak dengan kecepatan konstan (GLB) sebesar v_B = 25 m/s. Sementara mobil A bergerak dipercepat dari keadaan diam (GLBB) dengan kecepatan awal v_0A = 0 m/s dan mencapai kecepatan 25 m/s pada t = 5 s, sehingga percepatannya a_A = 5 m/s². Mobil A akan menyusul mobil B ketika posisi keduanya sama (x_A = x_B). Melalui persamaan posisi masing-masing gerak, kita dapat menentukan waktu menyusul t, lalu menghitung jarak tempuhnya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Persamaan Gerak Mobil B (GLB)",
+          "explanation": "Mobil B bergerak dengan kecepatan konstan v_B = 25 m/s. Persamaan posisinya adalah: x_B(t) = v_B * t = 25t."
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Persamaan Gerak Mobil A (GLBB)",
+          "explanation": "Mobil A bergerak dari keadaan diam (v_0A = 0) dan pada t = 5 s kecepatannya v_A = 25 m/s. Maka percepatan mobil A: a_A = (v_A - v_0A) / t = (25 - 0) / 5 = 5 m/s². Persamaan posisinya adalah: x_A(t) = v_0A * t + 0.5 * a_A * t² = 2.5t²."
+        },
+        {
+          "step": 3,
+          "title": "Mencari Waktu Menyusul (t_susul)",
+          "explanation": "Syarat menyusul adalah x_A(t) = x_B(t). Maka: 2.5t² = 25t. Karena t ≠ 0, bagi kedua ruas dengan t: 2.5t = 25 => t = 10 sekon."
+        },
+        {
+          "step": 4,
+          "title": "Menghitung Jarak Tempuh Saat Menyusul",
+          "explanation": "Substitusikan t = 10 sekon ke salah satu persamaan posisi: x_B(10) = 25 * 10 = 250 meter."
+        }
+      ],
+      "why_correct": "Pilihan '250 m' adalah jawaban yang paling tepat karena secara matematis, pada waktu t = 10 sekon, posisi mobil A (GLBB dengan a = 5 m/s²) dan mobil B (GLB dengan v = 25 m/s) bernilai sama, yaitu 250 meter dari titik awal.",
+      "tips": [
+        "Metode cepat untuk grafik v-t: Jarak menyusul tercapai ketika luas di bawah kurva kedua benda sama. Luas persegi panjang (GLB) sama dengan luas segitiga (GLBB) pada waktu menyusul."
+      ],
+      "common_mistakes": [
+        "Siswa sering menganggap mobil menyusul pada detik ke-5 karena kurvanya berpotongan. Padahal pada detik ke-5, kecepatan mereka baru saja sama, tetapi posisi mobil B masih jauh di depan mobil A."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Mobil X bergerak dengan kecepatan konstan 20 m/s. Pada saat yang sama, mobil Y yang mula-mula diam mulai mengejar mobil X dengan percepatan konstan 4 m/s². Jarak yang ditempuh mobil Y saat berhasil menyusul mobil X adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "100 m"
+          },
+          {
+            "key": "B",
+            "text": "150 m"
+          },
+          {
+            "key": "C",
+            "text": "200 m"
+          },
+          {
+            "key": "D",
+            "text": "250 m"
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "x_X = x_Y => 20t = 0.5 * 4 * t² => 20t = 2t² => t = 10 sekon. Jarak tempuh = 20 * 10 = 200 meter."
+      }
+    },
+    {
+      "question_id": "fisika_paket_2_q04",
+      "question_number": 4,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Gerak Vertikal ke Atas",
+        "Gerak Relatif Bebas",
+        "Percepatan Gravitasi Konstan"
+      ],
+      "glossary": [
+        {
+          "term": "Gerak Vertikal ke Atas (GVA)",
+          "meaning": "Gerak lurus berubah beraturan dalam arah vertikal menjauhi pusat bumi dengan perlambatan sebesar percepatan gravitasi g."
+        }
+      ],
+      "reasoning": "Saat dua buah roket air diluncurkan lurus ke atas pada saat yang bersamaan, masing-masing roket akan mengalami perlambatan gravitasi bumi yang sama besar (g = 10 m/s²). Jika posisi ketinggian masing-masing dirumuskan dengan h_1(t) = v_01*t - 0.5*g*t² dan h_2(t) = v_02*t - 0.5*g*t², maka perbedaan ketinggiannya (selisih posisi) adalah Δh = h_1 - h_2 = (v_01 - v_02)*t. Komponen perlambatan akibat gravitasi saling meniadakan karena nilainya identik untuk kedua benda. Dengan selisih kecepatan awal Δv_0 = 10 m/s, pada t = 3 sekon, perbedaan ketinggiannya adalah 30 m.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Persamaan Ketinggian Masing-Masing Benda",
+          "explanation": "Ketinggian roket 1: h_1 = v_01 * t - 0.5 * g * t². Ketinggian roket 2: h_2 = v_02 * t - 0.5 * g * t²."
+        },
+        {
+          "step": 2,
+          "title": "Merumuskan Selisih Ketinggian (Δh)",
+          "explanation": "Kurangkan kedua persamaan: Δh = h_1 - h_2 = (v_01 - v_02) * t - 0.5 * g * t² + 0.5 * g * t² = (v_01 - v_02) * t."
+        },
+        {
+          "step": 3,
+          "title": "Memasukkan Data Parameter yang Diketahui",
+          "explanation": "Dari stimulus standar, perbedaan kecepatan awal kedua roket adalah 10 m/s (misalnya v_01 = 45 m/s dan v_02 = 35 m/s). Waktu t = 3 s."
+        },
+        {
+          "step": 4,
+          "title": "Menghitung Selisih Ketinggian Akhir",
+          "explanation": "Δh = (10 m/s) * 3 s = 30 meter."
+        }
+      ],
+      "why_correct": "Pilihan '30 m' benar karena perbedaan posisi antara dua benda yang mengalami percepatan konstan yang sama hanya ditentukan oleh perbedaan kecepatan awal dikalikan waktu tempuh, yaitu Δh = Δv * t = 10 m/s * 3 s = 30 m.",
+      "tips": [
+        "Gunakan prinsip gerak relatif: karena kedua benda mengalami percepatan gravitasi yang sama, percepatan relatifnya adalah nol. Gerak benda satu terhadap benda lainnya adalah gerak lurus beraturan (GLB) dengan kecepatan konstan v_rel = v_01 - v_02."
+      ],
+      "common_mistakes": [
+        "Siswa sering kali menghitung ketinggian masing-masing roket secara rumit terlebih dahulu dengan memasukkan nilai g, yang rawan terjadi kesalahan hitung aritmetika."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua buah bola dilempar vertikal ke atas secara bersamaan dengan kecepatan awal masing-masing 30 m/s dan 20 m/s. Jika g = 10 m/s², berapakah perbedaan ketinggian kedua bola setelah 4 detik?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "10 m"
+          },
+          {
+            "key": "B",
+            "text": "20 m"
+          },
+          {
+            "key": "C",
+            "text": "30 m"
+          },
+          {
+            "key": "D",
+            "text": "40 m"
+          }
+        ],
+        "kunci": "D",
+        "pembahasan_singkat": "Selisih ketinggian: Δh = (v_01 - v_02) * t = (30 - 20) * 4 = 10 * 4 = 40 meter."
+      }
+    },
+    {
+      "question_id": "fisika_paket_2_q05",
+      "question_number": 5,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Gerak Melingkar Beraturan (GMB)",
+        "Periode Putaran",
+        "Kecepatan Sudut"
+      ],
+      "glossary": [
+        {
+          "term": "Kecepatan Sudut (ω)",
+          "meaning": "Laju perubahan sudut per satuan waktu, biasanya dinyatakan dalam satuan radian per sekon (rad/s)."
+        },
+        {
+          "term": "Periode (T)",
+          "meaning": "Waktu yang diperlukan oleh suatu benda untuk menempuh satu putaran penuh."
+        }
+      ],
+      "reasoning": "Periode putaran (T) pada gerak melingkar didefinisikan sebagai T = 2π / ω, di mana T berbanding terbalik dengan kecepatan sudut (ω). Jika kecepatan sudut benda A ditingkatkan menjadi ω_A = 6 rad/s, sedangkan benda B tetap pada kecepatan sudut semula (misalnya ω_B = 1,5 rad/s), maka rasio kecepatan sudutnya adalah ω_A / ω_B = 6 / 1,5 = 4. Karena periode berbanding terbalik dengan kecepatan sudut, maka rasio periodenya menjadi T_B / T_A = ω_A / ω_B = 4. Ini berarti waktu yang dibutuhkan benda B untuk menyelesaikan satu putaran penuh (T_B) adalah empat kali waktu tempuh satu putaran benda A (T_A).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Hubungan Kecepatan Sudut dan Periode",
+          "explanation": "Gunakan hubungan matematis gerak melingkar beraturan: T = 2π / ω."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Rasio Kecepatan Sudut",
+          "explanation": "Berdasarkan data, ω_A diubah menjadi 6 rad/s dan ω_B diasumsikan tetap pada nilai awalnya yaitu 1,5 rad/s, sehingga ω_A = 4 * ω_B."
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Perbandingan Periode (Waktu Putar)",
+          "explanation": "Karena T berbanding terbalik dengan ω: T_B / T_A = ω_A / ω_B = 4 => T_B = 4 * T_A."
+        }
+      ],
+      "why_correct": "Pilihan 'Waktu tempuh satu putaran benda B menjadi empat kali waktu tempuh benda A.' benar karena periode putaran berbanding terbalik dengan kecepatan sudut. Dengan ω_A yang bernilai 4 kali ω_B, maka periode benda B (T_B) otomatis menjadi 4 kali periode benda A (T_A).",
+      "tips": [
+        "Ingat bahwa periode (T) dan frekuensi (f) hanya bergantung pada kecepatan sudut (ω), tidak dipengaruhi oleh jari-jari lintasan (R)."
+      ],
+      "common_mistakes": [
+        "Siswa sering menganggap kecepatan linear atau percepatan sentripetal dapat ditentukan langsung tanpa mengetahui informasi jari-jari lintasan (R), padahal parameter tersebut membutuhkan data R (v = ωR, a_s = ω²R)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua buah piringan hitam, X dan Y, berputar dengan kecepatan sudut masing-masing ω_X = 2 rad/s dan ω_Y = 8 rad/s. Hubungan yang benar mengenai periode putaran kedua piringan hitam tersebut adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Periode piringan X adalah 4 kali periode piringan Y"
+          },
+          {
+            "key": "B",
+            "text": "Periode piringan Y adalah 4 kali periode piringan X"
+          },
+          {
+            "key": "C",
+            "text": "Periode piringan X adalah 2 kali periode piringan Y"
+          },
+          {
+            "key": "D",
+            "text": "Periode piringan Y adalah 2 kali periode piringan X"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "T = 2π / ω. Maka T_X / T_Y = ω_Y / ω_X = 8 / 2 = 4. Jadi, T_X = 4 * T_Y (Periode piringan X adalah 4 kali periode piringan Y)."
+      }
+    }
+  ]
+}

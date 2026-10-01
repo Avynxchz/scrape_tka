@@ -1,0 +1,1002 @@
+{
+  "package": 1,
+  "subject": "Kimia",
+  "solutions": [
+    {
+      "question_number": 1,
+      "concept_kunci": [
+        "Larutan Penyangga (Buffer)",
+        "Persamaan Henderson-Hasselbalch"
+      ],
+      "glossary": [
+        {
+          "term": "Buffer Asam",
+          "meaning": "Larutan yang mempertahankan pH pada daerah asam, terdiri dari asam lemah dan basa konjugasinya."
+        },
+        {
+          "term": "Ka",
+          "meaning": "Tetapan ionisasi asam lemah."
+        }
+      ],
+      "diketahui": "V asam asetat = 20 mL, M asam asetat = 0,1 M; V natrium asetat = 20 mL, M natrium asetat = 0,1 M; Ka = 1 × 10⁻⁵",
+      "ditanyakan": "pH larutan buffer",
+      "reasoning": "Karena jumlah mol asam lemah dan basa konjugasinya sama, maka konsentrasi keduanya dalam larutan akan saling meniadakan dalam rumus logaritma, sehingga pH akan sama dengan pKa.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung mol komponen",
+          "explanation": "Mol asam = 20 mL × 0,1 M = 2 mmol. Mol garam = 20 mL × 0,1 M = 2 mmol."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung pH",
+          "explanation": "$[H^+] = Ka \\times \\frac{n_{asam}}{n_{garam}} = 10^{-5} \\times \\frac{2}{2} = 10^{-5}$. Maka $pH = -\\log[H^+] = -\\log(10^{-5}) = 5$."
+        }
+      ],
+      "why_correct": "Sesuai perhitungan, $[H^+] = Ka$, sehingga $pH = pKa = -\\log(10^{-5}) = 5$.",
+      "tips": [
+        "Jika mol asam lemah sama dengan mol basa konjugasinya, maka pH = pKa."
+      ],
+      "common_mistakes": [
+        "Salah menghitung mol atau lupa bahwa volume total tidak mempengaruhi rasio mol dalam rumus buffer."
+      ],
+      "question_id": "kim_p1_q01",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 2,
+      "concept_kunci": [
+        "Klasifikasi Atom Karbon",
+        "Struktur Alkana"
+      ],
+      "glossary": [
+        {
+          "term": "C Primer",
+          "meaning": "Atom C yang mengikat 1 atom C lain."
+        },
+        {
+          "term": "C Tersier",
+          "meaning": "Atom C yang mengikat 3 atom C lain."
+        }
+      ],
+      "diketahui": "Struktur: $CH_3-CH_2-CH_2-C(CH_3)_2-CH(CH_3)-CH_3$",
+      "ditanyakan": "Jumlah atom C primer dan tersier",
+      "reasoning": "Atom C primer berada di ujung rantai (mengikat 1 C), sedangkan atom C tersier berada di titik percabangan yang mengikat 3 atom C lainnya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi C Primer",
+          "explanation": "Terdapat 5 gugus $CH_3$ di ujung-ujung rantai dan cabang, sehingga jumlah C primer = 5."
+        },
+        {
+          "step": 2,
+          "title": "Identifikasi C Tersier",
+          "explanation": "Hanya ada satu atom C yang mengikat 3 atom C lain (yaitu atom C pada posisi CH yang mengikat satu gugus metil dan dua atom C rantai utama), sehingga jumlah C tersier = 1."
+        }
+      ],
+      "why_correct": "Berdasarkan struktur, terdapat 5 gugus metil (primer) dan 1 atom CH yang mengikat 3 atom C (tersier).",
+      "tips": [
+        "C primer selalu berada di ujung, C sekunder di tengah rantai lurus, C tersier di percabangan, C kuartener di pusat percabangan."
+      ],
+      "common_mistakes": [
+        "Salah menghitung jumlah gugus metil atau salah mengidentifikasi atom C tersier."
+      ],
+      "question_id": "kim_p1_q02",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 3,
+      "concept_kunci": [
+        "Variabel Penelitian",
+        "Metode Ilmiah"
+      ],
+      "glossary": [
+        {
+          "term": "Variabel Bebas",
+          "meaning": "Variabel yang sengaja diubah-ubah oleh peneliti."
+        },
+        {
+          "term": "Variabel Terikat",
+          "meaning": "Variabel yang diamati sebagai respon."
+        },
+        {
+          "term": "Variabel Terkontrol",
+          "meaning": "Variabel yang dibuat tetap agar tidak mempengaruhi hasil."
+        }
+      ],
+      "diketahui": "Reaksi kesetimbangan $2NO_2 \\rightleftharpoons N_2O_4$, suhu diubah, volume tetap, warna diamati.",
+      "ditanyakan": "Klasifikasi variabel A, B, C",
+      "reasoning": "Dalam eksperimen ini, suhu adalah variabel yang dimanipulasi (bebas), volume dijaga tetap (terkontrol), dan warna adalah indikator konsentrasi yang berubah akibat perlakuan (terikat).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Variabel Bebas",
+          "explanation": "Suhu diubah untuk melihat pengaruhnya, maka Suhu = Variabel Bebas."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Variabel Terikat",
+          "explanation": "Warna berubah sebagai akibat perubahan suhu, maka Warna = Variabel Terikat."
+        },
+        {
+          "step": 3,
+          "title": "Analisis Variabel Terkontrol",
+          "explanation": "Volume wadah disebutkan tetap, maka Volume = Variabel Terkontrol."
+        }
+      ],
+      "why_correct": "Sesuai dengan definisi variabel dalam metode ilmiah, suhu adalah faktor penyebab (bebas), warna adalah akibat (terikat), dan volume adalah kondisi yang distabilkan (terkontrol).",
+      "tips": [
+        "Ingat: Bebas = yang diubah, Terikat = yang diukur, Terkontrol = yang dibuat sama."
+      ],
+      "common_mistakes": [
+        "Tertukar antara variabel bebas dan terikat."
+      ],
+      "question_id": "kim_p1_q03",
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Variabel Terkontrol",
+          "B:Variabel Bebas",
+          "C:Variabel Terikat"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 4,
+      "concept_kunci": [
+        "Laju Reaksi",
+        "Grafik Konsentrasi terhadap Waktu"
+      ],
+      "glossary": [
+        {
+          "term": "Laju Reaksi",
+          "meaning": "Perubahan konsentrasi reaktan per satuan waktu."
+        },
+        {
+          "term": "M",
+          "meaning": "Molaritas (mol/Liter)."
+        }
+      ],
+      "diketahui": "Grafik: $t_0=0, [SO_3]=3M$; $t=60, [SO_3]=0M$. Ditanya laju pada 40 detik pertama.",
+      "ditanyakan": "Laju reaksi $2SO_3 \\rightarrow 2SO_2 + O_2$ pada 40 detik pertama",
+      "reasoning": "Laju reaksi $SO_3$ adalah perubahan konsentrasi $SO_3$ dibagi waktu. Karena $SO_3$ adalah reaktan, lajunya adalah $- \\Delta[SO_3] / \\Delta t$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan konsentrasi pada t=40",
+          "explanation": "Dari grafik, pada $t=0, [SO_3]=3$ dan $t=60, [SO_3]=0$. Gradien garis = $(0-3)/(60-0) = -0,05$. Pada $t=40, [SO_3] = 3 - (0,05 \\times 40) = 3 - 2 = 1 M$."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung laju reaksi",
+          "explanation": "Laju = $- \\Delta[SO_3] / \\Delta t = -(1 - 3) / 40 = 2 / 40 = 0,05 M/detik = 5,0 \\times 10^{-2} M/detik$."
+        }
+      ],
+      "why_correct": "Perhitungan gradien konsentrasi terhadap waktu memberikan nilai laju $5,0 \\times 10^{-2} M/detik$.",
+      "tips": [
+        "Laju reaksi reaktan selalu bernilai positif (menggunakan nilai mutlak perubahan konsentrasi)."
+      ],
+      "common_mistakes": [
+        "Lupa menggunakan nilai mutlak atau salah membaca titik pada grafik."
+      ],
+      "question_id": "kim_p1_q04",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 5,
+      "concept_kunci": [
+        "Stoikiometri Asam-Basa",
+        "Netralisasi"
+      ],
+      "glossary": [
+        {
+          "term": "pH Netral",
+          "meaning": "Kondisi di mana jumlah mol H⁺ sama dengan jumlah mol OH⁻ (mol ekuivalen sama)."
+        },
+        {
+          "term": "Mol ekuivalen",
+          "meaning": "Hasil kali mol zat dengan valensi asam atau basanya."
+        }
+      ],
+      "diketahui": "Larutan (1) HCl 0,1 M, 10 mL; (2) NaOH 0,2 M, 10 mL; (3) H₂SO₄ 0,1 M, 10 mL; (4) Mg(OH)₂ 0,2 M, 20 mL.",
+      "ditanyakan": "Pasangan yang menghasilkan pH netral (mol H⁺ = mol OH⁻).",
+      "reasoning": "Campuran bersifat netral jika jumlah mol H⁺ dari asam sama dengan jumlah mol OH⁻ dari basa.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung mol ekuivalen setiap larutan",
+          "explanation": "Mol ekuivalen = Molaritas × Volume × Valensi. (1) HCl: 0,1×10×1 = 1 mmol H⁺. (2) NaOH: 0,2×10×1 = 2 mmol OH⁻. (3) H₂SO₄: 0,1×10×2 = 2 mmol H⁺. (4) Mg(OH)₂: 0,2×20×2 = 8 mmol OH⁻."
+        },
+        {
+          "step": 2,
+          "title": "Uji pasangan",
+          "explanation": "Pasangan (2) dan (3): mol OH⁻ = 2 mmol, mol H⁺ = 2 mmol. Karena jumlahnya sama, maka netral."
+        }
+      ],
+      "why_correct": "Pada pasangan (2) dan (3), mol OH⁻ dari NaOH (2 mmol) tepat habis bereaksi dengan mol H⁺ dari H₂SO₄ (2 mmol), sehingga pH larutan menjadi netral.",
+      "tips": [
+        "Selalu hitung mol ekuivalen (M × V × valensi) bukan sekadar mol biasa."
+      ],
+      "common_mistakes": [
+        "Lupa mengalikan valensi asam/basa (misal: H₂SO₄ valensinya 2)."
+      ],
+      "question_id": "kim_p1_q05",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 6,
+      "concept_kunci": [
+        "Konfigurasi Elektron",
+        "Teori VSEPR",
+        "Kepolaran"
+      ],
+      "glossary": [
+        {
+          "term": "Hibridisasi",
+          "meaning": "Pencampuran orbital atom pusat untuk membentuk orbital baru yang setara."
+        },
+        {
+          "term": "PEB",
+          "meaning": "Pasangan Elektron Bebas yang mempengaruhi geometri molekul."
+        }
+      ],
+      "diketahui": "Unsur Q (nomor atom 7) dan Z (nomor atom 9).",
+      "ditanyakan": "Hibridisasi, geometri, dan kepolaran senyawa yang terbentuk.",
+      "reasoning": "Unsur Q (N) memiliki konfigurasi 2, 5 (butuh 3 elektron). Unsur Z (F) memiliki konfigurasi 2, 7 (butuh 1 elektron). Senyawa yang terbentuk adalah NF₃.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan struktur Lewis",
+          "explanation": "Atom pusat N memiliki 5 elektron valensi, 3 digunakan berikatan dengan F, menyisakan 1 PEB."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan geometri dan hibridisasi",
+          "explanation": "Tipe molekul AX₃E (3 pasang ikatan, 1 PEB) menghasilkan geometri segitiga piramida dengan hibridisasi sp³."
+        }
+      ],
+      "why_correct": "NF₃ memiliki 1 PEB pada atom N, menyebabkan bentuknya segitiga piramida (bukan planar) dan bersifat polar karena momen dipol tidak saling meniadakan.",
+      "tips": [
+        "Ingat: AX₃E selalu menghasilkan geometri segitiga piramida dan hibridisasi sp³."
+      ],
+      "common_mistakes": [
+        "Menganggap NF₃ nonpolar seperti BF₃; padahal N memiliki PEB yang membuat molekul polar."
+      ],
+      "question_id": "kim_p1_q06",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 7,
+      "concept_kunci": [
+        "Penyetaraan Reaksi Redoks"
+      ],
+      "glossary": [
+        {
+          "term": "Hukum Kekekalan Massa",
+          "meaning": "Jumlah atom di ruas kiri harus sama dengan jumlah atom di ruas kanan."
+        }
+      ],
+      "diketahui": "Reaksi: a SO₂ + b O₂ → c SO₃",
+      "ditanyakan": "Nilai koefisien a, b, dan c.",
+      "reasoning": "Menyetarakan jumlah atom S dan O di kedua sisi.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Persamaan atom",
+          "explanation": "Atom S: a = c. Atom O: 2a + 2b = 3c."
+        },
+        {
+          "step": 2,
+          "title": "Substitusi",
+          "explanation": "Jika a = 2, maka c = 2. Masukkan ke persamaan O: 2(2) + 2b = 3(2) => 4 + 2b = 6 => 2b = 2 => b = 1."
+        }
+      ],
+      "why_correct": "Dengan a=2, b=1, c=2, jumlah atom S kiri=2, kanan=2; jumlah atom O kiri=4+2=6, kanan=6. Reaksi setara.",
+      "tips": [
+        "Gunakan metode aljabar sederhana jika koefisien tidak langsung terlihat."
+      ],
+      "common_mistakes": [
+        "Salah menghitung jumlah atom O di ruas kiri (lupa menjumlahkan dari SO₂ dan O₂)."
+      ],
+      "question_id": "kim_p1_q07",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 8,
+      "concept_kunci": [
+        "Hasil Kali Kelarutan (Ksp)",
+        "Pengaruh Ion Senama"
+      ],
+      "glossary": [
+        {
+          "term": "Ion Senama",
+          "meaning": "Ion yang sama yang berasal dari dua sumber berbeda dalam larutan."
+        },
+        {
+          "term": "Ksp",
+          "meaning": "Tetapan kesetimbangan kelarutan."
+        }
+      ],
+      "diketahui": "AgNO₃ 0,01 M (50 mL), NaCl 0,03 M (50 mL), Ksp AgCl = 1×10⁻¹⁰.",
+      "ditanyakan": "Konsentrasi ion Ag⁺ sisa.",
+      "reasoning": "Reaksi pengendapan: Ag⁺ + Cl⁻ → AgCl(s). Hitung konsentrasi sisa setelah reaksi.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung mol awal",
+          "explanation": "Mol Ag⁺ = 0,01 M × 0,05 L = 0,0005 mol. Mol Cl⁻ = 0,03 M × 0,05 L = 0,0015 mol."
+        },
+        {
+          "step": 2,
+          "title": "Hitung konsentrasi sisa",
+          "explanation": "Volume total = 100 mL = 0,1 L. [Ag⁺] sisa = (0,0005 - 0,0005) = 0 (habis bereaksi). [Cl⁻] sisa = (0,0015 - 0,0005) / 0,1 L = 0,01 M. Gunakan Ksp: [Ag⁺][Cl⁻] = 10⁻¹⁰ => [Ag⁺](0,01) = 10⁻¹⁰ => [Ag⁺] = 10⁻⁸ M."
+        }
+      ],
+      "why_correct": "Setelah pengendapan, sisa Cl⁻ adalah 0,01 M. Berdasarkan Ksp, [Ag⁺] = Ksp / [Cl⁻] = 10⁻¹⁰ / 10⁻² = 10⁻⁸ M.",
+      "tips": [
+        "Selalu hitung konsentrasi ion setelah pengenceran (volume total) sebelum masuk ke rumus Ksp."
+      ],
+      "common_mistakes": [
+        "Lupa membagi mol dengan volume total (100 mL) saat mencari konsentrasi sisa."
+      ],
+      "question_id": "kim_p1_q08",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 9,
+      "concept_kunci": [
+        "Sifat Koligatif Larutan",
+        "Faktor Van't Hoff"
+      ],
+      "glossary": [
+        {
+          "term": "Elektrolit",
+          "meaning": "Zat yang terurai menjadi ion-ion dalam larutan."
+        },
+        {
+          "term": "Faktor Van't Hoff (i)",
+          "meaning": "Faktor yang menunjukkan jumlah partikel efektif dalam larutan elektrolit."
+        }
+      ],
+      "diketahui": "Penurunan titik beku ($\\Delta T_f$) NaCl = 2 $\\times$ $\\Delta T_f$ urea; Konsentrasi molar sama.",
+      "ditanyakan": "Penyebab fenomena tersebut.",
+      "reasoning": "Penurunan titik beku adalah sifat koligatif yang bergantung pada jumlah partikel. Rumus $\\Delta T_f = m \\cdot K_f \\cdot i$. Urea adalah non-elektrolit ($i=1$), sedangkan NaCl adalah elektrolit kuat yang terurai menjadi $Na^+$ dan $Cl^-$ ($i=2$).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Rumus",
+          "explanation": "Untuk urea: $\\Delta T_f = m \\cdot K_f \\cdot 1$. Untuk NaCl: $\\Delta T_f = m \\cdot K_f \\cdot i$."
+        },
+        {
+          "step": 2,
+          "title": "Perbandingan",
+          "explanation": "Karena $\\Delta T_f$ NaCl dua kali lipat urea, maka $i$ NaCl harus 2. NaCl ($NaCl \\rightarrow Na^+ + Cl^-$) memiliki 2 ion, sehingga $i=2$."
+        }
+      ],
+      "why_correct": "NaCl adalah garam biner (terdiri dari 2 ion) yang terdisosiasi sempurna, sehingga menghasilkan jumlah partikel dua kali lipat dibandingkan urea pada konsentrasi yang sama.",
+      "tips": [
+        "Ingat: $i = 1 + (n-1)\\alpha$. Untuk elektrolit kuat, $i = n$ (jumlah ion)."
+      ],
+      "common_mistakes": [
+        "Menganggap massa zat berpengaruh pada sifat koligatif, padahal sifat koligatif bergantung pada jumlah partikel (molalitas)."
+      ],
+      "question_id": "kim_p1_q09",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 10,
+      "concept_kunci": [
+        "Korosi",
+        "Faktor Laju Reaksi"
+      ],
+      "glossary": [
+        {
+          "term": "Korosi",
+          "meaning": "Proses oksidasi logam oleh oksigen dan air."
+        },
+        {
+          "term": "Elektrolit",
+          "meaning": "Zat yang mempercepat transfer elektron dalam proses korosi."
+        }
+      ],
+      "diketahui": "Kondisi (1): Udara + air; (2): Tanpa udara dan air (oli); (3): Udara + air + garam.",
+      "ditanyakan": "Urutan laju korosi dari yang paling cepat.",
+      "reasoning": "Korosi besi memerlukan $O_2$ dan $H_2O$. Garam ($NaCl$) berfungsi sebagai elektrolit yang mempercepat laju korosi. Tanpa $O_2$ dan $H_2O$ (tertutup oli), korosi tidak terjadi.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Kondisi",
+          "explanation": "Kondisi (3) memiliki elektrolit (garam) yang mempercepat korosi. Kondisi (1) korosi normal. Kondisi (2) tidak ada korosi."
+        },
+        {
+          "step": 2,
+          "title": "Pengurutan",
+          "explanation": "Laju tercepat adalah (3) > (1) > (2)."
+        }
+      ],
+      "why_correct": "Garam meningkatkan konduktivitas larutan, mempercepat reaksi elektrokimia korosi. Tanpa air dan udara, reaksi oksidasi besi tidak dapat berlangsung.",
+      "tips": [
+        "Ingat: Korosi = Besi + Air + Oksigen. Elektrolit mempercepat proses ini."
+      ],
+      "common_mistakes": [
+        "Menganggap oli mempercepat korosi, padahal oli berfungsi sebagai penghalang (proteksi)."
+      ],
+      "question_id": "kim_p1_q10",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 11,
+      "concept_kunci": [
+        "Stoikiometri",
+        "Reaksi Pengendapan"
+      ],
+      "glossary": [
+        {
+          "term": "AgCl",
+          "meaning": "Perak klorida, endapan putih."
+        },
+        {
+          "term": "Mol",
+          "meaning": "Satuan jumlah zat ($n = M \\times V$)."
+        }
+      ],
+      "diketahui": "Reaksi: $AgNO_3 + NaCl \\rightarrow AgCl + NaNO_3$. Target $AgCl = 1,435$ g. $Mr AgCl = 143,5$. Maka target mol $AgCl = 0,01$ mol.",
+      "ditanyakan": "Komposisi yang tepat untuk menghasilkan 0,01 mol AgCl.",
+      "reasoning": "Reaksi setara 1:1. Perlu 0,01 mol $AgNO_3$ dan 0,01 mol $NaCl$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung Kebutuhan Mol",
+          "explanation": "$n = 1,435 / 143,5 = 0,01$ mol."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Pilihan",
+          "explanation": "A: $0,005 \\times 1 + 0,005 \\times 1 = 0,005$ mol (Tidak Tepat). B: $0,01 \\times 1 + 0,005 \\times 2 = 0,01$ mol (Tepat). C: $0,01 \\times 2 + 0,01 \\times 2 = 0,02$ mol (Tidak Tepat)."
+        }
+      ],
+      "why_correct": "Hanya opsi B yang menghasilkan tepat 0,01 mol AgCl sesuai stoikiometri reaksi.",
+      "tips": [
+        "Selalu hitung mol reaktan ($M \\times V$) dan bandingkan dengan koefisien reaksi."
+      ],
+      "common_mistakes": [
+        "Lupa mengalikan konsentrasi dengan volume dalam liter."
+      ],
+      "question_id": "kim_p1_q11",
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Tidak Tepat",
+          "B:Tepat",
+          "C:Tidak Tepat"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 12,
+      "concept_kunci": [
+        "Rumus Empiris",
+        "Rumus Molekul"
+      ],
+      "glossary": [
+        {
+          "term": "Rumus Empiris",
+          "meaning": "Perbandingan paling sederhana atom-atom dalam senyawa."
+        },
+        {
+          "term": "Rumus Molekul",
+          "meaning": "Jumlah atom sebenarnya dalam satu molekul."
+        }
+      ],
+      "diketahui": "C=40%, H=6,7%, O=53,3%. Mr=180.",
+      "ditanyakan": "Kebenaran kesimpulan rumus molekul.",
+      "reasoning": "Mol C:H:O = (40/12): (6,7/1): (53,3/16) = 3,33: 6,7: 3,33 = 1: 2: 1. Rumus empiris = $CH_2O$. $(CH_2°)_n = 180 \\rightarrow 30n = 180 \\rightarrow n=6$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan Rumus Empiris",
+          "explanation": "Rasio mol 1:2:1 menghasilkan $CH_2O$."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan Rumus Molekul",
+          "explanation": "Dengan $n=6$, maka $(CH_2°)_6 = C_6H_{12}O_6$."
+        }
+      ],
+      "why_correct": "Kesimpulan awal salah karena hanya menyebut rumus empiris, padahal massa molar 180 g/mol menunjukkan senyawa tersebut adalah glukosa ($C_6H_{12}O_6$).",
+      "tips": [
+        "Rumus Molekul = (Rumus Empiris)n. Cari n dengan membagi Mr dengan massa molar empiris."
+      ],
+      "common_mistakes": [
+        "Menganggap rumus empiris sama dengan rumus molekul tanpa mengecek massa molar."
+      ],
+      "question_id": "kim_p1_q12",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 13,
+      "concept_kunci": [
+        "Teori Asam Basa Bronsted-Lowry",
+        "Transfer Proton"
+      ],
+      "glossary": [
+        {
+          "term": "Asam Bronsted-Lowry",
+          "meaning": "Spesi yang mendonorkan proton (H+)"
+        },
+        {
+          "term": "Basa Bronsted-Lowry",
+          "meaning": "Spesi yang menerima proton (H+)"
+        }
+      ],
+      "diketahui": "Reaksi: $H_2PO_4^- + H_2° \\\\rightarrow HPO_4^{2-} + H_3O^+$",
+      "ditanyakan": "Pernyataan yang benar mengenai reaksi asam basa Bronsted-Lowry.",
+      "reasoning": "Dalam teori Bronsted-Lowry, asam adalah donor proton dan basa adalah akseptor proton. Pada reaksi tersebut, $H_2PO_4^-$ melepaskan satu proton ($H^+$) menjadi $HPO_4^{2-}$, sehingga $H_2PO_4^-$ berperan sebagai asam.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Donor Proton",
+          "explanation": "Perhatikan perubahan $H_2PO_4^-$ menjadi $HPO_4^{2-}$. Spesi ini kehilangan satu $H^+$, maka ia bertindak sebagai donor proton (asam)."
+        },
+        {
+          "step": 2,
+          "title": "Identifikasi Akseptor Proton",
+          "explanation": "Perhatikan perubahan $H_2O$ menjadi $H_3O^+$. Spesi ini menerima satu $H^+$, maka ia bertindak sebagai akseptor proton (basa)."
+        }
+      ],
+      "why_correct": "Opsi C benar karena $H_2PO_4^-$ memberikan proton kepada $H_2O$ dan karena ia mendonorkan proton, maka ia bersifat asam.",
+      "tips": [
+        "Ingat: Asam = Donor (AD), Basa = Akseptor (BA)."
+      ],
+      "common_mistakes": [
+        "Tertukar antara spesi yang mendonorkan dan menerima proton."
+      ],
+      "question_id": "kim_p1_q13",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 14,
+      "concept_kunci": [
+        "Gaya Van der Waals",
+        "Titik Didih Isomer"
+      ],
+      "glossary": [
+        {
+          "term": "Gaya Van der Waals",
+          "meaning": "Gaya tarik antar molekul nonpolar yang dipengaruhi luas permukaan kontak."
+        },
+        {
+          "term": "Isomer",
+          "meaning": "Senyawa dengan rumus molekul sama namun struktur berbeda."
+        }
+      ],
+      "diketahui": "Titik didih dipengaruhi oleh massa molekul dan bentuk molekul (luas permukaan).",
+      "ditanyakan": "Tepat atau tidak tepat pernyataan mengenai titik didih isomer.",
+      "reasoning": "Semakin bercabang suatu rantai karbon, luas permukaan kontak antar molekul semakin kecil, sehingga gaya Van der Waals melemah dan titik didih semakin rendah.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis A",
+          "explanation": "n-butana (rantai lurus) memiliki luas permukaan lebih besar dibanding 2-metil-propana (bercabang), maka titik didih n-butana > 2-metil-propana. (Tepat)"
+        },
+        {
+          "step": 2,
+          "title": "Analisis B",
+          "explanation": "2,2-dimetil-propana (sangat bercabang/bulat) memiliki titik didih lebih rendah daripada 2-metil-butana (rantai lebih panjang). (Tidak Tepat)"
+        },
+        {
+          "step": 3,
+          "title": "Analisis C",
+          "explanation": "n-heksana (rantai lurus) memiliki luas permukaan lebih besar dibanding 3-metil-pentana (bercabang). (Tepat)"
+        }
+      ],
+      "why_correct": "Kunci A: Tepat, B: Tidak Tepat, C: Tepat karena sesuai dengan prinsip luas permukaan molekul terhadap kekuatan gaya antarmolekul.",
+      "tips": [
+        "Semakin lurus rantai karbon, semakin tinggi titik didihnya."
+      ],
+      "common_mistakes": [
+        "Menganggap massa molekul adalah satu-satunya penentu titik didih."
+      ],
+      "question_id": "kim_p1_q14",
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Tepat",
+          "B:Tidak Tepat",
+          "C:Tepat"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 15,
+      "concept_kunci": [
+        "Asas Le Chatelier",
+        "Kesetimbangan Kimia"
+      ],
+      "glossary": [
+        {
+          "term": "Asas Le Chatelier",
+          "meaning": "Jika suatu sistem kesetimbangan diberikan aksi, sistem akan bergeser untuk meminimalkan aksi tersebut."
+        },
+        {
+          "term": "Eksoterm",
+          "meaning": "Reaksi yang melepaskan kalor ($\\Delta H < 0$)"
+        }
+      ],
+      "diketahui": "$2SO_2(g) + O_2(g) \\\\rightleftharpoons 2SO_3(g) \\\\quad \\\\Delta H = -197 \\\\text{ kJ/mol}$",
+      "ditanyakan": "Upaya untuk memaksimalkan produk $SO_3$.",
+      "reasoning": "Untuk menggeser kesetimbangan ke arah produk (kanan), kita harus menambah konsentrasi reaktan, menurunkan suhu (karena eksoterm), atau mengambil produk secara terus-menerus.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Konsentrasi",
+          "explanation": "Menambah $O_2$ (reaktan) akan menggeser kesetimbangan ke kanan (produk)."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Suhu",
+          "explanation": "Karena reaksi eksoterm, menurunkan suhu akan menggeser kesetimbangan ke arah produk (kanan)."
+        },
+        {
+          "step": 3,
+          "title": "Analisis Produk",
+          "explanation": "Mengeluarkan $SO_3$ dari wadah akan memicu sistem untuk memproduksi lebih banyak $SO_3$."
+        }
+      ],
+      "why_correct": "Opsi B, D, dan E benar karena ketiganya sesuai dengan prinsip pergeseran kesetimbangan untuk meningkatkan hasil produk.",
+      "tips": [
+        "Ingat: Suhu turun untuk eksoterm, konsentrasi reaktan naik, produk diambil."
+      ],
+      "common_mistakes": [
+        "Menganggap menurunkan tekanan gas akan meningkatkan produk (padahal menurunkan tekanan menggeser ke koefisien gas lebih besar)."
+      ],
+      "question_id": "kim_p1_q15",
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "B",
+          "D",
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 16,
+      "concept_kunci": [
+        "Stoikiometri",
+        "Reagen Pembatas",
+        "Hukum Avogadro"
+      ],
+      "glossary": [
+        {
+          "term": "Reagen Pembatas",
+          "meaning": "Zat yang habis lebih dulu dalam reaksi kimia."
+        },
+        {
+          "term": "STP",
+          "meaning": "Standard Temperature and Pressure ($0^\\\\circ C, 1 \\\\text{ atm}$), dimana $1 \\\\text{ mol gas} = 22,4 \\\\text{ L}$"
+        }
+      ],
+      "diketahui": "24 g Mg ($Ar=24$), 1 L HCl 3 M. Reaksi: $Mg + 2HCl \\\\rightarrow MgCl_2 + H_2$",
+      "ditanyakan": "Pernyataan yang benar.",
+      "reasoning": "Hitung mol: $n_{Mg} = 24/24 = 1 \\\\text{ mol}$. $n_{HCl} = 1 \\\\times 3 = 3 \\\\text{ mol}$. Berdasarkan koefisien, $Mg$ habis bereaksi (1 mol), $HCl$ sisa 1 mol.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung Mol",
+          "explanation": "$n_{Mg} = 1 \\\\text{ mol}$, $n_{HCl} = 3 \\\\text{ mol}$."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan Pembatas",
+          "explanation": "Perbandingan $Mg:HCl$ adalah $1:2$. Untuk $1 \\\\text{ mol } Mg$, butuh $2 \\\\text{ mol } HCl$. Karena tersedia $3 \\\\text{ mol}$, maka $Mg$ habis (pembatas)."
+        },
+        {
+          "step": 3,
+          "title": "Hitung Produk",
+          "explanation": "Dari $1 \\\\text{ mol } Mg$, dihasilkan $1 \\\\text{ mol } H_2$ dan $1 \\\\text{ mol } MgCl_2$. Volume $H_2 = 1 \\\\times 22,4 = 22,4 \\\\text{ L}$."
+        }
+      ],
+      "why_correct": "A benar (1 mol Mg), B benar (22,4 L $H_2$). C salah karena pembatasnya Mg. D salah karena yang bereaksi hanya 2 mol. E salah karena yang dihasilkan hanya 1 mol.",
+      "tips": [
+        "Selalu bagi mol dengan koefisien untuk mencari reagen pembatas."
+      ],
+      "common_mistakes": [
+        "Salah menentukan reagen pembatas atau salah menghitung mol sisa."
+      ],
+      "question_id": "kim_p1_q16",
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 17,
+      "concept_kunci": [
+        "Asam Lemah",
+        "Derajat Ionisasi"
+      ],
+      "glossary": [
+        {
+          "term": "Ka",
+          "meaning": "Tetapan ionisasi asam lemah"
+        },
+        {
+          "term": "M",
+          "meaning": "Molaritas atau konsentrasi (mol/L)"
+        }
+      ],
+      "diketahui": "massa CH3COOH = 0,6 g; Mr CH3COOH = 60; V = 1 L; Ka = 10^-6",
+      "ditanyakan": "Analisis kebenaran pernyataan A, B, dan C.",
+      "reasoning": "Asam asetat adalah asam lemah yang terionisasi sebagian. Konsentrasi awal (M) dihitung dari mol/V. [H+] dihitung dengan rumus akar(Ka x M). Derajat ionisasi (α) dihitung dengan akar(Ka/M).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung Molaritas",
+          "explanation": "mol = 0,6/60 = 0,01 mol. M = 0,01 mol / 1 L = 0,01 M = 10^-2 M."
+        },
+        {
+          "step": 2,
+          "title": "Hitung [H+]",
+          "explanation": "[H+] = sqrt(Ka * M) = sqrt(10^-6 * 10^-2) = sqrt(10^-8) = 10^-4 M."
+        },
+        {
+          "step": 3,
+          "title": "Hitung pH dan α",
+          "explanation": "pH = -log(10^-4) = 4. α = sqrt(Ka/M) = sqrt(10^-6 / 10^-2) = sqrt(10^-4) = 10^-2 = 1%."
+        }
+      ],
+      "why_correct": "Pernyataan A benar (pH=4), B salah (seharusnya 10^-4 M), C benar (1% terionisasi).",
+      "tips": [
+        "Ingat rumus cepat [H+] = sqrt(Ka * M) untuk asam lemah."
+      ],
+      "common_mistakes": [
+        "Salah menghitung Mr atau salah menganggap asam asetat sebagai asam kuat."
+      ],
+      "question_id": "kim_p1_q17",
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Salah",
+          "C:Benar"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 18,
+      "concept_kunci": [
+        "Larutan Penyangga",
+        "Stoikiometri Reaksi"
+      ],
+      "glossary": [
+        {
+          "term": "mmol",
+          "meaning": "milimol (1/1000 mol)"
+        },
+        {
+          "term": "Penyangga",
+          "meaning": "Campuran asam lemah dan basa konjugasinya"
+        }
+      ],
+      "diketahui": "CH3COOH: 100 mL, 0,1 M (10 mmol); NaOH: 100 mL, 0,05 M (5 mmol); Ka = 10^-5",
+      "ditanyakan": "Pernyataan yang benar terkait reaksi.",
+      "reasoning": "Reaksi: CH3COOH + NaOH -> CH3COONa + H2O. Karena mol asam > mol basa, terbentuk larutan penyangga.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Stoikiometri",
+          "explanation": "CH3COOH (10 mmol) + NaOH (5 mmol) -> CH3COONa (5 mmol) + H2O. Sisa CH3COOH = 5 mmol."
+        },
+        {
+          "step": 2,
+          "title": "Hitung pH",
+          "explanation": "[H+] = Ka * (mol asam / mol garam) = 10^-5 * (5/5) = 10^-5. pH = -log(10^-5) = 5."
+        }
+      ],
+      "why_correct": "A benar (pH=5), C benar (NaOH habis 5 mmol), E benar (garam 5 mmol). B salah (yang bereaksi 5 mmol), D salah (hanya NaOH yang habis).",
+      "tips": [
+        "Gunakan tabel MRS (Mula-mula, Reaksi, Sisa) untuk stoikiometri."
+      ],
+      "common_mistakes": [
+        "Menganggap semua asam bereaksi dengan basa, padahal hanya sejumlah basa yang tersedia."
+      ],
+      "question_id": "kim_p1_q18",
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "C",
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 19,
+      "concept_kunci": [
+        "Kesetimbangan Kimia",
+        "Tetapan Kesetimbangan (Kc)"
+      ],
+      "glossary": [
+        {
+          "term": "Kc",
+          "meaning": "Tetapan kesetimbangan berdasarkan konsentrasi"
+        }
+      ],
+      "diketahui": "Reaksi: 2COF2 ⇌ CO2 + CF4; V = 5 L; Mol awal COF2 = 1 mol; Kc = 4",
+      "ditanyakan": "Sisa mol COF2 saat setimbang.",
+      "reasoning": "Gunakan tabel MRS dengan variabel x sebagai mol yang bereaksi.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tabel MRS",
+          "explanation": "2COF2 (1-2x) ⇌ CO2 (x) + CF4 (x). Konsentrasi: [COF2]=(1-2x)/5, [CO2]=x/5, [CF4]=x/5."
+        },
+        {
+          "step": 2,
+          "title": "Persamaan Kc",
+          "explanation": "Kc = ([CO2][CF4]) / [COF2]^2 => 4 = (x/5 * x/5) / ((1-2x)/5)^2 => 4 = x^2 / (1-2x)^2."
+        },
+        {
+          "step": 3,
+          "title": "Penyelesaian",
+          "explanation": "Akar(4) = x / (1-2x) => 2 - 4x = x => 5x = 2 => x = 0,4. Sisa COF2 = 1 - 2(0,4) = 0,2 mol."
+        }
+      ],
+      "why_correct": "Hasil perhitungan menunjukkan sisa COF2 adalah 0,2 mol.",
+      "tips": [
+        "Jika koefisien ruas kiri dan kanan sama, volume akan saling meniadakan dalam rumus Kc."
+      ],
+      "common_mistakes": [
+        "Lupa mengalikan koefisien pada variabel x saat menghitung sisa."
+      ],
+      "question_id": "kim_p1_q19",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    },
+    {
+      "question_number": 20,
+      "concept_kunci": [
+        "Laju Reaksi",
+        "Variabel Bebas"
+      ],
+      "glossary": [
+        {
+          "term": "Variabel Bebas",
+          "meaning": "Faktor yang diubah untuk melihat pengaruhnya"
+        }
+      ],
+      "diketahui": "Tabel percobaan laju reaksi dengan variabel [A], massa B, suhu, dan katalis.",
+      "ditanyakan": "Pasangan percobaan untuk pengaruh suhu.",
+      "reasoning": "Untuk menguji pengaruh suhu, variabel lain ([A], massa/luas permukaan B, katalis) harus dibuat tetap (sama).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Variabel Tetap",
+          "explanation": "Cari dua percobaan dengan [A], massa B (dan bentuknya), serta katalis yang identik, namun suhunya berbeda."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Data",
+          "explanation": "Percobaan 1: [A]=0,1, B=1g(granul), Katalis=1, T=30. Percobaan 3: [A]=0,1, B=1g(granul), Katalis=1, T=60. Hanya suhu yang berbeda."
+        }
+      ],
+      "why_correct": "Percobaan 1 dan 3 adalah satu-satunya pasangan yang memenuhi syarat kontrol variabel untuk suhu.",
+      "tips": [
+        "Gunakan prinsip 'ceteris paribus': ubah satu, jaga yang lain tetap."
+      ],
+      "common_mistakes": [
+        "Memilih pasangan yang memiliki lebih dari satu variabel berbeda."
+      ],
+      "question_id": "kim_p1_q20",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null
+    }
+  ]
+}

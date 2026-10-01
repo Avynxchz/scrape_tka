@@ -361,7 +361,7 @@ def write_markdown(questions, paket_name, md_path):
 def main():
     parser = argparse.ArgumentParser(description="Scraper Soal Simulasi TKA Pusmendik")
     parser.add_argument("--subject", type=str, default="all",
-                        choices=["all", "matematika", "bahasa_inggris", "ekonomi", "kewirausahaan"],
+                        choices=["all", "matematika", "bahasa_inggris", "ekonomi", "kewirausahaan", "geografi"],
                         help="Pilih mapel untuk di-scrape")
     parser.add_argument("--paket", type=str, default="all", choices=["1", "2", "all"],
                         help="Pilih paket: '1', '2', atau 'all'")
@@ -386,6 +386,10 @@ def main():
         "kewirausahaan": [
             {"val": "23", "jenis": "2", "name": "Kewirausahaan Paket 1", "output": os.path.join(base_dir, "data", "kewirausahaan", "paket_1")},
             {"val": "103", "jenis": "2", "name": "Kewirausahaan Paket 2", "output": os.path.join(base_dir, "data", "kewirausahaan", "paket_2")}
+        ],
+        "geografi": [
+            {"val": "13", "jenis": "2", "name": "Geografi Paket 1", "output": os.path.join(base_dir, "data", "geografi", "paket_1")},
+            {"val": "93", "jenis": "2", "name": "Geografi Paket 2", "output": os.path.join(base_dir, "data", "geografi", "paket_2")}
         ]
     }
     

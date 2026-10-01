@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 echo ============================================================
 echo   Starting CBT TKA Learning Server with AI Tutor
 echo ============================================================
@@ -15,7 +15,7 @@ if exist .env (
 )
 
 echo [Config] Active LLM Provider info:
-python -c import tutor_llm; print(tutor_llm.active_provider_info())
+python -c "import tutor_llm; print(tutor_llm.active_provider_info())"
 
 echo.
 echo [Server] Launching server on http://localhost:8080/ ...

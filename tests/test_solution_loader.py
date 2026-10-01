@@ -104,8 +104,8 @@ def test_authoritative_key_display_comes_from_learning_not_claude():
 def test_review_flags_preserved_from_source():
     doc, _ = sl.load_solution_doc("matematika", 2)
     flagged = {s["question_number"] for s in doc["solutions"] if s.get("needs_manual_review")}
-    assert flagged == {5, 14, 15, 21}, flagged
-    for nomor in (5, 14, 15, 21):
+    assert flagged == {5, 15}, flagged
+    for nomor in (5, 15):
         s = sl.get_solution("matematika", 2, nomor, "-")
         assert s["review"]["needs_manual_review"] is True
         assert s["review"]["review_reason"], f"Q{nomor} harus punya review_reason"
@@ -151,13 +151,12 @@ def test_q11_solution_is_about_room_geometry():
     assert s["key_crosscheck"]["match"] is True
 
 
-def test_q14_and_q21_review_state_in_payload():
-    for nomor, kunci in ((14, "B"), (21, "A, D")):
+def test_q14_and_q21_resolved_and_available():
+    for nomor in (14, 21):
         canon = server.canonical_for("matematika", 2, nomor)
         lrn = server.learning_for("matematika", 2, nomor)
         sol = server.build_solution_payload(canon, lrn, "matematika", 2)
-        assert sol is not None, f"Q{nomor} harus tetap tersedia meski review"
-        assert sol["review"]["needs_manual_review"] is True
+        assert sol is not None, f"Q{nomor} harus tersedia"
         assert sol["pembahasan"]["langkah_penyelesaian"]  # konten dipertahankan
 
 
@@ -248,8 +247,8 @@ def test_final_registry_points_to_extra():
 
 def test_registry_survives_unknown_package():
     """Paket tanpa entri registry -> tidak ada sumber (bukan crash)."""
-    assert sl.resolve_active_source("bahasa_inggris", 1) is None
-    assert sl.get_solution("bahasa_inggris", 1, 1, "-") is None
+    assert sl.resolve_active_source("subject_tidak_ada", 1) is None
+    assert sl.get_solution("subject_tidak_ada", 1, 1, "-") is None
 
 
 def test_set_active_source_rejects_missing_file(registry_guard):

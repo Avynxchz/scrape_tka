@@ -1,0 +1,364 @@
+{
+  "package": 2,
+  "subject": "Geografi",
+  "solutions": [
+    {
+      "question_id": "geografi_paket_2_q21",
+      "question_number": 21,
+      "official_answer": "Menyediakan informasi spasial dan temporal tentang kondisi atmosfer secara visual.",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Sistem Informasi Geografis berbasis Web (WebGIS)",
+        "Visualisasi Data Meteorologi Spasial-Temporal"
+      ],
+      "glossary": [
+        {
+          "term": "WebGIS",
+          "meaning": "Aplikasi sistem informasi geografis yang didistribusikan melalui jaringan internet untuk visualisasi dan analisis data spasial."
+        },
+        {
+          "term": "Data Temporal",
+          "meaning": "Data geografis yang memuat informasi waktu atau perubahan kondisi dari waktu ke waktu."
+        }
+      ],
+      "reasoning": "Windy.com memvisualisasikan parameter meteorologi (angin, tekanan udara, suhu, curah hujan) secara dinamis menggunakan data grid spasial global (model GFS, ECMWF) yang diperbarui secara berkala (temporal). Oleh karena itu, fungsi utamanya adalah menyajikan informasi spasial dan temporal atmosfer dalam bentuk visual yang intuitif bagi pengguna.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Karakteristik Aplikasi",
+          "explanation": "Windy.com menggunakan visualisasi berbasis partikel dinamis dan skala warna untuk menunjukkan arah angin, tekanan, dan kelembapan di seluruh permukaan bumi secara real-time maupun prediktif."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Dimensi Geografis",
+          "explanation": "Data yang ditampilkan mencakup koordinat lokasi di seluruh dunia (dimensi spasial) serta rentang waktu prakiraan dari hari ke hari (dimensi temporal)."
+        },
+        {
+          "step": 3,
+          "title": "Sintesis Fungsi Utama",
+          "explanation": "Aplikasi ini tidak dirancang untuk membangun instrumen fisik baru atau menganalisis sosiologi masyarakat, melainkan murni sebagai penyedia representasi visual dinamika atmosfer secara spasial-temporal."
+        }
+      ],
+      "why_correct": "Pilihan kedua benar karena Windy.com mentransformasi data mentah numerik dari model cuaca global menjadi visualisasi grafis peta interaktif yang menunjukkan variasi kondisi atmosfer berdasarkan lokasi (spasial) dan waktu (temporal).",
+      "tips": [
+        "Ingat bahwa data cuaca selalu memiliki atribut spasial (di mana fenomena terjadi) dan temporal (kapan dan seberapa cepat fenomena berubah)."
+      ],
+      "common_mistakes": [
+        "Terkecoh memilih opsi 'mengembangkan instrumen pengukuran cuaca baru' padahal Windy hanya menampilkan visualisasi dari data instrumen/model yang sudah ada."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Platform WebGIS seperti Ventusky atau Earth Nullschool menampilkan visualisasi pergerakan arus laut dan arah angin secara global. Bagi sektor keselamatan pelayaran, pemanfaatan utama dari integrasi data spasial-temporal parameter tersebut adalah untuk...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Merencanakan rute pelayaran yang efisien dan aman dari risiko gelombang tinggi akibat angin kencang."
+          },
+          {
+            "key": "B",
+            "text": "Mengukur kedalaman absolut palung laut terdalam secara langsung menggunakan sensor satelit optik."
+          },
+          {
+            "key": "C",
+            "text": "Menghitung total populasi komoditas ikan pelagis besar secara real-time di samudra."
+          },
+          {
+            "key": "D",
+            "text": "Menghentikan pembentukan badai tropis di tengah samudra sebelum mendekati daratan."
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Visualisasi arah angin dan gelombang laut secara spasial-temporal membantu kapten kapal memprediksi jalur badai dan menghindari area gelombang ekstrem, sehingga mengoptimalkan keselamatan rute pelayaran."
+      }
+    },
+    {
+      "question_id": "geografi_paket_2_q22",
+      "question_number": 22,
+      "official_answer": "Peta tutupan lahan, indeks kekeruhan perairan, serta perubahan garis pantai.",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Penginderaan Jauh Multispektral",
+        "Manajemen Wilayah Pesisir (ICZMP)"
+      ],
+      "glossary": [
+        {
+          "term": "Sentinel-2",
+          "meaning": "Satelit penginderaan jauh multispektral milik ESA dengan resolusi spasial hingga 10 meter yang dioptimalkan untuk pemantauan darat dan perairan pesisir."
+        },
+        {
+          "term": "Indeks Kekeruhan",
+          "meaning": "Parameter kualitas air yang merepresentasikan konsentrasi material tersuspensi (TSS), dapat diestimasi dari nilai reflektansi saluran merah dan hijau pada citra."
+        }
+      ],
+      "reasoning": "Satelit Copernicus Sentinel-2B bekerja pada spektrum optik (visible), red-edge, dan Shortwave Infrared (SWIR). Data dari saluran-saluran ini sangat efektif untuk mengekstraksi indeks vegetasi (tutupan lahan), indeks air (NDWI) untuk mendeteksi garis pantai, serta pantulan spektral sedimen tersuspensi (kekeruhan perairan). Data bawah permukaan laut seperti jenis batuan/mineral tidak dapat dijangkau oleh sensor optik pasif ini.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Karakteristik Sensor Satelit",
+          "explanation": "Sentinel-2B adalah satelit optik pasif yang menangkap radiasi elektromagnetik permukaan bumi, sangat baik untuk membedakan vegetasi, tanah terbuka, air, dan bangunan."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Parameter Fisik Pesisir yang Dapat Diekstraksi",
+          "explanation": "Parameter seperti kerapatan vegetasi mangrove (tutupan lahan), batas darat-laut (garis pantai), dan kandungan sedimen tersuspensi (kekeruhan) memiliki respon spektral yang unik dan kuat pada saluran spektral Sentinel-2."
+        },
+        {
+          "step": 3,
+          "title": "Penyaringan Opsi Non-Ekstraksi",
+          "explanation": "Kepadatan penduduk, kandungan mineral bawah laut, dan rute migrasi hewan tidak dapat diidentifikasi secara langsung dari citra multispektral optik permukaan."
+        }
+      ],
+      "why_correct": "Peta tutupan lahan, indeks kekeruhan perairan, dan perubahan garis pantai adalah tiga produk informasi spasial dasar yang paling ilmiah dan fisibel untuk diproduksi langsung dari analisis multispektral citra Sentinel-2B guna perencanaan wilayah pesisir.",
+      "tips": [
+        "Sensor satelit optik pasif (seperti Sentinel-2 dan Landsat) memiliki keterbatasan penetrasi kolom air dan tidak dapat menembus permukaan tanah/batuan dalam di bawah laut."
+      ],
+      "common_mistakes": [
+        "Memilih peta kepadatan penduduk karena mengira pemukiman yang terlihat padat di citra langsung merepresentasikan angka jumlah penduduk spesifik tanpa data sensus."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dalam analisis degradasi lingkungan lahan basah pesisir, kombinasi transformasi indeks spektral apa yang paling tepat diaplikasikan pada citra Sentinel-2 untuk memetakan kesehatan vegetasi mangrove sekaligus genangan air di sekitarnya?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "NDVI (Normalized Difference Vegetation Index) dan NDWI (Normalized Difference Water Index)"
+          },
+          {
+            "key": "B",
+            "text": "NDBI (Normalized Difference Built-up Index) dan DEM (Digital Elevation Model)"
+          },
+          {
+            "key": "C",
+            "text": "SAVI (Soil Adjusted Vegetation Index) dan LST (Land Surface Temperature)"
+          },
+          {
+            "key": "D",
+            "text": "EVI (Enhanced Vegetation Index) dan dNBR (differenced Normalized Burn Ratio)"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "NDVI menggunakan saluran Red dan NIR untuk memetakan kerapatan dan kesehatan vegetasi (mangrove), sementara NDWI menggunakan saluran Green/NIR atau SWIR untuk memisahkan dan memetakan badan air/genangan secara akurat."
+      }
+    },
+    {
+      "question_id": "geografi_paket_2_q23",
+      "question_number": 23,
+      "official_answer": {
+        "A": "Benar",
+        "B": "Benar",
+        "C": "Salah"
+      },
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Pencemaran Udara (NO2)",
+        "Dampak Ekologis Hujan Asam",
+        "Fisiologi Tumbuhan akibat Polutan"
+      ],
+      "glossary": [
+        {
+          "term": "Nitrogen Dioksida (NO₂)",
+          "meaning": "Gas polutan udara berwarna cokelat kemerahan yang dihasilkan utamanya dari pembakaran bahan bakar fosil pada suhu tinggi (kendaraan dan industri)."
+        },
+        {
+          "term": "Deposisi Asam",
+          "meaning": "Proses jatuhnya asam (dalam bentuk hujan, salju, atau kabut) dari atmosfer ke permukaan bumi akibat reaksi polutan SOx dan NOx dengan air."
+        }
+      ],
+      "reasoning": "A. BENAR: Paparan konsentrasi gas NO2 yang tinggi dalam jangka panjang merusak jaringan daun tumbuhan (menyebabkan nekrosis dan klorosis) yang menurunkan kualitas vegetasi.\nB. BENAR: NO2 bereaksi dengan uap air ($H_2O$) dan oksigen di atmosfer membentuk asam nitrat ($HNO_3$), yang merupakan komponen pembentuk hujan asam yang merusak kualitas kimia tanah dan air permukaan.\nC. SALAH: Polusi udara lokal tidak menyebabkan kekeringan total secara langsung. Kekeringan total dikontrol oleh sirkulasi atmosfer global dan variabilitas iklim regional (seperti El Nino), bukan oleh konsentrasi NO2.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Evaluasi Dampak Vegetasi (Pernyataan A)",
+          "explanation": "Gas NOx masuk lewat stomata tumbuhan, membentuk asam nitrit/nitrat di dalam sel, mengganggu klorofil, dan menghambat fotosintesis."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Reaksi Kimia Hujan Asam (Pernyataan B)",
+          "explanation": "Formula pembentukan hujan asam: $2NO_2 + H_2O \\rightarrow HNO_2 + HNO_3$. Asam nitrat ini larut dalam tetes air hujan."
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Hubungan Polusi-Kekeringan (Pernyataan C)",
+          "explanation": "Meskipun aerosol polusi mempengaruhi mikrofisika awan, klaim bahwa polusi NO2 memicu 'kekeringan total' secara saintifik adalah salah karena skala dan mekanisme pemicu kekeringan berbeda."
+        }
+      ],
+      "why_correct": "Pernyataan A benar secara ekofisiologi, pernyataan B benar secara kimia lingkungan, sedangkan pernyataan C salah secara klimatologis karena mengaitkan NO2 lokal sebagai penyebab mutlak kekeringan total.",
+      "tips": [
+        "Bedakan antara pencemaran kimia udara lokal dengan anomali cuaca makro seperti El Nino yang menyebabkan kekeringan fisik global."
+      ],
+      "common_mistakes": [
+        "Menganggap semua dampak negatif lingkungan (termasuk kekeringan ekstrem) pasti disebabkan secara langsung oleh polusi udara perkotaan."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Gas sulfur dioksida (SO₂) dan nitrogen dioksida (NO₂) yang tinggi di atmosfer di atas wilayah industri logam dapat mengalami reaksi fotokimia membentuk senyawa asam. Jika senyawa ini turun ke bumi bersama air hujan (deposisi basah), dampak ekologis langsung yang terjadi pada tanah pertanian adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Pelepasan ion aluminium beracun dari mineral tanah yang menghambat penyerapan nutrisi oleh akar tanaman."
+          },
+          {
+            "key": "B",
+            "text": "Peningkatan kapasitas tukar kation (KTK) tanah sehingga tanah menjadi sangat subur secara instan."
+          },
+          {
+            "key": "C",
+            "text": "Peningkatan pH tanah menjadi sangat basa sehingga merangsang aktivitas bakteri fiksasi nitrogen."
+          },
+          {
+            "key": "D",
+            "text": "Penurunan porositas tanah secara mekanis sehingga air tidak dapat meresap ke dalam tanah."
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Hujan asam (pH rendah) memicu mobilisasi logam berat seperti aluminium ($Al^{3+}$) dari partikel tanah ke larutan tanah. Ion aluminium bebas ini sangat beracun bagi ujung akar tanaman, menghambat absorpsi air dan nutrisi esensial."
+      }
+    },
+    {
+      "question_id": "geografi_paket_2_q24",
+      "question_number": 24,
+      "official_answer": [
+        "Warna gelap pada aliran sungai menunjukkan tingkat pencemaran yang tinggi",
+        "Pola aliran sungai yang berkelok-kelok menunjukkan wilayah cenderung landai.",
+        "Tekstur kasar pada citra menunjukkan area dengan vegetasi lebat."
+      ],
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Kunci Interpretasi Citra (Rona/Warna, Pola, Tekstur)",
+        "Geomorfologi Sungai Dewasa (Meander)"
+      ],
+      "glossary": [
+        {
+          "term": "Rona/Warna",
+          "meaning": "Tingkat kegelapan atau kecerahan objek (rona) dan wujud tampak mata akibat perbedaan panjang gelombang pantulan cahaya (warna) pada citra."
+        },
+        {
+          "term": "Tekstur",
+          "meaning": "Frekuensi perubahan rona pada citra, digolongkan menjadi kasar, sedang, atau halus (contoh: hutan bertekstur kasar, rumput bertekstur halus)."
+        },
+        {
+          "term": "Meander",
+          "meaning": "Pola aliran sungai yang berkelok-kelok secara teratur akibat proses erosi lateral dan deposisi di wilayah dengan gradien lereng sangat landai."
+        }
+      ],
+      "reasoning": "1. Warna gelap pada aliran air tawar jernih idealnya disebabkan oleh penyerapan cahaya penuh. Pada konteks sungai Pekalongan (industri batik), warna gelap pekat mengindikasikan akumulasi limbah zat pewarna yang menyerap energi cahaya matahari secara masif.\n2. Sungai berkelok-kelok (meander) secara geomorfologis hanya terbentuk di dataran rendah berlereng sangat landai karena berkurangnya kecepatan aliran (energi kinetik) sehingga erosi dominan ke arah samping (lateral).\n3. Vegetasi lebat (seperti pohon-pohon berkanopi) memiliki struktur ketinggian yang acak sehingga menghasilkan bayangan mikro, menciptakan variasi rona gelap-terang yang rapat (tekstur kasar) pada citra satelit.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Hubungan Warna dan Polusi",
+          "explanation": "Limbah industri pekat di Pekalongan menyerap sebagian besar spektrum cahaya tampak, menghasilkan rona yang sangat gelap/hitam pada citra penginderaan jauh."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Pola Aliran Sungai",
+          "explanation": "Pola sungai berkelok-kelok (meandering) secara spasial berasosiasi kuat dengan wilayah hilir atau dataran aluvial berlereng landai."
+        },
+        {
+          "step": 3,
+          "title": "Analisis Karakteristik Tekstur",
+          "explanation": "Tekstur kasar terbentuk karena adanya heterogenitas spasial objek penutup lahan berukuran tinggi, yang sangat khas ditemui pada tajuk hutan/vegetasi rapat."
+        }
+      ],
+      "why_correct": "Pernyataan 1 didasarkan pada informasi eksplisit stimulus mengenai pencemaran air. Pernyataan 2 didasarkan pada prinsip geomorfologi sungai meander. Pernyataan 3 didasarkan pada kaidah interpretasi citra untuk tekstur kanopi pohon.",
+      "tips": [
+        "Gunakan pendekatan interelasi geosfer: kenampakan fisik di citra (meandering) selalu berhubungan dengan kondisi topografi aslinya (landai)."
+      ],
+      "common_mistakes": [
+        "Mengabaikan aspek geomorfologi (pola aliran berkelok) dan menganggap interpretasi citra hanya boleh menganalisis aspek warna saja tanpa menghubungkannya dengan karakteristik medan landai."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Seorang analis geografi mengamati citra satelit resolusi tinggi daerah pesisir. Ia menemukan objek berpola teratur berderet menyerupai kisi-kisi persegi panjang, berona gelap homogen di dalam petak-petak tersebut, dan berasosiasi dekat dengan garis pantai. Objek tersebut dapat diinterpretasikan secara akurat sebagai...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Kawasan tambak budidaya air payau yang digenangi air."
+          },
+          {
+            "key": "B",
+            "text": "Pemukiman padat penduduk dengan atap seng baru."
+          },
+          {
+            "key": "C",
+            "text": "Hutan bakau alami yang belum terjamah manusia."
+          },
+          {
+            "key": "D",
+            "text": "Landasan pacu bandar udara internasional pesisir."
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Bentuk persegi panjang teratur (kisi-kisi), rona gelap homogen (karena penyerapan cahaya oleh air tenang yang menggenang), dan lokasi di dekat pesisir merupakan kunci interpretasi asosiasi yang sangat kuat untuk tambak perikanan air payau."
+      }
+    },
+    {
+      "question_id": "geografi_paket_2_q25",
+      "question_number": 25,
+      "official_answer": {
+        "A": "Benar",
+        "B": "Salah",
+        "C": "Benar"
+      },
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Energi Baru Terbarukan (EBT)",
+        "Tata Guna Lahan (Land Use Trade-off)",
+        "Mitigasi Perubahan Iklim"
+      ],
+      "glossary": [
+        {
+          "term": "PLTS Terapung (Floating PV)",
+          "meaning": "Pembangkit listrik tenaga surya yang panel-panel fotovoltaiknya dipasang mengapung di atas permukaan air seperti waduk, danau, atau kolam."
+        },
+        {
+          "term": "Transisi Energi Clean",
+          "meaning": "Proses pergeseran bauran energi dari ketergantungan bahan bakar fosil menuju sumber energi yang bebas karbon dan ramah lingkungan."
+        }
+      ],
+      "reasoning": "A. BENAR: Salah satu keunggulan terbesar PLTS terapung adalah memanfaatkan ruang permukaan air buatan (waduk/danau) sehingga tidak memicu konflik alih fungsi lahan darat produktif (seperti lahan pertanian atau kawasan hunian).\nB. SALAH: Panel surya terapung tidak didesain sebagai penahan banjir fisik atau tanggul (levee). Pengendalian banjir tetap diatur oleh kapasitas volume tampung dan sistem pintu air waduk itu sendiri.\nC. BENAR: Pembangkitan energi dari solar panel tidak mengemisikan gas rumah kaca ($CO_2$), secara langsung berkontribusi pada penurunan jejak karbon nasional.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Konflik Tata Guna Lahan (Pernyataan A)",
+          "explanation": "Pemasangan di atas air memecahkan masalah kelangkaan lahan darat yang kerap menghambat proyek PLTS skala besar."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Mekanisme Hidrologi Tanggul (Pernyataan B)",
+          "explanation": "Panel hanya mengapung mengikuti fluktuasi muka air dan tidak menambah kemampuan struktural bendungan dalam menahan limpasan debit banjir."
+        },
+        {
+          "step": 3,
+          "title": "Analisis Kontribusi Dekarbonisasi (Pernyataan C)",
+          "explanation": "PLTS menghasilkan energi listrik bebas emisi operasional, membantu menggeser penggunaan bahan bakar fosil (batubara/gas)."
+        }
+      ],
+      "why_correct": "Pernyataan A dan C menjelaskan manfaat nyata teknis-lingkungan dari Floating PV, sedangkan pernyataan B salah karena mencampuradukkan fungsi panel surya terapung dengan struktur sipil pengendali banjir waduk.",
+      "tips": [
+        "Meskipun PLTS diletakkan di atas infrastruktur pengendali banjir (waduk), panelnya sendiri tidak memiliki fungsi mekanis untuk mereduksi banjir."
+      ],
+      "common_mistakes": [
+        "Mengira karena dipasang di waduk pengendali banjir, maka panel PLTS terapung secara langsung berkontribusi memperkuat struktur fisik penahan debit air banjir."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Selain menghemat penggunaan lahan darat dan menghasilkan energi bersih, penutupan permukaan air oleh panel PLTS terapung memiliki keuntungan ekologis sekunder bagi badan air itu sendiri, yaitu...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Mengurangi laju evaporasi air waduk serta menekan pertumbuhan alga yang berlebihan akibat terhalangnya sinar matahari."
+          },
+          {
+            "key": "B",
+            "text": "Meningkatkan suhu air waduk secara drastis untuk mempercepat perkembangbiakan ikan air tawar."
+          },
+          {
+            "key": "C",
+            "text": "Mempercepat proses pelapukan kimia batuan di dasar waduk guna menambah mineral air."
+          },
+          {
+            "key": "D",
+            "text": "Meningkatkan laju sedimentasi waduk agar kapasitas tampung air bertambah."
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Panel surya yang terapung menghalangi penetrasi sinar matahari langsung dan menurunkan kecepatan angin di atas permukaan air. Hal ini secara efektif mereduksi laju evaporasi air waduk (menjaga ketersediaan air) dan membatasi proses fotosintesis alga merugikan (mencegah eutrofikasi)."
+      }
+    }
+  ]
+}

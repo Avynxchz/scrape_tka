@@ -14,8 +14,8 @@ const SUBJECT_CATALOG = {
       2: 'data/matematika_paket_2_learning.json'
     },
     imgBase: {
-      1: 'data/paket_1/',
-      2: 'data/paket_2/'
+      1: 'data/matematika/paket_1/',
+      2: 'data/matematika/paket_2/'
     },
     welcome: `Halo! Saya <strong>AI Tutor TKA Matematika</strong>. Masih bingung dengan arti simbol, rumus, atau langkah pengerjaan di soal ini? Klik salah satu pertanyaan cepat di atas atau ketik langsung pertanyaanmu di bawah ya!`
   },
@@ -54,6 +54,222 @@ const SUBJECT_CATALOG = {
       2: 'data/kewirausahaan/paket_2/'
     },
     welcome: `Halo! Saya <strong>AI Tutor TKA Kewirausahaan (PKWU)</strong>. Masih bingung dengan konsep bisnis, istilah, atau langkah analisis pada soal ini? Klik salah satu pertanyaan cepat di atas atau ketik langsung pertanyaanmu di bawah ya!`
+  },
+  geografi: {
+    name: 'Geografi',
+    json: {
+      1: 'data/geografi_paket_1_learning.json',
+      2: 'data/geografi_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/geografi/paket_1/',
+      2: 'data/geografi/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Geografi</strong>. Masih bingung dengan analisis peta, citra penginderaan jauh, fenomena geosfer, atau prinsip geografi pada soal ini? Klik salah satu pertanyaan cepat di atas atau ketik langsung pertanyaanmu di bawah ya!`
+  },
+  fisika: {
+    name: 'Fisika',
+    json: {
+      1: 'data/fisika_paket_1_learning.json',
+      2: 'data/fisika_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/fisika/paket_1/',
+      2: 'data/fisika/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Fisika</strong>. Masih bingung dengan penurunan rumus, diagram benda bebas, vektor, atau hukum fisika pada soal ini? Klik salah satu pertanyaan cepat di atas atau ketik langsung pertanyaanmu di bawah ya!`
+  },
+  kimia: {
+    name: 'Kimia',
+    json: {
+      1: 'data/kimia_paket_1_learning.json',
+      2: 'data/kimia_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/kimia/paket_1/',
+      2: 'data/kimia/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Kimia</strong>. Masih bingung dengan reaksi kimia, struktur molekul, hukum kesetimbangan, atau stoikiometri pada soal ini? Klik salah satu pertanyaan cepat di atas atau ketik langsung pertanyaanmu di bawah ya!`
+  },
+  biologi: {
+    name: 'Biologi',
+    json: {
+      1: 'data/biologi_paket_1_learning.json',
+      2: 'data/biologi_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/biologi/paket_1/',
+      2: 'data/biologi/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Biologi</strong>. Masih bingung dengan diagram organ, proses metabolisme sel, genetika, atau analisis eksperimen pada soal ini? Klik salah satu pertanyaan cepat di atas atau ketik langsung pertanyaanmu di bawah ya!`
+  },
+  bahasa_indonesia: {
+    name: 'Bahasa Indonesia',
+    json: {
+      1: 'data/bahasa_indonesia_paket_1_learning.json',
+      2: 'data/bahasa_indonesia_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/bahasa_indonesia/paket_1/',
+      2: 'data/bahasa_indonesia/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Indonesia</strong>. Masih bingung dengan makna istilah, gagasan pokok wacana, atau kaidah kebahasaan pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  sosiologi: {
+    name: 'Sosiologi',
+    json: {
+      1: 'data/sosiologi_paket_1_learning.json',
+      2: 'data/sosiologi_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/sosiologi/paket_1/',
+      2: 'data/sosiologi/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Sosiologi</strong>. Masih bingung dengan konsep teori sosiologi, fenomena sosial, atau dinamika kelompok pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  sejarah: {
+    name: 'Sejarah',
+    json: {
+      1: 'data/sejarah_paket_1_learning.json',
+      2: 'data/sejarah_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/sejarah/paket_1/',
+      2: 'data/sejarah/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Sejarah</strong>. Masih bingung dengan kronologi, konteks peristiwa, atau analisis sumber sejarah pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  matematika_lanjut: {
+    name: 'Matematika Tingkat Lanjut',
+    json: {
+      1: 'data/matematika_lanjut_paket_1_learning.json',
+      2: 'data/matematika_lanjut_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/matematika_lanjut/paket_1/',
+      2: 'data/matematika_lanjut/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Matematika Lanjut</strong>. Masih bingung dengan matriks, polinomial, trigonometri analitik, atau kalkulus lanjut pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  bahasa_indonesia_lanjut: {
+    name: 'Bahasa Indonesia Tingkat Lanjut',
+    json: {
+      1: 'data/bahasa_indonesia_lanjut_paket_1_learning.json',
+      2: 'data/bahasa_indonesia_lanjut_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/bahasa_indonesia_lanjut/paket_1/',
+      2: 'data/bahasa_indonesia_lanjut/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Indonesia Lanjut</strong>. Masih bingung dengan struktur teks sastra, telaah kritis karya, atau kaidah bahasa tingkat lanjut? Tanyakan langsung di bawah ya!`
+  },
+  bahasa_inggris_lanjut: {
+    name: 'Bahasa Inggris Tingkat Lanjut',
+    json: {
+      1: 'data/bahasa_inggris_lanjut_paket_1_learning.json',
+      2: 'data/bahasa_inggris_lanjut_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/bahasa_inggris_lanjut/paket_1/',
+      2: 'data/bahasa_inggris_lanjut/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Inggris Lanjut</strong>. Need help understanding the text, rhetorical devices, synthesis of arguments, or advanced vocabulary? Feel free to ask below!`
+  },
+  antropologi: {
+    name: 'Antropologi',
+    json: {
+      1: 'data/antropologi_paket_1_learning.json',
+      2: 'data/antropologi_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/antropologi/paket_1/',
+      2: 'data/antropologi/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Antropologi</strong>. Masih bingung dengan konsep kebudayaan, etnografi, sistem kekerabatan, atau analisis dinamika budaya pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  ppkn: {
+    name: 'Pendidikan Pancasila & Kewarganegaraan (PPKn)',
+    json: {
+      1: 'data/ppkn_paket_1_learning.json',
+      2: 'data/ppkn_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/ppkn/paket_1/',
+      2: 'data/ppkn/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA PPKn</strong>. Masih bingung dengan pasal-pasal konstitusi, sistem ketatanegaraan, hak asasi manusia, atau nilai-nilai Pancasila pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  bahasa_arab: {
+    name: 'Bahasa Arab',
+    json: {
+      1: 'data/bahasa_arab_paket_1_learning.json',
+      2: 'data/bahasa_arab_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/bahasa_arab/paket_1/',
+      2: 'data/bahasa_arab/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Arab</strong>. Masih bingung dengan qawaid (nahwu/sharaf), mufradat, atau pemahaman teks bahasa Arab pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  bahasa_jepang: {
+    name: 'Bahasa Jepang',
+    json: {
+      1: 'data/bahasa_jepang_paket_1_learning.json',
+      2: 'data/bahasa_jepang_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/bahasa_jepang/paket_1/',
+      2: 'data/bahasa_jepang/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Jepang</strong>. Masih bingung dengan kanji, pola kalimat (bunpou), kosakata, atau pemahaman teks (dokkai) pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  bahasa_jerman: {
+    name: 'Bahasa Jerman',
+    json: {
+      1: 'data/bahasa_jerman_paket_1_learning.json',
+      2: 'data/bahasa_jerman_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/bahasa_jerman/paket_1/',
+      2: 'data/bahasa_jerman/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Jerman</strong>. Masih bingung dengan gramatika (Kasus/Grammatik), kosakata (Wortschatz), atau pemahaman teks (Leseverstehen) pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  bahasa_prancis: {
+    name: 'Bahasa Prancis',
+    json: {
+      1: 'data/bahasa_prancis_paket_1_learning.json',
+      2: 'data/bahasa_prancis_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/bahasa_prancis/paket_1/',
+      2: 'data/bahasa_prancis/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Prancis</strong>. Masih bingung dengan tata bahasa (grammaire/conjugaison), kosakata (vocabulaire), atau pemahaman bacaan pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  bahasa_mandarin: {
+    name: 'Bahasa Mandarin',
+    json: {
+      1: 'data/bahasa_mandarin_paket_1_learning.json',
+      2: 'data/bahasa_mandarin_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/bahasa_mandarin/paket_1/',
+      2: 'data/bahasa_mandarin/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Mandarin</strong>. Masih bingung dengan hanzi, pinyin, tata bahasa (yufa), atau pemahaman wacana pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  bahasa_korea: {
+    name: 'Bahasa Korea',
+    json: {
+      1: 'data/bahasa_korea_paket_1_learning.json',
+      2: 'data/bahasa_korea_paket_2_learning.json'
+    },
+    imgBase: {
+      1: 'data/bahasa_korea/paket_1/',
+      2: 'data/bahasa_korea/paket_2/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Korea</strong>. Masih bingung dengan hangeul, partikel, tata bahasa (munbeop), atau pemahaman bacaan pada soal ini? Tanyakan langsung di bawah ya!`
   }
 };
 
@@ -70,6 +286,7 @@ const state = {
   tutorMsgs: [],    // cache tampilan percakapan tutor soal aktif (sumber: server)
   tutorConvId: null,
   tutorProvider: null,
+  selectedTutorModel: localStorage.getItem('tka_tutor_model') || 'qwen-groq',
   explanationVisible: false
 };
 
@@ -77,10 +294,81 @@ function pkgKey(pkg = state.currentPkg) {
   return `${state.currentSubject}:${pkg}`;
 }
 
+// Dynamic synchronization of all subjects and packages from server catalog
+async function syncDynamicCatalog() {
+  try {
+    const res = await fetch('/api/swarm/subjects');
+    if (!res.ok) return;
+    const data = await res.json();
+    const subjects = data.subjects || {};
+
+    const mapelGroups = {};
+    for (const [slug, item] of Object.entries(subjects)) {
+      const mk = item.mapel_key;
+      const kat = item.kategori || 'Pilihan';
+      if (!mapelGroups[kat]) mapelGroups[kat] = {};
+      if (!mapelGroups[kat][mk]) {
+        mapelGroups[kat][mk] = {
+          name: item.name.replace(/\s*\(Paket\s*\d+\)/i, '').trim(),
+          packages: {}
+        };
+      }
+      mapelGroups[kat][mk].packages[item.paket] = item.status === 'live';
+
+      if (!SUBJECT_CATALOG[mk]) {
+        SUBJECT_CATALOG[mk] = {
+          name: mapelGroups[kat][mk].name,
+          json: {
+            1: `data/${mk}_paket_1_learning.json`,
+            2: `data/${mk}_paket_2_learning.json`
+          },
+          imgBase: {
+            1: `data/${mk}/paket_1/`,
+            2: `data/${mk}/paket_2/`
+          },
+          welcome: `Halo! Saya <strong>AI Tutor TKA ${mapelGroups[kat][mk].name}</strong>. Masih bingung dengan konsep atau langkah pengerjaan pada soal ini? Tanyakan langsung di bawah ya!`
+        };
+      }
+    }
+
+    const select = document.getElementById('subjectSelect');
+    if (select) {
+      const currVal = state.currentSubject;
+      let html = '';
+      for (const [kat, mapels] of Object.entries(mapelGroups)) {
+        html += `<optgroup label="${kat}">`;
+        for (const [mk, info] of Object.entries(mapels)) {
+          const liveCount = Object.values(info.packages).filter(Boolean).length;
+          const liveTag = liveCount > 0 ? ` [${liveCount} Paket Live]` : ' (Belum Scrape)';
+          html += `<option value="${mk}">${info.name}${liveTag}</option>`;
+        }
+        html += `</optgroup>`;
+      }
+      select.innerHTML = html;
+      select.value = currVal;
+    }
+  } catch (err) {
+    console.warn("syncDynamicCatalog error:", err);
+  }
+}
+
 // Initialize Application on Page Load
 document.addEventListener('DOMContentLoaded', async () => {
-  await loadPackageData(1);
-  await loadPackageData(2);
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramSub = urlParams.get('subject');
+  const paramPkg = parseInt(urlParams.get('paket') || '1', 10);
+
+  await syncDynamicCatalog();
+
+  if (paramSub && SUBJECT_CATALOG[paramSub]) {
+    state.currentSubject = paramSub;
+    state.currentPkg = paramPkg === 2 ? 2 : 1;
+    const select = document.getElementById('subjectSelect');
+    if (select) select.value = paramSub;
+  }
+
+  await loadPackageData(state.currentPkg);
+  loadPackageData(state.currentPkg === 1 ? 2 : 1);
   updateSubjectUI();
   renderQuestion();
   renderGridModal();
@@ -125,6 +413,9 @@ function updateSubjectUI() {
   });
   document.getElementById('tabPkg1').classList.toggle('active', state.currentPkg === 1);
   document.getElementById('tabPkg2').classList.toggle('active', state.currentPkg === 2);
+
+  // Pasang class mapel pada body (misal .subject-bahasa_arab untuk arah RTL)
+  document.body.className = `subject-${state.currentSubject}`;
 }
 
 // Switch active subject (from header dropdown)
@@ -149,6 +440,11 @@ async function switchPackage(pkgNum) {
   if (state.currentPkg === pkgNum) return;
 
   await loadPackageData(pkgNum);
+  const key = pkgKey(pkgNum);
+  if (!state.pkgData[key] || !state.pkgData[key].soal || state.pkgData[key].soal.length === 0) {
+    alert(`Paket ${pkgNum} untuk ${SUBJECT_CATALOG[state.currentSubject]?.name || state.currentSubject} belum selesai di-scrape.`);
+    return;
+  }
 
   state.currentPkg = pkgNum;
   state.currentIndex = 0;
@@ -172,102 +468,318 @@ function renderQuestion() {
   if (!q) return;
 
   const total = state.pkgData[pkgKey()].soal.length;
-  const subjectMeta = SUBJECT_CATALOG[state.currentSubject];
-  const pkgPath = subjectMeta.imgBase[state.currentPkg];
+  const subjectMeta = SUBJECT_CATALOG[state.currentSubject] || {};
+  const pkgPath = (subjectMeta.imgBase && subjectMeta.imgBase[state.currentPkg]) || `data/${state.currentSubject}/paket_${state.currentPkg}/`;
 
-  // 1. Metadata Bar
-  document.getElementById('badgeSoalNomor').innerText = `Soal Nomor ${q.nomor} dari ${total}`;
-  document.getElementById('badgeTopik').innerText = q.topik || `${subjectMeta.name} TKA`;
-  document.getElementById('badgeTipe').innerText = q.tipe_soal || 'Pilihan Ganda';
+  // 1. Metadata Bar & Dynamic Progress Bar
+  const badgeNomor = document.getElementById('badgeSoalNomor');
+  if (badgeNomor) badgeNomor.innerText = `Latihan Soal UTBK · Nomor ${q.nomor}`;
+  const badgeTopik = document.getElementById('badgeTopik');
+  if (badgeTopik) badgeTopik.innerText = (q.topik || `${subjectMeta.name || state.currentSubject} SMA`).toUpperCase();
+  const badgeTipe = document.getElementById('badgeTipe');
+  if (badgeTipe) badgeTipe.innerText = q.tipe_soal || 'Pilihan Ganda';
 
-  // 2. Stimulus Left Column (Preserve clean list formatting)
+  // v0 Header sync
+  const currQNumEl = document.getElementById('currQNum');
+  if (currQNumEl) currQNumEl.innerText = q.nomor;
+  const totalQNumEl = document.getElementById('totalQNum');
+  if (totalQNumEl) totalQNumEl.innerText = total;
+  const progressFillEl = document.getElementById('progressBarFill');
+  if (progressFillEl) progressFillEl.style.width = `${Math.round(((state.currentIndex + 1) / total) * 100)}%`;
+  const qNumBadge = document.getElementById('qNumBadge');
+  if (qNumBadge) qNumBadge.innerText = String(q.nomor).padStart(2, '0');
+  const qLabelHeader = document.getElementById('qLabelHeader');
+  if (qLabelHeader) qLabelHeader.innerText = `Soal Nomor ${q.nomor} dari ${total}`;
+
+  // Sync cookie and URL for persistent subject/paket context across browser and server
+  try {
+    document.cookie = `active_subject=${state.currentSubject}; path=/; max-age=86400`;
+    document.cookie = `active_paket=${state.currentPkg}; path=/; max-age=86400`;
+    const targetUrl = `?subject=${encodeURIComponent(state.currentSubject)}&paket=${state.currentPkg}`;
+    if (window.location.search !== targetUrl) {
+      window.history.replaceState(null, '', `${targetUrl}#soal-${q.nomor}`);
+    }
+  } catch (e) {}
+
+/**
+ * Format dan bersihkan HTML resmi CBT Pusmendik agar aman, responsif,
+ * dan terintegrasi rapi dengan sistem layout kartu modern kita.
+ */
+function formatPusmendikHtml(rawHtml, pkgPath) {
+  if (!rawHtml) return '';
+  let html = rawHtml;
+
+  // 1. Bersihkan penanda XML dan komentar CBT internal Pusmendik
+  html = html.replace(/<!--[\s\S]*?-->/g, '').trim();
+
+  // 1b. Normalisasi simbol ilmiah: derajat Celsius, derajat sudut, plus-minus, dan eksponen
+  html = html.replace(/<sup>o<\/sup>\s*C\b/gi, '°C');
+  html = html.replace(/<sup>o<\/sup>/gi, '°');
+  html = html.replace(/<u>\+<\/u>/gi, '±');
+  html = html.replace(/\b110\s*[-–]\s*6\s*M\b/gi, '1 × 10⁻⁶ M');
+  html = html.replace(/\b10\s*[-–]\s*6\s*M\b/gi, '10⁻⁶ M');
+
+  // 2. Lepaskan pembungkus div col-lg-6 cont-soal / isi-soal bawaan Pusmendik
+  // (agar tidak memaksakan height kaku 340px atau scrollbar ganda)
+  const wrapperMatch = html.match(/^<div\s+class=["']col-lg-6[^"']*["'][^>]*>([\s\S]*)<\/div>$/i);
+  if (wrapperMatch) {
+    html = wrapperMatch[1].trim();
+  }
+
+  // 3. Normalisasi UNIVERSAL path gambar: tangkap SEMUA format src
+  //    termasuk /tka/cbt_images/..., images/..., ./images/..., URL lengkap, dll.
+  //    Hasilnya selalu: src="${pkgPath}images/${namafile}"
+  html = html.replace(/src=["']([^"']+\.(?:png|jpe?g|gif|webp|svg))(?:\?[^"']*)?["']/gi, (match, p1) => {
+    // Ekstrak nama file murni dari path apa pun
+    const parts = p1.split('/');
+    const fname = parts[parts.length - 1].split('?')[0];
+    let base = pkgPath.endsWith('/') ? pkgPath : `${pkgPath}/`;
+    return `src="${base}images/${fname}?v=36"`;
+  });
+
+  // 4. Buat parser DOM lokal agar aman, responsif, dan presisi
+  try {
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
+
+    // 4a. Perbaiki tabel: bersihkan width kaku (Mat P1 Q13, B. Jerman P1 Q10, B. Jerman P2 Q13-15)
+    temp.querySelectorAll('table').forEach(tbl => {
+      tbl.removeAttribute('width');
+      if (tbl.style.width) tbl.style.removeProperty('width');
+      const rows = tbl.querySelectorAll('tr');
+
+      // Deteksi tabel kartu 1 sel pembungkus artikel (B. Jerman P2 Q13, Q14, Q15)
+      if (rows.length === 1 && rows[0].children.length === 1) {
+        tbl.classList.add('table-layout-single-cell');
+      } else if (rows.length === 1 && tbl.querySelector('img')) {
+        tbl.classList.add('table-layout-card');
+      }
+
+      tbl.querySelectorAll('th, td').forEach(cell => {
+        cell.removeAttribute('width');
+        if (cell.style.width) cell.style.removeProperty('width');
+        // Hanya beri td-has-img jika ini kolom gambar khusus di baris multi-kolom
+        if (cell.parentElement.children.length > 1 && cell.querySelector('img') && !cell.textContent.trim()) {
+          cell.classList.add('td-has-img');
+        }
+      });
+
+      const parent = tbl.parentElement;
+      if (!parent || !parent.classList.contains('table-responsive')) {
+        const wrap = document.createElement('div');
+        wrap.className = 'table-responsive';
+        tbl.parentNode.insertBefore(wrap, tbl);
+        wrap.appendChild(tbl);
+      }
+    });
+
+    // 4b. Klasifikasi gambar: inline-symbol-img vs diagram-img
+    temp.querySelectorAll('p').forEach(p => {
+      const imgs = p.querySelectorAll('img');
+      if (imgs.length === 0) return;
+
+      const clone = p.cloneNode(true);
+      clone.querySelectorAll('img').forEach(im => im.remove());
+      const realText = (clone.textContent || '').replace(/\u00a0/g, ' ').trim();
+
+      if (!realText && imgs.length === 1) {
+        p.classList.add('diagram-paragraph');
+        imgs[0].classList.add('diagram-img');
+      } else {
+        imgs.forEach(im => {
+          const w = parseInt(im.getAttribute('width') || '0', 10);
+          const h = parseInt(im.getAttribute('height') || '0', 10);
+
+          // Diagram tegas jika dimensi gambar besar (rak buku, grafik pertidaksamaan, peta, organ)
+          const isDefiniteDiagram = (h > 65) || (w > 220 && h > 50) || (w > 260);
+          // Simbol atau formula inline jika kecil atau membawa atribut formula
+          const isInlineFormula = im.hasAttribute('data-latex') || (h > 0 && h <= 55 && w <= 250) || (w > 0 && w <= 95);
+
+          if (isDefiniteDiagram) {
+            im.classList.add('diagram-img');
+            p.classList.add('diagram-paragraph');
+          } else if (isInlineFormula) {
+            im.classList.add('inline-symbol-img');
+          } else if (realText.length === 0) {
+            im.classList.add('diagram-img');
+          } else {
+            im.classList.add('inline-symbol-img');
+          }
+        });
+      }
+    });
+
+    return temp.innerHTML;
+  } catch (err) {
+    console.warn('DOM parse notice in formatPusmendikHtml:', err);
+    return html;
+  }
+}
+
+/**
+ * Cek apakah HTML stimulus memiliki konten nyata (gambar atau teks)
+ * dan bukan sekadar tag kosong atau spasi (&nbsp;)
+ */
+function hasVisibleStimulusContent(htmlStr) {
+  if (!htmlStr) return false;
+  if (/<img\b/i.test(htmlStr)) return true;
+  let text = htmlStr.replace(/<!--[\s\S]*?-->/g, '');
+  text = text.replace(/<[^>]+>/g, '');
+  text = text.replace(/&nbsp;/gi, ' ').replace(/\u00a0/g, ' ').trim();
+  return text.length > 0;
+}
+
+/**
+ * Sanitasi teks stimulus untuk tampilan UI (fallback bila HTML tidak ada):
+ * - Hapus penanda teknis AI/LLM ([Diagram — ...], [VISUAL_INFORMATION_UNRESOLVED: ...], dll.)
+ */
+function cleanUiStimulusText(stimText, stimImages) {
+  if (!stimText) return '';
+  const lines = stimText.split('\n');
+  const clean = [];
+
+  for (let line of lines) {
+    const t = line.trim();
+    if (!t) continue;
+
+    // Saring tag transkripsi AI vision / OCR
+    if (/^\[(Diagram|VISUAL_INFORMATION_UNRESOLVED|Formula|Table|Graph|Others)[\s\S]*\]/i.test(t)) {
+      continue;
+    }
+
+    if (stimImages && stimImages.length > 0) {
+      const withoutMath = t.replace(/\$[^$]+\$/g, '').trim();
+      if (withoutMath === '') continue;
+      if (t.startsWith('$') && /\[(Formula|Diagram|Table)/i.test(t)) continue;
+    }
+
+    clean.push(t);
+  }
+
+  return clean.join('\n');
+}
+
+  // 2. Stimulus Context (Rendering persis 100% CBT Pusmendik resmi)
+  const stimCol = document.getElementById('stimulusCol');
   const stimContainer = document.getElementById('stimulusContainer');
   stimContainer.innerHTML = '';
 
   let hasStimulus = false;
-  if (q.stimulus && (q.stimulus.text || (q.stimulus.images && q.stimulus.images.length > 0))) {
+  const stimHtml = (q.stimulus && q.stimulus.html) ? q.stimulus.html : '';
+
+  if (hasVisibleStimulusContent(stimHtml)) {
     hasStimulus = true;
     const stimDiv = document.createElement('div');
-    stimDiv.className = 'stimulus-text';
+    stimDiv.className = 'stimulus-body-content';
+    stimDiv.innerHTML = formatPusmendikHtml(stimHtml, pkgPath);
 
-    // If raw HTML exists from Pusmendik, use it for 100% fidelity
-    if (q.stimulus.html) {
-      let cleanHtml = q.stimulus.html;
-      cleanHtml = cleanHtml.replace(/<!--\?xml.*?\?-->/g, '');
-      cleanHtml = cleanHtml.replace(/\uFFFD/g, ' ');
-      // Fix image paths to local assets
-      if (q.stimulus.images && q.stimulus.images.length > 0) {
-        q.stimulus.images.forEach(imgObj => {
-          const localSrc = `${pkgPath}${imgObj.rel_path}`;
-          // Global replace of the full remote URL
-          cleanHtml = cleanHtml.split(imgObj.remote_url).join(localSrc);
-          // Global replace of the relative remote path (without domain)
-          if (imgObj.remote_url.startsWith('https://pusmendik.kemendikdasmen.go.id')) {
-            const relRemote = imgObj.remote_url.replace('https://pusmendik.kemendikdasmen.go.id', '');
-            cleanHtml = cleanHtml.split(relRemote).join(localSrc);
-          }
-          // Fallback: replace any src that ends with the same filename
-          const fname = (imgObj.rel_path || '').split('/').pop();
-          if (fname) {
-            const escaped = fname.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            cleanHtml = cleanHtml.replace(
-              new RegExp(`src="[^"]*${escaped}"`, 'g'),
-              `src="${localSrc}"`
-            );
-          }
+    // Lightbox click handler untuk seluruh gambar stimulus
+    stimDiv.querySelectorAll('img').forEach(img => {
+      img.title = 'Klik untuk memperbesar gambar stimulus';
+      img.style.cursor = 'zoom-in';
+      img.onclick = () => openImageLightbox(img.src, 'Gambar Stimulus');
+    });
+
+    stimContainer.appendChild(stimDiv);
+  } else if (q.stimulus && (q.stimulus.text || (q.stimulus.images && q.stimulus.images.length > 0))) {
+    // Fallback bila HTML tidak tersedia
+    const rawStimText = q.stimulus.text ? q.stimulus.text.trim() : '';
+    const stimImages = q.stimulus.images || [];
+    const cleanStimText = cleanUiStimulusText(rawStimText, stimImages);
+
+    if (cleanStimText || stimImages.length > 0) {
+      hasStimulus = true;
+      const stimDiv = document.createElement('div');
+      stimDiv.className = 'stimulus-body-content';
+
+      if (cleanStimText) {
+        cleanStimText.split('\n').filter(p => p.trim()).forEach(pText => {
+          const p = document.createElement('p');
+          p.innerHTML = pText.replace(/\*(.*?)\*/g, '<em>$1</em>');
+          stimDiv.appendChild(p);
         });
       }
-      // Final pass: rewrite any remaining relative images/... srcs to the local package path
-      // (covers Pusmendik HTML that uses src="images/xxx.png" without a domain)
-      cleanHtml = cleanHtml.replace(/src="(images\/[^"]+)"/g, `src="${pkgPath}$1"`);
-      stimDiv.innerHTML = cleanHtml;
-    } else {
-      // Fallback: Format paragraphs and bullets cleanly
-      const paragraphs = q.stimulus.text.split('\n').filter(p => p.trim());
-      paragraphs.forEach(pText => {
-        const p = document.createElement('p');
-        p.innerHTML = pText.replace(/\*(.*?)\*/g, '<em>$1</em>');
-        stimDiv.appendChild(p);
-      });
+
+      if (stimImages.length > 0) {
+        const imgStack = document.createElement('div');
+        imgStack.className = stimImages.length > 1 ? 'stimulus-images-stack' : 'stimulus-images-single';
+        stimImages.forEach(imgObj => {
+          const imgWrap = document.createElement('div');
+          imgWrap.className = 'stimulus-img-container';
+          const img = document.createElement('img');
+          img.src = `${pkgPath}${imgObj.rel_path || 'images/' + imgObj.filename}?v=36`;
+          img.className = 'stimulus-img';
+          img.title = 'Klik untuk memperbesar gambar stimulus';
+          img.style.cursor = 'zoom-in';
+          img.onclick = () => openImageLightbox(img.src, 'Gambar Stimulus');
+          imgWrap.appendChild(img);
+          imgStack.appendChild(imgWrap);
+        });
+        stimDiv.appendChild(imgStack);
+      }
+      stimContainer.appendChild(stimDiv);
     }
-    stimContainer.appendChild(stimDiv);
   }
 
-  if (!hasStimulus) {
-    stimContainer.innerHTML = `
-      <div style="color: var(--text-light); text-align: center; margin-top: 60px;">
-        <i class="fa-regular fa-file-lines" style="font-size: 32px; margin-bottom: 12px; display: block;"></i>
-        <p>Soal ini tidak memiliki teks stimulus/bacaan terpisah.</p>
-        <p style="font-size: 13px;">Silakan langsung cermati pertanyaan dan pilihan jawaban di panel berikutnya.</p>
-      </div>
-    `;
+  // Tampilkan/sembunyikan kontainer stimulus
+  const divider = document.getElementById('cbtPanelDivider');
+  const examGrid = document.getElementById('cbtExamGrid');
+
+  if (stimCol) stimCol.style.display = hasStimulus ? 'block' : 'none';
+  if (divider) divider.style.display = 'none';
+  if (examGrid) {
+    if (hasStimulus) {
+      examGrid.classList.add('has-stimulus');
+    } else {
+      examGrid.classList.remove('has-stimulus');
+    }
   }
 
-  // 3. Question Prompt (Right Column)
+  // 3. Question Prompt (Rendering persis 100% CBT Pusmendik resmi)
   const promptContainer = document.getElementById('promptContainer');
   promptContainer.innerHTML = '';
-  const promptLines = (q.pertanyaan.text || '').split('\n').filter(l => l.trim());
-  promptLines.forEach((line, idx) => {
-    const p = document.createElement('p');
-    p.innerHTML = line.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    if (idx > 0) {
-      p.style.fontSize = '13.5px';
-      p.style.color = '#475569';
-      p.style.marginTop = '6px';
-    }
-    promptContainer.appendChild(p);
-  });
+  const pertHtml = (q.pertanyaan && q.pertanyaan.html) ? q.pertanyaan.html : '';
 
-  if (q.pertanyaan.images && q.pertanyaan.images.length > 0) {
-    q.pertanyaan.images.forEach(pImg => {
-      const imgWrap = document.createElement('div');
-      imgWrap.className = 'stimulus-img-container';
-      const img = document.createElement('img');
-      img.src = `${pkgPath}${pImg.rel_path}`;
-      img.className = 'stimulus-img';
-      imgWrap.appendChild(img);
-      promptContainer.appendChild(imgWrap);
+  if (pertHtml) {
+    const promptDiv = document.createElement('div');
+    promptDiv.className = 'prompt-html-wrap';
+    promptDiv.innerHTML = formatPusmendikHtml(pertHtml, pkgPath);
+
+    // Lightbox click handler untuk seluruh gambar pertanyaan/prompt
+    promptDiv.querySelectorAll('img').forEach(img => {
+      img.title = 'Klik untuk memperbesar gambar soal';
+      img.style.cursor = 'zoom-in';
+      img.onclick = () => openImageLightbox(img.src, 'Gambar Soal');
     });
+
+    promptContainer.appendChild(promptDiv);
+  } else {
+    // Fallback bila HTML pertanyaan tidak tersedia
+    const promptRaw = (q.pertanyaan && q.pertanyaan.text) ? q.pertanyaan.text.trim() : '';
+    if (promptRaw) {
+      const promptLines = promptRaw.split('\n').filter(l => l.trim());
+      promptLines.forEach(line => {
+        const p = document.createElement('p');
+        p.className = 'prompt-paragraph';
+        p.innerHTML = line.replace(/\*(.*?)\*/g, '<em>$1</em>');
+        promptContainer.appendChild(p);
+      });
+    }
+
+    if (q.pertanyaan && q.pertanyaan.images && q.pertanyaan.images.length > 0) {
+      q.pertanyaan.images.forEach(pImg => {
+        const imgWrap = document.createElement('div');
+        imgWrap.className = 'stimulus-img-container prompt-img-wrap';
+        const img = document.createElement('img');
+        img.src = `${pkgPath}${pImg.rel_path || 'images/' + pImg.filename}`;
+        img.className = 'stimulus-img';
+        img.title = 'Klik untuk memperbesar gambar soal';
+        img.style.cursor = 'zoom-in';
+        img.onclick = () => openImageLightbox(img.src, 'Gambar Soal');
+        imgWrap.appendChild(img);
+        promptContainer.appendChild(imgWrap);
+      });
+    }
   }
 
   // 4. Options List (PG) atau Tabel Pernyataan Benar/Salah
@@ -275,49 +787,143 @@ function renderQuestion() {
   optionsContainer.innerHTML = '';
 
   const currentSelection = (state.userAnswers[pkgKey()] || {})[q.nomor];
-  const isComplex = q.tipe_soal === 'Pilihan Ganda Kompleks';
+  const isComplex = (q.tipe_soal === 'Pilihan Ganda Kompleks' || q.tipe === 'Pilihan Ganda Kompleks' || (Array.isArray(q.kunci_jawaban) && !statementType(q)));
   const stmtType = statementType(q);
 
   if (stmtType) {
     renderBsStatements(q, currentSelection || {}, optionsContainer);
   } else {
-  q.pilihan_jawaban.forEach(opt => {
-    const isSelected = isComplex
-      ? (Array.isArray(currentSelection) && currentSelection.includes(opt.key))
-      : (currentSelection === opt.key);
+    const opts = q.pilihan_jawaban || [];
+    if (opts.length === 0 && q.pernyataan && q.pernyataan.length > 0) {
+      renderBsStatements(q, currentSelection || {}, optionsContainer);
+    } else {
+      opts.forEach(opt => {
+      const isSelected = isComplex
+        ? (Array.isArray(currentSelection) && currentSelection.includes(opt.key))
+        : (currentSelection === opt.key);
 
-    const optItem = document.createElement('div');
-    optItem.className = `option-item ${isSelected ? 'selected' : ''}`;
-    optItem.dataset.key = opt.key;
-    optItem.onclick = () => selectOption(opt.key, isComplex);
+      const optItem = document.createElement('div');
+      optItem.className = `option-item ${isSelected ? 'selected' : ''}`;
+      optItem.dataset.key = opt.key;
+      optItem.onclick = () => selectOption(opt.key, isComplex);
 
-    // Key indicator
-    const indicator = document.createElement('div');
-    indicator.className = 'opt-indicator';
-    indicator.innerText = opt.key;
-    if (isComplex) {
-      indicator.style.borderRadius = '6px'; // Checkbox style
+      // Key indicator
+      const indicator = document.createElement('div');
+      indicator.className = 'opt-indicator';
+      indicator.innerText = opt.key;
+      if (isComplex) {
+        indicator.style.borderRadius = '6px';
+      }
+      optItem.appendChild(indicator);
+
+      // Option body
+      const body = document.createElement('div');
+      body.className = 'opt-body';
+
+      if (opt.html) {
+        // 1. Prioritaskan HTML resmi CBT Pusmendik dengan superskrip, subskrip, dan simbol utuh
+        let rawOptHtml = (opt.html || '').trim();
+        // Bersihkan prefiks huruf pilihan duplikat "A. " atau "<p>A. "
+        rawOptHtml = rawOptHtml.replace(/^(<p[^>]*>)?\s*[A-E][.\)]\s*/i, '$1');
+        body.innerHTML = formatPusmendikHtml(rawOptHtml, pkgPath);
+
+        // Pasang event lightbox dan klasifikasi ukuran gambar pilihan
+        body.querySelectorAll('img').forEach(img => {
+          const checkSize = () => {
+            const nw = img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
+            const nh = img.naturalHeight || parseInt(img.getAttribute('height') || '0', 10);
+            if ((nw > 100 || nh > 55) && !img.hasAttribute('data-latex')) {
+              img.classList.remove('opt-math-img');
+              img.classList.add('opt-diagram-img');
+            } else {
+              img.classList.remove('opt-diagram-img');
+              img.classList.add('opt-math-img');
+            }
+          };
+
+          if (img.complete && img.naturalWidth > 0) {
+            checkSize();
+          } else {
+            img.onload = checkSize;
+          }
+
+          img.title = 'Klik untuk memperbesar gambar';
+          img.onclick = (e) => {
+            e.stopPropagation();
+            selectOption(opt.key, isComplex);
+            openImageLightbox(img.src, `Pilihan Jawaban ${opt.key}`);
+          };
+        });
+      } else if (opt.image) {
+        // 2. Tampilkan gambar opsi jika tersedia (grafik atau formula matematika)
+        const mathImg = document.createElement('img');
+        let base = pkgPath.endsWith('/') ? pkgPath : `${pkgPath}/`;
+        let rel = (opt.image.rel_path || `images/${opt.image.filename}`).replace(/^\.?\//, '');
+        if (base.endsWith('images/') && rel.startsWith('images/')) {
+          rel = rel.substring(7);
+        }
+        mathImg.src = `${base}${rel}?v=36`;
+        mathImg.alt = `Pilihan ${opt.key}`;
+        mathImg.title = 'Klik untuk memperbesar gambar';
+        mathImg.onclick = (e) => {
+          e.stopPropagation();
+          selectOption(opt.key, isComplex);
+          openImageLightbox(mathImg.src, `Pilihan Jawaban ${opt.key}`);
+        };
+
+        // Klasifikasi visual diagram vs rumus inline
+        mathImg.onload = () => {
+          if (mathImg.naturalHeight > 55 || mathImg.naturalWidth > 90) {
+            mathImg.classList.add('opt-diagram-img');
+          } else {
+            mathImg.classList.add('opt-math-img');
+          }
+        };
+
+        let rawText = (opt.text || '').trim();
+        let textWithoutMath = rawText.replace(/\$[^$]+\$/g, '').trim();
+        let isPureFormulaText = (opt.latex && (rawText === `$${opt.latex}$` || rawText === opt.latex)) ||
+                                (rawText.startsWith('$') && rawText.endsWith('$') && !textWithoutMath);
+
+        const hasRealAccompanyingText = Boolean(rawText && !isPureFormulaText);
+        const txtSpan = hasRealAccompanyingText ? document.createElement('span') : null;
+        if (txtSpan) {
+          txtSpan.innerText = rawText;
+        }
+
+        const isImgFirst = opt.image_first || opt.image_position === 'before' || (hasRealAccompanyingText && /^(dan|atau|dengan|,)\s+/i.test(rawText));
+
+        if (isImgFirst) {
+          body.appendChild(mathImg);
+          if (txtSpan) {
+            txtSpan.style.marginLeft = '8px';
+            body.appendChild(txtSpan);
+          }
+        } else {
+          if (txtSpan) {
+            txtSpan.style.marginRight = '8px';
+            body.appendChild(txtSpan);
+          }
+          body.appendChild(mathImg);
+        }
+      } else {
+        // 3. Fallback teks bersih dengan simbol yang telah diperbaiki
+        let strippedDisplay = (opt.full_display || '').replace(/^[A-E][.\)]\s*/, '').trim();
+        let fullContent = '';
+        if (strippedDisplay) {
+          fullContent = strippedDisplay;
+        } else if (opt.latex) {
+          fullContent = `$${opt.latex}$`;
+        } else {
+          fullContent = opt.text || '';
+        }
+        body.innerHTML = fullContent;
+      }
+
+      optItem.appendChild(body);
+      optionsContainer.appendChild(optItem);
+      });
     }
-    optItem.appendChild(indicator);
-
-    // Option body
-    const body = document.createElement('div');
-    body.className = 'opt-body';
-
-    const fullContent = opt.full_display || (opt.latex ? `$${opt.latex}$` : opt.text);
-    body.innerHTML = fullContent;
-
-    if (!opt.latex && opt.image) {
-      const mathImg = document.createElement('img');
-      mathImg.src = `${pkgPath}${opt.image.rel_path}`;
-      mathImg.alt = `Opsi ${opt.key}`;
-      mathImg.className = 'opt-math-img';
-      body.appendChild(mathImg);
-    }
-
-    optItem.appendChild(body);
-    optionsContainer.appendChild(optItem);
-  });
   }
 
   // Reset feedback banner
@@ -325,9 +931,22 @@ function renderQuestion() {
   feedback.style.display = 'none';
 
   // 5. Navigation Buttons State
-  document.getElementById('btnPrev').disabled = state.currentIndex === 0;
-  // Next tetap aktif di soal terakhir: memicu popup Konfirmasi Selesai Tes (alur resmi)
-  document.getElementById('btnNext').disabled = false;
+  const totalQuestions = (state.pkgData[pkgKey()] && state.pkgData[pkgKey()].soal) ? state.pkgData[pkgKey()].soal.length : 1;
+  const isLastQuestion = state.currentIndex >= totalQuestions - 1;
+  const btnPrev = document.getElementById('btnPrev');
+  const btnNext = document.getElementById('btnNext');
+
+  btnPrev.disabled = state.currentIndex === 0;
+  btnNext.disabled = false;
+
+  if (isLastQuestion) {
+    btnNext.innerHTML = '<i class="fa-solid fa-flag-checkered"></i> <span>Selesai Tes</span>';
+    btnNext.classList.add('btn-nav-finish');
+  } else {
+    btnNext.innerHTML = '<span>Selanjutnya</span> <i class="fa-solid fa-arrow-right"></i>';
+    btnNext.classList.remove('btn-nav-finish');
+  }
+
   document.getElementById('chkRagu').checked = !!((state.raguStatus[pkgKey()] || {})[q.nomor]);
 
   // 6. Learning Section (Explanation, AI Tutor & Similar Question)
@@ -341,6 +960,11 @@ function renderQuestion() {
   document.getElementById('txtToggleExp').innerText = state.explanationVisible
     ? 'Tutup Tata Cara & Pembahasan'
     : 'Buka Tata Cara & Pembahasan';
+
+  // Floating AI button di desktop dihilangkan (hanya aktif di mobile via CSS)
+
+  // Sinkronkan status ciut/tampil Tata Cara
+  setExplanationCollapsed(state.explanationCollapsed);
 
   // Trigger KaTeX render
   renderMath();
@@ -383,26 +1007,36 @@ function selectOption(key, isComplex) {
 
 // Tipe soal berbasis pernyataan: 'Benar-Salah', 'Pernyataan-Label', atau null
 function statementType(q) {
-  if (q.tipe_soal === 'Benar-Salah') return 'Benar-Salah';
-  if (q.tipe_soal === 'Pernyataan-Label') return 'Pernyataan-Label';
+  if (!q) return null;
+  const t = q.tipe_soal || q.tipe;
+  if (t === 'Benar-Salah') return 'Benar-Salah';
+  if (t === 'Pernyataan-Label') return 'Pernyataan-Label';
+  if (t === 'Matriks' || (q.pernyataan && q.pernyataan.length > 0)) {
+    return 'Benar-Salah';
+  }
   return null;
 }
 
 // Nilai kolom pilihan untuk soal pernyataan.
-// Benar/Salah -> ['Benar','Salah']; Label -> label unik sesuai urutan kemunculan di kunci
 function statementValues(q) {
-  if (statementType(q) === 'Benar-Salah') return ['Benar', 'Salah'];
+  if (Array.isArray(q.table_headers) && q.table_headers.length >= 2) {
+    return q.table_headers;
+  }
   const vals = [];
-  (Array.isArray(q.kunci_jawaban) ? q.kunci_jawaban : []).forEach(entry => {
-    const v = String(entry).split(':')[1];
-    if (v && !vals.includes(v)) vals.push(v);
-  });
-  return vals;
+  if (Array.isArray(q.kunci_jawaban)) {
+    q.kunci_jawaban.forEach(entry => {
+      const v = String(entry).split(':')[1];
+      if (v && !vals.includes(v)) vals.push(v);
+    });
+  }
+  if (vals.length >= 2) return vals;
+  return ['Benar', 'Salah'];
 }
 
 // Render tabel pernyataan (meniru UI resmi Pusmendik)
 function renderBsStatements(q, selection, container) {
-  const pkgPath = SUBJECT_CATALOG[state.currentSubject].imgBase[state.currentPkg];
+  const subjectMeta = SUBJECT_CATALOG[state.currentSubject] || {};
+  const pkgPath = (subjectMeta.imgBase && subjectMeta.imgBase[state.currentPkg]) || `data/${state.currentSubject}/paket_${state.currentPkg}/`;
   const values = statementValues(q);
   const isBS = statementType(q) === 'Benar-Salah';
 
@@ -432,19 +1066,49 @@ function renderBsStatements(q, selection, container) {
     no.innerText = stmt.key;
     row.appendChild(no);
 
-    // Isi pernyataan (teks + latex + gambar)
+    // Isi pernyataan (teks + gambar asli resmi + latex)
     const body = document.createElement('div');
     body.className = 'bs-cell bs-cell-stmt';
-    const stmtText = stmt.text || '';
-    body.innerHTML = stmt.latex
-      ? `${stmtText} <span class="bs-latex">$${stmt.latex}$</span>`
-      : stmtText;
+    const stmtText = (stmt.text || '').trim();
+
     if (stmt.image) {
       const img = document.createElement('img');
       img.src = `${pkgPath}${stmt.image.rel_path}`;
       img.alt = `Pernyataan ${stmt.key}`;
       img.className = 'bs-stmt-img';
-      body.appendChild(img);
+      img.title = 'Klik untuk memperbesar gambar';
+      img.style.cursor = 'zoom-in';
+      img.onclick = (e) => {
+        e.stopPropagation();
+        openImageLightbox(img.src, `Pernyataan ${stmt.key}`);
+      };
+
+      if (!stmtText) {
+        body.appendChild(img);
+      } else if (/^(merupakan|adalah|sama dengan|lebih|kurang|termasuk)/i.test(stmtText)) {
+        // Contoh Soal 3: [gambar a] merupakan kelipatan dari 3.
+        body.appendChild(img);
+        const span = document.createElement('span');
+        span.innerHTML = ` ${stmtText}`;
+        body.appendChild(span);
+      } else {
+        const span = document.createElement('span');
+        span.innerHTML = `${stmtText} `;
+        body.appendChild(span);
+        body.appendChild(img);
+      }
+    } else if (stmt.latex) {
+      let contentHtml = '';
+      if (!stmtText) {
+        contentHtml = `<span class="bs-latex">$${stmt.latex}$</span>`;
+      } else if (/^(merupakan|adalah|sama dengan|lebih|kurang|termasuk)/i.test(stmtText)) {
+        contentHtml = `<span class="bs-latex">$${stmt.latex}$</span> ${stmtText}`;
+      } else {
+        contentHtml = `${stmtText} <span class="bs-latex">$${stmt.latex}$</span>`;
+      }
+      body.innerHTML = contentHtml;
+    } else {
+      body.innerHTML = stmtText;
     }
     row.appendChild(body);
 
@@ -510,7 +1174,7 @@ function isQuestionAnswered(item) {
     if (typeof ans !== 'object' || Array.isArray(ans)) return false;
     return (item.pernyataan || []).every(st => ans[st.key]);
   }
-  if (item.tipe_soal === 'Pilihan Ganda Kompleks') {
+  if (item.tipe_soal === 'Pilihan Ganda Kompleks' || item.tipe === 'Pilihan Ganda Kompleks') {
     return Array.isArray(ans) && ans.length > 0;
   }
   return true;
@@ -523,7 +1187,7 @@ function checkUserAnswer() {
 
   const currentSelection = (state.userAnswers[pkgKey()] || {})[q.nomor];
   const feedback = document.getElementById('feedbackBanner');
-  const isComplex = q.tipe_soal === 'Pilihan Ganda Kompleks';
+  const isComplex = (q.tipe_soal === 'Pilihan Ganda Kompleks' || q.tipe === 'Pilihan Ganda Kompleks' || (Array.isArray(q.kunci_jawaban) && !statementType(q)));
   const stmtType = statementType(q);
 
   // ---- Soal pernyataan (Benar/Salah & Label): validasi & evaluasi per pernyataan ----
@@ -534,7 +1198,7 @@ function checkUserAnswer() {
     const unanswered = stmts.filter(st => !sel[st.key]);
 
     if (unanswered.length > 0) {
-      const valName = stmtType === 'Benar-Salah' ? 'Benar/Salah' : 'label yang sesuai';
+      const valName = statementValues(q).join('/');
       feedback.className = 'feedback-banner danger';
       feedback.style.display = 'flex';
       feedback.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Silakan pilih ${valName} untuk <strong>semua pernyataan</strong> terlebih dahulu!`;
@@ -575,8 +1239,8 @@ function checkUserAnswer() {
   const correctKey = q.kunci_jawaban;
   let isCorrect = false;
 
+  const targetArr = Array.isArray(correctKey) ? correctKey : (correctKey ? [correctKey] : []);
   if (isComplex) {
-    const targetArr = Array.isArray(correctKey) ? correctKey : [correctKey];
     const sortedUser = [...currentSelection].sort().join(',');
     const sortedTarget = [...targetArr].sort().join(',');
     isCorrect = sortedUser === sortedTarget;
@@ -587,7 +1251,7 @@ function checkUserAnswer() {
   // Highlight options
   document.querySelectorAll('.option-item').forEach(el => {
     const k = el.dataset.key;
-    const isTarget = isComplex ? (Array.isArray(correctKey) && correctKey.includes(k)) : (k === correctKey);
+    const isTarget = isComplex ? targetArr.includes(k) : (k === correctKey);
     el.classList.toggle('correct', isTarget);
     if (!isTarget && el.classList.contains('selected')) {
       el.classList.add('incorrect');
@@ -614,12 +1278,100 @@ function toggleExplanation() {
   state.explanationVisible = !state.explanationVisible;
   const learnSec = document.getElementById('learningSection');
   learnSec.style.display = state.explanationVisible ? 'flex' : 'none';
-  document.getElementById('txtToggleExp').innerText = state.explanationVisible
-    ? 'Tutup Tata Cara & Pembahasan'
-    : 'Buka Tata Cara & Pembahasan';
+  const txtToggle = document.getElementById('txtToggleExp');
+  if (txtToggle) {
+    txtToggle.innerText = state.explanationVisible
+      ? 'Tutup Tata Cara & Pembahasan'
+      : 'Tata Cara & Langkah Penyelesaian';
+  }
+  const arr = document.getElementById('accordionArrow');
+  if (arr) {
+    arr.classList.toggle('rotated', state.explanationVisible);
+  }
+
+  // Floating AI button di desktop dihilangkan (hanya aktif di mobile via CSS)
 
   if (state.explanationVisible) {
+    // Saat dibuka via tombol Buka Tata Cara, tampilkan langkah penuh
+    setExplanationCollapsed(false);
     learnSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+
+// Set status ciut/tampil Tata Cara & Langkah Penyelesaian Soal
+function setExplanationCollapsed(collapsed) {
+  state.explanationCollapsed = !!collapsed;
+  const expCard = document.getElementById('explanationCard');
+  const expBody = document.getElementById('expBody');
+  const notice = document.getElementById('expCollapsedNotice');
+  const txtBtn = document.getElementById('txtExpCollapse');
+  const iconBtn = document.getElementById('iconExpCollapse');
+  const txtAiBtn = document.getElementById('txtToggleStepsFromAi');
+  const iconAiBtn = document.getElementById('iconToggleStepsFromAi');
+
+  if (state.explanationCollapsed) {
+    if (expCard) expCard.classList.add('is-collapsed');
+    if (expBody) expBody.style.display = 'none';
+    if (notice) notice.style.display = 'flex';
+    if (txtBtn) txtBtn.innerText = 'Tampilkan Tata Cara';
+    if (iconBtn) iconBtn.className = 'fa-solid fa-eye';
+    if (txtAiBtn) txtAiBtn.innerText = 'Tampilkan Tata Cara';
+    if (iconAiBtn) iconAiBtn.className = 'fa-solid fa-eye';
+  } else {
+    if (expCard) expCard.classList.remove('is-collapsed');
+    if (expBody) expBody.style.display = 'block';
+    if (notice) notice.style.display = 'none';
+    if (txtBtn) txtBtn.innerText = 'Sembunyikan Tata Cara';
+    if (iconBtn) iconBtn.className = 'fa-solid fa-eye-slash';
+    if (txtAiBtn) txtAiBtn.innerText = 'Sembunyikan Tata Cara';
+    if (iconAiBtn) iconAiBtn.className = 'fa-solid fa-eye-slash';
+  }
+}
+
+// Toggle ciut/tampil Tata Cara & Langkah
+function toggleExplanationCollapse() {
+  setExplanationCollapsed(!state.explanationCollapsed);
+}
+
+// Buka AI Tutor langsung di bawah soal (dengan tata cara diciutkan agar soal terlihat)
+function openAiTutorDirect() {
+  const learnSec = document.getElementById('learningSection');
+  if (!state.explanationVisible) {
+    state.explanationVisible = true;
+    learnSec.style.display = 'flex';
+    document.getElementById('txtToggleExp').innerText = 'Tutup Tata Cara & Pembahasan';
+    const btnFloating = document.getElementById('btnFloatingAi');
+    if (btnFloating) btnFloating.style.display = 'flex';
+  }
+
+  // Sembunyikan langkah penyelesaian agar user bisa melihat soal & chat AI berdampingan tanpa scrolling jauh!
+  setExplanationCollapsed(true);
+
+  const card = document.getElementById('aiTutorCard');
+  if (card) {
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const input = document.getElementById('chatInput');
+    if (input) setTimeout(() => input.focus(), 350);
+  }
+}
+
+// Smooth scroll to AI Tutor card
+function scrollToAiTutor() {
+  if (!state.explanationVisible) {
+    state.explanationVisible = true;
+    const learnSec = document.getElementById('learningSection');
+    if (learnSec) learnSec.style.display = 'flex';
+    const txtExp = document.getElementById('txtToggleExp');
+    if (txtExp) txtExp.innerText = 'Tutup Tata Cara & Pembahasan';
+  }
+  // Sembunyikan rincian langkah agar posisi soal tetap dekat di atas saat chat AI
+  setExplanationCollapsed(true);
+
+  const card = document.getElementById('aiTutorCard');
+  if (card) {
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const input = document.getElementById('chatInput');
+    if (input) setTimeout(() => input.focus(), 350);
   }
 }
 
@@ -634,40 +1386,143 @@ function renderExplanation(q) {
 
 // State jujur: semua kartu menandai pembahasan spesifik belum tersedia.
 function _renderSolutionUnavailable(note) {
-  document.getElementById('conceptContainer').innerHTML =
-    '<i class="fa-solid fa-hourglass-half"></i> <strong>Pembahasan belum tersedia</strong> untuk soal ini — menunggu solusi spesifik hasil Claude (Layer 3).';
+  const banner = document.getElementById('solutionSummaryBanner');
+  if (banner) {
+    banner.style.display = 'none';
+    banner.innerHTML = '';
+  }
 
-  document.getElementById('symbolsBox').style.display = 'none';
-  document.getElementById('symbolsContainer').innerHTML = '';
+  const conceptContainer = document.getElementById('conceptContainer');
+  if (conceptContainer) {
+    conceptContainer.innerHTML =
+      '<div class="concept-card-item empty-state"><i class="fa-solid fa-hourglass-half"></i> <span><strong>Pembahasan belum tersedia</strong> untuk soal ini — menunggu solusi spesifik hasil Claude (Layer 3).</span></div>';
+  }
 
-  document.getElementById('whyConceptBox').style.display = 'none';
-  document.getElementById('whyConceptContainer').innerHTML = '';
+  const symBox = document.getElementById('symbolsBox');
+  if (symBox) {
+    symBox.style.display = 'none';
+    const symContainer = document.getElementById('symbolsContainer');
+    if (symContainer) symContainer.innerHTML = '';
+  }
+
+  const whyBox = document.getElementById('whyConceptBox');
+  if (whyBox) {
+    whyBox.style.display = 'none';
+    const whyContainer = document.getElementById('whyConceptContainer');
+    if (whyContainer) whyContainer.innerHTML = '';
+  }
 
   const stepsContainer = document.getElementById('stepsContainer');
-  stepsContainer.innerHTML = '';
-  const noteDiv = document.createElement('div');
-  noteDiv.className = 'step-item';
-  noteDiv.innerHTML =
-    '<i class="fa-solid fa-hourglass-half"></i> <strong>Langkah penyelesaian belum tersedia.</strong> ' +
-    _escHtml(note || 'File solusi Claude untuk soal ini belum ada; konten generik lama sengaja tidak ditampilkan. Konteks soal (teks, visual, kunci) tetap bisa ditanyakan ke AI Tutor.');
-  stepsContainer.appendChild(noteDiv);
+  if (stepsContainer) {
+    stepsContainer.innerHTML = '';
+    const noteDiv = document.createElement('div');
+    noteDiv.className = 'step-timeline-card empty-card';
+    noteDiv.innerHTML =
+      '<div class="step-timeline-indicator"><div class="step-num-badge empty"><i class="fa-solid fa-hourglass-half"></i></div></div>' +
+      '<div class="step-timeline-body"><div class="step-card-inner"><div class="step-card-header"><span class="step-tag">STATUS</span><h4 class="step-title">Langkah Penyelesaian Belum Tersedia</h4></div>' +
+      '<div class="step-card-content"><div class="step-main-text">' + _escHtml(note || 'File solusi Claude untuk soal ini belum ada; konten generik lama sengaja tidak ditampilkan. Konteks soal (teks, visual, kunci) tetap bisa ditanyakan ke AI Tutor.') + '</div></div></div></div>';
+    stepsContainer.appendChild(noteDiv);
+  }
 
-  document.getElementById('tipsContainer').innerHTML =
-    '<i class="fa-solid fa-hourglass-half"></i> Tips & jebakan spesifik soal ini menyusul dari solusi Claude.';
+  const tipsContainer = document.getElementById('tipsContainer');
+  if (tipsContainer) {
+    tipsContainer.innerHTML =
+      '<i class="fa-solid fa-hourglass-half"></i> Tips & jebakan spesifik soal ini menyusul dari solusi Claude.';
+  }
 
-  document.getElementById('canonicalVisualBox').style.display = 'none';
-  document.getElementById('canonicalVisualList').innerHTML = '';
+  const visBox = document.getElementById('canonicalVisualBox');
+  if (visBox) {
+    visBox.style.display = 'none';
+    const visList = document.getElementById('canonicalVisualList');
+    if (visList) visList.innerHTML = '';
+  }
 }
 
 function _escHtml(s) {
   return String(s || '')
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }
 
 function _fmtText(s) {
-  return _escHtml(s)
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\n/g, '<br>');
+  let text = _escHtml(s);
+  // Bersihkan sisa header markdown (### Judul)
+  text = text.replace(/(?:^|\n)#{2,6}\s+\*\*([^*]+)\*\*/g, '\n<strong>$1:</strong>\n');
+  text = text.replace(/(?:^|\n)#{2,6}\s+([^\n]+)/g, '\n<strong>$1:</strong>\n');
+  // Format bold markdown (**teks**)
+  text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  // Newline menjadi <br>
+  text = text.replace(/\n/g, '<br>');
+  // Rapikan <br> yang beruntun berlebih (>2)
+  text = text.replace(/(?:<br>\s*){3,}/g, '<br><br>');
+  return text;
+}
+
+// Helper to render an elevated, structured pedagogical step card
+function _renderStepTimelineCard(stepText, index, totalSteps) {
+  let stepNum = index + 1;
+  let rawText = String(stepText || '').trim();
+
+  // 1. Extract Step Number
+  const numMatch = rawText.match(/^(\d+)[\.\:\)]\s*(.*)$/s);
+  if (numMatch) {
+    stepNum = numMatch[1];
+    rawText = numMatch[2];
+  } else {
+    const stepMatch = rawText.match(/^(?:Langkah|Step)\s*(\d+)[\:\.\-]?\s*(.*)$/is);
+    if (stepMatch) {
+      stepNum = stepMatch[1];
+      rawText = stepMatch[2];
+    }
+  }
+
+  // 2. Extract Title (separated by " — " or " : " or " - ")
+  let title = '';
+  let body = rawText;
+  const splitDash = rawText.match(/^([^\n—\-:]{3,65})\s*(?:—|:\s|\s-\s)(.*)$/s);
+  if (splitDash && !splitDash[1].includes('$') && !splitDash[1].includes('\\')) {
+    title = splitDash[1].trim();
+    body = splitDash[2].trim();
+  }
+
+  // 3. Detect and extract parenthetical note if at the end, e.g. "(bilangan asli dimulai dari 1, bukan 0)"
+  let mainBody = body;
+  let noteText = '';
+  const noteMatch = body.match(/^(.*?)\s*\(([^)]+)\)\.?\s*$/s);
+  if (noteMatch && !noteMatch[2].includes('\\') && !noteMatch[2].includes('{') && noteMatch[2].length > 10) {
+    mainBody = noteMatch[1].trim();
+    noteText = noteMatch[2].trim();
+  }
+
+  const card = document.createElement('div');
+  card.className = 'step-timeline-card';
+  card.innerHTML = `
+    <div class="step-timeline-indicator">
+      <div class="step-num-badge">${stepNum}</div>
+      ${index < totalSteps - 1 ? '<div class="step-timeline-line"></div>' : ''}
+    </div>
+    <div class="step-timeline-body">
+      <div class="step-card-inner">
+        <div class="step-card-header">
+          <span class="step-tag">LANGKAH ${String(stepNum).padStart(2, '0')}</span>
+          ${title ? `<h4 class="step-title">${_fmtText(title)}</h4>` : ''}
+        </div>
+        <div class="step-card-content">
+          <div class="step-main-text">${_fmtText(mainBody)}</div>
+          ${noteText ? `
+            <div class="step-note-callout">
+              <i class="fa-solid fa-circle-info"></i>
+              <span><strong>Catatan Penting:</strong> ${_fmtText(noteText)}</span>
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    </div>
+  `;
+  return card;
 }
 
 // === Pembahasan panel: solusi spesifik hasil Claude (Layer 3) + konteks visual (Layer 2) ===
@@ -690,113 +1545,236 @@ async function _applyCanonicalSolution(q) {
     // Abaikan respons basi — pengguna sudah berpindah soal
     if (seq !== _solutionReqSeq || token !== pkgKey() + '#' + state.currentIndex) return;
 
-    // Konteks visual soal (Layer 2 — transkripsi teks gambar asli, bukan pembahasan)
+    // Konteks visual soal (Layer 2 — transkripsi teks gambar asli)
     const visBox = document.getElementById('canonicalVisualBox');
     const visList = document.getElementById('canonicalVisualList');
-    visList.innerHTML = '';
-    (data.formulas || []).forEach(f => {
-      const li = document.createElement('div');
-      li.className = 'step-item';
-      const src = f.source === 'official data-latex' ? 'data-latex resmi' : 'transkripsi vision';
-      li.innerHTML = `<i class="fa-solid fa-square-root-variable"></i> <strong>Formula</strong> <em>(${src})</em>: $${_escHtml(f.latex)}$`;
-      visList.appendChild(li);
-    });
-    (data.visual_items || []).forEach(v => {
-      const li = document.createElement('div');
-      li.className = 'step-item';
-      li.innerHTML = `<i class="fa-solid fa-chart-simple"></i> <strong>${_escHtml(v.kind)}:</strong> ${_fmtText(v.description)}`;
-      visList.appendChild(li);
-    });
-    visBox.style.display = ((data.visual_items || []).length || (data.formulas || []).length) ? 'block' : 'none';
+    if (visList) {
+      visList.innerHTML = '';
+      (data.formulas || []).forEach(f => {
+        const li = document.createElement('div');
+        li.className = 'visual-context-item';
+        const src = f.source === 'official data-latex' ? 'data-latex resmi' : 'transkripsi vision';
+        li.innerHTML = `<i class="fa-solid fa-square-root-variable"></i> <div class="vc-body"><strong>Formula</strong> <em>(${src})</em>: $${_escHtml(f.latex)}$</div>`;
+        visList.appendChild(li);
+      });
+      (data.visual_items || []).forEach(v => {
+        const li = document.createElement('div');
+        li.className = 'visual-context-item';
+        li.innerHTML = `<i class="fa-solid fa-chart-simple"></i> <div class="vc-body"><strong>${_escHtml(v.kind)}:</strong> ${_fmtText(v.description)}</div>`;
+        visList.appendChild(li);
+      });
+    }
+    if (visBox) {
+      visBox.style.display = 'none'; // Sembunyikan konteks visual teknis dari pandangan siswa
+    }
 
     if (data.status !== 'success' || !data.solution) {
-      // Solusi spesifik belum ada -> status jujur (bukan konten learning lama)
       _renderSolutionUnavailable(data.message);
       renderMath();
       return;
     }
 
     const p = data.solution.pembahasan || {};
-
-    // Konsep & tips: dari solusi spesifik soal (Layer 3 aktif)
-    const konsepList = Array.isArray(p.konsep_kunci) ? p.konsep_kunci : [];
-    document.getElementById('conceptContainer').innerHTML = konsepList.length
-      ? konsepList.map(k => `<div class="step-item"><i class="fa-solid fa-lightbulb"></i> ${_fmtText(k)}</div>`).join('')
-      : '-';
-    document.getElementById('tipsContainer').innerHTML = p.tips_trik ? _fmtText(p.tips_trik) : '-';
-
     const review = data.solution.review || {};
+    const answerDisplay = data.solution.answer_display || '-';
+    const canonicalId = data.solution.canonical_id || q.nomor;
 
-    // Glosarium — hanya notasi yang benar-benar muncul di soal ini (kanonis)
+    // 1. Solution Summary & Official Answer Banner (Elevated Certificate Seal)
+    const banner = document.getElementById('solutionSummaryBanner');
+    if (banner) {
+      // Format statement answers nicely if multi-part
+      let keyMarkup = '';
+      if (answerDisplay.includes(',')) {
+        const parts = answerDisplay.split(',').map(s => s.trim());
+        keyMarkup = `
+          <div class="key-pills-wrap">
+            ${parts.map(pt => {
+              const isBenar = pt.toLowerCase().includes('benar');
+              const isSalah = pt.toLowerCase().includes('salah');
+              const cls = isBenar ? 'key-pill-green' : (isSalah ? 'key-pill-red' : 'key-pill-blue');
+              return `<span class="key-statement-pill ${cls}">${_escHtml(pt)}</span>`;
+            }).join('')}
+          </div>
+        `;
+      } else {
+        keyMarkup = `<div class="key-badge-large">${_escHtml(answerDisplay)}</div>`;
+      }
+
+      banner.innerHTML = `
+        <div class="summary-seal-row">
+          <div class="summary-seal-left">
+            <div class="summary-seal-icon"><i class="fa-solid fa-shield-check"></i></div>
+            <div class="summary-seal-text">
+              <div class="seal-heading">Kunci Jawaban Resmi & Terverifikasi</div>
+              <div class="seal-subheading">Solusi terverifikasi kurikulum dan silabus Pusmendik Kemendikdasmen</div>
+            </div>
+          </div>
+          <div class="summary-seal-right">
+            <span class="key-badge-caption">KUNCI RESMI</span>
+            ${keyMarkup}
+          </div>
+        </div>
+        <div class="summary-meta-bar">
+          <span class="meta-tag meta-verified"><i class="fa-solid fa-shield-check"></i> Status: Solusi Terverifikasi</span>
+          <span class="meta-tag meta-model"><i class="fa-solid fa-microchip"></i> Verifikasi: Claude Opus 4.6</span>
+        </div>
+      `;
+      banner.style.display = 'block';
+    }
+
+    // 2. Pilar 1: Identifikasi Masalah (Dik & Dit) + Konsep Kunci
+    const konsepList = Array.isArray(p.konsep_kunci) ? p.konsep_kunci : [];
+    const conceptContainer = document.getElementById('conceptContainer');
+    const conceptBox = document.getElementById('conceptBox');
+    if (conceptContainer) {
+      let dikDitHtml = '';
+      if (p.diketahui || p.ditanyakan) {
+        dikDitHtml = `
+          <div class="dik-dit-grid">
+            <div class="dik-dit-card dik">
+              <div class="dik-dit-badge-tag"><i class="fa-solid fa-clipboard-list"></i> DIKETAHUI (DIK)</div>
+              <div class="dik-dit-text">${_fmtText(p.diketahui || '-')}</div>
+            </div>
+            <div class="dik-dit-card dit">
+              <div class="dik-dit-badge-tag"><i class="fa-solid fa-circle-question"></i> DITANYAKAN (DIT)</div>
+              <div class="dik-dit-text">${_fmtText(p.ditanyakan || '-')}</div>
+            </div>
+          </div>
+        `;
+      }
+
+      let konsepItemsHtml = '';
+      if (konsepList.length) {
+        konsepItemsHtml = `
+          <div class="pillar-sub-section-title">
+            <i class="fa-solid fa-key"></i> Konsep & Rumus Utama yang Menghubungkan:
+          </div>
+          <div class="concept-items-wrap">
+            ${konsepList.map(k => `
+              <div class="concept-card-item">
+                <div class="concept-card-icon"><i class="fa-solid fa-check"></i></div>
+                <div class="concept-card-text">${_fmtText(k)}</div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      conceptContainer.innerHTML = dikDitHtml + konsepItemsHtml;
+      if (conceptBox) conceptBox.style.display = 'block';
+    }
+
+    // 3. Pilar 2: Glosarium Simbol & Notasi
     const symBox = document.getElementById('symbolsBox');
     const symList = document.getElementById('symbolsContainer');
     const glos = p.glosarium_simbol || [];
-    if (glos.length) {
+    if (glos.length && symList && symBox) {
       symList.innerHTML = '';
       glos.forEach(sym => {
         const card = document.createElement('div');
         card.className = 'symbol-card';
+        const isMath = sym.simbol.includes('\\') || sym.simbol.includes('∩') || sym.simbol.includes('∪') || sym.simbol.includes('^');
+        const badgeContent = isMath
+          ? (sym.simbol.startsWith('$') ? sym.simbol : `$${sym.simbol}$`)
+          : _escHtml(sym.simbol);
         card.innerHTML = `
-          <div class="symbol-top">
-            <span class="symbol-badge">${sym.simbol.includes('\\') ? `$${_escHtml(sym.simbol)}$` : _escHtml(sym.simbol)}</span>
-            <span class="symbol-name">${_escHtml(sym.nama)}</span>
+          <div class="symbol-card-top">
+            <span class="symbol-badge">${badgeContent}</span>
+            ${sym.nama ? `<span class="symbol-name">${_escHtml(sym.nama)}</span>` : ''}
           </div>
           <div class="symbol-desc">${_fmtText(sym.arti)}</div>
         `;
         symList.appendChild(card);
       });
       symBox.style.display = 'block';
+    } else if (symBox) {
+      symBox.style.display = 'none';
     }
 
-    // Alasan logis (Layer 3) — tampil hanya bila solusinya menyediakan
+    // 4. Pilar 3: Memahami Logika Konsep (Mengapa Rumus Ini Dipakai?)
     const whyBox = document.getElementById('whyConceptBox');
     const whyTextEl = document.getElementById('whyConceptContainer');
-    if (p.mengapa_begini) {
-      whyBox.style.display = 'flex';
-      whyTextEl.innerHTML = _fmtText(p.mengapa_begini);
-    } else {
-      whyBox.style.display = 'none';
+    if (whyBox && whyTextEl) {
+      if (p.mengapa_begini) {
+        whyBox.style.display = 'block';
+        whyTextEl.innerHTML = _fmtText(p.mengapa_begini);
+      } else {
+        whyBox.style.display = 'none';
+      }
     }
 
-    // Langkah penyelesaian — hasil Claude
+    // 5. Pilar 4: Langkah-Langkah Pengerjaan Rinci
     const stepsContainer = document.getElementById('stepsContainer');
-    stepsContainer.innerHTML = '';
-    const badge = document.createElement('div');
-    badge.className = 'step-item';
-    badge.innerHTML =
-      `<i class="fa-solid fa-robot"></i> <strong>Sumber:</strong> solusi spesifik soal hasil Claude ` +
-      (data.solution.source && data.solution.source.file
-        ? `(sumber aktif: <code>${_escHtml(data.solution.source.file)}</code>, ` +
-          `soal <code>${_escHtml(data.solution.canonical_id)}</code>)`
-        : `(soal <code>${_escHtml(data.solution.canonical_id)}</code>)`) +
-      (data.visual_unresolved
-        ? ` — <em>${data.visual_unresolved} elemen visual soal ini masih menunggu transkripsi</em>`
-        : '') +
-      `. <br><strong>Kunci resmi:</strong> ${_escHtml(data.solution.answer_display)}`;
-    stepsContainer.appendChild(badge);
-    (p.langkah_penyelesaian || []).forEach(stepText => {
-      const stepDiv = document.createElement('div');
-      stepDiv.className = 'step-item';
-      stepDiv.innerHTML = _fmtText(stepText);
-      stepsContainer.appendChild(stepDiv);
-    });
+    if (stepsContainer) {
+      stepsContainer.innerHTML = '';
+      const langkahList = p.langkah_penyelesaian || [];
+      const totalSteps = langkahList.length;
 
-    // Indikator review yang jujur (needs_manual_review dari file solusi) —
-    // dibuat SETELAH langkah dibangun agar tidak ikut terhapus innerHTML=''.
-    const oldReviewBadge = document.getElementById('solutionReviewBadge');
-    if (oldReviewBadge) oldReviewBadge.remove();
-    if (review.needs_manual_review) {
-      const badge = document.createElement('div');
-      badge.id = 'solutionReviewBadge';
-      badge.className = 'step-item';
-      badge.style.cssText = 'border-left:3px solid #f59e0b;background:rgba(245,158,11,.08);';
-      badge.innerHTML =
-        '<i class="fa-solid fa-triangle-exclamation"></i> <strong>Perlu verifikasi manual.</strong> ' +
-        'Sebagian informasi sumber soal ini belum dapat dipastikan, sehingga penjelasan di atas ' +
-        'memuat ketergantungan verifikasi dan belum final. ' +
-        (review.review_reason ? `<details><summary style="cursor:pointer"><em>Lihat alasan verifikasi</em></summary>` +
-          `<div style="margin-top:6px;font-size:.92em;">${_fmtText(review.review_reason)}</div></details>` : '');
-      stepsContainer.insertBefore(badge, stepsContainer.children[1] || null);
+      // Peringatan jika perlu verifikasi manual
+      if (review.needs_manual_review) {
+        const revAlert = document.createElement('div');
+        revAlert.id = 'solutionReviewBadge';
+        revAlert.className = 'solution-review-alert';
+        revAlert.innerHTML = `
+          <div class="alert-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <div class="alert-content">
+            <div class="alert-title">Perlu Verifikasi Manual</div>
+            <div class="alert-msg">Sebagian informasi sumber soal ini masih menunggu peninjauan dan belum final.</div>
+            ${review.review_reason ? `
+              <details class="alert-details">
+                <summary>Lihat catatan peninjauan</summary>
+                <div class="details-body">${_fmtText(review.review_reason)}</div>
+              </details>
+            ` : ''}
+          </div>
+        `;
+        stepsContainer.appendChild(revAlert);
+      }
+
+      langkahList.forEach((stepText, idx) => {
+        const card = _renderStepTimelineCard(stepText, idx, totalSteps);
+        stepsContainer.appendChild(card);
+      });
+    }
+
+    // 6. Pilar 5: Tips Cepat & Antisipasi Jebakan Soal (Permantap Dual Cards)
+    const tipsContainer = document.getElementById('tipsContainer');
+    if (tipsContainer) {
+      const tipsList = Array.isArray(p.tips_list) ? p.tips_list : [];
+      const mistakesList = Array.isArray(p.mistakes_list) ? p.mistakes_list : [];
+
+      if (tipsList.length || mistakesList.length) {
+        tipsContainer.innerHTML = `
+          <div class="tips-dual-grid">
+            ${tipsList.length ? `
+              <div class="tips-subcard shortcut">
+                <div class="tips-subcard-header">
+                  <i class="fa-solid fa-bolt"></i>
+                  <span>Trik Cepat & Efisiensi Ujian</span>
+                </div>
+                <ul class="tips-bullet-list">
+                  ${tipsList.map(t => `<li>${_fmtText(t)}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+            ${mistakesList.length ? `
+              <div class="tips-subcard trap">
+                <div class="tips-subcard-header">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                  <span>Jebakan Umum yang Harus Dihindari</span>
+                </div>
+                <ul class="tips-bullet-list trap-list">
+                  ${mistakesList.map(m => `<li>${_fmtText(m)}</li>`).join('')}
+                </ul>
+              </div>
+            ` : ''}
+          </div>
+        `;
+      } else if (p.tips_trik) {
+        tipsContainer.innerHTML = `<div class="tips-text-legacy">${_fmtText(p.tips_trik)}</div>`;
+      } else {
+        tipsContainer.innerHTML = '<span class="empty-hint">Lakukan pengecekan teliti pada setiap tahap penurunan rumus di atas.</span>';
+      }
     }
 
     renderMath();
@@ -847,11 +1825,22 @@ function formatAiMessage(rawText) {
   let calloutLines = [];
 
   function inline(text) {
-    let t = text;
-    // Protect display math ($$...$$) from bold/em processing is unnecessary;
-    // bold/italic patterns rarely clash with LaTeX in practice.
+    // Lindungi token matematika agar tidak terpotong oleh html-escape atau markdown italic
+    const mathTokens = [];
+    let t = text.replace(/(\$\$[\s\S]*?\$\$|\$[^\$]+?\$)/g, (match) => {
+      mathTokens.push(match);
+      return `___MATH_TOKEN_${mathTokens.length - 1}___`;
+    });
+
+    t = _escHtml(t);
     t = t.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     t = t.replace(/\*([^\*]+)\*/g, '<em>$1</em>');
+    t = t.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    // Kembalikan token matematika apa adanya untuk KaTeX
+    t = t.replace(/___MATH_TOKEN_(\d+)___/g, (_, idx) => {
+      return mathTokens[parseInt(idx, 10)] || '';
+    });
     return t;
   }
 
@@ -913,12 +1902,12 @@ function formatAiMessage(rawText) {
     // Headings
     if (line.startsWith('### ')) {
       flushList();
-      const content = line.replace(/^###\s+/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      const content = inline(line.replace(/^###\s+/, ''));
       html += `<div class="ai-h3"><i class="fa-solid fa-diamond-turn-right"></i> <span>${content}</span></div>`;
       continue;
     } else if (line.startsWith('## ')) {
       flushList();
-      const content = line.replace(/^##\s+/, '').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      const content = inline(line.replace(/^##\s+/, ''));
       html += `<div class="ai-h2">${content}</div>`;
       continue;
     }
@@ -927,7 +1916,7 @@ function formatAiMessage(rawText) {
     const blockMathMatch = trimmed.match(/^\$\$(.+)\$\$$/);
     if (blockMathMatch) {
       flushList();
-      html += `<div class="ai-block-math">$$${blockMathMatch[1]}$$</div>`;
+      html += `<div class="ai-block-math">$$${_escHtml(blockMathMatch[1])}$$</div>`;
       continue;
     }
 
@@ -972,41 +1961,177 @@ function formatAiMessage(rawText) {
   return html;
 }
 
+// Cooldown & Quota Management State
+let _cooldownTimer = null;
+let _cooldownSecondsRemaining = 0;
+
+function updateTutorQuotaUI(quota) {
+  if (!quota) return;
+  state.tutorQuota = quota;
+  const badge = document.getElementById('tutorQuotaBadge');
+  const text = document.getElementById('tutorQuotaText');
+  if (!badge || !text) return;
+
+  const isSub = quota.is_subscriber || quota.tier === 'subscriber';
+  const rem = quota.remaining !== undefined ? quota.remaining : 10;
+  const limit = quota.daily_limit || (isSub ? 100 : 10);
+
+  text.innerText = `${rem}/${limit} Tanya`;
+  badge.className = `tutor-quota-badge ${isSub ? 'subscriber' : 'free'}`;
+  badge.title = isSub
+    ? `Akun Langganan: ${rem} dari ${limit} pertanyaan tersisa hari ini`
+    : `Akun Gratis: ${rem} dari ${limit} pertanyaan tersisa hari ini. Jeda 10 detik per pertanyaan.`;
+
+  // Disable input bila kuota harian habis
+  const chatInput = document.getElementById('chatInput');
+  const btnSend = document.getElementById('btnSendChat');
+  if (rem <= 0) {
+    if (chatInput) {
+      chatInput.placeholder = `Kuota harianmu (${limit}/${limit}) telah habis. Berlangganan untuk 100x/hari!`;
+      chatInput.disabled = true;
+    }
+    if (btnSend) btnSend.disabled = true;
+  }
+}
+
+// Reset / Refresh Kuota (Mode Testing Admin)
+async function refreshTutorQuota() {
+  const btn = document.getElementById('btnRefreshQuota');
+  if (btn) btn.classList.add('rotating');
+  try {
+    const res = await fetch('/api/tutor/reset_quota', { method: 'POST' });
+    const data = await res.json();
+    if (data.status === 'success' && data.quota) {
+      if (_cooldownTimer) {
+        clearInterval(_cooldownTimer);
+        _cooldownTimer = null;
+      }
+      _cooldownSecondsRemaining = 0;
+      updateTutorQuotaUI(data.quota);
+      const btnSend = document.getElementById('btnSendChat');
+      const chatInput = document.getElementById('chatInput');
+      if (btnSend) {
+        btnSend.disabled = false;
+        btnSend.innerHTML = '<i class="fa-solid fa-paper-plane"></i>';
+      }
+      if (chatInput) {
+        chatInput.disabled = false;
+        chatInput.placeholder = 'Tanyakan langkah atau rumus...';
+      }
+    }
+  } catch (err) {
+    console.error('Gagal reset kuota:', err);
+  } finally {
+    if (btn) {
+      setTimeout(() => btn.classList.remove('rotating'), 400);
+    }
+  }
+}
+
+function startTutorCooldown(seconds = 10) {
+  if (_cooldownTimer) clearInterval(_cooldownTimer);
+  _cooldownSecondsRemaining = Math.max(1, Math.ceil(seconds));
+
+  const btnSend = document.getElementById('btnSendChat');
+  const chatInput = document.getElementById('chatInput');
+
+  function tick() {
+    if (_cooldownSecondsRemaining <= 0) {
+      clearInterval(_cooldownTimer);
+      _cooldownTimer = null;
+      if (btnSend && (!state.tutorQuota || state.tutorQuota.remaining > 0)) {
+        btnSend.disabled = false;
+        btnSend.innerHTML = '<i class="fa-solid fa-paper-plane"></i>';
+      }
+      if (chatInput && (!state.tutorQuota || state.tutorQuota.remaining > 0)) {
+        chatInput.disabled = false;
+        chatInput.placeholder = 'Tanyakan langkah atau rumus...';
+      }
+      return;
+    }
+
+    if (btnSend) {
+      btnSend.disabled = true;
+      btnSend.innerHTML = `<span style="font-size:11px;font-weight:700;">${_cooldownSecondsRemaining}s</span>`;
+    }
+    if (chatInput) {
+      chatInput.disabled = true;
+      chatInput.placeholder = `Tunggu ${_cooldownSecondsRemaining} detik sebelum bertanya lagi...`;
+    }
+    _cooldownSecondsRemaining--;
+  }
+
+  tick();
+  _cooldownTimer = setInterval(tick, 1000);
+}
+
+// Render Chat Conversation History
+// Helper pembersih nama model AI (tanpa emoji, nama rapi konsisten)
+function cleanModelName(raw) {
+  if (!raw) return 'Gemini 3 Flash';
+  const str = String(raw).trim();
+  const noEmoji = str.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F1E0}-\u{1F1FF}]/gu, '').trim();
+  const lower = noEmoji.toLowerCase();
+  if (lower.includes('flash') || lower === 'gemini-flash') return 'Gemini 3 Flash';
+  if (lower.includes('pro') || lower === 'gemini-pro') return 'Gemini Pro';
+  if (lower.includes('qwen') || lower === 'qwen-groq') return 'Qwen 2.5 27B';
+  return noEmoji || 'Gemini 3 Flash';
+}
+
 // Render Chat Conversation History
 // Sumber data = percakapan tersimpan di server (tutor_store, per user+soal).
 // state.tutorMsgs adalah cache tampilan; sinkronisasi dari /api/tutor/state.
 function renderChatHistory(q) {
   const chatMessages = document.getElementById('chatMessages');
+  if (!chatMessages) return;
   chatMessages.innerHTML = '';
 
   const history = state.tutorMsgs || [];
+  const subjectName = (SUBJECT_CATALOG[state.currentSubject] && SUBJECT_CATALOG[state.currentSubject].name) || 'TKA';
+  const activeModelDisplay = cleanModelName(state.selectedTutorModel);
 
   if (history.length === 0) {
     // Default welcome message (per subject)
     const defaultWelcome = document.createElement('div');
     defaultWelcome.className = 'chat-bubble ai';
+    const modelBadge = `<span class="tutor-model-badge" title="Model AI Aktif"><i class="fa-solid fa-microchip"></i> ${_escHtml(activeModelDisplay)}</span>`;
     defaultWelcome.innerHTML = `
-      <div class="bubble-avatar"><i class="fa-solid fa-robot"></i></div>
+      <div class="bubble-sender-bar">
+        <div class="sender-left">
+          <span class="sender-avatar"><i class="fa-solid fa-robot"></i></span>
+          <span class="sender-name">AI Tutor ${subjectName}</span>
+        </div>
+        ${modelBadge}
+      </div>
       <div class="bubble-content">
-        <p class="ai-p">${SUBJECT_CATALOG[state.currentSubject].welcome}</p>
+        <p class="ai-p">${(SUBJECT_CATALOG[state.currentSubject] && SUBJECT_CATALOG[state.currentSubject].welcome) || 'Halo! Masih bingung dengan konsep atau langkah pengerjaan pada soal ini? Tanyakan langsung di bawah ya!'}</p>
       </div>
     `;
     chatMessages.appendChild(defaultWelcome);
   } else {
     history.forEach(item => {
-      const role = item.role === 'user' ? 'user' : 'ai';
+      const isUser = item.role === 'user';
       const bubble = document.createElement('div');
-      bubble.className = `chat-bubble ${role}`;
-      const icon = role === 'ai' ? 'fa-robot' : 'fa-user';
+      bubble.className = `chat-bubble ${isUser ? 'user' : 'ai'}`;
 
-      const contentHtml = role === 'ai'
-        ? formatAiMessage(item.content)
-        : `<p class="ai-p">${item.content.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>')}</p>`;
-
-      bubble.innerHTML = `
-        <div class="bubble-avatar"><i class="fa-solid ${icon}"></i></div>
-        <div class="bubble-content">${contentHtml}</div>
-      `;
+      if (isUser) {
+        const userText = item.content.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
+        bubble.innerHTML = `<div class="bubble-content"><p class="ai-p">${userText}</p></div>`;
+      } else {
+        const contentHtml = formatAiMessage(item.content);
+        const answeringModel = cleanModelName(item.model || activeModelDisplay);
+        const modelBadge = `<span class="tutor-model-badge" title="Model AI Penjawab: ${_escHtml(answeringModel)}"><i class="fa-solid fa-microchip"></i> ${_escHtml(answeringModel)}</span>`;
+        bubble.innerHTML = `
+          <div class="bubble-sender-bar">
+            <div class="sender-left">
+              <span class="sender-avatar"><i class="fa-solid fa-robot"></i></span>
+              <span class="sender-name">AI Tutor ${subjectName}</span>
+            </div>
+            ${modelBadge}
+          </div>
+          <div class="bubble-content">${contentHtml}</div>
+        `;
+      }
       chatMessages.appendChild(bubble);
     });
   }
@@ -1025,10 +2150,59 @@ async function syncTutorConversation() {
       state.tutorMsgs = data.messages || [];
       state.tutorConvId = data.conversation_id || null;
       state.tutorProvider = data.provider || null;
+      if (data.provider) {
+        syncModelSelectorUI(data.provider);
+      }
+      if (data.quota) {
+        updateTutorQuotaUI(data.quota);
+        if (data.quota.cooldown_remaining > 0) {
+          startTutorCooldown(data.quota.cooldown_remaining);
+        }
+      }
       renderChatHistory(q);
+      const chatMessages = document.getElementById('chatMessages');
+      if (chatMessages) renderMath(chatMessages);
     }
   } catch (err) {
     console.warn('Sync percakapan tutor gagal (server tidak dijangkau):', err);
+  }
+}
+
+// Model Selector UI Helpers (tanpa emoji, sinkronisasi instan)
+function changeTutorModel(val) {
+  state.selectedTutorModel = val;
+  try {
+    localStorage.setItem('tka_tutor_model', val);
+  } catch (e) {}
+  const sel = document.getElementById('aiTutorModelSelect');
+  if (sel && sel.value !== val) sel.value = val;
+  const q = getCurrentQuestion();
+  if (q) {
+    renderChatHistory(q);
+  }
+}
+
+function syncModelSelectorUI(provider) {
+  const sel = document.getElementById('aiTutorModelSelect');
+  if (!sel) return;
+  if (provider && provider.model_options && provider.model_options.length > 0) {
+    const currentVal = state.selectedTutorModel || 'qwen-groq';
+    sel.innerHTML = provider.model_options.map(opt =>
+      `<option value="${opt.id}" ${opt.id === currentVal ? 'selected' : ''}>${_escHtml(cleanModelName(opt.name))}</option>`
+    ).join('');
+  }
+  let saved = localStorage.getItem('tka_tutor_model');
+  // Migrasi: 'gemini-flash' adalah default lama sebelum Groq menjadi rute utama
+  // tutor — dianggap bukan pilihan sadar agar default baru berlaku.
+  if (saved === 'gemini-flash') {
+    try { localStorage.removeItem('tka_tutor_model'); } catch (e) {}
+    saved = null;
+  }
+  if (saved && Array.from(sel.options).some(o => o.value === saved)) {
+    state.selectedTutorModel = saved;
+    sel.value = saved;
+  } else if (sel.options.length > 0) {
+    state.selectedTutorModel = sel.value;
   }
 }
 
@@ -1064,6 +2238,14 @@ function sendQuickPrompt(promptText) {
 async function sendChatMessage(e) {
   if (e && e.preventDefault) e.preventDefault();
 
+  if (_cooldownTimer) {
+    return; // Abaikan saat masih dalam cooldown 10 detik
+  }
+  if (state.tutorQuota && state.tutorQuota.remaining <= 0) {
+    alert("Kuota harian bertanya kamu telah habis. Berlangganan untuk mendapatkan 100 pertanyaan per hari!");
+    return;
+  }
+
   const input = document.getElementById('chatInput');
   const msg = input.value.trim();
   if (!msg) return;
@@ -1086,12 +2268,19 @@ async function sendChatMessage(e) {
   // Show typing indicator
   const chatMessages = document.getElementById('chatMessages');
   const typingBubble = document.createElement('div');
+  const subjectName = (SUBJECT_CATALOG[state.currentSubject] && SUBJECT_CATALOG[state.currentSubject].name) || 'TKA';
   typingBubble.className = 'chat-bubble ai typing-indicator';
   typingBubble.id = 'aiTypingBubble';
   typingBubble.innerHTML = `
-    <div class="bubble-avatar"><i class="fa-solid fa-robot"></i></div>
+    <div class="bubble-sender-bar">
+      <div class="sender-left">
+        <span class="sender-avatar"><i class="fa-solid fa-robot"></i></span>
+        <span class="sender-name">AI Tutor ${subjectName}</span>
+      </div>
+      <span class="tutor-model-badge" title="Model Sedang Menjawab"><i class="fa-solid fa-microchip"></i> ${_escHtml(cleanModelName(state.selectedTutorModel))}</span>
+    </div>
     <div class="bubble-content" style="color: var(--text-muted); font-style: italic;">
-      <i class="fa-solid fa-circle-notch fa-spin"></i> AI Tutor sedang menyusun penjelasan...
+      <i class="fa-solid fa-circle-notch fa-spin"></i> Sedang menyusun penjelasan...
     </div>
   `;
   chatMessages.appendChild(typingBubble);
@@ -1109,6 +2298,7 @@ async function sendChatMessage(e) {
         paket: state.currentPkg,
         nomor: q.nomor,
         message: msg,
+        model: state.selectedTutorModel || 'gemini-flash',
         request_id: clientRequestId
       })
     });
@@ -1117,16 +2307,39 @@ async function sendChatMessage(e) {
     const typingEl = document.getElementById('aiTypingBubble');
     if (typingEl) typingEl.remove();
 
-    if (data.status === 'success' && data.reply) {
-      state.tutorMsgs.push({ role: 'assistant', content: data.reply });
-      renderChatHistory(q);
-      renderMath();
-    } else {
-      // LLM gagal / error server: pesan user sudah tersimpan; tampilkan
-      // error jujur + tombol coba lagi (TIDAK ada balasan palsu).
+    if (data.quota) {
+      updateTutorQuotaUI(data.quota);
+    }
+
+    if (res.status === 429) {
+      if (data.reason === 'cooldown' && data.wait_seconds) {
+        startTutorCooldown(data.wait_seconds);
+      }
       state.tutorMsgs.push({
         role: 'assistant',
-        content: '⚠️ ' + (data.message || 'Terjadi kendala saat menghubungi AI.'),
+        content: data.message || 'Harap tunggu beberapa detik sebelum mengirim pertanyaan berikutnya.',
+        error: true
+      });
+      renderChatHistory(q);
+      return;
+    }
+
+    if (data.status === 'success' && data.reply) {
+      state.tutorMsgs.push({
+        role: 'assistant',
+        content: data.reply,
+        model: cleanModelName(data.model || state.selectedTutorModel)
+      });
+      renderChatHistory(q);
+      const chatMessages = document.getElementById('chatMessages');
+      if (chatMessages) renderMath(chatMessages);
+
+      // Mulai cooldown 10 detik antar pertanyaan
+      startTutorCooldown(10);
+    } else {
+      state.tutorMsgs.push({
+        role: 'assistant',
+        content: data.message || 'Terjadi kendala saat menghubungi AI.',
         error: true
       });
       renderChatHistory(q);
@@ -1143,7 +2356,10 @@ async function sendChatMessage(e) {
     });
     renderChatHistory(q);
   } finally {
-    btnSend.disabled = false;
+    if (!_cooldownTimer && (!state.tutorQuota || state.tutorQuota.remaining > 0)) {
+      btnSend.disabled = false;
+      btnSend.innerHTML = '<i class="fa-solid fa-paper-plane"></i>';
+    }
   }
 }
 
@@ -1179,7 +2395,7 @@ function renderSimilarQuestion(q) {
     return;
   }
 
-  promptEl.innerText = sim.pertanyaan || '';
+  promptEl.innerHTML = _fmtText(sim.pertanyaan || '');
   optsEl.innerHTML = '';
 
   const savedSim = (state.simAnswers[pkgKey()] || {})[q.nomor];
@@ -1197,11 +2413,15 @@ function renderSimilarQuestion(q) {
     item.appendChild(ind);
 
     const txt = document.createElement('span');
-    txt.innerText = opt.text;
+    txt.innerHTML = _fmtText(opt.text);
     item.appendChild(txt);
 
     optsEl.appendChild(item);
   });
+
+  // Render rumus KaTeX pada prompt & opsi soal serupa (teks di-escape via _fmtText).
+  renderMath(promptEl);
+  renderMath(optsEl);
 
   if (savedSim && savedSim.checked) {
     evaluateSimilarDisplay(sim, savedSim.selected);
@@ -1266,13 +2486,13 @@ function evaluateSimilarDisplay(sim, selectedKey) {
     fb.className = 'sim-feedback success';
     fb.innerHTML = `
       <div style="font-weight: 700; margin-bottom: 4px;"><i class="fa-solid fa-circle-check"></i> Jawaban Latihan Benar! (Opsi ${sim.kunci})</div>
-      <div>${sim.pembahasan}</div>
+      <div>${_fmtText(sim.pembahasan || sim.pembahasan_singkat || '')}</div>
     `;
   } else {
     fb.className = 'sim-feedback danger';
     fb.innerHTML = `
       <div style="font-weight: 700; margin-bottom: 4px;"><i class="fa-solid fa-circle-xmark"></i> Jawaban Latihan Belum Tepat. Kunci: Opsi ${sim.kunci}</div>
-      <div>${sim.pembahasan}</div>
+      <div>${_fmtText(sim.pembahasan || sim.pembahasan_singkat || '')}</div>
     `;
   }
   renderMath();
@@ -1298,12 +2518,23 @@ function navigateQuestion(delta) {
 // ==================== ALUR SELESAI TES & REVIU HASIL ====================
 
 function openFinishModal() {
-  const total = state.pkgData[pkgKey()].soal.length;
-  const answered = state.pkgData[pkgKey()].soal.filter(isQuestionAnswered).length;
-  document.getElementById('finishSummaryText').innerText =
-    `Kamu sudah menjawab ${answered} dari ${total} soal. ` +
-    `Terimakasih telah berpartisipasi dalam tes ini. Tekan SELESAI TES untuk melihat reviu hasil, ` +
-    `atau KEMBALI untuk melanjutkan mengerjakan.`;
+  const pkg = state.pkgData[pkgKey()];
+  if (!pkg || !pkg.soal) return;
+  const total = pkg.soal.length;
+  const answered = pkg.soal.filter(isQuestionAnswered).length;
+  const ragu = Object.values(state.raguStatus[pkgKey()] || {}).filter(Boolean).length;
+  const belum = total - answered;
+
+  let msg = `Kamu telah menjawab <strong>${answered}</strong> dari <strong>${total}</strong> soal.`;
+  if (ragu > 0) {
+    msg += `<br><span style="color:#f59e0b;"><i class="fa-solid fa-triangle-exclamation"></i> Masih ada <strong>${ragu}</strong> soal ditandai ragu-ragu.</span>`;
+  }
+  if (belum > 0) {
+    msg += `<br><span style="color:#ef4444;"><i class="fa-solid fa-circle-exclamation"></i> Ada <strong>${belum}</strong> soal yang belum dijawab.</span>`;
+  }
+  msg += `<br><br>Apakah kamu yakin ingin menyelesaikan tes ini dan melihat reviu hasil nilai beserta seluruh kunci jawaban resmi TKA?`;
+
+  document.getElementById('finishSummaryText').innerHTML = msg;
   document.getElementById('modalKonfirmasiSelesai').classList.add('open');
 }
 
@@ -1311,12 +2542,11 @@ function closeFinishModal() {
   document.getElementById('modalKonfirmasiSelesai').classList.remove('open');
 }
 
-// Evaluasi satu soal -> { status: 'benar'|'salah'|'kosong' }
-// B/S dinilai per pernyataan; PG per soal (sesuai mekanisme resmi)
+// Evaluasi satu soal -> { type: 'bs'|'pg', status: 'benar'|'salah'|'kosong', perStatement? }
 function evaluateQuestion(item) {
   const ans = (state.userAnswers[pkgKey()] || {})[item.nomor];
 
-  if (item.tipe_soal === 'Benar-Salah' || item.tipe_soal === 'Pernyataan-Label') {
+  if (statementType(item)) {
     const stmts = item.pernyataan || [];
     const results = stmts.map(st => {
       const picked = (ans && typeof ans === 'object' && !Array.isArray(ans)) ? ans[st.key] : null;
@@ -1330,11 +2560,12 @@ function evaluateQuestion(item) {
   if (!isQuestionAnswered(item)) return { type: 'pg', status: 'kosong' };
 
   const correctKey = item.kunci_jawaban;
-  const isComplex = item.tipe_soal === 'Pilihan Ganda Kompleks';
+  const isComplex = (item.tipe_soal === 'Pilihan Ganda Kompleks' || item.tipe === 'Pilihan Ganda Kompleks' || (Array.isArray(item.kunci_jawaban) && !statementType(item)));
   let isCorrect;
   if (isComplex) {
-    const target = Array.isArray(correctKey) ? [...correctKey].sort().join(',') : String(correctKey);
-    isCorrect = [...ans].sort().join(',') === target;
+    const target = Array.isArray(correctKey) ? [...correctKey].sort().join(',') : String(correctKey || '');
+    const user = Array.isArray(ans) ? [...ans].sort().join(',') : String(ans || '');
+    isCorrect = user === target;
   } else {
     isCorrect = ans === correctKey;
   }
@@ -1347,61 +2578,129 @@ function selesaiTes() {
 }
 
 function renderReviewHasil() {
-  const soalList = state.pkgData[pkgKey()].soal;
+  const pkg = state.pkgData[pkgKey()];
+  if (!pkg || !pkg.soal) return;
+  const soalList = pkg.soal;
+  const subjectMeta = SUBJECT_CATALOG[state.currentSubject] || {};
+  const pkgPath = (subjectMeta.imgBase && subjectMeta.imgBase[state.currentPkg]) || `data/${state.currentSubject}/paket_${state.currentPkg}/`;
   let benar = 0, salah = 0, kosong = 0;
   const rows = [];
 
-  soalList.forEach(item => {
+  soalList.forEach((item, idx) => {
     const res = evaluateQuestion(item);
     const ans = (state.userAnswers[pkgKey()] || {})[item.nomor];
 
+    let statusHtml = '';
     let andaHtml = '<span class="review-empty">Belum dijawab</span>';
     let kunciHtml = '';
-    let counts;
+
+    // Ambil cuplikan opsi teks/latex/image jika ada
+    const getOptSnippet = (k) => {
+      const opt = (item.pilihan_jawaban || []).find(o => o.key === k);
+      if (!opt) return '';
+      if (opt.text && opt.text.trim()) return opt.text.trim();
+      if (opt.latex) return `$${opt.latex}$`;
+      if (opt.image) {
+        let base = pkgPath.endsWith('/') ? pkgPath : `${pkgPath}/`;
+        let rel = (opt.image.rel_path || `images/${opt.image.filename}`).replace(/^\.?\//, '');
+        if (base.endsWith('images/') && rel.startsWith('images/')) {
+          rel = rel.substring(7);
+        }
+        return `<img src="${base}${rel}" alt="Opsi ${k}" style="max-height:48px; max-width:140px; vertical-align:middle; border-radius:4px; border:1px solid #cbd5e1; background:#fff; padding:2px; display:inline-block;" />`;
+      }
+      return '';
+    };
 
     if (res.type === 'bs') {
       const kunciMap = parseBsKunci(item);
-      counts = { benar: 0, salah: 0, kosong: 0 };
-      res.perStatement.forEach(st => counts[st === 'benar' ? 'benar' : st === 'salah' ? 'salah' : 'kosong']++);
-      // untuk agregat: setiap pernyataan dihitung satu item
-      const partsAnda = (item.pernyataan || []).map(st => {
-        const picked = (ans && typeof ans === 'object' && !Array.isArray(ans)) ? ans[st.key] : null;
-        return `${st.key} (${picked || '&mdash;'})`;
-      });
-      const partsKunci = (item.pernyataan || []).map(st => `${st.key} (${kunciMap[st.key] || '&mdash;'})`);
-      andaHtml = partsAnda.join('<br>');
-      kunciHtml = partsKunci.join('<br>');
-      benar += counts.benar;
-      salah += counts.salah;
-      kosong += counts.kosong;
-    } else {
-      if (res.status === 'kosong') {
+      const stmts = item.pernyataan || [];
+      const hasAnyAnswer = stmts.some(st => ans && typeof ans === 'object' && !Array.isArray(ans) && ans[st.key]);
+      const allCorrect = res.perStatement.length > 0 && res.perStatement.every(s => s === 'benar');
+
+      if (!hasAnyAnswer) {
         kosong++;
-      } else if (res.status === 'benar') {
+        statusHtml = '<span class="review-status-badge badge-kosong"><i class="fa-regular fa-circle"></i> Kosong</span>';
+      } else if (allCorrect) {
         benar++;
+        statusHtml = '<span class="review-status-badge badge-benar"><i class="fa-solid fa-check"></i> Benar</span>';
       } else {
         salah++;
+        statusHtml = '<span class="review-status-badge badge-salah"><i class="fa-solid fa-xmark"></i> Salah</span>';
       }
-      const label = Array.isArray(ans) ? ans.join(', ') : (ans || null);
-      andaHtml = label ? `<span class="review-ans">${label}</span>` : '<span class="review-empty">Belum dijawab</span>';
-      const kl = Array.isArray(item.kunci_jawaban) ? item.kunci_jawaban.join(', ') : item.kunci_jawaban;
-      kunciHtml = `<span class="review-key">${kl}</span>`;
+
+      const partsAnda = stmts.map(st => {
+        const picked = (ans && typeof ans === 'object' && !Array.isArray(ans)) ? ans[st.key] : null;
+        if (!picked) {
+          return `<strong>${st.key}</strong> (&mdash;)`;
+        }
+        const isRight = picked === kunciMap[st.key];
+        const color = isRight ? '#059669' : '#dc2626';
+        return `<strong>${st.key}</strong> (<span style="color:${color}; font-weight:700;">${picked}</span>)`;
+      });
+
+      const partsKunci = stmts.map(st => {
+        return `<strong>${st.key}</strong> (<span style="color:#059669; font-weight:700;">${kunciMap[st.key] || '&mdash;'}</span>)`;
+      });
+
+      andaHtml = `<div class="review-ans-multiline">${partsAnda.join('<br>')}</div>`;
+      kunciHtml = `<div class="review-key-multiline">${partsKunci.join('<br>')}</div>`;
+    } else {
+      // Pilihan Ganda Biasa & Kompleks
+      if (res.status === 'kosong') {
+        kosong++;
+        statusHtml = '<span class="review-status-badge badge-kosong"><i class="fa-regular fa-circle"></i> Kosong</span>';
+      } else if (res.status === 'benar') {
+        benar++;
+        statusHtml = '<span class="review-status-badge badge-benar"><i class="fa-solid fa-check"></i> Benar</span>';
+      } else {
+        salah++;
+        statusHtml = '<span class="review-status-badge badge-salah"><i class="fa-solid fa-xmark"></i> Salah</span>';
+      }
+
+      if (Array.isArray(ans) && ans.length > 0) {
+        const itemsAnda = ans.map(k => {
+          const snip = getOptSnippet(k);
+          return `<strong>(${k})</strong>${snip ? ` ${snip}` : ''}`;
+        });
+        andaHtml = `<span class="review-ans">${itemsAnda.join('<br>')}</span>`;
+      } else if (typeof ans === 'string' && ans) {
+        const snip = getOptSnippet(ans);
+        andaHtml = `<span class="review-ans"><strong>(${ans})</strong>${snip ? ` ${snip}` : ''}</span>`;
+      } else {
+        andaHtml = '<span class="review-empty">Belum dijawab</span>';
+      }
+
+      const correctKey = item.kunci_jawaban;
+      if (Array.isArray(correctKey)) {
+        const itemsKunci = correctKey.map(k => {
+          const snip = getOptSnippet(k);
+          return `<strong>(${k})</strong>${snip ? ` ${snip}` : ''}`;
+        });
+        kunciHtml = `<span class="review-key">${itemsKunci.join('<br>')}</span>`;
+      } else if (typeof correctKey === 'string' && correctKey) {
+        const snip = getOptSnippet(correctKey);
+        kunciHtml = `<span class="review-key"><strong>(${correctKey})</strong>${snip ? ` ${snip}` : ''}</span>`;
+      } else {
+        kunciHtml = '<span class="review-key">&mdash;</span>';
+      }
     }
 
     rows.push(`
-      <tr onclick="reviewJumpTo(${item.nomor - 1})" title="Klik untuk review soal ini">
+      <tr onclick="reviewJumpTo(${idx})" title="Klik untuk membuka pembahasan soal nomor ${item.nomor}">
         <td class="review-no">${item.nomor}</td>
+        <td>${statusHtml}</td>
         <td>${andaHtml}</td>
         <td>${kunciHtml}</td>
       </tr>
     `);
   });
 
-  const totalItems = benar + salah + kosong;
-  const persen = totalItems ? Math.round((benar / totalItems) * 100) : 0;
+  const totalQuestions = soalList.length;
+  const persen = totalQuestions ? Math.round((benar / totalQuestions) * 100) : 0;
 
+  const subjName = (SUBJECT_CATALOG[state.currentSubject] && SUBJECT_CATALOG[state.currentSubject].name) || state.currentSubject;
   document.getElementById('reviewMetaText').innerText =
-    `${SUBJECT_CATALOG[state.currentSubject].name} — Paket ${state.currentPkg}`;
+    `${subjName} — Paket ${state.currentPkg} (${totalQuestions} Soal)`;
   document.getElementById('reviewScoreBenar').innerText = benar;
   document.getElementById('reviewScoreSalah').innerText = salah;
   document.getElementById('reviewScoreKosong').innerText = kosong;
@@ -1411,6 +2710,9 @@ function renderReviewHasil() {
   document.getElementById('reviewTableBody').innerHTML = rows.join('');
 
   document.getElementById('reviewHasilOverlay').classList.add('open');
+
+  // Trigger KaTeX untuk render rumus matematika di tabel hasil
+  renderMath(document.getElementById('reviewTableBody'));
 }
 
 // Klik baris reviu -> lompat ke soal terkait (pembahasan terbuka)
@@ -1520,11 +2822,12 @@ window.addEventListener('beforeunload', (e) => {
   }
 });
 
-// Trigger KaTeX math formula rendering
-function renderMath() {
+// Trigger KaTeX math formula rendering (Targeted for fast 60fps rendering)
+function renderMath(targetEl) {
   if (window.renderMathInElement) {
     try {
-      renderMathInElement(document.body, {
+      const container = targetEl || document.querySelector('.main-container') || document.body;
+      renderMathInElement(container, {
         delimiters: [
           { left: '$$', right: '$$', display: true },
           { left: '$', right: '$', display: false },
@@ -1538,3 +2841,51 @@ function renderMath() {
     }
   }
 }
+
+
+// Image Lightbox Zoom Modal (Pinch & Button Zoom Support)
+let currentLightboxScale = 1;
+
+function openImageLightbox(src, caption) {
+  const modal = document.getElementById('imageLightboxModal');
+  const img = document.getElementById('lightboxImg');
+  const cap = document.getElementById('lightboxCaption');
+  if (!modal || !img) return;
+  img.src = src;
+  currentLightboxScale = 1;
+  img.style.transform = 'scale(1)';
+  if (cap) cap.innerText = caption || 'Pratinjau Gambar';
+  modal.classList.add('open');
+}
+
+function closeImageLightbox(e) {
+  if (e && e.target && (e.target.id === 'lightboxImg' || e.target.closest('.lightbox-toolbar'))) return;
+  const modal = document.getElementById('imageLightboxModal');
+  if (modal) {
+    modal.classList.remove('open');
+    resetLightboxZoom();
+  }
+}
+
+function zoomLightbox(delta) {
+  const img = document.getElementById('lightboxImg');
+  if (!img) return;
+  currentLightboxScale = Math.min(Math.max(0.5, currentLightboxScale + delta), 3.5);
+  img.style.transform = `scale(${currentLightboxScale})`;
+}
+
+function resetLightboxZoom() {
+  const img = document.getElementById('lightboxImg');
+  if (!img) return;
+  currentLightboxScale = 1;
+  img.style.transform = 'scale(1)';
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const modal = document.getElementById('imageLightboxModal');
+    if (modal && modal.classList.contains('open')) {
+      closeImageLightbox();
+    }
+  }
+});

@@ -1,0 +1,90 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Sejarah (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: B
+Stimulus Teks: Sejarawan R. Moh. Ali mendefinisikan sejarah sebagai ilmu yang menyelidiki perkembangan mengenai peristiwa dan kejadian di masa lampau.
+Pertanyaan: Berdasarkan pengertian tersebut, apa ciri utama sejarah sebagai ilmu?
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: ['B']
+Stimulus Teks: Kerajaan-kerajaan Islam di Indonesia, seperti Demak, Aceh, Mataram Islam, dan Ternate-Tidore, telah memberikan pengaruh besar terhadap perkembangan budaya masyarakat. Pengaruh tersebut tidak hanya tampak dalam sistem pemerintahan dan arsitektur, tetapi juga dalam tradisi, seni pertunjukan, dan upacara keagamaan yang masih dilestarikan hingga kini. Beberapa tradisi dan kesenian yang berkembang pada masa kerajaan Islam tetap hidup sebagai warisan budaya yang terus dipertahankan oleh masyarakat.
+Pertanyaan: Manakah yang merupakan peninggalan budaya dari masa kerajaan Islam yang masih berlanjut di masa kini?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+Stimulus Teks: Sultan Hasanuddin merupakan salah satu penguasa lokal yang tidak mau tunduk pada monopoli dagang VOC sehingga menimbulkan konflik bersenjata selama beberapa tahun. Pada akhirnya VOC berhasil memaksa Sultan Hasanuddin untuk melakukan perundingan di Bongaya pada 18 November 1667. Isi perjanjian tersebut membatasi wilayah kekuasaan Kesultanan Gowa dan memperkuat kedudukan VOC.
+Pertanyaan: Pilihlah Tepat atau Tidak Tepat pada pernyataan berikut yang menggambarkan kondisi konflik GOWA dengan VOC!
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: E
+Stimulus Teks: Pada masa-masa akhir pendudukannya di Indonesia, Jepang semakin terdesak dalam Perang Asia Timur Raya. Untuk memperoleh dukungan rakyat Indonesia, Jepang menjanjikan kemerdekaan dan membentuk BPUPK sebagai langkah awal persiapan. BPUPK kemudian menjadi forum penting bagi tokoh-tokoh bangsa dalam merumuskan dasar negara dan arah masa depan Indonesia.
+Pertanyaan: Dari berbagai latar belakang politik dan militer saat itu, pilih yang menjadi alasan paling tepat dan mendalam bagi Jepang membentuk BPUPK?
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+Stimulus Teks: Pada masa Demokrasi Liberal, Indonesia mengalami ketidakstabilan politik akibat sering bergantinya kabinet. Untuk mengatasi hal ini, pemerintah mengeluarkan UU No. 7 Tahun 1953 yang mengatur pelaksanaan Pemilu 1955. Pemilu tersebut menjadi tonggak penting dalam sejarah demokrasi Indonesia karena melibatkan partisipasi politik yang luas. Hasilnya menunjukkan adanya keberagaman kekuatan politik dan tantangan dalam mewujudkan stabilitas pemerintahan.
+Pertanyaan: Pada peristiwa Pemilu 1955 pada masa Demokrasi Liberal, manakah pernyataan berikut yang menggambarkan perkembangan politik Indonesia saat itu?
+
+Pilihlah Tepat atau Tidak Tepat untuk setiap pernyataan yang menggambarkan perkembangan politik tahun 1995!
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: ['A', 'C', 'D']
+Stimulus Teks: Pada akhir masa pemerintahan Presiden Soeharto, Indonesia mengalami krisis multidimensi. Krisis ekonomi akibat utang luar negeri yang besar, kekeringan karena El Nino, dan kebakaran hutan memperburuk situasi. Tekanan dari dalam negeri dan luar negeri mendorong desakan agar Indonesia segera melakukan reformasi. Puncaknya, Soeharto mengundurkan diri pada 21 Mei 1998.
+Pertanyaan: Sebutkan faktor-faktor utama penyebab lahirnya Reformasi di Indonesia pada tahun 1998! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: ['B', 'D', 'E']
+Stimulus Teks: Peristiwa Proklamasi Kemerdekaan Indonesia pada 17 Agustus 1945 merupakan tonggak sejarah yang penting dan monumental. Untuk memahami peristiwa tersebut secara akurat, sejarawan menggunakan sumber primer, yaitu bukti langsung yang berasal dari masa terjadinya peristiwa atau semua yang dibuat pada saat kejadian berlangsung, bukan yang ditulis atau diproduksi jauh setelahnya.
+Pertanyaan: Manakah yang merupakan sumber sejarah primer dalam peristiwa Proklamasi 17 Agustus 1945?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: E
+Stimulus Teks: Kesultanan Aceh merupakan salah satu kerajaan bercorak Islam di Nusantara. Kerajaan ini mencapai puncak kejayaannya dalam bidang ekonomi pada abad ke-16. Letaknya di Selat Malaka membuat kapal-kapal dagang dari Arab, India, dan Tiongkok banyak yang singgah di pelabuhan yang dikuasai Kesultanan Aceh. Beberapa komoditas unggulan dari kerajaan ini adalah lada dan kapur barus yang banyak dicari oleh pedagang asing.
+Pertanyaan: Berdasarkan informasi diatas, apa yang menyebabkan ekonomi Kesultanan Aceh pada abad ke-16 berkembang pesat?
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: ['A']
+Stimulus Teks: Bangsa Indonesia melakukan berbagai perlawanan terhadap Belanda sebelum abad ke-20. Karakteristik dan strategi perlawanan pada masa tersebut berbeda-beda, bergantung pada tokoh yang memimpin dan kondisi lokal di masing-masing daerah.
+Pertanyaan: Berdasarkan informasi tersebut, manakah yang menunjukkan karakteristik dalam strategi perlawanan terhadap Belanda sebelum abad ke-20?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: ['A:Tidak Tepat', 'B:Tepat', 'C:Tepat']
+Stimulus Teks: Perlawanan terhadap pendudukan Jepang muncul di berbagai daerah, termasuk pemberontakan PETA di Blitar dan perlawanan rakyat Kalimantan Barat. Meskipun pada akhirnya berhasil dipadamkan, aksi-aksi tersebut menunjukkan bentuk perlawanan aktif rakyat Indonesia terhadap kekejaman dan penindasan Jepang.
+Pertanyaan: Bagaimana strategi perlawanan yang dilakukan bangsa Indonesia terhadap Jepang yang sesuai dengan teks tersebut?
+
+Tentukan Tepat dan Tidak Tepat pada setiap pernyataan berikut terkait strategi perlawanan!
+

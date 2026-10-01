@@ -137,12 +137,12 @@ def test_question_counts_match_raw(canonical_docs):
         assert canonical_docs[slug]["total_questions"] == n
 
 
-def test_graded_items_total_259(canonical_docs):
+def test_graded_items_total_277(canonical_docs):
     total = 0
     for doc in canonical_docs.values():
         for q in doc["questions"]:
             total += 1 if q["type"] in ("PG", "PGK") else len(q["statements"])
-    assert total == 259
+    assert total == 277
 
 
 def test_type_distribution_preserved(canonical_docs):
@@ -150,7 +150,7 @@ def test_type_distribution_preserved(canonical_docs):
     for doc in canonical_docs.values():
         for q in doc["questions"]:
             dist[q["type"]] = dist.get(q["type"], 0) + 1
-    assert dist == {"PG": 117, "PGK": 61, "BS": 22, "LABEL": 5}
+    assert dist == {"PG": 121, "PGK": 63, "BS": 26, "LABEL": 5}
 
 
 def test_official_answers_match_learning_keys(canonical_docs):

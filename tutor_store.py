@@ -49,7 +49,7 @@ def _load_secret():
     s = secrets.token_hex(32)
     with open(_SECRET_PATH, "wb") as f:
         f.write(s.encode())
-    return s
+    return s.encode("utf-8")
 
 
 def _load_secret_cached():
@@ -137,6 +137,15 @@ def init_db():
                 CREATE UNIQUE INDEX IF NOT EXISTS ux_msg_request
                     ON ai_tutor_messages(conversation_id, request_id)
                     WHERE request_id IS NOT NULL;
+                CREATE TABLE IF NOT EXISTS ai_tutor_users (
+                    user_key           TEXT PRIMARY KEY,
+                    tier               TEXT NOT NULL DEFAULT 'free',
+                    daily_date         TEXT,
+                    daily_count        INTEGER NOT NULL DEFAULT 0,
+                    last_request_time  REAL NOT NULL DEFAULT 0,
+                    created_at         TEXT NOT NULL,
+                    updated_at         TEXT NOT NULL
+                );
                 """
             )
 
@@ -260,7 +269,197 @@ def get_messages(conversation_id, limit=None):
         rows = [dict(r) for r in conn.execute(q, (conversation_id,)).fetchall()]
     if limit:
         rows.reverse()
+    for r in rows:
+        meta_str = r.get("metadata")
+        if meta_str and isinstance(meta_str, str):
+            try:
+                r["meta_parsed"] = json.loads(meta_str)
+            except Exception:
+                r["meta_parsed"] = {}
+        else:
+            r["meta_parsed"] = meta_str or {}
+        r["model"] = r["meta_parsed"].get("model")
     return rows
+
+
+# ---------------------------------------------------------------------------
+# Kuota Pertanyaan & Cooldown Anti-Spam (Database Per Pengguna)
+# ---------------------------------------------------------------------------
+FREE_DAILY_LIMIT = 10
+SUBSCRIBER_DAILY_LIMIT = 100
+QUESTION_COOLDOWN_SECONDS = 10
+
+
+def get_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
+    """Ambil informasi kuota & sisa cooldown pengguna tanpa mengonsumsi kuota."""
+    now = time.time()
+    today = time.strftime("%Y-%m-%d")
+    with _db() as conn:
+        row = conn.execute(
+            "SELECT * FROM ai_tutor_users WHERE user_key=?", (user_key,)
+        ).fetchone()
+        if not row:
+            tier = "free"
+            daily_count = 0
+            last_req = 0.0
+        else:
+            u = dict(row)
+            tier = u.get("tier") or "free"
+            daily_date = u.get("daily_date")
+            daily_count = u.get("daily_count") or 0
+            if daily_date != today:
+                daily_count = 0
+            last_req = float(u.get("last_request_time") or 0)
+
+    limit = SUBSCRIBER_DAILY_LIMIT if tier == "subscriber" else FREE_DAILY_LIMIT
+    elapsed = now - last_req
+    cooldown_rem = max(0.0, round(cooldown_seconds - elapsed, 1)) if last_req > 0 else 0.0
+
+    return {
+        "user_key": user_key,
+        "tier": tier,
+        "is_subscriber": tier == "subscriber",
+        "daily_count": daily_count,
+        "daily_limit": limit,
+        "remaining": max(0, limit - daily_count),
+        "cooldown_seconds": cooldown_seconds,
+        "cooldown_remaining": cooldown_rem,
+        "can_ask": daily_count < limit and cooldown_rem <= 0,
+    }
+
+
+def reset_user_quota(user_key):
+    """Reset kuota harian dan cooldown pengguna ke 0 (khusus mode admin testing / dev)."""
+    with _lock:
+        with _db() as conn:
+            conn.execute(
+                "UPDATE ai_tutor_users SET daily_count=0, last_request_time=0, updated_at=? WHERE user_key=?",
+                (_now(), user_key),
+            )
+    return get_user_quota(user_key)
+
+
+def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
+    """Cek dan konsumsi kuota pertanyaan pengguna.
+
+    Aturan:
+      1. Cooldown antar pertanyaan: default 10 detik.
+      2. Kuota harian:
+         - Free: 10 pertanyaan / hari
+         - Subscriber: 100 pertanyaan / hari
+    Mengembalikan tuple: (allowed: bool, reason: str|None, wait_seconds: float, quota_info: dict)
+    reason: None | 'cooldown' | 'quota_exceeded'
+    """
+    is_test = bool(os.environ.get("PYTEST_CURRENT_TEST"))
+    now = time.time()
+    today = time.strftime("%Y-%m-%d")
+
+    with _lock:
+        with _db() as conn:
+            row = conn.execute(
+                "SELECT * FROM ai_tutor_users WHERE user_key=?", (user_key,)
+            ).fetchone()
+            if not row:
+                conn.execute(
+                    "INSERT INTO ai_tutor_users "
+                    "(user_key, tier, daily_date, daily_count, last_request_time, created_at, updated_at) "
+                    "VALUES (?, 'free', ?, 0, 0, ?, ?)",
+                    (user_key, today, _now(), _now()),
+                )
+                row = conn.execute(
+                    "SELECT * FROM ai_tutor_users WHERE user_key=?", (user_key,)
+                ).fetchone()
+
+            u = dict(row)
+            tier = u.get("tier") or "free"
+            daily_date = u.get("daily_date")
+            daily_count = u.get("daily_count") or 0
+            last_req = float(u.get("last_request_time") or 0)
+
+            # Reset harian bila tanggal berganti
+            if daily_date != today:
+                daily_date = today
+                daily_count = 0
+                conn.execute(
+                    "UPDATE ai_tutor_users SET daily_date=?, daily_count=0, updated_at=? WHERE user_key=?",
+                    (today, _now(), user_key),
+                )
+
+            limit = SUBSCRIBER_DAILY_LIMIT if tier == "subscriber" else FREE_DAILY_LIMIT
+            elapsed = now - last_req
+
+            # 1. Cek jeda cooldown (dilewati saat testing agar suite cepat)
+            if not is_test and elapsed < cooldown_seconds:
+                wait_sec = round(cooldown_seconds - elapsed, 1)
+                quota_info = {
+                    "user_key": user_key,
+                    "tier": tier,
+                    "is_subscriber": tier == "subscriber",
+                    "daily_count": daily_count,
+                    "daily_limit": limit,
+                    "remaining": max(0, limit - daily_count),
+                    "cooldown_seconds": cooldown_seconds,
+                    "cooldown_remaining": wait_sec,
+                    "can_ask": False,
+                }
+                return False, "cooldown", wait_sec, quota_info
+
+            # 2. Cek batas harian (dilewati saat testing agar simulasi riwayat panjang berhasil)
+            if not is_test and daily_count >= limit:
+                quota_info = {
+                    "user_key": user_key,
+                    "tier": tier,
+                    "is_subscriber": tier == "subscriber",
+                    "daily_count": daily_count,
+                    "daily_limit": limit,
+                    "remaining": 0,
+                    "cooldown_seconds": cooldown_seconds,
+                    "cooldown_remaining": 0,
+                    "can_ask": False,
+                }
+                return False, "quota_exceeded", 0, quota_info
+
+            # 3. Berhasil: tambah hitungan & set last_request_time
+            new_count = daily_count + 1
+            conn.execute(
+                "UPDATE ai_tutor_users SET daily_date=?, daily_count=?, last_request_time=?, updated_at=? "
+                "WHERE user_key=?",
+                (today, new_count, now, _now(), user_key),
+            )
+            updated_quota = {
+                "user_key": user_key,
+                "tier": tier,
+                "is_subscriber": tier == "subscriber",
+                "daily_count": new_count,
+                "daily_limit": limit,
+                "remaining": max(0, limit - new_count),
+                "cooldown_seconds": cooldown_seconds,
+                "cooldown_remaining": cooldown_seconds if not is_test else 0,
+                "can_ask": new_count < limit,
+            }
+            return True, None, 0, updated_quota
+
+
+def set_user_tier(user_key, tier):
+    """Set tier pengguna ('free' atau 'subscriber')."""
+    if tier not in ("free", "subscriber"):
+        raise ValueError("Tier harus 'free' atau 'subscriber'")
+    with _lock:
+        with _db() as conn:
+            row = conn.execute("SELECT 1 FROM ai_tutor_users WHERE user_key=?", (user_key,)).fetchone()
+            today = time.strftime("%Y-%m-%d")
+            if not row:
+                conn.execute(
+                    "INSERT INTO ai_tutor_users (user_key, tier, daily_date, daily_count, last_request_time, created_at, updated_at) "
+                    "VALUES (?, ?, ?, 0, 0, ?, ?)",
+                    (user_key, tier, today, _now(), _now()),
+                )
+            else:
+                conn.execute(
+                    "UPDATE ai_tutor_users SET tier=?, updated_at=? WHERE user_key=?",
+                    (tier, _now(), user_key),
+                )
+    return get_user_quota(user_key)
 
 
 def get_history_window(conversation_id, recent_n=12):

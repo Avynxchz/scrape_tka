@@ -1,0 +1,203 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Sejarah (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sejarawan R. Moh. Ali mendefinisikan sejarah sebagai ilmu yang menyelidiki perkembangan mengenai peristiwa dan kejadian di masa lampau.
+
+PERTANYAAN:
+Berdasarkan pengertian tersebut, apa ciri utama sejarah sebagai ilmu?
+OPSI / PERNYATAAN:
+  - A. A. Disusun berdasarkan kesaksian lisan dari para pelaku
+  - B. B. Mengkaji peristiwa masa lalu secara sistematis dan berdasarkan
+  - C. C. Menyelidiki perubahan dan kesinambungan tradisi dalam
+  - D. D. Mempelajari semua peristiwa yang pernah terjadi di masa lampau.
+  - E. E. Menyusun narasi tentang kejadian di masa lalu berdasarkan imajinasi.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Kerajaan-kerajaan Islam di Indonesia, seperti Demak, Aceh, Mataram Islam, dan Ternate-Tidore, telah memberikan pengaruh besar terhadap perkembangan budaya masyarakat. Pengaruh tersebut tidak hanya tampak dalam sistem pemerintahan dan arsitektur, tetapi juga dalam tradisi, seni pertunjukan, dan upacara keagamaan yang masih dilestarikan hingga kini. Beberapa tradisi dan kesenian yang berkembang pada masa kerajaan Islam tetap hidup sebagai warisan budaya yang terus dipertahankan oleh masyarakat.
+
+PERTANYAAN:
+Manakah yang merupakan peninggalan budaya dari masa kerajaan Islam yang masih berlanjut di masa kini?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Upacara Kasada
+  - B. B. Tradisi Sekaten
+  - C. C. Tradisi Trabuik
+  - D. D. Wayang Topeng Malangan
+  - E. E. Tari Reog Ponorogo
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Sultan Hasanuddin merupakan salah satu penguasa lokal yang tidak mau tunduk pada monopoli dagang VOC sehingga menimbulkan konflik bersenjata selama beberapa tahun. Pada akhirnya VOC berhasil memaksa Sultan Hasanuddin untuk melakukan perundingan di Bongaya pada 18 November 1667. Isi perjanjian tersebut membatasi wilayah kekuasaan Kesultanan Gowa dan memperkuat kedudukan VOC.
+
+PERTANYAAN:
+Pilihlah Tepat atau Tidak Tepat pada pernyataan berikut yang menggambarkan kondisi konflik GOWA dengan VOC!
+OPSI / PERNYATAAN:
+  - A. VOC berusaha melemahkan Gowa karena posisinya yang strategis dalam perdagangan di kawasan timur kepulauan Nusantara.
+  - B. Sultan Hasanuddin bersedia menandatangani Perjanjian Bongaya untuk memperoleh konsesi dagang yang lebih luas.
+  - C. Perjanjian Bongaya memperkuat kedudukan VOC dalam monopoli perdagangan di Nusantara.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada masa-masa akhir pendudukannya di Indonesia, Jepang semakin terdesak dalam Perang Asia Timur Raya. Untuk memperoleh dukungan rakyat Indonesia, Jepang menjanjikan kemerdekaan dan membentuk BPUPK sebagai langkah awal persiapan. BPUPK kemudian menjadi forum penting bagi tokoh-tokoh bangsa dalam merumuskan dasar negara dan arah masa depan Indonesia.
+
+PERTANYAAN:
+Dari berbagai latar belakang politik dan militer saat itu, pilih yang menjadi alasan paling tepat dan mendalam bagi Jepang membentuk BPUPK?
+OPSI / PERNYATAAN:
+  - A. A. Menjaga citra baiknya di mata rakyat Indonesia setelah kekalahan mulai tampak.
+  - B. B. Memperlihatkan kepada dunia bahwa mereka mendukung kemerdekaan bangsa-bangsa Asia.
+  - C. C. Percaya bahwa rakyat Indonesia sudah siap memimpin negaranya sendiri tanpa intervensi asing.
+  - D. D. Menghindari tekanan dari  negara-negara Barat dengan menunjukkan kemajuan politik di wilayah jajahannya.
+  - E. E. Terdesak dalam perang dan perlu dukungan rakyat Indonesia, maka memberi janji kemerdekaan sebagai strategi politik.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Pada masa Demokrasi Liberal, Indonesia mengalami ketidakstabilan politik akibat sering bergantinya kabinet. Untuk mengatasi hal ini, pemerintah mengeluarkan UU No. 7 Tahun 1953 yang mengatur pelaksanaan Pemilu 1955. Pemilu tersebut menjadi tonggak penting dalam sejarah demokrasi Indonesia karena melibatkan partisipasi politik yang luas. Hasilnya menunjukkan adanya keberagaman kekuatan politik dan tantangan dalam mewujudkan stabilitas pemerintahan.
+
+PERTANYAAN:
+Pada peristiwa Pemilu 1955 pada masa Demokrasi Liberal, manakah pernyataan berikut yang menggambarkan perkembangan politik Indonesia saat itu?
+
+Pilihlah Tepat atau Tidak Tepat untuk setiap pernyataan yang menggambarkan perkembangan politik tahun 1995!
+OPSI / PERNYATAAN:
+  - A. Pemilu 1955 bertujuan menyederhanakan partai politik dan mewujudkan sistem parlementer yang stabil.
+  - B. Salah satu hasil Pemilu 1955 adalah terbentuknya sistem pemerintahan presidensial yang kuat dan stabil.
+  - C. Partisipasi pemilih dalam Pemilu 1955 menunjukkan antusiasme rakyat terhadap demokrasi.
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pada akhir masa pemerintahan Presiden Soeharto, Indonesia mengalami krisis multidimensi. Krisis ekonomi akibat utang luar negeri yang besar, kekeringan karena El Nino, dan kebakaran hutan memperburuk situasi. Tekanan dari dalam negeri dan luar negeri mendorong desakan agar Indonesia segera melakukan reformasi. Puncaknya, Soeharto mengundurkan diri pada 21 Mei 1998.
+
+PERTANYAAN:
+Sebutkan faktor-faktor utama penyebab lahirnya Reformasi di Indonesia pada tahun 1998! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Ketidakmampuan pemerintah menangani krisis ekonomi yang melanda seluruh sektor.
+  - B. B. Kemenangan kubu oposisi dalam pemilihan umum yang demokratis.
+  - C. C. Desakan internasional agar Indonesia menerima bantuan IMF dengan syarat reformasi.
+  - D. D. Kekecewaan masyarakat terhada rezim Orde Baru yang dianggap antidemokratis.
+  - E. E. Suksesnya pembangunan infrastruktur nasional secara merata.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: ['B', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Peristiwa Proklamasi Kemerdekaan Indonesia pada 17 Agustus 1945 merupakan tonggak sejarah yang penting dan monumental. Untuk memahami peristiwa tersebut secara akurat, sejarawan menggunakan sumber primer, yaitu bukti langsung yang berasal dari masa terjadinya peristiwa atau semua yang dibuat pada saat kejadian berlangsung, bukan yang ditulis atau diproduksi jauh setelahnya.
+
+PERTANYAAN:
+Manakah yang merupakan sumber sejarah primer dalam peristiwa Proklamasi 17 Agustus 1945?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Buku Sejarah Nasional Indonesia Jilid 6.
+  - B. B. Berita koran Asia Raya tanggal 18 Agustus 1945 tentang Proklamasi.
+  - C. C. Film dokumenter produksi Museum Perumusan Naskah Proklamasi Kemerdekaan.
+  - D. D. Teks proklamasi kemerdekaan Indonesia yang ditandatangani oleh Sukarno dan Hatta.
+  - E. E. Foto suasana pengibaran bendera tanggal 17 Agustus 1945 di Jalan Pegangsaan Timur No 56.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Kesultanan Aceh merupakan salah satu kerajaan bercorak Islam di Nusantara. Kerajaan ini mencapai puncak kejayaannya dalam bidang ekonomi pada abad ke-16. Letaknya di Selat Malaka membuat kapal-kapal dagang dari Arab, India, dan Tiongkok banyak yang singgah di pelabuhan yang dikuasai Kesultanan Aceh. Beberapa komoditas unggulan dari kerajaan ini adalah lada dan kapur barus yang banyak dicari oleh pedagang asing.
+
+PERTANYAAN:
+Berdasarkan informasi diatas, apa yang menyebabkan ekonomi Kesultanan Aceh pada abad ke-16 berkembang pesat?
+OPSI / PERNYATAAN:
+  - A. A. Tanah yang sangat subur untuk pertanian.
+  - B. B. Kekayaan alam berupa hasil-hasil tambang.
+  - C. C. Hubungan persahabatan dengan kerajaan-kerajaan lain.
+  - D. D. Kerajaan Aceh saat itu sedang mencapai puncak kejayaan.
+  - E. E. Lokasi yang strategis dalam jalur perdagangan internasional.
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Bangsa Indonesia melakukan berbagai perlawanan terhadap Belanda sebelum abad ke-20. Karakteristik dan strategi perlawanan pada masa tersebut berbeda-beda, bergantung pada tokoh yang memimpin dan kondisi lokal di masing-masing daerah.
+
+PERTANYAAN:
+Berdasarkan informasi tersebut, manakah yang menunjukkan karakteristik dalam strategi perlawanan terhadap Belanda sebelum abad ke-20?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Dilakukan secara sporadis di berbagai daerah.
+  - B. B. Dipimpin oleh tokoh, ulama, atau bangsawan setempat.
+  - C. C. Kurangnya koordinasi yang baik antarwilayah.
+  - D. D. Dilakukan menggunakan strategi diplomasi.
+  - E. E. Memanfaatkan organisasi modern.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: ['A:Tidak Tepat', 'B:Tepat', 'C:Tepat']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Perlawanan terhadap pendudukan Jepang muncul di berbagai daerah, termasuk pemberontakan PETA di Blitar dan perlawanan rakyat Kalimantan Barat. Meskipun pada akhirnya berhasil dipadamkan, aksi-aksi tersebut menunjukkan bentuk perlawanan aktif rakyat Indonesia terhadap kekejaman dan penindasan Jepang.
+
+PERTANYAAN:
+Bagaimana strategi perlawanan yang dilakukan bangsa Indonesia terhadap Jepang yang sesuai dengan teks tersebut?
+
+Tentukan Tepat dan Tidak Tepat pada setiap pernyataan berikut terkait strategi perlawanan!
+OPSI / PERNYATAAN:
+  - A. Perlawanan dilakukan secara spontan tanpa strategi sehingga menunjukkan lemahnya perlawanan.
+  - B. Pemberontakan PETA di Blitar menunjukkan adanya perlawanan militer terorganisasi terhadap Jepang.
+  - C. Rencana perlawanan di Kalimantan Barat bocor karena kurangnya koordinasi dan infiltrasi mata-mata
+

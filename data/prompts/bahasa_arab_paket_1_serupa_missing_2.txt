@@ -1,0 +1,39 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Bahasa Arab (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 08424_dce97e1e0131fd43a3042710414e6a3a.png]:
+مَا مَعْنَى عِبَارَةِ 'أُشَاهِدُ' فِي الْجُمْلَةِ؟
+[Isi Gambar Soal 08424_e3ec464463d886789cad5d6775e23970.png]:
+اخْتَرِ الصَّحِيحَ أَوِ الْخَطَأَ لِكُلِّ عِبَارَةٍ!
+Pertanyaan: Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+

@@ -1,0 +1,2403 @@
+{
+  "package": 1,
+  "subject": "Matematika",
+  "solutions": [
+    {
+      "question_id": "mtk_p1_q01",
+      "question_number": 1,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Aturan Penjumlahan Peluang (Inklusi-Eksklusi): $P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = \\frac{n(A) + n(B) - n(A \\cap B)}{n(S)}$"
+      ],
+      "glossary": [
+        {
+          "term": "\\cup (Gabungan (Union))",
+          "meaning": "Kata kuncinya adalah **'ATAU'**. Menghitung semua anggota yang memenuhi syarat A, syarat B, atau keduanya sekaligus."
+        },
+        {
+          "term": "\\cap (Irisan (Intersection))",
+          "meaning": "Kata kuncinya adalah **'DAN'**. Hanya menghitung anggota yang memiliki kedua sifat secara bersamaan (kamar laut DAN Twin Bed)."
+        },
+        {
+          "term": "n(S) (Ruang Sampel Semesta)",
+          "meaning": "Total seluruh kamar yang tersedia di lantai 5 hotel ($n(S) = 30$)."
+        },
+        {
+          "term": "P(A) (Peluang Kejadian)",
+          "meaning": "Perbandingan banyaknya kejadian yang diharapkan terhadap total ruang sampel: $P(A) = \\frac{n(A)}{n(S)}$."
+        }
+      ],
+      "reasoning": "**Mengapa irisan harus dikurangi ($ - n(A \\cap B)$)?** Jika kita langsung menjumlahkan kamar laut ($18$) dengan kamar Twin Bed ($10$), hasilnya adalah $28$. Namun di antara kamar-kamar tersebut, ada **6 kamar yang memiliki kedua fasilitas sekaligus**. Ke-6 kamar ini sudah terhitung di kelompok 18 kamar laut, dan ikut terhitung lagi di kelompok 10 kamar Twin Bed (**penghitungan ganda / double counting**)! Supaya adil dan setiap kamar fisik hanya dihitung tepat satu kali, ke-6 kamar irisan tersebut wajib dikurangkan satu kali: $$\\text{Kamar Memenuhi Syarat} = 18 + 10 - 6 = 22 \\text{ kamar}$$ Visualisasi Diagram Venn: • Hanya Pemandangan Laut saja = $18 - 6 = 12$ kamar • Laut DAN Twin Bed (Irisan) = $6$ kamar • Hanya Twin Bed saja = $10 - 6 = 4$ kamar • Kamar Standar (Bukan keduanya) = $30 - (12 + 6 + 4) = 8$ kamar Total = $12 + 6 + 4 + 8 = 30$ kamar (Cocok!).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Ruang Sampel ($n(S)$)",
+          "explanation": "Total seluruh kamar yang tersedia di lantai 5 adalah $n(S) = 30$."
+        },
+        {
+          "step": 2,
+          "title": "Data Frekuensi Tiap Kategori Fasilitas",
+          "explanation": "• Kamar berpemandangan laut: $n(A) = 18$ • Kamar bertempat tidur Twin Bed: $n(B) = 10$ • Kamar laut sekaligus Twin Bed: $n(A \\cap B) = 6$"
+        },
+        {
+          "step": 3,
+          "title": "Hitung Kamar Memenuhi Syarat (Laut ATAU Twin Bed)",
+          "explanation": "Gunakan prinsip inklusi-eksklusi agar 6 kamar irisan tidak terhitung ganda: $$n(A \\cup B) = 18 + 10 - 6 = 22 \\text{ kamar}$$"
+        },
+        {
+          "step": 4,
+          "title": "Hitung Nilai Peluang dan Sederhanakan",
+          "explanation": "$$P(A \\cup B) = $\\frac{n(A \\cup B)}{n(S)} = \\frac{$ 22}{30}$$ Bagi pembilang dan penyebut dengan FPB-nya (yaitu 2): $$ $\\frac{22 \\div 2}{30 \\div 2} = \\frac{$ 11}{15}$$"
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Kata kunci 'ATAU' artinya gabungan ($\\cup$). Saat ada anggota yang punya kedua sifat sekaligus, WAJIB kurangkan irisannya satu kali agar tidak terjadi double counting!"
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q02",
+      "question_number": 2,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Peluang dasar $P(A) = \\frac{n(A)}{n(S)}$ dan Peluang komplemen kejadian $P(A') = 1 - P(A)$."
+      ],
+      "glossary": [
+        {
+          "term": "P(A) (Peluang Kejadian A)",
+          "meaning": "$P(A) = \\frac{n(A)}{n(S)}$, rentang nilainya $0 \\le P(A) \\le 1$ atau $0\\% \\le P(A) \\le 100\\%$."
+        },
+        {
+          "term": "P(A') (Peluang Komplemen)",
+          "meaning": "Peluang kejadian **BUKAN A**. Dihitung dengan rumus: $P(A') = 1 - P(A)$."
+        },
+        {
+          "term": "n(S) (Ruang Sampel)",
+          "meaning": "Total unit gadget per kelompok = $10$ unit."
+        }
+      ],
+      "reasoning": "**Memahami Tipe Soal Pilihan Ganda Kompleks:** Pada ANBK / TKA, soal tipe ini meminta peserta mengevaluasi setiap pernyataan secara mandiri. Pernyataan yang memuat kata 'bukan' menguji pemahaman konsep **peluang komplemen** ($1 - P$). Sementara pernyataan persentase menguji konversi pecahan ke bentuk persen (dikalikan $100\\%$).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tabulasi Data per 10 Unit Gadget",
+          "explanation": "• Ponsel pintar (smartphone) = 4 unit • Jam tangan pintar (smartwatch) = 3 unit • Komputer tablet = 2 unit • Pelacak lokasi (smart tag) = $10 - (4 + 3 + 2) = 1$ unit Total $n(S) = 10$ unit."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Pernyataan A",
+          "explanation": "'Peluang terpilihnya ponsel pintar adalah 40%.' $$P(\\text{smartphone}) = $\\frac{$ 4}{10} = 0,4 = 40\\% \\quad \\text{(BENAR)}$$"
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Pernyataan B",
+          "explanation": "'Peluang terpilihnya gadget bukan komputer tablet adalah 0,2.' $$P(\\text{bukan tablet}) = 1 - P(\\text{tablet}) = 1 - $\\frac{$ 2}{10} = 1 - 0,2 = 0,8$$ Nilai 0,2 adalah peluang terpilihnya tablet, bukan komplemennya. Jadi pernyataan B **SALAH**."
+        },
+        {
+          "step": 4,
+          "title": "Evaluasi Pernyataan C",
+          "explanation": "'Peluang terpilihnya unit pelacak lokasi adalah 1/5.' $$P(\\text{smart tag}) = $\\frac{$ 1}{10}$$ Karena $1/10 \\ne 1/5$ (di mana $1/5 = 2/10$), maka pernyataan C **SALAH**."
+        },
+        {
+          "step": 5,
+          "title": "Evaluasi Pernyataan D",
+          "explanation": "'Peluang terpilihnya gadget bukan jam tangan pintar adalah 70%.' $$P(\\text{bukan smartwatch}) = 1 - $\\frac{3}{10} = \\frac{$ 7}{10} = 70\\% \\quad \\text{(BENAR)}$$"
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A, D.",
+      "tips": [
+        "Hati-hati dengan kata 'BUKAN'! Selalu gunakan rumus komplemen $1 - P$. Jangan terbalik antara peluang kejadian itu sendiri dengan komplemennya."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q03",
+      "question_number": 3,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah B.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q04",
+      "question_number": 4,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah B.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q05",
+      "question_number": 5,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah B.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q06",
+      "question_number": 6,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah E.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q07",
+      "question_number": 7,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah B.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q08",
+      "question_number": 8,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q09",
+      "question_number": 9,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q10",
+      "question_number": 10,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "C",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C, D.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q11",
+      "question_number": 11,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah B.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q12",
+      "question_number": 12,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q13",
+      "question_number": 13,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah B, C, D.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q14",
+      "question_number": 14,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q15",
+      "question_number": 15,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah D.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q16",
+      "question_number": 16,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q17",
+      "question_number": 17,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Salah",
+          "C:Benar"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A:Salah, B:Salah, C:Benar.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q18",
+      "question_number": 18,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q19",
+      "question_number": 19,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah D.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q20",
+      "question_number": 20,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah E.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q21",
+      "question_number": 21,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah E.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q22",
+      "question_number": 22,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah B.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q23",
+      "question_number": 23,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah D.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q24",
+      "question_number": 24,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q25",
+      "question_number": 25,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q26",
+      "question_number": 26,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "B",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah B, D.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q27",
+      "question_number": 27,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q28",
+      "question_number": 28,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q29",
+      "question_number": 29,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q30",
+      "question_number": 30,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A, D.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q31",
+      "question_number": 31,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Benar",
+          "C:Salah"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A:Salah, B:Benar, C:Salah.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q32",
+      "question_number": 32,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q33",
+      "question_number": 33,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah B.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q34",
+      "question_number": 34,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Benar",
+          "C:Salah"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A:Salah, B:Benar, C:Salah.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q35",
+      "question_number": 35,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q36",
+      "question_number": 36,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah E.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q37",
+      "question_number": 37,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Salah",
+          "C:Benar"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A:Salah, B:Salah, C:Benar.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q38",
+      "question_number": 38,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah D.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q39",
+      "question_number": 39,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Benar",
+          "C:Salah"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A:Benar, B:Benar, C:Salah.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q40",
+      "question_number": 40,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah B.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q41",
+      "question_number": 41,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q42",
+      "question_number": 42,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A, B, C, D.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q43",
+      "question_number": 43,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Salah",
+          "C:Benar"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A:Benar, B:Salah, C:Benar.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q44",
+      "question_number": 44,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A, B.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q45",
+      "question_number": 45,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Benar",
+          "C:Salah"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah A:Benar, B:Benar, C:Salah.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q46",
+      "question_number": 46,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "**Logika Pengerjaan Berdasarkan Kurikulum Merdeka:** Matematika pada asesmen TKA menguji kemampuan literasi numerasi, yaitu bagaimana menyederhanakan konteks nyata menjadi pemodelan matematika yang terukur dan logis.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "Cermati angka-angka dan batasan yang diberikan pada stimulus cerita."
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "Representasikan hubungan antar variabel dalam bentuk formula atau persamaan."
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "Selesaikan operasi aljabar secara runtut hingga mendapatkan jawaban yang paling tepat."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis langkah dan pembuktian di atas, pilihan yang memenuhi semua syarat adalah C.",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    }
+  ]
+}

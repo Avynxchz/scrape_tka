@@ -1,0 +1,2435 @@
+<!DOCTYPE html><html lang="en"><head>
+	<title>Simulasi TKA</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-16x16.png">
+	<link rel="manifest" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/site.webmanifest">
+	<link rel="mask-icon" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/safari-pinned-tab.svg">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://pusmendik.kemendikdasmen.go.id/tka/_assets/css/icheck-bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120206082-3"></script>
+	<script>
+
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120206082-3');
+
+	</script> -->
+</head>
+<body>
+
+<div class="container-fluid text-white" style="background:#326698;background-size: contain;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/bg-top.png');background-repeat: no-repeat;background-position: left; height:150px;position:fixed;top:0px;left:0px;right:0px">
+	  <div class="row">
+		<div class="col pl-5 pt-1">
+			<table>
+				<tbody><tr>
+					<td>
+						<img style="margin:5px;height:70px" src="https://pusmendik.kemendikdasmen.go.id/tka/images/logo-kemdikbud-71x72.png">
+					</td>
+					<td>
+						<div><b>PUSMENDIK</b></div>
+						<div><small>APLIKASI ANBK<small></small></small></div><small><small>
+					</small></small></td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div class="col pl-5 pt-1 mt-4 pr-5 text-right">
+			<table align="right">
+				<tbody><tr>
+					<td style="vertical-align:top">
+						<div><small>P130100230 - Peserta Simulasi<small></small></small></div><small><small>
+					</small></small></td>
+					<td>
+						<div class="pl-1 pr-1 pt-1 pb-1" style="background:#74b9ff;border-radius:2px;color:#326698"><i class="fa fa-graduation-cap fa-flip-horizontal"></i></div>
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+	  </div>
+</div>
+
+<div class="container-fluid fadeInDown mb-5" style="margin-top:90px;">
+  <div class="row">
+	<div class="col-sm-12" style="border:0px solid red">
+		<div class="text-left pt-3 pb-5 mb-2" id="formContent" style="background-size: 300px;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/logo-w.png');background-repeat: no-repeat;background-position: top right; ">
+		  <div class="row row-atas"> 
+			<div class="col-sm-4"><span style="font-size:18px">Soal nomor</span> <span style="font-size:20px" id="noSoal">1</span></div>
+			<div class="col-sm-8 cont-btn-informasi">
+				<button class="btn-informasi btn btn-primary btn-round m" data-toggle="modal" data-target="#infoSoal" style="border-radius:30px;font-size:12px;"><i class="fa fa-info-circle d-sm-none"></i><span class="d-none d-sm-inline-block">INFORMASI SOAL<span></span></span></button>
+				<button class="btn-informasi btn  btn-outline-secondary  btn-round" style="border-radius:30px;font-size:12px;">Sisa Waktu : <b><span id="countdown">01:14:57</span></b></button>
+				<button class="btn-informasi btn btn-primary btn-round" data-toggle="modal" data-target="#myModal" style="border-radius:30px;font-size:12px"><span class="d-none d-sm-inline-block">Daftar Soal </span> <i class="fa fa-th-large"></i></button>
+			</div>
+		  </div>
+		  <div class="row pb-2  row-atas"> 
+			<div class="col-sm-6"><small>Ukuran font soal:</small> <span style="font-size:12px" class="ml-2 mr-1 cfont" id="c1" onclick="changeFont('12','c1')">A</span> <span style="font-size:16px" class="ml-2 mr-1 cfont" id="c2" onclick="changeFont('16','c2')">A</span> <span style="font-size:20px" class="ml-2 mr-1 cfont" id="c3" onclick="changeFont('18','c3')">A</span></div>
+			<div class="col-sm-6 mt-2 mataujian">
+				Geografi  (Paket 2)			</div>
+		  </div>
+		  <div class="row pl-3 pr-3 pb-2 mb-1"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  <!-- isi soal -->
+		  <div class="row pl-3 pr-3 pb-2 mb-2"> 
+			<div class="col p-3 " id="isisoal" style="border:2px solid #eee; border-top:10px solid #eee;">
+				<div class="soal-soal row" style="" id="soal-no-1"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>PLTS Terapung Cirata</strong></p>
+<p>Perhatikan narasi berikut ini!<br>Pembangkit Listrik Tenaga Surya (PLTS) Terapung Cirata yang dibangun di atas Waduk Cirata, Jawa Barat, merupakan proyek energi terbarukan strategis nasional dan terbesar di Asia Tenggara. PLTS ini dibangun di atas area seluas sekitar 200 hektar dari total permukaan waduk 6.200 hektar atau sekitar 3,2% dari luas waduk. Dengan kapasitas daya mencapai 192 megawatt peak (MWp), PLTS ini mampu menghasilkan listrik sekitar 300 GWh per tahun, cukup untuk memenuhi kebutuhan energi lebih dari 50.000 rumah tangga.<br>Selain menghasilkan listrik bersih, PLTS terapung memberikan manfaat tambahan berupa pengurangan penguapan air waduk hingga 30% di area tertutup panel surya. Suhu air di bawah modul terapung cenderung lebih stabil, yang terbukti menurunkan risiko blooming alga dan meningkatkan kualitas oksigen terlarut (DO) pada pagi hari. Hal ini menguntungkan bagi biota perairan, khususnya ikan nila dan patin yang menjadi komoditas utama budidaya masyarakat sekitar.<br>Namun demikian, pembangunan sistem terapung ini menimbulkan tantangan teknis seperti biaya pemasangan yang lebih tinggi dibanding PLTS darat, potensi pelapukan material karena kelembaban tinggi, serta kekhawatiran akan terganggunya jalur perahu nelayan. Oleh karena itu, keterlibatan masyarakat lokal dan evaluasi berkala terhadap dampak lingkungan menjadi bagian penting dalam manajemen proyek ini.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan data dan informasi pada stimulus tentang PLTS Terapung Cirata, manakah dari pernyataan berikut yang merupakan manfaat atau implikasi langsung dari pembangunan pembangkit tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','0');">
+													<input id="pilihan_1_0" onchange="pilihan('1','a','614')" pil="a" name="pilihan1" type="radio">
+													<label for="pilihan_1_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>PLTS Cirata dapat mengurangi emisi karbon dari sektor transportasi sebesar 300 ribu ton CO₂ per tahun</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','1');">
+													<input id="pilihan_1_1" onchange="pilihan('1','b','614')" pil="b" name="pilihan1" type="radio">
+													<label for="pilihan_1_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Rendahnya fluktuasi suhu air di bawah panel surya berpotensi mengurangi laju pertumbuhan alga</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','2');">
+													<input id="pilihan_1_2" onchange="pilihan('1','c','614')" pil="c" name="pilihan1" type="radio">
+													<label for="pilihan_1_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Selain menghasilkan energi terbarukan, panel surya menahan panas yang diterima permukaan air</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','3');">
+													<input id="pilihan_1_3" onchange="pilihan('1','d','614')" pil="d" name="pilihan1" type="radio">
+													<label for="pilihan_1_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Nelayan lokal berpeluang berkolaborasi untuk pemeliharaan PLTS yang bermanfaat membangun kesadaran bersama</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','4');">
+													<input id="pilihan_1_4" onchange="pilihan('1','e','614')" pil="e" name="pilihan1" type="radio">
+													<label for="pilihan_1_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Instalasi PLTS terapung memungkinkan peningkatan debit air masuk ke waduk saat musim hujan</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display: none;" id="soal-no-2"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Fenomena Sebelum dan Sesudah Alih Fungsi Lahan di Ceper Kabupaten Klaten</strong></p>
+<p>Berikut disajikan gambar citra satelit dari Wilayah Ceper, Kabupaten Klaten dan Sekitarnya pada tahun 2007 dan 2024.<br>Pada gambar tersebut terlihat perubahan penggunaan lahan.</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/09017_5b955a3986da7c28d711ddd93598f6b2.png" alt=""></p>
+<p style="text-align: center;"><img src="/tka/cbt_images/09017_b5ab0f9aea4e66b0cac00e311b767641.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan perbandingan citra satelit tahun 2007 dan 2024 wilayah Ceper, Kabupaten Klaten, perubahan penggunaan lahan yang paling dominan adalah...</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','0');">
+													<input id="pilihan_2_0" onchange="pilihan('2','a','625')" pil="a" name="pilihan2" type="radio">
+													<label for="pilihan_2_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Hutan lindung menjadi lahan perkebunan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','1');">
+													<input id="pilihan_2_1" onchange="pilihan('2','b','625')" pil="b" name="pilihan2" type="radio">
+													<label for="pilihan_2_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sawah menjadi bangunan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','2');">
+													<input id="pilihan_2_2" onchange="pilihan('2','c','625')" pil="c" name="pilihan2" type="radio">
+													<label for="pilihan_2_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lahan tandus menjadi kawasan resapan air</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','3');">
+													<input id="pilihan_2_3" onchange="pilihan('2','d','625')" pil="d" name="pilihan2" type="radio">
+													<label for="pilihan_2_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sawah menjadi kawasan konservasi alam</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','4');">
+													<input id="pilihan_2_4" onchange="pilihan('2','e','625')" pil="e" name="pilihan2" type="radio">
+													<label for="pilihan_2_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Permukiman menjadi kawasan pertanian organik</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-3"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Fenomena Alih Fungsi Lahan Banjarmasin</strong></p>
+<p>Berikut disajikan gambar citra satelit dari Kota Banjarmasin dan Sekitarnya pada tahun 2002 dan 2024.<br>Pada gambar terlihat perbedaan penggunaan lahan.</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/13971_9b78faf55a2ca84c35e612a5a69d2d91.png" alt=""><br><img src="/tka/cbt_images/13971_e39da9debdd8aed4c4dee31cb214a204.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan perubahan penggunaan lahan yang tampak pada citra satelit Banjarmasin tahun 2002 dan 2024, konsep alih fungsi lahan dapat diterapkan untuk menjelaskan bahwa ... .</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','0');">
+													<input id="pilihan_3_0" onchange="pilihan('3','a','638')" pil="a" name="pilihan3" type="radio">
+													<label for="pilihan_3_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perubahan dari kawasan terbuka menjadi kawasan terbangun merupakan bentuk dari alih fungsi lahan yang alami</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','1');">
+													<input id="pilihan_3_1" onchange="pilihan('3','b','638')" pil="b" name="pilihan3" type="radio">
+													<label for="pilihan_3_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Alih fungsi lahan hanya terjadi pada daerah pegunungan dan lereng curam</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','2');">
+													<input id="pilihan_3_2" onchange="pilihan('3','c','638')" pil="c" name="pilihan3" type="radio">
+													<label for="pilihan_3_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peningkatan jumlah bangunan pada kawasan vegetatif mencerminkan tekanan penduduk terhadap lingkungan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','3');">
+													<input id="pilihan_3_3" onchange="pilihan('3','d','638')" pil="d" name="pilihan3" type="radio">
+													<label for="pilihan_3_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Semua kawasan kota seharusnya dialihfungsikan agar memenuhi kebutuhan ekonomi</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','4');">
+													<input id="pilihan_3_4" onchange="pilihan('3','e','638')" pil="e" name="pilihan3" type="radio">
+													<label for="pilihan_3_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perubahan tersebut tidak berdampak pada lingkungan karena berada di wilayah datar</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-4"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Peta SPI (Standardized Precipitation Index) bulan Februari 2025</strong></p>
+<p>Perhatikan peta berikut yang menunjukkan kondisi SPI 1 bulan (Februari 2025) berdasarkan data BMKG!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/02464_4c5b540da5c79a8d9cd030e139e1111f.png" alt=""></p>
+<p><span style="font-size: 11px;"><em>Sumber:bmkg.go.id</em></span></p>
+<p>Indonesia secara geografis terletak di antara dua benua dan dua samudra, serta memiliki wilayah yang membentang dari barat ke timur sepanjang sekitar 5.200 km. Kondisi ini menyebabkan adanya perbedaan pola curah hujan dan iklim antar daerah. Salah satu bentuk analisis iklim adalah melalui peta<em> Standardized Precipitation Index</em> (SPI) yang digunakan untuk mengetahui kondisi kekeringan atau kebasahan suatu wilayah dalam jangka waktu tertentu.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan peta SPI dan pemahaman tentang variasi iklim di Indonesia, manakah wilayah berikut yang kemungkinan besar mengalami risiko gagal panen akibat kekeringan ekstrem pada Februari 2025?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','0');">
+													<input id="pilihan_4_0" onchange="pilihan('4','a','620')" pil="a" name="pilihan4" type="radio">
+													<label for="pilihan_4_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kalimantan Utara</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','1');">
+													<input id="pilihan_4_1" onchange="pilihan('4','b','620')" pil="b" name="pilihan4" type="radio">
+													<label for="pilihan_4_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Papua selatan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','2');">
+													<input id="pilihan_4_2" onchange="pilihan('4','c','620')" pil="c" name="pilihan4" type="radio">
+													<label for="pilihan_4_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Jawa Barat</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','3');">
+													<input id="pilihan_4_3" onchange="pilihan('4','d','620')" pil="d" name="pilihan4" type="radio">
+													<label for="pilihan_4_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sulawesi Tengah</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','4');">
+													<input id="pilihan_4_4" onchange="pilihan('4','e','620')" pil="e" name="pilihan4" type="radio">
+													<label for="pilihan_4_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sumatera Selatan</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-5"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>POSISI STRATEGIS INDONESIA</strong></p>
+<p>Perhatikan informasi berikut ini!<br>Indonesia memiliki lima Destinasi Super Prioritas (DSP) yang tersebar di berbagai wilayah, yakni Danau Toba di Sumatera Utara, Borobudur di Jawa Tengah–DIY, Mandalika di Nusa Tenggara Barat, Labuan Bajo di Nusa Tenggara Timur, dan Likupang di Sulawesi Utara. Masing-masing destinasi memiliki karakter geografis yang berbeda, baik dari sisi kedekatannya dengan jalur pelayaran internasional, keberadaan bandara internasional, maupun potensi alam dan budaya yang dimiliki. Pemerintah mengembangkan kawasan ini sebagai bagian dari upaya meningkatkan peran sektor pariwisata dan memperkuat keterhubungan Indonesia dengan kawasan regional maupun internasional.</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/25539_5fd7775615e18a051cd6c233bc14c2a6.png" alt=""></p>
+<p><span style="font-size: 11px;">Sumber:</span><br><span style="color: #0000ff; font-size: 11px;"> https://paltv.disway.id/read/18478/ini-5-destinasi-super-prioritas-di-indonesia</span></p>
+<p style="text-align: center;"><span style="color: #0000ff; font-size: 11px;"><img src="/tka/cbt_images/96967_444b579ba8f821b7aea15fcc9596174b.png" alt=""></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan data dalam tabel, mengapa pengembangan destinasi wisata super prioritas di wilayah seperti Labuan Bajo dan Likupang berpotensi menarik wisatawan internasional?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','0');">
+													<input id="pilihan_5_0" onchange="pilihan('5','a','623')" pil="a" name="pilihan5" type="radio">
+													<label for="pilihan_5_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Karena berada di tengah-tengah pulau utama Indonesia yang mudah dijangkau dengan jalur darat</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','1');">
+													<input id="pilihan_5_1" onchange="pilihan('5','b','623')" pil="b" name="pilihan5" type="radio">
+													<label for="pilihan_5_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Karena letaknya di dataran tinggi yang bebas dari bencana alam dan polusi udara</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','2');">
+													<input id="pilihan_5_2" onchange="pilihan('5','c','623')" pil="c" name="pilihan5" type="radio">
+													<label for="pilihan_5_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Karena memiliki karakter geografis khas dan dekat dengan jalur internasional laut atau udara</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','3');">
+													<input id="pilihan_5_3" onchange="pilihan('5','d','623')" pil="d" name="pilihan5" type="radio">
+													<label for="pilihan_5_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Karena letaknya terpencil sehingga menawarkan eksklusivitas penuh bagi wisatawan asing</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','4');">
+													<input id="pilihan_5_4" onchange="pilihan('5','e','623')" pil="e" name="pilihan5" type="radio">
+													<label for="pilihan_5_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Karena menjadi pusat administrasi dan pemerintahan di wilayah timur Indonesia</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-6"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Peta Tata Ruang Kota Binjai</strong></p>
+<p>Perhatikan Peta Tata Ruang Kota Binjai berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/52014_1597c7364712811af68b63e8904a8c73.png" alt=""></p>
+<p><span style="font-size: 11px;">Sumber: Pemerintahan Kota Binjai</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Manakah pernyataan berikut yang menunjukkan arah perkembangan kota di Kota Binjai berdasarkan Peta Tata Ruang Wilayah tersebut?<br>Klik pilihan yang <strong>Sesuai</strong> dan <strong>Tidak Sesuai </strong>untuk setiap pernyataan!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Sesuai</td><td class="text-center" style="width:100px">Tidak Sesuai</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perkembangan kota ke arah selatan secara siginifikan yang didukung adanya kawasan botani dan pertanian, serta kawasan wisata</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('6.','1','1');">
+															<input id="pilihan_6_1_1" name="pilihan_6_1" class="pilihan__1" onchange="pilihan3('6','3','640','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_6_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('6.','1','2');">
+															<input id="pilihan_6_1_2" name="pilihan_6_1" class="pilihan__1" onchange="pilihan3('6','3','640','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_6_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perkembangan kota ke arah barat secara signifikan yang didukung selaras dengan kawasan perdagangan/ jasa, pusat pemerintahan, dan jalur trasnportasi</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('6.','2','1');">
+															<input id="pilihan_6_2_1" name="pilihan_6_2" class="pilihan__2" onchange="pilihan3('6','3','640','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_6_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('6.','2','2');">
+															<input id="pilihan_6_2_2" name="pilihan_6_2" class="pilihan__2" onchange="pilihan3('6','3','640','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_6_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perkembangan kota ke arah utara secara signifikan karena adanya dukungan kawasan industri serta kawasan perdagangan/ jasa</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('6.','3','1');">
+															<input id="pilihan_6_3_1" name="pilihan_6_3" class="pilihan__3" onchange="pilihan3('6','3','640','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_6_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('6.','3','2');">
+															<input id="pilihan_6_3_2" name="pilihan_6_3" class="pilihan__3" onchange="pilihan3('6','3','640','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_6_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-7"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Peta Tata Ruang Kota Binjai</strong></p>
+<p>Perhatikan Peta Tata Ruang Kota Binjai berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/73610_1597c7364712811af68b63e8904a8c73.png" alt=""></p>
+<p><span style="font-size: 11px;">Sumber: Pemerintahan Kota Binjai</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Seorang pengusaha akan membangun sebuah bisnis properti komersial pada lokasi X, jenis usaha yang sesuai oleh pengusaha tersebut adalah...<br>Klik pilihan yang <strong>Sesuai</strong> dan <strong>Tidak Sesuai</strong>!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Jenis Usaha</td><td class="text-center" style="width:100px">Sesuai</td><td class="text-center" style="width:100px">Tidak Sesuai</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembangunan Apartemen</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','1','1');">
+															<input id="pilihan_7_1_1" name="pilihan_7_1" class="pilihan__1" onchange="pilihan3('7','3','634','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_7_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','1','2');">
+															<input id="pilihan_7_1_2" name="pilihan_7_1" class="pilihan__1" onchange="pilihan3('7','3','634','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_7_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Budidaya Peternakan</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','2','1');">
+															<input id="pilihan_7_2_1" name="pilihan_7_2" class="pilihan__2" onchange="pilihan3('7','3','634','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_7_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','2','2');">
+															<input id="pilihan_7_2_2" name="pilihan_7_2" class="pilihan__2" onchange="pilihan3('7','3','634','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_7_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pusat Bisnis dan perekonomian (Mall)</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','3','1');">
+															<input id="pilihan_7_3_1" name="pilihan_7_3" class="pilihan__3" onchange="pilihan3('7','3','634','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_7_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('7.','3','2');">
+															<input id="pilihan_7_3_2" name="pilihan_7_3" class="pilihan__3" onchange="pilihan3('7','3','634','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_7_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-8"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Data Proyeksi Penduduk ex Provinsi Papua Berdasarkan Kelompok Umur</strong></p>
+<p>Perhatikan tabel <strong>Proyeksi Penduduk ex Provinsi Papua</strong> (Provinsi Papua, Papua Tengah, Papua Pegunungan, dan Papua Selatan) berikut!</p>
+<p><img src="/tka/cbt_images/67202_de38a12e16f9d22ac26c2d74b022202d.png" alt=""></p>
+<p><span style="font-size: 11px;">Sumber: BPS Provinsi Papua</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan proyeksi penduduk tahun 2025, strategi pembangunan <strong>yang PALING TEPAT</strong> untuk 10 tahun mendatang adalah ... .<br><strong>(Jawaban benar lebih dari satu)</strong></p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('8.','0');">
+													<input id="pilihan_8_0" class="pilihan8" onchange="pilihan2('8','a','635')" pil="a" name="pilihan8" type="checkbox" value="A">
+													<label for="pilihan_8_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(8,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengembangkan pusat-pusat vokasi serta program magang industri yang relevan bagi lulusan SMA/sederajat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('8.','1');">
+													<input id="pilihan_8_1" class="pilihan8" onchange="pilihan2('8','b','635')" pil="b" name="pilihan8" type="checkbox" value="B">
+													<label for="pilihan_8_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(8,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Memperluas akses pendidikan tinggi dan beasiswa untuk jenjang sarjana dan pascasarjana.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('8.','2');">
+													<input id="pilihan_8_2" class="pilihan8" onchange="pilihan2('8','c','635')" pil="c" name="pilihan8" type="checkbox" value="C">
+													<label for="pilihan_8_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(8,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mendorong program transmigrasi ke wilayah luar Papua untuk mengurangi tekanan demografi di kota besar.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('8.','3');">
+													<input id="pilihan_8_3" class="pilihan8" onchange="pilihan2('8','d','635')" pil="d" name="pilihan8" type="checkbox" value="D">
+													<label for="pilihan_8_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(8,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menambah anggaran subsidi energi dan pangan untuk semua kelompok usia sebagai bentuk pemerataan pembangunan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('8.','4');">
+													<input id="pilihan_8_4" class="pilihan8" onchange="pilihan2('8','e','635')" pil="e" name="pilihan8" type="checkbox" value="E">
+													<label for="pilihan_8_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(8,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menganalisis potensi investasi dan membuka lapangan kerja baru di sektor unggulan lokal seperti pertanian, perikanan, dan ekonomi digital.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-9"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Piramida Penduduk Kota Banjar</strong></p>
+<p>Perhatikan piramida penduduk kota Banjar, Provinsi Jawa Barat berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/80653_4880aae143138cb2ccba9ff3cc4c79cd.png" alt=""></p>
+<p>Berdasarkan data jumlah penduduk Kota Banjar, tercatat sebanyak 210.000 jiwa. Dari jumlah tersebut, sebanyak 105.300 jiwa merupakan penduduk laki-laki, dan 104.600 jiwa merupakan penduduk perempuan.<br>Jika dilihat dari rasio jenis kelamin, terdapat sekitar 99,34 perempuan untuk setiap 100 laki-laki. Rasio ini menunjukkan bahwa jumlah laki-laki dan perempuan hampir seimbang, dengan selisih yang sangat kecil.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan struktur penduduk tersebut, simpulan yang tepat untuk menggambarkan kondisi demografi wilayah tersebut adalah?<br>(Pilih semua jawaban yang benar! Jawaban benar lebih dari satu.)</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','0');">
+													<input id="pilihan_9_0" class="pilihan9" onchange="pilihan2('9','a','636')" pil="a" name="pilihan9" type="checkbox" value="A">
+													<label for="pilihan_9_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kota Banjar sedang menikmati bonus demografi karena dominasi penduduk usia produktif.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','1');">
+													<input id="pilihan_9_1" class="pilihan9" onchange="pilihan2('9','b','636')" pil="b" name="pilihan9" type="checkbox" value="B">
+													<label for="pilihan_9_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Rasio ketergantungan tinggi karena sebagian besar penduduk berada pada usia tua.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','2');">
+													<input id="pilihan_9_2" class="pilihan9" onchange="pilihan2('9','c','636')" pil="c" name="pilihan9" type="checkbox" value="C">
+													<label for="pilihan_9_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perencanaan pembangunan perlu fokus pada peningkatan kualitas tenaga kerja dan pendidikan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','3');">
+													<input id="pilihan_9_3" class="pilihan9" onchange="pilihan2('9','d','636')" pil="d" name="pilihan9" type="checkbox" value="D">
+													<label for="pilihan_9_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Rasio ketergantungan tinggi karena sebagian besar penduduk masih remaja non produktif.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','4');">
+													<input id="pilihan_9_4" class="pilihan9" onchange="pilihan2('9','e','636')" pil="e" name="pilihan9" type="checkbox" value="E">
+													<label for="pilihan_9_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mobilitas antar wilayah yang menyumbang pertumbuhan penduduk masih rendah.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-10"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Fenomena Penuaan Penduduk di Indonesia</strong></p>
+<p style="text-align: center;"><img src="/tka/cbt_images/19912_da5e19cda913d202eef5e758084a65ae.png" alt=""></p>
+<p>Indonesia dan negara-negara ASEAN sedang menghadapi tantangan penuaan penduduk, yaitu bertambahnya jumlah lansia dan berkurangnya penduduk usia produktif. Akibatnya, beban ekonomi negara meningkat karena pengeluaran untuk pensiun dan kesehatan bertambah, sementara tenaga kerja menurun. Jika tidak dipersiapkan sejak sekarang, kondisi ini bisa menghambat pertumbuhan ekonomi. Untuk itu, pemerintah perlu menyiapkan strategi agar lansia tetap sehat, mandiri, dan produktif, seperti melalui program perlindungan sosial dan lingkungan yang ramah lansia.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Apa saja upaya yang dapat dilakukan pemerintah untuk mengurangi dampak negatif dari penuaan penduduk di masa depan?<br>(Pilih semua jawaban benar! Jawaban benar lebih dari satu!)</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','0');">
+													<input id="pilihan_10_0" class="pilihan10" onchange="pilihan2('10','a','639')" pil="a" name="pilihan10" type="checkbox" value="A">
+													<label for="pilihan_10_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menyediakan program perlindungan sosial bagi penduduk tua agar tetap sejahtera</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','1');">
+													<input id="pilihan_10_1" class="pilihan10" onchange="pilihan2('10','b','639')" pil="b" name="pilihan10" type="checkbox" value="B">
+													<label for="pilihan_10_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Meningkatkan belanja negara untuk peningkatan kualitas hidup masyarakat</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','2');">
+													<input id="pilihan_10_2" class="pilihan10" onchange="pilihan2('10','c','639')" pil="c" name="pilihan10" type="checkbox" value="C">
+													<label for="pilihan_10_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menciptakan lingkungan yang ramah lansia agar mereka tetap mandiri dan produktif</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','3');">
+													<input id="pilihan_10_3" class="pilihan10" onchange="pilihan2('10','d','639')" pil="d" name="pilihan10" type="checkbox" value="D">
+													<label for="pilihan_10_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengkampanyekan budaya hidup sehat di lingkungan masyarakat</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('10.','4');">
+													<input id="pilihan_10_4" class="pilihan10" onchange="pilihan2('10','e','639')" pil="e" name="pilihan10" type="checkbox" value="E">
+													<label for="pilihan_10_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(10,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kebijakan penambahan usia pensiun untuk aparatur sipil negara</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-11"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Citra dan Elevasi Hutan di Gunung Arjuno, Kota Batu</strong></p>
+<p>Perhatikan Citra dan Elevasi Berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/49476_b482fc0a46599d4825367c8e8b65dd7c.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Manakah pernyataan berikut yang menunjukkan perencanaan infrastruktur yang sesuai dengan karakteristik wilayah pada citra dan elevasi tersebut?</p>
+<p>Pilih <strong>Sesuai</strong> atau <strong>Tidak Sesuai</strong> untuk setiap pernyataan!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Sesuai</td><td class="text-center" style="width:100px">Tidak Sesuai</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembangunan peternakan Sapi, mendekatkan dengan sumberpakan di Lokasi C</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('11.','1','1');">
+															<input id="pilihan_11_1_1" name="pilihan_11_1" class="pilihan__1" onchange="pilihan3('11','3','619','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_11_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('11.','1','2');">
+															<input id="pilihan_11_1_2" name="pilihan_11_1" class="pilihan__1" onchange="pilihan3('11','3','619','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_11_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembangunan sistem irigasi tetes di lokasi A, guna penghematan energi</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('11.','2','1');">
+															<input id="pilihan_11_2_1" name="pilihan_11_2" class="pilihan__2" onchange="pilihan3('11','3','619','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_11_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('11.','2','2');">
+															<input id="pilihan_11_2_2" name="pilihan_11_2" class="pilihan__2" onchange="pilihan3('11','3','619','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_11_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembuatan terasering pada semua wilayah sebagai upaya pencegahan laju erosi di lokasi A</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('11.','3','1');">
+															<input id="pilihan_11_3_1" name="pilihan_11_3" class="pilihan__3" onchange="pilihan3('11','3','619','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_11_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('11.','3','2');">
+															<input id="pilihan_11_3_2" name="pilihan_11_3" class="pilihan__3" onchange="pilihan3('11','3','619','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_11_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-12"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Studi Kasus: Penambangan Nikel di Halmahera Timur</strong></p>
+<p>Perhatikan informasi berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/54758_2b2a68242462a78cdb4f458eaa5ad613.png" alt=""></p>
+<p><span style="font-size: 11px;">Gambar: Pertambangan Nikel di Halmahera dan Produk turunan dari Nikel</span></p>
+<p>Sejak 2019, Halmahera Timur, Maluku Utara, menjadi lokasi ekspansi besar-besaran industri pertambangan nikel untuk mendukung kebutuhan baterai kendaraan listrik global. Aktivitas ini membuka lapangan kerja dan meningkatkan pendapatan daerah, namun juga menimbulkan masalah lingkungan serius seperti kerusakan hutan mangrove, pencemaran sungai akibat limbah tailing, dan gangguan ekosistem pesisir.<br>Sebuah laporan (2023) menyebutkan bahwa hanya sebagian kecil perusahaan tambang yang menjalankan reklamasi dan revegetasi pasca tambang. Pemerintah daerah menghadapi dilema antara mendorong investasi atau melindungi keberlanjutan ekologi. Sementara itu, masyarakat adat mulai kehilangan akses terhadap hutan dan sumber daya alam yang sebelumnya menjadi tumpuan hidup.<br>Upaya konservasi seperti audit lingkungan, zonasi wilayah adat, dan restorasi mangrove telah diusulkan, namun implementasinya berjalan lambat.<br><strong>Sumber</strong>:Mongabay Indonesia, 2023.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan informasi diatas, bagaimana keberlanjutan pengelolaan sumber daya alam berdasarkan prinsip konservasi dan restorasi lingkungan?<br>Pillih pada pernyataan yang <strong>benar</strong> dan <strong>salah</strong>!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Revegetasi yang dilakukan sebagian kecil perusahaan merupakan bentuk pengelolaan SDA berbasis restorasi.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('12.','1','1');">
+															<input id="pilihan_12_1_1" name="pilihan_12_1" class="pilihan__1" onchange="pilihan3('12','3','630','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_12_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('12.','1','2');">
+															<input id="pilihan_12_1_2" name="pilihan_12_1" class="pilihan__1" onchange="pilihan3('12','3','630','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_12_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Audit lingkungan tidak berkaitan dengan konservasi karena hanya berupa kegiatan administratif yang tidak berdampak pada ekosistem.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('12.','2','1');">
+															<input id="pilihan_12_2_1" name="pilihan_12_2" class="pilihan__2" onchange="pilihan3('12','3','630','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_12_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('12.','2','2');">
+															<input id="pilihan_12_2_2" name="pilihan_12_2" class="pilihan__2" onchange="pilihan3('12','3','630','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_12_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Zonasi wilayah adat merupakan bentuk konservasi karena menjaga wilayah hidup masyarakat sekaligus melindungi lingkungan.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('12.','3','1');">
+															<input id="pilihan_12_3_1" name="pilihan_12_3" class="pilihan__3" onchange="pilihan3('12','3','630','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_12_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('12.','3','2');">
+															<input id="pilihan_12_3_2" name="pilihan_12_3" class="pilihan__3" onchange="pilihan3('12','3','630','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_12_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-13"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Kebakaran Hutan dan Lahan Gambut di Kalimantan Tengah</strong></p>
+<p>Perhatikan informasi berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/16859_76060ba266182e01aa148d8d4eab692e.png" alt=""></p>
+<p><span style="font-size: 11px;">sumber:<span style="color: #0000ff;"><em>https://desyyusnita.com/ngobrol-tempo-lahan-gambut.html</em></span></span></p>
+<p>Setiap musim kemarau, wilayah Kabupaten Pulang Pisau dan Kabupaten Kapuas, Kalimantan Tengah mengalami kebakaran hutan dan lahan gambut yang meluas. Data kejadian Karhutla mulai Januari hingga September 2023 sebanyak 358 kejadian di Pulang Pisau, dan 352 kejadian di Kapas. Pembukaan lahan dengan cara dibakar oleh oknum yang tidak bertanggung jawab menjadi salah satu penyebab kebakaran.<br>Kebakaran ini tidak hanya menyebabkan kerusakan ekosistem, tetapi juga mengganggu kesehatan masyarakat akibat kabut asap, serta menurunkan produktivitas pertanian dan perikanan lokal. Sejak 2020, pemerintah dan organisasi masyarakat sipil bekerja sama melalui program restorasi gambut dengan <strong>pendekatan 3R: <em>Rewetting</em> (pembasahan), <em>Revegetation</em> (penanaman ulang), dan <em>Revitalization</em> (pemberdayaan ekonomi lokal)</strong>. Sebelum musim kemarau tiba, sebuah kelompok juga sudah melakukan perawatan sumur bor yang sebelumnya dibangun oleh BRGM (Badan Restorasi Gambut dan Mangrove). Tujuannya agar sumur tetap berfungsi optimal saat dibutuhkan.</p>
+<p><span style="font-size: 11px;">Sumber: MMC Kalteng (2023); Antara Kalteng (2023)</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan narasi tersebut, bagaimana langkah yang tepat untuk menjaga keseimbangan antara pemanfaatan ekonomi dan pelestarian lahan gambut di Kalimantan Tengah?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','0');">
+													<input id="pilihan_13_0" onchange="pilihan('13','a','631')" pil="a" name="pilihan13" type="radio">
+													<label for="pilihan_13_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Meningkatkan produktivitas lahan gambut dengan memperluas pembukaan lahan secara efisien.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','1');">
+													<input id="pilihan_13_1" onchange="pilihan('13','b','631')" pil="b" name="pilihan13" type="radio">
+													<label for="pilihan_13_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menetapkan larangan total aktivitas masyarakat di seluruh kawasan gambut untuk mencegah kerusakan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','2');">
+													<input id="pilihan_13_2" onchange="pilihan('13','c','631')" pil="c" name="pilihan13" type="radio">
+													<label for="pilihan_13_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Melanjutkan pembukaan lahan gambut dengan sistem tebang pilih agar tetap lestari dan menjaga rotasi tanaman.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','3');">
+													<input id="pilihan_13_3" onchange="pilihan('13','d','631')" pil="d" name="pilihan13" type="radio">
+													<label for="pilihan_13_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mendorong program pertanian ramah gambut dan mengembangkan produk hasil hutan bukan kayu.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','4');">
+													<input id="pilihan_13_4" onchange="pilihan('13','e','631')" pil="e" name="pilihan13" type="radio">
+													<label for="pilihan_13_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengganti lahan gambut dengan tambak agar menghasilkan keuntungan ekonomi yang lebih tinggi.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-14"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perhatikan informasi berikut ini!</p>
+<ol>
+<li>Saat musim kemarau, wilayah Kalimantan Selatan sering mengalami kebakaran lahan gambut, seperti di Kota Banjarbaru pada Juli 2024. Sementara itu saat musim hujan, wilayah ini sering dilanda banjir karena daya serap air yang rendah seperti di Kabupaten Banjar dan Kabupaten Barito Kuala pada Desember 2024</li>
+<li>Wilayah Nusa Tenggara Timur (NTT) rentan mengalami bencana kekeringan saat musim kemarau. Kabupaten Kupang menjadi salah satu daerah yang mengalami kekeringan ekstrem pada November 2023, dan menyebabkan kelangkaan air bersih. Sementara itu, NTT juga rentan dilanda banjir saat musim hujan. Pada bulan Maret 2023, desa di Kabupaten Kupang mengalami banjir akibat curah hujan sedang hingga lebat yang terjadi selama beberapa hari.</li>
+</ol>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Fenomena bencana di Kalimantan Selatan maupun NTT cenderung berulang setiap tahunnya. Konsep geografi yang tepat untuk menjelaskan keteraturan terjadinya bencana tersebut adalah…</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','0');">
+													<input id="pilihan_14_0" onchange="pilihan('14','a','632')" pil="a" name="pilihan14" type="radio">
+													<label for="pilihan_14_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>diferensiasi area</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','1');">
+													<input id="pilihan_14_1" onchange="pilihan('14','b','632')" pil="b" name="pilihan14" type="radio">
+													<label for="pilihan_14_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>keterjangkauan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','2');">
+													<input id="pilihan_14_2" onchange="pilihan('14','c','632')" pil="c" name="pilihan14" type="radio">
+													<label for="pilihan_14_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>interaksi</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','3');">
+													<input id="pilihan_14_3" onchange="pilihan('14','d','632')" pil="d" name="pilihan14" type="radio">
+													<label for="pilihan_14_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>pola</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','4');">
+													<input id="pilihan_14_4" onchange="pilihan('14','e','632')" pil="e" name="pilihan14" type="radio">
+													<label for="pilihan_14_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>aglomerasi</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-15"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong><img src="/tka/cbt_images/64170_fb858711afe41f70754ddf24dc8c8a56.png" alt=""></strong></p>
+<p><strong>Pertanian di Gunung Marapi Sumatera Barat</strong></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pilih Fakta atau Opini tetang pernyataan yang berhubungan antara aktivitas Gunung Marapi dan kondisi lahan pertanian subur di sekitarnya !</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Fakta</td><td class="text-center" style="width:100px">Opini</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Keberadaan lahan subur di sekitar Gunung Marapi sepenuhnya bergantung pada intensitas letusan yang terjadi setiap tahun.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','1','1');">
+															<input id="pilihan_15_1_1" name="pilihan_15_1" class="pilihan__1" onchange="pilihan3('15','3','629','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_15_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','1','2');">
+															<input id="pilihan_15_1_2" name="pilihan_15_1" class="pilihan__1" onchange="pilihan3('15','3','629','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_15_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Material hasil letusan gunung api dapat memperbaiki struktur tanah dan memperkaya unsur hara setelah mengalami pelapukan.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','2','1');">
+															<input id="pilihan_15_2_1" name="pilihan_15_2" class="pilihan__2" onchange="pilihan3('15','3','629','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_15_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','2','2');">
+															<input id="pilihan_15_2_2" name="pilihan_15_2" class="pilihan__2" onchange="pilihan3('15','3','629','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_15_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tanah vulkanik dari Gunung Marapi cenderung memiliki kandungan mineral yang tinggi sehingga cocok untuk pertanian sayur dan buah.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','3','1');">
+															<input id="pilihan_15_3_1" name="pilihan_15_3" class="pilihan__3" onchange="pilihan3('15','3','629','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_15_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('15.','3','2');">
+															<input id="pilihan_15_3_2" name="pilihan_15_3" class="pilihan__3" onchange="pilihan3('15','3','629','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_15_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-16"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: left;">Perhatikan informasi wilayah berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/01538_da8193c117e4832680b732835a122b6f.png" alt=""></p>
+<p><span style="font-size: 11px;">Sumber: BMKG</span></p>
+<p style="text-align: left;">Gempa bumi bermagnitudo 4,1 mengguncang Bogor, Jawa Barat, pada Kamis malam, 10 April 2025. Akibatnya, 35 unit rumah rusak. Gempa tersebut dipicu oleh aktivitas Sesar Citarik, yang merupakan salah satu sesar aktif di bagian barat Pulau Jawa.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan informasi tersebut, salah satu bentuk adaptasi struktural yang paling tepat dilakukan untuk mengurangi risiko korban jiwa dan kerusakan adalah....</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','0');">
+													<input id="pilihan_16_0" onchange="pilihan('16','a','628')" pil="a" name="pilihan16" type="radio">
+													<label for="pilihan_16_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>membangun rumah berpondasi beton berat agar tidak mudah roboh saat gempa</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','1');">
+													<input id="pilihan_16_1" onchange="pilihan('16','b','628')" pil="b" name="pilihan16" type="radio">
+													<label for="pilihan_16_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>melakukan simulasi evakuasi gempa secara rutin kepada seluruh masyarakat</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','2');">
+													<input id="pilihan_16_2" onchange="pilihan('16','c','628')" pil="c" name="pilihan16" type="radio">
+													<label for="pilihan_16_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>merancang pemukiman baru dengan peta mikrozonasi gempa sebagai acuan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','3');">
+													<input id="pilihan_16_3" onchange="pilihan('16','d','628')" pil="d" name="pilihan16" type="radio">
+													<label for="pilihan_16_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>membangun pemukiman padat di dataran rendah agar jauh dari pusat gempa</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','4');">
+													<input id="pilihan_16_4" onchange="pilihan('16','e','628')" pil="e" name="pilihan16" type="radio">
+													<label for="pilihan_16_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>menunda pembangunan infrastruktur hingga sesar dinyatakan tidak aktif</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-17"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Data Statistik Capaian Pembangunan Tahun 2023</strong></p>
+<p>Tabel Indikator Pembangunan Sosial Kota Makassar dan Kota Medan Tahun 2023</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/57683_1a0de5d972c1f5377bb36d3dfc64d7d2.png" alt=""></p>
+<p style="text-align: left;"><span style="font-size: 11px;"><strong><em>Sumber</em></strong><em>:<br></em><em>Badan Pusat Statistik 2023. Indikator Kesejahteraan Rakyat Kota Makassar &amp; Kota Medan. https://bps.go.id</em></span></p>
+<p style="text-align: justify;">Pemerintah Indonesia terus memantau perkembangan pembangunan manusia di berbagai kota. Berdasarkan data tahun 2023, Kota Makassar menunjukkan capaian yang lebih tinggi dibanding Kota Medan dalam beberapa indikator sosial.</p>
+<ul>
+<li style="text-align: justify;"><strong>Rata-rata lama sekolah</strong> di Makassar mencapai <strong>11,47 tahun</strong>, sedangkan di Medan <strong>10,69 tahun</strong>.</li>
+<li style="text-align: justify;"><strong>Angka melek huruf</strong> Makassar berada pada <strong>99,23%</strong>, sedikit lebih tinggi dari Medan (<strong>98,94%</strong>).</li>
+<li style="text-align: justify;"><strong>Akses air minum layak</strong> hampir merata di Makassar (<strong>99,92%</strong>), namun masih cukup rendah di Medan (<strong>87,39%</strong>).</li>
+<li style="text-align: justify;"><strong>Angka pengangguran terbuka</strong> justru lebih tinggi di Makassar (<strong>9,53%</strong>) dibanding Medan (<strong>8,86%</strong>).</li>
+<li style="text-align: justify;"><strong>Rasio tenaga kesehatan</strong> per 100.000 penduduk di Makassar mencapai <strong>989</strong>, sedangkan Medan hanya <strong>732</strong>.</li>
+</ul>
+<p style="text-align: justify;">Perbedaan capaian ini menunjukkan adanya dinamika dalam pembangunan sosial antara dua kota besar di Indonesia yang memiliki kondisi geografis dan karakter penduduk yang berbeda.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan <strong>Tabel Indikator Pembangunan Sosial Kota Makassar dan Kota Medan Tahun 2023, tentukan</strong> simpulan yang <strong>paling tepat dan logis dari pernyataan berikut!</strong></p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','0');">
+													<input id="pilihan_17_0" onchange="pilihan('17','a','624')" pil="a" name="pilihan17" type="radio">
+													<label for="pilihan_17_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kota Medan secara umum menunjukkan kualitas sosial lebih tinggi karena angka penganggurannya lebih rendah.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','1');">
+													<input id="pilihan_17_1" onchange="pilihan('17','b','624')" pil="b" name="pilihan17" type="radio">
+													<label for="pilihan_17_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kota Makassar menunjukkan keunggulan pelayanan dasar dan kualitas pendidikan, meskipun menghadapi tantangan lapangan kerja.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','2');">
+													<input id="pilihan_17_2" onchange="pilihan('17','c','624')" pil="c" name="pilihan17" type="radio">
+													<label for="pilihan_17_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kota Medan memiliki rasio tenaga kesehatan yang lebih baik, tetapi tertinggal dalam pendidikan dasar.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','3');">
+													<input id="pilihan_17_3" onchange="pilihan('17','d','624')" pil="d" name="pilihan17" type="radio">
+													<label for="pilihan_17_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kota Makassar memiliki tantangan serius dalam akses air minum dan layanan kesehatan dibandingkan Kota Medan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','4');">
+													<input id="pilihan_17_4" onchange="pilihan('17','e','624')" pil="e" name="pilihan17" type="radio">
+													<label for="pilihan_17_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kedua kota menunjukkan capaian pembangunan yang seimbang, karena perbedaan data masing-masing hanya terjadi dalam selisih kecil.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-18"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Peta Isoseismal Tapanuli Utara</strong></p>
+<p>Perhatikan peta dan narasi berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/95515_0349b850c2f312a3f59d6abe13c3d920.png" alt=""></p>
+<p>Pada 1 Oktober 2022 pukul 02:28:41 WIB, wilayah Kabupaten Pasaman Barat diguncang gempa bumi berkekuatan magnitudo 5,8 dengan kedalaman 10 km. Episenter gempa berada di darat pada koordinat 2,11° LU dan 98,83° BT. Getaran kuat dirasakan di beberapa kecamatan seperti Talamau, Kinali, dan Pasaman, menyebabkan kerusakan pada rumah tidak tahan gempa serta memicu longsor di kawasan perbukitan. Peta isoseismal menunjukkan bahwa wilayah dengan intensitas getaran tertinggi berada di sekitar zona patahan aktif Sumatera. Aktivitas manusia seperti pembangunan permukiman di kaki bukit tanpa perkuatan struktur turut memperbesar kerusakan akibat getaran tanah dan pergerakan lereng.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan peta dan narasi di atas, bagaimana dampak yang kemungkinan terjadi akibat gempa Tapanuli Utara di lokasi titik episenter?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','0');">
+													<input id="pilihan_18_0" onchange="pilihan('18','a','627')" pil="a" name="pilihan18" type="radio">
+													<label for="pilihan_18_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lokasi titik episenter dapat mengalami beberapa kerusakan struktur ringan pada bangunan permukiman</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','1');">
+													<input id="pilihan_18_1" onchange="pilihan('18','b','627')" pil="b" name="pilihan18" type="radio">
+													<label for="pilihan_18_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lokasi titik episenter tidak mengalami kerusakan bangunan dan hanya dapat menjatuhkan benda kecil di atas meja</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','2');">
+													<input id="pilihan_18_2" onchange="pilihan('18','c','627')" pil="c" name="pilihan18" type="radio">
+													<label for="pilihan_18_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lokasi titik episenter menglami kerusakan besar seperti robohnya seluruh bangunan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','3');">
+													<input id="pilihan_18_3" onchange="pilihan('18','d','627')" pil="d" name="pilihan18" type="radio">
+													<label for="pilihan_18_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lokasi titik episenter mengalami kerusakan sedang seperti robohnya sebagian bangunan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','4');">
+													<input id="pilihan_18_4" onchange="pilihan('18','e','627')" pil="e" name="pilihan18" type="radio">
+													<label for="pilihan_18_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lokasi titik episenter tidak mengalami kerusakan apapun</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-19"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Gempa Sigi</strong></p>
+<p>Perhatikan peta dan narasi berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/29476_4037f2edfd5253ed8c829033757d4c90.png" alt=""></p>
+<p><strong>Gempa Sigi – Sulawesi Tengah 2023<br></strong>Pada 27 Februari 2023 pukul 08:26:02 WIB, wilayah Kabupaten Sigi, Sulawesi Tengah diguncang gempa tektonik berkekuatan magnitudo 5,5 dengan kedalaman 10 km. Episenter gempa terletak di darat pada koordinat 1,59° LS dan 120,21° BT. Berdasarkan peta isoseismal, intensitas getaran tertinggi tercatat di wilayah Kulawi dan Dolo Selatan, yang terletak dekat dengan Sesar Palu-Koro—salah satu sesar aktif utama di Sulawesi. Getaran dirasakan cukup kuat di permukiman padat yang berada di lereng dan bantaran sungai, menyebabkan beberapa kerusakan ringan pada bangunan tidak tahan gempa. Aktivitas manusia yang membangun tanpa mempertimbangkan aspek geologi semakin meningkatkan risiko kerusakan saat terjadi gempabumi.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Merujuk pada narasi dan data Gempa Sigi, tentukan <strong>Fakta</strong> atau <strong>Opini</strong> yang sesuai dari pernyataan berikut!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Fakta</td><td class="text-center" style="width:100px">Opini</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pusat gempa Sigi 2023 berada di darat dengan kedalaman 10 km</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('19.','1','1');">
+															<input id="pilihan_19_1_1" name="pilihan_19_1" class="pilihan__1" onchange="pilihan3('19','3','626','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_19_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('19.','1','2');">
+															<input id="pilihan_19_1_2" name="pilihan_19_1" class="pilihan__1" onchange="pilihan3('19','3','626','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_19_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Guncangan gempa lebih terasa di wilayah dengan batuan sedimen dan lembek</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('19.','2','1');">
+															<input id="pilihan_19_2_1" name="pilihan_19_2" class="pilihan__2" onchange="pilihan3('19','3','626','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_19_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('19.','2','2');">
+															<input id="pilihan_19_2_2" name="pilihan_19_2" class="pilihan__2" onchange="pilihan3('19','3','626','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_19_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Gempa bumi hanya berdampak jika terjadi dengan magnitudo di atas 6,0</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('19.','3','1');">
+															<input id="pilihan_19_3_1" name="pilihan_19_3" class="pilihan__3" onchange="pilihan3('19','3','626','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_19_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('19.','3','2');">
+															<input id="pilihan_19_3_2" name="pilihan_19_3" class="pilihan__3" onchange="pilihan3('19','3','626','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_19_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-20"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>PERTEMUAN LEMPENG TEKTONIK INDONESIA</strong></p>
+<p><em>Perhatikan gambar berikut!</em></p>
+<p style="text-align: center;"><em><img src="/tka/cbt_images/77223_5e99f9d1a51abaec66174d12f2ac687f.png" alt=""></em></p>
+<p><span style="font-size: 11px;">Sumber:<br></span><span style="font-size: 11px;">Eric Gaba (Sting - fr:Sting)derivative work: Mikenorton (talk) - Tectonic_plates_boundaries_detailed-en.svg, CC BY 2.5, https://commons.wikimedia.org/w/index.php?curid=8357551</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan gambar di atas, manakah pernyataan yang <strong>benar</strong> dan <strong>salah</strong> berdasarkan analisis subduksi lempeng yang terjadi di Indonesia?</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Gempa tektonik di wilayah Aceh, Sumatera Barat, dan selatan Jawa terjadi akibat tumbukan Lempeng Indo-Australia dan Eurasia.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('20.','1','1');">
+															<input id="pilihan_20_1_1" name="pilihan_20_1" class="pilihan__1" onchange="pilihan3('20','3','633','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_20_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('20.','1','2');">
+															<input id="pilihan_20_1_2" name="pilihan_20_1" class="pilihan__1" onchange="pilihan3('20','3','633','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_20_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Zona subduksi di selatan Pulau Jawa dan Nusa Tenggara menunjukkan potensi tsunami tinggi.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('20.','2','1');">
+															<input id="pilihan_20_2_1" name="pilihan_20_2" class="pilihan__2" onchange="pilihan3('20','3','633','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_20_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('20.','2','2');">
+															<input id="pilihan_20_2_2" name="pilihan_20_2" class="pilihan__2" onchange="pilihan3('20','3','633','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_20_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Wilayah Kalimantan relatif tidak aman dari aktivitas tektonik karena dekat dari batas lempeng aktif.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('20.','3','1');">
+															<input id="pilihan_20_3_1" name="pilihan_20_3" class="pilihan__3" onchange="pilihan3('20','3','633','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_20_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('20.','3','2');">
+															<input id="pilihan_20_3_2" name="pilihan_20_3" class="pilihan__3" onchange="pilihan3('20','3','633','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_20_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-21"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perhatikan informasi berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/94841_77b81697fad3ff8630b2ee758e467b56.png" alt=""></p>
+<p><em>Windy.com</em> adalah sebuah aplikasi berbasis peta yang sangat populer, dirancang untuk memvisualisasikan data cuaca dan angin secara global. Pengguna dapat melihat pola angin, suhu, curah hujan, tekanan atmosfer, gelombang laut, dan berbagai parameter meteorologi lainnya dalam bentuk animasi yang menarik. Data untuk <em>Windy</em> dikumpulkan dari berbagai model prakiraan cuaca global (seperti GFS, ECMWF) dan observasi satelit cuaca. Dengan <em>Windy</em>, pengguna dapat memprediksi kondisi cuaca di lokasi tertentu, merencanakan aktivitas yang bergantung pada cuaca (misalnya pelayaran, penerbangan, atau pendakian), serta memahami fenomena atmosfer secara visual dan intuitif.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Aplikasi tersebut dapat berperan untuk ... .</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','0');">
+													<input id="pilihan_21_0" onchange="pilihan('21','a','622')" pil="a" name="pilihan21" type="radio">
+													<label for="pilihan_21_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengelola basis data historis tentang peristiwa bencana alam dan dampaknya.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','1');">
+													<input id="pilihan_21_1" onchange="pilihan('21','b','622')" pil="b" name="pilihan21" type="radio">
+													<label for="pilihan_21_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menyediakan informasi spasial dan temporal tentang kondisi atmosfer secara visual.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','2');">
+													<input id="pilihan_21_2" onchange="pilihan('21','c','622')" pil="c" name="pilihan21" type="radio">
+													<label for="pilihan_21_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengembangkan instrumen pengukuran cuaca baru yang lebih akurat dan canggih.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','3');">
+													<input id="pilihan_21_3" onchange="pilihan('21','d','622')" pil="d" name="pilihan21" type="radio">
+													<label for="pilihan_21_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menganalisis perilaku sosial manusia dalam menghadapi perubahan iklim global.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','4');">
+													<input id="pilihan_21_4" onchange="pilihan('21','e','622')" pil="e" name="pilihan21" type="radio">
+													<label for="pilihan_21_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Memfasilitasi komunikasi langsung antara ahli meteorologi dan masyarakat umum.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-22"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Perhatikan gambar Citra Satelit wilayah demak dan sekitarnya berikut ini!</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/84439_45431e9a982ae25e87dcf679ee3a26e6.png" alt=""></strong></p>
+<p><span style="font-size: 11px;">Sumber:<br></span><span style="font-size: 11px;">Citra satelit Copernicus Sentinel-2B</span></p>
+<p>Perhatikan dengan saksama citra satelit wilayah pesisir Semarang, Indonesia, yang disajikan di bawah ini. Citra ini diambil oleh satelit Copernicus Sentinel-2B dan menampilkan interaksi kompleks antara daratan dan lautan, menunjukkan area perkotaan, lahan pertanian, serta berbagai bentuk pemanfaatan wilayah pesisir. Amati perbedaan warna dan pola yang mengindikasikan jenis tutupan lahan, kondisi perairan, dan aktivitas manusia di sepanjang garis pantai.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Untuk tujuan perencanaan tata ruang dan pengelolaan lingkungan wilayah pesisir Semarang, informasi spasial esensial apa yang dapat diekstraksi dan divisualisasikan menjadi peta tematik yang paling tepat dari pengolahan citra satelit sumber daya seperti yang disajikan di atas?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','0');">
+													<input id="pilihan_22_0" onchange="pilihan('22','a','613')" pil="a" name="pilihan22" type="radio">
+													<label for="pilihan_22_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peta kepadatan penduduk serta persebaran fasilitas umum perkotaan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','1');">
+													<input id="pilihan_22_1" onchange="pilihan('22','b','613')" pil="b" name="pilihan22" type="radio">
+													<label for="pilihan_22_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peta jalur migrasi hewan laut dan identifikasi vegetasi alami ekosistem pesisir.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','2');">
+													<input id="pilihan_22_2" onchange="pilihan('22','c','613')" pil="c" name="pilihan22" type="radio">
+													<label for="pilihan_22_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peta tutupan lahan, indeks kekeruhan perairan, serta perubahan garis pantai.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','3');">
+													<input id="pilihan_22_3" onchange="pilihan('22','d','613')" pil="d" name="pilihan22" type="radio">
+													<label for="pilihan_22_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peta persebaran jenis batuan dan potensi kandungan mineral di bawah permukaan laut.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','4');">
+													<input id="pilihan_22_4" onchange="pilihan('22','e','613')" pil="e" name="pilihan22" type="radio">
+													<label for="pilihan_22_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peta jaringan transportasi darat dan laut serta analisis aksesibilitas pusat-pusat ekonomi.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-23"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Citra Satelit Pencemaran Lingkungan</strong></p>
+<p style="text-align: center;"><img src="/tka/cbt_images/27937_9907dc67ba3fcbde8fbbf244619635ba.png" alt=""></p>
+<p><span style="font-size: 11px;">Sumber gambar: <span style="color: #0000ff;">https://www.greenpeace.org/indonesia/siaran-pers-2/45007/setahun-setelah-periode-awal-penguncian-dan-pembatasan-sosial-covid-19-gambar-satelit-mengungkapkan-peningkatan-polusi-udara-global/</span></span></p>
+<p>Gambar di atas merupakan citra satelit yang menunjukkan tingkat polusi udara di wilayah Jakarta dan sekitarnya selama periode April 2018 hingga April 2021. Warna-warna pada peta menunjukkan konsentrasi Nitrogen Dioksida (NO₂), dengan legenda sebagai berikut:<br>Merah: Konsentrasi NO₂ Tinggi<br>Kuning: Konsentrasi NO₂ Sedang<br>Hijau: Konsentrasi NO₂ Rendah<br>Peta ini dapat digunakan untuk menganalisis dampak pencemaran udara terhadap lingkungan dan kesehatan masyarakat, serta mengidentifikasi sumber-sumber polusi berdasarkan ciri visual pada citra satelit.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan pola distribusi konsentrasi NO₂ dalam citra satelit, pilih benar atau salah pernyataan dampak lingkungan dan sosial yang dapat terjadi di wilayah yang menunjukkan konsentrasi tinggi!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Dampak lingkungan dan sosial</td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penurunan kualitas vegetasi akibat paparan polusi udara jangka panjang</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','1','1');">
+															<input id="pilihan_23_1_1" name="pilihan_23_1" class="pilihan__1" onchange="pilihan3('23','3','615','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_23_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','1','2');">
+															<input id="pilihan_23_1_2" name="pilihan_23_1" class="pilihan__1" onchange="pilihan3('23','3','615','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_23_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Terjadinya hujan asam yang berdampak pada kualitas tanah dan air</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','2','1');">
+															<input id="pilihan_23_2_1" name="pilihan_23_2" class="pilihan__2" onchange="pilihan3('23','3','615','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_23_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','2','2');">
+															<input id="pilihan_23_2_2" name="pilihan_23_2" class="pilihan__2" onchange="pilihan3('23','3','615','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_23_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Polusi udara menurunkan curah hujan dan mengakibatkan kekeringan total</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','3','1');">
+															<input id="pilihan_23_3_1" name="pilihan_23_3" class="pilihan__3" onchange="pilihan3('23','3','615','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_23_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('23.','3','2');">
+															<input id="pilihan_23_3_2" name="pilihan_23_3" class="pilihan__3" onchange="pilihan3('23','3','615','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_23_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-24"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Citra Satelit Pencemaran Sungai di Pekalongan</strong></p>
+<p>Gambar berikut menunjukkan citra satelit yang menampilkan kondisi pencemaran air sungai di Pekalongan, Jawa Tengah. Warna gelap pada aliran sungai menunjukkan tingkat pencemaran yang tinggi akibat limbah industri dan domestik.</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/69952_ca8fa748087554bece2024edc3317bfe.png" alt=""></p>
+<p><span style="font-size: 11px;">Sumber gambar: Google Earth</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan citra satelit, pernyataan manakah yang benar mengenai interpretasi visual dari citra? (Pilih semua jawaban yang benar, Jawaban Benar lebih dari satu)</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','0');">
+													<input id="pilihan_24_0" class="pilihan24" onchange="pilihan2('24','a','618')" pil="a" name="pilihan24" type="checkbox" value="A">
+													<label for="pilihan_24_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Warna gelap pada aliran sungai menunjukkan tingkat pencemaran yang tinggi</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','1');">
+													<input id="pilihan_24_1" class="pilihan24" onchange="pilihan2('24','b','618')" pil="b" name="pilihan24" type="checkbox" value="B">
+													<label for="pilihan_24_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pola aliran sungai yang berkelok-kelok menunjukkan wilayah cenderung landai.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','2');">
+													<input id="pilihan_24_2" class="pilihan24" onchange="pilihan2('24','c','618')" pil="c" name="pilihan24" type="checkbox" value="C">
+													<label for="pilihan_24_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tekstur kasar pada citra menunjukkan area dengan vegetasi lebat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','3');">
+													<input id="pilihan_24_3" class="pilihan24" onchange="pilihan2('24','d','618')" pil="d" name="pilihan24" type="checkbox" value="D">
+													<label for="pilihan_24_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Bentuk persegi dengan rona gelap menunjukkan area persawahan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('24.','4');">
+													<input id="pilihan_24_4" class="pilihan24" onchange="pilihan2('24','e','618')" pil="e" name="pilihan24" type="checkbox" value="E">
+													<label for="pilihan_24_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(24,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Bayangan pada citra satelit tidak memberikan informasi penting dalam interpretasi pencemaran air.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-25"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Pembangunan PLTS Terapung Cirata di Waduk Cirata, Jawa Barat</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/03057_4e07fffb302587974a3f1e5ceb0096d5.png" alt=""></strong></p>
+<p style="text-align: left;"><span style="font-size: 11px;"><strong>Sumber gambar: <span style="color: #0000ff;">https://www.antaranews.com/infografik/3800178/potensi-plts-terapung-di-indonesia</span></strong></span></p>
+<p style="text-align: justify;">Gambar menunjukkan informasi geospasial tentang potensi pemanfaatan Pembangkit Listrik Tenaga Surya (PLTS) terapung di berbagai wilayah perairan Indonesia, baik di danau, waduk, hingga area pengelolaan air buangan. Menurut data BRIN (2023), wilayah Maluku dan Papua memiliki potensi terbesar dengan pemanfaatan mencapai 99,7%, sementara PLTS terapung aktif saat ini baru terdapat di Waduk Cirata, Jawa Barat, seluas 200 ha dengan kapasitas 192 MWp dan investasi Rp1,7 triliun.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Manakah dampak dari pembangunan PLTS terapung berikut yang benar?</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>PLTS terapung mengoptimalkan ruang perairan buatan tanpa mengurangi lahan pertanian atau permukiman.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('25.','1','1');">
+															<input id="pilihan_25_1_1" name="pilihan_25_1" class="pilihan__1" onchange="pilihan3('25','3','607','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_25_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('25.','1','2');">
+															<input id="pilihan_25_1_2" name="pilihan_25_1" class="pilihan__1" onchange="pilihan3('25','3','607','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_25_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>PLTS terapung secara langsung mengendalikan banjir dan berfungsi sebagai tanggul air.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('25.','2','1');">
+															<input id="pilihan_25_2_1" name="pilihan_25_2" class="pilihan__2" onchange="pilihan3('25','3','607','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_25_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('25.','2','2');">
+															<input id="pilihan_25_2_2" name="pilihan_25_2" class="pilihan__2" onchange="pilihan3('25','3','607','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_25_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>PLTS terapung berkontribusi pada pengurangan emisi karbon dan mendukung transisi energi bersih.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('25.','3','1');">
+															<input id="pilihan_25_3_1" name="pilihan_25_3" class="pilihan__3" onchange="pilihan3('25','3','607','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_25_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('25.','3','2');">
+															<input id="pilihan_25_3_2" name="pilihan_25_3" class="pilihan__3" onchange="pilihan3('25','3','607','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_25_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-26"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>PETA JARINGAN JALAN PULAU KALIMANTAN</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/46623_204dee7467b955f63e20941259fc5c03.png" alt=""></strong></p>
+<p><span style="font-size: 11px;">Sumber: Satker PJN Provinsi Kalimantan Barat Tahun 2018</span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pilih pernyataan yang paling tepat yang menunjukkan kelayakan pembangunan jalan nasional berdasarkan pertimbangan spasial dan keberlanjutan! (jawaban benar lebih dari satu)</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('26.','0');">
+													<input id="pilihan_26_0" class="pilihan26" onchange="pilihan2('26','a','612')" pil="a" name="pilihan26" type="checkbox" value="A">
+													<label for="pilihan_26_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(26,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembangunan jalan nasional baru di wilayah pedalaman Kalimantan Tengah yang saat ini minim akses layak dilakukan karena dapat membuka isolasi daerah dan mendukung pemerataan wilayah, meskipun menghadapi tantangan morfologis dan pembiayaan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('26.','1');">
+													<input id="pilihan_26_1" class="pilihan26" onchange="pilihan2('26','b','612')" pil="b" name="pilihan26" type="checkbox" value="B">
+													<label for="pilihan_26_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(26,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pengembangan jaringan jalan di sekitar wilayah konsentrasi penduduk dan pusat-pusat kegiatan ekonomi seperti Balikpapan dan Samarinda memiliki kelayakan tinggi karena dapat langsung meningkatkan efisiensi logistik dan mendukung pertumbuhan ekonomi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('26.','2');">
+													<input id="pilihan_26_2" class="pilihan26" onchange="pilihan2('26','c','612')" pil="c" name="pilihan26" type="checkbox" value="C">
+													<label for="pilihan_26_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(26,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembangunan jalan nasional di pesisir utara Kalimantan Timur menuju perbatasan Serawak belum dapat dinilai sepenuhnya layak karena masih memerlukan kajian potensi wilayah dan fungsi strategis lintas batas.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('26.','3');">
+													<input id="pilihan_26_3" class="pilihan26" onchange="pilihan2('26','d','612')" pil="d" name="pilihan26" type="checkbox" value="D">
+													<label for="pilihan_26_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(26,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perpanjangan jalan nasional menuju daerah terpencil di Kalimantan Utara menunjukkan tantangan kelayakan, terutama dari aspek biaya pembangunan dan aksesibilitas, namun tetap memerlukan studi potensi sumber daya wilayah.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('26.','4');">
+													<input id="pilihan_26_4" class="pilihan26" onchange="pilihan2('26','e','612')" pil="e" name="pilihan26" type="checkbox" value="E">
+													<label for="pilihan_26_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(26,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peningkatan kapasitas jalan nasional yang sudah menghubungkan pelabuhan utama di Kalimantan dianggap lebih layak daripada membuka jalur baru, karena memaksimalkan infrastruktur yang telah ada dan menurunkan biaya distribusi.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-27"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Penutup Lahan Hutan dan Kontur</strong></p>
+<p>Perhatikan gambar berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/41732_ed5f1a044ff3e156311fa2ff84c275e0.png" alt=""></p>
+<p><span style="font-size: 11px;">sumber gambar: <span style="color: #0000ff;">https://kphropang.wordpress.com/2017/01/20/peta-kawasan-hutan/</span></span></p>
+<p>Gambar di atas merupakan peta kawasan hutan dan kontur di Kabupaten Sumbawa, Nusa Tenggara Barat. Kawasan hutan tersebut diklasifikasikan menjadi hutan lindung, hutan produksi, dan hutan produksi terbatas. Informasi ini penting untuk perencanaan infrastruktur, konservasi lingkungan, dan pengelolaan sumber daya alam di wilayah tersebut.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan distribusi kawasan hutan dan kontur wilayah pada peta, pilih benar atau salah infrastruktur pendukung yang paling tepat direncanakan untuk menunjang keberlanjutan wilayah pada wilayah tersebut!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Infrastruktur Pendukung</td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembangunan jalan konservasi yang mengikuti kontur untuk meminimalisir erosi tanah</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','1','1');">
+															<input id="pilihan_27_1_1" name="pilihan_27_1" class="pilihan__1" onchange="pilihan3('27','3','617','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_27_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','1','2');">
+															<input id="pilihan_27_1_2" name="pilihan_27_1" class="pilihan__1" onchange="pilihan3('27','3','617','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_27_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembukaan jalur tambang terbuka di dalam kawasan hutan lindung</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','2','1');">
+															<input id="pilihan_27_2_1" name="pilihan_27_2" class="pilihan__2" onchange="pilihan3('27','3','617','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_27_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','2','2');">
+															<input id="pilihan_27_2_2" name="pilihan_27_2" class="pilihan__2" onchange="pilihan3('27','3','617','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_27_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pembangunan menara pemantau kebakaran hutan di wilayah hutan produksi terbatas</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','3','1');">
+															<input id="pilihan_27_3_1" name="pilihan_27_3" class="pilihan__3" onchange="pilihan3('27','3','617','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_27_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('27.','3','2');">
+															<input id="pilihan_27_3_2" name="pilihan_27_3" class="pilihan__3" onchange="pilihan3('27','3','617','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_27_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-28"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Citra dan Elevasi Kawasan Hutan Kota Bogor</strong></p>
+<p>Perhatikan Citra dan Elevasi Berikut!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/92790_f45e94413a537775fa975e55e48d4343.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Manakah pernyataan berikut yang menunjukkan interpretasi citra yang sesuai dengan karakteristik wilayah pada citra dan elevasi tersebut?<br>entukan Sesuai atau Tidak Sesuai untuk setiap pernyataan!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Sesuai</td><td class="text-center" style="width:100px">Tidak Sesuai</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lokasi A menunjukkan kawasan hutan kota</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('28.','1','1');">
+															<input id="pilihan_28_1_1" name="pilihan_28_1" class="pilihan__1" onchange="pilihan3('28','3','621','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_28_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('28.','1','2');">
+															<input id="pilihan_28_1_2" name="pilihan_28_1" class="pilihan__1" onchange="pilihan3('28','3','621','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_28_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lokasi C menunjukkan kawasan hutan</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('28.','2','1');">
+															<input id="pilihan_28_2_1" name="pilihan_28_2" class="pilihan__2" onchange="pilihan3('28','3','621','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_28_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('28.','2','2');">
+															<input id="pilihan_28_2_2" name="pilihan_28_2" class="pilihan__2" onchange="pilihan3('28','3','621','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_28_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lokasi B menunjukkan kawasan permukiman</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('28.','3','1');">
+															<input id="pilihan_28_3_1" name="pilihan_28_3" class="pilihan__3" onchange="pilihan3('28','3','621','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_28_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('28.','3','2');">
+															<input id="pilihan_28_3_2" name="pilihan_28_3" class="pilihan__3" onchange="pilihan3('28','3','621','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_28_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-29"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><em>Perhatikan citra satelit berikut!</em></p>
+<p style="text-align: center;"><em><img src="/tka/cbt_images/40158_c122f8648ef6d1857f14219467d5e6bc.png" alt=""></em></p>
+<p><span style="font-size: 11px;">Sumber: Mongabay (2024)</span></p>
+<p><em>Citra satelit dari kawasan hutan Taman Nasional Tesso Nilo pada Oktober 2020 dan Oktober 2024 memperlihatkan adanya deforestasi yang signifikan di kawasan tersebut. Data menunjukkan bahwa antara tahun 2009 hingga 2023, Taman Nasional Tesso Nilo telah kehilangan sekitar 78% tutupan hutan primer akibat aktivitas pembukaan lahan. Pada tahun 2024, deforestasi masih terus berlangsung di sisa hutan yang ada, dengan penyebab utama adalah ekspansi perkebunan kelapa sawit. Selain itu, pembangunan jalan di kawasan ini juga meningkatkan aktivitas perburuan liar terhadap satwa di wilayah tersebut.</em></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 340px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Bagaimana dampak fenomena tersebut terhadap lingkungannya?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','0');">
+													<input id="pilihan_29_0" onchange="pilihan('29','a','616')" pil="a" name="pilihan29" type="radio">
+													<label for="pilihan_29_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Hilangnya tutupan hutan primer di kawasan taman nasional akibat deforestasi membuat hutan ini tidak memiliki umur yang panjang.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','1');">
+													<input id="pilihan_29_1" onchange="pilihan('29','b','616')" pil="b" name="pilihan29" type="radio">
+													<label for="pilihan_29_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Deforestasi hutan primer berakibat penurunan suhu lokal di kawasan karena perkebunan kelapa sawit lebih efektif menaungi tanah.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','2');">
+													<input id="pilihan_29_2" onchange="pilihan('29','c','616')" pil="c" name="pilihan29" type="radio">
+													<label for="pilihan_29_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Proses penyerapan karbon dioksida pada hutan primer di kawasan Taman Nasional Tesso Nilo kini tidak terjadi lagi secara signifikan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','3');">
+													<input id="pilihan_29_3" onchange="pilihan('29','d','616')" pil="d" name="pilihan29" type="radio">
+													<label for="pilihan_29_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Deforestasi di hutan primer menyebabkan percepatan peningkatan emisi karbon, sehingga berkontribusi pada pemanasan global.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','4');">
+													<input id="pilihan_29_4" onchange="pilihan('29','e','616')" pil="e" name="pilihan29" type="radio">
+													<label for="pilihan_29_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kawasan hutan primer Taman Nasional Tesso Nilo yang di alih fungsikan tidak dapat dipulihkan dalam jangka waktu yang cepat.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div>			</div>
+		  </div>
+		  
+		  <div class="row pl-3 pr-3 pb-1 mb-0"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  
+		  <div class="row pb-0 pt-2 mt-2 btn-bawah"> 
+			<div class="col text-center" style="">
+				<button class="btn btn-danger btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="prevSoal()"><i class="fa fa-chevron-circle-left"></i> <span class="d-none d-sm-inline-block">Soal sebelumnya</span></button>
+			</div>
+			<div class="col text-center" style="">
+				<button class="btn btn-warning btn-round btn-md btn-navigasi" style="border-radius:30px;color:#fff;"><input type="checkbox" onclick="raguRagu()" id="c_ragu_ragu" value=""> <span class="d-none d-sm-inline-block">Ragu-ragu
+			</span></button></div>
+			<div class="col text-center" style="">
+				<button class="btn btn-primary btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="nextSoal()" id="nextSoal"> <span class="d-none d-sm-inline-block">Soal berikutnya</span> <i class="fa fa-chevron-circle-right"></i></button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	 
+  </div> 
+</div>
+
+<div class="modal fadeIn" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Daftar Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+		<form id="formJawaban">
+         				<span class="d-none" id="tmp_answer_1"></span>
+				<span class="d-none" id="ragu_answer_1"></span>
+				<input type="hidden" name="jawaban_no[1]" id="input_jawaban_no_1" value="1">
+								<div id="jawaban-no-1" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal btn-primary" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('1')">1					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer1" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_2"></span>
+				<span class="d-none" id="ragu_answer_2"></span>
+				<input type="hidden" name="jawaban_no[2]" id="input_jawaban_no_2" value="2">
+								<div id="jawaban-no-2" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('2')">2					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer2" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_3"></span>
+				<span class="d-none" id="ragu_answer_3"></span>
+				<input type="hidden" name="jawaban_no[3]" id="input_jawaban_no_3" value="3">
+								<div id="jawaban-no-3" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('3')">3					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer3" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_4"></span>
+				<span class="d-none" id="ragu_answer_4"></span>
+				<input type="hidden" name="jawaban_no[4]" id="input_jawaban_no_4" value="4">
+								<div id="jawaban-no-4" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('4')">4					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer4" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_5"></span>
+				<span class="d-none" id="ragu_answer_5"></span>
+				<input type="hidden" name="jawaban_no[5]" id="input_jawaban_no_5" value="5">
+								<div id="jawaban-no-5" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('5')">5					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer5" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_6"></span>
+				<span class="d-none" id="ragu_answer_6"></span>
+				<input type="hidden" name="jawaban_no[6]" id="input_jawaban_no_6" value="6">
+								<div id="jawaban-no-6" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('6')">6					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer6" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_7"></span>
+				<span class="d-none" id="ragu_answer_7"></span>
+				<input type="hidden" name="jawaban_no[7]" id="input_jawaban_no_7" value="7">
+								<div id="jawaban-no-7" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('7')">7					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer7" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_8"></span>
+				<span class="d-none" id="ragu_answer_8"></span>
+				<input type="hidden" name="jawaban_no[8]" id="input_jawaban_no_8" value="8">
+								<div id="jawaban-no-8" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('8')">8					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer8" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_9"></span>
+				<span class="d-none" id="ragu_answer_9"></span>
+				<input type="hidden" name="jawaban_no[9]" id="input_jawaban_no_9" value="9">
+								<div id="jawaban-no-9" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('9')">9					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer9" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_10"></span>
+				<span class="d-none" id="ragu_answer_10"></span>
+				<input type="hidden" name="jawaban_no[10]" id="input_jawaban_no_10" value="10">
+								<div id="jawaban-no-10" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('10')">10					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer10" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_11"></span>
+				<span class="d-none" id="ragu_answer_11"></span>
+				<input type="hidden" name="jawaban_no[11]" id="input_jawaban_no_11" value="11">
+								<div id="jawaban-no-11" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('11')">11					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer11" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_12"></span>
+				<span class="d-none" id="ragu_answer_12"></span>
+				<input type="hidden" name="jawaban_no[12]" id="input_jawaban_no_12" value="12">
+								<div id="jawaban-no-12" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('12')">12					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer12" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_13"></span>
+				<span class="d-none" id="ragu_answer_13"></span>
+				<input type="hidden" name="jawaban_no[13]" id="input_jawaban_no_13" value="13">
+								<div id="jawaban-no-13" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('13')">13					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer13" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_14"></span>
+				<span class="d-none" id="ragu_answer_14"></span>
+				<input type="hidden" name="jawaban_no[14]" id="input_jawaban_no_14" value="14">
+								<div id="jawaban-no-14" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('14')">14					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer14" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_15"></span>
+				<span class="d-none" id="ragu_answer_15"></span>
+				<input type="hidden" name="jawaban_no[15]" id="input_jawaban_no_15" value="15">
+								<div id="jawaban-no-15" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('15')">15					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer15" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_16"></span>
+				<span class="d-none" id="ragu_answer_16"></span>
+				<input type="hidden" name="jawaban_no[16]" id="input_jawaban_no_16" value="16">
+								<div id="jawaban-no-16" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('16')">16					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer16" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_17"></span>
+				<span class="d-none" id="ragu_answer_17"></span>
+				<input type="hidden" name="jawaban_no[17]" id="input_jawaban_no_17" value="17">
+								<div id="jawaban-no-17" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('17')">17					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer17" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_18"></span>
+				<span class="d-none" id="ragu_answer_18"></span>
+				<input type="hidden" name="jawaban_no[18]" id="input_jawaban_no_18" value="18">
+								<div id="jawaban-no-18" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('18')">18					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer18" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_19"></span>
+				<span class="d-none" id="ragu_answer_19"></span>
+				<input type="hidden" name="jawaban_no[19]" id="input_jawaban_no_19" value="19">
+								<div id="jawaban-no-19" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('19')">19					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer19" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_20"></span>
+				<span class="d-none" id="ragu_answer_20"></span>
+				<input type="hidden" name="jawaban_no[20]" id="input_jawaban_no_20" value="20">
+								<div id="jawaban-no-20" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('20')">20					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer20" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_21"></span>
+				<span class="d-none" id="ragu_answer_21"></span>
+				<input type="hidden" name="jawaban_no[21]" id="input_jawaban_no_21" value="21">
+								<div id="jawaban-no-21" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('21')">21					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer21" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_22"></span>
+				<span class="d-none" id="ragu_answer_22"></span>
+				<input type="hidden" name="jawaban_no[22]" id="input_jawaban_no_22" value="22">
+								<div id="jawaban-no-22" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('22')">22					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer22" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_23"></span>
+				<span class="d-none" id="ragu_answer_23"></span>
+				<input type="hidden" name="jawaban_no[23]" id="input_jawaban_no_23" value="23">
+								<div id="jawaban-no-23" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('23')">23					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer23" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_24"></span>
+				<span class="d-none" id="ragu_answer_24"></span>
+				<input type="hidden" name="jawaban_no[24]" id="input_jawaban_no_24" value="24">
+								<div id="jawaban-no-24" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('24')">24					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer24" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_25"></span>
+				<span class="d-none" id="ragu_answer_25"></span>
+				<input type="hidden" name="jawaban_no[25]" id="input_jawaban_no_25" value="25">
+								<div id="jawaban-no-25" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('25')">25					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer25" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_26"></span>
+				<span class="d-none" id="ragu_answer_26"></span>
+				<input type="hidden" name="jawaban_no[26]" id="input_jawaban_no_26" value="26">
+								<div id="jawaban-no-26" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('26')">26					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer26" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_27"></span>
+				<span class="d-none" id="ragu_answer_27"></span>
+				<input type="hidden" name="jawaban_no[27]" id="input_jawaban_no_27" value="27">
+								<div id="jawaban-no-27" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('27')">27					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer27" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_28"></span>
+				<span class="d-none" id="ragu_answer_28"></span>
+				<input type="hidden" name="jawaban_no[28]" id="input_jawaban_no_28" value="28">
+								<div id="jawaban-no-28" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('28')">28					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer28" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_29"></span>
+				<span class="d-none" id="ragu_answer_29"></span>
+				<input type="hidden" name="jawaban_no[29]" id="input_jawaban_no_29" value="29">
+								<div id="jawaban-no-29" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('29')">29					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer29" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 		 </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="infoSoal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Informasi Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fadeIn" id="timeoutDialog" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-2 pt-5">
+		<h5 class="modal-title" style="text-align:center">PERHATIAN !!</h5>
+		<p>Waktu tes sudah habis !</p>
+      </div>
+	  <div class="modal-footer text-center">
+		<button class="btn btn-danger" onclick="selesaikanTes()">Ok, Lanjutkan !</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="c-svg" id="c-svg-1" style="display: none;"></div><div class="c-svg" id="c-svg-2" style="display: none;"></div><div class="c-svg" id="c-svg-3" style="display: none;"></div><div class="c-svg" id="c-svg-4" style="display: none;"></div><div class="c-svg" id="c-svg-5" style="display: none;"></div><div class="c-svg" id="c-svg-6" style="display: none;"></div><div class="c-svg" id="c-svg-7" style="display: none;"></div><div class="c-svg" id="c-svg-8" style="display: none;"></div><div class="c-svg" id="c-svg-9" style="display: none;"></div><div class="c-svg" id="c-svg-10" style="display: none;"></div><div class="c-svg" id="c-svg-11" style="display: none;"></div><div class="c-svg" id="c-svg-12" style="display: none;"></div><div class="c-svg" id="c-svg-13" style="display: none;"></div><div class="c-svg" id="c-svg-14" style="display: none;"></div><div class="c-svg" id="c-svg-15" style="display: none;"></div><div class="c-svg" id="c-svg-16" style="display: none;"></div><div class="c-svg" id="c-svg-17" style="display: none;"></div><div class="c-svg" id="c-svg-18" style="display: none;"></div><div class="c-svg" id="c-svg-19" style="display: none;"></div><div class="c-svg" id="c-svg-20" style="display: none;"></div><div class="c-svg" id="c-svg-21" style="display: none;"></div><div class="c-svg" id="c-svg-22" style="display: none;"></div><div class="c-svg" id="c-svg-23" style="display: none;"></div><div class="c-svg" id="c-svg-24" style="display: none;"></div><div class="c-svg" id="c-svg-25" style="display: none;"></div><div class="c-svg" id="c-svg-26" style="display: none;"></div><div class="c-svg" id="c-svg-27" style="display: none;"></div><div class="c-svg" id="c-svg-28" style="display: none;"></div><div class="c-svg" id="c-svg-29" style="display: none;"></div>
+<div style="position: fixed; inset: 0px; background: rgb(255, 255, 255); opacity: 0.5; z-index: 99999; display: none;" id="loader">
+<img class="loader" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/images/loader2.gif">
+</div>
+
+
+<style>
+	
+	@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
+	@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+	@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+	@media (max-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.mataujian{text-align:left} 
+		#formContent{padding-left:10px;padding-right:10px}
+		.row-atas {text-align:center;}
+		#isisoal img {width:100%;}
+	}
+	@media (min-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.container-fluid{ padding-left:50px;padding-right:50px} 
+		.mataujian{text-align:right} 
+		#formContent{padding-left:50px;padding-right:50px} 
+		.btn-navigasi {width:180px;}
+		.cont-btn-informasi{text-align:right}
+		
+	}
+	@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+	@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+			
+	/* STRUCTURE */
+	.loader {
+	  margin: 0;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -ms-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+	
+	.wrapper {
+	  display: flex;
+	  align-items: center;
+	  flex-direction: column; 
+	  justify-content: center;
+	  width: 100%;
+	  min-height: 100%;
+	  padding: 20px;
+	  margin-top:-80px;
+	}
+
+	#formContent {
+	  -webkit-border-radius: 10px 10px 10px 10px;
+	  border-radius: 10px 10px 10px 10px;
+	  background: #fff;
+	  position: relative;
+	  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  text-align: center;
+	}
+
+	
+
+
+	/* TABS */
+
+	h2.inactive {
+	  color: #cccccc;
+	}
+
+	h2.active {
+	  color: #0d0d0d;
+	  border-bottom: 2px solid #5fbae9;
+	}
+	
+	input[type=text] {
+	  border: none;
+	  color: #0d0d0d;
+	  text-decoration: none;
+	  border-radius:0px;
+	  border-bottom:1px solid #eee;
+	  background:transparent;
+	}
+	
+
+	/* ANIMATIONS */
+
+	/* Simple CSS3 Fade-in-down Animation */
+	.fadeInDown {
+	  -webkit-animation-name: fadeInDown;
+	  animation-name: fadeInDown;
+	  -webkit-animation-duration: 1s;
+	  animation-duration: 1s;
+	  -webkit-animation-fill-mode: both;
+	  animation-fill-mode: both;
+	}
+
+	@-webkit-keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	@keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+	.fadeIn {
+	  opacity:0;
+	  -webkit-animation:fadeIn ease-in 1;
+	  -moz-animation:fadeIn ease-in 1;
+	  animation:fadeIn ease-in 1;
+
+	  -webkit-animation-fill-mode:forwards;
+	  -moz-animation-fill-mode:forwards;
+	  animation-fill-mode:forwards;
+
+	  -webkit-animation-duration:1s;
+	  -moz-animation-duration:1s;
+	  animation-duration:1s;
+	}
+
+	.fadeIn.first {
+	  -webkit-animation-delay: 0.4s;
+	  -moz-animation-delay: 0.4s;
+	  animation-delay: 0.4s;
+	}
+
+	.fadeIn.second {
+	  -webkit-animation-delay: 0.6s;
+	  -moz-animation-delay: 0.6s;
+	  animation-delay: 0.6s;
+	}
+
+	.fadeIn.third {
+	  -webkit-animation-delay: 0.8s;
+	  -moz-animation-delay: 0.8s;
+	  animation-delay: 0.8s;
+	}
+
+	.fadeIn.fourth {
+	  -webkit-animation-delay: 1s;
+	  -moz-animation-delay: 1s;
+	  animation-delay: 1s;
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	.underlineHover:after {
+	  display: block;
+	  left: 0;
+	  bottom: -10px;
+	  width: 0;
+	  height: 2px;
+	  background-color: #56baed;
+	  content: "";
+	  transition: width 0.2s;
+	}
+
+	.underlineHover:hover {
+	  color: #0d0d0d;
+	}
+
+	.underlineHover:hover:after{
+	  width: 100%;
+	}
+	
+	.cfont {
+		cursor:pointer;
+	}
+	
+	
+	///
+	
+</style>
+  
+<script type="text/javascript" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery/jquery.2.1.1.min.js"></script>
+<script src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery.timer.js"></script>
+  
+<script>
+	
+	$(document).ready(function() {
+		$('#loader').fadeOut();
+		var  w = $(window).width();
+				if (w > 800)  {
+			var ii = $('#isisoal').height();
+			var  h = $(window).height();
+			var  h = h-$('.cont-soal').position().top-380;
+			$('.cont-soal').css({
+				'height':h,
+				'overflow': 'auto'
+			});
+
+			$('.isi-soal').css({
+				'height':h,
+			 	'overflow': 'auto'
+			 });
+
+			// if (ii > h) {
+			// 	$('.cont-soal').css({
+			// 	'height':ii,
+			// 	'overflow': 'auto'
+			// 	});
+			// }
+		}
+		
+		window.setTimeout( lihatSoal(1), 5000 ); // 5 seconds
+	});
+	var selected = 1;
+	var jumlah_soal = 29;
+	function lihatSoal(nomor) {
+		$('.soal-soal').css('display','none');
+		if (nomor=='') {
+			nomor = selected;
+		} 
+		$('#soal-no-'+nomor).css('display','');
+		selected = nomor;
+		$('#noSoal').html(nomor);
+		
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+		}
+		
+		for (i=1;i<=jumlah_soal;i++){
+			var cccc= $('#tmp_answer_'+i).html();
+			if (cccc != '') $('#jawaban-no-'+i).addClass('btn-dark');
+			var cccc= $('#ragu_answer_'+i).html();
+			if (cccc != '') {
+				$('#jawaban-no-'+i).addClass('btn-warning');
+				$('#jawaban-no-'+i).removeClass('btn-dark');
+			}
+		}
+		//$('.btn-lihat-soal').removeClass('btn-dark');
+		$('#jawaban-no-'+nomor).removeClass('btn-warning');
+		$('#jawaban-no-'+nomor).removeClass('btn-dark');
+		$('.btn-lihat-soal').removeClass('btn-primary');
+		
+		$('#jawaban-no-'+nomor).addClass('btn-primary');
+		
+		window.scrollTo(0, 0);
+		$('.c-svg').fadeOut();
+		redrawline(selected);
+	}
+	
+	function nextSoal() {
+		if (selected < jumlah_soal) {
+			selected++;		
+			lihatSoal(selected);
+		} else {
+			
+			selesaikanTes();
+		}
+	}
+	
+	function prevSoal() {
+		if (selected > 1) {
+			selected--;
+			lihatSoal(selected);
+		}
+	}
+	
+	function raguRagu() {
+		if ($('#c_ragu_ragu').is(':checked')) {
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			$('#jawaban-no-'+selected).addClass('btn-warning');
+			$('#ragu_answer_'+selected).html('1');
+			save_ragu(selected,'1');
+		} else {
+			$('#ragu_answer_'+selected).html('');
+			$('#jawaban-no-'+selected).removeClass('btn-warning');
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			
+			if ($('#answer'+selected).html() == '')
+			{
+				$('#jawaban-no-'+selected).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+selected).addClass('btn-dark');
+			}
+			
+			save_ragu(selected,'');
+			
+		}
+	}
+	
+	function trigger_ragu(nomor)
+	{
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			$('#jawaban-no-'+nomor).addClass('btn-warning');
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+			$('#jawaban-no-'+nomor).removeClass('btn-warning');
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			
+			if ($('#answer'+nomor).html() == '')
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-dark');
+			}
+		}
+		
+	}
+	
+	lihatSoal(2);
+	
+	function selesaikanTes() {
+		$.ajax({ 
+		   type: "POST",
+		   dataType: "html",
+		   data : $('#formJawaban').serialize(),
+		   url: "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/finishtes?ses_id=b2560fbdfec5a32f0d9159e1959531fc455f2509",
+		   cache: false, 
+		   beforeSend: function(){
+			   $('#nextSoal').prop('disabled',true);
+			   $('#nextSoal').html('Silahkan tunggu ... !');
+			   $('#loader').fadeIn();
+			},
+			complete: function(){
+			},
+			success: function(result){
+				//alert(result);
+				if (result=='error') {
+					alert('Oops ada kesalahan! \rSilahkan ulangi !');
+					$('#nextSoal').prop('disabled',false);
+					$('#nextSoal').prop('enabled',true);
+					$('#nextSoal').html('Soal berikutnya');
+					$('#loader').fadeOut();
+				}
+				else
+					window.location = result;
+		   }
+		});
+	}
+
+	function changeFont(s,d)
+	{
+		$('#isisoal').css("font-size", s + "px");
+		$('.cfont').css("font-weight", "normal");
+		$('#'+d).css("font-weight", "bold");
+	}
+			
+	var RemainTime = new (function() {
+		var $countdown;
+		var $form;
+		var incrementTime = 60;
+		var globalTime = 4500 * 1000; // 50 seconds (in milliseconds)
+		var currentTime = globalTime;
+		var DurationTime = 4500 * 60000; // 5 minutes (in milliseconds)
+
+
+		$(function() {
+
+			// Setup the timer
+			$countdown = $('#countdown');
+			RemainTime.Timer = $.timer(updateTimer, incrementTime, true);
+
+		});
+
+		function updateTimer() {
+
+			// Output timer position
+			var timeString = formatTime(currentTime);
+			$countdown.html(timeString);
+			// If timer is complete, trigger alert
+			if (currentTime == 0) {
+				jQuery.noConflict();
+				$('#timeoutDialog').modal();
+				//$('#timeoutDialog').modal('show');
+				RemainTime.Timer.stop();
+				//disable_all();
+				//bootbox_timeout();
+				
+				return;
+			}
+			// Increment timer position
+			currentTime -= incrementTime;
+			if (currentTime < 0) currentTime = 0;
+
+		}
+	});
+
+	// Common functions
+	function pad(number, length) {
+		var str = '' + number;
+		while (str.length < length) {str = '0' + str;}
+		return str;
+	}
+	function formatTime(time) {
+		time = time / 10;
+		var hour= parseInt(time / 360000),
+			min = parseInt(time / 6000) - (hour * 60),
+			sec = parseInt(time / 100) - (min * 60) - (hour * 3600),
+			hundredths = pad(time - (sec * 100) - (min * 6000) - (hour * 360000), 2);
+		return (hour > 0 ? pad(hour, 2) : "00") + ":" + (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + "";
+	}
+	
+	function KlikJawaban(no,i)
+	{
+		$('#pilihan_'+no+'_'+i).trigger('click');
+	}
+	
+	
+	function KlikJawaban2(no,i)
+	{
+		$('#pilihan_'+'_'+no+'_'+i).trigger('click');
+	}
+	
+	function KlikJawaban3(no,i,j)
+	{
+		$('#pilihan_'+'_'+no+'_'+i+'_'+j).trigger('click');
+	}
+	
+	
+	function pilihan(n,v,i) {
+		if (v.toUpperCase() == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(v.toUpperCase());
+		//$("#answer"+n).css('color','#000');
+		//pushPromise(i,v);
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+		$("#jawaban-no-"+n).addClass('btn-dark');
+		//$("#jawaban-no-"+n).addClass('text-white');
+		// $("#cont-answer"+n).css('color','#fff');
+
+		save_answer(n,v.toUpperCase());
+		trigger_ragu(selected);
+
+	}
+	
+	
+	function pilihan2(n,v,i) {
+		
+		var jawaban = $('.pilihan'+n+':checked')
+		   .map(function() { return $(this).val() })
+		   .get()
+		   .join(";");
+		
+		if (jawaban == '') {
+			$("#answer"+n).html('');
+			$("#jawaban-no-"+n).removeClass('btn-dark');
+			$("#jawaban-no-"+n).addClass('btn-outline-dark');
+		}
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+			$("#jawaban-no-"+n).addClass('btn-dark');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		
+		// pushPromise(i,jawaban);
+		
+		
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+
+	}
+	
+	function pilihan3(n,total,s, arr) {
+		var jawaban = '';
+		for (i=1;i<=total;i++)  {
+			var v = $('input[name="pilihan_'+n+'_'+i+'"]:checked').val();
+			if (v != undefined && v != null) jawaban += arr[(i-1)]+'|'+v + ';';
+		}
+		jawaban = jawaban.substring(0, jawaban.length-1);
+		
+		if (jawaban == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		// pushPromise(s,jawaban);
+		
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+	    $("#jawaban-no-"+n).addClass('btn-dark');
+			
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+	}
+	
+		
+	function pilih1(no, id, warna, order) {
+			
+			// if (window['right_'+no] == '') {
+				// $('.m-left-'+no).prop('checked', false);
+				// $('.tr-left-'+no).css('background','');
+			// }
+			//if (window['dipilih1_'+no].indexOf(id) >=0) window['free1_'+no]=false;
+			if (window['free1_'+no]) {
+				window['free1_'+no] = false;
+				$('#r_left_'+no+'_'+id).prop('checked', true);
+				$('#row1-'+no+'-'+id).css('background',warna);
+				window['pos1_'+no] = $('#r_left_'+no+'_'+id).offset();
+				window['pos11_'+no] = $('#r_left_'+no+'_'+id).position();
+				window['warna1_'+no] = warna;
+				window['id1_'+no] = id;
+				window['order1_'+no] = order;
+				window['dipilih1_'+no].push(id);
+				window['jawab_'+no] = id;
+			}
+			
+	}
+	
+	function removeA(arr) {
+		var what, a = arguments, L = a.length, ax;
+		while (L > 1 && arr.length) {
+			what = a[--L];
+			while ((ax= arr.indexOf(what)) !== -1) {
+				arr.splice(ax, 1);
+			}
+		}
+		return arr;
+	}
+	
+	function rgb2hex(rgb) {
+		rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+		function hex(x) {
+			return ("0" + parseInt(x).toString(16)).slice(-2);
+		}
+		return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+	}
+	
+	
+	
+	function pilih2(no, id,tipe,order,s, ps) {
+		var _c_pilih = $('#r_right_'+no+'_'+id).prop('checked');
+		if (_c_pilih==true) {
+			//alert('1');
+			
+			var id1 =  window['pasangan_'+no+'_'+id];
+			window['free1_'+no] = false;
+			//$('#r_left_'+no+'_'+id).prop('checked', true);
+			var warna11 = rgb2hex($('#row2-'+no+'-'+id).css('background-color'));
+			window['warna1_'+no] = warna11;
+			window['pos1_'+no] = $('#r_left_'+no+'_'+id1).offset();
+			window['pos11_'+no] = $('#r_left_'+no+'_'+id1).position();
+			var cc = id1+";"+id+'|';
+			var ddd = window['jawaban_'+no];
+			dd = ddd.replace(cc,"");
+			window['jawaban_'+no] = dd;
+			
+			window['id1_'+no] = id1;
+			window['free1_'+no] = false;
+			window['right_'+no] = '';
+			window['free_'+no] = true;
+			//delete window['dipilih2_'+no][id];
+			//window['dipilih2_'+no].remove(id);
+			removeA(window['dipilih2_'+no], id);
+			//$('#r_right_'+no+'_'+id).prop('checked', false);
+			//$('.line-'+no).css('display','none');
+			var xx = '#line_'+no+'_'+window['id1_'+no];
+			//alert(xx);
+			$(xx).css('display','none');
+			$('#r_right_'+no+'_'+id).prop('checked', false);
+			$('#row2-'+no+'-'+id).css('background','#ffffff');
+		}
+		else 
+		{
+			//alert('2');
+			window['free_'+no] = true;
+			if (window['dipilih2_'+no].indexOf(id) >=0) window['free_'+no]=false;
+			//alert(2);
+			
+			if ((window['id1_'+no] != '') && window['free_'+no] && (window['right_'+no] == '')) {
+				//alert(3);
+				window['free1_'+no] = true;
+				window['right_'+no] = '';
+				eval('var pasangan_'+no+'_'+id + '= "";');
+				window['pasangan_'+no+'_'+id] = window['id1_'+no];
+				window['jawaban_'+no] = window['jawaban_'+no]+ window['id1_'+no] +';'+ id +'|';
+				window['dipilih2_'+no].push(id);
+				$('#r_right_'+no+'_'+id).prop('checked', true);
+				$('#row2-'+no+'-'+id).css('background',window['warna1_'+no]);
+				$('#r_right_'+no+'_'+id).val(window['id1_'+no]+';'+id);
+				
+				pos2 = $('#r_right_'+no+'_'+id).offset();
+				pos22 = $('#r_right_'+no+'_'+id).position();
+				$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left);
+				$('#line_'+no+'_'+window['id1_'+no]).fadeIn();
+				if (window['pos1_'+no].top > pos2.top) {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',window['pos1_'+no].top-pos2.top)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',0)
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',pos2.top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				} else {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',0)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',Math.abs(window['pos1_'+no].top-pos2.top))
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',window['pos1_'+no].top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				}
+				
+				
+				window['id1_'+no] = '';
+				jawaban = window['jawaban_'+no];
+				n = no;
+				
+				if (jawaban == '')
+					$("#answer"+n).html('');
+				else {
+					$("#answer"+n).html('<i class="fa fa-check"></i>');
+					$("#answer"+n).removeClass('d-none');
+				}
+				
+				//$("#answer"+n).css('color','#000');
+				
+				
+					$("#tmp_answer_"+n).html(jawaban);
+					if (ps == '2')	   {
+						save_answer(n,jawaban);
+						//pushPromise(s,jawaban);
+					}
+				
+				// $("#cont-answer"+n).css('background','#000');
+				// $("#cont-answer"+n).css('color','#fff');
+				
+				trigger_ragu(selected);
+
+			} else {
+				if (tipe==2)
+				$('#r_right_'+no+'_'+id).prop('checked', false);
+			}
+		
+		}
+		
+	}
+	
+			eval('var tipesoal_pencocokan_1 = "1"');
+			eval('var tipesoal_pencocokan_2 = "1"');
+			eval('var tipesoal_pencocokan_3 = "1"');
+			eval('var tipesoal_pencocokan_4 = "1"');
+			eval('var tipesoal_pencocokan_5 = "1"');
+			eval('var tipesoal_pencocokan_6 = "3"');
+			eval('var tipesoal_pencocokan_7 = "3"');
+			eval('var tipesoal_pencocokan_8 = "2"');
+			eval('var tipesoal_pencocokan_9 = "2"');
+			eval('var tipesoal_pencocokan_10 = "2"');
+			eval('var tipesoal_pencocokan_11 = "3"');
+			eval('var tipesoal_pencocokan_12 = "3"');
+			eval('var tipesoal_pencocokan_13 = "1"');
+			eval('var tipesoal_pencocokan_14 = "1"');
+			eval('var tipesoal_pencocokan_15 = "3"');
+			eval('var tipesoal_pencocokan_16 = "1"');
+			eval('var tipesoal_pencocokan_17 = "1"');
+			eval('var tipesoal_pencocokan_18 = "1"');
+			eval('var tipesoal_pencocokan_19 = "3"');
+			eval('var tipesoal_pencocokan_20 = "3"');
+			eval('var tipesoal_pencocokan_21 = "1"');
+			eval('var tipesoal_pencocokan_22 = "1"');
+			eval('var tipesoal_pencocokan_23 = "3"');
+			eval('var tipesoal_pencocokan_24 = "2"');
+			eval('var tipesoal_pencocokan_25 = "3"');
+			eval('var tipesoal_pencocokan_26 = "2"');
+			eval('var tipesoal_pencocokan_27 = "3"');
+			eval('var tipesoal_pencocokan_28 = "3"');
+			eval('var tipesoal_pencocokan_29 = "1"');
+		
+	function redrawline(no) {
+		var tmp_tipesoal = window['tipesoal_pencocokan_'+no];
+		if (tmp_tipesoal == 5) {
+			resetKunci(no,'');
+			var tmp = $('#tmp_answer_'+no).html();//window['jawaban_pencocokan_'+no];
+			var tmp_warna = window['warna_pencocokan_'+no];
+			var tmp_soal = window['soal_pencocokan_'+no];
+			var arr_tmp = tmp.split('|');
+			for (i=0;i<arr_tmp.length;i++) {
+				if (arr_tmp[i].trim() != '') {
+					var arr_tmp2 = arr_tmp[i].split(';');
+					pilih1(no,arr_tmp2[0], tmp_warna[i], i);
+					pilih2(no,arr_tmp2[1], '2', arr_tmp2[1],tmp_soal,'1');
+				}
+			}
+			
+			$('#c-svg-'+no).fadeIn();
+		}
+	}
+	
+	
+	function resetKunci(no, tipe) {
+		left = '';
+		window['right_'+no] = '';
+		window['warna1_'+no] = '';
+		window['id1_'+no] = '';
+		window['pos1_'+no] = '';
+		window['pos11_'+no] = '';
+		window['free1_'+no] = true;
+		window['free_'+no] = true;
+		window['dipilih1_'+no] = [];
+		window['dipilih2_'+no] = [];
+		$('.tr-left-'+no).css('background','');
+		$('.tr-right-'+no).css('background','');
+		$('.line-'+no).css('display','none');
+		window['jawab_'+no] = '';
+		window['jawaban_'+no] = '';
+		window['order1_'+no] = '';
+		$('.m-left-'+no).prop('checked', false);
+		$('.m-right-'+no).prop('checked', false);
+		if (tipe == '1') $("#tmp_answer_"+no).html('');
+		$("#answer"+no).html('');
+		$("#jawaban-no-"+no).removeClass('btn-dark');
+		$("#jawaban-no-"+no).addClass('btn-outline-dark');
+		
+	};
+	
+	
+	$('.jawaban_essai').focusout(function() {
+		var no = this.title;
+		var jawaban = $('#jawaban_essai_'+no).val();					
+		var s = $('#jawaban_essai_'+no).attr('pre');					
+		
+		
+		if (jawaban == '')
+			$("#answer"+no).html('');
+		else {
+			$("#answer"+no).html('<i class="fa fa-check"></i>');
+			$("#answer"+no).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+no).html(jawaban);
+		
+		save_answer(no,jawaban);
+			   
+		// $("#answer"+no).css('color','#000');
+		
+			// $.post( "https://pusmendik.kemendikdasmen.go.id/tka/cbt/peserta/sv_ans",
+			// {
+				// id_soal: s,
+				// jawaban:jawaban,
+				// id_ujian: ,
+				// id_projek_ujian: 
+			// }, function(data) {
+		// });
+		// $("#cont-answer"+no).css('background','#000');
+		// $("#cont-answer"+no).css('color','#fff');
+		trigger_ragu(selected);
+			
+	}).blur(function() {});
+	
+	
+	function methodThatReturnsAPromise(i,jawaban) {
+		return new Promise((resolve, reject) => {
+			$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_jawaban", {nomor: i,jawaban:jawaban, }, function(data) {resolve();});
+		});
+	}
+	
+	var promises = [Promise.resolve()];
+	
+	function pushPromise(i,jawaban)
+	{
+	  promises.push(promises.pop().then(function(){
+		return methodThatReturnsAPromise(i,jawaban)}));
+	}
+	
+	function save_ragu(nomor,jawaban) {
+		$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_ragu", {nomor: nomor,jawaban:jawaban, }, function(data) {});
+	}
+	
+	function save_answer(nomor,jawaban) {
+		pushPromise(nomor,jawaban);
+	}
+</script>
+
+
+
+</body></html>

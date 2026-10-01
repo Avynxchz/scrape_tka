@@ -1,0 +1,448 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Matematika Tingkat Lanjut (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "<Kutipan/konteks kalimat atau variabel yang diketahui>",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 32924_a8edfab2768b756ccdf1fb08bf2d391b.png]:
+Berikut adalah transkripsi teks dan rumus matematika dari gambar:
+
+Diketahui matriks $P = \begin{pmatrix} 1 & 2 \\ -1 & -4 \end{pmatrix}$ dan $Q = \begin{pmatrix} 2 & 5 \\ -1 & 2 \end{pmatrix}$. Determinan $(\mathrm{P} + \mathrm{Q})$ adalah
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A. 9
+  - B. B. 8
+  - C. C. 5
+  - D. D. -8
+  - E. E. -20
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 87832_240a84ccfa4914a66d187e09b0d8f20c.png]:
+Berikut adalah transkripsi teks dan rumus matematika dari gambar:
+
+Diketahui matriks $A = \begin{pmatrix} -1 & 2 \\ 3 & 4 \end{pmatrix}$, $B = \begin{pmatrix} -2 & 0 \\ 3 & 3 \end{pmatrix}$, dan $C = \begin{pmatrix} -4 & 4 \\ -3 & 2 \end{pmatrix}$. Invers dari matriks $3A - 4B + C^T$ adalah ....
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 88143_d3db8e09f0e5fafa82adae844028eb99.png]:
+Berikut adalah transkripsi teks dan rumus matematis dari gambar:
+
+Diketahui matriks $A = \begin{pmatrix} 3 & 0 \\ 2 & 5 \end{pmatrix}$, $B = \begin{pmatrix} x & -1 \\ y & 1 \end{pmatrix}$, dan $C = \begin{pmatrix} 0 & 3 \\ 1 & 11 \end{pmatrix}$ dan $\text{A}^\text{T}$ adalah transpose matriks $A$. Jika $2\text{A}^\text{T} + \text{B} = \text{C}$, maka nilai $x - y$ adalah ....
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A. 5
+  - B. B. 1
+  - C. C. -1
+  - D. D. -4
+  - E. E. -7
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Diketahui fungsi trigonometri f ( x ) = –3 sin (2x – 30°) + 4. Periode fungsi f ( x ) adalah....
+OPSI / PERNYATAAN:
+  - A. A. 90°
+  - B. B. 120°
+  - C. C. 150°
+  - D. D. 180°
+  - E. E. 720°
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 78190_1615899666fef932dbf6bd3f6eff745d.png]:
+Transkripsi rumus dari gambar:
+
+$$y = \sin(2x) - \frac{1}{2}$$
+PERTANYAAN:
+Di bawah ini yang merupakan grafik fungsi  adalah....
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Suatu perahu akan menyeberangi sungai selebar 50 meter dari titik A di pinggir sungai. Kecepatan arus sungai 10 meter/menit sejajar dengan pinggiran sungai dengan arah ke hulu dan kecepatan perahu 20 meter/menit dengan arah tegak lurus dengan arah arus sungai. Jika B  berada di seberang sungai dan berjarak terdekat dengan posisi A, jarak titik perahu pada saat sampai di seberang sungai dan titik B adalah … meter.
+OPSI / PERNYATAAN:
+  - A. A. 10
+  - B. B. 15
+  - C. C. 20
+  - D. D. 25
+  - E. E. 30
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: ['B', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 50116_4d55d153907bc5f62bdafe56997a7425.png]:
+Berikut adalah transkripsi rumus dari gambar:
+
+$$x^2 + y^2 - 6x - 2y - 26 = 0$$
+PERTANYAAN:
+Diketahui persamaan lingkaran. Di antara lima pernyataan berikut, tentukan pernyataan yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Lingkaran tersebut berpusat di (1, 3).
+  - B. B. Panjang jari-jari lingkaran tersebut 6 satuan panjang.
+  - C. C. Jarak pusat lingkaran dengan sumbu- adalah 3.
+  - D. D. Jarak pusat lingkaran dengan sumbu- adalah 1.
+  - E. E. Garis memotong lingkaran di dua titik.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 18801_316eb45b673d91fa5bb14eb953e1d6de.png]:
+Transkripsi rumus matematika pada gambar:
+
+$$\left(\frac{-3}{2}\right)$$
+PERTANYAAN:
+Bayangan dari kurva y = 2 x 2 – 5 yang ditranslasikan oleh matriks   kemudian didilatasikan oleh (O, 2) dengan O merupakan titik koordinat (0,0) adalah.…
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 29890_10c8f7643de04a60b368681f2d869b8e.png]:
+Berikut adalah transkripsi dari gambar tersebut:
+
+Nilai dari $\lim_{x \to 2} \frac{x^2 + 5x - 14}{4 - \sqrt{x^2 + 12}} = \dots$
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A. -18
+  - B. B. -9
+  - C. C. 0
+  - D. D. 9
+  - E. E. 18
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 81866_8980b5c8c1cfa85ea5888beb34b8b949.png]:
+Berikut adalah transkripsi teks dan rumus matematika dari gambar:
+
+Nilai dari $\lim_{x \to \infty} ((\sqrt{3x} - \sqrt{3x-4})(\sqrt{3x+2}))$ adalah
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B. -2
+  - C. C. 0
+  - D. D. 2
+  - E. E.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 90514_7fb2007b8eeb6bf88d49968d0b3c468d.png]:
+Berikut adalah transkripsi teks dan rumus matematika dari gambar tersebut:
+
+Diketahui $M = \begin{pmatrix} 2 & 5 \\ 1 & 3 \end{pmatrix}$ dan $M^{-1}$ melambangkan invers dari $M$.
+
+Berapakah nilai $p$ dan $q$ yang tepat memenuhi $pM^{-1} = q \begin{pmatrix} 6 & -10 \\ -2 & 4 \end{pmatrix}$?
+PERTANYAAN:
+Pilih semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. p = 2 dan q =1
+  - B. B. p = 3 dan q = 3
+  - C. C. p = 4 dan q = 2
+  - D. D. p = 5 dan q = 1
+  - E. E. p = 6 dan q = 3
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 64319_0ab438bf4a4fbf6db4247ceff39387f8.png]:
+$$f(t) = 3(2^t)$$
+PERTANYAAN:
+Seorang murid memperkirakan banyaknya penonton suatu video dalam ribuan yang dibuat oleh content creator A di media sosial mengikuti model  dengan t adalah banyaknya hari sejak video diunggah.
+
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. Video  tersebut hanya ditonton oleh 3.000 penonton setelah tepat 24 jam diunggah.
+  - B. Banyaknya penonton video meningkat dua kali lipat dari hari sebelumnya untuk beberapa hari setelah diunggah.
+  - C. Model banyaknya penonton ini tidak tepat untuk waktu yang cukup besar.
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Diketahui u,v dan w merupakan tiga vektor dengan u = (1,1,−1),v = (1, v1, 2) dan w = (0,w1,w2). Berapakah nilai v1 dan w1 yang mungkin sehingga memenuhi w = u−v?
+
+Pilih semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. 𝑣1=0 dan 𝑤1 =1.
+  - B. B. 𝑣1=1 dan 𝑤1 =0.
+  - C. C. 𝑣1=1 dan 𝑤1 =2.
+  - D. D. 𝑣1=2 dan 𝑤1 =−1.
+  - E. E. 𝑣1=2 dan 𝑤1 =2.
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+Segitiga PQR dengan titik P (-1,3), Q (3,3), dan R(1,-2) didilatasi dengan pusat titik (0,0) dan faktor skala 3. Luas segitiga tersebut setelah dilakukan dilatasi adalah … satuan luas.
+OPSI / PERNYATAAN:
+  - A. A. 10
+  - B. B. 30
+  - C. C. 90
+  - D. D. 120
+  - E. E. 180
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 74488_4cca73046257d115983291003ce9234a.png]:
+Berikut adalah transkripsi teks dan rumus matematika dari gambar:
+
+$$\text{Diketahui } f(x) = \begin{cases} 2x, & \text{untuk } 0 < x < 1; \\ 1, & \text{untuk } x = 1; \\ 3 - x, & \text{untuk } 1 < x \le 3; \\ 1 + (x - 3)^2, & \text{untuk } x > 3. \end{cases}$$
+PERTANYAAN:
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. 
+  - B. 
+  - C. 
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 24668_1464cced0b69c451376e3647ba4db8a4.png]:
+Berikut adalah transkripsi ekspresi matematika dari gambar dalam format LaTeX:
+
+$$\lim_{x \to \pi} \frac{\sin(x - \pi)}{3(\pi - x) \cos(4x)} = \dots$$
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B. 0
+  - C. C.
+  - D. D. 1
+  - E. E. 3
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 36997_ec4151abe3c365046e9892ce30488ec3.png]:
+Berikut adalah transkripsi teks dan rumus matematis dari gambar:
+
+Matriks $A, B, C$, dan $D$ berturut-turut berukuran $p \times 3$, $2 \times q$, $r \times s$, dan $t \times u$. Di antara lima nilai $(p, q, r, s, t, u)$ berikut, tentukan semua nilai yang dapat memenuhi persamaan matriks $(2A + B) \times 4C = 5D$! Jawaban benar lebih dari satu.
+
+---
+
+### Analisis Ordo Matriks:
+1. **Penjumlahan Matriks $(2A + B)$:**
+   * Ordo $A$ = $p \times 3$
+   * Ordo $B$ = $2 \times q$
+   * Syarat penjumlahan matriks: ordo keduanya harus sama, sehingga:
+     * $p = 2$
+     * $q = 3$
+   * Ordo matriks hasil $(2A + B)$ adalah $2 \times 3$.
+
+2. **Perkalian Matriks $(2A + B) \times 4C$:**
+   * Ordo $(2A + B)$ = $2 \times 3$
+   * Ordo $4C$ = $r \times s$
+   * Syarat perkalian matriks: jumlah kolom matriks pertama harus sama dengan jumlah baris matriks kedua, sehingga:
+     * $r = 3$
+   * Ordo hasil kali matriks tersebut adalah $2 \times s$.
+
+3. **Kesamaan Matriks $(2A + B) \times 4C = 5D$:**
+   * Ordo ruas kiri = $2 \times s$
+   * Ordo $5D$ = $t \times u$
+   * Syarat kesamaan matriks:
+     * $t = 2$
+     * $u = s$
+
+### Hubungan Variabel:
+$$(p, q, r, s, t, u) = (2, 3, 3, s, 2, s)$$
+dengan $s$ dapat bernilai sebarang bilangan bulat positif ($s = u$).
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A. (1, 2, 2, 3, 2, 3)
+  - B. B. (2, 2, 3, 3, 3, 3)
+  - C. C. (2, 3, 3, 3, 2, 2)
+  - D. D. (2, 3, 3, 3, 2, 3)
+  - E. E. (2, 3, 3, 4, 2, 4)
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 95268_39932075eb3711aad846a67059a1355a.png]:
+Berikut adalah transkripsi teks dan rumus matematika dari gambar:
+
+Fungsi polinomial berderajat tiga $f(x) = x^3 + 2x^2 + ax + b$ memenuhi:
+* sisa pembagian $f(x)$ oleh $x - 1$ adalah $6$ dan
+* sisa pembagian $f(x)$ oleh $x + 1$ adalah $2$.
+PERTANYAAN:
+Berdasarkan informasi tersebut, pilihlah semua pernyataan berikut yang benar. Jawaban benar lebih dari satu!
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 14291_8e0230cc6ed3986c851ae85246fb2070.png]:
+Berikut adalah transkripsi teks dan rumus matematis serta deskripsi geometri dari gambar:
+
+### **Transkripsi Teks dan Soal**
+$PQRS$ merupakan segiempat sembarang. Jika titik $T$ terletak pada ruas garis $\overline{PR}$ dan titik $U$ terletak pada ruas garis $\overline{SQ}$ dengan $2PT = TR$ dan $2SU = UQ$, diperoleh persamaan vektor:
+$$2\vec{PQ} + 2\vec{PS} + \vec{RQ} + \vec{RS} = a\vec{SQ} + b\vec{TU}$$
+
+dengan $(10 \times a) + b = \dots.$
+
+---
+
+### **Deskripsi Geometri**
+* **Bangun:** Segiempat sembarang $PQRS$.
+* **Garis Diagonal:**
+  * Diagonal $\overline{PR}$ memuat titik $T$ sedemikian sehingga $PT : TR = 1 : 2$ (atau $\vec{t} = \frac{2\vec{p} + \vec{r}}{3}$).
+  * Diagonal $\overline{SQ}$ memuat titik $U$ sedemikian sehingga $SU : UQ = 1 : 2$ (atau $\vec{u} = \frac{2\vec{s} + \vec{q}}{3}$).
+* **Ruas Garis Tambahan:** Ruas garis berarah $\vec{TU}$ yang menghubungkan titik $T$ pada diagonal $PR$ ke titik $U$ pada diagonal $SQ$.
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A. 16
+  - B. B. 32
+  - C. C. 36
+  - D. D. 42
+  - E. E. 61
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 17504_0df0b79133338046b0f866b354a3ed68.png]:
+Berikut adalah transkripsi teks dan rumus dari gambar:
+
+Persamaan lingkaran yang berpusat di $A(-2, 1)$ dan menyinggung garis $4x + 3y - 20 = 0$ di titik $B(2, 4)$ adalah ....
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+

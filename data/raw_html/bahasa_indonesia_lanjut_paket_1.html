@@ -1,0 +1,1634 @@
+<!DOCTYPE html><html lang="en"><head>
+	<title>Simulasi TKA</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-16x16.png">
+	<link rel="manifest" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/site.webmanifest">
+	<link rel="mask-icon" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/safari-pinned-tab.svg">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://pusmendik.kemendikdasmen.go.id/tka/_assets/css/icheck-bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120206082-3"></script>
+	<script>
+
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120206082-3');
+
+	</script> -->
+</head>
+<body>
+
+<div class="container-fluid text-white" style="background:#326698;background-size: contain;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/bg-top.png');background-repeat: no-repeat;background-position: left; height:150px;position:fixed;top:0px;left:0px;right:0px">
+	  <div class="row">
+		<div class="col pl-5 pt-1">
+			<table>
+				<tbody><tr>
+					<td>
+						<img style="margin:5px;height:70px" src="https://pusmendik.kemendikdasmen.go.id/tka/images/logo-kemdikbud-71x72.png">
+					</td>
+					<td>
+						<div><b>PUSMENDIK</b></div>
+						<div><small>APLIKASI ANBK<small></small></small></div><small><small>
+					</small></small></td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div class="col pl-5 pt-1 mt-4 pr-5 text-right">
+			<table align="right">
+				<tbody><tr>
+					<td style="vertical-align:top">
+						<div><small>P130100230 - PESERTA BAHASA_INDONESIA_LANJUT_PAKET_1<small></small></small></div><small><small>
+					</small></small></td>
+					<td>
+						<div class="pl-1 pr-1 pt-1 pb-1" style="background:#74b9ff;border-radius:2px;color:#326698"><i class="fa fa-graduation-cap fa-flip-horizontal"></i></div>
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+	  </div>
+</div>
+
+<div class="container-fluid fadeInDown mb-5" style="margin-top:90px;">
+  <div class="row">
+	<div class="col-sm-12" style="border:0px solid red">
+		<div class="text-left pt-3 pb-5 mb-2" id="formContent" style="background-size: 300px;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/logo-w.png');background-repeat: no-repeat;background-position: top right; ">
+		  <div class="row row-atas"> 
+			<div class="col-sm-4"><span style="font-size:18px">Soal nomor</span> <span style="font-size:20px" id="noSoal">1</span></div>
+			<div class="col-sm-8 cont-btn-informasi">
+				<button class="btn-informasi btn btn-primary btn-round m" data-toggle="modal" data-target="#infoSoal" style="border-radius:30px;font-size:12px;"><i class="fa fa-info-circle d-sm-none"></i><span class="d-none d-sm-inline-block">INFORMASI SOAL<span></span></span></button>
+				<button class="btn-informasi btn  btn-outline-secondary  btn-round" style="border-radius:30px;font-size:12px;">Sisa Waktu : <b><span id="countdown">01:14:58</span></b></button>
+				<button class="btn-informasi btn btn-primary btn-round" data-toggle="modal" data-target="#myModal" style="border-radius:30px;font-size:12px"><span class="d-none d-sm-inline-block">Daftar Soal </span> <i class="fa fa-th-large"></i></button>
+			</div>
+		  </div>
+		  <div class="row pb-2  row-atas"> 
+			<div class="col-sm-6"><small>Ukuran font soal:</small> <span style="font-size:12px" class="ml-2 mr-1 cfont" id="c1" onclick="changeFont('12','c1')">A</span> <span style="font-size:16px" class="ml-2 mr-1 cfont" id="c2" onclick="changeFont('16','c2')">A</span> <span style="font-size:20px" class="ml-2 mr-1 cfont" id="c3" onclick="changeFont('18','c3')">A</span></div>
+			<div class="col-sm-6 mt-2 mataujian">
+				Bahasa Indonesia Tingkat Lanjut (Paket 1)			</div>
+		  </div>
+		  <div class="row pl-3 pr-3 pb-2 mb-1"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  <!-- isi soal -->
+		  <div class="row pl-3 pr-3 pb-2 mb-2"> 
+			<div class="col p-3 " id="isisoal" style="border:2px solid #eee; border-top:10px solid #eee;">
+				<div class="soal-soal row" style="" id="soal-no-1"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;">PROPOSAL KEGIATAN</p>
+<p style="text-align: center;">Pemanfaatan Teknologi Digital untuk Meningkatkan Daya Saing UKM Pangan Lokal</p>
+<p style="text-align: justify;">Dalam beberapa tahun terakhir, perkembangan teknologi digital telah membuka peluang besar bagi pelaku Usaha Kecil dan Menengah (UKM), khususnya di sektor pangan lokal. Namun, banyak UKM yang belum mampu memanfaatkan teknologi secara optimal karena keterbatasan akses informasi, pelatihan, dan pendanaan. Berdasarkan survei yang dilakukan oleh Dinas Koperasi dan UKM Provinsi Jawa Barat pada 2023, hanya 35% UKM pangan yang aktif menggunakan platform digital untuk pemasaran.</p>
+<p style="text-align: justify;">Seiring dengan meningkatnya penggunaan internet dan perangkat digital, konsumen semakin bergeser ke transaksi daring sekitar 60% lebih. Fenomena ini menjadi peluang besar yang belum dimaksimalkan oleh UKM pangan lokal. Misalnya, banyak produk makanan olahan khas daerah memiliki potensi pasar nasional dan bahkan internasional, tetapi belum memiliki strategi pemasaran digital yang memadai. Di sisi lain, persaingan dengan produk pangan dari industri besar dan waralaba semakin ketat, sehingga inovasi digital menjadi kebutuhan mendesak.</p>
+<p style="text-align: justify;">Oleh karena itu, kami mengajukan program pelatihan bertema “Digitalisasi UKM Pangan Lokal” yang bertujuan untuk meningkatkan literasi digital, pemahaman e-commerce, serta keterampilan penggunaan dompet digital dan media sosial sebagai sarana promosi. Program ini dirancang untuk menjangkau 50% pelaku UKM di tiga kabupaten, dengan metode blended learning (daring dan luring), serta pendampingan usaha selama 3 bulan.</p>
+<p style="text-align: justify;">Program ini penting karena teknologi digital tidak hanya memperluas pasar, tetapi juga menekan biaya distribusi, meningkatkan efisiensi, dan mempercepat proses transaksi. Berdasarkan data Bank Indonesia, nilai transaksi e-commerce Indonesia pada 2022 mencapai Rp476 triliun, yang 60% didominasi oleh produk konsumsi rumah tangga, termasuk pangan. Data tersebut menunjukkan adanya kebutuhan akan peningkatan kapasitas pelaku UKM dalam mengakses ekosistem digital.</p>
+<p style="text-align: justify;">Dengan adanya pelatihan ini, diharapkan pelaku UKM pangan lokal dapat bersaing secara sehat di pasar digital yang terus berkembang. Usulan program ini akan disampaikan kepada Kementerian Koperasi dan UKM dengan anggaran sebesar Rp450 juta, yang mencakup biaya pelatihan, honor narasumber, pembuatan modul, serta pengembangan platform daring lokal. Program ini juga mendukung Tujuan Pembangunan Berkelanjutan (SDG's), khususnya poin 8 tentang pekerjaan layak dan pertumbuhan ekonomi, serta poin 9 tentang industri, inovasi, dan infrastruktur.</p>
+<p style="text-align: justify;">Sumber: www.pusedi.or.id/ecommerce-ukm2022 dengan penyesuaian oleh penulis soal</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Dari pernyataan-pernyataan berikut, manakah pernyataan yang mengungkapkan kesesuaian antara usulan program dan data pendukung sesuai teks proposal tersebut?</p>
+<p>Tentukan Sesuai atau Tidak Sesuai untuk setiap pernyataan berikut!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Usulan Program dan Data  Pendukung </td><td class="text-center" style="width:100px">Sesuai</td><td class="text-center" style="width:100px">Tidak Sesuai</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Usulan Program: Mengajukan program pelatihan digitalisasi bagi 100 pelaku UKM di tiga kabupaten. Data Pendukung: Hanya 35% UKM pangan aktif menggunakan platform digital.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','1','1');">
+															<input id="pilihan_1_1_1" name="pilihan_1_1" class="pilihan__1" onchange="pilihan3('1','3','170','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_1_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','1','2');">
+															<input id="pilihan_1_1_2" name="pilihan_1_1" class="pilihan__1" onchange="pilihan3('1','3','170','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_1_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Usulan Program: Mengusulkan pelatihan e commerce, promosi digital, dan penggunaan dompet digital. Data Pendukung: Nilai transaksi e-commerce nasional mencapai 476 triliun rupiah dan didominasi produk konsumsi termasuk pangan.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','2','1');">
+															<input id="pilihan_1_2_1" name="pilihan_1_2" class="pilihan__2" onchange="pilihan3('1','3','170','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_1_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','2','2');">
+															<input id="pilihan_1_2_2" name="pilihan_1_2" class="pilihan__2" onchange="pilihan3('1','3','170','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_1_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Usulan Program: Meminta Kementerian turun langsung ke lapangan sebelum menyetujui usulan. Data Pendukung: Data survei telah menunjukkan kebutuhan pelatihan tanpa menyebut perlunya kunjungan langsung oleh kementerian.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','3','1');">
+															<input id="pilihan_1_3_1" name="pilihan_1_3" class="pilihan__3" onchange="pilihan3('1','3','170','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_1_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('1.','3','2');">
+															<input id="pilihan_1_3_2" name="pilihan_1_3" class="pilihan__3" onchange="pilihan3('1','3','170','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_1_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display: none;" id="soal-no-2"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;">PROPOSAL KEGIATAN</p>
+<p style="text-align: center;">Pemanfaatan Teknologi Digital untuk Meningkatkan Daya Saing UKM Pangan Lokal</p>
+<p style="text-align: justify;">Dalam beberapa tahun terakhir, perkembangan teknologi digital telah membuka peluang besar bagi pelaku Usaha Kecil dan Menengah (UKM), khususnya di sektor pangan lokal. Namun, banyak UKM yang belum mampu memanfaatkan teknologi secara optimal karena keterbatasan akses informasi, pelatihan, dan pendanaan. Berdasarkan survei yang dilakukan oleh Dinas Koperasi dan UKM Provinsi Jawa Barat pada 2023, hanya 35% UKM pangan yang aktif menggunakan platform digital untuk pemasaran.</p>
+<p style="text-align: justify;">Seiring dengan meningkatnya penggunaan internet dan perangkat digital, konsumen semakin bergeser ke transaksi daring sekitar 60% lebih. Fenomena ini menjadi peluang besar yang belum dimaksimalkan oleh UKM pangan lokal. Misalnya, banyak produk makanan olahan khas daerah memiliki potensi pasar nasional dan bahkan internasional, tetapi belum memiliki strategi pemasaran digital yang memadai. Di sisi lain, persaingan dengan produk pangan dari industri besar dan waralaba semakin ketat, sehingga inovasi digital menjadi kebutuhan mendesak.</p>
+<p style="text-align: justify;">Oleh karena itu, kami mengajukan program pelatihan bertema “Digitalisasi UKM Pangan Lokal” yang bertujuan untuk meningkatkan literasi digital, pemahaman e-commerce, serta keterampilan penggunaan dompet digital dan media sosial sebagai sarana promosi. Program ini dirancang untuk menjangkau 50% pelaku UKM di tiga kabupaten, dengan metode blended learning (daring dan luring), serta pendampingan usaha selama 3 bulan.</p>
+<p style="text-align: justify;">Program ini penting karena teknologi digital tidak hanya memperluas pasar, tetapi juga menekan biaya distribusi, meningkatkan efisiensi, dan mempercepat proses transaksi. Berdasarkan data Bank Indonesia, nilai transaksi e-commerce Indonesia pada 2022 mencapai Rp476 triliun, yang 60% didominasi oleh produk konsumsi rumah tangga, termasuk pangan. Data tersebut menunjukkan adanya kebutuhan akan peningkatan kapasitas pelaku UKM dalam mengakses ekosistem digital.</p>
+<p style="text-align: justify;">Dengan adanya pelatihan ini, diharapkan pelaku UKM pangan lokal dapat bersaing secara sehat di pasar digital yang terus berkembang. Usulan program ini akan disampaikan kepada Kementerian Koperasi dan UKM dengan anggaran sebesar Rp450 juta, yang mencakup biaya pelatihan, honor narasumber, pembuatan modul, serta pengembangan platform daring lokal. Program ini juga mendukung Tujuan Pembangunan Berkelanjutan (SDG's), khususnya poin 8 tentang pekerjaan layak dan pertumbuhan ekonomi, serta poin 9 tentang industri, inovasi, dan infrastruktur.</p>
+<p style="text-align: justify;">Sumber: www.pusedi.or.id/ecommerce-ukm2022 dengan penyesuaian oleh penulis soal</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Hubungan koherensi antara paragraf ke-2 dan ke-3 adalah ....</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','0');">
+													<input id="pilihan_2_0" onchange="pilihan('2','a','169')" pil="a" name="pilihan2" type="radio">
+													<label for="pilihan_2_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>alasan pengajuan proposal yang diperinci dengan contoh UKM</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','1');">
+													<input id="pilihan_2_1" onchange="pilihan('2','b','169')" pil="b" name="pilihan2" type="radio">
+													<label for="pilihan_2_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>alasan pengajuan program pelatihan yang diperkuat tujuan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','2');">
+													<input id="pilihan_2_2" onchange="pilihan('2','c','169')" pil="c" name="pilihan2" type="radio">
+													<label for="pilihan_2_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>akibat dari maraknya fenomena digitalisasi UKM di daerah</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','3');">
+													<input id="pilihan_2_3" onchange="pilihan('2','d','169')" pil="d" name="pilihan2" type="radio">
+													<label for="pilihan_2_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>akibat dari program literasi digital yang disertai tujuan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','4');">
+													<input id="pilihan_2_4" onchange="pilihan('2','e','169')" pil="e" name="pilihan2" type="radio">
+													<label for="pilihan_2_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>alasan pengajuan proposal program dengan persyaratan</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-3"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;">PROPOSAL KEGIATAN</p>
+<p style="text-align: center;">Pemanfaatan Teknologi Digital untuk Meningkatkan Daya Saing UKM Pangan Lokal</p>
+<p style="text-align: justify;">Dalam beberapa tahun terakhir, perkembangan teknologi digital telah membuka peluang besar bagi pelaku Usaha Kecil dan Menengah (UKM), khususnya di sektor pangan lokal. Namun, banyak UKM yang belum mampu memanfaatkan teknologi secara optimal karena keterbatasan akses informasi, pelatihan, dan pendanaan. Berdasarkan survei yang dilakukan oleh Dinas Koperasi dan UKM Provinsi Jawa Barat pada 2023, hanya 35% UKM pangan yang aktif menggunakan platform digital untuk pemasaran.</p>
+<p style="text-align: justify;">Seiring dengan meningkatnya penggunaan internet dan perangkat digital, konsumen semakin bergeser ke transaksi daring sekitar 60% lebih. Fenomena ini menjadi peluang besar yang belum dimaksimalkan oleh UKM pangan lokal. Misalnya, banyak produk makanan olahan khas daerah memiliki potensi pasar nasional dan bahkan internasional, tetapi belum memiliki strategi pemasaran digital yang memadai. Di sisi lain, persaingan dengan produk pangan dari industri besar dan waralaba semakin ketat, sehingga inovasi digital menjadi kebutuhan mendesak.</p>
+<p style="text-align: justify;">Oleh karena itu, kami mengajukan program pelatihan bertema “Digitalisasi UKM Pangan Lokal” yang bertujuan untuk meningkatkan literasi digital, pemahaman e-commerce, serta keterampilan penggunaan dompet digital dan media sosial sebagai sarana promosi. Program ini dirancang untuk menjangkau 50% pelaku UKM di tiga kabupaten, dengan metode blended learning (daring dan luring), serta pendampingan usaha selama 3 bulan.</p>
+<p style="text-align: justify;">Program ini penting karena teknologi digital tidak hanya memperluas pasar, tetapi juga menekan biaya distribusi, meningkatkan efisiensi, dan mempercepat proses transaksi. Berdasarkan data Bank Indonesia, nilai transaksi e-commerce Indonesia pada 2022 mencapai Rp476 triliun, yang 60% didominasi oleh produk konsumsi rumah tangga, termasuk pangan. Data tersebut menunjukkan adanya kebutuhan akan peningkatan kapasitas pelaku UKM dalam mengakses ekosistem digital.</p>
+<p style="text-align: justify;">Dengan adanya pelatihan ini, diharapkan pelaku UKM pangan lokal dapat bersaing secara sehat di pasar digital yang terus berkembang. Usulan program ini akan disampaikan kepada Kementerian Koperasi dan UKM dengan anggaran sebesar Rp450 juta, yang mencakup biaya pelatihan, honor narasumber, pembuatan modul, serta pengembangan platform daring lokal. Program ini juga mendukung Tujuan Pembangunan Berkelanjutan (SDG's), khususnya poin 8 tentang pekerjaan layak dan pertumbuhan ekonomi, serta poin 9 tentang industri, inovasi, dan infrastruktur.</p>
+<p style="text-align: justify;">Sumber: www.pusedi.or.id/ecommerce-ukm2022 dengan penyesuaian oleh penulis soal</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan teks, manakah argumen yang logis dari pernyataan- pernyataan berikut?</p>
+<p>Tentukan Logis atau Tidak Logis untuk setiap argumen berikut!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Argumen</td><td class="text-center" style="width:100px">Logis</td><td class="text-center" style="width:100px">Tidak Logi</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Program pelatihan penting karena teknologi digital pasti memperluas jejaring.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('3.','1','1');">
+															<input id="pilihan_3_1_1" name="pilihan_3_1" class="pilihan__1" onchange="pilihan3('3','3','171','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_3_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('3.','1','2');">
+															<input id="pilihan_3_1_2" name="pilihan_3_1" class="pilihan__1" onchange="pilihan3('3','3','171','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_3_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Program pelatihan penting karena teknologi digital pasti memperluas jejaring.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('3.','2','1');">
+															<input id="pilihan_3_2_1" name="pilihan_3_2" class="pilihan__2" onchange="pilihan3('3','3','171','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_3_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('3.','2','2');">
+															<input id="pilihan_3_2_2" name="pilihan_3_2" class="pilihan__2" onchange="pilihan3('3','3','171','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_3_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Usulan program didasarkan pada data survei dan kebutuhan nyata di lapangan.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('3.','3','1');">
+															<input id="pilihan_3_3_1" name="pilihan_3_3" class="pilihan__3" onchange="pilihan3('3','3','171','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_3_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('3.','3','2');">
+															<input id="pilihan_3_3_2" name="pilihan_3_3" class="pilihan__3" onchange="pilihan3('3','3','171','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_3_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-4"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Kutipan puisi untuk soal nomor 4 - 6! <br>Huesca jiwa di dunia yang hilang <br>jiwa jiwa sayang,kenangan padamu <br>adalah derita di sisiku <br>bayangan yang bikin tinjauan beku <br><br>angin bangkit ketika senja<br> ngingatkan musim gugur akan tiba <br>aku cemas bisa kehilangan kau <br>aku cemas pada kecemasanku sendiri <br><br>di batu penghabisan ke Huesca <br>batas terakhir dari kebanggaan kita <br>kenanglah sayang, dengan mesra <br>kau kubayangkan di sisiku ada <br><br>dan jika untung malang menghamparkan <br>aku dalam kuburan dangkal <br>ingatlah sebisamu segala yang indah <br>dan cintaku yang kekal<br><br><br>(Puisi Huesca karya John Cornford diterjemahkan oleh Chairil Anwar)</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>di batu penghabisan ke Huesca <br>batas terakhir dari kebanggaan kita<br><br>Makna kiasan batu penghabisan dan batas terakhir memperjelas kondisi yang dialami aku lirik (penyair) tentang ....</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','0');">
+													<input id="pilihan_4_0" onchange="pilihan('4','a','240')" pil="a" name="pilihan4" type="radio">
+													<label for="pilihan_4_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,0);"><!--?xml encoding="utf-8" ?--><p>perpisahan antara penyair dengan orang yang dikasihi</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','1');">
+													<input id="pilihan_4_1" onchange="pilihan('4','b','240')" pil="b" name="pilihan4" type="radio">
+													<label for="pilihan_4_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,1);"><!--?xml encoding="utf-8" ?--><p>situasi kejiwaan yang penuh dinamika kehidupan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','2');">
+													<input id="pilihan_4_2" onchange="pilihan('4','c','240')" pil="c" name="pilihan4" type="radio">
+													<label for="pilihan_4_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,2);"><!--?xml encoding="utf-8" ?--><p>setiap perjumpaan akan dibatasi dengan perpisahan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','3');">
+													<input id="pilihan_4_3" onchange="pilihan('4','d','240')" pil="d" name="pilihan4" type="radio">
+													<label for="pilihan_4_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,3);"><!--?xml encoding="utf-8" ?--><p>semua ikhtiar harus dilakukan sampai batas kemampuan</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('4.','4');">
+													<input id="pilihan_4_4" onchange="pilihan('4','e','240')" pil="e" name="pilihan4" type="radio">
+													<label for="pilihan_4_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(4,4);"><!--?xml encoding="utf-8" ?--><p>apa pun hasil akhirnya harus disikapi dengan kebanggaan</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-5"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Kutipan puisi untuk soal nomor 4 - 6!<br>Huesca jiwa di dunia yang hilang<br>jiwa jiwa sayang,kenangan padamu<br>adalah derita di sisiku<br>bayangan yang bikin tinjauan beku<br><br>angin bangkit ketika senja<br>ngingatkan musim gugur akan tiba<br>aku cemas bisa kehilangan kau<br>aku cemas pada kecemasanku sendiri<br><br>di batu penghabisan ke Huesca<br>batas terakhir dari kebanggaan kita<br>kenanglah sayang, dengan mesra<br>kau kubayangkan di sisiku ada<br><br>dan jika untung malang menghamparkan<br>aku dalam kuburan dangkal<br>ingatlah sebisamu segala yang indah<br>dan cintaku yang kekal<br><br><br>(Puisi Huesca karya John Cornford diterjemahkan oleh Chairil Anwar)</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>angin bangkit ketika senja <br>ngingatkan musim gugur akan tiba<br><br>Makna citraan penglihatan ketika senja dan musim gugur mengkonkretkan gagasan penyair tentang ….</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','0');">
+													<input id="pilihan_5_0" onchange="pilihan('5','a','241')" pil="a" name="pilihan5" type="radio">
+													<label for="pilihan_5_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,0);"><!--?xml encoding="utf-8" ?--><p>pergantian hari dan musim</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','1');">
+													<input id="pilihan_5_1" onchange="pilihan('5','b','241')" pil="b" name="pilihan5" type="radio">
+													<label for="pilihan_5_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,1);"><!--?xml encoding="utf-8" ?--><p>batas akhir aktivitas manusia</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','2');">
+													<input id="pilihan_5_2" onchange="pilihan('5','c','241')" pil="c" name="pilihan5" type="radio">
+													<label for="pilihan_5_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,2);"><!--?xml encoding="utf-8" ?--><p>suasana kedukaan di ujung waktu</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','3');">
+													<input id="pilihan_5_3" onchange="pilihan('5','d','241')" pil="d" name="pilihan5" type="radio">
+													<label for="pilihan_5_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,3);"><!--?xml encoding="utf-8" ?--><p>siap menghadapi perubahan waktu</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','4');">
+													<input id="pilihan_5_4" onchange="pilihan('5','e','241')" pil="e" name="pilihan5" type="radio">
+													<label for="pilihan_5_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,4);"><!--?xml encoding="utf-8" ?--><p>kondisi menjelang akhir kehidupan</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-6"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><strong>Kutipan puisi untuk soal nomor 4 - 6!</strong><br>Huesca jiwa di dunia yang hilang<br>jiwa jiwa sayang,kenangan padamu<br>adalah derita di sisiku<br>bayangan yang bikin tinjauan beku<br><br>angin bangkit ketika senja<br>ngingatkan musim gugur akan tiba<br>aku cemas bisa kehilangan kau<br>aku cemas pada kecemasanku sendiri<br><br>di batu penghabisan ke Huesca<br>batas terakhir dari kebanggaan kita<br>kenanglah sayang, dengan mesra<br>kau kubayangkan di sisiku ada<br><br>dan jika untung malang menghamparkan<br>aku dalam kuburan dangkal<br>ingatlah sebisamu segala yang indah<br>dan cintaku yang kekal<br><br><br>(Puisi Huesca karya John Cornford diterjemahkan oleh <strong>Chairil Anwar</strong>)</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>&nbsp;</p>
+<p>angin bangkit ketika senja<br>ngingatkan musim gugur akan tiba<br>aku cemas bisa kehilangan kau<br>aku cemas pada kecemasanku sendiri</p>
+<p>Suasana hati yang muncul setelah membaca bait puisi tersebut adalah ….</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','0');">
+													<input id="pilihan_6_0" onchange="pilihan('6','a','312')" pil="a" name="pilihan6" type="radio">
+													<label for="pilihan_6_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>keriangan hati saat musim gugur sudah tiba</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','1');">
+													<input id="pilihan_6_1" onchange="pilihan('6','b','312')" pil="b" name="pilihan6" type="radio">
+													<label for="pilihan_6_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>kemuraman saat senja hari di musim gugur</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','2');">
+													<input id="pilihan_6_2" onchange="pilihan('6','c','312')" pil="c" name="pilihan6" type="radio">
+													<label for="pilihan_6_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>keadaan gersang karena daun berguguran</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','3');">
+													<input id="pilihan_6_3" onchange="pilihan('6','d','312')" pil="d" name="pilihan6" type="radio">
+													<label for="pilihan_6_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>kesedihan karena takut kehilangan orang terkasih</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('6.','4');">
+													<input id="pilihan_6_4" onchange="pilihan('6','e','312')" pil="e" name="pilihan6" type="radio">
+													<label for="pilihan_6_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(6,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>kebimbangan hati menunggu pergantian musim</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-7"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Teks untuk soal nomor 7 s.d. 10!</strong></p>
+<table width="614">
+<tbody>
+<tr>
+<td width="614">
+<p><strong>Teks Digital: Ulasan Pengunjung: Eksplorasi Budaya di Kampung Adat Ciptagelar</strong></p>
+<p>⭐ <strong>4.8/5 dari 87 ulasan</strong></p>
+<p>👤 <strong>Rini Kartika – ★★★★★</strong></p>
+<p><em>Kunjungan: Agustus 2024 </em></p>
+<p><br> Pengalaman saya di Kampung Adat Ciptagelar sungguh luar biasa. Udara sejuk dan pemandangan hutan di kaki Gunung Halimun sangat menenangkan. Penduduknya sangat ramah dan terbuka terhadap tamu, tetapi tetap menjaga adat dan tata krama mereka. Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam. Sistem pertanian mereka yang masih tradisional sangat menarik untuk dipelajari. Tempat ini cocok untuk siapa pun yang ingin rehat dari hiruk-pikuk kota dan belajar budaya lokal.</p>
+<p><em>&nbsp;</em></p>
+<p>👤 <strong>Arif Nugroho – ★★★★☆</strong></p>
+<p><em>Kunjungan: Juli 2023</em></p>
+<p><br> Saya sangat mengapresiasi bagaimana masyarakat Ciptagelar menjaga nilai-nilai adat mereka. Tidak ada listrik atau televisi di rumah-rumah penduduk, tapi justru itu yang membuat suasananya begitu tenang dan damai. Namun, saya merasa beberapa informasi tentang aturan kunjungan dan transportasi masih kurang tersedia secara daring. Semoga ke depan bisa dibuat panduan digital agar lebih mudah bagi wisatawan.</p>
+<p>&nbsp;</p>
+<p>👤 <strong>Linda Mariana – ★★★★★</strong></p>
+<p><em>Kunjungan: Mei 2023</em></p>
+<p><br> Kampung ini sungguh unik! Saya mengikuti tur budaya singkat dan berbincang dengan salah satu sesepuh adat. Beliau menjelaskan filosofi hidup mereka yang sangat dalam dan menyentuh hati. Foto-foto yang saya ambil tidak bisa menggambarkan sepenuhnya keindahan dan kedalaman makna yang saya rasakan. Tempat ini lebih dari sekadar wisata, ini adalah pengalaman spiritual dan edukatif.</p>
+<p><em>&nbsp;</em></p>
+<p>👤 <strong>Bagas Permana – ★★★★☆</strong></p>
+<p><em>Kunjungan</em><em>: Desember 2022</em></p>
+<p>Saya menyukai artikel dan informasi yang saya baca sebelum ke sana, tetapi saat sampai, saya merasa ada sedikit perbedaan. Penulis artikel bilang “semua orang pasti jatuh cinta pada Ciptagelar”, tapi menurut saya itu terlalu berlebihan. Tempat ini memang menarik, tapi mungkin tidak semua orang nyaman dengan keterbatasan teknologi dan fasilitas. Namun, tetap patut dikunjungi jika ingin mengenal budaya Sunda secara mendalam.</p>
+<p>👤 <strong>Melati Dewi – ★★★★★</strong></p>
+<p><em>Kunjungan</em><em>: Oktober 2023</em></p>
+<p><br> Sangat merekomendasikan! Saya ke sana bersama komunitas pecinta budaya, dan kami benar-benar menikmati tiap detik. Bahkan saat tidak ada sinyal ponsel, kami bisa fokus sepenuhnya pada pengalaman. Saya senang karena penduduk memberi edukasi tentang larangan dan ritual adat secara terbuka. Jangan lupa datang saat ada upacara adat, karena itu momen paling berkesan!</p>
+</td>
+</tr>
+<tr>
+<td width="614">
+<p style="text-align: center;"><strong>Teks Cetak: Eksplorasi Budaya yang Otentik di Kampung Adat Ciptagelar</strong></p>
+<p>Kampung Adat Ciptagelar, yang terletak di kawasan Gunung Halimun, Sukabumi, Jawa Barat, menjadi salah satu destinasi wisata budaya yang menyuguhkan pengalaman autentik dan reflektif bagi para pengunjung. Berada di ketinggian dengan udara yang sejuk serta lanskap hutan yang asri, kampung ini menawarkan kehidupan masyarakat adat Sunda yang masih memegang teguh nilai-nilai dan tata cara warisan leluhur.</p>
+<p>Dalam ulasan dari berbagai pengunjung, kesan yang muncul begitu kuat adalah ketenangan dan kedalaman spiritual yang dirasakan selama berada di kampung tersebut. Rini Kartika, salah satu pengunjung, menggambarkan pengalamannya seperti “kembali ke masa lalu dan hidup dalam harmoni dengan alam.” Ia menyoroti keramahan warga serta sistem pertanian tradisional yang masih dijalankan tanpa bantuan teknologi modern. Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.</p>
+<p>Hal serupa disampaikan oleh Arif Nugroho, yang mengapresiasi bagaimana masyarakat Ciptagelar menolak penggunaan listrik dan televisi sebagai bagian dari pelestarian adat. Namun, ia juga mencatat perlunya peningkatan informasi daring terkait aturan kunjungan agar wisatawan baru lebih siap dan nyaman. Kritik ini menjadi masukan berharga bagi pengelola wisata berbasis komunitas.</p>
+<p>Salah satu keunikan Ciptagelar terletak pada filosofi hidup warganya, sebagaimana diungkapkan oleh Linda Mariana. Ia mengikuti tur budaya yang dipandu oleh sesepuh adat, dan merasakan kedalaman nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat. Dalam ulasannya, ia menegaskan bahwa tempat ini bukan sekadar destinasi, tetapi ruang untuk menyelami makna hidup yang sederhana namun bermakna.</p>
+<p>Meski mendapat pujian, tidak semua pengunjung sepenuhnya setuju dengan pandangan idealis tentang kampung ini. Bagas Permana, misalnya, menyampaikan bahwa kenyataan di lapangan tidak selalu sesuai dengan ekspektasi yang dibangun dari artikel promosi. Menurutnya, tidak semua orang akan nyaman dengan keterbatasan fasilitas dan teknologi. Namun ia tetap menyatakan bahwa Ciptagelar layak dikunjungi bagi siapa pun yang ingin mengenal budaya Sunda lebih dalam.</p>
+<p>Rekomendasi datang dari Melati Dewi, yang menekankan pentingnya datang saat upacara adat seperti Seren Taun berlangsung. Ia dan komunitasnya merasa sangat dihargai sebagai tamu, dan menyatakan bahwa pengalaman berinteraksi langsung dengan masyarakat adat memberikan kesan yang sulit dilupakan.</p>
+<p>Secara keseluruhan, Kampung Adat Ciptagelar tidak hanya menghadirkan keindahan alam dan budaya, tetapi juga membuka ruang refleksi bagi siapa pun yang mengunjunginya. Ulasan-ulasan tersebut menunjukkan bahwa kekuatan desa ini bukan pada fasilitas wisata modern, melainkan pada kesederhanaan hidup yang penuh makna. Bagi pecinta budaya dan pelancong yang mencari kedalaman, Ciptagelar adalah destinasi yang layak untuk dijelajahi.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Manakah kalimat yang menyatakan evaluasi dalam teks ulasan cetak dan ulasan digital tersebut?</p>
+<p>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('7.','0');">
+													<input id="pilihan_7_0" class="pilihan7" onchange="pilihan2('7','a','313')" pil="a" name="pilihan7" type="checkbox" value="A">
+													<label for="pilihan_7_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(7,0);"><!--?xml encoding="utf-8" ?--><p>Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('7.','1');">
+													<input id="pilihan_7_1" class="pilihan7" onchange="pilihan2('7','b','313')" pil="b" name="pilihan7" type="checkbox" value="B">
+													<label for="pilihan_7_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(7,1);"><!--?xml encoding="utf-8" ?--><p>Artikel ini menyajikan informasi lengkap tentang rute menuju Kampung Ciptagelar.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('7.','2');">
+													<input id="pilihan_7_2" class="pilihan7" onchange="pilihan2('7','c','313')" pil="c" name="pilihan7" type="checkbox" value="C">
+													<label for="pilihan_7_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(7,2);"><!--?xml encoding="utf-8" ?--><p>Menurut saya, pernyataan ‘semua orang pasti jatuh cinta’ terlalu menggeneralisasi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('7.','3');">
+													<input id="pilihan_7_3" class="pilihan7" onchange="pilihan2('7','d','313')" pil="d" name="pilihan7" type="checkbox" value="D">
+													<label for="pilihan_7_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(7,3);"><!--?xml encoding="utf-8" ?--><p>Tokoh adat menjelaskan larangan penggunaan listrik di rumah-rumah warga.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('7.','4');">
+													<input id="pilihan_7_4" class="pilihan7" onchange="pilihan2('7','e','313')" pil="e" name="pilihan7" type="checkbox" value="E">
+													<label for="pilihan_7_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(7,4);"><!--?xml encoding="utf-8" ?--><p>Kekuatan desa ini bukan pada fasilitas wisata modern, melainkan pada kesederhanaan hidup yang penuh makna.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-8"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Teks untuk soal nomor 7 s.d. 10!</strong></p>
+<table width="614">
+<tbody>
+<tr>
+<td width="614">
+<p><strong>Teks Digital: Ulasan Pengunjung: Eksplorasi Budaya di Kampung Adat Ciptagelar</strong></p>
+<p>⭐&nbsp;<strong>4.8/5 dari 87 ulasan</strong></p>
+<p>👤&nbsp;<strong>Rini Kartika – ★★★★★</strong></p>
+<p><em>Kunjungan: Agustus 2024</em></p>
+<p><br>Pengalaman saya di Kampung Adat Ciptagelar sungguh luar biasa. Udara sejuk dan pemandangan hutan di kaki Gunung Halimun sangat menenangkan. Penduduknya sangat ramah dan terbuka terhadap tamu, tetapi tetap menjaga adat dan tata krama mereka. Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam. Sistem pertanian mereka yang masih tradisional sangat menarik untuk dipelajari. Tempat ini cocok untuk siapa pun yang ingin rehat dari hiruk-pikuk kota dan belajar budaya lokal.</p>
+<p><em>&nbsp;</em></p>
+<p>👤&nbsp;<strong>Arif Nugroho – ★★★★☆</strong></p>
+<p><em>Kunjungan: Juli 2023</em></p>
+<p><br>Saya sangat mengapresiasi bagaimana masyarakat Ciptagelar menjaga nilai-nilai adat mereka. Tidak ada listrik atau televisi di rumah-rumah penduduk, tapi justru itu yang membuat suasananya begitu tenang dan damai. Namun, saya merasa beberapa informasi tentang aturan kunjungan dan transportasi masih kurang tersedia secara daring. Semoga ke depan bisa dibuat panduan digital agar lebih mudah bagi wisatawan.</p>
+<p>&nbsp;</p>
+<p>👤&nbsp;<strong>Linda Mariana – ★★★★★</strong></p>
+<p><em>Kunjungan: Mei 2023</em></p>
+<p><br>Kampung ini sungguh unik! Saya mengikuti tur budaya singkat dan berbincang dengan salah satu sesepuh adat. Beliau menjelaskan filosofi hidup mereka yang sangat dalam dan menyentuh hati. Foto-foto yang saya ambil tidak bisa menggambarkan sepenuhnya keindahan dan kedalaman makna yang saya rasakan. Tempat ini lebih dari sekadar wisata, ini adalah pengalaman spiritual dan edukatif.</p>
+<p><em>&nbsp;</em></p>
+<p>👤&nbsp;<strong>Bagas Permana – ★★★★☆</strong></p>
+<p><em>Kunjungan</em><em>: Desember 2022</em></p>
+<p>Saya menyukai artikel dan informasi yang saya baca sebelum ke sana, tetapi saat sampai, saya merasa ada sedikit perbedaan. Penulis artikel bilang “semua orang pasti jatuh cinta pada Ciptagelar”, tapi menurut saya itu terlalu berlebihan. Tempat ini memang menarik, tapi mungkin tidak semua orang nyaman dengan keterbatasan teknologi dan fasilitas. Namun, tetap patut dikunjungi jika ingin mengenal budaya Sunda secara mendalam.</p>
+<p>👤&nbsp;<strong>Melati Dewi – ★★★★★</strong></p>
+<p><em>Kunjungan</em><em>: Oktober 2023</em></p>
+<p><br>Sangat merekomendasikan! Saya ke sana bersama komunitas pecinta budaya, dan kami benar-benar menikmati tiap detik. Bahkan saat tidak ada sinyal ponsel, kami bisa fokus sepenuhnya pada pengalaman. Saya senang karena penduduk memberi edukasi tentang larangan dan ritual adat secara terbuka. Jangan lupa datang saat ada upacara adat, karena itu momen paling berkesan!</p>
+</td>
+</tr>
+<tr>
+<td width="614">
+<p style="text-align: center;"><strong>Teks Cetak: Eksplorasi Budaya yang Otentik di Kampung Adat Ciptagelar</strong></p>
+<p>Kampung Adat Ciptagelar, yang terletak di kawasan Gunung Halimun, Sukabumi, Jawa Barat, menjadi salah satu destinasi wisata budaya yang menyuguhkan pengalaman autentik dan reflektif bagi para pengunjung. Berada di ketinggian dengan udara yang sejuk serta lanskap hutan yang asri, kampung ini menawarkan kehidupan masyarakat adat Sunda yang masih memegang teguh nilai-nilai dan tata cara warisan leluhur.</p>
+<p>Dalam ulasan dari berbagai pengunjung, kesan yang muncul begitu kuat adalah ketenangan dan kedalaman spiritual yang dirasakan selama berada di kampung tersebut. Rini Kartika, salah satu pengunjung, menggambarkan pengalamannya seperti “kembali ke masa lalu dan hidup dalam harmoni dengan alam.” Ia menyoroti keramahan warga serta sistem pertanian tradisional yang masih dijalankan tanpa bantuan teknologi modern. Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.</p>
+<p>Hal serupa disampaikan oleh Arif Nugroho, yang mengapresiasi bagaimana masyarakat Ciptagelar menolak penggunaan listrik dan televisi sebagai bagian dari pelestarian adat. Namun, ia juga mencatat perlunya peningkatan informasi daring terkait aturan kunjungan agar wisatawan baru lebih siap dan nyaman. Kritik ini menjadi masukan berharga bagi pengelola wisata berbasis komunitas.</p>
+<p>Salah satu keunikan Ciptagelar terletak pada filosofi hidup warganya, sebagaimana diungkapkan oleh Linda Mariana. Ia mengikuti tur budaya yang dipandu oleh sesepuh adat, dan merasakan kedalaman nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat. Dalam ulasannya, ia menegaskan bahwa tempat ini bukan sekadar destinasi, tetapi ruang untuk menyelami makna hidup yang sederhana namun bermakna.</p>
+<p>Meski mendapat pujian, tidak semua pengunjung sepenuhnya setuju dengan pandangan idealis tentang kampung ini. Bagas Permana, misalnya, menyampaikan bahwa kenyataan di lapangan tidak selalu sesuai dengan ekspektasi yang dibangun dari artikel promosi. Menurutnya, tidak semua orang akan nyaman dengan keterbatasan fasilitas dan teknologi. Namun ia tetap menyatakan bahwa Ciptagelar layak dikunjungi bagi siapa pun yang ingin mengenal budaya Sunda lebih dalam.</p>
+<p>Rekomendasi datang dari Melati Dewi, yang menekankan pentingnya datang saat upacara adat seperti Seren Taun berlangsung. Ia dan komunitasnya merasa sangat dihargai sebagai tamu, dan menyatakan bahwa pengalaman berinteraksi langsung dengan masyarakat adat memberikan kesan yang sulit dilupakan.</p>
+<p>Secara keseluruhan, Kampung Adat Ciptagelar tidak hanya menghadirkan keindahan alam dan budaya, tetapi juga membuka ruang refleksi bagi siapa pun yang mengunjunginya. Ulasan-ulasan tersebut menunjukkan bahwa kekuatan desa ini bukan pada fasilitas wisata modern, melainkan pada kesederhanaan hidup yang penuh makna. Bagi pecinta budaya dan pelancong yang mencari kedalaman, Ciptagelar adalah destinasi yang layak untuk dijelajahi.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Manakah pilihan kata yang tepat untuk menggambarkan kesederhanaan Kampung Ciptagelar?</p>
+<p>Tentukan <strong>Tepat</strong> atau <strong>Tidak Tepat</strong> pada setiap kalimat berikut!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Kalimat</td><td class="text-center" style="width:100px">Tepat</td><td class="text-center" style="width:100px">Tidak Tepat</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','1','1');">
+															<input id="pilihan_8_1_1" name="pilihan_8_1" class="pilihan__1" onchange="pilihan3('8','3','314','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_8_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','1','2');">
+															<input id="pilihan_8_1_2" name="pilihan_8_1" class="pilihan__1" onchange="pilihan3('8','3','314','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_8_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Tempat ini bukan sekadar destinasi, tetapi ruang untuk menyelami makna hidup yang sederhana namun bermakna.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','2','1');">
+															<input id="pilihan_8_2_1" name="pilihan_8_2" class="pilihan__2" onchange="pilihan3('8','3','314','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_8_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','2','2');">
+															<input id="pilihan_8_2_2" name="pilihan_8_2" class="pilihan__2" onchange="pilihan3('8','3','314','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_8_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Kampung ini menawarkan kehidupan masyarakat adat Sunda yang masih memegang teguh nilai-nilai dan tata cara warisan leluhur.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','3','1');">
+															<input id="pilihan_8_3_1" name="pilihan_8_3" class="pilihan__3" onchange="pilihan3('8','3','314','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_8_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('8.','3','2');">
+															<input id="pilihan_8_3_2" name="pilihan_8_3" class="pilihan__3" onchange="pilihan3('8','3','314','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_8_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-9"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><strong>Teks untuk soal nomor 7 s.d. 10!</strong></p>
+<table width="614">
+<tbody>
+<tr>
+<td width="614">
+<p><strong>Teks Digital: Ulasan Pengunjung: Eksplorasi Budaya di Kampung Adat Ciptagelar</strong></p>
+<p>⭐ <strong>4.8/5 dari 87 ulasan</strong></p>
+<p>👤 <strong>Rini Kartika – ★★★★★</strong></p>
+<p><em>Kunjungan: Agustus 2024 </em></p>
+<p><br> Pengalaman saya di Kampung Adat Ciptagelar sungguh luar biasa. Udara sejuk dan pemandangan hutan di kaki Gunung Halimun sangat menenangkan. Penduduknya sangat ramah dan terbuka terhadap tamu, tetapi tetap menjaga adat dan tata krama mereka. Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam. Sistem pertanian mereka yang masih tradisional sangat menarik untuk dipelajari. Tempat ini cocok untuk siapa pun yang ingin rehat dari hiruk-pikuk kota dan belajar budaya lokal.</p>
+<p><em>&nbsp;</em></p>
+<p>👤 <strong>Arif Nugroho – ★★★★☆</strong></p>
+<p><em>Kunjungan: Juli 2023</em></p>
+<p><br> Saya sangat mengapresiasi bagaimana masyarakat Ciptagelar menjaga nilai-nilai adat mereka. Tidak ada listrik atau televisi di rumah-rumah penduduk, tapi justru itu yang membuat suasananya begitu tenang dan damai. Namun, saya merasa beberapa informasi tentang aturan kunjungan dan transportasi masih kurang tersedia secara daring. Semoga ke depan bisa dibuat panduan digital agar lebih mudah bagi wisatawan.</p>
+<p>&nbsp;</p>
+<p>👤 <strong>Linda Mariana – ★★★★★</strong></p>
+<p><em>Kunjungan: Mei 2023</em></p>
+<p><br> Kampung ini sungguh unik! Saya mengikuti tur budaya singkat dan berbincang dengan salah satu sesepuh adat. Beliau menjelaskan filosofi hidup mereka yang sangat dalam dan menyentuh hati. Foto-foto yang saya ambil tidak bisa menggambarkan sepenuhnya keindahan dan kedalaman makna yang saya rasakan. Tempat ini lebih dari sekadar wisata, ini adalah pengalaman spiritual dan edukatif.</p>
+<p>&nbsp;</p>
+<p>👤 <strong>Bagas Permana – ★★★★☆</strong></p>
+<p><em>Kunjungan</em><em>: Desember 2022</em></p>
+<p>Saya menyukai artikel dan informasi yang saya baca sebelum ke sana, tetapi saat sampai, saya merasa ada sedikit perbedaan. Penulis artikel bilang “semua orang pasti jatuh cinta pada Ciptagelar”, tapi menurut saya itu terlalu berlebihan. Tempat ini memang menarik, tapi mungkin tidak semua orang nyaman dengan keterbatasan teknologi dan fasilitas. Namun, tetap patut dikunjungi jika ingin mengenal budaya Sunda secara mendalam.</p>
+<p>👤 <strong>Melati Dewi – ★★★★★</strong></p>
+<p><em>Kunjungan</em><em>: Oktober 2023</em></p>
+<p><br> Sangat merekomendasikan! Saya ke sana bersama komunitas pecinta budaya, dan kami benar-benar menikmati tiap detik. Bahkan saat tidak ada sinyal ponsel, kami bisa fokus sepenuhnya pada pengalaman. Saya senang karena penduduk memberi edukasi tentang larangan dan ritual adat secara terbuka. Jangan lupa datang saat ada upacara adat, karena itu momen paling berkesan!</p>
+</td>
+</tr>
+<tr>
+<td width="614">
+<p style="text-align: center;"><strong>Teks Cetak: Eksplorasi Budaya yang Otentik di Kampung Adat Ciptagelar</strong></p>
+<p>Kampung Adat Ciptagelar, yang terletak di kawasan Gunung Halimun, Sukabumi, Jawa Barat, menjadi salah satu destinasi wisata budaya yang menyuguhkan pengalaman autentik dan reflektif bagi para pengunjung. Berada di ketinggian dengan udara yang sejuk serta lanskap hutan yang asri, kampung ini menawarkan kehidupan masyarakat adat Sunda yang masih memegang teguh nilai-nilai dan tata cara warisan leluhur.</p>
+<p>Dalam ulasan dari berbagai pengunjung, kesan yang muncul begitu kuat adalah ketenangan dan kedalaman spiritual yang dirasakan selama berada di kampung tersebut. Rini Kartika, salah satu pengunjung, menggambarkan pengalamannya seperti “kembali ke masa lalu dan hidup dalam harmoni dengan alam.” Ia menyoroti keramahan warga serta sistem pertanian tradisional yang masih dijalankan tanpa bantuan teknologi modern. Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.</p>
+<p>Hal serupa disampaikan oleh Arif Nugroho, yang mengapresiasi bagaimana masyarakat Ciptagelar menolak penggunaan listrik dan televisi sebagai bagian dari pelestarian adat. Namun, ia juga mencatat perlunya peningkatan informasi daring terkait aturan kunjungan agar wisatawan baru lebih siap dan nyaman. Kritik ini menjadi masukan berharga bagi pengelola wisata berbasis komunitas.</p>
+<p>Salah satu keunikan Ciptagelar terletak pada filosofi hidup warganya, sebagaimana diungkapkan oleh Linda Mariana. Ia mengikuti tur budaya yang dipandu oleh sesepuh adat, dan merasakan kedalaman nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat. Dalam ulasannya, ia menegaskan bahwa tempat ini bukan sekadar destinasi, tetapi ruang untuk menyelami makna hidup yang sederhana namun bermakna.</p>
+<p>Meski mendapat pujian, tidak semua pengunjung sepenuhnya setuju dengan pandangan idealis tentang kampung ini. Bagas Permana, misalnya, menyampaikan bahwa kenyataan di lapangan tidak selalu sesuai dengan ekspektasi yang dibangun dari artikel promosi. Menurutnya, tidak semua orang akan nyaman dengan keterbatasan fasilitas dan teknologi. Namun ia tetap menyatakan bahwa Ciptagelar layak dikunjungi bagi siapa pun yang ingin mengenal budaya Sunda lebih dalam.</p>
+<p>Rekomendasi datang dari Melati Dewi, yang menekankan pentingnya datang saat upacara adat seperti Seren Taun berlangsung. Ia dan komunitasnya merasa sangat dihargai sebagai tamu, dan menyatakan bahwa pengalaman berinteraksi langsung dengan masyarakat adat memberikan kesan yang sulit dilupakan.</p>
+<p>Secara keseluruhan, Kampung Adat Ciptagelar tidak hanya menghadirkan keindahan alam dan budaya, tetapi juga membuka ruang refleksi bagi siapa pun yang mengunjunginya. Ulasan-ulasan tersebut menunjukkan bahwa kekuatan desa ini bukan pada fasilitas wisata modern, melainkan pada kesederhanaan hidup yang penuh makna. Bagi pecinta budaya dan pelancong yang mencari kedalaman, Ciptagelar adalah destinasi yang layak untuk dijelajahi.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Manakah kalimat yang merupakan kalimat majemuk setara dalam teks ulasan digital dan cetak tersebut?</p>
+<p>Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','0');">
+													<input id="pilihan_9_0" class="pilihan9" onchange="pilihan2('9','a','315')" pil="a" name="pilihan9" type="checkbox" value="A">
+													<label for="pilihan_9_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','1');">
+													<input id="pilihan_9_1" class="pilihan9" onchange="pilihan2('9','b','315')" pil="b" name="pilihan9" type="checkbox" value="B">
+													<label for="pilihan_9_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Namun, ia juga mencatat perlunya peningkatan informasi daring terkait aturan kunjungan agar wisatawan baru lebih siap dan nyaman.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','2');">
+													<input id="pilihan_9_2" class="pilihan9" onchange="pilihan2('9','c','315')" pil="c" name="pilihan9" type="checkbox" value="C">
+													<label for="pilihan_9_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Meski mendapat pujian, tidak semua pengunjung sepenuhnya setuju dengan pandangan idealis tentang kampung ini.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','3');">
+													<input id="pilihan_9_3" class="pilihan9" onchange="pilihan2('9','d','315')" pil="d" name="pilihan9" type="checkbox" value="D">
+													<label for="pilihan_9_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kami merasa sangat dihargai sebagai tamu, dan pengalaman berinteraksi langsung dengan masyarakat adat memberikan kesan yang sulit dilupakan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','4');">
+													<input id="pilihan_9_4" class="pilihan9" onchange="pilihan2('9','e','315')" pil="e" name="pilihan9" type="checkbox" value="E">
+													<label for="pilihan_9_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Ia mengikuti tur budaya yang dipandu oleh sesepuh adat dan merasakan kedalaman nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-10"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p><strong>Teks untuk soal nomor 7 s.d. 10!</strong></p>
+<table width="614">
+<tbody>
+<tr>
+<td width="614">
+<p><strong>Teks Digital: Ulasan Pengunjung: Eksplorasi Budaya di Kampung Adat Ciptagelar</strong></p>
+<p>⭐&nbsp;<strong>4.8/5 dari 87 ulasan</strong></p>
+<p>👤&nbsp;<strong>Rini Kartika – ★★★★★</strong></p>
+<p><em>Kunjungan: Agustus 2024</em></p>
+<p><br>Pengalaman saya di Kampung Adat Ciptagelar sungguh luar biasa. Udara sejuk dan pemandangan hutan di kaki Gunung Halimun sangat menenangkan. Penduduknya sangat ramah dan terbuka terhadap tamu, tetapi tetap menjaga adat dan tata krama mereka. Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam. Sistem pertanian mereka yang masih tradisional sangat menarik untuk dipelajari. Tempat ini cocok untuk siapa pun yang ingin rehat dari hiruk-pikuk kota dan belajar budaya lokal.</p>
+<p><em>&nbsp;</em></p>
+<p>👤&nbsp;<strong>Arif Nugroho – ★★★★☆</strong></p>
+<p><em>Kunjungan: Juli 2023</em></p>
+<p><br>Saya sangat mengapresiasi bagaimana masyarakat Ciptagelar menjaga nilai-nilai adat mereka. Tidak ada listrik atau televisi di rumah-rumah penduduk, tapi justru itu yang membuat suasananya begitu tenang dan damai. Namun, saya merasa beberapa informasi tentang aturan kunjungan dan transportasi masih kurang tersedia secara daring. Semoga ke depan bisa dibuat panduan digital agar lebih mudah bagi wisatawan.</p>
+<p>&nbsp;</p>
+<p>👤&nbsp;<strong>Linda Mariana – ★★★★★</strong></p>
+<p><em>Kunjungan: Mei 2023</em></p>
+<p><br>Kampung ini sungguh unik! Saya mengikuti tur budaya singkat dan berbincang dengan salah satu sesepuh adat. Beliau menjelaskan filosofi hidup mereka yang sangat dalam dan menyentuh hati. Foto-foto yang saya ambil tidak bisa menggambarkan sepenuhnya keindahan dan kedalaman makna yang saya rasakan. Tempat ini lebih dari sekadar wisata, ini adalah pengalaman spiritual dan edukatif.</p>
+<p>&nbsp;</p>
+<p>👤&nbsp;<strong>Bagas Permana – ★★★★☆</strong></p>
+<p><em>Kunjungan</em><em>: Desember 2022</em></p>
+<p>Saya menyukai artikel dan informasi yang saya baca sebelum ke sana, tetapi saat sampai, saya merasa ada sedikit perbedaan. Penulis artikel bilang “semua orang pasti jatuh cinta pada Ciptagelar”, tapi menurut saya itu terlalu berlebihan. Tempat ini memang menarik, tapi mungkin tidak semua orang nyaman dengan keterbatasan teknologi dan fasilitas. Namun, tetap patut dikunjungi jika ingin mengenal budaya Sunda secara mendalam.</p>
+<p>👤&nbsp;<strong>Melati Dewi – ★★★★★</strong></p>
+<p><em>Kunjungan</em><em>: Oktober 2023</em></p>
+<p><br>Sangat merekomendasikan! Saya ke sana bersama komunitas pecinta budaya, dan kami benar-benar menikmati tiap detik. Bahkan saat tidak ada sinyal ponsel, kami bisa fokus sepenuhnya pada pengalaman. Saya senang karena penduduk memberi edukasi tentang larangan dan ritual adat secara terbuka. Jangan lupa datang saat ada upacara adat, karena itu momen paling berkesan!</p>
+</td>
+</tr>
+<tr>
+<td width="614">
+<p style="text-align: center;"><strong>Teks Cetak: Eksplorasi Budaya yang Otentik di Kampung Adat Ciptagelar</strong></p>
+<p>Kampung Adat Ciptagelar, yang terletak di kawasan Gunung Halimun, Sukabumi, Jawa Barat, menjadi salah satu destinasi wisata budaya yang menyuguhkan pengalaman autentik dan reflektif bagi para pengunjung. Berada di ketinggian dengan udara yang sejuk serta lanskap hutan yang asri, kampung ini menawarkan kehidupan masyarakat adat Sunda yang masih memegang teguh nilai-nilai dan tata cara warisan leluhur.</p>
+<p>Dalam ulasan dari berbagai pengunjung, kesan yang muncul begitu kuat adalah ketenangan dan kedalaman spiritual yang dirasakan selama berada di kampung tersebut. Rini Kartika, salah satu pengunjung, menggambarkan pengalamannya seperti “kembali ke masa lalu dan hidup dalam harmoni dengan alam.” Ia menyoroti keramahan warga serta sistem pertanian tradisional yang masih dijalankan tanpa bantuan teknologi modern. Suasana yang jauh dari kebisingan kota ini dianggap cocok bagi siapa pun yang ingin beristirahat sekaligus belajar dari kearifan lokal.</p>
+<p>Hal serupa disampaikan oleh Arif Nugroho, yang mengapresiasi bagaimana masyarakat Ciptagelar menolak penggunaan listrik dan televisi sebagai bagian dari pelestarian adat. Namun, ia juga mencatat perlunya peningkatan informasi daring terkait aturan kunjungan agar wisatawan baru lebih siap dan nyaman. Kritik ini menjadi masukan berharga bagi pengelola wisata berbasis komunitas.</p>
+<p>Salah satu keunikan Ciptagelar terletak pada filosofi hidup warganya, sebagaimana diungkapkan oleh Linda Mariana. Ia mengikuti tur budaya yang dipandu oleh sesepuh adat, dan merasakan kedalaman nilai-nilai spiritual yang dijunjung tinggi oleh masyarakat. Dalam ulasannya, ia menegaskan bahwa tempat ini bukan sekadar destinasi, tetapi ruang untuk menyelami makna hidup yang sederhana namun bermakna.</p>
+<p>Meski mendapat pujian, tidak semua pengunjung sepenuhnya setuju dengan pandangan idealis tentang kampung ini. Bagas Permana, misalnya, menyampaikan bahwa kenyataan di lapangan tidak selalu sesuai dengan ekspektasi yang dibangun dari artikel promosi. Menurutnya, tidak semua orang akan nyaman dengan keterbatasan fasilitas dan teknologi. Namun ia tetap menyatakan bahwa Ciptagelar layak dikunjungi bagi siapa pun yang ingin mengenal budaya Sunda lebih dalam.</p>
+<p>Rekomendasi datang dari Melati Dewi, yang menekankan pentingnya datang saat upacara adat seperti Seren Taun berlangsung. Ia dan komunitasnya merasa sangat dihargai sebagai tamu, dan menyatakan bahwa pengalaman berinteraksi langsung dengan masyarakat adat memberikan kesan yang sulit dilupakan.</p>
+<p>Secara keseluruhan, Kampung Adat Ciptagelar tidak hanya menghadirkan keindahan alam dan budaya, tetapi juga membuka ruang refleksi bagi siapa pun yang mengunjunginya. Ulasan-ulasan tersebut menunjukkan bahwa kekuatan desa ini bukan pada fasilitas wisata modern, melainkan pada kesederhanaan hidup yang penuh makna. Bagi pecinta budaya dan pelancong yang mencari kedalaman, Ciptagelar adalah destinasi yang layak untuk dijelajahi.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Manakah pernyataan yang mengungkapkan kesesuaian antara ulasan dan fakta dalam teks ulasan digital dan cetak tersebut?</p>
+<p>Tentukan <strong>Sesuai</strong> atau <strong>Tidak Sesuai</strong> pada setiap pernyataan berikut!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Ulasan dan Fakta</td><td class="text-center" style="width:100px">Sesuai</td><td class="text-center" style="width:100px">Tidak Sesuai</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Ulasan:<br> Tempat ini cocok untuk siapa pun yang ingin rehat dari hiruk-pikuk kota.</p>
+<p>Fakta:<br> Suasana kampung yang tenang, sejuk, dan jauh dari kebisingan kota.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('10.','1','1');">
+															<input id="pilihan_10_1_1" name="pilihan_10_1" class="pilihan__1" onchange="pilihan3('10','3','316','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_10_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('10.','1','2');">
+															<input id="pilihan_10_1_2" name="pilihan_10_1" class="pilihan__1" onchange="pilihan3('10','3','316','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_10_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Ulasan:<br> Semua orang pasti akan jatuh cinta pada keunikan Ciptagelar.</p>
+<p>Fakta:<br> Tidak semua pengunjung merasa nyaman, seperti ulasan Bagas Permana.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('10.','2','1');">
+															<input id="pilihan_10_2_1" name="pilihan_10_2" class="pilihan__2" onchange="pilihan3('10','3','316','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_10_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('10.','2','2');">
+															<input id="pilihan_10_2_2" name="pilihan_10_2" class="pilihan__2" onchange="pilihan3('10','3','316','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_10_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Ulasan:<br> Saya merasa seperti kembali ke masa lalu, hidup dalam harmoni dengan alam.</p>
+<p>Fakta:<br> Kehidupan tradisional tanpa listrik, penuh nilai adat dan kesederhanaan.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('10.','3','1');">
+															<input id="pilihan_10_3_1" name="pilihan_10_3" class="pilihan__3" onchange="pilihan3('10','3','316','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_10_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('10.','3','2');">
+															<input id="pilihan_10_3_2" name="pilihan_10_3" class="pilihan__3" onchange="pilihan3('10','3','316','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_10_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div>			</div>
+		  </div>
+		  
+		  <div class="row pl-3 pr-3 pb-1 mb-0"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  
+		  <div class="row pb-0 pt-2 mt-2 btn-bawah"> 
+			<div class="col text-center" style="">
+				<button class="btn btn-danger btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="prevSoal()"><i class="fa fa-chevron-circle-left"></i> <span class="d-none d-sm-inline-block">Soal sebelumnya</span></button>
+			</div>
+			<div class="col text-center" style="">
+				<button class="btn btn-warning btn-round btn-md btn-navigasi" style="border-radius:30px;color:#fff;"><input type="checkbox" onclick="raguRagu()" id="c_ragu_ragu" value=""> <span class="d-none d-sm-inline-block">Ragu-ragu
+			</span></button></div>
+			<div class="col text-center" style="">
+				<button class="btn btn-primary btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="nextSoal()" id="nextSoal"> <span class="d-none d-sm-inline-block">Soal berikutnya</span> <i class="fa fa-chevron-circle-right"></i></button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	 
+  </div> 
+</div>
+
+<div class="modal fadeIn" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Daftar Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+		<form id="formJawaban">
+         				<span class="d-none" id="tmp_answer_1"></span>
+				<span class="d-none" id="ragu_answer_1"></span>
+				<input type="hidden" name="jawaban_no[1]" id="input_jawaban_no_1" value="1">
+								<div id="jawaban-no-1" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal btn-primary" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('1')">1					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer1" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_2"></span>
+				<span class="d-none" id="ragu_answer_2"></span>
+				<input type="hidden" name="jawaban_no[2]" id="input_jawaban_no_2" value="2">
+								<div id="jawaban-no-2" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('2')">2					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer2" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_3"></span>
+				<span class="d-none" id="ragu_answer_3"></span>
+				<input type="hidden" name="jawaban_no[3]" id="input_jawaban_no_3" value="3">
+								<div id="jawaban-no-3" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('3')">3					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer3" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_4"></span>
+				<span class="d-none" id="ragu_answer_4"></span>
+				<input type="hidden" name="jawaban_no[4]" id="input_jawaban_no_4" value="4">
+								<div id="jawaban-no-4" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('4')">4					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer4" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_5"></span>
+				<span class="d-none" id="ragu_answer_5"></span>
+				<input type="hidden" name="jawaban_no[5]" id="input_jawaban_no_5" value="5">
+								<div id="jawaban-no-5" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('5')">5					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer5" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_6"></span>
+				<span class="d-none" id="ragu_answer_6"></span>
+				<input type="hidden" name="jawaban_no[6]" id="input_jawaban_no_6" value="6">
+								<div id="jawaban-no-6" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('6')">6					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer6" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_7"></span>
+				<span class="d-none" id="ragu_answer_7"></span>
+				<input type="hidden" name="jawaban_no[7]" id="input_jawaban_no_7" value="7">
+								<div id="jawaban-no-7" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('7')">7					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer7" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_8"></span>
+				<span class="d-none" id="ragu_answer_8"></span>
+				<input type="hidden" name="jawaban_no[8]" id="input_jawaban_no_8" value="8">
+								<div id="jawaban-no-8" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('8')">8					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer8" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_9"></span>
+				<span class="d-none" id="ragu_answer_9"></span>
+				<input type="hidden" name="jawaban_no[9]" id="input_jawaban_no_9" value="9">
+								<div id="jawaban-no-9" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('9')">9					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer9" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_10"></span>
+				<span class="d-none" id="ragu_answer_10"></span>
+				<input type="hidden" name="jawaban_no[10]" id="input_jawaban_no_10" value="10">
+								<div id="jawaban-no-10" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('10')">10					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer10" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>		 </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="infoSoal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Informasi Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fadeIn" id="timeoutDialog" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-2 pt-5">
+		<h5 class="modal-title" style="text-align:center">PERHATIAN !!</h5>
+		<p>Waktu tes sudah habis !</p>
+      </div>
+	  <div class="modal-footer text-center">
+		<button class="btn btn-danger" onclick="selesaikanTes()">Ok, Lanjutkan !</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="c-svg" id="c-svg-1" style="display: none;"></div><div class="c-svg" id="c-svg-2" style="display: none;"></div><div class="c-svg" id="c-svg-3" style="display: none;"></div><div class="c-svg" id="c-svg-4" style="display: none;"></div><div class="c-svg" id="c-svg-5" style="display: none;"></div><div class="c-svg" id="c-svg-6" style="display: none;"></div><div class="c-svg" id="c-svg-7" style="display: none;"></div><div class="c-svg" id="c-svg-8" style="display: none;"></div><div class="c-svg" id="c-svg-9" style="display: none;"></div><div class="c-svg" id="c-svg-10" style="display: none;"></div>
+<div style="position: fixed; inset: 0px; background: rgb(255, 255, 255); opacity: 0.5; z-index: 99999; display: none;" id="loader">
+<img class="loader" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/images/loader2.gif">
+</div>
+
+
+<style>
+	
+	@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
+	@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+	@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+	@media (max-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.mataujian{text-align:left} 
+		#formContent{padding-left:10px;padding-right:10px}
+		.row-atas {text-align:center;}
+		#isisoal img {width:100%;}
+	}
+	@media (min-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.container-fluid{ padding-left:50px;padding-right:50px} 
+		.mataujian{text-align:right} 
+		#formContent{padding-left:50px;padding-right:50px} 
+		.btn-navigasi {width:180px;}
+		.cont-btn-informasi{text-align:right}
+		
+	}
+	@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+	@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+			
+	/* STRUCTURE */
+	.loader {
+	  margin: 0;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -ms-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+	
+	.wrapper {
+	  display: flex;
+	  align-items: center;
+	  flex-direction: column; 
+	  justify-content: center;
+	  width: 100%;
+	  min-height: 100%;
+	  padding: 20px;
+	  margin-top:-80px;
+	}
+
+	#formContent {
+	  -webkit-border-radius: 10px 10px 10px 10px;
+	  border-radius: 10px 10px 10px 10px;
+	  background: #fff;
+	  position: relative;
+	  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  text-align: center;
+	}
+
+	
+
+
+	/* TABS */
+
+	h2.inactive {
+	  color: #cccccc;
+	}
+
+	h2.active {
+	  color: #0d0d0d;
+	  border-bottom: 2px solid #5fbae9;
+	}
+	
+	input[type=text] {
+	  border: none;
+	  color: #0d0d0d;
+	  text-decoration: none;
+	  border-radius:0px;
+	  border-bottom:1px solid #eee;
+	  background:transparent;
+	}
+	
+
+	/* ANIMATIONS */
+
+	/* Simple CSS3 Fade-in-down Animation */
+	.fadeInDown {
+	  -webkit-animation-name: fadeInDown;
+	  animation-name: fadeInDown;
+	  -webkit-animation-duration: 1s;
+	  animation-duration: 1s;
+	  -webkit-animation-fill-mode: both;
+	  animation-fill-mode: both;
+	}
+
+	@-webkit-keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	@keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+	.fadeIn {
+	  opacity:0;
+	  -webkit-animation:fadeIn ease-in 1;
+	  -moz-animation:fadeIn ease-in 1;
+	  animation:fadeIn ease-in 1;
+
+	  -webkit-animation-fill-mode:forwards;
+	  -moz-animation-fill-mode:forwards;
+	  animation-fill-mode:forwards;
+
+	  -webkit-animation-duration:1s;
+	  -moz-animation-duration:1s;
+	  animation-duration:1s;
+	}
+
+	.fadeIn.first {
+	  -webkit-animation-delay: 0.4s;
+	  -moz-animation-delay: 0.4s;
+	  animation-delay: 0.4s;
+	}
+
+	.fadeIn.second {
+	  -webkit-animation-delay: 0.6s;
+	  -moz-animation-delay: 0.6s;
+	  animation-delay: 0.6s;
+	}
+
+	.fadeIn.third {
+	  -webkit-animation-delay: 0.8s;
+	  -moz-animation-delay: 0.8s;
+	  animation-delay: 0.8s;
+	}
+
+	.fadeIn.fourth {
+	  -webkit-animation-delay: 1s;
+	  -moz-animation-delay: 1s;
+	  animation-delay: 1s;
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	.underlineHover:after {
+	  display: block;
+	  left: 0;
+	  bottom: -10px;
+	  width: 0;
+	  height: 2px;
+	  background-color: #56baed;
+	  content: "";
+	  transition: width 0.2s;
+	}
+
+	.underlineHover:hover {
+	  color: #0d0d0d;
+	}
+
+	.underlineHover:hover:after{
+	  width: 100%;
+	}
+	
+	.cfont {
+		cursor:pointer;
+	}
+	
+	
+	///
+	
+</style>
+  
+<script type="text/javascript" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery/jquery.2.1.1.min.js"></script>
+<script src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery.timer.js"></script>
+  
+<script>
+	
+	$(document).ready(function() {
+		$('#loader').fadeOut();
+		var  w = $(window).width();
+				if (w > 800)  {
+			var ii = $('#isisoal').height();
+			var  h = $(window).height();
+			var  h = h-$('.cont-soal').position().top-380;
+			$('.cont-soal').css({
+				'height':h,
+				'overflow': 'auto'
+			});
+
+			$('.isi-soal').css({
+				'height':h,
+			 	'overflow': 'auto'
+			 });
+
+			// if (ii > h) {
+			// 	$('.cont-soal').css({
+			// 	'height':ii,
+			// 	'overflow': 'auto'
+			// 	});
+			// }
+		}
+		
+		window.setTimeout( lihatSoal(1), 5000 ); // 5 seconds
+	});
+	var selected = 1;
+	var jumlah_soal = 10;
+	function lihatSoal(nomor) {
+		$('.soal-soal').css('display','none');
+		if (nomor=='') {
+			nomor = selected;
+		} 
+		$('#soal-no-'+nomor).css('display','');
+		selected = nomor;
+		$('#noSoal').html(nomor);
+		
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+		}
+		
+		for (i=1;i<=jumlah_soal;i++){
+			var cccc= $('#tmp_answer_'+i).html();
+			if (cccc != '') $('#jawaban-no-'+i).addClass('btn-dark');
+			var cccc= $('#ragu_answer_'+i).html();
+			if (cccc != '') {
+				$('#jawaban-no-'+i).addClass('btn-warning');
+				$('#jawaban-no-'+i).removeClass('btn-dark');
+			}
+		}
+		//$('.btn-lihat-soal').removeClass('btn-dark');
+		$('#jawaban-no-'+nomor).removeClass('btn-warning');
+		$('#jawaban-no-'+nomor).removeClass('btn-dark');
+		$('.btn-lihat-soal').removeClass('btn-primary');
+		
+		$('#jawaban-no-'+nomor).addClass('btn-primary');
+		
+		window.scrollTo(0, 0);
+		$('.c-svg').fadeOut();
+		redrawline(selected);
+	}
+	
+	function nextSoal() {
+		if (selected < jumlah_soal) {
+			selected++;		
+			lihatSoal(selected);
+		} else {
+			
+			selesaikanTes();
+		}
+	}
+	
+	function prevSoal() {
+		if (selected > 1) {
+			selected--;
+			lihatSoal(selected);
+		}
+	}
+	
+	function raguRagu() {
+		if ($('#c_ragu_ragu').is(':checked')) {
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			$('#jawaban-no-'+selected).addClass('btn-warning');
+			$('#ragu_answer_'+selected).html('1');
+			save_ragu(selected,'1');
+		} else {
+			$('#ragu_answer_'+selected).html('');
+			$('#jawaban-no-'+selected).removeClass('btn-warning');
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			
+			if ($('#answer'+selected).html() == '')
+			{
+				$('#jawaban-no-'+selected).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+selected).addClass('btn-dark');
+			}
+			
+			save_ragu(selected,'');
+			
+		}
+	}
+	
+	function trigger_ragu(nomor)
+	{
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			$('#jawaban-no-'+nomor).addClass('btn-warning');
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+			$('#jawaban-no-'+nomor).removeClass('btn-warning');
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			
+			if ($('#answer'+nomor).html() == '')
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-dark');
+			}
+		}
+		
+	}
+	
+	lihatSoal(2);
+	
+	function selesaikanTes() {
+		$.ajax({ 
+		   type: "POST",
+		   dataType: "html",
+		   data : $('#formJawaban').serialize(),
+		   url: "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/finishtes?ses_id=fff3464aac70b3d04c380c383d000cdd73826da1",
+		   cache: false, 
+		   beforeSend: function(){
+			   $('#nextSoal').prop('disabled',true);
+			   $('#nextSoal').html('Silahkan tunggu ... !');
+			   $('#loader').fadeIn();
+			},
+			complete: function(){
+			},
+			success: function(result){
+				//alert(result);
+				if (result=='error') {
+					alert('Oops ada kesalahan! \rSilahkan ulangi !');
+					$('#nextSoal').prop('disabled',false);
+					$('#nextSoal').prop('enabled',true);
+					$('#nextSoal').html('Soal berikutnya');
+					$('#loader').fadeOut();
+				}
+				else
+					window.location = result;
+		   }
+		});
+	}
+
+	function changeFont(s,d)
+	{
+		$('#isisoal').css("font-size", s + "px");
+		$('.cfont').css("font-weight", "normal");
+		$('#'+d).css("font-weight", "bold");
+	}
+			
+	var RemainTime = new (function() {
+		var $countdown;
+		var $form;
+		var incrementTime = 60;
+		var globalTime = 4500 * 1000; // 50 seconds (in milliseconds)
+		var currentTime = globalTime;
+		var DurationTime = 4500 * 60000; // 5 minutes (in milliseconds)
+
+
+		$(function() {
+
+			// Setup the timer
+			$countdown = $('#countdown');
+			RemainTime.Timer = $.timer(updateTimer, incrementTime, true);
+
+		});
+
+		function updateTimer() {
+
+			// Output timer position
+			var timeString = formatTime(currentTime);
+			$countdown.html(timeString);
+			// If timer is complete, trigger alert
+			if (currentTime == 0) {
+				jQuery.noConflict();
+				$('#timeoutDialog').modal();
+				//$('#timeoutDialog').modal('show');
+				RemainTime.Timer.stop();
+				//disable_all();
+				//bootbox_timeout();
+				
+				return;
+			}
+			// Increment timer position
+			currentTime -= incrementTime;
+			if (currentTime < 0) currentTime = 0;
+
+		}
+	});
+
+	// Common functions
+	function pad(number, length) {
+		var str = '' + number;
+		while (str.length < length) {str = '0' + str;}
+		return str;
+	}
+	function formatTime(time) {
+		time = time / 10;
+		var hour= parseInt(time / 360000),
+			min = parseInt(time / 6000) - (hour * 60),
+			sec = parseInt(time / 100) - (min * 60) - (hour * 3600),
+			hundredths = pad(time - (sec * 100) - (min * 6000) - (hour * 360000), 2);
+		return (hour > 0 ? pad(hour, 2) : "00") + ":" + (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + "";
+	}
+	
+	function KlikJawaban(no,i)
+	{
+		$('#pilihan_'+no+'_'+i).trigger('click');
+	}
+	
+	
+	function KlikJawaban2(no,i)
+	{
+		$('#pilihan_'+'_'+no+'_'+i).trigger('click');
+	}
+	
+	function KlikJawaban3(no,i,j)
+	{
+		$('#pilihan_'+'_'+no+'_'+i+'_'+j).trigger('click');
+	}
+	
+	
+	function pilihan(n,v,i) {
+		if (v.toUpperCase() == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(v.toUpperCase());
+		//$("#answer"+n).css('color','#000');
+		//pushPromise(i,v);
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+		$("#jawaban-no-"+n).addClass('btn-dark');
+		//$("#jawaban-no-"+n).addClass('text-white');
+		// $("#cont-answer"+n).css('color','#fff');
+
+		save_answer(n,v.toUpperCase());
+		trigger_ragu(selected);
+
+	}
+	
+	
+	function pilihan2(n,v,i) {
+		
+		var jawaban = $('.pilihan'+n+':checked')
+		   .map(function() { return $(this).val() })
+		   .get()
+		   .join(";");
+		
+		if (jawaban == '') {
+			$("#answer"+n).html('');
+			$("#jawaban-no-"+n).removeClass('btn-dark');
+			$("#jawaban-no-"+n).addClass('btn-outline-dark');
+		}
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+			$("#jawaban-no-"+n).addClass('btn-dark');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		
+		// pushPromise(i,jawaban);
+		
+		
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+
+	}
+	
+	function pilihan3(n,total,s, arr) {
+		var jawaban = '';
+		for (i=1;i<=total;i++)  {
+			var v = $('input[name="pilihan_'+n+'_'+i+'"]:checked').val();
+			if (v != undefined && v != null) jawaban += arr[(i-1)]+'|'+v + ';';
+		}
+		jawaban = jawaban.substring(0, jawaban.length-1);
+		
+		if (jawaban == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		// pushPromise(s,jawaban);
+		
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+	    $("#jawaban-no-"+n).addClass('btn-dark');
+			
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+	}
+	
+		
+	function pilih1(no, id, warna, order) {
+			
+			// if (window['right_'+no] == '') {
+				// $('.m-left-'+no).prop('checked', false);
+				// $('.tr-left-'+no).css('background','');
+			// }
+			//if (window['dipilih1_'+no].indexOf(id) >=0) window['free1_'+no]=false;
+			if (window['free1_'+no]) {
+				window['free1_'+no] = false;
+				$('#r_left_'+no+'_'+id).prop('checked', true);
+				$('#row1-'+no+'-'+id).css('background',warna);
+				window['pos1_'+no] = $('#r_left_'+no+'_'+id).offset();
+				window['pos11_'+no] = $('#r_left_'+no+'_'+id).position();
+				window['warna1_'+no] = warna;
+				window['id1_'+no] = id;
+				window['order1_'+no] = order;
+				window['dipilih1_'+no].push(id);
+				window['jawab_'+no] = id;
+			}
+			
+	}
+	
+	function removeA(arr) {
+		var what, a = arguments, L = a.length, ax;
+		while (L > 1 && arr.length) {
+			what = a[--L];
+			while ((ax= arr.indexOf(what)) !== -1) {
+				arr.splice(ax, 1);
+			}
+		}
+		return arr;
+	}
+	
+	function rgb2hex(rgb) {
+		rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+		function hex(x) {
+			return ("0" + parseInt(x).toString(16)).slice(-2);
+		}
+		return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+	}
+	
+	
+	
+	function pilih2(no, id,tipe,order,s, ps) {
+		var _c_pilih = $('#r_right_'+no+'_'+id).prop('checked');
+		if (_c_pilih==true) {
+			//alert('1');
+			
+			var id1 =  window['pasangan_'+no+'_'+id];
+			window['free1_'+no] = false;
+			//$('#r_left_'+no+'_'+id).prop('checked', true);
+			var warna11 = rgb2hex($('#row2-'+no+'-'+id).css('background-color'));
+			window['warna1_'+no] = warna11;
+			window['pos1_'+no] = $('#r_left_'+no+'_'+id1).offset();
+			window['pos11_'+no] = $('#r_left_'+no+'_'+id1).position();
+			var cc = id1+";"+id+'|';
+			var ddd = window['jawaban_'+no];
+			dd = ddd.replace(cc,"");
+			window['jawaban_'+no] = dd;
+			
+			window['id1_'+no] = id1;
+			window['free1_'+no] = false;
+			window['right_'+no] = '';
+			window['free_'+no] = true;
+			//delete window['dipilih2_'+no][id];
+			//window['dipilih2_'+no].remove(id);
+			removeA(window['dipilih2_'+no], id);
+			//$('#r_right_'+no+'_'+id).prop('checked', false);
+			//$('.line-'+no).css('display','none');
+			var xx = '#line_'+no+'_'+window['id1_'+no];
+			//alert(xx);
+			$(xx).css('display','none');
+			$('#r_right_'+no+'_'+id).prop('checked', false);
+			$('#row2-'+no+'-'+id).css('background','#ffffff');
+		}
+		else 
+		{
+			//alert('2');
+			window['free_'+no] = true;
+			if (window['dipilih2_'+no].indexOf(id) >=0) window['free_'+no]=false;
+			//alert(2);
+			
+			if ((window['id1_'+no] != '') && window['free_'+no] && (window['right_'+no] == '')) {
+				//alert(3);
+				window['free1_'+no] = true;
+				window['right_'+no] = '';
+				eval('var pasangan_'+no+'_'+id + '= "";');
+				window['pasangan_'+no+'_'+id] = window['id1_'+no];
+				window['jawaban_'+no] = window['jawaban_'+no]+ window['id1_'+no] +';'+ id +'|';
+				window['dipilih2_'+no].push(id);
+				$('#r_right_'+no+'_'+id).prop('checked', true);
+				$('#row2-'+no+'-'+id).css('background',window['warna1_'+no]);
+				$('#r_right_'+no+'_'+id).val(window['id1_'+no]+';'+id);
+				
+				pos2 = $('#r_right_'+no+'_'+id).offset();
+				pos22 = $('#r_right_'+no+'_'+id).position();
+				$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left);
+				$('#line_'+no+'_'+window['id1_'+no]).fadeIn();
+				if (window['pos1_'+no].top > pos2.top) {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',window['pos1_'+no].top-pos2.top)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',0)
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',pos2.top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				} else {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',0)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',Math.abs(window['pos1_'+no].top-pos2.top))
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',window['pos1_'+no].top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				}
+				
+				
+				window['id1_'+no] = '';
+				jawaban = window['jawaban_'+no];
+				n = no;
+				
+				if (jawaban == '')
+					$("#answer"+n).html('');
+				else {
+					$("#answer"+n).html('<i class="fa fa-check"></i>');
+					$("#answer"+n).removeClass('d-none');
+				}
+				
+				//$("#answer"+n).css('color','#000');
+				
+				
+					$("#tmp_answer_"+n).html(jawaban);
+					if (ps == '2')	   {
+						save_answer(n,jawaban);
+						//pushPromise(s,jawaban);
+					}
+				
+				// $("#cont-answer"+n).css('background','#000');
+				// $("#cont-answer"+n).css('color','#fff');
+				
+				trigger_ragu(selected);
+
+			} else {
+				if (tipe==2)
+				$('#r_right_'+no+'_'+id).prop('checked', false);
+			}
+		
+		}
+		
+	}
+	
+			eval('var tipesoal_pencocokan_1 = "3"');
+			eval('var tipesoal_pencocokan_2 = "1"');
+			eval('var tipesoal_pencocokan_3 = "3"');
+			eval('var tipesoal_pencocokan_4 = "1"');
+			eval('var tipesoal_pencocokan_5 = "1"');
+			eval('var tipesoal_pencocokan_6 = "1"');
+			eval('var tipesoal_pencocokan_7 = "2"');
+			eval('var tipesoal_pencocokan_8 = "3"');
+			eval('var tipesoal_pencocokan_9 = "2"');
+			eval('var tipesoal_pencocokan_10 = "3"');
+		
+	function redrawline(no) {
+		var tmp_tipesoal = window['tipesoal_pencocokan_'+no];
+		if (tmp_tipesoal == 5) {
+			resetKunci(no,'');
+			var tmp = $('#tmp_answer_'+no).html();//window['jawaban_pencocokan_'+no];
+			var tmp_warna = window['warna_pencocokan_'+no];
+			var tmp_soal = window['soal_pencocokan_'+no];
+			var arr_tmp = tmp.split('|');
+			for (i=0;i<arr_tmp.length;i++) {
+				if (arr_tmp[i].trim() != '') {
+					var arr_tmp2 = arr_tmp[i].split(';');
+					pilih1(no,arr_tmp2[0], tmp_warna[i], i);
+					pilih2(no,arr_tmp2[1], '2', arr_tmp2[1],tmp_soal,'1');
+				}
+			}
+			
+			$('#c-svg-'+no).fadeIn();
+		}
+	}
+	
+	
+	function resetKunci(no, tipe) {
+		left = '';
+		window['right_'+no] = '';
+		window['warna1_'+no] = '';
+		window['id1_'+no] = '';
+		window['pos1_'+no] = '';
+		window['pos11_'+no] = '';
+		window['free1_'+no] = true;
+		window['free_'+no] = true;
+		window['dipilih1_'+no] = [];
+		window['dipilih2_'+no] = [];
+		$('.tr-left-'+no).css('background','');
+		$('.tr-right-'+no).css('background','');
+		$('.line-'+no).css('display','none');
+		window['jawab_'+no] = '';
+		window['jawaban_'+no] = '';
+		window['order1_'+no] = '';
+		$('.m-left-'+no).prop('checked', false);
+		$('.m-right-'+no).prop('checked', false);
+		if (tipe == '1') $("#tmp_answer_"+no).html('');
+		$("#answer"+no).html('');
+		$("#jawaban-no-"+no).removeClass('btn-dark');
+		$("#jawaban-no-"+no).addClass('btn-outline-dark');
+		
+	};
+	
+	
+	$('.jawaban_essai').focusout(function() {
+		var no = this.title;
+		var jawaban = $('#jawaban_essai_'+no).val();					
+		var s = $('#jawaban_essai_'+no).attr('pre');					
+		
+		
+		if (jawaban == '')
+			$("#answer"+no).html('');
+		else {
+			$("#answer"+no).html('<i class="fa fa-check"></i>');
+			$("#answer"+no).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+no).html(jawaban);
+		
+		save_answer(no,jawaban);
+			   
+		// $("#answer"+no).css('color','#000');
+		
+			// $.post( "https://pusmendik.kemendikdasmen.go.id/tka/cbt/peserta/sv_ans",
+			// {
+				// id_soal: s,
+				// jawaban:jawaban,
+				// id_ujian: ,
+				// id_projek_ujian: 
+			// }, function(data) {
+		// });
+		// $("#cont-answer"+no).css('background','#000');
+		// $("#cont-answer"+no).css('color','#fff');
+		trigger_ragu(selected);
+			
+	}).blur(function() {});
+	
+	
+	function methodThatReturnsAPromise(i,jawaban) {
+		return new Promise((resolve, reject) => {
+			$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_jawaban", {nomor: i,jawaban:jawaban, }, function(data) {resolve();});
+		});
+	}
+	
+	var promises = [Promise.resolve()];
+	
+	function pushPromise(i,jawaban)
+	{
+	  promises.push(promises.pop().then(function(){
+		return methodThatReturnsAPromise(i,jawaban)}));
+	}
+	
+	function save_ragu(nomor,jawaban) {
+		$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_ragu", {nomor: nomor,jawaban:jawaban, }, function(data) {});
+	}
+	
+	function save_answer(nomor,jawaban) {
+		pushPromise(nomor,jawaban);
+	}
+</script>
+
+
+
+</body></html>

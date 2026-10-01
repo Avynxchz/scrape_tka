@@ -1,0 +1,526 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Inggris (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Teks untuk soal nomor 1 s.d. 5!
+
+King Hung Vuong VI had a beautiful daughter. He did not want her to marry just any prince. So, he made an announcement that he was looking for the right husband for her. Many princes came from faraway lands, but none of them was a good match for the princess.
+
+Son Tinh was the Spirit of the Mountain, and Thuy Tinh was the Spirit of the Waters. One day, they both appeared as young noblemen and asked to marry the princess. They were equally talented, powerful, and respected. The King found it hard to choose, so he decided to give them a test. He said that the one who brought the proper wedding gifts first the next morning would marry his daughter.
+
+The next day, Son Tinh arrived early with his gifts. The King kept his promise and gave the princess to him. Thuy Tinh was angry about losing. He challenged Son Tinh to fight for the princess. But Son Tinh refused, believing he had already won fairly. Furious, Thuy Tinh used his power to call the rivers and streams to rise. Soon, the land was covered with floods that destroyed crops and homes.
+
+Son Tinh stayed calm in his mountain palace. Whenever the water rose, he made his mountains higher. After many days of fighting, Thuy Tinh grew tired and ordered the waters to retreat. Still, he never accepted his defeat. Every year, he tried again to attack, and this is how monsoons came to Vietnam.
+
+PERTANYAAN:
+Which of the following outlines shows the correct main points of the story?
+OPSI / PERNYATAAN:
+  - A. A. King Hung Vuong VI wanted the best husband for his daughter. Many princes came but none was suitable. Son Tinh and Thuy Tinh both wanted to marry her. The King gave them a test. Thuy Tinh arrived first with the wedding gifts. The princess was given to Thuy Tinh.
+  - B. B. King Hung Vuong VI had a beautiful daughter. He announced he was looking for the right husband. Son Tinh and Thuy Tinh appeared and asked to marry her. The King gave them a test with wedding gifts. Son Tinh arrived first and married the princess. Thuy Tinh attacked with floods but was defeated.
+  - C. C. King Hung Vuong VI asked his daughter to choose her husband. The princess liked both Son Tinh and Thuy Tinh. The King delayed his decision for many days. Finally, he asked them to fight each other. Thuy Tinh lost the battle and left the land. The country never suffered from floods again.
+  - D. D. King Hung Vuong VI searched for a husband for his daughter. Son Tinh and Thuy Tinh wanted to marry her. The King gave them a challenge. Thuy Tinh lost the test and became angry. He called the waters to rise and destroy the land. Son Tinh drowned in the floods.
+  - E. E. The King wanted a nobleman for his daughter. He invited many princes to the palace. Son Tinh and Thuy Tinh competed for the princess. Son Tinh refused the challenge of gifts. The King chose Thuy Tinh as the winner. Thuy Tinh ruled peacefully without floods.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Teks untuk soal nomor 1 s.d. 5!
+
+King Hung Vuong VI had a beautiful daughter. He did not want her to marry just any prince. So, he made an announcement that he was looking for the right husband for her. Many princes came from faraway lands, but none of them was a good match for the princess.
+
+Son Tinh was the Spirit of the Mountain, and Thuy Tinh was the Spirit of the Waters. One day, they both appeared as young noblemen and asked to marry the princess. They were equally talented, powerful, and respected. The King found it hard to choose, so he decided to give them a test. He said that the one who brought the proper wedding gifts first the next morning would marry his daughter.
+
+The next day, Son Tinh arrived early with his gifts. The King kept his promise and gave the princess to him. Thuy Tinh was angry about losing. He challenged Son Tinh to fight for the princess. But Son Tinh refused, believing he had already won fairly. Furious, Thuy Tinh used his power to call the rivers and streams to rise. Soon, the land was covered with floods that destroyed crops and homes.
+
+Son Tinh stayed calm in his mountain palace. Whenever the water rose, he made his mountains higher. After many days of fighting, Thuy Tinh grew tired and ordered the waters to retreat. Still, he never accepted his defeat. Every year, he tried again to attack, and this is how monsoons came to Vietnam.
+
+PERTANYAAN:
+Why did Thuy Tinh attack Son Tinh after the wedding?
+OPSI / PERNYATAAN:
+  - A. A. He was jealous of Son Tinh’s victory
+  - B. B. He believed the King had lied to him.
+  - C. C. He thought the princess loved him more.
+  - D. D. He wanted to show off his power to the king.
+  - E. E. He had promised to fight until death.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: ['A:Similarity', 'B:Similarity', 'C:Difference']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Teks untuk soal nomor 1 s.d. 5!
+
+King Hung Vuong VI had a beautiful daughter. He did not want her to marry just any prince. So, he made an announcement that he was looking for the right husband for her. Many princes came from faraway lands, but none of them was a good match for the princess.
+
+Son Tinh was the Spirit of the Mountain, and Thuy Tinh was the Spirit of the Waters. One day, they both appeared as young noblemen and asked to marry the princess. They were equally talented, powerful, and respected. The King found it hard to choose, so he decided to give them a test. He said that the one who brought the proper wedding gifts first the next morning would marry his daughter.
+
+The next day, Son Tinh arrived early with his gifts. The King kept his promise and gave the princess to him. Thuy Tinh was angry about losing. He challenged Son Tinh to fight for the princess. But Son Tinh refused, believing he had already won fairly. Furious, Thuy Tinh used his power to call the rivers and streams to rise. Soon, the land was covered with floods that destroyed crops and homes.
+
+Son Tinh stayed calm in his mountain palace. Whenever the water rose, he made his mountains higher. After many days of fighting, Thuy Tinh grew tired and ordered the waters to retreat. Still, he never accepted his defeat. Every year, he tried again to attack, and this is how monsoons came to Vietnam.
+
+PERTANYAAN:
+After reading the text, we can see that Son tinh and Thuy tinh are different, but they also have some similarities. Decide if each trait shows a similarity or a difference.
+OPSI / PERNYATAAN:
+  - A. Both are not humans.
+  - B. They can control the elements.
+  - C. They love the king's daughter.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Teks untuk soal nomor 1 s.d. 5!
+
+King Hung Vuong VI had a beautiful daughter. He did not want her to marry just any prince. So, he made an announcement that he was looking for the right husband for her. Many princes came from faraway lands, but none of them was a good match for the princess.
+
+Son Tinh was the Spirit of the Mountain, and Thuy Tinh was the Spirit of the Waters. One day, they both appeared as young noblemen and asked to marry the princess. They were equally talented, powerful, and respected. The King found it hard to choose, so he decided to give them a test. He said that the one who brought the proper wedding gifts first the next morning would marry his daughter.
+
+The next day, Son Tinh arrived early with his gifts. The King kept his promise and gave the princess to him. Thuy Tinh was angry about losing. He challenged Son Tinh to fight for the princess. But Son Tinh refused, believing he had already won fairly. Furious, Thuy Tinh used his power to call the rivers and streams to rise. Soon, the land was covered with floods that destroyed crops and homes.
+
+Son Tinh stayed calm in his mountain palace. Whenever the water rose, he made his mountains higher. After many days of fighting, Thuy Tinh grew tired and ordered the waters to retreat. Still, he never accepted his defeat. Every year, he tried again to attack, and this is how monsoons came to Vietnam.
+
+PERTANYAAN:
+What does the phrase “kept his promise” in the text mean?
+OPSI / PERNYATAAN:
+  - A. A. Forgot about his decision.
+  - B. B. Changed his mind about the wedding.
+  - C. C. Did what he had promised to do.
+  - D. D. Delayed the marriage for many days.
+  - E. E. The King asked the princes to bring more gifts.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: ['A', 'B']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 1 s.d. 5!
+
+King Hung Vuong VI had a beautiful daughter. He did not want her to marry just any prince. So, he made an announcement that he was looking for the right husband for her. Many princes came from faraway lands, but none of them was a good match for the princess.
+
+Son Tinh was the Spirit of the Mountain, and Thuy Tinh was the Spirit of the Waters. One day, they both appeared as young noblemen and asked to marry the princess. They were equally talented, powerful, and respected. The King found it hard to choose, so he decided to give them a test. He said that the one who brought the proper wedding gifts first the next morning would marry his daughter.
+
+The next day, Son Tinh arrived early with his gifts. The King kept his promise and gave the princess to him. Thuy Tinh was angry about losing. He challenged Son Tinh to fight for the princess. But Son Tinh refused, believing he had already won fairly. Furious, Thuy Tinh used his power to call the rivers and streams to rise. Soon, the land was covered with floods that destroyed crops and homes.
+
+Son Tinh stayed calm in his mountain palace. Whenever the water rose, he made his mountains higher. After many days of fighting, Thuy Tinh grew tired and ordered the waters to retreat. Still, he never accepted his defeat. Every year, he tried again to attack, and this is how monsoons came to Vietnam.
+
+PERTANYAAN:
+What is the main lesson of the story?
+
+There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Accept defeat gracefully to prevent harm to others.
+  - B. B. Be fair and follow the agreed rules in competitions.
+  - C. C. Choose peaceful solutions rather than angry reactions.
+  - D. D. Prepare honestly and present your gifts properly.
+  - E. E. Respect leaders’ decisions and community agreements.
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A:Breaks', 'B:Preparation', 'C:Breaks']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Teks untuk soal nomor 6 s.d. 10!
+[Konteks Visual Gambar 04907_553dcd423e6da03fc4942ea98fcb90d4.png]:
+Infografik berjudul 'HOW TO STUDY IN THE LIBRARY' dengan subjudul: 'Studying in the library is a good way to focus and learn. Follow these steps to use your time well:' memuat 6 langkah studi: 1. 'PREPARE YOUR MATERIALS': 'Bring your books, notes, stationery, and water. Make sure you also have your library card.' (disertai ikon buku, catatan, dan botol air). 2. 'CHOOSE QUIET SPOT': 'Find a table with good light and little noise. Avoid sitting too close to the entrance or the restroom.' (disertai ikon meja belajar dengan lampu). 3. 'SET A STUDY GOAL': 'Decide what you want to finish, such as reading two chapters or writing an essay' (disertai ikon target sasaran / stopwatch). 4. 'FOLLOW LIBRARY RULES': 'Speak softly, keep your phone on silent, and do not eat inside. Respect other students.' (disertai tiga simbol larangan). 5. 'TAKE SHORT BREAKS': 'After one hour, stand up, stretch, or walk for five minutes. This will help you stay fresh' (disertai ikon orang berjalan dan meregangkan tubuh). 6. 'REVIEW BEFORE LEAVING': 'Check your notes, organize your books, and return borrowed materials.' (disertai ikon daftar periksa). Teks penutup di bagian bawah: 'With these steps, your library study time will be effective'.
+PERTANYAAN:
+The following activities are suggested in the infographic. Categorize them as either preparation or breaks during study.
+OPSI / PERNYATAAN:
+  - A. Standing up
+  - B. Bringing a book
+  - C. Doing stretch
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 6 s.d. 10!
+[Konteks Visual Gambar 91591_553dcd423e6da03fc4942ea98fcb90d4.png]:
+Infografik berjudul 'HOW TO STUDY IN THE LIBRARY' dengan subjudul: 'Studying in the library is a good way to focus and learn. Follow these steps to use your time well:' memuat 6 langkah studi: 1. 'PREPARE YOUR MATERIALS': 'Bring your books, notes, stationery, and water. Make sure you also have your library card.' (disertai ikon buku, catatan, dan botol air). 2. 'CHOOSE QUIET SPOT': 'Find a table with good light and little noise. Avoid sitting too close to the entrance or the restroom.' (disertai ikon meja belajar dengan lampu). 3. 'SET A STUDY GOAL': 'Decide what you want to finish, such as reading two chapters or writing an essay' (disertai ikon target sasaran / stopwatch). 4. 'FOLLOW LIBRARY RULES': 'Speak softly, keep your phone on silent, and do not eat inside. Respect other students.' (disertai tiga simbol larangan). 5. 'TAKE SHORT BREAKS': 'After one hour, stand up, stretch, or walk for five minutes. This will help you stay fresh' (disertai ikon orang berjalan dan meregangkan tubuh). 6. 'REVIEW BEFORE LEAVING': 'Check your notes, organize your books, and return borrowed materials.' (disertai ikon daftar periksa). Teks penutup di bagian bawah: 'With these steps, your library study time will be effective'.
+PERTANYAAN:
+How can we decide a certain table is perfect for studying according to the text?
+
+There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. It has good lighting
+  - B. B. It provides white noise
+  - C. C. It is located near the entrance
+  - D. D. It is far from the toilet
+  - E. E. It provides stationery
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Teks untuk soal nomor 6 s.d. 10!
+[Konteks Visual Gambar 92769_553dcd423e6da03fc4942ea98fcb90d4.png]:
+Infografik berjudul 'HOW TO STUDY IN THE LIBRARY' dengan subjudul: 'Studying in the library is a good way to focus and learn. Follow these steps to use your time well:' memuat 6 langkah studi: 1. 'PREPARE YOUR MATERIALS': 'Bring your books, notes, stationery, and water. Make sure you also have your library card.' (disertai ikon buku, catatan, dan botol air). 2. 'CHOOSE QUIET SPOT': 'Find a table with good light and little noise. Avoid sitting too close to the entrance or the restroom.' (disertai ikon meja belajar dengan lampu). 3. 'SET A STUDY GOAL': 'Decide what you want to finish, such as reading two chapters or writing an essay' (disertai ikon target sasaran / stopwatch). 4. 'FOLLOW LIBRARY RULES': 'Speak softly, keep your phone on silent, and do not eat inside. Respect other students.' (disertai tiga simbol larangan). 5. 'TAKE SHORT BREAKS': 'After one hour, stand up, stretch, or walk for five minutes. This will help you stay fresh' (disertai ikon orang berjalan dan meregangkan tubuh). 6. 'REVIEW BEFORE LEAVING': 'Check your notes, organize your books, and return borrowed materials.' (disertai ikon daftar periksa). Teks penutup di bagian bawah: 'With these steps, your library study time will be effective'.
+PERTANYAAN:
+Who needs to read this infographic?
+OPSI / PERNYATAAN:
+  - A. A. The students of that school
+  - B. B. People who happen to visit the school
+  - C. C. The librarian of another school
+  - D. D. The headmaster of that school
+  - E. E. Parents who come to pick up their kids
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 6 s.d. 10!
+[Konteks Visual Gambar 92769_553dcd423e6da03fc4942ea98fcb90d4.png]:
+Infografik berjudul 'HOW TO STUDY IN THE LIBRARY' dengan subjudul: 'Studying in the library is a good way to focus and learn. Follow these steps to use your time well:' memuat 6 langkah studi: 1. 'PREPARE YOUR MATERIALS': 'Bring your books, notes, stationery, and water. Make sure you also have your library card.' (disertai ikon buku, catatan, dan botol air). 2. 'CHOOSE QUIET SPOT': 'Find a table with good light and little noise. Avoid sitting too close to the entrance or the restroom.' (disertai ikon meja belajar dengan lampu). 3. 'SET A STUDY GOAL': 'Decide what you want to finish, such as reading two chapters or writing an essay' (disertai ikon target sasaran / stopwatch). 4. 'FOLLOW LIBRARY RULES': 'Speak softly, keep your phone on silent, and do not eat inside. Respect other students.' (disertai tiga simbol larangan). 5. 'TAKE SHORT BREAKS': 'After one hour, stand up, stretch, or walk for five minutes. This will help you stay fresh' (disertai ikon orang berjalan dan meregangkan tubuh). 6. 'REVIEW BEFORE LEAVING': 'Check your notes, organize your books, and return borrowed materials.' (disertai ikon daftar periksa). Teks penutup di bagian bawah: 'With these steps, your library study time will be effective'.
+PERTANYAAN:
+Which actions show disrespect for other students?
+
+There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Speaking loudly to friends.
+  - B. B. Keeping the phone silent.
+  - C. C. Eating snacks at the desk.
+  - D. D. Playing music in the corner.
+  - E. E. Moving chairs noisily.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Teks untuk soal nomor 6 s.d. 10!
+[Konteks Visual Gambar 92769_553dcd423e6da03fc4942ea98fcb90d4.png]:
+Infografik berjudul 'HOW TO STUDY IN THE LIBRARY' dengan subjudul: 'Studying in the library is a good way to focus and learn. Follow these steps to use your time well:' memuat 6 langkah studi: 1. 'PREPARE YOUR MATERIALS': 'Bring your books, notes, stationery, and water. Make sure you also have your library card.' (disertai ikon buku, catatan, dan botol air). 2. 'CHOOSE QUIET SPOT': 'Find a table with good light and little noise. Avoid sitting too close to the entrance or the restroom.' (disertai ikon meja belajar dengan lampu). 3. 'SET A STUDY GOAL': 'Decide what you want to finish, such as reading two chapters or writing an essay' (disertai ikon target sasaran / stopwatch). 4. 'FOLLOW LIBRARY RULES': 'Speak softly, keep your phone on silent, and do not eat inside. Respect other students.' (disertai tiga simbol larangan). 5. 'TAKE SHORT BREAKS': 'After one hour, stand up, stretch, or walk for five minutes. This will help you stay fresh' (disertai ikon orang berjalan dan meregangkan tubuh). 6. 'REVIEW BEFORE LEAVING': 'Check your notes, organize your books, and return borrowed materials.' (disertai ikon daftar periksa). Teks penutup di bagian bawah: 'With these steps, your library study time will be effective'.
+PERTANYAAN:
+You find this infographic in front of your school library. What will you do before your next visit to the library?
+OPSI / PERNYATAAN:
+  - A. A. Making sure that I bring my water bottle and lunch with me.
+  - B. B. Bringing the books and stationery that I will use.
+  - C. C. Organizing the book that I borrowed from the library.
+  - D. D. Walking for five minutes so I can focus more when studying.
+  - E. E. Making sure you look fresh because you will meet other students.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: ['A:Relaxation', 'B:Conservation', 'C:Relaxation']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Exploring Bali's Natural Wonders
+
+Bali, a beautiful island in Indonesia, is known for its stunning landscapes and rich culture. While many come for the beaches and temples, the island also offers natural attractions that amaze nature lovers from around the world. From national parks and waterfalls to terraced rice fields, Bali is full of natural beauty.
+
+In the west lies West Bali National Park, a peaceful area filled with green forests, calm mangrove swamps, and colorful coral reefs along the sea. The air is fresh, and the scenery feels untouched. One of the park’s most special sights is the Bali Starling—a rare white bird with bright blue around its eyes. Its soft song adds magic to the quiet forest. Visitors can walk along clear paths and enjoy the rich variety of plants and animals in this protected area.
+
+Heading north, travelers find the scenic Munduk Waterfall, surrounded by green hills and forests. Water flows gently over rocky cliffs into a cool clear pool. Mist rises into the air, mixing with the calming sound of falling water. The walk to the waterfall passes through narrow paths lined with coffee and clove trees. Their fresh scent fills the air, offering a pleasant and peaceful experience. Munduk is the perfect place to relax and enjoy Bali’s natural charm.
+
+Near the cultural center Ubud, the famous Tegalalang rice terraces stretch across the hills in green steps. These terraces are shaped by generations of farmers who work the land by hand. In the morning, mist rises above the fields, and sunlight reflects off the water in the paddies. Farmers in wide-brimmed hats plant rice carefully, their feet sinking into the soft earth. Water flows gently through small canals, keeping the fields healthy and green. The quiet surroundings and slow rhythm of farm life create a peaceful and inspiring scene.
+
+These natural wonders highlight Bali's dedication in preserving its environmental and cultural treasures. By exploring these sites, tourists not only experience the island's scenic beauty but also support ongoing conservation efforts, helping to ensure that Bali's wonders last for future generations.
+
+PERTANYAAN:
+What  is  the  main  purpose  of  visiting  these  places:  to  support conservation or to relax?
+
+Click Conservation or Relaxation for each place!
+OPSI / PERNYATAAN:
+  - A. Munduk Waterfall
+  - B. West Bali National Park
+  - C. Tegalalang Rice Terraces
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Exploring Bali's Natural Wonders
+
+Bali, a beautiful island in Indonesia, is known for its stunning landscapes and rich culture. While many come for the beaches and temples, the island also offers natural attractions that amaze nature lovers from around the world. From national parks and waterfalls to terraced rice fields, Bali is full of natural beauty.
+
+In the west lies West Bali National Park, a peaceful area filled with green forests, calm mangrove swamps, and colorful coral reefs along the sea. The air is fresh, and the scenery feels untouched. One of the park’s most special sights is the Bali Starling—a rare white bird with bright blue around its eyes. Its soft song adds magic to the quiet forest. Visitors can walk along clear paths and enjoy the rich variety of plants and animals in this protected area.
+
+Heading north, travelers find the scenic Munduk Waterfall, surrounded by green hills and forests. Water flows gently over rocky cliffs into a cool clear pool. Mist rises into the air, mixing with the calming sound of falling water. The walk to the waterfall passes through narrow paths lined with coffee and clove trees. Their fresh scent fills the air, offering a pleasant and peaceful experience. Munduk is the perfect place to relax and enjoy Bali’s natural charm.
+
+Near the cultural center Ubud, the famous Tegalalang rice terraces stretch across the hills in green steps. These terraces are shaped by generations of farmers who work the land by hand. In the morning, mist rises above the fields, and sunlight reflects off the water in the paddies. Farmers in wide-brimmed hats plant rice carefully, their feet sinking into the soft earth. Water flows gently through small canals, keeping the fields healthy and green. The quiet surroundings and slow rhythm of farm life create a peaceful and inspiring scene.
+
+These natural wonders highlight Bali's dedication in preserving its environmental and cultural treasures. By exploring these sites, tourists not only experience the island's scenic beauty but also support ongoing conservation efforts, helping to ensure that Bali's wonders last for future generations.
+
+PERTANYAAN:
+The text mainly talks about Bali’s …
+OPSI / PERNYATAAN:
+  - A. A. wildlife species and nature lovers
+  - B. B. unique cultural treasures and sites.
+  - C. C. stunning nature and remarkable sites.
+  - D. D. generations and cultural conservation.
+  - E. E. scenic beauty and local farming practices.
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Exploring Bali's Natural Wonders
+
+Bali, a beautiful island in Indonesia, is known for its stunning landscapes and rich culture. While many come for the beaches and temples, the island also offers natural attractions that amaze nature lovers from around the world. From national parks and waterfalls to terraced rice fields, Bali is full of natural beauty.
+
+In the west lies West Bali National Park, a peaceful area filled with green forests, calm mangrove swamps, and colorful coral reefs along the sea. The air is fresh, and the scenery feels untouched. One of the park’s most special sights is the Bali Starling—a rare white bird with bright blue around its eyes. Its soft song adds magic to the quiet forest. Visitors can walk along clear paths and enjoy the rich variety of plants and animals in this protected area.
+
+Heading north, travelers find the scenic Munduk Waterfall, surrounded by green hills and forests. Water flows gently over rocky cliffs into a cool clear pool. Mist rises into the air, mixing with the calming sound of falling water. The walk to the waterfall passes through narrow paths lined with coffee and clove trees. Their fresh scent fills the air, offering a pleasant and peaceful experience. Munduk is the perfect place to relax and enjoy Bali’s natural charm.
+
+Near the cultural center Ubud, the famous Tegalalang rice terraces stretch across the hills in green steps. These terraces are shaped by generations of farmers who work the land by hand. In the morning, mist rises above the fields, and sunlight reflects off the water in the paddies. Farmers in wide-brimmed hats plant rice carefully, their feet sinking into the soft earth. Water flows gently through small canals, keeping the fields healthy and green. The quiet surroundings and slow rhythm of farm life create a peaceful and inspiring scene.
+
+These natural wonders highlight Bali's dedication in preserving its environmental and cultural treasures. By exploring these sites, tourists not only experience the island's scenic beauty but also support ongoing conservation efforts, helping to ensure that Bali's wonders last for future generations.
+
+PERTANYAAN:
+Which parts of the text best support the description of Bali as a "Bali is full of natural beauty"?
+
+There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. A peaceful area filled with green forests, calm mangrove swamps, and colorful coral reefs along the sea.
+  - B. B. These terraces are shaped by generations of farmers who work the land by hand.
+  - C. C. Water flows gently over rocky cliffs into a cool, clear pool. Mist rises into the air, mixing with the calming sound of falling water.
+  - D. D. In the morning, mist rises above the fields, and sunlight reflects off the water in the paddies.
+  - E. E. Farmers in wide-brimmed hats plant rice carefully, their feet sinking into the soft earth.
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+My Experience as an Intern at a Sports Club
+
+Last summer, I had the opportunity to work as an intern at a local sports club. It was my first time working in a professional sports environment, and I was both nervous and excited. The internship went through a few phases, starting from orientation until finally jumping in to help during practices and games.
+
+On my first day, I met the head coach, who welcomed me and explained my tasks. I had to set up cones for drills, bring water for the players, and check the training schedules. The first few days were challenging because I was not used to the morning routine. Every morning I had to wake up early, arrive on time, and follow instructions carefully. I worried about making mistakes, but the coaches were kind and guided me.
+
+In the second month of my internship, I was trained to handle emergency situations. I got the chance to put that knowledge into practice when something unexpected happened. During football practice, a player fell and hurt his ankle. Everyone stopped, and I quickly ran to get the first aid kit. I helped the coach assess the injury and ensured the player stayed calm while we got him seated safely. Luckily, it wasn’t serious, but the experience reinforced an important lesson: staying alert and prepared during emergencies can make a big difference.
+
+At the end of my internship, the coaches held an evaluation and reflection session where they shared the results of their feedback. They highlighted my strengths in teamwork, responsibility, and communication, and even gave me a club T-shirt as a gift. I felt proud because I had improved in these areas. It was a great experience, and
+
+I hope to work in a sports club again in the future.
+
+PERTANYAAN:
+During the internship, what did the writer do every morning?
+OPSI / PERNYATAAN:
+  - A. A. Made schedules and explained them to the coaches.
+  - B. B. Played football with the team and got the first aid kit.
+  - C. C. Prepared a club gift, guided the coaches, and gave t-shirts.
+  - D. D. Woke up early, arrived on time, and followed the instructions.
+  - E. E. Set up cones, brought water, and checked emergency schedules.
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+My Experience as an Intern at a Sports Club
+
+Last summer, I had the opportunity to work as an intern at a local sports club. It was my first time working in a professional sports environment, and I was both nervous and excited. The internship went through a few phases, starting from orientation until finally jumping in to help during practices and games.
+
+On my first day, I met the head coach, who welcomed me and explained my tasks. I had to set up cones for drills, bring water for the players, and check the training schedules. The first few days were challenging because I was not used to the morning routine. Every morning I had to wake up early, arrive on time, and follow instructions carefully. I worried about making mistakes, but the coaches were kind and guided me.
+
+In the second month of my internship, I was trained to handle emergency situations. I got the chance to put that knowledge into practice when something unexpected happened. During football practice, a player fell and hurt his ankle. Everyone stopped, and I quickly ran to get the first aid kit. I helped the coach assess the injury and ensured the player stayed calm while we got him seated safely. Luckily, it wasn’t serious, but the experience reinforced an important lesson: staying alert and prepared during emergencies can make a big difference.
+
+At the end of my internship, the coaches held an evaluation and reflection session where they shared the results of their feedback. They highlighted my strengths in teamwork, responsibility, and communication, and even gave me a club T-shirt as a gift. I felt proud because I had improved in these areas. It was a great experience, and
+
+I hope to work in a sports club again in the future.
+
+PERTANYAAN:
+What are the best words to describe the writer’s personality during the internship?
+
+There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Careful and ready to help
+  - B. B. Confident and enjoys working alone
+  - C. C. Responsible and willing to learn
+  - D. D. Friendly and works well with others
+  - E. E. Creative and likes to try new things
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+My Experience as an Intern at a Sports Club
+
+Last summer, I had the opportunity to work as an intern at a local sports club. It was my first time working in a professional sports environment, and I was both nervous and excited. The internship went through a few phases, starting from orientation until finally jumping in to help during practices and games.
+
+On my first day, I met the head coach, who welcomed me and explained my tasks. I had to set up cones for drills, bring water for the players, and check the training schedules. The first few days were challenging because I was not used to the morning routine. Every morning I had to wake up early, arrive on time, and follow instructions carefully. I worried about making mistakes, but the coaches were kind and guided me.
+
+In the second month of my internship, I was trained to handle emergency situations. I got the chance to put that knowledge into practice when something unexpected happened. During football practice, a player fell and hurt his ankle. Everyone stopped, and I quickly ran to get the first aid kit. I helped the coach assess the injury and ensured the player stayed calm while we got him seated safely. Luckily, it wasn’t serious, but the experience reinforced an important lesson: staying alert and prepared during emergencies can make a big difference.
+
+At the end of my internship, the coaches held an evaluation and reflection session where they shared the results of their feedback. They highlighted my strengths in teamwork, responsibility, and communication, and even gave me a club T-shirt as a gift. I felt proud because I had improved in these areas. It was a great experience, and
+
+I hope to work in a sports club again in the future.
+
+PERTANYAAN:
+What will the writer most likely do after finishing the internship?
+OPSI / PERNYATAAN:
+  - A. A. Considering a career in a sports medicine
+  - B. B. Stop working and focus only on school
+  - C. C. Look for another chance to work in a sports club
+  - D. D. Study medicine to become a doctor
+  - E. E. Train as a professional football player
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 17 s.d. 20!
+
+Social Media Harms Teen Mental Health
+
+In today’s world, social media is a big part of many teenagers’ daily lives. While it has some benefits, such as staying connected with friends, meeting new people, and learning about interesting topics, it also brings serious problems. I strongly believe that social media harms teen mental health, and we must pay more attention to this issue before it becomes even worse.
+
+First, social media often makes teenagers compare themselves to others in an unhealthy way. When teens see pictures of people who seem perfect, they feel that they are not good enough. These feelings can lower self-esteem and lead to sadness, anxiety, or even depression. The problem is that many of these online posts are edited, filtered, or fake, but teens still feel pressure to look or live the same way. They may think that their own life is boring or not successful, which is simply not true.
+
+Second, too much time on social media affects sleep and study habits. Many teenagers use their phones late at night, checking messages or watching videos, which reduces sleep time and quality. Without enough sleep, teens cannot focus well in class, and their grades may suffer. This can increase stress and worry about the future, making them feel overwhelmed.
+
+Finally, online bullying, or cyberbullying, is another serious danger. Unlike face-to-face bullying, it can happen at any time and be shared with many people. Victims of cyberbullying often feel alone, scared, and helpless, and in some cases, it leads to serious mental health problems.
+
+In conclusion, although social media has some good uses, its harm to teen mental health is much greater. Teenagers need support from parents, teachers, and society to use it wisely. Schools should teach students how to use social media in healthy ways, and parents should guide their children to take breaks and spend time offline. By doing this, we can help protect young people’s mental health in this digital age.
+
+PERTANYAAN:
+What will happen if teenagers have poor sleep quality?
+
+There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Teenagers' grades could drop.
+  - B. B. Teens struggle to focus in class.
+  - C. C. Teens are likely to feel stressed.
+  - D. D. Teenagers will be more confident
+  - E. E. Teens will become mentally strong.
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 17 s.d. 20!
+
+Social Media Harms Teen Mental Health
+
+In today’s world, social media is a big part of many teenagers’ daily lives. While it has some benefits, such as staying connected with friends, meeting new people, and learning about interesting topics, it also brings serious problems. I strongly believe that social media harms teen mental health, and we must pay more attention to this issue before it becomes even worse.
+
+First, social media often makes teenagers compare themselves to others in an unhealthy way. When teens see pictures of people who seem perfect, they feel that they are not good enough. These feelings can lower self-esteem and lead to sadness, anxiety, or even depression. The problem is that many of these online posts are edited, filtered, or fake, but teens still feel pressure to look or live the same way. They may think that their own life is boring or not successful, which is simply not true.
+
+Second, too much time on social media affects sleep and study habits. Many teenagers use their phones late at night, checking messages or watching videos, which reduces sleep time and quality. Without enough sleep, teens cannot focus well in class, and their grades may suffer. This can increase stress and worry about the future, making them feel overwhelmed.
+
+Finally, online bullying, or cyberbullying, is another serious danger. Unlike face-to-face bullying, it can happen at any time and be shared with many people. Victims of cyberbullying often feel alone, scared, and helpless, and in some cases, it leads to serious mental health problems.
+
+In conclusion, although social media has some good uses, its harm to teen mental health is much greater. Teenagers need support from parents, teachers, and society to use it wisely. Schools should teach students how to use social media in healthy ways, and parents should guide their children to take breaks and spend time offline. By doing this, we can help protect young people’s mental health in this digital age.
+
+PERTANYAAN:
+Which of the following additional facts would most likely make the text more persuasive?
+
+There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Research data showing the number of teenagers experiencing anxiety or depression because of social media.
+  - B. B. Personal stories from teenagers who feel happier after reducing their social media use.
+  - C. C. Statistics about how many teenagers use social media every day.
+  - D. D. A list of the most popular social media platforms among teenagers.
+  - E. E. Expert opinions from doctors or psychologists about the dangers of social media for mental health.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 17 s.d. 20!
+
+Social Media Harms Teen Mental Health
+
+In today’s world, social media is a big part of many teenagers’ daily lives. While it has some benefits, such as staying connected with friends, meeting new people, and learning about interesting topics, it also brings serious problems. I strongly believe that social media harms teen mental health, and we must pay more attention to this issue before it becomes even worse.
+
+First, social media often makes teenagers compare themselves to others in an unhealthy way. When teens see pictures of people who seem perfect, they feel that they are not good enough. These feelings can lower self-esteem and lead to sadness, anxiety, or even depression. The problem is that many of these online posts are edited, filtered, or fake, but teens still feel pressure to look or live the same way. They may think that their own life is boring or not successful, which is simply not true.
+
+Second, too much time on social media affects sleep and study habits. Many teenagers use their phones late at night, checking messages or watching videos, which reduces sleep time and quality. Without enough sleep, teens cannot focus well in class, and their grades may suffer. This can increase stress and worry about the future, making them feel overwhelmed.
+
+Finally, online bullying, or cyberbullying, is another serious danger. Unlike face-to-face bullying, it can happen at any time and be shared with many people. Victims of cyberbullying often feel alone, scared, and helpless, and in some cases, it leads to serious mental health problems.
+
+In conclusion, although social media has some good uses, its harm to teen mental health is much greater. Teenagers need support from parents, teachers, and society to use it wisely. Schools should teach students how to use social media in healthy ways, and parents should guide their children to take breaks and spend time offline. By doing this, we can help protect young people’s mental health in this digital age.
+
+PERTANYAAN:
+Which statements from the text support the author’s argument that social media harms teen mental health?
+
+There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. "When teens see pictures of people who seem perfect, they feel that they are not good enough."
+  - B. B. "Many teenagers use their phones late at night, which reduces sleep time and quality."
+  - C. C. "Schools should teach students how to use social media in healthy ways."
+  - D. D. "Social media helps teens stay connected with friends and learn about interesting topics."
+  - E. E. "Victims of cyberbullying often feel alone, scared, and helpless."
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 17 s.d. 20!
+
+Social Media Harms Teen Mental Health
+
+In today’s world, social media is a big part of many teenagers’ daily lives. While it has some benefits, such as staying connected with friends, meeting new people, and learning about interesting topics, it also brings serious problems. I strongly believe that social media harms teen mental health, and we must pay more attention to this issue before it becomes even worse.
+
+First, social media often makes teenagers compare themselves to others in an unhealthy way. When teens see pictures of people who seem perfect, they feel that they are not good enough. These feelings can lower self-esteem and lead to sadness, anxiety, or even depression. The problem is that many of these online posts are edited, filtered, or fake, but teens still feel pressure to look or live the same way. They may think that their own life is boring or not successful, which is simply not true.
+
+Second, too much time on social media affects sleep and study habits. Many teenagers use their phones late at night, checking messages or watching videos, which reduces sleep time and quality. Without enough sleep, teens cannot focus well in class, and their grades may suffer. This can increase stress and worry about the future, making them feel overwhelmed.
+
+Finally, online bullying, or cyberbullying, is another serious danger. Unlike face-to-face bullying, it can happen at any time and be shared with many people. Victims of cyberbullying often feel alone, scared, and helpless, and in some cases, it leads to serious mental health problems.
+
+In conclusion, although social media has some good uses, its harm to teen mental health is much greater. Teenagers need support from parents, teachers, and society to use it wisely. Schools should teach students how to use social media in healthy ways, and parents should guide their children to take breaks and spend time offline. By doing this, we can help protect young people’s mental health in this digital age.
+
+PERTANYAAN:
+What is the most prominent impression you gain from the text?
+
+There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Social media makes teenagers unhappy because they compare their lives to unrealistic images online.
+  - B. B. Teenagers should completely stop using social media to protect their mental health.
+  - C. C. Using social media too much can disturb teenagers' sleep and make it harder for them to focus at school.
+  - D. D. Cyberbullying is a serious problem on social media and can make teenagers feel lonely and scared.
+  - E. E. The text explains that social media has only negative effects without any positive sides.
+

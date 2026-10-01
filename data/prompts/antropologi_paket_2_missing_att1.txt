@@ -1,0 +1,104 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Antropologi (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Di sebuah sekolah menengah, siswanya berasal dari beragam suku, agama, dan budaya. Namun tidak semua merasa diperlakukan adil. Dalam kegiatan keagamaan, hanya satu kelompok yang rutin diberi ruang dan waktu untuk beribadah serta merayakan hari besarnya. Sementara kelompok lain sering kali tidak mendapat kesempatan yang sama. Hal ini menimbulkan rasa kecewa, kecemburuan, dan ketegangan antar siswa. Beberapa mulai merasa tidak nyaman bahkan enggan terlibat dalam kegiatan bersama.
+
+PERTANYAAN:
+Berdasarkan ilustrasi diatas, rekomendasi kebijakan apakah yang paling tepat diambil oleh sekolah untuk menciptakan lingkungan yang adil dan inklusif bagi semua siswa? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Mengadakan forum dialog lintas agama dan budaya secara berkala di sekolah.
+  - B. B. Mewajibkan seluruh siswa mengikuti kegiatan keagamaan mayoritas sebagai bentuk toleransi.
+  - C. C. Menyediakan fasilitas ibadah dan ruang perayaan yang setara bagi semua kelompok agama.
+  - D. D. Menunjuk perwakilan dari tiap kelompok untuk merancang kegiatan inklusif di sekolah.
+  - E. E. Membatasi kegiatan agama yang dianggap minoritas agar tidak menimbulkan konflik baru.
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di Dataran Tinggi Dieng, terdapat tradisi unik bernama Rambut Gimbal atau anak gembel. Rambut gimbal diyakini sebagai titipan Kyai Kolodete, leluhur masyarakat Dieng. Anak yang memiliki rambut gimbal akan menjalani prosesi ruwatan sebelum rambutnya dipotong. Ritual ini menjadi simbol pelepasan kekuatan gaib sekaligus wujud syukur atas perlindungan leluhur. Prosesi ruwatan melibatkan serangkaian ritual adat, tarian, dan pemberian sesaji. Masyarakat setempat percaya bahwa rambut gimbal membawa berkah, tetapi juga menjadi ujian bagi orang tua untuk memenuhi permintaan anak sebelum rambutnya dipotong.
+[Konteks Visual Gambar 16723_1a8fb680b35d17f3cd6de222af7e5dab.png]:
+Ilustrasi konseptual yang menggambarkan proses penelitian lapangan, kajian etnografi, atau perancangan proyek bertema kehidupan masyarakat pesisir. Di bagian atas tampak seorang pria berkacamata sedang mengetik di depan laptop di atas meja bundar dengan ekspresi berpikir disertai tanda tanya ('??'), serta lembaran dokumen berlabel 'BRIEF' dan rancangan bagan/storyboard. Di sekelilingnya terhampar berbagai aspek kehidupan nelayan pesisir: rumah panggung tradisional, nelayan yang memamerkan dan membawa hasil tangkapan ikan, keranjang berisi ikan, nelayan merentangkan jaring/jala, perahu-perahu nelayan yang beroperasi di laut, serta bintang laut.
+PERTANYAAN:
+Berdasarkan perspektif antropologi, bagaimana peran kearifan lokal tradisi Rambut Gimbal dalam masyarakat Dieng?
+OPSI / PERNYATAAN:
+  - A. A. Sebagai alat kontrol sosial untuk menertibkan anak-anak yang dianggap nakal dalam perspektif lokal.
+  - B. B. Memperkuat identitas budaya melalui ritual yang memadukan unsur religius dan adat masyarakat lokal.
+  - C. C. Meningkatkan pariwisata dengan menjadikan tradisi sebagai daya tarik komersial bagi wisatawan.
+  - D. D. Menjadi sarana edukasi modern tentang pentingnya kebersihan rambut bagi anak-anak di perdesaan.
+  - E. E. Merefleksikan hubungan simbolis antara manusia, alam, dan dunia spiritual dalam sistem kepercayaan lokal.
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Masyarakat Bali memiliki tradisi lisan sekaa gong, yaitu kelompok penabuh gong atau gamelan yang memainkan komposisi musik sakral dan profan dalam berbagai upacara serta hiburan. Di era globalisasi, sekaa gong menghadapi tantangan seperti menurunnya minat generasi muda akibat dominasi musik modern, keterbatasan waktu latihan karena kesibukan, serta minimnya ruang fisik untuk berlatih bersama.
+
+PERTANYAAN:
+Jika kamu adalah pegiat seni dan budaya Bali, ide kreatif apa yang paling efektif untuk menjawab tantangan tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Mengadakan kompetisi gamelan tingkat nasional dengan hadiah besar untuk menarik perhatian generasi muda.
+  - B. B. Mewajibkan seluruh sekolah memiliki sekaa gong sebagai kegiatan ekstrakurikuler dengan latihan rutin.
+  - C. C. Menciptakan platform belajar gamelan daring yang interaktif dan memfasilitasi kolaborasi virtual antar seniman.
+  - D. D. Membangun gedung pertunjukan gamelan di setiap desa untuk meningkatkan eksistensi gamelan tradisional.
+  - E. E. Melarang semua jenis musik modern di area publik agar gamelan kembali menjadi pilihan utama masyarakat.
+
+---
+[SOAL NO 30]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pantun Banjar adalah salah satu bentuk tradisi lisan yang kaya dari suku Banjar di Kalimantan Selatan. Berupa puisi lisan empat baris, pantun ini seringkali digunakan dalam berbagai acara adat, hiburan rakyat, atau sekadar percakapan sehari-hari untuk menyampaikan nasihat, humor, atau ekspresi perasaan. Pantun Banjar tidak hanya berfungsi sebagai media komunikasi, tetapi juga cerminan nilai-nilai budaya, kearifan lokal, dan identitas masyarakat Banjar. Penyampaiannya yang spontan dan berima menjadikannya seni yang unik. Di era digital kini Pantun Banjar menghadapi tantangan serius. Minat generasi muda untuk mempelajari dan melantunkan pantun secara langsung cenderung menurun drastis. Mereka lebih terpapar pada media sosial dan hiburan visual yang lebih instan. Akibatnya, jumlah "pemantun" atau ahli pantun yang mampu berbalas pantun secara otentik semakin berkurang, mengancam kelangsungan tradisi ini. Kondisi ini membuat para budayawan khawatir Pantun Banjar akan terlupakan.
+
+PERTANYAAN:
+Berdasarkan narasi di atas, bagaimana keterkaitan antara bentuk tradisi lisan Pantun Banjar, problematikanya dan solusi inovatif untuk pelestariannya?
+OPSI / PERNYATAAN:
+  - A. A. Tradisi lisan pantun Banjar rentan terhadap penyebaran melalui media cetak, solusinya adalah membukukan semua pantun.
+  - B. B. Pantun Banjar adalah seni yang sulit dipelajari secara otodidak, solusinya adalah melarang penggunaan teknologi.
+  - C. C. Pantun Banjar kalah bersaing dengan hiburan modern yang instan, solusinya adalah adaptasi format ke platform digital.
+  - D. D. Tradisi lisan pantun Banjar adalah milik kaum tua saja, solusinya adalah mengabaikan partisipasi generasi muda.
+  - E. E. Pementasan pantun Banjar memerlukan banyak biaya, solusinya adalah mencari sponsor dari luar negeri.
+

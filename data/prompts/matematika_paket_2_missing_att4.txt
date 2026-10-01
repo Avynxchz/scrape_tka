@@ -1,0 +1,226 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Matematika (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Arif, seorang desain interior akan membuat suatu desain ornamen jam dinding baru. Ornamen tersebut memiliki bentuk dasar gabungan segitiga dan lingkaran. Adapun bentuk ornamen jam dan ukuran yang akan dibuat diberikan pada gambar berikut.
+[Konteks Visual Gambar 13067_2686059096b60017046a9d87b7828ffd.png]:
+Diagram bangun geometris dekoratif berwarna toska yang memadukan bentuk segitiga/panah dan jam dinding:- Bagian atas: daerah segitiga putih berisi ilustrasi seekor burung berwarna merah muda yang sedang bernyanyi dengan simbol not balok.- Bagian bawah: bentuk setengah lingkaran/cincin yang melingkupi sebuah jam analog dengan jarum pendek di angka 7 dan jarum panjang di angka 12 (menunjukkan pukul 07.00).- Dimensi ukuran yang diberikan:- Tinggi total bangun: $70\text{ cm}$ (diindikasikan oleh garis panah vertikal di sebelah kanan).- Lebar diameter lingkaran jam: $20\text{ cm}$ (diindikasikan oleh garis panah horizontal di bawah lingkaran).- Lebar bentang maksimum (ujung sayap kiri ke ujung sayap kanan): $50\text{ cm}$ (diindikasikan oleh garis panah horizontal paling bawah).
+PERTANYAAN:
+Di sekeliling ornamen jam tersebut akan ditempel kayu tipis untuk menambah efek tiga dimensi. Apabila Arif akan membuat dua buah ornamen jam dinding untuk dijadikan model contoh, berapa panjang kayu tipis yang ia perlukan?
+OPSI / PERNYATAAN:
+  - A. A. 322,8 cm.
+  - B. B. 352,8 cm.
+  - C. C. 362,8 cm.
+  - D. D. 382,8 cm.
+  - E. E. 445,6 cm.
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan permasalahan dalam kotak berikut!
+
+Panjang salah satu diagonal suatu layang-layang adalah 20 cm.
+
+Berapakah keliling layang-layang tersebut?
+[Konteks Visual Gambar 59350_43c53b7b11969504259adbc792a4e868.png]:
+Diagram bangun datar layang-layang dalam orientasi mendatar (horizontal) beserta kedua diagonalnya:- Memiliki empat titik sudut: kiri, kanan, atas, dan bawah.- Garis diagonal horizontal membentang dari titik sudut kiri ke titik sudut kanan, berfungsi sebagai sumbu simetri lipat horizontal.- Garis diagonal vertikal menghubungkan titik sudut atas dan titik sudut bawah.- Kedua diagonal saling berpotongan tegak lurus di bagian dalam bangun, membagi layang-layang menjadi empat segitiga siku-siku.
+PERTANYAAN:
+Putuskan apakah pernyataan (1) dan pernyataan (2) berikut cukup untuk menjawab permasalahan dalam kotak tersebut! (1) Luas layang-layang adalah 160 cm 2. (2) Panjang salah satu sisi layang-layang adalah 10 cm.
+OPSI / PERNYATAAN:
+  - A. A. Pernyataan (1) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (2) SAJA tidak cukup.
+  - B. B. Pernyataan (2) SAJA cukup untuk menjawab pertanyaan, tetapi pernyataan (1) SAJA tidak cukup.
+  - C. C. DUA pernyataan BERSAMA-SAMA cukup untuk menjawab pertanyaan, tetapi SATU pernyataan SAJA tidak cukup
+  - D. D. Pernyataan (1) SAJA cukup untuk menjawab pertanyaan dan pernyataan (2) SAJA cukup.
+  - E. E. Pernyataan (1) dan pernyataan (2) tidak cukup untuk menjawab pertanyaan.
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pak Omar adalah seorang distributor helm. Hari ini, ia mendapat pesanan untuk mengirimkan helm yang sama dalam jumlah besar menggunakan truk. Agar kualitas terjaga, helm dikemas dalam wadah kardus helm. Adapun ukuran kardus helm dan bak truk diberikan pada gambar berikut.
+
+Pak Omar memberikan arahan pada kurir untuk mengatur posisi atas kardus helm tidak boleh dibalik (tempat masuk kepala harus menghadap ke bawah). Semua kardus helm disusun menghadap depan (seperti pada gambar) atau menghadap samping (apabila gambar diputar 90°). Namun, apabila masih terdapat ruang kosong yang mungkin, maka penyusunan kardus helm dengan posisi berbeda untuk mengisi ruang kosong tersebut dapat dilakukan.
+[Konteks Visual Gambar 88891_672e667e0a5270d7c790f26f7053149a.png]:
+Ilustrasi suasana stan pasar sekolah:- Spanduk besar kain putih membentang horizontal yang ditopang dua tiang kayu, bertuliskan teks verbatim huruf kapital 'BAZAR SEKOLAH'.- Di bawah spanduk terdapat 5 buah stan (gerai/booth) pameran kayu yang identik, tersusun berjajar secara horizontal dari kiri ke kanan.- Masing-masing gerai memiliki atap tenda/kanopi berwarna hijau bergelombang, meja kayu penyaji, dan empat tiang/kaki penyangga.
+PERTANYAAN:
+Berdasarkan posisi susunan tersebut, berapa paling banyak kardus helm yang dapat dimuat di truk tersebut?
+OPSI / PERNYATAAN:
+  - A. A. 336 kardus.
+  - B. B. 360 kardus.
+  - C. C. 384 kardus.
+  - D. D. 432 kardus.
+  - E. E. 504 kardus.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Bu Sita, seorang desainer interior, sedang mengerjakan proyek pribadi untuk mempercantik kamar tidurnya. Ia berencana membuat beberapa hiasan lampu tidur dari bahan akrilik. Setiap hiasan akan berbentuk tabung berongga (tanpa alas dan tutup) dengan diameter 14 cm dan tinggi 25 cm. Bagian luar hiasan tabung ini akan dilapisi dengan stiker vinil motif bunga seperti pada gambar berikut.
+[Konteks Visual Gambar 20080_8b17d82a6c1c5a16706642d9079560a6.png]:
+Tabel data nilai rapor dan jumlah uang yang dimiliki oleh empat orang siswa:
+
+| Nama | Nilai Rapor | Uang yang dimiliki (Rp) | |:--- |:---: |:---: | | Andi | 90 | 285.000 | | Budi | 92 | 286.000 | | Cici | 89 | 280.000 | | Dini | 95 | 287.000 |
+PERTANYAAN:
+Stiker vinil dijual dalam lembaran, dan harga satu lembarnya adalah Rp9.000,00. Setiap lembar stiker vinil mampu menutupi area seluas 300 cm 2. Jika Bu Sita berencana membuat 8 buah hiasan lampu tidur, berapakah biaya minimal yang harus dikeluarkan Bu Sita untuk membeli stiker vinil tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Rp72.000,00.
+  - B. B. Rp108.000,00.
+  - C. C. Rp252.000,00.
+  - D. D. Rp270.000,00.
+  - E. E. Rp288.000,00.
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Perhatikan gambar berikut.
+[Konteks Visual Gambar 14962_012e984631e677fca2f6c544689d4ef7.png]:
+Diagram segitiga $ABC$ dengan garis tinggi $AD$ yang tegak lurus terhadap sisi alas $BC$ di titik $D$ (ditandai dengan simbol sudut siku-siku):- Sisi $AB$ memiliki panjang $4\text{ cm}$ dan ditandai dengan tanda garis ganda ( $=$).- Ruas garis $DC$ pada alas juga memiliki tanda garis ganda ( $=$), yang menunjukkan bahwa panjang $DC = AB = 4\text{ cm}$.- Sudut $\angle ABD$ diberi label $\beta$.- Sudut $\angle CAD$ diberi label $\alpha$.
+[Konteks Visual Gambar 14962_920ca2e608712f2ea6de4801adffb5a2.png]:
+Persamaan trigonometri: $\cos(a) = \frac{3}{5}$
+PERTANYAAN:
+Jika diketahui nilai   tentukan Benar atau Salah terkait perbandingan trigonometri berikut!
+OPSI / PERNYATAAN:
+  - A. 
+  - B. 
+  - C. 
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Banyak siswa yang lulus di sekolah Yayasan Cahaya beragam setiap tahunnya. Berikut adalah data banyak lulusan di tiga sekolah menengah swasta milik Yayasan Cahaya.
+[Konteks Visual Gambar 54324_c1fcae756cc66f6899b3ea1ebbd1abbd.png]:
+Grafik garis tren dengan judul 'Data Banyak Lulusan Tahun 2017-2025':
+
+- Legenda:- Lingkaran hijau: SMA 1 Bintang- Lingkaran merah: SMA 2 Bintang- Lingkaran biru: SMK Kejora
+
+- Data koordinat nilai (Tahun vs Jumlah Lulusan):
+
+| Tahun | SMA 1 Bintang (Hijau) | SMA 2 Bintang (Merah) | SMK Kejora (Biru) | |:---: |:---: | | 2017 | 301 | 255 | 250 | | 2018 | 310 | 260 | 285 | | 2019 | 310 | 290 | 301 | | 2020 | 301 | 310 | 320 | | 2021 | 308 | 315 | 320 | | 2022 | 310 | 320 | 325 | | 2023 | 315 | 300 | 320 | | 2024 | 350 | 300 | 350 | | 2025 | 360 | 300 | 400 |
+PERTANYAAN:
+Berdasarkan grafik tersebut, berikut ini pernyataan mana saja yang tepat mendeskripsikan banyak lulusan di ketiga sekolah milik Yayasan Cahaya? Pilih setiap jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Banyak siswa SMA 1 Bintang yang lulus selalu bertambah mulai tahun 2020.
+  - B. B. Pada tahun 2017-2020, banyak lulusan dari ketiga sekolah di yayasan Cahaya selalu bertambah.
+  - C. C. Banyak lulusan SMK Kejora konsisten naik selama lima tahun terakhir.
+  - D. D. Banyak lulusan SMA 2 Bintang tetap sama selama tiga tahun terakhir.
+  - E. E. Banyak lulusan ketiga sekolah di tahun 2023 menurun dibanding tahun sebelumnya.
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di sebuah acara bazar yang diadakan oleh suatu sekolah, terdapat 5 stan yang masing-masing dikelola oleh pedagang yang berbeda.
+[Konteks Visual Gambar 61144_bab2e2936f9906add5d8d3fc46fddaff.png]:
+Ilustrasi soal peluang dengan judul 'Jumlah Kertas di dalam Kotak Undian':- Kelompok 1 (kiri): 6 lembar kupon bertuliskan teks verbatim 'Minuman Gratis' dengan label kuning di bawahnya bertuliskan '6 kertas'.- Kelompok 2 (tengah): 4 lembar kupon makanan (3 lembar bertuliskan 'Makanan Gratis' dan 1 lembar bertuliskan 'Makanan Grati') dengan label kuning di bawahnya bertuliskan '4 kertas'.- Kelompok 3 (kanan): 5 lembar kupon kosong (tanpa tulisan) dengan label kuning di bawahnya bertuliskan '5 kertas'.- Total keseluruhan kupon: $6 + 4 + 5 = 15$ lembar kertas.
+PERTANYAAN:
+Dalam bazar tersebut, stan pedagang C ingin berada di antara pedagang A dan pedagang D. Banyak kemungkinan susunan atau penataan stan sesuai keinginan pedagang C tersebut adalah....
+OPSI / PERNYATAAN:
+  - A. A. 6 susunan
+  - B. B. 12 susunan
+  - C. C. 120 susunan
+  - D. D. 240 susunan
+  - E. E. 720 susunan
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Benar', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Perhatikan tabel distribusi data jumlah pengunjung perpustakaan Desa Sukamaju pada minggu ke-1 bulan Januari!
+
+Pada minggu ke-1 bulan Januari tersebut, diketahui informasi sebagai berikut: 1) rata-rata pengunjung perpustakaan setiap hari adalah 6 orang, 2) selalu ada minimal dua pengunjung perpustakaan namun tidak pernah melebihi 10 pengunjung pada setiap hari buka (Senin-Jumat), dan 3) median dari data pada tabel adalah 6.
+[Konteks Visual Gambar 44740_626ada04625c9728ab8c9944c147be01.png]:
+Tabel data jumlah pengunjung pada Minggu ke-1:
+
+| Minggu ke-1 | Senin | Selasa | Rabu | Kamis | Jumat | |:---: |:---: |:---: | | Jumlah Pengunjung | 4 | p | 5 | r | 6 |
+PERTANYAAN:
+Tentukan Benar atau Salah pada setiap pernyataan berikut terkait jumlah pengunjung perpustakaan pada minggu ke-1 bulan Januari tersebut!
+OPSI / PERNYATAAN:
+  - A. Banyak pengunjung pada hari Selasa pasti selalu lebih banyak dibandingkan hari lain.
+  - B. Banyak pengunjung pada hari Kamis pasti lebih dari 5 orang.
+  - C. Banyak pengunjung pada hari Jumat dan Kamis mungkin saja sama.
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Dalam rangka memperingati Tahun Baru Imlek, sebuah supermarket membuat kotak undian yang berisi hadiah untuk para pelanggannya. Terdapat 60 angpao yang dimasukkan ke dalam kotak tersebut. Hadiahnya terbagi dalam dua kategori, yaitu kupon belanja dan peralatan rumah tangga. Untuk hadiah kupon belanja, terdapat 15 angpao berisi kupon senilai Rp25.000,00 dan 12 angpao berisi kupon senilai Rp50.000,00. Untuk hadiah peralatan rumah tangga, terdapat 10 angpao berisi set sendok-garpu, 8 angpao berisi pemanas air, dan sisanya angpao kosong. Rini menjadi orang pertama yang berkesempatan mengambil satu angpao secara acak dari kotak tersebut
+
+PERTANYAAN:
+Berapakah peluang Rini mengambil angpao yang kosong?
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sebuah kantin sekolah mengadakan undian berhadiah.
+
+Hanya kertas yang kosong yang akan selalu dikembalikan lagi ke dalam kotak meskipun terambil berkali-kali. Ani akan mengambil satu buah kertas dari kotak undian. Ani adalah orang kelima yang mengambil kertas undian.
+[Konteks Visual Gambar 61924_dd8a2e5d09f6c81b8f5837d25999cfa5.png]:
+Ilustrasi isometrik sebuah kamar tidur yang dimodelkan dalam kerangka bangun ruang kubus/balok $ABCD.EFGH$:- Titik-titik sudut ruangan:- Lantai: titik A (sudut kiri), titik B (sudut depan), titik C (sudut kanan), titik D (sudut belakang).- Langit-langit: titik E (sudut kiri atas), titik F (sudut depan atas), titik G (sudut kanan atas), titik H (sudut belakang atas).- Perabotan dan elemen di dalam ruangan:- Tempat tidur dengan kasur putih dan selimut kuning/oranye berada di dekat titik D (dinding belakang).- Meja belajar lengkap dengan kursi, lampu meja, dan buku di dekat titik A (dinding kiri).- Jendela berpenutup tirai lipat oranye pada dinding kiri di atas meja belajar.- Lemari pakaian kayu dua pintu di dekat titik C (dinding kanan).- Meja kecil berpajangan televisi di lantai bagian depan kanan.- Karpet oranye bergaris di tengah lantai.- Rak gantung di dinding belakang atas tempat tidur yang memuat piala, piringan hitam, dan buku, ditunjuk dengan garis panah berlabel teks verbatim 'Rak Buku Gantung'.
+PERTANYAAN:
+Kertas apa sajakah yang mungkin sudah terambil oleh orang-orang sebelumnya sehingga peluang Ani memperoleh minuman atau makanan adalah
+OPSI / PERNYATAAN:
+  - A. A. 1 minuman gratis, 1 makanan gratis, dan 2 kertas kosong.
+  - B. B. 2 makanan gratis dan 2 minuman gratis.
+  - C. C. 2 minuman gratis dan 2 kertas kosong.
+  - D. D. 4 kertas kosong.
+  - E. E. 4 minuman gratis.
+

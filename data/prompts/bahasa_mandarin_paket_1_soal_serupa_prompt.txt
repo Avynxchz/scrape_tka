@@ -1,0 +1,152 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Bahasa Mandarin (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: E
+Stimulus Teks: Teks untuk soal nomor 1 dan 2!
+[Isi Gambar Soal 23404_70bae53fcc189a69c9173af5bd18ad0e.png]:
+Dialog percakapan antara laki-laki (男) dan perempuan (女) beraksara Hanzi beserta Pinyin: Qǐng tīng wǒ shuō! 男： 请 听 我 说！
+
+Hǎode. 女： 好的。
+
+'Gāoxìng', nǐ néng xiě ma? 男： '高兴'， 你 能 写 吗？
+
+Néng, wǒ huì xiě. 女： 能， 我 会 写。
+
+Hěn hǎo! Nà, zěnme dú nà gè hànzì? 男： 很 好！那，怎么 读 那 个 汉字？
+
+Dú 'gāoxìng'. 女： 读 '高兴'。
+Pertanyaan: “gāoxìng”
+
+Apa arti kata   “高兴”   ?
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: B
+Stimulus Teks: Teks untuk soal nomor 1 dan 2!
+[Isi Gambar Soal 23404_70bae53fcc189a69c9173af5bd18ad0e.png]:
+Dialog percakapan antara laki-laki (男) dan perempuan (女) beraksara Hanzi beserta Pinyin: Qǐng tīng wǒ shuō! 男： 请 听 我 说！
+
+Hǎode. 女： 好的。
+
+'Gāoxìng', nǐ néng xiě ma? 男： '高兴'， 你 能 写 吗？
+
+Néng, wǒ huì xiě. 女： 能， 我 会 写。
+
+Hěn hǎo! Nà, zěnme dú nà gè hànzì? 男： 很 好！那，怎么 读 那 个 汉字？
+
+Dú 'gāoxìng'. 女： 读 '高兴'。
+[Isi Gambar Soal 07327_4e92c007d8ca8fe22664439d10a5f765.png]:
+Teks beraksara Hanzi beserta Pinyin: Tāmen zài nǎr? 他们 在 哪儿？
+Pertanyaan: 
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 23010_11069531843d66562d882eda6eb1e372.png]:
+Daftar empat kalimat bernomor dalam aksara Hanzi beserta Pinyin: Shàngwǔ bā diǎn shàngkè. (1) 上午 八 点 上课。
+
+Wǒ měitiān zǎoshang liù diǎn hē chá. (2) 我 每天 早上 六 点 喝 茶。
+
+Qī diǎn qù xuéxiào. (3) 七 点 去 学校。
+
+Xiàwǔ shí èr diǎn huí jiā. (4) 下午 十二 点 回 家。
+Pertanyaan: Susunlah kalimat tersebut menjadi paragraf padu!
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: ['A:Salah', 'B:Salah', 'C:Benar']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 23652_876abb434d5e851256f4ff542874ff19.png]:
+Dialog percakapan antara Lanlan (兰兰) dan Mali (玛丽) beraksara Hanzi beserta Pinyin: Lánlán: Zhè shì shénme? 兰兰: 这 是 什么？
+
+Mǎlì: Zhè shì shū. 玛丽: 这 是 书。
+
+Lánlán: Zhè shì nǐ de shū ma? 兰兰: 这 是 你 的 书 吗？
+
+Mǎlì: Shì de, shì wǒ de. 玛丽: 是 的，是 我 的。
+Pertanyaan: Apa informasi yang terdapat pada percakapan di atas?
+
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: ['B', 'D']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 00556_49fbbde866f0ac901b5949867b0923f1.png]:
+Daftar kata beraksara Hanzi yang dipisahkan garis miring beserta Pinyin di atasnya: nǐ shénme cài xǐhuan 你 / 什么 / 菜 / 喜欢
+Pertanyaan: Susunlah kosakata tersebut menjadi kalimat padu!
+
+Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 50336_3148bb2cfaf2c8a4e52997c790e7e1b5.png]:
+Kalimat rumpang dalam aksara Hanzi beserta Pinyin: Tā hěn xǐhuan ______ hànyǔ. 他 很 喜欢 _ 汉语。
+Pertanyaan: 
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 69375_6635f5521ae86a7acde82d9f7af5b11f.png]:
+Teks beraksara Hanzi beserta Pinyin: Wǒmen dōu xuéxí Hànyǔ 我们 都 学习 汉语。
+Pertanyaan: Jumlah guratan pada karakter 语 adalah ….
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 61479_766fa25fbd5af6163b34eedaaa2b2e7e.png]:
+Ilustrasi seorang anak perempuan berambut cokelat sedang tidur nyenyak di atas kasur dengan selimut kuning bermotif bunga-bunga, wajahnya tersenyum tenang dan terdapat simbol dengkuran/tidur meliuk di atas kepalanya.
+Pertanyaan: 
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: ['A', 'D']
+Stimulus Teks: Teks untuk soal nomor 9 dan 10!
+[Isi Gambar Soal 41268_76eb3d2b1585af8d12660132cbfb005a.png]:
+Teks bacaan beraksara Hanzi beserta Pinyin: Jīntiān shì Māma hé nǚér zài jiā zuòfàn 今天 是 星期天。妈妈 和 女儿 在 家 做饭。
+
+Bàba hé érzi qù shāngdiàn 爸爸 和 儿子 去 商店 。
+
+Tāmen mǎi le shuǐguǒ hé bēizi Tāmen dōu hěn gāoxìng 他们 买 了 水果 和 杯子。 他们 都 很 高兴。
+Pertanyaan: (Shuí)  (gāoxìng)
+
+谁        高兴？
+
+Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: A
+Stimulus Teks: Teks untuk soal nomor 9 dan 10!
+[Isi Gambar Soal 16693_76eb3d2b1585af8d12660132cbfb005a.png]:
+Teks bacaan beraksara Hanzi beserta Pinyin: Jīntiān shì Māma hé nǚér zài jiā zuòfàn 今天 是 星期天。妈妈 和 女儿 在 家 做饭。
+
+Bàba hé érzi qù shāngdiàn 爸爸 和 儿子 去 商店 。
+
+Tāmen mǎi le shuǐguǒ hé bēizi Tāmen dōu hěn gāoxìng 他们 买 了 水果 和 杯子。 他们 都 很 高兴。
+Pertanyaan: Tentukan hanyu pinyin yang tepat pada kata yang dicetak tebal!
+

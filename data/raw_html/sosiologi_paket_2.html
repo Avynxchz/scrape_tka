@@ -1,0 +1,2315 @@
+<!DOCTYPE html><html lang="en"><head>
+	<title>Simulasi TKA</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="apple-touch-icon" sizes="180x180" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/favicon-16x16.png">
+	<link rel="manifest" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/site.webmanifest">
+	<link rel="mask-icon" href="https://pusmendik.kemendikdasmen.go.id/tka/fav/safari-pinned-tab.svg">
+	<meta name="msapplication-TileColor" content="#da532c">
+	<meta name="theme-color" content="#ffffff">
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://pusmendik.kemendikdasmen.go.id/tka/_assets/css/icheck-bootstrap.min.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120206082-3"></script>
+	<script>
+
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-120206082-3');
+
+	</script> -->
+</head>
+<body>
+
+<div class="container-fluid text-white" style="background:#326698;background-size: contain;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/bg-top.png');background-repeat: no-repeat;background-position: left; height:150px;position:fixed;top:0px;left:0px;right:0px">
+	  <div class="row">
+		<div class="col pl-5 pt-1">
+			<table>
+				<tbody><tr>
+					<td>
+						<img style="margin:5px;height:70px" src="https://pusmendik.kemendikdasmen.go.id/tka/images/logo-kemdikbud-71x72.png">
+					</td>
+					<td>
+						<div><b>PUSMENDIK</b></div>
+						<div><small>APLIKASI ANBK<small></small></small></div><small><small>
+					</small></small></td>
+				</tr>
+			</tbody></table>
+		</div>
+		<div class="col pl-5 pt-1 mt-4 pr-5 text-right">
+			<table align="right">
+				<tbody><tr>
+					<td style="vertical-align:top">
+						<div><small>P130100230 - PESERTA SOSIOLOGI_PAKET_2<small></small></small></div><small><small>
+					</small></small></td>
+					<td>
+						<div class="pl-1 pr-1 pt-1 pb-1" style="background:#74b9ff;border-radius:2px;color:#326698"><i class="fa fa-graduation-cap fa-flip-horizontal"></i></div>
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+	  </div>
+</div>
+
+<div class="container-fluid fadeInDown mb-5" style="margin-top:90px;">
+  <div class="row">
+	<div class="col-sm-12" style="border:0px solid red">
+		<div class="text-left pt-3 pb-5 mb-2" id="formContent" style="background-size: 300px;background-image: url('https://pusmendik.kemendikdasmen.go.id/tka/images/logo-w.png');background-repeat: no-repeat;background-position: top right; ">
+		  <div class="row row-atas"> 
+			<div class="col-sm-4"><span style="font-size:18px">Soal nomor</span> <span style="font-size:20px" id="noSoal">1</span></div>
+			<div class="col-sm-8 cont-btn-informasi">
+				<button class="btn-informasi btn btn-primary btn-round m" data-toggle="modal" data-target="#infoSoal" style="border-radius:30px;font-size:12px;"><i class="fa fa-info-circle d-sm-none"></i><span class="d-none d-sm-inline-block">INFORMASI SOAL<span></span></span></button>
+				<button class="btn-informasi btn  btn-outline-secondary  btn-round" style="border-radius:30px;font-size:12px;">Sisa Waktu : <b><span id="countdown">01:14:58</span></b></button>
+				<button class="btn-informasi btn btn-primary btn-round" data-toggle="modal" data-target="#myModal" style="border-radius:30px;font-size:12px"><span class="d-none d-sm-inline-block">Daftar Soal </span> <i class="fa fa-th-large"></i></button>
+			</div>
+		  </div>
+		  <div class="row pb-2  row-atas"> 
+			<div class="col-sm-6"><small>Ukuran font soal:</small> <span style="font-size:12px" class="ml-2 mr-1 cfont" id="c1" onclick="changeFont('12','c1')">A</span> <span style="font-size:16px" class="ml-2 mr-1 cfont" id="c2" onclick="changeFont('16','c2')">A</span> <span style="font-size:20px" class="ml-2 mr-1 cfont" id="c3" onclick="changeFont('18','c3')">A</span></div>
+			<div class="col-sm-6 mt-2 mataujian">
+				Sosiologi (Paket 2)			</div>
+		  </div>
+		  <div class="row pl-3 pr-3 pb-2 mb-1"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  <!-- isi soal -->
+		  <div class="row pl-3 pr-3 pb-2 mb-2"> 
+			<div class="col p-3 " id="isisoal" style="border:2px solid #eee; border-top:10px solid #eee;">
+				<div class="soal-soal row" style="" id="soal-no-1"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Pandemi COVID-19 yang melanda dunia sejak awal tahun 2020 telah membawa perubahan dalam berbagai aspek kehidupan, termasuk cara kita berinteraksi dan menjaga hubungan sosial. Kebijakan jaga jarak atau <em>physical distancing</em> menjadi norma baru yang wajib dipatuhi, sementara aktivitas tatap muka, termasuk pembelajaran, beralih secara drastis menjadi daring.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Apa yang memungkinkan interaksi sosial tetap terjadi pada masa pandemi meskipun terdapat pembatasan tatap muka secara langsung?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','0');">
+													<input id="pilihan_1_0" onchange="pilihan('1','a','698')" pil="a" name="pilihan1" type="radio">
+													<label for="pilihan_1_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Individu memahami teknologi informasi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','1');">
+													<input id="pilihan_1_1" onchange="pilihan('1','b','698')" pil="b" name="pilihan1" type="radio">
+													<label for="pilihan_1_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Komunikasi tetap terjalin melalui media daring.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','2');">
+													<input id="pilihan_1_2" onchange="pilihan('1','c','698')" pil="c" name="pilihan1" type="radio">
+													<label for="pilihan_1_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Semua pihak mengikuti aturan dengan taat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','3');">
+													<input id="pilihan_1_3" onchange="pilihan('1','d','698')" pil="d" name="pilihan1" type="radio">
+													<label for="pilihan_1_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Lingkungan sekitar menyediakan jaringan internet.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('1.','4');">
+													<input id="pilihan_1_4" onchange="pilihan('1','e','698')" pil="e" name="pilihan1" type="radio">
+													<label for="pilihan_1_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(1,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Siswa dan guru menggunakan handphone.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display: none;" id="soal-no-2"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Nasionalisme sebagai masyarakat yang lahir di Indonesia muncul pertama kali setelah Indische Partij terbentuk pada 1912. Partai ini melibatkan segala etnis, termasuk Eropa dan peranakan Indo. Kemudian peranakan Indo melebur dengan momentum nasionalisme berikutnya, Sumpah Pemuda 1928. Sumpah Pemuda menjadi ajang persatuan antara peranakan Tionghoa, Arab, dan Indo untuk jati dirinya sebagai orang Indonesia. Peristiwa ini mempertemukan kalangan tersebut untuk mengkampanyekan persatuan. Berangsur-angsur setelah Sumpah Pemuda, berdirilah partai berbasis etnis yang mendukung nasionalisme. Kemudian pergerakan secara etnik perlahan pun melebur dengan kelompok nasionalisme lainnya. Tanpa sekat, dan bermuara pada kemerdekaan Indonesia.</p>
+<p style="text-align: justify;"><span style="font-size: 11px;">Sumber diadaptasi dari:&nbsp;<span style="color: #0000ff;">https://nationalgeographic.grid.id/</span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengapa sumpah pemuda pada kasus tersebut bisa dikategorikan sebagai simbol multikulturalisme?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','0');">
+													<input id="pilihan_2_0" onchange="pilihan('2','a','699')" pil="a" name="pilihan2" type="radio">
+													<label for="pilihan_2_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mencerminkan proses asimilasi nilai dan tujuan budaya-budaya yang berbeda demi menjaga identitas asli setiap etnik.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','1');">
+													<input id="pilihan_2_1" onchange="pilihan('2','b','699')" pil="b" name="pilihan2" type="radio">
+													<label for="pilihan_2_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengakomodasi berbagai etnik dari latar belakang berbeda untuk mendukung penghapusan identitasnya menjadi Indonesia.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','2');">
+													<input id="pilihan_2_2" onchange="pilihan('2','c','699')" pil="c" name="pilihan2" type="radio">
+													<label for="pilihan_2_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tedapat dorongan untuk membangun partikularisme melalui partai-partai bernuansa etnik dalam meraih kemerdekaan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','3');">
+													<input id="pilihan_2_3" onchange="pilihan('2','d','699')" pil="d" name="pilihan2" type="radio">
+													<label for="pilihan_2_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Bersifat tidak eksklusif untuk satu kelompok etnik melainkan inklusif dan terbuka bagi semua etnik yang hidup di Indonesia.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('2.','4');">
+													<input id="pilihan_2_4" onchange="pilihan('2','e','699')" pil="e" name="pilihan2" type="radio">
+													<label for="pilihan_2_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(2,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Adanya bentuk tuntutan agar etnik yang bergabung turut serta menjadi bagian dari kelompok mayoritas.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-3"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Di sebuah desa yang sedang berkembang, hidup dua kelompok masyarakat dengan latar belakang budaya dan kebiasaan yang berbeda, yaitu satu kelompok berasal dari penduduk asli desa dan kelompok lainnya berasal dari warga pendatang. Pada awalnya, hubungan antara kedua kelompok kerap diwarnai kesalahpahaman saat rapat desa, karena perbedaan cara pandang dan nilai-nilai budaya yang dianut. Kondisi ini menimbulkan ketegangan sosial yang menghambat pembangunan desa. Melihat hal ini, tokoh masyarakat menginisiasi kegiatan bersama seperti gotong royong, pelatihan kewirausahaan, dan dialog antarbudaya. Melalui proses ini, kedua kelompok mulai saling memahami, menghargai perbedaan, dan bekerja sama dalam pembangunan desa. Mereka juga sepakat untuk tetap mempertahankan budaya masing-masing, sambil merancang kegiatan budaya bersama yang melibatkan semua warga tanpa membedakan asal-usul.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan ilustrasi tersebut, bentuk hubungan sosial apakah yang akhirnya terwujud di antara kedua kelompok masyarakat di atas?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','0');">
+													<input id="pilihan_3_0" onchange="pilihan('3','a','700')" pil="a" name="pilihan3" type="radio">
+													<label for="pilihan_3_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Asimilasi, karena kedua kelompok membentuk budaya baru dengan menghilangkan perbedaan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','1');">
+													<input id="pilihan_3_1" onchange="pilihan('3','b','700')" pil="b" name="pilihan3" type="radio">
+													<label for="pilihan_3_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kontravensi, karena terjadi perbedaan pandangan meskipun belum sampai pada konflik terbuka.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','2');">
+													<input id="pilihan_3_2" onchange="pilihan('3','c','700')" pil="c" name="pilihan3" type="radio">
+													<label for="pilihan_3_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Koersi, karena kedua kelompok menyelesaikan konflik dengan dominasi kelompok yang lebih kuat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','3');">
+													<input id="pilihan_3_3" onchange="pilihan('3','d','700')" pil="d" name="pilihan3" type="radio">
+													<label for="pilihan_3_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Persaingan, karena masing-masing kelompok tetap mempertahankan identitas budaya secara tertutup.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('3.','4');">
+													<input id="pilihan_3_4" onchange="pilihan('3','e','700')" pil="e" name="pilihan3" type="radio">
+													<label for="pilihan_3_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(3,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Akomodasi, karena terdapat upaya meredakan ketegangan dengan kesepakatan bersama dan saling membantu.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-4"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Di salah satu kota besar, warga merasa resah karena sering terjadi penyerangan oleh sekelompok remaja bermotor. Para pelaku membawa senjata tajam. Aksi kekerasan ini umumnya berlangsung pada malam hari, terutama di kawasan Simpang Tiga, jalur utama yang sering dilalui warga ketika malam. Pihak kepolisian menyatakan bahwa insiden ini bukan yang pertama kali terjadi. Dalam dua bulan terakhir, telah terjadi lima kasus serupa dengan pola yang sama yaitu dilakukan oleh remaja dan menyasar warga yang sedang sendirian.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Mengapa peristiwa yang terjadi dalam ilustrasi tersebut dianggap sebagai gejala sosial?<br>Klik pilihan Benar atau Salah pada setiap pernyataan berdasarkan isi teks!</p>
+ <!-- PG Kompleks > 1 jawaban pilihan -->
+											<table class="table table-bordered table-hover" style="margin-top:10px;">
+											<thead><tr><td class="text-center d-none" style="width:50px">#</td><td>Pernyataan</td><td class="text-center" style="width:100px">Benar</td><td class="text-center" style="width:100px">Salah</td></tr></thead><tbody><tr><td class="text-center d-none" style="padding:2px">A.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Kasus tersebut merupakan gejala sosial dengan dampak keresahan dan menimbulkan ketakutan di masyarakat.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('4.','1','1');">
+															<input id="pilihan_4_1_1" name="pilihan_4_1" class="pilihan__1" onchange="pilihan3('4','3','1261','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_4_1_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('4.','1','2');">
+															<input id="pilihan_4_1_2" name="pilihan_4_1" class="pilihan__1" onchange="pilihan3('4','3','1261','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_4_1_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">B.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Kasus ini termasuk gejala sosial akibat adanya penyimpangan perilaku dari norma sosial yang berlaku di masyarakat.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('4.','2','1');">
+															<input id="pilihan_4_2_1" name="pilihan_4_2" class="pilihan__2" onchange="pilihan3('4','3','1261','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_4_2_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('4.','2','2');">
+															<input id="pilihan_4_2_2" name="pilihan_4_2" class="pilihan__2" onchange="pilihan3('4','3','1261','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_4_2_2"></label>
+															</div>
+														</td>
+													</tr><tr><td class="text-center d-none" style="padding:2px">C.</td><td class="text-left" style="padding:2px;padding-left:10px"><!--?xml encoding="utf-8" ?--><p>Aksi kekerasan dalam kasus ini terjadi secara individu dan tidak berulang sama sekali sehingga bukan gejala sosial.</p>
+</td>														<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('4.','3','1');">
+															<input id="pilihan_4_3_1" name="pilihan_4_3" class="pilihan__3" onchange="pilihan3('4','3','1261','ABCDEFGHIJK')" type="radio" value="1">
+															<label for="pilihan_4_3_1"></label>
+															</div>
+														</td>
+																											<td class="text-center" style="padding:2px">
+															<div class="checkbox icheck-primary" onclick="KlikJawaban3('4.','3','2');">
+															<input id="pilihan_4_3_2" name="pilihan_4_3" class="pilihan__3" onchange="pilihan3('4','3','1261','ABCDEFGHIJK')" type="radio" value="2">
+															<label for="pilihan_4_3_2"></label>
+															</div>
+														</td>
+													</tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-5"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><img src="/tka/cbt_images/61587_25d5924e0b541ff197a099d8218134b7.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Pemerintah desa membiarkan para penduduk melakukan urbanisasi. Jika hal tersebut terus terjadi, apa dampak negatif gejala sosial yang relevan berdasarkan kasus pada infografis?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','0');">
+													<input id="pilihan_5_0" onchange="pilihan('5','a','702')" pil="a" name="pilihan5" type="radio">
+													<label for="pilihan_5_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pengangguran di wilayah pedesaan akan terus meningkat karena lapangan kerja semakin sempit.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','1');">
+													<input id="pilihan_5_1" onchange="pilihan('5','b','702')" pil="b" name="pilihan5" type="radio">
+													<label for="pilihan_5_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sumber-sumber hayati akan rusak karena pencemaran lingkungan akibat pembangunan yang masif.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','2');">
+													<input id="pilihan_5_2" onchange="pilihan('5','c','702')" pil="c" name="pilihan5" type="radio">
+													<label for="pilihan_5_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kerusakan lingkungan di perdesaan akibat alih fungsi lahan terjadi karena industrialisasi semakin pesat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','3');">
+													<input id="pilihan_5_3" onchange="pilihan('5','d','702')" pil="d" name="pilihan5" type="radio">
+													<label for="pilihan_5_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kenaikan harga terjadi seiring penurunan pasokan pangan karena banyak lahan yang tidak tergarap.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('5.','4');">
+													<input id="pilihan_5_4" onchange="pilihan('5','e','702')" pil="e" name="pilihan5" type="radio">
+													<label for="pilihan_5_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(5,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pemanasan global terus meningkat karena polusi udara di perkotaan tidak diimbangi dengan penghijauan.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-6"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Pentingnya Keterlibatan Perempuan Dalam Politik</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/36608_9b22b00c1acd114a31c3cda1ac88179a.png" alt=""></strong></p>
+<p style="text-align: justify;">Penelitian ini bertujuan untuk memahami bagaimana keterlibatan perempuan dalam partai politik. Peneliti ingin melihat apakah perempuan benar-benar memiliki kesempatan dan mampu mengambil peran penting di dalamnya. Fokus peneliti adalah mengamati sejauh mana perempuan terlibat sebagai anggota biasa, pengurus partai, atau sebagai calon wakil rakyat dalam pemilihan umum. Dengan ini, peneliti berharap bisa mengetahui posisi perempuan dalam struktur partai dan kontribusi mereka terhadap aktivitas politik. Penelitian ini penting untuk melihat kesetaraan gender dalam dunia politik.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Manakah pernyataan yang menunjukkan tujuan penelitian kualitatif studi kasus dari permasalahan sosial tersebut?<br>Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('6.','0');">
+													<input id="pilihan_6_0" class="pilihan6" onchange="pilihan2('6','a','703')" pil="a" name="pilihan6" type="checkbox" value="A">
+													<label for="pilihan_6_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(6,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Untuk mengidentifikasi kesempatan dan peran yang dapat diambil perempuan dalam aktivitas politik di partai.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('6.','1');">
+													<input id="pilihan_6_1" class="pilihan6" onchange="pilihan2('6','b','703')" pil="b" name="pilihan6" type="checkbox" value="B">
+													<label for="pilihan_6_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(6,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Untuk memahami kontribusi spesifik perempuan terhadap dinamika dan keputusan politik di dalam partai.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('6.','2');">
+													<input id="pilihan_6_2" class="pilihan6" onchange="pilihan2('6','c','703')" pil="c" name="pilihan6" type="checkbox" value="C">
+													<label for="pilihan_6_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(6,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Untuk menganalisis korelasi antara tingkat keterlibatan perempuan dengan eksistensi partai politik.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('6.','3');">
+													<input id="pilihan_6_3" class="pilihan6" onchange="pilihan2('6','d','703')" pil="d" name="pilihan6" type="checkbox" value="D">
+													<label for="pilihan_6_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(6,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Untuk mengetahui sejauh mana kesetaraan gender terwujud dalam struktur dan praktik partai politik.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('6.','4');">
+													<input id="pilihan_6_4" class="pilihan6" onchange="pilihan2('6','e','703')" pil="e" name="pilihan6" type="checkbox" value="E">
+													<label for="pilihan_6_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(6,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Untuk menentukan pengaruh keterlibatan perempuan terhadap pengambilan keputusan yang berpihak pada perempuan.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-7"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><strong>Pentingnya Keterlibatan Perempuan Dalam Politik</strong></p>
+<p style="text-align: center;"><strong><img src="/tka/cbt_images/46388_9b22b00c1acd114a31c3cda1ac88179a.png" alt=""></strong></p>
+<p style="text-align: justify;">Penelitian ini bertujuan untuk memahami bagaimana keterlibatan perempuan dalam partai politik. Peneliti ingin melihat apakah perempuan benar-benar memiliki kesempatan dan mampu mengambil peran penting di dalamnya. Fokus peneliti adalah mengamati sejauh mana perempuan terlibat sebagai anggota biasa, pengurus partai, atau sebagai calon wakil rakyat dalam pemilihan umum. Dengan ini, peneliti berharap bisa mengetahui posisi perempuan dalam struktur partai dan kontribusi mereka terhadap aktivitas politik. Penelitian ini penting untuk melihat kesetaraan gender dalam dunia politik.<br>Berikut merupakan langkah-langkah penelitian sosial yang akan dilakukan peneliti:</p>
+<ol>
+<li>Mengumpulkan data melalui wawancara, observasi, dan dokumentasi.</li>
+<li>Menentukan landasan teori dan konsep yang relevan.</li>
+<li>Mengolah dan menganalisis data hasil penelitian.</li>
+<li>Menyusun latar belakang penelitian berdasarkan data resmi.</li>
+<li>Menarik kesimpulan dan memberikan rekomendasi kebijakan</li>
+</ol>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Manakah urutan langkah-langkah penelitian yang termasuk tahapan pelaksanaan penelitian sosial?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('7.','0');">
+													<input id="pilihan_7_0" onchange="pilihan('7','a','704')" pil="a" name="pilihan7" type="radio">
+													<label for="pilihan_7_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(7,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengumpulkan data melalui wawancara, observasi, dan dokumentasi dan Menentukan landasan teori dan konsep yang relevan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('7.','1');">
+													<input id="pilihan_7_1" onchange="pilihan('7','b','704')" pil="b" name="pilihan7" type="radio">
+													<label for="pilihan_7_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(7,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengumpulkan data melalui wawancara, observasi, dan dokumentasi dan Mengolah dan menganalisis data hasil penelitian.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('7.','2');">
+													<input id="pilihan_7_2" onchange="pilihan('7','c','704')" pil="c" name="pilihan7" type="radio">
+													<label for="pilihan_7_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(7,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengumpulkan data melalui wawancara, observasi, dan dokumentasi dan Menarik kesimpulan dan memberikan rekomendasi kebijakan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('7.','3');">
+													<input id="pilihan_7_3" onchange="pilihan('7','d','704')" pil="d" name="pilihan7" type="radio">
+													<label for="pilihan_7_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(7,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menentukan landasan teori dan konsep yang relevan dan Menyusun latar belakang penelitian berdasarkan data resmi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('7.','4');">
+													<input id="pilihan_7_4" onchange="pilihan('7','e','704')" pil="e" name="pilihan7" type="radio">
+													<label for="pilihan_7_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(7,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menyusun latar belakang penelitian berdasarkan data resmi dan Menarik kesimpulan dan memberikan rekomendasi kebijakan.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-8"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Penggunaan media sosial yang sangat banyak digemari oleh remaja menimbulkan kekhawatiran dapat mempengaruhi perilaku dan moral mereka. Kenakalan remaja yang makin rumit sering dihubungkan dengan interaksi mereka dengan konten online tertentu. Sehingga seorang peneliti melakukan penelitian pada remaja usia 13-18 tahun yang sering memakai media sosial. Peneliti tersebut mengumpulkan data dengan menyebarkan kuesioner online kepada 150 remaja. Kuesioner ini mempunyai dua bagian utama yaitu satu untuk mengukur seberapa sering dan bagaimana mereka menggunakan media sosial, dan bagian lainnya untuk mengukur tingkat kenakalan remaja berdasarkan pengalaman dan pandangan mereka sendiri.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Manakah pernyataan yang menunjukkan metode penelitian yang sesuai dengan teknik pengumpulan data yang dilakukan?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','0');">
+													<input id="pilihan_8_0" onchange="pilihan('8','a','705')" pil="a" name="pilihan8" type="radio">
+													<label for="pilihan_8_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penelitian eksperimen dengan teknik penentuan sampel <em>stratified sampling</em> karena penelitian ini membandingkan pada kelompok pengguna media sosial maupun yang tidak dari berbagai kalangan yang berbeda tingkatan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','1');">
+													<input id="pilihan_8_1" onchange="pilihan('8','b','705')" pil="b" name="pilihan8" type="radio">
+													<label for="pilihan_8_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penelitian eksploratif dengan teknik penentuan samplel <em>cluster samping</em> berdasarkan wilayah untuk mengeksplorasi fenomena penggunaan media sosial dapat mempengaruhi moral remaja.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','2');">
+													<input id="pilihan_8_2" onchange="pilihan('8','c','705')" pil="c" name="pilihan8" type="radio">
+													<label for="pilihan_8_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penelitian kuantitatif dengan teknik penentuan sampel <em>simple random sampling</em> berdasarkan rentang usia yang diambil secara acak untuk menganalisis pengaruh penggunaan media sosial terhadap tingkat kenakalan remaja.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','3');">
+													<input id="pilihan_8_3" onchange="pilihan('8','d','705')" pil="d" name="pilihan8" type="radio">
+													<label for="pilihan_8_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penelitian lapangan dengan teknik penentuan sampel <em>area sampling</em> berdasarkan area tertentu untuk mengobservasi fenomena penggunaan media sosial terhadap tingkat kenakalan remaja.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('8.','4');">
+													<input id="pilihan_8_4" onchange="pilihan('8','e','705')" pil="e" name="pilihan8" type="radio">
+													<label for="pilihan_8_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(8,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penelitian kualitatif dengan teknik penentuan sampel <em>purposive sampling</em> dengan menentukan kriteria tertentu untuk memahami dampak yang ditimbulkan dari fenomena penggunaan media sosial pada remaja.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-9"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Penelitian ini bertujuan untuk menelaah secara komprehensif fenomena meningkatnya jumlah pengemis anak di ruang publik. Fokus utama diarahkan pada identifikasi faktor-faktor penyebab anak-anak berada di jalanan, seperti kondisi kemiskinan, keterbatasan akses terhadap pendidikan, serta eksploitasi oleh pihak tertentu. Penelitian ini juga mengeksplorasi dampak sosial dan psikologis yang dialami anak-anak tersebut, termasuk hilangnya masa kanak-kanak, kerentanan terhadap tindak kekerasan, dan munculnya stigma sosial. Teknik pengumpulan data yang digunakan meliputi observasi partisipatif, wawancara mendalam, dan kajian pustaka. Temuan dari penelitian ini diharapkan dapat memberikan kontribusi dalam pengembangan ilmu sosial, menjadi dasar pemecahan permasalahan sosial, serta meningkatkan kapasitas dan kompetensi peneliti.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pernyataan manakah yang paling tepat menggambarkan kontribusi penelitian sosial dalam menyelesaikan permasalahan berdasarkan ilustrasi tersebut?<br>Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.</p>
+ <!-- PG kompleks checkbox -->
+											<table class="table" style="margin-top:10px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','0');">
+													<input id="pilihan_9_0" class="pilihan9" onchange="pilihan2('9','a','706')" pil="a" name="pilihan9" type="checkbox" value="A">
+													<label for="pilihan_9_0"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menambah wawasan tentang dampak fisik, psikologis maupun sosial yang dialami oleh pengemis di bawah umur.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','1');">
+													<input id="pilihan_9_1" class="pilihan9" onchange="pilihan2('9','b','706')" pil="b" name="pilihan9" type="checkbox" value="B">
+													<label for="pilihan_9_1"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Memberikan solusi atau saran kepada pemerintah untuk dapat dijadikan sebagai dasar pengambilan kebijakan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','2');">
+													<input id="pilihan_9_2" class="pilihan9" onchange="pilihan2('9','c','706')" pil="c" name="pilihan9" type="checkbox" value="C">
+													<label for="pilihan_9_2"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menjadi referensi utama bagi penelitian selanjutnya dan memberikan manfaat bagi para pembaca.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','3');">
+													<input id="pilihan_9_3" class="pilihan9" onchange="pilihan2('9','d','706')" pil="d" name="pilihan9" type="checkbox" value="D">
+													<label for="pilihan_9_3"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Meningkatkan kesadaran masyarakat tentang kompleksitas dan bahaya pengemis di bawah umur.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="checkbox icheck-primary" onclick="KlikJawaban2('9.','4');">
+													<input id="pilihan_9_4" class="pilihan9" onchange="pilihan2('9','e','706')" pil="e" name="pilihan9" type="checkbox" value="E">
+													<label for="pilihan_9_4"></label>
+													</div>
+											</td><td style="padding-top:15px;border:0px;padding:0px" onclick="KlikJawaban2(9,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengurangi tingkat kekerasan dan eksploitasi di jalanan pada anak di bawah umur.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-10"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perhatikan grafik di bawah ini!</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/79570_3ec9b6972a88d909a3ff87b151cf396d.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan grafik hasil penelitian di atas, penjelasan manakah yang paling tepat mengenai pola partisipasi komunitas dalam kegiatan lingkungan?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','0');">
+													<input id="pilihan_10_0" onchange="pilihan('10','a','707')" pil="a" name="pilihan10" type="radio">
+													<label for="pilihan_10_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Semua jenis kegiatan lingkungan memiliki tingkat partisipasi yang seragam dan tinggi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','1');">
+													<input id="pilihan_10_1" onchange="pilihan('10','b','707')" pil="b" name="pilihan10" type="radio">
+													<label for="pilihan_10_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kegiatan bersih sungai adalah yang paling populer dan menarik partisipasi komunitas terbanyak.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','2');">
+													<input id="pilihan_10_2" onchange="pilihan('10','c','707')" pil="c" name="pilihan10" type="radio">
+													<label for="pilihan_10_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Masyarakat cenderung tidak tertarik pada kegiatan lingkungan yang bersifat fisik seperti penanaman pohon.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','3');">
+													<input id="pilihan_10_3" onchange="pilihan('10','d','707')" pil="d" name="pilihan10" type="radio">
+													<label for="pilihan_10_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Daur ulang sampah merupakan kegiatan yang paling sukses dalam menarik jumlah peserta terbanyak.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('10.','4');">
+													<input id="pilihan_10_4" onchange="pilihan('10','e','707')" pil="e" name="pilihan10" type="radio">
+													<label for="pilihan_10_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(10,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tidak ada perbedaan yang signifikan antara partisipasi dalam penanaman pohon dan daur ulang sampah.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-11"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Penelitian ini bertujuan untuk mengkaji pengaruh permainan gim daring <em>(online)</em> terhadap semangat belajar siswa. Saat ini, banyak siswa yang gemar bermain gim daring. Seorang peneliti tertarik untuk mengetahui apakah kebiasaan tersebut dapat meningkatkan semangat belajar atau justru menurunkannya. Penelitian akan dilakukan di sebuah sekolah dengan melibatkan siswa dari kelas X, XI, dan XII. Pemilihan tiga jenjang kelas ini dimaksudkan agar hasil yang diperoleh lebih komprehensif serta dapat mengungkap adanya perbedaan pengaruh gim daring berdasarkan tingkat usia dan kematangan siswa.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan kasus tersebut, teknik sampling manakah yang paling tepat digunakan agar data yang diperoleh relevan dan representatif terhadap fenomena yang diteliti?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','0');">
+													<input id="pilihan_11_0" onchange="pilihan('11','a','708')" pil="a" name="pilihan11" type="radio">
+													<label for="pilihan_11_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><em>Simple Random Sampling</em>, karena setiap siswa memiliki peluang yang sama untuk dipilih, tanpa mempertimbangkan jenjang kelas atau tingkat kematangan mereka.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','1');">
+													<input id="pilihan_11_1" onchange="pilihan('11','b','708')" pil="b" name="pilihan11" type="radio">
+													<label for="pilihan_11_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><em>Purposive Sampling,</em> karena peneliti memilih siswa tertentu yang aktif bermain gim daring, meskipun tidak mewakili setiap kelompok usia.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','2');">
+													<input id="pilihan_11_2" onchange="pilihan('11','c','708')" pil="c" name="pilihan11" type="radio">
+													<label for="pilihan_11_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><em>Stratified Random Sampling</em>, karena sampel diambil dari kelompok kelas yang berbeda agar hasil mencerminkan perbedaan usia dan kematangan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','3');">
+													<input id="pilihan_11_3" onchange="pilihan('11','d','708')" pil="d" name="pilihan11" type="radio">
+													<label for="pilihan_11_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><em>Cluster Sampling,</em> karena responden biasanya diambil berdasarkan wilayah tertentu, sedangkan penelitian ini fokus pada satu sekolah saja.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('11.','4');">
+													<input id="pilihan_11_4" onchange="pilihan('11','e','708')" pil="e" name="pilihan11" type="radio">
+													<label for="pilihan_11_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(11,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p><em>Snowball Sampling,</em> karena cocok untuk subjek sulit dijangkau, sedangkan siswa sekolah dapat diakses langsung oleh peneliti.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-12"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perhatikan hasil penelitian berikut!</p>
+<p>Tabel Perspesi, hambatan, dan harapan publik mengenai pelayanan pemerintah</p>
+<p style="text-align: center;"><img src="/tka/cbt_images/90488_ec4c37e033871c0e73779ac150b7516f.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Bagaimana langkah-langkah penelitian yang tepat agar peneliti bisa menghasilkan sajian data tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','0');">
+													<input id="pilihan_12_0" onchange="pilihan('12','a','710')" pil="a" name="pilihan12" type="radio">
+													<label for="pilihan_12_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peneliti membuat panduan wawancara yang diturunkan dari rumusan masalah penelitian, lalu melakukan pengumpulan data, mengecek kelengkapan jawaban, mengidentifikasi hasil jawaban, lalu mengelompokkannya dalam kategori yang sama.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','1');">
+													<input id="pilihan_12_1" onchange="pilihan('12','b','710')" pil="b" name="pilihan12" type="radio">
+													<label for="pilihan_12_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peneliti membuat daftar pertanyaan tertutup, mengujicobakannya dalam kelompok kecil, mengecek kelengkapan jawaban, mengelompokkan jawaban dalam tema tertentu, lalu menyimpulkan jawaban setiap responden.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','2');">
+													<input id="pilihan_12_2" onchange="pilihan('12','c','710')" pil="c" name="pilihan12" type="radio">
+													<label for="pilihan_12_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peneliti membuat kuesioner dengan jenis pertanyaan campuran, lalu melakukan pengumpulan data, mengecek kelengkapan jawaban, mengklasifikasi jawaban setiap responden, lalu melakukan penyajian data.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','3');">
+													<input id="pilihan_12_3" onchange="pilihan('12','d','710')" pil="d" name="pilihan12" type="radio">
+													<label for="pilihan_12_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peneliti merumuskan pertanyaan-pertanyaan pokok dari judul penelitian, lalu membuat panduan wawancara, melakukan uji coba terbatas, melakukan pengumpulan data, mengecek kelengkapan data, lalu penyajian data.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('12.','4');">
+													<input id="pilihan_12_4" onchange="pilihan('12','e','710')" pil="e" name="pilihan12" type="radio">
+													<label for="pilihan_12_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(12,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Peneliti merumuskan indikator dari variabel, lalu menurunkan indikator menjadi butir pertanyaan, melakukan uji coba terbatas, melakukan pengumpulan data, mengecek kelengkapan data, lalu penyajian data.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-13"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Perhatikan hasil penelitian berikut!</p>
+<p>Tabel Perspesi, hambatan, dan harapan publik mengenai pelayanan pemerintah</p>
+<p><img src="/tka/cbt_images/91960_ec4c37e033871c0e73779ac150b7516f.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Bagaimana langkah-langkah penelitian yang tepat agar peneliti bisa menghasilkan sajian data tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','0');">
+													<input id="pilihan_13_0" onchange="pilihan('13','a','709')" pil="a" name="pilihan13" type="radio">
+													<label for="pilihan_13_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,0);"><!--?xml encoding="utf-8" ?--><p>Peneliti membuat panduan wawancara yang diturunkan dari rumusan masalah penelitian, lalu melakukan pengumpulan data, mengecek kelengkapan jawaban, mengidentifikasi hasil jawaban, lalu mengelompokkannya dalam kategori yang sama.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','1');">
+													<input id="pilihan_13_1" onchange="pilihan('13','b','709')" pil="b" name="pilihan13" type="radio">
+													<label for="pilihan_13_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,1);"><!--?xml encoding="utf-8" ?--><p>Peneliti membuat daftar pertanyaan tertutup, mengujicobakannya dalam kelompok kecil, mengecek kelengkapan jawaban, mengelompokkan jawaban dalam tema tertentu, lalu menyimpulkan jawaban setiap responden.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','2');">
+													<input id="pilihan_13_2" onchange="pilihan('13','c','709')" pil="c" name="pilihan13" type="radio">
+													<label for="pilihan_13_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,2);"><!--?xml encoding="utf-8" ?--><p>Peneliti membuat kuesioner dengan jenis pertanyaan campuran, lalu melakukan pengumpulan data, mengecek kelengkapan jawaban, mengklasifikasi jawaban setiap responden, lalu melakukan penyajian data.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','3');">
+													<input id="pilihan_13_3" onchange="pilihan('13','d','709')" pil="d" name="pilihan13" type="radio">
+													<label for="pilihan_13_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,3);"><!--?xml encoding="utf-8" ?--><p>Peneliti merumuskan pertanyaan-pertanyaan pokok dari judul penelitian, lalu membuat panduan wawancara, melakukan uji coba terbatas, melakukan pengumpulan data, mengecek kelengkapan data, lalu penyajian data.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('13.','4');">
+													<input id="pilihan_13_4" onchange="pilihan('13','e','709')" pil="e" name="pilihan13" type="radio">
+													<label for="pilihan_13_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(13,4);"><!--?xml encoding="utf-8" ?--><p>Peneliti merumuskan indikator dari variabel, lalu menurunkan indikator menjadi butir pertanyaan, melakukan uji coba terbatas, melakukan pengumpulan data, mengecek kelengkapan data, lalu penyajian data.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-14"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Di beberapa kota di Indonesia mulai banyak terjadi konflik antara kelompok pedagang pasar tradisional dan pengelola pusat perbelanjaan modern/mal yang baru dibangun. Para pedagang pasar tradisional merasa dirugikan karena kehadiran mal tersebut mengakibatkan menurunnya jumlah pembeli di pasar tradisional. Mereka menganggap bahwa pembangunan pusat perbelanjaan tidak memperhatikan keberlangsungan ekonomi masyarakat kecil. Sementara itu, pihak pengelola mal merasa bahwa pembangunan tersebut sah dan merupakan bentuk kemajuan ekonomi kota. Ketegangan makin meningkat setelah terjadi aksi demonstrasi yang diwarnai kericuhan. Pemerintah kota mencoba meredam konflik dengan memediasi kedua belah pihak namun hingga kini belum tercapai kesepakatan yang memuaskan semua pihak. Konflik ini menjadi sorotan media dan memunculkan berbagai reaksi dari masyarakat luas.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Apa bentuk konflik sosial yang terjadi berdasarkan ilustrasi tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','0');">
+													<input id="pilihan_14_0" onchange="pilihan('14','a','711')" pil="a" name="pilihan14" type="radio">
+													<label for="pilihan_14_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Konflik antar kelas sosial karena terjadi benturan antara pedagang tradisional dan pedagang di mal.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','1');">
+													<input id="pilihan_14_1" onchange="pilihan('14','b','711')" pil="b" name="pilihan14" type="radio">
+													<label for="pilihan_14_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Konflik antarkelompok kepentingan karena adanya perbedaan kepentingan ekonomi yang berbeda.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','2');">
+													<input id="pilihan_14_2" onchange="pilihan('14','c','711')" pil="c" name="pilihan14" type="radio">
+													<label for="pilihan_14_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Konflik politik antar institusi dalam hal ini kelompok pedagang di mal ingin mengalahkan pedagang pasar tradisional.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','3');">
+													<input id="pilihan_14_3" onchange="pilihan('14','d','711')" pil="d" name="pilihan14" type="radio">
+													<label for="pilihan_14_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Konflik budaya akibat perubahan nilai dimana pedagang pasar tradisional kehilangan pelanggan sejak adanya mal.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('14.','4');">
+													<input id="pilihan_14_4" onchange="pilihan('14','e','711')" pil="e" name="pilihan14" type="radio">
+													<label for="pilihan_14_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(14,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Konflik antarpribadi karena perbedaan individu yang terjadi diantara para pedang tradisional kepada pedagang di mal.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-15"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Pada suatu daerah terjadi ketegangan antara komunitas adat dengan perusahaan perkebunan sawit. Konflik ini bermulai dari klaim terhadap hak kepemilikan lahan. Perusahaan berpegang pada izin yang mereka miliki, sementara komunitas adat merasa terabaikan. Konflik ini mengakibatkan terjadinya bentrokan fisik dan pemblokiran jalan oleh warga yang mengakibatkan aktivitas distribusi hasil perkebunan sawit menjadi terhambat. Mediasi awal dalam rangka penyelesaian konflik yang terjadi sudah dilakukan tetapi gagal total dan bahkan memperparah ketegangan dan ketidakpercayaan antara kedua belah pihak (komunitas adat dan pihak perusahaan perkebunan sawit). Situasi yang terjadi ini berada pada titik kritis dan memerlukan intervensi yang lebih kuat.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Bagaimana strategi yang tepat untuk mencapai kedamaian yang berkelanjutan antara komunitas adat dan perusahaan perkebunan?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','0');">
+													<input id="pilihan_15_0" onchange="pilihan('15','a','712')" pil="a" name="pilihan15" type="radio">
+													<label for="pilihan_15_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Memulai kembali negosiasi antara manajemen perusahaan dan perwakilan komunitas adat tanpa melibatkan campur tangan pihak ketiga yang netral.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','1');">
+													<input id="pilihan_15_1" onchange="pilihan('15','b','712')" pil="b" name="pilihan15" type="radio">
+													<label for="pilihan_15_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Melakukan dialog multi-pihak yang melibatkan pemerintah, akademisi, dan organisasi non pemerintah untuk membangun pemahaman bersama.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','2');">
+													<input id="pilihan_15_2" onchange="pilihan('15','c','712')" pil="c" name="pilihan15" type="radio">
+													<label for="pilihan_15_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Melakukan arbitrase dengan menunjuk pihak ketiga yang independen dan memiliki kewenangan untuk membuat keputusan mengikat secara hukum.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','3');">
+													<input id="pilihan_15_3" onchange="pilihan('15','d','712')" pil="d" name="pilihan15" type="radio">
+													<label for="pilihan_15_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengembangkan program kemitraan usaha bersama antara kedua belah pihak dengan sistem pembagian keuntungan yang di bagi secara adil.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('15.','4');">
+													<input id="pilihan_15_4" onchange="pilihan('15','e','712')" pil="e" name="pilihan15" type="radio">
+													<label for="pilihan_15_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(15,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Membentuk forum musyawarah desa yang difasilitasi oleh tokoh masyarakat setempat untuk mencari solusi terbaik yang berbasis kearifan lokal.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-16"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><img src="/tka/cbt_images/33146_433979b768d21e6deaa4821c422fbd3f.png" alt="" width="619" height="380"></p>
+<p style="text-align: justify;">Di Desa Tanjung Harapan, sebuah perusahaan tambang mulai beroperasi setelah mendapatkan izin dari pemerintah daerah. Perusahaan tersebut membuka lahan secara besar-besaran, termasuk wilayah hutan adat yang selama ini dikelola secara turun-temurun oleh masyarakat lokal. Masyarakat adat menolak keberadaan tambang karena merasa tidak dilibatkan dalam proses perizinan dan khawatir kehilangan sumber penghidupan. Dalam beberapa bulan terakhir, terjadi aksi protes yang berujung pada bentrokan antara warga dan aparat keamanan.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan ilustrasi tersebut, apa penyebab utama terjadinya konflik sosial di Desa Tanjung Harapan?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','0');">
+													<input id="pilihan_16_0" onchange="pilihan('16','a','713')" pil="a" name="pilihan16" type="radio">
+													<label for="pilihan_16_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Pemerintah daerah tidak mampu mengelola hasil tambang dengan baik.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','1');">
+													<input id="pilihan_16_1" onchange="pilihan('16','b','713')" pil="b" name="pilihan16" type="radio">
+													<label for="pilihan_16_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perusahaan tidak memberikan pelatihan kerja kepada masyarakat sekitar.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','2');">
+													<input id="pilihan_16_2" onchange="pilihan('16','c','713')" pil="c" name="pilihan16" type="radio">
+													<label for="pilihan_16_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Masyarakat adat tidak memiliki pengetahuan tentang kegiatan pertambangan modern.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','3');">
+													<input id="pilihan_16_3" onchange="pilihan('16','d','713')" pil="d" name="pilihan16" type="radio">
+													<label for="pilihan_16_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kurangnya komunikasi dan partisipasi masyarakat dalam proses pengambilan keputusan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('16.','4');">
+													<input id="pilihan_16_4" onchange="pilihan('16','e','713')" pil="e" name="pilihan16" type="radio">
+													<label for="pilihan_16_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(16,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Terjadi benturan kepentingan antara perusahaan dan hak masyarakat adat atas lahan.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-17"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Konflik mulai terjadi ketika proyek pabrik yang didukung pemerintah lokal mulai dibangun di tanah yang secara tradisional menghidupi petani lokal. Petani mengatakan bahwa mereka tidak diberi informasi dan mengkhawatirkan nasib mereka akibat hilangnya mata pencaharian. Protes petani akhirnya viral di media sosial dan akhinya mendapatkan perhatian dari pemerintah. Pemerintah lokal mengundang pihak petani dan pabrik untuk duduk bersama berdialog dengan fasilitasi tim perdamaian. Kesepakatan akhirnya terwujud dalam bentuk kompensasi, dibangunnya zona penyangga pertanian dan dilibatkannya warga (petani) dalam pengawasan proyek.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan ilustrasi tersebut, apa cara yang paling efektif untuk meredakan konflik dan menciptakan harmoni sosial?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','0');">
+													<input id="pilihan_17_0" onchange="pilihan('17','a','714')" pil="a" name="pilihan17" type="radio">
+													<label for="pilihan_17_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Memindahkan lahan pertanian ke lokasi lain tanpa perundingan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','1');">
+													<input id="pilihan_17_1" onchange="pilihan('17','b','714')" pil="b" name="pilihan17" type="radio">
+													<label for="pilihan_17_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Melakukan dialog untuk menciptakan kesepakatan yang inklusif.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','2');">
+													<input id="pilihan_17_2" onchange="pilihan('17','c','714')" pil="c" name="pilihan17" type="radio">
+													<label for="pilihan_17_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menawarkan bagi hasil saham kepada petani tanpa jaminan tanah.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','3');">
+													<input id="pilihan_17_3" onchange="pilihan('17','d','714')" pil="d" name="pilihan17" type="radio">
+													<label for="pilihan_17_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menekan protes dengan melakukan mobilisasi aparat keamanan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('17.','4');">
+													<input id="pilihan_17_4" onchange="pilihan('17','e','714')" pil="e" name="pilihan17" type="radio">
+													<label for="pilihan_17_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(17,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Melanjutkan konstruksi tanpa mempertimbangkan keberatan warga.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-18"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><img src="/tka/cbt_images/85430_a835ddfc7e4df0b9c82357d46edb2085.png" alt=""></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><p>Manakah pernyataan yang paling tepat menunjukkan perbedaan kelompok sosial pada infografis tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','0');">
+													<input id="pilihan_18_0" onchange="pilihan('18','a','715')" pil="a" name="pilihan18" type="radio">
+													<label for="pilihan_18_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Keluarga menunjukkan kelompok informal yang terbentuk secara spontan dan alami dari interaksi sosial yang terjadi karena adanya kesamaan minat, hobi, atau tujuan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','1');">
+													<input id="pilihan_18_1" onchange="pilihan('18','b','715')" pil="b" name="pilihan18" type="radio">
+													<label for="pilihan_18_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kelompok belajar menunjukkan kelompok primer yang ditandai oleh adanya hubungan yang sangat erat, personal, intim, dan interaksi tatap muka yang sering.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','2');">
+													<input id="pilihan_18_2" onchange="pilihan('18','c','715')" pil="c" name="pilihan18" type="radio">
+													<label for="pilihan_18_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Organisasi pramuka menunjukkan kelompok primer yang ditandai dengan adanya hubungan yang sangat erat, personal, intim, dan interaksi tatap muka yang sering.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','3');">
+													<input id="pilihan_18_3" onchange="pilihan('18','d','715')" pil="d" name="pilihan18" type="radio">
+													<label for="pilihan_18_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Teman bermain menunjukkan kelompok formal yang dibentuk secara sengaja dan terencana dengan tujuan serta struktur yang jelas dan memiliki aturan yang tertulis.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('18.','4');">
+													<input id="pilihan_18_4" onchange="pilihan('18','e','715')" pil="e" name="pilihan18" type="radio">
+													<label for="pilihan_18_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(18,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Organisasi OSIS menunjukkan kelompok sekunder yang dicirikan oleh hubungan yang lebih formal, impersonal, dan berdasarkan tujuan atau kepentingan tertentu.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-19"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Di Kelurahan Maju Jaya, warga terdiri dari beragam kelompok sosial seperti penduduk asli, pendatang dari kota, serta etnis minoritas. Dalam kegiatan pembangunan balai warga, kelompok penduduk asli selalu diundang dalam rapat musyawarah, sementara kelompok lain jarang dilibatkan. Kelompok pendatang dan etnis minoritas juga kesulitan memperoleh informasi tentang kegiatan warga karena akses informasi hanya beredar di lingkaran tertentu. Akibatnya, kelompok yang tidak terlibat merasa tersisih dan mulai muncul perasaan tidak dihargai. Ketegangan mulai terlihat ketika beberapa warga menyuarakan ketidakpuasan dalam forum daring lokal. Situasi ini menimbulkan saling curiga, bahkan muncul komentar negatif antar kelompok. Dalam masyarakat majemuk seperti ini, praktik ketidaksetaraan sosial dalam partisipasi dapat menjadi awal dari konflik yang lebih besar.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Manakah pernyataan yang menjadi pemicu awal terjadinya ketegangan antara kelompok pendatang dan etnis minoritas?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','0');">
+													<input id="pilihan_19_0" onchange="pilihan('19','a','716')" pil="a" name="pilihan19" type="radio">
+													<label for="pilihan_19_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Ketidakadilan dalam pengambilan keputusan musyawarah membentuk jarak sosial antar kelompok dan menurunkan rasa dihargai.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','1');">
+													<input id="pilihan_19_1" onchange="pilihan('19','b','716')" pil="b" name="pilihan19" type="radio">
+													<label for="pilihan_19_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesenjangan dalam akses informasi memperkuat stigma sosial dan mendorong eksklusi kelompok minoritas.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','2');">
+													<input id="pilihan_19_2" onchange="pilihan('19','c','716')" pil="c" name="pilihan19" type="radio">
+													<label for="pilihan_19_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Dominasi kelompok mayoritas memperlemah solidaritas sosial dan merenggangkan relasi antar kelompok masyarakat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','3');">
+													<input id="pilihan_19_3" onchange="pilihan('19','d','716')" pil="d" name="pilihan19" type="radio">
+													<label for="pilihan_19_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Ketimpangan dalam hak partisipasi membentuk jurang sosial, menurunkan rasa saling percaya antar kelompok.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('19.','4');">
+													<input id="pilihan_19_4" onchange="pilihan('19','e','716')" pil="e" name="pilihan19" type="radio">
+													<label for="pilihan_19_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(19,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Ketidaksetaraan dalam pembagian peran memperkuat stratifikasi sosial dan menghambat mobilitas kelompok.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-20"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Sebuah studi di Kota Bahari menunjukkan bahwa ketimpangan pendapatan antara kelompok kaya dan miskin semakin lebar dalam 10 tahun terakhir. Akses terhadap fasilitas pendidikan, kesehatan, dan pekerjaan berkualitas lebih mudah diperoleh oleh kelompok masyarakat atas. Sementara itu, masyarakat miskin harus bergantung pada layanan publik yang terbatas dan sering kali berkualitas rendah. Ketidakpuasan mulai muncul di media sosial dan ruang publik. Beberapa kelompok masyarakat melakukan aksi protes untuk menuntut keadilan sosial.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Apakah dampak sosial yang mungkin terjadi akibat adanya ketidakpuasan masyarakat miskin terhadap layanan publik?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','0');">
+													<input id="pilihan_20_0" onchange="pilihan('20','a','717')" pil="a" name="pilihan20" type="radio">
+													<label for="pilihan_20_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menimbulkan aksi protes masyarakat miskin untuk menyuarakan pendapat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','1');">
+													<input id="pilihan_20_1" onchange="pilihan('20','b','717')" pil="b" name="pilihan20" type="radio">
+													<label for="pilihan_20_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menimbulkan kerentanan kelompok miskin akibat terbatasnya akses terhadap fasilitas publik.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','2');">
+													<input id="pilihan_20_2" onchange="pilihan('20','c','717')" pil="c" name="pilihan20" type="radio">
+													<label for="pilihan_20_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menimbulkan ketidaksetaraan yeng membuat kelompok miskin semakin terhambat dan merasa tidak adil.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','3');">
+													<input id="pilihan_20_3" onchange="pilihan('20','d','717')" pil="d" name="pilihan20" type="radio">
+													<label for="pilihan_20_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menimbulkan rendahnya partisipasi masyarakat miskin dalam proses pengambilan keputusan publik.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('20.','4');">
+													<input id="pilihan_20_4" onchange="pilihan('20','e','717')" pil="e" name="pilihan20" type="radio">
+													<label for="pilihan_20_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(20,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menimbulkan kebijakan pemerintah yang diarahkan untuk memperbaiki layanan publik di wilayah miskin.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-21"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Pemerintah Kota Madani membuka program beasiswa bagi pelajar SMA yang berasal dari keluarga kurang mampu. Program ini tidak hanya berdasarkan nilai akademik, tetapi juga mempertimbangkan latar belakang ekonomi dan akses pendidikan siswa. Selain itu, fasilitas transportasi gratis diberikan khusus bagi siswa dari daerah terpencil untuk memudahkan mereka bersekolah.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Berdasarkan ilustrasi di atas, bagaimana prinsip kesetaraan sosial diterapkan dalam pelayanan publik?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','0');">
+													<input id="pilihan_21_0" onchange="pilihan('21','a','718')" pil="a" name="pilihan21" type="radio">
+													<label for="pilihan_21_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesetaraan kesempatan, karena siswa diberi peluang yang setara untuk maju.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','1');">
+													<input id="pilihan_21_1" onchange="pilihan('21','b','718')" pil="b" name="pilihan21" type="radio">
+													<label for="pilihan_21_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesetaraan budaya, karena pemerintah menghormati adat dan kebiasaan lokal.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','2');">
+													<input id="pilihan_21_2" onchange="pilihan('21','c','718')" pil="c" name="pilihan21" type="radio">
+													<label for="pilihan_21_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesetaraan ekonomi, karena pemerintah memberikan bantuan kepada semua warga.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','3');">
+													<input id="pilihan_21_3" onchange="pilihan('21','d','718')" pil="d" name="pilihan21" type="radio">
+													<label for="pilihan_21_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesetaraan hukum, karena semua siswa diperlakukan sama tanpa melihat latar belakang.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('21.','4');">
+													<input id="pilihan_21_4" onchange="pilihan('21','e','718')" pil="e" name="pilihan21" type="radio">
+													<label for="pilihan_21_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(21,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesetaraan politik, karena semua siswa mendapat hak suara dalam menentukan program.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-22"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Di sebuah kawasan pinggiran perkotaan yang padat penduduk, banyak keluarga hidup tanpa memiliki akses ke air bersih, sanitasi dan jaringan listrik yang stabil. Di kawasan ini banyak orang tua yang berkerja di sektor informal dengan pendapatan tidak teratur. Anak-anak di daerah ini sering putus sekolah karena mendukung ekonomi orang tuanya. Penduduknya merasa terasing dari perkembangan kota dan tidak banyak menerima dukungan dari program pemerintah. Hal ini menunjukkan adanya ketimpangan sosial dan hal tersebut pada akhirnya berkontribusi pada meningkatnya kemiskinan, layanan publik yang terbatas dan rendahnya literasi.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengapa ketimpangan sosial dapat meningkatkan angka kemiskinan pada masyarakat perkotaan pada kasus tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','0');">
+													<input id="pilihan_22_0" onchange="pilihan('22','a','719')" pil="a" name="pilihan22" type="radio">
+													<label for="pilihan_22_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Tradisi budaya yang memprioritaskan pendidikan formal daripada informal, sehingga mengabaikan keterampilan hidup yang relevan dengan kondisi masyarakat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','1');">
+													<input id="pilihan_22_1" onchange="pilihan('22','b','719')" pil="b" name="pilihan22" type="radio">
+													<label for="pilihan_22_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Penolakan kelompok marginal untuk direlokasi ke lingkungan yang lebih sehat, yang menyebabkan mereka tetap tinggal di wilayah tanpa akses layanan dasar.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','2');">
+													<input id="pilihan_22_2" onchange="pilihan('22','c','719')" pil="c" name="pilihan22" type="radio">
+													<label for="pilihan_22_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kurangnya motivasi warga untuk memperbaiki kehidupan mereka sendiri karena tidak adanya bentuk pengangguran yang nyata di wilayah masyarakat berada.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','3');">
+													<input id="pilihan_22_3" onchange="pilihan('22','d','719')" pil="d" name="pilihan22" type="radio">
+													<label for="pilihan_22_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Akses yang tidak merata terhadap layanan dasar dan ketidakberpihakan kebijakan yang menyebabkan warga terpinggirkan dan tidak mendapat layanan memadai.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('22.','4');">
+													<input id="pilihan_22_4" onchange="pilihan('22','e','719')" pil="e" name="pilihan22" type="radio">
+													<label for="pilihan_22_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(22,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Perencanaan keuangan buruk dan tingkat konsumsi yang tidak berimbang menyebabkan pendapatan dari sektor informal sulit mencukupi kebutuhan dasar.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-23"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Globalisasi mendorong pertumbuhan ekonomi di negara-negara berkembang terutama di sektor industri dan jasa. Namun, pembangunan seringkali tidak merata dan terpusat di kota-kota besar. Padahal, akses terhadap pendidikan dan teknologi sebelumnya memang sudah banyak terpusat di wilayah kota. Meskipun hal ini tampak menguntungkan, perusahaan multinasional yang masuk ke negara berkembang sebenarnya diuntungkan karena bisa membayar upah rendah kepada pekerja lokal. Sebagian bahkan tidak memberikan hak-hak yang adil seperti pekerja dari negara asal mereka. Sayangnya, hal ini sering dianggap lazim demi mendorong perekonomian negara dan menyerap tanaga kerja tinggi.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengapa globalisasi pada kasus tersebut dapat menimbulkan kesenjangan sosial?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','0');">
+													<input id="pilihan_23_0" onchange="pilihan('23','a','720')" pil="a" name="pilihan23" type="radio">
+													<label for="pilihan_23_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesenjangan sosial pada kasus muncul karena pertumbuhan ekonomi Indonesia yang lambat dibandingkan negara lain.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','1');">
+													<input id="pilihan_23_1" onchange="pilihan('23','b','720')" pil="b" name="pilihan23" type="radio">
+													<label for="pilihan_23_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesenjangan sosial pada kasus terjadi karena adanya alienasi/keterasingan pekerja dari produk yang dihasilkannya.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','2');">
+													<input id="pilihan_23_2" onchange="pilihan('23','c','720')" pil="c" name="pilihan23" type="radio">
+													<label for="pilihan_23_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesenjangan sosial pada kasus terjadi karena kurangnya perencanaan dan peran pemerintah dalam pembangunan ekonomi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','3');">
+													<input id="pilihan_23_3" onchange="pilihan('23','d','720')" pil="d" name="pilihan23" type="radio">
+													<label for="pilihan_23_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesenjangan sosial pada kasus terjadi karena industrialisasi merupakan perubahan sosial dampaknya tidak bisa diprediksi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('23.','4');">
+													<input id="pilihan_23_4" onchange="pilihan('23','e','720')" pil="e" name="pilihan23" type="radio">
+													<label for="pilihan_23_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(23,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesenjangan sosial pada kasus terjadi karena tidak adanya kesadaran dari pekerja untuk memperjuangkan keadilan sosial.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-24"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Desa Wirausaha yang dahulu mengandalkan pertanian tradisional kini mulai berubah. Sejak adanya akses internet dan media sosial, banyak pemuda desa membuka toko daring untuk menjual produk kerajinan tangan ke luar negeri. Selain itu, beberapa keluarga mengadopsi gaya hidup konsumtif dan mulai meninggalkan tradisi gotong royong. Bahasa asing juga mulai sering digunakan dalam pergaulan anak muda.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Apa bentuk dampak globalisasi yang paling menonjol terhadap kehidupan ekonomi masyarakat?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('24.','0');">
+													<input id="pilihan_24_0" onchange="pilihan('24','a','721')" pil="a" name="pilihan24" type="radio">
+													<label for="pilihan_24_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(24,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Globalisasi menyebabkan desa kembali pada ekonomi subsisten dan lokal.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('24.','1');">
+													<input id="pilihan_24_1" onchange="pilihan('24','b','721')" pil="b" name="pilihan24" type="radio">
+													<label for="pilihan_24_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(24,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Globalisasi menyebabkan masyarakat menolak transaksi dengan pihak luar.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('24.','2');">
+													<input id="pilihan_24_2" onchange="pilihan('24','c','721')" pil="c" name="pilihan24" type="radio">
+													<label for="pilihan_24_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(24,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Globalisasi menyebabkan peningkatan aktivitas jual beli melalui platform digital.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('24.','3');">
+													<input id="pilihan_24_3" onchange="pilihan('24','d','721')" pil="d" name="pilihan24" type="radio">
+													<label for="pilihan_24_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(24,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Globalisasi menyebabkan seluruh hasil kerajinan digunakan untuk kebutuhan pribadi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('24.','4');">
+													<input id="pilihan_24_4" onchange="pilihan('24','e','721')" pil="e" name="pilihan24" type="radio">
+													<label for="pilihan_24_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(24,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Globalisasi menyebabkan masyarakat berhenti memproduksi barang tradisional.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-25"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Di sebuah sekolah menengah, para murid mengikuti program pembelajaran berbasis teknologi digital. Setiap siswa dibekali gawai untuk mengakses materi pembelajaran dari rumah maupun di sekolah. Guru memanfaatkan platform pembelajaran daring yang memungkinkan diskusi kelas berlangsung secara virtual. Selain itu, siswa juga diperkenalkan pada tren budaya global melalui media sosial, seperti gaya hidup sehat, komunitas kreatif, hingga diskusi lintas negara tentang isu sosial. Seiring waktu, cara siswa berinteraksi, belajar, dan memandang dunia mengalami perubahan yang nyata, termasuk dalam cara mereka menanggapi keberagaman dan beradaptasi dengan perkembangan zaman</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Bagaimana keterlibatan masyarakat dalam aktivitas berbasis digital merefleksikan konsekuensi sosial yang diakibatkan oleh arus globalisasi?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('25.','0');">
+													<input id="pilihan_25_0" onchange="pilihan('25','a','722')" pil="a" name="pilihan25" type="radio">
+													<label for="pilihan_25_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(25,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Teknologi memperluas akses ruang belajar karena siswa belajar dari jejaring global, mencerminkan pendidikan yang kolaboratif.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('25.','1');">
+													<input id="pilihan_25_1" onchange="pilihan('25','b','722')" pil="b" name="pilihan25" type="radio">
+													<label for="pilihan_25_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(25,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Teknologi memudahkan akses nilai baru karena siswa terbiasa informasi global, mencerminkan pola pikir masyarakat yang terbuka.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('25.','2');">
+													<input id="pilihan_25_2" onchange="pilihan('25','c','722')" pil="c" name="pilihan25" type="radio">
+													<label for="pilihan_25_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(25,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Teknologi meningkatkan refleksi terhadap perbedaan karena siswa berdiskusi lintas latar, mencerminkan tumbuhnya toleransi sosial.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('25.','3');">
+													<input id="pilihan_25_3" onchange="pilihan('25','d','722')" pil="d" name="pilihan25" type="radio">
+													<label for="pilihan_25_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(25,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Teknologi mendorong partisipasi budaya digital karena siswa aktif di media sosial, mencerminkan pergeseran ekspresi masyarakat.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('25.','4');">
+													<input id="pilihan_25_4" onchange="pilihan('25','e','722')" pil="e" name="pilihan25" type="radio">
+													<label for="pilihan_25_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(25,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Teknologi memperkuat interaksi lintas budaya karena berinteraksi dengan komunitas global, mencerminkan luasnya wawasan global.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-26"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Kampung Cempaka dulunya merupakan permukiman padat dengan kegiatan sosial yang tinggi. Warga sering mengadakan kerja bakti, arisan RT, dan kegiatan keagamaan bersama. Namun, sejak banyak rumah dijual dan dibeli oleh pendatang dari luar daerah, suasana sosial berubah. Warga baru lebih tertutup, tidak aktif dalam kegiatan warga, dan lebih memilih berinteraksi melalui media sosial. Meskipun kawasan menjadi lebih bersih dan tertata, namun hubungan antarwarga melemah.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Apa dampak jangka panjang dari pola interaksi sosial yang mulai berubah di Kampung Cempaka?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('26.','0');">
+													<input id="pilihan_26_0" onchange="pilihan('26','a','723')" pil="a" name="pilihan26" type="radio">
+													<label for="pilihan_26_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(26,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kesadaran kolektif dalam menjaga lingkungan mulai melemah secara bertahap.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('26.','1');">
+													<input id="pilihan_26_1" onchange="pilihan('26','b','723')" pil="b" name="pilihan26" type="radio">
+													<label for="pilihan_26_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(26,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Partisipasi warga dalam kegiatan rutin mengalami penurunan yang tidak disadari.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('26.','2');">
+													<input id="pilihan_26_2" onchange="pilihan('26','c','723')" pil="c" name="pilihan26" type="radio">
+													<label for="pilihan_26_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(26,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Rasa memiliki terhadap komunitas perlahan terkikis karena kurangnya keterlibatan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('26.','3');">
+													<input id="pilihan_26_3" onchange="pilihan('26','d','723')" pil="d" name="pilihan26" type="radio">
+													<label for="pilihan_26_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(26,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Kegiatan sosial berubah bentuk tanpa memperkuat hubungan antarwarga.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('26.','4');">
+													<input id="pilihan_26_4" onchange="pilihan('26','e','723')" pil="e" name="pilihan26" type="radio">
+													<label for="pilihan_26_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(26,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Norma sosial tetap bertahan meskipun jumlah interaksi warga semakin terbatas.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-27"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: center;"><img src="/tka/cbt_images/39389_f04c79467fa950ca73d2063e77250913.png" alt=""></p>
+<p style="text-align: justify;">Di era digital saat ini, media sosial menjadi salah satu sumber utama informasi bagi masyarakat. Namun, tidak semua informasi yang tersebar dapat dipertanggungjawabkan. Baru-baru ini, di sebuah kota kecil, beredar pesan berantai di aplikasi pengirim pesan yang menyebutkan akan terjadi gempa besar dan mengimbau warga untuk segera mengungsi. Informasi tersebut ternyata tidak berasal dari lembaga resmi dan terbukti hoaks. Akibatnya, banyak warga panik, meninggalkan rumah, bahkan terjadi penjarahan di beberapa toko. Situasi ini menunjukkan bagaimana penyebaran informasi yang tidak benar bisa menimbulkan kepanikan massal dan merusak tatanan sosial masyarakat.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengapa masalah sosial dalam ilustrasi tersebut merupakan dampak dari globalisasi?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('27.','0');">
+													<input id="pilihan_27_0" onchange="pilihan('27','a','724')" pil="a" name="pilihan27" type="radio">
+													<label for="pilihan_27_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(27,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Globalisasi memfasilitasi peningkatan interaksi dan relasi sosial secara tatap muka yang intens antarwarga.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('27.','1');">
+													<input id="pilihan_27_1" onchange="pilihan('27','b','724')" pil="b" name="pilihan27" type="radio">
+													<label for="pilihan_27_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(27,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Globalisasi mendorong kembalinya nilai-nilai tradisional dan kearifan lokal yang mampu menyaring informasi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('27.','2');">
+													<input id="pilihan_27_2" onchange="pilihan('27','c','724')" pil="c" name="pilihan27" type="radio">
+													<label for="pilihan_27_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(27,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Globalisasi menyebabkan homogenitas budaya sehingga masyarakat lebih mudah percaya pada satu jenis informasi.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('27.','3');">
+													<input id="pilihan_27_3" onchange="pilihan('27','d','724')" pil="d" name="pilihan27" type="radio">
+													<label for="pilihan_27_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(27,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Globalisasi memungkinkan penyebaran informasi, termasuk hoaks, secara cepat dan masif melintasi batas geografis.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('27.','4');">
+													<input id="pilihan_27_4" onchange="pilihan('27','e','724')" pil="e" name="pilihan27" type="radio">
+													<label for="pilihan_27_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(27,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Globalisasi menekankan pentingnya peran lembaga formal dalam mengontrol setiap bentuk komunikasi masyarakat.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-28"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Dalam dua tahun terakhir, banyak siswa di sebuah SMA mulai meninggalkan kebiasaan menggunakan bahasa daerah dalam percakapan sehari-hari. Mereka lebih sering menggunakan istilah dalam bahasa Inggris yang dipopulerkan melalui media sosial, film, dan budaya pop barat. Selain itu, pakaian adat mulai jarang dipakai, bahkan saat acara sekolah. Sebagian siswa merasa budaya lokal sudah ketinggalan zaman dan tidak menarik untuk ditampilkan</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Sikap manakah yang paling sesuai untuk membangun kesadaran siswa agar tetap menghargai budaya daerah tanpa menolak budaya luar?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('28.','0');">
+													<input id="pilihan_28_0" onchange="pilihan('28','a','725')" pil="a" name="pilihan28" type="radio">
+													<label for="pilihan_28_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(28,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mendorong siswa untuk lebih sering menampilkan budaya lokal dalam kegiatan sekolah yang bersifat terbuka.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('28.','1');">
+													<input id="pilihan_28_1" onchange="pilihan('28','b','725')" pil="b" name="pilihan28" type="radio">
+													<label for="pilihan_28_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(28,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengarahkan siswa untuk menekankan unsur-unsur lokal dalam proyek yang menampilkan identitas global.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('28.','2');">
+													<input id="pilihan_28_2" onchange="pilihan('28','c','725')" pil="c" name="pilihan28" type="radio">
+													<label for="pilihan_28_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(28,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menanamkan rasa bangga terhadap budaya lokal sambil tetap membuka ruang eksplorasi budaya luar.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('28.','3');">
+													<input id="pilihan_28_3" onchange="pilihan('28','d','725')" pil="d" name="pilihan28" type="radio">
+													<label for="pilihan_28_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(28,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menyediakan platform yang memfasilitasi siswa dalam menggabungkan nilai-nilai lokal dan global secara kreatif.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('28.','4');">
+													<input id="pilihan_28_4" onchange="pilihan('28','e','725')" pil="e" name="pilihan28" type="radio">
+													<label for="pilihan_28_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(28,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengutamakan nilai-nilai budaya daerah dalam seluruh bentuk kegiatan tanpa menghilangkan pengaruh luar sepenuhnya.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-29"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Indonesia, China, India, Pakistan, Bangladesh, dan Nigeria menyumbang 75% dari total beban polusi udara global karena tingkat polusi udara yang tinggi dan jumlah populasi yang besar. Udara yang berisi partikel halus (PM 2.5) berpotensi mengurangi usia hidup rata-rata warga Indonesia hingga 1,4 tahun dibandingkan jika kualitas udara di Indonesia memenuhi standar WHO, yakni 5 µg/m. Pencemaran udara oleh pelaku industri menjadi sorotan karena berkontribusi tinggi terhadap polusi udara. Selain itu, beberapa pihak juga berencana menggugat pemerintah karena dinilai belum optimal dalam mengatasi masalah polusi udara. Hal ini tidak mengherankan karena beberapa negara juga masih belum memiliki data yang lengkap berupa hasil riset maupun alat untuk memonitor dan mengukur kualitas udara.</p>
+<p><span style="font-size: 11px;">Diolah dari: <span style="color: #0000ff;">https://www.bbc.com/indonesia/articles/c72enp76622o</span></span></p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Apa rekomendasi yang paling tepat diberikan kepada institusi pendidikan tinggi agar bisa berkontribusi dalam mengatasi masalah tersebut?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','0');">
+													<input id="pilihan_29_0" onchange="pilihan('29','a','727')" pil="a" name="pilihan29" type="radio">
+													<label for="pilihan_29_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mendampingi masyarakat menuntut pemerintah menggratiskan pengobatan untuk penyakit gangguan pernafasan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','1');">
+													<input id="pilihan_29_1" onchange="pilihan('29','b','727')" pil="b" name="pilihan29" type="radio">
+													<label for="pilihan_29_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menjalin kerja sama dengan nagara-negara maju agar berinvestasi di sektor industri dengan konsep energi terbaharukan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','2');">
+													<input id="pilihan_29_2" onchange="pilihan('29','c','727')" pil="c" name="pilihan29" type="radio">
+													<label for="pilihan_29_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Membangun pusat riset yang berkonsentrasi pada lingkungan agar menghasilkan strategi dan pembangunan berkelanjutan.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','3');">
+													<input id="pilihan_29_3" onchange="pilihan('29','d','727')" pil="d" name="pilihan29" type="radio">
+													<label for="pilihan_29_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menjalin kerja sama dengan berbagai pihak untuk membuat program penanaman sejuta pohon di wilayah hutan gundul.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('29.','4');">
+													<input id="pilihan_29_4" onchange="pilihan('29','e','727')" pil="e" name="pilihan29" type="radio">
+													<label for="pilihan_29_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(29,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengembangkan program pengabdian kepada masyarakat untuk memberikan edukasi cara mengelola limbah rumah tangga.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div><div class="soal-soal row" style="display:none" id="soal-no-30"><div class="col-lg-6 cont-soal" style="padding-right: 20px; height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p style="text-align: justify;">Masuknya budaya asing ke Indonesia yang dipercepat oleh arus globalisasi dan teknologi membawa pengaruh besar, baik secara positif maupun negatif. Di satu sisi, budaya asing memperluas wawasan, memperkenalkan inovasi, dan memperkaya kebudayaan lokal. Namun, di sisi lain, pengaruh ini juga dapat mengikis nilai-nilai tradisional, memicu perubahan gaya hidup yang bertentangan dengan norma masyarakat, serta menimbulkan ketimpangan sosial. Desa Trunyan di Bali memiliki tradisi pemakaman unik: jenazah tidak dikubur atau dibakar, melainkan diletakkan di atas tanah dan dibiarkan membusuk secara alami. Tradisi ini menarik minat wisatawan, baik domestik maupun mancanegara. Namun, meningkatnya kunjungan wisatawan memunculkan tantangan baru seperti meningkatnya volume sampah, degradasi lingkungan, dan komersialisasi budaya yang berisiko mengubah makna spiritual dari tradisi tersebut.</p>
+</div><div class="col-lg-6 isi-soal" style="border-left: 5px dotted rgb(238, 238, 238); height: 520px; overflow: auto;"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Apa rekomendasi paling strategis yang bisa dilakukan pemuda Desa Trunyan untuk menjaga nilai budaya di tengah arus globalisasi?</p>
+ <!-- PG -->
+											<table class="table " style="margin-top:0px">
+																								<tbody><tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('30.','0');">
+													<input id="pilihan_30_0" onchange="pilihan('30','a','728')" pil="a" name="pilihan30" type="radio">
+													<label for="pilihan_30_0"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(30,0);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Mengampanyekan gaya hidup lokal melalui media sosial dengan pendekatan visual modern.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('30.','1');">
+													<input id="pilihan_30_1" onchange="pilihan('30','b','728')" pil="b" name="pilihan30" type="radio">
+													<label for="pilihan_30_1"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(30,1);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Meningkatkan daya tarik ekonomi dari tradisi dengan memperluas pasar souvenir khas pemakaman.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('30.','2');">
+													<input id="pilihan_30_2" onchange="pilihan('30','c','728')" pil="c" name="pilihan30" type="radio">
+													<label for="pilihan_30_2"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(30,2);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Menjadi pemandu wisata profesional agar bisa menjelaskan budaya secara sistematis dan netral.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('30.','3');">
+													<input id="pilihan_30_3" onchange="pilihan('30','d','728')" pil="d" name="pilihan30" type="radio">
+													<label for="pilihan_30_3"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(30,3);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Meningkatkan penggunaan bahasa asing dalam promosi budaya agar lebih diterima wisatawan asing.</p>
+</td></tr>													<tr><td style="width:20px;border:0px;padding:0px">
+													<div class="radio icheck-primary" onclick="KlikJawaban('30.','4');">
+													<input id="pilihan_30_4" onchange="pilihan('30','e','728')" pil="e" name="pilihan30" type="radio">
+													<label for="pilihan_30_4"></label>
+													</div>
+											</td><td style="padding-top:15px;;border:0px;padding:0px;padding-top:5px" onclick="KlikJawaban(30,4);"><!--?xml encoding="utf-8" ?--><!--?xml encoding="utf-8" ?--><p>Membuat festival tahunan dengan atraksi budaya yang diatur oleh sponsor dan pihak swasta.</p>
+</td></tr>											</tbody></table>
+															</div>
+				</div>			</div>
+		  </div>
+		  
+		  <div class="row pl-3 pr-3 pb-1 mb-0"> 
+			<div class="col" style="border-bottom:1px solid #eee"></div>
+		  </div>
+		  
+		  <div class="row pb-0 pt-2 mt-2 btn-bawah"> 
+			<div class="col text-center" style="">
+				<button class="btn btn-danger btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="prevSoal()"><i class="fa fa-chevron-circle-left"></i> <span class="d-none d-sm-inline-block">Soal sebelumnya</span></button>
+			</div>
+			<div class="col text-center" style="">
+				<button class="btn btn-warning btn-round btn-md btn-navigasi" style="border-radius:30px;color:#fff;"><input type="checkbox" onclick="raguRagu()" id="c_ragu_ragu" value=""> <span class="d-none d-sm-inline-block">Ragu-ragu
+			</span></button></div>
+			<div class="col text-center" style="">
+				<button class="btn btn-primary btn-round btn-md btn-navigasi" style="border-radius:30px;" onclick="nextSoal()" id="nextSoal"> <span class="d-none d-sm-inline-block">Soal berikutnya</span> <i class="fa fa-chevron-circle-right"></i></button>
+			</div>
+		  </div>
+		</div>
+	</div>
+	 
+  </div> 
+</div>
+
+<div class="modal fadeIn" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Daftar Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+		<form id="formJawaban">
+         				<span class="d-none" id="tmp_answer_1"></span>
+				<span class="d-none" id="ragu_answer_1"></span>
+				<input type="hidden" name="jawaban_no[1]" id="input_jawaban_no_1" value="1">
+								<div id="jawaban-no-1" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal btn-primary" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('1')">1					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer1" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_2"></span>
+				<span class="d-none" id="ragu_answer_2"></span>
+				<input type="hidden" name="jawaban_no[2]" id="input_jawaban_no_2" value="2">
+								<div id="jawaban-no-2" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('2')">2					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer2" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_3"></span>
+				<span class="d-none" id="ragu_answer_3"></span>
+				<input type="hidden" name="jawaban_no[3]" id="input_jawaban_no_3" value="3">
+								<div id="jawaban-no-3" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('3')">3					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer3" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_4"></span>
+				<span class="d-none" id="ragu_answer_4"></span>
+				<input type="hidden" name="jawaban_no[4]" id="input_jawaban_no_4" value="4">
+								<div id="jawaban-no-4" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('4')">4					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer4" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_5"></span>
+				<span class="d-none" id="ragu_answer_5"></span>
+				<input type="hidden" name="jawaban_no[5]" id="input_jawaban_no_5" value="5">
+								<div id="jawaban-no-5" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('5')">5					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer5" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_6"></span>
+				<span class="d-none" id="ragu_answer_6"></span>
+				<input type="hidden" name="jawaban_no[6]" id="input_jawaban_no_6" value="6">
+								<div id="jawaban-no-6" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('6')">6					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer6" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_7"></span>
+				<span class="d-none" id="ragu_answer_7"></span>
+				<input type="hidden" name="jawaban_no[7]" id="input_jawaban_no_7" value="7">
+								<div id="jawaban-no-7" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('7')">7					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer7" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_8"></span>
+				<span class="d-none" id="ragu_answer_8"></span>
+				<input type="hidden" name="jawaban_no[8]" id="input_jawaban_no_8" value="8">
+								<div id="jawaban-no-8" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('8')">8					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer8" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_9"></span>
+				<span class="d-none" id="ragu_answer_9"></span>
+				<input type="hidden" name="jawaban_no[9]" id="input_jawaban_no_9" value="9">
+								<div id="jawaban-no-9" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('9')">9					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer9" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_10"></span>
+				<span class="d-none" id="ragu_answer_10"></span>
+				<input type="hidden" name="jawaban_no[10]" id="input_jawaban_no_10" value="10">
+								<div id="jawaban-no-10" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('10')">10					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer10" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_11"></span>
+				<span class="d-none" id="ragu_answer_11"></span>
+				<input type="hidden" name="jawaban_no[11]" id="input_jawaban_no_11" value="11">
+								<div id="jawaban-no-11" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('11')">11					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer11" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_12"></span>
+				<span class="d-none" id="ragu_answer_12"></span>
+				<input type="hidden" name="jawaban_no[12]" id="input_jawaban_no_12" value="12">
+								<div id="jawaban-no-12" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('12')">12					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer12" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_13"></span>
+				<span class="d-none" id="ragu_answer_13"></span>
+				<input type="hidden" name="jawaban_no[13]" id="input_jawaban_no_13" value="13">
+								<div id="jawaban-no-13" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('13')">13					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer13" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_14"></span>
+				<span class="d-none" id="ragu_answer_14"></span>
+				<input type="hidden" name="jawaban_no[14]" id="input_jawaban_no_14" value="14">
+								<div id="jawaban-no-14" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('14')">14					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer14" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_15"></span>
+				<span class="d-none" id="ragu_answer_15"></span>
+				<input type="hidden" name="jawaban_no[15]" id="input_jawaban_no_15" value="15">
+								<div id="jawaban-no-15" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('15')">15					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer15" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_16"></span>
+				<span class="d-none" id="ragu_answer_16"></span>
+				<input type="hidden" name="jawaban_no[16]" id="input_jawaban_no_16" value="16">
+								<div id="jawaban-no-16" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('16')">16					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer16" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_17"></span>
+				<span class="d-none" id="ragu_answer_17"></span>
+				<input type="hidden" name="jawaban_no[17]" id="input_jawaban_no_17" value="17">
+								<div id="jawaban-no-17" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('17')">17					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer17" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_18"></span>
+				<span class="d-none" id="ragu_answer_18"></span>
+				<input type="hidden" name="jawaban_no[18]" id="input_jawaban_no_18" value="18">
+								<div id="jawaban-no-18" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('18')">18					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer18" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_19"></span>
+				<span class="d-none" id="ragu_answer_19"></span>
+				<input type="hidden" name="jawaban_no[19]" id="input_jawaban_no_19" value="19">
+								<div id="jawaban-no-19" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('19')">19					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer19" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_20"></span>
+				<span class="d-none" id="ragu_answer_20"></span>
+				<input type="hidden" name="jawaban_no[20]" id="input_jawaban_no_20" value="20">
+								<div id="jawaban-no-20" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('20')">20					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer20" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>				<span class="d-none" id="tmp_answer_21"></span>
+				<span class="d-none" id="ragu_answer_21"></span>
+				<input type="hidden" name="jawaban_no[21]" id="input_jawaban_no_21" value="21">
+								<div id="jawaban-no-21" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('21')">21					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer21" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_22"></span>
+				<span class="d-none" id="ragu_answer_22"></span>
+				<input type="hidden" name="jawaban_no[22]" id="input_jawaban_no_22" value="22">
+								<div id="jawaban-no-22" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('22')">22					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer22" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_23"></span>
+				<span class="d-none" id="ragu_answer_23"></span>
+				<input type="hidden" name="jawaban_no[23]" id="input_jawaban_no_23" value="23">
+								<div id="jawaban-no-23" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('23')">23					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer23" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_24"></span>
+				<span class="d-none" id="ragu_answer_24"></span>
+				<input type="hidden" name="jawaban_no[24]" id="input_jawaban_no_24" value="24">
+								<div id="jawaban-no-24" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('24')">24					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer24" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_25"></span>
+				<span class="d-none" id="ragu_answer_25"></span>
+				<input type="hidden" name="jawaban_no[25]" id="input_jawaban_no_25" value="25">
+								<div id="jawaban-no-25" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('25')">25					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer25" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_26"></span>
+				<span class="d-none" id="ragu_answer_26"></span>
+				<input type="hidden" name="jawaban_no[26]" id="input_jawaban_no_26" value="26">
+								<div id="jawaban-no-26" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('26')">26					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer26" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_27"></span>
+				<span class="d-none" id="ragu_answer_27"></span>
+				<input type="hidden" name="jawaban_no[27]" id="input_jawaban_no_27" value="27">
+								<div id="jawaban-no-27" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('27')">27					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer27" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_28"></span>
+				<span class="d-none" id="ragu_answer_28"></span>
+				<input type="hidden" name="jawaban_no[28]" id="input_jawaban_no_28" value="28">
+								<div id="jawaban-no-28" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('28')">28					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer28" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_29"></span>
+				<span class="d-none" id="ragu_answer_29"></span>
+				<input type="hidden" name="jawaban_no[29]" id="input_jawaban_no_29" value="29">
+								<div id="jawaban-no-29" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('29')">29					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer29" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 				<span class="d-none" id="tmp_answer_30"></span>
+				<span class="d-none" id="ragu_answer_30"></span>
+				<input type="hidden" name="jawaban_no[30]" id="input_jawaban_no_30" value="30">
+								<div id="jawaban-no-30" class="btn  btn-outline-dark  btn-sm mb-2 mr-2 btn-lihat-soal" style="width:30px;height:30px;padding-top:5px;position:relative" onclick="lihatSoal('30')">30					<div class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"><i class="fa fa-check"></i></div>
+					<div id="answer30" class="badge badge-light d-none" style="height:15px;width:15px;font-size:9px;border-radius:50%;position:absolute;top:-5px;right:-5px;border:1px solid #000;background:#fff"></div>
+				</div>
+				
+		 <br>		 </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="infoSoal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header" style="background:#dfe6e9">
+        <h5 class="modal-title">Informasi Soal</h5>
+        <button type="button" class="close" data-dismiss="modal">×</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-5 pt-5">
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="modal fadeIn" id="timeoutDialog" role="dialog" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <!-- Modal body -->
+      <div class="modal-body text-center pb-2 pt-5">
+		<h5 class="modal-title" style="text-align:center">PERHATIAN !!</h5>
+		<p>Waktu tes sudah habis !</p>
+      </div>
+	  <div class="modal-footer text-center">
+		<button class="btn btn-danger" onclick="selesaikanTes()">Ok, Lanjutkan !</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="c-svg" id="c-svg-1" style="display: none;"></div><div class="c-svg" id="c-svg-2" style="display: none;"></div><div class="c-svg" id="c-svg-3" style="display: none;"></div><div class="c-svg" id="c-svg-4" style="display: none;"></div><div class="c-svg" id="c-svg-5" style="display: none;"></div><div class="c-svg" id="c-svg-6" style="display: none;"></div><div class="c-svg" id="c-svg-7" style="display: none;"></div><div class="c-svg" id="c-svg-8" style="display: none;"></div><div class="c-svg" id="c-svg-9" style="display: none;"></div><div class="c-svg" id="c-svg-10" style="display: none;"></div><div class="c-svg" id="c-svg-11" style="display: none;"></div><div class="c-svg" id="c-svg-12" style="display: none;"></div><div class="c-svg" id="c-svg-13" style="display: none;"></div><div class="c-svg" id="c-svg-14" style="display: none;"></div><div class="c-svg" id="c-svg-15" style="display: none;"></div><div class="c-svg" id="c-svg-16" style="display: none;"></div><div class="c-svg" id="c-svg-17" style="display: none;"></div><div class="c-svg" id="c-svg-18" style="display: none;"></div><div class="c-svg" id="c-svg-19" style="display: none;"></div><div class="c-svg" id="c-svg-20" style="display: none;"></div><div class="c-svg" id="c-svg-21" style="display: none;"></div><div class="c-svg" id="c-svg-22" style="display: none;"></div><div class="c-svg" id="c-svg-23" style="display: none;"></div><div class="c-svg" id="c-svg-24" style="display: none;"></div><div class="c-svg" id="c-svg-25" style="display: none;"></div><div class="c-svg" id="c-svg-26" style="display: none;"></div><div class="c-svg" id="c-svg-27" style="display: none;"></div><div class="c-svg" id="c-svg-28" style="display: none;"></div><div class="c-svg" id="c-svg-29" style="display: none;"></div><div class="c-svg" id="c-svg-30" style="display: none;"></div>
+<div style="position: fixed; inset: 0px; background: rgb(255, 255, 255); opacity: 0.5; z-index: 99999; display: none;" id="loader">
+<img class="loader" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/images/loader2.gif">
+</div>
+
+
+<style>
+	
+	@media (min-width:320px)  { /* smartphones, iPhone, portrait 480x320 phones */ }
+	@media (min-width:481px)  { /* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */ }
+	@media (min-width:641px)  { /* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */ }
+	@media (max-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.mataujian{text-align:left} 
+		#formContent{padding-left:10px;padding-right:10px}
+		.row-atas {text-align:center;}
+		#isisoal img {width:100%;}
+	}
+	@media (min-width:641px)  { 
+		/* tablet, landscape iPad, lo-res laptops ands desktops */  
+		.container-fluid{ padding-left:50px;padding-right:50px} 
+		.mataujian{text-align:right} 
+		#formContent{padding-left:50px;padding-right:50px} 
+		.btn-navigasi {width:180px;}
+		.cont-btn-informasi{text-align:right}
+		
+	}
+	@media (min-width:1025px) { /* big landscape tablets, laptops, and desktops */ }
+	@media (min-width:1281px) { /* hi-res laptops and desktops */ }
+			
+	/* STRUCTURE */
+	.loader {
+	  margin: 0;
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  -ms-transform: translate(-50%, -50%);
+	  transform: translate(-50%, -50%);
+	}
+	
+	.wrapper {
+	  display: flex;
+	  align-items: center;
+	  flex-direction: column; 
+	  justify-content: center;
+	  width: 100%;
+	  min-height: 100%;
+	  padding: 20px;
+	  margin-top:-80px;
+	}
+
+	#formContent {
+	  -webkit-border-radius: 10px 10px 10px 10px;
+	  border-radius: 10px 10px 10px 10px;
+	  background: #fff;
+	  position: relative;
+	  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+	  text-align: center;
+	}
+
+	
+
+
+	/* TABS */
+
+	h2.inactive {
+	  color: #cccccc;
+	}
+
+	h2.active {
+	  color: #0d0d0d;
+	  border-bottom: 2px solid #5fbae9;
+	}
+	
+	input[type=text] {
+	  border: none;
+	  color: #0d0d0d;
+	  text-decoration: none;
+	  border-radius:0px;
+	  border-bottom:1px solid #eee;
+	  background:transparent;
+	}
+	
+
+	/* ANIMATIONS */
+
+	/* Simple CSS3 Fade-in-down Animation */
+	.fadeInDown {
+	  -webkit-animation-name: fadeInDown;
+	  animation-name: fadeInDown;
+	  -webkit-animation-duration: 1s;
+	  animation-duration: 1s;
+	  -webkit-animation-fill-mode: both;
+	  animation-fill-mode: both;
+	}
+
+	@-webkit-keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	@keyframes fadeInDown {
+	  0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -100%, 0);
+		transform: translate3d(0, -100%, 0);
+	  }
+	  100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	  }
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	@-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+	@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+	.fadeIn {
+	  opacity:0;
+	  -webkit-animation:fadeIn ease-in 1;
+	  -moz-animation:fadeIn ease-in 1;
+	  animation:fadeIn ease-in 1;
+
+	  -webkit-animation-fill-mode:forwards;
+	  -moz-animation-fill-mode:forwards;
+	  animation-fill-mode:forwards;
+
+	  -webkit-animation-duration:1s;
+	  -moz-animation-duration:1s;
+	  animation-duration:1s;
+	}
+
+	.fadeIn.first {
+	  -webkit-animation-delay: 0.4s;
+	  -moz-animation-delay: 0.4s;
+	  animation-delay: 0.4s;
+	}
+
+	.fadeIn.second {
+	  -webkit-animation-delay: 0.6s;
+	  -moz-animation-delay: 0.6s;
+	  animation-delay: 0.6s;
+	}
+
+	.fadeIn.third {
+	  -webkit-animation-delay: 0.8s;
+	  -moz-animation-delay: 0.8s;
+	  animation-delay: 0.8s;
+	}
+
+	.fadeIn.fourth {
+	  -webkit-animation-delay: 1s;
+	  -moz-animation-delay: 1s;
+	  animation-delay: 1s;
+	}
+
+	/* Simple CSS3 Fade-in Animation */
+	.underlineHover:after {
+	  display: block;
+	  left: 0;
+	  bottom: -10px;
+	  width: 0;
+	  height: 2px;
+	  background-color: #56baed;
+	  content: "";
+	  transition: width 0.2s;
+	}
+
+	.underlineHover:hover {
+	  color: #0d0d0d;
+	}
+
+	.underlineHover:hover:after{
+	  width: 100%;
+	}
+	
+	.cfont {
+		cursor:pointer;
+	}
+	
+	
+	///
+	
+</style>
+  
+<script type="text/javascript" src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery/jquery.2.1.1.min.js"></script>
+<script src="https://pusmendik.kemendikdasmen.go.id/tka/_assets/js/jquery.timer.js"></script>
+  
+<script>
+	
+	$(document).ready(function() {
+		$('#loader').fadeOut();
+		var  w = $(window).width();
+				if (w > 800)  {
+			var ii = $('#isisoal').height();
+			var  h = $(window).height();
+			var  h = h-$('.cont-soal').position().top-380;
+			$('.cont-soal').css({
+				'height':h,
+				'overflow': 'auto'
+			});
+
+			$('.isi-soal').css({
+				'height':h,
+			 	'overflow': 'auto'
+			 });
+
+			// if (ii > h) {
+			// 	$('.cont-soal').css({
+			// 	'height':ii,
+			// 	'overflow': 'auto'
+			// 	});
+			// }
+		}
+		
+		window.setTimeout( lihatSoal(1), 5000 ); // 5 seconds
+	});
+	var selected = 1;
+	var jumlah_soal = 30;
+	function lihatSoal(nomor) {
+		$('.soal-soal').css('display','none');
+		if (nomor=='') {
+			nomor = selected;
+		} 
+		$('#soal-no-'+nomor).css('display','');
+		selected = nomor;
+		$('#noSoal').html(nomor);
+		
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+		}
+		
+		for (i=1;i<=jumlah_soal;i++){
+			var cccc= $('#tmp_answer_'+i).html();
+			if (cccc != '') $('#jawaban-no-'+i).addClass('btn-dark');
+			var cccc= $('#ragu_answer_'+i).html();
+			if (cccc != '') {
+				$('#jawaban-no-'+i).addClass('btn-warning');
+				$('#jawaban-no-'+i).removeClass('btn-dark');
+			}
+		}
+		//$('.btn-lihat-soal').removeClass('btn-dark');
+		$('#jawaban-no-'+nomor).removeClass('btn-warning');
+		$('#jawaban-no-'+nomor).removeClass('btn-dark');
+		$('.btn-lihat-soal').removeClass('btn-primary');
+		
+		$('#jawaban-no-'+nomor).addClass('btn-primary');
+		
+		window.scrollTo(0, 0);
+		$('.c-svg').fadeOut();
+		redrawline(selected);
+	}
+	
+	function nextSoal() {
+		if (selected < jumlah_soal) {
+			selected++;		
+			lihatSoal(selected);
+		} else {
+			
+			selesaikanTes();
+		}
+	}
+	
+	function prevSoal() {
+		if (selected > 1) {
+			selected--;
+			lihatSoal(selected);
+		}
+	}
+	
+	function raguRagu() {
+		if ($('#c_ragu_ragu').is(':checked')) {
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			$('#jawaban-no-'+selected).addClass('btn-warning');
+			$('#ragu_answer_'+selected).html('1');
+			save_ragu(selected,'1');
+		} else {
+			$('#ragu_answer_'+selected).html('');
+			$('#jawaban-no-'+selected).removeClass('btn-warning');
+			$('#jawaban-no-'+selected).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+selected).removeClass('btn-dark');
+			
+			if ($('#answer'+selected).html() == '')
+			{
+				$('#jawaban-no-'+selected).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+selected).addClass('btn-dark');
+			}
+			
+			save_ragu(selected,'');
+			
+		}
+	}
+	
+	function trigger_ragu(nomor)
+	{
+		if ($('#jawaban-no-'+nomor).hasClass('btn-warning')) {
+			$('#c_ragu_ragu').prop('checked',true);
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			$('#jawaban-no-'+nomor).addClass('btn-warning');
+		} else {
+			$('#c_ragu_ragu').prop('checked',false);
+			$('#jawaban-no-'+nomor).removeClass('btn-warning');
+			$('#jawaban-no-'+nomor).removeClass('btn-outline-dark');
+			$('#jawaban-no-'+nomor).removeClass('btn-dark');
+			
+			if ($('#answer'+nomor).html() == '')
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-outline-dark');
+			}
+			else
+			{
+				$('#jawaban-no-'+nomor).addClass('btn-dark');
+			}
+		}
+		
+	}
+	
+	lihatSoal(2);
+	
+	function selesaikanTes() {
+		$.ajax({ 
+		   type: "POST",
+		   dataType: "html",
+		   data : $('#formJawaban').serialize(),
+		   url: "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/finishtes?ses_id=5324e12b23d530837a2d16ee0575bc57a1c3d9c0",
+		   cache: false, 
+		   beforeSend: function(){
+			   $('#nextSoal').prop('disabled',true);
+			   $('#nextSoal').html('Silahkan tunggu ... !');
+			   $('#loader').fadeIn();
+			},
+			complete: function(){
+			},
+			success: function(result){
+				//alert(result);
+				if (result=='error') {
+					alert('Oops ada kesalahan! \rSilahkan ulangi !');
+					$('#nextSoal').prop('disabled',false);
+					$('#nextSoal').prop('enabled',true);
+					$('#nextSoal').html('Soal berikutnya');
+					$('#loader').fadeOut();
+				}
+				else
+					window.location = result;
+		   }
+		});
+	}
+
+	function changeFont(s,d)
+	{
+		$('#isisoal').css("font-size", s + "px");
+		$('.cfont').css("font-weight", "normal");
+		$('#'+d).css("font-weight", "bold");
+	}
+			
+	var RemainTime = new (function() {
+		var $countdown;
+		var $form;
+		var incrementTime = 60;
+		var globalTime = 4500 * 1000; // 50 seconds (in milliseconds)
+		var currentTime = globalTime;
+		var DurationTime = 4500 * 60000; // 5 minutes (in milliseconds)
+
+
+		$(function() {
+
+			// Setup the timer
+			$countdown = $('#countdown');
+			RemainTime.Timer = $.timer(updateTimer, incrementTime, true);
+
+		});
+
+		function updateTimer() {
+
+			// Output timer position
+			var timeString = formatTime(currentTime);
+			$countdown.html(timeString);
+			// If timer is complete, trigger alert
+			if (currentTime == 0) {
+				jQuery.noConflict();
+				$('#timeoutDialog').modal();
+				//$('#timeoutDialog').modal('show');
+				RemainTime.Timer.stop();
+				//disable_all();
+				//bootbox_timeout();
+				
+				return;
+			}
+			// Increment timer position
+			currentTime -= incrementTime;
+			if (currentTime < 0) currentTime = 0;
+
+		}
+	});
+
+	// Common functions
+	function pad(number, length) {
+		var str = '' + number;
+		while (str.length < length) {str = '0' + str;}
+		return str;
+	}
+	function formatTime(time) {
+		time = time / 10;
+		var hour= parseInt(time / 360000),
+			min = parseInt(time / 6000) - (hour * 60),
+			sec = parseInt(time / 100) - (min * 60) - (hour * 3600),
+			hundredths = pad(time - (sec * 100) - (min * 6000) - (hour * 360000), 2);
+		return (hour > 0 ? pad(hour, 2) : "00") + ":" + (min > 0 ? pad(min, 2) : "00") + ":" + pad(sec, 2) + "";
+	}
+	
+	function KlikJawaban(no,i)
+	{
+		$('#pilihan_'+no+'_'+i).trigger('click');
+	}
+	
+	
+	function KlikJawaban2(no,i)
+	{
+		$('#pilihan_'+'_'+no+'_'+i).trigger('click');
+	}
+	
+	function KlikJawaban3(no,i,j)
+	{
+		$('#pilihan_'+'_'+no+'_'+i+'_'+j).trigger('click');
+	}
+	
+	
+	function pilihan(n,v,i) {
+		if (v.toUpperCase() == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(v.toUpperCase());
+		//$("#answer"+n).css('color','#000');
+		//pushPromise(i,v);
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+		$("#jawaban-no-"+n).addClass('btn-dark');
+		//$("#jawaban-no-"+n).addClass('text-white');
+		// $("#cont-answer"+n).css('color','#fff');
+
+		save_answer(n,v.toUpperCase());
+		trigger_ragu(selected);
+
+	}
+	
+	
+	function pilihan2(n,v,i) {
+		
+		var jawaban = $('.pilihan'+n+':checked')
+		   .map(function() { return $(this).val() })
+		   .get()
+		   .join(";");
+		
+		if (jawaban == '') {
+			$("#answer"+n).html('');
+			$("#jawaban-no-"+n).removeClass('btn-dark');
+			$("#jawaban-no-"+n).addClass('btn-outline-dark');
+		}
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+			$("#jawaban-no-"+n).addClass('btn-dark');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		
+		// pushPromise(i,jawaban);
+		
+		
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+
+	}
+	
+	function pilihan3(n,total,s, arr) {
+		var jawaban = '';
+		for (i=1;i<=total;i++)  {
+			var v = $('input[name="pilihan_'+n+'_'+i+'"]:checked').val();
+			if (v != undefined && v != null) jawaban += arr[(i-1)]+'|'+v + ';';
+		}
+		jawaban = jawaban.substring(0, jawaban.length-1);
+		
+		if (jawaban == '')
+			$("#answer"+n).html('');
+		else {
+			$("#answer"+n).html('<i class="fa fa-check"></i>');
+			$("#answer"+n).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+n).html(jawaban);
+			   
+		// $("#answer"+n).css('color','#000');
+		// pushPromise(s,jawaban);
+		
+		$("#jawaban-no-"+n).removeClass('btn-outline-dark');
+	    $("#jawaban-no-"+n).addClass('btn-dark');
+			
+		// $("#cont-answer"+n).css('background','#000');
+		// $("#cont-answer"+n).css('color','#fff');
+		save_answer(n,jawaban);
+		 trigger_ragu(selected);
+		
+	}
+	
+		
+	function pilih1(no, id, warna, order) {
+			
+			// if (window['right_'+no] == '') {
+				// $('.m-left-'+no).prop('checked', false);
+				// $('.tr-left-'+no).css('background','');
+			// }
+			//if (window['dipilih1_'+no].indexOf(id) >=0) window['free1_'+no]=false;
+			if (window['free1_'+no]) {
+				window['free1_'+no] = false;
+				$('#r_left_'+no+'_'+id).prop('checked', true);
+				$('#row1-'+no+'-'+id).css('background',warna);
+				window['pos1_'+no] = $('#r_left_'+no+'_'+id).offset();
+				window['pos11_'+no] = $('#r_left_'+no+'_'+id).position();
+				window['warna1_'+no] = warna;
+				window['id1_'+no] = id;
+				window['order1_'+no] = order;
+				window['dipilih1_'+no].push(id);
+				window['jawab_'+no] = id;
+			}
+			
+	}
+	
+	function removeA(arr) {
+		var what, a = arguments, L = a.length, ax;
+		while (L > 1 && arr.length) {
+			what = a[--L];
+			while ((ax= arr.indexOf(what)) !== -1) {
+				arr.splice(ax, 1);
+			}
+		}
+		return arr;
+	}
+	
+	function rgb2hex(rgb) {
+		rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+		function hex(x) {
+			return ("0" + parseInt(x).toString(16)).slice(-2);
+		}
+		return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+	}
+	
+	
+	
+	function pilih2(no, id,tipe,order,s, ps) {
+		var _c_pilih = $('#r_right_'+no+'_'+id).prop('checked');
+		if (_c_pilih==true) {
+			//alert('1');
+			
+			var id1 =  window['pasangan_'+no+'_'+id];
+			window['free1_'+no] = false;
+			//$('#r_left_'+no+'_'+id).prop('checked', true);
+			var warna11 = rgb2hex($('#row2-'+no+'-'+id).css('background-color'));
+			window['warna1_'+no] = warna11;
+			window['pos1_'+no] = $('#r_left_'+no+'_'+id1).offset();
+			window['pos11_'+no] = $('#r_left_'+no+'_'+id1).position();
+			var cc = id1+";"+id+'|';
+			var ddd = window['jawaban_'+no];
+			dd = ddd.replace(cc,"");
+			window['jawaban_'+no] = dd;
+			
+			window['id1_'+no] = id1;
+			window['free1_'+no] = false;
+			window['right_'+no] = '';
+			window['free_'+no] = true;
+			//delete window['dipilih2_'+no][id];
+			//window['dipilih2_'+no].remove(id);
+			removeA(window['dipilih2_'+no], id);
+			//$('#r_right_'+no+'_'+id).prop('checked', false);
+			//$('.line-'+no).css('display','none');
+			var xx = '#line_'+no+'_'+window['id1_'+no];
+			//alert(xx);
+			$(xx).css('display','none');
+			$('#r_right_'+no+'_'+id).prop('checked', false);
+			$('#row2-'+no+'-'+id).css('background','#ffffff');
+		}
+		else 
+		{
+			//alert('2');
+			window['free_'+no] = true;
+			if (window['dipilih2_'+no].indexOf(id) >=0) window['free_'+no]=false;
+			//alert(2);
+			
+			if ((window['id1_'+no] != '') && window['free_'+no] && (window['right_'+no] == '')) {
+				//alert(3);
+				window['free1_'+no] = true;
+				window['right_'+no] = '';
+				eval('var pasangan_'+no+'_'+id + '= "";');
+				window['pasangan_'+no+'_'+id] = window['id1_'+no];
+				window['jawaban_'+no] = window['jawaban_'+no]+ window['id1_'+no] +';'+ id +'|';
+				window['dipilih2_'+no].push(id);
+				$('#r_right_'+no+'_'+id).prop('checked', true);
+				$('#row2-'+no+'-'+id).css('background',window['warna1_'+no]);
+				$('#r_right_'+no+'_'+id).val(window['id1_'+no]+';'+id);
+				
+				pos2 = $('#r_right_'+no+'_'+id).offset();
+				pos22 = $('#r_right_'+no+'_'+id).position();
+				$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left);
+				$('#line_'+no+'_'+window['id1_'+no]).fadeIn();
+				if (window['pos1_'+no].top > pos2.top) {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',window['pos1_'+no].top-pos2.top)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',0)
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',pos2.top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				} else {
+					$('#line_'+no+'_'+window['id1_'+no])
+						.attr('x1',0)
+						.attr('y1',0)
+						.attr('x2',Math.abs(window['pos1_'+no].left-pos2.left)-20)
+						.attr('y2',Math.abs(window['pos1_'+no].top-pos2.top))
+						.attr('stroke',window['warna1_'+no])
+						;
+					$('#svg_'+no+'_'+window['id1_'+no]).css('top',window['pos1_'+no].top);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('left',window['pos1_'+no].left+20);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('height',Math.abs(window['pos1_'+no].top-pos2.top)*2+10);
+					$('#svg_'+no+'_'+window['id1_'+no]).css('width',Math.abs(window['pos1_'+no].left-pos2.left)-20);
+				}
+				
+				
+				window['id1_'+no] = '';
+				jawaban = window['jawaban_'+no];
+				n = no;
+				
+				if (jawaban == '')
+					$("#answer"+n).html('');
+				else {
+					$("#answer"+n).html('<i class="fa fa-check"></i>');
+					$("#answer"+n).removeClass('d-none');
+				}
+				
+				//$("#answer"+n).css('color','#000');
+				
+				
+					$("#tmp_answer_"+n).html(jawaban);
+					if (ps == '2')	   {
+						save_answer(n,jawaban);
+						//pushPromise(s,jawaban);
+					}
+				
+				// $("#cont-answer"+n).css('background','#000');
+				// $("#cont-answer"+n).css('color','#fff');
+				
+				trigger_ragu(selected);
+
+			} else {
+				if (tipe==2)
+				$('#r_right_'+no+'_'+id).prop('checked', false);
+			}
+		
+		}
+		
+	}
+	
+			eval('var tipesoal_pencocokan_1 = "1"');
+			eval('var tipesoal_pencocokan_2 = "1"');
+			eval('var tipesoal_pencocokan_3 = "1"');
+			eval('var tipesoal_pencocokan_4 = "3"');
+			eval('var tipesoal_pencocokan_5 = "1"');
+			eval('var tipesoal_pencocokan_6 = "2"');
+			eval('var tipesoal_pencocokan_7 = "1"');
+			eval('var tipesoal_pencocokan_8 = "1"');
+			eval('var tipesoal_pencocokan_9 = "2"');
+			eval('var tipesoal_pencocokan_10 = "1"');
+			eval('var tipesoal_pencocokan_11 = "1"');
+			eval('var tipesoal_pencocokan_12 = "1"');
+			eval('var tipesoal_pencocokan_13 = "1"');
+			eval('var tipesoal_pencocokan_14 = "1"');
+			eval('var tipesoal_pencocokan_15 = "1"');
+			eval('var tipesoal_pencocokan_16 = "1"');
+			eval('var tipesoal_pencocokan_17 = "1"');
+			eval('var tipesoal_pencocokan_18 = "1"');
+			eval('var tipesoal_pencocokan_19 = "1"');
+			eval('var tipesoal_pencocokan_20 = "1"');
+			eval('var tipesoal_pencocokan_21 = "1"');
+			eval('var tipesoal_pencocokan_22 = "1"');
+			eval('var tipesoal_pencocokan_23 = "1"');
+			eval('var tipesoal_pencocokan_24 = "1"');
+			eval('var tipesoal_pencocokan_25 = "1"');
+			eval('var tipesoal_pencocokan_26 = "1"');
+			eval('var tipesoal_pencocokan_27 = "1"');
+			eval('var tipesoal_pencocokan_28 = "1"');
+			eval('var tipesoal_pencocokan_29 = "1"');
+			eval('var tipesoal_pencocokan_30 = "1"');
+		
+	function redrawline(no) {
+		var tmp_tipesoal = window['tipesoal_pencocokan_'+no];
+		if (tmp_tipesoal == 5) {
+			resetKunci(no,'');
+			var tmp = $('#tmp_answer_'+no).html();//window['jawaban_pencocokan_'+no];
+			var tmp_warna = window['warna_pencocokan_'+no];
+			var tmp_soal = window['soal_pencocokan_'+no];
+			var arr_tmp = tmp.split('|');
+			for (i=0;i<arr_tmp.length;i++) {
+				if (arr_tmp[i].trim() != '') {
+					var arr_tmp2 = arr_tmp[i].split(';');
+					pilih1(no,arr_tmp2[0], tmp_warna[i], i);
+					pilih2(no,arr_tmp2[1], '2', arr_tmp2[1],tmp_soal,'1');
+				}
+			}
+			
+			$('#c-svg-'+no).fadeIn();
+		}
+	}
+	
+	
+	function resetKunci(no, tipe) {
+		left = '';
+		window['right_'+no] = '';
+		window['warna1_'+no] = '';
+		window['id1_'+no] = '';
+		window['pos1_'+no] = '';
+		window['pos11_'+no] = '';
+		window['free1_'+no] = true;
+		window['free_'+no] = true;
+		window['dipilih1_'+no] = [];
+		window['dipilih2_'+no] = [];
+		$('.tr-left-'+no).css('background','');
+		$('.tr-right-'+no).css('background','');
+		$('.line-'+no).css('display','none');
+		window['jawab_'+no] = '';
+		window['jawaban_'+no] = '';
+		window['order1_'+no] = '';
+		$('.m-left-'+no).prop('checked', false);
+		$('.m-right-'+no).prop('checked', false);
+		if (tipe == '1') $("#tmp_answer_"+no).html('');
+		$("#answer"+no).html('');
+		$("#jawaban-no-"+no).removeClass('btn-dark');
+		$("#jawaban-no-"+no).addClass('btn-outline-dark');
+		
+	};
+	
+	
+	$('.jawaban_essai').focusout(function() {
+		var no = this.title;
+		var jawaban = $('#jawaban_essai_'+no).val();					
+		var s = $('#jawaban_essai_'+no).attr('pre');					
+		
+		
+		if (jawaban == '')
+			$("#answer"+no).html('');
+		else {
+			$("#answer"+no).html('<i class="fa fa-check"></i>');
+			$("#answer"+no).removeClass('d-none');
+		}
+		
+		$("#tmp_answer_"+no).html(jawaban);
+		
+		save_answer(no,jawaban);
+			   
+		// $("#answer"+no).css('color','#000');
+		
+			// $.post( "https://pusmendik.kemendikdasmen.go.id/tka/cbt/peserta/sv_ans",
+			// {
+				// id_soal: s,
+				// jawaban:jawaban,
+				// id_ujian: ,
+				// id_projek_ujian: 
+			// }, function(data) {
+		// });
+		// $("#cont-answer"+no).css('background','#000');
+		// $("#cont-answer"+no).css('color','#fff');
+		trigger_ragu(selected);
+			
+	}).blur(function() {});
+	
+	
+	function methodThatReturnsAPromise(i,jawaban) {
+		return new Promise((resolve, reject) => {
+			$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_jawaban", {nomor: i,jawaban:jawaban, }, function(data) {resolve();});
+		});
+	}
+	
+	var promises = [Promise.resolve()];
+	
+	function pushPromise(i,jawaban)
+	{
+	  promises.push(promises.pop().then(function(){
+		return methodThatReturnsAPromise(i,jawaban)}));
+	}
+	
+	function save_ragu(nomor,jawaban) {
+		$.post( "https://pusmendik.kemendikdasmen.go.id/tka/simulasi_tka/save_ragu", {nomor: nomor,jawaban:jawaban, }, function(data) {});
+	}
+	
+	function save_answer(nomor,jawaban) {
+		pushPromise(nomor,jawaban);
+	}
+</script>
+
+
+
+</body></html>

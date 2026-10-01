@@ -1,0 +1,234 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Sejarah (Paket 2)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: ['A', 'B', 'C']
+Stimulus Teks: Banten pada awalnya merupakan daerah kekuasaan Kerajaan Pajajaran, namun berhasil ditaklukkan Demak di bawah pimpinan Fatahillah. Peristiwa ini menjadi jalan bagi cepatnya perkembangan Islam di wilayah tersebut. Banten segera tumbuh menjadi pelabuhan penting di Selat Sunda setelah Malaka jatuh ke tangan Portugis pada tahun 1511.
+Pertanyaan: Apa saja faktor yang mempengaruhi perkembangan ekonomi Kerajaan Banten sehingga menjadi pelabuhan penting pada periode tersebut?
+Klik jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: D
+Stimulus Teks: Pada bulan April 1595, Belanda memulai pelayaran menuju Nusantara di bawah pimpinan Cornelis de Houtman. Belanda menempuh rute Pantai Barat Afrika – Tanjung Harapan–Samudra Hindia–Selat Sunda–Banten. Belanda akhirnya sampai di Nusantara melalui Selat Sunda dan merapat di Banten pada tahun 1596.
+Pertanyaan: Apa tujuan utama Bangsa Belanda datang ke Nusantara ?
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: ['A', 'D', 'E']
+Stimulus Teks: Ki Hajar Dewantara dikenal sebagai tokoh pergerakan nasional yang gigih memperjuangkan kemerdekaan melalui jalur pendidikan, pers, dan diplomasi. Ia mendirikan Taman Siswa sebagai bentuk perlawanan terhadap diskriminasi pendidikan kolonial dan aktif menyuarakan pentingnya pendidikan nasional melalui tulisan-tulisan kritis di media. Gagasan dan nilai perjuangannya tetap relevan hingga masa kini.
+Pertanyaan: Manakah pernyataan berikut yang mencerminkan ide Ki Hajar Dewantara dan masih relevan untuk kehidupan masa kini?
+Klik jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Tritura merupakan respons mahasiswa terhadap situasi politik dan ekonomi Indonesia pasca peristiwa G30S 1965. Tergambar pada tabel berikut:
+Sumber: Hapsari & Adil, 2023:169
+Pertanyaan: Manakah yang termasuk dalam peristiwa penting terkait titik awal lahirnya Orde Baru?
+Klik pilihan
+Benar
+atau
+Salah
+untuk setiap pernyataan di bawah ini!
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: E
+Stimulus Teks: Menurut pendapat Herodotus bahwa sejarah tidak berkembang ke arah depan dengan tujuan yang pasti, tetapi bergerak seperti garis lingkaran yang tinggi rendahnya diakibatkan oleh keadaan manusia.
+Pertanyaan: Apakah fokus pengertian sejarah menurut pendapat tersebut?
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: ['A', 'C', 'E']
+Stimulus Teks: Demak awalnya merupakan bagian dari wilayah kerajaan Majapahit. Setelah keruntuhan Majapahit, Raden Fatah mendirikan kerajaan Islam Demak. Perkembangan politik ini membuat Demak berperan penting dalam ekonomi.
+Pertanyaan: Apa saja faktor yang membuat Demak memiliki peran penting dalam bidang ekonomi?
+Klik jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: E
+Stimulus Teks: Dalam meneliti peristiwa Konferensi Asia Afrika 1955, seorang siswa membaca naskah pidato asli Presiden Soekarno dan buku sejarah kontemporer yang membahas dampak konferensi tersebut. Naskah pidato ditulis pada saat acara berlangsung, sedangkan buku ditulis oleh sejarawan pada tahun 2015. Siswa tersebut membandingkan kedua sumber tersebut untuk memahami isi peristiwa dan sudut pandang masa kini.
+Pertanyaan: Bagaimana perbedaan karakteristik antara dua bahan yang digunakan siswa tersebut?
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: B
+Stimulus Teks: Perlawanan Aceh yang dipimpin oleh Teuku Abdul Jalil adalah salah satu bentuk perlawanan menghadapi pendudukan Jepang. Pasukan Jepang dikerahkan dari Bireun, Lhok Sukon, Lhokseumawe. Blang Kampong Teungah juga diserbu Jepang pada 13 November 1942. Teuku Abdul Djalil dan 19 orang pengikutnya meninggal.
+Pertanyaan: Apakah yang menjadi alasan perlawanan Teuku Abdul Jalil terhadap Jepang di Aceh?
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: E
+Stimulus Teks: Candi Borobudur dihiasi ribuan panel relief yang mengisahkan ajaran Buddha dan kehidupan sehari-hari masyarakat Jawa kuno. Gambar ini memperlihatkan Relief Karmawibhangga Panel nomor 65 di Candi Borobudur yang menggambarkan aktivitas masyarakat Jawa Kuno.
+Sumber gambar:
+https://kebudayaan.kemdikbud.go.id/bkborobudur/wp-content/uploads/sites/12/2019/04/IMG_20190411_093937-e1554951877688.jpg
+Pertanyaan: Apa penggambaran yang tepat dari Relief Karmawibhangga Panel nomor 65 tentang kehidupan sosial masyarakat?
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: E
+Stimulus Teks: Agama Islam masuk ke Nusantara melalui berbagai cara, salah satunya adalah melalui jalur perdagangan. Beberapa ahli berpendapat bahwa Islam dibawa oleh para pedagang dari Gujarat.
+Pertanyaan: Apa bukti yang mendukung teori Gujarat tersebut?
+---
+[SOAL ACUAN NO 11]
+Kunci Resmi: A
+Stimulus Teks: Sumpah Pemuda terjadi pada tanggal 28 Oktober 1928, merupakan momen yang penting dalam sejarah perjuangan kemerdekaan Indonesia. Peristiwa ini merupakan hasil dari Kongres Pemuda II yang diselenggarakan di Jakarta. Hal ini menjadi tonggak penting dalam menyatukan para pemuda dari berbagai latar belakang suku, dan bahasa sebagai satu identitas, bangsa Indonesia. Persatuan ini yang menjadi modal dalam berjuang menggapai kemerdekaan Indonesia.
+Pertanyaan: Berdasarkan informasi diatas, bagaimana perbandingan persatuan dan nasionalisme di masyarakat sebelum dan sesudah Sumpah Pemuda?
+---
+[SOAL ACUAN NO 12]
+Kunci Resmi: ['B', 'C', 'D']
+Stimulus Teks: Pada awal abad ke-17, Surabaya adalah kota pelabuhan yang makmur dengan jaringan perdagangan kuat. Namun, kota ini ditaklukkan oleh Kesultanan Mataram di bawah kepemimpinan Sultan Agung setelah pengepungan panjang dari tahun 1620 hingga 1625.
+Pertanyaan: Bagaimanakah pengaruh konflik antara Mataram dengan Surabaya terhadap kehidupan ekonomi di Nusantara?
+Klik jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 13]
+Kunci Resmi: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+Stimulus Teks: Gajah Mada, Mahapatih Majapahit, mengucapkan Sumpah Palapa untuk menyatukan Nusantara. Sumpah ini membawa Majapahit mencapai puncak kejayaannya sebagai kekuatan yang disegani. Sejarawan George Coedes menuliskan bahwa Gajah Mada merupakan tokoh penting dalam perluasan supremasi/kekuasaan tertinggi Majapahit pada masa Hayam Wuruk.
+Pertanyaan: Berdasarkan informasi di atas, manakah penafsiran yang paling tepat mengenai Sumpah Palapa bagi Majapahit?
+Pilih
+tepat
+atau
+tidak tepat
+mengenai pentingnya Sumpah Palapa bagi Majapahit!
+---
+[SOAL ACUAN NO 14]
+Kunci Resmi: B
+Stimulus Teks: Bangsa Spanyol sebagai salah satu bangsa Eropa yang melakukan penjelajahan Samudera. Beberapa tokoh penjelajahan samudera dari negara ini di antaranya adalah Christophorus Columbus, Francisco Pizarro dan Magellan.
+Pertanyaan: Manakah jalur pelayaran Bangsa Spanyol sehingga sampai di Nusantara?
+---
+[SOAL ACUAN NO 15]
+Kunci Resmi: ['A:Tepat', 'B:Tepat', 'C:Tidak Tepat']
+Stimulus Teks: Walisongo, sebutan bagi kelompok yang berperan penting dalam penyebaran Islam di Pulau Jawa. Wali Songo memperkenalkan agama Islam melalui berbagai pendekatan kepada masyarakat. Wali Songo menggunakan berbagai pendekatan budaya untuk menyebarkan Islam di Jawa, seperti cerita pewayangan dengan tokoh Islam dan pertunjukan seni.
+Pertanyaan: Manakah dari pernyataan berikut yang menunjukkan fakta yang tepat dan tidak tepat tentang jejak budaya Islam di Jawa?
+Klik pilihan
+Tepat
+atau
+Tidak Tepat
+untuk setiap pernyataan di bawah ini!
+---
+[SOAL ACUAN NO 16]
+Kunci Resmi: E
+Stimulus Teks: Gambar ini menunjukkan ilustrasi pelaksanaan hukuman yang dikenal sebagai
+poenale sanctie
+yang banyak dilakukakan pada perkebunan kolonial di Sumatera Timur pada akhir abad ke-19. Praktik seperti ini diterapkan kepada pekerja perkebunan yang dianggap melanggar peraturan.
+Sumber:
+Raden Roro Mei/Pusmendik, 2025
+Pertanyaan: Berdasarkan ilustrasi tersebut, manakah di antara pernyataan berikut yang paling tepat menunjukkan pengaruh praktik
+poenale sanctie
+terhadap kehidupan pekerja pada masa kolonial?
+---
+[SOAL ACUAN NO 17]
+Kunci Resmi: ['A', 'C', 'E']
+Stimulus Teks: Perang Tellumpoccoe terjadi pada 1582–1611 di Sulawesi Selatan sebagai konflik antara Kesultanan Gowa-Tallo dan aliansi kerajaan-kerajaan Bugis (Bone, Wajo, Soppeng).
+Pertanyaan: Bagaimana dampak perang tersebut dalam kehidupan ekonomi di Nusantara?
+Klik jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 18]
+Kunci Resmi: E
+Stimulus Teks: Kehidupan global semakin berkembang dengan maraknya penjelajahan samudra orang-orang Eropa ke dunia Timur. Begitu juga peristiwa di kawasan Laut Tengah pada tahun 1453 turut meramaikan kedatangan bangsa Eropa ke Nusantara.
+Pertanyaan: Peristiwa apa yang terjadi di Laut Tengah sehingga melatarbelakangi kedatangan bangsa Eropa ke Nusantara?
+---
+[SOAL ACUAN NO 19]
+Kunci Resmi: ['A', 'B', 'D']
+Stimulus Teks: Mohammad Hatta dikenal sebagai tokoh nasionalis yang memperjuangkan kemerdekaan Indonesia melalui jalur diplomasi dan pendidikan. Ia juga menekankan pentingnya koperasi sebagai pilar ekonomi kerakyatan.
+Pertanyaan: Jika Anda adalah seorang pemuda yang ingin menghidupkan semangat Mohammad Hatta di masa kini, manakah tindakan yang tepat yang mencerminkan semangat tersebut?
+klik jawaban benar! Jawaban benar lebih dari satu
+---
+[SOAL ACUAN NO 20]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Persaingan Portugis dan Spanyol di Maluku diakhiri dengan perjanjian Saragosa 1529. Portugis tetap di Maluku, sementara Spanyol harus bergerak ke Filipina. Portugis semakin berkuasa dengan melakukan monopoli perdagangan di Maluku. Hal ini mengancam kedudukan raja-raja di Maluku.
+Pertanyaan: Strategi apa yang digunakan rakyat Maluku untuk melawan Portugis?
+Pilihlah
+benar
+atau
+salah
+dari pernyataan tentang strategi perlawanan yang dilakukan rakyat Maluku dalam menghadapi Portugis!
+---
+[SOAL ACUAN NO 21]
+Kunci Resmi: A
+Stimulus Teks: Perlawanan yang dipimpin oleh Kiai Zainal Mustafa meletus pada bulan Februari 1944. Dia seorang tokoh dari Singaparna, Tasik Malaya, Jawa Barat. Ia sangat menentang kebijakan-kebijakan Jepang.
+Pertanyaan: Apakah yang mendorong perlawanan Kiai Zainal Mustafa kepada Jepang di Singaparna?
+---
+[SOAL ACUAN NO 22]
+Kunci Resmi: ['A', 'B', 'C']
+Stimulus Teks: Setelah berhasil memproklamsikan kemerdekaan Indonesia pada tanggal 17 Agustus 1945, Bangsa Indonesia harus berjuang mempertahankan kemerdekaan. Ancaman dari luar maupun dari dalam mengancam tegaknya kedaulatan Negara Republik Indonesia yang baru saja berdiri. Ancaman dari luar muncul dari Belanda yang tidak mau mengakui kedaulatan Indonesia.
+Pertanyaan: Perjuangan fisik apa saja yang dilakukan oleh rakyat Indonesia untuk mempertahankan kemerdekaan menghadapi Belanda yang ingin menguasai kembali Indonesia ?
+Klik pada semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 23]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Jepang menjadi negara industri karena keberhasilan Restorasi Meiji/kebangkitan modernisasi. Kebutuhan akan modal pada kegiatan industri memicu Jepang melakukan ekspansi ke Indonesia.
+Pertanyaan: Bagaimana karakteristik kebijakan Jepang pada masyarakat saat menjajah Indonesia?
+Pilihlah
+Benar
+atau
+Salah
+pada pernyataan berikut !
+---
+[SOAL ACUAN NO 24]
+Kunci Resmi: ['A:Sesuai', 'B:Tidak Sesuai', 'C:Sesuai']
+Stimulus Teks: Tabel: Kondisi Ekonomi Masa Demokrasi Liberal
+Sumber Tabel: Kementerian Pendidikan dan Kebudayaan. 2015. Sejarah Indonesia Untuk SMA/MA Kelas XII. Jakarta: Kemendikbud, halaman 70-75
+Pertanyaan: Berdasarkan data tersebut, manakah dampak negatif akibat kebijakan pemerintah pada masa Demokrasi Parlementer?
+Klik
+sesuai
+atau
+tidak sesuai
+dari dari dampak negatif kebijakan pemerintah pada masa Demokrasi Parlementer!
+---
+[SOAL ACUAN NO 25]
+Kunci Resmi: ['C', 'D', 'E']
+Stimulus Teks: Ekonomi Kerakyatan digagas oleh Mohammad Hatta, yang bertujuan untuk membangun perekonomian rakyat melalui koperasi, dengan prinsip kebersamaan, kekuasaan milik rakyat, dan lebih mementingkan kepentingan umum. Namun, fakta saat ini jurang sosial melebar antara buruh dan pemilik modal. Pemerintah membuat proyek sosial ekonomi untuk menjembatani kesenjangan tersebut.
+Pertanyaan: Manakah yang mencerminkan nilai-nilai dari semangat ekonomi Bung Hatta?
+Pilih jawaban benar? jawaban benar lebih dari satu
+---
+[SOAL ACUAN NO 26]
+Kunci Resmi: C
+Stimulus Teks: Agresi Militer Belanda II dimulai pada tanggal 10 Desember 1948, ketika Belanda menyerbu Yogyakarta dan menawan Presiden serta Wakil Presiden. Sedangkan Syafruddin Prawiranegara membentuk Pemerintahan Darurat Republik Indonesia (PDRI) di Sumatera Barat saat situasi genting. Panglima Soedirman melanjutkan perjuangan melalui gerilya. Sementara itu, diplomasi Indonesia tetap berjalan di forum internasional.
+Sumber:
+Buku Sejarah untuk SMA/MA Kelas XII (Kemdikbud, 2022)
+Pertanyaan: Apa bentuk respons strategis bangsa Indonesia dalam mempertahankan kemerdekaan setelah Agresi Militer Belanda II?
+---
+[SOAL ACUAN NO 27]
+Kunci Resmi: ['A:Tepat', 'B:Tidak Tepat', 'C:Tepat']
+Stimulus Teks: Supersemar atau Surat Perintah 11 Maret 1966 merupakan surat yang dikeluarkan oleh Presiden Sukarno dan memberikan wewenang luas kepada Letjen Soeharto untuk menjaga stabilitas negara dan menyelamatkan revolusi. Surat ini menjadi titik balik sejarah Indonesia karena memberi dasar legitimasi bagi Soeharto untuk mengambil langkah-langkah strategis selanjutnya.
+Pertanyaan: Bagaimana akibat Supersemar sehingga mendorong lahirnya Orde Baru?
+Pilih
+tepat
+atau
+tidak tepat
+setiap fakta kelahiran Orde Baru
+---
+[SOAL ACUAN NO 28]
+Kunci Resmi: C
+Stimulus Teks: Perhatikan kutipan berikut!
+“Pembangunan mercusuar dianggap sebagai cara menunjukkan keunggulan Indonesia di mata dunia, namun biaya besar yang dikeluarkan menyebabkan krisis ekonomi semakin parah.”
+Sumber: Kahin, Nationalism and Revolution in Indonesia, 2010.
+Pertanyaan: Berdasarkan kutipan tersebut, apa kelemahan utama dari kebijakan Politik Mercusuar yang dilaksanakan oleh Presiden Soekarno?
+---
+[SOAL ACUAN NO 29]
+Kunci Resmi: ['A', 'B', 'C']
+Stimulus Teks: Tabel: Terkait dualisme kepemimpinan nasional pada awal Orde Baru
+Presiden Soeharto diharapkan segera melakukan pemilu pada tahun 1968. Namun karena berbagai pertimbangan politik dan keamanan, pemilu baru dapat diselenggarakan pada tahun 1971. Setelah pemilu tahun 1971, pemerintah melemparkan gagasan penyederhanaan partai politik. Banyaknya partai politik dianggap tidak memudahkan pembangunan, justru menambah permasalahan.
+Pertanyaan: Apa saja langkah-langkah pemerintah dalam mengatasi masalah partai politik?
+Klik pada jawaban yang benar! Jawaban benar lebih dari satu.
+

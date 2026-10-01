@@ -1,0 +1,158 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Bahasa Arab (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 79180_a831eaeed59da301ed08f2d540f2439d.png]:
+أَسْتَيْقِظُ فِي الصَّبَاحِ وَأَتَنَاوَلُ الْفُطُوْرَ مَعَ أُسْرَتِي. بَعْدَ ذَلِكَ، أَسْتَخْدِمُ هَاتِفِي لِقِرَاءَةِ الْأَخْبَارِ. ثُمَّ
+[Isi Gambar Soal 79180_134787b655b1f86fd0f9a301518712ab.png]:
+أَذْهَبُ إِلَى الْمَدْرَسَةِ وَأَدْرُسُ مَعَ أَصْدِقَائِي. بَعْدَ الدِّرَاسَةِ، أُشَاهِدُ الْفِيْدِيُوْهَاتِ. فِي الْمَسَاءِ، أَجْلِسُ (Catatan: Kata 'أُشَاهِدُ' bergaris bawah)
+[Isi Gambar Soal 79180_c3ca687ece2dde893b0ba984e3ccbb8b.png]:
+مَعَ عَائِلَتِي، ثُمَّ أَنَامُ بِسَلَامٍ.
+[Isi Gambar Soal 79180_e76c7faaf7e808f14fe9484fcf683385.png]:
+مَاذَا يَفْعَلُ الْكَاتِبُ فِي الْمَسَاءِ؟
+Pertanyaan: 
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 08424_dce97e1e0131fd43a3042710414e6a3a.png]:
+مَا مَعْنَى عِبَارَةِ 'أُشَاهِدُ' فِي الْجُمْلَةِ؟
+[Isi Gambar Soal 08424_e3ec464463d886789cad5d6775e23970.png]:
+اخْتَرِ الصَّحِيحَ أَوِ الْخَطَأَ لِكُلِّ عِبَارَةٍ!
+Pertanyaan: Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: A
+Stimulus Teks: Susunlah kata-kata berikut menjadi kalimat yang benar!
+[Isi Gambar Soal 13986_2ea62ff01ad0762c8a0b018486c5a504.png]:
+رَتِّبْ هَذِهِ الْكَلِمَاتِ لِتَكُوْنَ جُمْلَةً مُفِيْدَةً!
+[Isi Gambar Soal 13986_18c54d98efd6978dd8731aa2c3e1a348.png]:
+الْمَسَاءِ / فِي / نُشَاهِدُ / الْعَائِلَةِ / مَعَ / التِّلْفَازَ
+Pertanyaan: 
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: ['A', 'C']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 58658_3d4d6bdceb3b812d5a2840f6961e8454.png]:
+فَاطِمَةُ عَامِلَةٌ فِي مَطْعَمِ الْمَدْرَسَةِ. تَذْهَبُ كُلَّ يَوْمٍ صَبَاحًا مُبَكِّرًا. هِيَ عَامِلَةٌ مُجْتَهِدَةٌ. لَا تَذْهَبُ
+[Isi Gambar Soal 58658_a186d758382526cdec7cb4d3e9dae945.png]:
+إِلَى الْعَمَلِ إِلَّا فِي يَوْمِ الْعُطْلَةِ أَوْ إِذَا كَانَتْ مَرِيْضَةً.
+[Isi Gambar Soal 58658_a669c76574784cddad0c1d13a4a62017.png]:
+مِنَ النَّصِّ السَّابِقِ نَفْهَمُ أَنَّ فَاطِمَةَ....
+[Isi Gambar Soal 58658_43432ee325a12ea3ef08ca22a194cae9.png]:
+اِخْتَرْ أَكْثَرَ مِنْ إِجَابَةٍ صَحِيْحَةٍ.
+Pertanyaan: Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: A
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 36128_5ff535270f59bbecd1ac391b71ba9631.png]:
+فَضْلِي: صَبَاحُ الْخَيْرِ، يَا أَحْمَدُ. اِسْمِي فَضْلِي.
+[Isi Gambar Soal 36128_8759a660888fa083997ea9164c6e4398.png]:
+أَحْمَدُ: صَبَاحُ النُّوْرِ، يَا فَضْلِي. كَمْ عُمْرُكَ؟
+[Isi Gambar Soal 36128_ec4fd7bbb6b78bf3e145947d83700b51.png]:
+فَضْلِي: عُمْرِي أَرْبَعَةَ عَشَرَ سَنَةً. أَنَا طَالِبٌ فِي الْمَدْرَسَةِ الْمُتَوَسِّطَةِ.
+[Isi Gambar Soal 36128_1dd7dd71e0164c715a115a505a694e8d.png]:
+وَبَيْتِي قَرِيْبٌ مِنَ الْمَدْرَسَةِ.
+[Isi Gambar Soal 36128_3a61cfeb6a0631186509294d566913ed.png]:
+أَحْمَدُ: أَيْنَ عُنْوَانُ بَيْتِكَ؟
+[Isi Gambar Soal 36128_209daef564c3fcf3280e247d31750631.png]:
+فَضْلِي: عُنْوَانُ بَيْتِي فِي شَارِعِ سُوْكَارْنُوْ، جَاكَرْتَا الْجَنُوْبِيَّةِ.
+[Isi Gambar Soal 36128_a9274f587de9c196ff3076619b67c265.png]:
+فَضْلِي: وَهَذَا صَدِيْقِي، اِسْمُهُ خَالِدٌ.
+[Isi Gambar Soal 36128_1ad196dc0d9a000bb79999ea71d3ba39.png]:
+خَالِدٌ: نَعَمْ، أَنَا مَالِيزِيُّ الْجِنْسِيَّةِ. وَعُمْرِي خَمْسَةَ عَشَرَ سَنَةً.
+[Isi Gambar Soal 36128_24660a1dfc8a1efc3ee88a5d8bc673cc.png]:
+كَمْ عُمْرُ فَضْلِي؟
+Pertanyaan: 
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 66728_5ff535270f59bbecd1ac391b71ba9631.png]:
+فَضْلِي: صَبَاحُ الْخَيْرِ، يَا أَحْمَدُ. اِسْمِي فَضْلِي.
+[Isi Gambar Soal 66728_8759a660888fa083997ea9164c6e4398.png]:
+أَحْمَدُ: صَبَاحُ النُّوْرِ، يَا فَضْلِي. كَمْ عُمْرُكَ؟
+[Isi Gambar Soal 66728_ec4fd7bbb6b78bf3e145947d83700b51.png]:
+فَضْلِي: عُمْرِي أَرْبَعَةَ عَشَرَ سَنَةً. أَنَا طَالِبٌ فِي الْمَدْرَسَةِ الْمُتَوَسِّطَةِ.
+[Isi Gambar Soal 66728_1dd7dd71e0164c715a115a505a694e8d.png]:
+وَبَيْتِي قَرِيْبٌ مِنَ الْمَدْرَسَةِ.
+[Isi Gambar Soal 66728_3a61cfeb6a0631186509294d566913ed.png]:
+أَحْمَدُ: أَيْنَ عُنْوَانُ بَيْتِكَ؟
+[Isi Gambar Soal 66728_209daef564c3fcf3280e247d31750631.png]:
+فَضْلِي: عُنْوَانُ بَيْتِي فِي شَارِعِ سُوْكَارْنُوْ، جَاكَرْتَا الْجَنُوْبِيَّةِ.
+[Isi Gambar Soal 66728_a9274f587de9c196ff3076619b67c265.png]:
+فَضْلِي: وَهَذَا صَدِيْقِي، اِسْمُهُ خَالِدٌ.
+[Isi Gambar Soal 66728_1ad196dc0d9a000bb79999ea71d3ba39.png]:
+خَالِدٌ: نَعَمْ، أَنَا مَالِيزِيُّ الْجِنْسِيَّةِ. وَعُمْرِي خَمْسَةَ عَشَرَ سَنَةً.
+[Isi Gambar Soal 66728_6c60295fb57c17fb13ca0aa129135125.png]:
+مَا الْفِكْرَةُ الرَّئِيْسِيَّةُ فِي الْحِوَارِ؟
+Pertanyaan: 
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: D
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 50957_bed476505fdf55f583e14c8fff59038d.png]:
+التَّلَامِيْذُ يُنَظِّفُوْنَ حَدِيْقَةَ الْمَدْرَسَةِ كُلَّ أُسْبُوْعٍ. مَا ضِدُّ الْكَلِمَةِ الَّتِي تَحْتَهَا خَطٌّ... (Catatan: Kata 'يُنَظِّفُوْنَ' bergaris bawah)
+Pertanyaan: 
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 01182_622c008fac4848e01f581e06fc131302.png]:
+سَلْمَى: هَلْ تُحِبِّينَ زِرَاعَةَ الْأَشْجَارِ ؟ نُوْرُ: نَعَمْ، الْأَشْجَارُ جَمِيْلَةٌ وَمُفِيْدَةٌ. سَلْمَى: مَاذَا تَفْعَلُ الْأَشْجَارُ ؟ نُوْرُ: الْأَشْجَارُ تُنَظِّفُ الْهَوَاءَ. هَيَّا نَزْرَعْ أَشْجَارًا. سَلْمَى: نَعَمْ، هَذِهِ فِكْرَةٌ جَيِّدَةٌ.
+Pertanyaan: كَيْفَ تُسَاعِدُ ٱلْأَشْجَارُ ٱلنَّاسَ؟
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: B
+Stimulus Teks: Susunlah kalimat berikut menjadi paragraf padu!
+[Isi Gambar Soal 79718_162e7b8c13948bdef4ad819c5407cce4.png]:
+رَتِّبِ الْجُمَلَ الْآتِيَةَ لِتَكُوْنَ فِقْرَةً مُتَنَاسِقَةً!
+[Isi Gambar Soal 79718_b64dd838fb2189818e4933ddb4064619.png]:
+(١) أَرْسُمُ الْحَيَوَانَاتِ فِي دَفْتَرِي.
+[Isi Gambar Soal 79718_145f61f4c81c920dc3e830a397ec1435.png]:
+(٢) أُحِبُّ الْهِوَايَاتِ الْمُخْتَلِفَةَ.
+[Isi Gambar Soal 79718_dfc1f3fb413c612373647700de2f6552.png]:
+(٣) وَأَسْتَمِعُ إِلَى الْمُوْسِيْقَى كُلَّ يَوْمٍ.
+Pertanyaan: 
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: ['A', 'B']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 25209_bca9545d0b0b13e0f9ff43c571b2c1b5.png]:
+Ilustrasi suasana ruang kelas (فَصْلٌ). Di depan kelas, seorang guru laki-laki (مُعَلِّمٌ) berdiri di samping papan tulis hijau yang bertuliskan kata bahasa Arab 'سَبُّوْرَةٌ'. Di depan papan tulis terdapat meja guru lengkap dengan monitor komputer dan buku-buku. Di dalam ruangan, para siswa dan siswi (طُلَّابٌ) duduk rapi di meja masing-masing, sebagian sedang menulis dan memperhatikan penjelasan guru.
+[Isi Gambar Soal 25209_256e437dd1647453b8391de6bbffcc73.png]:
+مَاذَا يَفْعَلُ الْأَشْخَاصُ فِي الصُّوْرَةِ؟
+[Isi Gambar Soal 25209_a55947dffeec97325e66abe67198b4c5.png]:
+اِخْتَرْ أَكْثَرَ مِنْ إِجَابَةٍ صَحِيْحَةٍ.
+Pertanyaan: Jawaban benar lebih dari satu.
+

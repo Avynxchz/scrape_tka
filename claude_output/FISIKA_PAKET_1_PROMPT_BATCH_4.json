@@ -1,0 +1,336 @@
+{
+  "package": 1,
+  "subject": "Fisika",
+  "solutions": [
+    {
+      "question_id": "fisika_paket_1_q16",
+      "question_number": 16,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Gaya Listrik",
+        "Medan Listrik Pelat Sejajar",
+        "Hubungan Potensial dan Jarak"
+      ],
+      "glossary": [
+        {
+          "term": "Toner",
+          "meaning": "Serbuk bermuatan yang digunakan pada printer laser atau mesin fotokopi untuk membentuk cetakan gambar/teks pada kertas melalui interaksi elektrostatis."
+        }
+      ],
+      "reasoning": "Gaya listrik yang dialami oleh suatu partikel bermuatan dalam medan listrik homogen di antara dua pelat sejajar dirumuskan dengan F = q * E, di mana E = V / d. Dengan demikian, F = q * V / d. Berdasarkan data awal, nilai gaya listrik mula-mula adalah F = (10^-7 C) * (200 V) / (2 * 10^-3 m) = 0,01 N. Analisis setiap pernyataan didasarkan pada perbandingan nilai gaya listrik hasil modifikasi terhadap ambang batas gaya minimum fungsional sebesar 0,01 N.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mengevaluasi Gaya Listrik Kondisi Awal",
+          "explanation": "Menghitung gaya listrik mula-mula menggunakan rumus F = q * (V / d). Masukkan nilai q = 10^-7 C, V = 200 V, dan d = 2 mm (2 * 10^-3 m). Didapat F = 0,01 N, yang bernilai tepat sama dengan batas gaya minimum fungsional mesin."
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Pernyataan A (Pengurangan Jarak Pelat)",
+          "explanation": "Jika jarak d diturunkan menjadi 1,5 mm (1,5 * 10^-3 m) sementara V tetap 200 V, maka medan listrik meningkat menjadi E = 200 / (1,5 * 10^-3) = 1,33 * 10^5 V/m. Gaya listrik baru menjadi F = q * E = 10^-7 * 1,33 * 10^5 = 0,0133 N. Karena F > 0,01 N, gaya ini memenuhi syarat fungsional. Pernyataan A BENAR."
+        },
+        {
+          "step": 3,
+          "title": "Menganalisis Pernyataan B (Beda Potensial Minimum)",
+          "explanation": "Agar mesin berfungsi optimal pada jarak d = 2 mm, gaya minimum harus 0,01 N. Tegangan minimum (V_min) dicari dengan 0,01 = q * (V_min / d). Didapatkan V_min = (0,01 * 2 * 10^-3) / 10^-7 = 200 V. Maka tegangan 100 V tidak cukup karena hanya menghasilkan gaya 0,005 N. Pernyataan B SALAH."
+        },
+        {
+          "step": 4,
+          "title": "Menganalisis Pernyataan C (Peningkatan Muatan Partikel)",
+          "explanation": "Jika muatan q ditingkatkan menjadi 2 * 10^-7 C dengan V = 200 V dan d = 2 mm tetap, maka gaya listrik naik menjadi F = (2 * 10^-7) * (200 / 2 * 10^-3) = 0,02 N. Karena 0,02 N > 0,01 N, mesin akan berfungsi dengan sangat baik tanpa modifikasi parameter lain. Pernyataan C BENAR."
+        }
+      ],
+      "why_correct": "Analisis kuantitatif membuktikan bahwa Pernyataan A bernilai Benar karena memperkecil jarak d akan memperbesar medan listrik dan gaya Coulomb. Pernyataan B bernilai Salah karena tegangan 100 V hanya menghasilkan gaya setengah dari ambang batas minimum. Pernyataan C bernilai Benar karena penggandaan muatan secara linear melipatgandakan gaya tarik partikel sehingga melampaui batas fungsional minimum.",
+      "tips": [
+        "Selalu konversikan satuan jarak ke dalam SI (meter) sebelum melakukan perhitungan gaya Coulomb atau kuat medan listrik."
+      ],
+      "common_mistakes": [
+        "Sering kali menganggap hubungan antara gaya listrik (F) dan jarak antar pelat (d) adalah berbanding terbalik kuadrat (1/d^2) seperti hukum Coulomb partikel titik, padahal untuk pelat sejajar, hubungannya adalah berbanding terbalik secara linear (1/d) karena medannya homogen."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah partikel debu bermuatan q = 2 x 10^-8 C dipindahkan di antara dua pelat sejajar yang berjarak 4 mm. Agar partikel mengalami gaya listrik minimal sebesar 0,001 N untuk mengendapkan debu tersebut, beda potensial minimal yang harus dipasang pada kedua pelat adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "100 V"
+          },
+          {
+            "key": "B",
+            "text": "200 V"
+          },
+          {
+            "key": "C",
+            "text": "300 V"
+          },
+          {
+            "key": "D",
+            "text": "400 V"
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Menggunakan persamaan F = q * (V / d), maka V = (F * d) / q. Substitusi nilai yang diketahui: V = (0,001 N * 4 x 10^-3 m) / (2 x 10^-8 C) = (4 x 10^-6) / (2 x 10^-8) = 200 V. Jadi, beda potensial minimal yang diperlukan adalah 200 V."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q17",
+      "question_number": 17,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Kesalahan Pengukuran",
+        "Ketelitian Jangka Sorong",
+        "Pencilan Data (Outlier)"
+      ],
+      "glossary": [
+        {
+          "term": "Jangka Sorong",
+          "meaning": "Alat ukur panjang yang memiliki tingkat ketelitian hingga 0,1 mm atau 0,05 mm, umumnya digunakan untuk mengukur diameter luar, diameter dalam, atau kedalaman tabung."
+        }
+      ],
+      "reasoning": "Data diameter satu buah bola bekel tunggal yang dilaporkan bervariasi sangat ekstrem dari 1,06 cm hingga 1,88 cm (selisih mencapai ~0,8 cm). Pada kenyataannya, deviasi pembacaan jangka sorong yang normal oleh pengamat yang terlatih hanyalah berkisar pada ketidakpastian alat ukur (0,01 cm). Variasi data yang masif ini membuktikan adanya kesalahan interpretasi pembacaan skala utama atau skala nonius oleh praktikan, sehingga data tersebut cacat metodologis dan tidak dapat dipercaya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Variabilitas Data Pengukuran",
+          "explanation": "Mengamati empat data yang dihasilkan: 1,06 cm; 1,88 cm; 1,44 cm; dan 1,16 cm. Selisih antardata sangat besar untuk pengukuran berulang pada satu buah bola padat yang sama."
+        },
+        {
+          "step": 2,
+          "title": "Mengaitkan dengan Karakteristik Jangka Sorong",
+          "explanation": "Menyadari bahwa jangka sorong dirancang untuk pengukuran presisi dengan ketidakpastian mutlak kecil (0,01 cm atau 0,005 cm). Rentang deviasi data riil yang mencapai 0,82 cm tidak mungkin bersumber dari batas ketelitian alat."
+        },
+        {
+          "step": 3,
+          "title": "Mengidentifikasi Sumber Kesalahan",
+          "explanation": "Menyimpulkan bahwa fluktuasi ekstrem ini diakibatkan oleh human error (salah membaca letak garis skala nonius yang segaris dengan skala utama atau salah membaca skala utama), yang membuat pencatatan hasil pembacaan tidak sesuai dengan tampilan fisik alat."
+        }
+      ],
+      "why_correct": "Pernyataan 'Terdapat hasil pembacaan yang tidak sesuai dengan tampilan jangka sorong sehingga data tidak dapat dipercaya' adalah yang paling tepat karena secara metodologis, fluktuasi data yang tidak logis dan terlampau lebar pada objek rigid menunjukkan adanya kesalahan fatal dalam proses pembacaan alat, bukan karena variasi alami dimensi objek.",
+      "tips": [
+        "Dalam analisis data eksperimen, selalu lakukan verifikasi konsistensi data. Jika terdapat data pencilan (outlier) yang sangat jauh dari estimasi fisis, periksa kembali cara pembacaan skala alat ukur."
+      ],
+      "common_mistakes": [
+        "Langsung merata-rata seluruh data pengukuran yang diperoleh tanpa menyaring atau membuang data pencilan yang jelas-jelas mengandung kesalahan pembacaan (human error)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Seorang siswa mengukur ketebalan sebuah koin logam berulang kali dengan mikrometer sekrup dan memperoleh data: 2,12 mm; 2,15 mm; 2,82 mm; dan 2,14 mm. Berdasarkan data tersebut, analisis ilmiah yang paling tepat mengenai keandalan pengukuran ini adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Semua data sangat akurat dan dapat langsung dirata-rata untuk mendapat hasil akhir."
+          },
+          {
+            "key": "B",
+            "text": "Data 2,82 mm menunjukkan adanya kesalahan pembacaan skala oleh siswa sehingga data tersebut tidak andal."
+          },
+          {
+            "key": "C",
+            "text": "Koin mengalami pemuaian instan yang sangat besar pada pengukuran ketiga."
+          },
+          {
+            "key": "D",
+            "text": "Alat ukur mikrometer sekrup mengalami kerusakan permanen pada pengukuran ketiga."
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Data 2,82 mm menyimpang sangat jauh dari kelompok data lainnya (2,12 mm; 2,15 mm; 2,14 mm). Hal ini mengindikasikan adanya kesalahan pembacaan skala (outlier akibat human error), sehingga data ketiga tidak andal dan sebaiknya dikeluarkan dari perhitungan rata-rata."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q18",
+      "question_number": 18,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Teorema Impuls-Momentum",
+        "Gaya Impulsif",
+        "Waktu Kontak"
+      ],
+      "glossary": [
+        {
+          "term": "Gaya Impulsif",
+          "meaning": "Gaya kontak rata-rata yang bekerja pada suatu benda dalam selang waktu yang sangat singkat."
+        }
+      ],
+      "reasoning": "Aksi menarik tangan ke belakang saat menangkap bola yang bergerak cepat didasarkan pada konsep Hubungan Impuls dan Momentum: I = F * delta_t = delta_p. Ketika bola ditangkap hingga berhenti, perubahan momentum bola (delta_p) bernilai konstan. Dengan menarik tangan ke belakang, penjaga gawang memperpanjang jarak dan memperlama selang waktu kontak (delta_t) proses penghentian bola. Karena F = delta_p / delta_t, maka dengan bertambah besarnya delta_t, gaya impulsif (F) yang dialami/diterima oleh tangan akan menjadi jauh lebih kecil, sehingga mengurangi rasa sakit dan risiko cedera.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Perubahan Momentum Bola",
+          "explanation": "Bola datang dengan kecepatan awal v dan berhenti (kecepatan akhir 0). Perubahan momentum bola delta_p = m * (0 - v) adalah bernilai tetap, tidak bergantung pada metode penangkapan."
+        },
+        {
+          "step": 2,
+          "title": "Mengaitkan Gerakan Tangan dengan Waktu Kontak",
+          "explanation": "Menarik tangan sedikit ke belakang searah gerak bola memperpanjang jarak tempuh bola selama proses pengereman, yang secara langsung memperlama durasi kontak (delta_t) antara bola dan sarung tangan."
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Dampak terhadap Gaya Kontak",
+          "explanation": "Berdasarkan hubungan F = delta_p / delta_t, peningkatan nilai penyebut (delta_t) dengan pembilang (delta_p) tetap akan mengakibatkan nilai gaya rata-rata F berkurang secara signifikan."
+        }
+      ],
+      "why_correct": "Pilihan 'Memperlama waktu kontak dengan bola' dan 'Memperkecil gaya yang dirasakan tangan' adalah benar karena sesuai dengan konsekuensi logis dari formula gaya impulsif, di mana durasi kontak yang lebih panjang berbanding terbalik dengan besar gaya mekanis yang mentransfer energi kinetik bola ke tangan.",
+      "tips": [
+        "Ingat bahwa memperlama waktu kontak (delta_t) adalah strategi utama dalam keselamatan mekanis untuk meminimalkan gaya benturan, seperti pada prinsip kerja helm, matras lompat tinggi, dan bumper mobil."
+      ],
+      "common_mistakes": [
+        "Sering salah mengira bahwa menarik tangan ke belakang bertujuan untuk memperkecil nilai impuls total. Nilai impuls total yang dibutuhkan untuk menghentikan bola adalah konstan karena perubahan momentum bola dari bergerak menjadi diam selalu sama."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Fungsi utama sabuk pengaman dan kantong udara (airbag) di dalam mobil saat terjadi tabrakan keras secara mendadak adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Memperkecil nilai perubahan momentum total yang dialami oleh pengemudi."
+          },
+          {
+            "key": "B",
+            "text": "Memperlama durasi benturan tubuh pengemudi dengan kemudi sehingga memperkecil gaya impulsif yang bekerja pada tubuh."
+          },
+          {
+            "key": "C",
+            "text": "Mempercepat waktu kontak tubuh pengemudi agar mobil lebih cepat berhenti."
+          },
+          {
+            "key": "D",
+            "text": "Menghilangkan gaya gravitasi yang menarik tubuh pengemudi ke arah depan."
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Kantong udara dan sabuk pengaman berfungsi memperlambat laju penghentian tubuh pengendara (memperlama waktu kontak benturan, delta_t). Berdasarkan prinsip F = delta_p / delta_t, dengan memperbesar delta_t, gaya hantam/gaya impulsif (F) yang dialami tubuh akan sangat mengecil sehingga fatalitas cedera dapat dikurangi."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q19",
+      "question_number": 19,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Pemuaian Termal",
+        "Ekspansi Rongga",
+        "Pemuaian Luas"
+      ],
+      "glossary": [
+        {
+          "term": "Pemuaian",
+          "meaning": "Peristiwa bertambahnya ukuran panjang, luas, atau volume suatu benda akibat menerima energi panas (kenaikan suhu)."
+        }
+      ],
+      "reasoning": "Saat sebuah cincin logam dipanaskan, seluruh dimensi linier dari cincin tersebut mengalami pemuaian termal secara proporsional ke arah luar dari pusat cincin. Hal ini sering dianalogikan dengan efek perbesaran foto (photographic enlargement). Jarak rata-rata antar atom di seluruh bagian cincin meregang, yang mengakibatkan keliling luar maupun keliling dalam (lubang cincin) ikut bertambah panjang. Dengan demikian, ukuran diameter lubang cincin bertambah besar, memungkinkan bola logam dingin melewatinya dengan mudah.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Arah Pemuaian Partikel Benda Tegar",
+          "explanation": "Pada tingkat mikroskopis, pemanasan meningkatkan energi kinetik atom-atom logam sehingga mereka bergetar lebih hebat dan membutuhkan ruang rata-rata yang lebih luas ke segala arah secara radial keluar."
+        },
+        {
+          "step": 2,
+          "title": "Menerapkan Konsep Ekspansi Rongga (Cavity Expansion)",
+          "explanation": "Rongga di dalam benda tegar yang dipanaskan memuai dengan cara yang sama persis seolah-olah rongga tersebut diisi oleh material padat sejenis. Luas rongga bertambah mengikuti persamaan pemuaian luas."
+        },
+        {
+          "step": 3,
+          "title": "Menghubungkan Perubahan Dimensi dengan Kelolosan Bola",
+          "explanation": "Karena diameter lubang cincin bertambah besar, kelonggaran (clearance) antara bola dan cincin meningkat, sehingga bola logam (suhu ruang) yang sebelumnya pas-pasan kini dapat lewat dengan mudah."
+        }
+      ],
+      "why_correct": "Pilihan 'ukuran lubang bertambah dan memungkinkan bola kembali bisa melewati cincin' adalah benar karena secara fisis pemuaian pada benda berlubang menyebabkan ukuran lubang tersebut ikut membesar (bukan menyusut atau mengecil ke arah dalam).",
+      "tips": [
+        "Bayangkan menggambar lingkaran kecil di atas selembar kertas karet. Jika kertas karet ditarik (diregangkan) ke segala arah, lingkaran yang digambar di atasnya pasti akan ikut membesar. Konsep pemuaian lubang logam bekerja dengan prinsip geometris yang serupa."
+      ],
+      "common_mistakes": [
+        "Sering berasumsi secara intuitif bahwa ketika cincin memuai, logam akan mengembang ke arah luar sekaligus ke arah dalam untuk mengisi lubang kosong sehingga ukuran lubang mengecil. Ini salah, karena ikatan atom di seluruh keliling cincin ditarik keluar secara radial."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah pelat besi tebal memiliki lubang berbentuk persegi tepat di bagian tengahnya. Jika pelat besi tersebut dimasukkan ke dalam tungku pembakaran sehingga suhunya meningkat sangat tinggi, maka yang akan terjadi pada luas lubang persegi tersebut adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Luas lubang berkurang karena plat besi memuai ke arah dalam dan menyumbat lubang."
+          },
+          {
+            "key": "B",
+            "text": "Luas lubang bertambah karena seluruh dimensi geometri pelat memuai ke arah luar secara proporsional."
+          },
+          {
+            "key": "C",
+            "text": "Luas lubang tetap sama karena pemuaian hanya terjadi pada bagian tepi luar pelat besi."
+          },
+          {
+            "key": "D",
+            "text": "Bentuk lubang berubah menjadi lingkaran karena gaya tekan pemuaian tidak merata."
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Ketika pelat berlubang dipanaskan, pemuaian termal dua dimensi menyebabkan perluasan seluruh bagian pelat secara radial menjauhi pusat. Akibatnya, lubang persegi di tengah pelat juga akan ikut membesar secara proporsional (mengalami ekspansi termal)."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q20",
+      "question_number": 20,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Rangkaian Seri vs Paralel",
+        "Hukum Ohm",
+        "Daya Listrik Riil"
+      ],
+      "glossary": [
+        {
+          "term": "Rangkaian Seri",
+          "meaning": "Susunan komponen listrik ujung-ke-ujung sehingga arus yang mengalir sama besar, namun tegangan total terbagi di antara komponen-komponen tersebut."
+        }
+      ],
+      "reasoning": "Pada Rumah B, 6 buah lampu pijar 40 W dirangkai secara seri pada tegangan 220 V. Sifat rangkaian seri menyebabkan tegangan total terbagi merata ke setiap lampu (masing-masing hanya mendapat V_lampu = 220 / 6 = 36,7 V). Karena daya riil berbanding lurus dengan kuadrat tegangan (P = V^2 / R), penurunan tegangan kerja yang drastis ini menyebabkan daya output cahaya aktual drop sangat ekstrem, sehingga lampu menyala sangat redup. Untuk mengoptimalkannya, rangkaian harus diubah menjadi paralel agar setiap lampu menerima tegangan penuh 220 V dan menghasilkan daya nominalnya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Distribusi Tegangan Rangkaian Seri",
+          "explanation": "Pada rangkaian seri di Rumah B, tegangan kerja total 220 V terbagi ke 6 lampu. Setiap lampu hanya menerima tegangan sekitar 36,7 V, yang jauh di bawah spesifikasi tegangan nominalnya."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Dampak Penurunan Tegangan terhadap Daya Cahaya",
+          "explanation": "Menggunakan hubungan P = V^2 / R, penurunan tegangan dari 220 V menjadi 36,7 V (~1/6 kali semula) menyebabkan output daya setiap lampu turun menjadi ~(1/36) kali daya nominalnya. Inilah mengapa lampu menyala sangat redup dan konsumsi energi listrik terukur sangat rendah."
+        },
+        {
+          "step": 3,
+          "title": "Memformulasikan Solusi Perbaikan",
+          "explanation": "Mengubah instalasi kabel menjadi rangkaian paralel. Di dalam rangkaian paralel, semua cabang mendapatkan nilai tegangan yang sama dengan tegangan sumber (V = 220 V), sehingga setiap lampu pijar dapat menyala dengan daya penuh (40 W) dan intensitas cahaya optimal."
+        }
+      ],
+      "why_correct": "Dua rekomendasi yang tepat adalah: 1) 'mengubah rangkaian lampu di rumah B dari seri menjadi paralel akan meningkatkan intensitas cahaya', dan 2) 'rumah B perlu mengganti rangkaian menjadi paralel agar setiap lampu menerima tegangan penuh...'. Keduanya secara ilmiah mengatasi masalah pembagian tegangan pada susunan seri.",
+      "tips": [
+        "Ingat bahwa semua instalasi listrik rumah tangga harus dirangkai secara paralel agar setiap peralatan listrik mendapatkan tegangan kerja standar yang sama (220 V) dan bekerja secara independen."
+      ],
+      "common_mistakes": [
+        "Berpikir bahwa meningkatkan spesifikasi daya lampu (misal dari 40 W ke 100 W) dalam rangkaian seri akan menyelesaikan masalah. Lampu dengan daya nominal lebih besar memiliki hambatan (R) lebih kecil, sehingga dalam rangkaian seri ia justru akan mendapatkan porsi tegangan yang lebih kecil lagi dan menyala semakin redup."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Tiga buah lampu identik dengan spesifikasi masing-masing 10 W, 220 V dirangkai secara seri dan dihubungkan ke sumber tegangan 220 V. Dibandingkan jika ketiga lampu tersebut dirangkai secara paralel pada sumber tegangan yang sama, keadaan lampu pada rangkaian seri adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Menyala lebih terang karena hambatan total rangkaian seri bernilai lebih kecil."
+          },
+          {
+            "key": "B",
+            "text": "Menyala sama terang karena total daya kumulatif yang diserap oleh kedua rangkaian tetap sama."
+          },
+          {
+            "key": "C",
+            "text": "Menyala jauh lebih redup karena setiap lampu hanya mendapatkan sepertiga bagian dari tegangan sumber."
+          },
+          {
+            "key": "D",
+            "text": "Lampu langsung putus karena kuat arus yang mengalir pada rangkaian seri melonjak tajam."
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "Pada rangkaian seri, tegangan sumber 220 V dibagi rata kepada tiga lampu identik, sehingga masing-masing lampu hanya mendapat tegangan ~73,3 V. Karena daya berbanding lurus dengan kuadrat tegangan (P = V^2/R), penurunan tegangan ini berakibat pada merosotnya daya cahaya aktual dari setiap lampu, sehingga menyala jauh lebih redup dibandingkan rangkaian paralel (yang masing-masing mendapat tegangan penuh 220 V)."
+      }
+    }
+  ]
+}

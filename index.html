@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulasi TKA - Platform Belajar Interaktif</title>
-  <meta name="description" content="Platform belajar interaktif soal TKA Matematika Pusmendik Kemendikdasmen dilengkapi pembahasan langkah-demi-langkah dan latihan soal serupa.">
+  <title>TKA Master - Simulasi Ujian & AI Tutor</title>
+  <meta name="description" content="Platform belajar interaktif dan simulasi ujian TKA Pusmendik Kemendikdasmen dilengkapi pembahasan langkah terstruktur dan AI Tutor cerdas.">
   
-  <!-- Google Fonts: Poppins & Inter -->
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -20,312 +20,439 @@
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
   
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=36">
 </head>
 <body>
-  <!-- Background Aura -->
-  <div class="bg-aura"></div>
 
-  <!-- Top Header Navigation -->
+  <!-- Sticky Modern App Header -->
   <header class="app-header">
     <div class="header-container">
+      <!-- Left: Logo & Brand -->
       <div class="brand">
         <div class="brand-logo">
-          <i class="fa-solid fa-graduation-cap"></i>
+          <i class="fa-solid fa-bullseye"></i>
         </div>
         <div class="brand-text">
-          <span class="brand-title" id="brandTitle">SIMULASI TKA MATEMATIKA</span>
-          <span class="brand-subtitle">Platform Belajar & Pembahasan Mandiri SMK</span>
+          <span class="brand-title" id="brandTitle">TKA Master</span>
+          <span class="brand-subtitle">Simulasi Ujian & AI Tutor</span>
         </div>
       </div>
 
-      <!-- Subject Selector -->
-      <div class="subject-select-wrap">
-        <i class="fa-solid fa-layer-group"></i>
-        <select class="subject-select" id="subjectSelect" onchange="switchSubject(this.value)" aria-label="Pilih Mata Pelajaran">
-          <option value="matematika">Matematika (Wajib)</option>
-          <option value="bahasa_inggris">Bahasa Inggris (Wajib)</option>
-          <option value="ekonomi">Ekonomi (Pilihan)</option>
-          <option value="kewirausahaan">Kewirausahaan / PKWU (Pilihan)</option>
-        </select>
+      <!-- Center: Subject & Package Selectors -->
+      <div class="header-center-controls">
+        <!-- Subject Selector -->
+        <div class="subject-select-wrap">
+          <i class="fa-solid fa-layer-group"></i>
+          <select class="subject-select" id="subjectSelect" onchange="switchSubject(this.value)" aria-label="Pilih Mata Pelajaran">
+            <optgroup label="Mapel Wajib">
+              <option value="matematika">Matematika (Wajib)</option>
+              <option value="bahasa_indonesia">Bahasa Indonesia (Wajib)</option>
+              <option value="bahasa_inggris">Bahasa Inggris (Wajib)</option>
+            </optgroup>
+            <optgroup label="Saintek Pilihan">
+              <option value="fisika">Fisika (Pilihan)</option>
+              <option value="kimia">Kimia (Pilihan)</option>
+              <option value="biologi">Biologi (Pilihan)</option>
+            </optgroup>
+            <optgroup label="Soshum Pilihan">
+              <option value="ekonomi">Ekonomi (Pilihan)</option>
+              <option value="geografi">Geografi (Pilihan)</option>
+              <option value="sosiologi">Sosiologi (Pilihan)</option>
+              <option value="sejarah">Sejarah (Pilihan)</option>
+              <option value="antropologi">Antropologi (Pilihan)</option>
+              <option value="kewirausahaan">Kewirausahaan / PKWU (Pilihan)</option>
+            </optgroup>
+            <optgroup label="Tingkat Lanjut">
+              <option value="matematika_lanjut">Matematika Lanjut</option>
+              <option value="bahasa_indonesia_lanjut">Bahasa Indonesia Lanjut</option>
+              <option value="bahasa_inggris_lanjut">Bahasa Inggris Lanjut</option>
+            </optgroup>
+            <optgroup label="Lintas Minat">
+              <option value="ppkn">Pendidikan Pancasila / PPKn</option>
+            </optgroup>
+            <optgroup label="Bahasa Asing">
+              <option value="bahasa_arab">Bahasa Arab</option>
+              <option value="bahasa_jepang">Bahasa Jepang</option>
+              <option value="bahasa_jerman">Bahasa Jerman</option>
+              <option value="bahasa_prancis">Bahasa Prancis</option>
+              <option value="bahasa_mandarin">Bahasa Mandarin</option>
+              <option value="bahasa_korea">Bahasa Korea</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <!-- Segmented Package Tabs -->
+        <div class="package-tabs" role="tablist">
+          <button class="pkg-tab active" id="tabPkg1" onclick="switchPackage(1)">
+            <span id="tabPkg1Label">Paket 1</span>
+          </button>
+          <button class="pkg-tab" id="tabPkg2" onclick="switchPackage(2)">
+            <span id="tabPkg2Label">Paket 2</span>
+          </button>
+        </div>
       </div>
 
-      <!-- Package Selector Buttons -->
-      <div class="package-tabs" role="tablist">
-        <button class="pkg-tab active" id="tabPkg1" onclick="switchPackage(1)">
-          <i class="fa-solid fa-book-open"></i>
-          <span id="tabPkg1Label">Paket 1</span>
-        </button>
-        <button class="pkg-tab" id="tabPkg2" onclick="switchPackage(2)">
-          <i class="fa-solid fa-book-open"></i>
-          <span id="tabPkg2Label">Paket 2</span>
-        </button>
-      </div>
-
-      <!-- Header Utilities -->
+      <!-- Right: Timer, Daftar Soal, Avatar -->
       <div class="header-actions">
+        <!-- Timer Pill -->
+        <div class="timer-pill" id="timerPill">
+          <i class="fa-regular fa-clock"></i>
+          <span id="timerText">01:45:20</span>
+        </div>
+
+        <!-- Daftar Soal Button -->
         <button class="btn-daftar-soal" id="btnOpenDaftarSoal" onclick="openDaftarModal()">
           <i class="fa-solid fa-table-cells-large"></i>
           <span>Daftar Soal</span>
         </button>
+
+        <!-- Selesai Tes Button -->
+        <button class="btn-finish-header" id="btnFinishHeader" onclick="openFinishModal()" title="Selesai dan lihat hasil tes">
+          <i class="fa-solid fa-flag-checkered"></i>
+          <span>Selesai Tes</span>
+        </button>
+
+        <!-- User Avatar -->
+        <div class="user-avatar" title="Peserta Ujian">
+          <span>AR</span>
+        </div>
       </div>
     </div>
   </header>
 
-  <!-- Main Container -->
-  <main class="main-container">
-    <!-- Top Metadata Bar -->
-    <div class="meta-bar">
-      <div class="meta-left">
-        <span class="soal-badge" id="badgeSoalNomor">Soal Nomor 1</span>
-        <span class="topik-badge" id="badgeTopik">Peluang & Kombinatorika</span>
-        <span class="tipe-badge" id="badgeTipe">Pilihan Ganda</span>
-      </div>
-      <div class="meta-right">
-        <div class="font-resizer">
-          <span>Ukuran font:</span>
-          <button class="btn-font" onclick="setFontSize('sm')">A</button>
-          <button class="btn-font active" onclick="setFontSize('md')">A</button>
-          <button class="btn-font font-lg" onclick="setFontSize('lg')">A</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- CBT 2-Column Split Exam Screen -->
-    <section class="cbt-card">
-      <div class="cbt-split">
-        <!-- Left Panel: Stimulus & Diagram Context -->
-        <div class="cbt-col stimulus-col" id="stimulusCol">
-          <div class="col-header">
-            <i class="fa-regular fa-file-lines"></i>
-            <span>Stimulus / Bacaan Konteks</span>
+  <!-- Main Content Layout (2-Column Dashboard Grid) -->
+  <main class="main-wrapper">
+    <div class="cbt-dashboard-grid">
+      
+      <!-- LEFT COLUMN: Main CBT Question, Solution Accordion, Similar Practice -->
+      <div class="cbt-main-col">
+        
+        <!-- Topic Header & Progress Bar -->
+        <div class="topic-header-bar">
+          <div class="topic-info">
+            <p class="topic-tag" id="badgeTopik">MATEMATIKA SMA · HIMPUNAN</p>
+            <h1 class="exercise-title" id="badgeSoalNomor">Latihan Soal UTBK · Nomor 1</h1>
           </div>
-          <div class="col-content" id="stimulusContainer">
-            <!-- Rendered dynamically -->
+          <div class="progress-indicator">
+            <span class="prog-num" id="currQNum">1</span>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="progressBarFill" style="width: 2.5%;"></div>
+            </div>
+            <span class="prog-num prog-total" id="totalQNum">40</span>
           </div>
         </div>
 
-        <!-- Right Panel: Question Prompt & Answer Options -->
-        <div class="cbt-col question-col">
-          <div class="col-header">
-            <i class="fa-regular fa-circle-question"></i>
-            <span>Pertanyaan & Pilihan Jawaban</span>
+        <!-- Main CBT Question Card -->
+        <article class="cbt-question-card">
+          <!-- Card Header Bar -->
+          <div class="qcard-header">
+            <div class="qcard-number-tag">
+              <span class="qnum-badge" id="qNumBadge">01</span>
+              <span class="qlabel-text" id="qLabelHeader">Soal Nomor 1 dari 40</span>
+            </div>
+            <span class="qtype-badge" id="badgeTipe">Pilihan Ganda</span>
           </div>
-          <div class="col-content">
-            <div class="prompt-text" id="promptContainer">
-              <!-- Prompt text rendered dynamically -->
-            </div>
-            
-            <div class="options-list" id="optionsContainer">
-              <!-- Options rendered dynamically -->
-            </div>
 
-            <!-- Action to check answer -->
-            <div class="answer-action-bar">
+          <!-- Card Content Body (Pusmendik 2-Column Split Layout) -->
+          <div class="qcard-body">
+            <div class="cbt-exam-grid" id="cbtExamGrid">
+              <!-- Stimulus Column (Kiri / cont-soal) -->
+              <div class="cbt-stimulus-col" id="stimulusCol">
+                <div class="stimulus-header">
+                  <i class="fa-regular fa-file-lines"></i>
+                  <span>Stimulus / Konteks Soal</span>
+                </div>
+                <div class="stimulus-content" id="stimulusContainer"></div>
+              </div>
+
+              <!-- Vertical Dotted Divider (seperti CBT Pusmendik asli) -->
+              <div class="cbt-panel-divider" id="cbtPanelDivider"></div>
+
+              <!-- Question & Options Column (Kanan / isi-soal) -->
+              <div class="cbt-question-col" id="questionCol">
+                <div class="prompt-text" id="promptContainer"></div>
+                <div class="options-list" id="optionsContainer"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question Action Bar -->
+          <div class="qcard-actions">
+            <div class="actions-left">
               <button class="btn-action btn-check" id="btnCheckAnswer" onclick="checkUserAnswer()">
                 <i class="fa-solid fa-circle-check"></i>
-                <span>Cek Jawaban Utama</span>
+                <span>Cek Jawaban & Pembahasan</span>
               </button>
-              <button class="btn-action btn-toggle-exp" id="btnToggleExplanation" onclick="toggleExplanation()">
+              <button class="btn-action btn-ragu" id="btnRagu" onclick="toggleRagu()">
+                <input type="checkbox" id="chkRagu" pointer-events="none">
+                <i class="fa-regular fa-circle-question"></i>
+                <span>Ragu-ragu</span>
+              </button>
+            </div>
+            <div class="actions-right">
+              <button class="btn-action btn-nav btn-prev" id="btnPrev" onclick="navigateQuestion(-1)">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Sebelumnya</span>
+              </button>
+              <button class="btn-action btn-nav btn-next" id="btnNext" onclick="navigateQuestion(1)">
+                <span>Selanjutnya</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Inline Feedback Alert -->
+          <div class="feedback-banner" id="feedbackBanner" style="display: none;"></div>
+        </article>
+
+        <!-- Solution Accordion Trigger Button -->
+        <button class="btn-accordion-solution" id="btnToggleExplanation" onclick="toggleExplanation()">
+          <span class="btn-solution-label">
+            <i class="fa-solid fa-book-open"></i>
+            <span id="txtToggleExp">Tata Cara & Langkah Penyelesaian</span>
+          </span>
+          <i class="fa-solid fa-chevron-down accordion-arrow" id="accordionArrow"></i>
+        </button>
+
+        <!-- Structured Pedagogical Solution Section -->
+        <section class="learning-section" id="learningSection" style="display: none;">
+          <div class="explanation-card" id="explanationCard">
+            <!-- Hidden collapse toggle button kept for backward-compatibility -->
+            <button type="button" class="btn-collapse-exp" id="btnToggleExpCollapse" onclick="toggleExplanationCollapse()" style="display: none;">
+              <i class="fa-solid fa-eye-slash" id="iconExpCollapse"></i>
+              <span id="txtExpCollapse">Sembunyikan Tata Cara</span>
+            </button>
+
+            <!-- Collapsible Body -->
+            <div class="exp-body" id="expBody">
+              <!-- Top Verified Solution & Answer Key Banner -->
+              <div class="solution-summary-banner" id="solutionSummaryBanner" style="display: none;"></div>
+
+              <!-- Pilar 1: Konsep & Teori Kunci -->
+              <div class="concept-box" id="conceptBox">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge emerald"><i class="fa-solid fa-compass"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag emerald">PILAR 1 · IDENTIFIKASI & FONDASI TEORI</span>
+                    <h3 class="pillar-heading">Identifikasi Masalah (Dik & Dit) & Konsep Kunci</h3>
+                  </div>
+                </div>
+                <div class="concept-cards-grid" id="conceptContainer"></div>
+              </div>
+
+              <!-- Pilar 2: Glosarium Simbol & Notasi -->
+              <div class="symbols-box" id="symbolsBox">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge indigo"><i class="fa-solid fa-book-bookmark"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag indigo">PILAR 2 · NOTASI MATEMATIKA</span>
+                    <h3 class="pillar-heading">Glosarium Simbol & Istilah</h3>
+                  </div>
+                </div>
+                <div class="symbols-grid" id="symbolsContainer"></div>
+              </div>
+
+              <!-- Pilar 3: Memahami Logika Konsep (Mengapa Rumus Ini Dipakai?) -->
+              <div class="why-concept-box" id="whyConceptBox">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge violet"><i class="fa-solid fa-lightbulb"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag violet">PILAR 3 · INTUISI BERPIKIR</span>
+                    <h3 class="pillar-heading">Mengapa Rumus Ini Dipakai?</h3>
+                  </div>
+                </div>
+                <div class="why-text-body" id="whyConceptContainer"></div>
+              </div>
+
+              <!-- Pilar 4: Langkah-Langkah Pengerjaan Rinci -->
+              <div class="steps-section-card">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge blue"><i class="fa-solid fa-list-check"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag blue">PILAR 4 · LANGKAH SISTEMATIS</span>
+                    <h3 class="pillar-heading">Langkah-Langkah Pengerjaan Rinci</h3>
+                  </div>
+                </div>
+                <div class="timeline-steps" id="stepsContainer"></div>
+              </div>
+
+              <!-- Konteks Visual Soal (Bila Ada) -->
+              <div class="steps-section-card" id="canonicalVisualBox" style="display: none !important;">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge slate"><i class="fa-solid fa-image"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag slate">KONTEKS VISUAL</span>
+                    <h3 class="pillar-heading">Konteks Visual Soal</h3>
+                  </div>
+                </div>
+                <div class="timeline-steps" id="canonicalVisualList"></div>
+              </div>
+
+              <!-- Pilar 5: Tips Cepat & Jebakan Soal -->
+              <div class="tips-box">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge amber"><i class="fa-solid fa-bolt"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag amber">PILAR 5 · TRIK UJIAN & JEBAKAN</span>
+                    <h3 class="pillar-heading">Tips Cepat & Antisipasi Jebakan</h3>
+                  </div>
+                </div>
+                <div class="tips-text" id="tipsContainer"></div>
+              </div>
+            </div>
+
+            <!-- Collapsed Notice -->
+            <div class="exp-collapsed-notice" id="expCollapsedNotice" style="display: none;">
+              <div class="collapsed-msg">
                 <i class="fa-solid fa-lightbulb"></i>
-                <span id="txtToggleExp">Buka Tata Cara & Pembahasan</span>
+                <span>Tata cara & langkah pengerjaan disembunyikan agar soal di atas tetap terlihat saat tanya AI.</span>
+              </div>
+              <button type="button" class="btn-restore-exp" onclick="toggleExplanationCollapse()">
+                <i class="fa-solid fa-eye"></i> Tampilkan Langkah
+              </button>
+            </div>
+          </div>
+
+          <!-- Drill Practice: Similar Question Card -->
+          <div class="practice-card">
+            <div class="practice-header">
+              <div class="practice-title">
+                <i class="fa-solid fa-crosshairs"></i>
+                <h3>Latihan Pemantapan (Soal Serupa)</h3>
+              </div>
+              <span class="practice-badge">Eksekusi Mandiri</span>
+            </div>
+
+            <p class="practice-desc">
+              Setelah membaca teori dan cara penyelesaian di atas, coba selesaikan soal serupa berikut secara mandiri untuk memperkuat pemahamanmu:
+            </p>
+
+            <div class="practice-prompt" id="simPromptContainer"></div>
+            <div class="practice-options" id="simOptionsContainer"></div>
+
+            <div class="practice-action-bar">
+              <button class="btn-action btn-sim-check" id="btnCheckSimAnswer" onclick="checkSimilarAnswer()">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Periksa Jawaban Latihan</span>
               </button>
             </div>
 
-            <!-- Inline feedback alert -->
-            <div class="feedback-banner" id="feedbackBanner" style="display: none;"></div>
+            <div class="sim-feedback" id="simFeedback" style="display: none;"></div>
           </div>
-        </div>
+        </section>
       </div>
 
-      <!-- CBT Bottom Navigation Bar -->
-      <div class="cbt-footer">
-        <button class="btn-nav btn-prev" id="btnPrev" onclick="navigateQuestion(-1)">
-          <i class="fa-solid fa-chevron-left"></i>
-          <span>Soal Sebelumnya</span>
-        </button>
-
-        <button class="btn-nav btn-ragu" id="btnRagu" onclick="toggleRagu()">
-          <input type="checkbox" id="chkRagu" pointer-events="none">
-          <span>Ragu-ragu</span>
-        </button>
-
-        <button class="btn-nav btn-next" id="btnNext" onclick="navigateQuestion(1)">
-          <span>Soal Berikutnya</span>
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-      </div>
-    </section>
-
-    <!-- Interactive Learning & Explanation Section -->
-    <section class="learning-section" id="learningSection" style="display: none;">
-      <!-- Step-by-Step Explanation Card -->
-      <div class="explanation-card">
-        <div class="exp-header">
-          <div class="exp-title">
-            <i class="fa-solid fa-lightbulb"></i>
-            <h3>Tata Cara & Langkah Penyelesaian Soal</h3>
-          </div>
-          <span class="exp-badge">Metode Belajar Terstruktur</span>
-        </div>
-
-        <!-- Concept Box -->
-        <div class="concept-box">
-          <div class="box-icon"><i class="fa-solid fa-compass-drafting"></i></div>
-          <div class="box-body">
-            <h4>Konsep & Teori Kunci:</h4>
-            <div class="concept-text" id="conceptContainer"></div>
-          </div>
-        </div>
-
-        <!-- Mathematical Symbols Glossary Box -->
-        <div class="symbols-box" id="symbolsBox">
-          <div class="symbols-header">
-            <i class="fa-solid fa-book-bookmark"></i>
-            <h4>Glosarium Istilah & Notasi Kunci:</h4>
-          </div>
-          <div class="symbols-grid" id="symbolsContainer">
-            <!-- Rendered dynamically -->
-          </div>
-        </div>
-
-        <!-- Why Concept Box (Logika Mendalam) -->
-        <div class="why-concept-box" id="whyConceptBox">
-          <div class="why-icon"><i class="fa-solid fa-circle-nodes"></i></div>
-          <div class="why-body">
-            <h4>Memahami Logika Konsep (Mengapa Rumus Ini Dipakai?):</h4>
-            <div class="why-text" id="whyConceptContainer"></div>
-          </div>
-        </div>
-
-        <!-- Ordered Steps -->
-        <div class="steps-container">
-          <h4><i class="fa-solid fa-list-check"></i> Langkah-Langkah Pengerjaan Rinci:</h4>
-          <div class="timeline-steps" id="stepsContainer">
-            <!-- Rendered dynamically -->
-          </div>
-        </div>
-
-        <!-- Konteks Visual Kanonis (transkripsi teks dari gambar asli) -->
-        <div class="steps-container" id="canonicalVisualBox" style="display: none;">
-          <h4><i class="fa-solid fa-image"></i> Konteks Visual Soal (transkripsi teks):</h4>
-          <div class="timeline-steps" id="canonicalVisualList">
-            <!-- Rendered dynamically -->
-          </div>
-        </div>
-
-        <!-- Pro Tips Box -->
-        <div class="tips-box">
-          <div class="tips-icon"><i class="fa-solid fa-bolt"></i></div>
-          <div class="tips-body">
-            <strong>Tips Cepat & Jebakan Soal:</strong>
-            <p id="tipsContainer"></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- INTERACTIVE TWO-WAY AI TUTOR CARD -->
-      <div class="ai-tutor-card">
-        <div class="ai-tutor-header">
-          <div class="ai-tutor-title">
-            <div class="ai-avatar"><i class="fa-solid fa-robot"></i></div>
-            <div>
-              <h3 id="aiTutorTitle">Tanya AI Tutor Matematika</h3>
-              <p>Belajar dua arah: Tanyakan konsep, istilah, atau langkah yang belum kamu pahami!</p>
+      <!-- RIGHT COLUMN: Sticky AI Tutor Sidebar -->
+      <aside class="cbt-sidebar-col">
+        <div class="ai-tutor-card" id="aiTutorCard">
+          <!-- AI Tutor Card Header -->
+          <div class="ai-tutor-header">
+            <div class="ai-tutor-title">
+              <div class="ai-avatar"><i class="fa-solid fa-robot"></i></div>
+              <div>
+                <h2 id="aiTutorTitle">AI Tutor Cerdas</h2>
+                <div class="ai-status-row">
+                  <p class="ai-status"><span class="status-dot"></span> Sedang aktif</p>
+                  <span class="tutor-quota-badge free" id="tutorQuotaBadge" title="Sisa kuota harian tanya AI Tutor">
+                    <i class="fa-solid fa-bolt"></i> <span id="tutorQuotaText">10/10 Tanya</span>
+                  </span>
+                  <button type="button" class="btn-refresh-quota" id="btnRefreshQuota" onclick="refreshTutorQuota()" title="[Mode Testing Admin] Klik untuk reset kuota kembali penuh!">
+                    <i class="fa-solid fa-arrows-rotate"></i> Reset
+                  </button>
+                  <button type="button" class="btn-new-chat-tutor" id="btnStartNewChat" onclick="startNewTutorConversation()" title="Mulai obrolan baru untuk soal ini">
+                    <i class="fa-solid fa-plus"></i> Chat Baru
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="ai-header-badge" title="Tutor Interaktif Cerdas">
+              <i class="fa-solid fa-sparkles"></i>
             </div>
           </div>
-          <span class="ai-badge"><i class="fa-solid fa-sparkles"></i> AI Tutor Aktif</span>
-          <button type="button" class="chip-btn" id="btnNewTutorChat" onclick="startNewTutorConversation()" title="Mulai percakapan baru untuk soal ini" style="margin-left:8px;">+ Chat Baru</button>
-        </div>
 
-        <!-- Quick Prompt Chips -->
-        <div class="quick-chips-wrapper">
-          <span class="chips-label"><i class="fa-regular fa-comment-dots"></i> Pertanyaan Cepat:</span>
-          <div class="quick-chips" id="quickChipsContainer">
-            <!-- Chips rendered dynamically per question -->
-          </div>
-        </div>
-
-        <!-- Chat Messages Conversation -->
-        <div class="chat-messages" id="chatMessages">
-          <div class="chat-bubble ai">
-            <div class="bubble-avatar"><i class="fa-solid fa-robot"></i></div>
-            <div class="bubble-content">
-              <p class="ai-p">Halo! Saya <strong>AI Tutor TKA</strong>. Klik pertanyaan cepat di atas atau ketik langsung pertanyaanmu di bawah ya!</p>
+          <!-- AI Model Selector Bar -->
+          <div class="ai-model-selector-bar">
+            <div class="model-select-group">
+              <span class="model-select-icon"><i class="fa-solid fa-brain"></i></span>
+              <label for="aiTutorModelSelect" class="model-select-label">Model:</label>
+              <select id="aiTutorModelSelect" class="ai-model-select" onchange="changeTutorModel(this.value)">
+                <option value="qwen-groq" selected>Qwen 2.5 27B (Groq Fast — Default)</option>
+                <option value="gemini-flash">Gemini 3.8 Flash (Vision Multimodal)</option>
+                <option value="gemini-pro">Gemini Pro (Advanced)</option>
+              </select>
             </div>
           </div>
-        </div>
 
-        <!-- Chat Input Form -->
-        <form class="chat-input-form" id="chatForm" onsubmit="sendChatMessage(event)">
-          <input type="text" id="chatInput" placeholder="Ketik pertanyaanmu di sini..." autocomplete="off">
-          <button type="submit" class="btn-send-chat" id="btnSendChat">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span>Tanya AI</span>
-          </button>
-        </form>
-      </div>
-
-      <!-- Drill Practice: Similar Question Card -->
-      <div class="practice-card">
-        <div class="practice-header">
-          <div class="practice-title">
-            <i class="fa-solid fa-crosshairs"></i>
-            <h3>Latihan Pemantapan (Soal Serupa)</h3>
+          <!-- Quick Prompt Chips -->
+          <div class="quick-chips-wrapper">
+            <div class="quick-chips" id="quickChipsContainer"></div>
           </div>
-          <span class="practice-badge">Langsung Eksekusi Pemahaman</span>
+
+          <!-- Chat Conversation Stream -->
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-bubble ai">
+              <div class="bubble-sender-bar">
+                <span class="sender-avatar"><i class="fa-solid fa-robot"></i></span>
+                <span class="sender-name">AI Tutor</span>
+              </div>
+              <div class="bubble-content">
+                <p class="ai-p">Hai! Aku siap membantu kamu memahami konsep dan langkah pada soal ini.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Input Area -->
+          <div class="chat-input-area">
+            <form class="chat-input-form" id="chatForm" onsubmit="sendChatMessage(event)">
+              <input type="text" id="chatInput" placeholder="Tanyakan langkah atau rumus..." autocomplete="off">
+              <button type="submit" class="btn-send-chat" id="btnSendChat" aria-label="Kirim Pesan">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+            <p class="ai-disclaimer">AI dapat membuat kesalahan. Verifikasi jawabanmu.</p>
+          </div>
+
+          <!-- Hidden legacy buttons kept for backward-compatibility -->
+          <div style="display: none;">
+            <button id="btnToggleStepsFromAi"></button>
+            <i id="iconToggleStepsFromAi"></i>
+            <span id="txtToggleStepsFromAi"></span>
+            <button id="btnNewTutorChat"></button>
+          </div>
         </div>
-
-        <p class="practice-desc">
-          Setelah membaca teori dan cara penyelesaian di atas, coba selesaikan soal serupa berikut secara mandiri untuk memperkuat pemahamanmu:
-        </p>
-
-        <div class="practice-prompt" id="simPromptContainer">
-          <!-- Rendered dynamically -->
-        </div>
-
-        <div class="practice-options" id="simOptionsContainer">
-          <!-- Rendered dynamically -->
-        </div>
-
-        <div class="practice-action-bar">
-          <button class="btn-action btn-sim-check" id="btnCheckSimAnswer" onclick="checkSimilarAnswer()">
-            <i class="fa-solid fa-paper-plane"></i>
-            <span>Periksa Jawaban Latihan</span>
-          </button>
-        </div>
-
-        <!-- Similar question feedback -->
-        <div class="sim-feedback" id="simFeedback" style="display: none;"></div>
-      </div>
-    </section>
+      </aside>
+    </div>
   </main>
 
-  <!-- Modal Daftar Soal -->
+  <!-- Modal Daftar Soal (40-Grid Navigator) -->
   <div class="modal-overlay" id="modalDaftarSoal" onclick="closeDaftarModal(event)">
     <div class="modal-content" onclick="event.stopPropagation()">
       <div class="modal-header">
         <div class="modal-title">
           <i class="fa-solid fa-table-cells-large"></i>
-          <h3 id="modalTitle">Daftar Soal - Matematika Paket 1</h3>
+          <h3 id="modalTitle">Daftar Soal</h3>
         </div>
         <button class="btn-close-modal" onclick="closeDaftarModal()">&times;</button>
       </div>
       
       <div class="modal-legend">
-        <div class="legend-item"><span class="legend-dot current"></span> Soal Aktif</div>
-        <div class="legend-item"><span class="legend-dot answered"></span> Sudah Dijawab</div>
+        <div class="legend-item"><span class="legend-dot current"></span> Sedang dikerjakan</div>
+        <div class="legend-item"><span class="legend-dot answered"></span> Sudah dijawab</div>
         <div class="legend-item"><span class="legend-dot ragu"></span> Ragu-ragu</div>
-        <div class="legend-item"><span class="legend-dot unanswered"></span> Belum Dijawab</div>
+        <div class="legend-item"><span class="legend-dot unanswered"></span> Belum dijawab</div>
       </div>
 
-      <div class="soal-grid" id="soalGrid">
-        <!-- Rendered dynamically -->
+      <div class="soal-grid" id="soalGrid"></div>
+
+      <div class="modal-footer-action">
+        <button class="btn-finish-from-modal" onclick="closeDaftarModal(); openFinishModal();">
+          <i class="fa-solid fa-flag-checkered"></i> Selesai Tes & Lihat Hasil
+        </button>
       </div>
     </div>
   </div>
 
-  <!-- Modal Konfirmasi Selesai Tes (mengikuti alur resmi Pusmendik) -->
+  <!-- Modal Konfirmasi Selesai Tes -->
   <div class="modal-overlay" id="modalKonfirmasiSelesai" onclick="closeFinishModal()">
     <div class="modal-content finish-modal" onclick="event.stopPropagation()">
       <div class="finish-icon"><i class="fa-solid fa-flag-checkered"></i></div>
@@ -381,9 +508,10 @@
         <table class="review-table">
           <thead>
             <tr>
-              <th>NO.</th>
+              <th style="width: 50px; text-align: center;">NO.</th>
+              <th style="width: 105px;">STATUS</th>
               <th>JAWABAN ANDA</th>
-              <th>KUNCI JAWABAN</th>
+              <th>KUNCI JAWABAN (RESMI TKA)</th>
             </tr>
           </thead>
           <tbody id="reviewTableBody"></tbody>
@@ -401,7 +529,29 @@
     </div>
   </div>
 
+  <!-- Floating Jump to AI Tutor Button (Mobile only) -->
+  <button id="btnFloatingAi" class="floating-ai-jump" onclick="scrollToAiTutor()" aria-label="Tanya AI Tutor">
+    <i class="fa-solid fa-comments"></i>
+    <span>Tanya AI</span>
+  </button>
+
+  <!-- Lightbox Image Zoom Modal -->
+  <div class="lightbox-modal" id="imageLightboxModal" onclick="closeImageLightbox(event)">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <div class="lightbox-toolbar">
+        <button type="button" class="lightbox-btn" onclick="zoomLightbox(0.25)" title="Perbesar (+)"><i class="fa-solid fa-magnifying-glass-plus"></i> Perbesar</button>
+        <button type="button" class="lightbox-btn" onclick="zoomLightbox(-0.25)" title="Perkecil (-)"><i class="fa-solid fa-magnifying-glass-minus"></i> Perkecil</button>
+        <button type="button" class="lightbox-btn" onclick="resetLightboxZoom()" title="Reset Ukuran"><i class="fa-solid fa-arrows-rotate"></i> 100%</button>
+        <button type="button" class="lightbox-close" onclick="closeImageLightbox()" title="Tutup (Esc)"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="lightbox-img-wrap" id="lightboxImgWrap">
+        <img id="lightboxImg" src="" alt="Pratinjau Gambar">
+      </div>
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="app.js?v=4"></script>
+  <script src="app.js?v=36"></script>
 </body>
 </html>

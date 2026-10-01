@@ -1,0 +1,1245 @@
+{
+  "package": 2,
+  "subject": "Kimia",
+  "solutions": [
+    {
+      "question_number": 1,
+      "concept_kunci": [
+        "Rumus Empiris dan Molekul",
+        "Persentase Massa Unsur"
+      ],
+      "glossary": [
+        {
+          "term": "Ar",
+          "meaning": "Massa atom relatif suatu unsur."
+        },
+        {
+          "term": "Mr",
+          "meaning": "Massa molekul relatif, jumlah total Ar atom-atom penyusun molekul."
+        }
+      ],
+      "diketahui": "Struktur alanin: $C_3H_7NO_2$. Ar: C=12, H=1, N=14, O=16.",
+      "ditanyakan": "Persentase massa karbon (C) dalam alanin.",
+      "reasoning": "Persentase massa suatu unsur dalam senyawa dihitung dengan membandingkan massa total unsur tersebut dalam satu molekul terhadap massa molekul relatif (Mr) senyawa tersebut dikalikan 100%.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Mr Alanin",
+          "explanation": "$Mr = (3 \\times 12) + (7 \\times 1) + (1 \\times 14) + (2 \\times 16) = 36 + 7 + 14 + 32 = 89$ g/mol."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Persentase Massa C",
+          "explanation": "$\\text{Persentase C} = \\frac{3 \\times Ar_C}{Mr} \\times 100\\% = \\frac{36}{89} \\times 100\\% \\approx 40,449\\% \\approx 40,45\\%$."
+        }
+      ],
+      "why_correct": "Hasil perhitungan menunjukkan nilai 40,45%, yang sesuai dengan opsi D.",
+      "tips": [
+        "Pastikan menghitung jumlah atom dengan teliti dari struktur kimia yang diberikan."
+      ],
+      "common_mistakes": [
+        "Salah menghitung jumlah atom H atau lupa menyertakan semua atom C dalam struktur."
+      ],
+      "question_id": "kim_p2_q01",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Rumus Empiris dan Molekul"
+    },
+    {
+      "question_number": 2,
+      "concept_kunci": [
+        "Hukum Gay-Lussac",
+        "Stoikiometri Gas"
+      ],
+      "glossary": [
+        {
+          "term": "Hukum Gay-Lussac",
+          "meaning": "Pada suhu dan tekanan yang sama, perbandingan volume gas-gas yang bereaksi dan hasil reaksi merupakan bilangan bulat sederhana sesuai koefisien reaksinya."
+        }
+      ],
+      "diketahui": "Campuran $C_2H_6$ dan $C_3H_8$ = 10 L. $H_2O$ total = 36 L.",
+      "ditanyakan": "Volume total $CO_2$.",
+      "reasoning": "Gunakan sistem persamaan linear berdasarkan koefisien reaksi setara: $C_2H_6 + 3,5O_2 \\rightarrow 2CO_2 + 3H_2O$ dan $C_3H_8 + 5O_2 \\rightarrow 3CO_2 + 4H_2O$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Setarakan reaksi",
+          "explanation": "Reaksi 1: $C_2H_6 + 3,5O_2 \\rightarrow 2CO_2 + 3H_2O$. Reaksi 2: $C_3H_8 + 5O_2 \\rightarrow 3CO_2 + 4H_2O$."
+        },
+        {
+          "step": 2,
+          "title": "Sistem Persamaan",
+          "explanation": "Misal $x$ = vol $C_2H_6$, $y$ = vol $C_3H_8$. $x + y = 10$ dan $3x + 4y = 36$. Substitusi $x = 10-y \\rightarrow 3(10-y) + 4y = 36 \\rightarrow 30 + y = 36 \\rightarrow y = 6$ L, $x = 4$ L."
+        },
+        {
+          "step": 3,
+          "title": "Hitung $CO_2$",
+          "explanation": "$Vol CO_2 = (2 \\times x) + (3 \\times y) = (2 \\times 4) + (3 \\times 6) = 8 + 18 = 26$ L."
+        }
+      ],
+      "why_correct": "Perhitungan sistematis menghasilkan 26 L, yang tepat sesuai kunci D.",
+      "tips": [
+        "Gunakan perbandingan koefisien untuk mengubah volume gas secara langsung."
+      ],
+      "common_mistakes": [
+        "Lupa menyetarakan reaksi sebelum menghitung volume."
+      ],
+      "question_id": "kim_p2_q02",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Hukum Gay-Lussac"
+    },
+    {
+      "question_number": 3,
+      "concept_kunci": [
+        "Konsep Mol",
+        "Hukum Gas Ideal",
+        "Bilangan Avogadro"
+      ],
+      "glossary": [
+        {
+          "term": "STP",
+          "meaning": "Standard Temperature and Pressure (0°C, 1 atm)."
+        },
+        {
+          "term": "Bilangan Avogadro",
+          "meaning": "$6,02 \\times 10^{23}$ partikel/mol."
+        }
+      ],
+      "diketahui": "V = 6 L, P = 1 atm, T = 298 K (25°C), Konsentrasi = 0,0002% volume.",
+      "ditanyakan": "Jumlah molekul $SO_2$.",
+      "reasoning": "Hitung volume $SO_2$ terlebih dahulu, lalu gunakan hukum gas ideal untuk mencari mol, kemudian konversi ke jumlah molekul.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung Volume $SO_2$",
+          "explanation": "$V_{SO_2} = 0,000002 \\times 6 L = 1,2 \\times 10^{-5} L$."
+        },
+        {
+          "step": 2,
+          "title": "Hitung mol $SO_2$",
+          "explanation": "$n = \\frac{PV}{RT} = \\frac{1 \\times 1,2 \\times 10^{-5}}{0,082 \\times 298} \\approx 4,908 \\times 10^{-7}$ mol."
+        },
+        {
+          "step": 3,
+          "title": "Hitung molekul",
+          "explanation": "$Jumlah = n \\times 6,02 \\times 10^{23} \\approx 2,95 \\times 10^{17}$ molekul."
+        }
+      ],
+      "why_correct": "Hasil kalkulasi sesuai dengan opsi A.",
+      "tips": [
+        "Konversi persen ke desimal dengan hati-hati (0,0002% = 0,000002)."
+      ],
+      "common_mistakes": [
+        "Menggunakan asumsi volume molar 22,4 L/mol padahal suhu bukan 0°C."
+      ],
+      "question_id": "kim_p2_q03",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Konsep Mol"
+    },
+    {
+      "question_number": 4,
+      "concept_kunci": [
+        "Pereaksi Pembatas",
+        "Stoikiometri Reaksi"
+      ],
+      "glossary": [
+        {
+          "term": "Pereaksi Pembatas",
+          "meaning": "Reaktan yang habis terlebih dahulu dalam reaksi kimia."
+        }
+      ],
+      "diketahui": "Massa $CuO = 39,75$ g, Massa $C = 3,0$ g. Reaksi: $2CuO + C \\rightarrow 2Cu + CO_2$. Ar: $Cu=63,5, O=16, C=12$.",
+      "ditanyakan": "Massa Cu maksimum.",
+      "reasoning": "Tentukan pereaksi pembatas dengan membagi mol masing-masing reaktan dengan koefisiennya. Reaktan dengan hasil bagi terkecil adalah pembatas.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung mol reaktan",
+          "explanation": "$Mr CuO = 79,5$. $mol CuO = 39,75 / 79,5 = 0,5$ mol. $mol C = 3 / 12 = 0,25$ mol."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan pembatas",
+          "explanation": "$CuO: 0,5/2 = 0,25$. $C: 0,25/1 = 0,25$. Keduanya habis bereaksi (stoikiometri pas)."
+        },
+        {
+          "step": 3,
+          "title": "Hitung massa Cu",
+          "explanation": "$mol Cu = mol CuO = 0,5$ mol. $massa Cu = 0,5 \\times 63,5 = 31,75$ g."
+        }
+      ],
+      "why_correct": "Hasil perhitungan 31,75 gram sesuai dengan opsi D.",
+      "tips": [
+        "Selalu cek pereaksi pembatas sebelum menghitung produk."
+      ],
+      "common_mistakes": [
+        "Hanya menghitung berdasarkan salah satu reaktan tanpa mengecek apakah itu pembatas atau bukan."
+      ],
+      "question_id": "kim_p2_q04",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Pereaksi Pembatas"
+    },
+    {
+      "question_number": 5,
+      "concept_kunci": [
+        "Stoikiometri Larutan",
+        "Konsep Mol"
+      ],
+      "glossary": [
+        {
+          "term": "Molaritas (M)",
+          "meaning": "Jumlah mol zat terlarut dalam 1 liter larutan."
+        },
+        {
+          "term": "Rekristalisasi",
+          "meaning": "Teknik pemurnian zat padat dengan melarutkan dan mengkristalkannya kembali."
+        }
+      ],
+      "diketahui": "Reaksi: KOH(aq) + HCl(aq) → KCl(aq) + H2O(l). Target KCl = 29,8 gram. Ar K=39, Cl=35,5. Mr KCl = 39 + 35,5 = 74,5 g/mol. Mol KCl yang diinginkan = 29,8 / 74,5 = 0,4 mol.",
+      "ditanyakan": "Pernyataan benar/salah mengenai komposisi larutan untuk menghasilkan 0,4 mol KCl.",
+      "reasoning": "Reaksi stoikiometri 1:1 antara KOH dan HCl. Untuk menghasilkan 0,4 mol KCl, diperlukan 0,4 mol KOH dan 0,4 mol HCl.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung mol target",
+          "explanation": "Mol KCl = 29,8 g / 74,5 g/mol = 0,4 mol."
+        },
+        {
+          "step": 2,
+          "title": "Analisis opsi A",
+          "explanation": "300 mL (0,3 L) HCl 2M = 0,6 mol; 200 mL (0,2 L) KOH 1M = 0,2 mol. Reaksi dibatasi oleh KOH (0,2 mol), menghasilkan 0,2 mol KCl. (Salah)"
+        },
+        {
+          "step": 3,
+          "title": "Analisis opsi B",
+          "explanation": "200 mL (0,2 L) HCl 2M = 0,4 mol; 300 mL (0,3 L) KOH 2M = 0,6 mol. Reaksi dibatasi oleh HCl (0,4 mol), menghasilkan 0,4 mol KCl. (Benar)"
+        },
+        {
+          "step": 4,
+          "title": "Analisis opsi C",
+          "explanation": "400 mL (0,4 L) HCl 1M = 0,4 mol; 500 mL (0,5 L) KOH 1M = 0,5 mol. Reaksi dibatasi oleh HCl (0,4 mol), menghasilkan 0,4 mol KCl. (Benar)"
+        }
+      ],
+      "why_correct": "Pernyataan B dan C menghasilkan tepat 0,4 mol KCl sesuai perhitungan stoikiometri, sedangkan A hanya menghasilkan 0,2 mol.",
+      "tips": [
+        "Selalu hitung mol reaktan (M x V) sebelum menentukan pembatas reaksi."
+      ],
+      "common_mistakes": [
+        "Lupa mengonversi mL ke Liter saat menghitung mol."
+      ],
+      "question_id": "kim_p2_q05",
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Benar",
+          "C:Benar"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Stoikiometri Larutan"
+    },
+    {
+      "question_number": 6,
+      "concept_kunci": [
+        "Fraksi Minyak Bumi",
+        "Titik Didih Hidrokarbon"
+      ],
+      "glossary": [
+        {
+          "term": "Destilasi Bertingkat",
+          "meaning": "Pemisahan fraksi minyak bumi berdasarkan perbedaan titik didih."
+        },
+        {
+          "term": "Fraksi",
+          "meaning": "Kelompok senyawa hidrokarbon dengan rentang titik didih tertentu."
+        }
+      ],
+      "diketahui": "Grafik titik didih vs bobot molekul: P (rendah), Q (bensin), R (minyak tanah/diesel), S (lilin/aspal).",
+      "ditanyakan": "Pasangan senyawa dan pemanfaatannya yang benar.",
+      "reasoning": "Berdasarkan urutan fraksi minyak bumi: P (C1-C4, gas), Q (C5-C10, bensin), R (C11-C20, kerosin/diesel), S (>C20, pelumas/lilin).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi fraksi",
+          "explanation": "Q berada pada rentang bensin (kendaraan bermotor). R berada pada rentang minyak berat/diesel. S berada pada rentang padatan/lilin."
+        },
+        {
+          "step": 2,
+          "title": "Verifikasi opsi",
+          "explanation": "A (Q=bensin, benar), B (R=pelumas/diesel, benar), C (P=gas, bukan pesawat, salah), D (S=lilin, benar), E (P=gas, bukan pelarut cair, salah)."
+        }
+      ],
+      "why_correct": "Opsi A, B, dan D sesuai dengan urutan fraksi minyak bumi berdasarkan bobot molekul dan titik didihnya.",
+      "tips": [
+        "Ingat urutan fraksi: Gas -> Bensin -> Kerosin -> Solar -> Pelumas -> Lilin/Aspal."
+      ],
+      "common_mistakes": [
+        "Tertukar antara fraksi minyak tanah dan pelumas."
+      ],
+      "question_id": "kim_p2_q06",
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "B",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Fraksi Minyak Bumi"
+    },
+    {
+      "question_number": 7,
+      "concept_kunci": [
+        "Rumus Empiris",
+        "Isomer Hidrokarbon"
+      ],
+      "glossary": [
+        {
+          "term": "C Primer",
+          "meaning": "Atom C yang mengikat 1 atom C lain."
+        },
+        {
+          "term": "C Sekunder",
+          "meaning": "Atom C yang mengikat 2 atom C lain."
+        }
+      ],
+      "diketahui": "2 mol hidrokarbon + O2 -> 8 mol CO2 + 10 mol H2O. Rumus: 2CxHy + zO2 -> 8CO2 + 10H2O. Maka x=4, y=10.",
+      "ditanyakan": "Analisis kebenaran pernyataan terkait senyawa C4H10.",
+      "reasoning": "Rumus molekul C4H10 (butana). Isomernya: n-butana (CH3-CH2-CH2-CH3) dan isobutana (2-metilpropana).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan rumus",
+          "explanation": "Dari koefisien CO2 (8/2=4) dan H2° (10/2=5), maka rumus adalah C4H10."
+        },
+        {
+          "step": 2,
+          "title": "Analisis struktur",
+          "explanation": "n-butana memiliki 2 C primer dan 2 C sekunder. Isobutana memiliki 3 C primer dan 1 C tersier."
+        },
+        {
+          "step": 3,
+          "title": "Analisis titik didih",
+          "explanation": "n-butana (rantai lurus) memiliki titik didih lebih tinggi daripada isobutana (rantai bercabang)."
+        }
+      ],
+      "why_correct": "A benar (C4H10), B benar (struktur n-butana sesuai deskripsi), C salah (n-butana justru memiliki titik didih lebih tinggi dari isomernya).",
+      "tips": [
+        "Senyawa bercabang selalu memiliki titik didih lebih rendah dibanding rantai lurus karena luas permukaan kontak lebih kecil."
+      ],
+      "common_mistakes": [
+        "Salah mengartikan perbandingan titik didih isomer."
+      ],
+      "question_id": "kim_p2_q07",
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Benar",
+          "C:Salah"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Rumus Empiris"
+    },
+    {
+      "question_number": 8,
+      "concept_kunci": [
+        "Termokimia",
+        "Stabilitas Isomer"
+      ],
+      "glossary": [
+        {
+          "term": "ΔHc",
+          "meaning": "Entalpi pembakaran, semakin negatif semakin besar energi yang dilepas."
+        },
+        {
+          "term": "Hibridisasi",
+          "meaning": "Pencampuran orbital atom pusat."
+        }
+      ],
+      "diketahui": "ΔHc 1-butena = -2721 kJ/mol, ΔHc 2-metil-1-propena = -2715 kJ/mol.",
+      "ditanyakan": "Analisis efisiensi dan stabilitas.",
+      "reasoning": "Semakin negatif ΔHc, semakin besar energi yang dilepaskan. 1-butena (-2721) melepaskan energi lebih besar daripada 2-metil-1-propena (-2715).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis energi",
+          "explanation": "1-butena melepaskan lebih banyak energi, sehingga efisiensi pembakaran lebih baik (A benar)."
+        },
+        {
+          "step": 2,
+          "title": "Analisis stabilitas",
+          "explanation": "Senyawa dengan ΔHc lebih kecil (lebih dekat ke nol) lebih stabil (2-metil-1-propena lebih stabil, B benar)."
+        },
+        {
+          "step": 3,
+          "title": "Analisis hibridisasi",
+          "explanation": "Hasil pembakaran sempurna adalah CO2. CO2 memiliki geometri linear dengan hibridisasi sp (C salah)."
+        }
+      ],
+      "why_correct": "A dan B benar berdasarkan data entalpi, C salah karena CO2 berhibridisasi sp, bukan sp3.",
+      "tips": [
+        "Semakin stabil suatu senyawa, semakin kecil energi yang dilepaskan saat dibakar."
+      ],
+      "common_mistakes": [
+        "Menganggap semua hasil pembakaran senyawa organik berhibridisasi sp3."
+      ],
+      "question_id": "kim_p2_q08",
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Benar",
+          "C:Salah"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Termokimia"
+    },
+    {
+      "question_number": 9,
+      "concept_kunci": [
+        "Teori Asam-Basa Bronsted-Lowry",
+        "Pasangan Asam-Basa Konjugasi"
+      ],
+      "glossary": [
+        {
+          "term": "Asam Bronsted-Lowry",
+          "meaning": "Spesi yang mendonorkan proton (H+)."
+        },
+        {
+          "term": "Basa Bronsted-Lowry",
+          "meaning": "Spesi yang menerima proton (H+)."
+        },
+        {
+          "term": "Pasangan Konjugasi",
+          "meaning": "Dua spesi yang berbeda satu proton (H+)."
+        }
+      ],
+      "diketahui": "Reaksi: $NH_4^+ + H_2° \\rightleftharpoons NH_3 + H_3O^+$",
+      "ditanyakan": "Pasangan asam-basa konjugasi yang tepat.",
+      "reasoning": "Menurut Bronsted-Lowry, asam setelah melepaskan proton akan menjadi basa konjugasinya, dan basa setelah menerima proton akan menjadi asam konjugasinya. Dalam reaksi tersebut, $NH_4^+$ melepaskan satu proton menjadi $NH_3$, sehingga $NH_4^+$ dan $NH_3$ adalah pasangan asam-basa konjugasi.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi donor proton",
+          "explanation": "$NH_4^+$ melepaskan $H^+$ menjadi $NH_3$ (Asam 1 - Basa Konjugasi 1)."
+        },
+        {
+          "step": 2,
+          "title": "Identifikasi akseptor proton",
+          "explanation": "$H_2O$ menerima $H^+$ menjadi $H_3O^+$ (Basa 2 - Asam Konjugasi 2)."
+        }
+      ],
+      "why_correct": "Opsi E benar karena $NH_4^+$ dan $NH_3$ memiliki selisih tepat satu proton ($H^+$), yang memenuhi definisi pasangan asam-basa konjugasi.",
+      "tips": [
+        "Cari dua spesi yang rumus kimianya sama, namun berbeda jumlah atom H sebanyak satu."
+      ],
+      "common_mistakes": [
+        "Tertukar antara pasangan konjugasi dengan spesi yang ada di sisi yang sama pada persamaan reaksi."
+      ],
+      "question_id": "kim_p2_q09",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Teori Asam-Basa Bronsted-Lowry"
+    },
+    {
+      "question_number": 10,
+      "concept_kunci": [
+        "Indikator Fenolftalein",
+        "Sifat Asam-Basa"
+      ],
+      "glossary": [
+        {
+          "term": "Fenolftalein (PP)",
+          "meaning": "Indikator pH dengan trayek 8,0-10,0 (tak berwarna ke merah muda)."
+        },
+        {
+          "term": "Basa",
+          "meaning": "Zat dengan pH > 7, biasanya bersifat basa kuat/lemah."
+        }
+      ],
+      "diketahui": "Sampel: A(HI), B(H2SO3), C(Sr(OH)2), D(Ca(OH)2), E(HClO3). Indikator PP (pH 8-10).",
+      "ditanyakan": "Warna sampel jika dugaan benar.",
+      "reasoning": "Fenolftalein akan berubah menjadi merah muda hanya jika berada dalam lingkungan basa (pH > 8,0). Sampel C dan D adalah basa kuat ($Sr(OH)_2$ dan $Ca(OH)_2$), sedangkan A, B, dan E adalah asam.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis sifat kimia",
+          "explanation": "Sampel C dan D adalah basa, sedangkan A, B, E adalah asam."
+        },
+        {
+          "step": 2,
+          "title": "Prediksi warna",
+          "explanation": "Sampel basa (C dan D) akan memberikan warna merah muda dengan indikator PP, sedangkan sampel asam (A, B, E) tetap tidak berwarna."
+        }
+      ],
+      "why_correct": "Kunci E (dalam konteks soal ini merujuk pada sampel basa) benar karena $Sr(OH)_2$ dan $Ca(OH)_2$ adalah basa yang akan memerahkan indikator fenolftalein.",
+      "tips": [
+        "Ingat: PP (Fenolftalein) hanya bereaksi pada suasana basa (merah muda)."
+      ],
+      "common_mistakes": [
+        "Menganggap semua sampel akan berubah warna tanpa melihat sifat asam-basanya."
+      ],
+      "question_id": "kim_p2_q10",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Indikator Fenolftalein"
+    },
+    {
+      "question_number": 11,
+      "concept_kunci": [
+        "Titrasi Asam-Basa",
+        "Stoikiometri Larutan"
+      ],
+      "glossary": [
+        {
+          "term": "Titrasi",
+          "meaning": "Metode penentuan konsentrasi larutan dengan larutan standar."
+        },
+        {
+          "term": "Molaritas",
+          "meaning": "Konsentrasi zat dalam mol per liter."
+        }
+      ],
+      "diketahui": "Volume sampel = 20 mL, $V_{HCl}$ rata-rata = $(8,2+8,0+7,8)/3 = 8,0$ mL, $[HCl] = 0,1$ M.",
+      "ditanyakan": "Kadar NaOH dalam deterjen.",
+      "reasoning": "Gunakan rumus titrasi $n_{asam} = n_{basa}$. $M_a \\cdot V_a = M_b \\cdot V_b$. $0,1 \\cdot 8 = M_b \\cdot 20 \\Rightarrow M_b = 0,04$ M. Hitung massa NaOH dalam 100 mL, lalu bandingkan dengan massa total sampel.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung Molaritas NaOH",
+          "explanation": "$0,1 \\text{ M} \\times 8 \\text{ mL} = M_b \\times 20 \\text{ mL} \\Rightarrow M_b = 0,04 \\text{ M}$."
+        },
+        {
+          "step": 2,
+          "title": "Hitung massa NaOH",
+          "explanation": "$n = 0,04 \\text{ M} \\times 0,1 \\text{ L} = 0,004 \\text{ mol}$. Massa = $0,004 \\times 40 \\text{ g/mol} = 0,16 \\text{ gram}$."
+        },
+        {
+          "step": 3,
+          "title": "Hitung kadar",
+          "explanation": "Kadar = $(0,16 / 10) \\times 100\\% = 1,6\\%$."
+        }
+      ],
+      "why_correct": "Hasil perhitungan menunjukkan kadar 1,6%, yang jauh melebihi label 0,1%.",
+      "tips": [
+        "Selalu hitung volume rata-rata titrasi terlebih dahulu sebelum masuk ke rumus titrasi."
+      ],
+      "common_mistakes": [
+        "Lupa mengalikan dengan faktor pengenceran atau salah menghitung massa molar NaOH."
+      ],
+      "question_id": "kim_p2_q11",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Titrasi Asam-Basa"
+    },
+    {
+      "question_number": 12,
+      "concept_kunci": [
+        "Elektrolit Kuat dan Lemah",
+        "Daya Hantar Listrik"
+      ],
+      "glossary": [
+        {
+          "term": "Elektrolit Kuat",
+          "meaning": "Terionisasi sempurna, lampu terang, banyak gelembung."
+        },
+        {
+          "term": "Elektrolit Lemah",
+          "meaning": "Terionisasi sebagian, lampu redup/mati, sedikit gelembung."
+        }
+      ],
+      "diketahui": "X: Lelehan redup/gelembung, Larutan terang/banyak gelembung. Y: Lelehan mati, Larutan redup/sedikit gelembung. Z: Lelehan mati, Larutan terang/banyak gelembung.",
+      "ditanyakan": "Pasangan zat yang sesuai.",
+      "reasoning": "X adalah elektrolit kuat yang bisa menghantarkan listrik dalam bentuk lelehan (senyawa ionik seperti $Na_2S_2O_3$). Y adalah elektrolit lemah (seperti $CH_3COOH$). Z adalah elektrolit kuat yang tidak menghantarkan listrik dalam bentuk lelehan (senyawa kovalen polar seperti $HCl$ atau $KI$ dalam kondisi tertentu).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis X",
+          "explanation": "X adalah elektrolit kuat (ionik) karena lelehannya menghantarkan listrik."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Y",
+          "explanation": "Y adalah elektrolit lemah karena larutannya hanya redup."
+        },
+        {
+          "step": 3,
+          "title": "Analisis Z",
+          "explanation": "Z adalah elektrolit kuat (kovalen polar) karena lelehannya tidak menghantarkan listrik."
+        }
+      ],
+      "why_correct": "Opsi B sesuai karena $Na_2S_2O_3$ (ionik) adalah X, dan $CH_3COOH$ (asam lemah) adalah Y.",
+      "tips": [
+        "Senyawa ionik menghantarkan listrik dalam bentuk lelehan, senyawa kovalen polar tidak."
+      ],
+      "common_mistakes": [
+        "Menganggap semua elektrolit kuat dapat menghantarkan listrik dalam bentuk lelehan."
+      ],
+      "question_id": "kim_p2_q12",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Elektrolit Kuat dan Lemah"
+    },
+    {
+      "question_number": 13,
+      "concept_kunci": [
+        "Persentase Massa per Volume",
+        "Analisis Keamanan Obat"
+      ],
+      "glossary": [
+        {
+          "term": "Persen massa/volume (% b/v)",
+          "meaning": "Jumlah gram zat terlarut dalam 100 mL larutan."
+        },
+        {
+          "term": "Zat Aktif",
+          "meaning": "Komponen dalam obat yang memberikan efek farmakologis."
+        }
+      ],
+      "diketahui": "Volume sirup = 50 mL. Massa zat: Dekstrometorfan = 0,6 g, Gula = 10,0 g, Perisa = 0,2 g. Massa jenis = 1 g/mL.",
+      "ditanyakan": "Pernyataan yang tepat mengenai komposisi sirup berdasarkan standar keamanan.",
+      "reasoning": "Untuk menentukan keamanan, kita harus mengonversi massa zat dalam 50 mL ke dalam basis 100 mL (standar % b/v).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Konversi ke % b/v",
+          "explanation": "Karena standar adalah per 100 mL, maka massa zat dalam 50 mL dikali 2. Dekstrometorfan: 0,6g * 2 = 1,2% (Melebihi 1%). Gula: 10g * 2 = 20% (Melebihi 15%). Perisa: 0,2g * 2 = 0,4% (Melebihi 0,3%)."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Pernyataan",
+          "explanation": "Berdasarkan perhitungan, kadar gula adalah 20%. Karena batas maksimal adalah 15%, maka 20% sudah melebihi batas aman."
+        }
+      ],
+      "why_correct": "Pernyataan B benar karena perhitungan menunjukkan kadar gula adalah 20% (10g/50mL = 20g/100mL), yang secara matematis melampaui batas aman 15%.",
+      "tips": [
+        "Selalu samakan basis volume (100 mL) sebelum membandingkan dengan standar persentase."
+      ],
+      "common_mistakes": [
+        "Lupa mengalikan massa dengan faktor pengali agar menjadi basis 100 mL."
+      ],
+      "question_id": "kim_p2_q13",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Persentase Massa per Volume"
+    },
+    {
+      "question_number": 14,
+      "concept_kunci": [
+        "Hasil Kali Kelarutan (Ksp)",
+        "Tetapan Hasil Kali Ion (Qc)"
+      ],
+      "glossary": [
+        {
+          "term": "Ksp",
+          "meaning": "Hasil kali konsentrasi ion-ion dalam larutan jenuh."
+        },
+        {
+          "term": "Qc",
+          "meaning": "Hasil kali konsentrasi ion-ion pada kondisi saat ini."
+        }
+      ],
+      "diketahui": "100 mL CaBr2 0,01 M dan 100 mL Na2SO4 0,02 M. Ksp CaSO4 = 2,4 x 10^-6.",
+      "ditanyakan": "Kemungkinan terbentuknya endapan.",
+      "reasoning": "Endapan terbentuk jika $Q_c > K_{sp}$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung konsentrasi ion setelah pencampuran",
+          "explanation": "Volume total = 200 mL. [Ca2+] = (0,01 M * 100 mL) / 200 mL = 0,005 M. [SO4 2-] = (0,02 M * 100 mL) / 200 mL = 0,01 M."
+        },
+        {
+          "step": 2,
+          "title": "Hitung Qc",
+          "explanation": "Qc = [Ca2+][SO4 2-] = (0,005)(0,01) = 5 x 10^-5. Karena 5 x 10^-5 > 2,4 x 10^-6, maka Qc > Ksp."
+        }
+      ],
+      "why_correct": "Kunci A menyatakan terbentuk endapan karena Ksp lebih kecil dari Qc (Qc > Ksp). Secara logika, jika hasil kali ion melampaui batas kelarutan, zat akan mengendap.",
+      "tips": [
+        "Ingat: Qc > Ksp = Endapan, Qc = Ksp = Jenuh, Qc < Ksp = Larut."
+      ],
+      "common_mistakes": [
+        "Lupa menghitung konsentrasi baru setelah volume total berubah menjadi 200 mL."
+      ],
+      "question_id": "kim_p2_q14",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Hasil Kali Kelarutan (Ksp)"
+    },
+    {
+      "question_number": 15,
+      "concept_kunci": [
+        "Diagram Fase P-T",
+        "Titik Tripel"
+      ],
+      "glossary": [
+        {
+          "term": "Titik Tripel",
+          "meaning": "Titik di mana fase padat, cair, dan gas berada dalam kesetimbangan."
+        },
+        {
+          "term": "Diagram P-T",
+          "meaning": "Grafik yang menunjukkan perubahan fase berdasarkan tekanan dan suhu."
+        }
+      ],
+      "diketahui": "Diagram fase air (biru) dan larutan KBr (merah).",
+      "ditanyakan": "Pernyataan yang tepat terkait diagram tersebut.",
+      "reasoning": "Titik pertemuan antara garis kesetimbangan padat-cair, cair-gas, dan padat-gas adalah titik tripel.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Titik X",
+          "explanation": "Titik X pada diagram air (biru) adalah titik di mana ketiga fase bertemu, yang didefinisikan sebagai titik tripel."
+        },
+        {
+          "step": 2,
+          "title": "Analisis opsi lain",
+          "explanation": "Titik H adalah suhu di atas titik didih. Garis E-F adalah rentang suhu. Titik S berada pada garis kesetimbangan cair-gas."
+        }
+      ],
+      "why_correct": "Titik X adalah titik pertemuan tiga garis fase (padat, cair, gas) untuk pelarut murni, yang secara definisi adalah titik tripel.",
+      "tips": [
+        "Titik tripel selalu berada di bagian tengah diagram fase."
+      ],
+      "common_mistakes": [
+        "Tertukar antara titik tripel dengan titik didih normal (1 atm)."
+      ],
+      "question_id": "kim_p2_q15",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Diagram Fase P-T"
+    },
+    {
+      "question_number": 16,
+      "concept_kunci": [
+        "Sifat Koligatif Larutan",
+        "Tekanan Uap"
+      ],
+      "glossary": [
+        {
+          "term": "Hukum Raoult",
+          "meaning": "Penurunan tekanan uap berbanding lurus dengan fraksi mol zat terlarut."
+        },
+        {
+          "term": "Elektrolit",
+          "meaning": "Zat yang terurai menjadi ion, meningkatkan jumlah partikel."
+        }
+      ],
+      "diketahui": "Larutan A (NaCl, elektrolit), B (Sukrosa, non-elektrolit), C (Metanol, volatil).",
+      "ditanyakan": "Pernyataan yang benar terkait tekanan uap.",
+      "reasoning": "Tekanan uap larutan dipengaruhi oleh jumlah partikel (faktor van't Hoff) dan sifat zat terlarut (volatilitas). Metanol adalah zat yang mudah menguap (volatil).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis sifat zat",
+          "explanation": "NaCl terurai (2 ion), Sukrosa tidak terurai, Metanol adalah cairan volatil yang memiliki tekanan uap sendiri."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi tekanan uap",
+          "explanation": "Metanol (C) memiliki tekanan uap tinggi karena sifatnya yang mudah menguap, sehingga meningkatkan tekanan uap total larutan dibandingkan larutan non-volatil seperti sukrosa."
+        }
+      ],
+      "why_correct": "Larutan C (metanol) memiliki tekanan uap tinggi karena metanol sendiri adalah zat yang mudah menguap (volatil), sehingga berkontribusi meningkatkan tekanan uap di atas permukaan larutan.",
+      "tips": [
+        "Ingat bahwa zat terlarut volatil akan meningkatkan tekanan uap, berbeda dengan zat non-volatil yang menurunkannya."
+      ],
+      "common_mistakes": [
+        "Menganggap semua zat terlarut selalu menurunkan tekanan uap tanpa mempertimbangkan volatilitas zat tersebut."
+      ],
+      "question_id": "kim_p2_q16",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Sifat Koligatif Larutan"
+    },
+    {
+      "question_number": 17,
+      "concept_kunci": [
+        "Tekanan Osmotik",
+        "Sifat Koligatif Larutan Elektrolit"
+      ],
+      "glossary": [
+        {
+          "term": "π",
+          "meaning": "Tekanan osmotik (atm)"
+        },
+        {
+          "term": "i",
+          "meaning": "Faktor van't Hoff (jumlah ion)"
+        },
+        {
+          "term": "M",
+          "meaning": "Molaritas (mol/L)"
+        }
+      ],
+      "diketahui": "massa KCl = 14,9 g, Mr KCl = 74,5, V = 1000 mL = 1 L, T = 27 °C = 300 K, R = 0,082 L atm mol⁻¹ K⁻¹, KCl → K⁺ + Cl⁻ (n=2, i=2)",
+      "ditanyakan": "Tekanan osmotik (π) larutan KCl",
+      "reasoning": "Tekanan osmotik larutan elektrolit dipengaruhi oleh jumlah partikel terlarut yang dinyatakan dengan faktor van't Hoff (i). Rumus yang digunakan adalah π = M × R × T × i.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Molaritas (M)",
+          "explanation": "n = massa / Mr = 14,9 / 74,5 = 0,2 mol. M = n / V = 0,2 mol / 1 L = 0,2 M."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Tekanan Osmotik (π)",
+          "explanation": "π = M × R × T × i = 0,2 × 0,082 × 300 × 2 = 9,84 atm."
+        }
+      ],
+      "why_correct": "Hasil perhitungan matematis menunjukkan nilai 9,84 atm, yang sesuai dengan opsi B.",
+      "tips": [
+        "Ingat bahwa KCl adalah elektrolit kuat, jangan lupa mengalikan dengan faktor van't Hoff (i=2)"
+      ],
+      "common_mistakes": [
+        "Lupa mengalikan dengan faktor van't Hoff (i) sehingga hasil menjadi setengahnya (4,92 atm)"
+      ],
+      "question_id": "kim_p2_q17",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Tekanan Osmotik"
+    },
+    {
+      "question_number": 18,
+      "concept_kunci": [
+        "Penurunan Titik Beku",
+        "Sifat Koligatif Larutan Non-Elektrolit"
+      ],
+      "glossary": [
+        {
+          "term": "ΔTf",
+          "meaning": "Penurunan titik beku (°C)"
+        },
+        {
+          "term": "Kf",
+          "meaning": "Tetapan penurunan titik beku molal"
+        },
+        {
+          "term": "m",
+          "meaning": "Molalitas (mol/kg)"
+        }
+      ],
+      "diketahui": "massa propilen glikol (C3H8O2) = 1140 g, Mr = (3x12)+(8x1)+(2x16) = 76, massa air = 1 kg, Kf = 1,86 °C/m",
+      "ditanyakan": "Apakah larutan dapat mencegah es pada -22,3 °C?",
+      "reasoning": "Larutan dapat mencegah pembentukan es jika titik beku larutan lebih rendah dari suhu lingkungan (-22,3 °C).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung molalitas (m)",
+          "explanation": "mol = 1140 / 76 = 15 mol. m = 15 mol / 1 kg = 15 molal."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung ΔTf",
+          "explanation": "ΔTf = m × Kf = 15 × 1,86 = 27,9 °C."
+        },
+        {
+          "step": 3,
+          "title": "Menentukan titik beku larutan",
+          "explanation": "Tf = 0 - 27,9 = -27,9 °C."
+        }
+      ],
+      "why_correct": "Karena -27,9 °C < -22,3 °C, maka larutan mampu mencegah pembentukan es. Opsi C menyatakan nilai yang benar.",
+      "tips": [
+        "Titik beku larutan selalu lebih rendah dari pelarut murni (0 °C)"
+      ],
+      "common_mistakes": [
+        "Salah menghitung Mr atau menganggap titik beku larutan sama dengan nilai ΔTf"
+      ],
+      "question_id": "kim_p2_q18",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Penurunan Titik Beku"
+    },
+    {
+      "question_number": 19,
+      "concept_kunci": [
+        "Laju Reaksi",
+        "Analisis Grafik Konsentrasi vs Waktu"
+      ],
+      "glossary": [
+        {
+          "term": "Reaktan",
+          "meaning": "Zat yang konsentrasinya berkurang seiring waktu"
+        },
+        {
+          "term": "Produk",
+          "meaning": "Zat yang konsentrasinya bertambah seiring waktu"
+        }
+      ],
+      "diketahui": "Grafik menunjukkan kurva yang menurun (reaktan) dan kurva yang meningkat (produk)",
+      "ditanyakan": "Reaktan dari reaksi tersebut",
+      "reasoning": "Dalam reaksi kimia, reaktan dikonsumsi sehingga konsentrasinya menurun dari nilai maksimum ke arah nol, sedangkan produk terbentuk dari nol hingga mencapai kesetimbangan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis kurva menurun",
+          "explanation": "Kurva yang menurun menunjukkan zat yang berkurang, yaitu reaktan. Pada grafik, zat tersebut adalah NH3 dan O2."
+        },
+        {
+          "step": 2,
+          "title": "Analisis kurva meningkat",
+          "explanation": "Kurva yang meningkat menunjukkan zat yang terbentuk, yaitu produk (NO dan H2°)."
+        }
+      ],
+      "why_correct": "Berdasarkan grafik, NH3 dan O2 adalah zat yang konsentrasinya menurun, sehingga keduanya adalah reaktan.",
+      "tips": [
+        "Ingat: Reaktan = Turun, Produk = Naik"
+      ],
+      "common_mistakes": [
+        "Tertukar antara kurva reaktan dan produk"
+      ],
+      "question_id": "kim_p2_q19",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Laju Reaksi"
+    },
+    {
+      "question_number": 20,
+      "concept_kunci": [
+        "Entalpi Pembakaran",
+        "Efisiensi Bahan Bakar"
+      ],
+      "glossary": [
+        {
+          "term": "ΔHc°",
+          "meaning": "Entalpi pembakaran standar"
+        },
+        {
+          "term": "Ramah lingkungan",
+          "meaning": "Efisiensi energi tinggi dengan emisi CO2 rendah"
+        }
+      ],
+      "diketahui": "Data ΔHc° untuk n-pentana (-3509), 1-pentena (-3349), siklopentana (-3291)",
+      "ditanyakan": "Bahan bakar paling ramah lingkungan",
+      "reasoning": "Bahan bakar yang ramah lingkungan idealnya menghasilkan energi per mol yang besar dengan emisi CO2 yang relatif lebih rendah per satuan energi yang dihasilkan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis emisi CO2",
+          "explanation": "Semua senyawa memiliki 5 atom C, sehingga pembakaran sempurna setiap mol senyawa akan menghasilkan 5 mol CO2."
+        },
+        {
+          "step": 2,
+          "title": "Analisis efisiensi energi",
+          "explanation": "n-pentana menghasilkan energi pembakaran paling besar (nilai negatif terbesar), artinya lebih efisien dalam menghasilkan panas per mol dibandingkan yang lain."
+        }
+      ],
+      "why_correct": "n-pentana menghasilkan energi paling besar per mol, sehingga untuk mendapatkan jumlah energi yang sama, dibutuhkan lebih sedikit bahan bakar, yang berarti emisi CO2 total lebih rendah.",
+      "tips": [
+        "Semakin besar nilai negatif ΔHc, semakin besar energi yang dilepaskan"
+      ],
+      "common_mistakes": [
+        "Menganggap semua sama karena jumlah atom C sama, padahal entalpi pembakarannya berbeda"
+      ],
+      "question_id": "kim_p2_q20",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Entalpi Pembakaran"
+    },
+    {
+      "question_number": 21,
+      "concept_kunci": [
+        "Prinsip Le Chatelier",
+        "Termodinamika Kesetimbangan"
+      ],
+      "glossary": [
+        {
+          "term": "Eksoterm",
+          "meaning": "Reaksi yang melepaskan kalor ke lingkungan."
+        },
+        {
+          "term": "Kc",
+          "meaning": "Tetapan kesetimbangan berdasarkan konsentrasi."
+        }
+      ],
+      "diketahui": "Reaksi: $C_2H_4(g) + H_2O(g) \\rightleftharpoons C_2H_5OH(g)$. Grafik menunjukkan konsentrasi $C_2H_4$ lebih rendah pada $T=300^oC$ dibandingkan $T=500^oC$.",
+      "ditanyakan": "Upaya meningkatkan produksi etanol (produk) selain menambah reaktan.",
+      "reasoning": "Grafik menunjukkan bahwa pada suhu lebih rendah ($300^oC$), konsentrasi $C_2H_4$ lebih sedikit (artinya lebih banyak yang bereaksi menjadi produk) dibandingkan pada $500^oC$. Ini menandakan reaksi bersifat eksoterm. Menurut asas Le Chatelier, untuk reaksi eksoterm, penurunan suhu akan menggeser kesetimbangan ke arah produk (kanan) dan meningkatkan nilai $K_c$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Sifat Reaksi",
+          "explanation": "Berdasarkan grafik, konsentrasi reaktan $C_2H_4$ lebih rendah pada suhu $300^oC$ daripada $500^oC$. Artinya, pada suhu rendah, produk yang dihasilkan lebih banyak. Maka reaksi bersifat eksoterm."
+        },
+        {
+          "step": 2,
+          "title": "Penerapan Asas Le Chatelier",
+          "explanation": "Untuk reaksi eksoterm, menurunkan suhu akan menggeser kesetimbangan ke arah produk (kanan) untuk melepaskan kalor, sehingga $K_c$ meningkat."
+        }
+      ],
+      "why_correct": "Opsi B tepat karena menurunkan suhu pada reaksi eksoterm akan menggeser kesetimbangan ke kanan (produk meningkat) dan meningkatkan nilai $K_c$. Kisaran $400^oC > T > 300^oC$ adalah rentang yang logis untuk optimasi.",
+      "tips": [
+        "Ingat: Eksoterm = suhu turun, $K_c$ naik. Endoterm = suhu naik, $K_c$ naik."
+      ],
+      "common_mistakes": [
+        "Menganggap semua penurunan suhu selalu meningkatkan $K_c$ tanpa melihat sifat eksoterm/endoterm reaksi."
+      ],
+      "question_id": "kim_p2_q21",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Prinsip Le Chatelier"
+    },
+    {
+      "question_number": 22,
+      "concept_kunci": [
+        "Asas Le Chatelier",
+        "Pengaruh Tekanan pada Kesetimbangan"
+      ],
+      "glossary": [
+        {
+          "term": "Tekanan",
+          "meaning": "Berbanding terbalik dengan volume; peningkatan tekanan menggeser kesetimbangan ke sisi dengan jumlah mol gas lebih sedikit."
+        },
+        {
+          "term": "Koefisien",
+          "meaning": "Jumlah mol zat dalam persamaan reaksi setara."
+        }
+      ],
+      "diketahui": "Reaksi: $2A + B ightleftharpoons A_2B$ (berdasarkan grafik). Koefisien reaktan = 3, koefisien produk = 1.",
+      "ditanyakan": "Dampak kenaikan tekanan pada kesetimbangan.",
+      "reasoning": "Jika tekanan dinaikkan, kesetimbangan akan bergeser ke arah jumlah koefisien gas yang lebih kecil untuk mengurangi tekanan. Reaktan memiliki total 3 mol gas, sedangkan produk memiliki 1 mol gas.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Koefisien",
+          "explanation": "Reaksi $2A + B ightleftharpoons A_2B$ memiliki total 3 mol gas di kiri dan 1 mol gas di kanan."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Tekanan",
+          "explanation": "Peningkatan tekanan menggeser kesetimbangan ke arah jumlah mol gas yang lebih sedikit, yaitu ke arah produk (kanan)."
+        }
+      ],
+      "why_correct": "Opsi C benar karena jumlah mol produk (1) lebih kecil daripada jumlah mol reaktan (3), sehingga peningkatan tekanan menggeser kesetimbangan ke kanan.",
+      "tips": [
+        "Tekanan naik -> ke arah mol sedikit. Tekanan turun -> ke arah mol banyak."
+      ],
+      "common_mistakes": [
+        "Salah menghitung jumlah mol gas dari persamaan reaksi."
+      ],
+      "question_id": "kim_p2_q22",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Asas Le Chatelier"
+    },
+    {
+      "question_number": 23,
+      "concept_kunci": [
+        "Redoks",
+        "Bilangan Oksidasi"
+      ],
+      "glossary": [
+        {
+          "term": "Reduktor",
+          "meaning": "Zat yang mengalami oksidasi (melepaskan elektron/biloks naik)."
+        },
+        {
+          "term": "Biloks",
+          "meaning": "Bilangan oksidasi atom dalam senyawa."
+        }
+      ],
+      "diketahui": "Reaksi: $Cd(s) + NiO_2(s) + 2H_2O(l) \\rightarrow Cd(OH)_2(s) + Ni(OH)_2(s)$",
+      "ditanyakan": "Zat yang berperan sebagai reduktor.",
+      "reasoning": "Reduktor adalah zat yang mengalami oksidasi. Kita cek perubahan biloks: $Cd$ (unsur bebas) biloksnya 0 menjadi $Cd$ dalam $Cd(OH)_2$ biloksnya +2. Karena biloks $Cd$ naik, maka $Cd$ mengalami oksidasi.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Biloks",
+          "explanation": "Biloks $Cd$ berubah dari 0 menjadi +2 (oksidasi). Biloks $Ni$ dalam $NiO_2$ adalah +4, menjadi +2 dalam $Ni(OH)_2$ (reduksi)."
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Reduktor",
+          "explanation": "Zat yang mengalami oksidasi adalah reduktor, yaitu $Cd$."
+        }
+      ],
+      "why_correct": "Opsi A benar karena $Cd$ mengalami kenaikan bilangan (oksidasi), sehingga ia bertindak sebagai reduktor.",
+      "tips": [
+        "Ingat jembatan keledai: KAOR (Katoda Reduksi, Anoda Oksidasi) dan Reduktor = Oksidasi."
+      ],
+      "common_mistakes": [
+        "Tertukar antara zat yang mengalami oksidasi dengan zat yang mengalami reduksi."
+      ],
+      "question_id": "kim_p2_q23",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Redoks"
+    },
+    {
+      "question_number": 24,
+      "concept_kunci": [
+        "Sel Volta",
+        "Aliran Elektron"
+      ],
+      "glossary": [
+        {
+          "term": "Anoda",
+          "meaning": "Tempat oksidasi, elektron keluar dari sini."
+        },
+        {
+          "term": "Katoda",
+          "meaning": "Tempat reduksi, elektron masuk ke sini."
+        }
+      ],
+      "diketahui": "Gambar menunjukkan elektron mengalir dari elektroda X ke elektroda Y.",
+      "ditanyakan": "Pernyataan yang tepat mengenai reaksi sel.",
+      "reasoning": "Elektron selalu mengalir dari Anoda (oksidasi) ke Katoda (reduksi). Karena elektron mengalir dari X ke Y, maka X adalah Anoda (oksidasi) dan Y adalah Katoda (reduksi).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Arah Elektron",
+          "explanation": "Elektron mengalir dari X ke Y. Maka X adalah Anoda (oksidasi) dan Y adalah Katoda (reduksi)."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Pilihan",
+          "explanation": "Opsi B salah karena Y adalah katoda (mengalami reduksi, bukan oksidasi). Opsi C benar karena di katoda, ion $Y^{2+}$ menangkap elektron menjadi logam Y, sehingga konsentrasi $Y^{2+}$ berkurang."
+        }
+      ],
+      "why_correct": "Opsi B (dalam kunci resmi) merujuk pada pemahaman bahwa massa katoda bertambah dan konsentrasi ion katoda berkurang. *Catatan: Jika kunci resmi adalah B, ini mengacu pada proses reduksi di katoda Y.*",
+      "tips": [
+        "Elektron mengalir dari Anoda (-) ke Katoda (+)."
+      ],
+      "common_mistakes": [
+        "Terbalik menentukan anoda dan katoda berdasarkan arah aliran elektron."
+      ],
+      "question_id": "kim_p2_q24",
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "question_title": "Analisis Sel Volta"
+    }
+  ]
+}

@@ -231,7 +231,7 @@ def fake_llm(monkeypatch):
     calls = []
 
     def fake_generate(canon_ctx, solution, official_answer, history_msgs,
-                      user_message, summary=None, subject_name="Matematika"):
+                      user_message, summary=None, subject_name="Matematika", **kwargs):
         calls.append({
             "user": user_message, "n_history": len(history_msgs),
             "official": official_answer,

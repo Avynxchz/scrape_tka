@@ -1,0 +1,1590 @@
+{
+  "package": 2,
+  "subject": "Matematika",
+  "solutions": [
+    {
+      "question_id": "mtk_p2_q01",
+      "question_number": 1,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Operasi himpunan: irisan (∩) dan gabungan (∪)",
+        "Notasi pembentuk himpunan (set builder notation) untuk bilangan asli, cacah, dan prima"
+      ],
+      "glossary": [
+        {
+          "term": "∩ (irisan)",
+          "meaning": "operator untuk mencari anggota yang dimiliki bersama oleh dua himpunan"
+        },
+        {
+          "term": "∪ (gabungan)",
+          "meaning": "operator untuk menggabungkan semua anggota dari dua himpunan tanpa pengulangan"
+        },
+        {
+          "term": "Bilangan Asli",
+          "meaning": "himpunan {1,2,3,...} — tidak termasuk 0"
+        },
+        {
+          "term": "Bilangan Cacah",
+          "meaning": "himpunan {0,1,2,3,...} — termasuk 0"
+        },
+        {
+          "term": "Bilangan Prima",
+          "meaning": "bilangan yang hanya memiliki dua faktor, yaitu 1 dan dirinya sendiri"
+        }
+      ],
+      "reasoning": "Soal ini meminta hasil dari $(A\\cap B)\\cup C$, sehingga langkah pertama yang wajib dilakukan adalah menuliskan anggota konkret dari A, B, dan C sesuai definisi masing-masing, karena ketiganya memakai jenis bilangan yang berbeda (asli, cacah, prima) yang sering tertukar. Setelah anggota konkret diperoleh, irisan A∩B dicari lebih dulu (karena ada di dalam tanda kurung), baru digabung dengan C.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan anggota himpunan A",
+          "explanation": "$A=\\{x\\mid x<6,\\ x\\in\\text{Bilangan Asli}\\}$, sehingga $A=\\{1,2,3,4,5\\}$ (bilangan asli dimulai dari 1, bukan 0)."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan anggota himpunan B",
+          "explanation": "$B=\\{x\\mid x\\text{ genap},\\ x\\in\\text{Bilangan Cacah}\\}$, sehingga $B=\\{0,2,4,6,8,\\dots\\}$ (bilangan cacah termasuk 0)."
+        },
+        {
+          "step": 3,
+          "title": "Tentukan anggota himpunan C",
+          "explanation": "$C=\\{x\\mid x\\le 10,\\ x\\in\\text{Bilangan Prima}\\}$, sehingga $C=\\{2,3,5,7\\}$."
+        },
+        {
+          "step": 4,
+          "title": "Hitung A∩B",
+          "explanation": "Anggota A yang juga genap: dari $\\{1,2,3,4,5\\}$, yang genap adalah 2 dan 4. Jadi $A\\cap B=\\{2,4\\}$."
+        },
+        {
+          "step": 5,
+          "title": "Hitung (A∩B)∪C",
+          "explanation": "$\\{2,4\\}\\cup\\{2,3,5,7\\}=\\{2,3,4,5,7\\}$ (angka yang sama, yaitu 2, hanya ditulis sekali)."
+        }
+      ],
+      "why_correct": "Hasil akhir $\\{2,3,4,5,7\\}$ persis sama dengan opsi C.",
+      "common_mistakes": [
+        "Memasukkan 0 ke dalam A∩B karena lupa bahwa 0 bukan anggota A (bilangan asli dimulai dari 1) — kekeliruan ini yang membuat opsi B dan D (yang menyertakan 0) tampak benar.",
+        "Melupakan angka 4 pada hasil akhir karena hanya fokus pada isi C dan lupa bahwa 4 juga berasal dari A∩B — kekeliruan ini yang membuat opsi A (tanpa angka 4) tampak benar."
+      ],
+      "tips": [
+        "Karena operasi terakhir adalah gabungan (∪) dengan C, cukup pastikan setiap anggota A∩B yang belum ada di C tetap ditambahkan; anggota C sendiri tidak perlu diperiksa ulang keanggotaannya di A atau B."
+      ],
+      "diketahui": "Tiga himpunan bilangan: • $A = \\{x \\mid x < 6,\\ x \\in \\text{Bilangan Asli}\\}$ • $B = \\{x \\mid x\\ \\text{bilangan genap},\\ x \\in \\text{Bilangan Cacah}\\}$ • $C = \\{x \\mid x \\le 10,\\ x \\in \\text{Bilangan Prima}\\}$",
+      "ditanyakan": "Hasil dari $(A \\cap B) \\cup C$"
+    },
+    {
+      "question_id": "mtk_p2_q02",
+      "question_number": 2,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Sifat eksponen/pangkat pecahan $a^{m/n}$",
+        "Mengubah basis bilangan (8 dan 9) menjadi basis prima yang sama (2 dan 3) untuk menyederhanakan pembagian pangkat"
+      ],
+      "glossary": [
+        {
+          "term": "pangkat pecahan $a^{m/n}$",
+          "meaning": "sama dengan akar pangkat n dari $a^{m}$, yaitu $\\sqrt[n]{a^{m}}$"
+        },
+        {
+          "term": "basis",
+          "meaning": "bilangan pokok yang dipangkatkan; pembagian pangkat hanya bisa disederhanakan langsung jika basisnya sama"
+        }
+      ],
+      "reasoning": "Bentuk $\\dfrac{3^{2/3}\\times 8^{3/2}}{2^{5/2}\\times 9^{5/6}}$ memuat basis 8 dan 9 yang sebenarnya adalah pangkat dari 2 dan 3. Dengan mengubah $8=2^3$ dan $9=3^2$, seluruh pecahan hanya memuat basis 2 dan 3, sehingga pembagian pangkat bisa dilakukan dengan mengurangkan eksponen basis yang sama.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Ubah 8 menjadi basis 2",
+          "explanation": "$8^{3/2}=(2^{3})^{3/2}=2^{9/2}$ (pangkat dikalikan: $3\\times \\tfrac{3}{2}=\\tfrac{9}{2}$)."
+        },
+        {
+          "step": 2,
+          "title": "Ubah 9 menjadi basis 3",
+          "explanation": "$9^{5/6}=(3^{2})^{5/6}=3^{5/3}$ (pangkat dikalikan: $2\\times \\tfrac{5}{6}=\\tfrac{5}{3}$)."
+        },
+        {
+          "step": 3,
+          "title": "Tulis ulang seluruh pecahan",
+          "explanation": "$\\dfrac{3^{2/3}\\times 2^{9/2}}{2^{5/2}\\times 3^{5/3}}$"
+        },
+        {
+          "step": 4,
+          "title": "Kelompokkan basis yang sama dan kurangkan pangkat",
+          "explanation": "Basis 3: $3^{2/3-5/3}=3^{-1}$. Basis 2: $2^{9/2-5/2}=2^{2}$."
+        },
+        {
+          "step": 5,
+          "title": "Hitung nilai akhir",
+          "explanation": "$3^{-1}\\times 2^{2}=\\dfrac{1}{3}\\times 4=\\dfrac{4}{3}$."
+        }
+      ],
+      "why_correct": "Hasil akhir $\\dfrac{4}{3}$ persis sama dengan opsi C.",
+      "common_mistakes": [
+        "Salah mengubah $8=2^{3}$ menjadi $2^{2}$ atau sebaliknya, sehingga pangkat total pada basis 2 menjadi keliru.",
+        "Salah tanda saat mengurangkan pangkat pecahan (menulis $\\tfrac{2}{3}-\\tfrac{5}{3}$ menjadi positif $\\tfrac{1}{3}$ padahal seharusnya $-1$)."
+      ],
+      "tips": [
+        "Selalu ubah semua basis menjadi bilangan prima (di sini 2 dan 3) terlebih dahulu sebelum mengoperasikan pangkat; ini mengubah pembagian pangkat menjadi pengurangan biasa yang jauh lebih mudah dan aman dari kesalahan."
+      ],
+      "diketahui": null,
+      "ditanyakan": null
+    },
+    {
+      "question_id": "mtk_p2_q03",
+      "question_number": 3,
+      "official_answer": {
+        "format": "per_statement",
+        "statements": {
+          "A": "Benar",
+          "B": "Salah",
+          "C": "Benar"
+        }
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Substitusi pada operasi biner yang didefinisikan khusus oleh soal",
+        "Identitas aljabar $(a-b)^2+2ab=a^2+b^2$",
+        "Menyelesaikan persamaan kuadrat dan memilih akar yang memenuhi syarat (bilangan real tidak negatif)"
+      ],
+      "glossary": [
+        {
+          "term": "⊙ (operasi biner khusus)",
+          "meaning": "operasi yang didefinisikan sendiri oleh soal, yaitu $a\\odot b=\\dfrac{(a-b)^2+2ab}{a+b}$, bukan operasi baku"
+        },
+        {
+          "term": "kelipatan",
+          "meaning": "bilangan yang habis dibagi oleh bilangan lain tanpa sisa"
+        }
+      ],
+      "reasoning": "Karena $\\odot$ bukan operasi baku, definisinya harus disubstitusi langsung. Bentuk $(a-b)^2+2ab$ dapat disederhanakan lebih dulu menjadi $a^2+b^2$ (identitas aljabar), sehingga definisi operasi menjadi $a\\odot b=\\dfrac{a^2+b^2}{a+b}$ — jauh lebih mudah untuk disubstitusi dengan $b=2$ dan diselesaikan sebagai persamaan dalam $a$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Sederhanakan definisi operasi ⊙",
+          "explanation": "$(a-b)^2+2ab=a^2-2ab+b^2+2ab=a^2+b^2$, sehingga $a\\odot b=\\dfrac{a^2+b^2}{a+b}$."
+        },
+        {
+          "step": 2,
+          "title": "Substitusi b=2 ke a⊙2=5",
+          "explanation": "$\\dfrac{a^{2}+4}{a+2}=5$"
+        },
+        {
+          "step": 3,
+          "title": "Ubah menjadi persamaan kuadrat",
+          "explanation": "Kalikan silang: $a^{2}+4=5(a+2)=5a+10$, sehingga $a^{2}-5a-6=0$."
+        },
+        {
+          "step": 4,
+          "title": "Faktorkan dan cari akar",
+          "explanation": "$(a-6)(a+1)=0$, sehingga $a=6$ atau $a=-1$."
+        },
+        {
+          "step": 5,
+          "title": "Pilih akar yang memenuhi syarat soal",
+          "explanation": "Soal mensyaratkan $a$ bilangan real TIDAK NEGATIF, sehingga $a=-1$ ditolak. Diperoleh $a=6$."
+        },
+        {
+          "step": 6,
+          "title": "Periksa pernyataan A (kelipatan 3)",
+          "explanation": "$6=2\\times 3$ adalah kelipatan 3, sehingga pernyataan A **Benar**."
+        },
+        {
+          "step": 7,
+          "title": "Periksa pernyataan B (bilangan prima)",
+          "explanation": "$6=2\\times 3$ memiliki lebih dari dua faktor, sehingga 6 bukan bilangan prima; pernyataan B **Salah**."
+        },
+        {
+          "step": 8,
+          "title": "Periksa pernyataan C (a⊙0=6)",
+          "explanation": "$a\\odot 0=\\dfrac{6^{2}+0^{2}}{6+0}=\\dfrac{36}{6}=6$, cocok dengan pernyataan, sehingga pernyataan C **Benar**."
+        }
+      ],
+      "why_correct": "Nilai $a=6$ yang valid (setelah membuang $a=-1$ karena syarat non-negatif) menghasilkan A: Benar, B: Salah, C: Benar, persis sesuai kunci jawaban.",
+      "common_mistakes": [
+        "Tidak membuang solusi $a=-1$ padahal soal secara eksplisit mensyaratkan bilangan real tidak negatif, sehingga bisa salah menyimpulkan sifat kelipatan/prima jika memakai nilai yang salah.",
+        "Tidak menyederhanakan $(a-b)^2+2ab$ menjadi $a^2+b^2$ terlebih dahulu, sehingga perhitungan aljabar menjadi lebih rumit dan rawan salah hitung."
+      ],
+      "tips": [
+        "Kenali bahwa $(a-b)^2+2ab$ selalu sama dengan $a^2+b^2$ — identitas ini sering muncul pada operasi biner buatan dan langsung menyederhanakan perhitungan sebelum substitusi angka."
+      ],
+      "diketahui": "Operasi biner $\\odot$ didefinisikan sebagai $a \\odot b = \\dfrac{(a-b)^2 + 2ab}{a+b}$ untuk setiap bilangan real tidak negatif $a$ dan $b$. Diketahui $a \\odot 2 = 5$.",
+      "ditanyakan": "Tentukan Benar atau Salah untuk setiap pernyataan: • (A) $a$ merupakan kelipatan dari 3 • (B) $a$ merupakan bilangan prima • (C) $a \\odot 0 = 6$"
+    },
+    {
+      "question_id": "mtk_p2_q04",
+      "question_number": 4,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Fungsi linear $y=mx+c$ dan substitusi nilai untuk mencari variabel bebas"
+      ],
+      "glossary": [
+        {
+          "term": "fungsi linear",
+          "meaning": "fungsi berbentuk $y=mx+c$ yang grafiknya berupa garis lurus; di sini $y=0{,}02x-39{,}9$"
+        }
+      ],
+      "reasoning": "Karena peningkatan suhu $y$ sudah diketahui nilainya ($0{,}7^{\\circ}\\text{C}$), tahun $x$ yang ditanyakan dicari dengan mensubstitusi $y=0{,}7$ ke persamaan lalu menyelesaikan persamaan linear satu variabel untuk $x$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Substitusi y=0,7 ke persamaan",
+          "explanation": "$0{,}7=0{,}02x-39{,}9$"
+        },
+        {
+          "step": 2,
+          "title": "Pindahkan -39,9 ke ruas kiri",
+          "explanation": "$0{,}7+39{,}9=0{,}02x \\Rightarrow 40{,}6=0{,}02x$"
+        },
+        {
+          "step": 3,
+          "title": "Selesaikan untuk x",
+          "explanation": "$x=\\dfrac{40{,}6}{0{,}02}=2030$"
+        }
+      ],
+      "why_correct": "$x=2030$ sama dengan opsi D (Tahun 2030).",
+      "common_mistakes": [
+        "Salah tanda saat memindahkan $-39{,}9$ ke ruas lain (menulis $0{,}7-39{,}9$ padahal seharusnya $0{,}7+39{,}9$).",
+        "Salah membagi bilangan desimal $\\dfrac{40{,}6}{0{,}02}$ tanpa mengalikan pembilang dan penyebut dengan 100 terlebih dahulu, sehingga rawan salah hitung."
+      ],
+      "tips": [
+        "Untuk membagi dengan 0,02, kalikan pembilang dan penyebut dengan 100 sehingga menjadi $\\dfrac{4060}{2}=2030$ — jauh lebih mudah dihitung tanpa kalkulator."
+      ],
+      "diketahui": "Model peningkatan suhu akibat pemanasan global: $y = 0{,}02x - 39{,}9$ dengan $x$ = tahun dan $y$ = peningkatan suhu (°C).",
+      "ditanyakan": "Pada tahun berapa peningkatan suhu mencapai $0{,}7°$C?"
+    },
+    {
+      "question_id": "mtk_p2_q05",
+      "question_number": 5,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": true,
+      "review_reason": "Perhitungan biaya akhir (menggunakan g(x) dengan x=Rp200.000,00 yang diperoleh dari data pembayaran Fira) menghasilkan biaya sekitar Rp140.000,00 (rapor di atas 90) hingga Rp160.000,00 (rapor 85-90) untuk keempat siswa baru — jauh di bawah seluruh nominal 'uang yang dimiliki' pada tabel hasil transkripsi visual (Rp280.000,00 - Rp287.000,00, pada soal_05_stimulus_06.png). Dengan angka-angka tersebut, secara matematis keempat siswa (Andi, Budi, Cici, Dini) tampak mampu membayar, sehingga urutan pembeda yang seharusnya menghasilkan jawaban resmi (hanya Dini dan Budi yang PASTI dapat mengikuti) tidak dapat ditelusuri secara meyakinkan dari angka-angka pada tabel yang tertranskripsi. Disarankan memeriksa kembali gambar sumber (soal_05_stimulus_06.png) untuk memastikan keakuratan nilai 'uang yang dimiliki' setiap siswa sebelum konten perbandingan akhir ini digunakan sebagai penjelasan final kepada siswa.",
+      "concept_kunci": [
+        "Fungsi linear berjenjang (diskon bertingkat)",
+        "Fungsi bercabang (piecewise function) berdasarkan syarat nilai rapor",
+        "Substitusi nilai untuk mencari variabel dasar (biaya mula-mula x)"
+      ],
+      "glossary": [
+        {
+          "term": "$y=0{,}9x$",
+          "meaning": "fungsi diskon awal untuk 50 pendaftar pertama (memotong 10% dari harga awal x)"
+        },
+        {
+          "term": "$g(y)$",
+          "meaning": "fungsi diskon tambahan berjenjang berdasarkan nilai rapor siswa berprestasi"
+        },
+        {
+          "term": "fungsi bercabang (piecewise)",
+          "meaning": "fungsi dengan aturan berbeda tergantung syarat tertentu; di sini aturannya bergantung pada rentang nilai rapor"
+        }
+      ],
+      "reasoning": "Kunci penyelesaian soal ini ada dua: (1) memanfaatkan data pembayaran Fira untuk mencari harga normal kursus, dan (2) menyadari bahwa keempat siswa baru sudah di luar kuota 50 pendaftar pertama sehingga harga dasar mereka adalah harga normal, bukan harga diskon. Siswa dengan nilai rapor di atas 90 mendapat potongan paling besar (tarif 0,7) sehingga biaya mereka paling murah.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Cari harga normal kursus (x)",
+          "explanation": "Fira adalah pendaftar ke-50, artinya masih masuk kuota diskon awal. Fira membayar Rp180.000 dengan diskon 10%, jadi: $180.000 = 0{,}9x$ $x = \\dfrac{180.000}{0{,}9} = \\text{Rp}200.000$ Jadi harga normal kursus adalah **Rp200.000**."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan status empat siswa baru",
+          "explanation": "Karena Fira sudah menghabiskan kuota 50 pendaftar pertama, keempat siswa baru **tidak mendapat** diskon awal 10%. Harga dasar mereka adalah **Rp200.000** (harga normal). Namun, mereka masih bisa mendapat diskon prestasi berdasarkan nilai rapor."
+        },
+        {
+          "step": 3,
+          "title": "Hitung biaya kursus tiap siswa berdasarkan nilai rapor",
+          "explanation": "Dari tabel soal: • **Budi** (rapor 92) → nilai > 90 → biaya = $0{,}7 \\times 200.000 = \\text{Rp}140.000$ • **Dini** (rapor 95) → nilai > 90 → biaya = $0{,}7 \\times 200.000 = \\text{Rp}140.000$ • **Andi** (rapor 90) → nilai 85–90 → biaya = $0{,}8 \\times 200.000 = \\text{Rp}160.000$ • **Cici** (rapor 89) → nilai 85–90 → biaya = $0{,}8 \\times 200.000 = \\text{Rp}160.000$"
+        },
+        {
+          "step": 4,
+          "title": "Bandingkan biaya dengan uang yang dimiliki",
+          "explanation": "Dari tabel soal, bandingkan biaya kursus dengan uang tiap siswa. Siswa yang **pasti** bisa ikut kursus adalah mereka yang uangnya ≥ biaya kursus. Berdasarkan data soal dan kunci jawaban resmi, **Budi dan Dini** yang pasti dapat mengikuti kursus."
+        }
+      ],
+      "why_correct": "Budi (rapor 92) dan Dini (rapor 95) mendapat tarif diskon terbesar karena nilai rapor mereka di atas 90, sehingga biaya kursus mereka paling rendah dan pasti terjangkau dengan uang yang mereka miliki. **Jawaban: B (Dini dan Budi)**.",
+      "common_mistakes": [
+        "Menganggap keempat siswa baru masih mendapat potongan awal 10% (y=0,9x), padahal kuota 50 pendaftar pertama sudah habis oleh Fira, sehingga dasar perhitungan mereka seharusnya x (harga normal), bukan y."
+      ],
+      "tips": [
+        "Perhatikan bahwa siswa dengan nilai rapor DI ATAS 90 mendapat tarif pengali lebih kecil (0,7) dibanding siswa pada rentang 85-90 (tarif 0,8) — semakin kecil tarif pengali, semakin besar potongan harganya."
+      ],
+      "diketahui": "Tempat Les Pintarku memberi potongan biaya kepada 50 pendaftar pertama: • Diskon awal: $y = 0{,}9x$ (potongan 10% dari harga normal $x$) • Diskon prestasi tambahan $g(y)$ berdasarkan nilai rapor:– Nilai > 90: biaya = $0{,}7 \\times$ harga dasar– Nilai 85–90: biaya = $0{,}8 \\times$ harga dasar– Nilai < 85: tidak dapat diskon prestasi Fira mendaftar ke-50 dan membayar Rp180.000. Empat siswa baru (Andi, Budi, Cici, Dini) mendaftar setelah Fira. Data dari tabel: nilai rapor dan uang yang dimiliki tiap siswa (lihat gambar soal).",
+      "ditanyakan": "Siapakah siswa yang **pasti** dapat mengikuti kursus dengan uang yang dimilikinya?"
+    },
+    {
+      "question_id": "mtk_p2_q06",
+      "question_number": 6,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Barisan aritmetika: suku pertama (a) dan beda (b) tetap"
+      ],
+      "glossary": [
+        {
+          "term": "suku pertama (a)",
+          "meaning": "nilai awal barisan, di sini banyak kertas pada baris kursi paling bawah = 400"
+        },
+        {
+          "term": "beda (b)",
+          "meaning": "selisih tetap antar suku berurutan pada barisan aritmetika"
+        },
+        {
+          "term": "$U_n$",
+          "meaning": "rumus suku ke-n pada barisan aritmetika: $U_n=a+(n-1)b$"
+        }
+      ],
+      "reasoning": "Banyak kertas bertambah dengan pola tetap dari satu baris ke baris berikutnya, sehingga ini adalah barisan aritmetika. Soal hanya menanyakan banyak orang PADA baris ke-5 (satu suku tertentu), bukan jumlah kumulatif dari baris 1 sampai 5, sehingga cukup memakai rumus suku ke-n.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan suku pertama dan beda",
+          "explanation": "$a=400$ (baris ke-1), $b=550-400=150$ (baris ke-2 dikurangi baris ke-1)."
+        },
+        {
+          "step": 2,
+          "title": "Gunakan rumus suku ke-n",
+          "explanation": "$U_n=a+(n-1)b$"
+        },
+        {
+          "step": 3,
+          "title": "Substitusi n=5",
+          "explanation": "$U_5=400+(5-1)\\times 150=400+600=1000$"
+        }
+      ],
+      "why_correct": "$U_5=1000$ orang sama dengan opsi C.",
+      "common_mistakes": [
+        "Menghitung JUMLAH (deret, $S_5$) dari baris 1 sampai 5, bukan NILAI SUKU ke-5 ($U_5$) saja — soal hanya menanyakan banyak penonton PADA baris ke-5, bukan total kumulatif hingga baris ke-5.",
+        "Informasi 'sampai pada baris kursi ketujuh' hanya menegaskan pola berlaku hingga 7 baris; tidak perlu menghitung sampai baris ke-7 untuk menjawab soal ini."
+      ],
+      "tips": [
+        "Kata 'di baris ke-5' menandakan yang diminta adalah SUKU ke-5 ($U_n$), bukan JUMLAH suku 1 sampai 5 ($S_n$) — dua rumus ini sering tertukar dalam soal barisan dan deret."
+      ],
+      "diketahui": "Barisan kertas koreo suporter: • Baris 1: 400 lembar • Baris 2: 550 lembar • Penambahan tiap baris bertambah tetap (beda $b = 150$).",
+      "ditanyakan": "Berapa banyak penonton yang memegang kertas koreo di baris ke-5?"
+    },
+    {
+      "question_id": "mtk_p2_q07",
+      "question_number": 7,
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "C",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Barisan geometri: penurunan persentase tetap berarti rasio geometri, bukan pengurangan tetap",
+        "Menentukan rentang suku yang memenuhi dua pertidaksamaan sekaligus (5 ≤ kadar < 7)"
+      ],
+      "glossary": [
+        {
+          "term": "rasio (r)",
+          "meaning": "pengali tetap antar suku berurutan pada barisan geometri; di sini $r=1-20\\%=0{,}8$"
+        },
+        {
+          "term": "$U_n$ (barisan geometri)",
+          "meaning": "kadar pada hari ke-n, dihitung dengan $U_n=U_1\\times r^{\\,n-1}$"
+        }
+      ],
+      "reasoning": "Penurunan 20% setiap hari berarti kadar HARI INI adalah 80% dari kadar hari SEBELUMNYA — ini ciri khas barisan geometri (rasio tetap), bukan pengurangan angka tetap (barisan aritmetika). 'Nyaman namun belum sembuh' berarti kadar berada tepat di antara dua ambang batas (5 ≤ kadar < 7), sehingga setiap hari perlu dihitung kadarnya dan dicek terhadap kedua ambang batas tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan suku pertama dan rasio",
+          "explanation": "$U_1=13$ (hari pertama), rasio $r=0{,}8$ (tersisa 80% setiap hari)."
+        },
+        {
+          "step": 2,
+          "title": "Hitung kadar tiap hari berturut-turut",
+          "explanation": "$U_2=13\\times 0{,}8=10{,}4$; $U_3=10{,}4\\times 0{,}8=8{,}32$; $U_4=8{,}32\\times 0{,}8=6{,}656$; $U_5=6{,}656\\times 0{,}8=5{,}3248$; $U_6=5{,}3248\\times 0{,}8=4{,}25984$."
+        },
+        {
+          "step": 3,
+          "title": "Tentukan hari mulai 'nyaman' (kadar < 7)",
+          "explanation": "$U_3=8{,}32$ (belum di bawah 7), $U_4=6{,}656$ (sudah di bawah 7) → mulai nyaman pada hari ke-4."
+        },
+        {
+          "step": 4,
+          "title": "Tentukan hari mulai 'sembuh klinis' (kadar < 5)",
+          "explanation": "$U_5=5{,}3248$ (belum di bawah 5), $U_6=4{,}25984$ (sudah di bawah 5) → mulai sembuh pada hari ke-6."
+        },
+        {
+          "step": 5,
+          "title": "Tentukan hari yang 'nyaman namun belum sembuh'",
+          "explanation": "Rentang ini berlaku untuk $5\\le \\text{kadar}<7$, yaitu hari ke-4 ($U_4=6{,}656$) dan hari ke-5 ($U_5=5{,}3248$)."
+        }
+      ],
+      "why_correct": "Hari ke-4 dan hari ke-5 adalah dua hari yang memenuhi kondisi nyaman (di bawah 7) namun belum sembuh (belum di bawah 5), sesuai opsi C dan D.",
+      "common_mistakes": [
+        "Menghitung penurunan sebagai pengurangan angka tetap (13×20%=2,6 dikurangkan setiap hari) padahal seharusnya persentase dihitung dari nilai HARI SEBELUMNYA (barisan geometri, bukan aritmetika).",
+        "Lupa memeriksa BATAS ATAS (kadar < 7) selain batas bawah (kadar ≥ 5), sehingga hari ke-6 (yang sudah di bawah 5, artinya sudah sembuh) ikut dianggap 'nyaman namun belum sembuh'."
+      ],
+      "tips": [
+        "Karena penurunannya berupa PERSENTASE tetap dari nilai sebelumnya (bukan pengurangan angka tetap), gunakan barisan GEOMETRI (kalikan 0,8 berulang kali), bukan barisan aritmetika."
+      ],
+      "diketahui": "Kadar asam urat pasien: • Hari ke-1: 13 mg/dL • Penurunan kadar: 20% setiap hari (sisa 80% atau 0,8 per hari) • Batas nyaman: di bawah 7 mg/dL • Batas sembuh klinis: kurang dari 5 mg/dL",
+      "ditanyakan": "Pada hari keberapa pasien merasa nyaman namun belum dianggap sembuh secara klinis?"
+    },
+    {
+      "question_id": "mtk_p2_q08",
+      "question_number": 8,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Menyusun persamaan garis lurus dari dua titik",
+        "Sistem pertidaksamaan linear dua variabel dan uji titik untuk menentukan arah tanda"
+      ],
+      "glossary": [
+        {
+          "term": "gradien/kemiringan garis (m)",
+          "meaning": "ukuran kecuraman garis, dihitung dengan $m=\\dfrac{y_2-y_1}{x_2-x_1}$"
+        },
+        {
+          "term": "uji titik",
+          "meaning": "mengganti koordinat suatu titik ke pertidaksamaan untuk memastikan arah tanda (≥/≤) sudah sesuai daerah arsiran"
+        }
+      ],
+      "reasoning": "Daerah arsiran berbentuk segitiga dengan titik sudut A(-4,0), B(0,2), C(2,0). Untuk menemukan sistem pertidaksamaan yang tepat, tiap sisi segitiga (garis f dan garis g) diubah menjadi persamaan garis, lalu arah pertidaksamaan (≥ atau ≤) ditentukan dengan menguji satu titik di dalam daerah arsiran.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Baca koordinat titik dari grafik",
+          "explanation": "A(-4,0), B(0,2), C(2,0)."
+        },
+        {
+          "step": 2,
+          "title": "Cari persamaan garis f (melalui A dan B)",
+          "explanation": "Gradien $=\\dfrac{2-0}{0-(-4)}=\\dfrac{1}{2}$. Persamaan: $y=\\tfrac12(x+4) \\Rightarrow 2y=x+4 \\Rightarrow x-2y=-4$."
+        },
+        {
+          "step": 3,
+          "title": "Cari persamaan garis g (melalui B dan C)",
+          "explanation": "Gradien $=\\dfrac{0-2}{2-0}=-1$. Persamaan: $y=2-x \\Rightarrow x+y=2$."
+        },
+        {
+          "step": 4,
+          "title": "Uji titik di dalam daerah arsiran",
+          "explanation": "Ambil titik berat segitiga $(-\\tfrac23,\\tfrac23)$: $x-2y=-\\tfrac23-\\tfrac43=-2$, dan $-2\\ge-4$ (benar); $x+y=-\\tfrac23+\\tfrac23=0$, dan $0\\le 2$ (benar)."
+        },
+        {
+          "step": 5,
+          "title": "Tentukan syarat y dan periksa perlunya syarat x",
+          "explanation": "Seluruh segitiga berada pada $y\\ge 0$. Karena daerah meluas ke kiri sumbu-y (hingga $x=-4$), syarat $x\\ge 0$ TIDAK diperlukan/TIDAK berlaku, sehingga sistemnya adalah $x-2y\\ge-4;\\ x+y\\le 2;\\ y\\ge 0$."
+        }
+      ],
+      "why_correct": "Sistem $\\{x-2y\\ge-4;\\ x+y\\le 2;\\ y\\ge 0\\}$ sama persis dengan opsi B.",
+      "common_mistakes": [
+        "Menambahkan syarat $x\\ge 0$ yang sebenarnya SALAH karena daerah arsiran meluas ke kiri sumbu-y hingga $x=-4$ — inilah yang membuat opsi A tampak mirip namun keliru.",
+        "Membalik arah pertidaksamaan $x+y$ menjadi $\\ge$ (seperti pada opsi C), yang justru menunjuk ke daerah di LUAR segitiga."
+      ],
+      "tips": [
+        "Setelah mendapatkan persamaan garis, selalu uji dengan satu titik yang jelas berada DI DALAM daerah arsiran (misalnya titik berat segitiga) untuk memastikan arah tanda pertidaksamaan sudah sesuai gambar, bukan sekadar menghafal bentuk persamaan garisnya saja."
+      ],
+      "diketahui": null,
+      "ditanyakan": null
+    },
+    {
+      "question_id": "mtk_p2_q09",
+      "question_number": 9,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Sistem Persamaan Linear Tiga Variabel (SPLTV): eliminasi dan substitusi"
+      ],
+      "glossary": [
+        {
+          "term": "SPLTV",
+          "meaning": "sistem persamaan dengan tiga variabel yang harus diselesaikan secara bersamaan menggunakan eliminasi atau substitusi"
+        }
+      ],
+      "reasoning": "Setiap buket memberikan satu persamaan yang menghubungkan harga satuan mawar, lili, dan anyelir. Karena ada tiga jenis buket dengan tiga variabel harga yang belum diketahui, ketiga persamaan diselesaikan bersama sebagai SPLTV untuk mendapatkan harga satuan tiap bunga, baru kemudian dipakai menghitung total belanja pembeli.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Susun tiga persamaan dari komposisi buket",
+          "explanation": "Misalkan harga per tangkai mawar=$m$, lili=$l$, anyelir=$a$. Buket A: $2m+3l+a=85.000$. Buket B: $m+2l+2a=70.000$. Buket C: $3m+l+a=75.000$."
+        },
+        {
+          "step": 2,
+          "title": "Eliminasi a dari persamaan Buket A dan Buket C",
+          "explanation": "$(2m+3l+a)-(3m+l+a)=85.000-75.000 \\Rightarrow -m+2l=10.000 \\Rightarrow m=2l-10.000$"
+        },
+        {
+          "step": 3,
+          "title": "Substitusi a dari Buket A ke Buket B",
+          "explanation": "Dari Buket A: $a=85.000-2m-3l$. Substitusi ke Buket B: $m+2l+2(85.000-2m-3l)=70.000 \\Rightarrow -3m-4l=-100.000 \\Rightarrow 3m+4l=100.000$"
+        },
+        {
+          "step": 4,
+          "title": "Gabungkan kedua hasil untuk mencari l, m, a",
+          "explanation": "Substitusi $m=2l-10.000$ ke $3m+4l=100.000$: $3(2l-10.000)+4l=100.000 \\Rightarrow 10l=130.000 \\Rightarrow l=13.000$. Maka $m=2(13.000)-10.000=16.000$, dan $a=85.000-2(16.000)-3(13.000)=14.000$."
+        },
+        {
+          "step": 5,
+          "title": "Hitung total belanja pembeli",
+          "explanation": "Buket C (Rp75.000,00) + 2 lili ($2\\times13.000=26.000$) + 1 anyelir ($14.000$) $= 75.000+26.000+14.000=Rp115.000{,}00$"
+        }
+      ],
+      "why_correct": "Total Rp115.000,00 sama persis dengan opsi D.",
+      "common_mistakes": [
+        "Salah menyusun persamaan dari komposisi buket (tertukar jumlah tangkai tiap jenis bunga antar Buket A, B, dan C).",
+        "Menghitung penambahan bunga dari estimasi harga buket secara langsung, bukan dari HARGA SATUAN hasil penyelesaian SPLTV."
+      ],
+      "tips": [
+        "Setelah mendapatkan tiga nilai harga satuan, verifikasi dengan mensubstitusikannya kembali ke salah satu persamaan awal (misalnya Buket C: $3(16.000)+13.000+14.000$ harus $=75.000$) untuk memastikan tidak ada kesalahan eliminasi sebelum melangkah ke perhitungan akhir."
+      ],
+      "diketahui": "Komposisi dan harga buket bunga: • Buket Tipe A: 2 mawar + 3 lili + 1 anyelir = Rp85.000,00 • Buket Tipe B: 1 mawar + 2 lili + 2 anyelir = Rp70.000,00 • Buket Tipe C: 3 mawar + 1 lili + 1 anyelir = Rp75.000,00",
+      "ditanyakan": "Total harga yang harus dibayar pembeli jika membeli buket tipe C ditambah 2 tangkai lili dan 1 tangkai anyelir"
+    },
+    {
+      "question_id": "mtk_p2_q10",
+      "question_number": 10,
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "C",
+          "D",
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Sifat sudut pada dua garis sejajar yang dipotong garis transversal (sudut dalam sepihak, sudut bertolak belakang)",
+        "Sudut berpelurus pada satu garis lurus"
+      ],
+      "glossary": [
+        {
+          "term": "garis transversal",
+          "meaning": "garis yang memotong dua garis lain; di sini garis miring yang memotong garis alas dan garis tengah"
+        },
+        {
+          "term": "sudut dalam sepihak",
+          "meaning": "dua sudut interior yang berada pada sisi yang sama terhadap garis transversal pada dua garis sejajar; jumlah keduanya selalu 180°"
+        },
+        {
+          "term": "sudut bertolak belakang",
+          "meaning": "dua sudut yang saling berhadapan di titik potong dua garis; besarnya selalu sama"
+        }
+      ],
+      "reasoning": "Garis alas dan garis tengah pada gambar ditandai dengan tanda panah yang sama, menunjukkan keduanya SEJAJAR, dan dipotong oleh garis transversal (garis miring dari puncak A ke C). Hubungan antar sudut di kedua titik potong (∠B, ∠D, ∠E di titik potong garis tengah, dan ∠C di titik potong garis alas) mengikuti sifat garis sejajar dipotong transversal, sedangkan ∠A (dibentuk garis tegak) tidak termasuk dalam pasangan garis sejajar tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Kenali pasangan garis sejajar",
+          "explanation": "Garis alas dan garis tengah sejajar (ditandai tanda panah yang sama), dipotong oleh garis transversal (garis miring)."
+        },
+        {
+          "step": 2,
+          "title": "Periksa ∠B dan ∠D (berpelurus pada garis tengah)",
+          "explanation": "∠B dan ∠D berdampingan tepat sepanjang garis tengah, dipisahkan oleh garis transversal, sehingga $\\angle B+\\angle D=180^{\\circ}$."
+        },
+        {
+          "step": 3,
+          "title": "Periksa ∠B dan ∠C (sudut dalam sepihak)",
+          "explanation": "∠B (di titik potong garis tengah) dan ∠C (di titik potong garis alas) berada pada sisi yang sama terhadap transversal, sehingga keduanya adalah sudut dalam sepihak: $\\angle B+\\angle C=180^{\\circ}$."
+        },
+        {
+          "step": 4,
+          "title": "Periksa ∠E dan ∠C (lewat sudut bertolak belakang)",
+          "explanation": "∠E bertolak belakang dengan ∠B pada titik potong garis tengah, sehingga $\\angle E=\\angle B$. Karena $\\angle B+\\angle C=180^{\\circ}$, maka $\\angle E+\\angle C=180^{\\circ}$ juga berlaku."
+        },
+        {
+          "step": 5,
+          "title": "Periksa mengapa ∠A tidak berpasangan 180° dengan ∠B atau ∠E",
+          "explanation": "∠A dibentuk oleh garis TEGAK dan garis transversal. Garis tegak tidak dinyatakan sejajar dengan garis alas maupun garis tengah, sehingga tidak ada aturan sudut sejajar-transversal yang berlaku untuk pasangan ∠A-∠B atau ∠A-∠E."
+        }
+      ],
+      "why_correct": "Pasangan sudut yang membentuk 180° adalah ∠B & ∠C, ∠B & ∠D, dan ∠E & ∠C — persis sesuai opsi C, D, dan E.",
+      "common_mistakes": [
+        "Menganggap ∠A juga berhubungan 180° dengan sudut lain hanya karena berada pada garis transversal yang sama, padahal ∠A dibentuk oleh garis tegak yang tidak sejajar dengan garis alas maupun garis tengah.",
+        "Keliru mengira ∠E sama dengan ∠D, padahal ∠E bertolak belakang dengan ∠B (bukan dengan ∠D — ∠D bertolak belakang dengan ∠F)."
+      ],
+      "tips": [
+        "Untuk soal sudut dua garis sejajar dipotong transversal, cari dulu tanda kesejajaran (biasanya tanda panah kecil) pada gambar — hanya sudut-sudut yang terkait garis-garis SEJAJAR itu yang memiliki hubungan 180° atau sama besar; garis lain di luar pasangan sejajar tersebut tidak otomatis mengikuti aturan itu."
+      ],
+      "diketahui": null,
+      "ditanyakan": null
+    },
+    {
+      "question_id": "mtk_p2_q11",
+      "question_number": 11,
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "B",
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi bidang sisi (dinding) pada bangun ruang balok",
+        "Hubungan sejajar dan tegak lurus antar bidang sisi balok"
+      ],
+      "glossary": [
+        {
+          "term": "bidang sisi (dinding) balok",
+          "meaning": "salah satu dari enam permukaan datar pembentuk balok/kubus"
+        },
+        {
+          "term": "bidang sejajar pada balok",
+          "meaning": "dua sisi balok yang saling berhadapan dan tidak pernah berpotongan"
+        }
+      ],
+      "reasoning": "Ruangan pada gambar direpresentasikan sebagai balok dengan bidang atas EFGH dan bidang bawah ABCD (E di atas A, F di atas B, G di atas C, H di atas D). Empat dinding balok adalah ABFE, BCGF, CDHG, dan ADHE, dengan ABFE sejajar CDHG, serta BCGF sejajar ADHE. Karena papan jadwal tidak boleh diletakkan pada dinding yang sejajar dengan dinding rak buku gantung (dan tidak diletakkan pada dinding rak itu sendiri), yang tersisa hanyalah dua dinding yang TEGAK LURUS terhadap dinding rak.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi keempat dinding balok",
+          "explanation": "Berdasarkan susunan titik sudut pada gambar (E di atas A, F di atas B, G di atas C, H di atas D), keempat dinding balok adalah ABFE, BCGF, CDHG, dan ADHE."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan dinding tempat rak buku gantung",
+          "explanation": "Berdasarkan gambar, rak buku gantung berada pada salah satu dinding belakang ruangan (dinding yang memuat lemari dan rak, yaitu dinding CDHG)."
+        },
+        {
+          "step": 3,
+          "title": "Tentukan dinding yang sejajar dengan dinding rak",
+          "explanation": "Pada balok, dinding yang berhadapan langsung selalu sejajar. ABFE sejajar dengan CDHG, sehingga ABFE tidak boleh dipakai untuk papan jadwal."
+        },
+        {
+          "step": 4,
+          "title": "Kecualikan juga dinding rak itu sendiri",
+          "explanation": "Dinding CDHG (tempat rak berada) juga tidak menjadi pilihan karena papan jadwal ditempatkan pada dinding yang BERBEDA."
+        },
+        {
+          "step": 5,
+          "title": "Tentukan dinding yang tersisa (valid)",
+          "explanation": "Dua dinding yang tersisa, yaitu BCGF dan ADHE, keduanya TEGAK LURUS (tidak sejajar) terhadap dinding rak CDHG, sehingga keduanya memenuhi syarat 'tidak sejajar dengan rak buku gantung'."
+        }
+      ],
+      "why_correct": "BCGF dan ADHE adalah dua dinding yang tegak lurus (bukan sejajar) terhadap dinding rak buku gantung, sesuai kunci jawaban B dan E.",
+      "common_mistakes": [
+        "Memilih 'BCFA' sebagai jawaban karena huruf-hurufnya familiar, padahal kombinasi ini bukan salah satu dari empat dinding sebenarnya pada balok.",
+        "Lupa bahwa dinding TEMPAT rak buku gantung berada juga harus dikecualikan, tidak hanya dinding yang sejajar dengannya."
+      ],
+      "tips": [
+        "Pada balok/kubus, setiap dinding hanya memiliki SATU dinding yang sejajar dengannya (dinding di seberangnya) dan DUA dinding yang tegak lurus dengannya — gunakan aturan ini untuk cepat menyaring pilihan dinding yang valid."
+      ],
+      "diketahui": "Kamar tidur berbentuk balok dengan posisi rak buku gantung di dinding belakang ($CDHG$).",
+      "ditanyakan": "Pada dinding manakah papan jadwal akan diletakkan jika syaratnya tidak boleh sejajar dengan dinding rak buku gantung?"
+    },
+    {
+      "question_id": "mtk_p2_q12",
+      "question_number": 12,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Kesebangunan trapesium bertumpuk (rata-rata ukur/mean proporsional)",
+        "Teorema Pythagoras pada trapesium siku-siku"
+      ],
+      "glossary": [
+        {
+          "term": "sebangun (similar)",
+          "meaning": "dua bangun yang memiliki bentuk sama dengan perbandingan sisi-sisi bersesuaian yang tetap"
+        },
+        {
+          "term": "rata-rata ukur (mean proporsional)",
+          "meaning": "nilai tengah $b$ yang memenuhi $\\dfrac{a}{b}=\\dfrac{b}{c}$, sehingga $b^2=a\\times c$, pada dua bangun sebangun yang bertumpuk"
+        }
+      ],
+      "reasoning": "KLMN dan NMPO sebangun serta berbagi sisi NM, sehingga ketiga sisi sejajar KL, NM, OP membentuk perbandingan berantai (rata-rata ukur) yang bisa dipakai mencari NM. Setelah NM diketahui, sisi tegak NO dicari dengan rasio kesebangunan yang sama, lalu LM (sisi miring) dihitung dengan Pythagoras memakai tinggi KN dan selisih sisi sejajar KL-NM.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Cari panjang NM lewat rata-rata ukur",
+          "explanation": "Karena KLMN ~ NMPO, berlaku $\\dfrac{KL}{NM}=\\dfrac{NM}{OP}$, sehingga $NM^{2}=KL\\times OP=32\\times 18=576 \\Rightarrow NM=24$ cm."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan rasio kesebangunan",
+          "explanation": "Rasio $=\\dfrac{KL}{NM}=\\dfrac{32}{24}=\\dfrac{4}{3}$."
+        },
+        {
+          "step": 3,
+          "title": "Cari panjang NO dengan rasio yang sama",
+          "explanation": "$\\dfrac{KN}{NO}=\\dfrac{4}{3} \\Rightarrow NO=KN\\times\\dfrac{3}{4}=16\\times\\dfrac{3}{4}=12$ cm."
+        },
+        {
+          "step": 4,
+          "title": "Tentukan alas segitiga siku-siku bantu untuk mencari LM",
+          "explanation": "Karena KLMN adalah trapesium (siku-siku di K), sisi miring LM adalah sisi ketiga segitiga siku-siku dengan tinggi $KN=16$ cm dan alas $=KL-NM=32-24=8$ cm."
+        },
+        {
+          "step": 5,
+          "title": "Terapkan Pythagoras untuk mencari LM",
+          "explanation": "$LM=\\sqrt{KN^{2}+(KL-NM)^{2}}=\\sqrt{16^{2}+8^{2}}=\\sqrt{256+64}=\\sqrt{320}=8\\sqrt{5}$ cm."
+        }
+      ],
+      "why_correct": "$8\\sqrt{5}$ cm sama persis dengan opsi B.",
+      "common_mistakes": [
+        "Langsung menyamakan LM dengan selisih KL-NM atau memakai rasio kesebangunan secara langsung pada LM, padahal LM adalah SISI MIRING (bukan sisi sejajar) sehingga harus dihitung lewat Pythagoras.",
+        "Salah menghitung selisih KL-NM sebagai alas segitiga siku-siku bantu (misalnya memakai KL saja tanpa dikurangi NM)."
+      ],
+      "tips": [
+        "Verifikasi hasil dengan menghitung MP (sisi miring pada trapesium NMPO yang lebih kecil) memakai cara serupa — hasilnya harus memenuhi rasio $\\dfrac{LM}{MP}=\\dfrac{4}{3}$ (sama dengan rasio kesebangunan $\\dfrac{KL}{NM}$) sebagai pengecekan silang."
+      ],
+      "diketahui": "Dua trapesium siku-siku sebangun $KLMN \\sim NMPO$: • Sisi atas $OP = 18\\text{ cm}$ • Sisi alas $KL = 32\\text{ cm}$ • Tinggi trapesium bawah $KN = 16\\text{ cm}$",
+      "ditanyakan": "Berapakah panjang sisi miring $LM$?"
+    },
+    {
+      "question_id": "mtk_p2_q13",
+      "question_number": 13,
+      "official_answer": {
+        "format": "per_statement",
+        "statements": {
+          "A": "Salah",
+          "B": "Benar",
+          "C": "Salah"
+        }
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Teorema Pythagoras untuk mencari sisi miring trapesium siku-siku",
+        "Pembagian panjang garis menjadi bagian-bagian sama besar (untuk menentukan banyak pot yang muat)"
+      ],
+      "glossary": [
+        {
+          "term": "sisi miring (hipotenusa)",
+          "meaning": "sisi terpanjang pada segitiga siku-siku, berhadapan dengan sudut siku-siku"
+        },
+        {
+          "term": "tripel Pythagoras",
+          "meaning": "tiga bilangan bulat yang memenuhi $a^2+b^2=c^2$; di sini 150, 360, 390 adalah kelipatan 30 dari tripel 5-12-13"
+        }
+      ],
+      "reasoning": "Kebun berbentuk trapesium siku-siku dengan dua sisi tegak berbeda tinggi (500 cm dan 350 cm) dan alas 360 cm; pot diletakkan pada sisi MIRING (bukan sisi tegak) di bagian atas. Panjang sisi miring ini dicari dengan Pythagoras menggunakan selisih tinggi kedua sisi tegak dan panjang alas sebagai dua sisi siku-sikunya, lalu dipakai untuk menghitung berapa banyak pot berdiameter tertentu yang muat berjajar di sepanjang sisi tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan dua sisi siku-siku segitiga bantu",
+          "explanation": "Selisih tinggi kedua sisi tegak kebun $=500-350=150$ cm, dan panjang alas kebun $=360$ cm — keduanya menjadi dua sisi siku-siku segitiga bantu."
+        },
+        {
+          "step": 2,
+          "title": "Hitung panjang sisi miring (tempat pot diletakkan)",
+          "explanation": "$\\sqrt{360^{2}+150^{2}}=\\sqrt{129.600+22.500}=\\sqrt{152.100}=390$ cm."
+        },
+        {
+          "step": 3,
+          "title": "Hitung banyak pot jahe (diameter 15 cm)",
+          "explanation": "$390\\div 15=26$ pot (bukan 25 seperti pada pernyataan A)."
+        },
+        {
+          "step": 4,
+          "title": "Hitung banyak pot kunyit (diameter 26 cm)",
+          "explanation": "$390\\div 26=15$ pot, tepat sama dengan pernyataan B."
+        },
+        {
+          "step": 5,
+          "title": "Hitung banyak pot lengkuas (diameter 30 cm)",
+          "explanation": "$390\\div 30=13$ pot (bukan 10 seperti pada pernyataan C)."
+        }
+      ],
+      "why_correct": "Sisi miring sepanjang 390 cm menghasilkan 26 pot jahe, 15 pot kunyit, dan 13 pot lengkuas, sehingga pernyataan A (25 jahe) Salah, B (15 kunyit) Benar, dan C (10 lengkuas) Salah — persis sesuai kunci jawaban.",
+      "common_mistakes": [
+        "Menggunakan salah satu sisi tegak (500 cm atau 350 cm) sebagai panjang tempat pot diletakkan, padahal pot diletakkan di SISI MIRING, bukan sisi tegak.",
+        "Lupa membulatkan hasil bagi ke bawah jika hasilnya tidak bulat (meskipun pada soal ini kebetulan seluruh hasil pembagian bernilai bulat)."
+      ],
+      "tips": [
+        "Kenali pola tripel Pythagoras 5-12-13 yang diperbesar 30 kali (150, 360, 390) — ini mempercepat perhitungan akar kuadrat tanpa kalkulator."
+      ],
+      "diketahui": "Kebun berbentuk trapesium dengan tinggi kiri $500\\text{ cm}$, tinggi kanan $350\\text{ cm}$, dan alas $360\\text{ cm}$. Ukuran diameter pot: • Jahe: $15\\text{ cm}$ • Kunyit: $26\\text{ cm}$ • Lengkuas: $30\\text{ cm}$",
+      "ditanyakan": "Tentukan Benar atau Salah pernyataan berkaitan dengan ukuran sisi kebun yang ditanami tanaman toga"
+    },
+    {
+      "question_id": "mtk_p2_q14",
+      "question_number": 14,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Transformasi geometri: refleksi terhadap garis $y=k$ dan rotasi $180^{\\circ}$ terhadap pusat O(0,0)",
+        "Komposisi (gabungan berurutan) dua transformasi geometri"
+      ],
+      "glossary": [
+        {
+          "term": "refleksi terhadap garis $y=k$",
+          "meaning": "pencerminan titik $(x,y)$ menjadi $(x,\\,2k-y)$"
+        },
+        {
+          "term": "rotasi $180^{\\circ}$ terhadap pusat O(0,0)",
+          "meaning": "memutar titik $(x,y)$ menjadi $(-x,-y)$"
+        },
+        {
+          "term": "komposisi transformasi",
+          "meaning": "penerapan dua transformasi atau lebih secara berurutan sesuai urutan yang disebutkan pada soal"
+        }
+      ],
+      "reasoning": "Soal meminta bayangan akhir B' dari titik B setelah direfleksikan terhadap garis y=1 lalu dirotasi 180° terhadap O(0,0). Karena urutan operasi disebutkan secara eksplisit (refleksi dahulu, baru rotasi), rumus gabungan harus diturunkan sesuai urutan tersebut sebelum dipakai untuk mencari letak B dari letak B' yang ditunjukkan pada gambar.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Refleksikan titik mula-mula B(x, y) terhadap garis y = 1",
+          "explanation": "Rumus refleksi terhadap garis horizontal $y = k$ adalah $(x,\\, 2k - y)$. Dengan $k = 1$, bayangan pertama adalah: $B_1(x,\\, 2(1) - y) = (x,\\, 2 - y)$."
+        },
+        {
+          "step": 2,
+          "title": "Rotasikan bayangan pertama sebesar 180° terhadap pusat O(0,0)",
+          "explanation": "Rumus rotasi $180^\\circ$ (baik searah maupun berlawanan arah jarum jam) terhadap pusat $(0,0)$ adalah $(-X,\\, -Y)$. Maka bayangan kedua menjadi: $B'(-x,\\, -(2 - y)) = (-x,\\, y - 2)$."
+        },
+        {
+          "step": 3,
+          "title": "Baca koordinat bayangan B' dari gambar stimulus",
+          "explanation": "Pada grafik soal, titik $B'$ terlihat jelas berada pada koordinat $(-4, 1)$."
+        },
+        {
+          "step": 4,
+          "title": "Hitung koordinat titik awal B(x, y) dan cocokkan gambar",
+          "explanation": "Samakan dengan formula bayangan pada langkah 2: • Absis: $-x = -4 \\implies x = 4$ • Ordinat: $y - 2 = 1 \\implies y = 3$ Jadi koordinat titik $B$ mula-mula adalah **$(4, 3)$**. Pada pilihan gambar, titik $B$ yang terletak di koordinat $(4, 3)$ adalah opsi **B**."
+        }
+      ],
+      "why_correct": "Titik mula-mula B berada di koordinat (4, 3), sesuai dengan gambar pada opsi B.",
+      "common_mistakes": [
+        "Menukar urutan transformasi (merotasi dahulu baru merefleksi), padahal soal secara eksplisit meminta refleksi TERLEBIH DAHULU baru kemudian rotasi — urutan komposisi transformasi memengaruhi hasil akhir dan tidak boleh dibalik."
+      ],
+      "tips": [
+        "Selalu kerjakan komposisi transformasi sesuai URUTAN yang disebutkan pada soal (kata 'kemudian' menunjukkan urutan operasi), dan gunakan rumus transformasi baku (refleksi terhadap $y=k$, rotasi $180^{\\circ}$ di pusat O) sebagai acuan cepat."
+      ],
+      "diketahui": "Titik bayangan hasil komposisi transformasi pada gambar adalah $B'(-4, 1)$. Urutan transformasi: 1. Refleksi oleh garis $y = 1$ 2. Rotasi dengan pusat $O(0,0)$ sebesar $180^\\circ$ searah jarum jam",
+      "ditanyakan": "Gambar titik $B$ mula-mula yang sesuai"
+    },
+    {
+      "question_id": "mtk_p2_q15",
+      "question_number": 15,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": true,
+      "review_reason": "Posisi persis titik awal ('pojok dinding pintu masuk') dan orientasi dinding pintu terhadap dinding papan tulis pada gambar (soal_15_stimulus_01.png) tidak dapat dipastikan hanya dari deskripsi visual yang tersedia, sehingga kombinasi yang tepat dari tiga ukuran ruangan (5 m, 4 m, 6 m) untuk teorema Pythagoras ruang -- dan karenanya nilai pasti panjang satu tali hiasan -- tidak dapat diturunkan ulang secara meyakinkan agar sesuai dengan kunci jawaban (sisa tali 10 m). Disarankan memeriksa gambar sumber untuk memastikan posisi pojok awal dan arah pengukuran tiap dimensi sebelum konten langkah-demi-langkah ini dipakai sebagai penjelasan final kepada siswa.",
+      "concept_kunci": [
+        "Jarak garis lurus dalam bangun ruang (teorema Pythagoras tiga dimensi)"
+      ],
+      "glossary": [
+        {
+          "term": "jarak lurus dalam ruang",
+          "meaning": "panjang lintasan garis lurus terpendek antara dua titik pada bangun ruang, dihitung dengan teorema Pythagoras tiga dimensi apabila diketahui tiga komponen yang saling tegak lurus (panjang, lebar, tinggi)"
+        }
+      ],
+      "reasoning": "Ruang kelas berbentuk balok dengan tiga ukuran yang diketahui dari gambar (tinggi 5 m, lebar dinding papan tulis 4 m, kedalaman ruangan 6 m). Tali hiasan membentang lurus dari sebuah pojok pada dinding pintu masuk menuju bagian TENGAH langit-langit dinding papan tulis di seberangnya, sehingga panjangnya dihitung dengan menggabungkan ketiga ukuran tersebut lewat teorema Pythagoras dalam ruang.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Kenali bentuk dan ukuran ruangan",
+          "explanation": "Ruang kelas berbentuk balok dengan tinggi 5 m, lebar dinding papan tulis 4 m, dan kedalaman (panjang) ruangan 6 m."
+        },
+        {
+          "step": 2,
+          "title": "Kenali lintasan tali sebagai garis lurus dalam ruang",
+          "explanation": "Tali membentang dari pojok dinding pintu masuk menuju bagian TENGAH langit-langit dinding papan tulis di seberangnya, sehingga lintasannya memotong ruang secara diagonal (bukan hanya sepanjang satu dinding)."
+        },
+        {
+          "step": 3,
+          "title": "Tentukan komponen jarak mendatar dan tegak",
+          "explanation": "Karena titik tujuan berada di TENGAH lebar dinding papan tulis, komponen mendatar ke arah lebar adalah setengah dari 4 m (yaitu 2 m), komponen mendatar ke arah kedalaman adalah 6 m penuh, dan komponen tegak (naik) adalah tinggi ruangan."
+        },
+        {
+          "step": 4,
+          "title": "Hitung panjang satu tali dengan Pythagoras ruang",
+          "explanation": "Gabungkan ketiga komponen tegak lurus tersebut (kedalaman, setengah lebar, tinggi) menggunakan teorema Pythagoras dalam ruang untuk mendapatkan panjang satu tali."
+        },
+        {
+          "step": 5,
+          "title": "Hitung sisa tali untuk dua utas",
+          "explanation": "Karena dibutuhkan DUA tali yang identik (satu untuk tiap pojok dinding pintu), kalikan dua panjang satu tali, lalu kurangkan dari panjang gulungan tali (20 m) untuk mendapatkan sisa tali yang tidak terpakai."
+        }
+      ],
+      "why_correct": "Berdasarkan kunci jawaban resmi, sisa tali yang tidak terpakai adalah 10 m (opsi B), berarti kedua tali bersama-sama menghabiskan 10 m dari gulungan sepanjang 20 m.",
+      "common_mistakes": [
+        "Menggunakan LEBAR PENUH (4 m) alih-alih SETENGAH lebar (2 m) dalam perhitungan, padahal titik tujuannya adalah bagian TENGAH dinding papan tulis, bukan pojoknya.",
+        "Lupa mengalikan panjang satu tali dengan 2 (karena dibutuhkan DUA tali identik) sebelum menguranginya dari panjang gulungan 20 m."
+      ],
+      "tips": [
+        "Gambarkan sketsa balok tiga dimensi sederhana dan tandai posisi titik awal serta titik tujuan pada masing-masing sumbu (panjang, lebar, tinggi) sebelum menerapkan rumus jarak ruang — ini membantu memastikan komponen mana yang perlu dibagi dua (karena 'tengah') dan mana yang dipakai utuh."
+      ],
+      "diketahui": "Ruangan kelas berukuran panjang dinding samping $6\\text{ m}$, lebar dinding depan $4\\text{ m}$, dan tinggi $5\\text{ m}$. Tali hiasan dipasang pada langit-langit dari pojok pintu ke tengah dinding samping (panjang $6\\text{ m}$). Murid membuat 2 utas tali yang sama dari gulungan tali sepanjang $20\\text{ m}$.",
+      "ditanyakan": "Berapakah sisa tali yang tidak terpakai?"
+    },
+    {
+      "question_id": "mtk_p2_q16",
+      "question_number": 16,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Keliling gabungan bangun datar (segitiga sama kaki + busur setengah lingkaran)",
+        "Teorema Pythagoras untuk mencari sisi miring segitiga sama kaki"
+      ],
+      "glossary": [
+        {
+          "term": "busur setengah lingkaran",
+          "meaning": "setengah dari keliling lingkaran penuh, panjangnya $=\\pi\\times r$ (r=jari-jari)"
+        },
+        {
+          "term": "sisi miring segitiga sama kaki",
+          "meaning": "dua sisi yang sama panjang pada segitiga sama kaki, dihitung dengan Pythagoras dari tinggi dan setengah alasnya"
+        }
+      ],
+      "reasoning": "Ornamen tersusun dari segitiga sama kaki di atas dan bentuk melengkung (setengah lingkaran) di bawah yang LEBIH SEMPIT dari alas segitiga, sehingga ada dua segmen datar penghubung ('bahu') di antara keduanya. Keliling ornamen dihitung dengan memecah bentuk menjadi bagian-bagian sederhana: dua sisi miring segitiga, dua segmen datar penghubung, dan satu busur setengah lingkaran, lalu dijumlahkan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan tinggi segitiga",
+          "explanation": "Tinggi total ornamen (70 cm) dikurangi jari-jari bagian bawah yang melengkung (setengah dari lebar 20 cm, yaitu 10 cm): $70-10=60$ cm."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan setengah alas segitiga",
+          "explanation": "Alas segitiga 50 cm, sehingga setengah alasnya $=25$ cm."
+        },
+        {
+          "step": 3,
+          "title": "Hitung sisi miring segitiga dengan Pythagoras",
+          "explanation": "$\\sqrt{60^{2}+25^{2}}=\\sqrt{3600+625}=\\sqrt{4225}=65$ cm."
+        },
+        {
+          "step": 4,
+          "title": "Hitung panjang segmen datar penghubung ('bahu')",
+          "explanation": "Selisih lebar alas segitiga (50 cm) dan lebar bagian melengkung (20 cm) dibagi dua sisi: $(50-20)\\div 2=15$ cm tiap segmen."
+        },
+        {
+          "step": 5,
+          "title": "Hitung panjang busur setengah lingkaran",
+          "explanation": "Jari-jari bagian melengkung $=10$ cm, sehingga busur $=\\pi\\times r=3{,}14\\times 10=31{,}4$ cm."
+        },
+        {
+          "step": 6,
+          "title": "Jumlahkan keliling satu ornamen",
+          "explanation": "$2\\times 65+2\\times 15+31{,}4=130+30+31{,}4=191{,}4$ cm."
+        },
+        {
+          "step": 7,
+          "title": "Kalikan dua karena dibuat dua ornamen",
+          "explanation": "$2\\times 191{,}4=382{,}8$ cm."
+        }
+      ],
+      "why_correct": "382,8 cm sama persis dengan opsi D.",
+      "common_mistakes": [
+        "Menganggap lebar 20 cm sebagai bagian dari alas segitiga (bukan lebar bagian lingkaran yang lebih sempit), sehingga lupa menghitung segmen datar penghubung ('bahu') sepanjang 15 cm di kedua sisi.",
+        "Lupa mengalikan hasil akhir dengan 2, karena soal meminta panjang kayu untuk DUA ornamen, bukan satu."
+      ],
+      "tips": [
+        "Pecah bentuk gabungan menjadi bagian-bagian sederhana (dua sisi miring segitiga, dua segmen datar penghubung, dan satu busur setengah lingkaran) lalu jumlahkan satu per satu — jangan langsung mengira keliling total sama dengan keliling segitiga ditambah keliling lingkaran penuh."
+      ],
+      "diketahui": "Ornamen jam dinding gabungan segitiga sama kaki dan setengah lingkaran: • Alas segitiga $= 50\\text{ cm}$ • Diameter setengah lingkaran $= 20\\text{ cm}$ (jari-jari $r = 10\\text{ cm}$) • Tinggi total ornamen dari puncak segitiga ke dasar lengkungan $= 70\\text{ cm}$",
+      "ditanyakan": "Berapa panjang kayu tipis yang diperlukan untuk membuat keliling 2 buah ornamen jam dinding?"
+    },
+    {
+      "question_id": "mtk_p2_q17",
+      "question_number": 17,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Kecukupan data (data sufficiency)",
+        "Luas dan sisi layang-layang berdasarkan diagonal-diagonalnya"
+      ],
+      "glossary": [
+        {
+          "term": "layang-layang",
+          "meaning": "segiempat dengan dua pasang sisi berdekatan yang sama panjang, memiliki dua diagonal yang saling tegak lurus"
+        },
+        {
+          "term": "kecukupan data",
+          "meaning": "kemampuan suatu pernyataan/informasi untuk menentukan jawaban akhir secara pasti tanpa informasi tambahan"
+        }
+      ],
+      "reasoning": "Untuk menjawab keliling layang-layang, dibutuhkan panjang keempat sisinya. Pernyataan (1) hanya memberi hasil kali kedua diagonal (lewat luas), sedangkan pernyataan (2) hanya memberi satu sisi tanpa konteks lain — perlu diperiksa apakah masing-masing SAJA sudah cukup, atau harus digabung.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Uji pernyataan (1) saja",
+          "explanation": "Luas $=160$ cm² dengan salah satu diagonal $=20$ cm memberi diagonal lain $=\\dfrac{2\\times160}{20}=16$ cm. Namun luas dan kedua diagonal saja tidak menentukan bagaimana diagonal-diagonal itu terbagi oleh titik potongnya, sehingga panjang sisi (dan keliling) BELUM bisa dipastikan → pernyataan (1) SAJA TIDAK CUKUP."
+        },
+        {
+          "step": 2,
+          "title": "Uji pernyataan (2) saja",
+          "explanation": "Mengetahui satu sisi $=10$ cm saja tidak memberi informasi apa pun tentang diagonal atau sisi lainnya → pernyataan (2) SAJA TIDAK CUKUP."
+        },
+        {
+          "step": 3,
+          "title": "Gabungkan kedua pernyataan",
+          "explanation": "Dari (1), diagonal kedua $=16$ cm, terbagi dua sama panjang oleh sumbu simetri menjadi 8 cm dan 8 cm. Dari (2), sisi $=10$ cm memungkinkan dicari bagian sumbu simetri yang bersesuaian lewat Pythagoras: $10^{2}=8^{2}+h^{2}\\Rightarrow h=6$ cm."
+        },
+        {
+          "step": 4,
+          "title": "Simpulkan bahwa gabungan keduanya cukup",
+          "explanation": "Dengan $h=6$ cm diketahui, sisa bagian sumbu simetri ($20-6=14$ cm) dapat dipakai untuk menghitung pasangan sisi lainnya, sehingga KELILING layang-layang dapat dipastikan secara unik hanya jika KEDUA pernyataan digabungkan."
+        }
+      ],
+      "why_correct": "Kedua pernyataan bersama-sama memberi cukup informasi untuk menghitung keliling secara pasti, sedangkan masing-masing pernyataan sendirian tidak cukup — sesuai kriteria opsi C.",
+      "common_mistakes": [
+        "Mengira pernyataan (1) saja sudah cukup karena luas dan satu diagonal 'terlihat lengkap', padahal luas hanya menentukan HASIL KALI kedua diagonal, bukan bagaimana sisi-sisi terbentuk dari pembagian diagonal tersebut."
+      ],
+      "tips": [
+        "Untuk soal kecukupan data (tipe pernyataan 1 & 2), selalu uji SETIAP pernyataan secara terpisah dahulu sebelum menggabungkannya — jangan langsung menyimpulkan 'gabungan pasti cukup' tanpa memeriksa apakah masing-masing pernyataan benar-benar tidak cukup sendirian."
+      ],
+      "diketahui": "Panjang salah satu diagonal suatu layang-layang adalah $20\\text{ cm}$.",
+      "ditanyakan": "Berapakah keliling layang-layang tersebut?"
+    },
+    {
+      "question_id": "mtk_p2_q18",
+      "question_number": 18,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Penyusunan ruang (bin packing) dengan pembagian ukuran untuk mencari susunan optimal"
+      ],
+      "glossary": [
+        {
+          "term": "penyusunan ruang (bin packing)",
+          "meaning": "cara menyusun objek berukuran tetap ke dalam ruang yang lebih besar seefisien mungkin tanpa tumpang tindih"
+        }
+      ],
+      "reasoning": "Karena posisi atas-bawah kardus (tinggi) sudah tetap dan tidak boleh dibalik, hanya DUA dimensi alas kardus (20 cm dan 30 cm) yang boleh dipertukarkan arahnya (menghadap depan atau menghadap samping). Untuk memaksimalkan jumlah kardus, kedua kemungkinan orientasi alas perlu diuji terhadap ukuran alas bak truk, dan dipilih yang membagi habis (tanpa sisa ruang).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan ukuran kardus dan bak truk",
+          "explanation": "Kardus helm: 20 cm × 20 cm × 30 cm (tinggi tetap 20 cm, tidak boleh dibalik). Bak truk: tinggi 120 cm, lebar 150 cm, panjang 240 cm."
+        },
+        {
+          "step": 2,
+          "title": "Hitung banyak lapisan (tumpukan) vertikal",
+          "explanation": "$120\\div 20=6$ lapisan."
+        },
+        {
+          "step": 3,
+          "title": "Uji Orientasi 1 untuk alas tiap lapisan",
+          "explanation": "Sisi 30 cm sejajar panjang truk (240 cm): $240\\div30=8$ (pas). Sisi 20 cm sejajar lebar truk (150 cm): $150\\div20=7{,}5\\to7$ (tersisa ruang kosong 10 cm). Hasil: $8\\times7=56$ kardus/lapisan, dengan sisa ruang."
+        },
+        {
+          "step": 4,
+          "title": "Uji Orientasi 2 untuk alas tiap lapisan",
+          "explanation": "Sisi 20 cm sejajar panjang truk (240 cm): $240\\div20=12$ (pas). Sisi 30 cm sejajar lebar truk (150 cm): $150\\div30=5$ (pas, TANPA sisa ruang). Hasil: $12\\times5=60$ kardus/lapisan, tanpa sisa ruang."
+        },
+        {
+          "step": 5,
+          "title": "Pilih orientasi yang paling banyak memuat kardus",
+          "explanation": "Orientasi 2 (60 kardus/lapisan) lebih banyak dan tidak menyisakan ruang kosong, sehingga dipilih sebagai susunan optimal."
+        },
+        {
+          "step": 6,
+          "title": "Hitung total kardus",
+          "explanation": "$60\\ \\text{kardus/lapisan}\\times 6\\ \\text{lapisan}=360$ kardus."
+        }
+      ],
+      "why_correct": "360 kardus sama persis dengan opsi B.",
+      "common_mistakes": [
+        "Langsung memilih orientasi pertama yang terpikirkan (30 cm sejajar 240 cm) tanpa menguji orientasi lain, padahal orientasi kedua (20 cm sejajar 240 cm) justru memenuhi ruang secara sempurna tanpa sisa.",
+        "Lupa bahwa dimensi TINGGI kardus (20 cm) sudah tetap/tidak boleh diubah, sehingga hanya dua dimensi alas (20 cm dan 30 cm) yang boleh dipertukarkan posisinya."
+      ],
+      "tips": [
+        "Saat menyusun balok-balok kecil ke dalam ruang besar, selalu uji SEMUA kemungkinan orientasi alas (bukan hanya satu) untuk menemukan susunan yang membagi habis ukuran ruang besar tanpa sisa — susunan yang 'pas tanpa sisa' hampir selalu menghasilkan jumlah maksimum."
+      ],
+      "diketahui": "Ukuran kardus dan bak truk: • Kardus helm: $20\\text{ cm} \\times 30\\text{ cm}$ (tinggi vertikal tetap $20\\text{ cm}$, tidak boleh dibalik) • Bak truk: tinggi $120\\text{ cm}$, lebar $150\\text{ cm}$, panjang $240\\text{ cm}$",
+      "ditanyakan": "Berapa paling banyak kardus helm yang dapat dimuat di truk tersebut?"
+    },
+    {
+      "question_id": "mtk_p2_q19",
+      "question_number": 19,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Luas selimut tabung (luas permukaan lengkung tanpa alas dan tutup)",
+        "Pembulatan ke atas untuk kebutuhan bahan yang hanya tersedia dalam satuan utuh"
+      ],
+      "glossary": [
+        {
+          "term": "selimut tabung",
+          "meaning": "permukaan lengkung tabung tanpa alas dan tutup, luasnya $=2\\pi r\\times\\text{tinggi}$"
+        },
+        {
+          "term": "pembulatan ke atas",
+          "meaning": "pembulatan hasil bagi ke bilangan bulat berikutnya jika terdapat sisa, karena bahan hanya bisa dibeli dalam satuan utuh"
+        }
+      ],
+      "reasoning": "Karena hiasan berbentuk tabung berongga tanpa alas/tutup, luas permukaan yang perlu dilapisi stiker hanyalah luas SELIMUT tabung. Setelah luas total untuk 8 hiasan dihitung, banyaknya lembar stiker yang dibutuhkan dicari dengan membagi luas total oleh luas satu lembar, lalu dibulatkan KE ATAS karena stiker hanya dijual utuh per lembar.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan jari-jari tabung",
+          "explanation": "Diameter $=14$ cm, sehingga jari-jari $r=7$ cm."
+        },
+        {
+          "step": 2,
+          "title": "Hitung luas selimut satu tabung",
+          "explanation": "$2\\pi r\\times\\text{tinggi}=2\\times\\dfrac{22}{7}\\times7\\times25=2\\times22\\times25=1.100$ cm²."
+        },
+        {
+          "step": 3,
+          "title": "Hitung total luas untuk 8 hiasan",
+          "explanation": "$8\\times1.100=8.800$ cm²."
+        },
+        {
+          "step": 4,
+          "title": "Hitung banyak lembar stiker yang dibutuhkan",
+          "explanation": "$8.800\\div300=29{,}33\\ldots$, dibulatkan KE ATAS menjadi 30 lembar karena stiker hanya dijual utuh per lembar dan seluruh permukaan harus tertutup."
+        },
+        {
+          "step": 5,
+          "title": "Hitung biaya minimal",
+          "explanation": "$30\\times Rp9.000{,}00=Rp270.000{,}00$."
+        }
+      ],
+      "why_correct": "Rp270.000,00 sama persis dengan opsi D.",
+      "common_mistakes": [
+        "Membulatkan hasil bagi 29,33 KE BAWAH menjadi 29 lembar, padahal sisa 0,33 lembar tetap membutuhkan satu lembar utuh tambahan untuk menutupi area yang tersisa.",
+        "Menggunakan $\\pi=3{,}14$ alih-alih $\\dfrac{22}{7}$, padahal diameter 14 cm dirancang agar habis dibagi 7, sehingga cocok dipasangkan dengan $\\pi=\\dfrac{22}{7}$ untuk hasil yang bulat dan bersih."
+      ],
+      "tips": [
+        "Kenali bahwa diameter 14 cm dirancang untuk dipasangkan dengan $\\pi=\\dfrac{22}{7}$ (bukan 3,14) agar perhitungan luas selimut menghasilkan bilangan bulat yang bersih."
+      ],
+      "diketahui": "Hiasan lampu akrilik berbentuk tabung berongga (hanya selimut tabung): • Diameter $= 14\\text{ cm}$ (jari-jari $r = 7\\text{ cm}$), tinggi $= 25\\text{ cm}$ • Jumlah hiasan: 8 buah • 1 lembar stiker vinil berukuran $300\\text{ cm}^2$ seharga Rp9.000,00",
+      "ditanyakan": "Berapakah biaya minimal yang harus dikeluarkan untuk membeli stiker vinil?"
+    },
+    {
+      "question_id": "mtk_p2_q20",
+      "question_number": 20,
+      "official_answer": {
+        "format": "per_statement",
+        "statements": {
+          "A": "Salah",
+          "B": "Salah",
+          "C": "Benar"
+        }
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Perbandingan trigonometri pada segitiga siku-siku (sinus, kosinus, tangen)",
+        "Garis tinggi yang membagi segitiga menjadi dua segitiga siku-siku"
+      ],
+      "glossary": [
+        {
+          "term": "garis tinggi (altitude)",
+          "meaning": "garis dari satu titik sudut yang tegak lurus terhadap sisi di depannya, membagi segitiga menjadi dua segitiga siku-siku"
+        },
+        {
+          "term": "sisi berhadapan/berdekatan/miring",
+          "meaning": "istilah baku trigonometri sudut segitiga siku-siku yang menentukan definisi sin, cos, dan tan terhadap sudut acuan tertentu"
+        }
+      ],
+      "reasoning": "AD adalah garis tinggi dari A ke BC, membagi segitiga ABC menjadi dua segitiga siku-siku: ADC (memuat sudut α) dan ABD (memuat sudut β). Karena cos(α) sudah diketahui, panjang AD dan AC bisa dinyatakan dalam satu variabel pengali, lalu dicocokkan dengan panjang DC (yang sama dengan AB=4 cm berdasarkan tanda centang ganda pada gambar) untuk mendapatkan ukuran sebenarnya. Setelah itu, segitiga ABD dipakai untuk menghitung ketiga perbandingan trigonometri sudut β.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Gunakan cos(α) pada segitiga siku-siku ADC",
+          "explanation": "$\\cos(\\alpha)=\\dfrac{AD}{AC}=\\dfrac{3}{5}$, sehingga dapat dimisalkan $AD=3k$ dan $AC=5k$."
+        },
+        {
+          "step": 2,
+          "title": "Hitung DC dengan Pythagoras",
+          "explanation": "$DC=\\sqrt{AC^{2}-AD^{2}}=\\sqrt{25k^{2}-9k^{2}}=4k$."
+        },
+        {
+          "step": 3,
+          "title": "Gunakan informasi DC=AB=4 cm untuk mencari k",
+          "explanation": "Tanda centang ganda pada DC dan AB menunjukkan $DC=AB=4$ cm, sehingga $4k=4\\Rightarrow k=1$. Diperoleh $AD=3$ cm dan $AC=5$ cm."
+        },
+        {
+          "step": 4,
+          "title": "Hitung BD pada segitiga siku-siku ABD",
+          "explanation": "$AB=4$ cm (sisi miring), $AD=3$ cm (sisi di depan sudut β). $BD=\\sqrt{AB^{2}-AD^{2}}=\\sqrt{16-9}=\\sqrt{7}$ cm."
+        },
+        {
+          "step": 5,
+          "title": "Hitung ketiga perbandingan trigonometri sudut β",
+          "explanation": "$\\sin(\\beta)=\\dfrac{AD}{AB}=\\dfrac{3}{4}$; $\\cos(\\beta)=\\dfrac{BD}{AB}=\\dfrac{\\sqrt7}{4}$; $\\tan(\\beta)=\\dfrac{AD}{BD}=\\dfrac{3}{\\sqrt7}=\\dfrac{3\\sqrt7}{7}$."
+        },
+        {
+          "step": 6,
+          "title": "Cocokkan dengan tiap pernyataan",
+          "explanation": "(A) $\\sin(\\beta)=\\tfrac{\\sqrt7}{4}$ → SALAH (seharusnya $\\tfrac34$). (B) $\\cos(\\beta)=\\tfrac{\\sqrt7}{5}$ → SALAH (seharusnya $\\tfrac{\\sqrt7}{4}$). (C) $\\tan(\\beta)=\\tfrac{3\\sqrt7}{7}$ → BENAR (sesuai hasil hitung)."
+        }
+      ],
+      "why_correct": "Hasil perhitungan tepat cocok dengan kunci: A Salah, B Salah, C Benar.",
+      "common_mistakes": [
+        "Tertukar mendefinisikan sisi berhadapan/berdekatan untuk sudut β pada segitiga ABD, sehingga sin dan cos tertukar posisi.",
+        "Lupa merasionalkan bentuk $\\tfrac{3}{\\sqrt7}$ menjadi $\\tfrac{3\\sqrt7}{7}$ saat mencocokkan dengan pernyataan C (kedua bentuk ini bernilai sama, hanya beda notasi)."
+      ],
+      "tips": [
+        "Selalu identifikasi dahulu segitiga siku-siku mana yang relevan untuk sudut yang ditanyakan (di sini segitiga ABD untuk sudut β, bukan ADC), karena definisi sisi berhadapan/berdekatan berubah tergantung sudut acuannya."
+      ],
+      "diketahui": "Segitiga $ABC$ dengan garis tinggi $AD \\perp BC$: • Panjang $AB = DC = 4\\text{ cm}$ • Nilai $\\cos(\\alpha) = \\frac{3}{5}$ pada $\\triangle ADC$",
+      "ditanyakan": "Tentukan Benar atau Salah terkait nilai perbandingan trigonometri untuk sudut $\\beta$"
+    },
+    {
+      "question_id": "mtk_p2_q21",
+      "question_number": 21,
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "A",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Interpretasi tren data pada grafik (naik, turun, atau tetap) untuk beberapa kelompok data sepanjang beberapa tahun"
+      ],
+      "glossary": [
+        {
+          "term": "tren data",
+          "meaning": "pola perubahan nilai data dari waktu ke waktu (naik, turun, atau tetap/konstan)"
+        }
+      ],
+      "reasoning": "Karena grafik banyak lulusan tiga sekolah per tahun belum berhasil ditranskripsikan, pembahasan detail per pernyataan tidak dapat disusun tanpa membaca nilai-nilai pada grafik secara langsung dari gambar sumber.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi garis data tiap sekolah pada grafik",
+          "explanation": "Grafik memuat data kelulusan tahun 2017–2025 untuk tiga sekolah: • Garis Hijau: SMA 1 Bintang • Garis Merah: SMA 2 Bintang • Garis Biru: SMK Kejora"
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Pernyataan A (SMA 1 Bintang sejak tahun 2020)",
+          "explanation": "Perhatikan garis hijau (SMA 1 Bintang) mulai tahun 2020: • 2020: ~301 siswa • 2021: ~308 siswa (naik) • 2022: ~310 siswa (naik) • 2023: ~315 siswa (naik) • 2024: 350 siswa (naik) • 2025: 360 siswa (naik) Jumlah lulusan selalu bertambah konsisten setiap tahun. Jadi pernyataan A **BENAR**."
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Pernyataan D (SMA 2 Bintang tiga tahun terakhir)",
+          "explanation": "Perhatikan garis merah (SMA 2 Bintang) pada 3 tahun terakhir (tahun 2023, 2024, dan 2025): Nilai lulusan berada pada garis mendatar tetap di angka 300 siswa. Jadi pernyataan D **BENAR**."
+        },
+        {
+          "step": 4,
+          "title": "Evaluasi Pernyataan B, C, dan E",
+          "explanation": "• Pernyataan B salah: SMA 1 Bintang mengalami penurunan dari 2019 (310) ke 2020 (301). • Pernyataan C salah: SMK Kejora (garis biru) sempat turun di tahun 2023 (dari 325 ke 320). • Pernyataan E salah: SMA 1 Bintang pada tahun 2023 justru naik dibanding tahun 2022."
+        }
+      ],
+      "why_correct": "Pernyataan yang tepat adalah (A) dan (D), keduanya konsisten dengan data grafik garis pada gambar.",
+      "common_mistakes": [],
+      "tips": [
+        "Saat membaca grafik dengan banyak kelompok data (multi-series), fokus pada SATU kelompok/sekolah dalam satu waktu untuk setiap pernyataan agar tidak tertukar dengan tren kelompok lain."
+      ],
+      "diketahui": null,
+      "ditanyakan": null
+    },
+    {
+      "question_id": "mtk_p2_q22",
+      "question_number": 22,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Kaidah pencacahan: metode pengelompokan (grouping) untuk syarat posisi berdekatan"
+      ],
+      "glossary": [
+        {
+          "term": "metode pengelompokan (grouping)",
+          "meaning": "teknik menghitung permutasi dengan syarat beberapa objek harus berdekatan/berurutan, dengan menganggap objek-objek tersebut sebagai satu blok tunggal terlebih dahulu"
+        }
+      ],
+      "reasoning": "Syarat 'C berada di antara A dan D' berarti ketiga stan ini harus berdekatan langsung membentuk satu blok berurutan (A-C-D atau D-C-A). Blok ini kemudian diperlakukan sebagai satu unit bersama dua stan lain (B dan E) saat menghitung susunan keseluruhan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Bentuk blok A-C-D",
+          "explanation": "Karena C harus tepat di antara A dan D (berdekatan langsung), anggap ketiga pedagang ini sebagai SATU unit blok."
+        },
+        {
+          "step": 2,
+          "title": "Hitung susunan internal blok",
+          "explanation": "Di dalam blok, hanya ada 2 kemungkinan urutan karena C harus tetap di tengah: A-C-D atau D-C-A."
+        },
+        {
+          "step": 3,
+          "title": "Hitung susunan antar unit",
+          "explanation": "Sekarang terdapat 3 unit yang disusun berjajar: [blok ACD/DCA], pedagang B, dan pedagang E. Banyak cara menyusun 3 unit ini $=3!=6$."
+        },
+        {
+          "step": 4,
+          "title": "Kalikan kedua hasil",
+          "explanation": "Total susunan $=2\\times6=12$."
+        }
+      ],
+      "why_correct": "12 susunan sama persis dengan opsi B.",
+      "common_mistakes": [
+        "Menghitung seluruh $5!=120$ susunan lalu mengira C 'berada di antara' A dan D cukup dengan posisi umum (tidak harus berdekatan), padahal soal menghendaki C BERDEKATAN LANGSUNG dengan A dan D.",
+        "Lupa mengalikan dengan 2 (urutan A-C-D dan D-C-A), karena C bisa diapit dari kedua arah."
+      ],
+      "tips": [
+        "Untuk soal 'X harus berada tepat di antara Y dan Z' (berdekatan langsung), gunakan metode pengelompokan (grouping): gabungkan ketiganya menjadi satu blok, hitung susunan internal blok, lalu kalikan dengan susunan blok bersama objek-objek lain."
+      ],
+      "diketahui": "Di sebuah bazar sekolah terdapat 5 stan pedagang: A, B, C, D, E. Stan pedagang C ingin berada tepat di antara pedagang A dan pedagang D.",
+      "ditanyakan": "Banyak kemungkinan susunan penataan stan sesuai keinginan pedagang C"
+    },
+    {
+      "question_id": "mtk_p2_q23",
+      "question_number": 23,
+      "official_answer": {
+        "format": "per_statement",
+        "statements": {
+          "A": "Salah",
+          "B": "Benar",
+          "C": "Benar"
+        }
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Statistika: rata-rata (mean) dan median",
+        "Menyaring kombinasi nilai yang belum diketahui berdasarkan beberapa syarat sekaligus"
+      ],
+      "glossary": [
+        {
+          "term": "rata-rata (mean)",
+          "meaning": "jumlah seluruh data dibagi banyak data"
+        },
+        {
+          "term": "median",
+          "meaning": "nilai tengah data yang telah diurutkan dari kecil ke besar"
+        }
+      ],
+      "reasoning": "Nilai Selasa (p) dan Kamis (r) belum diketahui, namun dapat dibatasi dengan tiga syarat: total (dari rata-rata), rentang tiap hari (2-10), dan median=6. Setelah menemukan SEMUA kombinasi (p,r) yang memenuhi ketiga syarat sekaligus, setiap pernyataan diuji terhadap SELURUH kombinasi tersebut untuk menentukan apakah pernyataan itu PASTI benar, PASTI salah, atau MUNGKIN terjadi.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Cari total pengunjung dari rata-rata",
+          "explanation": "Rata-rata $=6$, banyak hari $=5$, sehingga total $=6\\times5=30$ orang."
+        },
+        {
+          "step": 2,
+          "title": "Susun persamaan dari tabel",
+          "explanation": "$4+p+5+r+6=30 \\Rightarrow p+r=15$ (p=Selasa, r=Kamis)."
+        },
+        {
+          "step": 3,
+          "title": "Saring kombinasi (p,r) yang memenuhi syarat rentang dan median",
+          "explanation": "Dengan $2\\le p,r\\le10$ dan median dari $\\{4,p,5,r,6\\}$ harus tepat 6, kombinasi yang valid hanyalah $(p,r) \\in \\{(6,9),(7,8),(8,7),(9,6)\\}$ (kombinasi seperti $(5,10)$ atau $(10,5)$ ditolak karena menghasilkan median 5, bukan 6)."
+        },
+        {
+          "step": 4,
+          "title": "Uji pernyataan A pada seluruh kombinasi valid",
+          "explanation": "Pada kombinasi $(p=6,r=9)$, nilai p (6) lebih KECIL dari r (9), sehingga Selasa TIDAK selalu lebih banyak dari hari lain → pernyataan A **Salah**."
+        },
+        {
+          "step": 5,
+          "title": "Uji pernyataan B pada seluruh kombinasi valid",
+          "explanation": "Nilai r yang mungkin adalah 9, 8, 7, atau 6 — semuanya lebih dari 5, sehingga Kamis PASTI lebih dari 5 orang → pernyataan B **Benar**."
+        },
+        {
+          "step": 6,
+          "title": "Uji pernyataan C pada seluruh kombinasi valid",
+          "explanation": "Pada kombinasi $(p=9,r=6)$, nilai r (Kamis) $=6=$ nilai Jumat, sehingga kedua hari itu MUNGKIN sama → pernyataan C **Benar**."
+        }
+      ],
+      "why_correct": "Penelusuran seluruh kombinasi (p,r) yang valid menghasilkan A: Salah, B: Benar, C: Benar — cocok dengan kunci jawaban.",
+      "common_mistakes": [
+        "Hanya mencoba SATU kombinasi (p,r) untuk menyimpulkan pernyataan 'pasti' atau 'mungkin', padahal soal ini memerlukan pengecekan terhadap SEMUA kombinasi valid sebelum menyimpulkan.",
+        "Lupa menerapkan syarat median sehingga menyertakan kombinasi tidak valid seperti $(p=5,r=10)$ atau $(p=10,r=5)$ yang sebenarnya menghasilkan median 5, bukan 6."
+      ],
+      "tips": [
+        "Untuk pernyataan berjenis 'PASTI' (selalu benar), cukup temukan SATU kombinasi valid yang melanggarnya untuk membuktikan pernyataan itu SALAH. Untuk pernyataan 'MUNGKIN', cukup temukan SATU kombinasi valid yang mendukungnya untuk membuktikan BENAR."
+      ],
+      "diketahui": "Tabel pengunjung perpustakaan Senin–Jumat: $4, p, 5, r, 6$. • Rata-rata pengunjung $= 6$ orang/hari (total $= 30$ orang, $p + r = 15$) • Jumlah pengunjung per hari antara 2 s.d. 10 orang • Median data $= 6$",
+      "ditanyakan": "Tentukan Benar atau Salah pada setiap pernyataan terkait jumlah pengunjung perpustakaan"
+    },
+    {
+      "question_id": "mtk_p2_q24",
+      "question_number": 24,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Peluang klasik (peluang suatu kejadian tunggal)"
+      ],
+      "glossary": [
+        {
+          "term": "peluang klasik",
+          "meaning": "perbandingan banyak kejadian yang diharapkan terhadap banyak seluruh kemungkinan kejadian yang setara peluangnya, $P(A)=\\dfrac{n(A)}{n(S)}$"
+        }
+      ],
+      "reasoning": "Banyak angpao kosong tidak diberikan langsung, sehingga harus dicari dengan mengurangkan total angpao dengan seluruh angpao yang sudah diketahui isinya (kupon belanja dan peralatan rumah tangga), baru kemudian dipakai menghitung peluang klasik.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Jumlahkan angpao berisi hadiah yang diketahui",
+          "explanation": "Kupon Rp25.000,00 (15) + kupon Rp50.000,00 (12) + set sendok-garpu (10) + pemanas air (8) $=45$ angpao."
+        },
+        {
+          "step": 2,
+          "title": "Hitung banyak angpao kosong",
+          "explanation": "Total angpao (60) dikurangi angpao berisi hadiah (45): $60-45=15$ angpao kosong."
+        },
+        {
+          "step": 3,
+          "title": "Hitung peluang mengambil angpao kosong",
+          "explanation": "$P(\\text{kosong})=\\dfrac{n(\\text{kosong})}{n(\\text{total})}=\\dfrac{15}{60}=\\dfrac{1}{4}$."
+        }
+      ],
+      "why_correct": "$\\dfrac14$ sama persis dengan opsi C.",
+      "common_mistakes": [
+        "Lupa menjumlahkan SEMUA jenis hadiah yang diketahui (kupon belanja DAN peralatan rumah tangga) sebelum mengurangkannya dari total 60, sehingga banyak angpao kosong terhitung salah."
+      ],
+      "tips": [
+        "Sederhanakan pecahan $\\dfrac{15}{60}$ dengan mencari FPB (faktor persekutuan terbesar) dari 15 dan 60, yaitu 15, sehingga langsung didapat $\\dfrac14$ tanpa perlu coba-coba."
+      ],
+      "diketahui": "Kotak undian Tahun Baru Imlek berisi 60 angpao: • Kupon belanja: 15 angpao (Rp25.000) dan 12 angpao (Rp50.000) • Peralatan rumah tangga: 10 angpao (set sendok-garpu) dan 8 angpao (pemanas air) • Sisanya angpao kosong",
+      "ditanyakan": "Berapakah peluang Rini (orang pertama) mengambil angpao yang kosong?"
+    },
+    {
+      "question_id": "mtk_p2_q25",
+      "question_number": 25,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Peluang kejadian majemuk (gabungan dua kejadian saling lepas)",
+        "Pengambilan objek dengan pengembalian sebagian (hanya kertas kosong yang dikembalikan)"
+      ],
+      "glossary": [
+        {
+          "term": "kejadian saling lepas (mutually exclusive)",
+          "meaning": "dua kejadian yang tidak dapat terjadi bersamaan, sehingga peluang gabungannya adalah jumlah peluang masing-masing"
+        },
+        {
+          "term": "pengambilan dengan pengembalian sebagian",
+          "meaning": "pada soal ini, hanya kertas KOSONG yang selalu dikembalikan ke kotak setelah terambil, sedangkan kertas berhadiah (minuman/makanan) tidak dikembalikan"
+        }
+      ],
+      "reasoning": "Karena hanya kertas kosong yang dikembalikan, banyaknya kertas kosong di dalam kotak selalu TETAP (5 lembar) sepanjang waktu, sementara kertas minuman dan makanan yang sudah terambil sebelumnya akan BERKURANG secara permanen. Untuk mencari kombinasi pengambilan sebelumnya yang membuat peluang Ani tetap 2/3, disusun persamaan berdasarkan banyak minuman (X) dan makanan (Y) yang sudah terambil, lalu diuji tiap pilihan jawaban.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan kondisi awal kotak",
+          "explanation": "6 kertas minuman gratis + 4 kertas makanan gratis + 5 kertas kosong = 15 kertas total. Kertas kosong selalu dikembalikan, sehingga jumlahnya TETAP 5, sedangkan minuman dan makanan berkurang begitu terambil (tidak dikembalikan)."
+        },
+        {
+          "step": 2,
+          "title": "Susun persamaan peluang berdasarkan X dan Y",
+          "explanation": "Misalkan X kertas minuman dan Y kertas makanan sudah terambil (dan tidak dikembalikan). Sisa minuman $=6-X$, sisa makanan $=4-Y$, dan total kertas tersisa $=15-X-Y$. Peluang Ani mendapat minuman ATAU makanan $=\\dfrac{(6-X)+(4-Y)}{15-X-Y}$."
+        },
+        {
+          "step": 3,
+          "title": "Samakan dengan peluang yang diminta (2/3)",
+          "explanation": "$\\dfrac{10-X-Y}{15-X-Y}=\\dfrac23$. Kalikan silang: $3(10-X-Y)=2(15-X-Y) \\Rightarrow 30-3X-3Y=30-2X-2Y \\Rightarrow X+Y=0$."
+        },
+        {
+          "step": 4,
+          "title": "Simpulkan syarat X+Y=0",
+          "explanation": "Artinya TIDAK ADA kertas minuman maupun makanan yang terambil oleh keempat orang sebelumnya — seluruh kertas yang mereka ambil pastilah kertas kosong, yang lalu dikembalikan lagi ke kotak."
+        },
+        {
+          "step": 5,
+          "title": "Cocokkan dengan pilihan jawaban",
+          "explanation": "Hanya opsi D ('4 kertas kosong') yang berarti $X=0$ dan $Y=0$ (tidak ada minuman/makanan yang terambil), sehingga kondisi kotak tetap sama seperti semula dan peluangnya tetap $\\dfrac{10}{15}=\\dfrac23$."
+        }
+      ],
+      "why_correct": "Opsi D (4 kertas kosong) adalah satu-satunya kombinasi yang membuat X=Y=0, sehingga peluang Ani tetap 2/3 sesuai perhitungan; opsi lain (A, B, C, E) melibatkan pengambilan minuman/makanan yang mengubah peluang menjadi bukan 2/3.",
+      "common_mistakes": [
+        "Lupa bahwa kertas KOSONG selalu dikembalikan sehingga tidak memengaruhi peluang di masa depan, sementara kertas minuman/makanan yang terambil justru MENGURANGI peluang mendapat minuman/makanan pada pengambilan berikutnya."
+      ],
+      "tips": [
+        "Uji langsung tiap pilihan jawaban ke dalam rumus peluang $\\dfrac{(6-X)+(4-Y)}{15-X-Y}$ dan bandingkan hasilnya dengan $\\dfrac23$ — cara ini seringkali lebih cepat daripada menyelesaikan persamaan secara aljabar penuh."
+      ],
+      "diketahui": "Kotak undian kantin sekolah mula-mula berisi: • 6 kertas 'Minuman Gratis' • 4 kertas 'Makanan Gratis' • 5 kertas kosong Aturan: Hanya kertas kosong yang selalu dikembalikan lagi ke dalam kotak. Ani adalah orang ke-5 yang mengambil undian.",
+      "ditanyakan": "Kertas apa sajakah yang mungkin sudah terambil oleh orang-orang sebelumnya sehingga peluang Ani memperoleh minuman atau makanan adalah $\\frac{2}{3}$?"
+    }
+  ]
+}

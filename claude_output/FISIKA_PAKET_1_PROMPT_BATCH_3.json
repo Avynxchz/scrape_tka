@@ -1,0 +1,385 @@
+{
+  "package": 1,
+  "subject": "Fisika",
+  "solutions": [
+    {
+      "question_id": "fisika_paket_1_q11",
+      "question_number": 11,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Kinematika Gerak Lurus Berubah Beraturan (GLBB)",
+        "Analisis Grafik Kinematika (x-t, v-t, a-t)"
+      ],
+      "glossary": [
+        {
+          "term": "Gerak Lurus Berubah Beraturan (GLBB)",
+          "meaning": "Gerak suatu benda pada lintasan lurus dengan percepatan tetap (konstan)."
+        },
+        {
+          "term": "Gradien",
+          "meaning": "Kemiringan suatu garis pada grafik kartesius yang merepresentasikan laju perubahan variabel terikat terhadap variabel bebas."
+        }
+      ],
+      "reasoning": "Untuk menyajikan gerak benda ke dalam grafik berbagai besaran terhadap waktu, pertama-tama kita harus mengidentifikasi jenis gerak berdasarkan data kecepatan terhadap waktu yang diberikan. Jika selisih kecepatan tiap sekon bernilai konstan, benda mengalami GLBB dipercepat dengan percepatan konstan (a = tetap). Grafik kecepatan-waktu (v-t) akan berbentuk garis lurus linear naik, grafik percepatan-waktu (a-t) berupa garis lurus mendatar (horizontal) konstan, sedangkan grafik posisi-waktu (s-t) akan berbentuk kurva parabola terbuka ke atas (fungsi kuadratik).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Perubahan Kecepatan",
+          "explanation": "Hitung selisih kecepatan tiap selang waktu satu sekon ($a = \\Delta v / \\Delta t$). Jika diperoleh nilai yang konstan, gerak tersebut adalah GLBB dipercepat dengan percepatan tetap $a > 0$."
+        },
+        {
+          "step": 2,
+          "title": "Mengonstruksi Grafik Percepatan terhadap Waktu (a-t)",
+          "explanation": "Karena percepatan bernilai konstan dan tidak berubah terhadap waktu, grafik $a-t$ digambarkan sebagai garis lurus horizontal sejajar sumbu waktu $t$ pada kuadran positif."
+        },
+        {
+          "step": 3,
+          "title": "Mengonstruksi Grafik Kecepatan terhadap Waktu (v-t)",
+          "explanation": "Persamaan kecepatan memenuhi fungsi linear $v(t) = v_0 + at$. Dengan demikian, grafik $v-t$ digambarkan berupa garis lurus miring ke atas dengan gradien positif setara nilai percepatan $a$."
+        },
+        {
+          "step": 4,
+          "title": "Mengonstruksi Grafik Posisi terhadap Waktu (s-t)",
+          "explanation": "Persamaan posisi memenuhi fungsi kuadratik $s(t) = s_0 + v_0 t + \\frac{1}{2}at^2$. Karena $a > 0$, kurva grafik $s-t$ berupa parabola melengkung ke atas (terbuka ke atas) yang menunjukkan pertambahan kecepatan."
+        }
+      ],
+      "why_correct": "Grafik yang tepat untuk GLBB dipercepat adalah grafik v-t berupa garis lurus naik dengan kemiringan positif, grafik a-t berupa garis horizontal konstan di atas sumbu t, dan grafik s-t berupa kurva kuadratik/parabola terbuka ke atas.",
+      "tips": [
+        "Selalu periksa gradien grafik v-t untuk menentukan percepatan.",
+        "Ingat bahwa grafik s-t pada GLBB tidak pernah berupa garis lurus miring, melainkan kurva melengkung (parabola)."
+      ],
+      "common_mistakes": [
+        "Mengira grafik posisi terhadap waktu (s-t) pada GLBB berbentuk garis lurus linear.",
+        "Salah membaca grafik a-t dengan menggambarkannya naik linear padahal percepatannya konstan."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah mobil mainan bergerak lurus dengan data kecepatan tiap sekon disajikan dalam tabel berikut:\n\n| t (s) | 0 | 1 | 2 | 3 | 4 |\n|---|---|---|---|---|---|\n| v (m/s) | 3 | 5 | 7 | 9 | 11 |\n\nManakah pernyataan yang benar mengenai grafik representasi gerak mobil tersebut?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Grafik percepatan terhadap waktu (a-t) berupa garis lurus linear naik dengan gradien 2."
+          },
+          {
+            "key": "B",
+            "text": "Grafik posisi terhadap waktu (s-t) berbentuk garis lurus linear naik dari titik asal."
+          },
+          {
+            "key": "C",
+            "text": "Grafik kecepatan terhadap waktu (v-t) berupa garis lurus naik dengan titik potong sumbu vertikal di v = 3 m/s."
+          },
+          {
+            "key": "D",
+            "text": "Grafik percepatan terhadap waktu (a-t) berupa garis horizontal konstan pada nilai a = 3 m/s²."
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "Dari tabel diperoleh percepatan $a = \\frac{5 - 3}{1 - 0} = 2\\text{ m/s}^2$ (konstan). Kecepatan awal $v_0 = 3\\text{ m/s}$. Maka grafik $v-t$ berbentuk garis lurus naik yang memotong sumbu-$v$ di angka $3\\text{ m/s}$. Grafik $a-t$ harusnya berupa garis horizontal pada $a = 2\\text{ m/s}^2$ dan grafik $s-t$ berbentuk kurva parabola melengkung ke atas."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q12",
+      "question_number": 12,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Kesetimbangan Benda Tegar",
+        "Pusat Massa dan Keseimbangan Stabil"
+      ],
+      "glossary": [
+        {
+          "term": "Pusat Massa (Center of Mass)",
+          "meaning": "Titik representatif di mana seluruh massa sistem terkonsentrasi untuk menganalisis gerak translasi."
+        },
+        {
+          "term": "Keseimbangan Stabil",
+          "meaning": "Kondisi kesetimbangan di mana jika sistem diberi gangguan kecil, akan timbul torsi pemulih yang mengembalikan sistem ke posisi semula."
+        }
+      ],
+      "reasoning": "Pemain sirkus menggunakan tongkat panjang yang melengkung ke bawah untuk merendahkan titik berat (pusat massa) keseluruhan sistem (pemain + tongkat). Ketika ujung tongkat melengkung jauh ke bawah, titik berat sistem dapat bergeser ke posisi yang sangat rendah, bahkan berada di bawah tali (titik tumpu). Menurut prinsip mekanika, jika pusat massa berada di bawah titik tumpu, sistem berada dalam kesetimbangan stabil. Setiap kali tubuh oleng (miring), torsi pemulih yang dihasilkan oleh gaya gravitasi akan bekerja mengembalikan posisi sistem ke arah tegak semula.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Titik Tumpu",
+          "explanation": "Identifikasi titik tumpu sistem berada pada titik kontak antara telapak kaki pemain sirkus dengan tali penopang."
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Distribusi Massa Tongkat",
+          "explanation": "Tongkat yang panjang dan terkulai ke bawah menempatkan sebagian besar massa tongkat berada jauh di bawah garis horisontal tubuh pemain sirkus."
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Posisi Pusat Massa Gabungan",
+          "explanation": "Dengan menggunakan rumus koordinat pusat massa, kontribusi massa tongkat yang rendah menarik posisi pusat massa gabungan (sistem) turun drastis di bawah titik tumpu tali."
+        },
+        {
+          "step": 4,
+          "title": "Menghubungkan Posisi Pusat Massa dengan Torsi Pemulih",
+          "explanation": "Ketika sistem berotasi (oleng) ke samping, gaya gravitasi yang bekerja pada pusat massa di bawah titik tumpu akan menghasilkan torsi pemulih (restoring torque) yang mengarahkan sistem kembali ke posisi setimbang."
+        }
+      ],
+      "why_correct": "Tongkat panjang yang terkulai ke bawah memindahkan posisi pusat massa sistem ke bawah titik tumpu, menciptakan kondisi kesetimbangan stabil di mana gaya gravitasi otomatis mengoreksi kemiringan tubuh melalui torsi pemulih.",
+      "tips": [
+        "Makin rendah posisi pusat massa relatif terhadap titik tumpu, makin stabil sistem tersebut.",
+        "Tongkat panjang juga meningkatkan momen inersia ($I = mr^2$), yang memperlambat laju oleng (percepatan sudut) sehingga memudahkan koordinasi motorik pemain."
+      ],
+      "common_mistakes": [
+        "Mengira tongkat hanya berfungsi memperbesar gaya gesek kaki dengan tali secara langsung.",
+        "Mengira fungsi utama tongkat adalah memperbesar gaya berat semata, padahal letak/distribusi massa-lah yang paling krusial."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah mainan burung plastik dapat berdiri seimbang dengan hanya bertumpu pada ujung paruhnya di atas jari tangan kita. Rahasia desain fisik dari mainan ini sehingga tidak terjatuh adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Bahan plastik pembuat paruh memiliki koefisien gesek yang sangat besar."
+          },
+          {
+            "key": "B",
+            "text": "Sayap mainan dirancang melengkung jauh ke depan dan ke bawah sehingga pusat massa mainan berada di bawah titik tumpu paruh."
+          },
+          {
+            "key": "C",
+            "text": "Gaya angkat udara di bawah sayap menjaga keseimbangan burung."
+          },
+          {
+            "key": "D",
+            "text": "Massa ekor burung dibuat jauh lebih berat untuk mengimbangi berat kepala."
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Mainan burung keseimbangan dirancang dengan sayap yang menjulur ke depan dan ke bawah melampaui paruhnya. Desain ini memindahkan pusat massa total mainan ke titik yang berada tepat di bawah ujung paruh (titik tumpu), sehingga menciptakan kondisi kesetimbangan stabil."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q13",
+      "question_number": 13,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Asas Bernoulli",
+        "Perbedaan Tekanan Statis dan Dinamis"
+      ],
+      "glossary": [
+        {
+          "term": "Asas Bernoulli",
+          "meaning": "Hukum yang menyatakan bahwa pada fluida dinamis yang mengalir, wilayah dengan kecepatan aliran tinggi akan memiliki tekanan statis yang lebih rendah, dan sebaliknya."
+        }
+      ],
+      "reasoning": "Botol semprotan parfum bekerja berdasarkan Asas Bernoulli. Ketika udara ditiupkan secara cepat melalui pipa sempit di atas lubang tabung tegak, kelajuan udara di atas lubang tersebut menjadi sangat tinggi. Menurut Bernoulli, kelajuan fluida yang tinggi menyebabkan tekanan udara di tempat tersebut menjadi sangat rendah (lebih rendah dari tekanan atmosfer). Sementara itu, cairan parfum di dalam wadah berada di bawah tekanan atmosfer normal yang jauh lebih tinggi. Perbedaan tekanan ini memaksa cairan parfum terdorong naik melalui pipa tegak dan pecah menjadi butiran halus saat bertemu hembusan udara cepat.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Aliran Udara Cepat",
+          "explanation": "Udara yang ditiupkan dari pompa/selang mengalir cepat melewati mulut pipa vertikal sehingga menciptakan daerah aliran udara dinamis berkecepatan tinggi ($v$ besar)."
+        },
+        {
+          "step": 2,
+          "title": "Menerapkan Asas Bernoulli di Mulut Pipa",
+          "explanation": "Berdasarkan persamaan Bernoulli, peningkatan kecepatan udara di atas pipa vertikal menyebabkan penurunan tekanan udara lokal ($P_{atas}$ mengecil)."
+        },
+        {
+          "step": 3,
+          "title": "Membandingkan Tekanan Wadah dengan Ujung Pipa",
+          "explanation": "Tekanan di permukaan cairan parfum di dalam wadah tertutup/terbuka sebagian adalah tekanan atmosfer normal ($P_{atmosfer}$), yang sekarang bernilai jauh lebih besar daripada $P_{atas}$ ($P_{atmosfer} > P_{atas}$)."
+        },
+        {
+          "step": 4,
+          "title": "Menganalisis Kenaikan Cairan",
+          "explanation": "Perbedaan tekanan ($P_{atmosfer} - P_{atas}$) menghasilkan gaya angkat neto yang mendorong cairan parfum naik ke atas menembus pipa vertikal menuju mulut semprotan."
+        }
+      ],
+      "why_correct": "Pernyataan yang tepat adalah: (1) Tekanan di permukaan cairan parfum menjadi lebih tinggi daripada tekanan di atasnya, karena hembusan udara cepat menurunkan tekanan di bagian atas. (2) Cairan parfum terdorong naik ke atas karena faktor tekanan udara luar (tekanan atmosfer normal yang menekan cairan di dalam botol).",
+      "tips": [
+        "Ingat prinsip dasar Bernoulli: Kecepatan tinggi ($↑$) berpasangan dengan tekanan rendah ($↓$)."
+      ],
+      "common_mistakes": [
+        "Mengira udara yang mengalir cepat di atas lubang justru menambah atau memperbesar tekanan udara di atas wadah.",
+        "Salah mengaitkan prinsip kerja alat ini dengan Hukum Pascal (Hukum Pascal berkaitan dengan transmisi tekanan dalam fluida statis tertutup)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Pada alat penyemprot obat nyamuk tipe pompa manual, ketika piston didorong dengan cepat, udara keluar kencang melalui lubang sempit di atas pipa penyedot cairan. Mengapa cairan obat nyamuk dapat naik ke atas dan menyembur?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Udara kencang meningkatkan tekanan di atas pipa penyedot sehingga menyedot cairan."
+          },
+          {
+            "key": "B",
+            "text": "Kecepatan udara yang tinggi di ujung atas pipa menghasilkan tekanan rendah, sehingga tekanan atmosfer di dalam wadah mendorong cairan naik."
+          },
+          {
+            "key": "C",
+            "text": "Piston memberikan gaya tekan hidrolik sesuai Hukum Pascal yang diteruskan ke segala arah."
+          },
+          {
+            "key": "D",
+            "text": "Cairan naik akibat efek kapilaritas murni dari bahan pipa penyedot."
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Sesuai Asas Bernoulli, aliran udara berkecepatan tinggi di ujung atas pipa penyedot menghasilkan daerah bertekanan rendah. Tekanan udara di dalam tangki cairan yang lebih tinggi (tekanan atmosfer) kemudian mendorong cairan naik ke atas menuju daerah bertekanan rendah tersebut."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q14",
+      "question_number": 14,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Hukum Snellius",
+        "Pembiasan Cahaya (Refraksi)",
+        "Kedalaman Semu dan Kedalaman Nyata"
+      ],
+      "glossary": [
+        {
+          "term": "Refraksi",
+          "meaning": "Pembelokan arah rambat gelombang cahaya saat melewati bidang batas antara dua medium yang memiliki kerapatan optik (indeks bias) berbeda."
+        },
+        {
+          "term": "Garis Normal",
+          "meaning": "Garis khayal yang tegak lurus dengan permukaan batas antar-medium pada titik datangnya cahaya."
+        }
+      ],
+      "reasoning": "Ketika cahaya merambat dari air ($n_{air} = 4/3$) ke udara ($n_{udara} = 1$), cahaya merambat dari medium yang lebih rapat ke medium yang kurang rapat. Sesuai Hukum Snellius, sinar akan dibiaskan menjauhi garis normal (sudut bias di udara $\\theta_{udara}$ > sudut datang di air $\\theta_{air}$). Akibatnya, perpanjangan sinar bias yang diterima oleh mata pengamat menghasilkan bayangan semu ikan yang posisinya lebih dekat ke permukaan air (lebih dangkal/tinggi dari posisi sebenarnya). Oleh karena itu, posisi ikan asli berada lebih dalam/rendah daripada yang tampak. Strategi membidik lebih rendah adalah benar secara ilmiah. Deviasi posisi semu juga bertambah besar seiring meningkatnya sudut datang/pengamatan terhadap garis normal.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menerapkan Hukum Snellius",
+          "explanation": "Gunakan persamaan $n_{air} \\sin \\theta_{air} = n_{udara} \\sin \\theta_{udara}$. Karena $n_{air} > n_{udara}$, maka $\\sin \\theta_{air} < \\sin \\theta_{udara}$, yang berarti $\\theta_{air} < \\theta_{udara}$ (sinar dibiaskan menjauhi garis normal)."
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Posisi Bayangan Semu",
+          "explanation": "Mata manusia mengasumsikan cahaya merambat lurus. Perpanjangan garis lurus dari sinar bias di udara akan berpotongan di titik yang lebih tinggi dari posisi ikan sesungguhnya, sehingga ikan terlihat lebih dangkal dari keadaan aslinya."
+        },
+        {
+          "step": 3,
+          "title": "Mengevaluasi Kecepatan Lemparan",
+          "explanation": "Kecepatan mekanis tombak tidak mempengaruhi jalur optis berkas cahaya. Kesalahan bidikan karena refraksi murni merupakan masalah geometris sudut pandang, bukan dinamika kecepatan proyektil."
+        },
+        {
+          "step": 4,
+          "title": "Menganalisis Pengaruh Sudut Pengamatan",
+          "explanation": "Semakin miring pengamat melihat permukaan air (sudut terhadap normal makin besar), perbedaan kedalaman nyata ($h$) dan semu ($h'$) akan semakin signifikan karena efek deviasi sudut pembiasan yang kian ekstrem."
+        }
+      ],
+      "why_correct": "Pernyataan A BENAR karena ikan asli berada di posisi lebih rendah/dalam dari bayangan visualnya. Pernyataan B SALAH karena kecepatan tombak tidak memengaruhi fenomena pembiasan cahaya. Pernyataan C BENAR karena deviasi akibat refraksi meningkat seiring membesarnya sudut datang.",
+      "tips": [
+        "Ingat rumus kedalaman semu untuk pandangan hampir tegak lurus: $h' = h \\frac{n_{pengamat}}{n_{benda}}$."
+      ],
+      "common_mistakes": [
+        "Mengira cahaya merambat dari mata ke ikan, padahal cahaya merambat dari objek (ikan) ke mata pengamat.",
+        "Mengira kecepatan tombak dapat mengompensasi pembelokan cahaya."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Seorang anak melihat sebuah koin tenggelam di dasar kolam air jernih ($n = 1,33$). Jika anak tersebut melihat koin dengan sudut pandang tertentu dari udara ($n = 1$), pernyataan manakah yang benar mengenai penampakan koin tersebut?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Koin tampak berada di posisi yang lebih dalam dari posisi aslinya karena cahaya dibiaskan menjauhi garis normal."
+          },
+          {
+            "key": "B",
+            "text": "Koin tampak lebih dekat ke permukaan kolam dibandingkan posisi aslinya."
+          },
+          {
+            "key": "C",
+            "text": "Jika indeks bias cairan kolam ditingkatkan, koin akan terlihat semakin mendekati kedalaman aslinya."
+          },
+          {
+            "key": "D",
+            "text": "Posisi semu koin tidak dipengaruhi oleh sudut pengamatan anak tersebut."
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Karena cahaya merambat dari air (medium rapat) ke udara (medium kurang rapat), sinar dibiaskan menjauhi garis normal. Hal ini mengakibatkan perpanjangan sinar membentuk bayangan semu yang lebih dekat ke permukaan kolam (tampak lebih dangkal)."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q15",
+      "question_number": 15,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Efisiensi Mesin Carnot",
+        "Hukum II Termodinamika"
+      ],
+      "glossary": [
+        {
+          "term": "Mesin Carnot",
+          "meaning": "Mesin kalor teoritis yang beroperasi dalam siklus reversibel (Siklus Carnot) dan memiliki efisiensi teoritis maksimum di antara semua mesin yang bekerja pada batas suhu yang sama."
+        },
+        {
+          "term": "Reservoir",
+          "meaning": "Sistem termodinamika yang kapasitas panasnya sangat besar sehingga suhunya tidak berubah secara signifikan saat kalor diserap atau dilepaskan."
+        }
+      ],
+      "reasoning": "Efisiensi maksimum mesin Carnot didefinisikan secara matematis melalui hubungan suhu mutlak (Kelvin) reservoir tinggi ($T_H$) dan reservoir rendah ($T_L$), yaitu: $\\eta = 1 - \\frac{T_L}{T_H}$. Efisiensi mesin mula-mula adalah $\\eta = 1 - \\frac{480}{800} = 1 - 0,6 = 0,4$ atau $40\\%$. Agar eksperimen berjalan lebih efektif, peneliti memerlukan mesin baru dengan efisiensi $\\eta_{baru} > 40\\%$. Kita perlu mengevaluasi efisiensi dari masing-masing pilihan spesifikasi suhu reservoir yang diajukan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Efisiensi Referensi",
+          "explanation": "Gunakan data awal: $T_H = 800\\text{ K}$ dan $T_L = 480\\text{ K}$.\n$\\eta_{awal} = 1 - \\frac{480}{800} = 0,40$ atau $40\\%$. Peneliti mencari mesin dengan $\\eta > 40\\%$."
+        },
+        {
+          "step": 2,
+          "title": "Mengevaluasi Opsi 1 ($T_H = 600\\text{ K}, T_L = 480\\text{ K}$)",
+          "explanation": "$\\eta = 1 - \\frac{480}{600} = 1 - 0,80 = 0,20$ ($20\\%$). Nilai ini lebih rendah dari mesin mula-mula."
+        },
+        {
+          "step": 3,
+          "title": "Mengevaluasi Opsi 2 ($T_H = 800\\text{ K}, T_L = 400\\text{ K}$)",
+          "explanation": "$\\eta = 1 - \\frac{400}{800} = 1 - 0,50 = 0,50$ ($50\\%$). Nilai ini memenuhi karena lebih besar dari $40\\%$."
+        },
+        {
+          "step": 4,
+          "title": "Mengevaluasi Opsi 3 ($T_H = 900\\text{ K}, T_L = 500\\text{ K}$)",
+          "explanation": "$\\eta = 1 - \\frac{500}{900} = 1 - 0,556 = 0,444$ ($44,4\\%$). Nilai ini memenuhi karena lebih besar dari $40\\%$."
+        },
+        {
+          "step": 5,
+          "title": "Mengevaluasi Opsi 4 ($T_H = 900\\text{ K}, T_L = 600\\text{ K}$)",
+          "explanation": "$\\eta = 1 - \\frac{600}{900} = 1 - 0,667 = 0,333$ ($33,3\\%$). Nilai ini lebih rendah dari mesin mula-mula."
+        },
+        {
+          "step": 6,
+          "title": "Mengevaluasi Opsi 5 ($T_H = 1000\\text{ K}, T_L = 600\\text{ K}$)",
+          "explanation": "$\\eta = 1 - \\frac{600}{1000} = 1 - 0,60 = 0,40$ ($40\\%$). Efisiensinya sama dengan mesin awal, bukan lebih tinggi."
+        }
+      ],
+      "why_correct": "Mesin Carnot yang memiliki efisiensi lebih tinggi dari $40\\%$ adalah mesin dengan kombinasi suhu (800 K dan 400 K) yang menghasilkan efisiensi $50\\%$, serta suhu (900 K dan 500 K) yang menghasilkan efisiensi $44,4\\%$.",
+      "tips": [
+        "Untuk meningkatkan efisiensi mesin Carnot, Anda dapat menaikkan suhu reservoir tinggi ($T_H$) atau menurunkan suhu reservoir rendah ($T_L$)."
+      ],
+      "common_mistakes": [
+        "Lupa mengubah suhu ke satuan Kelvin (pada soal ini kebetulan suhu sudah dalam Kelvin).",
+        "Mengira selisih suhu ($T_H - T_L$) yang besar otomatis memberikan efisiensi yang lebih besar tanpa membaginya dengan $T_H$."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah mesin kalor Carnot mula-mula beroperasi di antara reservoir suhu tinggi 600 K dan suhu rendah 360 K. Jika ingin diganti dengan mesin Carnot baru yang memiliki efisiensi kerja lebih tinggi, spesifikasi manakah yang harus dipilih?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Suhu tinggi 500 K dan suhu rendah 320 K"
+          },
+          {
+            "key": "B",
+            "text": "Suhu tinggi 700 K dan suhu rendah 420 K"
+          },
+          {
+            "key": "C",
+            "text": "Suhu tinggi 800 K and suhu rendah 400 K"
+          },
+          {
+            "key": "D",
+            "text": "Suhu tinggi 600 K dan suhu rendah 400 K"
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "Efisiensi awal: $\\eta_{awal} = 1 - \\frac{360}{600} = 0,40$ ($40\\%$). Kita cari opsi dengan efisiensi $> 40\\%$.\n- Opsi A: $\\eta = 1 - \\frac{320}{500} = 0,36$ ($36\\%$)\n- Opsi B: $\\eta = 1 - \\frac{420}{700} = 0,40$ ($40\\%$)\n- Opsi C: $\\eta = 1 - \\frac{400}{800} = 0,50$ ($50\\%$) -> Lebih tinggi dari $40\\%$.\n- Opsi D: $\\eta = 1 - \\frac{400}{600} = 0,33$ ($33,3\\%$)."
+      }
+    }
+  ]
+}

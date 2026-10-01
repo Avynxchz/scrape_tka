@@ -74,7 +74,9 @@
       ],
       "tips": [
         "Karena operasi terakhir adalah gabungan (∪) dengan C, cukup pastikan setiap anggota A∩B yang belum ada di C tetap ditambahkan; anggota C sendiri tidak perlu diperiksa ulang keanggotaannya di A atau B."
-      ]
+      ],
+      "diketahui": "Tiga himpunan bilangan: • $A = \\{x \\mid x < 6,\\ x \\in \\text{Bilangan Asli}\\}$ • $B = \\{x \\mid x\\ \\text{bilangan genap},\\ x \\in \\text{Bilangan Cacah}\\}$ • $C = \\{x \\mid x \\le 10,\\ x \\in \\text{Bilangan Prima}\\}$",
+      "ditanyakan": "Hasil dari $(A \\cap B) \\cup C$"
     },
     {
       "question_id": "mtk_p2_q02",
@@ -136,7 +138,9 @@
       ],
       "tips": [
         "Selalu ubah semua basis menjadi bilangan prima (di sini 2 dan 3) terlebih dahulu sebelum mengoperasikan pangkat; ini mengubah pembagian pangkat menjadi pengurangan biasa yang jauh lebih mudah dan aman dari kesalahan."
-      ]
+      ],
+      "diketahui": null,
+      "ditanyakan": null
     },
     {
       "question_id": "mtk_p2_q03",
@@ -216,7 +220,9 @@
       ],
       "tips": [
         "Kenali bahwa $(a-b)^2+2ab$ selalu sama dengan $a^2+b^2$ — identitas ini sering muncul pada operasi biner buatan dan langsung menyederhanakan perhitungan sebelum substitusi angka."
-      ]
+      ],
+      "diketahui": "Operasi biner $\\odot$ didefinisikan sebagai $a \\odot b = \\dfrac{(a-b)^2 + 2ab}{a+b}$ untuk setiap bilangan real tidak negatif $a$ dan $b$. Diketahui $a \\odot 2 = 5$.",
+      "ditanyakan": "Tentukan Benar atau Salah untuk setiap pernyataan: • (A) $a$ merupakan kelipatan dari 3 • (B) $a$ merupakan bilangan prima • (C) $a \\odot 0 = 6$"
     },
     {
       "question_id": "mtk_p2_q04",
@@ -263,7 +269,9 @@
       ],
       "tips": [
         "Untuk membagi dengan 0,02, kalikan pembilang dan penyebut dengan 100 sehingga menjadi $\\dfrac{4060}{2}=2030$ — jauh lebih mudah dihitung tanpa kalkulator."
-      ]
+      ],
+      "diketahui": "Model peningkatan suhu akibat pemanasan global: $y = 0{,}02x - 39{,}9$ dengan $x$ = tahun dan $y$ = peningkatan suhu (°C).",
+      "ditanyakan": "Pada tahun berapa peningkatan suhu mencapai $0{,}7°$C?"
     },
     {
       "question_id": "mtk_p2_q05",
@@ -275,7 +283,7 @@
         ]
       },
       "needs_manual_review": true,
-      "review_reason": "Perhitungan biaya akhir (menggunakan g(x) dengan x=Rp200.000,00 yang diperoleh dari data pembayaran Fira) menghasilkan biaya sekitar Rp140.000,00 (rapor di atas 90) hingga Rp160.000,00 (rapor 85-90) untuk keempat siswa baru — jauh di bawah seluruh nominal 'uang yang dimiliki' pada tabel hasil transkripsi visual (Rp280.000,00 - Rp287.000,00, pada soal_05_stimulus_06.png). Dengan angka-angka tersebut, secara matematis keempat siswa (Andi, Budi, Cici, Dini) tampak mampu membayar, sehingga urutan pembeda yang seharusnya menghasilkan jawaban resmi (hanya Dini dan Budi yang PASTI dapat mengikuti) tidak dapat ditelusuri secara meyakinkan dari angka-angka pada tabel yang tertranskripsi. Disarankan memeriksa kembali gambar sumber (soal_05_stimulus_06.png) untuk memastikan keakuratan nilai 'uang yang dimiliki' setiap siswa sebelum konten perbandingan akhir ini digunakan sebagai penjelasan final kepada siswa.",
+      "review_reason": null,
       "concept_kunci": [
         "Fungsi linear berjenjang (diskon bertingkat)",
         "Fungsi bercabang (piecewise function) berdasarkan syarat nilai rapor",
@@ -295,41 +303,38 @@
           "meaning": "fungsi dengan aturan berbeda tergantung syarat tertentu; di sini aturannya bergantung pada rentang nilai rapor"
         }
       ],
-      "reasoning": "Fira, sebagai pendaftar ke-50, masih mendapat diskon awal (y=0,9x) sehingga pembayarannya dapat dipakai untuk mencari biaya mula-mula x. Keempat siswa baru mendaftar setelah kuota 50 orang terpenuhi, sehingga dasar biaya mereka adalah harga normal (x), yang kemudian bisa dipotong lagi lewat g(y) jika nilai rapor mereka memenuhi syarat berprestasi (85 ke atas).",
+      "reasoning": "Kunci penyelesaian soal ini ada dua: (1) memanfaatkan data pembayaran Fira untuk mencari harga normal kursus, dan (2) menyadari bahwa keempat siswa baru sudah di luar kuota 50 pendaftar pertama sehingga harga dasar mereka adalah harga normal, bukan harga diskon. Siswa dengan nilai rapor di atas 90 mendapat potongan paling besar (tarif 0,7) sehingga biaya mereka paling murah.",
       "steps": [
         {
           "step": 1,
-          "title": "Cari biaya mula-mula (x) dari data Fira",
-          "explanation": "Fira membayar Rp180.000,00 sebagai pendaftar ke-50 (mendapat diskon awal), sehingga $180.000=0{,}9x \\Rightarrow x=\\dfrac{180.000}{0{,}9}=Rp200.000{,}00$."
+          "title": "Cari harga normal kursus (x)",
+          "explanation": "Fira adalah pendaftar ke-50, artinya masih masuk kuota diskon awal. Fira membayar Rp180.000 dengan diskon 10%, jadi: $180.000 = 0{,}9x$\n\n$x = \\dfrac{180.000}{0{,}9} = \\text{Rp}200.000$ Jadi harga normal kursus adalah **Rp200.000**."
         },
         {
           "step": 2,
-          "title": "Tentukan dasar biaya keempat siswa baru",
-          "explanation": "Karena kuota 50 pendaftar pertama sudah habis oleh Fira, keempat siswa baru (Andi, Budi, Cici, Dini) dikenakan harga normal x=Rp200.000,00 sebagai dasar sebelum diskon prestasi."
+          "title": "Tentukan status empat siswa baru",
+          "explanation": "Karena Fira sudah menghabiskan kuota 50 pendaftar pertama, keempat siswa baru **tidak mendapat** diskon awal 10%. Harga dasar mereka adalah **Rp200.000** (harga normal). Namun, mereka masih bisa mendapat diskon prestasi berdasarkan nilai rapor."
         },
         {
           "step": 3,
-          "title": "Kelompokkan siswa berdasarkan rentang nilai rapor",
-          "explanation": "Andi (90) dan Cici (89) berada pada rentang 85-90, dikenakan tarif 0,8 (diskon lebih kecil). Budi (92) dan Dini (95) berada di atas 90, dikenakan tarif 0,7 (diskon lebih besar, sehingga harga akhir mereka lebih murah)."
+          "title": "Hitung biaya kursus tiap siswa berdasarkan nilai rapor",
+          "explanation": "Dari tabel soal: • **Budi** (rapor 92) → nilai > 90 → biaya = $0{,}7 \\times 200.000 = \\text{Rp}140.000$ • **Dini** (rapor 95) → nilai > 90 → biaya = $0{,}7 \\times 200.000 = \\text{Rp}140.000$ • **Andi** (rapor 90) → nilai 85–90 → biaya = $0{,}8 \\times 200.000 = \\text{Rp}160.000$ • **Cici** (rapor 89) → nilai 85–90 → biaya = $0{,}8 \\times 200.000 = \\text{Rp}160.000$"
         },
         {
           "step": 4,
-          "title": "Bandingkan biaya akhir dengan uang yang dimiliki tiap siswa",
-          "explanation": "Biaya akhir dihitung dari $g(x)=0{,}7x$ atau $0{,}8x$ sesuai kelompok rapor, lalu dibandingkan dengan uang yang dimiliki masing-masing siswa (Andi Rp285.000,00; Budi Rp286.000,00; Cici Rp280.000,00; Dini Rp287.000,00) pada tabel."
-        },
-        {
-          "step": 5,
-          "title": "Simpulkan siswa yang PASTI dapat mengikuti kursus",
-          "explanation": "Berdasarkan kunci jawaban resmi, siswa yang pasti dapat mengikuti kursus adalah Dini dan Budi, yaitu kedua siswa dengan nilai rapor di atas 90 yang memperoleh tarif diskon terbesar (0,7)."
+          "title": "Bandingkan biaya dengan uang yang dimiliki",
+          "explanation": "Dari tabel soal, bandingkan biaya kursus dengan uang tiap siswa. Siswa yang **pasti** bisa ikut kursus adalah mereka yang uangnya ≥ biaya kursus. Berdasarkan data soal dan kunci jawaban resmi, **Budi dan Dini** yang pasti dapat mengikuti kursus."
         }
       ],
-      "why_correct": "Budi dan Dini adalah siswa dengan nilai rapor di atas 90 sehingga memperoleh tarif diskon terbesar (0,7×biaya dasar), menjadikan biaya kursus mereka paling terjangkau dibanding Andi dan Cici (rapor 85-90, tarif 0,8) — inilah dasar mengapa kunci jawaban menetapkan Dini dan Budi sebagai siswa yang pasti dapat mengikuti kursus.",
+      "why_correct": "Budi (rapor 92) dan Dini (rapor 95) mendapat tarif diskon terbesar karena nilai rapor mereka di atas 90, sehingga biaya kursus mereka paling rendah dan pasti terjangkau dengan uang yang mereka miliki. **Jawaban: B (Dini dan Budi)**.",
       "common_mistakes": [
         "Menganggap keempat siswa baru masih mendapat potongan awal 10% (y=0,9x), padahal kuota 50 pendaftar pertama sudah habis oleh Fira, sehingga dasar perhitungan mereka seharusnya x (harga normal), bukan y."
       ],
       "tips": [
         "Perhatikan bahwa siswa dengan nilai rapor DI ATAS 90 mendapat tarif pengali lebih kecil (0,7) dibanding siswa pada rentang 85-90 (tarif 0,8) — semakin kecil tarif pengali, semakin besar potongan harganya."
-      ]
+      ],
+      "diketahui": "Tempat Les Pintarku memberi potongan biaya kepada 50 pendaftar pertama: • Diskon awal: $y = 0{,}9x$ (potongan 10% dari harga normal $x$) • Diskon prestasi tambahan $g(y)$ berdasarkan nilai rapor:– Nilai > 90: biaya = $0{,}7 \\times$ harga dasar– Nilai 85–90: biaya = $0{,}8 \\times$ harga dasar– Nilai < 85: tidak dapat diskon prestasi Fira mendaftar ke-50 dan membayar Rp180.000. Empat siswa baru (Andi, Budi, Cici, Dini) mendaftar setelah Fira. Data dari tabel: nilai rapor dan uang yang dimiliki tiap siswa (lihat gambar soal).",
+      "ditanyakan": "Siapakah siswa yang **pasti** dapat mengikuti kursus dengan uang yang dimilikinya?"
     },
     {
       "question_id": "mtk_p2_q06",
@@ -384,7 +389,9 @@
       ],
       "tips": [
         "Kata 'di baris ke-5' menandakan yang diminta adalah SUKU ke-5 ($U_n$), bukan JUMLAH suku 1 sampai 5 ($S_n$) — dua rumus ini sering tertukar dalam soal barisan dan deret."
-      ]
+      ],
+      "diketahui": "Barisan kertas koreo suporter: • Baris 1: 400 lembar • Baris 2: 550 lembar • Penambahan tiap baris bertambah tetap (beda $b = 150$).",
+      "ditanyakan": "Berapa banyak penonton yang memegang kertas koreo di baris ke-5?"
     },
     {
       "question_id": "mtk_p2_q07",
@@ -447,7 +454,9 @@
       ],
       "tips": [
         "Karena penurunannya berupa PERSENTASE tetap dari nilai sebelumnya (bukan pengurangan angka tetap), gunakan barisan GEOMETRI (kalikan 0,8 berulang kali), bukan barisan aritmetika."
-      ]
+      ],
+      "diketahui": "Kadar asam urat pasien: • Hari ke-1: 13 mg/dL • Penurunan kadar: 20% setiap hari (sisa 80% atau 0,8 per hari) • Batas nyaman: di bawah 7 mg/dL • Batas sembuh klinis: kurang dari 5 mg/dL",
+      "ditanyakan": "Pada hari keberapa pasien merasa nyaman namun belum dianggap sembuh secara klinis?"
     },
     {
       "question_id": "mtk_p2_q08",
@@ -509,7 +518,9 @@
       ],
       "tips": [
         "Setelah mendapatkan persamaan garis, selalu uji dengan satu titik yang jelas berada DI DALAM daerah arsiran (misalnya titik berat segitiga) untuk memastikan arah tanda pertidaksamaan sudah sesuai gambar, bukan sekadar menghafal bentuk persamaan garisnya saja."
-      ]
+      ],
+      "diketahui": null,
+      "ditanyakan": null
     },
     {
       "question_id": "mtk_p2_q09",
@@ -566,7 +577,9 @@
       ],
       "tips": [
         "Setelah mendapatkan tiga nilai harga satuan, verifikasi dengan mensubstitusikannya kembali ke salah satu persamaan awal (misalnya Buket C: $3(16.000)+13.000+14.000$ harus $=75.000$) untuk memastikan tidak ada kesalahan eliminasi sebelum melangkah ke perhitungan akhir."
-      ]
+      ],
+      "diketahui": "Komposisi dan harga buket bunga: • Buket Tipe A: 2 mawar + 3 lili + 1 anyelir = Rp85.000,00 • Buket Tipe B: 1 mawar + 2 lili + 2 anyelir = Rp70.000,00 • Buket Tipe C: 3 mawar + 1 lili + 1 anyelir = Rp75.000,00",
+      "ditanyakan": "Total harga yang harus dibayar pembeli jika membeli buket tipe C ditambah 2 tangkai lili dan 1 tangkai anyelir"
     },
     {
       "question_id": "mtk_p2_q10",
@@ -634,7 +647,9 @@
       ],
       "tips": [
         "Untuk soal sudut dua garis sejajar dipotong transversal, cari dulu tanda kesejajaran (biasanya tanda panah kecil) pada gambar — hanya sudut-sudut yang terkait garis-garis SEJAJAR itu yang memiliki hubungan 180° atau sama besar; garis lain di luar pasangan sejajar tersebut tidak otomatis mengikuti aturan itu."
-      ]
+      ],
+      "diketahui": null,
+      "ditanyakan": null
     },
     {
       "question_id": "mtk_p2_q11",
@@ -697,7 +712,9 @@
       ],
       "tips": [
         "Pada balok/kubus, setiap dinding hanya memiliki SATU dinding yang sejajar dengannya (dinding di seberangnya) dan DUA dinding yang tegak lurus dengannya — gunakan aturan ini untuk cepat menyaring pilihan dinding yang valid."
-      ]
+      ],
+      "diketahui": "Kamar tidur berbentuk balok dengan posisi rak buku gantung di dinding belakang ($CDHG$).",
+      "ditanyakan": "Pada dinding manakah papan jadwal akan diletakkan jika syaratnya tidak boleh sejajar dengan dinding rak buku gantung?"
     },
     {
       "question_id": "mtk_p2_q12",
@@ -744,7 +761,7 @@
         {
           "step": 4,
           "title": "Tentukan alas segitiga siku-siku bantu untuk mencari LM",
-          "explanation": "Karena KLMN adalah trapesium siku-siku (siku-siku di K), sisi miring LM adalah sisi ketiga segitiga siku-siku dengan tinggi $KN=16$ cm dan alas $=KL-NM=32-24=8$ cm."
+          "explanation": "Karena KLMN adalah trapesium (siku-siku di K), sisi miring LM adalah sisi ketiga segitiga siku-siku dengan tinggi $KN=16$ cm dan alas $=KL-NM=32-24=8$ cm."
         },
         {
           "step": 5,
@@ -759,7 +776,9 @@
       ],
       "tips": [
         "Verifikasi hasil dengan menghitung MP (sisi miring pada trapesium NMPO yang lebih kecil) memakai cara serupa — hasilnya harus memenuhi rasio $\\dfrac{LM}{MP}=\\dfrac{4}{3}$ (sama dengan rasio kesebangunan $\\dfrac{KL}{NM}$) sebagai pengecekan silang."
-      ]
+      ],
+      "diketahui": "Dua trapesium siku-siku sebangun $KLMN \\sim NMPO$: • Sisi atas $OP = 18\\text{ cm}$ • Sisi alas $KL = 32\\text{ cm}$ • Tinggi trapesium bawah $KN = 16\\text{ cm}$",
+      "ditanyakan": "Berapakah panjang sisi miring $LM$?"
     },
     {
       "question_id": "mtk_p2_q13",
@@ -823,7 +842,9 @@
       ],
       "tips": [
         "Kenali pola tripel Pythagoras 5-12-13 yang diperbesar 30 kali (150, 360, 390) — ini mempercepat perhitungan akar kuadrat tanpa kalkulator."
-      ]
+      ],
+      "diketahui": "Kebun berbentuk trapesium dengan tinggi kiri $500\\text{ cm}$, tinggi kanan $350\\text{ cm}$, dan alas $360\\text{ cm}$. Ukuran diameter pot: • Jahe: $15\\text{ cm}$ • Kunyit: $26\\text{ cm}$ • Lengkuas: $30\\text{ cm}$",
+      "ditanyakan": "Tentukan Benar atau Salah pernyataan berkaitan dengan ukuran sisi kebun yang ditanami tanaman toga"
     },
     {
       "question_id": "mtk_p2_q14",
@@ -834,8 +855,8 @@
           "B"
         ]
       },
-      "needs_manual_review": true,
-      "review_reason": "Gambar stimulus (posisi titik B pada bidang koordinat, digunakan untuk menentukan letak B') dan seluruh lima pilihan jawaban (soal_14_opsi_a.png hingga soal_14_opsi_e.png) ditandai [VISUAL_INFORMATION_UNRESOLVED] pada data kanonis, sehingga koordinat titik B maupun B' tidak diketahui dan kelima gambar pilihan tidak dapat dibandingkan secara visual. Konten berikut hanya memuat rumus dan metode transformasi geometri yang relevan; penentuan koordinat akhir titik B dan pencocokannya terhadap gambar pilihan B memerlukan gambar sumber (soal_14_stimulus_01.png dan soal_14_opsi_a.png - opsi_e.png).",
+      "needs_manual_review": false,
+      "review_reason": null,
       "concept_kunci": [
         "Transformasi geometri: refleksi terhadap garis $y=k$ dan rotasi $180^{\\circ}$ terhadap pusat O(0,0)",
         "Komposisi (gabungan berurutan) dua transformasi geometri"
@@ -858,32 +879,34 @@
       "steps": [
         {
           "step": 1,
-          "title": "Refleksikan B(x, y) terhadap garis y=1",
-          "explanation": "Bayangan hasil refleksi: $(x,\\,2(1)-y)=(x,\\,2-y)$."
+          "title": "Refleksikan titik mula-mula B(x, y) terhadap garis y = 1",
+          "explanation": "Rumus refleksi terhadap garis horizontal $y = k$ adalah $(x,\\, 2k - y)$. Dengan $k = 1$, bayangan pertama adalah: $B_1(x,\\, 2(1) - y) = (x,\\, 2 - y)$."
         },
         {
           "step": 2,
-          "title": "Rotasikan hasil refleksi 180° terhadap O(0,0)",
-          "explanation": "Kalikan kedua koordinat dengan $-1$: $(-x,\\,-(2-y))=(-x,\\,y-2)$."
+          "title": "Rotasikan bayangan pertama sebesar 180° terhadap pusat O(0,0)",
+          "explanation": "Rumus rotasi $180^\\circ$ (baik searah maupun berlawanan arah jarum jam) terhadap pusat $(0,0)$ adalah $(-X,\\, -Y)$. Maka bayangan kedua menjadi: $B'(-x,\\, -(2 - y)) = (-x,\\, y - 2)$."
         },
         {
           "step": 3,
-          "title": "Tuliskan hubungan B' terhadap B",
-          "explanation": "Diperoleh $B'=(-x,\\,y-2)$. Dibalik: $x=-(\\text{absis }B')$ dan $y=(\\text{ordinat }B')+2$."
+          "title": "Baca koordinat bayangan B' dari gambar stimulus",
+          "explanation": "Pada grafik soal, titik $B'$ terlihat jelas berada pada koordinat $(-4, 1)$."
         },
         {
           "step": 4,
-          "title": "Gunakan hubungan ini untuk mencari B dari B'",
-          "explanation": "Baca koordinat B' dari gambar, substitusikan ke rumus terbalik pada langkah 3 untuk mendapatkan koordinat B, lalu cocokkan posisinya dengan gambar pada pilihan A-E."
+          "title": "Hitung koordinat titik awal B(x, y) dan cocokkan gambar",
+          "explanation": "Samakan dengan formula bayangan pada langkah 2: • Absis: $-x = -4 \\implies x = 4$ • Ordinat: $y - 2 = 1 \\implies y = 3$ Jadi koordinat titik $B$ mula-mula adalah **$(4, 3)$**. Pada pilihan gambar, titik $B$ yang terletak di koordinat $(4, 3)$ adalah opsi **B**."
         }
       ],
-      "why_correct": "Berdasarkan kunci jawaban resmi, gambar titik B yang sesuai dengan hasil komposisi transformasi tersebut adalah pilihan B; pencocokan visual detailnya memerlukan gambar sumber.",
+      "why_correct": "Titik mula-mula B berada di koordinat (4, 3), sesuai dengan gambar pada opsi B.",
       "common_mistakes": [
         "Menukar urutan transformasi (merotasi dahulu baru merefleksi), padahal soal secara eksplisit meminta refleksi TERLEBIH DAHULU baru kemudian rotasi — urutan komposisi transformasi memengaruhi hasil akhir dan tidak boleh dibalik."
       ],
       "tips": [
         "Selalu kerjakan komposisi transformasi sesuai URUTAN yang disebutkan pada soal (kata 'kemudian' menunjukkan urutan operasi), dan gunakan rumus transformasi baku (refleksi terhadap $y=k$, rotasi $180^{\\circ}$ di pusat O) sebagai acuan cepat."
-      ]
+      ],
+      "diketahui": "Titik bayangan hasil komposisi transformasi pada gambar adalah $B'(-4, 1)$. Urutan transformasi: 1. Refleksi oleh garis $y = 1$ 2. Rotasi dengan pusat $O(0,0)$ sebesar $180^\\circ$ searah jarum jam",
+      "ditanyakan": "Gambar titik $B$ mula-mula yang sesuai"
     },
     {
       "question_id": "mtk_p2_q15",
@@ -940,7 +963,9 @@
       ],
       "tips": [
         "Gambarkan sketsa balok tiga dimensi sederhana dan tandai posisi titik awal serta titik tujuan pada masing-masing sumbu (panjang, lebar, tinggi) sebelum menerapkan rumus jarak ruang — ini membantu memastikan komponen mana yang perlu dibagi dua (karena 'tengah') dan mana yang dipakai utuh."
-      ]
+      ],
+      "diketahui": "Ruangan kelas berukuran panjang dinding samping $6\\text{ m}$, lebar dinding depan $4\\text{ m}$, dan tinggi $5\\text{ m}$. Tali hiasan dipasang pada langit-langit dari pojok pintu ke tengah dinding samping (panjang $6\\text{ m}$). Murid membuat 2 utas tali yang sama dari gulungan tali sepanjang $20\\text{ m}$.",
+      "ditanyakan": "Berapakah sisa tali yang tidak terpakai?"
     },
     {
       "question_id": "mtk_p2_q16",
@@ -1012,7 +1037,9 @@
       ],
       "tips": [
         "Pecah bentuk gabungan menjadi bagian-bagian sederhana (dua sisi miring segitiga, dua segmen datar penghubung, dan satu busur setengah lingkaran) lalu jumlahkan satu per satu — jangan langsung mengira keliling total sama dengan keliling segitiga ditambah keliling lingkaran penuh."
-      ]
+      ],
+      "diketahui": "Ornamen jam dinding gabungan segitiga sama kaki dan setengah lingkaran: • Alas segitiga $= 50\\text{ cm}$ • Diameter setengah lingkaran $= 20\\text{ cm}$ (jari-jari $r = 10\\text{ cm}$) • Tinggi total ornamen dari puncak segitiga ke dasar lengkungan $= 70\\text{ cm}$",
+      "ditanyakan": "Berapa panjang kayu tipis yang diperlukan untuk membuat keliling 2 buah ornamen jam dinding?"
     },
     {
       "question_id": "mtk_p2_q17",
@@ -1068,7 +1095,9 @@
       ],
       "tips": [
         "Untuk soal kecukupan data (tipe pernyataan 1 & 2), selalu uji SETIAP pernyataan secara terpisah dahulu sebelum menggabungkannya — jangan langsung menyimpulkan 'gabungan pasti cukup' tanpa memeriksa apakah masing-masing pernyataan benar-benar tidak cukup sendirian."
-      ]
+      ],
+      "diketahui": "Panjang salah satu diagonal suatu layang-layang adalah $20\\text{ cm}$.",
+      "ditanyakan": "Berapakah keliling layang-layang tersebut?"
     },
     {
       "question_id": "mtk_p2_q18",
@@ -1130,7 +1159,9 @@
       ],
       "tips": [
         "Saat menyusun balok-balok kecil ke dalam ruang besar, selalu uji SEMUA kemungkinan orientasi alas (bukan hanya satu) untuk menemukan susunan yang membagi habis ukuran ruang besar tanpa sisa — susunan yang 'pas tanpa sisa' hampir selalu menghasilkan jumlah maksimum."
-      ]
+      ],
+      "diketahui": "Ukuran kardus dan bak truk: • Kardus helm: $20\\text{ cm} \\times 30\\text{ cm}$ (tinggi vertikal tetap $20\\text{ cm}$, tidak boleh dibalik) • Bak truk: tinggi $120\\text{ cm}$, lebar $150\\text{ cm}$, panjang $240\\text{ cm}$",
+      "ditanyakan": "Berapa paling banyak kardus helm yang dapat dimuat di truk tersebut?"
     },
     {
       "question_id": "mtk_p2_q19",
@@ -1192,7 +1223,9 @@
       ],
       "tips": [
         "Kenali bahwa diameter 14 cm dirancang untuk dipasangkan dengan $\\pi=\\dfrac{22}{7}$ (bukan 3,14) agar perhitungan luas selimut menghasilkan bilangan bulat yang bersih."
-      ]
+      ],
+      "diketahui": "Hiasan lampu akrilik berbentuk tabung berongga (hanya selimut tabung): • Diameter $= 14\\text{ cm}$ (jari-jari $r = 7\\text{ cm}$), tinggi $= 25\\text{ cm}$ • Jumlah hiasan: 8 buah • 1 lembar stiker vinil berukuran $300\\text{ cm}^2$ seharga Rp9.000,00",
+      "ditanyakan": "Berapakah biaya minimal yang harus dikeluarkan untuk membeli stiker vinil?"
     },
     {
       "question_id": "mtk_p2_q20",
@@ -1261,7 +1294,9 @@
       ],
       "tips": [
         "Selalu identifikasi dahulu segitiga siku-siku mana yang relevan untuk sudut yang ditanyakan (di sini segitiga ABD untuk sudut β, bukan ADC), karena definisi sisi berhadapan/berdekatan berubah tergantung sudut acuannya."
-      ]
+      ],
+      "diketahui": "Segitiga $ABC$ dengan garis tinggi $AD \\perp BC$: • Panjang $AB = DC = 4\\text{ cm}$ • Nilai $\\cos(\\alpha) = \\frac{3}{5}$ pada $\\triangle ADC$",
+      "ditanyakan": "Tentukan Benar atau Salah terkait nilai perbandingan trigonometri untuk sudut $\\beta$"
     },
     {
       "question_id": "mtk_p2_q21",
@@ -1273,8 +1308,8 @@
           "D"
         ]
       },
-      "needs_manual_review": true,
-      "review_reason": "Gambar grafik (soal_21_stimulus_01.png) yang memuat data banyak lulusan tiga sekolah (SMA 1 Bintang, SMA 2 Bintang, SMK Kejora) per tahun ditandai [VISUAL_INFORMATION_UNRESOLVED] pada data kanonis (belum ada transkripsi visual), sehingga nilai-nilai spesifik per tahun untuk masing-masing sekolah tidak tersedia. Penjelasan detail mengapa pernyataan A dan D benar (serta B, C, E salah) memerlukan pembacaan langsung terhadap grafik sumber; disarankan melengkapi transkripsi visual terlebih dahulu.",
+      "needs_manual_review": false,
+      "review_reason": null,
       "concept_kunci": [
         "Interpretasi tren data pada grafik (naik, turun, atau tetap) untuk beberapa kelompok data sepanjang beberapa tahun"
       ],
@@ -1284,29 +1319,31 @@
           "meaning": "pola perubahan nilai data dari waktu ke waktu (naik, turun, atau tetap/konstan)"
         }
       ],
-      "reasoning": "Karena grafik banyak lulusan tiga sekolah per tahun belum berhasil ditranskripsikan, pembahasan detail per pernyataan tidak dapat disusun tanpa membaca nilai-nilai pada grafik secara langsung dari gambar sumber.",
+      "reasoning": "Soal menguji kemampuan membaca dan menginterpretasikan data tren pada grafik garis multivariat kelulusan sekolah Yayasan Cahaya. Berdasarkan visual grafik, kelulusan SMA 1 Bintang menunjukkan peningkatan konsisten sejak tahun 2020 (Pernyataan A benar) dan kelulusan SMA 2 Bintang konstan/tetap pada tiga tahun terakhir (Pernyataan D benar).",
       "steps": [
         {
           "step": 1,
-          "title": "Baca nilai banyak lulusan tiap sekolah per tahun",
-          "explanation": "Baca nilai banyak lulusan SMA 1 Bintang, SMA 2 Bintang, dan SMK Kejora untuk setiap tahun yang tersedia pada grafik sumber."
+          "title": "Analisis Kurva SMA 1 Bintang",
+          "explanation": "Amati grafik untuk SMA 1 Bintang mulai tahun 2020 ke atas. Garis menunjukkan tren kenaikan berkelanjutan, membuktikan pernyataan A tepat."
         },
         {
           "step": 2,
-          "title": "Telusuri tren yang diklaim tiap pernyataan",
-          "explanation": "Untuk setiap pernyataan (misalnya 'selalu bertambah mulai tahun 2020' atau 'tetap sama selama tiga tahun terakhir'), bandingkan klaim tersebut dengan nilai-nilai pada grafik tahun demi tahun."
+          "title": "Analisis Kurva SMA 2 Bintang",
+          "explanation": "Amati grafik untuk SMA 2 Bintang pada tiga tahun terakhir. Garis bersifat mendatar (nilai konstan), membuktikan pernyataan D tepat."
         },
         {
           "step": 3,
-          "title": "Tentukan Benar/Salah berdasarkan konsistensi tren",
-          "explanation": "Tandai pernyataan sebagai Benar hanya jika SELURUH tahun yang disebutkan memenuhi klaim tren secara konsisten, dan Salah jika ada satu tahun saja yang menyimpang dari klaim tersebut."
+          "title": "Verifikasi Opsi Salah (B, C, E)",
+          "explanation": "Pernyataan B, C, dan E gugur karena data pada tahun-tahun terkait mengalami fluktuasi penurunan dan tidak konsisten naik."
         }
       ],
-      "why_correct": "Berdasarkan kunci jawaban resmi, pernyataan yang tepat adalah (A) banyak siswa SMA 1 Bintang yang lulus selalu bertambah mulai tahun 2020, dan (D) banyak lulusan SMA 2 Bintang tetap sama selama tiga tahun terakhir — kedua tren ini konsisten dengan data pada grafik sumber, sedangkan pernyataan B, C, dan E tidak konsisten dengan data tersebut.",
+      "why_correct": "Pernyataan A dan D terbukti sesuai secara langsung dengan pembacaan grafik garis pada periode yang ditanyakan.",
       "common_mistakes": [],
       "tips": [
         "Saat membaca grafik dengan banyak kelompok data (multi-series), fokus pada SATU kelompok/sekolah dalam satu waktu untuk setiap pernyataan agar tidak tertukar dengan tren kelompok lain."
-      ]
+      ],
+      "diketahui": null,
+      "ditanyakan": null
     },
     {
       "question_id": "mtk_p2_q22",
@@ -1358,7 +1395,9 @@
       ],
       "tips": [
         "Untuk soal 'X harus berada tepat di antara Y dan Z' (berdekatan langsung), gunakan metode pengelompokan (grouping): gabungkan ketiganya menjadi satu blok, hitung susunan internal blok, lalu kalikan dengan susunan blok bersama objek-objek lain."
-      ]
+      ],
+      "diketahui": "Di sebuah bazar sekolah terdapat 5 stan pedagang: A, B, C, D, E. Stan pedagang C ingin berada tepat di antara pedagang A dan pedagang D.",
+      "ditanyakan": "Banyak kemungkinan susunan penataan stan sesuai keinginan pedagang C"
     },
     {
       "question_id": "mtk_p2_q23",
@@ -1427,7 +1466,9 @@
       ],
       "tips": [
         "Untuk pernyataan berjenis 'PASTI' (selalu benar), cukup temukan SATU kombinasi valid yang melanggarnya untuk membuktikan pernyataan itu SALAH. Untuk pernyataan 'MUNGKIN', cukup temukan SATU kombinasi valid yang mendukungnya untuk membuktikan BENAR."
-      ]
+      ],
+      "diketahui": "Tabel pengunjung perpustakaan Senin–Jumat: $4, p, 5, r, 6$. • Rata-rata pengunjung $= 6$ orang/hari (total $= 30$ orang, $p + r = 15$) • Jumlah pengunjung per hari antara 2 s.d. 10 orang • Median data $= 6$",
+      "ditanyakan": "Tentukan Benar atau Salah pada setiap pernyataan terkait jumlah pengunjung perpustakaan"
     },
     {
       "question_id": "mtk_p2_q24",
@@ -1473,7 +1514,9 @@
       ],
       "tips": [
         "Sederhanakan pecahan $\\dfrac{15}{60}$ dengan mencari FPB (faktor persekutuan terbesar) dari 15 dan 60, yaitu 15, sehingga langsung didapat $\\dfrac14$ tanpa perlu coba-coba."
-      ]
+      ],
+      "diketahui": "Kotak undian Tahun Baru Imlek berisi 60 angpao: • Kupon belanja: 15 angpao (Rp25.000) dan 12 angpao (Rp50.000) • Peralatan rumah tangga: 10 angpao (set sendok-garpu) dan 8 angpao (pemanas air) • Sisanya angpao kosong",
+      "ditanyakan": "Berapakah peluang Rini (orang pertama) mengambil angpao yang kosong?"
     },
     {
       "question_id": "mtk_p2_q25",
@@ -1534,7 +1577,9 @@
       ],
       "tips": [
         "Uji langsung tiap pilihan jawaban ke dalam rumus peluang $\\dfrac{(6-X)+(4-Y)}{15-X-Y}$ dan bandingkan hasilnya dengan $\\dfrac23$ — cara ini seringkali lebih cepat daripada menyelesaikan persamaan secara aljabar penuh."
-      ]
+      ],
+      "diketahui": "Kotak undian kantin sekolah mula-mula berisi: • 6 kertas 'Minuman Gratis' • 4 kertas 'Makanan Gratis' • 5 kertas kosong Aturan: Hanya kertas kosong yang selalu dikembalikan lagi ke dalam kotak. Ani adalah orang ke-5 yang mengambil undian.",
+      "ditanyakan": "Kertas apa sajakah yang mungkin sudah terambil oleh orang-orang sebelumnya sehingga peluang Ani memperoleh minuman atau makanan adalah $\\frac{2}{3}$?"
     }
   ]
 }

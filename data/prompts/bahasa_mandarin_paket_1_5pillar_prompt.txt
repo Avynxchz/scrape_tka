@@ -1,0 +1,257 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Mandarin (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Teks untuk soal nomor 1 dan 2!
+[Konteks Visual Gambar 23404_70bae53fcc189a69c9173af5bd18ad0e.png]:
+Dialog percakapan antara laki-laki (男) dan perempuan (女) beraksara Hanzi beserta Pinyin: Qǐng tīng wǒ shuō! 男： 请 听 我 说！
+
+Hǎode. 女： 好的。
+
+'Gāoxìng', nǐ néng xiě ma? 男： '高兴'， 你 能 写 吗？
+
+Néng, wǒ huì xiě. 女： 能， 我 会 写。
+
+Hěn hǎo! Nà, zěnme dú nà gè hànzì? 男： 很 好！那，怎么 读 那 个 汉字？
+
+Dú 'gāoxìng'. 女： 读 '高兴'。
+PERTANYAAN:
+“gāoxìng”
+
+Apa arti kata   “高兴”   ?
+OPSI / PERNYATAAN:
+  - A. A. Baik
+  - B. B. Berani
+  - C. C. Nyaman
+  - D. D. Bersih
+  - E. E. Senang
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Teks untuk soal nomor 1 dan 2!
+[Konteks Visual Gambar 23404_70bae53fcc189a69c9173af5bd18ad0e.png]:
+Dialog percakapan antara laki-laki (男) dan perempuan (女) beraksara Hanzi beserta Pinyin: Qǐng tīng wǒ shuō! 男： 请 听 我 说！
+
+Hǎode. 女： 好的。
+
+'Gāoxìng', nǐ néng xiě ma? 男： '高兴'， 你 能 写 吗？
+
+Néng, wǒ huì xiě. 女： 能， 我 会 写。
+
+Hěn hǎo! Nà, zěnme dú nà gè hànzì? 男： 很 好！那，怎么 读 那 个 汉字？
+
+Dú 'gāoxìng'. 女： 读 '高兴'。
+[Konteks Visual Gambar 07327_4e92c007d8ca8fe22664439d10a5f765.png]:
+Teks beraksara Hanzi beserta Pinyin: Tāmen zài nǎr? 他们 在 哪儿？
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 23010_11069531843d66562d882eda6eb1e372.png]:
+Daftar empat kalimat bernomor dalam aksara Hanzi beserta Pinyin: Shàngwǔ bā diǎn shàngkè. (1) 上午 八 点 上课。
+
+Wǒ měitiān zǎoshang liù diǎn hē chá. (2) 我 每天 早上 六 点 喝 茶。
+
+Qī diǎn qù xuéxiào. (3) 七 点 去 学校。
+
+Xiàwǔ shí èr diǎn huí jiā. (4) 下午 十二 点 回 家。
+PERTANYAAN:
+Susunlah kalimat tersebut menjadi paragraf padu!
+OPSI / PERNYATAAN:
+  - A. A. (1) – (3) – (4) – (2)
+  - B. B. (2) – (3) – (1) – (4)
+  - C. C. (2) – (4) – (3) – (1)
+  - D. D. (2) – (4) – (1) – (3)
+  - E. E. (1) – (4) – (3) – (2)
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 23652_876abb434d5e851256f4ff542874ff19.png]:
+Dialog percakapan antara Lanlan (兰兰) dan Mali (玛丽) beraksara Hanzi beserta Pinyin: Lánlán: Zhè shì shénme? 兰兰: 这 是 什么？
+
+Mǎlì: Zhè shì shū. 玛丽: 这 是 书。
+
+Lánlán: Zhè shì nǐ de shū ma? 兰兰: 这 是 你 的 书 吗？
+
+Mǎlì: Shì de, shì wǒ de. 玛丽: 是 的，是 我 的。
+PERTANYAAN:
+Apa informasi yang terdapat pada percakapan di atas?
+
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+OPSI / PERNYATAAN:
+  - A. 
+  - B. 
+  - C. 
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: ['B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 00556_49fbbde866f0ac901b5949867b0923f1.png]:
+Daftar kata beraksara Hanzi yang dipisahkan garis miring beserta Pinyin di atasnya: nǐ shénme cài xǐhuan 你 / 什么 / 菜 / 喜欢
+PERTANYAAN:
+Susunlah kosakata tersebut menjadi kalimat padu!
+
+Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 50336_3148bb2cfaf2c8a4e52997c790e7e1b5.png]:
+Kalimat rumpang dalam aksara Hanzi beserta Pinyin: Tā hěn xǐhuan ______ hànyǔ. 他 很 喜欢 _ 汉语。
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A. zuòfàn 做饭
+  - B. B. xuéxí 学习
+  - C. C. shuìjiào 睡觉
+  - D. D. shuōhuà 说话
+  - E. E. kànjiàn 看见
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 69375_6635f5521ae86a7acde82d9f7af5b11f.png]:
+Teks beraksara Hanzi beserta Pinyin: Wǒmen dōu xuéxí Hànyǔ 我们 都 学习 汉语。
+PERTANYAAN:
+Jumlah guratan pada karakter 语 adalah ….
+OPSI / PERNYATAAN:
+  - A. A. 7 guratan
+  - B. B. 8 guratan
+  - C. C. 9 guratan
+  - D. D. 10 guratan
+  - E. E. 11 guratan
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 61479_766fa25fbd5af6163b34eedaaa2b2e7e.png]:
+Ilustrasi seorang anak perempuan berambut cokelat sedang tidur nyenyak di atas kasur dengan selimut kuning bermotif bunga-bunga, wajahnya tersenyum tenang dan terdapat simbol dengkuran/tidur meliuk di atas kepalanya.
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A. Shuí de nǚér piào liang 谁 的 女儿 漂 亮。
+  - B. B. Tā xiǎng qù shuìjiào 她 想 去 睡觉。
+  - C. C. Wǒ kànjiàn nǚér lái 我 看见 女儿 来。
+  - D. D. Wǒ nǚér shuìjiào le 我 女儿 睡觉 了。
+  - E. E. Nǚér huì jiào māmā 女儿 会 叫 妈妈。
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 9 dan 10!
+[Konteks Visual Gambar 41268_76eb3d2b1585af8d12660132cbfb005a.png]:
+Teks bacaan beraksara Hanzi beserta Pinyin: Jīntiān shì Māma hé nǚér zài jiā zuòfàn 今天 是 星期天。妈妈 和 女儿 在 家 做饭。
+
+Bàba hé érzi qù shāngdiàn 爸爸 和 儿子 去 商店 。
+
+Tāmen mǎi le shuǐguǒ hé bēizi Tāmen dōu hěn gāoxìng 他们 买 了 水果 和 杯子。 他们 都 很 高兴。
+PERTANYAAN:
+(Shuí)  (gāoxìng)
+
+谁        高兴？
+
+Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. (Érzi) 儿子
+  - B. B. (Māmā) 妈妈
+  - C. C. (Nǚér) 女儿
+  - D. D. (Bàba) 爸爸
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Teks untuk soal nomor 9 dan 10!
+[Konteks Visual Gambar 16693_76eb3d2b1585af8d12660132cbfb005a.png]:
+Teks bacaan beraksara Hanzi beserta Pinyin: Jīntiān shì Māma hé nǚér zài jiā zuòfàn 今天 是 星期天。妈妈 和 女儿 在 家 做饭。
+
+Bàba hé érzi qù shāngdiàn 爸爸 和 儿子 去 商店 。
+
+Tāmen mǎi le shuǐguǒ hé bēizi Tāmen dōu hěn gāoxìng 他们 买 了 水果 和 杯子。 他们 都 很 高兴。
+PERTANYAAN:
+Tentukan hanyu pinyin yang tepat pada kata yang dicetak tebal!
+OPSI / PERNYATAAN:
+  - A. A. xīngqītiān
+  - B. B. xíngqītiān
+  - C. C. xīngqìtiān
+  - D. D. xīngqītián
+  - E. E. xìngqītiān
+

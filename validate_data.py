@@ -32,6 +32,7 @@ IMG_BASE = {
     ("bahasa_inggris", 1): "data/bahasa_inggris/paket_1", ("bahasa_inggris", 2): "data/bahasa_inggris/paket_2",
     ("ekonomi", 1): "data/ekonomi/paket_1", ("ekonomi", 2): "data/ekonomi/paket_2",
     ("kewirausahaan", 1): "data/kewirausahaan/paket_1", ("kewirausahaan", 2): "data/kewirausahaan/paket_2",
+    ("geografi", 1): "data/geografi/paket_1",
 }
 
 PKGS = [
@@ -39,6 +40,7 @@ PKGS = [
     "bahasa_inggris_paket_1", "bahasa_inggris_paket_2",
     "ekonomi_paket_1", "ekonomi_paket_2",
     "kewirausahaan_paket_1", "kewirausahaan_paket_2",
+    "geografi_paket_1",
 ]
 
 OFFICIAL_BS_COUNT = {  # dari bukti scrape (kunci_bs), untuk cross-check konversi
@@ -46,6 +48,7 @@ OFFICIAL_BS_COUNT = {  # dari bukti scrape (kunci_bs), untuk cross-check konvers
     "bahasa_inggris_paket_1": 0, "bahasa_inggris_paket_2": 0,
     "ekonomi_paket_1": 3, "ekonomi_paket_2": 2,
     "kewirausahaan_paket_1": 3, "kewirausahaan_paket_2": 3,
+    "geografi_paket_1": 4,
 }
 
 

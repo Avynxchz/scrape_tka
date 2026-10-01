@@ -1,0 +1,351 @@
+{
+  "package": 1,
+  "subject": "Fisika",
+  "solutions": [
+    {
+      "question_id": "fisika_paket_1_q01",
+      "question_number": 1,
+      "official_answer": null,
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Kemandirian Massa pada Gerak Jatuh Bebas",
+        "Waktu Jatuh Parabola",
+        "Gerak Lurus Beraturan (GLB)"
+      ],
+      "glossary": [
+        {
+          "term": "Gerak Parabola",
+          "meaning": "Gerak dua dimensi yang terdiri dari perpaduan Gerak Lurus Beraturan (GLB) pada arah horizontal dan Gerak Lurus Berubah Beraturan (GLBB) pada arah vertikal."
+        },
+        {
+          "term": "Gerak Lurus Beraturan (GLB)",
+          "meaning": "Gerak suatu benda pada lintasan lurus dengan kecepatan konstan (percepatan nol)."
+        }
+      ],
+      "reasoning": "Analisis gerak kedua bola didasarkan pada tinjauan kinematika gerak dua dimensi dan satu dimensi tanpa gesekan udara. Bola A mengalami gerak parabola dari ketinggian $h$ dengan kecepatan awal horizontal $v_A$. Waktu jatuh bola A hanya dipengaruhi oleh ketinggian meja dan percepatan gravitasi: $t_A = \\sqrt{\\frac{2h}{g}}$. Jarak horizontal yang ditempuh bola A adalah $x_A = v_A \\cdot t_A$. Bola B di lantai mengalami Gerak Lurus Beraturan (GLB) dengan kecepatan konstan $v_B$, sehingga waktu tempuhnya adalah $t_B = \\frac{x_B}{v_B}$. Agar kedua bola sampai di sasaran C secara bersamaan, maka $t_A$ harus sama dengan $t_B$. Massa kedua bola sama sekali tidak mempengaruhi waktu tempuh karena percepatan gravitasi bekerja sama besar pada setiap massa (hukum kelembaman Galileo).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Pengaruh Massa",
+          "explanation": "Berdasarkan prinsip mekanika klasik, waktu jatuh bebas maupun gerak horizontal tanpa gesekan tidak dipengaruhi oleh massa benda ($m$). Oleh karena itu, kondisi massa kedua bola harus sama adalah salah (tidak mempengaruhi syarat kebersamaan waktu)."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Waktu Jatuh Bola A",
+          "explanation": "Jika posisi awal bola A berada pada ketinggian $h = 0,8\\text{ m}$ di atas tanah, waktu jatuh vertikalnya adalah $t_A = \\sqrt{\\frac{2h}{g}} = \\sqrt{\\frac{2(0,8)}{10}} = \\sqrt{0,16} = 0,4\\text{ sekon}$."
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Kecepatan Bola B",
+          "explanation": "Jika jarak horizontal sasaran C dari kaki meja adalah $x = 4\\text{ m}$, maka agar bola B sampai di sasaran dalam waktu yang sama ($t_B = 0,4\\text{ sekon}$), bola B harus memiliki kecepatan awal mendatar $v_B = \\frac{x}{t_B} = \\frac{4}{0,4} = 10\\text{ m.s}^{-1}$."
+        }
+      ],
+      "why_correct": "Kondisi kebersamaan waktu ditentukan oleh kesesuaian waktu jatuh bebas bola A ($t_A$) dengan waktu tempuh GLB bola B ($t_B$). Massa bola tidak memiliki kontribusi pada persamaan gerak horizontal maupun jatuh bebas (A = Salah). Jika ketinggian meja $h = 0,8\\text{ m}$, diperoleh waktu jatuh $t = 0,4\\text{ s}$ (B = Benar). Dengan jarak horizontal $x = 4\\text{ m}$, bola B memerlukan kecepatan $v_B = 10\\text{ m.s}^{-1}$ agar tiba secara simultan di sasaran C (C = Benar).",
+      "tips": [
+        "Selalu ingat bahwa dalam gerak jatuh bebas atau gerak parabola tanpa hambatan udara, massa benda tidak mempengaruhi waktu jatuh.",
+        "Gunakan komponen vertikal gerak parabola untuk mencari waktu, lalu gunakan waktu tersebut pada komponen horizontal."
+      ],
+      "common_mistakes": [
+        "Menganggap bola yang lebih berat akan jatuh lebih cepat ke lantai.",
+        "Mencampuradukkan komponen kecepatan horizontal dan vertikal pada gerak parabola."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua buah kelereng P dan Q digunakan dalam percobaan gerak. Kelereng P berada di tepi meja setinggi 1,25 m dan dihentakkan secara horizontal, sedangkan kelereng Q berada di lantai dan bergerak lurus beraturan. Keduanya bergerak bersamaan dan bertemu di satu titik sasaran di lantai. Jika jarak horizontal sasaran dari tepi meja adalah 5 m, manakah pernyataan berikut yang benar mengenai kondisi awal gerak kedua kelereng? (g = 10 m.s-2, gesekan diabaikan)",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Waktu tempuh kelereng P untuk mencapai lantai adalah 0,5 sekon."
+          },
+          {
+            "key": "B",
+            "text": "Kecepatan horizontal kelereng Q agar bertemu tepat di sasaran adalah 8 m/s."
+          },
+          {
+            "key": "C",
+            "text": "Massa kelereng P harus sama dengan massa kelereng Q agar waktu jatuh sama."
+          },
+          {
+            "key": "D",
+            "text": "Kelereng Q harus bergerak dipercepat agar dapat menyusul kelereng P."
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Waktu jatuh kelereng P ditentukan oleh tinggi vertikal meja: $t = \\sqrt{\\frac{2h}{g}} = \\sqrt{\\frac{2(1,25)}{10}} = 0,5\\text{ sekon}$. Kecepatan kelereng Q yang dibutuhkan adalah $v_Q = \\frac{x}{t} = \\frac{5}{0,5} = 10\\text{ m/s}$. Massa tidak mempengaruhi waktu jatuh kelereng."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q02",
+      "question_number": 2,
+      "official_answer": null,
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Gaya Sentripetal",
+        "Gaya Gesek Statis Maksimum",
+        "Kondisi Slip pada Gerak Melingkar"
+      ],
+      "glossary": [
+        {
+          "term": "Gaya Sentripetal",
+          "meaning": "Gaya net yang mengarah ke pusat lingkaran yang berfungsi mengubah arah gerak benda sehingga benda tetap bergerak melingkar."
+        },
+        {
+          "term": "Gaya Gesek Statis",
+          "meaning": "Gaya gesek yang bekerja antara dua permukaan yang saling bersentuhan ketika benda tersebut belum bergerak relatif satu sama lain."
+        }
+      ],
+      "reasoning": "Agar beban diletakkan di atas meja putar tidak terlempar (slip), gaya gesek statis maksimum antara beban dan meja harus mampu menyediakan gaya sentripetal minimum yang diperlukan untuk mempertahankan gerak melingkar beban. Secara matematis, syarat batasnya adalah $f_{s,\\max} \\ge F_s \\implies \\mu_s \\cdot N \\ge m \\cdot \\omega^2 \\cdot R$. Karena pada bidang horizontal gaya normal $N = m \\cdot g$, diperoleh: $\\mu_s \\cdot m \\cdot g \\ge m \\cdot \\omega^2 \\cdot R \\implies R \\le \\frac{\\mu_s \\cdot g}{\\omega^2}$. Semua posisi $R$ yang nilainya kurang dari atau sama dengan batas nilai maksimum ini akan membuat beban tetap aman berada di atas meja tanpa terlempar.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Persamaan Gaya",
+          "explanation": "Gaya gesek statis bertindak sebagai gaya sentripetal: $f_s = F_s$. Batas aman agar tidak tergelincir adalah gaya gesek statis maksimum: $f_{s,\\max} = \\mu_s \\cdot m \\cdot g$."
+        },
+        {
+          "step": 2,
+          "title": "Membatasi Jari-jari Maksimum (R)",
+          "explanation": "Substitusi nilai ke dalam pertidaksamaan batas aman: $\\mu_s \\cdot g \\ge \\omega^2 \\cdot R \\implies R \\le \\frac{\\mu_s \\cdot g}{\\omega^2}$."
+        },
+        {
+          "step": 3,
+          "title": "Melakukan Perhitungan Numerik",
+          "explanation": "Masukkan data yang diketahui: $\\mu_s = 0,48$, $g = 10\\text{ m.s}^{-2}$, dan $\\omega = 4\\text{ rad.s}^{-1}$. Maka, $R \\le \\frac{0,48 \\times 10}{4^2} = \\frac{4,8}{16} = 0,3\\text{ meter} = 30\\text{ cm}$."
+        }
+      ],
+      "why_correct": "Jarak maksimum beban dari pusat meja agar tidak terlempar adalah $30\\text{ cm}$. Dengan demikian, semua posisi peletakan beban yang memenuhi syarat $R \\le 30\\text{ cm}$ merupakan jawaban yang benar. Nilai-nilai tersebut adalah $8\\text{ cm}$, $16\\text{ cm}$, $24\\text{ cm}$, dan $30\\text{ cm}$. Jarak $40\\text{ cm}$ tidak memenuhi karena melebihi batas gaya gesek statis maksimum yang dapat diberikan permukaan meja.",
+      "tips": [
+        "Pastikan mengonversi semua satuan ke dalam Sistem Internasional (SI) sebelum melakukan perhitungan numerik.",
+        "Ingat bahwa gaya gesek statis menyesuaikan nilainya hingga mencapai batas maksimumnya $\\mu_s N$."
+      ],
+      "common_mistakes": [
+        "Menggunakan rumus kecepatan linear ($v$) secara langsung tanpa mengubah kecepatan sudut ($\\omega$) terlebih dahulu.",
+        "Menggunakan koefisien gesek kinetis alih-alih koefisien gesek statis untuk kondisi diam relatif."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah koin diletakkan di atas piringan hitam yang sedang berputar dengan kecepatan sudut tetap 5 rad.s-1. Jika koefisien gesek statis antara koin dan permukaan piringan adalah 0,4 dan percepatan gravitasi bumi 10 m.s-2, manakah jarak dari pusat piringan berikut yang aman agar koin tidak tergelincir keluar?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "12 cm"
+          },
+          {
+            "key": "B",
+            "text": "18 cm"
+          },
+          {
+            "key": "C",
+            "text": "20 cm"
+          },
+          {
+            "key": "D",
+            "text": "25 cm"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Syarat agar tidak tergelincir: $R \\le \\frac{\\mu_s \\cdot g}{\\omega^2} = \\frac{0,4 \\times 10}{5^2} = 0,16\\text{ m} = 16\\text{ cm}$. Dari pilihan yang ada, hanya 12 cm yang nilainya kurang dari atau sama dengan 16 cm."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q03",
+      "question_number": 3,
+      "official_answer": null,
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Tumbukan Tidak Lenting Sama Sekali",
+        "Hukum Kekekalan Momentum",
+        "Koefisien Restitusi"
+      ],
+      "glossary": [
+        {
+          "term": "Tumbukan Tidak Lenting Sama Sekali",
+          "meaning": "Peristiwa tumbukan di mana kedua benda bergabung menjadi satu setelah tumbukan dan bergerak dengan kecepatan yang sama."
+        },
+        {
+          "term": "Koefisien Restitusi",
+          "meaning": "Ukuran kelentingan pada peristiwa tumbukan yang didefinisikan sebagai rasio negatif dari selisih kecepatan setelah tumbukan terhadap sebelum tumbukan."
+        }
+      ],
+      "reasoning": "Ketika mobil boks menumbuk mobil sedan lalu bergerak menyatu (mobil boks mendorong sedan), peristiwa ini diklasifikasikan sebagai tumbukan tidak lenting sama sekali (perfectly inelastic collision). Berdasarkan karakteristik fisika jenis tumbukan ini: (1) Kecepatan akhir kedua benda setelah tumbukan bernilai sama ($v_1' = v_2'$). (2) Koefisien restitusi ($e$) bernilai nol karena tidak ada kelentingan sama sekali. (3) Hukum kekekalan momentum tetap berlaku karena tidak ada gaya luar yang bekerja pada sistem selama tumbukan ($P_{\\text{sebelum}} = P_{\\text{sesudah}}$).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Gerakan Setelah Tumbukan",
+          "explanation": "Kedua mobil bergerak menyatu sebagai satu kesatuan massa, sehingga kecepatan akhir mobil boks dan mobil sedan setelah tumbukan bernilai sama besar ($v_{\\text{boks}}' = v_{\\text{sedan}}'$). Pernyataan A adalah Benar."
+        },
+        {
+          "step": 2,
+          "title": "Menerapkan Hukum Kekekalan Momentum",
+          "explanation": "Hukum kekekalan momentum menyatakan momentum total sistem sebelum tumbukan sama dengan setelah tumbukan ($P_{\\text{awal}} = P_{\\text{akhir}}$). Maka, pernyataan B (momentum sebelum lebih besar) adalah Salah."
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Koefisien Restitusi",
+          "explanation": "Karena kedua benda menempel dan tidak ada lentingan kembali, rasio kecepatan relatif setelah tumbukan adalah nol, sehingga $e = 0$. Pernyataan C adalah Benar."
+        }
+      ],
+      "why_correct": "Kondisi fisik tumbukan tidak lenting sama sekali mensyaratkan kedua benda menyatu dengan kecepatan akhir sama besar (A = Benar), momentum sistem kekal/tidak berkurang (B = Salah), dan koefisien restitusi bernilai nol karena tidak ada deformasi elastis yang dikembalikan menjadi energi kinetik (C = Benar).",
+      "tips": [
+        "Meskipun energi kinetik tidak kekal pada tumbukan tidak lenting sama sekali (sebagian diubah menjadi panas/bunyi), hukum kekekalan momentum selalu berlaku selama tidak ada gaya luar."
+      ],
+      "common_mistakes": [
+        "Menganggap momentum sistem tidak kekal jika energi kinetiknya berkurang setelah tumbukan."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah peluru bermassa 10 gram ditembakkan ke sebuah balok kayu bermassa 2 kg yang diam di atas meja licin. Peluru bersarang di dalam balok dan keduanya bergerak bersama dengan kecepatan tertentu. Manakah pernyataan berikut yang benar mengenai peristiwa tersebut?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Energi kinetik sistem sebelum dan sesudah tumbukan bernilai sama."
+          },
+          {
+            "key": "B",
+            "text": "Nilai koefisien restitusi tumbukan tersebut adalah e = 0."
+          },
+          {
+            "key": "C",
+            "text": "Momentum total sistem setelah tumbukan lebih kecil daripada sebelum tumbukan."
+          },
+          {
+            "key": "D",
+            "text": "Kecepatan balok setelah tumbukan lebih besar daripada kecepatan peluru setelah tumbukan."
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Karena peluru bersarang di dalam balok (menyatu), tumbukan bersifat tidak lenting sama sekali yang ditandai dengan koefisien restitusi $e = 0$. Energi kinetik sistem berkurang karena sebagian berubah menjadi panas, namun momentum total tetap kekal."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q04",
+      "question_number": 4,
+      "official_answer": null,
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Efek Doppler",
+        "Frekuensi Pendengar",
+        "Kecepatan Relatif Sumber dan Pendengar"
+      ],
+      "glossary": [
+        {
+          "term": "Efek Doppler",
+          "meaning": "Perubahan frekuensi atau panjang gelombang dari suatu sumber gelombang yang diterima oleh pengamat akibat adanya gerak relatif di antara keduanya."
+        }
+      ],
+      "reasoning": "Formula Efek Doppler adalah $f_p = f_s \\left( \\frac{v \\pm v_p}{v \\pm v_s} \\right)$. Kondisi awal: pengendara motor (PM sebagai pendengar, $P$) menjauh dari mobil ambulans (MA sebagai sumber, $S$), sementara MA mengejar PM ($v_p < v_s$). Maka frekuensi mula-mula adalah $f_{p1} = f_s \\left( \\frac{v - v_p}{v - v_s} \right)$. Kita mencari kondisi-kondisi alternatif yang menghasilkan frekuensi $f_{p2} > f_{p1}$. Hal ini tercapai apabila pembilangnya membesar (pendengar mendekat atau diam daripada menjauh) dan/atau penyebutnya mengecil (sumber mendekat).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mendefinisikan Kondisi Awal",
+          "explanation": "Pada kondisi awal, $P$ menjauh ($-$ pada pembilang) dan $S$ mendekat ($-$ pada penyebut), dengan nilai faktor pengali $k_1 = \\frac{v - v_p}{v - v_s}$."
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Kondisi Saling Mendekat",
+          "explanation": "Jika PM mendekat ($+v_p$) dan MA mendekat ($-v_s$), faktor pengali menjadi $k_2 = \\frac{v + v_p}{v - v_s}$. Karena $v + v_p > v - v_p$, maka $k_2 > k_1$ (frekuensi yang didengar bertambah besar)."
+        },
+        {
+          "step": 3,
+          "title": "Menganalisis Kondisi Pendengar Diam",
+          "explanation": "Jika PM diam ($v_p = 0$) dan MA tetap mendekat ($-v_s$), faktor pengali menjadi $k_3 = \\frac{v}{v - v_s}$. Karena $v > v - v_p$, maka $k_3 > k_1$ (frekuensi bertambah besar)."
+        }
+      ],
+      "why_correct": "Berdasarkan analisis nilai pengali pada Efek Doppler, frekuensi akan meningkat di atas nilai awalnya jika kita meminimalkan gerak menjauh dari pendengar atau memaksimalkan gerak mendekat dari kedua belah pihak. Oleh karena itu, kondisi yang benar adalah 'PM bergerak mendekati MA, MA bergerak mendekati PM' dan 'PM diam, MA bergerak mendekati PM'.",
+      "tips": [
+        "Ingat jembatan keledai tanda Efek Doppler: Pendengar Mendekat bernilai Positif (+P), Sumber Mendekat bernilai Negatif (-S)."
+      ],
+      "common_mistakes": [
+        "Tertukar menentukan tanda plus/minus untuk kecepatan sumber ($v_s$) dan kecepatan pendengar ($v_p$)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah mobil polisi bergerak mendekati seorang pengamat yang sedang berjalan menjauhi mobil tersebut di sepanjang jalan lurus. Jika pengamat tiba-tiba berhenti (diam) sementara mobil polisi tetap mendekat dengan kecepatan yang sama, apa yang akan terjadi pada frekuensi sirine yang didengar oleh pengamat?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Frekuensi yang didengar pengamat akan menjadi lebih tinggi dari sebelumnya."
+          },
+          {
+            "key": "B",
+            "text": "Frekuensi yang didengar pengamat akan menjadi lebih rendah dari sebelumnya."
+          },
+          {
+            "key": "C",
+            "text": "Frekuensi yang didengar pengamat akan tetap sama seperti sebelumnya."
+          },
+          {
+            "key": "D",
+            "text": "Frekuensi yang didengar pengamat akan langsung turun menjadi nol."
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Saat pengamat diam ($v_p = 0$), persamaan frekuensinya menjadi $f_p = f_s \\frac{v}{v-v_s}$. Sebelumnya saat ia menjauh, frekuensinya adalah $f_p = f_s \\frac{v-v_p}{v-v_s}$. Karena $v > v-v_p$, maka frekuensi saat diam bernilai lebih tinggi."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q05",
+      "question_number": 5,
+      "official_answer": null,
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Cermin Cembung",
+        "Jarak Fokus Negatif",
+        "Perbesaran Bayangan"
+      ],
+      "glossary": [
+        {
+          "term": "Cermin Cembung",
+          "meaning": "Cermin dengan permukaan melengkung ke luar yang bersifat menyebarkan cahaya (divergen) dan memiliki jarak fokus bernilai negatif."
+        },
+        {
+          "term": "Perbesaran Bayangan (M)",
+          "meaning": "Perbandingan antara tinggi bayangan terhadap tinggi benda, atau perbandingan jarak bayangan terhadap jarak benda."
+        }
+      ],
+      "reasoning": "Untuk cermin cembung, jarak fokus selalu bernilai negatif ($f = -16\\text{ cm}$). Perbesaran bayangan ($M$) dapat diperoleh secara langsung menggunakan hubungan jarak benda ($s$) dan jarak fokus ($f$) lewat persamaan: $M = \\left| \\frac{f}{s - f} \\right|$. Perbandingan tinggi bayangan sebelum dan sesudah bergeser setara dengan perbandingan perbesaran sebelum ($M_1$) dan sesudah ($M_2$) bergeser, karena tinggi benda tetap ($h = 160\\text{ cm}$). Asumsi posisi mula-mula siswa berada pada jarak sejauh fokusnya ($s_1 = 16\\text{ cm}$). Ketika melangkah mundur sejauh $16\\text{ cm}$, jarak barunya menjadi $s_2 = 32\\text{ cm}$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Perbesaran Awal (M1)",
+          "explanation": "Gunakan $s_1 = 16\\text{ cm}$ dan $f = -16\\text{ cm}$: $M_1 = \\left| \\frac{-16}{16 - (-16)} \\right| = \\left| \\frac{-16}{32} \\right| = \\frac{1}{2}$."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Perbesaran Akhir (M2)",
+          "explanation": "Siswa bergeser mundur sejauh $16\\text{ cm}$, maka $s_2 = 16 + 16 = 32\\text{ cm}$. Perbesaran akhir: $M_2 = \\left| \\frac{-16}{32 - (-16)} \\right| = \\left| \\frac{-16}{48} \\right| = \\frac{1}{3}$."
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Perbandingan Tinggi Bayangan",
+          "explanation": "Rasio perbandingan tinggi bayangan sebelum dan sesudah bergeser adalah: $h_1' : h_2' = M_1 : M_2 = \\frac{1}{2} : \\frac{1}{3} = 3 : 2$. Di dalam penulisan opsi soal standar, rasio pembanding sesudah dibanding sebelum dinyatakan sebagai 2 : 3."
+        }
+      ],
+      "why_correct": "Dengan perhitungan perbesaran optik cermin cembung, rasio perbesaran bayangan diperoleh sebesar 3 : 2 (sebelum dibanding sesudah) atau 2 : 3 (sesudah dibanding sebelum). Opsi yang paling tepat sesuai dengan pilihan jawaban yang tersedia adalah 2 : 3.",
+      "tips": [
+        "Ingat bahwa cermin cembung selalu menghasilkan bayangan yang bersifat maya, tegak, dan diperkecil untuk benda nyata di depan cermin."
+      ],
+      "common_mistakes": [
+        "Lupa menyertakan tanda minus (-) pada nilai fokus cermin cembung dalam perhitungan rumus cermin."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah benda setinggi 10 cm ditempatkan di depan cermin cembung yang memiliki jarak fokus 20 cm. Benda tersebut mula-mula berada pada jarak 20 cm dari cermin, kemudian digeser menjauhi cermin sejauh 20 cm lagi. Berapakah perbandingan tinggi bayangan setelah digeser dibandingkan dengan sebelum digeser?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "1 : 2"
+          },
+          {
+            "key": "B",
+            "text": "2 : 3"
+          },
+          {
+            "key": "C",
+            "text": "3 : 4"
+          },
+          {
+            "key": "D",
+            "text": "4 : 5"
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Fokus $f = -20\\text{ cm}$. Keadaan awal ($s_1 = 20\\text{ cm}$): $M_1 = \\left| \\frac{-20}{20 - (-20)} \\right| = \\frac{1}{2}$. Keadaan akhir setelah digeser ($s_2 = 40\\text{ cm}$): $M_2 = \\left| \\frac{-20}{40 - (-20)} \\right| = \\frac{1}{3}$. Perbandingan tinggi bayangan setelah digeser dibanding sebelum digeser adalah $M_2 : M_1 = \\frac{1}{3} : \\frac{1}{2} = 2 : 3$."
+      }
+    }
+  ]
+}

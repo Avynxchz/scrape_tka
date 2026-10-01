@@ -1,0 +1,118 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Bahasa Jepang (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: リカ  : けんたさん、まいあさ なにを たべますか。けんた:                  を たべます。
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: E
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: まいあさ、５じ                おきます。
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: C
+Stimulus Teks: です / じゅう /  ねんせい / すみません / きょうしつ / は / の / どこ /か /
+Pertanyaan: Susunlah kosakata tersebut menjadi kalimat padu!
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 44788_89da835920303aea3f6109f43bf7ec5b.png]:
+Gambar menampilkan sebuah kalender dinding berbahasa Jepang untuk bulan Mei 2025 (2025 5月). Di pojok kiri atas terdapat kalender kecil bulan April (4) dan di pojok kanan atas terdapat kalender kecil bulan Juni (6). Di sebelah kiri terdapat sebuah balon kata bertuliskan 'kyou' (artinya 'hari ini' dalam bahasa Jepang) dengan ujung penunjuk mengarah ke kotak tanggal 6 Mei 2025 (hari Selasa / 火曜日).
+
+Rincian kalender Mei 2025: | 日 (Minggu, merah) | 月 (Senin) | 火 (Selasa) | 水 (Rabu) | 木 (Kamis) | 金 (Jumat) | 土 (Sabtu, biru) | |:---: |:---: |:---: |:---: | | 28 | 29 | 30 | 1 | 2 | 3 (merah, 憲法記念日) | | 4 (merah, みどりの日) | 5 (merah, こどもの日) | 6 (merah, 振替休日) | 7 | 8 | 9 | 10 (biru) | | 11 (merah) | 12 | 13 | 14 | 15 | 16 | 17 (biru) | | 18 (merah) | 19 | 20 | 21 | 22 | 23 | 24 (biru) | | 25 (merah) | 26 | 27 | 28 | 29 | 30 | 31 (biru) |
+Pertanyaan: Bagaimana pernyataan yang tepat terkait ilustrasi gambar kalender tersebut?
+
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: Teks untuk soal nomor 5 dan 6!
+
+Akiko san wa maishuu nichiyoubi ni oyogimasu.
+
+Kenta san wa maishuu kinyoubi ni badominton o shimasu.
+
+Maya san wa maishuu kinyoubi ni badominton o shimasu. Tokidoki oyogimasu.
+
+Anton san wa maishuu nichiyoubi ni sakkaa o shimasu. Tokidoki oyogimasu.
+Pertanyaan: Bagaimana pernyataan kesimpulan yang tepat terkait teks tersebut?
+
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: ['A', 'B', 'D']
+Stimulus Teks: Teks untuk soal nomor 5 dan 6!
+
+Akiko san wa maishuu nichiyoubi ni oyogimasu.
+
+Kenta san wa maishuu kinyoubi ni badominton o shimasu.
+
+Maya san wa maishuu kinyoubi ni badominton o shimasu. Tokidoki oyogimasu.
+
+Anton san wa maishuu nichiyoubi ni sakkaa o shimasu. Tokidoki oyogimasu.
+Pertanyaan: Mana saja informasi yang tepat terkait teks tersebut?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 62569_84ca57162e96216dbed0c86e56672af9.png]:
+Ilustrasi dua orang wanita sedang duduk mengobrol di sebuah meja bundar sambil masing-masing memegang cangkir minuman, dengan latar belakang jendela pemandangan pohon dan langit berawan.
+
+Terdapat balon percakapan di atas kedua tokoh:- Balon kata dari wanita berbaju merah muda di sebelah kiri berisi kalimat rumpang bertuliskan: 'きのう ______ か？'- Balon kata dari wanita berbaju ungu di sebelah kanan berisi jawaban: 'きのう　かようび でした。'
+Pertanyaan: 
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: D
+Stimulus Teks: Watashino gakkou wa hiroi desu. Sankai arimasu. Kouchoushitsu, shoukuinshitsu, hokenshitsu, jimushitsu wa ikkai ni arimasu.
+
+Kyoushitsu to toshoushitsu wa nikai to sankai ni arimasu. Watashi wa yasumi jikan no toki ni yoku toshoshitsu ni imasu.
+Pertanyaan: Toshoshitsu de __________. Toshoshitsu wa shizukana tokoro desu. Kono tokorowa daisuki desu.
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: C
+Stimulus Teks: わたしの　かぞくは　ごにんです。ちちと　ははと　あねが　います。ははは びょういんで　はたらいています。ちちは　りょうりが　とくいです。まいしゅう、かぞくで　こうえんに　いきます。
+Pertanyaan: おかあさんの　しごとは　なんですか。
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: A
+Stimulus Teks: はじめまして。
+
+ぼくは アミルです。パキスタンじんです。
+
+サッカーが すきです。まいにち れんしゅうします。
+
+よろしく おねがいします。
+Pertanyaan: アミルさんの　しゅみは　なんですか。
+

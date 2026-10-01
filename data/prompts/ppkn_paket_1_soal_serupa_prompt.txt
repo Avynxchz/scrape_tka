@@ -1,0 +1,134 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Pendidikan Pancasila & Kewarganegaraan (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: B
+Stimulus Teks: Sistem pemerintahan Indonesia terbagi antara pemerintah pusat dan pemerintah daerah yang hubungannya diatur sesuai peraturan perundang-undangan. Hubungan ini kerap menimbulkan berbagai tantangan, terutama dalam pelaksanaan otonomi daerah, pembagian anggaran, serta sinkronisasi kebijakan pusat dan daerah.
+Pertanyaan: Berdasar ilustrasi tersebut, tantangan dari hubungan antara pemerintah pusat dan daerah, yakni….
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: ['A:Salah', 'B:Salah', 'C:Benar']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Sila pertama Pancasila berbunyi “Ketuhanan Yang Maha Esa”. Tentukan Benar (B) atau Salah (S) makna dari sila pertama Pancasila pada pernyataan berikut ini!
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: ['B', 'C', 'E']
+Stimulus Teks: Masyarakat di seluruh wilayah tanah air Indonesia seharusnya memiliki kesadaran yang sama menjaga keutuhan NKRI, salah satunya dalam bidang pertahanan dan keamanan. Melemahnya peran masyarakat untuk menjaga pertanahan berdampak pada munculnya ancaman yang bisa datang dari dalam maupun luar. Berdasarkan ilustrasi di atas, tentukan alasan pentingnya masyarakat ikut serta dalam menjaga keutuhan NKRI!
+Pertanyaan: Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Pada masa Orde Baru, pelaksanaan demokrasi Pancasila mengalami berbagai tantangan seperti pembatasan kebebasan berpendapat, dominasi partai politik tertentu, serta lemahnya fungsi pengawasan terhadap pemerintah. Upaya paling tepat untuk mencegah terulangnya kondisi tersebut adalah ….
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: C
+Stimulus Teks: Berdasarkan data dari Badan Nasional Penanggulangan Terorisme (BNPT) dan Kementerian Komunikasi dan Digital (Komdigi) terdapat sebanyak 180.954 konten bermuatan intoleransi, radikalisme, ekstremisme, dan terorisme di ruang siber. Oleh karena berbahaya bisa menimbulkan ancaman terhadap negara terutama bagi bhinneka tunggal ika, maka konten-konten tersebut telah diblokir.
+Pertanyaan: Berdasarkan ilustrasi tersebut, potensi akibat yang ditimbulkan dari ancaman tersebut, yaitu…
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: ['A', 'C', 'D']
+Stimulus Teks: Di suatu sekolah yang memiliki latar belakang yang beragam, Dimas aktif mengajak teman-temannya untuk saling menghargai perbedaan budaya dan tidak membeda-bedakan dalam bergaul. Ia juga mengingatkan agar tidak membuat konten media sosial yang dapat memecah belah.
+Pertanyaan: Berdasarkan ilustrasi, tentukan hubungan antara perilaku tersebut dengan menjaga keutuhan NKRI!
+
+Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: D
+Stimulus Teks: Pada suatu peringatan hari besar keagamaan semua masyarakat menghormati pelaksanaan ibadah dan memberikan kesempatan untuk merayakannya dengan khidmat.
+Pertanyaan: Perilaku tersebut merupakan perwujudan Sila Pertama Pancasila yang penting dilakukan karena….
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: A
+Stimulus Teks: Pada sebuah wilayah perbatasan, pembangunan infrastruktur belum merata dibandingkan daerah lainnya. Kondisi ini menimbulkan rasa ketidakadilan dan keluhan dari masyarakat setempat. Beberapa kelompok mulai menyuarakan sikap antipemerintah dan mempertanyakan komitmen negara terhadap kesejahteraan seluruh rakyat. Jika dibiarkan, situasi ini dapat berkembang menjadi ancaman serius bagi persatuan nasional.
+Pertanyaan: Berdasar ilustrasi tersebut, solusi untuk mencegah dampak negatif dari kondisi tersebut terhadap persatuan bangsa, adalah….
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: ['A', 'B', 'C']
+Stimulus Teks: Di suatu sekolah yang memiliki latar belakang yang beragam, Dimas aktif mengajak teman-temannya untuk saling menghargai perbedaan budaya dan tidak membeda-bedakan dalam bergaul. Ia juga mengingatkan agar tidak membuat konten media sosial yang dapat memecah belah.
+Pertanyaan: Berdasarkan ilustrasi, tentukan hubungan antara perilaku tersebut dengan menjaga keutuhan NKRI!
+
+Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: A
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Pada masa berlakunya UUDS 1950, pemerintah sering berganti dan tidak stabil karena koalisi partai politik pecah yang menyebabkan pengambilan kebijakan negara menjadi tidak efektif. Berdasarkan peristiwa tersebut, pelaksanaan demokrasi tidak berjalan lancar karena ….
+---
+[SOAL ACUAN NO 11]
+Kunci Resmi: D
+Stimulus Teks: Pada awal kemerdekaan Indonesia, terdapat perdebatan tajam tentang dasar negara karena perbedaan keinginan antara negara berdasarkan agama tertentu, paham sekuler, dan sosialisme. Namun pada akhirnya, Pancasila dipilih sebagai dasar dan ideologi negara. Alasan utama Pancasila diterima sebagai ideologi negara dalam situasi keberagaman ideologis tersebut karena Pancasila ….
+Pertanyaan: 
+---
+[SOAL ACUAN NO 12]
+Kunci Resmi: ['B', 'D', 'E']
+Stimulus Teks: Pada suatu masyarakat adat di suatu desa terpencil, terjadi penolakan terhadap pembangunan gedung pemerintah desa, karena merasa tidak membutuhkan fasilitas tersebut. Pemerintah daerah setempat berupaya mencari solusi agar pembangunan tetap berjalan dengan melakukan dialog dan bertemu dengan para tokoh masyarakat adat. Solusi yang dilakukan dengan mengangkat beberapa tokoh adat menjadi petugas di kantor desa tersebut.
+Pertanyaan: Berdasarkan ilustrasi, tentukan alasan pentingnya dilakukan solusi atas kasus tersebut berdasarkan pernyataan berikut! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 13]
+Kunci Resmi: C
+Stimulus Teks: Platform media sosial tidak hanya digunakan untuk hiburan, tetapi juga dijadikan sebagai sarana menyuarakan aspirasi politik, membentuk opini publik, bahkan memengaruhi kebijakan publik. Berdasarkan ilustrasi, dampak strategis tersebut terhadap eksistensi NKRI yaitu ….
+Pertanyaan: 
+---
+[SOAL ACUAN NO 14]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Gotong royong dilakukan oleh warga lintas suku dalam membersihkan lingkungan di wilayah perkotaan yang penduduknya berasal dari berbagai daerah. Kondisi masyarakat tersebut sesuai dengan penerapan dari Bhinneka Tunggal Ika.
+Pertanyaan: Tentukan Benar atau Salah untuk setiap pernyataan di bawah ini terkait hal tersebut!
+---
+[SOAL ACUAN NO 15]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Salah']
+Stimulus Teks: Pasca amandemen ketiga UUD NRI Tahun 1945 telah dibentuk Mahkamah Konstitusi (MK) sebagai salah satu lembaga yang melaksanakan kekuasaan kehakiman.
+Pertanyaan: Tentukan Benar atau Salah untuk setiap pernyataan berikut terkait contoh penerapan kewenangan Mahkamah Konstitusi!
+---
+[SOAL ACUAN NO 16]
+Kunci Resmi: B
+Stimulus Teks: Pada setiap penyusunan peraturan perundang-undangan, DPR bersama pemerintah secara musyawarah melakukan pembahasan dengan berpedoman pada Pancasila sebagai landasan filosofis. Hal tersebut merupakan salah satu perwujudan Pancasila sebagai dasar negara.
+Pertanyaan: Berdasarkan ilustrasi tersebut pentingnya Pancasila sebagai dasar negara, yaitu….
+---
+[SOAL ACUAN NO 17]
+Kunci Resmi: B
+Stimulus Teks: Pemerintah daerah di suatu kabupaten mengusulkan pembangunan rumah sakit baru di wilayah pegunungan. Usulan tersebut kemudian disetujui dan mendapatkan dukungan dana dari pemerintah pusat. Pembangunan berjalan lancar karena adanya hubungan dalam bentuk koordinasi dan komunikasi yang baik antara pemerintah pusat dan daerah.
+Pertanyaan: Berdasarkan ilustrasi tersebut, manfaat dari hubungan tersebut, yakni ….
+---
+[SOAL ACUAN NO 18]
+Kunci Resmi: ['A', 'C', 'E']
+Stimulus Teks: Di sebuah desa yang beragam suku, agama, dan budaya, para pemudanya bekerja sama membangun balai desa. Mereka berbagi tugas secara adil dan saling menghargai perbedaan. Namun, sebagian warga enggan terlibat karena perbedaan pandangan.
+Pertanyaan: Berdasarkan ilustrasi tersebut, tentukan perilaku yang tepat untuk mendukung modal sosial dalam pembangunan nasional! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 19]
+Kunci Resmi: ['A', 'B', 'D']
+Stimulus Teks: Di sebuah wilayah perbatasan Indonesia, muncul konflik horizontal yang dipicu oleh perbedaan suku dan kesenjangan ekonomi yang berpotensi mengganggu stabilitas nasional dan menimbulkan kerawanan keamanan.
+Pertanyaan: Berdasarkan ilustrasi tersebut, tentukan pernyataan berikut ini yang benar terkait dengan peran warga negara dalam mendukung sistem pertahanan dan keamanan! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 20]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: Pasal 31 ayat (1) UUD NRI Tahun 1945 menjelaskan, bahwa  “Setiap warga negara berhak mendapatkan pendidikan”.
+Pertanyaan: Tentukan Benar atau Salah pada setiap pernyataan berikut terkait makna dari pasal tersebut!
+

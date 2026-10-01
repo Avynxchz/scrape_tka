@@ -28,6 +28,15 @@ SIMULASI_URL = f"{BASE_URL}/tka/simulasi_tka"
 ROOT = os.path.dirname(os.path.abspath(__file__))
 KUNCI_DIR = os.path.join(ROOT, "data", "kunci")
 
+CANONICAL_LABELS = {
+    "tepat": "Tepat",
+    "tidak tepat": "Tidak Tepat",
+    "sesuai": "Sesuai",
+    "tidak sesuai": "Tidak Sesuai",
+    "benar": "Benar",
+    "salah": "Salah"
+}
+
 # ID mapel resmi (dropdown #mapel). Pilihan mapel dideteksi dinamis.
 WAJIB_IDS = {"matematika": ["7", "82"], "bahasa_inggris": ["3", "84"]}
 TARGETS = [
@@ -40,6 +49,8 @@ TARGETS = [
     ("ekonomi_paket_2", "2", 2),
     ("kewirausahaan_paket_1", "2", 1),
     ("kewirausahaan_paket_2", "2", 2),
+    ("geografi_paket_1", "2", 1),
+    ("geografi_paket_2", "2", 2),
 ]
 FILE_FOR_SLUG = {
     "matematika_paket_1": "matematika_paket_1_learning.json",
@@ -49,6 +60,8 @@ FILE_FOR_SLUG = {
     "ekonomi_paket_2": "ekonomi_paket_2_learning.json",
     "kewirausahaan_paket_1": "kewirausahaan_paket_1_learning.json",
     "kewirausahaan_paket_2": "kewirausahaan_paket_2_learning.json",
+    "geografi_paket_1": "geografi_paket_1_learning.json",
+    "geografi_paket_2": "geografi_paket_2_learning.json",
 }
 
 
@@ -268,15 +281,43 @@ def scrape_slug(page, slug, jenis_mapel, paket, nama_mapel_hint=None):
     raw_rows = {}
     for r in rows:
         no = int(re.sub(r"\D", "", r["no"]))
-        raw_rows[no] = {"anda": r["anda"].strip(), "kunci": r["kunci"].strip()}
-        bs_pairs = re.findall(r"([A-Z])\s*\((Benar|Salah)\)", r["kunci"])
-        if bs_pairs:
-            kunci_bs[no] = {k: v for k, v in bs_pairs}
-            bs_stmt_counts[no] = len(bs_pairs)
+        kunci_cell = r["kunci"].strip()
+        raw_rows[no] = {"anda": r["anda"].strip(), "kunci": kunci_cell}
+
+        matrix_pairs = re.findall(r"([A-E])\s*\(([^)]+)\)", kunci_cell)
+        m_pair_alt = re.findall(r"([A-E])\s*\((Tepat|Tidak Tepat|Sesuai|Tidak Sesuai|Benar|Salah)\)", kunci_cell, re.I)
+        if len(matrix_pairs) >= 2:
+            kunci_bs[no] = {k.upper(): CANONICAL_LABELS.get(v.strip().lower(), v.strip()) for k, v in matrix_pairs}
+            bs_stmt_counts[no] = len(matrix_pairs)
+        elif len(m_pair_alt) >= 1:
+            kunci_bs[no] = {k.upper(): CANONICAL_LABELS.get(v.strip().lower(), v.strip()) for k, v in m_pair_alt}
+            bs_stmt_counts[no] = len(m_pair_alt)
+        elif any(w in kunci_cell for w in ["Benar", "Salah", "Tepat", "Sesuai"]):
+            bs_map = {}
+            for line in kunci_cell.split("\n"):
+                line = line.strip()
+                m = re.match(r"\(([A-E])\)\s*(Tepat|Tidak Tepat|Sesuai|Tidak Sesuai|Benar|Salah)", line, re.I)
+                if m:
+                    bs_map[m.group(1).upper()] = CANONICAL_LABELS.get(m.group(2).strip().lower(), m.group(2).strip())
+            if bs_map:
+                kunci_bs[no] = bs_map
+                bs_stmt_counts[no] = len(bs_map)
+            else:
+                letters = re.findall(r"\(\s*([A-E])\s*\)", kunci_cell)
+                if letters:
+                    kunci_pg[no] = letters if len(letters) > 1 else letters[0]
+                else:
+                    m_raw = re.findall(r"\b([A-E])\b", kunci_cell)
+                    if m_raw:
+                        kunci_pg[no] = m_raw if len(m_raw) > 1 else m_raw[0]
         else:
-            m = re.search(r"\(([A-Z])\)", r["kunci"])
-            if m:
-                kunci_pg[no] = m.group(1)
+            letters = re.findall(r"\(\s*([A-E])\s*\)", kunci_cell)
+            if letters:
+                kunci_pg[no] = letters if len(letters) > 1 else letters[0]
+            else:
+                m_raw = re.findall(r"\b([A-E])\b", kunci_cell)
+                if m_raw:
+                    kunci_pg[no] = m_raw if len(m_raw) > 1 else m_raw[0]
 
     result = {
         "slug": slug,
@@ -322,6 +363,8 @@ def run_scrape(targets, headless=True):
                         hint = "kewirausahaan"
                     elif slug.startswith("bahasa_inggris"):
                         hint = "inggris"
+                    elif slug.startswith("geografi"):
+                        hint = "geografi"
                     scrape_slug(page, slug, jenis, paket, hint)
                     break  # sukses -> lanjut target berikutnya
                 except Exception as e:

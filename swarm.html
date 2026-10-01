@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TKA Cyber Swarm Matrix // Jarvis Neural Worktree & Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-dark: #070b14;
+      --bg-canvas: #0d1320;
+      --bg-pod: #111a2c;
+      --bg-pod-hover: #152238;
+      --bg-terminal: #070c14;
+      --border-pod: rgba(56, 189, 248, 0.22);
+      --border-terminal: #1e293b;
+      --cyan: #00f2fe;
+      --blue: #38bdf8;
+      --mint: #5eead4;
+      --indigo: #818cf8;
+      --violet: #c084fc;
+      --emerald: #34d399;
+      --amber: #fbbf24;
+      --rose: #fb7185;
+      --text-muted: #64748b;
+      --line-idle: #1e293b;
+      --line-active: #00f2fe;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(ellipse at 50% 0%, rgba(0, 242, 254, 0.14) 0%, transparent 65%),
+        radial-gradient(ellipse at 85% 90%, rgba(192, 132, 252, 0.1) 0%, transparent 60%),
+        linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 100%, 36px 36px, 36px 36px;
+      color: #f1f5f9;
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* TOP HEADER */
+    header {
+      padding: 12px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(9, 14, 24, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.22);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--cyan), var(--mint));
+      color: #070b14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 0 18px rgba(0, 242, 254, 0.45);
+    }
+
+    .brand-title h1 {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color: #ffffff;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .brand-title p {
+      font-size: 0.68rem;
+      color: var(--mint);
+      letter-spacing: 0.8px;
+    }
+
+    .header-ctrls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-glow {
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .btn-demo {
+      background: linear-gradient(135deg, #f59e0b, #ec4899);
+      color: #ffffff;
+      box-shadow: 0 0 16px rgba(245, 158, 11, 0.35);
+      border: 1px solid rgba(245, 158, 11, 0.6);
+    }
+    .btn-demo:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 26px rgba(245, 158, 11, 0.65);
+    }
+
+    .btn-launch {
+      background: linear-gradient(135deg, #0284c7, #00f2fe);
+      color: #070b14;
+      box-shadow: 0 0 18px rgba(0, 242, 254, 0.35);
+      border: 1px solid #00f2fe;
+    }
+    .btn-launch:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 28px rgba(0, 242, 254, 0.6);
+    }
+
+    .btn-reset {
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--rose);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+    }
+    .btn-reset:hover { background: rgba(244, 63, 94, 0.25); }
+
+    .btn-cbt {
+      background: rgba(30, 41, 59, 0.7);
+      color: #f8fafc;
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      text-decoration: none;
+    }
+
+    /* MAIN STAGE */
+    main {
+      flex: 1;
+      padding: 20px 24px 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1720px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    /* 1. TOP ORCHESTRATOR SECTION WITH COMMANDER BOT */
+    .orchestrator-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 580px;
+    }
+
+    .node-header-tag {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #94a3b8;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .orchestrator-card {
+      width: 100%;
+      background: rgba(14, 22, 38, 0.88);
+      backdrop-filter: blur(14px);
+      border: 2px solid var(--cyan);
+      border-radius: 14px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.25);
+      position: relative;
+    }
+
+    .bot-visual {
+      position: relative;
+      width: 52px;
+      height: 52px;
+      flex-shrink: 0;
+    }
+
+    .bot-glow-ring {
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px dashed rgba(0, 242, 254, 0.6);
+      animation: spinRing 12s linear infinite;
+    }
+    @keyframes spinRing { 100% { transform: rotate(360deg); } }
+
+    .bot-avatar-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #00f2fe, #1e1b4b);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+    .bot-avatar-inner svg {
+      width: 28px;
+      height: 28px;
+      fill: #ffffff;
+      filter: drop-shadow(0 0 4px #00f2fe);
+    }
+
+    .orchestrator-term {
+      flex: 1;
+      background: var(--bg-terminal);
+      border: 1px solid #334155;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .term-topbar {
+      background: #1e293b;
+      padding: 4px 8px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: #475569; }
+    .dot-r { background: #ef4444; }
+    .dot-y { background: #eab308; }
+    .dot-g { background: #22c55e; }
+
+    .term-screen {
+      padding: 8px 10px;
+      font-size: 0.72rem;
+      line-height: 1.45;
+      color: #e2e8f0;
+      min-height: 48px;
+      white-space: pre-wrap;
+    }
+    .prompt-sym { color: var(--mint); font-weight: 800; margin-right: 4px; }
+    .cursor-blink {
+      display: inline-block;
+      width: 6px;
+      height: 12px;
+      background: var(--mint);
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* TELEMETRY BAR UNDER ORCHESTRATOR */
+    .telemetry-strip {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 12px;
+      width: 100%;
+    }
+
+    .telemetry-node {
+      background: rgba(14, 22, 38, 0.78);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 8px;
+      padding: 5px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.7rem;
+    }
+    .telemetry-node i { color: var(--cyan); }
+    .t-val { font-weight: 800; color: #ffffff; }
+
+    /* 2. FORKING TREE SVG CANVAS (TOP TO 5 WORKTREES) */
+    .svg-tree-container {
+      width: 100%;
+      height: 80px;
+      position: relative;
+      margin: 0;
+      pointer-events: none;
+    }
+    .svg-tree { width: 100%; height: 100%; }
+
+    .branch-line {
+      stroke: var(--line-idle);
+      stroke-width: 1.8;
+      fill: none;
+      transition: stroke 0.4s ease;
+    }
+    .branch-line.active {
+      stroke: var(--line-active);
+      stroke-width: 2.6;
+      stroke-dasharray: 6 6;
+      animation: linePulse 0.8s linear infinite;
+      filter: drop-shadow(0 0 7px var(--cyan));
+    }
+    @keyframes linePulse { to { stroke-dashoffset: -12; } }
+
+    /* 3. 5 WORKTREE PODS GRID */
+    .worktree-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      width: 100%;
+      position: relative;
+      z-index: 5;
+    }
+
+    .worktree-pod {
+      background: var(--bg-pod);
+      border: 1.5px solid var(--border-pod);
+      border-radius: 14px;
+      padding: 12px 10px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .worktree-pod:hover {
+      transform: translateY(-4px);
+      border-color: var(--cyan);
+      box-shadow: 0 12px 35px rgba(0, 242, 254, 0.25);
+    }
+    .worktree-pod.active {
+      border-color: var(--cyan);
+      background: #17243a;
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.35);
+    }
+    .worktree-pod.success {
+      border-color: var(--emerald);
+      box-shadow: 0 0 24px rgba(52, 211, 153, 0.25);
+    }
+
+    .pod-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+      gap: 2px;
+    }
+    .pod-git-icon {
+      font-size: 1.15rem;
+      color: var(--mint);
+      margin-bottom: 2px;
+    }
+    .worktree-pod.active .pod-git-icon {
+      animation: pulseRotate 2s infinite ease-in-out;
+      color: var(--cyan);
+      filter: drop-shadow(0 0 8px var(--cyan));
+    }
+    @keyframes pulseRotate {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.15) rotate(8deg); }
+    }
+
+    .pod-main-label {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .pod-sub-label {
+      font-size: 0.65rem;
+      color: var(--blue);
+      letter-spacing: 1px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    /* MAIN TERMINAL IN POD */
+    .pod-main-terminal {
+      width: 100%;
+      background: var(--bg-terminal);
+      border: 1.2px solid #334155;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .worktree-pod.active .pod-main-terminal { border-color: var(--cyan); }
+
+    .pod-screen {
+      padding: 8px 10px;
+      min-height: 56px;
+      font-size: 0.68rem;
+      line-height: 1.4;
+      color: #cbd5e1;
+      white-space: pre-wrap;
+    }
+
+    /* CHIP TAGS */
+    .chip-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 10px;
+      justify-content: center;
+    }
+    .chip-tag {
+      font-size: 0.58rem;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      color: #94a3b8;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .chip-tag.highlight {
+      background: rgba(0, 242, 254, 0.1);
+      color: var(--cyan);
+      border-color: rgba(0, 242, 254, 0.3);
+    }
+
+    /* AGENT TEAM SECTION */
+    .agent-team-divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .agent-team-divider::before, .agent-team-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: #1e293b;
+    }
+    .agent-team-divider span {
+      font-size: 0.62rem;
+      color: #94a3b8;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .agent-team-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+      width: 100%;
+    }
+
+    .sub-agent-box {
+      background: var(--bg-terminal);
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 4px 3px 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.2s ease;
+      min-height: 56px;
+      justify-content: space-between;
+    }
+    .sub-agent-box.active {
+      border-color: var(--cyan);
+      background: rgba(0, 242, 254, 0.1);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.3);
+    }
+    .sub-agent-box.success {
+      border-color: var(--emerald);
+      background: rgba(52, 211, 153, 0.1);
+    }
+
+    .sub-top-bar { display: flex; align-items: center; gap: 3px; }
+    .sub-dot { width: 3.5px; height: 3.5px; border-radius: 50%; background: #475569; }
+    .sub-prompt { font-size: 0.62rem; color: var(--mint); font-weight: 800; }
+    .sub-agent-name {
+      font-size: 0.54rem;
+      color: #94a3b8;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-align: center;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+    .sub-agent-box.active .sub-agent-name { color: var(--cyan); }
+    .sub-agent-box.success .sub-agent-name { color: var(--emerald); }
+
+    /* 4. CONVERGING TREE SVG CANVAS */
+    .svg-merge-container {
+      width: 100%;
+      height: 60px;
+      position: relative;
+      margin: 0;
+      pointer-events: none;
+    }
+
+    /* 5. MERGE NODE */
+    .merge-box {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 10;
+      margin-bottom: 20px;
+    }
+
+    .merge-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #111a2c;
+      border: 1.5px solid #334155;
+      padding: 9px 24px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 2px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease;
+    }
+    .merge-badge.active {
+      border-color: var(--emerald);
+      box-shadow: 0 0 30px rgba(52, 211, 153, 0.4);
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+    }
+
+    /* 6. BOTTOM DUAL HUD */
+    .bottom-hud {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .hud-box {
+      background: rgba(14, 22, 38, 0.88);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .hud-header {
+      background: rgba(9, 14, 24, 0.92);
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .hud-title {
+      font-size: 0.74rem;
+      color: var(--blue);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .inventory-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.72rem;
+    }
+    .inventory-table th {
+      text-align: left;
+      padding: 7px 14px;
+      background: rgba(15, 23, 42, 0.6);
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    .inventory-table td {
+      padding: 7px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .badge-sub { padding: 2px 6px; border-radius: 4px; font-size: 0.62rem; font-weight: 700; }
+    .badge-geo { background: rgba(56, 189, 248, 0.2); color: var(--blue); border: 1px solid rgba(56, 189, 248, 0.4); }
+    .badge-fis { background: rgba(192, 132, 252, 0.2); color: var(--violet); border: 1px solid rgba(192, 132, 252, 0.4); }
+
+    .terminal-body {
+      padding: 12px 14px;
+      height: 210px;
+      overflow-y: auto;
+      font-size: 0.7rem;
+      line-height: 1.55;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      background: #060a12;
+    }
+    .log-line { display: flex; align-items: flex-start; gap: 8px; word-break: break-all; }
+    .log-time { color: #64748b; flex-shrink: 0; }
+    .log-tag { padding: 1px 5px; border-radius: 4px; font-weight: 700; font-size: 0.6rem; flex-shrink: 0; }
+    .tag-SCOUT { background: rgba(56, 189, 248, 0.2); color: var(--blue); }
+    .tag-ARCHITECT { background: rgba(129, 140, 248, 0.2); color: var(--indigo); }
+    .tag-VISIONARY { background: rgba(192, 132, 252, 0.2); color: var(--violet); }
+    .tag-GEMINI { background: rgba(0, 242, 254, 0.2); color: var(--cyan); }
+    .tag-AUDITOR { background: rgba(52, 211, 153, 0.2); color: var(--emerald); }
+    .tag-SYSTEM { background: rgba(251, 191, 36, 0.2); color: var(--amber); }
+
+    /* DEVTOOLS MODAL */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-overlay.open { display: flex; }
+
+    .modal-window {
+      background: #0b111c;
+      border: 1.5px solid var(--cyan);
+      box-shadow: 0 0 50px rgba(0, 242, 254, 0.35);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 860px;
+      height: 75vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 12px 18px;
+      background: #141c2c;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-title { font-size: 0.86rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px; }
+    .modal-close { background: transparent; border: none; color: #94a3b8; font-size: 1.1rem; cursor: pointer; }
+    .modal-tabs { display: flex; background: #0c1422; border-bottom: 1px solid #334155; padding: 0 14px; gap: 6px; }
+    .m-tab {
+      padding: 8px 12px;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .m-tab.active { color: var(--cyan); border-bottom-color: var(--cyan); font-weight: 700; }
+    .modal-body { flex: 1; padding: 16px; overflow-y: auto; font-size: 0.72rem; background: #060910; line-height: 1.6; }
+    pre code { color: #38bdf8; white-space: pre-wrap; }
+    .live-status-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      border: 1px solid #334155;
+      background: rgba(15, 23, 42, 0.8);
+      transition: all 0.3s ease;
+      color: #94a3b8;
+    }
+    .live-status-pill.running {
+      border-color: var(--cyan);
+      background: rgba(0, 242, 254, 0.12);
+      color: var(--cyan);
+      box-shadow: 0 0 16px rgba(0, 242, 254, 0.35);
+    }
+    .live-status-pill.completed {
+      border-color: var(--emerald);
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--emerald);
+      box-shadow: 0 0 16px rgba(52, 211, 153, 0.35);
+    }
+    .live-status-pill.error {
+      border-color: var(--rose);
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--rose);
+      box-shadow: 0 0 16px rgba(244, 63, 94, 0.35);
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #64748b;
+    }
+    .live-status-pill.running .live-dot {
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+      animation: pulseDot 1s infinite alternate;
+    }
+    .live-status-pill.completed .live-dot {
+      background: var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
+    }
+    @keyframes pulseDot {
+      0% { opacity: 0.4; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* SUBJECT SELECTOR MODAL & CARDS */
+    .btn-select-mapel {
+      background: linear-gradient(135deg, #6366f1, #8b5cf6);
+      color: #ffffff;
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.4);
+    }
+    .btn-select-mapel:hover {
+      box-shadow: 0 0 24px rgba(139, 92, 246, 0.6);
+      transform: translateY(-1px);
+    }
+    .selector-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 12px;
+      padding: 12px 0;
+    }
+    .subject-card {
+      background: #0d1527;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 8px;
+      padding: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      user-select: none;
+    }
+    .subject-card:hover {
+      border-color: var(--cyan);
+      background: #131e36;
+    }
+    .subject-card.selected {
+      border-color: var(--cyan);
+      background: rgba(0, 242, 254, 0.08);
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.2);
+    }
+    .subject-card input[type="checkbox"] {
+      margin-top: 3px;
+      accent-color: var(--cyan);
+      cursor: pointer;
+      width: 16px;
+      height: 16px;
+    }
+    .sc-info { flex: 1; }
+    .sc-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 4px;
+    }
+    .sc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      font-size: 0.65rem;
+    }
+    .badge-live {
+      background: rgba(52, 211, 153, 0.18);
+      color: #34d399;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(52, 211, 153, 0.4);
+    }
+    .badge-unscraped {
+      background: rgba(251, 191, 36, 0.18);
+      color: #fbbf24;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(251, 191, 36, 0.4);
+    }
+    .badge-kat {
+      background: rgba(99, 102, 241, 0.18);
+      color: #a5b4fc;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+    .selector-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      background: #090e18;
+      border-bottom: 1px solid #1e293b;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      background: transparent;
+      border: 1px solid #334155;
+      color: #94a3b8;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.68rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s ease;
+    }
+    .filter-btn:hover { border-color: var(--blue); color: #fff; }
+    .filter-btn.active {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      font-weight: 700;
+    }
+    .selector-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 18px;
+      background: #090e18;
+      border-top: 1px solid #1e293b;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- TOP HEADER -->
+  <header>
+    <div class="brand-wrap">
+      <div class="brand-icon">
+        <i class="fa-solid fa-network-wired"></i>
+      </div>
+      <div class="brand-title">
+        <h1>TKA CYBER SWARM MATRIX</h1>
+        <p>JARVIS WORKTREE NEURAL REASONING // ZERO-HUMAN-IN-THE-LOOP</p>
+      </div>
+    </div>
+
+    <div class="header-ctrls">
+      <div id="livePill" class="live-status-pill">
+        <span class="live-dot"></span>
+        <span id="liveStatusText">STANDBY</span>
+      </div>
+
+      <button id="btnSelectMapel" class="btn-glow btn-select-mapel" onclick="openSubjectSelector()">
+        <i class="fa-solid fa-layer-group"></i> TARGET MATRIX · <span id="selectedCountBadge">PILIH MAPEL</span>
+      </button>
+
+      <button id="btnStartDemo" class="btn-glow btn-demo" onclick="runJarvisSimulation()">
+        <i class="fa-solid fa-play"></i> SIMULASI DEMO
+      </button>
+
+      <button id="btnStartLive" class="btn-glow btn-launch" onclick="startLiveSwarm()">
+        <i class="fa-solid fa-bolt"></i> LUNCURKAN SWARM
+      </button>
+
+      <button id="btnResetSwarm" class="btn-glow btn-reset" onclick="resetJarvis(true, true)">
+        <i class="fa-solid fa-rotate-left"></i> RESET
+      </button>
+
+      <a href="/index.html" target="_blank" class="btn-glow btn-cbt">
+        <i class="fa-solid fa-laptop-code"></i> CBT APP
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN CANVAS STAGE -->
+  <main>
+
+    <!-- 1. ROOT ORCHESTRATOR WITH COMMANDER BOT -->
+    <div class="orchestrator-stage">
+      <div class="node-header-tag">
+        <i class="fa-solid fa-sitemap"></i> ORCHESTRATOR ROOT
+      </div>
+
+      <div class="orchestrator-card">
+        <div class="bot-visual">
+          <div class="bot-glow-ring"></div>
+          <div class="bot-avatar-inner">
+            <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1-1-1v-3a1 1 0 0 1 1-1h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2M7.5 13A2.5 2.5 0 0 0 5 15.5 2.5 2.5 0 0 0 7.5 18 2.5 2.5 0 0 0 10 15.5 2.5 2.5 0 0 0 7.5 13m9 0a2.5 2.5 0 0 0-2.5 2.5 2.5 2.5 0 0 0 2.5 2.5 2.5 2.5 0 0 0 2.5-2.5 2.5 2.5 0 0 0-2.5-2.5Z"/></svg>
+          </div>
+        </div>
+
+        <div id="term_orchestrator" class="orchestrator-term">
+          <div class="term-topbar">
+            <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+            <span style="font-size: 0.62rem; color: #64748b; margin-left: 6px;">orchestrator_master.py</span>
+          </div>
+          <div class="term-screen">
+            <span class="prompt-sym">></span>
+            <span id="orchestrator_text">Swarm War Room standby. Click "JALANKAN SIMULASI DEMO" to pulse neural pipeline.</span>
+            <span class="cursor-blink"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TELEMETRY STRIP -->
+      <div class="telemetry-strip">
+        <div class="telemetry-node">
+          <i class="fa-solid fa-clock"></i>
+          <div>ELAPSED: <span id="telElapsed" class="t-val">00:00</span></div>
+        </div>
+        <div class="telemetry-node">
+          <i class="fa-solid fa-list-check"></i>
+          <div>QUESTIONS: <span id="telQuestions" class="t-val">0 / 73</span></div>
+        </div>
+        <div class="telemetry-node">
+          <i class="fa-solid fa-images"></i>
+          <div>ASSETS: <span id="telImages" class="t-val">0 / 94</span></div>
+        </div>
+        <div class="telemetry-node">
+          <i class="fa-solid fa-brain"></i>
+          <div>MODEL: <span class="t-val" style="color: var(--cyan);">GEMINI 3.8 FLASH HIGH</span></div>
+        </div>
+        <div class="telemetry-node">
+          <i class="fa-solid fa-shield-check"></i>
+          <div>ZERO-TRUST: <span class="t-val" style="color: var(--emerald);">100% LOCK</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. FORKING TREE SVG CANVAS (TOP TO 5 WORKTREES) -->
+    <div class="svg-tree-container">
+      <svg class="svg-tree" preserveAspectRatio="none" viewBox="0 0 1000 80">
+        <path id="trunk_top" class="branch-line" d="M 500 0 L 500 35" />
+        <path id="bus_top" class="branch-line" d="M 100 35 L 900 35" />
+        <path id="drop_1" class="branch-line" d="M 100 35 L 100 80" />
+        <path id="drop_2" class="branch-line" d="M 300 35 L 300 80" />
+        <path id="drop_3" class="branch-line" d="M 500 35 L 500 80" />
+        <path id="drop_4" class="branch-line" d="M 700 35 L 700 80" />
+        <path id="drop_5" class="branch-line" d="M 900 35 L 900 80" />
+      </svg>
+    </div>
+
+    <!-- 3. 5 WORKTREE PODS GRID -->
+    <div class="worktree-grid">
+
+      <!-- WORKTREE 1: SCOUT SWARM -->
+      <div id="pod_1" class="worktree-pod" onclick="openDevTools('divisi_1')">
+        <div class="pod-header">
+          <i class="fa-solid fa-code-fork pod-git-icon"></i>
+          <div class="pod-main-label">WORKTREE 01</div>
+          <div class="pod-sub-label">SCOUT SWARM</div>
+        </div>
+
+        <div id="term_pod_1" class="pod-main-terminal">
+          <div class="term-topbar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+          <div class="pod-screen">
+            <span class="prompt-sym">></span><span id="text_pod_1">Waiting for ingress trigger...</span>
+          </div>
+        </div>
+
+        <div class="chip-tags">
+          <span class="chip-tag highlight">DOM Harvester</span>
+          <span class="chip-tag">Asset Downloader</span>
+          <span class="chip-tag">Key-Lock</span>
+        </div>
+
+        <div class="agent-team-divider"><span>AGENT TEAM</span></div>
+
+        <div class="agent-team-grid">
+          <div id="sub_1_1" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">GEO-P1</div></div>
+          <div id="sub_1_2" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">GEO-P2</div></div>
+          <div id="sub_1_3" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">FIS-P1</div></div>
+          <div id="sub_1_4" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">FIS-P2</div></div>
+        </div>
+      </div>
+
+      <!-- WORKTREE 2: DATA ARCHITECT -->
+      <div id="pod_2" class="worktree-pod" onclick="openDevTools('divisi_2')">
+        <div class="pod-header">
+          <i class="fa-solid fa-code-fork pod-git-icon"></i>
+          <div class="pod-main-label">WORKTREE 02</div>
+          <div class="pod-sub-label">DATA ARCHITECT</div>
+        </div>
+
+        <div id="term_pod_2" class="pod-main-terminal">
+          <div class="term-topbar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+          <div class="pod-screen">
+            <span class="prompt-sym">></span><span id="text_pod_2">Standing by for raw DOM...</span>
+          </div>
+        </div>
+
+        <div class="chip-tags">
+          <span class="chip-tag highlight">Clean Verbatim</span>
+          <span class="chip-tag">MathML/KaTeX</span>
+          <span class="chip-tag">Canonical L2</span>
+        </div>
+
+        <div class="agent-team-divider"><span>AGENT TEAM</span></div>
+
+        <div class="agent-team-grid">
+          <div id="sub_2_1" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">SANITIZER</div></div>
+          <div id="sub_2_2" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">LATEX-PARSE</div></div>
+          <div id="sub_2_3" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">CANON-BUILD</div></div>
+          <div id="sub_2_4" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">VALIDATOR</div></div>
+        </div>
+      </div>
+
+      <!-- WORKTREE 3: VISIONARY AGENT -->
+      <div id="pod_3" class="worktree-pod" onclick="openDevTools('divisi_3')">
+        <div class="pod-header">
+          <i class="fa-solid fa-code-fork pod-git-icon"></i>
+          <div class="pod-main-label">WORKTREE 03</div>
+          <div class="pod-sub-label">VISIONARY AGENT</div>
+        </div>
+
+        <div id="term_pod_3" class="pod-main-terminal">
+          <div class="term-topbar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+          <div class="pod-screen">
+            <span class="prompt-sym">></span><span id="text_pod_3">Waiting for image inputs...</span>
+          </div>
+        </div>
+
+        <div class="chip-tags">
+          <span class="chip-tag highlight">Zero Blindness</span>
+          <span class="chip-tag">Vector Geometry</span>
+          <span class="chip-tag">Sidecar JSON</span>
+        </div>
+
+        <div class="agent-team-divider"><span>AGENT TEAM</span></div>
+
+        <div class="agent-team-grid">
+          <div id="sub_3_1" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">SAT-MAPS</div></div>
+          <div id="sub_3_2" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">BMKG-SPI</div></div>
+          <div id="sub_3_3" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">PHYS-VECTOR</div></div>
+          <div id="sub_3_4" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">SIDECAR</div></div>
+        </div>
+      </div>
+
+      <!-- WORKTREE 4: GEMINI FLASH REASONING ENGINE -->
+      <div id="pod_4" class="worktree-pod" onclick="openDevTools('divisi_4')">
+        <div class="pod-header">
+          <i class="fa-solid fa-code-fork pod-git-icon"></i>
+          <div class="pod-main-label">WORKTREE 04</div>
+          <div class="pod-sub-label">GEMINI FLASH HIGH</div>
+        </div>
+
+        <div id="term_pod_4" class="pod-main-terminal">
+          <div class="term-topbar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+          <div class="pod-screen">
+            <span class="prompt-sym">></span><span id="text_pod_4">Thinking budget: High (Standby)</span>
+          </div>
+        </div>
+
+        <div class="chip-tags">
+          <span class="chip-tag highlight">Gemini 3.8 Flash High</span>
+          <span class="chip-tag">185 tok/s</span>
+          <span class="chip-tag">Model 1 Schema</span>
+        </div>
+
+        <div class="agent-team-divider"><span>AGENT TEAM</span></div>
+
+        <div class="agent-team-grid">
+          <div id="sub_4_1" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">BATCH-ODD</div></div>
+          <div id="sub_4_2" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">BATCH-EVEN</div></div>
+          <div id="sub_4_3" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">KATEX-PROOF</div></div>
+          <div id="sub_4_4" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">DRILL-SOAL</div></div>
+        </div>
+      </div>
+
+      <!-- WORKTREE 5: ZERO-TRUST AUDITOR -->
+      <div id="pod_5" class="worktree-pod" onclick="openDevTools('divisi_5')">
+        <div class="pod-header">
+          <i class="fa-solid fa-code-fork pod-git-icon"></i>
+          <div class="pod-main-label">WORKTREE 05</div>
+          <div class="pod-sub-label">ZERO-TRUST AUDIT</div>
+        </div>
+
+        <div id="term_pod_5" class="pod-main-terminal">
+          <div class="term-topbar"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+          <div class="pod-screen">
+            <span class="prompt-sym">></span><span id="text_pod_5">Key guard monitoring...</span>
+          </div>
+        </div>
+
+        <div class="chip-tags">
+          <span class="chip-tag highlight">Pusmendik Lock</span>
+          <span class="chip-tag">5-Pilar Check</span>
+          <span class="chip-tag">Live Deploy</span>
+        </div>
+
+        <div class="agent-team-divider"><span>AGENT TEAM</span></div>
+
+        <div class="agent-team-grid">
+          <div id="sub_5_1" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">KEY-LOCK</div></div>
+          <div id="sub_5_2" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">5-PILAR</div></div>
+          <div id="sub_5_3" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">ENRICHER</div></div>
+          <div id="sub_5_4" class="sub-agent-box"><div class="sub-top-bar"><div class="sub-dot"></div><div class="sub-dot"></div><div class="sub-dot"></div></div><div class="sub-prompt">>_</div><div class="sub-agent-name">DEPLOY-CBT</div></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4. CONVERGING TREE SVG CANVAS -->
+    <div class="svg-merge-container">
+      <svg class="svg-tree" preserveAspectRatio="none" viewBox="0 0 1000 60">
+        <path id="conv_1" class="branch-line" d="M 100 0 L 100 30" />
+        <path id="conv_2" class="branch-line" d="M 300 0 L 300 30" />
+        <path id="conv_3" class="branch-line" d="M 500 0 L 500 30" />
+        <path id="conv_4" class="branch-line" d="M 700 0 L 700 30" />
+        <path id="conv_5" class="branch-line" d="M 900 0 L 900 30" />
+
+        <path id="bus_bottom" class="branch-line" d="M 100 30 L 900 30" />
+        <path id="stem_bottom" class="branch-line" d="M 500 30 L 500 60" />
+      </svg>
+    </div>
+
+    <!-- 5. FINAL MERGE NODE -->
+    <div class="merge-box">
+      <div id="mergeNode" class="merge-badge">
+        <i class="fa-solid fa-code-merge"></i>
+        <span id="mergeText">MERGE // PRODUCTION RUNTIME</span>
+      </div>
+    </div>
+
+    <!-- 6. BOTTOM DUAL HUD: TARGET MATRIX & LIVE TERMINAL BUS -->
+    <div class="bottom-hud">
+
+      <!-- TARGET MATRIX -->
+      <div class="hud-box">
+        <div class="hud-header">
+          <div class="hud-title">
+            <i class="fa-solid fa-bullseye"></i> ACTIVE SWARM TARGET MATRIX
+          </div>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <span id="targetMatrixCountBadge" style="font-size: 0.68rem; color: var(--cyan);">0 TARGET AKTIF</span>
+            <button class="btn-glow" style="padding: 3px 8px; font-size: 0.64rem; background: #1e293b;" onclick="openSubjectSelector()">
+              <i class="fa-solid fa-pen-to-square"></i> UBAH
+            </button>
+          </div>
+        </div>
+
+        <table class="inventory-table">
+          <thead>
+            <tr>
+              <th>TARGET MAPEL</th>
+              <th>JENIS</th>
+              <th>PUSMENDIK ID</th>
+              <th>STATUS ASSET & SOLUSI</th>
+            </tr>
+          </thead>
+          <tbody id="targetMatrixBody">
+            <tr>
+              <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 16px;">
+                Memuat data target matrix...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- LIVE TERMINAL BUS -->
+      <div class="hud-box">
+        <div class="hud-header">
+          <div class="hud-title">
+            <i class="fa-solid fa-network-wired"></i> LIVE AGENT BUS STREAM
+          </div>
+          <span style="font-size: 0.68rem; color: var(--emerald);">● REAL-TIME STREAM</span>
+        </div>
+
+        <div id="terminalBody" class="terminal-body">
+          <div class="log-line">
+            <span class="log-time">[00:00:00]</span>
+            <span class="log-tag tag-SYSTEM">SYSTEM</span>
+            <span class="log-msg">Jarvis Neural Swarm siap. Pilih mapel via TARGET MATRIX dan klik "LUNCURKAN SWARM".</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- DEVTOOLS HIDDEN LAYER MODAL -->
+  <div id="devToolsModal" class="modal-overlay" onclick="closeDevTools(event)">
+    <div class="modal-window" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div id="modalTitle" class="modal-title">
+          <i class="fa-solid fa-microchip"></i> WORKTREE HIDDEN LAYER TELEMETRY
+        </div>
+        <button class="modal-close" onclick="closeDevTools()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-tabs">
+        <button id="tabPayload" class="m-tab active" onclick="switchModalTab('payload')">LIVE JSON PAYLOAD</button>
+        <button id="tabThinking" class="m-tab" onclick="switchModalTab('thinking')">REASONING CHAIN (THINKING)</button>
+        <button id="tabTelemetry" class="m-tab" onclick="switchModalTab('telemetry')">AGENT RUNTIME METRICS</button>
+      </div>
+
+      <div id="modalBody" class="modal-body">
+        <pre><code id="modalCode">Memuat telemetri...</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBJECT SELECTOR MODAL -->
+  <div id="subjectSelectorModal" class="modal-overlay" onclick="closeSubjectSelector(event)">
+    <div class="modal-window" style="max-width: 1080px; height: 86vh;" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-layer-group" style="color: var(--cyan);"></i> MASTER SUBJECT SELECTOR // MATRIX PUSMENDIK TKA
+        </div>
+        <button class="modal-close" onclick="closeSubjectSelector()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- TOOLBAR & FILTERS -->
+      <div class="selector-toolbar">
+        <div class="filter-tabs" id="subjectFilterTabs">
+          <button class="filter-btn active" onclick="filterSubjectCategory('ALL')">SEMUA (<span id="countAll">0</span>)</button>
+          <button class="filter-btn" onclick="filterSubjectCategory('UNSCRAPED')">🟡 BELUM SCRAPE (<span id="countUnscraped">0</span>)</button>
+          <button class="filter-btn" onclick="filterSubjectCategory('LIVE')">🟢 LIVE CBT (<span id="countLive">0</span>)</button>
+          <button class="filter-btn" onclick="filterSubjectCategory('Saintek Pilihan')">SAINTEK</button>
+          <button class="filter-btn" onclick="filterSubjectCategory('Soshum Pilihan')">SOSHUM</button>
+          <button class="filter-btn" onclick="filterSubjectCategory('Wajib')">WAJIB</button>
+          <button class="filter-btn" onclick="filterSubjectCategory('Bahasa Asing')">BAHASA ASING</button>
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-glow" style="padding: 5px 10px; font-size: 0.68rem; background: rgba(251, 191, 36, 0.2); border: 1px solid var(--amber); color: var(--amber);" onclick="selectAllUnscraped()">
+            <i class="fa-solid fa-check-double"></i> Pilih Semua Unscraped
+          </button>
+          <button class="btn-glow" style="padding: 5px 10px; font-size: 0.68rem; background: #1e293b;" onclick="clearSelection()">
+            <i class="fa-solid fa-xmark"></i> Kosongkan
+          </button>
+        </div>
+      </div>
+
+      <!-- SUBJECT CARDS GRID -->
+      <div class="modal-body" style="background: #080d1a;">
+        <div id="subjectCardsGrid" class="selector-grid">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- FOOTER -->
+      <div class="selector-footer">
+        <div>
+          <span style="color: #94a3b8; font-size: 0.75rem;">TARGET TERPILIH: </span>
+          <strong id="modalSelectedCount" style="color: var(--cyan); font-size: 0.85rem;">0 Paket</strong>
+          <span style="color: #64748b; font-size: 0.7rem; margin-left: 10px;">| AI MODEL: <strong style="color: var(--mint);">GOOGLE GEMINI 3.8 FLASH</strong></span>
+        </div>
+        <button id="btnLaunchFromModal" class="btn-glow btn-launch" onclick="launchSelectedSwarm()">
+          <i class="fa-solid fa-bolt"></i> LUNCURKAN SWARM UNTUK TARGET INI
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let isSimulating = false;
+    let simInterval = null;
+    let elapsedSec = 0;
+    let activeDevToolsDivision = 'divisi_4';
+    let currentModalTab = 'payload';
+
+    const hiddenData = {
+      divisi_1: {
+        payload: {
+          scout_targets: ["geografi_paket_2 (ID:93)", "fisika_paket_1 (ID:8)", "fisika_paket_2 (ID:88)"],
+          total_questions_scraped: 73,
+          total_images_saved: 94,
+          key_extraction_mode: "review_hasil_table",
+          dom_parser: "Playwright Headless Chromium"
+        },
+        thinking: [
+          "[Worker GEO-P2] Navigasi login simulasi Pusmendik -> Mengambil 29 butir soal & 24 citra.",
+          "[Worker FIS-P1] Ekstraksi 22 soal fisika -> Mengunduh 38 diagram rangkaian & rumus.",
+          "[Worker FIS-P2] Ekstraksi 22 soal fisika -> Mengunduh 32 diagram vektor gerak.",
+          "[Worker KEY-LOCK] Membaca tabel review_hasil Pusmendik -> 73 kunci resmi terkunci tanpa kompromi."
+        ],
+        telemetry: { concurrency: 4, bandwidth: "24.5 MB/s", dom_latency: "18ms", errors: 0 }
+      },
+      divisi_2: {
+        payload: {
+          normalization_standard: "Canonical L2 JSON",
+          tags_stripped: ["&nbsp;", "<font>", "<span>", "inline styles"],
+          verbatim_text_verified: true,
+          questions_processed: 73
+        },
+        thinking: [
+          "[SANITIZER] Menghilangkan noise HTML dan format formatting Pusmendik yang rusak.",
+          "[LATEX-PARSE] Mengonversi tag MathML Pusmendik menjadi standar LaTeX verbatim ($...$).",
+          "[CANON-BUILD] Menyusun file JSON canonical di data/canonical_questions/*.json.",
+          "[VALIDATOR] Validasi skema L2 lolos 100% tanpa missing assets."
+        ],
+        telemetry: { parser_speed: "520 nodes/s", memory: "84 MB", schema_compliance: "100%" }
+      },
+      divisi_3: {
+        payload: {
+          scanned_images: 94,
+          sidecar_files: 3,
+          visual_categories: ["Peta Anomali SPI BMKG", "Citra Satelit Landsat", "Rangkaian Listrik", "Diagram Gaya Dinamika"]
+        },
+        thinking: [
+          "[SAT-MAPS] Memindai citra satelit Ceper Klaten 2007 vs 2024 -> Konversi sawah menjadi atap pabrik logam cerah.",
+          "[BMKG-SPI] Memindai peta SPI Feb 2025 -> Mendeteksi warna marun pekat (Extremely Dry) di Merauke, Papua Selatan.",
+          "[PHYS-VECTOR] Menguraikan komponen vektor gaya pada katrol licin dan hukum Kirchoff II.",
+          "[SIDECAR] Menyimpan deskripsi teknis ke data/canonical_questions/_vision/*.json."
+        ],
+        telemetry: { spatial_accuracy: "High", ocr_score: "99.2%", zero_blindness: true }
+      },
+      divisi_4: {
+        payload: {
+          engine: "Google Gemini 3.8 Flash",
+          thinking_mode: "High Effort Reasoning",
+          temperature: 0.2,
+          workers: {
+            batch_odd: { role: "Worker A", batches: [1, 3, 5] },
+            batch_even: { role: "Worker B", batches: [2, 4, 6] }
+          },
+          target_schema: "Model 1 Contract (package, subject, solutions[concept_kunci, glossary, steps, why_correct, soal_serupa])"
+        },
+        thinking: [
+          "[BATCH-ODD] Menganalisis Batch 1 Geografi P2 (Soal 1 s.d. 5)...",
+          "[BATCH-ODD] Soal 1: Peneduhan modul surya Cirata -> Stabilitas fluktuasi suhu air waduk menekan pertumbuhan alga -> Kunci B (Valid).",
+          "[BATCH-ODD] Soal 4: Peta BMKG SPI Feb 2025 -> Anomali kekeringan marun ekstrem terkonsentrasi di Papua Selatan -> Kunci B (Valid).",
+          "[BATCH-EVEN] Menganalisis Batch 2 Fisika P1 -> Menghitung usaha $W = F \\cdot s \\cdot \\cos\\theta = 120\\text{ Joule}$.",
+          "[DRILL-SOAL] Menyusun 1 Soal Serupa isomorfik lengkap 4 opsi dan pembahasan singkat per butir."
+        ],
+        telemetry: { token_throughput: "185 tokens/sec", latency: "1.12s", reasoning_budget: 2048, schema_failures: 0 }
+      },
+      divisi_5: {
+        payload: {
+          audit_pipeline: ["Pusmendik Key Lock", "5-Pillar Schema", "KaTeX Syntax Check", "Anti-Boilerplate"],
+          ground_truth_keys: "73 / 73 Locked (No Overwrite)",
+          hot_reload_target: "data/*_learning.json",
+          cbt_web: "http://localhost:8080/index.html"
+        },
+        thinking: [
+          "[KEY-LOCK] Memverifikasi kunci penalaran AI terhadap kunci resmi Pusmendik: 100% Match.",
+          "[5-PILAR] Validasi kelengkapan 5 pilar pedagogis: konsep inti, kausalitas, eliminasi distraktor, dunia nyata, miskonsepsi.",
+          "[ENRICHER] Mengompilasi dan sinkronisasi ke file database pembelajaran.",
+          "[DEPLOY-CBT] Hot-reload runtime CBT selesai. Siswa langsung dapat mengakses pembahasan lengkap!"
+        ],
+        telemetry: { zero_trust_score: "100%", build_time: "0.38s", status: "Production Ready" }
+      }
+    };
+
+    function runJarvisSimulation() {
+      if (isSimulating) return;
+      isSimulating = true;
+      resetJarvis(false);
+
+      const btn = document.getElementById('btnStartDemo');
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> JARVIS RUNNING...';
+
+      // Start elapsed timer
+      simInterval = setInterval(() => {
+        elapsedSec++;
+        const m = String(Math.floor(elapsedSec / 60)).padStart(2, '0');
+        const s = String(elapsedSec % 60).padStart(2, '0');
+        document.getElementById('telElapsed').innerText = `${m}:${s}`;
+      }, 1000);
+
+      // STEP 1: ORCHESTRATOR PULSE (0s)
+      setPathActive('trunk_top', true);
+      setPathActive('bus_top', true);
+      setPathActive('drop_1', true);
+      typeText('orchestrator_text', "Neural Swarm Initialized. Branching tasks to 5 worktrees...", () => {});
+      addLog("SYSTEM", "Neural Swarm Initialized. Menghubungkan trunk ke Worktree 01 s.d. 05...", "tag-SYSTEM");
+
+      // STEP 2: WORKTREE 1 (SCOUT) ACTIVATION (2s)
+      setTimeout(() => {
+        activatePod(1, "Scout Swarm connecting to Pusmendik simulation...");
+        activateSubAgent('sub_1_1', true);
+        activateSubAgent('sub_1_2', true);
+        activateSubAgent('sub_1_3', true);
+        activateSubAgent('sub_1_4', true);
+        animateNumber('telQuestions', 0, 73, 2000, " / 73");
+        animateNumber('telImages', 0, 94, 2500, " / 94");
+        addLog("SCOUT", "Worker GEO-P1, GEO-P2, FIS-P1, FIS-P2 aktif mengunduh 73 soal dan 94 aset...", "tag-SCOUT");
+      }, 2000);
+
+      // STEP 3: WORKTREE 1 SUCCESS -> WORKTREE 2 ARCHITECT (5.5s)
+      setTimeout(() => {
+        setPodSuccess(1, "73 questions & 94 assets scraped + keys locked.");
+        setPathActive('drop_2', true);
+        activatePod(2, "Sanitizing raw DOM into Canonical L2 JSON...");
+        activateSubAgent('sub_2_1', true);
+        activateSubAgent('sub_2_2', true);
+        activateSubAgent('sub_2_3', true);
+        activateSubAgent('sub_2_4', true);
+        
+        // Update status cells defensively
+        const setTargetStatusSafe = (id, text) => {
+          const el = document.getElementById(id);
+          if (el) { el.innerText = text; el.style.color = 'var(--emerald)'; }
+        };
+        setTargetStatusSafe('status_target_geo2', '29 Soal (100% Ingress)');
+        setTargetStatusSafe('status_target_fis1', '22 Soal (100% Ingress)');
+        setTargetStatusSafe('status_target_fis2', '22 Soal (100% Ingress)');
+        document.querySelectorAll('#targetMatrixBody tr td:last-child').forEach(td => {
+          if (td.innerText.includes('Standby') || td.innerText.includes('Memuat')) {
+            td.innerText = 'Selesai Ingress (100%)';
+            td.style.color = 'var(--emerald)';
+          }
+        });
+        addLog("ARCHITECT", "Membersihkan HTML dan menyusun struktur kanonis L2...", "tag-ARCHITECT");
+      }, 5500);
+
+      // STEP 4: WORKTREE 2 SUCCESS -> WORKTREE 3 VISIONARY (9.5s)
+      setTimeout(() => {
+        setPodSuccess(2, "Canonical L2 dataset verified verbatim.");
+        setPathActive('drop_3', true);
+        activatePod(3, "Visionary analyzing BMKG SPI maps & Klaten satellite imagery...");
+        activateSubAgent('sub_3_1', true);
+        activateSubAgent('sub_3_2', true);
+        activateSubAgent('sub_3_3', true);
+        activateSubAgent('sub_3_4', true);
+        addLog("VISIONARY", "Memindai peta SPI BMKG Papua Selatan & citra satelit Ceper Klaten...", "tag-VISIONARY");
+      }, 9500);
+
+      // STEP 5: WORKTREE 3 SUCCESS -> WORKTREE 4 GEMINI FLASH HIGH (13.5s)
+      setTimeout(() => {
+        setPodSuccess(3, "Multimodal sidecar descriptions generated (Zero-Blindness).");
+        setPathActive('drop_4', true);
+        activatePod(4, "Gemini 3.8 Flash High Worker A & B generating solutions...");
+        activateSubAgent('sub_4_1', true);
+        activateSubAgent('sub_4_2', true);
+        activateSubAgent('sub_4_3', true);
+        activateSubAgent('sub_4_4', true);
+        addLog("GEMINI", "Gemini Flash High memproses micro-batch (185 tok/s). Kepatuhan Model 1: 100%...", "tag-GEMINI");
+      }, 13500);
+
+      // STEP 6: WORKTREE 4 SUCCESS -> WORKTREE 5 ZERO-TRUST AUDIT (18.5s)
+      setTimeout(() => {
+        setPodSuccess(4, "73/73 Layer 3 solutions solved adhering to Model 1 schema.");
+        setPathActive('drop_5', true);
+        activatePod(5, "Running Zero-Trust Audit & Pusmendik Key Guard...");
+        activateSubAgent('sub_5_1', true);
+        activateSubAgent('sub_5_2', true);
+        activateSubAgent('sub_5_3', true);
+        activateSubAgent('sub_5_4', true);
+
+        // Connect converging lines down to merge
+        setPathActive('conv_1', true);
+        setPathActive('conv_2', true);
+        setPathActive('conv_3', true);
+        setPathActive('conv_4', true);
+        setPathActive('conv_5', true);
+        setPathActive('bus_bottom', true);
+        setPathActive('stem_bottom', true);
+        addLog("AUDITOR", "Memvalidasi kunci Pusmendik dan KaTeX formula. 100% Pass...", "tag-AUDITOR");
+      }, 18500);
+
+      // STEP 7: FINAL MERGE & DEPLOY (23s)
+      setTimeout(() => {
+        setPodSuccess(5, "Audit 100% pass! Compiling learning.json...");
+        const merge = document.getElementById('mergeNode');
+        merge.className = 'merge-badge active';
+        document.getElementById('mergeText').innerText = 'MERGED // CBT RUNTIME 100% PRODUCTION READY';
+        
+        typeText('orchestrator_text', "Mission Accomplished: All 73 questions live on CBT app!", () => {});
+        addLog("SYSTEM", "RELEASE SELESAI! Web CBT langsung hot-reload dengan pembahasan baru.", "tag-SYSTEM");
+
+        clearInterval(simInterval);
+        isSimulating = false;
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-play"></i> JALANKAN SIMULASI LAGI';
+      }, 23000);
+    }
+
+    function activatePod(num, text) {
+      const pod = document.getElementById(`pod_${num}`);
+      const term = document.getElementById(`term_pod_${num}`);
+      if (pod) pod.className = 'worktree-pod active';
+      if (term) term.className = 'pod-main-terminal active';
+      typeText(`text_pod_${num}`, text);
+    }
+
+    function setPodSuccess(num, text) {
+      const pod = document.getElementById(`pod_${num}`);
+      const term = document.getElementById(`term_pod_${num}`);
+      if (pod) pod.className = 'worktree-pod success';
+      if (term) term.className = 'pod-main-terminal';
+      document.getElementById(`text_pod_${num}`).innerText = text;
+      for (let i = 1; i <= 4; i++) {
+        const sub = document.getElementById(`sub_${num}_${i}`);
+        if (sub) sub.className = 'sub-agent-box success';
+      }
+    }
+
+    function activateSubAgent(id, active) {
+      const elem = document.getElementById(id);
+      if (elem) elem.className = active ? 'sub-agent-box active' : 'sub-agent-box';
+    }
+
+    function setPathActive(id, active) {
+      const p = document.getElementById(id);
+      if (p) p.className.baseVal = active ? 'branch-line active' : 'branch-line';
+    }
+
+    function typeText(elemId, fullText, callback) {
+      const el = document.getElementById(elemId);
+      if (!el) return;
+      el.innerText = "";
+      let i = 0;
+      const t = setInterval(() => {
+        if (i < fullText.length) {
+          el.innerText += fullText.charAt(i);
+          i++;
+        } else {
+          clearInterval(t);
+          if (callback) callback();
+        }
+      }, 16);
+    }
+
+    function animateNumber(elemId, start, end, duration, suffix = "") {
+      const el = document.getElementById(elemId);
+      if (!el) return;
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        el.innerText = Math.floor(progress * (end - start) + start) + suffix;
+        if (progress < 1) window.requestAnimationFrame(step);
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    function addLog(tag, message, tagClass = "tag-SYSTEM") {
+      const tb = document.getElementById('terminalBody');
+      const now = new Date();
+      const timeStr = now.toTimeString().split(' ')[0];
+      const div = document.createElement('div');
+      div.className = 'log-line';
+      div.innerHTML = `
+        <span class="log-time">[${timeStr}]</span>
+        <span class="log-tag ${tagClass}">${tag}</span>
+        <span class="log-msg">${escapeHtml(message)}</span>
+      `;
+      tb.appendChild(div);
+      tb.scrollTop = tb.scrollHeight;
+    }
+
+    function escapeHtml(text) {
+      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    let latestRealSwarmData = null;
+
+    function resetJarvis(resetTimer = true, callBackend = true) {
+      if (simInterval) clearInterval(simInterval);
+      if (livePollInterval) {
+        clearInterval(livePollInterval);
+        livePollInterval = null;
+      }
+      isSimulating = false;
+      if (callBackend) {
+        fetch('/api/swarm/reset', { method: 'POST' }).catch(() => {});
+      }
+      if (resetTimer) {
+        elapsedSec = 0;
+        document.getElementById('telElapsed').innerText = '00:00';
+      }
+      document.getElementById('telQuestions').innerText = '0 / 73';
+      document.getElementById('telImages').innerText = '0 / 94';
+      
+      const btn = document.getElementById('btnStartDemo');
+      if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-play"></i> JALANKAN SIMULASI DEMO';
+      }
+
+      const btnLive = document.getElementById('btnStartLive');
+      if (btnLive) {
+        btnLive.disabled = false;
+        btnLive.innerHTML = '<i class="fa-solid fa-bolt"></i> LUNCURKAN SWARM';
+      }
+
+      const pill = document.getElementById('livePill');
+      if (pill) pill.className = 'live-status-pill';
+      const pillTxt = document.getElementById('liveStatusText');
+      if (pillTxt) pillTxt.innerText = 'STANDBY';
+
+      document.getElementById('orchestrator_text').innerText = 'Swarm War Room standby. Pilih mapel dan klik "LUNCURKAN SWARM".';
+
+      const allPaths = ['trunk_top', 'bus_top', 'drop_1', 'drop_2', 'drop_3', 'drop_4', 'drop_5', 
+                        'conv_1', 'conv_2', 'conv_3', 'conv_4', 'conv_5', 'bus_bottom', 'stem_bottom'];
+      allPaths.forEach(id => setPathActive(id, false));
+
+      for (let p = 1; p <= 5; p++) {
+        const pod = document.getElementById(`pod_${p}`);
+        const term = document.getElementById(`term_pod_${p}`);
+        if (pod) pod.className = 'worktree-pod';
+        if (term) term.className = 'pod-main-terminal';
+        document.getElementById(`text_pod_${p}`).innerText = 'Standing by for pipeline trigger...';
+        for (let s = 1; s <= 4; s++) {
+          const sub = document.getElementById(`sub_${p}_${s}`);
+          if (sub) sub.className = 'sub-agent-box';
+        }
+      }
+
+      const merge = document.getElementById('mergeNode');
+      if (merge) merge.className = 'merge-badge';
+      document.getElementById('mergeText').innerText = 'MERGE // PRODUCTION RUNTIME';
+    }
+
+    // DEVTOOLS HIDDEN LAYER MODAL
+    function openDevTools(divisiKey) {
+      activeDevToolsDivision = divisiKey;
+      const modal = document.getElementById('devToolsModal');
+      const title = document.getElementById('modalTitle');
+      title.innerHTML = `<i class="fa-solid fa-microchip"></i> WORKTREE TELEMETRY: ${divisiKey.toUpperCase()}`;
+      modal.classList.add('open');
+      renderModalContent();
+    }
+
+    function closeDevTools(e) {
+      document.getElementById('devToolsModal').classList.remove('open');
+    }
+
+    function switchModalTab(tabKey) {
+      currentModalTab = tabKey;
+      document.querySelectorAll('.m-tab').forEach(b => b.classList.remove('active'));
+      if (tabKey === 'payload') document.getElementById('tabPayload').classList.add('active');
+      if (tabKey === 'thinking') document.getElementById('tabThinking').classList.add('active');
+      if (tabKey === 'telemetry') document.getElementById('tabTelemetry').classList.add('active');
+      renderModalContent();
+    }
+
+    function renderModalContent() {
+      const codeElem = document.getElementById('modalCode');
+      const data = hiddenData[activeDevToolsDivision] || {};
+      const realDiv = (latestRealSwarmData && latestRealSwarmData.divisions) ? latestRealSwarmData.divisions[activeDevToolsDivision] : null;
+
+      if (currentModalTab === 'payload') {
+        const payloadToShow = realDiv ? { ...data.payload, live_real_division: realDiv } : data.payload;
+        codeElem.innerText = JSON.stringify(payloadToShow || {}, null, 2);
+      } else if (currentModalTab === 'thinking') {
+        let thoughts = [...(data.thinking || [])];
+        if (realDiv && realDiv.current_task) {
+          thoughts.unshift(`[LIVE AGENT TASK] ${realDiv.current_task}`);
+        }
+        codeElem.innerText = thoughts.join('\n\n');
+      } else if (currentModalTab === 'telemetry') {
+        const telToShow = realDiv ? {
+          ...data.telemetry,
+          live_status: realDiv.status,
+          live_progress: `${realDiv.progress}%`,
+          workers: realDiv.workers || undefined
+        } : data.telemetry;
+        codeElem.innerText = JSON.stringify(telToShow || {}, null, 2);
+      }
+    }
+
+    let livePollInterval = null;
+    let allSubjectsCatalog = null;
+    let selectedSlugs = new Set();
+    let currentCategoryFilter = 'ALL';
+
+    // Fetch master subject catalog
+    async function loadSubjectCatalog() {
+      try {
+        const res = await fetch('/api/swarm/subjects');
+        if (!res.ok) return;
+        allSubjectsCatalog = await res.json();
+        updateSubjectCounts();
+        renderSubjectCards();
+        renderActiveTargetMatrix();
+      } catch (e) {
+        console.error("Gagal memuat katalog mapel:", e);
+      }
+    }
+
+    function updateSubjectCounts() {
+      if (!allSubjectsCatalog || !allSubjectsCatalog.subjects) return;
+      const subs = Object.values(allSubjectsCatalog.subjects);
+      const total = subs.length;
+      const live = subs.filter(s => s.status === 'live').length;
+      const unscraped = subs.filter(s => s.status === 'unscraped').length;
+
+      const cAll = document.getElementById('countAll');
+      const cLive = document.getElementById('countLive');
+      const cUn = document.getElementById('countUnscraped');
+      if (cAll) cAll.innerText = total;
+      if (cLive) cLive.innerText = live;
+      if (cUn) cUn.innerText = unscraped;
+
+      // Default selection: select first 2 unscraped if nothing selected
+      if (selectedSlugs.size === 0) {
+        subs.filter(s => s.status === 'unscraped').slice(0, 2).forEach(s => selectedSlugs.add(s.slug));
+      }
+      updateSelectedBadge();
+    }
+
+    function updateSelectedBadge() {
+      const b = document.getElementById('selectedCountBadge');
+      const mb = document.getElementById('modalSelectedCount');
+      const count = selectedSlugs.size;
+      const txt = count === 0 ? "PILIH MAPEL" : `${count} TARGET`;
+      if (b) b.innerText = txt;
+      if (mb) mb.innerText = `${count} Paket`;
+    }
+
+    function openSubjectSelector() {
+      const modal = document.getElementById('subjectSelectorModal');
+      if (modal) modal.classList.add('open');
+      renderSubjectCards();
+    }
+
+    function closeSubjectSelector() {
+      const modal = document.getElementById('subjectSelectorModal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function filterSubjectCategory(cat) {
+      currentCategoryFilter = cat;
+      const tabs = document.querySelectorAll('#subjectFilterTabs .filter-btn');
+      tabs.forEach(t => t.classList.remove('active'));
+      const activeBtn = Array.from(tabs).find(t => t.innerText.toUpperCase().includes(cat.toUpperCase()) || (cat === 'ALL' && t.innerText.includes('SEMUA')));
+      if (activeBtn) activeBtn.classList.add('active');
+      renderSubjectCards();
+    }
+
+    function renderSubjectCards() {
+      const grid = document.getElementById('subjectCardsGrid');
+      if (!grid || !allSubjectsCatalog || !allSubjectsCatalog.subjects) return;
+
+      const subs = Object.values(allSubjectsCatalog.subjects);
+      let filtered = subs;
+
+      if (currentCategoryFilter === 'UNSCRAPED') {
+        filtered = subs.filter(s => s.status === 'unscraped');
+      } else if (currentCategoryFilter === 'LIVE') {
+        filtered = subs.filter(s => s.status === 'live');
+      } else if (currentCategoryFilter !== 'ALL') {
+        filtered = subs.filter(s => s.kategori === currentCategoryFilter);
+      }
+
+      grid.innerHTML = filtered.map(s => {
+        const isSel = selectedSlugs.has(s.slug);
+        const isLive = s.status === 'live';
+        const badgeClass = isLive ? 'badge-live' : 'badge-unscraped';
+        const badgeText = isLive ? '🟢 LIVE CBT' : '🟡 BELUM SCRAPE';
+
+        return `
+          <div class="subject-card ${isSel ? 'selected' : ''}" onclick="toggleSubjectSelection('${s.slug}')">
+            <input type="checkbox" ${isSel ? 'checked' : ''} onclick="event.stopPropagation(); toggleSubjectSelection('${s.slug}')">
+            <div class="sc-info">
+              <div class="sc-title">${escapeHtml(s.name)}</div>
+              <div class="sc-meta">
+                <span class="${badgeClass}">${badgeText}</span>
+                <span class="badge-kat">${escapeHtml(s.kategori)}</span>
+                <span style="color: #64748b;">ID: <code>val=${s.val}</code></span>
+                <span style="color: var(--cyan);">${isLive ? s.question_count + ' Soal' : '~25 Soal'}</span>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleSubjectSelection(slug) {
+      if (selectedSlugs.has(slug)) {
+        selectedSlugs.delete(slug);
+      } else {
+        selectedSlugs.add(slug);
+      }
+      updateSelectedBadge();
+      renderSubjectCards();
+      renderActiveTargetMatrix();
+    }
+
+    function selectAllUnscraped() {
+      if (!allSubjectsCatalog || !allSubjectsCatalog.subjects) return;
+      Object.values(allSubjectsCatalog.subjects).forEach(s => {
+        if (s.status === 'unscraped') selectedSlugs.add(s.slug);
+      });
+      updateSelectedBadge();
+      renderSubjectCards();
+      renderActiveTargetMatrix();
+    }
+
+    function clearSelection() {
+      selectedSlugs.clear();
+      updateSelectedBadge();
+      renderSubjectCards();
+      renderActiveTargetMatrix();
+    }
+
+    function launchSelectedSwarm() {
+      closeSubjectSelector();
+      if (selectedSlugs.size === 0) {
+        alert("Pilih minimal 1 paket mapel terlebih dahulu!");
+        return;
+      }
+      startLiveSwarm(Array.from(selectedSlugs));
+    }
+
+    function renderActiveTargetMatrix(realTargets = null) {
+      const tb = document.getElementById('targetMatrixBody');
+      const badge = document.getElementById('targetMatrixCountBadge');
+      if (!tb) return;
+
+      const targetsToRender = realTargets || Array.from(selectedSlugs);
+      if (badge) badge.innerText = `${targetsToRender.length} TARGET AKTIF`;
+
+      if (targetsToRender.length === 0) {
+        tb.innerHTML = `
+          <tr>
+            <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 18px;">
+              Belum ada target dipilih. Klik <strong>UBAH</strong> untuk memilih mapel.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tb.innerHTML = targetsToRender.map(slug => {
+        const item = (allSubjectsCatalog && allSubjectsCatalog.subjects && allSubjectsCatalog.subjects[slug]) || {
+          name: slug.replace(/_/g, ' ').toUpperCase(),
+          kategori: "Pilihan",
+          val: "-",
+          status: "ready"
+        };
+        const badgeColor = item.kategori.includes("Saintek") ? "var(--cyan)" : item.kategori.includes("Soshum") ? "var(--amber)" : "var(--indigo)";
+        return `
+          <tr>
+            <td><strong>${escapeHtml(item.name)}</strong></td>
+            <td><span class="badge-sub" style="border-color: ${badgeColor}; color: ${badgeColor};">${escapeHtml(item.kategori)}</span></td>
+            <td><code>val=${item.val}</code></td>
+            <td id="status_target_${slug}">Standby di Ingress</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    async function startLiveSwarm(customTargets = null) {
+      try {
+        const targets = customTargets || Array.from(selectedSlugs);
+        if (targets.length === 0) {
+          openSubjectSelector();
+          return;
+        }
+
+        const btn = document.getElementById('btnStartLive');
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> RUNNING SWARM...';
+        
+        const pill = document.getElementById('livePill');
+        if (pill) pill.className = 'live-status-pill running';
+        const pillTxt = document.getElementById('liveStatusText');
+        if (pillTxt) pillTxt.innerText = `RUNNING (${targets.length} TARGET)`;
+
+        setPathActive('trunk_top', true);
+        setPathActive('bus_top', true);
+
+        const orchText = document.getElementById('orchestrator_text');
+        if (orchText) orchText.innerText = `🚀 Swarm Engine activated. Mengorkestrasi ${targets.length} paket target via Google Gemini 3.8 Flash...`;
+
+        addLog("ORCHESTRATOR", `Meluncurkan Misi Swarm untuk ${targets.length} paket via Gemini 3.8 Flash...`, "tag-GEMINI");
+
+        const res = await fetch('/api/swarm/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ targets: targets })
+        });
+        const d = await res.json();
+
+        if (d.status === 'error') {
+          addLog("SYSTEM", "Info backend: " + (d.message || "Gagal memulai"), "tag-SYSTEM");
+        }
+
+        // Start live polling every 700ms
+        if (livePollInterval) clearInterval(livePollInterval);
+        livePollInterval = setInterval(pollRealSwarmStatus, 700);
+        pollRealSwarmStatus();
+      } catch (err) {
+        addLog("SYSTEM", "Gagal menghubungi backend: " + err, "tag-SYSTEM");
+        const btn = document.getElementById('btnStartLive');
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fa-solid fa-bolt"></i> LUNCURKAN SWARM';
+      }
+    }
+
+    async function pollRealSwarmStatus() {
+      try {
+        const res = await fetch('/api/swarm/status');
+        if (!res.ok) return;
+        const data = await res.json();
+        renderRealSwarmData(data);
+      } catch (e) {
+        console.error("Poll error:", e);
+      }
+    }
+
+    function renderRealSwarmData(data) {
+      latestRealSwarmData = data;
+      const pill = document.getElementById('livePill');
+      const pillTxt = document.getElementById('liveStatusText');
+      const btn = document.getElementById('btnStartLive');
+
+      // 1. Elapsed timer
+      const m = String(Math.floor(data.elapsed_seconds / 60)).padStart(2, '0');
+      const s = String(data.elapsed_seconds % 60).padStart(2, '0');
+      document.getElementById('telElapsed').innerText = `${m}:${s}`;
+      
+      // 2. Metrics
+      if (data.stats) {
+        const estTotal = (data.current_targets && data.current_targets.length ? data.current_targets.length : 3) * 24;
+        document.getElementById('telQuestions').innerText = `${data.stats.total_questions_scraped || 0} / ${estTotal}`;
+        document.getElementById('telImages').innerText = `${data.stats.total_images_saved || 0}`;
+      }
+
+      // Update active targets matrix if current_targets available
+      if (data.current_targets && data.current_targets.length > 0) {
+        renderActiveTargetMatrix(data.current_targets);
+      }
+
+      const divs = data.divisions;
+      if (!divs) return;
+
+      const d1 = divs.divisi_1;
+      const d2 = divs.divisi_2;
+      const d3 = divs.divisi_3;
+      const d4 = divs.divisi_4;
+      const d5 = divs.divisi_5;
+
+      // Update worker details in target matrix table
+      if (d1 && d1.workers) {
+        for (const [w_id, w_info] of Object.entries(d1.workers)) {
+          const slug = w_id.replace(/^worker_/, '');
+          const cell = document.getElementById(`status_target_${slug}`);
+          if (cell) {
+            cell.innerText = `${w_info.status.toUpperCase()} (${w_info.progress}%): ${w_info.details || ''}`;
+            if (w_info.status === 'success') cell.style.color = 'var(--emerald)';
+            else if (w_info.status === 'active') cell.style.color = 'var(--cyan)';
+            else if (w_info.status === 'error') cell.style.color = 'var(--rose)';
+          }
+        }
+      }
+
+      // Check if running
+      if (data.is_running) {
+        if (pill) pill.className = 'live-status-pill running';
+        if (btn) {
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> RUNNING SWARM...';
+        }
+
+        setPathActive('trunk_top', true);
+        setPathActive('bus_top', true);
+
+        // Find active division for orchestrator readout
+        if (d4 && d4.status === 'active') {
+          if (pillTxt) pillTxt.innerText = `RUNNING (DIVISI 4: ${d4.progress}%)`;
+          document.getElementById('orchestrator_text').innerText = d4.current_task || "Divisi 4 Gemini 3.8 Flash sedang memecahkan solusi 5 pilar & soal serupa...";
+        } else if (d1 && d1.status === 'active') {
+          if (pillTxt) pillTxt.innerText = 'RUNNING (DIVISI 1: SCOUT)';
+          document.getElementById('orchestrator_text').innerText = d1.current_task || "Divisi 1 Scout sedang menginfiltrasi Pusmendik...";
+        } else if (d2 && d2.status === 'active') {
+          if (pillTxt) pillTxt.innerText = 'RUNNING (DIVISI 2: ARCHITECT)';
+          document.getElementById('orchestrator_text').innerText = d2.current_task || "Divisi 2 Data Architect menyusun Dual-Artifact...";
+        } else if (d3 && d3.status === 'active') {
+          if (pillTxt) pillTxt.innerText = 'RUNNING (DIVISI 3: VISIONARY)';
+          document.getElementById('orchestrator_text').innerText = d3.current_task || "Divisi 3 Gemini 3.8 Flash memindai citra & formula...";
+        } else if (d5 && d5.status === 'active') {
+          if (pillTxt) pillTxt.innerText = 'RUNNING (DIVISI 5: AUDIT)';
+          document.getElementById('orchestrator_text').innerText = d5.current_task || "Divisi 5 Zero-Trust Audit memverifikasi 9 kriteria...";
+        }
+      }
+
+      // Update paths & pods
+      if (d1) {
+        setPathActive('drop_1', d1.status === 'active' || d1.status === 'success');
+        updatePodVisual(1, d1.status, d1.current_task);
+      }
+
+      if (d2) {
+        setPathActive('drop_2', d2.status === 'active' || d2.status === 'success');
+        updatePodVisual(2, d2.status, d2.current_task);
+      }
+
+      if (d3) {
+        setPathActive('drop_3', d3.status === 'active' || d3.status === 'success');
+        updatePodVisual(3, d3.status, d3.current_task);
+      }
+
+      if (d4) {
+        setPathActive('drop_4', d4.status === 'active' || d4.status === 'success');
+        updatePodVisual(4, d4.status, d4.current_task);
+      }
+
+      if (d5) {
+        setPathActive('drop_5', d5.status === 'active' || d5.status === 'success');
+        updatePodVisual(5, d5.status, d5.current_task);
+      }
+
+      // 4. Update logs in terminal bus
+      if (data.logs && data.logs.length > 0) {
+        const tb = document.getElementById('terminalBody');
+        tb.innerHTML = data.logs.map(l => `
+          <div class="log-line">
+            <span class="log-time">[${l.time}]</span>
+            <span class="log-tag tag-${l.tag.toUpperCase()}">${l.tag}</span>
+            <span class="log-msg">${escapeHtml(l.message)}</span>
+          </div>
+        `).join('');
+        tb.scrollTop = tb.scrollHeight;
+      }
+
+      // 5. If finished
+      if (!data.is_running) {
+        if (livePollInterval) {
+          clearInterval(livePollInterval);
+          livePollInterval = null;
+        }
+
+        if (d5 && d5.status === 'success') {
+          if (pill) pill.className = 'live-status-pill completed';
+          if (pillTxt) pillTxt.innerText = 'TUNTAS // 100% READY';
+
+          // Activate bottom merge
+          setPathActive('conv_1', true);
+          setPathActive('conv_2', true);
+          setPathActive('conv_3', true);
+          setPathActive('conv_4', true);
+          setPathActive('conv_5', true);
+          setPathActive('bus_bottom', true);
+          setPathActive('stem_bottom', true);
+
+          const merge = document.getElementById('mergeNode');
+          if (merge) merge.className = 'merge-badge active';
+          const mergeTxt = document.getElementById('mergeText');
+          if (mergeTxt) mergeTxt.innerText = 'MERGED // CBT RUNTIME 100% PRODUCTION READY';
+
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-check"></i> SWARM SELESAI!';
+          }
+          document.getElementById('orchestrator_text').innerText = "Mission Accomplished: All selected questions live on CBT app!";
+        } else if (d5 && d5.status === 'error') {
+          if (pill) pill.className = 'live-status-pill error';
+          if (pillTxt) pillTxt.innerText = 'SELESAI (ADA ISU)';
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> SELESAI (PERIKSA LOG)';
+          }
+          document.getElementById('orchestrator_text').innerText = d5.current_task || "Siklus tuntas. Sebagian target perlu ditinjau di log.";
+        } else {
+          if (pill) pill.className = 'live-status-pill';
+          if (pillTxt) pillTxt.innerText = 'STANDBY';
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-bolt"></i> LUNCURKAN SWARM';
+          }
+        }
+      }
+    }
+
+    function updatePodVisual(num, status, text) {
+      const pod = document.getElementById(`pod_${num}`);
+      const term = document.getElementById(`term_pod_${num}`);
+      const txt = document.getElementById(`text_pod_${num}`);
+      if (pod) pod.className = `worktree-pod ${status}`;
+      if (term) term.className = `pod-main-terminal ${status === 'active' ? 'active' : ''}`;
+      if (txt && text) txt.innerText = text;
+
+      // Update 4 sub-agent boxes
+      for (let s = 1; s <= 4; s++) {
+        const sub = document.getElementById(`sub_${num}_${s}`);
+        if (sub) {
+          if (status === 'success') sub.className = 'sub-agent-box success';
+          else if (status === 'active') sub.className = 'sub-agent-box active';
+          else sub.className = 'sub-agent-box';
+        }
+      }
+    }
+
+    // Auto-check on page load
+    loadSubjectCatalog();
+    pollRealSwarmStatus();
+    setInterval(pollRealSwarmStatus, 2500);
+  </script>
+</body>
+</html>

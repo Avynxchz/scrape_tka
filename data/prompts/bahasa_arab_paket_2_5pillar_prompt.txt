@@ -1,0 +1,557 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Arab (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+.تُحِبُّ عَائِشَةُ قِرَاءَةَ كُتُبِ التَّارِيْخِ وَالْمَجَلَّاتِ
+
+PERTANYAAN:
+مَا مَعْنىَ الْكَلِمَة الَّتِي تَحْتَهَا خَطٌّ؟
+OPSI / PERNYATAAN:
+  - A. A. Memasak
+  - B. B. Membawa
+  - C. C. Menulis
+  - D. D. Melukis
+  - E. E. Membaca
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+.فِي الْفَطُوْرِ، نَشْرَبُ الشَّايَ وَنَأْكُلُ الْكَعْكَ وَالْفَاكِهَةَ. فِي الْغَدَاءِ، نَأْكُلُ الرُّزَّ وَالسَّمَكَ وَالسَّلَطَةَ وَنَشْرَبُ الْمَاءَ. فِي الْعَشَاءِ، نَأْكُلُ اللَّحْمَ وَنَشْرَبُ الْعَصِيْرَ
+
+PERTANYAAN:
+مَاذَا نَأْكُلُ فِي الْغَدَاءِ ؟.اِخْتَرْ أَكْثَرَ مِنْ إِجَابَةٍ صَحِيحَةٍ
+
+(Jawaban benar lebih dari satu.)
+OPSI / PERNYATAAN:
+  - A. A. السَّلَطَةَ
+  - B. B. السَّمَكَ
+  - C. C. الرُّزَّ
+  - D. D. اللَّحْمَ
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+.فِيْ مَحَطَّةِ القِطَارِ، يَشْتَرِي الْمُـسَافِرُ تَذْكِرَةً لِرِحْلَتِهِ
+
+PERTANYAAN:
+مَا مَعْنَى الْكَلِمَةِ التَِّى تَحْتَهَا خَطٌّ؟
+OPSI / PERNYATAAN:
+  - A. A. Menjual
+  - B. B. Membawa
+  - C. C. Membeli
+  - D. D. Meminta
+  - E. E. Berjalan
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+.وَضَعَ أَحْمَدُ حَقِيْبَتَهُ عَلَى الطَّاوِلَةِ
+
+PERTANYAAN:
+...مُرادِفُ الكَلِمَةِ الَّتِي تَحْتَهَا خَطٌّ هُوَ
+OPSI / PERNYATAAN:
+  - A. A. كُرْسِيٌّ
+  - B. B. خِزَانَةٌ
+  - C. C. نَافِذَةٌ
+  - D. D. جِدَارٌ
+  - E. E. مَكْتَبٌ
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: ['A:الصَحِيْحُ', 'B:الخَطَأُ', 'C:الصَحِيْحُ']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+زَيْنَبُ: هَلْ أُمُّكِ مُدَرِّسَةٌ ؟.مَرْيَمُ: نَعَمْ، أُمِّيْ تُعَلِّمُ الْطَالِبَةَ فِيْ ٱلْمَدْرَسَة مِنَ الاِثْنَيْنِ إِلَى الْجُمْعَةِ زَيْنَبُ: فِيْ أَيِّ صَفٍّ تُعَلِّمُ أُمُّكِ الْطَالِبَةَ ؟.مَرْيَمُ: تُعَلِّمُهَا فِيْ الْصَّفِّ الْحَادِيْ عَشَرَ
+
+PERTANYAAN:
+مَاذَا تَفْعَلُ أُمُّ مَرْيَمَ؟!اِخْتَرِ الصَّحِيْحَ أَوِ ٱلْخَطَأَ لِكُلِّ عِبَارَةٍ
+
+(Klik pilihan Benar atau Salah pada setiap pernyataan!)
+OPSI / PERNYATAAN:
+  - A. أُمُّ مَرْيَمَ تُعَلِّمُ فِيْ الصَّفِّ الْحَادِيْ عَشَرَ
+  - B. أُمُّ مَرْيَمَ تَعْمَلُ فِي الْمَدْرَسَةِ كُلَّ يَوْمٍ
+  - C. أُمُّ مَرْيَمَ تُدَرِّسُ المُتَعَلِّمَاتِ فِي الْمَدْرَسَةِ
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+.قَرَأَتْ البِنْتُ قِصَّةً حَزِيْنَةً فِي ٱلْمَدْرَسَةِ
+
+PERTANYAAN:
+ماَ مَعْنىَ "قِصَّةً حَزِيْنَةً"؟
+OPSI / PERNYATAAN:
+  - A. A. Cerita Yang Bahagia
+  - B. B. Cerita Yang Sedih
+  - C. C. Cerita Yang Pendek
+  - D. D. Cerita Yang lucu
+  - E. E. Cerita Yang Menarik
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+ذِهَابُ إِلَى الْمَكْتَبِ
+
+فَاطِمَةُ: مَرْحَبًا يَا سُعَادُ، لِمَاذَا أَنْتِ مُسْرِعَةٌ؟.سُعَادُ: لِأَنَّنِيْ تَأَخَّرْتُ، وَيُبْدَأُ الدَّرْسُ فِيْ السَّاعَةِ الثَّامِنَةِ فَاطِمَةُ: مَاذَا نَفْعَلُ بَعْدَ الدَّرْسِ؟.سُعَادُ: نَذْهَبُ إِلَى الْمَكْتَبَةِ لِنُكْمِلَ الْوَاجِبَ.فَاطِمَةُ: جَيِّدٌ، أَنَا أُحِبُّ الْمَكْتَبَةَ سُعَادُ: وَمَاذَا سَنَفْعَلُ بَعْدَ إِنْهَاءِ الْوَاجِبِ؟.فَاطِمَةُ: يُمْكِنُنَا أَنْ نَقْرَأَ كُتُبَ الْقِصَصِ قَلِيْلًا.سُعَادُ: هَذِهِ فِكْرَةٌ رَائِعَةٌ، أَنَا أُحِبُّ قِرَاءَةَ الْقِصَصِ مَعَكِ
+
+PERTANYAAN:
+فِيْ أَيِّ سَاعَةٍ يُبْدَأُ الدَّرْسُ؟
+OPSI / PERNYATAAN:
+  - A. A. فِيْ السَّاعَةِ السَّادِسَةِ
+  - B. B. فِيْ السَّاعَةِ السَّابِعَةِ
+  - C. C. فِيْ السَّاعَةِ الثَّامِنَةِ
+  - D. D. فِيْ السَّاعَةِ التَّاسِعَةِ
+  - E. E. فِيْ السَّاعَةِ العَاشِرَةِ
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+ذِهَابُ إِلَى الْمَكْتَبِ
+
+فَاطِمَةُ: مَرْحَبًا يَا سُعَادُ، لِمَاذَا أَنْتِ مُسْرِعَةٌ؟.سُعَادُ: لِأَنَّنِيْ تَأَخَّرْتُ، وَيُبْدَأُ الدَّرْسُ فِيْ السَّاعَةِ الثَّامِنَةِ فَاطِمَةُ: مَاذَا نَفْعَلُ بَعْدَ الدَّرْسِ؟.سُعَادُ: نَذْهَبُ إِلَى الْمَكْتَبَةِ لِنُكْمِلَ الْوَاجِبَ.فَاطِمَةُ: جَيِّدٌ، أَنَا أُحِبُّ الْمَكْتَبَةَ سُعَادُ: وَمَاذَا سَنَفْعَلُ بَعْدَ إِنْهَاءِ الْوَاجِبِ؟.فَاطِمَةُ: يُمْكِنُنَا أَنْ نَقْرَأَ كُتُبَ الْقِصَصِ قَلِيْلًا.سُعَادُ: هَذِهِ فِكْرَةٌ رَائِعَةٌ، أَنَا أُحِبُّ قِرَاءَةَ الْقِصَصِ مَعَكِ
+
+PERTANYAAN:
+لِمَاذَا سُعَادُ مُسْرِعَةٌ؟
+OPSI / PERNYATAAN:
+  - A. A. لِأَنَّهَا نَسِيَتْ كِتَابَهَا
+  - B. B. لِأَنَّهَا تَأَخَّرَتْ
+  - C. C. لِأَنَّهَا تَذْهَبُ إِلَى المَكْتَبَةِ
+  - D. D. لِأَنَّهَا تَأْكُلُ الفُطُورَ
+  - E. E. لِأَنَّهَا لا تُرِيدُ الدَّرْسَ
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['A', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+المَكْتَبَةُ
+
+فِي مَدْرَسَتِي مَكْتَبَةٌ وَاسِعَةٌ. تَقَعُ الْمَكْتَبَةُ بَيْنَ غُرْفَةِ الْمُدَرِّسِيْنَ وَمَخْبَرَةِ الْعُلُومِ الطَّبِيعِيَّةِ. فِيهَا كُتُبٌ كَثِيرَةٌ مُتَنَوِّعَةٌ وَصُحُفٌ مِنَ الرُّفُوْفِ الَّتِي تُوْضَعُ عَلَيْهَا كُتُبٌ دِرَاسِيَّةٌ وَكُتُبٌ أُخْرَى تَحْتَوِيْ مَعْلُوْمَاتٍ نَافِعَةٍ. قَرِيْبَةٌ مِنَ الرُّفُوْفِ طَاوِلَاتٌ مُرَتَّبَةٌ بِكَرَاسِيْهَا تَسْهِيْلًا لِطَالِبٍ يُرِيْدُ أَنْ يَقْرَأَ فِيْهَا. هُنَاكَ خَزَائِنُ تُوْضَعُ فِيْهَا الْكُتُبُ المَوْسُوْعَةُ الْمُتَنَوِّعَةُ مَوْضُوْعُهَا
+[Konteks Visual Gambar 92863_9e8e12fe1694aaf83250d68cfb57b118.png]:
+Ilustrasi dua anak yang sedang belajar bersama di ruang perpustakaan (gaya ilustrasi Irasutoya):- Di sebelah kiri, seorang anak perempuan berambut pendek hitam mengenakan pakaian berkerah merah sedang duduk membaca buku terbuka bersampul biru yang dipegang dengan kedua tangannya.- Di sebelah kanan, seorang anak laki-laki mengenakan kemeja/kaus hijau sedang duduk menulis menggunakan pena di buku tulis yang terbuka di atas meja.- Di atas meja kayu berwarna cokelat muda, terdapat tumpukan tiga buah buku di sisi kiri (dari bawah ke atas: buku bersampul biru, merah, dan hijau) serta buku yang sedang digunakan untuk menulis.- Latar belakang berupa lemari/rak buku berwarna putih yang tersusun penuh dengan deretan buku berwarna-warni (merah, biru, hijau, kuning, dan oranye).
+PERTANYAAN:
+مَا الأَشْيَاءُ فِي اَلمكْتَبَةِ؟ إِخْتَرْ أَكْثَرَ مِنْ إِجَابَةٍ صَحِيْحَةٍ.
+
+(Jawaban benar lebih dari satu.)
+OPSI / PERNYATAAN:
+  - A. A. كُتُبٌ
+  - B. B. مِرْوَحَةٌ
+  - C. C. طَاوِلَاتٌ
+  - D. D. غُرْفَةٌ
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+المَكْتَبَةُ
+
+فِي مَدْرَسَتِي مَكْتَبَةٌ وَاسِعَةٌ. تَقَعُ الْمَكْتَبَةُ بَيْنَ غُرْفَةِ الْمُدَرِّسِيْنَ وَمَخْبَرَةِ الْعُلُومِ الطَّبِيعِيَّةِ. فِيهَا كُتُبٌ كَثِيرَةٌ مُتَنَوِّعَةٌ وَصُحُفٌ مِنَ الرُّفُوْفِ الَّتِي تُوْضَعُ عَلَيْهَا كُتُبٌ دِرَاسِيَّةٌ وَكُتُبٌ أُخْرَى تَحْتَوِيْ مَعْلُوْمَاتٍ نَافِعَةٍ. قَرِيْبَةٌ مِنَ الرُّفُوْفِ طَاوِلَاتٌ مُرَتَّبَةٌ بِكَرَاسِيْهَا تَسْهِيْلًا لِطَالِبٍ يُرِيْدُ أَنْ يَقْرَأَ فِيْهَا. هُنَاكَ خَزَائِنُ تُوْضَعُ فِيْهَا الْكُتُبُ المَوْسُوْعَةُ الْمُتَنَوِّعَةُ مَوْضُوْعُهَا
+[Konteks Visual Gambar 67266_9e8e12fe1694aaf83250d68cfb57b118.png]:
+Ilustrasi dua anak yang sedang belajar bersama di ruang perpustakaan (gaya ilustrasi Irasutoya):- Di sebelah kiri, seorang anak perempuan berambut pendek hitam mengenakan pakaian berkerah merah sedang duduk membaca buku terbuka bersampul biru yang dipegang dengan kedua tangannya.- Di sebelah kanan, seorang anak laki-laki mengenakan kemeja/kaus hijau sedang duduk menulis menggunakan pena di buku tulis yang terbuka di atas meja.- Di atas meja kayu berwarna cokelat muda, terdapat tumpukan tiga buah buku di sisi kiri (dari bawah ke atas: buku bersampul biru, merah, dan hijau) serta buku yang sedang digunakan untuk menulis.- Latar belakang berupa lemari/rak buku berwarna putih yang tersusun penuh dengan deretan buku berwarna-warni (merah, biru, hijau, kuning, dan oranye).
+PERTANYAAN:
+مَا ضِدُّ ٱلْكَلِمَةِ الَّتِيْ تَحْتَهَا خَطٌّ فِي ٱلْجُمْلَةِ ؟
+OPSI / PERNYATAAN:
+  - A. A. مُرَتَّبَةٌ
+  - B. B. مُتَنَوِّعَةٌ
+  - C. C. بَعِيْدَةٌ
+  - D. D. خَفِيْفَةٌ
+  - E. E. ثَقِيْلَةٌ
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: ['A:الصَّحِيْحُ', 'B:الْخَطَأُ', 'C:الْخَطَأُ']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+.!رَتِّبْ هَذِهِ الْكَلِمَاتِ لِتَكُوْنَ جُمْلَةً مُفِيْدَةً
+
+(Susunlah kata-kata berikut menjadi kalimat yang benar!)
+
+.الغُرْفَةَ / يُنَظِّفُ / أَحْمَدُ / صَبَاحًا.!اِخْتَرِ الصَّحِيْحَ أَوِ الْخَطَأَ لِكُلِّ عِبَارَةٍ
+
+(Klik pilihan Benar atau Salah pada setiap pernyataan!)
+OPSI / PERNYATAAN:
+  - A. يُنَظِّفُ أَحْمَدُ الغُرْفَةَ صَبَاحًا
+  - B. أَحْمَدُ يُنَظِّفُ صَبَاحًا الغُرْفَةَ
+  - C. يُنَظِّفُ الغُرْفَةَ أَحْمَدُ صَبَاحًا
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: ['A:الْخَطَأُ', 'B:الْخَطَأُ', 'C:الصَّحِيْحُ']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+.!رَتِّبْ هَذِهِ الْكَلِمَاتِ لِتَكُوْنَ جُمْلَةً مُفِيْدَةً
+
+(Susunlah kata-kata berikut menjadi kalimat yang benar!)
+
+.الأَحَدِ / يَزُوْرُ / بَيْتَ / يَزِيْدُ / جَدِّهِ / يَوْمَ.!اِخْتَرِ الصَّحِيْحَ أَوِ الْخَطَأَ لِكُلِّ عِبَارَةٍ
+
+(Klik pilihan Benar atau Salah pada setiap pernyataan!)
+OPSI / PERNYATAAN:
+  - A. يَزِيْدُ يَزُوْرُ الأَحَدِ بَيْتَ يَوْمَ جَدِّهِ
+  - B. يَزُوْرُ يَزِيْدُ بَيْتَ يَوْمَ الأَحَدِ جَدِّهِ
+  - C. يَزُوْرُ يَزِيْدُ بَيْتَ جَدِّهِ يَوْمَ الأَحَدِ
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+!رَتِّبِ الْجُمَلَ الْآتِيَةَ لِتُكَوِّنَ فَقْرَةً مُتَنَاسِقَةً
+
+(Susunlah kalimat berikut menjadi paragraf padu!)
+
+۱). هِيَ تَعْمَلُ فِي الْمُسْتَشْفَى الْعَامِّ ۲). أُمِّيْ طَبِيْبَةٌ ۳). لِأَنَّهَا مُوَظَّفَةٌ عَامَّةٌ فِيْهَا
+OPSI / PERNYATAAN:
+  - A. A. ٣-٢-١
+  - B. B. ٢-٣-١
+  - C. C. ٣-١-٢
+  - D. D. ١-٣-٢
+  - E. E. ١-٢-٣
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+!رَتِّبْ هَذِهِ الْكَلِمَاتِ لِتَكُونَ جُمْلَةً مُفِيْدَةً
+
+(Susunlah kata-kata berikut menjadi kalimat yang benar!)
+
+يُنَظِّفُ /الحَدِيْقَةَ / كُلَّ / صَبَاحٍ / الْعَامِلُ
+OPSI / PERNYATAAN:
+  - A. A. يُنَظِّفُ الْعَامِلُ الحَدِيْقَةَ كُلَّ صَبَاحٍ
+  - B. B. العَامِلُ كُلَّ يُنَظِّفُ صَبَاحٍ الحَدِيقَةَ
+  - C. C. العَامِلُ الحَدِيقَةَ كُلَّ يُنَظِّفُ صَبَاحٍ
+  - D. D. صَبَاحٍ العَامِلُ الحَدِيقَةَ كُلَّ يُنَظِّفُ
+  - E. E. كُلَّ صَبَاحٍ العَامِلُ الحَدِيقَةَ يُنَظِّفُ
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+!رَتِّبِ الْجُمَلَ الْآتِيَةَ لِتُكَوِّنَ فَقْرَةً مُتَنَاسِقَةً
+
+(Susunlah kalimat berikut menjadi paragraf padu!)
+
+۱). لِأَنَّهَا تُعَلِّمُنِي التَّعَاوُنَ ۲). أُحِبُّ لَعِبَ كُرَةِ الْقَدَمِ مَعَ أَصْدِقَائِي فِي الْمَلْعَبِ ۳). وَأَلْعَبُ كُرَةَ الْقَدَمِ كُلَّ يَوْمِ جُمُعَةٍ بَعْدَ الدِّرَاسَةِ
+OPSI / PERNYATAAN:
+  - A. A. ١-٣-٢
+  - B. B. ٢-١-٣
+  - C. C. ٣-١-٢
+  - D. D. ٣-٢-١
+  - E. E. ١-٢- ٣
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: ['A:الخَطَأُ', 'B:الصَحِيْحُ', 'C:الصَحِيْحُ']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+!رَتِّبْ هَذِهِ الْكَلِمَاتِ لِتَكُونَ جُمْلَةً مُفِيْدَةً
+
+(Susunlah kata-kata berikut menjadi kalimat yang benar!)
+
+.الْمُمَرِّضُ / يَفْحَصُ / وَيُسَاعِدُهُ / الطَّبِيْبُ / اَلْمَرِيْضَ!اِخْتَرِ الصَحِيْحُ أَوِ الْخَطَأَ لِكُلِّ عِبَارَةٍ
+
+(Klik pilihan Benar atau Salah pada setiap pernyataan!)
+OPSI / PERNYATAAN:
+  - A. الْمُمَرِّضُ يَفْحَصُ الطَّبِيْبُ وَيُسَاعِدُهُ الْمَرِيْضَ
+  - B. الطَّبِيْبُ يَفْحَصُ الْمَرِيْضَ وَيُسَاعِدُهُ الْمُمَرِّضُ
+  - C. يَفْحَصُ الطَّبِيْبُ الْمَرِيْضَ وَيُسَاعِدُهُ الْمُمَرِّضُ
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+!رَتِّبِ الْجُمَلَ الْآتِيَةَ لِتُكَوِّنَ فَقْرَةً مُتَنَاسِقَةً
+
+(Susunlah kalimat berikut menjadi paragraf padu!)
+
+۱). وَهُوَ يَبْنِي الْمَبَانِيَ وَالْجُسُوْرَ ۲). لِمَصْلَحَةِ الْمُجْتَمَعِ الْعَامِّ ۳). فَاضِلُ مُهَنْدِسٌ فِي الشِرْكَةِ
+OPSI / PERNYATAAN:
+  - A. A. ١-٣-٢
+  - B. B. ٢-٣-١
+  - C. C. ١-٢-٣
+  - D. D. ٢-١-٣
+  - E. E. ٣-٢-١
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['A:الْخَطَأُ', 'B:الصَّحِيْحُ', 'C:الصَّحِيْحُ']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+!رَتِّبْ هَذِهِ الْكَلِمَاتِ لِتَكُوْنَ جُمْلَةً مُفِيْدَةً
+
+(Susunlah kata-kata berikut menjadi kalimat yang benar!)
+
+حَدِيْقَةِ / الْحَيَوَانَاتِ / تَمَشَّى / مُحَمَّدٌ / إِلَى!اِخْتَرِ الصَّحِيْحَ أَوِ الْخَطَأَ لِكُلِّ عِبَارَةٍ
+
+(Klik pilihan Benar atau Salah pada setiap pernyataan!)
+OPSI / PERNYATAAN:
+  - A. تَمَشَّى الْحَيَوَانَاتِ إِلَى حَدِيْقَةِ مُحَمَّدٌ
+  - B. تَمَشَّى مُحَمَّدٌ إِلَى حَدِيْقَةِ الْحَيَوَانَاتِ
+  - C. مُحَمَّدٌ تَمَشَّى إِلَى حَدِيْقَةِ الْحَيَوَانَاتِ
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+!رَتِّبِ الْجُمَلَ الْآتِيَةَ لِتُكَوِّنَ فَقْرَةً مُتَنَاسِقَةً
+
+(Susunlah kalimat berikut menjadi paragraf padu!)
+
+۱). اِسْتَعَرْتُ كِتَابًا عَنْ الْعُلُوْمِ ۲). قَرَأْتُ أسْمَاءَ الْكُتُبِ فِيْ الرَّفِّ ۳). ذَهَبْتُ إِلَى الْمَكْتَبَةِ بَعْدَ الدِّرَاسَةِ
+OPSI / PERNYATAAN:
+  - A. A. ٢-٣-١
+  - B. B. ٣-١-٢
+  - C. C. ١-٣-٢
+  - D. D. ٢-١-٣
+  - E. E. ١-٢-٣
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+
+PERTANYAAN:
+.طَلَبَ الْمُدَرِّسُ اَحْمَدَ لِيُغْلِقَ الشُّبَّاكَ، فَقَالَ لَهُ الْمُدَرِّسُ: يَااَحْمَدُ،.... الشُّبَّاكَ
+OPSI / PERNYATAAN:
+  - A. A. يُغْلِقُ
+  - B. B. تُغْلِقُ
+  - C. C. اِغْلِقْ
+  - D. D. يُغْلَقُ
+  - E. E. اَغْلِقُ
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: ['A:الْخَطَأُ', 'B:الْخَطَأُ', 'C:الصَّحِيْحُ']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+الأُمُّ: مَاذَا تَفْعَلُ قَبْلَ النَّوْمِ كُلَّ يَوْمٍ؟.فَاطِمَةُ: أَغْسِلُ أَسْنَانِي وَأَقْرَأُ الْقِصَّةَ
+
+PERTANYAAN:
+مَا هِيَ عَادَاتُ فَاطِمَةِ قَبْلَ النَّوْمِ؟!اِخْتَرِ الصَّحِيْحَ أَوِ الْخَطَأَ لِكُلِّ عِبَارَةٍ
+
+(Klik pilihan Benar atau Salah pada setiap pernyataan!)
+OPSI / PERNYATAAN:
+  - A. تَقْرَأُ الجَرِيْدَةَ
+  - B. تَغْسِلُ ٱلصُّحُوْن
+  - C. تَهْتَمُّ بِالنَّظَافَةِ
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+التَّاجِرُ: مَرْحَبًا، أَيُّ خِدْمَةٍ ؟.الشَّارِيْ: اُرِيْدُ سَمَكًا وَ لَحْمًا وَ دَجَاجًا التَّاجِرُ: تَفَضَّلُ، هَذَا السَّمَكُ وَ الَحْمُ وَ الدَّجَاجُ. وَ مَاذَا تُرِيْدُ أَيْضًا ؟.الشَّارِيْ: اُرِيْدُ سُكَّرًا وَ شَايًا وَ قَهْوَةً التَّاجِرُ: تَفَضَّلُ، هَذَا السُّكَّرَ وَ الشَّايَا وَ القَهْوَةَ. وَ هَلْ تُرِيْدُ شَيْئًا اَخَرَ؟.الشَّارِيْ: لَا، شُكْرًا لَكَ
+
+PERTANYAAN:
+كَمْ اَنْوَاعًا التِّي تَشْتَرِيْ الشَّارِيْ ؟
+OPSI / PERNYATAAN:
+  - A. A. خَمْسَةُ اَنْواَعٍ
+  - B. B. سِتَّةُ اَنْوَاعٍ
+  - C. C. سَبْعَةُ اَنْوَاعٍ
+  - D. D. ثمَاَنِيَّةُ اَنْوَاعٍ
+  - E. E. تِسْعَةُ اَنْوَاعٍ
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+.اُسْرَةُ جَعْفَرَ اُسْرَةٌ سَعِيْدَةٌ. اَبُوْهُ السَّيِّدُ عَبْدُ العَزِيْزِ يَمْلِكُ الدُّكَانَ فِي السُّوْقِ. هُوَ يَبِيْعُ الْخُضْرَوَاتِ. وَاَمَّا اُمُّهُ السَّيِّدَةُ فَاطِمَةُ، فَهِيَ مُدَرِّسَةٌ، وَتَذْهَبُ إِلَى الدُّكَّانِ لِتُسَاعِدَ زَوْجَهَا فِي الْمَسَاءِ
+
+PERTANYAAN:
+العِبَارَةُ الُمنَاسِبَةُ لِلنَّصِّ السَّابِقِ هِيَ.....إِخْتَرْ أَكْثَرَ مِنْ إِجَابةٍ صَحِيْحَةٍ
+
+(Jawaban benar lebih dari satu.)
+OPSI / PERNYATAAN:
+  - A. A. السَّيِّدَةُ فَاطِمَةُ تُسَاعِدُ زَوْجَهَا فِي الْبَيْعِ
+  - B. B. السَّيِّدُ عَبْدُ عَزِيزٌ يَعْمَلُ فِي الْمَكْتَبِ
+  - C. C. تَطْبَخُ السَّيِّدَةُ فَاطِمَةُ الْخُضْرَوَاتَ
+  - D. D. يَمْلِكُ أَبُوْ جَعْفَرٍ الدُّكَانَ فِي السُّوْقِ
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+سَارَةُ: مَاذَا تُرِيْدُ أَنْ تَصْبَحَ فِي الْمُسْتَقْبَلِ يَا مَرْيَمُ؟.مَرْيَمُ: أُرِيْدَ أَنْ أَكُوْنَ طَبِيْبَةً.سَارَةُ: فِكْرَةٌ رَائِعَةٌ! مِهْنَةُ الطِّبِّ مُهِمَّةٌ جِدًا.مَرْيَمُ: نَعَمْ، أَنَا أُحِبُّ مُسَاعَدَةَ النَّاسِ.سَارَةُ: وَأَنَا أُوَافِقُكِ تَمَامًا. الطَبِيْبُ يُسَاعِدُ الْمُجْتَمَعَ كَثِيْرًا.مَرْيَمُ: شُكْرًا يَا سَارَةُ.سَارَةُ: عَفْوًا
+
+PERTANYAAN:
+مَا ٱلْمَوْضُوعُ ٱلْمُنَاسِبُ لِلْحِوَارِِ ٱلسَّابِقِ؟
+OPSI / PERNYATAAN:
+  - A. A. دَوْرُ الطَّبِيْبِ فِيْ الْمُجْتَمَعِ
+  - B. B. حِوَارٌ عَنِ المُجْتَمَعِ
+  - C. C. فِكْرَةٌ عَنْ مُسَاعَدَةِ النَّاسِ
+  - D. D. مِهْنَةُ مَرْيَمِ فِيْ الْمُسْتَقْبَلِ
+  - E. E. مَرْيَمُ وَسَارَةُ فِيْ الْمَدْرَسَةِ
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+.يُرِيْدُ خَالِدٌ وَ حَسَنٌ اَنْ يَاْكُلَ الطَّعَامَ وَ الشَّرَابَ، فَذَهَبَا اِلىَ السُّوْقِ بَائِعٌ: اَهْلًا وَسَهْلًا، أَيُّ خِدْمَةٍ ؟.خَالِدٌ: اَهْلاً بِكَ، نَحْن ُنُرِيْدُ اَنْ نَشْتَرِيَ الطَّعَامَ وَ الشَّرَابَ بَائِعٌ: مِنْ فَضْلِكَ، عِنْدَنَا المَطْعُوْمَاتُ مِنْهَا خُبْزٌ وَ رُزٌّ وَ مَكْرُوْنَةٌ وَعِنْدَنَا بَعْضَ الشَّرَابِ مِنْهَا مَاءٌ وَ عَصِيْرٌ وَ شَايٌ وَ قَهْوَةٌ. مَاذَا تُفَضِّلَانِ ؟.حَسَنٌ: اُفَضِّلُ الُخبْزَ وَ الشَّايَ.خَالِدٌ: اُفَضِّلُ الرُّزَّ وَ الْعَصِيْرَ
+
+PERTANYAAN:
+كَمْ نَوْعًا مِنَ الْمَطْعُوْمَاتُ عِنْدَ البَائِعُ ؟
+OPSI / PERNYATAAN:
+  - A. A. نَوْعَانِ
+  - B. B. ثَلَاثَةُ أَنْوَاعٍ
+  - C. C. أَرْبَعَةُ أَنْوَاعٍ
+  - D. D. خَمْسَةُ أَنْوَاعٍ
+  - E. E. سِتَّةُ اَنْوَاعٍ
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+.يَذْهَبُ مُحَمَّدٌ إِلَى الْمُسْتَشْفَى الْعَامِّ كُلَّ يَوْمٍ. يَعْمَلُ هُنَاكَ طَبِيْبًا. وَيَقْضِي يَوْمَهُ فِي مُعَالَجَةِ الْمَرْضَى. يُحِبُّ مُحَمَّدٌ عَمَلَهُ كَثِيْرًا لِأَنَّهُ يَسْعَدُ بِمُسَاعَدَةِ النَّاسِ
+
+PERTANYAAN:
+ماَ الفِكْرَةُ الرَّئِيْسَةُ فِي هَذَا النَّصِّ؟
+
+(Apa ide utama dalam teks tersebut?)
+OPSI / PERNYATAAN:
+  - A. A. تَأْثِيرُ الكُتُبِ الطِّبِّيَّةِ
+  - B. B. كَيْفِيَّةُ عِلَاجِ المَرْضَى
+  - C. C. العَمَلُ فِي المُسْتَشْفَيَاتِ
+  - D. D. أَهَمِّيَّةُ الطَّبِيبِ
+  - E. E. حَيَاةُ الطَّبِيبِ اليَوْمِيَّةُ
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+.الأُمُّ: هَيَّا نُنَظِّفُ السَّاحَةَ مَعًا.الِابْنُ: نَعَمْ يَا أُمِّيْ، سَأُسَاعِدُكِ فِيْ كَنَسِ الْأَوْرَاقِ.الأُمُّ: أَنْتَ وَلَدٌ مُجْتَهِدٌ، أَفْخَرُ بِكَ.الِابْنُ: هَذَا وَاجِبِيْ، وَأُحِبُّ أَنْ أُسَاعِدَكِ دَائِمًا
+[Konteks Visual Gambar 03185_59d06b15acaf1585394d2f787dcfd889.png]:
+Ilustrasi dua orang yang sedang membersihkan lingkungan di luar ruangan:- Seorang perempuan dewasa dengan rambut hitam disanggul, mengenakan daster atau terusan cokelat bercorak, sedang menyapu dedaunan kering di atas tanah/jalan menggunakan sapu bergagang panjang.- Seorang anak laki-laki berkaus hijau dan celana panjang cokelat berdiri di sampingnya memegang serokan sampah (pengki) untuk menampung daun-daun kering yang disapu.- Di atas permukaan tanah berwarna abu-abu tampak banyak daun-daun kering berguguran berwarna cokelat.- Latar belakang berupa tanaman rimbun, semak hijau, dan pepohonan dengan langit biru cerah berawan putih.
+PERTANYAAN:
+مَاالْقِيْمَةُ الَّتِي نَتَعَلَّمُهَا مِنَ الْحِوَارِ السَّابِقِ؟.اِخْتَرْ أَكْثَرَ مِنْ إِجَابَةٍ صَحِيحَةٍ
+
+(Jawaban benar lebih dari satu.)
+OPSI / PERNYATAAN:
+  - A. A. الْمُسَاعَدَةُ
+  - B. B. ٱلْأَمَانَةُ
+  - C. C. الصَّدَاقَةُ
+  - D. D. التَّعَاوُنُ
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: ['A:الصَحِيْحُ', 'B:الصَحِيْحُ', 'C:الخَطَأُ']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+مَالِكٌ: كَيْفَ نُحَافِظُ عَلَى نَظَافَةِ الْبِيئَةِ؟ يَاسِرٌ: بِنَظَافَةِ الْمَدْرَسَةِ وَعَدَمِ رَمْيِ الْقُمَامَةِ مَالِكٌ: هَلْ تُوجَدُ أَشْجَارٌ فِي الْمَدْرَسَةِ؟ يَاسِرٌ: نَعَمْ، وَهِيَ تُعْطِي الْهَوَاءَ النَّقِيَّ مَالِكٌ: لِمَاذَا يَجِبُ أَنْ نُحَافِظَ عَلَى النَّظَافَةِ؟ يَاسِرٌ: لِأَنَّهَا تُسَاعِدُ عَلَى صِحَّتِنَا وَرَاحَتِنَا
+
+PERTANYAAN:
+مَاذَا نَسْتَنْتِجُ مِنَ الْحِوَارِ السَابِقِ؟!اِخْتَرِ الصَّحِيحَ أَوِ الْخَطَأَ لِكُلِّ عِبَارَةٍ
+
+(Klik pilihan Benar atau Salah pada setiap pernyataan!)
+OPSI / PERNYATAAN:
+  - A. الْبِيْئَةُ النَّظِيْفَةُ تُسَاعِدُ عَلَى الصِّحَّةِ
+  - B. الشَّجَرُ فِيْ الْمَدْرَسَةِ يُقَدِّمُ هَوَاءً نَقِيًّا
+  - C. تَنْظِيْفُ الْمَدْرَسَةِ مَسْؤُولِيَّةُ الطُّلَّابِ
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: ['A', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+أَحْمَدُ: يَا خَالِدُ، هَلْ تُرِيْدُ أَنْ نَذْهَبَ إِلَى الْجَبَلِ؟ خَالِدٌ: لَا بَأْسَ، وَلَكِنَّ هَلْ الْجَبَلُ آمَنٌ الْآنَ؟.أَحْمَدُ: سَمِعْتُ أَنَّ هُنَاكَ تَحْذِيْرًا بِسَبَابِ الاِنْهِيَارَاتِ خَالِدٌ: لَا تَذْهَبْ! هَلْ تُرِيْدُ الذِّهَابَ إِلَى الشَاطِئِ؟.أَحْمَدُ: نَعَمْ، هَيّا نَذْهَبُ إلَى شَاطِئِ الْبَحْرِ
+
+PERTANYAAN:
+لِمَاذَا اِخْتَارَ خَالِدٌ الذَّهَابَ إِلَى الشَّاطِئِ؟.إِخْتَرْ أَكْثَرَ مِنْ إِجَابَةٍ صَحِيْحَةٍ
+
+(Jawaban benar lebih dari satu.)
+OPSI / PERNYATAAN:
+  - A. A. لِأَنَّ الشَّاطِئَ آمِنٌ
+  - B. B. لِأَنَّ يَوْمَهُ عُطْلَةٌ
+  - C. C. لِأَنَّ الْجَبَلَ خَطِيْرٌ
+  - D. D. لِأَنَّ الْجَبَلَ قَرِيْبٌ
+

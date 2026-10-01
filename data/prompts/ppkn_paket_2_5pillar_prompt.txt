@@ -1,0 +1,493 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Pendidikan Pancasila & Kewarganegaraan (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pasal 27 ayat (3) UUD NRI Tahun 1945 menyatakan bahwa “Setiap warga negara berhak dan wajib ikut serta dalam upaya pembelaan negara.”
+
+PERTANYAAN:
+Berdasarkan ilustrasi, hak warga negara yang mencerminkan pasal tersebut yaitu warga negara berhak....
+OPSI / PERNYATAAN:
+  - A. A. mengikuti kegiatan sosial dan wajib mematuhi peraturan yang ditetapkan oleh pemerintah dalam lingkungannya
+  - B. B. memperoleh pendidikan dan wajib menerapkan nilai-nilai kebangsaan dalam kehidupan sehari-hari
+  - C. C. menyampaikan aspirasi kepada pemerintah dan wajib menaati aturan hukum yang berlaku di masyarakat
+  - D. D. terlibat dalam kegiatan kemasyarakatan dan wajib ikut menjaga ketertiban serta ketentraman lingkungan sekitarnya
+  - E. E. memperoleh perlindungan negara dan wajib ikut berpartisipasi menjaga keamanan serta kedaulatan bangsa
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pemerintah terus mendorong harmoni dalam keberagaman melalui berbagai program. Salah satunya adalah Festival Toleransi dan Budaya Pelajar yang melibatkan siswa SMA dari berbagai daerah. Kegiatan ini meliputi pertukaran budaya, pameran kearifan lokal, dan diskusi lintas suku, agama, serta bahasa.
+
+PERTANYAAN:
+Berdasarkan informasi tersebut, pernyataan mana saja yang menunjukkan sikap positif sebagai modal sosial untuk pembangunan nasional? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. terlibat secara aktif dalam pertukaran budaya dan belajar mengenali keunikan budaya yang lain
+  - B. B. menjalin komunikasi secara wajar dengan tetap menjaga kenyamanan dalam keberagaman budaya
+  - C. C. menghormati simbol-simbol dari berbagai adat dan agama saat berkunjung ke daerah-daerah lain
+  - D. D. membagikan pengalaman kegiatan lintas budaya di media sosial sebagai inspirasi untuk masyarakat
+  - E. E. menyampaikan pendapat dengan hati-hati saat melakukan diskusi agar keputusan segera terwujud
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Penyebaran paham radikalisme di media sosial untuk merubah ideologi negara semakin marak terjadi. Hal ini memengaruhi generasi muda dan menciptakan konflik horizontal di masyarakat.
+
+PERTANYAAN:
+Upaya terbaik untuk melindungi keutuhan NKRI dari dampak tersebut adalah...
+OPSI / PERNYATAAN:
+  - A. A. mengadakan dialog terbuka dengan kelompok radikal untuk mencari titik temu dan mengurangi konflik ideologi
+  - B. B. memperkuat pendidikan Pancasila dan literasi digital di sekolah serta melibatkan tokoh agama dalam edukasi masyarakat
+  - C. C. meningkatkan pengawasan ketat terhadap aktivitas media sosial dan memberikan teguran bagi penyebar konten radikal
+  - D. D. mengorganisir kampanye nasional anti radikalisme melalui berbagai platform media untuk membentuk opini publik
+  - E. E. membentuk forum diskusi antargenerasi untuk membahas perbedaan pandangan ideologi secara demokratis
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Indonesia sebagai negara kepulauan yang multietnis menghadapi tantangan disintegrasi yang sering dipicu oleh isu ketidakadilan, diskriminasi, dan penyebaran hoaks.
+
+PERTANYAAN:
+Cara warga negara dalam mengatasi tantangan tersebut dapat dilakukan dengan ….
+OPSI / PERNYATAAN:
+  - A. A. mengajak masyarakat menjaga budaya lokal dengan membatasi pengaruh budaya luar yang masuk
+  - B. B. menyebarkan informasi yang benar dan membangun dialog antarkelompok untuk mencegah konflik
+  - C. C. mendorong pembentukan kelompok sosial yang terdiri dari warga dengan latar belakang yang sama
+  - D. D. berpartisipasi dalam diskusi di media sosial dengan menyuarakan pandangan kelompok minoritas
+  - E. E. meminimalkan pernyataan atau aktivitas yang dapat menimbulkan gesekan antarkelompok di masyarakat
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Terjadi perdebatan sengit di masyarakat dan parlemen terkait wacana amandemen UUD 1945 di mana sebagian pihak mengusulkan agar pemilihan presiden dikembalikan ke MPR, sedangkan sebagian lain ingin mempertahankan sistem pemilihan langsung oleh rakyat. Ketegangan ini menimbulkan kekhawatiran akan mundurnya demokrasi di Indonesia.
+
+PERTANYAAN:
+Berdasarkan ilustrasi, pentingnya Pancasila untuk memecahkan masalah tersebut karena ….
+OPSI / PERNYATAAN:
+  - A. A. menjadi dasar mempertimbangkan setiap perubahan agar tetap menjamin kedaulatan rakyat dan keadilan sosial secara seimbang
+  - B. B. digunakan sebagai alat hukum tertinggi Indonesia agar perubahan aturan tidak menyalahi sistem pemerintahan yang sudah berlaku
+  - C. C. menjadi acuan teknis lembaga legislatif di Indonesia dalam menentukan batasan perubahan agar tidak melewati kewenangan politik
+  - D. D. digunakan oleh lembaga eksekutif agar pelaksanaan pemerintahan di Indonesia tetap stabil di tengah konflik politik yang terjadi
+  - E. E. dijadikan dasar keputusan oleh lembaga yudikatif untuk menilai apakah usulan perubahan tersebut sesuai kepentingan negara
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Salah satu bentuk kerja sama antara pemerintah pusat dan pemerintah daerah adalah dalam hal Penanggulangan Kemiskinan. Kerja sama dalam penanggulangan kemiskinan melibatkan pemerintah pusat yang memberikan kebijakan dan program, sementara pemerintah daerah melaksanakan program tersebut di tingkat daerah termasuk bantuan sosial, pelatihan, dan pengembangan usaha mikro.
+
+PERTANYAAN:
+Bentuk kerja sama ini dilakukan karena...
+OPSI / PERNYATAAN:
+  - A. A. Pemerintah pusat mengembangkan program-program yang dapat diimplementasikan oleh pemerintah daerah, seperti program pelatihan kerja, bantuan sosial, dan pengembangan ekonomi lokal
+  - B. B. Pemerintah daerah dapat mengembangkan ekonomi lokal dengan menciptakan lapangan kerja, mendukung usaha kecil dan menengah, serta meningkatkan infrastruktur
+  - C. C. Pemerintah daerah dapat menyediakan program bantuan sosial seperti bantuan pangan, bantuan biaya pendidikan, dan bantuan kesehatan untuk masyarakat miskin.
+  - D. D. Pemerintah daerah dapat mengidentifikasi dan memetakan kemiskinan di daerahnya, sehingga dapat mengajukan permohonan bantuan kepada pemerintah pusat untuk mengatasinya
+  - E. E. Pemerintah daerah dapat meningkatkan kapasitas masyarakat melalui pelatihan dan pendidikan, sehingga masyarakat dapat meningkatkan keterampilan dan kemampuan mereka
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Keberagaman bangsa Indonesia merupakan salah satu kekuatan dan kekayaan bangsa, namun juga dapat menjadi tantangan dalam membangun kesatuan dan persatuan. Oleh karena itu, penting untuk meningkatkan sikap toleransi, saling menghormati, dan kerja sama antaretnis dan agama.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, Pernyataan mana saja yang menjelaskan tujuan integrasi nasional dalam bingkai Bhinneka Tunggal Ika? Klik pada pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Integrasi bangsa Indonesia bertujuan untuk membangun kesatuan dan persatuan bangsa, sehingga masyarakat Indonesia dapat hidup harmonis dan sejahtera
+  - B. B. Integrasi bangsa Indonesia bertujuan untuk meningkatkan kualitas hidup masyarakat Indonesia melalui pembangunan ekonomi, pendidikan, dan kesehatan
+  - C. C. Integrasi Bangsa Indonesia bertujuan untuk menjadikan bangsa Indonesia menjadi Negara yang kuat dan bangsa yang disegani dalam percaturan internasional
+  - D. D. Integrasi yang berasal dari kebinekaan bangsa Indonesia bertujuan meningkatkan kerjasama antarpemeluk agama dan suku bangsa sehingga tercipta bangsa yang besar
+  - E. E. Integrasi nasional Indonesia bertujuan mengembangkan identitas nasional yang kuat dan bangga, sehingga masyarakat Indonesia dapat memiliki rasa kebanggaan dan cinta tanah air
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Panca gatra adalah aspek sosial kemasyarakatan dalam wawasan nusantara yang bersifat dinamis meliputi ideologi, politik, ekonomi, sosial budaya dan pertahanan keamanan. Gatra ekonomi sebagai salah satu aspek dalam wawasan nusantara merujuk pada aspek ekonomi yang menjadi bagian integral dari cara pandang bangsa Indonesia terhadap wilayah dan potensi negaranya. Wawasan nusantara dalam bidang ekonomi juga mengamanatkan pelaksanaan demokrasi ekonomi.
+
+PERTANYAAN:
+Pentingnya hal tersebut dalam menjaga keutuhan NKRI adalah ….
+OPSI / PERNYATAAN:
+  - A. A. mewujudkan pembangunan yang menjamin terwujudnya pemerataan pendapatan
+  - B. B. mendorong untuk terus mengembangkan kehidupan ekonomi yang kuat dan mandiri
+  - C. C. menekankan pentingnya eksplorasi dan eksploitasi potensi ekonomi antardaerah di Indonesia
+  - D. D. melibatkan potensi dan partisipasi dari seluruh masyarakat, bukan hanya pihak tertentu
+  - E. E. mengeksplorasi seluruh kekayaan alam dan potensi ekonomi strategis Indonesia
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Dalam negara demokrasi, pemilihan umum merupakan sarana utama mewujudkan kedaulatan rakyat. Pemilu merupakan proses penting dalam sistem demokrasi yang memungkinkan rakyat untuk memilih wakil-wakil mereka dalam pemerintahan.
+
+PERTANYAAN:
+Perilaku yang mencerminkan hak asasi manusia sesuai dengan sila keempat Pancasila berdasarkan ilustrasi tersebut adalah....
+OPSI / PERNYATAAN:
+  - A. A. menggunakan hak pilih sesuai dengan arah kebijakan dari partai politik
+  - B. B. menghormati perbedaan pendapat dan pilihan politik dalam masyarakat
+  - C. C. berpartisipasi aktif dengan cara mengikuti kampanye seluruh partai politik
+  - D. D. mengikuti debat dalam pemilu untuk menilai strategi pemenangan para kandidat
+  - E. E. menerima hasil dari setiap tahapan pemilu karena pelaksanaannya di awasi negara
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Dalam pelaksanaan Pilkada Serentak tahun 2024 lalu, terjadi perselisihan hasil penghitungan suara salah satu daerah. Dua pasangan calon saling mengklaim kemenangan, sementara rekapitulasi suara oleh KPU daerah dituding tidak transparan. Salah satu pasangan calon kemudian menggugat hasil Pilkada tersebut karena diduga terjadi kecurangan yang bersifat terstruktur, sistematis, dan masif (TSM) yang dapat memengaruhi hasil akhir pemilihan.
+
+PERTANYAAN:
+Berdasarkan sistem ketatanegaraan Indonesia, cara menyelesaikan permasalahan tersebut sesuai kewenangan lembaga negara adalah...
+OPSI / PERNYATAAN:
+  - A. A. Presiden menetapkan peraturan pemerintah untuk mengatur ketentuan penyelesaian perbedaan penghitungan suara
+  - B. B. Mahkamah Konstitusi melaksanakan kewenangannya dengan memutus perselisihan tentang hasil pemilukada
+  - C. C. Komisi Pemilihan Umum membuat aturan internal tentang penyelesaian perselisihan hasil perhitungan suara pemilukada
+  - D. D. Badan Pengawas Pemilihan Umum memerintahkan dilakukannya pemungutan suara ulang untuk kepastian hasil
+  - E. E. DPRD bersama Pemerintah Daerah membuat peraturan daerah yang mengatur pemilukada yang lebih lengkap
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Diskriminasi adalah perlakuan yang tidak adil terhadap seseorang atau kelompok berdasarkan perbedaan suku, agama, ras, jenis kelamin, atau status sosial. Apabila dibiarkan, diskriminasi dapat memicu konflik dan menjadi ancaman serius bagi integrasi nasional Indonesia.
+
+PERTANYAAN:
+Berdasarkan ilustrasi, upaya yang perlu dilakukan untuk menghadapi ancaman tersebut agar integrasi nasional tetap terjaga adalah....
+OPSI / PERNYATAAN:
+  - A. A. mendorong tumbuhnya semangat memperjuangkan kebebasan individu dalam kehidupan bernegara
+  - B. B. mengajak setiap individu untuk saling mengakui sebagai makhluk yang memiliki kebebasan dan merdeka
+  - C. C. mengutamakan dialog antarwarga untuk memperkuat rasa saling pengertian dan mencegah prasangka
+  - D. D. menempatkan orang lain sesuai posisi sosialnya sebagai bagian dari tatanan masyarakat yang teratur
+  - E. E. menumbuhkan sikap saling menghormati karena setiap manusia memiliki harkat dan martabat yang sama
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Globalisasi ekonomi mendorong masuknya berbagai produk luar negeri ke pasar Indonesia. Apabila tidak disikapi dengan bijak, hal ini dapat menurunkan daya saing produk lokal dan mengancam perekonomian nasional.
+
+PERTANYAAN:
+Berdasarkan ilustrasi, klik pada pilihan Benar atau Salah dari setiap pernyataan berikut yang menunjukkan peran warga negara dalam menjaga keutuhan NKRI berdasarkan dinamika tersebut!
+OPSI / PERNYATAAN:
+  - A. berperan sebagai konsumen yang mendukung produk dalam negeri untuk memperkuat perekonomian nasional
+  - B. berpartisipasi dalam kegiatan ekonomi yang mendorong daya saing bangsa di tengah arus globalisasi
+  - C. berpatisipasi dengan membeli produk-produk dalam negeri karena memiliki harga lebih murah
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Bunyi sila kedua dan keempat Pancasila yaitu “Kemanusiaan yang Adil dan Beradab” dan “Kerakyatan yang Dipimpin oleh Hikmat Kebijaksanaan dalam Permusyawaratan Perwakilan”.
+
+PERTANYAAN:
+Perilaku yang berhubungan dengan kedua sila Pancasila tersebut adalah...
+OPSI / PERNYATAAN:
+  - A. A. menghormati perbedaan pendapat teman dan bekerja sama untuk menyelesaikan tugas kelompok dengan baik
+  - B. B. memberikan perlakuan yang sama kepada semua orang tanpa membeda-bedakan latar belakang suku dan agama
+  - C. C. bekerja sama dengan warga lain untuk membangun fasilitas umum yang dapat dinikmati oleh seluruh masyarakat
+  - D. D. memberikan bantuan kepada korban banjir suatu daerah berdasarkan hasil musyawarah seluruh warga kampung
+  - E. E. menghormati hak asasi manusia dengan bersikap adil dan beradab kepada sesama antarumat beragama
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Mahkamah Konstitusi (MK) adalah lembaga negara yang mempunyai wewenang sebagaimana di atur dalam Undang-Undang Dasar Negara RI Tahun 1945.
+
+PERTANYAAN:
+Klik pada pilihan Benar atau Salah dari setiap pernyataan berikut berkaitan dengan Wewenang Mahkamah Konstitusi!
+OPSI / PERNYATAAN:
+  - A. memutuskan pendapat DPR mengenai dugaan pelanggaran oleh Presiden dan Wakil Presiden
+  - B. menguji peraturan perundang-undangan di bawah undang-undang terhadap undang-undang
+  - C. mengganti dan sekaligus melantik Presiden dan/atau Wakil Presiden dalam masa jabatannya
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Bangsa Indonesia adalah bangsa yang memiliki keberagaman suku, agama, bahasa, adat istiadat, dan budaya yang hidup berdampingan. Kebinekaan dapat menjadi fondasi kokoh yang menopang persatuan dan kesatuan bangsa. Namun adanya perbedaan juga dapat menjadi ancaman persatuan dan kesatuan.
+
+PERTANYAAN:
+Klik Benar atau Salah dari setiap pernyataan berikut yang menunjukkan upaya menjaga integrasi nasional dalam bingkai kebinekaan!
+OPSI / PERNYATAAN:
+  - A. menghormati dan melindungi hak asasi manusia untuk semua warga negara, tanpa membedakan latar belakang budaya, agama, atau suku bangsa
+  - B. mengawasi dan menangani konflik yang berpotensi mengancam integrasi nasional, serta meningkatkan kerja sama antarlembaga dan masyarakat
+  - C. meningkatkan dialog dan komunikasi antarkelompok masyarakat untuk memperkuat persatuan bangsa dengan menyesuaikan perkembangan budaya lain
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Benar', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Perubahan iklim dan lingkungan merupakan salah satu bagian dalam perkembangan masyarakat global yang dapat mengancam keberlangsungan hidup manusia dan ekosistem serta menciptakan ketidakstabilan sosial, ekonomi dan politik yang kerap memunculkan terjadinya konflik dalam masyarakat.
+
+PERTANYAAN:
+Klik pada pilihan Benar atau Salah dari setiap pernyataan berikut yang menunjukkan bukti bahwa Bhinneka Tunggal Ika dapat mengatasi ancaman sebagaimana ilustrasi diatas!
+OPSI / PERNYATAAN:
+  - A. Bhinneka Tunggal Ika merupakan semboyan persatuan dan kesatuan yang mengakui persamaan suku, agama, bahasa, dan budaya serta identitas nasional dengan menghilangkan segala bentuk perbedaan
+  - B. Bhinneka Tunggal Ika meningkatkan penghormatan dan penghargaan terhadap perbedaan, sehingga dapat mengurangi konflik dan meningkatkan kesatuan dan persatuan sebagai bagian masyarakat global
+  - C. Bhinneka Tunggal Ika meningkatkan kesadaran terhadap keberagaman dan kesatuan, sehingga dapat meningkatkan partisipasi dan kontribusi masyarakat dalam membangun masyarakat global yang dinamis
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Warga di sebuah lingkungan perumahan hidup berdampingan dalam keberagaman agama, budaya, dan latar belakang sosial. Mereka saling menghargai, aktif dalam kegiatan sosial bersama, dan menjaga ketertiban dengan mematuhi aturan yang berlaku.
+
+PERTANYAAN:
+Berdasarkan ilustrasi, nilai Pancasila yang paling tepat telah diterapkan pada kondisi tersebut adalah ….
+OPSI / PERNYATAAN:
+  - A. A. Nilai Ketuhanan, karena setiap warga dapat menjalankan ibadah sesuai agama dan keyakinannya
+  - B. B. Nilai Kemanusiaan, karena masyarakat saling membantu tanpa memandang latar belakangnya
+  - C. C. Nilai Persatuan, karena perbedaan yang ada tidak menjadi penghalang untuk hidup rukun dan harmonis
+  - D. D. Nilai Persatuan, karena warga berpartisipasi dalam kegiatan sosial sesuai peran kelompok budayanya
+  - E. E. Nilai Keadilan Sosial, karena semua warga mendapatkan hak dan fasilitas secara merata tanpa kecuali
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sekelompok pedagang kecil mengalami masalah karena tempat mereka mencari nafkah tiba-tiba dilarang digunakan. Hal ini terjadi tanpa kesepakatan ganti rugi, sehingga mereka merasa telah terjadi pelanggaran hak dan pengingkaran kewajiban untuk saling menghormati kepentingan masing-masing.
+
+PERTANYAAN:
+Berdasarkan ilustrasi, solusi untuk mengatasi pelanggaran tersebut yaitu ….
+OPSI / PERNYATAAN:
+  - A. A. mengirim perwakilan pedagang untuk menyampaikan usulan agar memperoleh tempat pengganti untuk berjualan
+  - B. B. mengumpulkan dukungan dari elemen masyarakat sebagai upaya mempertahankan haknya untuk berjualan
+  - C. C. melakukan mediasi sehingga para pihak memahami hak dan kewajibannya yang melandasi kepentingannya
+  - D. D. mengajukan advokasi kepada lembaga bantuan hukum untuk memastikan para pedagang berada di pihak yang benar
+  - E. E. mewakilkan kepada lembaga swadaya masyarakat untuk membantu memperjuangkan hak-hak sebagai pengguna lahan
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Kehidupan suku bangsa di Indonesia sangat kaya akan keberagaman, dipengaruhi oleh faktor geografis dan sejarah. Indonesia memiliki lebih dari 1.340 suku bangsa yang tersebar di berbagai pulau, masing-masing dengan bahasa, tradisi, dan adat istiadat yang unik.
+
+PERTANYAAN:
+Berdasarkan ilustrasi, tantangan yang dihadapi dalam menjaga integrasi nasional dalam bingkai “Bhinneka Tunggal Ika” adalah ….
+OPSI / PERNYATAAN:
+  - A. A. adanya ketimpangan kehidupan yang terjadi dalam masyarakat
+  - B. B. munculnya sikap sukuisme dalam kehidupan bermasyarakat
+  - C. C. hadirnya perasaan rendah diri suku tertentu dalam masyarakat
+  - D. D. terjadinya kepunahan suku tertentu akibat kesenjangan sosial
+  - E. E. munculnya perilaku modernisme suku tertentu yang berlebihan
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada sebuah desa, terjadi perselisihan antara dua kelompok warga terkait penggunaan lahan pertanian. Konflik ini mulai menimbulkan ketegangan sosial dan berpotensi mengganggu kerja sama antarwarga serta keutuhan desa.
+
+PERTANYAAN:
+Berdasarkan ilustrasi, solusi penyelesaikan konflik yang terjadi sesuai dengan penerapan konsep wawasan nusantara yaitu dengan....
+OPSI / PERNYATAAN:
+  - A. A. menyelenggarakan musyawarah antarwarga untuk mencapai kesepakatan dan memperkuat persatuan masyarakat desa
+  - B. B. mengadakan pertemuan antarwarga untuk membahas penggunaan lahan secara teknis dan meninjau masalah yang muncul
+  - C. C. membuat jadwal penggunaan lahan secara bergiliran agar setiap kelompok memperoleh kesempatan sesuai kebutuhan
+  - D. D. melaksanakan mediasi secara terbatas untuk menyelesaikan persoalan pengelolaan lahan antara kedua kelompok warga
+  - E. E. menyusun laporan hasil konflik antarwarga dan menyerahkan saran penyelesaian kepada pihak berwenang di desa
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Perkembangan global menyebabkan Pancasila menjadi representasi dari keberagaman masyarakat dunia. Pancasila dengan nilai-nilai toleransi, persatuan, dan keadilan, menjadi solusi universal dalam mengatasi tantangan perbedaan budaya dan agama di dunia. Kondisi tersebut berpotensi menjadikan bangsa Indonesia sebagai role model dalam mempromosikan kerukunan dan harmoni dari keberagaman masyarakat dunia.
+
+PERTANYAAN:
+Klik pada pilihan benar atau salah dari setiap pernyataan berikut terkait fungsi dari diterapkannya Pancasila dalam pergaulan kehidupan global berdasarkan ilustrasi tersebut!
+OPSI / PERNYATAAN:
+  - A. Pancasila dapat menjadi landasan untuk meningkatkan hubungan internasional yang harmonis dan berkeadilan
+  - B. Pancasila dapat menjadi landasan untuk membangun kerja sama internasional yang efektif dan berkeadilan
+  - C. Implementasi Pancasila di era global dapat meningkatkan derajat Indonesia sebagai bangsa yang unggul di dunia
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pasal 27 ayat (2) UUD NRI Tahun 1945 menyatakan bahwa tiap-tiap warga negara berhak atas pekerjaan dan penghidupan yang layak bagi kemanusiaan.
+
+PERTANYAAN:
+Tantangan yang dihadapi dalam mengimplementasikan pasal tersebut adalah....
+OPSI / PERNYATAAN:
+  - A. A. penyusunan regulasi di bidang ketenagakerjaan yang membutuhkan waktu yang lama
+  - B. B. adanya keterbatasan akses terhadap pekerjaan akibat ketidaksetaraan dan infrastruktur
+  - C. C. tingkat keterampilan dan pendidikan di kalangan pencari kerja yang merata dan setara
+  - D. D. adanya perbedaan standar kualitas pekerja yang berbeda-beda dari pemberi kerja
+  - E. E. lemahnya perlindungan hukum yang diberikan oleh negara kepada pekerja anak
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Reog Ponorogo merupakan bagian tak terpisahkan dari kehidupan budaya masyarakat Ponorogo, Jawa Timur. Seiring perkembangannya, Reog tidak hanya menjadi simbol budaya masyarakat Ponorogo, tetapi juga bagian dari identitas budaya nasional Indonesia. Pada tahun 2024, Reog Ponorogo resmi diakui sebagai warisan budaya takbenda oleh UNESCO, sebagai langkah penting dalam pelestarian warisan budaya bangsa dan menjadi modal sosial pembangunan Indonesia.
+
+PERTANYAAN:
+Alasan pelestarian Reog Ponorogo menjadi modal sosial pembangunan Indonesia adalah....
+OPSI / PERNYATAAN:
+  - A. A. tradisi lokal memperkuat promosi pariwisata untuk peningkatan ekonomi nasional
+  - B. B. identitas budaya daerah yang diakui secara internasional mendatangkan modal pembangunan
+  - C. C. kebudayaan menjadi identitas pembangunan bangsa di tengah maraknya gempuran budaya asing
+  - D. D. pembangunan nasional membutuhkan identitas budaya lokal dalam menentukan prioritas pembangunan
+  - E. E. pengakuan warisan budaya oleh UNESCO dapat menjadi modal pembangunan yang diakui dunia internasional
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pemerintah Indonesia mengadakan kegiatan Festival Budaya Nusantara yang melibatkan berbagai komunitas dari seluruh provinsi. Kegiatan ini mencakup pameran seni, pertunjukan tradisional, serta diskusi tentang keberagaman budaya Indonesia.
+
+PERTANYAAN:
+Alasan kegiatan tersebut dapat memperkukuh persatuan dan kesatuan bangsa adalah....
+OPSI / PERNYATAAN:
+  - A. A. memperkenalkan produk lokal untuk meningkatkan perekonomian setiap daerah
+  - B. B. mengedepankan keberagaman budaya Indonesia yang mempererat hubungan antarwarga negara
+  - C. C. menciptakan peluang kerja baru untuk masyarakat yang terlibat dalam pameran dan pertunjukan
+  - D. D. memberi kesempatan kepada wisatawan lokal dan asing untuk menikmati budaya Indonesia
+  - E. E. promosi pariwisata lokal di setiap daerah untuk menarik lebih banyak wisatawan domestik
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Dinamika masyarakat multikultural di Indonesia merupakan interaksi kompleks antarberbagai kelompok etnis, budaya, agama, dan sistem nilai, yang menghasilkan berbagai tantangan. Salah satu permasalahan yang dihadapi masyarakat multikultural di Indonesia adalah konflik antaragama.
+
+PERTANYAAN:
+Peran Pancasila sebagai ideologi negara yang menjadi pemersatu dalam kehidupan berbangsa berdasarkan ilustrasi di atas adalah …
+OPSI / PERNYATAAN:
+  - A. A. sebagai perekat hubungan umat beragama mayoritas dan minoritas serta pemerintah dalam kehidupan bernegara
+  - B. B. menjadi pendorong adanya dialog sesama agama untuk meningkatkan kebersamaan umat dan mengurangi rasa curiga
+  - C. C. menjadi dasar dalam melihat adanya perbedaan paham dari berbagai agama dan aliran kepercayaan dalam masyarakat
+  - D. D. merupakan sarana untuk menguji kepekaan sosial dan rasa solidaritas kelompok dari umat beragama dalam masyarakat
+  - E. E. sebagai dasar untuk menghargai dan menghormati perayaan hari-hari besar berbagai agama dalam masyarakat
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Seorang pengusaha membuang limbah pabrik ke sungai yang mengalir di dekat pemukiman warga. Akibatnya, air menjadi tercemar dan banyak warga mengalami gangguan kesehatan. Meskipun masyarakat sudah melaporkan hal ini kepada pihak berwenang, proses hukum berjalan sangat lambat. Bahkan, muncul kabar bahwa perusahaan tersebut memberikan “uang pelican” agar kasusnya tidak diproses lebih lanjut. Warga menjadi kecewa dan kehilangan kepercayaan    terhadap lembaga penegak hukum.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, tantangan utama dalam penegakan hukum yang ditunjukkan adalah....
+OPSI / PERNYATAAN:
+  - A. A. kurangnya partisipasi masyarakat dalam kegiatan pemeliharaan lingkungan hidup
+  - B. B. lemahnya perlindungan hukum kepada terduga pelaku pencemaran lingkungan
+  - C. C. maraknya pengaruh kekuasaan dan praktik suap dalam menjalankan proses hukum
+  - D. D. maraknya pelanggaran hukum yang diselesaikan secara kekeluargaan
+  - E. E. rendahnya kesadaran pengusaha dalam menjaga kelestarian lingkungan alam
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Dalam rangka menjaga kebinekaan, kerja sama dan toleransi merupakan konsep yang sangat penting dalam membangun hubungan yang harmonis dan damai antara individu, kelompok, dan masyarakat. Kerjasama dapat dilakukan dalam berbagai bidang, seperti ekonomi, politik, sosial, dan budaya untuk meningkatkan efisiensi, efektivitas, dan kualitas hasil kerja. Sedangkan toleransi dilakukan dalam rangka membangun hubungan yang harmonis dan damai antara individu dan kelompok yang berbeda.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, mana saja pernyataan berikut yang menunjukkan upaya menjaga kebinekaan untuk menjadi modal sosial pembangunan nasional? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Meningkatkan kualitas hidup masyarakat melalui pembangunan yang berbasis pada kebutuhan dan aspirasi masyarakat, sehingga masyarakat dapat merasa sejahtera dan bahagia.
+  - B. B. Meningkatkan kreativitas dan inovasi melalui pertukaran ide dan pengalaman antar kelompok masyarakat, sehingga dapat mempromosikan pembangunan yang inovatif dan efektif.
+  - C. C. Membantu meningkatkan interaksi dan pemahaman antara budaya yang berbeda serta kerja sama seni dan budaya dalam rangka meningkatkan penghargaan terhadap budaya lain.
+  - D. D. Meningkatkan kesadaran dan rasa tanggung jawab masyarakat terhadap pembangunan nasional, sehingga masyarakat dapat merasa memiliki dan bertanggung jawab terhadap masa depan bangsa.
+  - E. E. Menjalin kerja sama seni dan budaya dapat membantu meningkatkan penghargaan terhadap budaya serta penggunaan teknologi yang dapat meningkatkan komunikasi dan interaksi antara budaya yang berbeda.
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Menjelang pemilu serentak, pemerintah dan berbagai organisasi mengadakan sosialisasi untuk pemilih pemula di tingkat SMA. Reza seorang siswa kelas XII mengikuti kegiatan sosialisasi tersebut. Ia belajar pentingnya mengenali visi misi calon wakil rakyat, menghindari politik uang, dan menggunakan hak pilih dengan bijak. Reza juga mengajak teman-temannya untuk ikut serta dalam pemilu sebagai wujud tanggung jawab warga negara.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, pernyataan manakaah yang menunjukkan tujuan partisipasi pemilih pemula seperti Reza dalam pesta demokrasi?. Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Memberikan suara untuk menentukan pemimpin yang membawa perubahan positif.
+  - B. B. Menunjukkan jati diri sebagai pelajar yang bertanggung jawab terhadap masa depan.
+  - C. C. Membangun kesadaran para pemilih pemula untuk terlibat dalam proses pemilihan.
+  - D. D. Menolak segala bentuk politik uang dan memilih berdasarkan kepentingan kelompok.
+  - E. E. Menggunakan hak pilih seseuai hati nurani dengan mempertimbangkan kompetensi pemimpin.
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sejak 1957, Indonesia telah mengirim lebih dari 30.000 personel TNI ke berbagai negara konflik sebagai bagian dari misi perdamaian dunia. Peran serta Indonesia ini merupakan perwujudan nilai Pancasila dan amanat Pembukaan UUD NRI Tahun 1945 untuk mewujudkan perdamaian berdasarkan kemerdekaan, perdamaian abadi, dan keadilan sosial.
+
+PERTANYAAN:
+Keunggulan nilai Pancasila dalam peran tersebut adalah....
+OPSI / PERNYATAAN:
+  - A. A. mewujudkan solidaritas kemanusiaan melalui politik luar negeri bebas aktif
+  - B. B. menunjukkan komitmen terhadap nilai persatuan dalam kerja sama internasional
+  - C. C. menerapkan keadilan sosial dengan mewujudkan perdamaian di kancah global
+  - D. D. memperkuat posisi Indonesia dalam persaingan geopolitik khususnya kawasan asia
+  - E. E. mewujudkan tujuan nasional dengan berupaya menjaga kepentingan strategis global
+

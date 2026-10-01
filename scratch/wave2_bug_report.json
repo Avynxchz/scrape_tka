@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-10-01 01:31:13",
+  "targets": [
+    "sosiologi_paket_2",
+    "antropologi_paket_1",
+    "antropologi_paket_2",
+    "ppkn_paket_1",
+    "ppkn_paket_2"
+  ],
+  "total_issues": 2,
+  "total_warnings": 0,
+  "discovered_bugs": [
+    {
+      "target": "antropologi_paket_2",
+      "phase": "QualityGuard",
+      "category": "PILAR_LANGKAH_KURANG",
+      "message": "Q26 memiliki kurang dari 2 langkah penyelesaian!",
+      "violations": []
+    },
+    {
+      "target": "antropologi_paket_2",
+      "phase": "AutomatedAuditor",
+      "category": "AUDIT_ISSUE",
+      "message": "Q26: steps memiliki < 2 tahap",
+      "violations": []
+    },
+    {
+      "target": "antropologi_paket_2",
+      "phase": "AutomatedAuditor",
+      "category": "AUDIT_ISSUE",
+      "message": "Q26: why_correct kosong",
+      "violations": []
+    }
+  ],
+  "audit_results": {
+    "sosiologi_paket_2": {
+      "issues": [],
+      "warnings": [],
+      "qg_status": "PASS",
+      "qg_error": null
+    },
+    "antropologi_paket_1": {
+      "issues": [],
+      "warnings": [],
+      "qg_status": "PASS",
+      "qg_error": null
+    },
+    "antropologi_paket_2": {
+      "issues": [
+        "Q26: steps memiliki < 2 tahap",
+        "Q26: why_correct kosong"
+      ],
+      "warnings": [],
+      "qg_status": "FAIL",
+      "qg_error": "[PILAR_LANGKAH_KURANG] Q26 memiliki kurang dari 2 langkah penyelesaian!"
+    },
+    "ppkn_paket_1": {
+      "issues": [],
+      "warnings": [],
+      "qg_status": "PASS",
+      "qg_error": null
+    },
+    "ppkn_paket_2": {
+      "issues": [],
+      "warnings": [],
+      "qg_status": "PASS",
+      "qg_error": null
+    }
+  }
+}

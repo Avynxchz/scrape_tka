@@ -1,3 +1,4 @@
+import re
 import os
 import sys
 import json
@@ -11,6 +12,7 @@ import solution_loader  # noqa: E402  (sumber Layer 3: solusi spesifik Claude)
 import tutor_engine    # noqa: E402  (mesin tutor konversasional berbasis LLM)
 import tutor_llm       # noqa: E402  (abstraksi provider LLM)
 import tutor_store     # noqa: E402  (persistensi percakapan — SQLite)
+import legacy_tutor    # noqa: E402  (arsip mesin heuristik lama)
 
 tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
 
@@ -48,7 +50,7 @@ def _check_user_rate_limit(user_key):
         _user_rate_limits[user_key] = timestamps
         return True, None
 
-PORT = 8080
+PORT = int(os.environ.get("PORT", 8080))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ============================================================================
@@ -64,43 +66,105 @@ SUBJECT_SLUGS = {
     "bahasa_inggris": {1: "bahasa_inggris_paket_1", 2: "bahasa_inggris_paket_2"},
     "ekonomi": {1: "ekonomi_paket_1", 2: "ekonomi_paket_2"},
     "kewirausahaan": {1: "kewirausahaan_paket_1", 2: "kewirausahaan_paket_2"},
+    "geografi": {1: "geografi_paket_1", 2: "geografi_paket_2"},
+    "fisika": {1: "fisika_paket_1", 2: "fisika_paket_2"},
+    "kimia": {1: "kimia_paket_1", 2: "kimia_paket_2"},
+    "biologi": {1: "biologi_paket_1", 2: "biologi_paket_2"},
+    "bahasa_indonesia": {1: "bahasa_indonesia_paket_1", 2: "bahasa_indonesia_paket_2"},
+    "sosiologi": {1: "sosiologi_paket_1", 2: "sosiologi_paket_2"},
+    "sejarah": {1: "sejarah_paket_1", 2: "sejarah_paket_2"},
+    "antropologi": {1: "antropologi_paket_1", 2: "antropologi_paket_2"},
+    "ppkn": {1: "ppkn_paket_1", 2: "ppkn_paket_2"},
+    "matematika_lanjut": {1: "matematika_lanjut_paket_1", 2: "matematika_lanjut_paket_2"},
+    "bahasa_indonesia_lanjut": {1: "bahasa_indonesia_lanjut_paket_1", 2: "bahasa_indonesia_lanjut_paket_2"},
+    "bahasa_inggris_lanjut": {1: "bahasa_inggris_lanjut_paket_1", 2: "bahasa_inggris_lanjut_paket_2"},
+    "bahasa_arab": {1: "bahasa_arab_paket_1", 2: "bahasa_arab_paket_2"},
+    "bahasa_jepang": {1: "bahasa_jepang_paket_1", 2: "bahasa_jepang_paket_2"},
+    "bahasa_jerman": {1: "bahasa_jerman_paket_1", 2: "bahasa_jerman_paket_2"},
+    "bahasa_prancis": {1: "bahasa_prancis_paket_1", 2: "bahasa_prancis_paket_2"},
+    "bahasa_mandarin": {1: "bahasa_mandarin_paket_1", 2: "bahasa_mandarin_paket_2"},
+    "bahasa_korea": {1: "bahasa_korea_paket_1", 2: "bahasa_korea_paket_2"},
 }
 _canon_cache = {}
 _lrn_cache = {}
+_sidecar_cache = {}
+
+
+def load_sidecar_doc(subject, paket):
+    slug = get_subject_slug(subject, paket)
+    path = os.path.join(BASE_DIR, "data", f"{slug}_sidecar_transcriptions.json")
+    if not os.path.exists(path):
+        return {}
+    mtime = os.path.getmtime(path)
+    cached = _sidecar_cache.get(slug)
+    if cached and cached.get("_mtime") == mtime:
+        return cached["doc"]
+    try:
+        with open(path, encoding="utf-8") as f:
+            doc = json.load(f)
+    except Exception:
+        doc = {}
+    _sidecar_cache[slug] = {"doc": doc, "_mtime": mtime}
+    return doc
+
+
+def get_subject_slug(subject, paket):
+    if subject in SUBJECT_SLUGS and paket in SUBJECT_SLUGS[subject]:
+        return SUBJECT_SLUGS[subject][paket]
+    return f"{subject}_paket_{paket}"
 
 
 def load_canonical_doc(subject, paket):
-    slug = SUBJECT_SLUGS.get(subject, {}).get(paket)
-    if not slug:
+    slug = get_subject_slug(subject, paket)
+    path = os.path.join(CANON_DIR, f"{slug}.json")
+    if not os.path.exists(path):
         return None
-    if slug not in _canon_cache:
-        path = os.path.join(CANON_DIR, f"{slug}.json")
-        if not os.path.exists(path):
-            _canon_cache[slug] = None
-        else:
-            with open(path, encoding="utf-8") as f:
-                _canon_cache[slug] = json.load(f)
-    return _canon_cache[slug]
+    mtime = os.path.getmtime(path)
+    cached = _canon_cache.get(slug)
+    if cached and cached.get("_mtime") == mtime:
+        return cached["doc"]
+    with open(path, encoding="utf-8") as f:
+        doc = json.load(f)
+    _canon_cache[slug] = {"doc": doc, "_mtime": mtime}
+    return doc
 
 
 def load_learning_doc(subject, paket):
-    slug = SUBJECT_SLUGS.get(subject, {}).get(paket)
-    if not slug:
+    slug = get_subject_slug(subject, paket)
+    path = os.path.join(BASE_DIR, "data", f"{slug}_learning.json")
+    if not os.path.exists(path):
         return None
-    if slug not in _lrn_cache:
-        path = os.path.join(BASE_DIR, "data", f"{slug}_learning.json")
-        with open(path, encoding="utf-8") as f:
-            _lrn_cache[slug] = json.load(f)
-    return _lrn_cache[slug]
+    mtime = os.path.getmtime(path)
+    cached = _lrn_cache.get(slug)
+    if cached and cached.get("_mtime") == mtime:
+        return cached["doc"]
+    with open(path, encoding="utf-8") as f:
+        doc = json.load(f)
+    _lrn_cache[slug] = {"doc": doc, "_mtime": mtime}
+    return doc
 
 
 def canonical_for(subject, paket, nomor):
     doc = load_canonical_doc(subject, paket)
-    if not doc:
-        return None
-    for q in doc["questions"]:
-        if q["question_number"] == nomor:
-            return q
+    if doc and "questions" in doc:
+        for q in doc["questions"]:
+            if q.get("question_number") == nomor or q.get("number") == nomor:
+                if "question_number" not in q and "number" in q:
+                    q["question_number"] = q["number"]
+                return q
+    lrn = learning_for(subject, paket, nomor)
+    if lrn:
+        return {
+            "id": lrn.get("id", f"{subject}_{paket}_{nomor}"),
+            "number": nomor,
+            "question_number": nomor,
+            "type": lrn.get("tipe_soal", "Pilihan Ganda"),
+            "stimulus": lrn.get("stimulus", {}).get("text", ""),
+            "question": lrn.get("pertanyaan", {}).get("text", ""),
+            "options": lrn.get("pilihan_jawaban", []),
+            "visual_context": {},
+            "official_answer": lrn.get("kunci_jawaban")
+        }
     return None
 
 
@@ -143,37 +207,138 @@ def format_kunci_display(q_data):
     return str(kunci)
 
 
-def build_canonical_context(canon, lrn_q):
-    """Bungkus satu soal kanonis menjadi konteks teks untuk AI Tutor."""
-    vc = canon.get("visual_context", {})
+def clean_katex_artifacts(text):
+    """Bersihkan artefak rendering KaTeX DOM innerText & teks rusak hasil
+    ekstraksi DOM (rumus pecah per karakter + duplikat gema KaTeX).
+
+    Perbaikan utama didelegasikan ke text_quality.repair_math_text (pemetaan
+    huruf matematika unicode, penggabungan baris pecah per karakter, buang
+    gema duplikat); replacements LaTeX mentah (\\times, \\neq, dll.) tetap
+    dijalankan sebagai lapis tambahan.
+    """
+    if not text or not isinstance(text, str):
+        return text
+
+    import text_quality
+    text = text_quality.repair_math_text(text)
+
+    # Ganti duplikasi LaTeX mentah yang diekstrak berantakan
+    replacements = [
+        (r'(?<![a-zA-Z])\\?times(?![a-zA-Z])', r'×'),
+        (r'(?<![a-zA-Z])\\?neq(?![a-zA-Z])', r'≠'),
+        (r'(?<![a-zA-Z])\\?leq(?![a-zA-Z])', r'≤'),
+        (r'(?<![a-zA-Z])\\?geq(?![a-zA-Z])', r'≥'),
+        (r'(?<![a-zA-Z])\\?pm(?![a-zA-Z])', r'±'),
+        (r'(?<![a-zA-Z])\\?approx(?![a-zA-Z])', r'≈'),
+        (r'(?<![a-zA-Z])\\?rightarrow(?![a-zA-Z])', r'→'),
+        (r'(?<![a-zA-Z])\\?leftarrow(?![a-zA-Z])', r'←'),
+        (r'(?<![a-zA-Z])\\?cdot(?![a-zA-Z])', r'·'),
+        (r'(?<![a-zA-Z])\\?circ(?![a-zA-Z])', r'°'),
+        (r'(?<![a-zA-Z])\\?degree(?![a-zA-Z])', r'°'),
+    ]
+    for pat, rep in replacements:
+        text = re.sub(pat, rep, text)
+
+    # Hapus spasi / baris kosong berlebih
+    text = re.sub(r'[ \t]+', ' ', text)
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    return text.strip()
+
+
+def build_canonical_context(canon, lrn_q, subject=None, paket=None):
+    """Bungkus satu soal kanonis menjadi konteks teks lengkap untuk AI Tutor."""
+    vc = canon.get("visual_context", {}) if canon else {}
+    sidecars = load_sidecar_doc(subject, paket) if subject and paket else {}
     parts = []
-    if canon.get("stimulus_text"):
-        parts.append("[STIMULUS]\n" + canon["stimulus_text"])
-    if canon.get("question_text"):
-        parts.append("[SOAL]\n" + canon["question_text"])
-    options = canon.get("options")
-    statements = canon.get("statements")
-    if options:
-        opt_lines = "\n".join(f"  {k}. {v}" for k, v in options.items())
-        parts.append("[OPSI JAWABAN]\n" + opt_lines)
-    elif statements:
-        st_lines = "\n".join(f"  {s['key']}. {s.get('display', '')}" for s in statements)
-        parts.append("[PERNYATAAN]\n" + st_lines)
+
+    # 1. Stimulus Teks
+    stim_text = (
+        (canon.get("stimulus_text") if canon else "")
+        or (canon.get("stimulus") if canon else "")
+        or (lrn_q.get("stimulus", {}).get("text") if lrn_q else "")
+    )
+    if stim_text and stim_text.strip():
+        parts.append("[STIMULUS]\n" + stim_text.strip())
+
+    # 2. Pertanyaan / Soal Teks
+    q_text = (
+        (canon.get("question_text") if canon else "")
+        or (canon.get("question") if canon else "")
+        or (lrn_q.get("pertanyaan", {}).get("text") if lrn_q else "")
+    )
+    if q_text and q_text.strip():
+        parts.append("[SOAL]\n" + q_text.strip())
+
+    # 3. Pilihan Jawaban / Pernyataan
+    statements = (lrn_q.get("pernyataan") if lrn_q else None) or (canon.get("statements") if canon else None)
+    options = (lrn_q.get("pilihan_jawaban") if lrn_q else None) or (canon.get("options") if canon else None)
+
+    if statements:
+        st_lines = []
+        for s in statements:
+            k = s.get("key", "")
+            txt = s.get("text") or s.get("display") or ""
+            img_note = f" [Gambar: {s['image']['filename']}]" if s.get("image") else ""
+            st_lines.append(f"  {k}. {txt}{img_note}")
+        parts.append("[PERNYATAAN / ITEM KONDISI]\n" + "\n".join(st_lines))
+    elif options:
+        opt_lines = []
+        if isinstance(options, dict):
+            for k, v in options.items():
+                opt_lines.append(f"  {k}. {v}")
+        elif isinstance(options, list):
+            for opt in options:
+                k = opt.get("key", "")
+                txt = opt.get("full_display") or opt.get("text") or (f"${opt['latex']}$" if opt.get("latex") else "")
+                img_note = f" [Gambar: {opt['image']['filename']}]" if opt.get("image") else ""
+                opt_lines.append(f"  {k}. {txt}{img_note}")
+        if opt_lines:
+            parts.append("[OPSI JAWABAN]\n" + "\n".join(opt_lines))
+
+    # 4. Gambar dan Elemen Visual & Transkripsi Sidecar
+    imgs = []
+    if lrn_q:
+        imgs = lrn_q.get("stimulus", {}).get("images", []) + lrn_q.get("pertanyaan", {}).get("images", [])
+    img_lines = []
+    for im in imgs:
+        fn = im.get("filename", "") if isinstance(im, dict) else os.path.basename(str(im))
+        if fn:
+            img_lines.append(f"- Diagram/Gambar: {fn}")
+            if fn in sidecars:
+                desc = sidecars[fn].get("description", "")
+                if desc:
+                    img_lines.append(f"  [Transkripsi Teks & Rumus Gambar {fn}]:\n  {desc}")
+
     visual_text = format_visual_context(vc)
-    parts.append("[KONTEKS VISUAL]\n" + visual_text)
+    if img_lines:
+        visual_desc = "\n".join(img_lines)
+        if visual_text and visual_text != "Soal ini tidak memiliki elemen visual.":
+            visual_desc += "\n" + visual_text
+        parts.append("[KONTEKS VISUAL / GAMBAR SOAL]\n" + visual_desc)
+    elif visual_text and visual_text != "Soal ini tidak memiliki elemen visual.":
+        parts.append("[KONTEKS VISUAL]\n" + visual_text)
+
+    # 5. Kunci Resmi
     kunci_disp = format_kunci_display(lrn_q or {})
     parts.append(f"[KUNCI RESMI] {kunci_disp}")
+
+    # 6. Informasi Diketahui dari Diagram / Soal
+    if lrn_q and lrn_q.get("pembahasan"):
+        pb = lrn_q["pembahasan"]
+        if pb.get("diketahui"):
+            parts.append(f"[INFORMASI DIKETAHUI DARI DIAGRAM & SOAL]\n{pb['diketahui']}")
+
     return {
-        "id": canon["id"],
-        "type": canon["type"],
-        "transcription_status": canon.get("transcription_status"),
+        "id": (canon.get("id") if canon else None) or (lrn_q.get("id") if lrn_q else "q_unknown"),
+        "type": (canon.get("type") if canon else None) or (lrn_q.get("tipe_soal") if lrn_q else "Pilihan Ganda"),
+        "transcription_status": canon.get("transcription_status") if canon else "available",
         "soal_text": "\n\n".join(parts),
-        "visual_text": visual_text,
+        "visual_text": (visual_desc if img_lines else visual_text) if (img_lines or (visual_text and visual_text != "Soal ini tidak memiliki elemen visual.")) else "Soal ini tidak memiliki elemen visual.",
         "formulas": [
             {"latex": f.get("latex", ""), "source": f.get("source", "")}
-            for f in canon.get("visual_context", {}).get("formulas", [])
+            for f in (canon.get("visual_context", {}).get("formulas", []) if canon else [])
         ],
-        "langkah_claude": canon.get("solution_steps_claude") or [],
+        "langkah_claude": (canon.get("solution_steps_claude") if canon else []) or [],
         "kunci_display": kunci_disp,
     }
 
@@ -215,7 +380,8 @@ def build_solution_payload(canon, lrn_q, subject=None, paket=None):
     sol = None
     if subject and paket:
         try:
-            sol = solution_loader.get_solution(subject, paket, canon["question_number"], kunci_disp)
+            q_num = canon.get("question_number") or canon.get("number")
+            sol = solution_loader.get_solution(subject, paket, q_num, kunci_disp)
         except Exception:
             sol = None
     if not sol:
@@ -226,22 +392,34 @@ def build_solution_payload(canon, lrn_q, subject=None, paket=None):
         sym, name = _split_glossary_term(g.get("term", ""))
         glosarium.append({"simbol": sym, "nama": name, "arti": g.get("meaning", "")})
 
-    mengapa = "\n\n".join(x for x in (sol.get("reasoning"), sol.get("why_correct")) if x)
+    mengapa = "\n\n".join(x for x in (clean_katex_artifacts(sol.get("reasoning")), clean_katex_artifacts(sol.get("why_correct"))) if x)
     langkah = [
-        f"{st.get('step', i + 1)}. {st.get('title', '')} — {st.get('explanation', '')}".strip(" —")
+        clean_katex_artifacts(f"{st.get('step', i + 1)}. {st.get('title', '')} — {st.get('explanation', '')}".strip(" —"))
         for i, st in enumerate(sol.get("steps", []))
     ]
-    tips_lines = [f"• {t}" for t in sol.get("tips", [])]
-    tips_lines += [f"⚠️ Jebakan umum: {m}" for m in sol.get("common_mistakes", [])]
+    tips_lines = [f"• {clean_katex_artifacts(t)}" for t in sol.get("tips", [])]
+    tips_lines += [f"⚠️ Jebakan umum: {clean_katex_artifacts(m)}" for m in sol.get("common_mistakes", [])]
+
+    # Diketahui/Ditanyakan: ambil dari solusi bila ada, JANGAN auto-generate
+    # dari stimulus_text mentah (berisi transkripsi AI yang tidak layak baca).
+    diketahui = clean_katex_artifacts(sol.get("diketahui")) if sol.get("diketahui") else None
+    ditanyakan = clean_katex_artifacts(sol.get("ditanyakan")) if sol.get("ditanyakan") else None
 
     return {
         "pembahasan": {
+            "diketahui": diketahui,
+            "ditanyakan": ditanyakan,
             "konsep_kunci": sol.get("concept_kunci", []),
             "glosarium_simbol": glosarium,
             "mengapa_begini": mengapa or None,
             "langkah_penyelesaian": langkah,
             "tips_trik": "\n".join(tips_lines) or None,
+            "tips_list": [clean_katex_artifacts(t) for t in sol.get("tips", [])],
+            "mistakes_list": [clean_katex_artifacts(m) for m in sol.get("common_mistakes", [])],
         },
+        # Soal serupa (latihan pemantapan) ikut dalam payload agar AI Tutor
+        # mengetahui latihan yang tampil ke siswa beserta kunci & pembahasannya.
+        "soal_serupa": (lrn_q.get("soal_serupa") if lrn_q else None),
         "review": sol.get("review"),
         "key_crosscheck": sol.get("key_crosscheck"),
         "source": sol.get("source"),
@@ -257,7 +435,76 @@ SUBJECT_NAMES = {
     "bahasa_inggris": "Bahasa Inggris",
     "ekonomi": "Ekonomi",
     "kewirausahaan": "Produk Kreatif & Kewirausahaan",
+    "geografi": "Geografi",
+    "fisika": "Fisika",
+    "kimia": "Kimia",
+    "biologi": "Biologi",
 }
+
+
+def find_question_image_paths(subject, paket, lrn_q, canon):
+    """Kumpulkan file gambar PNG/JPG fisik lokal yang ada pada soal untuk multimodal vision."""
+    filenames = []
+
+    # 1. Dari stimulus & pertanyaan learning json
+    if lrn_q:
+        for im in lrn_q.get("stimulus", {}).get("images", []) + lrn_q.get("pertanyaan", {}).get("images", []):
+            if isinstance(im, dict) and im.get("filename"):
+                filenames.append(im["filename"])
+            elif isinstance(im, str):
+                filenames.append(os.path.basename(im))
+
+        # Regex dari html jika ada tag img
+        for html_chunk in [lrn_q.get("stimulus", {}).get("html", ""), lrn_q.get("pertanyaan", {}).get("html", "")]:
+            for m in re.findall(r'<img[^>]+src=["\']([^"\']+)["\']', html_chunk or ""):
+                filenames.append(os.path.basename(m))
+
+    # 2. Dari canonical json
+    if canon:
+        for im in canon.get("images", []):
+            if isinstance(im, dict) and im.get("filename"):
+                filenames.append(im["filename"])
+            elif isinstance(im, str):
+                filenames.append(os.path.basename(im))
+
+    # Hilangkan duplikat sembari menjaga urutan
+    seen = set()
+    unique_filenames = []
+    for fn in filenames:
+        clean_fn = fn.split("?")[0].strip()
+        if clean_fn and clean_fn not in seen and not clean_fn.endswith((".gif", ".ico")):
+            seen.add(clean_fn)
+            unique_filenames.append(clean_fn)
+
+    # Direktori pencarian fisik
+    search_dirs = [
+        os.path.join(BASE_DIR, "data", subject, f"paket_{paket}", "images"),
+        os.path.join(BASE_DIR, "data", f"paket_{paket}", "images"),
+        os.path.join(BASE_DIR, "data", subject, "images"),
+        os.path.join(BASE_DIR, "data", "fisika", f"paket_{paket}", "images"),
+        os.path.join(BASE_DIR, "data", "geografi", f"paket_{paket}", "images"),
+    ]
+
+    found_paths = []
+    for fn in unique_filenames:
+        found = False
+        for d in search_dirs:
+            cand = os.path.join(d, fn)
+            if os.path.isfile(cand):
+                if cand not in found_paths:
+                    found_paths.append(cand)
+                found = True
+                break
+        if not found:
+            # Cari rekursif di folder data bila letak gambar ada di subfolder lain
+            for root, dirs, files in os.walk(os.path.join(BASE_DIR, "data")):
+                if fn in files:
+                    cand = os.path.join(root, fn)
+                    if cand not in found_paths:
+                        found_paths.append(cand)
+                    break
+
+    return found_paths
 
 
 def resolve_tutor_context(subject, paket, nomor):
@@ -267,12 +514,13 @@ def resolve_tutor_context(subject, paket, nomor):
     """
     canon = canonical_for(subject, paket, nomor)
     lrn_q = learning_for(subject, paket, nomor)
-    if not canon:
+    if not canon and not lrn_q:
         return None
-    canon_ctx = build_canonical_context(canon, lrn_q)
+    canon_ctx = build_canonical_context(canon, lrn_q, subject=subject, paket=paket)
     solution = build_solution_payload(canon, lrn_q, subject, paket)
+    image_paths = find_question_image_paths(subject, paket, lrn_q, canon)
     return {
-        "canonical_id": canon["id"],
+        "canonical_id": canon["id"] if canon else f"{subject}_p{paket}_q{nomor}",
         "canon_ctx": canon_ctx,
         "solution": solution,           # berisi pembahasan/review/source/crosscheck
         "official_answer": canon_ctx["kunci_display"],
@@ -280,6 +528,7 @@ def resolve_tutor_context(subject, paket, nomor):
         "subject": subject,
         "paket": paket,
         "nomor": nomor,
+        "image_paths": image_paths,
     }
 
 
@@ -290,442 +539,151 @@ def _refresh_tutor_summary(conversation_id):
     except Exception:
         pass
 
+# Arsip mesin tutor heuristik berbasis aturan dipindahkan ke legacy_tutor.py
+get_ai_tutor_response = legacy_tutor.get_ai_tutor_response
 
-def get_ai_tutor_response(paket, nomor, user_msg, q_data):
-    """
-    Multi-Subject Pedagogical AI Tutor Engine for Kurikulum Merdeka TKA.
-    Supports: Matematika, Bahasa Inggris, Ekonomi, Kewirausahaan.
-    Handles:
-    1. Subject-aware expertise (adapts domain based on active mapel)
-    2. Polite refusal for truly off-topic questions (gossip, games, etc.)
-    3. Deep question-specific pedagogical explanations
-    4. Visual memory - can describe images/charts in the question
-    """
-    msg_lower = user_msg.lower()
-    active_topik = q_data.get('topik', 'Matematika TKA')
-    active_subject = q_data.get('subject', 'matematika')  # from frontend
-    visual_memory = q_data.get('visual_memory', '')
-    is_math = active_subject == 'matematika'
-    # Konteks kanonis (disuntik handler): soal verbatim + visual + kunci resmi
-    canon_ctx = q_data.get('_canonical')
-    # Layer 3 aktif: solusi spesifik soal hasil Claude (dari sumber registry)
-    _l3 = q_data.get('_solution_layer3')
-    _review_note = (
-        "\n\n> ⚠️ *Catatan verifikasi: penjelasan soal ini menandai bahwa sebagian "
-        "informasi sumber memerlukan verifikasi manual dan belum dapat dipastikan "
-        "sepenuhnya. Perlakukan bagian terkait sebagai belum final.*"
-    )
 
-    # Subject display names
-    subject_names = {
-        "matematika": "Matematika",
-        "bahasa_inggris": "Bahasa Inggris",
-        "ekonomi": "Ekonomi",
-        "kewirausahaan": "Produk Kreatif & Kewirausahaan"
-    }
-    active_subject_name = subject_names.get(active_subject, "Matematika")
+_client_active_context = {}  # ip -> {"subject": ..., "paket": ...}
 
-    # =========================================================================
-    # 1. DETEKSI TOPIK BENAR-BENAR DI LUAR KURIKULUM -> TOLAK DENGAN SOPAN
-    # =========================================================================
-    off_topic_keywords = [
-        "resep", "masak", "makanan", "game", "mobile legends", "free fire", "anime",
-        "film", "zodiak", "ramalan", "pacar", "cinta", "pacaran",
-        "gosip", "artis", "tiktok", "instagram"
-    ]
+def _track_client_context(handler):
+    try:
+        ip = handler.client_address[0] if hasattr(handler, 'client_address') and handler.client_address else '127.0.0.1'
+        path = handler.path
+        m = re.search(r'data/([a-z0-9_]+)_paket_(\d+)_learning\.json', path)
+        if m:
+            _client_active_context[ip] = {"subject": m.group(1), "paket": int(m.group(2))}
+            return
+        if 'subject=' in path:
+            qs = urllib.parse.parse_qs(urllib.parse.urlparse(path).query)
+            if 'subject' in qs:
+                subj = qs['subject'][0]
+                pkt = int(qs['paket'][0]) if 'paket' in qs else 1
+                _client_active_context[ip] = {"subject": subj, "paket": pkt}
+                return
+    except Exception:
+        pass
 
-    if any(k in msg_lower for k in off_topic_keywords):
-        return (
-            "Halo! Senang sekali kamu bersemangat belajar. 😊\n\n"
-            f"Namun, peran saya di sini adalah sebagai **Tutor Spesialis {active_subject_name}** (Kurikulum Merdeka). "
-            "Untuk topik di luar kurikulum (seperti game, gosip, atau hiburan), "
-            "saya belum bisa memberikan bimbingan.\n\n"
-            f"Yuk, kita fokus kembali ke materi **{active_subject_name}** untuk persiapan ujian TKA! "
-            "Silakan tanyakan hal-hal terkait soal yang sedang kamu pelajari ya!"
-        )
-
-    # =========================================================================
-    # 2. CARA HITUNG CEPAT & ARITMATIKA (MENTAL MATH TRICKS) - MATEMATIKA SAJA
-    # =========================================================================
-    # Contoh kasus spesifik user: "cara ngitung cepat 22 per 30 dibagi 2"
-    if is_math and (("22" in msg_lower and "30" in msg_lower) or ("dibagi 2" in msg_lower and "pecahan" in msg_lower)):
-        return (
-            "Pertanyaan yang luar biasa! Menghitung cepat pecahan seperti **22 per 30 dibagi 2** sering muncul saat menyederhanakan peluang atau aljabar:\n\n"
-            "### Kasus A: Menyederhanakan Pecahan $\\frac{22}{30}$ (Pembilang & Penyebut Dibagi 2)\n"
-            "Jika maksudmu adalah menyederhanakan pecahan $\\frac{22}{30}$:\n"
-            "• **Trik Mental Math 2 Detik:** Karena pembilang ($22$) dan penyebut ($30$) sama-sama bilangan genap, langsung ambil separuh dari masing-masing angka di kepala:\n"
-            "  $$22 \\div 2 = 11$$\n"
-            "  $$30 \\div 2 = 15$$\n"
-            "• **Bentuk Paling Sederhana:** $$\\frac{11}{15}$$\n\n"
-            "### Kasus B: Operasi Pembagian $\\frac{22}{30} \\div 2$\n"
-            "Jika maksudmu adalah membagi nilai pecahan tersebut dengan angka 2:\n"
-            "• **Trik Kilat (Jika pembilang genap):** Cukup bagi angka atasnya dengan 2, penyebutnya tetap!\n"
-            "  $$\\frac{22 \\div 2}{30} = \\frac{11}{30}$$\n"
-            "• **Aturan Formal Pecahan:** Membagi dengan 2 sama dengan mengalikan $\\frac{1}{2}$:\n"
-            "  $$\\frac{22}{30} \\times \\frac{1}{2} = \\frac{22}{60} = \\frac{11}{30}$$\n\n"
-            "⚡ **Tips Cepat Ujian TKA:**\n"
-            "Selalu cek apakah pembilang dan penyebut adalah bilangan genap. Jika genap, langsung bagi 2 tanpa ragu untuk menghemat waktu ujian!"
-        )
-
-    # Pertanyaan trik hitung cepat umum
-    if is_math and any(k in msg_lower for k in ["ngitung cepat", "hitung cepat", "cara cepat hitung", "trik hitung", "mental math", "cara kilat hitung"]):
-        return (
-            "### ⚡ Trik Kilat Hitung Cepat untuk Ujian Matematika TKA:\n\n"
-            "1. **Trik Perkalian 5:**\n"
-            "   Bagi angkanya dengan 2, lalu kalikan 10 (atau tambah 0 di belakang).\n"
-            "   • Contoh: $36 \\times 5 = (36 \\div 2) \\times 10 = 18 \\times 10 = 180$.\n\n"
-            "2. **Trik Perkalian 11 (2 Digit):**\n"
-            "   Buka digit pertama dan kedua, lalu selipkan hasil penjumlahannya di tengah.\n"
-            "   • Contoh: $35 \\times 11 = 3\\,[3+5]\\,5 = 385$.\n\n"
-            "3. **Trik Persentase Kilat:**\n"
-            "   • $10\\%$ = Cukup geser koma 1 digit ke kiri (misal: $10\\%$ dari $450 = 45$).\n"
-            "   • $1\\%$ = Geser koma 2 digit ke kiri ($1\\%$ dari $450 = 4,5$).\n"
-            "   • $15\\%$ = Gabungkan $10\\% + 5\\%$ ($45 + 22,5 = 67,5$).\n\n"
-            "4. **Trik Kuadrat Berakhiran 5:**\n"
-            "   Kalikan angka depan dengan kakaknya (angka + 1), lalu tempelkan 25 di belakang.\n"
-            "   • Contoh: $45^2 = (4 \\times 5)\\text{ lalu tempel } 25 = 2025$.\n\n"
-            "⚡ **Tips Cepat:** Latih terus trik mental math ini agar kamu bisa menyelesaikan soal ujian TKA dalam hitungan detik!"
-        )
-
-    # =========================================================================
-    # 3. MATEMATIKA DI LUAR TOPIK SOAL INI (OFF-TOPIC MATH) -> JAWAB + INGATKAN FOKUS
-    # =========================================================================
-    
-    # 3A. KALKULUS (Turunan, Integral, Limit) - MATEMATIKA SAJA
-    if is_math and any(k in msg_lower for k in ["kalkulus", "turunan", "integral", "diferensial", "differensial", "derivatif", "limit fungsi", "stasioner"]):
-        reply = (
-            "Halo! Pertanyaan seputar **Kalkulus** sangat berbobot! Mari kita bahas inti konsepnya:\n\n"
-            "### 1. Turunan (Diferensial)\n"
-            "• **Konsep:** Mengukur laju perubahan sesaat suatu fungsi atau kemiringan (gradien) kurva.\n"
-            "• **Rumus Dasar Pangkat:**\n"
-            "  $$f(x) = a \\cdot x^n \\implies f'(x) = a \\cdot n \\cdot x^{n-1}$$\n"
-            "• **Contoh:** Turunan dari $f(x) = 4x^3$ adalah $f'(x) = 4 \\cdot 3 \\cdot x^2 = 12x^2$.\n\n"
-            "### 2. Integral (Antiturunan)\n"
-            "• **Konsep:** Kebalikan dari operasi turunan, sering dipakai untuk mencari fungsi asal atau menghitung luas daerah di bawah kurva.\n"
-            "• **Rumus Dasar Tak Tentu:**\n"
-            "  $$\\int a \\cdot x^n \\, dx = \\frac{a}{n+1} \\cdot x^{n+1} + C \\quad (n \\neq -1)$$\n"
-            "• **Contoh:** $\\int 6x \\, dx = \\frac{6}{2}x^2 + C = 3x^2 + C$.\n\n"
-            "### 3. Limit Fungsi\n"
-            "• **Konsep:** Menentukan nilai yang didekati oleh fungsi saat nilai $x$ mendekati suatu titik acuan tertentu ($\\lim_{x \\to c} f(x)$).\n\n"
-            f"📌 **Catatan Tutor:**\n"
-            f"Topik Kalkulus ini adalah salah satu materi unggulan di matematika lanjut! Namun, untuk soal nomor {nomor} yang sedang kamu buka, "
-            f"topik utamanya adalah **{active_topik}**. Agar persiapan ujian TKA kamu semakin matang dan tuntas satu per satu, "
-            f"yuk setelah ini kita fokus kembali membedah soal nomor {nomor} ini ya!"
-        )
-        return reply
-
-    # 3B. TRIGONOMETRI & PYTHAGORAS - MATEMATIKA SAJA
-    if is_math and any(k in msg_lower for k in ["trigonometri", "sinus", "cosinus", "tangen", "sudut istimewa", "pythagoras", "pitagoras"]):
-        reply = (
-            "Halo! Mari kita review konsep kunci **Trigonometri**:\n\n"
-            "### 1. Perbandingan Sudut Segitiga Siku-Siku (Sindemi, Cossami, Tandesa)\n"
-            "• **$\\sin(\\theta)$:** $\\frac{\\text{Sisi Depan}}{\\text{Sisi Miring}}$ (Sindemi)\n"
-            "• **$\\cos(\\theta)$:** $\\frac{\\text{Sisi Samping}}{\\text{Sisi Miring}}$ (Cossami)\n"
-            "• **$\\tan(\\theta)$:** $\\frac{\\text{Sisi Depan}}{\\text{Sisi Samping}}$ (Tandesa)\n\n"
-            "### 2. Teorema Pythagoras\n"
-            "Pada segitiga siku-siku dengan sisi miring $c$:\n"
-            "$$a^2 + b^2 = c^2$$\n"
-            "• **Tripel Pythagoras Populer:** $(3, 4, 5)$, $(5, 12, 13)$, $(7, 24, 25)$, $(8, 15, 17)$.\n\n"
-            f"📌 **Catatan Tutor:**\n"
-            f"Trigonometri ini sangat seru dipelajari! Tapi ingat ya, di soal nomor {nomor} ini kita sedang memelajari **{active_topik}**. "
-            f"Yuk, setelah memahami ini, kita kembali menyelesaikan target soal nomor {nomor} agar belajarmu tetap terarah!"
-        )
-        return reply
-
-    # 3C. MATRIKS & VEKTOR - MATEMATIKA SAJA
-    if is_math and any(k in msg_lower for k in ["matriks", "determinan", "invers", "ordo", "vektor"]):
-        reply = (
-            "Halo! Berikut ringkasan konsep esensial **Matriks**:\n\n"
-            "### 1. Determinan Matriks Ordo $2 \\times 2$\n"
-            "Jika matriks $A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}$, maka:\n"
-            "$$\\det(A) = |A| = (a \\cdot d) - (b \\cdot c)$$\n\n"
-            "### 2. Invers Matriks Ordo $2 \\times 2$\n"
-            "$$A^{-1} = \\frac{1}{\\det(A)} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$\n"
-            "*(Syarat memiliki invers: $\\det(A) \\neq 0$)*.\n\n"
-            f"📌 **Catatan Tutor:**\n"
-            f"Materi Matriks sangat penting di jenjang SMK/SMA! Namun pada nomor {nomor} ini, fokus kita ada pada **{active_topik}**. "
-            f"Mari kita tuntaskan pembahasan soal ini terlebih dahulu ya!"
-        )
-        return reply
-
-    # 3D. ALJABAR, PERSAMAAN KUADRAT & SPLDV - MATEMATIKA SAJA
-    if is_math and any(k in msg_lower for k in ["aljabar", "persamaan kuadrat", "rumus abc", "pemfaktoran", "spldv", "spltv"]):
-        reply = (
-            "Halo! Konsep dasar **Aljabar & Persamaan Kuadrat** sangat krusial:\n\n"
-            "### 1. Bentuk Umum Persamaan Kuadrat\n"
-            "$$ax^2 + bx + c = 0$$\n"
-            "• **Rumus ABC:** Digunakan untuk mencari akar-akar persamaan saat sulit difaktorkan:\n"
-            "  $$x_{1,2} = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$$\n"
-            "• **Diskriminan ($D = b^2 - 4ac$):** Jika $D > 0$ punya 2 akar nyata berlainan, jika $D = 0$ akar kembar, jika $D < 0$ tidak punya akar real.\n\n"
-            f"📌 **Catatan Tutor:**\n"
-            f"Aljabar adalah fondasi utama matematika! Namun pada soal ini, kamu sedang berhadapan dengan materi **{active_topik}**. "
-            f"Yuk kita prioritaskan menyelesaikan soal nomor {nomor} ini ya!"
-        )
-        return reply
-
-    # 3E. BAHASA INGGRIS: GRAMMAR, VOCABULARY & READING
-    if active_subject == "bahasa_inggris" and any(k in msg_lower for k in ["grammar", "tense", "tenses", "vocabulary", "vocab", "idiom", "passive voice", "part of speech", "synonym", "antonym", "reading", "comprehension", "skimming", "scanning"]):
-        reply = (
-            "Halo! Pertanyaan seputar **Bahasa Inggris** bagus sekali! Mari kita review intinya:\n\n"
-            "### 1. Grammar: 16 Tenses Dasar\n"
-            "• **Simple Present:** kebiasaan/fakta — *She studies every day.*\n"
-            "• **Simple Past:** selesai di masa lalu — *She studied yesterday.*\n"
-            "• **Present Perfect:** sudah selesai, efeknya terasa — *She has studied.*\n"
-            "• **Simple Future:** rencana/prediksi — *She will study.*\n\n"
-            "### 2. Reading Comprehension Strategy\n"
-            "• **Skimming:** baca cepat untuk menangkap ide pokok (main idea).\n"
-            "• **Scanning:** cari kata kunci spesifik (angka, nama, tanggal) langsung di teks.\n"
-            "• **Context Clues:** tebak arti kosakata asing dari kalimat di sekitarnya.\n\n"
-            "### 3. Vocabulary Building\n"
-            "• Hafalkan kata dalam frasa/konteks kalimat, bukan kata soliter — jauh lebih mudah diingat saat ujian.\n\n"
-            f"📌 **Catatan Tutor:**\n"
-            f"Materi Bahasa Inggris ini sering muncul di TKA! Namun untuk soal nomor {nomor} yang sedang kamu buka, "
-            f"topik utamanya adalah **{active_topik}**. Yuk setelah ini kita fokus kembali membedah soal nomor {nomor} ini ya!"
-        )
-        return reply
-
-    # 3F. EKONOMI: KONSEP PASAR & MAKRO
-    if active_subject == "ekonomi" and any(k in msg_lower for k in ["inflasi", "supply", "demand", "penawaran", "permintaan", "elastisitas", "pasar", "moneter", "fiskal", "gdp", "pdb", "kurs", "macam-macam pasar", "kebutuhan", "kelangkaan"]):
-        reply = (
-            "Halo! Konsep **Ekonomi** ini fundamental sekali. Mari kita bahas intinya:\n\n"
-            "### 1. Permintaan & Penawaran (Supply & Demand)\n"
-            "• **Hukum Permintaan:** harga naik → jumlah diminta turun (kurva menurun).\n"
-            "• **Hukum Penawaran:** harga naik → jumlah ditawarkan naik (kurva menaik).\n"
-            "• **Titik Keseimbangan (equilibrium):** saat Qd = Qs.\n\n"
-            "### 2. Inflasi\n"
-            "• **Definisi:** kenaikan harga barang secara umum & terus-menerus dalam periode tertentu.\n"
-            "• **Penyebab:** demand-pull (permintaan berlebih) dan cost-push (biaya produksi naik).\n\n"
-            "### 3. Kelangkaan (Scarcity)\n"
-            "• Fondasi semua teori ekonomi: kebutuhan manusia tak terbatas, sumber daya terbatas.\n\n"
-            f"📌 **Catatan Tutor:**\n"
-            f"Materi Ekonomi ini wajib dikuasai untuk TKA! Namun pada soal nomor {nomor} ini, fokus kita ada pada **{active_topik}**. "
-            f"Yuk kita tuntaskan pembahasan soal ini terlebih dahulu ya!"
-        )
-        return reply
-
-    # 3G. KEWIRAUSAHAAN (PKWU): BISNIS, SWOT & MARKETING
-    if active_subject == "kewirausahaan" and any(k in msg_lower for k in ["swot", "bisnis", "marketing", "pemasaran", "usaha", "wirausaha", "modal", "branding", "segmentasi", "4p", "produk kreatif", "business model", "bmc"]):
-        reply = (
-            "Halo! Topik **Kewirausahaan (PKWU)** ini sangat praktis! Mari kita review konsep kuncinya:\n\n"
-            "### 1. Analisis SWOT\n"
-            "• **S**trengths (kekuatan) & **W**eaknesses (kelemahan) → analisis dari DALAM perusahaan.\n"
-            "• **O**pportunities (peluang) & **T**hreats (ancaman) → analisis dari LUAR perusahaan.\n\n"
-            "### 2. Marketing Mix (4P)\n"
-            "• **Product:** kualitas, desain, keunikan produk.\n"
-            "• **Price:** strategi harga (murah, premium, kompetitif).\n"
-            "• **Place:** lokasi & jalur distribusi penjualan.\n"
-            "• **Promotion:** iklan, diskon, media sosial.\n\n"
-            "### 3. Business Model Canvas (BMC)\n"
-            "• Kerangka 9 blok untuk memetakan bisnis: dari *customer segment* hingga *cost structure*.\n\n"
-            f"📌 **Catatan Tutor:**\n"
-            f"Materi PKWU ini sering keluar di TKA SMK! Namun untuk soal nomor {nomor} yang sedang kamu buka, "
-            f"topik utamanya adalah **{active_topik}**. Yuk setelah ini kita fokus kembali membedah soal nomor {nomor} ini ya!"
-        )
-        return reply
-
-    # =========================================================================
-    # 4. PENJELASAN SPESIFIK SESUAI SOAL AKTIF (CONTEXTUAL CBT ENGINE)
-    # =========================================================================
-
-    # 4A-pre. Konsep & Teori Kunci (Layer 3 — solusi spesifik soal)
-    if any(k in msg_lower for k in ["konsep", "teori"]):
-        if _l3 and _l3.get('concept_kunci'):
-            res = f"### Konsep & Teori Kunci Soal Nomor {nomor} (dari solusi spesifik soal):\n\n"
-            for c in _l3['concept_kunci']:
-                res += f"• {c}\n"
-            if (_l3.get('review') or {}).get('needs_manual_review'):
-                res += _review_note
-            return res
-        return (
-            f"Konsep kunci spesifik (Layer 3) untuk soal nomor {nomor} belum tersedia "
-            "— sumber solusi aktif belum memuat soal ini."
-        )
-
-    # 4A. Simbol dan Glosarium — preferensi: glosarium spesifik dari Layer 3;
-    # bila tidak ada, tampilkan formula kanonis (hanya yang MUNCUL pada soal ini).
-    if any(k in msg_lower for k in ["∪", "∩", "simbol", "notasi", "lambang", "union", "irisan", "arti simbol"]):
-        glos_l3 = (_l3 or {}).get('glossary') or []
-        if glos_l3:
-            res = f"### Notasi & Istilah pada Soal Nomor {nomor} (dari solusi spesifik soal):\n\n"
-            for g in glos_l3:
-                res += f"**{g.get('term', '')}** — {g.get('meaning', '')}\n\n"
-            if (_l3.get('review') or {}).get('needs_manual_review'):
-                res += _review_note
-            return res
-        formulas = (canon_ctx or {}).get('formulas') or []
-        if formulas:
-            res = "Berikut notasi matematis yang muncul pada soal ini (dari konteks kanonis):\n\n"
-            for f in formulas:
-                latex = f.get('latex', '')
-                src = f.get('source', '')
-                src_note = " (data-latex resmi situs)" if src == "official data-latex" else " (hasil transkripsi vision)"
-                res += f"### ${latex}${src_note}\n"
-                res += f"• Notasi ini adalah bagian dari soal nomor {nomor}. Untuk arti operasinya, lihat definisi yang diberikan pada pernyataan soal.\n\n"
-            res += "Ada bagian notasi atau langkah lain yang ingin kamu tanyakan?"
-            return res
-        return (
-            f"Soal nomor {nomor} ini tidak memiliki notasi/formula khusus yang tertranskripsi "
-            "pada konteks kanonis."
-            "\n\nKonteks lengkap soalnya:\n\n"
-            f"{(canon_ctx or {}).get('soal_text', '(konteks soal tidak tersedia)')}"
-        )
-
-    # 4B. Alasan Mengapa / Kenapa Pengerjaannya Begitu (Layer 3 saja — tanpa konten lama)
-    if any(k in msg_lower for k in ["kenapa", "mengapa", "dikurang", "alasan", "kok bisa"]):
-        if _l3:
-            res = (f"### Mengapa jawaban soal nomor {nomor} seperti itu?\n\n"
-                   f"**Cara berpikir (dari solusi spesifik soal ini):**\n{_l3.get('reasoning', '')}\n\n"
-                   f"**Mengapa kunci benar:**\n{_l3.get('why_correct', '')}")
-            if (_l3.get('review') or {}).get('needs_manual_review'):
-                res += _review_note
-            return res
-        return (
-            f"### Mengapa jawaban soal nomor {nomor} seperti itu?\n\n"
-            "Penjelasan alasan langkah demi langkah (Layer 3) untuk soal ini "
-            "belum tersedia — sumber solusi aktif belum memuat soal ini.\n\n"
-            "Sementara itu, ini konteks lengkap soalnya agar kita membahas soal yang sama:\n\n"
-            f"{(canon_ctx or {}).get('soal_text', '(konteks soal tidak tersedia)')}"
-        )
-
-    # 4C. Permintaan Analogi Sederhana — pakai reasoning spesifik soal (Layer 3)
-    if any(k in msg_lower for k in ["analogi", "perumpamaan", "gampang", "mudah", "contoh nyata"]):
-        if _l3 and _l3.get('reasoning'):
-            res = (f"Baik! Berikut cara berpikir penyelesaian soal nomor {nomor} "
-                   "(dari solusi spesifik soal ini — silakan minta bagian mana pun "
-                   "yang ingin dijelaskan ulang):\n\n" + _l3['reasoning'])
-            if (_l3.get('review') or {}).get('needs_manual_review'):
-                res += _review_note
-            return res
-        return (
-            f"Tentu! Untuk menjelaskan soal nomor {nomor} ({active_topik}) dengan analogi sederhana, "
-            "saya perlu penjelasan spesifik soal ini (Layer 3 hasil Claude) yang belum tersedia saat ini.\n\n"
-            "Agar diskusi tetap pada soal yang sama, ini konteks lengkap soalnya:\n\n"
-            f"{(canon_ctx or {}).get('soal_text', '(konteks soal tidak tersedia)')}"
-        )
-
-    # 4D. Langkah-Langkah Penyelesaian (HANYA langkah hasil Claude — Layer 3)
-    if any(k in msg_lower for k in ["langkah", "cara pengerjaan", "tahapan", "cara kerja", "cara jawab"]):
-        l3_steps = (_l3 or {}).get('steps') or []
-        if l3_steps:
-            res = f"### Langkah Demi Langkah Menyelesaikan Soal Nomor {nomor} (dari solusi spesifik soal):\n\n"
-            for stp in l3_steps:
-                res += f"**Langkah {stp.get('step', '')}: {stp.get('title', '')}**\n{stp.get('explanation', '')}\n\n"
-            if (_l3.get('review') or {}).get('needs_manual_review'):
-                res += _review_note
-            return res
-        # TIDAK ada fallback ke langkah generik lama — jujur: belum tersedia.
-        return (
-            f"Langkah penyelesaian (Layer 3) untuk soal nomor {nomor} belum tersedia — "
-            "sumber solusi aktif belum memuat soal ini, dan langkah generik lama "
-            "sengaja tidak dipakai karena bukan penjelasan spesifik soal ini.\n\n"
-            f"Sementara itu, berikut konteks lengkap soalnya sebagai acuan bersama:\n\n"
-            f"{(canon_ctx or {}).get('soal_text', '(konteks soal tidak tersedia)')}"
-        )
-
-    # 4E. Tips & Trik — hanya bila tips spesifik soal (Layer 3) tersedia
-    if any(k in msg_lower for k in ["tips", "trik", "cepat", "kilat", "ujian"]):
-        l3_tips = (_l3 or {}).get('tips') or []
-        l3_mist = (_l3 or {}).get('common_mistakes') or []
-        if l3_tips or l3_mist:
-            res = f"### Tips & Jebakan untuk Soal Nomor {nomor} (dari solusi spesifik soal):\n\n"
-            for t in l3_tips:
-                res += f"• {t}\n"
-            for m in l3_mist:
-                res += f"⚠️ Jebakan umum: {m}\n"
-            if (_l3.get('review') or {}).get('needs_manual_review'):
-                res += _review_note
-            return res
-        return (
-            f"Tips spesifik untuk soal nomor {nomor} (Layer 3 hasil Claude) belum tersedia.\n\n"
-            "Tips generik per mapel sengaja tidak saya tampilkan agar tidak menyesatkan — "
-            "tanyakan saja langkah, kunci, atau konteks visual soal ini."
-        )
-
-    # 4F. Kunci Jawaban (tampilan dari konteks kanonis bila ada)
-    if any(k in msg_lower for k in ["kunci", "jawaban benar", "opsi benar"]):
-        kunci_disp = (canon_ctx or {}).get('kunci_display') or format_kunci_display(q_data)
-        return (
-            f"Kunci jawaban yang tepat untuk soal nomor {nomor} ini adalah **{kunci_disp}**.\n\n"
-            f"Silakan telaah pembahasannya di bagian bawah atau tanyakan langkah mana yang belum kamu pahami!"
-        )
-
-    # 4G. Pertanyaan tentang Gambar / Visual (prioritas: transkripsi kanonis)
-    if any(k in msg_lower for k in ["gambar", "grafik", "diagram", "tabel", "chart", "kurva", "ilustrasi", "foto", "image"]):
-        visual_text = (canon_ctx or {}).get('visual_text') or ''
-        if visual_text and visual_text != "Soal ini tidak memiliki elemen visual.":
-            return (
-                f"### 🖼️ Deskripsi Gambar pada Soal Nomor {nomor} (konteks kanonis):\n\n"
-                f"{visual_text}\n\n"
-                f"Apakah ada bagian spesifik dari gambar ini yang ingin kamu tanyakan lebih detail?"
-            )
-        if visual_memory:
-            return (
-                f"### 🖼️ Deskripsi Gambar pada Soal Nomor {nomor}:\n\n"
-                f"{visual_memory}\n\n"
-                f"Apakah ada bagian spesifik dari gambar ini yang ingin kamu tanyakan lebih detail?"
-            )
-        return (
-            f"Soal nomor {nomor} ini tidak memiliki gambar/diagram stimulus khusus. "
-            f"Seluruh informasi yang dibutuhkan terdapat di dalam teks soal.\n\n"
-            f"Ada hal lain yang ingin kamu tanyakan tentang materi **{active_topik}**?"
-        )
-
-    # 4H. Fallback Cerdas Kontekstual (Multi-Subject)
-    # Konsep kunci lama TIDAK lagi ditampilkan sebagai konten — hanya status jujur.
-    status_line = ''
-    if canon_ctx:
-        status_line = (
-            f"\n\n📎 **Konteks soal kanonis sudah dimuat** (id `{canon_ctx['id']}`, tipe "
-            f"{canon_ctx['type']}, status transkripsi {canon_ctx['transcription_status']}). "
-            "Tanyakan langkah, kunci, gambar, atau bagian soal mana pun — saya membaca "
-            "dari konteks lengkap soal ini."
-        )
-    if _l3 and _l3.get('concept_kunci'):
-        status_line += ("\n\n🧠 **Konsep utama soal ini** (dari solusi spesifik): "
-                        + "; ".join(_l3['concept_kunci'][:2]) + ".")
-    return (
-        f"Halo! Terkait soal nomor {nomor} dengan materi **{active_topik}**:\n\n"
-        f"Sebagai tutor **{active_subject_name}** kamu, saya siap membantu kamu memahami soal ini. Kamu bisa tanyakan:\n"
-        f"1. **Arti istilah atau notasi** yang muncul pada soal ini?\n"
-        f"2. **Mengapa jawabannya seperti itu** (alasan logisnya)?\n"
-        f"3. **Langkah penyelesaian** soal ini?\n"
-        f"4. **Gambar/diagram/tabel** apa yang ada di soal ini?\n"
-        f"{status_line}\n\n"
-        f"Silakan ketik pertanyaan spesifikmu ya!"
-    )
 
 class AppRequestHandler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=BASE_DIR, **kwargs)
 
     def end_headers(self):
-        # Disable caching for html/js/css so frontend changes are always picked up
+        # Disable caching for html/js/css/json and root so frontend changes are always picked up immediately
         clean = self.path.split('?', 1)[0].split('#', 1)[0].lower()
-        if clean.endswith(('.html', '.js', '.css')):
-            self.send_header('Cache-Control', 'no-cache, must-revalidate')
+        if clean.endswith(('.html', '.js', '.css', '.json')) or clean in ('', '/'):
+            self.send_header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            self.send_header('Pragma', 'no-cache')
+            self.send_header('Expires', '0')
         super().end_headers()
 
     def translate_path(self, path):
-        # Resolve image paths from Pusmendik stimuli HTML across all subject folders
+        # 1. First, check if the standard path directly resolves to an existing file on disk
+        std_path = super().translate_path(path)
+        if os.path.isfile(std_path):
+            return std_path
+
+        # 2. If file does not exist at requested location, handle image fallbacks
         clean_path = path.split('?', 1)[0].split('#', 1)[0]
-        if clean_path.startswith('/images/'):
+        is_image_req = (
+            clean_path.startswith('/images/')
+            or clean_path.startswith('/tka/cbt_images/')
+            or '/cbt_images/' in clean_path
+            or clean_path.endswith(('.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg'))
+        )
+        if is_image_req:
             filename = os.path.basename(clean_path)
-            # Search across all subject image directories
-            search_dirs = [
-                os.path.join(BASE_DIR, "data", "paket_1", "images"),
-                os.path.join(BASE_DIR, "data", "paket_2", "images"),
-                os.path.join(BASE_DIR, "data", "bahasa_inggris", "paket_1", "images"),
-                os.path.join(BASE_DIR, "data", "bahasa_inggris", "paket_2", "images"),
-                os.path.join(BASE_DIR, "data", "ekonomi", "paket_1", "images"),
-                os.path.join(BASE_DIR, "data", "ekonomi", "paket_2", "images"),
-                os.path.join(BASE_DIR, "data", "kewirausahaan", "paket_1", "images"),
-                os.path.join(BASE_DIR, "data", "kewirausahaan", "paket_2", "images"),
-            ]
-            for d in search_dirs:
-                cand = os.path.join(d, filename)
+            if not filename:
+                return std_path
+
+            data_root = os.path.join(BASE_DIR, "data")
+
+            # Check active subject and package from Cookie, Referer, or Client Context
+            req_subject = None
+            req_paket = None
+
+            cookie_hdr = self.headers.get('Cookie', '') if hasattr(self, 'headers') and self.headers else ''
+            if cookie_hdr:
+                for c in cookie_hdr.split(';'):
+                    c = c.strip()
+                    if c.startswith('active_subject='):
+                        req_subject = c.split('=', 1)[1].strip()
+                    elif c.startswith('active_paket='):
+                        try:
+                            req_paket = int(c.split('=', 1)[1].strip())
+                        except ValueError:
+                            pass
+
+            referer = self.headers.get('Referer', '') if hasattr(self, 'headers') and self.headers else ''
+            if referer:
+                try:
+                    parsed_ref = urllib.parse.urlparse(referer)
+                    q_params = urllib.parse.parse_qs(parsed_ref.query)
+                    if 'subject' in q_params and not req_subject:
+                        req_subject = q_params['subject'][0]
+                    if 'paket' in q_params and not req_paket:
+                        try:
+                            req_paket = int(q_params['paket'][0])
+                        except ValueError:
+                            pass
+                except Exception:
+                    pass
+
+            client_ip = self.client_address[0] if hasattr(self, 'client_address') and self.client_address else '127.0.0.1'
+            if not req_subject and client_ip in _client_active_context:
+                cached = _client_active_context[client_ip]
+                req_subject = cached.get('subject')
+                if not req_paket:
+                    req_paket = cached.get('paket')
+
+            # Priority 1: Check active subject and package
+            if req_subject:
+                if req_paket:
+                    cand = os.path.join(data_root, req_subject, f"paket_{req_paket}", "images", filename)
+                    if os.path.isfile(cand):
+                        return cand
+                for p in ["paket_1", "paket_2"]:
+                    cand = os.path.join(data_root, req_subject, p, "images", filename)
+                    if os.path.isfile(cand):
+                        return cand
+                cand = os.path.join(data_root, req_subject, "images", filename)
                 if os.path.isfile(cand):
                     return cand
-        return super().translate_path(path)
+
+            # Priority 2: Check if clean_path contains subject name hint
+            for entry in os.scandir(data_root):
+                if entry.is_dir() and entry.name in clean_path:
+                    for sub in os.scandir(entry.path):
+                        if sub.is_dir() and sub.name in clean_path:
+                            cand = os.path.join(sub.path, "images", filename)
+                            if os.path.isfile(cand):
+                                return cand
+                    cand = os.path.join(entry.path, "images", filename)
+                    if os.path.isfile(cand):
+                        return cand
+
+            # Priority 3: For generic question filenames (soal_XX_..., opt_...),
+            # NEVER fallback to an arbitrary subject directory! That causes cross-subject pollution.
+            is_generic_soal = filename.startswith(("soal_", "opt_"))
+            if not is_generic_soal:
+                # Globally unique hashes (e.g. 17088_... or \d+_[a-f0-9]{32}) are safe to search anywhere
+                for entry in os.scandir(data_root):
+                    if entry.is_dir():
+                        for sub in os.scandir(entry.path):
+                            if sub.is_dir() and sub.name.startswith("paket_"):
+                                img_dir = os.path.join(sub.path, "images")
+                                cand = os.path.join(img_dir, filename)
+                                if os.path.isfile(cand):
+                                    return cand
+                        cand = os.path.join(entry.path, "images", filename)
+                        if os.path.isfile(cand):
+                            return cand
+
+                for root, dirs, files in os.walk(data_root):
+                    if filename in files:
+                        return os.path.join(root, filename)
+
+        return std_path
 
     # ---- Sesi pengguna anonim utk percakapan tutor (cookie HMAC, HttpOnly) ---
     def _tutor_session(self):
@@ -756,6 +714,21 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         self.wfile.write(json.dumps(obj, ensure_ascii=False).encode('utf-8'))
 
     def do_GET(self):
+        _track_client_context(self)
+        # 1. Proteksi Path Traversal & File Sensitif
+        clean_path = urllib.parse.unquote(self.path).split('?', 1)[0].split('#', 1)[0]
+        parts = [p for p in clean_path.split('/') if p]
+
+        # Tolak file dan direktori tersembunyi (dimulai dengan titik, mis. .env, .git)
+        if any(p.startswith('.') for p in parts):
+            return self._send_json(403, {"status": "forbidden", "message": "Akses ditolak: file tersembunyi dilindungi."})
+
+        # Tolak ekstensi file sensitif / internal source code / database
+        lower_path = clean_path.lower()
+        forbidden_exts = ('.py', '.pyc', '.db', '.sqlite', '.sqlite3', '.bat', '.sh', '.cmd', '.log', '.zip', '.bak', '.env')
+        if lower_path.endswith(forbidden_exts) or 'secret' in lower_path:
+            return self._send_json(403, {"status": "forbidden", "message": "Akses ditolak: tipe file dilindungi."})
+
         if self.path.split('?', 1)[0] == '/api/tutor/state':
             # Muat ulang percakapan tersimpan soal ini (resume tanpa isi kosong)
             try:
@@ -772,20 +745,64 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 conv = tutor_store.get_or_create_conversation(
                     user_key, ctx["canonical_id"], subject, paket, nomor, create=False)
                 messages = tutor_store.get_messages(conv["id"]) if conv else []
+                user_quota = tutor_store.get_user_quota(user_key)
                 return self._send_json(200, {
                     "status": "success",
                     "canonical_id": ctx["canonical_id"],
                     "provider": tutor_llm.active_provider_info(),
+                    "quota": user_quota,
                     "conversation_id": conv["id"] if conv else None,
                     "summary": conv.get("summary") if conv else None,
                     "messages": [{"id": m["id"], "role": m["role"],
-                                  "content": m["content"]} for m in messages],
+                                  "content": m["content"],
+                                  "model": m.get("model")} for m in messages],
                 }, cookie_value=new_cookie)
             except Exception as e:
                 return self._send_json(500, {"status": "error", "message": str(e)})
+
+        if self.path.split('?', 1)[0] == '/api/swarm/status':
+            try:
+                from pipeline.swarm_manager import swarm_engine
+                return self._send_json(200, swarm_engine.get_status())
+            except Exception as e:
+                return self._send_json(500, {"status": "error", "message": str(e)})
+
+        if self.path.split('?', 1)[0] == '/api/swarm/subjects':
+            try:
+                from pipeline.subject_catalog import get_full_catalog
+                return self._send_json(200, get_full_catalog())
+            except Exception as e:
+                return self._send_json(500, {"status": "error", "message": str(e)})
+
         return super().do_GET()
 
     def do_POST(self):
+        _track_client_context(self)
+        if self.path == '/api/swarm/start':
+            try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else "{}"
+                targets = None
+                if post_data.strip():
+                    try:
+                        body = json.loads(post_data)
+                        targets = body.get("targets")
+                    except Exception:
+                        pass
+                from pipeline.swarm_manager import swarm_engine
+                ok, msg = swarm_engine.start_swarm_pipeline(targets=targets)
+                return self._send_json(200 if ok else 400, {"status": "success" if ok else "error", "message": msg})
+            except Exception as e:
+                return self._send_json(500, {"status": "error", "message": str(e)})
+
+        if self.path == '/api/swarm/reset':
+            try:
+                from pipeline.swarm_manager import swarm_engine
+                swarm_engine.reset()
+                return self._send_json(200, {"status": "success", "message": "Swarm status reset."})
+            except Exception as e:
+                return self._send_json(500, {"status": "error", "message": str(e)})
+
         if self.path == '/api/ai-tutor':
             content_length = int(self.headers.get('Content-Length', 0))
             post_data = self.rfile.read(content_length).decode('utf-8')
@@ -904,6 +921,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 paket = int(payload.get('paket', 1))
                 nomor = int(payload.get('nomor', 1))
                 message = (payload.get('message') or '').strip()
+                model = payload.get('model')
                 request_id = payload.get('request_id') or None
                 if not message:
                     return self._send_json(400, {"status": "error",
@@ -913,12 +931,21 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                     return self._send_json(404, {"status": "error",
                                                  "message": "Soal tidak ditemukan."})
                 user_key, new_cookie = self._tutor_session()
-                allowed, limit_msg = _check_user_rate_limit(user_key)
-                if not allowed:
+                # Cooldown 10s & Kuota Harian (10x free / 100x langganan) per user
+                quota_ok, quota_reason, wait_sec, user_quota = tutor_store.consume_user_quota(user_key, cooldown_seconds=10)
+                if not quota_ok:
+                    if quota_reason == "cooldown":
+                        limit_msg = f"Santai dulu ya, tunggu {wait_sec} detik sebelum mengirim pertanyaan berikutnya."
+                    else:
+                        limit = user_quota.get("daily_limit", 10)
+                        limit_msg = f"Batas kuota harian ({limit} pertanyaan) kamu untuk hari ini telah tercapai. Berlangganan untuk 100 pertanyaan per hari!"
                     return self._send_json(429, {
                         "status": "rate_limited",
+                        "reason": quota_reason,
                         "error_kind": "rate_limit",
-                        "retryable": True,
+                        "retryable": quota_reason == "cooldown",
+                        "wait_seconds": wait_sec,
+                        "quota": user_quota,
                         "message": limit_msg,
                     }, cookie_value=new_cookie)
                 conv = tutor_store.get_or_create_conversation(
@@ -945,7 +972,9 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                     reply, meta = tutor_engine.generate_tutor_response(
                         ctx["canon_ctx"], ctx["solution"], ctx["official_answer"],
                         history_for_prompt, message, summary=conv.get("summary"),
-                        subject_name=ctx["subject_name"])
+                        subject_name=ctx["subject_name"],
+                        model=model,
+                        image_paths=ctx.get("image_paths", []))
                 except tutor_llm.LLMError as e:
                     _refresh_tutor_summary(conv_id)
                     return self._send_json(502, {
@@ -958,16 +987,20 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 finally:
                     _llm_concurrency_semaphore.release()
 
+                model_name = meta.get("model") or tutor_llm.active_provider_info().get("model") or "AI Tutor"
                 am, _ = tutor_store.add_message(
                     conv_id, 'assistant', reply,
                     request_id=(request_id + ':a') if request_id else None,
-                    metadata={"intent": meta["intent"],
-                              "provider": tutor_llm.active_provider_info()["provider"]})
+                    metadata={"intent": meta.get("intent"),
+                              "model": model_name,
+                              "provider": meta.get("provider") or tutor_llm.active_provider_info()["provider"]})
                 _refresh_tutor_summary(conv_id)
                 return self._send_json(200, {
                     "status": "success", "reply": reply,
                     "conversation_id": conv_id, "message_id": am["id"],
-                    "intent": meta["intent"],
+                    "intent": meta.get("intent"),
+                    "model": model_name,
+                    "quota": user_quota,
                 }, cookie_value=new_cookie)
             except Exception as e:
                 return self._send_json(500, {"status": "error", "message": str(e)})
@@ -992,6 +1025,18 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 return self._send_json(200, {
                     "status": "success", "conversation_id": conv["id"],
                     "messages": [], "summary": None,
+                }, cookie_value=new_cookie)
+            except Exception as e:
+                return self._send_json(500, {"status": "error", "message": str(e)})
+
+        elif self.path == '/api/tutor/reset_quota':
+            try:
+                user_key, new_cookie = self._tutor_session()
+                quota = tutor_store.reset_user_quota(user_key)
+                return self._send_json(200, {
+                    "status": "success",
+                    "message": "Kuota berhasil di-refresh kembali penuh!",
+                    "quota": quota,
                 }, cookie_value=new_cookie)
             except Exception as e:
                 return self._send_json(500, {"status": "error", "message": str(e)})

@@ -1,0 +1,623 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Mandarin (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 43597_b9d2ff4dc36cda2567be12003bfaf81f.png]:
+Ilustrasi empat orang sahabat sedang menonton televisi bersama di ruang keluarga sambil bersantai dan memakan popkorn. Dua orang duduk di atas sofa (seorang wanita memegang mangkuk popkorn dan seorang pria memegang cangkir), sedangkan dua orang lainnya duduk di karpet lantai berbulu putih di depan sofa (seorang pria memegang kotak popkorn dan seorang wanita berbaju kuning duduk merangkul lutut) menghadap ke layar televisi yang menyala.
+[Konteks Visual Gambar 43597_e8f5a6289431041ca3792337650382b1.png]:
+Teks kalimat rumpang bahasa Mandarin beserta pinyin: Wǒmen dōu xǐhuan 我们 都 喜欢 ________ 。
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 24481_660bcbefcb3f239c38ed6e17c16742c0.png]:
+Teks kalimat rumpang bahasa Mandarin beserta pinyin: Jiějie hěn qù Běijīng xuéxí Hànyǔ 姐姐 很 _______ 去 北京 学习 汉语 。
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 58092_da9bd99a422649b35f60cd24428333b1.png]:
+Teks kalimat bahasa Mandarin beserta pinyin: Tāmen zài chànggē 他们 在 唱歌。
+PERTANYAAN:
+Tentukan Hanyu pinyin yang tepat dari Hanzi yang dicetak tebal!
+OPSI / PERNYATAAN:
+  - A. A. nà biān
+  - B. B. nǎlǐ
+  - C. C. nàlǐ
+  - D. D. nàr
+  - E. E. nǎr
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 10420_e2d3782df37243644c94982dadca9e79.png]:
+Ilustrasi seorang dokter laki-laki di ruang kerja dokter / klinik. Dokter berkacamata dan mengenakan jas lab putih serta stetoskop, sambil memegang papan klip (clipboard) dengan formulir checklist rekam medis/kesehatan. Di latar belakang terlihat meja kantor dengan komputer, kursi putar, wadah alat tulis, rak dinding berisi buku dan berkas warna-warni, lampu gantung, serta tiga bingkai di dinding yang memuat gambar anatomi lambung, ginjal, dan sertifikat berstempel pita.
+[Konteks Visual Gambar 10420_b3d0219a27f42086853ca34633083d2f.png]:
+Teks kalimat rumpang bahasa Mandarin beserta pinyin: Tā de érzi shì 他 的 儿子 是 ______ 。
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: ['A', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 20809_9a760b42fb370e0921d625d736194fe2.png]:
+Ilustrasi suasana ruang kelas di mana seorang guru perempuan sedang mengajar empat orang siswa berseragam putih dengan kerah biru. Guru berdiri di depan kelas mengenakan kardigan jingga kecokelatan dan rok abu-abu, memegang buku pelajaran dengan tangan kanan serta menunjuk ke arah papan tulis hijau dengan tangan kiri. Di papan tulis tertulis teks hanzi berwarna putih: 你好谢谢 Di hadapan guru terdapat dua meja belajar kayu dengan buku-buku terbuka; empat siswa (dua laki-laki dan dua perempuan) duduk memperhatikan penjelasan guru, dengan salah satu siswa laki-laki di baris depan mengangkat tangan kanannya.
+[Konteks Visual Gambar 20809_9a54acc2cec2f282c7ec6c3a54aed05b.png]:
+Teks judul frasa bahasa Mandarin beserta pinyin: Wǒmen de yìtiān 我们 的 一天
+[Konteks Visual Gambar 20809_47f2b7190da583a2485620b33d496a16.png]:
+Teks paragraf bahasa Mandarin beserta pinyin: Jīntiān shì xīngqī yī Wǒmen zǎoshang qī diǎn yǒu 今天 是 星期 一。 我们 早上 七 点 有 Hànyǔ kè 汉语 课。 Wǒmen jīntiān xuéxí shuō nǐhǎo hé xièxie 我们 今天 学习 说 '你好' 和 '谢谢' 。 Zhōngwǔ wǒmen yìqǐ qù chī wǔ fàn 中午 我们 一起 去 吃 午 饭 。
+[Konteks Visual Gambar 20809_af3ccd92b2989195fc128e1c7667e65a.png]:
+Teks kalimat bahasa Mandarin beserta pinyin: Xiàwǔ wǒmen bú huí jiā, tóngxuémen dōu zài xuéxiào 下午 我们 不 回 家 ， 同学们 都 在 学校 yìqǐ zuò zuòyè 一起 做 作业 。
+PERTANYAAN:
+Manakah pernyataan yang sesuai berdasarkan isi teks? Jawaban yang benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 57952_a8ffa93190369ad47f9e2758d2f38af4.png]:
+Teks dialog percakapan bahasa Mandarin beserta pinyin: Tāmen shì shuí A: 他们 是 谁 ？
+
+Tāmen shì wǒ de jiějiě hé gēge B: 他们 是 我 的 姐姐 和 哥哥。
+
+Jiějiě zài _____ gōngzuò A: 姐姐 在 哪儿 工作 ？
+
+Jiějiě zài Běijīng gōngzuò B: 姐姐 在 北京 工作 。
+[Konteks Visual Gambar 57952_9a54acc2cec2f282c7ec6c3a54aed05b.png]:
+Teks judul frasa bahasa Mandarin beserta pinyin: Wǒmen de yìtiān 我们 的 一天
+[Konteks Visual Gambar 57952_7b0008d0132e71eee69a92ade57cf858.png]:
+Teks paragraf bahasa Mandarin beserta pinyin: Jīntiān shì xīngqī yī Wǒmen zǎoshang qī diǎn yǒu 今天 是 星期 一。 我们 早上 七 点 有 Hànyǔ kè 汉语 课。 Wǒmen jīntiān xuéxí shuō nǐhǎo hé xièxie 我们 今天 学习 说 '你好' 和 '谢谢' 。 Zhōngwǔ wǒmen yìqǐ qù chī wǔ fàn 中午 我们 一起 去 吃 午 饭 。
+[Konteks Visual Gambar 57952_43bdf5094e55811a54c72d91402e7d2b.png]:
+Teks kalimat bahasa Mandarin beserta pinyin: Xiàwǔ wǒmen bú huíjiā, tóngxuémen dōu zài xuéxiào yìqǐ 下午 我们 不 回家 ， 同学们 都 在 学校 一起 zuò zuòyè 做 作业 。
+PERTANYAAN:
+Jumlah guratan dari Hanzi yang dicetak tebal adalah....
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: ['A', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 45449_74f680b6bec11b5112449976bed7b259.png]:
+Teks dialog rumpang bahasa Mandarin beserta pinyin: Nǐ māma zài jiā ma A: 你 妈妈 在 家 吗？
+
+Tā bú zài jiā B: 她 不 在 家。
+
+Nǐ māma qù nǎr A: 你 妈妈 去 哪儿？
+
+Tā qù B: 她 去 ______ 。
+PERTANYAAN:
+Kosakata apa saja yang tepat untuk melengkapi percakapan tersebut?
+
+Jawaban yang benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 23257_8037e9c213e72a89f7cbe2807a81de02.png]:
+Teks dialog percakapan bahasa Mandarin beserta pinyin: Xiǎo Lǐ Nǐ māma ---- jǐ suì 小 李: 你 妈妈 今年 几 岁?
+
+Xiǎo Wáng Wǒ māma sìshísān suì le 小 王: 我 妈妈 四十三 岁 了 。
+
+Xiǎo Lǐ Nǐ bàba ne 小 李: 你 爸爸 呢?
+
+Xiǎo Wáng Wǒ bàba wǔshí suì le 小 王: 我 爸爸 五十 岁 了 。
+PERTANYAAN:
+Tentukan Hanyu pinyin yang tepat dari Hanzi yang dicetak tebal!
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 60950_61deaf0a64095e1999f5e86e372b06dc.png]:
+Ilustrasi seorang siswi berambut hitam diikat ke belakang, mengenakan seragam sekolah kemeja putih berlengan panjang dengan dasi hijau tua dan logo lencana sekolah di saku kiri. Siswi tersebut sedang duduk menghadap meja kayu sambil memegang pensil dan tekun menulis di atas selembar kertas putih.
+[Konteks Visual Gambar 60950_0d4f554f0fec6637d4eeb68bdad0409a.png]:
+Teks kalimat rumpang bahasa Mandarin beserta pinyin: Xiànzài wǒ zài xuéxiào Hànzì 现在 我 在 学校 ______ 汉字 。
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 52862_052a50497e585d119d4ab2f8cb94543d.png]:
+Ilustrasi seorang wanita berambut hitam pendek tampak belakang sedang duduk di sofa hijau dan menonton siaran berita di televisi. Televisi berada di atas meja kabinet kayu cokelat bersama dekoder/pemutar media hitam. Pada layar televisi tertulis teks 'NEWS' disertai grafis globe/peta dunia dan seorang presenter berita pria berjas dan berdasi. Di sisi kanan terdapat tanaman hias berdaun hijau di dalam pot tanah liat di dekat tirai jendela berwarna biru.
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 67995_8c3d526d369ab5aaf0b0cbc36ee21c29.png]:
+Teks potongan frasa/kata acak bahasa Mandarin untuk menyusun kalimat beserta pinyin: mǎi shàngwǔ wǒ shū yì běn le 买 / 上午 / 我 / 书 / 一 本 / 了 /zuótiān 昨天
+PERTANYAAN:
+Susunlah kosakata tersebut menjadi kalimat padu! Jawaban yang benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 67098_ea2610194f2fd976aa5f5bf1e2651791.png]:
+Teks potongan frasa/kata acak bahasa Mandarin untuk menyusun kalimat beserta pinyin: Hànyǔ xuéxiào tiāntiān zài wǒmen shuō 汉语 / 学校 / 天天 / 在 / 我们 / 说
+PERTANYAAN:
+Susunlah kosakata tersebut menjadi kalimat padu!
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 15127_cc5ab808eee7860e60a368e54d1b163a.png]:
+Teks kalimat bahasa Mandarin bernomor urut beserta pinyin: Mǎlì shì wǒ de Hànyǔ lǎoshī (1) 玛丽 是 我 的 汉语 老师 。 Tā bù shì Měiguó rén (2) 她 不 是 美国 人 。 Tā shì Yìnní rén (3) 她 是 印尼 人 。
+PERTANYAAN:
+Susunlah kalimat tersebut menjadi paragraf padu!
+OPSI / PERNYATAAN:
+  - A. A. (3) – (1) – (2)
+  - B. B. (2) – (3) – (1)
+  - C. C. (1) – (3) – (2)
+  - D. D. (3) – (2) – (1)
+  - E. E. (2) – (1) – (3)
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 70709_53fa1035279c8d7a312690eafddc969e.png]:
+Teks potongan frasa/kata acak bahasa Mandarin untuk menyusun kalimat beserta pinyin: yào chī yìdiǎnr tā mǐfàn 要 / 吃 / 一点儿 / 她 / 米饭
+PERTANYAAN:
+Susunlah kosakata tersebut menjadi kalimat padu!
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 19185_cd6f88cd7b4fd015bd310c9fe3ff724f.png]:
+Teks kalimat bernomor urut bahasa Mandarin beserta pinyin: Tā de Hànyǔ hěn hǎo (1) 她 的 汉语 很 好 。 Tā xǐhuan hé Zhōngguó rén shuō Hànyǔ (2) 她 喜欢 和 中国 人 说 汉语 。 Mǎlì xiànzài xuéxí Hànyǔ (3) 玛丽 现在 学习 汉语 。
+PERTANYAAN:
+Susunlah kalimat tersebut menjadi paragraf padu! Klik pilihan Benar atau Salah pada setiap pernyataan!
+OPSI / PERNYATAAN:
+  - A. (1) – (2) – (3)
+  - B. (2) – (1) – (3)
+  - C. (3) – (1) – (2)
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: ['B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 37682_7c90f7fb60e48dfe451d1424ab21d2d0.png]:
+Teks kalimat bahasa Mandarin beserta pinyin: Xiàwǔ liǎng diǎn jīntiān lái tóngxuémen 下午 两 点 今天 来 同学们 xuéxiào kāihuì 学校 开会 。
+[Konteks Visual Gambar 37682_3249add4a07d163d4b1fa0039ebdf243.png]:
+Teks potongan kata/frasa acak bahasa Mandarin untuk menyusun kalimat beserta pinyin: jīntiān xuéxiào kāihuì tóngxuémen xiàwǔ 今天 / 学校 / 开会 / 同学们 / 下午 /lái liǎng diǎn 来 / 两 点
+PERTANYAAN:
+Susunlah kosakata tersebut menjadi kalimat padu! Jawaban yang benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 22718_fb2d5da78b26aae977aa9b2f8d99f37a.png]:
+Teks potongan frasa bahasa Mandarin untuk menyusun kalimat beserta pinyin: qù Mǎlì zhōngwǔ chī fàn fàndiàn 去 / 玛丽 / 中午 / 吃 饭 / 饭店
+PERTANYAAN:
+Susunlah kosakata tersebut menjadi kalimat padu!
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 85755_324cc098608b9e3b7c8fd5fc18c53c56.png]:
+Teks kalimat bernomor urut bahasa Mandarin beserta pinyin: Wǎnshang shí diǎn huí jiā (1) 晚上 十 点 回 家 。 Mǎlì de māma shì yīshēng (2) 玛丽 的 妈妈 是 医生 。 Tā zǎoshang liù diǎn qù gōngzuò (3) 她 早上 六 点 去 工作 。
+PERTANYAAN:
+Susunlah kalimat tersebut menjadi paragraf padu!
+OPSI / PERNYATAAN:
+  - A. A. (1) – (3) – (2)
+  - B. B. (3) – (1) – (2)
+  - C. C. (3) – (2) – (1)
+  - D. D. (2) – (1) – (3)
+  - E. E. (2) – (3) – (1)
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 01618_61ca025c7dc6f65ac1a33cd305f435f8.png]:
+Teks percakapan bahasa Mandarin beserta pinyin: Tāmen qǐchuáng le ma A: 他们 起 床 了 吗?
+
+Tāmen qǐchuáng le B: 他们 起 床 了。
+
+Tāmen jǐ diǎn qù xuéxiào A: 他们 几 点 去 学校?
+
+Tāmen zǎoshang liù diǎn bàn qù xuéxiào B: 他们 早上 六 点 半 去 学校 。
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 85993_9720de0910a5472a1e2eea0004cb513c.png]:
+Teks frasa bahasa Mandarin beserta pinyin: Wáng Fāng hé Lǎoshī 王 方 和 老师
+[Konteks Visual Gambar 85993_2e43048f68f512d15b96e99cd7d0ee38.png]:
+Teks dialog percakapan bahasa Mandarin beserta pinyin: Wáng Fāng Nǐ hǎo zhè shì bān ma 王 方: 你 好 ， 这 是 A 班 吗？
+
+Lǎoshī Shì de nǐ jiào shénme míngzi 老师: 是 的。 你 叫 什么 名字 ？
+
+Wáng Fāng Wǒ jiào Wáng Fāng wǒ shì xuésheng 王 方: 我 叫 王 方 ， 我 是 学生 。
+
+Lǎoshī Nǐ zuò zài Lǐ Nà de hòumian 老师: 你 坐 在 李 娜 的 后面 。
+[Konteks Visual Gambar 85993_f79daa40384db010876c53f4bb9121ad.png]:
+Teks dialog percakapan bahasa Mandarin beserta pinyin: Wáng Fāng Xièxie lǎoshī 王 方: 谢谢 ， 老师 。
+
+Lǎoshī Xiànzài wǒmen shàngkè 老师: 现在 我们 上课 ！
+[Konteks Visual Gambar 85993_c4876ca102a6edd0129230f3708034d6.png]:
+Teks kalimat tanya bahasa Mandarin beserta pinyin: Wáng Fāng shì shuí 王 方 是 谁 ？
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: ['A', 'B']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 68197_ced93bfd196ac2bba6b24bc16f5cdd3c.png]:
+Teks judul frasa bahasa Mandarin beserta pinyin: Wáng Fāng hé Lǎoshī 王 方 和 老师
+[Konteks Visual Gambar 68197_22ddd07a75bf8879c8ded4a04e0f2ecc.png]:
+Teks dialog percakapan bahasa Mandarin beserta pinyin: Wáng Fāng Nǐ hǎo zhè shì bān ma 王 方: 你 好 ， 这 是 A 班 吗？
+
+Lǎoshī Shì de nǐ jiào shénme míngzi 老师: 是 的。 你 叫 什么 名字 ？
+
+Wáng Fāng Wǒ jiào Wáng Fāng wǒ shì xuésheng 王 方: 我 叫 王 方 ， 我 是 学生 。
+
+Lǎoshī Nǐ zuò zài Lǐ Nà de hòumian 老师: 你 坐 在 李 娜 的 后面 。
+
+Wáng Fāng Xièxie lǎoshī 王 方: 谢谢 ， 老师 。
+
+Lǎoshī Xiànzài wǒmen shàng kè 老师: 现在 我们 上 课！
+PERTANYAAN:
+Apa yang dapat disimpulkan dari percakapan tersebut? Jawaban yang benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 58947_3a131604bccc38ee1268a1c4496057d0.png]:
+Ilustrasi suasana kelas di mana seorang guru perempuan sedang menerangkan pelajaran di depan papan tulis hijau kepada empat siswa berseragam putih kerah biru. Di papan tulis tertulis teks hanzi: 你好谢谢 Guru memegang buku pelajaran biru dengan tangan kanan dan tangan kirinya menunjuk ke papan tulis. Salah satu siswa laki-laki di bangku depan mengangkat tangan kanannya saat sesi tanya jawab.
+[Konteks Visual Gambar 58947_aab0f19d99adeca5a851b288ddf2b93b.png]:
+Teks kalimat tanya bahasa Mandarin beserta pinyin: Tāmen sì gè rén zài zuò shénme 他们 四 个 人 在 做 什么 ？
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 52295_286e19c767b55dc38ba2ccc102570f3d.png]:
+Teks dialog percakapan bahasa Mandarin beserta pinyin: Dàwèi Nǐ hǎo wǒ jiào Dàwèi 大卫: 你 好 ， 我 叫 大卫。
+
+Mǎlì Nǐ hǎo Dàwèi wǒ jiào Mǎlì 玛丽: 你 好 ， 大卫。 我 叫 玛丽。
+
+Dàwèi Nǐ shì xuésheng ma 大卫: 你 是 学生 吗？
+
+Mǎlì Shì wǒ shì xuésheng nǐ ne 玛丽: 是 ， 我 是 学生 。 你 呢？
+
+Dàwèi Wǒ shì yīshēng 大卫: 我 是 医生 。
+PERTANYAAN:
+Manakah pernyataan yang tepat berdasarkan isi percakapan tersebut? Jawaban yang benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 76437_a594b24f231ba8d1f0cec6b6fc612971.png]:
+Teks paragraf bahasa Mandarin beserta pinyin: Wǒ jiā yǒu sì kǒu rén bàba māmā mèimei hé wǒ 我 家 有 四 口 人 ： 爸爸、 妈妈、 妹妹 和 我。 Wǒ yě yǒu yì zhī māo tā hěn piàoliang 我 也 有 一 只 猫 ， 它 很 漂亮 。 Jīntiān shì xīngqī tiān xià yǔ le wǒmen dōu zài 今天 是 星期 天 ， 下 雨 了。 我们 都 在 jiā kàn diànshì 家 看 电视 。
+[Konteks Visual Gambar 76437_1a9aada61c963111c3f7d2700ed598e8.png]:
+Teks kalimat tanya bahasa Mandarin beserta pinyin: Tāmen wèishénme zài jiā lǐ 他们 为什么 在 家 里|?
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 22133_28c308213d968f5aaa12dbd9fbf8f013.png]:
+Ilustrasi seorang wanita dengan rambut disanggul rapi mengenakan celemek (apron) putih di atas baju putih, sedang memasak di dapur. Ia tampak sedang memotong bahan masakan dengan pisau ke dalam panci yang diletakkan di atas kompor gas. Di samping kompor terdapat piring berisi sayuran hijau.
+[Konteks Visual Gambar 22133_3e3cadebb6ae3afe9f4cad05a7c92010.png]:
+Teks paragraf bahasa Mandarin beserta pinyin: Wǒ jiā yǒu sān kǒu rén bàba māma hé wǒ 我 家 有 三 口 人， 爸爸、 妈妈 和 我。 Bàba zài yīyuàn gōngzuò māma zài jiā zuò fàn 爸爸 在 医院 工作 ， 妈妈 在 家 做 饭。 Māma zuò de cài hěn hǎo chī 妈妈 做 的 菜 很 好 吃。 Měitiān wǒmen dōu zài jiā yìqǐ chī fàn hěn gāoxìng 每天 我们 都 在 家 一起 吃 饭， 很 高兴 。
+PERTANYAAN:
+Apa yang dapat disimpulkan dari teks tersebut? Jawaban yang benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: ['A', 'B']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 37323_e310850f724ae20e7d19f3adf32d14b4.png]:
+Teks percakapan bahasa Mandarin beserta pinyin: Wáng Fāng Xiè Péng nǐ zěnme qù xuéxiào 王 方: 谢 朋 ， 你 怎么 去 学校 ？
+
+Xiè Péng Wǒ zuò chūzūchē 谢 朋: 我 坐 出租车 。
+
+Wáng Fāng Nǐ jīntiān jǐ diǎn shàng Hànyǔ kè 王 方: 你 今天 几 点 上 汉语 课？
+
+Xiè Péng Wǒ qī diǎn shàng Hànyǔ kè 谢 朋: 我 七 点 上 汉语 课。
+PERTANYAAN:
+Manakah pernyataan yang sesuai berdasarkan isi dialog tersebut? Jawaban yang benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 18612_8e710d793e2a95e3510dcca19e2337a2.png]:
+Teks paragraf bahasa Mandarin beserta pinyin: Jīntiān wǒmen zài jiā chī fàn Zhuōzi shang yǒu 今天 我们 在 家 吃 饭 。 桌子 上 有 mǐfàn píngguǒ shuǐ chá Māma chī shuǐguǒ 米饭 、 苹果 、 水 、 茶 。 妈妈 吃 水果 ， bàba chī mǐfàn bàba xǐhuan hē chá wǒ bù hē chá 爸爸 吃 米饭 。 爸爸 喜欢 喝 茶 ， 我 不 喝 茶 。
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 03302_b351209822cdef68f2961a53c3b96c76.png]:
+Teks percakapan bahasa Mandarin beserta pinyin: Mǎlì Ānnà nǐ hǎo ma 玛丽： 安娜，你 好 吗？
+
+Ānnà Wǒ hěn hǎo nǐ ne 安娜：我 很 好，你 呢？
+
+Mǎlì Wǒ yě hěn hǎo 玛丽：我 也 很 好。
+
+Ānnà Mǎlì nǐ jiā yǒu shuí ā 安娜：玛丽，你 家 有 谁 啊？
+
+Mǎlì Wǒ jiā yǒu nǎinai bàba māma liǎng gè gēge 玛丽：我 家 有 奶奶、爸爸、妈妈、两 个 哥哥， mèimei hé wǒ 妹妹 和 我。
+[Konteks Visual Gambar 03302_96617311b5495bcc3bb43683175eeca6.png]:
+Teks kalimat tanya bahasa Mandarin beserta pinyin: Mǎlì de jiā yǒu jǐ kǒu rén 玛丽 的 家 有 几 口 人？
+PERTANYAAN:
+
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 45646_9541ae945f1b0dd461d4bd548b7db808.png]:
+Teks paragraf bahasa Mandarin beserta pinyin: Wǒ de nǚér hěn gāo hěn piàoliang Jīntiān shì 我 的 女儿 很 高 ， 很 漂亮 。 今天 是 xīngqī tiān tā bú qù xuéxiào 星期 天 ， 她 不 去 学校 。 Wǒ hé tā qù kàn diànyǐng Kàn le diànyǐng wǒmen qù 我 和 她 去 看 电影 。 看 了 电影 ， 我们 去 fàndiàn chī Zhōngguó cài 饭店 吃 中国 菜 。 Tā shuō Zhōngguó cài hěn hǎochī 她 说 中国 菜 很 好吃 。
+PERTANYAAN:
+Apa yang dapat disimpulkan dari teks tersebut? Jawaban yang benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+

@@ -1,0 +1,554 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Kewirausahaan / PKK (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Kelompok murid SMK jurusan Tata Boga memproduksi kue kering (cookies) dalam skala rumahan untuk dipasarkan secara daring. Selama proses distribusi ke luar kota, mereka menerima keluhan dari pelanggan bahwa cookies banyak yang remuk dan melempem saat diterima. Setelah dievaluasi, diketahui bahwa kemasan hanya menggunakan plastik tipis biasa dan tanpa lapisan kedap udara.
+
+PERTANYAAN:
+Berdasarkan kasus tersebut, teknik pengemasan yang paling tepat untuk menjaga kualitas dan bentuk produk cookies adalah…
+OPSI / PERNYATAAN:
+  - A. A. Menggunakan kantong plastik tebal ziplock dan menambahkan bubble wrap untuk daya tahan
+  - B. B. Mengemas cookies dalam plastik tipis bening agar isi mudah terlihat oleh pelanggan
+  - C. C. Mengemas cookies dalam kotak karton bergelombang tanpa pelapis plastik, tapi menggunakan kertas tisu
+  - D. D. Menggunakan plastik OPP dan menyisipkan silica gel untuk mengurangi kelembapan dalam kemasan
+  - E. E. Menambahkan label “ Fragile ” dan “ Keep Dry ” di luar kemasan serta menggunakan kertas tisu sebagai pelapis
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tim wirausaha muda sedang merancang produksi roti isi cokelat kemasan sebagai bagian dari kegiatan promosi. Mereka menargetkan produksi sebanyak 500 pcs dalam waktu 4 hari kerja sesuai pemesanan oleh konsumen. Bahan baku utama yang disiapkan sejak awal terdiri dari:- 25 kg tepung terigu- 10 kg pasta cokelat- Bahan pelengkap lainnya dalam jumlah cukup Setiap hari, 4 orang bekerja selama 5 jam. Namun, pada hari pertama hanya 90 roti berhasil diproduksi. Hal ini karena dua kendala utama:
+
+Waktu fermentasi adonan yang lebih lama dari perkiraan
+
+Kapasitas oven terbatas, hanya bisa menampung 15 loyang per siklus
+
+Kondisi ini membuat tim khawatir target produksi tidak tercapai tepat waktu agar konsumen tidak kecewa.
+
+PERTANYAAN:
+Keputusan produksi yang tepat untuk memastikan target tercapai adalah....
+OPSI / PERNYATAAN:
+  - A. A. Menambah jam kerja harian agar fermentasi dan pemanggangan bisa diatur lebih fleksibel
+  - B. B. Mengganti jenis adonan agar tidak memerlukan proses fermentasi dan pemanggangan
+  - C. C. Menambah jumlah bahan baku agar cadangan tetap tersedia jika produksi roti terhambat
+  - D. D. Mengurangi target produksi menjadi 400 pcs agar lebih realistis
+  - E. E. Mengganti isian roti dari cokelat ke selai agar proses lebih cepat
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Benar', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Sekelompok Murid SMK membuat produk tempat pensil berbahan bambu yang diberi lukisan motif etnik. Produk ini unik, ramah lingkungan, dan ditujukan untuk pelajar dan pecinta kerajinan lokal. Penjualan selama bazar sekolah cukup baik, namun menurun setelah bazar berakhir. Mereka juga berencana meningkatkan penjualan sampai luar sekolah. Berdasarkan hasil evaluasi, perlu dilakukan perbaikan strategi pemasaran.
+
+PERTANYAAN:
+Tentukan Benar/Salah pernyataan berikut ini berdasarkan strategi yang paling tepat dalam memasarkan produk agar penjualan meningkat.
+OPSI / PERNYATAAN:
+  - A. Menunggu bazar berikutnya untuk fokus menjual produk agar tidak menambah biaya promosi.
+  - B. Melakukan penjualan melalui grup chat murid agar penjualan meningkat.
+  - C. Membuat akun media sosial dan mengunggah konten produk secara rutin
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Anatama seorang wirausaha muda yang memproduksi sabun organik alami tanpa bahan kimia. Produk tersebut memiliki target pasar konsumen yang memiliki kesadaran menggunakan produk alami dengan rentang usia antara 20–40 tahun. Ia berencana menyusun strategi pemasaran secara online agar produknya menjangkau pasar yang lebih luas.
+
+PERTANYAAN:
+Manakah strategi pemasaran online berikut yang paling relevan untuk diterapkan dalam memasarkan produk sabun organik tersebut? Tentukan jawaban yang benar. Jawaban benar lebih dari satu!
+OPSI / PERNYATAAN:
+  - A. A. Membagikan konten edukatif dan visual di media sosial tentang manfaat sabun organik
+  - B. B. Menyusun artikel blog tentang manfaat sabun alami dan mengoptimalkannya agar mudah ditemukan di mesin pencari
+  - C. C. Menyusun kampanye online yang mengajak konsumen membagikan pengalaman mereka menggunakan produk
+  - D. D. Mengirim broadcast massage sebagai bagian promosi ke nomor acak sebanyak mungkin agar menjangkau audiens luas
+  - E. E. Membuat siaran langsung rutin di platform video daring untuk membahas tren bisnis global
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Intan dan teman-temannya membuat minuman herbal botol berlabel “Segar Rempah” dengan varian jahe, kunyit, dan serai. Produk ini telah uji coba di lingkungan sekolah dan pasar tradisional dekat sekolah, dan mendapat respon positif dari guru, pegawai, dan pembeli umum. Dari uji coba tersebut diperoleh informasi sebagai berikut:- Target pasar utama: konsumen usia 30–50 tahun yang peduli kesehatan.- Lokasi: sekolah, dan lingkungan di sekitar sekolah- Kompetitor: produk minuman kemasan pabrikan dengan harga lebih tinggi.- Keunggulan produk: lebih segar, tanpa pengawet, dan harga lebih terjangkau.- Kelemahan: belum dikenal luas di luar lingkungan sekolah.
+
+PERTANYAAN:
+Berdasarkan hasil analisis pasar tersebut, strategi pemasaran yang paling tepat untuk meningkatkan penjualan produk “Segar Rempah” adalah …
+OPSI / PERNYATAAN:
+  - A. A. Menjual produk di pasar tradisional dengan sistem paket beli 2 gratis 1
+  - B. B. Mencetak brosur yang menarik untuk meningkatkan penjualan ke warga sekolah
+  - C. C. Membuat video testimoni manfaat produk dan menjualnya di media sosial
+  - D. D. Mengganti nama produk agar terdengar lebih modern dan berbahasa asing
+  - E. E. Menurunkan harga hingga 50% tanpa mempertimbangkan biaya produksi
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Kelompok wirausaha siswa jurusan Rekayasa Perangkat Lunak mengembangkan aplikasi berbasis Android bernama "TASK+ EDU", yaitu aplikasi pencatat tugas dan pengingat belajar. Aplikasi ini memiliki fitur penjadwalan, notifikasi, dan sinkronisasi ke kalender elektronik. Tim mereka sangat fokus pada pengembangan fitur dan desain antarmuka. Namun setelah 2 bulan berjalan, aplikasi hanya diunduh 57 kali dan mendapatkan ulasan minim. Berdasarkan hasil survei kecil yang dilakukan tim usaha, ditemukan bahwa strategi promosi digital yang jarang dilakukan, sehingga aplikasi tidak dikenal secara luas oleh target penggunanya, yakni pelajar yang aktif di media sosial. Selain itu, tidak adanya evaluasi dari pengguna melalui survei, sehingga pengembang tidak mengetahui kebutuhan atau keluhan pengguna setelah aplikasi digunakan.
+
+PERTANYAAN:
+Berdasarkan analisis terhadap strategi pemasaran pada kasus tersebut, penyebab utama dari tidak berhasilnya pemasaran produk “TASK+EDU” adalah.…
+OPSI / PERNYATAAN:
+  - A. A. Aplikasi memiliki banyak fitur yang membingungkan pengguna trutama pelajar
+  - B. B. Tim terlalu fokus pada desain antarmuka dan melupakan keamanan data
+  - C. C. Tidak ada strategi promosi digital yang relevan dengan kebiasaan target pasar
+  - D. D. Aplikasi yang ditawarkan tidak bisa digunakan secara offline sehingga tidak optimal
+  - E. E. Desain antar muka yang tidak sesuai dengan minat pelajar sehingga tidak optimal
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan gambar label produk minuman herbal "Jamoe Si Mbok" untuk kemasan botol berikut ini:
+[Konteks Visual Gambar 27466_eb2d778590a4c083f5d9341a73424bbb.png]:
+Tabel rincian biaya produksi dan jumlah produksi:
+
+| Rincian | Nilai / Satuan | |---|---| | Bahan baku | Rp4.000.000,00 | | Bahan kemasan dan label | Rp1.200.000,00 | | Tenaga kerja langsung | Rp2.000.000,00 | | Biaya overhead | Rp800.000,00 | | Jumlah produksi | 800 botol |
+PERTANYAAN:
+Dari gambar label tersebut, penerapan yang paling tepat pada kemasan produk minuman herbal "Jamoe Si Mbok" adalah...
+OPSI / PERNYATAAN:
+  - A. A. Menempelkan label di bagian tengah botol agar mudah dilihat oleh konsumen
+  - B. B. Menempatkan label di bagian bawah botol agar tidak mengganggu tampilan warna minuman
+  - C. C. Menempelkan label dengan posisi miring di depan dan samping botol agar lebih dikenal
+  - D. D. Menempelkan label di dalam botol untuk menghindari kerusakan saat pengiriman
+  - E. E. Label sebaiknya tidak ditempel pada produk namun ditempel di kardus kemasan botol
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tim murid SMK jurusan Desain Komunikasi Visual membuat prototipe desain kemasan minuman herbal “Wedang Rempah Saku”. Produk ini ditargetkan untuk kalangan muda dan pekerja kantor. Desain awal mereka menggunakan botol kaca tinggi dengan label berwarna coklat klasik. Setelah dilakukan uji pasar kecil, banyak responden mengatakan bahwa desain terlihat jadul, sulit dibawa bepergian, dan rawan pecah. Mereka kemudian menyarankan melakukan analisis ulang desain dan kemasan produk dengan mempertimbangkan kebutuhan pasar dan efisiensi dalam proses produksi dan distribusi.
+
+PERTANYAAN:
+Langkah yang dapat diterapkan untuk memperbaiki produk sesuai kebutuhan pasar adalah...
+OPSI / PERNYATAAN:
+  - A. A. Mengganti warna label menjadi lebih cerah dan menarik agar menarik pelanggan
+  - B. B. Mengganti bahan kemasan ke plastik fleksibel dan desain yang lebih kekinian
+  - C. C. Mengubah label produk dengan desain berwarna abu dan gambar yang menarik
+  - D. D. Mengganti kemasan dengan botol kaca dengan dua lapis agar lebih estetik
+  - E. E. Menambahkan hiasan pada botol kaca guna menambah kesan tradisional
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tim murid SMK jurusan Desain Komunikasi Visual membuat prototipe desain kemasan minuman herbal “Wedang Rempah Saku”. Produk ini ditargetkan untuk kalangan muda dan pekerja kantor. Desain awal mereka menggunakan botol kaca tinggi dengan label berwarna coklat klasik. Setelah dilakukan uji pasar kecil, banyak responden mengatakan bahwa desain terlihat jadul, sulit dibawa bepergian, dan rawan pecah. Mereka kemudian menyarankan melakukan analisis ulang desain dan kemasan produk dengan mempertimbangkan kebutuhan pasar dan efisiensi dalam proses produksi dan distribusi.
+
+PERTANYAAN:
+Langkah yang dapat diterapkan untuk memperbaiki produk sesuai kebutuhan pasar adalah...
+OPSI / PERNYATAAN:
+  - A. A. Mengganti warna label menjadi lebih cerah dan menarik agar menarik pelanggan
+  - B. B. Mengganti bahan kemasan ke plastik fleksibel dan desain yang lebih kekinian
+  - C. C. Mengubah label produk dengan desain berwarna abu dan gambar yang menarik
+  - D. D. Mengganti kemasan dengan botol kaca dengan dua lapis agar lebih estetik
+  - E. E. Menambahkan hiasan pada botol kaca guna menambah kesan tradisional
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Seorang murid jurusan Agribisnis SMK Tunas Mandiri memproduksi keripik bayam sebagai produk unggulan dalam program kewirausahaan sekolah. Produk ini dikemas dalam plastik bening dengan stiker nama produk pada bagian depan. Sasaran utama pasar mereka adalah remaja dan anak-anak sekolah. Namun, saat dipamerkan di bazar kuliner, banyak pengunjung menyampaikan bahwa kemasannya tidak kekinian dan tidak menampilkan identitas merek dengan jelas. Selain itu, beberapa pelanggan mengalami kesulitan membaca tanggal kedaluwarsa karena ukuran huruf yang terlalu kecil.
+
+PERTANYAAN:
+Berdasarkan deskripsi tersebut, langkah analisis kemasan yang paling tepat untuk meningkatkan daya tarik produk bagi target pasar adalah.…
+OPSI / PERNYATAAN:
+  - A. A. mendesain ulang kemasan dengan warna dan ilustrasi yang menarik serta memperbesar ukuran informasi
+  - B. B. mengganti kemasan plastik bening dengan toples kaca agar lebih eksklusif dan terlihat jelas tulisannya
+  - C. C. menambahkan brosur informasi gizi dan manfaat bayam dalam setiap kemasan sebagai nilai edukasi
+  - D. D. menyederhanakan desain kemasan dan merek produk agar biaya produksi dan harga jual lebih murah
+  - E. E. menggunakan bahan kemasan kertas cokelat alami untuk menonjolkan kesan yang ramah lingkungan
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+PT Cipta Kreasi Nusantara menciptakan inovasi Meja Lipat 3-in-1, yang dapat diubah menjadi rak, meja kerja, atau meja makan. Setelah rancang gambar selesai, maka dibuatlah protipe pertama untuk menguji kosep ide produk serta masukan dan perbaikan. Kesimpulan yang di dapat dari uji coba prototipe pertama sebagai berikut:- Pada saat difungsikan menjadi meja makan, ukurannya terlalu kecil dan tidak proporsional- Meja mudah diubah menjadi rak, tapi kurang stabil saat difungsikan sebagai meja makan- Saat berubah fungsi, bagian-bagian tertentu tidak kokoh untuk menopang beban- Kesulitan mengubah fungsi meja karena sistem geser yang berat
+
+PERTANYAAN:
+Dari situasi tersebut, langkah manakah yang paling tepat dilakukan dalam tahapan pengembangan prototipe produk? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Melakukan evaluasi pasar secara terbatas untuk mengetahui potensi minat konsumen
+  - B. B. Menyesuaikan kembali rancangan ukuran dan proporsi meja agar lebih ergonomis
+  - C. C. Meninjau kembali pemilihan bahan dan struktur sambungan untuk meningkatkan stabilitas
+  - D. D. Menambahkan fitur estetika agar produk terlihat lebih menarik di pasaran
+  - E. E. Menyempurnakan mekanisme perubahan fungsi agar lebih ringan dan mudah digunakan
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perusahaan konveksi lokal bernama CV Karya Atlet Mandiri mendapatkan pesanan besar dari panitia Marathon 2025. Mereka diminta memproduksi 10.000 jersey lari yang akan digunakan peserta dari berbagai kota di Indonesia. Pihak CV telah menyetujui spesifikasi tersebut dan mulai menghitung kebutuhan produksi. Berikut rincian biaya produksi:
+
+CV Karya Atlet Mandiri perlu menyelesaikan semua produksi dalam 1 bulan. Tim produksi harus menghitung total biaya produksi agar dapat menentukan harga jual dan margin keuntungan yang optimal.
+[Konteks Visual Gambar 59282_a82002502898779161a0c204862fb91d.png]:
+Tabel rincian biaya produksi jersey:
+
+Biaya Tetap (untuk seluruh produksi): | Komponen | Biaya | |---|---| | Sewa bulanan gedung produksi | Rp12.000.000,00 | | Gaji 4 orang staf tetap (admin, desain, QC) | Rp16.000.000,00 |
+
+Biaya Variabel per pcs jersey: | Komponen | Biaya | |---|---| | Bahan kain dryfit | Rp22.000,00 | | Sablon sublimasi dan tinta | Rp6.000,00 | | Jahit dan finishing | Rp7.000,00 | | Label dan kemasan | Rp5.000,00 |
+PERTANYAAN:
+Berdasarkan data di atas, berapakah total biaya produksi jersey Borobudur Marathon 2025?
+OPSI / PERNYATAAN:
+  - A. A. Rp428.000.000,00
+  - B. B. Rp412.000.000,00
+  - C. C. Rp400.000.000,00
+  - D. D. Rp28.000.000,00
+  - E. E. Rp16.800.000,00
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Perhatikan informasi yang tertera pada kemasan produk cairan pembersih piring dan gelas “Bersih”. Diproduksi: PT CAHAYA INDONESIA Berat bersih: 1500 ml Tanggal kadaluwarsa: 10 Agustus 2026 Manfaat: menghilangkan bau amis dan lemak hilang, serta lembut ditangan Cara penggunaan:- Tuang ½ sendok cairan pembersih ke dalam mangkok berisi 1 gelas air bersih- Masukan spons ke dalam larutan, kemudian diremas sampai berbusa- Cuci pirang dan gelas, lalu bilas sampai bersih Perhatian dan peringatan:- Jauhkan dari jangkauan anak-anak- Bila terkena mata, bilas dengan air bersih
+
+PERTANYAAN:
+Berdasarkan informasi pada kemasan tersebut, manakah informasi yang sesuai dengan kemasan produk tersebut? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Perbandingan campuran adalah setengah sendok cairan dicampur dengan satu mangkok air
+  - B. B. Cairan pembersih ini tidak boleh digunakan langsung tanpa dicampur air
+  - C. C. Jika cairan terkena mata, bilaslah dengan air bersih
+  - D. D. Produk ini hanya boleh digunakan sebelum 10 Agustus 2027
+  - E. E. Saat menggunakan produk, penting untuk menjauhkan dari jangkauan anak-anak
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pada proses pengecekan kualitas produk lemari besi, ditemukan adanya pengelupasan cat pada bagian dinding lemari. Akibatnya, produk tersebut dinyatakan tidak lolos quality control dan tidak dapat dikirim ke pelanggan. Setelah dilakukan investigasi lebih lanjut, diketahui bahwa pengelupasan cat tersebut disebabkan oleh benturan atau gesekan yang terjadi saat proses pemindahan lemari dari area produksi ke gudang penyimpanan.
+
+PERTANYAAN:
+Tindakan yang paling tepat untuk mengatasi dan mencegah masalah tersebut adalah…. Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Melatih ulang petugas pemindahan barang agar lebih berhati-hati dan menggunakan teknik angkat yang tepat
+  - B. B. Menerapkan pelindung tambahan pada bagian yang rawan benturan selama proses pemindahan
+  - C. C. Mengurangi frekuensi pemindahan lemari agar mengurangi risiko kerusakan selama proses tersebut
+  - D. D. Meninjau dan memperbaiki prosedur pemindahan produk agar lebih aman dan efisien
+  - E. E. Memperketat inspeksi visual pada setiap produk sebelum dikirimkan agar pengelupasan dapat dideteksi lebih awal
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sebuah unit usaha sekolah memproduksi totebag berbahan kanvas. Proses produksi dilakukan oleh murid yang mengikuti ekstrakulikuler menjahit di sekolah. Namun saat mengerjakan pesanan totebag, kelompok produksi mengalami kendala saat tahap menjahit. Benang sering putus dan jahitan menjadi tidak rapi, padahal mesin jahit sudah digunakan sesuai petunjuk. Setelah ditelusuri, diketahui bahwa benang yang digunakan terlalu tipis untuk bahan kanvas yang tebal.
+
+PERTANYAAN:
+Solusi terbaik yang dapat dilakukan untuk mengatasi masalah tersebut adalah...
+OPSI / PERNYATAAN:
+  - A. A. Mengganti bahan totebag dengan bahan kanvas yang lebih tipis
+  - B. B. Mengganti mesin jahit yang lebih berkualitas agar benang tidak cepat putus
+  - C. C. Menambahkan lem kain pada totebag agar sambungan tetap kuat dan tahan lama
+  - D. D. Melatih ulang murid dalam teknik menjahit yang lebih terampil dan teliti dalam menjahit
+  - E. E. Mengganti benang dengan jenis yang lebih tebal dan kuat sesuai karakter kanvas
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sekelompok murid farmasi merancang produk aromatherapy candle (lilin aroma terapi) dari bahan alami untuk keperluan relaksasi. Produk ini akan dikemas dalam toples kecil kaca. Target pasarnya adalah konsumen rumah tangga dan spa lokal. Dalam proses perancangan, murid menemukan beberapa bahan utama yang dapat digunakan:- Parafin (turunan minyak bumi)- Beeswax (lilin lebah)- Minyak esensial (lavender, kayu putih, melati)- Pewarna lilin sintetis- Bubuk kayu manis Mereka ingin memastikan bahwa produk tetap alami, aman, dan ramah lingkungan.
+
+PERTANYAAN:
+Berdasarkan situasi tersebut, kombinasi bahan baku mana untuk mendukung proses produksi lilin aroma terapi yang alami dan ramah lingkungan adalah....
+OPSI / PERNYATAAN:
+  - A. A. Menggunakan parafin, pewarna sintetis, dan minyak esensial
+  - B. B. Menggunakan beeswax, bubuk kayu manis, dan minyak esensia
+  - C. C. Menggabungkan parafin, beeswax, dan pewarna sintetis
+  - D. D. Memadukan bubuk kayu manis, pewarna sintetis, dan parafin
+  - E. E. Memilih beeswax, parafin, dan pengharum ruangan kimiawi
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['A', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Yuli dan Anita memproduksi minuman instan serbuk rasa buah tropis (mango-pineapple) yang terbuat dari sari buah dan gula alami. Produk tersebut dikemas dalam sachet kecil dan dipasarkan secara daring. Pada tiga bulan pertama, produk mendapatkan banyak ulasan positif dari konsumen karena cita rasanya yang segar serta kemasannya yang menarik. Namun, setelah beberapa bulan, muncul sejumlah keluhan seperti bubuk minuman yang menggumpal, aroma yang tidak lagi segar, dan perubahan rasa. Hasil penelusuran menunjukkan bahwa sebagian bahan baku disimpan di tempat lembap dan proses pengemasan dilakukan tanpa tahap penyaringan akhir untuk memisahkan partikel kasar.
+
+PERTANYAAN:
+Berdasarkan kasus tersebut, manakah tindakan yang tepat untuk perbaikan pengendalian mutu produk minuman serbuk rasa buah tersebut? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Menyimpan bahan baku di tempat yang kering dan bersuhu stabil
+  - B. B. Mengurangi penggunaan bahan pengawet agar produk lebih alami
+  - C. C. Menghilangkan tahap penyaringan akhir sebelum pengemasan
+  - D. D. Melakukan uji kualitas secara berkala terkait aroma, rasa, dan warna
+  - E. E. Menambah kemasan yang lebih tebal dan kedap udara untuk melindungi produk
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Kelompok wirausaha Tata Busana memproduksi masker kain tiga lapis untuk kegiatan sosial. Mereka telah menetapkan standar kualitas produk, yaitu jahitan yang rapi dan simetris, ukuran masker sesuai pola (17 x 9 cm), terdiri dari tiga lapis kain dengan saku filter, serta tali elastis yang tidak terlalu longgar. Namun, saat dilakukan pemeriksaan terhadap hasil produksi, dari 100 masker yang dicek, 25 di antaranya ditemukan memiliki ukuran yang tidak konsisten, beberapa hanya terdiri atas dua lapis kain, dan ada yang jahitannya lepas. Tim pengendalian mutu kemudian mencatat dan mengelompokkan jenis cacat pada produk tersebut.
+
+PERTANYAAN:
+Langkah pengendalian mutu yang paling tepat untuk diterapkan berdasarkan kasus tersebut adalah…
+OPSI / PERNYATAAN:
+  - A. A. Mendistribusikan semua produk yang telah dibuat untuk efisiensi waktu
+  - B. B. Memperbaiki produk yang rusak setelah dikirim ke konsumen
+  - C. C. Mengganti standar kualitas agar lebih fleksibel dan mudah dipenuhi
+  - D. D. Menarik seluruh produk yang telah dipasarkan dan menghentikan produksi
+  - E. E. Melakukan evaluasi dan perbaikan prosedur produksi sesuai hasil inspeksi
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Weni dan Mira memproduksi sabun cair cuci tangan dan menjualnya melalui platform marketplace. Produk dikirim langsung ke konsumen melalui jasa ekspedisi. Selain itu, mereka juga menerima pesanan langsung melalui media sosial.
+
+PERTANYAAN:
+Berdasarkan informasi tersebut, jenis saluran distribusi yang digunakan adalah…
+OPSI / PERNYATAAN:
+  - A. A. Distribusi langsung
+  - B. B. Distribusi tidak langsung tingkat dua
+  - C. C. Distribusi melalui agen tunggal
+  - D. D. Distribusi multilevel
+  - E. E. Distribusi eksklusif ke toko retail besar
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sebuah bengkel otomotif bernama Bengkel Solusi Cepat yang berlokasi di daerah perkotaan mengalami peningkatan permintaan terhadap layanan perbaikan kendaraan. Melihat peluang tersebut, pemilik bengkel, Budi, mulai mempertimbangkan untuk menambah layanan baru berupa perawatan berkala dan modifikasi kendaraan.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, hal apa yang sebaiknya menjadi fokus utama Budi dalam menganalisis sumber peluang usaha?
+OPSI / PERNYATAAN:
+  - A. A. Membandingkan harga jasa modifikasi dengan bengkel besar di kota lain
+  - B. B. Mengandalkan tren modifikasi kendaraan yang viral di media sosial
+  - C. C. Menganalisis kebutuhan pelanggan dan tren pasar lokal yang berkembang
+  - D. D. Mengurangi jumlah mekanik untuk menekan biaya operasional
+  - E. E. Membeli suku cadang dalam jumlah besar untuk mendapatkan diskon
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sekelompok murid SMK jurusan Agribisnis menyusun proposal usaha untuk memproduksi teh herbal daun kelor "Kelora". Proposal tersebut mencakup:
+
+Uraian mengenai kebutuhan masyarakat akan minuman sehat
+
+Penjelasan mengenai produk usaha dan keterangan produksi usaha oleh murid SMK berbasis home industri
+
+Analisis kekuatan, peluang, dan kelemahan pada bahan lokal dan peluang pasar online
+
+Proses produksi yang meliputi pengeringan daun, pengemasan, dan distribusi
+
+Pemasaran melalui promosi di media sosial dan bazar sekolah
+
+PERTANYAAN:
+Berdasarkan data di atas, bagian proposal usaha yang perlu ditambahkan agar menjadi proposal lengkap dan layak dikaji investor adalah…
+OPSI / PERNYATAAN:
+  - A. A. Latar belakang dan nama usaha
+  - B. B. Strategi distribusi dan bentuk kemasan
+  - C. C. Rincian kebutuhan modal dan analisis keuangan
+  - D. D. Analisis SWOT dan profil pembimbing usaha
+  - E. E. Logo kemasan dan dokumentasi produksi
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Sebuah bisnis lokal bernama "Tirta Botani" memproduksi dan menjual infused water dari buah lokal. Berikut ringkasan dari Business Model Canvas (BMC) mereka:
+[Konteks Visual Gambar 56044_354c082bb8b05ebba7414a68f5a9ba72.png]:
+Tabel elemen Business Model Canvas (BMC) untuk produk infused water:
+
+| Elemen | Deskripsi | |---|---| | Value Proposition | Infused water sehat, alami, dan tanpa pengawet | | Customer Segment | Konsumen gaya hidup sehat di wilayah kota | | Channels | Penjualan online via Instagram & marketplace | | Customer Relationship | Interaksi langsung dan testimoni | | Key Activities | Produksi, pengemasan, promosi | | Key Resources | Bahan baku buah lokal, botol kaca ramah lingkungan | | Key Partner | Petani buah lokal, kurir lokal | | Revenue Stream | Penjualan produk eceran dan bundling | | Cost Structure | Biaya bahan baku, promosi digital, dan logistik |
+PERTANYAAN:
+Berdasarkan BMC usaha Tirta Botani, manakah dari pernyataan berikut yang menunjukkan hasil analisis SWOT? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Ketersediaan buah lokal segar merupakan kekuatan dalam produksi
+  - B. B. Ketergantungan pada satu jalur distribusi bisa menjadi kelemahan
+  - C. C. Distribusi pemasaran melalui media sosial dan makterplace menjadi peluang pasar yang potensial
+  - D. D. Biaya kemasan botol kaca yang tinggi merupakan bagian dari strategi pemasaran
+  - E. E. Banyaknya pesaing dengan produk sejenis merupakan peluang untuk saling menjaga keunggulan produk
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Cahya membuka usaha minuman kekinian berbasis susu dan buah lokal dengan merek “SegarKu”. Usaha ini dijalankan dari rumah dan dipasarkan melalui media sosial. Meskipun belum memiliki izin usaha resmi, produk SegarKu mulai dikenal di lingkungan sekitar karena rasanya yang segar dan unik. Namun, kapasitas produksinya masih terbatas karena alat yang digunakan bersifat manual dan belum modern. Lokasi rumah yang berada di dekat sekolah dan kawasan perumahan padat penduduk menjadi salah satu keunggulan usaha ini. Dalam jangka panjang, pelaku usaha berharap dapat mengembangkan usaha secara lebih profesional dan menjangkau konsumen yang lebih luas.
+
+PERTANYAAN:
+Berdasarkan informasi tersebut, manakah dari pernyataan berikut ini yang merupakan bagian dari analisis SWOT usaha “SegarKu”? Tentukan jawaban yang benar. Jawaban benar lebih dari satu
+OPSI / PERNYATAAN:
+  - A. A. Promosi melalui media sosial berpotensi menjangkau pelanggan yang lebih luas
+  - B. B. Belum memiliki izin usaha resmi merupakan ancaman yang harus segera diatasi
+  - C. C. Alat produksi manual membuat proses produksi menjadi kurang efisien
+  - D. D. Strategi branding lewat nama unik seperti “SegarKu” dapat menjadi kekuatan
+  - E. E. Lokasi yang strategis yang dekat dengan perumahan menjadi ancaman utama
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada tahun 2023, Heldy berhasil menciptakan alat penyaring air sederhana yang dapat mengubah air hujan menjadi air layak minum hanya dengan menggunakan bahan-bahan rumah tangga. Alat ini bekerja berdasarkan sistem penyaringan bertingkat dengan tambahan arang aktif dan UV sederhana. Heldy kemudian mengajukan permohonan perlindungan hukum terhadap alat yang ditemukannya agar tidak ditiru oleh pihak lain tanpa izin.
+
+PERTANYAAN:
+Berdasarkan ilustrasi di atas, bentuk perlindungan HaKI yang sesuai untuk karya Heldy adalah....
+OPSI / PERNYATAAN:
+  - A. A. Hak Cipta
+  - B. B. Desain Industri
+  - C. C. Merek Dagang
+  - D. D. Hak Paten
+  - E. E. Rahasia Dagang
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Diah dan Sofyan merintis usaha produk kreatif “ Kaligrafika ”, yaitu lukisan kaligrafi digital yang bisa dikustom sesuai nama pembeli. Mereka juga membuat desainnya menggunakan aplikasi grafis dan menjualnya melalui platform digital. Dalam sebuah diskusi, mereka menyadari pentingnya melindungi karya dari penjiplakan dengan mendaftarkannya ke sistem Hak Kekayaan Intelektual (HaKI).
+
+PERTANYAAN:
+Tentukan Benar atau Salah pernyataan berikut ini berkaitan dengan jenis dan karakteristik HaKI yang mungkin relevan dengan usaha Kaligrafika.
+OPSI / PERNYATAAN:
+  - A. Dengan adanya hak cipta, produk Kaligrafika dapat terjamin karyanya
+  - B. Merek produk dapat digunakan untuk melindungi teknik produksi perusahaan
+  - C. Desain industri melindungi tampilan luar produk kaligrafika agar tidak ditiru
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Yuli menciptakan sebuah lagu orisinal dan mengunggahnya di platform berbagi video. Beberapa bulan kemudian, temannya, Ikhsan, memakai lagu tersebut sebagai latar musik untuk video promosi produknya tanpa meminta izin. Lagu itu diedit dengan cara dipotong, diberi efek tambahan, dan tidak mencantumkan nama Yuli sebagai penciptanya. Selain itu, Ikhsan juga mengunggah ulang video tersebut ke akun bisnisnya dan mengklaim lagu itu sebagai hasil karya timnya.
+
+PERTANYAAN:
+Berdasarkan informasi tersebut, tentukan Benar/Salah pernyataan berikut ini mengenai pelanggaran HaKI.
+OPSI / PERNYATAAN:
+  - A. Karya yang digunakan Ikhsan tanpa izin dan tanpa mencantumkan nama pencipta merupakan pelanggaran HaKI
+  - B. Video yang diunggah Ikhsan sudah diedit dan tidak mirip dengan versi asli sehingga tidak termasuk pelanggaran HaKI
+  - C. Video yang diunggah hanya digunakan oleh teman sendiri sehingga tidak perlu izin dan bukan sebagai pelanggaran
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: ['C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Perhatikan laporan biaya produksi usaha minuman dari sebuah UMKM berikut.
+[Konteks Visual Gambar 35630_6fbed59c5495e9e4bd2c01d069936f72.png]:
+Desain label atau poster kemasan produk minuman herbal berlatar hijau muda dengan hiasan ilustrasi bunga kering dan sobekan kertas vintage:- Judul merek (tulisan latin bersambung besar): 'Jamoe Si Mbok'- Keterangan varian: 'Varian' diikuti label 'BERAS KENCUR'- Gambar utama: Foto segelas jamu beras kencur cair berwarna kuning di atas meja bersama rempah-rempah (kencur, kayu manis, bunga lawang/pekak, dan bubuk rempah)- Komposisi (kiri bawah): 'Komposisi' 'Beras, Kencur, Gula Jawa'- Keterangan isi dan kedaluwarsa (kanan bawah): '300 ml' 'Baik dikonsumsi sebelum: 15 Mei 2026'
+PERTANYAAN:
+Apabila UMKM menargetkan laba: 30-40% dari total biaya produksi, berapakah harga jual per botol yang sebaiknya ditetapkan? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Rp11.250,00
+  - B. B. Rp12.500,00
+  - C. C. Rp13.700,00
+  - D. D. Rp14.000,00
+  - E. E. Rp15.500,00
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan transaksi usaha jasa "Servis Elektronik Cahaya" selama bulan Mei 2025:
+[Konteks Visual Gambar 22777_d79b5aa4d199432e035ee3443ccdf60b.png]:
+Tabel transaksi keuangan:
+
+| Tanggal | Keterangan Transaksi | |---|---| | 1 Mei | Pemilik menyetor modal tunai sebesar Rp15.000.000,00 | | 3 Mei | Menyewa tempat usaha dan langsung dibayar tunai Rp1.500.000,00 | | 7 Mei | Melayani jasa servis dan menerima pembayaran tunai Rp6.000.000,00 | | 10 Mei | Membeli perlengkapan servis tunai Rp1.000.000,00 | | 15 Mei | Melayani jasa servis secara kredit Rp4.000.000,00 | | 20 Mei | Membayar gaji karyawan Rp2.000.000,00 | | 25 Mei | Menerima pelunasan jasa servis dari pelanggan Rp2.000.000,00 |
+PERTANYAAN:
+Berdasarkan transaksi tersebut, Berapa saldo akhir kas untuk bulan Mei 2025?
+OPSI / PERNYATAAN:
+  - A. A. Rp14.500.000,00
+  - B. B. Rp16.500.000,00
+  - C. C. Rp17.000.000,00
+  - D. D. Rp18.500.000,00
+  - E. E. Rp20.000.000,00
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Berikut ini adalah ringkasan laporan keuangan usaha sablon kaos Kreatif Muda bulan April 2025:
+
+Usaha sablon tersebut masih memiliki sejumlah persediaan bahan yang menumpuk di gudang.
+[Konteks Visual Gambar 89491_25b6689089a114b10e437e184f91ec51.png]:
+Tabel data laporan keuangan usaha:
+
+| Keterangan | Jumlah | |---|---| | Total Penjualan | Rp3.000.000 | | Harga Pokok Produksi (HPP) | Rp2.500.000 | | Laba Bersih | Rp500.000 | | Biaya Promosi | Rp50.000 |
+PERTANYAAN:
+Berdasarkan laporan keuangan tersebut, manakah langkah tindak lanjut yang paling tepat dilakukan oleh usaha sablon tersebut? Tentukan jawaban yang benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Meninkatkan biaya promosi agar volume penjualan bertambah
+  - B. B. Menambah pembelian bahan baku baru untuk meningkatkan penjualan
+  - C. C. Mengoptimalkan penggunaan persediaan bahan yang masih menumpuk
+  - D. D. Menghentikan kegiatan produksi karena laba terlalu kecil
+  - E. E. Mengevaluasi harga jual atau mencari cara efisiensi produksi
+
+---
+[SOAL NO 30]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Usaha minuman kopi susu kekinian bernama "Kopi Kita" mencatat laporan keuangan bulan Mei sebagai berikut:
+[Konteks Visual Gambar 92449_a0e0b950cbec09bab81165cdcd0d2234.png]:
+Tabel data persediaan, pembelian, pendapatan, dan biaya bulan Mei:
+
+| Keterangan | Nilai | |---|---| | Persediaan Awal Bahan Baku | Rp1.000.000,00 | | Pembelian Bahan Baku Selama Mei | Rp3.000.000,00 | | Persediaan Akhir Bahan Baku | Rp500.000,00 | | Pendapatan Penjualan | Rp7.500.000,00 | | Biaya Operasional (Gaji, Listrik, Sewa) | Rp2.000.000,00 |
+PERTANYAAN:
+Berdasarkan data tersebut, berapakah laba bersih yang diperoleh usaha Kopi Kita pada bulan Mei?
+OPSI / PERNYATAAN:
+  - A. A. Rp1.000.000,00.
+  - B. B. Rp2.000.000,00.
+  - C. C. Rp2.500.000,00.
+  - D. D. Rp3.000.000,00.
+  - E. E. Rp3.500.000,00.
+

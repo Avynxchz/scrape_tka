@@ -50,6 +50,7 @@ PACKAGES = [
     ("ekonomi_paket_2", "Ekonomi", 2, "data/ekonomi/paket_2"),
     ("kewirausahaan_paket_1", "Kewirausahaan", 1, "data/kewirausahaan/paket_1"),
     ("kewirausahaan_paket_2", "Kewirausahaan", 2, "data/kewirausahaan/paket_2"),
+    ("geografi_paket_1", "Geografi", 1, "data/geografi/paket_1"),
 ]
 
 SUBJECT_PREFIX = {
@@ -57,6 +58,7 @@ SUBJECT_PREFIX = {
     "Bahasa Inggris": "bing",
     "Ekonomi": "eko",
     "Kewirausahaan": "pkwu",
+    "Geografi": "geo",
 }
 
 # --- Klasifikasi visual (deterministik, berbasis ukuran + konteks teks) -----

@@ -1,0 +1,242 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Ekonomi (Paket 2)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: A
+Stimulus Teks: Perusahaan minuman sehat “Segar Abadi” mengalami kenaikan harga bahan baku utama seperti jahe, madu, dan lemon akibat gagal panen di daerah penghasil. Jika perusahaan tetap menggunakan bahan yang sama, biaya produksi meningkat dan keuntungan menurun. Namun jika mengganti bahan baku dengan bahan sintetis, harga bisa ditekan, tetapi kualitas produk menurun dan kepercayaan konsumen bisa terganggu.
+Pertanyaan: Berdasarkan ilustrasi tersebut, manakah tindakan yang paling tepat diambil oleh perusahaan dengan mempertimbangkan prinsip ekonomi?
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Perusahaan “Adiwastra Jaya” merupakan perusahaan yang memproduksi berbagai macam pakaian jadi dalam jumlah besar sehingga perusahaan tersebut memiliki tenaga kerja yang cukup banyak. Ketika pemerintah menetapkan Kenaikan Upah Minimum Provinsi (UMP) tahun 2025 sebesar 6,5% dari UMP tahun sebelumnya, maka biaya produksi Perusahaan “Adiwastra Jaya” mengalami kenaikan. Kenaikan biaya produksi tersebut akan berdampak pada keseimbangan pasar yaitu....
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: A
+Stimulus Teks: Toko “Kue Impian” merupakan toko bahan-bahan kue yang terkenal di daerahnya. Toko ini menjual berbagai macam kebutuhan untuk membuat kue seperti halnya tepung, telur, dan gula. Berikut ini fungsi penawaran dan harga dari ketiga bahan tersebut.
+[Isi Gambar Soal 02602_6fe87c5c4132c17b1076023af7f049ca.png]:
+Tabel fungsi penawaran dan harga jual komoditas:
+
+| No | Nama | Fungsi Penawaran | Harga Jual | |:-: |:--- |:--- |:--- | | 1 | Tepung | $Qs = -1250 + 0,25P$ | Rp15.000,00/kg | | 2 | Telur | $Qs = 500 + 0,04P$ | Rp30.000,00/kg | | 3 | Gula | $Qs = -1200 + 0,3P$ | Rp20.000,00/kg |
+Pertanyaan: Jika semua harga jual dari ketiga bahan tersebut naik sebesar Rp3.000,00/kg maka berapakah jumlah tepung, telur, dan gula yang ditawarkan Toko “Kue Impian”?
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: ['C', 'D', 'E']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Pasar komoditas barang konsumsi X memiliki fungsi permintaan Qd = -20P + 500 dan fungsi penawaran Qs = 5P + 100. Pemerintah menetapkan pajak untuk barang tersebut yaitu sebesar Rp25,00 per unit. Manakah kesimpulan yang tepat berdasarkan kondisi tersebut? Klik jawaban yang benar dari setiap pernyataan. Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: D
+Stimulus Teks: Perhatikan kurva permintaan sepeda motor berikut ini.
+[Isi Gambar Soal 61876_a12c09ba96f10a97b5069e9126bb67af.png]:
+Grafik kurva permintaan dalam sumbu koordinat harga ( $P$) dan kuantitas ( $Q$):- Terdapat 3 garis lurus menurun miring ke kanan berwarna cokelat yang masing-masing memiliki titik-titik hijau (kurva permintaan individual/bergeser).- Terdapat kurva tebal berwarna hitam yang merepresentasikan kurva permintaan patah/berkink (kinked demand curve) atau gabungan kurva permintaan yang mendatar pada tingkat harga $P1$ dari sebelah kiri hingga titik $D1$, kemudian melengkung ke atas melewati titik $D2$ pada tingkat harga $P2$.- Titik-titik kunci bertanda lingkaran merah: * Titik $D3$: Terletak pada garis permintaan paling kiri bawah dengan koordinat $(Q3, P1)$. * Titik $D1$: Terletak pada garis permintaan tengah dengan koordinat $(Q1, P1)$. * Titik $D2$: Terletak pada garis permintaan paling kanan atas dengan koordinat $(Q2, P2)$.- Garis putus-putus biru memproyeksikan titik-titik merah tersebut ke sumbu vertikal ( $P$) pada nilai $P1$ dan $P2$, serta ke sumbu horizontal ( $Q$) pada nilai $Q3$, $Q1$, dan $Q2$.
+Pertanyaan: Pada awalnya, kurva permintaan sepeda motor berada pada titik D1. Sepeda motor dan BBM merupakan barang komplementer sehingga ketika terjadi kenaikan harga BBM, maka analisis perubahan permintaan sepeda motor yang baru adalah....
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: C
+Stimulus Teks: Berikut ini data pendapatan nasional dari Negara “Alamanda” tahun 2025 (dalam miliar):
+[Isi Gambar Soal 13586_8d3c2d54ad86f95b9e347da0a54ff2db.png]:
+Tabel data komponen pendapatan nasional:
+
+| Komponen Pendapatan Nasional | Jumlah | |:--- |:--- | | Produk domestik bruto (PDB) | Rp 1.200.000 | | Produk netto luar negeri | Rp 80.000 | | Pajak langsung | Rp 30.000 | | Pajak tidak langsung | Rp 10.000 | | Penyusutan barang modal | Rp 15.000 | | Iuran asuransi | Rp 30.000 | | Laba ditahan | Rp 8.000 | | Pajak perseroan | Rp 9.000 | | Transfer payment | Rp 12.000 | | Komsumsi Rumah Tangga | Rp 750.000 | | Investasi | Rp 100.000 | | Pengeluaran Pemerintah | Rp 100.000 | | Ekspor | Rp 500.000 | | Impor | Rp 250.000 |
+Pertanyaan: Berdasarkan data tersebut, besarnya Disposible Income (DI) adalah ….
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: ['A', 'B', 'C']
+Stimulus Teks: Pertumbuhan ekonomi adalah aspek yang mendukung serta meningkatkan kemakmuran rakyat dalam suatu negara.
+Pertanyaan: Berdasarkan pernyataan tersebut, manakah faktor yang dapat memengaruhi pertumbuhan ekonomi suatu negara? Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Perhatikan data pertumbuhan ekonomi dan indeks gini di Indonesia tahun 2020 hingga 2024 berdasarkan data dari Badan Pusat Statistik (BPS):
+[Isi Gambar Soal 26430_50eeee4af1242975469596c49c38168c.png]:
+Tabel data pertumbuhan ekonomi dan indeks Gini tahun 2020-2024:
+
+| Tahun | Pertumbuhan Ekonomi (%) | Indeks Gini | |:---: |:---: |:---: | | 2020 | -2.07 | 0.381 | | 2021 | 3.70 | 0.384 | | 2022 | 5.31 | 0.384 | | 2023 | 5.05 | 0.388 | | 2024 | 5.03 | 0.379 |
+Pertanyaan: Berdasarkan data di atas, lakukan analisis bagaimana keterkaitan pertumbuhan ekonomi dengan kesejahteraan masyarakat Indonesia dengan menentukan pernyataan berikut benar atau salah!
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: ['A', 'C', 'D']
+Stimulus Teks: Berikut ini merupakan informasi terkait kondisi perekonomian negara Vietnam dan Indonesia pada tahun 2024.
+[Isi Gambar Soal 51470_e43ec269afbc4a4aad4e1ddd9329db96.png]:
+Tabel indikator pembangunan ekonomi antara Negara Vietnam dan Negara Indonesia:
+
+| Indikator Pembangunan Ekonomi | Negara Vietnam | Negara Indonesia | |:--- |:---: |:---: | | Produk Domestik Bruto (PDB) | 7,09% | 5,03% | | Pendapatan per kapita | US $4.700 | US$ 4.960 | | Indeks Pembangunan Manusia | 0,766 | 0,750 |
+Pertanyaan: Berdasarkan informasi tersebut manakah pernyataan yang tepat terkait kondisi pembangunan ekonomi di kedua negara? Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 11]
+Kunci Resmi: ['A:Salah', 'B:Benar', 'C:Salah']
+Stimulus Teks: Perhatikan pernyataan tentang kondisi pengangguran berikut ini.
+
+Mely baru saja lulus kuliah jurusan ekonomi pembangunan dari salah satu universitas ternama di kotanya, dan sedang berusaha mendapatkan pekerjaan pertamanya.
+
+Yoga seorang lulusan SMA yang sedang mencoba melamar beberapa pekerjaan, namun Yoga belum juga mendapatkan panggilan akibat tidak memenuhi kualifikasi perusahaan.
+
+Pratiwi mengundurkan diri dari pekerjaannya sebagai pegawai pemerintah daerah karena harus pindah ke luar kota mengikuti keluarganya.
+
+Bagas menolak untuk menerima pekerjaan sebagai staf keuangan salah satu perusahaan karena upah yang ditawarkan perusahaan tidak sesuai dengan harapannya.
+
+Andi mengalami pemutusan hubungan kerja karena perusahaan tempatnya bekerja mengalami kerugian akibat menurunnya permintaan barang yang diproduksi perusahaannya.
+Pertanyaan: Tentukan Benar atau Salah pernyataan berikut ini terkait jenis pengangguran yang dialami oleh masing-masing individu.
+---
+[SOAL ACUAN NO 12]
+Kunci Resmi: E
+Stimulus Teks: Perhatikan data BPS per Februari 2025 tentang Tingkat Pengangguran Terbuka (TPT) berdasarkan umur berikut ini!
+
+Meskipun Tingkat Pengangguran Terbuka (TPT) secara nasional menurun menjadi 4,76%, kelompok usia muda (15-24 Tahun) tetap menjadi penyumbang tertinggi pengangguran dengan TPT mencapai 16,16%. Kondisi ini menunjukkan adanya permasalah serius terkait ketidaksesuaian antara keterampilan lulusan muda dan kebutuhan dunia kerja.
+[Isi Gambar Soal 51977_7f7d11496e2d59d4a80cb1ae33e34351.png]:
+Tabel data tingkat pengangguran terbuka berdasarkan kelompok umur:
+
+| No | Umur | Tingkat Pengangguran Terbuka | |:-: |:--- |:---: | | 1 | 15-24 Tahun | 16,16% | | 2 | 25-59 Tahun | 3,04% | | 3 | >60 Tahun | 1,67% |
+Pertanyaan: Berdasarkan informasi, solusi apa yang paling tepat untuk mengatasi permasalahan tersebut?
+---
+[SOAL ACUAN NO 13]
+Kunci Resmi: E
+Stimulus Teks: Pada kuartal pertama tahun ini, Badan Pusat Statistik (BPS) mencatat lonjakan harga pada sejumlah bahan pokok seperti beras, minyak goreng, telur ayam, dan cabai rawit di berbagai daerah di Indonesia. Kenaikan harga ini terjadi menjelang bulan Ramadan, di mana konsumsi masyarakat meningkat pesat. Di sisi lain, hasil panen beberapa komoditas menurun akibat curah hujan yang sangat tinggi dan banjir di sejumlah sentra pertanian.
+Pertanyaan: Berdasarkan ilustrasi tersebut, faktor utama yang menyebabkan inflasi adalah ….
+---
+[SOAL ACUAN NO 14]
+Kunci Resmi: A
+Stimulus Teks: Perhatikan data harga bahan pokok di daerah Adidaya berikut ini.
+[Isi Gambar Soal 01473_cbf8ae4af0a4f0e271e86276e8d01353.png]:
+Tabel perbandingan harga barang pada tahun 2024 dan tahun 2025:
+
+| Nama barang | Harga barang (Rp) Tahun 2024 | Harga barang (Rp) Tahun 2025 | |:--- |:---: |:---: | | Daging ayam (Kg) | 40.000 | 45.000 | | Telur (Kg) | 24.000 | 26.000 | | Gula (Kg) | 22.000 | 25.000 | | Cabai merah (Kg) | 14.000 | 19.000 |
+Pertanyaan: Besarnya nilai Indeks Harga Konsumen (IHK) tahun 2025 dengan metode agregatif sederhana adalah....
+---
+[SOAL ACUAN NO 15]
+Kunci Resmi: E
+Stimulus Teks: Perhatikan data Indeks Harga Konsumen (IHK) berikut, berdasarkan tiga sektor dalam empat periode. Dengan tahun 2022 sebagai indeks harga tahun dasar.
+[Isi Gambar Soal 24425_e738441f7959c716a5bd9552cb524b51.png]:
+Tabel data sektor pariwisata, transportasi, dan kesehatan dari tahun 2022 sampai 2025:
+
+| Tahun | Sektor Pariwisata | Sektor Transportasi | Sektor Kesehatan | |:---: |:---: | | 2022 | 100 | 100 | 100 | | 2023 | 110 | 107 | 109 | | 2024 | 112 | 115 | 114 | | 2025 | 117 | 116 | 118 |
+Pertanyaan: Berdasarkan tabel tersebut, manakah sektor yang paling berdampak terhadap tingkat inflasi?
+---
+[SOAL ACUAN NO 16]
+Kunci Resmi: ['A', 'C', 'E']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Bank Sentral bertanggung jawab agar keuangan suatu negara tetap stabil. Berikut ini mana yang merupakan peran dan fungsi Bank Indonesia? Klik jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 17]
+Kunci Resmi: ['A', 'B']
+Stimulus Teks: Di Indonesia, momen Hari Raya telah menjadi bagian penting dari siklus ekonomi tahunan. Pada periode ini, terjadi peningkatan aktivitas ekonomi masyarakat yang ditandai dengan percepatan peredaran uang dan peningkatan konsumsi rumah tangga. Efek kenaikan upah dari THR (Tunjangan Hari Raya) mendorong peningkatan konsumsi yang kemudian berimbas pada kenaikan harga. Hari Raya juga identik dengan meningkatnya belanja di kalangan masyarakat. Hampir setiap rumah tangga mengalokasikan anggaran konsumsi untuk berbagai hal. Berbagai aktivitas masyarakat di masa Lebaran ini terpotret dari arus perputaran uang yang lebih cepat dibandingkan dengan hari biasa sehingga memicu terjadinya inflasi.
+Pertanyaan: Berdasarkan ilustrasi tersebut, kebijakan moneter apa yang sesuai untuk mengantisipasi kondisi tersebut? Klik semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 18]
+Kunci Resmi: ['A', 'B', 'C']
+Stimulus Teks: Pertumbuhan ekonomi Indonesia pada kuartal I-2025 hanya mencapai 4,87%, mengalami penurunan dibanding kuartal-kuartal sebelumnya. Penurunan ini terutama disebabkan oleh lesunya konsumsi rumah tangga, yang hanya tumbuh 4,89% (YOY), meskipun kontribusinya terhadap PDB masih sangat besar, yaitu sekitar 54,53%. Penurunan konsumsi ini erat kaitannya dengan melemahnya daya beli dan penyusutan kelas menengah dari 57,33 juta orang pada 2019 menjadi hanya 47,85 juta orang pada 2024. Untuk merespons situasi tersebut, Bank Indonesia (BI) mengambil langkah menurunkan rasio Cadangan Wajib Minimum (GWM).
+Pertanyaan: Manakah pernyataan berikut yang tepat menggambarkan konsekuensi dan efektivitas dari kebijakan tersebut? Klik semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 19]
+Kunci Resmi: B
+Stimulus Teks: Rokok, minuman beralkohol, dan kendaraan berbahan bakar fosil merupakan barang yang dikategorikan sebagai demerit goods karena dapat membahayakan kesehatan. Oleh karena, pemerintah menerapkan kebijakan fungsi regulasi pajak, yakni menaikkan tarif pajak atas produk-produk yang memiliki eksternalitas negatif. Sebagai pelengkap, pemerintah juga memberikan insentif pajak kepada industri yang mengembangkan alternatif ramah lingkungan seperti kendaraan listrik dan produk substitusi non-alkohol.
+Pertanyaan: Berdasarkan ilustrasi tersebut, dampak yang paling tepat dari penerapan fungsi regulasi pajak adalah....
+---
+[SOAL ACUAN NO 20]
+Kunci Resmi: ['A', 'B']
+Stimulus Teks: Pak Andi seorang karyawan swasta. Gaji bulanannya dipotong secara otomatis untuk membayar Pajak Penghasilan (PPh) Pasal 21, yang disetorkan oleh perusahaannya ke kas negara. Ia memiliki Nomor Pokok Wajib Pajak (NPWP) dan rutin melaporkan SPT Tahunan secara online. Sedangkan Ibu Rani seorang pemilik toko kelontong. Ia menjual barang-barang kebutuhan rumah tangga dan secara berkala menyetorkan Pajak Pertambahan Nilai (PPN) atas penjualannya serta membayar PPh Final UMKM. Uang pajak yang disetorkan oleh Pak Andi dan Ibu Rani digunakan untuk membangun fasilitas umum seperti puskesmas dan sekolah, serta membayar gaji pegawai Aparatur Sipil Negara (ASN).
+Pertanyaan: Berdasarkan ilustrasi tersebut, manakah pernyataan berikut yang benar terkait jenis pajak, peran, fungsi, dan prinsip pajak? Tentukan jawaban yang benar. Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 21]
+Kunci Resmi: ['B', 'D']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Taliukir adalah sebuah perusahaan yang bergerak di bidang kerajinan tangan berbahan dasar kulit, seperti tas, dompet, dan sabuk. CV. Taliukir sangat mengutamakan kualitas produk yang dibuat secara tradisional, sehingga setiap produk memiliki sentuhan unik dan nilai seni tinggi. Produk mereka beredar di pasar menengah atas dan turis. Meskipun produknya berkualitas, CV. Taliukir kesulitan mendapatkan modal besar untuk mengembangkan usaha, seperti membeli mesin modern untuk efisiensi produksi massal atau membuka cabang di kota besar. Selain itu pasokan kulit berkualitas tinggi mulai langka dan harganya terus naik. Hal ini disebabkan semakin ketatnya regulasi lingkungan yang membatasi industri penyamakan kulit dan peningkatan permintaan dari industri fesyen global. Solusi yang bisa dilakukan untuk mengatasi permasalahan tersebut yaitu …. Pilihlah jawaban benar pada setiap pernyataan. Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 22]
+Kunci Resmi: D
+Stimulus Teks: CV Surya Karya, sebuah badan usaha jasa interior, menghadapi masalah keuangan dalam tiga bulan terakhir. Meski pendapatan meningkat karena banyaknya proyek, perusahaan justru mengalami kesulitan membayar gaji karyawan dan tagihan vendor tepat waktu. Setelah dilakukan penelusuran, diketahui bahwa manajer keuangan sering menggunakan dana masuk untuk membayar utang lama tanpa membuat perencanaan arus kas yang jelas. Selain itu, tidak ada pemisahan dana antara proyek satu dengan proyek lainnya, sehingga dana dari satu proyek sering digunakan untuk kebutuhan proyek lain. Akibatnya, banyak pengeluaran tidak terkontrol dan laporan keuangan sulit disusun secara akurat.
+Pertanyaan: Berdasarkan uraian tersebut, solusi yang paling tepat untuk mengatasi permasalahan manajemen keuangan yang terjadi adalah...
+---
+[SOAL ACUAN NO 23]
+Kunci Resmi: D
+Stimulus Teks: Perhatikan data laporan keuangan Koperasi Kilau Gemitang berikut ini.
+[Isi Gambar Soal 43711_2fd7d7c1282a657b5d194e274321dddb.png]:
+Tabel data keuangan dan alokasi Sisa Hasil Usaha (SHU) koperasi:
+
+| Uraian | Nilai/Persentase | |:--- |:--- | | Jumlah Simpanan anggota | Rp80.000.000,00 | | Jumlah penjualan selama satu tahun | Rp250.000.000,00 | | SHU tahun berjalan | Rp200.000.000,00 | | Jasa usaha | 50% | | Jasa modal | 30% | | Jasa pengurus | 15% | | Dana lain-lain | 5% |
+Pertanyaan: Berdasarkan data tersebut, jika jumlah pengurus koperasi sebanyak 20 orang, dan Pak Faiz merupakan salah satu pengurus dengan total simpanan Rp1.000.000,00 serta transaksi penjualan Rp2.000.000,00, maka total SHU yang diterima pak Faiz pada akhir tahun 2025 adalah....
+---
+[SOAL ACUAN NO 24]
+Kunci Resmi: E
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Beberapa negara di Asia Tenggara termasuk Indonesia membentuk sebuah organisasi yang bertujuan mempererat hubungan politik, ekonomi, dan sosial di kawasan mereka. Sementara itu, Indonesia juga menjalin perjanjian perdagangan barang dan jasa dengan Korea Selatan yang hanya melibatkan kedua negara tersebut. Di sisi lain, ada organisasi global yang anggotanya berasal dari berbagai negara di seluruh dunia yang fokus pada masalah perdagangan internasional. Berdasarkan ilustrasi tersebut, apa jenis kerja sama internasional yang tepat?
+---
+[SOAL ACUAN NO 25]
+Kunci Resmi: C
+Stimulus Teks: Selama beberapa tahun terakhir, Negara X mengalami defisit neraca perdagangan yang semakin memburuk. Sebagai negara berkembang, negara X bergantung pada ekspor sumber daya alam seperti kelapa sawit, batubara, dan karet. Nilai ekspor negara tersebut stagnan bahkan cenderung mengalami penurunan karena rendahnya kualitas dan inovasi produk domestik. Rendahnya nilai ekspor juga dipengaruhi oleh tingginya biaya logistik sehingga menyebabkan harga produk ekspor menjadi tinggi. Di sisi lain, negara X juga dibanjiri produk impor. Tingginya volume impor barang konsumsi seperti tekstil dan makanan olahan menyebabkan produk lokal kehilangan daya saing. Sementara itu, Pemerintah ingin mengambil kebijakan perdagangan internasional yang tepat untuk menyeimbangkan kembali kondisi tersebut dan melindungi industri nasional.
+Pertanyaan: Berdasarkan ilustrasi tersebut, manakah kebijakan perdagangan internasional yang paling tepat untuk mengatasi permasalahan Negara X?
+---
+[SOAL ACUAN NO 26]
+Kunci Resmi: ['B', 'C', 'E']
+Stimulus Teks: Pada Oktober 2023, American Shrimp Processors Association (ASPA) mengajukan petisi kepada Departemen Perdagangan Amerika Serikat (USDOC) dan Komisi Perdagangan Internasional Amerika Serikat (USITC). Petisi tersebut menuduh bahwa Indonesia melakukan praktik dumping dan menerima subsidi tidak adil dalam ekspor udang tropis beku, yang dianggap merugikan industri udang lokal di Amerika Serikat. Akibat tuduhan ini, ekspor udang Indonesia menghadapi risiko dikenai bea masuk anti-dumping dan countervailing duty (tarif subsidi). Jika tuduhan tersebut berlanjut dan pemerintah Amerika Serikat mengenakan bea masuk tambahan terhadap udang Indonesia.
+Pertanyaan: Manakah yang merupakan dampak logis terhadap daya saing ekspor udang Indonesia ke Amerika Serikat? Klik setiap pernyataan jawaban benar.Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 27]
+Kunci Resmi: ['C', 'E']
+Stimulus Teks: Perhatikan beberapa transaksi keuangan berikut yang terjadi di PT Solusi Jasa Mandiri bergerak di perusahaan jasa konsultan teknologi:
+
+Diterima pembayaran tunai sebesar Rp10.000.000,00 dari klien atas jasa yang telah diberikan.
+
+Dibayar sewa kantor untuk 3 bulan ke depan sebesar Rp6.000.000,00 secara tunai.
+
+Membeli peralatan kantor senilai Rp12.000.000,00 secara kredit.
+
+Pemilik menambahkan investasi pribadi ke dalam perusahaan sebesar Rp15.000.000,00 melalui rekening bank perusahaan.
+
+Menerima tagihan listrik bulan ini sebesar Rp800.000,00 yang belum dibayar.
+Pertanyaan: Berdasarkan transaksi tersebut, manakah yang menyebabkan perubahan pada aset maupun kewajiban dalam persamaan dasar akuntansi? Klik pada semua jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 28]
+Kunci Resmi: B
+Stimulus Teks: Data keuangan Bengkel Tuan Akhtar periode Desember 2024 sebagai berikut:
+
+Kas Rp10.000.000,00
+
+Piutang Rp7.000.000,00
+
+Sewa dibayar dimuka Rp6.000.000,00
+
+Peralatan Rp8.500.000,00
+
+Utang usaha Rp8.000.000,00
+
+Modal Rp23.500.000,00.
+Pertanyaan: Apabila perusahaan membayar utang sebesar Rp2.000.000,00 dan biaya bunga sebesar Rp50.000,00 maka perubahan persamaan dasar akuntansi yang benar adalah....
+---
+[SOAL ACUAN NO 29]
+Kunci Resmi: C
+Stimulus Teks: Diketahui data keuangan rental kendaraan “Sat Set” pada bulan Desember 2024 sebagai berikut!
+[Isi Gambar Soal 67589_31c3fa3118d325ed671d57795c34e1b4.png]:
+Tabel akun dan nilai saldo laporan keuangan/ekuitas:
+
+| Akun | Jumlah | |:--- |:--- | | Pendapatan operasional | Rp93.000.000,00 | | Pendapatan non operasional | Rp300.000,00 | | Beban operasional | Rp17.950.000,00 | | Beban non operasional | Rp3.050.000,00 | | Prive | Rp2.500.000,00 | | Modal akhir | Rp195.000.000,00 |
+Pertanyaan: Berdasarkan data tersebut, besarnya modal awal adalah ….
+

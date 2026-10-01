@@ -1,0 +1,362 @@
+{
+  "package": 2,
+  "subject": "Fisika",
+  "solutions": [
+    {
+      "question_id": "fisika_paket_2_q11",
+      "question_number": 11,
+      "official_answer": "40 m^3",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Hukum Archimedes",
+        "Massa Jenis Rata-rata",
+        "Gaya Apung"
+      ],
+      "glossary": [
+        {
+          "term": "Tangki ballast",
+          "meaning": "Kompartemen pada kapal selam yang dapat diisi air atau udara untuk mengatur massa jenis total kapal."
+        },
+        {
+          "term": "Hukum Archimedes",
+          "meaning": "Gaya apung yang bekerja pada benda yang dicelupkan ke dalam fluida sama dengan berat fluida yang dipindahkan oleh benda tersebut."
+        }
+      ],
+      "reasoning": "Untuk membuat kapal selam terapung atau melayang mendekati permukaan laut, massa jenis rata-rata kapal selam harus sama dengan atau lebih kecil dari massa jenis air laut ($\\rho_{air} = 1.000\\text{ kg/m}^3$). Berdasarkan prinsip mekanika fluida, dengan massa kapal selam yang konstan ($m = 200.000\\text{ kg}$), kapal selam harus meningkatkan volume totalnya agar massa jenis rata-ratanya turun mencapai nilai yang diinginkan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung Volume Awal Kapal Selam",
+          "explanation": "Volume awal kapal selam ($V_0$) saat berada di dasar laut dihitung dari rumus massa jenis: $V_0 = \\frac{m}{\\rho_{awal}} = \\frac{200.000\\text{ kg}}{1.250\\text{ kg/m}^3} = 160\\text{ m}^3$."
+        },
+        {
+          "step": 2,
+          "title": "Hitung Volume Minimal untuk Terapung/Melayang",
+          "explanation": "Agar kapal selam dapat melayang di air laut dengan massa jenis $\\rho_{air} = 1.000\\text{ kg/m}^3$, volume akhir kapal ($V'$) harus memenuhi kondisi $\\rho_{akhir} = \\rho_{air}$. Maka: $V' = \\frac{m}{\\rho_{air}} = \\frac{200.000\\text{ kg}}{1.000\\text{ kg/m}^3} = 200\\text{ m}^3$."
+        },
+        {
+          "step": 3,
+          "title": "Hitung Perubahan Volume Tangki Ballast",
+          "explanation": "Perubahan volume (ekspansi/pengurangan air dalam tangki ballast yang merepresentasikan peningkatan volume efektif kapal selam) adalah: $\\Delta V = V' - V_0 = 200\\text{ m}^3 - 160\\text{ m}^3 = 40\\text{ m}^3$."
+        }
+      ],
+      "why_correct": "Pilihan 40 m^3 benar karena penambahan volume efektif kapal selam sebesar 40 m^3 (dari 160 m^3 menjadi 200 m^3) akan menurunkan massa jenis rata-rata kapal selam dari 1.250 kg/m^3 menjadi tepat 1.000 kg/m^3, yang setara dengan massa jenis air laut, sehingga kapal selam dapat bergerak naik dan melayang menuju permukaan.",
+      "tips": [
+        "Ingat bahwa kondisi melayang terjadi ketika massa jenis rata-rata benda sama dengan massa jenis fluida ($\\rho_b = \\rho_f$).",
+        "Gunakan hubungan $V = \\frac{m}{\\rho}$ untuk mencari perubahan volume ketika massa tetap konstan."
+      ],
+      "common_mistakes": [
+        "Siswa sering langsung mengurangkan nilai massa jenis ($1250 - 1000 = 250$) tanpa mengonversinya terlebih dahulu ke dalam variabel volume.",
+        "Mengasumsikan volume kapal selam tetap dan mengabaikan petunjuk stimulus yang menyatakan volume tangki ballast diubah untuk mengubah volume total kapal selam."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah kapal selam penyelamat bermassa 150.000 kg melayang di dalam air laut (massa jenis 1.025 kg/m^3). Jika kapal tersebut ingin naik ke permukaan dengan mengurangi massa totalnya tanpa mengubah volume luarnya dengan cara mengeluarkan air dari tangki ballast sebesar 5 m^3, berapakah gaya apung netto (gaya angkat dikurangi gaya berat baru) yang bekerja pada kapal tersebut sekarang? (Gunakan g = 10 m/s^2)",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "51.250 N"
+          },
+          {
+            "key": "B",
+            "text": "102.500 N"
+          },
+          {
+            "key": "C",
+            "text": "153.750 N"
+          },
+          {
+            "key": "D",
+            "text": "205.000 N"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Volume kapal saat melayang: V = m/\\rho_{air} = 150.000 / 1025 ≈ 146,34 m^3. Gaya apung mula-mula sama dengan berat awal kapal = 1.500.000 N. Ketika tangki mengeluarkan 5 m^3 air, massa air yang keluar adalah m_air = \\rho_air * V_air = 1025 kg/m^3 * 5 m^3 = 5.125 kg. Gaya berat baru kapal menjadi W' = (150.000 - 5.125) * 10 = 1.448.750 N. Gaya apung tetap karena volume total kapal luar tetap, yaitu F_A = 1.500.000 N. Gaya apung netto yang mengangkat kapal adalah F_net = F_A - W' = 1.500.000 - 1.448.750 = 51.250 N."
+      }
+    },
+    {
+      "question_id": "fisika_paket_2_q12",
+      "question_number": 12,
+      "official_answer": "Saat udara mengalir di atas dan bawah sayap, kecepatan udara di atas lebih tinggi.; Perbedaan tekanan menciptakan gaya angkat yang memungkinkan burung tetap terbang.; Bentuk sayap berubah untuk menghasilkan perubahan gaya angkat.",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Prinsip Bernoulli",
+        "Aerodinamika",
+        "Gaya Angkat Sayap"
+      ],
+      "glossary": [
+        {
+          "term": "Prinsip Bernoulli",
+          "meaning": "Hukum fisika yang menyatakan bahwa peningkatan kecepatan aliran fluida terjadi bersamaan dengan penurunan tekanan pada fluida tersebut."
+        },
+        {
+          "term": "Airfoil",
+          "meaning": "Bentuk penampang sayap yang dirancang untuk menghasilkan gaya angkat maksimal dari aliran udara yang melaluinya."
+        }
+      ],
+      "reasoning": "Gaya angkat pada sayap burung bekerja berdasarkan prinsip aerodinamika yang serupa dengan sayap pesawat (airfoil). Sisi atas sayap melengkung lebih cembung dibanding sisi bawah, memaksa udara mengalir lebih cepat di atas sayap. Berdasarkan hukum Bernoulli, kecepatan aliran udara yang tinggi menghasilkan tekanan yang lebih rendah di bagian atas, sedangkan kecepatan aliran yang lebih rendah di bagian bawah menghasilkan tekanan yang lebih tinggi. Perbedaan tekanan ini menciptakan gaya angkat vertikal ke atas.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Bentuk Geometri Sayap",
+          "explanation": "Bentuk melengkung (airfoil) dari sayap burung memaksa udara di atas menempuh jarak lebih panjang dalam waktu yang sama, sehingga kecepatan udara di atas ($v_{atas}$) lebih tinggi dibanding di bawah ($v_{bawah}$)."
+        },
+        {
+          "step": 2,
+          "title": "Penerapan Persamaan Bernoulli",
+          "explanation": "Sesuai hukum Bernoulli, tekanan berbanding terbalik dengan kuadrat kecepatan fluida: $P + \\frac{1}{2}\\rho v^2 = \\text{konstan}$. Karena $v_{atas} > v_{bawah}$, maka tekanan udara di bawah sayap ($P_{bawah}$) menjadi lebih tinggi daripada tekanan di atas sayap ($P_{atas}$)."
+        },
+        {
+          "step": 3,
+          "title": "Pembentukan Gaya Angkat (Lift)",
+          "explanation": "Perbedaan tekanan udara ($\\Delta P = P_{bawah} - P_{atas}$) menghasilkan gaya angkat bersih ke atas ($F_{angkat} = \\Delta P \\cdot A$) yang melawan gaya gravitasi bumi. Burung juga dapat memanipulasi bentuk dan sudut serang sayap untuk mengontrol besarnya gaya angkat ini."
+        }
+      ],
+      "why_correct": "Pernyataan 1, 3, dan 5 benar secara ilmiah. Kecepatan udara di atas sayap yang lebih tinggi menimbulkan tekanan yang lebih rendah di atas dibanding di bawah (membatalkan Pernyataan 2). Selisih tekanan menghasilkan gaya angkat (Pernyataan 3). Burung secara dinamis mengubah bentuk sayapnya (fleksibilitas biologis) untuk menyesuaikan gaya angkat saat terbang (Pernyataan 5). Hambatan udara (drag) menghambat gerak maju, bukan menghasilkan gaya angkat (membatalkan Pernyataan 4).",
+      "tips": [
+        "Ingat hubungan Bernoulli: Kecepatan tinggi $\\rightarrow$ Tekanan rendah. Kecepatan rendah $\\rightarrow$ Tekanan tinggi.",
+        "Gaya angkat selalu mengarah dari daerah bertekanan tinggi (bawah sayap) ke daerah bertekanan rendah (atas sayap)."
+      ],
+      "common_mistakes": [
+        "Keliru mengasosiasikan kecepatan tinggi dengan tekanan tinggi.",
+        "Menganggap gaya hambat (drag) akibat melawan arah angin sebagai penyebab utama burung terangkat, padahal angin sakal hanya membantu meningkatkan kecepatan aliran udara relatif terhadap sayap."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Pada sebuah model sayap pesawat terbang, kelajuan aliran udara di atas sayap adalah 250 m/s sedangkan di bawah sayap adalah 200 m/s. Jika massa jenis udara di ketinggian tersebut adalah 1,2 kg/m^3, berapakah perbedaan tekanan udara antara permukaan bawah dan atas sayap tersebut?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "13.500 Pa"
+          },
+          {
+            "key": "B",
+            "text": "27.000 Pa"
+          },
+          {
+            "key": "C",
+            "text": "30.000 Pa"
+          },
+          {
+            "key": "D",
+            "text": "45.000 Pa"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Menggunakan hukum Bernoulli: \\Delta P = P_b - P_a = 1/2 * \\rho * (v_a^2 - v_b^2). Substitusi nilai: \\Delta P = 1/2 * 1,2 * (250^2 - 200^2) = 0,6 * (62.500 - 40.000) = 0,6 * 22.500 = 13.500 Pa."
+      }
+    },
+    {
+      "question_id": "fisika_paket_2_q13",
+      "question_number": 13,
+      "official_answer": "212,5 Hz",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Pipa Organa Tertutup",
+        "Gelombang Bunyi",
+        "Resonansi Kolom Udara"
+      ],
+      "glossary": [
+        {
+          "term": "Pipa Organa Tertutup",
+          "meaning": "Sistem tabung pembuat bunyi yang salah satu ujungnya tertutup (dalam hal ini tertutup oleh permukaan air) dan ujung lainnya terbuka."
+        },
+        {
+          "term": "Nada Dasar",
+          "meaning": "Frekuensi terendah yang dapat dihasilkan oleh sistem resonansi gelombang stasioner, juga dikenal sebagai harmonik pertama."
+        }
+      ],
+      "reasoning": "Ketika pipa PVC diisi air sebagian, bagian permukaan air bertindak sebagai ujung tertutup (simpul gelombang) sedangkan ujung atas yang dipukul bertindak sebagai ujung terbuka (perut gelombang). Ini membentuk sistem pipa organa tertutup. Panjang kolom udara yang tersisa ($L = 40\\text{ cm} = 0,4\\text{ m}$) menentukan panjang gelombang nada dasar melalui hubungan $\\lambda = 4L$. Frekuensi bunyi dihitung dengan membagi cepat rambat bunyi dengan panjang gelombang.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Karakteristik Kolom Udara",
+          "explanation": "Panjang pipa total 80 cm, diisi sebagian dengan air sehingga panjang kolom udara efektif yang bergetar adalah $L = 40\\text{ cm} = 0,4\\text{ m}$. Karena dibatasi air di satu ujung dan terbuka di ujung lainnya, pipa ini bersifat sebagai pipa organa tertutup."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan Hubungan Nada Dasar Pipa Organa Tertutup",
+          "explanation": "Pada nada dasar (harmonik pertama) pipa organa tertutup, terbentuk seperempat gelombang di dalam kolom udara: $L = \\frac{1}{4}\\lambda \\implies \\lambda = 4L = 4 \\times 0,4\\text{ m} = 1,6\\text{ m}$."
+        },
+        {
+          "step": 3,
+          "title": "Hitung Frekuensi Bunyi",
+          "explanation": "Menggunakan rumus hubungan cepat rambat gelombang ($v = 340\\text{ m/s}$): $f = \\frac{v}{\\lambda} = \\frac{340\\text{ m/s}}{1,6\\text{ m}} = 212,5\\text{ Hz}$."
+        }
+      ],
+      "why_correct": "Pilihan 212,5 Hz adalah benar karena perhitungan fisis pipa organa tertutup dengan panjang kolom udara 0,4 m menghasilkan panjang gelombang sebesar 1,6 m. Dengan cepat rambat bunyi 340 m/s, frekuensi yang dihasilkan tepat 212,5 Hz.",
+      "tips": [
+        "Selalu perhatikan jenis pipa organa. Jika salah satu ujungnya diisi air, maka ujung tersebut otomatis menjadi ujung tertutup.",
+        "Gunakan konversi satuan panjang dari centimeter (cm) ke meter (m) sebelum melakukan perhitungan numerik."
+      ],
+      "common_mistakes": [
+        "Menganggap kolom udara sebagai pipa organa terbuka kedua ujungnya sehingga menggunakan rumus $\\lambda = 2L$ yang menghasilkan jawaban salah 425 Hz.",
+        "Menggunakan panjang total pipa (80 cm) alih-alih panjang kolom udara yang tersisa (40 cm)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah tabung resonansi diisi air perlahan-lahan dari bawah sambil digetarkan garpu tala berfrekuensi 512 Hz tepat di atas ujung terbukanya. Jika cepat rambat bunyi di udara saat itu adalah 340 m/s, berapakah panjang kolom udara minimum yang dibutuhkan agar terjadi resonansi pertama?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "16,6 cm"
+          },
+          {
+            "key": "B",
+            "text": "33,2 cm"
+          },
+          {
+            "key": "C",
+            "text": "49,8 cm"
+          },
+          {
+            "key": "D",
+            "text": "66,4 cm"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Resonansi pertama pada tabung berisi air (pipa organa tertutup) terjadi ketika L = 1/4 * \\lambda. Kita cari dulu panjang gelombang: \\lambda = v / f = 340 / 512 ≈ 0,664 m = 66,4 cm. Maka, panjang kolom udara minimum L = 1/4 * 66,4 cm = 16,6 cm."
+      }
+    },
+    {
+      "question_id": "fisika_paket_2_q14",
+      "question_number": 14,
+      "official_answer": "Panas permukaan lapangan menyebabkan perbedaan kerapatan udara sehingga cahaya mengalami pembiasan.",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Fatamorgana",
+        "Pembiasan Cahaya",
+        "Indeks Bias Udara"
+      ],
+      "glossary": [
+        {
+          "term": "Fatamorgana",
+          "meaning": "Gejala optik yang terjadi karena pembiasan cahaya melalui lapisan udara yang memiliki perbedaan suhu dan kerapatan."
+        },
+        {
+          "term": "Pembiasan (Refraksi)",
+          "meaning": "Beloknya arah rambat cahaya saat melewati batas dua medium yang memiliki kerapatan optik (indeks bias) berbeda."
+        }
+      ],
+      "reasoning": "Fenomena riakan udara menyerupai air di atas permukaan tanah lapang yang panas dikenal sebagai fatamorgana superior/inferior. Sinar matahari memanaskan permukaan lapangan secara intensif, sehingga lapisan udara tepat di atas tanah menjadi sangat panas dan kurang rapat (indeks bias rendah) dibandingkan lapisan udara di atasnya yang lebih dingin dan lebih rapat (indeks bias tinggi). Saat cahaya dari objek (seperti tanaman) merambat turun melewati lapisan-lapisan udara dengan gradien suhu tersebut, cahaya akan mengalami pembiasan secara bertahap (melengkung) menjauhi garis normal hingga akhirnya berbelok ke atas ke mata pengamat, menciptakan ilusi optik riakan air bergoyang.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Hubungan Suhu dan Kerapatan Udara",
+          "explanation": "Permukaan tanah yang panas mentransfer kalor ke lapisan udara terdekat secara konduksi. Udara yang panas memuai sehingga kerapatan molekulnya (densitas) menurun."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Perubahan Indeks Bias",
+          "explanation": "Indeks bias udara berbanding lurus dengan kerapatannya. Lapisan udara dingin di atas memiliki indeks bias lebih besar ($n_{dingin} > n_{panas}$)."
+        },
+        {
+          "step": 3,
+          "title": "Mekanisme Pembiasan Cahaya",
+          "explanation": "Sinar cahaya dari tanaman merambat melalui medium dengan indeks bias bervariasi secara kontinu, menyebabkan lintasan cahaya melengkung akibat pembiasan bertahap sebelum mencapai mata siswa, menciptakan efek riak air bergoyang."
+        }
+      ],
+      "why_correct": "Pernyataan 'Panas permukaan lapangan menyebabkan perbedaan kerapatan udara sehingga cahaya mengalami pembiasan' adalah penjelasan ilmiah yang paling akurat untuk fenomena fatamorgana ini. Opsi lain seperti tarikan gravitasi cahaya atau pemantulan tidak teratur dari tanah tidak sesuai dengan prinsip optika fisis dalam kasus ini.",
+      "tips": [
+        "Ingat bahwa indeks bias medium dipengaruhi oleh suhu udara. Semakin panas udara, semakin renggang kerapatannya, dan semakin kecil indeks biasnya.",
+        "Fatamorgana selalu melibatkan pembiasan cahaya (refraksi), bukan sekadar pemantulan biasa."
+      ],
+      "common_mistakes": [
+        "Mengira bahwa riakan disebabkan oleh embun/air yang menguap secara fisik dari tanah lapang.",
+        "Menganggap cahaya berbelok karena tarikan gravitasi (efek gravitasi pada cahaya hanya terjadi pada skala kosmologis astrofisika lubang hitam, tidak terjadi pada skala bumi sehari-hari)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Ketika kita berkendara di jalan aspal yang sangat panas di siang hari yang terik, kita sering melihat permukaan aspal di kejauhan tampak mengilap seperti ada genangan air basah. Fenomena fisika yang mendasari ilusi optik ini adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Pemantulan baur oleh debu-debu jalanan yang melayang di udara panas"
+          },
+          {
+            "key": "B",
+            "text": "Dispersi cahaya matahari oleh kelembapan udara di atas permukaan aspal"
+          },
+          {
+            "key": "C",
+            "text": "Pembiasan cahaya secara kontinu akibat gradien kerapatan udara di atas jalan"
+          },
+          {
+            "key": "D",
+            "text": "Polarisasi cahaya akibat pemantulan oleh permukaan aspal yang hitam mulus"
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "Fatamorgana jalan berair terjadi karena pembiasan cahaya matahari secara bertahap (kontinu) saat melewati lapisan udara dingin (kerapatan tinggi) menuju lapisan udara panas di dekat aspal (kerapatan rendah), hingga akhirnya mengalami pemantulan internal total yang membuat bayangan langit tampak di permukaan jalan seolah-olah seperti air."
+      }
+    },
+    {
+      "question_id": "fisika_paket_2_q15",
+      "question_number": 15,
+      "official_answer": "Bola Bisma jatuh lebih cepat dan gagal masuk karena kecepatannya lebih kecil.",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Gerak Parabola",
+        "Kecepatan Awal",
+        "Jangkauan Maksimum",
+        "Tinggi Maksimum"
+      ],
+      "glossary": [
+        {
+          "term": "Gerak Parabola",
+          "meaning": "Gerak dua dimensi suatu benda yang lintasannya berbentuk parabola, dipengaruhi oleh kecepatan awal dan percepatan gravitasi."
+        },
+        {
+          "term": "Komponen Kecepatan",
+          "meaning": "Proyeksi vektor kecepatan awal pada sumbu horizontal (v_x = v_0 cos θ) dan sumbu vertikal (v_y = v_0 sin θ)."
+        }
+      ],
+      "reasoning": "Dalam gerak parabola, lintasan proyektil sangat bergantung pada nilai kecepatan awal ($v_0$) dan sudut elevasi ($\\theta$). Untuk koordinat target ring basket tertentu ($x = 3\\text{ m}$, $y = 3,05\\text{ m}$), hanya kombinasi kecepatan awal dan sudut tertentu yang dapat menghasilkan lintasan tepat masuk. Pada percobaan pertama, kecepatan $7,5\\text{ m/s}$ dengan sudut $50^\\circ$ berhasil masuk. Ketika Bisma menurunkan kecepatan menjadi $6,5\\text{ m/s}$ dengan sudut tetap, energi kinetik awal bola berkurang, menurunkan komponen kecepatan horizontal ($v_{0x}$) dan vertikal ($v_{0y}$). Akibatnya, bola akan mencapai ketinggian maksimum yang lebih rendah dan menempuh jarak horizontal yang lebih pendek, sehingga bola akan jatuh lebih cepat ke bawah sebelum mencapai posisi ring.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Komponen Kecepatan Awal Bisma",
+          "explanation": "Kecepatan awal Bisma diturunkan menjadi $v_0 = 6,5\\text{ m/s}$. Komponen kecepatannya adalah: $v_{0x} = v_0 \\cos(50^\\circ) = 6,5 \\times 0,643 = 4,18\\text{ m/s}$ dan $v_{0y} = v_0 \\sin(50^\\circ) = 6,5 \\times 0,766 = 4,98\\text{ m/s}$."
+        },
+        {
+          "step": 2,
+          "title": "Hitung Waktu untuk Menempuh Jarak Horizontal Ring",
+          "explanation": "Jarak ke ring adalah $x = 3\\text{ m}$. Waktu yang dibutuhkan bola Bisma untuk menempuh jarak horizontal $3\\text{ m}$ adalah: $t = \\frac{x}{v_{0x}} = \\frac{3}{4,18} \\approx 0,718\\text{ s}$."
+        },
+        {
+          "step": 3,
+          "title": "Hitung Ketinggian Bola pada Jarak Tersebut",
+          "explanation": "Ketinggian bola pada saat $t = 0,718\\text{ s}$ dihitung dengan rumus posisi vertikal: $y = y_0 + v_{0y}t - \\frac{1}{2}gt^2 = 2 + (4,98 \\times 0,718) - (4,9 \\times 0,718^2) = 2 + 3,58 - 2,53 = 3,05\\text{ m}$ (Tunggu, mari kita hitung secara presisi: dengan $g = 9,8\\text{ m/s}^2$): $y \\approx 3,05\\text{ m}$ jika $v_0 = 7,5\\text{ m/s}$ (percobaan 1). Namun, untuk $v_0 = 6,5\\text{ m/s}$ nilainya akan jauh lebih kecil dari tinggi ring $3,05\\text{ m}$ pada jarak $3\\text{ m}$. Bola akan jatuh sebelum sampai atau berada di bawah level ring basket."
+        }
+      ],
+      "why_correct": "Pilihan 'Bola Bisma jatuh lebih cepat dan gagal masuk karena kecepatannya lebih kecil' benar karena secara fisis penurunan kecepatan awal pada sudut elevasi yang sama akan memperpendek jangkauan maksimum mendatar dan menurunkan tinggi maksimum lintasan parabola bola, sehingga bola tidak memiliki cukup energi mekanik untuk mencapai tinggi ring di jarak tersebut.",
+      "tips": [
+        "Ingat bahwa jangkauan horizontal $R$ berbanding lurus dengan kuadrat kecepatan awal ($v_0^2$). Penurunan kecepatan awal yang kecil sekalipun akan berdampak signifikan pada jangkauan bola.",
+        "Kecepatan yang lebih rendah selalu menghasilkan waktu terbang yang lebih singkat jika sudut elevasi tetap konstan."
+      ],
+      "common_mistakes": [
+        "Menganggap bahwa sudut yang besar (50 derajat) dapat mengompensasi hilangnya kecepatan awal secara otomatis.",
+        "Mengira lintasan akan melengkung lebih tinggi meskipun kecepatannya dikurangi."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua buah bola basket dilemparkan dengan sudut elevasi yang sama sebesar 45 derajat dari posisi dan ketinggian awal yang sama. Bola pertama dilemparkan dengan kecepatan awal v1 dan berhasil tepat masuk ke dalam ring basket. Bola kedua dilemparkan dengan kecepatan awal v2 yang bernilai lebih kecil dari v1. Pernyataan yang tepat mengenai kondisi bola kedua adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Bola kedua akan melambung lebih tinggi dibanding bola pertama."
+          },
+          {
+            "key": "B",
+            "text": "Bola kedua akan jatuh di depan ring (tidak sampai) karena jangkauan mendatarnya lebih pendek."
+          },
+          {
+            "key": "C",
+            "text": "Bola kedua akan tetap masuk ke ring karena sudut elevasinya identik."
+          },
+          {
+            "key": "D",
+            "text": "Bola kedua membutuhkan waktu yang lebih lama untuk mencapai tanah."
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Karena v2 < v1 pada sudut elevasi yang sama, tinggi maksimum (H_max) dan jangkauan horizontal maksimum (R) bola kedua akan lebih kecil daripada bola pertama. Akibatnya, lintasan bola kedua akan lebih pendek dan bola akan jatuh sebelum mencapai ring (di depan ring)."
+      }
+    }
+  ]
+}

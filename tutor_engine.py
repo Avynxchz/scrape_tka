@@ -61,14 +61,18 @@ Percakapan terbaru (paling baru di bawah):
 
 <behavior_rules>
 1. KARAKTERISTIK SISTEM: Kamu bersifat stateless. Riwayat obrolan disuplai dari database backend. Jaga kontinuitas obrolan seolah-olah kamu entitas tunggal yang sama. Dilarang menyebutkan pergantian akun, kuota, atau masalah teknis API kepada siswa.
-2. HEMAT TOKEN (TPD CONSERVATION): Jawaban WAJIB singkat, padat, efektif, langsung ke inti masalah (ideal 3–6 kalimat per respon, atau poin-poin ringkas). Hindari penjelasan bertele-tele dan buang kalimat pembuka klise ("Tentu, mari kita bahas...", "Halo!").
-3. Jawab PESAN TERAKHIR siswa — bukan pertanyaan lama, bukan penjelasan umum. Pesan pendek seperti "kenapa?", "terus?", "kok bisa?" merujuk pada pembicaraan sebelumnya: hubungkan dengan konteks riwayat.
-4. JANGAN mengulang seluruh langkah solusi kecuali diminta. Fokus hanya pada bagian spesifik yang ditanyakan siswa.
-5. Variasikan cara penjelasan: Jika siswa belum mengerti, gunakan analogi sederhana, contoh angka kecil, atau penurunan konsep dasar.
-6. Kreatif tapi jujur: Jika memakai contoh angka lain, SELALU tandai jelas sebagai "misalnya" / "contoh", agar tidak tertukar dengan soal asli.
-7. Kunci resmi tidak boleh diganggu: Jika siswa menduga jawaban lain, jelaskan letak kekeliruan mereka dengan ramah dan edukatif.
-8. {review_note}
-9. Format jawaban: markdown ringan (bold untuk istilah kunci, `$$...$$` untuk rumus penting). Ramah, santun, dan edukatif dalam Bahasa Indonesia.
+2. HEMAT TOKEN & LANGSUNG KE INTI: Jawaban wajib padat, ramah, dan langsung ke inti pertanyaan siswa. Buang kalimat klise yang berulang ("Tentu, mari kita bahas...", "Halo!").
+3. STRUKTUR PENULISAN RAPI & BERSIH:
+   • Paragraf 1: Jawaban inti yang lugas dan mudah dicerna.
+   • Penjelasan bertahap: Jika ada hitungan atau alur logika, WAJIB gunakan poin bernomor (`1.`, `2.`) atau bullet (`•`) dengan baris baru agar tidak menumpuk dalam paragraf tebal.
+   • Notasi matematika: Wajib gunakan `$variabel$` untuk simbol matematika inline dan `$$rumus$$` pada baris mandiri untuk rumus utama (KaTeX).
+   • Trik Cepat: Bila ada jalan pintas atau cara cepat, berikan label "⚡ Tips Cepat: ...".
+4. Jawab PESAN TERAKHIR siswa — bukan pertanyaan lama, bukan penjelasan umum. Pesan pendek seperti "kenapa?", "terus?", "kok bisa?" merujuk pada pembicaraan sebelumnya: hubungkan dengan konteks riwayat.
+5. JANGAN mengulang seluruh langkah solusi kecuali diminta. Fokus hanya pada bagian spesifik yang ditanyakan siswa.
+6. Variasikan cara penjelasan: Jika siswa belum mengerti, gunakan analogi sederhana, contoh angka kecil, atau penurunan konsep dasar.
+7. Kreatif tapi jujur: Jika memakai contoh angka lain, SELALU tandai jelas sebagai "misalnya" / "contoh", agar tidak tertukar dengan soal asli.
+8. Kunci resmi tidak boleh diganggu: Jika siswa menduga jawaban lain, jelaskan letak kekeliruan mereka dengan ramah dan edukatif.
+9. {review_note}
 10. Di akhir jawaban, sertakan satu pertanyaan singkat pemeriksa pemahaman siswa bila relevan.
 </behavior_rules>"""
 
@@ -157,23 +161,59 @@ def _fmt_question_block(canon_ctx, subject_name):
 
 
 def _fmt_solution_block(sol):
-    """Layer 3 sebagai referensi — seluruh materi tersedia, tanpa perubahan isi."""
+    """Layer 3 sebagai referensi — berlabel PILAR 1-5 persis seperti panel UI,
+    sehingga siswa bisa bertanya 'apa isi pilar 3?' dan tutor tahu persis."""
     if not sol:
         return "(belum tersedia — jelaskan dari konteks soal; jangan mengarang kunci)"
     p = sol.get("pembahasan") or {}
     parts = []
-    if p.get("konsep_kunci"):
-        parts.append("Konsep kunci: " + "; ".join(p["konsep_kunci"]))
+
+    if p.get("diketahui") or p.get("ditanyakan") or p.get("konsep_kunci"):
+        pil1 = []
+        if p.get("diketahui"):
+            pil1.append("Data diketahui: " + str(p["diketahui"]))
+        if p.get("ditanyakan"):
+            pil1.append("Ditanyakan: " + str(p["ditanyakan"]))
+        if p.get("konsep_kunci"):
+            pil1.append("Konsep kunci: " + "; ".join(p["konsep_kunci"]))
+        parts.append("[PILAR 1 · IDENTIFIKASI MASALAH & FONDASI TEORI]\n" + "\n".join(pil1))
+
     if p.get("glosarium_simbol"):
         g = "; ".join(f"{g_['simbol']} = {g_.get('arti','')}" for g_ in p["glosarium_simbol"][:8])
-        parts.append("Istilah/notasi: " + g)
-    if p.get("langkah_penyelesaian"):
-        parts.append("Langkah penyelesaian (referensi):\n" +
-                     "\n".join(f"  {s}" for s in p["langkah_penyelesaian"]))
+        parts.append("[PILAR 2 · NOTASI MATEMATIKA & GLOSARIUM]\n" + g)
+
     if p.get("mengapa_begini"):
-        parts.append("Alasan konseptual: " + p["mengapa_begini"])
-    if p.get("tips_trik"):
-        parts.append("Tips & jebakan umum: " + p["tips_trik"])
+        parts.append("[PILAR 3 · INTUISI BERPIKIR (MENGAPA CARA INI DIPAKAI)]\n" + p["mengapa_begini"])
+
+    if p.get("langkah_penyelesaian"):
+        parts.append("[PILAR 4 · LANGKAH SISTEMATIS]\n" +
+                     "\n".join(f"  {s}" for s in p["langkah_penyelesaian"]))
+
+    pil5 = []
+    for t in p.get("tips_list") or []:
+        pil5.append("• " + t)
+    for m in p.get("mistakes_list") or []:
+        pil5.append("⚠️ Jebakan umum: " + m)
+    if not pil5 and p.get("tips_trik"):
+        pil5.append(p["tips_trik"])
+    if pil5:
+        parts.append("[PILAR 5 · TRIK UJIAN & JEBAKAN]\n" + "\n".join(pil5))
+
+    # Soal serupa (latihan pemantapan) — siswa dapat bertanya tentang ini,
+    # jadi tutor wajib tahu isinya: pertanyaan, pilihan, kunci, pembahasan.
+    sim = sol.get("soal_serupa") or {}
+    if sim.get("pertanyaan"):
+        sim_parts = ["Pertanyaan: " + str(sim["pertanyaan"])]
+        opts = sim.get("pilihan") or []
+        if opts:
+            sim_parts.append("Pilihan: " + "; ".join(
+                f"{o.get('key','')}. {(o.get('text') or '').strip()}" for o in opts))
+        if sim.get("kunci"):
+            sim_parts.append("Kunci soal serupa: " + str(sim["kunci"]))
+        if sim.get("pembahasan_singkat"):
+            sim_parts.append("Pembahasan singkat soal serupa: " + str(sim["pembahasan_singkat"]))
+        parts.append("[SOAL SERUPA · LATIHAN PEMANTAPAN]\n" + "\n".join(sim_parts))
+
     return "\n\n".join(parts) if parts else "(solusi tersedia namun kosong)"
 
 
@@ -275,9 +315,19 @@ def summarize_older(older_msgs, existing_summary):
 
 
 def generate_tutor_response(canon_ctx, solution, official_answer, history_msgs,
-                            user_message, summary=None, subject_name="Matematika"):
+                            user_message, summary=None, subject_name="Matematika",
+                            model=None, image_paths=None):
     """Panggil LLM dengan konteks lengkap. Melempar tutor_llm.LLMError saat gagal."""
     messages, meta = build_tutor_prompt(canon_ctx, solution, official_answer,
                                         history_msgs, user_message, summary, subject_name)
-    reply = tutor_llm.generate(messages, temperature=meta["temperature"])
+    reply_or_tuple = tutor_llm.generate(messages, model=model, image_paths=image_paths,
+                                        temperature=meta["temperature"], return_meta=True)
+    if isinstance(reply_or_tuple, tuple):
+        reply, llm_meta = reply_or_tuple
+        meta["model"] = llm_meta.get("model", "")
+        meta["provider"] = llm_meta.get("provider", "")
+    else:
+        reply = reply_or_tuple
+        meta["model"] = ""
+        meta["provider"] = ""
     return reply, meta

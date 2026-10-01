@@ -1,0 +1,143 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Indonesia (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. HINDARI LANGKAH GENERIK / BOILERPLATE. Setiap langkah harus spesifik pada konteks bacaan/soal dan opsi yang bersangkutan. Penjelasan langkah antar-soal TIDAK BOLEH meniru atau menduplikasi langkah soal lain.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+5. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "<Kutipan/konteks kalimat atau variabel yang diketahui>",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Tradisi Buwuhan: Antara Gotong Royong dan Utang Piutang
+Tradisi buwuhan merupakan bagian dari budaya masyarakat Jawa, khususnya di kota-kota besar seperti Surabaya. Tradisi ini dilakukan ketika ada acara penting seperti pernikahan atau khitanan yang diadakan di daerah tersebut. Buwuhan merujuk pada kegiatan memberi bantuan, baik berupa barang, uang, maupun tenaga kepada seseorang yang sedang mengadakan hajatan, atau bisa juga disebut sebagai kegiatan menyumbang. Tradisi ini mencerminkan nilai gotong royong dan solidaritas sosial karena keluarga dan tetangga saling bahu-membahu dalam membantu sesama.
+Namun, praktik buwuhan tidak lepas dari unsur pertukaran atau dipandang sebagai utang. Masyarakat meyakini bahwa segala bentuk bantuan yang diberikan akan kembali dalam bentuk yang setara ketika si pemberi mengadakan hajatan serupa. Hal ini menyebabkan buwuhan tidak lagi dipandang murni sebagai hibah atau sedekah, tetapi sebagai bentuk "utang tidak tertulis" yang menimbulkan kewajiban moral untuk membalas.
+Dalam praktiknya, buwuhan memang meringankan beban tuan rumah, tetapi dapat menimbulkan tekanan psikologis bagi penerima bantuan. Rasa malu dan kekhawatiran kehilangan harga diri mendorong sebagian orang untuk berutang demi mengembalikan buwuhan. Hal ini menyebabkan terbaginya cara pandang terhadap buwuhan. Ada yang melihatnya sebagai bentuk tolong-menolong, tetapi ada juga yang justru menganggapnya menjadi sistem utang piutang berbasis sosial. Sebagian pihak berpendapat bahwa buwuhan adalah hibah karena tujuannya adalah untuk membantu. Namun, apabila ada keharusan pengembalian, maka secara hukum dan etika, buwuhan telah bergeser dari semangat gotong royong menjadi sebuah kewajiban ekonomi yang membebani. Oleh karena itu, pemahaman masyarakat terhadap tradisi buwuhan perlu diluruskan agar nilai luhur tolong-menolong tetap terjaga tanpa menimbulkan beban yang tidak perlu.
+Sumber:
+Rachmawati, S. A., & Anwar, M. K. (2021). Budaya dan Tradisi Buwuh sebagai Utang Piutang dalam Adat Pernikahan di Kota Surabaya. Jurnal Ekonomika dan Bisnis Islam, 4(3), hl 69–83.
+
+PERTANYAAN:
+Manakah gagasan yang mendukung ide pokok bahwa buwuhan adalah bentuk utang?
+OPSI / PERNYATAAN:
+  - A. A. Praktik buwuhan disertai dengan perjanjian utang piutang secara tertulis.
+  - B. B. Buwuhan disertai kesepakatan untuk selalu memberi lebih dari yang diterima.
+  - C. C. Bentuk buwuhan dapat berupa sedekah atau hibah yang harus dibayar kembali.
+  - D. D. Buwuhan dilakukan oleh tetangga dan kerabat sebagai bentuk pertukaran solidaritas.
+  - E. E. Penerima buwuhan merasa harus mengembalikan bantuan yang diterima di kemudian hari.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Layur, Teruslah Berlayar
+“Bapak, pulanglah,” lirih Layur berharap. Ini hari keenam. Tiga hari adalah waktu terlama nelayan berada di laut. Dengan susah payah, Layur berpindah duduk ke dalam sebuah perahu tua. Penyangga kedua kaki Layur yang tak utuh ia letakkan di sampingnya.
+"Jangan-jangan..."
+"Tidak ... Aku tidak boleh berpikiran buruk. Bapak pasti pulang dengan selamat. Aku akan tetap menunggunya di sini sambil berdoa."
+Layur masih ingat masa-masa dulu, ketika Bapak berlayar pada malam hari dan keesokan harinya sudah merapat kembali di pantai dengan membawa ikan berlimpah.
+“Ayo! Siapa mau udang?” panggil Bapak. Layur berlari kencang bersama teman-temannya. Namun, itu adalah kenangan sepuluh tahun silam. Kini, udang dan ikan kecil adalah anugerah besar. Itu pun harus dijaring di tengah laut.
+Layur ingat betul, Bapak adalah pembuat bondet paling disegani, juga berpengaruh di dusun. Setiap hari, nelayan silih berganti datang ke rumah memesan bondet. Hasil panen ikan berlimpah. Tinggal melemparkan bondet ke dalam laut dan ...
+bum
+! Berkuintal-kuintal ikan terapung tinggal diserok menggunakan jaring.
+Sampai suatu ketika ...
+DUAAAR!
+Separuh rumah Layur luluh lantak karena simpanan bondet di gudang meledak. Ledakan bondet di gudang tak hanya merusak rumah tetapi juga mencelakai anak semata wayang. Ia berteriak minta tolong, menepuk-nepuk dadanya, dan menangis. Itulah titik balik yang amat disesali Bapak. Sejak itu, Bapak meninggalkan usaha pembuatan bondet. Demikian pula dengan warga Dusun Prau tempat mereka berdiam berangsur-angsur meninggalkan cara menangkap ikan dengan bondet.
+Lamat-lamat terlihat kibaran layar bercorak biru. Layur beringsut menuruni perahu tempatnya duduk. Lambaian tangan bapaknya semakin jelas dan semakin dekat.
+“Bapak dari mana? Bapak sudah tiga hari telat pulang!” Seru Layur kesal. Matanya berkaca-kaca, menahan rindu, dan cemas.
+Karya Anang YB
+Daftar Istillah
+:
+Bondet: istilah lokal yang merujuk pada bahan peledak rakitan, sering disebut juga bom ikan.
+Sumber:
+https://buku.kemdikbud.go.id/katalog/layur-tetaplah-berlayar (dengan pengubahan)
+
+PERTANYAAN:
+Berdasarkan teks tersebut, bagaimana sifat yang dimiliki oleh Layur?
+OPSI / PERNYATAAN:
+  - A. A. Nekat dan optimis
+  - B. B. Mudah cemas dan tabah
+  - C. C. Penuh harap dan kasih sayang
+  - D. D. Suka menyendiri dan tegas
+  - E. E. Cepat panik dan menyalahkan keadaan
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pantai Bersih Tanpa Sampah
+Di sebuah daerah wisata yang terkenal dengan pantainya yang indah, pemerintah setempat gencar mengampanyekan "Pantai Bersih Tanpa Sampah." Spanduk dan papan peringatan terpampang di berbagai sudut. Namun, kenyataannya seringkali berbeda.
+Suatu sore, Pak Wayan, seorang nelayan tua yang sudah puluhan tahun melaut, sedang membersihkan jaringnya di tepi pantai. Di sampingnya, sekelompok turis muda asyik berpose untuk berfoto. Mereka mengenakan topi pantai yang modis, kacamata hitam, dan membawa botol minum berwarna-warni.
+"Wah, pantainya bersih banget ya,
+guys
+!" seru salah satu turis sambil memegang ponselnya. "Pas banget buat konten 'liburan ramah lingkungan'!"
+Temannya menimpali, "Iya! Nanti
+caption-
+nya 'Menikmati keindahan alam tanpa jejak, menjaga bumi kita tercinta!'"
+Setelah puas berfoto dari berbagai sudut dengan beragam filter, mereka beranjak pergi. Namun mereka meninggalkan botol minuman plastik kosong, bungkus keripik, dan beberapa puntung rokok yang disembunyikan di balik semak-semak. Mereka bahkan tidak berusaha mencari tempat sampah yang hanya berjarak beberapa meter.
+Pak Wayan hanya bisa menggelengkan kepala. Ia berjalan mendekat dan memungut sampah-sampah itu satu per satu. Ia sudah terbiasa dengan pemandangan ini. Para turis datang untuk menikmati keindahan, berfoto, membuat konten, lalu pergi meninggalkan "kenangan" dalam bentuk sampah.
+Tak lama kemudian, seorang petugas kebersihan berseragam oranye datang dengan sapu dan karung. "Pak Wayan, sudah banyak lagi ya sampahnya?" tanyanya sambil menghela napas.
+"Sudah biasa, Nak," jawab Pak Wayan. "Ini namanya 'sampah estetik'. Cuma bagus di foto, tapi busuk di mata dan bau di hidung."
+Petugas itu tersenyum masam. "Iya, Pak. Kata mereka peduli lingkungan, tapi pedulinya cuma di
+caption
+media sosial."
+Malam harinya, di akun media sosial Pak Wayan—yang diajari cucunya—ia, ia melihat foto-foto pantai yang diunggah para turis tadi. Pantai tampak bersih sempurna, dihiasi filter matahari terbenam yang memukau. Ia membaca
+caption-
+nya
+:
+"Surgaku, jangan kau kotori!"
+Pak Wayan hanya bisa tersenyum getir. Sepertinya, slogan "Pantai Bersih Tanpa Sampah" itu hanya berlaku untuk kamera dan media sosial. Sementara di balik layar, jejak yang ditinggalkan justru lebih nyata dan memprihatinkan daripada gambar yang dipamerkan.
+[Konteks Visual Gambar 97300_03c2f200424e7466a907a3311d5834f2.png]:
+Berikut adalah deskripsi dan transkripsi visual dari gambar:
+
+### **Transkripsi Teks (Papan Informasi)**
+$$\text{PANTAI}$$
+$$\text{BERSIH}$$
+$$\text{TANPA}$$
+$$\text{SAMPAH}$$
+
+---
+
+### **Deskripsi Elemen Visual & Konteks Gambar**
+* **Objek Teks:** Papan kayu bertuliskan **"PANTAI BERSIH TANPA SAMPAH"** tertancap di pasir pantai.
+* **Kelompok Kanan (Objek Utama):** Empat orang pemuda/remaja (dua laki-laki, dua perempuan) berpose ceria dan antusias:
+  * Satu perempuan memegang *smartphone* untuk berswafoto (*selfie*).
+  * Satu laki-laki di belakang memegang kamera video (*handycam*).
+  * Dua lainnya tersenyum dan melambaikan tangan ke arah kamera ponsel.
+* **Objek Kiri (Kontras Sosial):** Seorang pria lanjut usia memakai topi caping/rimba dan kemeja putih, terduduk dengan postur membungkuk dan ekspresi wajah lelah/murung di samping papan.
+* **Latar Belakang:** Area pesisir pantai dengan garis pantai, air laut, dan siluet dua orang pengunjung lain di kejauhan.
+PERTANYAAN:
+Apa pesan moral yang disiratkan melalui dialog antara Pak Wayan dan petugas kebersihan?
+OPSI / PERNYATAAN:
+  - A. A. Menjaga kebersihan pantai adalah tanggung jawab utama pemerintah dan petugas kebersihan
+  - B. B. Wisatawan seringkali menikmati keindahan alam tanpa memiliki kepedulian yang mendalam
+  - C. C. Kesadaran lingkungan sejati harus dibuktikan lewat tindakan, bukan hanya kata-kata di media sosial
+  - D. D. Media sosial bisa menjadi sarana positif untuk mengampanyekan kepedulian terhadap lingkungan
+  - E. E. Nelayan dan petugas kebersihan sering kali menjadi pihak yang terdampak langsung oleh sampah
+

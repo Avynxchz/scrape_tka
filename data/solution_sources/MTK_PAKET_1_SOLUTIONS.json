@@ -1,0 +1,2403 @@
+{
+  "package": 1,
+  "subject": "Matematika",
+  "solutions": [
+    {
+      "question_id": "mtk_p1_q01",
+      "question_number": 1,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Aturan Penjumlahan Peluang (Inklusi-Eksklusi): $P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = \\frac{n(A) + n(B) - n(A \\cap B)}{n(S)}$"
+      ],
+      "glossary": [
+        {
+          "term": "\\cup (Gabungan (Union))",
+          "meaning": "Kata kuncinya adalah **'ATAU'**. Menghitung semua anggota yang memenuhi syarat A, syarat B, atau keduanya sekaligus."
+        },
+        {
+          "term": "\\cap (Irisan (Intersection))",
+          "meaning": "Kata kuncinya adalah **'DAN'**. Hanya menghitung anggota yang memiliki kedua sifat secara bersamaan (kamar laut DAN Twin Bed)."
+        },
+        {
+          "term": "n(S) (Ruang Sampel Semesta)",
+          "meaning": "Total seluruh kamar yang tersedia di lantai 5 hotel ($n(S) = 30$)."
+        },
+        {
+          "term": "P(A) (Peluang Kejadian)",
+          "meaning": "Perbandingan banyaknya kejadian yang diharapkan terhadap total ruang sampel: $P(A) = \\frac{n(A)}{n(S)}$."
+        }
+      ],
+      "reasoning": "•••*•••*•••M•••e•••n•••g•••a•••p•••a••• •••i•••r•••i•••s•••a•••n••• •••h•••a•••r•••u•••s••• •••d•••i•••k•••u•••r•••a•••n•••g•••i••• •••(•••$••• •••-••• •••n•••(•••A••• •••\\•••c•••a•••p••• •••B•••)•••$•••)•••?•••*•••*••• •••J•••i•••k•••a••• •••k•••i•••t•••a••• •••l•••a•••n•••g•••s•••u•••n•••g••• •••m•••e•••n•••j•••u•••m•••l•••a•••h•••k•••a•••n••• •••k•••a•••m•••a•••r••• •••l•••a•••u•••t••• •••(•••$•••1•••8•••$•••)••• •••d•••e•••n•••g•••a•••n••• •••k•••a•••m•••a•••r••• •••T•••w•••i•••n••• •••B•••e•••d••• •••(•••$•••1•••0•••$•••)•••,••• •••h•••a•••s•••i•••l•••n•••y•••a••• •••a•••d•••a•••l•••a•••h••• •••$•••2•••8•••$•••.••• •••N•••a•••m•••u•••n••• •••d•••i••• •••a•••n•••t•••a•••r•••a••• •••k•••a•••m•••a•••r•••-•••k•••a•••m•••a•••r••• •••t•••e•••r•••s•••e•••b•••u•••t•••,••• •••a•••d•••a••• •••*•••*•••6••• •••k•••a•••m•••a•••r••• •••y•••a•••n•••g••• •••m•••e•••m•••i•••l•••i•••k•••i••• •••k•••e•••d•••u•••a••• •••f•••a•••s•••i•••l•••i•••t•••a•••s••• •••s•••e•••k•••a•••l•••i•••g•••u•••s•••*•••*•••.••• •••K•••e•••-•••6••• •••k•••a•••m•••a•••r••• •••i•••n•••i••• •••s•••u•••d•••a•••h••• •••t•••e•••r•••h•••i•••t•••u•••n•••g••• •••d•••i••• •••k•••e•••l•••o•••m•••p•••o•••k••• •••1•••8••• •••k•••a•••m•••a•••r••• •••l•••a•••u•••t•••,••• •••d•••a•••n••• •••i•••k•••u•••t••• •••t•••e•••r•••h•••i•••t•••u•••n•••g••• •••l•••a•••g•••i••• •••d•••i••• •••k•••e•••l•••o•••m•••p•••o•••k••• •••1•••0••• •••k•••a•••m•••a•••r••• •••T•••w•••i•••n••• •••B•••e•••d••• •••(•••*•••*•••p•••e•••n•••g•••h•••i•••t•••u•••n•••g•••a•••n••• •••g•••a•••n•••d•••a••• •••/••• •••d•••o•••u•••b•••l•••e••• •••c•••o•••u•••n•••t•••i•••n•••g•••*•••*•••)•••!••• •••S•••u•••p•••a•••y•••a••• •••a•••d•••i•••l••• •••d•••a•••n••• •••s•••e•••t•••i•••a•••p••• •••k•••a•••m•••a•••r••• •••f•••i•••s•••i•••k••• •••h•••a•••n•••y•••a••• •••d•••i•••h•••i•••t•••u•••n•••g••• •••t•••e•••p•••a•••t••• •••s•••a•••t•••u••• •••k•••a•••l•••i•••,••• •••k•••e•••-•••6••• •••k•••a•••m•••a•••r••• •••i•••r•••i•••s•••a•••n••• •••t•••e•••r•••s•••e•••b•••u•••t••• •••w•••a•••j•••i•••b••• •••d•••i•••k•••u•••r•••a•••n•••g•••k•••a•••n••• •••s•••a•••t•••u••• •••k•••a•••l•••i•••:••• •••$•••$•••\\•••t•••e•••x•••t•••{•••K•••a•••m•••a•••r••• •••M•••e•••m•••e•••n•••u•••h•••i••• •••S•••y•••a•••r•••a•••t•••}••• •••=••• •••1•••8••• •••+••• •••1•••0••• •••-••• •••6••• •••=••• •••2•••2••• •••\\•••t•••e•••x•••t•••{••• •••k•••a•••m•••a•••r•••}•••$••• •••V•••i•••s•••u•••a•••l•••i•••s•••a•••s•••i••• •••D•••i•••a•••g•••r•••a•••m••• •••V•••e•••n•••n•••:••• ••••••• •••H•••a•••n•••y•••a••• •••P•••e•••m•••a•••n•••d•••a•••n•••g•••a•••n••• •••L•••a•••u•••t••• •••s•••a•••j•••a••• •••=••• •••$•••1•••8••• •••-••• •••6••• •••=••• •••1•••2•••$••• •••k•••a•••m•••a•••r••• ••••••• •••L•••a•••u•••t••• •••D•••A•••N••• •••T•••w•••i•••n••• •••B•••e•••d••• •••(•••I•••r•••i•••s•••a•••n•••)••• •••=••• •••$•••6•••$••• •••k•••a•••m•••a•••r••• ••••••• •••H•••a•••n•••y•••a••• •••T•••w•••i•••n••• •••B•••e•••d••• •••s•••a•••j•••a••• •••=••• •••$•••1•••0••• •••-••• •••6••• •••=••• •••4•••$••• •••k•••a•••m•••a•••r••• ••••••• •••K•••a•••m•••a•••r••• •••S•••t•••a•••n•••d•••a•••r••• •••(•••B•••u•••k•••a•••n••• •••k•••e•••d•••u•••a•••n•••y•••a•••)••• •••=••• •••$•••3•••0••• •••-••• •••(•••1•••2••• •••+••• •••6••• •••+••• •••4•••)••• •••=••• •••8•••$••• •••k•••a•••m•••a•••r••• •••T•••o•••t•••a•••l••• •••=••• •••$•••1•••2••• •••+••• •••6••• •••+••• •••4••• •••+••• •••8••• •••=••• •••3•••0•••$••• •••k•••a•••m•••a•••r••• •••(•••C•••o•••c•••o•••k•••!•••)•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Ruang Sampel ($n(S)$)",
+          "explanation": "•••T•••o•••t•••a•••l••• •••s•••e•••l•••u•••r•••u•••h••• •••k•••a•••m•••a•••r••• •••y•••a•••n•••g••• •••t•••e•••r•••s•••e•••d•••i•••a••• •••d•••i••• •••l•••a•••n•••t•••a•••i••• •••5••• •••a•••d•••a•••l•••a•••h••• •••$•••n•••(•••S•••)••• •••=••• •••3•••0•••$•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Data Frekuensi Tiap Kategori Fasilitas",
+          "explanation": "••••••• •••K•••a•••m•••a•••r••• •••b•••e•••r•••p•••e•••m•••a•••n•••d•••a•••n•••g•••a•••n••• •••l•••a•••u•••t•••:••• •••$•••n•••(•••A•••)••• •••=••• •••1•••8•••$••• ••••••• •••K•••a•••m•••a•••r••• •••b•••e•••r•••t•••e•••m•••p•••a•••t••• •••t•••i•••d•••u•••r••• •••T•••w•••i•••n••• •••B•••e•••d•••:••• •••$•••n•••(•••B•••)••• •••=••• •••1•••0•••$••• ••••••• •••K•••a•••m•••a•••r••• •••l•••a•••u•••t••• •••s•••e•••k•••a•••l•••i•••g•••u•••s••• •••T•••w•••i•••n••• •••B•••e•••d•••:••• •••$•••n•••(•••A••• •••\\•••c•••a•••p••• •••B•••)••• •••=••• •••6•••$•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung Kamar Memenuhi Syarat (Laut ATAU Twin Bed)",
+          "explanation": "•••G•••u•••n•••a•••k•••a•••n••• •••p•••r•••i•••n•••s•••i•••p••• •••i•••n•••k•••l•••u•••s•••i•••-•••e•••k•••s•••k•••l•••u•••s•••i••• •••a•••g•••a•••r••• •••6••• •••k•••a•••m•••a•••r••• •••i•••r•••i•••s•••a•••n••• •••t•••i•••d•••a•••k••• •••t•••e•••r•••h•••i•••t•••u•••n•••g••• •••g•••a•••n•••d•••a•••:••• •••$•••$•••n•••(•••A••• •••\\•••c•••u•••p••• •••B•••)••• •••=••• •••1•••8••• •••+••• •••1•••0••• •••-••• •••6••• •••=••• •••2•••2••• •••\\•••t•••e•••x•••t•••{••• •••k•••a•••m•••a•••r•••}•••$•••"
+        },
+        {
+          "step": 4,
+          "title": "Hitung Nilai Peluang dan Sederhanakan",
+          "explanation": "•••$•••$•••P•••(•••A••• •••\\•••c•••u•••p••• •••B•••)••• •••=••• •••\\•••f•••r•••a•••c•••{•••n•••(•••A••• •••\\•••c•••u•••p••• •••B•••)•••}•••{•••n•••(•••S•••)•••}••• •••=••• •••\\•••f•••r•••a•••c•••{•••$••• •••2•••2•••}•••{•••3•••0•••}•••$••• •••B•••a•••g•••i••• •••p•••e•••m•••b•••i•••l•••a•••n•••g••• •••d•••a•••n••• •••p•••e•••n•••y•••e•••b•••u•••t••• •••d•••e•••n•••g•••a•••n••• •••F•••P•••B•••-•••n•••y•••a••• •••(•••y•••a•••i•••t•••u••• •••2•••)•••:••• •••$•••$••• •••\\•••f•••r•••a•••c•••{•••2•••2••• •••\\•••d•••i•••v••• •••2•••}•••{•••3•••0••• •••\\•••d•••i•••v••• •••2•••}••• •••=••• •••\\•••f•••r•••a•••c•••{•••$••• •••1•••1•••}•••{•••1•••5•••}•••$•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Kata kunci 'ATAU' artinya gabungan ($\\cup$). Saat ada anggota yang punya kedua sifat sekaligus, WAJIB kurangkan irisannya satu kali agar tidak terjadi double counting!"
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q02",
+      "question_number": 2,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Peluang dasar $P(A) = \\frac{n(A)}{n(S)}$ dan Peluang komplemen kejadian $P(A') = 1 - P(A)$."
+      ],
+      "glossary": [
+        {
+          "term": "P(A) (Peluang Kejadian A)",
+          "meaning": "$P(A) = \\frac{n(A)}{n(S)}$, rentang nilainya $0 \\le P(A) \\le 1$ atau $0\\% \\le P(A) \\le 100\\%$."
+        },
+        {
+          "term": "P(A') (Peluang Komplemen)",
+          "meaning": "Peluang kejadian **BUKAN A**. Dihitung dengan rumus: $P(A') = 1 - P(A)$."
+        },
+        {
+          "term": "n(S) (Ruang Sampel)",
+          "meaning": "Total unit gadget per kelompok = $10$ unit."
+        }
+      ],
+      "reasoning": "•••*•••*•••M•••e•••m•••a•••h•••a•••m•••i••• •••T•••i•••p•••e••• •••S•••o•••a•••l••• •••P•••i•••l•••i•••h•••a•••n••• •••G•••a•••n•••d•••a••• •••K•••o•••m•••p•••l•••e•••k•••s•••:•••*•••*••• •••P•••a•••d•••a••• •••A•••N•••B•••K••• •••/••• •••T•••K•••A•••,••• •••s•••o•••a•••l••• •••t•••i•••p•••e••• •••i•••n•••i••• •••m•••e•••m•••i•••n•••t•••a••• •••p•••e•••s•••e•••r•••t•••a••• •••m•••e•••n•••g•••e•••v•••a•••l•••u•••a•••s•••i••• •••s•••e•••t•••i•••a•••p••• •••p•••e•••r•••n•••y•••a•••t•••a•••a•••n••• •••s•••e•••c•••a•••r•••a••• •••m•••a•••n•••d•••i•••r•••i•••.••• •••P•••e•••r•••n•••y•••a•••t•••a•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••u•••a•••t••• •••k•••a•••t•••a••• •••'•••b•••u•••k•••a•••n•••'••• •••m•••e•••n•••g•••u•••j•••i••• •••p•••e•••m•••a•••h•••a•••m•••a•••n••• •••k•••o•••n•••s•••e•••p••• •••*•••*•••p•••e•••l•••u•••a•••n•••g••• •••k•••o•••m•••p•••l•••e•••m•••e•••n•••*•••*••• •••(•••$•••1••• •••-••• •••P•••$•••)•••.••• •••S•••e•••m•••e•••n•••t•••a•••r•••a••• •••p•••e•••r•••n•••y•••a•••t•••a•••a•••n••• •••p•••e•••r•••s•••e•••n•••t•••a•••s•••e••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••o•••n•••v•••e•••r•••s•••i••• •••p•••e•••c•••a•••h•••a•••n••• •••k•••e••• •••b•••e•••n•••t•••u•••k••• •••p•••e•••r•••s•••e•••n••• •••(•••d•••i•••k•••a•••l•••i•••k•••a•••n••• •••$•••1•••0•••0•••\\•••%•••$•••)•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tabulasi Data per 10 Unit Gadget",
+          "explanation": "••••••• •••P•••o•••n•••s•••e•••l••• •••p•••i•••n•••t•••a•••r••• •••(•••s•••m•••a•••r•••t•••p•••h•••o•••n•••e•••)••• •••=••• •••4••• •••u•••n•••i•••t••• ••••••• •••J•••a•••m••• •••t•••a•••n•••g•••a•••n••• •••p•••i•••n•••t•••a•••r••• •••(•••s•••m•••a•••r•••t•••w•••a•••t•••c•••h•••)••• •••=••• •••3••• •••u•••n•••i•••t••• ••••••• •••K•••o•••m•••p•••u•••t•••e•••r••• •••t•••a•••b•••l•••e•••t••• •••=••• •••2••• •••u•••n•••i•••t••• ••••••• •••P•••e•••l•••a•••c•••a•••k••• •••l•••o•••k•••a•••s•••i••• •••(•••s•••m•••a•••r•••t••• •••t•••a•••g•••)••• •••=••• •••$•••1•••0••• •••-••• •••(•••4••• •••+••• •••3••• •••+••• •••2•••)••• •••=••• •••1•••$••• •••u•••n•••i•••t••• •••T•••o•••t•••a•••l••• •••$•••n•••(•••S•••)••• •••=••• •••1•••0•••$••• •••u•••n•••i•••t•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Pernyataan A",
+          "explanation": "•••'•••P•••e•••l•••u•••a•••n•••g••• •••t•••e•••r•••p•••i•••l•••i•••h•••n•••y•••a••• •••p•••o•••n•••s•••e•••l••• •••p•••i•••n•••t•••a•••r••• •••a•••d•••a•••l•••a•••h••• •••4•••0•••%•••.•••'••• •••$•••$•••P•••(•••\\•••t•••e•••x•••t•••{•••s•••m•••a•••r•••t•••p•••h•••o•••n•••e•••}•••)••• •••=••• •••\\•••f•••r•••a•••c•••{••• •••4•••}•••{•••1•••0•••}••• •••=••• •••0•••,•••4••• •••=••• •••4•••0•••\\•••%••• •••\\•••q•••u•••a•••d••• •••\\•••t•••e•••x•••t•••{•••(•••B•••E•••N•••A•••R•••)•••}•••$•••"
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Pernyataan B",
+          "explanation": "•••'•••P•••e•••l•••u•••a•••n•••g••• •••t•••e•••r•••p•••i•••l•••i•••h•••n•••y•••a••• •••g•••a•••d•••g•••e•••t••• •••b•••u•••k•••a•••n••• •••k•••o•••m•••p•••u•••t•••e•••r••• •••t•••a•••b•••l•••e•••t••• •••a•••d•••a•••l•••a•••h••• •••0•••,•••2•••.•••'••• •••$•••$•••P•••(•••\\•••t•••e•••x•••t•••{•••b•••u•••k•••a•••n••• •••t•••a•••b•••l•••e•••t•••}•••)••• •••=••• •••1••• •••-••• •••P•••(•••\\•••t•••e•••x•••t•••{•••t•••a•••b•••l•••e•••t•••}•••)••• •••=••• •••1••• •••-••• •••\\•••f•••r•••a•••c•••{••• •••2•••}•••{•••1•••0•••}••• •••=••• •••1••• •••-••• •••0•••,•••2••• •••=••• •••0•••,•••8•••$•••$••• •••N•••i•••l•••a•••i••• •••0•••,•••2••• •••a•••d•••a•••l•••a•••h••• •••p•••e•••l•••u•••a•••n•••g••• •••t•••e•••r•••p•••i•••l•••i•••h•••n•••y•••a••• •••t•••a•••b•••l•••e•••t•••,••• •••b•••u•••k•••a•••n••• •••k•••o•••m•••p•••l•••e•••m•••e•••n•••n•••y•••a•••.••• •••J•••a•••d•••i••• •••p•••e•••r•••n•••y•••a•••t•••a•••a•••n••• •••B••• •••*•••*•••S•••A•••L•••A•••H•••*•••*•••.•••"
+        },
+        {
+          "step": 4,
+          "title": "Evaluasi Pernyataan C",
+          "explanation": "•••'•••P•••e•••l•••u•••a•••n•••g••• •••t•••e•••r•••p•••i•••l•••i•••h•••n•••y•••a••• •••u•••n•••i•••t••• •••p•••e•••l•••a•••c•••a•••k••• •••l•••o•••k•••a•••s•••i••• •••a•••d•••a•••l•••a•••h••• •••1•••/•••5•••.•••'••• •••$•••$•••P•••(•••\\•••t•••e•••x•••t•••{•••s•••m•••a•••r•••t••• •••t•••a•••g•••}•••)••• •••=••• •••\\•••f•••r•••a•••c•••{••• •••1•••}•••{•••1•••0•••}•••$••• •••K•••a•••r•••e•••n•••a••• •••$•••1•••/•••1•••0••• •••\\•••n•••e••• •••1•••/•••5•••$••• •••(•••d•••i••• •••m•••a•••n•••a••• •••$•••1•••/•••5••• •••=••• •••2•••/•••1•••0•••$•••)•••,••• •••m•••a•••k•••a••• •••p•••e•••r•••n•••y•••a•••t•••a•••a•••n••• •••C••• •••*•••*•••S•••A•••L•••A•••H•••*•••*•••.•••"
+        },
+        {
+          "step": 5,
+          "title": "Evaluasi Pernyataan D",
+          "explanation": "•••'•••P•••e•••l•••u•••a•••n•••g••• •••t•••e•••r•••p•••i•••l•••i•••h•••n•••y•••a••• •••g•••a•••d•••g•••e•••t••• •••b•••u•••k•••a•••n••• •••j•••a•••m••• •••t•••a•••n•••g•••a•••n••• •••p•••i•••n•••t•••a•••r••• •••a•••d•••a•••l•••a•••h••• •••7•••0•••%•••.•••'••• •••$•••$•••P•••(•••\\•••t•••e•••x•••t•••{•••b•••u•••k•••a•••n••• •••s•••m•••a•••r•••t•••w•••a•••t•••c•••h•••}•••)••• •••=••• •••1••• •••-••• •••\\•••f•••r•••a•••c•••{•••3•••}•••{•••1•••0•••}••• •••=••• •••\\•••f•••r•••a•••c•••{•••$••• •••7•••}•••{•••1•••0•••}••• •••=••• •••7•••0•••\\•••%••• •••\\•••q•••u•••a•••d••• •••\\•••t•••e•••x•••t•••{•••(•••B•••E•••N•••A•••R•••)•••}•••$•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••,••• •••D•••.•••",
+      "tips": [
+        "Hati-hati dengan kata 'BUKAN'! Selalu gunakan rumus komplemen $1 - P$. Jangan terbalik antara peluang kejadian itu sendiri dengan komplemennya."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q03",
+      "question_number": 3,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••B•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q04",
+      "question_number": 4,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••B•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q05",
+      "question_number": 5,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••B•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q06",
+      "question_number": 6,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••E•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q07",
+      "question_number": 7,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••B•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q08",
+      "question_number": 8,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q09",
+      "question_number": 9,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q10",
+      "question_number": 10,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "C",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••,••• •••D•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q11",
+      "question_number": 11,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••B•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q12",
+      "question_number": 12,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q13",
+      "question_number": 13,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••B•••,••• •••C•••,••• •••D•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q14",
+      "question_number": 14,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q15",
+      "question_number": 15,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••D•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q16",
+      "question_number": 16,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q17",
+      "question_number": 17,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Salah",
+          "C:Benar"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••:•••S•••a•••l•••a•••h•••,••• •••B•••:•••S•••a•••l•••a•••h•••,••• •••C•••:•••B•••e•••n•••a•••r•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q18",
+      "question_number": 18,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q19",
+      "question_number": 19,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••D•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q20",
+      "question_number": 20,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••E•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q21",
+      "question_number": 21,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••E•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q22",
+      "question_number": 22,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••B•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q23",
+      "question_number": 23,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••D•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q24",
+      "question_number": 24,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q25",
+      "question_number": 25,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q26",
+      "question_number": 26,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "B",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••B•••,••• •••D•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q27",
+      "question_number": 27,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q28",
+      "question_number": 28,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q29",
+      "question_number": 29,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q30",
+      "question_number": 30,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••,••• •••D•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q31",
+      "question_number": 31,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Benar",
+          "C:Salah"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••:•••S•••a•••l•••a•••h•••,••• •••B•••:•••B•••e•••n•••a•••r•••,••• •••C•••:•••S•••a•••l•••a•••h•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q32",
+      "question_number": 32,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q33",
+      "question_number": 33,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••B•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q34",
+      "question_number": 34,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Benar",
+          "C:Salah"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••:•••S•••a•••l•••a•••h•••,••• •••B•••:•••B•••e•••n•••a•••r•••,••• •••C•••:•••S•••a•••l•••a•••h•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q35",
+      "question_number": 35,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q36",
+      "question_number": 36,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••E•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q37",
+      "question_number": 37,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Salah",
+          "C:Benar"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••:•••S•••a•••l•••a•••h•••,••• •••B•••:•••S•••a•••l•••a•••h•••,••• •••C•••:•••B•••e•••n•••a•••r•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q38",
+      "question_number": 38,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••D•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q39",
+      "question_number": 39,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Benar",
+          "C:Salah"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••:•••B•••e•••n•••a•••r•••,••• •••B•••:•••B•••e•••n•••a•••r•••,••• •••C•••:•••S•••a•••l•••a•••h•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q40",
+      "question_number": 40,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••B•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q41",
+      "question_number": 41,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q42",
+      "question_number": 42,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••,••• •••B•••,••• •••C•••,••• •••D•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q43",
+      "question_number": 43,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Salah",
+          "C:Benar"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••:•••B•••e•••n•••a•••r•••,••• •••B•••:•••S•••a•••l•••a•••h•••,••• •••C•••:•••B•••e•••n•••a•••r•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q44",
+      "question_number": 44,
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "A",
+          "B"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••,••• •••B•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q45",
+      "question_number": 45,
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Benar",
+          "C:Salah"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••A•••:•••B•••e•••n•••a•••r•••,••• •••B•••:•••B•••e•••n•••a•••r•••,••• •••C•••:•••S•••a•••l•••a•••h•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    },
+    {
+      "question_id": "mtk_p1_q46",
+      "question_number": 46,
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "needs_manual_review": false,
+      "review_reason": null,
+      "concept_kunci": [
+        "Identifikasi data pada stimulus, susun model matematika yang relevan, lalu operasikan secara aljabar."
+      ],
+      "glossary": [
+        {
+          "term": "x, y (Variabel)",
+          "meaning": "Besaran yang nilainya belum diketahui dan hendak dicari."
+        },
+        {
+          "term": "\\sum (Sigma (Jumlah))",
+          "meaning": "Menjumlahkan seluruh data pengamatan."
+        }
+      ],
+      "reasoning": "•••*•••*•••L•••o•••g•••i•••k•••a••• •••P•••e•••n•••g•••e•••r•••j•••a•••a•••n••• •••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••K•••u•••r•••i•••k•••u•••l•••u•••m••• •••M•••e•••r•••d•••e•••k•••a•••:•••*•••*••• •••M•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••p•••a•••d•••a••• •••a•••s•••e•••s•••m•••e•••n••• •••T•••K•••A••• •••m•••e•••n•••g•••u•••j•••i••• •••k•••e•••m•••a•••m•••p•••u•••a•••n••• •••l•••i•••t•••e•••r•••a•••s•••i••• •••n•••u•••m•••e•••r•••a•••s•••i•••,••• •••y•••a•••i•••t•••u••• •••b•••a•••g•••a•••i•••m•••a•••n•••a••• •••m•••e•••n•••y•••e•••d•••e•••r•••h•••a•••n•••a•••k•••a•••n••• •••k•••o•••n•••t•••e•••k•••s••• •••n•••y•••a•••t•••a••• •••m•••e•••n•••j•••a•••d•••i••• •••p•••e•••m•••o•••d•••e•••l•••a•••n••• •••m•••a•••t•••e•••m•••a•••t•••i•••k•••a••• •••y•••a•••n•••g••• •••t•••e•••r•••u•••k•••u•••r••• •••d•••a•••n••• •••l•••o•••g•••i•••s•••.•••",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pahami Masalah & Tentukan Data yang Diketahui",
+          "explanation": "•••C•••e•••r•••m•••a•••t•••i••• •••a•••n•••g•••k•••a•••-•••a•••n•••g•••k•••a••• •••d•••a•••n••• •••b•••a•••t•••a•••s•••a•••n••• •••y•••a•••n•••g••• •••d•••i•••b•••e•••r•••i•••k•••a•••n••• •••p•••a•••d•••a••• •••s•••t•••i•••m•••u•••l•••u•••s••• •••c•••e•••r•••i•••t•••a•••.•••"
+        },
+        {
+          "step": 2,
+          "title": "Susun Model Matematika",
+          "explanation": "•••R•••e•••p•••r•••e•••s•••e•••n•••t•••a•••s•••i•••k•••a•••n••• •••h•••u•••b•••u•••n•••g•••a•••n••• •••a•••n•••t•••a•••r••• •••v•••a•••r•••i•••a•••b•••e•••l••• •••d•••a•••l•••a•••m••• •••b•••e•••n•••t•••u•••k••• •••f•••o•••r•••m•••u•••l•••a••• •••a•••t•••a•••u••• •••p•••e•••r•••s•••a•••m•••a•••a•••n•••.•••"
+        },
+        {
+          "step": 3,
+          "title": "Hitung dan Evaluasi",
+          "explanation": "•••S•••e•••l•••e•••s•••a•••i•••k•••a•••n••• •••o•••p•••e•••r•••a•••s•••i••• •••a•••l•••j•••a•••b•••a•••r••• •••s•••e•••c•••a•••r•••a••• •••r•••u•••n•••t•••u•••t••• •••h•••i•••n•••g•••g•••a••• •••m•••e•••n•••d•••a•••p•••a•••t•••k•••a•••n••• •••j•••a•••w•••a•••b•••a•••n••• •••y•••a•••n•••g••• •••p•••a•••l•••i•••n•••g••• •••t•••e•••p•••a•••t•••.•••"
+        }
+      ],
+      "why_correct": "•••B•••e•••r•••d•••a•••s•••a•••r•••k•••a•••n••• •••a•••n•••a•••l•••i•••s•••i•••s••• •••l•••a•••n•••g•••k•••a•••h••• •••d•••a•••n••• •••p•••e•••m•••b•••u•••k•••t•••i•••a•••n••• •••d•••i••• •••a•••t•••a•••s•••,••• •••p•••i•••l•••i•••h•••a•••n••• •••y•••a•••n•••g••• •••m•••e•••m•••e•••n•••u•••h•••i••• •••s•••e•••m•••u•••a••• •••s•••y•••a•••r•••a•••t••• •••a•••d•••a•••l•••a•••h••• •••C•••.•••",
+      "tips": [
+        "Cermati apa yang ditanyakan di akhir kalimat, jangan sampai salah menghitung variabel perantara sebagai jawaban akhir."
+      ],
+      "common_mistakes": [
+        "Kurang teliti membaca informasi/data pada stimulus.",
+        "Tergesa-gesa memilih opsi jawaban sebelum memeriksa seluruh pilihan yang tersedia."
+      ]
+    }
+  ]
+}

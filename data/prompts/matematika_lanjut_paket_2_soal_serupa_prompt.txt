@@ -1,0 +1,244 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Matematika Tingkat Lanjut (Paket 2)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: ['A', 'C']
+Stimulus Teks: Diberikan segitiga pada setengah lingkaran seperti pada gambar berikut.
+Kedua sisi segitiga sama dengan jari-jari setengah lingkaran dan titik O merupakan titik pusat lingkaran.
+Luas daerah segitiga dinyatakan dengan
+dan luas daerah setengah lingkaran dinyatakan dengan
+dimana nilai
+.
+Pertanyaan: Suatu limit fungsi dipetakan sebagai
+. Bagaimana nilai limit fungsi perbandingan luas tersebut?
+Pilihlah semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: E
+Stimulus Teks: Perhatikan matriks berikut!
+Pertanyaan: Invers dari matrik F adalah ....
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: ['C', 'E']
+Stimulus Teks: Seorang pemilik Hotel mengelola 3 hotel yang berada pada kota yang berbeda. Hotel tersebut memiliki konsep dan tipe kamar yang sama yaitu Standard Room, Deluxe Room, dan Suite Room, dengan kapasitas dan harga per malam sebagai berikut.
+Pertanyaan: Pemilik hotel akan melakukan perhitungan pendapatan yang diperoleh dari ketiga hotel tersebut. Bagaimana kondisi pendapatan ketiga hotel tersebut dalam 1 hari jika semua tipe kamar terisi penuh?
+Pilih pada semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: E
+Stimulus Teks: Pak Andi memiliki beberapa sapi dan kambing. Semua hewan ternaknya selalu diberikan pakan berupa campuran rumput gajah dan rumput gamal. Setiap hari, dia selalu menyediakan 38 kg rumput gajah dan 34 kg rumput gamal untuk seluruh kambing dan sapi miliknya (tanpa sisa). Berikut adalah kebutuhan pakan untuk setiap ekor ternak milik Pak Andi per hari.
+Pertanyaan: Jika banyaknya sapi dan kambing yang dipelihara oleh Pak Andi berturut-turut adalah
+dan
+, maka
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: C
+Stimulus Teks: Sebuah pabrik minuman tradisional memproduksi tiga jenis minuman yaitu wedang jahe (WJ), beras kencur (BK), dan kunir asem (KA).
+Dalam proses produksinya, digunakan tiga bahan utama yaitu jahe (J) dalam gram, gula merah (GM) dalam gram, dan air ( A) dalam mililiter.
+Setiap botol minuman memerlukan bahan sebagai berikut:
+Pada suatu hari pabrik tersebut menerima pesanan sebagai berikut:
+Jumlah bahan baku yang digunakan dalam proses pembuatan setiap minuman adalah:
+Pertanyaan: Banyak air yang dibutuhkan untuk memproduksi satu botol kunir asem adalah ....
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: ['A', 'C']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Di manakah koordinat titik perpotongan grafik fungsi
+terhadap sumbu X?
+Pilih pada semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: D
+Stimulus Teks: Sebuah drum bahan bakar logam mengalami penambahan kapasitas volume saat terkena panas, yang dapat dinyatakan dalam fungsi berikut:
+dengan
+adalah suhu dalam derajat celsius dan
+adalah penambahan volume dalam liter.
+Pertanyaan: Apabila terdapat 10 drum dengan jenis dan ukuran yang sama, total penambahan volume dari drum-drum tersebut ketika terkena panas dengan suhu yang sama dapat dinyatakan dengan ....
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: ['A:Tidak Mungkin', 'B:Mungkin', 'C:Mungkin']
+Stimulus Teks: Sebuah perusahaan menawarkan saham kepada pembeli. Perusahaan menyiapkan modal saham yang akan dijual dan dapat dinyatakan sebagai fungsi
+dimana nilai
+dalam jutaan rupiah dan
+menyatakan banyak saham dalam satuan unit saham.
+Pertanyaan: Apabila modal saham yang dimiliki perusahaan tersebut adalah 2 milyar (2.000 juta), tentukan
+Mungkin
+atau
+Tidak Mungkin
+perusahaan dapat menjual sejumlah unit saham berikut!
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Diketahui suku banyak
+apabila dibagi oleh
+menghasilkan sisa
+, Nilai dari
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: ['A:Salah', 'B:Benar', 'C:Salah']
+Stimulus Teks: Populasi kelinci di suatu pulau dimodelkan dengan fungsi eksponensial, yaitu:
+dengan
+menyatakan waktu dalam satuan tahun dan
+menyatakan populasi dalam ribu ekor.
+Pertanyaan: Bagaimana interpretasi yang tepat mengenai model eksponensial populasi kelinci tersebut?
+---
+[SOAL ACUAN NO 11]
+Kunci Resmi: []
+Stimulus Teks: Seorang peneliti lingkungan melakukan pengamatan terhadap pertumbuhan tanaman eceng gondok di beberapa danau sekitar wilayah X. Pengamatan dilakukan selama 3 tahun dan hasil menunjukkan bahwa pertumbuhan eceng gondok dapat dimodelkan dengan fungsi berikut:
+Setelah 3 tahun pengamatan, peneliti mencatat banyak tanaman eceng gondok di beberapa wilayah perairan tersebut. Berikut data yang diperoleh:
+Pertanyaan: Berdasarkan data tersebut, wilayah perairan manakah dengan luas area yang tertutupi tanaman eceng gondok
+lebih dari 49 m
+2
+pada awal pengamatan dilakukan?
+Pilihlah setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 12]
+Kunci Resmi: E
+Stimulus Teks: Grafik berikut menyatakan perubahan kedalaman air laut di sebuah teluk.
+Pada grafik tersebut,
+menyatakan kedalaman air laut dalam meter,
+dalam jam, serta
+dan
+adalah konstanta. Berkenaan dengan nilai t pada grafik, nilai t = 6 menyatakan 6 jam setelah pukul 00.00, aturan serupa untuk nilai t lainnya.
+Pertanyaan: Waktu saat kedalaman air laut mencapai 12,3 meter untuk ketiga kalinya setelah pukul 00.00 adalah ....
+---
+[SOAL ACUAN NO 13]
+Kunci Resmi: B
+Stimulus Teks: Diketahui vektor
+Pertanyaan: Jika nilai vektor
+satuan panjang, maka nilai m yang memenuhi vektor
+adalah ...
+---
+[SOAL ACUAN NO 14]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Diketahui trapesium sama kaki
+ABCD
+dengan
+AD = BC
+dan titik
+A
+(0,0).
+Vektor-vektor posisi dari pembentuk trapesium adalah
+dan
+Nilai dari
+---
+[SOAL ACUAN NO 15]
+Kunci Resmi: []
+Stimulus Teks: Sebuah kereta api sedang melaju dengan kecepatan konstan pada sebuah lintasan lurus dari stasiun A sampai stasiun E. Diketahui koordinat stasiun A dan E (dalam km) berturut-turut adalah (2, 3, 5) dan (11, 6, 8).
+Perhatikan gambar berikut yang menggambarkan waktu tempuh (dalam menit) kereta tersebut antar stasiun:
+Pertanyaan: Manakah stasiun-stasiun yang jaraknya kurang dari 3,5 km?
+Pilih semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 16]
+Kunci Resmi: A
+Stimulus Teks: Perhartikan gambar lingkaran berikut:
+Pertanyaan: Diameter lingkaran di atas adalah 4 satuan, persamaan lingkaran yang sepusat dengan lingkaran pada gambar di atas adalah ....
+---
+[SOAL ACUAN NO 17]
+Kunci Resmi: ['B', 'D']
+Stimulus Teks: Perhatikan gambar berikut!
+Pertanyaan: Tentukan semua koordinat titik singgung lingkaran dari garis-garis singgung lingkaran yang tegak lurus terhadap garis ƒ
+!.
+Klik pada setiap jawaban benar. Jawaban Benar lebih dari satu.
+---
+[SOAL ACUAN NO 18]
+Kunci Resmi: ['A', 'D', 'E']
+Stimulus Teks: Suatu rumah makan terdapat gambar rambu lalu lintas. Gambarnya seperti gambar rambu lalu lintas balai pertolongan pertama namun tidak sama persis.
+Biasanya rambu lalu lintas itu berfungsi untuk memberikan informasi mengenai lokasi pelayanan kesehatan terdekat seperti balai kesehatan, puskesmas, atau tempat pertolongan pertama jika terjadi keadaan darurat atau kecelakaan.
+Rumah makan ini mempunyai tanda rambu lalu lintas tersebut tujuannya jika perut pelanggan sedang kelaparan segera merapat ke rumah makan tersebut supaya mendapatkan pertolongan pertama.
+Berikut gambar rambu lalu lintas balai pertolongan pertama di rumah makan tersebut.
+Pertanyaan: pemilik rumah makan ingin membuat rambu tersebut dalam jumlah banyak untuk cabang yang baru dan cat yang dibeli dalam ukuran yang sama.
+Cat warna apakah yang lebih banyak digunakan dibanding cat warna hitam?
+Klik pada semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 19]
+Kunci Resmi: ['A:Tidak Pas', 'B:Tidak Pas', 'C:Pas']
+Stimulus Teks: Pak Baskara akan membuat daun pintu dengan ornamen kaca patri berbentuk bulat di tengahnya. Berikut ini adalah detail dari daun pintu yang akan dibuat.
+Kerangka ornamen terbuat dari logam. Berfungsi untuk menempelkan potongan-potongan kaca patri. Pak Baskara sedang memilih logam yang dapat digunakan untuk membuat kerangka ornamen kaca patri. Beliau ingin memilih yang pas. Maksud pas di sini adalah: cukup untuk membuat kerangka dan sisanya tidak lebih dari 1 m.
+Berikut ini adalah jenis logam dan panjangnya yang dapat dipilih Pak Baskara untuk membuat kerangka ornamen.
+Pertanyaan: Tentukan apakah pilihan logam yang akan dibeli Pak Baskara berikut ini
+Pas
+atau
+Tidak Pas
+!
+Klik pada kolom yang sesuai!
+---
+[SOAL ACUAN NO 20]
+Kunci Resmi: E
+Stimulus Teks: Apabila garis
+dan
+dicerminkan terhadap garis
+kemudian dilanjutkan translasi
+, menghasilkan bayangan dengan persamaan berturut-turut
+dan
+.
+Pertanyaan: Nilai dari
+---
+[SOAL ACUAN NO 21]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Lingkaran
+memiliki pusat di (-5, 3) dan jari-jari 2. Lingkaran
+adalah bayangan dari
+setelah dilakukan translasi .
+Lingkaran
+dengan persamaan
+adalah bayangan dari
+setelah dilakukan dilatasi dengan pusat
+dengan faktor skala tertentu. Pernyataan yang benar mengenai translasi
+dan faktor skala dilatasi yang dilakukan adalah ….
+---
+[SOAL ACUAN NO 22]
+Kunci Resmi: ['D', 'E']
+Stimulus Teks: Garis
+merupakan bayangan garis
+dirotasikan sejauh 90º berlawanan arah jarum jam dengan pusat rotasi (2,0).
+Manakah koordinat titik yang terletak pada garis
+?
+Pertanyaan: Pilihlah semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 23]
+Kunci Resmi: A
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Nilai dari
+---
+[SOAL ACUAN NO 24]
+Kunci Resmi: B
+Stimulus Teks: Roni, penjual nasi goreng, menjual dagangannya sebanyak
+porsi dan akan memperoleh keuntungan (dalam jutaan rupiah) yang dapat dinyatakan dengan fungsi
+Pertanyaan: Keuntungan yang akan diperoleh Roni, apabila dia menjual nasi goreng dengan porsi sangat banyak adalah ….
+---
+[SOAL ACUAN NO 25]
+Kunci Resmi: E
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Nilai
+

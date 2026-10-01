@@ -1,0 +1,605 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Inggris Tingkat Lanjut (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Balancing Our Online and Offline Selves
+
+In today’s world, the line between our online and offline lives is becoming less clear. Many people create ideal versions of themselves on social media, which often do not fully match who they really are. This difference is called "digital dissonance"—the gap between how we present ourselves online and who we truly are in real life. This can affect our mental health and the quality of our relationships. First, the pressure to keep a perfect online image can cause stress, anxiety, and low self-esteem. When we compare ourselves to the happy and successful posts of others, we may feel like we are not good enough. It is important to remember that what we see online is only a small part of someone’s life, not the whole story. Reminding ourselves of this can reduce the harmful effects of unrealistic comparisons and improve our self-worth. Second, carefully crafted online personas can reduce honesty in real-life interactions. People might act differently online to gain approval or likes. This can harm genuine communication and relationships. Over time, this may create distance between friends or family members who feel they no longer know the “real” person behind the screen. To address this, we need to be mindful and responsible when using digital platforms. Being mindful means paying attention to whether our online behavior reflects our true values. It means thinking carefully before posting, being honest about our experiences, and understanding that social media is not the only way to measure success. Practicing digital mindfulness can help us use technology in a healthier, more balanced way. By staying true to ourselves both online and offline, we can enjoy the benefits of technology without losing our authenticity. This balance helps us build better self-confidence and stronger, more meaningful relationships. In a connected world, being mindful of how we present ourselves online leads to a more honest and peaceful life.
+
+Adapted from: https://medium.com/@alextimofte/the-vanishing-line-where-our-online-and-offline-selves-meet-90188f187b42
+
+PERTANYAAN:
+Which option indicates that the text represents only a single viewpoint?
+OPSI / PERNYATAAN:
+  - A. A. The text discusses only the negative effects of social media.
+  - B. B. The text only discusses the history of digital dissonance.
+  - C. C. The text only emphasizes the solution for mental illness.
+  - D. D. The text presents problems without solutions.
+  - E. E. The text provide less factual evidence.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: ['A', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Balancing Our Online and Offline Selves
+
+In today’s world, the line between our online and offline lives is becoming less clear. Many people create ideal versions of themselves on social media, which often do not fully match who they really are. This difference is called "digital dissonance"—the gap between how we present ourselves online and who we truly are in real life. This can affect our mental health and the quality of our relationships. First, the pressure to keep a perfect online image can cause stress, anxiety, and low self-esteem. When we compare ourselves to the happy and successful posts of others, we may feel like we are not good enough. It is important to remember that what we see online is only a small part of someone’s life, not the whole story. Reminding ourselves of this can reduce the harmful effects of unrealistic comparisons and improve our self-worth. Second, carefully crafted online personas can reduce honesty in real-life interactions. People might act differently online to gain approval or likes. This can harm genuine communication and relationships. Over time, this may create distance between friends or family members who feel they no longer know the “real” person behind the screen. To address this, we need to be mindful and responsible when using digital platforms. Being mindful means paying attention to whether our online behavior reflects our true values. It means thinking carefully before posting, being honest about our experiences, and understanding that social media is not the only way to measure success. Practicing digital mindfulness can help us use technology in a healthier, more balanced way. By staying true to ourselves both online and offline, we can enjoy the benefits of technology without losing our authenticity. This balance helps us build better self-confidence and stronger, more meaningful relationships. In a connected world, being mindful of how we present ourselves online leads to a more honest and peaceful life.
+
+Adapted from: https://medium.com/@alextimofte/the-vanishing-line-where-our-online-and-offline-selves-meet-90188f187b42
+
+PERTANYAAN:
+The text presents certain facts about the issue. Mrs Laurent claims these facts are not entirely accurate. Which statement below most strongly supports her claim? There is more than one correct answers. Please choose more than one correct answers!
+OPSI / PERNYATAAN:
+  - A. A. Certain information in the text cannot be verified.
+  - B. B. The facts presented happened only in the past.
+  - C. C. Some information in the text lacks verifiable evidence.
+  - D. D. The text presents problems without providing solutions.
+  - E. E. The text highlights issues that are irrelevant to modern times
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: ['A:Mindful Digital Behavior', 'B:Mindful Digital Behavior', 'C:Digital Dissonance']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Balancing Our Online and Offline Selves
+
+In today’s world, the line between our online and offline lives is becoming less clear. Many people create ideal versions of themselves on social media, which often do not fully match who they really are. This difference is called "digital dissonance"—the gap between how we present ourselves online and who we truly are in real life. This can affect our mental health and the quality of our relationships. First, the pressure to keep a perfect online image can cause stress, anxiety, and low self-esteem. When we compare ourselves to the happy and successful posts of others, we may feel like we are not good enough. It is important to remember that what we see online is only a small part of someone’s life, not the whole story. Reminding ourselves of this can reduce the harmful effects of unrealistic comparisons and improve our self-worth. Second, carefully crafted online personas can reduce honesty in real-life interactions. People might act differently online to gain approval or likes. This can harm genuine communication and relationships. Over time, this may create distance between friends or family members who feel they no longer know the “real” person behind the screen. To address this, we need to be mindful and responsible when using digital platforms. Being mindful means paying attention to whether our online behavior reflects our true values. It means thinking carefully before posting, being honest about our experiences, and understanding that social media is not the only way to measure success. Practicing digital mindfulness can help us use technology in a healthier, more balanced way. By staying true to ourselves both online and offline, we can enjoy the benefits of technology without losing our authenticity. This balance helps us build better self-confidence and stronger, more meaningful relationships. In a connected world, being mindful of how we present ourselves online leads to a more honest and peaceful life.
+
+Adapted from: https://medium.com/@alextimofte/the-vanishing-line-where-our-online-and-offline-selves-meet-90188f187b42
+
+PERTANYAAN:
+Which of the following statements reflect digital dissonance or mindful digital behavior? For each statement, select DIGITAL DISSONANCE or DIGITAL BEHAVIOUR!
+OPSI / PERNYATAAN:
+  - A. Thinking carefully before posting to reflect personal values.
+  - B. Using social media as a tool to build authentic relationships.
+  - C. Acting differently online to hide true feelings and impress others.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: ['A:Loss of Authenticity', 'B:Increased Stress', 'C:Loss of Authenticity']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Balancing Our Online and Offline Selves
+
+In today’s world, the line between our online and offline lives is becoming less clear. Many people create ideal versions of themselves on social media, which often do not fully match who they really are. This difference is called "digital dissonance"—the gap between how we present ourselves online and who we truly are in real life. This can affect our mental health and the quality of our relationships. First, the pressure to keep a perfect online image can cause stress, anxiety, and low self-esteem. When we compare ourselves to the happy and successful posts of others, we may feel like we are not good enough. It is important to remember that what we see online is only a small part of someone’s life, not the whole story. Reminding ourselves of this can reduce the harmful effects of unrealistic comparisons and improve our self-worth. Second, carefully crafted online personas can reduce honesty in real-life interactions. People might act differently online to gain approval or likes. This can harm genuine communication and relationships. Over time, this may create distance between friends or family members who feel they no longer know the “real” person behind the screen. To address this, we need to be mindful and responsible when using digital platforms. Being mindful means paying attention to whether our online behavior reflects our true values. It means thinking carefully before posting, being honest about our experiences, and understanding that social media is not the only way to measure success. Practicing digital mindfulness can help us use technology in a healthier, more balanced way. By staying true to ourselves both online and offline, we can enjoy the benefits of technology without losing our authenticity. This balance helps us build better self-confidence and stronger, more meaningful relationships. In a connected world, being mindful of how we present ourselves online leads to a more honest and peaceful life.
+
+Adapted from: https://medium.com/@alextimofte/the-vanishing-line-where-our-online-and-offline-selves-meet-90188f187b42
+
+PERTANYAAN:
+Which of the following situations may lead to increased stress or a loss of authenticity? Please choose Increased Stress or Loss of Authencity based on the information presented in the text!
+OPSI / PERNYATAAN:
+  - A. Creating an idealized online persona that differs from one’s real self.
+  - B. Constantly comparing oneself to others’ seemingly perfect social media posts.
+  - C. Hiding one’s true feelings on social media to avoid judgment.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Do Electric Vehicles Shape a Sustainable Future?
+
+The growing popularity of electric vehicles (EVs) has sparked global discussions about their role in shaping a sustainable future. As nations strive to reduce carbon emissions and transition to cleaner energy sources, EVs have been widely promoted as a practical alternative to traditional gasoline-powered cars. However, despite their many benefits, the future of electric vehicles remains a topic of debate due to various challenges that must still be addressed. On the one hand, the advantages of electric vehicles are clear. EVs produce zero tailpipe emissions, which means they do not release harmful gases such as carbon dioxide or nitrogen oxide that contribute to air pollution and climate change. Furthermore, they are quieter, reducing noise pollution in cities. As battery technology improves, EVs can travel longer distances, making them more convenient for everyday use. Additionally, governments around the world are offering financial incentives, including tax breaks and subsidies, to encourage people to buy electric cars, making them more affordable than ever before. On the other hand, there are still several drawbacks to consider. One major concern is the limited availability of charging stations, especially in rural or remote areas, which makes long-distance travel more difficult. Charging times can also be inconvenient compared to the quick refueling of conventional cars. Another issue is the environmental cost of battery production. Mining for lithium and other rare materials used in EV batteries can harm ecosystems and involve high energy use. Moreover, disposing of used batteries poses a long-term environmental risk unless proper recycling methods are widely adopted. In conclusion, while electric vehicles offer a promising solution to some of the world’s most pressing environmental problems, their future success depends on addressing current limitations. Investment in charging infrastructure, sustainable battery production, and public awareness will be essential to ensure that EVs are not only clean but also practical and accessible for everyone. The future of transportation may well be electric, but it will require careful planning and cooperation among governments, industries, and individuals to realize its full potential.
+
+Adapted from: SME News Service. (2025, July 12). Electric vehicles: The road ahead - Benefits, drawbacks & what the future holds. Sustainability ME News. https://www.sustainabilitymenews.com/transport/electric-vehicles-the-road-ahead-benefits-drawbacks-what-the-future-holds The Lifeology Editorial Team. (2024, July 3). Advantages and disadvantages of electric vehicles: A comprehensive analysis. Lifeology. https://thelifeology.com/advantages-and-disadvantages-of-electric-vehicles/2024 Alanazi, F. (2023). Electric vehicles: benefits, challenges, and potential solutions for widespread adaptation. Applied sciences, 13(10), 6016.
+
+PERTANYAAN:
+According to the text, why are electric vehicles considered better for the environment?
+OPSI / PERNYATAAN:
+  - A. A. They help reduce noise and air pollution.
+  - B. B. They require no energy to produce batteries.
+  - C. C. Their battery production is cheaper and more efficient.
+  - D. D. They can be charged easily anywhere, even in rural areas.
+  - E. E. They release carbon dioxide that contributes to global warming.
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A:False', 'B:True', 'C:True']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Do Electric Vehicles Shape a Sustainable Future?
+
+The growing popularity of electric vehicles (EVs) has sparked global discussions about their role in shaping a sustainable future. As nations strive to reduce carbon emissions and transition to cleaner energy sources, EVs have been widely promoted as a practical alternative to traditional gasoline-powered cars. However, despite their many benefits, the future of electric vehicles remains a topic of debate due to various challenges that must still be addressed. On the one hand, the advantages of electric vehicles are clear. EVs produce zero tailpipe emissions, which means they do not release harmful gases such as carbon dioxide or nitrogen oxide that contribute to air pollution and climate change. Furthermore, they are quieter, reducing noise pollution in cities. As battery technology improves, EVs can travel longer distances, making them more convenient for everyday use. Additionally, governments around the world are offering financial incentives, including tax breaks and subsidies, to encourage people to buy electric cars, making them more affordable than ever before. On the other hand, there are still several drawbacks to consider. One major concern is the limited availability of charging stations, especially in rural or remote areas, which makes long-distance travel more difficult. Charging times can also be inconvenient compared to the quick refueling of conventional cars. Another issue is the environmental cost of battery production. Mining for lithium and other rare materials used in EV batteries can harm ecosystems and involve high energy use. Moreover, disposing of used batteries poses a long-term environmental risk unless proper recycling methods are widely adopted. In conclusion, while electric vehicles offer a promising solution to some of the world’s most pressing environmental problems, their future success depends on addressing current limitations. Investment in charging infrastructure, sustainable battery production, and public awareness will be essential to ensure that EVs are not only clean but also practical and accessible for everyone. The future of transportation may well be electric, but it will require careful planning and cooperation among governments, industries, and individuals to realize its full potential.
+
+Adapted from: SME News Service. (2025, July 12). Electric vehicles: The road ahead - Benefits, drawbacks & what the future holds. Sustainability ME News. https://www.sustainabilitymenews.com/transport/electric-vehicles-the-road-ahead-benefits-drawbacks-what-the-future-holds The Lifeology Editorial Team. (2024, July 3). Advantages and disadvantages of electric vehicles: A comprehensive analysis. Lifeology. https://thelifeology.com/advantages-and-disadvantages-of-electric-vehicles/2024 Alanazi, F. (2023). Electric vehicles: benefits, challenges, and potential solutions for widespread adaptation. Applied sciences, 13(10), 6016.
+
+PERTANYAAN:
+What is mainly discussed in the text? Decide whether each statement is  True  or  False  according to the text!
+OPSI / PERNYATAAN:
+  - A. Electric vehicles do not produce harmful gases that cause air pollution and climate change.
+  - B. The future of electric vehicles remains a topic of debate due to various challenges that must still be addressed.
+  - C. Electric vehicles offer environmental solutions, but their success depends on addressing existing challenges.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: ['C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Do Electric Vehicles Shape a Sustainable Future?
+
+The growing popularity of electric vehicles (EVs) has sparked global discussions about their role in shaping a sustainable future. As nations strive to reduce carbon emissions and transition to cleaner energy sources, EVs have been widely promoted as a practical alternative to traditional gasoline-powered cars. However, despite their many benefits, the future of electric vehicles remains a topic of debate due to various challenges that must still be addressed. On the one hand, the advantages of electric vehicles are clear. EVs produce zero tailpipe emissions, which means they do not release harmful gases such as carbon dioxide or nitrogen oxide that contribute to air pollution and climate change. Furthermore, they are quieter, reducing noise pollution in cities. As battery technology improves, EVs can travel longer distances, making them more convenient for everyday use. Additionally, governments around the world are offering financial incentives, including tax breaks and subsidies, to encourage people to buy electric cars, making them more affordable than ever before. On the other hand, there are still several drawbacks to consider. One major concern is the limited availability of charging stations, especially in rural or remote areas, which makes long-distance travel more difficult. Charging times can also be inconvenient compared to the quick refueling of conventional cars. Another issue is the environmental cost of battery production. Mining for lithium and other rare materials used in EV batteries can harm ecosystems and involve high energy use. Moreover, disposing of used batteries poses a long-term environmental risk unless proper recycling methods are widely adopted. In conclusion, while electric vehicles offer a promising solution to some of the world’s most pressing environmental problems, their future success depends on addressing current limitations. Investment in charging infrastructure, sustainable battery production, and public awareness will be essential to ensure that EVs are not only clean but also practical and accessible for everyone. The future of transportation may well be electric, but it will require careful planning and cooperation among governments, industries, and individuals to realize its full potential.
+
+Adapted from: SME News Service. (2025, July 12). Electric vehicles: The road ahead - Benefits, drawbacks & what the future holds. Sustainability ME News. https://www.sustainabilitymenews.com/transport/electric-vehicles-the-road-ahead-benefits-drawbacks-what-the-future-holds The Lifeology Editorial Team. (2024, July 3). Advantages and disadvantages of electric vehicles: A comprehensive analysis. Lifeology. https://thelifeology.com/advantages-and-disadvantages-of-electric-vehicles/2024 Alanazi, F. (2023). Electric vehicles: benefits, challenges, and potential solutions for widespread adaptation. Applied sciences, 13(10), 6016.
+
+PERTANYAAN:
+Which additional facts would strengthen the writer's opinion that the limited availability of charging stations makes long-distance travel difficult? There is more than one correct answer. Click on every correct answer.
+OPSI / PERNYATAAN:
+  - A. A. Rural zones often have well-maintained roads for EV travel.
+  - B. B. Some rural communities prefer gasoline cars over EVs.
+  - C. C. Rural regions often lack more than a few charging stations per 100 km.
+  - D. D. A new technology allows EV batteries to be fully recharged in under 10 minutes.
+  - E. E. In rural zones, EV drivers may travel over 50 km before reaching a charging station.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: ['C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Do Electric Vehicles Shape a Sustainable Future?
+
+The growing popularity of electric vehicles (EVs) has sparked global discussions about their role in shaping a sustainable future. As nations strive to reduce carbon emissions and transition to cleaner energy sources, EVs have been widely promoted as a practical alternative to traditional gasoline-powered cars. However, despite their many benefits, the future of electric vehicles remains a topic of debate due to various challenges that must still be addressed. On the one hand, the advantages of electric vehicles are clear. EVs produce zero tailpipe emissions, which means they do not release harmful gases such as carbon dioxide or nitrogen oxide that contribute to air pollution and climate change. Furthermore, they are quieter, reducing noise pollution in cities. As battery technology improves, EVs can travel longer distances, making them more convenient for everyday use. Additionally, governments around the world are offering financial incentives, including tax breaks and subsidies, to encourage people to buy electric cars, making them more affordable than ever before. On the other hand, there are still several drawbacks to consider. One major concern is the limited availability of charging stations, especially in rural or remote areas, which makes long-distance travel more difficult. Charging times can also be inconvenient compared to the quick refueling of conventional cars. Another issue is the environmental cost of battery production. Mining for lithium and other rare materials used in EV batteries can harm ecosystems and involve high energy use. Moreover, disposing of used batteries poses a long-term environmental risk unless proper recycling methods are widely adopted. In conclusion, while electric vehicles offer a promising solution to some of the world’s most pressing environmental problems, their future success depends on addressing current limitations. Investment in charging infrastructure, sustainable battery production, and public awareness will be essential to ensure that EVs are not only clean but also practical and accessible for everyone. The future of transportation may well be electric, but it will require careful planning and cooperation among governments, industries, and individuals to realize its full potential.
+
+Adapted from: SME News Service. (2025, July 12). Electric vehicles: The road ahead - Benefits, drawbacks & what the future holds. Sustainability ME News. https://www.sustainabilitymenews.com/transport/electric-vehicles-the-road-ahead-benefits-drawbacks-what-the-future-holds The Lifeology Editorial Team. (2024, July 3). Advantages and disadvantages of electric vehicles: A comprehensive analysis. Lifeology. https://thelifeology.com/advantages-and-disadvantages-of-electric-vehicles/2024 Alanazi, F. (2023). Electric vehicles: benefits, challenges, and potential solutions for widespread adaptation. Applied sciences, 13(10), 6016.
+
+PERTANYAAN:
+What is the overall purpose of the text? There is more than one correct answer. Click on every correct answer.
+OPSI / PERNYATAAN:
+  - A. A. To promote electric vehicles as a key solution to climate problems.
+  - B. B. To argue that EVs may currently cause more harm than good.
+  - C. C. To inform readers about both the pros and cons of electric vehicles.
+  - D. D. To encourage balanced thinking about electric vehicle development.
+  - E. E. To criticize governments for lacking support for electric transport.
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['A:Effect', 'B:Cause', 'C:Effect']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Do Electric Vehicles Shape a Sustainable Future?
+
+The growing popularity of electric vehicles (EVs) has sparked global discussions about their role in shaping a sustainable future. As nations strive to reduce carbon emissions and transition to cleaner energy sources, EVs have been widely promoted as a practical alternative to traditional gasoline-powered cars. However, despite their many benefits, the future of electric vehicles remains a topic of debate due to various challenges that must still be addressed. On the one hand, the advantages of electric vehicles are clear. EVs produce zero tailpipe emissions, which means they do not release harmful gases such as carbon dioxide or nitrogen oxide that contribute to air pollution and climate change. Furthermore, they are quieter, reducing noise pollution in cities. As battery technology improves, EVs can travel longer distances, making them more convenient for everyday use. Additionally, governments around the world are offering financial incentives, including tax breaks and subsidies, to encourage people to buy electric cars, making them more affordable than ever before. On the other hand, there are still several drawbacks to consider. One major concern is the limited availability of charging stations, especially in rural or remote areas, which makes long-distance travel more difficult. Charging times can also be inconvenient compared to the quick refueling of conventional cars. Another issue is the environmental cost of battery production. Mining for lithium and other rare materials used in EV batteries can harm ecosystems and involve high energy use. Moreover, disposing of used batteries poses a long-term environmental risk unless proper recycling methods are widely adopted. In conclusion, while electric vehicles offer a promising solution to some of the world’s most pressing environmental problems, their future success depends on addressing current limitations. Investment in charging infrastructure, sustainable battery production, and public awareness will be essential to ensure that EVs are not only clean but also practical and accessible for everyone. The future of transportation may well be electric, but it will require careful planning and cooperation among governments, industries, and individuals to realize its full potential.
+
+Adapted from: SME News Service. (2025, July 12). Electric vehicles: The road ahead - Benefits, drawbacks & what the future holds. Sustainability ME News. https://www.sustainabilitymenews.com/transport/electric-vehicles-the-road-ahead-benefits-drawbacks-what-the-future-holds The Lifeology Editorial Team. (2024, July 3). Advantages and disadvantages of electric vehicles: A comprehensive analysis. Lifeology. https://thelifeology.com/advantages-and-disadvantages-of-electric-vehicles/2024 Alanazi, F. (2023). Electric vehicles: benefits, challenges, and potential solutions for widespread adaptation. Applied sciences, 13(10), 6016.
+
+PERTANYAAN:
+Which of the following statements presents a cause or an effect based on the text? Decide whether each statement is   CAUSE  or   EFFECT  according to the text!
+OPSI / PERNYATAAN:
+  - A. People are being incentivized to invest in electric vehicles.
+  - B. Governments worldwide offer incentives to make EVs affordable.
+  - C. People are encouraged to buy electric cars.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Rise of Finfluencers
+
+In today’s rapidly evolving digital age, understanding personal finance has become essential—yet many still find investing, budgeting, and growing wealth difficult to grasp. That’s where financial influencers, or “finfluencers,” play a crucial role. These individuals simplify complex financial topics, making them accessible to a broader audience and empowering people to make informed financial choices. Finfluencers share useful advice on managing money, from saving and investing to tackling debt. Unlike conservative advisors, they utilize social media and create short videos as tools to educate followers. A study in 2023 found that 76% of people learn faster through visual and short form content vs. traditional articles. Therefore, whether you're just starting to study the stock market or trying to structure monthly budget, finfluencers provide real, practical, and easy-to-understand insights. One of the major advantages of following finfluencers is their openness. Many share their personal experiences, including financial wins and setbacks, which builds authenticity and trust. A survey in 2024 reveals that 78% of consumers trust ‘people like themselves’ or relatable experts over corporations. This shows their authenticity will drive positive result. Furthermore, they also stay current with economic trends, cryptocurrency updates, and passive income ideas, which help their audiences stay ahead in a shifting financial landscape. Additionally, finfluencers serve as motivation by sharing relatable success stories and encouraging habits like saving for early retirement or building financial independence. Some even help protect their followers by debunking financial myths and warning against high-risk ventures like meme stocks and speculative crypto schemes. With the right guidance, you can become more financially empowered. There's no need to navigate your financial journey alone when credible, expert advice is just a scroll away. Start learning from finfluencers today and begin shaping a more secure financial future.
+
+Adapted from: 1. https://artafinance.com/insights/gen-z-in-crisis-money-mental-health-and-the-fight-for-stability#whats-fueling-the-crisis 2. ⁠⁠https://www.wesleyan.co.uk/the-next-step/blog/detail/financial-influencers 3. ⁠ https://dfpi.ca.gov/news/insights/social-media-finfluencers-who-should-you-trust/4. ⁠ https://www.simplyacademy.com/news-post/the-impact-of-finfluencers-on-the-financial-advice-sector/5. ⁠https://www.youtube.com/watch?v=ILsXSJeF9Xc&ab_channel=ThePlainBagel
+
+PERTANYAAN:
+People learn more easily from finfluencers and believe in them because the people...
+OPSI / PERNYATAAN:
+  - A. A. enjoy finfluencers’ short contents and think they have things in common.
+  - B. B. no longer believe in traditional advisors because they are out of date.
+  - C. C. anticipate a financial change which require guidance from finfluencers.
+  - D. D. are facing more complicated financial issues that are difficult to tackle.
+  - E. E. have used social media frequently in recent years and trust them more.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Rise of Finfluencers
+
+In today’s rapidly evolving digital age, understanding personal finance has become essential—yet many still find investing, budgeting, and growing wealth difficult to grasp. That’s where financial influencers, or “finfluencers,” play a crucial role. These individuals simplify complex financial topics, making them accessible to a broader audience and empowering people to make informed financial choices. Finfluencers share useful advice on managing money, from saving and investing to tackling debt. Unlike conservative advisors, they utilize social media and create short videos as tools to educate followers. A study in 2023 found that 76% of people learn faster through visual and short form content vs. traditional articles. Therefore, whether you're just starting to study the stock market or trying to structure monthly budget, finfluencers provide real, practical, and easy-to-understand insights. One of the major advantages of following finfluencers is their openness. Many share their personal experiences, including financial wins and setbacks, which builds authenticity and trust. A survey in 2024 reveals that 78% of consumers trust ‘people like themselves’ or relatable experts over corporations. This shows their authenticity will drive positive result. Furthermore, they also stay current with economic trends, cryptocurrency updates, and passive income ideas, which help their audiences stay ahead in a shifting financial landscape. Additionally, finfluencers serve as motivation by sharing relatable success stories and encouraging habits like saving for early retirement or building financial independence. Some even help protect their followers by debunking financial myths and warning against high-risk ventures like meme stocks and speculative crypto schemes. With the right guidance, you can become more financially empowered. There's no need to navigate your financial journey alone when credible, expert advice is just a scroll away. Start learning from finfluencers today and begin shaping a more secure financial future.
+
+Adapted from: 1. https://artafinance.com/insights/gen-z-in-crisis-money-mental-health-and-the-fight-for-stability#whats-fueling-the-crisis 2. ⁠⁠https://www.wesleyan.co.uk/the-next-step/blog/detail/financial-influencers 3. ⁠https://dfpi.ca.gov/news/insights/social-media-finfluencers-who-should-you-trust/4. ⁠https://www.simplyacademy.com/news-post/the-impact-of-finfluencers-on-the-financial-advice-sector/5. ⁠ https://www.youtube.com/watch?v=ILsXSJeF9Xc&ab_channel=ThePlainBagel
+
+PERTANYAAN:
+What extra evidence could strengthen the point made in the text?
+OPSI / PERNYATAAN:
+  - A. A. Many social media channels invite finfluencers to their programme.
+  - B. B. Finfluencers’ contents used to get a little hype in social media.
+  - C. C. Most of the people remain think financial issues are negligible.
+  - D. D. Most audience are already well informed about personal finance.
+  - E. E. Current financial topics rarely become trending in social media.
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Rise of Finfluencers
+
+In today’s rapidly evolving digital age, understanding personal finance has become essential—yet many still find investing, budgeting, and growing wealth difficult to grasp. That’s where financial influencers, or “finfluencers,” play a crucial role. These individuals simplify complex financial topics, making them accessible to a broader audience and empowering people to make informed financial choices. Finfluencers share useful advice on managing money, from saving and investing to tackling debt. Unlike conservative advisors, they utilize social media and create short videos as tools to educate followers. A study in 2023 found that 76% of people learn faster through visual and short form content vs. traditional articles. Therefore, whether you're just starting to study the stock market or trying to structure monthly budget, finfluencers provide real, practical, and easy-to-understand insights. One of the major advantages of following finfluencers is their openness. Many share their personal experiences, including financial wins and setbacks, which builds authenticity and trust. A survey in 2024 reveals that 78% of consumers trust ‘people like themselves’ or relatable experts over corporations. This shows their authenticity will drive positive result. Furthermore, they also stay current with economic trends, cryptocurrency updates, and passive income ideas, which help their audiences stay ahead in a shifting financial landscape. Additionally, finfluencers serve as motivation by sharing relatable success stories and encouraging habits like saving for early retirement or building financial independence. Some even help protect their followers by debunking financial myths and warning against high-risk ventures like meme stocks and speculative crypto schemes. With the right guidance, you can become more financially empowered. There's no need to navigate your financial journey alone when credible, expert advice is just a scroll away. Start learning from finfluencers today and begin shaping a more secure financial future.
+
+Adapted from: 1. https://artafinance.com/insights/gen-z-in-crisis-money-mental-health-and-the-fight-for-stability#whats-fueling-the-crisis 2. ⁠⁠ https://www.wesleyan.co.uk/the-next-step/blog/detail/financial-influencers 3. ⁠ https://dfpi.ca.gov/news/insights/social-media-finfluencers-who-should-you-trust/4. ⁠https://www.simplyacademy.com/news-post/the-impact-of-finfluencers-on-the-financial-advice-sector/5. ⁠https://www.youtube.com/watch?v=ILsXSJeF9Xc&ab_channel=ThePlainBagel
+
+PERTANYAAN:
+From the text, the writer wants to convince people to ….
+OPSI / PERNYATAAN:
+  - A. A. follow finfluencers in transforming their finance condition
+  - B. B. join the trend by watching more finfluencers in social media
+  - C. C. tackle their own finance problems by becoming finfluencer
+  - D. D. learn how to be a reputable and knowledgeable finfluencer
+  - E. E. create more short-form contents about financial independence
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+The Rise of Finfluencers
+
+In today’s rapidly evolving digital age, understanding personal finance has become essential—yet many still find investing, budgeting, and growing wealth difficult to grasp. That’s where financial influencers, or “finfluencers,” play a crucial role. These individuals simplify complex financial topics, making them accessible to a broader audience and empowering people to make informed financial choices. Finfluencers share useful advice on managing money, from saving and investing to tackling debt. Unlike conservative advisors, they utilize social media and create short videos as tools to educate followers. A study in 2023 found that 76% of people learn faster through visual and short form content vs. traditional articles. Therefore, whether you're just starting to study the stock market or trying to structure monthly budget, finfluencers provide real, practical, and easy-to-understand insights. One of the major advantages of following finfluencers is their openness. Many share their personal experiences, including financial wins and setbacks, which builds authenticity and trust. A survey in 2024 reveals that 78% of consumers trust ‘people like themselves’ or relatable experts over corporations. This shows their authenticity will drive positive result. Furthermore, they also stay current with economic trends, cryptocurrency updates, and passive income ideas, which help their audiences stay ahead in a shifting financial landscape. Additionally, finfluencers serve as motivation by sharing relatable success stories and encouraging habits like saving for early retirement or building financial independence. Some even help protect their followers by debunking financial myths and warning against high-risk ventures like meme stocks and speculative crypto schemes. With the right guidance, you can become more financially empowered. There's no need to navigate your financial journey alone when credible, expert advice is just a scroll away. Start learning from finfluencers today and begin shaping a more secure financial future.
+
+Adapted from: 1. https://artafinance.com/insights/gen-z-in-crisis-money-mental-health-and-the-fight-for-stability#whats-fueling-the-crisis 2. ⁠⁠ https://www.wesleyan.co.uk/the-next-step/blog/detail/financial-influencers 3. ⁠ https://dfpi.ca.gov/news/insights/social-media-finfluencers-who-should-you-trust/4. ⁠https://www.simplyacademy.com/news-post/the-impact-of-finfluencers-on-the-financial-advice-sector/5. ⁠https://www.youtube.com/watch?v=ILsXSJeF9Xc&ab_channel=ThePlainBagel
+
+PERTANYAAN:
+What reasons does the writer give to support their main opinion? There is more than one correct answer. Click on every correct answer.
+OPSI / PERNYATAAN:
+  - A. A. Finfluencers’ content is easy-to-digest for their audience.
+  - B. B. Finfluencers’ openness will damage their trustworthiness.
+  - C. C. Finfluencers protect people from making reckless financial choices.
+  - D. D. Finfluencers are those who study finance in higher education.
+  - E. E. Finfluencers broaden their audience by employing social media.
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: ['A:SUITABLE', 'B:UNSUITABLE', 'C:SUITABLE']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+The Rise of Finfluencers
+
+In today’s rapidly evolving digital age, understanding personal finance has become essential—yet many still find investing, budgeting, and growing wealth difficult to grasp. That’s where financial influencers, or “finfluencers,” play a crucial role. These individuals simplify complex financial topics, making them accessible to a broader audience and empowering people to make informed financial choices. Finfluencers share useful advice on managing money, from saving and investing to tackling debt. Unlike conservative advisors, they utilize social media and create short videos as tools to educate followers. A study in 2023 found that 76% of people learn faster through visual and short form content vs. traditional articles. Therefore, whether you're just starting to study the stock market or trying to structure monthly budget, finfluencers provide real, practical, and easy-to-understand insights. One of the major advantages of following finfluencers is their openness. Many share their personal experiences, including financial wins and setbacks, which builds authenticity and trust. A survey in 2024 reveals that 78% of consumers trust ‘people like themselves’ or relatable experts over corporations. This shows their authenticity will drive positive result. Furthermore, they also stay current with economic trends, cryptocurrency updates, and passive income ideas, which help their audiences stay ahead in a shifting financial landscape. Additionally, finfluencers serve as motivation by sharing relatable success stories and encouraging habits like saving for early retirement or building financial independence. Some even help protect their followers by debunking financial myths and warning against high-risk ventures like meme stocks and speculative crypto schemes. With the right guidance, you can become more financially empowered. There's no need to navigate your financial journey alone when credible, expert advice is just a scroll away. Start learning from finfluencers today and begin shaping a more secure financial future.
+
+Adapted from: 1. https://artafinance.com/insights/gen-z-in-crisis-money-mental-health-and-the-fight-for-stability#whats-fueling-the-crisis 2. ⁠⁠https://www.wesleyan.co.uk/the-next-step/blog/detail/financial-influencers 3. ⁠ https://dfpi.ca.gov/news/insights/social-media-finfluencers-who-should-you-trust/4. ⁠https://www.simplyacademy.com/news-post/the-impact-of-finfluencers-on-the-financial-advice-sector/5. ⁠ https://www.youtube.com/watch?v=ILsXSJeF9Xc&ab_channel=ThePlainBagel
+
+PERTANYAAN:
+In the text, the crucial role of finfluencers is well explained. Which statement best supports the idea above? Decide whether each statement is Suitable or Unsuitable according to the text!
+OPSI / PERNYATAAN:
+  - A. They make financial lessons easier to understand for everyone.
+  - B. Finfluencers mainly focus on warning people about risky investments.
+  - C. Finfluencers’ openness builds trust and keeps followers informed.
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Urban Farming: Vertical Garden as an Alternative
+
+As urban populations grow and farmland becomes scarcer, vertical farming has emerged as an innovative solution to food production challenges. Vertical farming involves growing crops in stacked layers, often in controlled indoor environments using hydroponics or aeroponics. This method promises many benefits, but it also comes with some drawbacks that must be considered. One major advantage of vertical farming is its efficient use of space. Since crops are grown vertically rather than horizontally, this system is ideal for cities where land is limited. It allows fresh produce to be grown close to consumers, reducing transportation costs and carbon emissions. Additionally, vertical farms can operate year-round, independent of seasonal changes, ensuring a steady supply of food. Another benefit is the reduced environmental impact compared to traditional farming. Vertical gardens use up to 90% less water because they recycle water within the system. They also eliminate the need for chemical pesticides and herbicides, resulting in cleaner water systems and healthier ecosystems. Moreover, since crops don’t require soil, there is no risk of soil degradation or erosion. However, there are also notable disadvantages to vertical farming. One of the biggest concerns is the high initial cost of setting up a vertical farm. These systems require advanced technology, LED lighting, climate control, and automation, which can be expensive to install and maintain. In addition, vertical farming uses a significant amount of electricity, especially for lighting, which may offset some of its environmental benefits if the energy is not sourced from renewable resources. Despite these challenges, vertical farming remains a promising option for sustainable agriculture, especially in urban areas. While it may not fully replace traditional farming, it offers a way to grow food more efficiently in the face of population growth and climate change. As technology improves and costs decrease, vertical farming could play a key role in feeding future generations in a more sustainable way.
+
+Adapted from: (n.d.). Advantages and disadvantages of vertical farming. Agri Planting. https://agriplanting.com/advantages-and-disadvantages-of-vertical-farming/Glover, E., & Urwin, M. (2024, January 5). Is vertical farming the future of agriculture? Inside the growing tech industry changing the way we cultivate food. Built In. https://builtin.com/articles/vertical-farming New Agri India. (2024, November 1). Vertical farming: A modern approach to urban agriculture. New Agri India. https://newagriindia.com/vertical-farming-an-approach-to-urban-agriculture/
+
+PERTANYAAN:
+According to the text, which of the following is a major disadvantage of vertical farming?
+OPSI / PERNYATAAN:
+  - A. A. It uses more land than traditional farming.
+  - B. B. It requires a large amount of electricity.
+  - C. C. It pollutes water sources with pesticides.
+  - D. D. It can only grow crops in certain seasons.
+  - E. E. It increases transportation costs.
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: ['A:False', 'B:False', 'C:True']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Urban Farming: Vertical Garden as an Alternative
+
+As urban populations grow and farmland becomes scarcer, vertical farming has emerged as an innovative solution to food production challenges. Vertical farming involves growing crops in stacked layers, often in controlled indoor environments using hydroponics or aeroponics. This method promises many benefits, but it also comes with some drawbacks that must be considered. One major advantage of vertical farming is its efficient use of space. Since crops are grown vertically rather than horizontally, this system is ideal for cities where land is limited. It allows fresh produce to be grown close to consumers, reducing transportation costs and carbon emissions. Additionally, vertical farms can operate year-round, independent of seasonal changes, ensuring a steady supply of food. Another benefit is the reduced environmental impact compared to traditional farming. Vertical gardens use up to 90% less water because they recycle water within the system. They also eliminate the need for chemical pesticides and herbicides, resulting in cleaner water systems and healthier ecosystems. Moreover, since crops don’t require soil, there is no risk of soil degradation or erosion. However, there are also notable disadvantages to vertical farming. One of the biggest concerns is the high initial cost of setting up a vertical farm. These systems require advanced technology, LED lighting, climate control, and automation, which can be expensive to install and maintain. In addition, vertical farming uses a significant amount of electricity, especially for lighting, which may offset some of its environmental benefits if the energy is not sourced from renewable resources. Despite these challenges, vertical farming remains a promising option for sustainable agriculture, especially in urban areas. While it may not fully replace traditional farming, it offers a way to grow food more efficiently in the face of population growth and climate change. As technology improves and costs decrease, vertical farming could play a key role in feeding future generations in a more sustainable way.
+
+Adapted from: (n.d.). Advantages and disadvantages of vertical farming. Agri Planting. https://agriplanting.com/advantages-and-disadvantages-of-vertical-farming/Glover, E., & Urwin, M. (2024, January 5). Is vertical farming the future of agriculture? Inside the growing tech industry changing the way we cultivate food. Built In. https://builtin.com/articles/vertical-farming New Agri India. (2024, November 1). Vertical farming: A modern approach to urban agriculture. New Agri India. https://newagriindia.com/vertical-farming-an-approach-to-urban-agriculture/
+
+PERTANYAAN:
+What is the main focus of the text above? Choose the correct category!
+OPSI / PERNYATAAN:
+  - A. The development of vertical farming in cities.
+  - B. The advanced technology system o used in vertical farming.
+  - C. The potential benefits and challenges of vertical farming
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Urban Farming: Vertical Garden as an Alternative
+
+As urban populations grow and farmland becomes scarcer, vertical farming has emerged as an innovative solution to food production challenges. Vertical farming involves growing crops in stacked layers, often in controlled indoor environments using hydroponics or aeroponics. This method promises many benefits, but it also comes with some drawbacks that must be considered. One major advantage of vertical farming is its efficient use of space. Since crops are grown vertically rather than horizontally, this system is ideal for cities where land is limited. It allows fresh produce to be grown close to consumers, reducing transportation costs and carbon emissions. Additionally, vertical farms can operate year-round, independent of seasonal changes, ensuring a steady supply of food. Another benefit is the reduced environmental impact compared to traditional farming. Vertical gardens use up to 90% less water because they recycle water within the system. They also eliminate the need for chemical pesticides and herbicides, resulting in cleaner water systems and healthier ecosystems. Moreover, since crops don’t require soil, there is no risk of soil degradation or erosion. However, there are also notable disadvantages to vertical farming. One of the biggest concerns is the high initial cost of setting up a vertical farm. These systems require advanced technology, LED lighting, climate control, and automation, which can be expensive to install and maintain. In addition, vertical farming uses a significant amount of electricity, especially for lighting, which may offset some of its environmental benefits if the energy is not sourced from renewable resources. Despite these challenges, vertical farming remains a promising option for sustainable agriculture, especially in urban areas. While it may not fully replace traditional farming, it offers a way to grow food more efficiently in the face of population growth and climate change. As technology improves and costs decrease, vertical farming could play a key role in feeding future generations in a more sustainable way.
+
+Adapted from: (n.d.). Advantages and disadvantages of vertical farming. Agri Planting. https://agriplanting.com/advantages-and-disadvantages-of-vertical-farming/Glover, E., & Urwin, M. (2024, January 5). Is vertical farming the future of agriculture? Inside the growing tech industry changing the way we cultivate food. Built In. https://builtin.com/articles/vertical-farming New Agri India. (2024, November 1). Vertical farming: A modern approach to urban agriculture. New Agri India. https://newagriindia.com/vertical-farming-an-approach-to-urban-agriculture/
+
+PERTANYAAN:
+Which of the following ideas would support the argument that vertical farming is a promising solution for sustainable food production? There is more than one correct answer. Click on every correct answer.
+OPSI / PERNYATAAN:
+  - A. A. Pests are rarely a problem in indoor vertical farms.
+  - B. B. Some vertical farms are powered by solar and wind energy.
+  - C. C. Many urban consumers prefer locally grown food from vertical farms.
+  - D. D. Vertical farms use up to 95% less water than traditional farming.
+  - E. E. Vertical farms need technical skills that few people currently have.
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['A', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Urban Farming: Vertical Garden as an Alternative
+
+As urban populations grow and farmland becomes scarcer, vertical farming has emerged as an innovative solution to food production challenges. Vertical farming involves growing crops in stacked layers, often in controlled indoor environments using hydroponics or aeroponics. This method promises many benefits, but it also comes with some drawbacks that must be considered. One major advantage of vertical farming is its efficient use of space. Since crops are grown vertically rather than horizontally, this system is ideal for cities where land is limited. It allows fresh produce to be grown close to consumers, reducing transportation costs and carbon emissions. Additionally, vertical farms can operate year-round, independent of seasonal changes, ensuring a steady supply of food. Another benefit is the reduced environmental impact compared to traditional farming. Vertical gardens use up to 90% less water because they recycle water within the system. They also eliminate the need for chemical pesticides and herbicides, resulting in cleaner water systems and healthier ecosystems. Moreover, since crops don’t require soil, there is no risk of soil degradation or erosion. However, there are also notable disadvantages to vertical farming. One of the biggest concerns is the high initial cost of setting up a vertical farm. These systems require advanced technology, LED lighting, climate control, and automation, which can be expensive to install and maintain. In addition, vertical farming uses a significant amount of electricity, especially for lighting, which may offset some of its environmental benefits if the energy is not sourced from renewable resources. Despite these challenges, vertical farming remains a promising option for sustainable agriculture, especially in urban areas. While it may not fully replace traditional farming, it offers a way to grow food more efficiently in the face of population growth and climate change. As technology improves and costs decrease, vertical farming could play a key role in feeding future generations in a more sustainable way.
+
+Adapted from: (n.d.). Advantages and disadvantages of vertical farming. Agri Planting. https://agriplanting.com/advantages-and-disadvantages-of-vertical-farming/Glover, E., & Urwin, M. (2024, January 5). Is vertical farming the future of agriculture? Inside the growing tech industry changing the way we cultivate food. Built In. https://builtin.com/articles/vertical-farming New Agri India. (2024, November 1). Vertical farming: A modern approach to urban agriculture. New Agri India. https://newagriindia.com/vertical-farming-an-approach-to-urban-agriculture/
+
+PERTANYAAN:
+What is the implied purpose of the text? There is more than one correct answer. Click on every correct answer.
+OPSI / PERNYATAAN:
+  - A. A. To describe how vertical farming works and where it is typically used.
+  - B. B. To explain why vertical farming is suitable for areas with limited farmland.
+  - C. C. To persuade readers to support vertical farming over traditional farming.
+  - D. D. To highlight both the benefits and challenges of vertical farming.
+  - E. E. To show how vertical farming can contribute to future food sustainability.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: ['A:Argument', 'B:Explanation', 'C:Explanation']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Urban Farming: Vertical Garden as an Alternative
+
+As urban populations grow and farmland becomes scarcer, vertical farming has emerged as an innovative solution to food production challenges. Vertical farming involves growing crops in stacked layers, often in controlled indoor environments using hydroponics or aeroponics. This method promises many benefits, but it also comes with some drawbacks that must be considered. One major advantage of vertical farming is its efficient use of space. Since crops are grown vertically rather than horizontally, this system is ideal for cities where land is limited. It allows fresh produce to be grown close to consumers, reducing transportation costs and carbon emissions. Additionally, vertical farms can operate year-round, independent of seasonal changes, ensuring a steady supply of food. Another benefit is the reduced environmental impact compared to traditional farming. Vertical gardens use up to 90% less water because they recycle water within the system. They also eliminate the need for chemical pesticides and herbicides, resulting in cleaner water systems and healthier ecosystems. Moreover, since crops don’t require soil, there is no risk of soil degradation or erosion. However, there are also notable disadvantages to vertical farming. One of the biggest concerns is the high initial cost of setting up a vertical farm. These systems require advanced technology, LED lighting, climate control, and automation, which can be expensive to install and maintain. In addition, vertical farming uses a significant amount of electricity, especially for lighting, which may offset some of its environmental benefits if the energy is not sourced from renewable resources. Despite these challenges, vertical farming remains a promising option for sustainable agriculture, especially in urban areas. While it may not fully replace traditional farming, it offers a way to grow food more efficiently in the face of population growth and climate change. As technology improves and costs decrease, vertical farming could play a key role in feeding future generations in a more sustainable way.
+
+Adapted from: (n.d.). Advantages and disadvantages of vertical farming. Agri Planting. https://agriplanting.com/advantages-and-disadvantages-of-vertical-farming/Glover, E., & Urwin, M. (2024, January 5). Is vertical farming the future of agriculture? Inside the growing tech industry changing the way we cultivate food. Built In. https://builtin.com/articles/vertical-farming New Agri India. (2024, November 1). Vertical farming: A modern approach to urban agriculture. New Agri India. https://newagriindia.com/vertical-farming-an-approach-to-urban-agriculture/
+
+PERTANYAAN:
+Read each statement below. Decide whether it is an argument or an explanation.
+OPSI / PERNYATAAN:
+  - A. Another benefit is the reduced environmental impact compared to traditional farming.
+  - B. Vertical gardens use up to 90% less water because they recycle water within the system.
+  - C. They eliminate the need for chemical pesticides and herbicides, resulting in cleaner water systems.
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Fast Fashion: Convenience at a Cost
+
+Fast fashion refers to the production of inexpensive clothing in response to rapidly changing trends. It allows people to buy stylish clothes quickly and at low prices. In many cities, young people enjoy following online trends and changing their outfits often. But this lifestyle choice comes with serious consequences, especially for the environment. Supporters of fast fashion argue that it makes clothing more accessible. In the past, many people could only afford new clothes a few times a year. Now, with lower prices and faster delivery, fashion feels more democratic. Some businesses are even trying to reduce waste by reusing materials or selling secondhand clothing. These small steps are part of what is called a “circular economy,” where products are reused or recycled instead of thrown away. If supported by technology and better systems, this approach could help reduce the negative impact of fast fashion. However, the problems linked to fast fashion are still severe. The fashion industry is responsible for around 8–10% of global carbon emissions and about 20% of industrial water pollution. Producing just one cotton shirt uses up enough water to supply a person with drinking water for two years. Many fast fashion items are made from materials that are not biodegradable, meaning they stay in landfills for hundreds of years. Because these clothes are often low in quality, people wear them only a few times before discarding them. In some countries, clothing consumption has grown by over 50% in the last decade, while the average use of each item has fallen sharply. Finding a balance between style and responsibility is not easy. Recycling clothes remains a challenge, and not all donated clothes are reused. Still, changes are possible. Some governments are starting to create rules that make companies more responsible for waste. Education also plays an important role. If more people understand the impact of their shopping habits, they may begin to choose better quality items and buy fewer things. In the end, fashion can still be fun—but it must also be fair and sustainable.
+
+Source: Long, X. (2025). How does fast fashion affect the environment? Economics Observatory. https://www.economicsobservatory.com/how-does-fast-fashion-affect-the-environment
+
+PERTANYAAN:
+According to the text, what is one environmental impact caused by fast fashion?
+OPSI / PERNYATAAN:
+  - A. A. It makes clothes more affordable for many people.
+  - B. B. It encourages people to recycle their old clothes.
+  - C. C. It produces a significant amount of water pollution.
+  - D. D. It produces appealing but low-quality clothing.
+  - E. E. It encourages the emergence of the "circular economy".
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: ['A', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Fast Fashion: Convenience at a Cost
+
+Fast fashion refers to the production of inexpensive clothing in response to rapidly changing trends. It allows people to buy stylish clothes quickly and at low prices. In many cities, young people enjoy following online trends and changing their outfits often. But this lifestyle choice comes with serious consequences, especially for the environment. Supporters of fast fashion argue that it makes clothing more accessible. In the past, many people could only afford new clothes a few times a year. Now, with lower prices and faster delivery, fashion feels more democratic. Some businesses are even trying to reduce waste by reusing materials or selling secondhand clothing. These small steps are part of what is called a “circular economy,” where products are reused or recycled instead of thrown away. If supported by technology and better systems, this approach could help reduce the negative impact of fast fashion. However, the problems linked to fast fashion are still severe. The fashion industry is responsible for around 8–10% of global carbon emissions and about 20% of industrial water pollution. Producing just one cotton shirt uses up enough water to supply a person with drinking water for two years. Many fast fashion items are made from materials that are not biodegradable, meaning they stay in landfills for hundreds of years. Because these clothes are often low in quality, people wear them only a few times before discarding them. In some countries, clothing consumption has grown by over 50% in the last decade, while the average use of each item has fallen sharply. Finding a balance between style and responsibility is not easy. Recycling clothes remains a challenge, and not all donated clothes are reused. Still, changes are possible. Some governments are starting to create rules that make companies more responsible for waste. Education also plays an important role. If more people understand the impact of their shopping habits, they may begin to choose better quality items and buy fewer things. In the end, fashion can still be fun—but it must also be fair and sustainable.
+
+Source: Long, X. (2025). How does fast fashion affect the environment? Economics Observatory. https://www.economicsobservatory.com/how-does-fast-fashion-affect-the-environment
+
+PERTANYAAN:
+What does the text say about fast fashion? There is more than one correct answer. Click on every correct answer.
+OPSI / PERNYATAAN:
+  - A. A. The fashion industry is responsible for up to 10% of global carbon emissions.
+  - B. B. A circular economy involves customers reusing or recycling materials to reduce waste.
+  - C. C. Fast fashion clothes are created to be worn only a few times before being thrown away.
+  - D. D. The use of biodegradable materials has reduced fast fashion’s environmental impact.
+  - E. E. Fast fashion became popular because it offers stylish and trendy clothes at low prices.
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Fast Fashion: Convenience at a Cost
+
+Fast fashion refers to the production of inexpensive clothing in response to rapidly changing trends. It allows people to buy stylish clothes quickly and at low prices. In many cities, young people enjoy following online trends and changing their outfits often. But this lifestyle choice comes with serious consequences, especially for the environment. Supporters of fast fashion argue that it makes clothing more accessible. In the past, many people could only afford new clothes a few times a year. Now, with lower prices and faster delivery, fashion feels more democratic. Some businesses are even trying to reduce waste by reusing materials or selling secondhand clothing. These small steps are part of what is called a “circular economy,” where products are reused or recycled instead of thrown away. If supported by technology and better systems, this approach could help reduce the negative impact of fast fashion. However, the problems linked to fast fashion are still severe. The fashion industry is responsible for around 8–10% of global carbon emissions and about 20% of industrial water pollution. Producing just one cotton shirt uses up enough water to supply a person with drinking water for two years. Many fast fashion items are made from materials that are not biodegradable, meaning they stay in landfills for hundreds of years. Because these clothes are often low in quality, people wear them only a few times before discarding them. In some countries, clothing consumption has grown by over 50% in the last decade, while the average use of each item has fallen sharply. Finding a balance between style and responsibility is not easy. Recycling clothes remains a challenge, and not all donated clothes are reused. Still, changes are possible. Some governments are starting to create rules that make companies more responsible for waste. Education also plays an important role. If more people understand the impact of their shopping habits, they may begin to choose better quality items and buy fewer things. In the end, fashion can still be fun—but it must also be fair and sustainable.
+
+Source: Long, X. (2025). How does fast fashion affect the environment? Economics Observatory. https://www.economicsobservatory.com/how-does-fast-fashion-affect-the-environment
+
+PERTANYAAN:
+The text discusses the phenomenon of fast fashion. Which of the following flowcharts best reflects the structure of the text?
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Fast Fashion: Convenience at a Cost
+
+Fast fashion refers to the production of inexpensive clothing in response to rapidly changing trends. It allows people to buy stylish clothes quickly and at low prices. In many cities, young people enjoy following online trends and changing their outfits often. But this lifestyle choice comes with serious consequences, especially for the environment. Supporters of fast fashion argue that it makes clothing more accessible. In the past, many people could only afford new clothes a few times a year. Now, with lower prices and faster delivery, fashion feels more democratic. Some businesses are even trying to reduce waste by reusing materials or selling secondhand clothing. These small steps are part of what is called a “circular economy,” where products are reused or recycled instead of thrown away. If supported by technology and better systems, this approach could help reduce the negative impact of fast fashion. However, the problems linked to fast fashion are still severe. The fashion industry is responsible for around 8–10% of global carbon emissions and about 20% of industrial water pollution. Producing just one cotton shirt uses up enough water to supply a person with drinking water for two years. Many fast fashion items are made from materials that are not biodegradable, meaning they stay in landfills for hundreds of years. Because these clothes are often low in quality, people wear them only a few times before discarding them. In some countries, clothing consumption has grown by over 50% in the last decade, while the average use of each item has fallen sharply. Finding a balance between style and responsibility is not easy. Recycling clothes remains a challenge, and not all donated clothes are reused. Still, changes are possible. Some governments are starting to create rules that make companies more responsible for waste. Education also plays an important role. If more people understand the impact of their shopping habits, they may begin to choose better quality items and buy fewer things. In the end, fashion can still be fun—but it must also be fair and sustainable.
+
+Source: Long, X. (2025). How does fast fashion affect the environment? Economics Observatory. https://www.economicsobservatory.com/how-does-fast-fashion-affect-the-environment
+
+PERTANYAAN:
+What important values about fast fashion does the writer want readers to understand from the text? There is more than one correct answer. Click on every correct answer.
+OPSI / PERNYATAAN:
+  - A. A. Fast fashion allows people to access popular clothing from everywhere with fast delivery.
+  - B. B. The fashion industry causes major environmental problems such as pollution and waste.
+  - C. C. Buying better quality and fewer clothing items is one solution to fast fashion’s problem.
+  - D. D. Instead of buying, people should donate and reuse their old clothes to avoid fast fashion.
+  - E. E. A circular economy by clothing producers helps make the fashion industry more sustainable.
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Fast Fashion: Convenience at a Cost
+
+Fast fashion refers to the production of inexpensive clothing in response to rapidly changing trends. It allows people to buy stylish clothes quickly and at low prices. In many cities, young people enjoy following online trends and changing their outfits often. But this lifestyle choice comes with serious consequences, especially for the environment. Supporters of fast fashion argue that it makes clothing more accessible. In the past, many people could only afford new clothes a few times a year. Now, with lower prices and faster delivery, fashion feels more democratic. Some businesses are even trying to reduce waste by reusing materials or selling secondhand clothing. These small steps are part of what is called a “circular economy,” where products are reused or recycled instead of thrown away. If supported by technology and better systems, this approach could help reduce the negative impact of fast fashion. However, the problems linked to fast fashion are still severe. The fashion industry is responsible for around 8–10% of global carbon emissions and about 20% of industrial water pollution. Producing just one cotton shirt uses up enough water to supply a person with drinking water for two years. Many fast fashion items are made from materials that are not biodegradable, meaning they stay in landfills for hundreds of years. Because these clothes are often low in quality, people wear them only a few times before discarding them. In some countries, clothing consumption has grown by over 50% in the last decade, while the average use of each item has fallen sharply. Finding a balance between style and responsibility is not easy. Recycling clothes remains a challenge, and not all donated clothes are reused. Still, changes are possible. Some governments are starting to create rules that make companies more responsible for waste. Education also plays an important role. If more people understand the impact of their shopping habits, they may begin to choose better quality items and buy fewer things. In the end, fashion can still be fun—but it must also be fair and sustainable.
+
+Source: Long, X. (2025). How does fast fashion affect the environment? Economics Observatory. https://www.economicsobservatory.com/how-does-fast-fashion-affect-the-environment
+
+The writer states, “Fashion can still be fun—but it must also be fair and sustainable.”
+
+PERTANYAAN:
+Which fact in the text best supports this opinion?
+OPSI / PERNYATAAN:
+  - A. A. Some businesses now reuse materials and promote secondhand clothing to reduce waste.
+  - B. B. Many people enjoy following online trends and buying new clothes at low prices.
+  - C. C. Clothing consumption has risen while the average use of each item has gone down.
+  - D. D. Producing cotton shirts consumes large amounts of water and affects global resources.
+  - E. E. Governments are beginning to make fashion companies more responsible for waste.
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Influence of Buy Now Pay Later (BNPL) Existence on the Level of Impulsive Buying Behavior in Society
+
+The impact of the Buy Now Pay Later (BNPL) system is evident in individual behaviors, where it can ease payments in urgent situations, particularly when buying necessary items rather than merely desired ones, especially when financial conditions are inadequate. This phenomenon is notably prevalent among individuals aged 18 to 21 years, as late adolescents are still influenced by various internal and external psychological factors, which hampers their ability to self-regulate. The findings from a study highlight the significant impact of BNPL on impulsive buying behavior among e-commerce users in Indonesia. The increasing integration of pay later options within e-commerce platforms offers a convenient solution for users to defer payments. This convenience, while beneficial for those in need of flexible financial solutions, inadvertently encourages users to make more impulsive purchases, driven by the perceived ease and lack of immediate financial commitment. One notable aspect observed in the study is the correlation between gender and shopping frequency, with women showing a higher tendency for frequent shopping compared to men. Women, for example, tend to be more responsive to promotions and discounts, especially in ecommerce, where targeted advertisements are tailored to attract shoppers with offers that appeal to their preferences. Additionally, the convenience of shopping from home and the availability of various options for household, personal care, and family needs align more closely with women’s purchasing behavior patterns. Technological advancements in online transactions have made shopping easier and more accessible than ever before. Features like BNPL not only add flexibility but also make the purchasing process more seamless. To wrap up, the BNPL system has two sides: the positive aspect, which assists users in acquiring essential products during financial crises and represents an innovation in payment methods; and the negative aspect, where this system may encourage consumerist behavior and lead to impulsive buying tendencies within society.
+
+Adapted from: https://journal.unm.ac.id/index.php/JE3S/article/download/4659/2722
+
+PERTANYAAN:
+Which statement supports the study result about BNPL impact on consumerism?
+OPSI / PERNYATAAN:
+  - A. A. Simplified payments via BNPL can prompt impulsive purchases.
+  - B. B. Adults who manage spending well are the main BNPL users.
+  - C. C. BNPL drives customers to seek unnecessary promotions.
+  - D. D. Payment preferences such as BNPL affects global economic conditions.
+  - E. E. BNPL offers a convenient lifestyle for young adults aged 18-21 years old.
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Influence of Buy Now Pay Later (BNPL) Existence on the Level of Impulsive Buying Behavior in Society
+
+The impact of the Buy Now Pay Later (BNPL) system is evident in individual behaviors, where it can ease payments in urgent situations, particularly when buying necessary items rather than merely desired ones, especially when financial conditions are inadequate. This phenomenon is notably prevalent among individuals aged 18 to 21 years, as late adolescents are still influenced by various internal and external psychological factors, which hampers their ability to self-regulate. The findings from a study highlight the significant impact of BNPL on impulsive buying behavior among e-commerce users in Indonesia. The increasing integration of pay later options within e-commerce platforms offers a convenient solution for users to defer payments. This convenience, while beneficial for those in need of flexible financial solutions, inadvertently encourages users to make more impulsive purchases, driven by the perceived ease and lack of immediate financial commitment. One notable aspect observed in the study is the correlation between gender and shopping frequency, with women showing a higher tendency for frequent shopping compared to men. Women, for example, tend to be more responsive to promotions and discounts, especially in ecommerce, where targeted advertisements are tailored to attract shoppers with offers that appeal to their preferences. Additionally, the convenience of shopping from home and the availability of various options for household, personal care, and family needs align more closely with women’s purchasing behavior patterns. Technological advancements in online transactions have made shopping easier and more accessible than ever before. Features like BNPL not only add flexibility but also make the purchasing process more seamless. To wrap up, the BNPL system has two sides: the positive aspect, which assists users in acquiring essential products during financial crises and represents an innovation in payment methods; and the negative aspect, where this system may encourage consumerist behavior and lead to impulsive buying tendencies within society.
+
+Adapted from: https://journal.unm.ac.id/index.php/JE3S/article/download/4659/2722
+
+PERTANYAAN:
+Which of the following ideas could be effectively added before the conclusion to strengthen the writer’s argument?
+OPSI / PERNYATAAN:
+  - A. A. BNPL is also influenced by seasonal changes such as end-of-year sales or the holiday season.
+  - B. B. Many BNPL companies have experienced rapid growth and have expanded into international markets.
+  - C. C. BNPL allows consumers to purchase goods and services and defer payment over time.
+  - D. D. The growing use of BNPL reflects broader shifts in consumer culture and financial habits.
+  - E. E. The concept of BNPL offers consumers an alternative to traditional credit.
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Influence of Buy Now Pay Later (BNPL) Existence on the Level of Impulsive Buying Behavior in Society
+
+The impact of the Buy Now Pay Later (BNPL) system is evident in individual behaviors, where it can ease payments in urgent situations, particularly when buying necessary items rather than merely desired ones, especially when financial conditions are inadequate. This phenomenon is notably prevalent among individuals aged 18 to 21 years, as late adolescents are still influenced by various internal and external psychological factors, which hampers their ability to self-regulate. The findings from a study highlight the significant impact of BNPL on impulsive buying behavior among e-commerce users in Indonesia. The increasing integration of pay later options within e-commerce platforms offers a convenient solution for users to defer payments. This convenience, while beneficial for those in need of flexible financial solutions, inadvertently encourages users to make more impulsive purchases, driven by the perceived ease and lack of immediate financial commitment. One notable aspect observed in the study is the correlation between gender and shopping frequency, with women showing a higher tendency for frequent shopping compared to men. Women, for example, tend to be more responsive to promotions and discounts, especially in ecommerce, where targeted advertisements are tailored to attract shoppers with offers that appeal to their preferences. Additionally, the convenience of shopping from home and the availability of various options for household, personal care, and family needs align more closely with women’s purchasing behavior patterns. Technological advancements in online transactions have made shopping easier and more accessible than ever before. Features like BNPL not only add flexibility but also make the purchasing process more seamless. To wrap up, the BNPL system has two sides: the positive aspect, which assists users in acquiring essential products during financial crises and represents an innovation in payment methods; and the negative aspect, where this system may encourage consumerist behavior and lead to impulsive buying tendencies within society.
+
+Adapted from: https://journal.unm.ac.id/index.php/JE3S/article/download/4659/2722
+
+PERTANYAAN:
+Why did the writer choose to present both the benefits and drawbacks of the Buy Now Pay Later system?
+OPSI / PERNYATAAN:
+  - A. A. To analyze and inform readers about the dual impact of the BNPL system, especially in the context of e-commerce in Indonesia.
+  - B. B. To expose the downside of BNPL, where the ease and convenience of deferred payment can lead to impulsive buying behavior.
+  - C. C. To generalize the concept of the Buy Now Pay Later (BNPL) system and its tremendous effect on Indonesian e-commerce.
+  - D. D. To evaluate the effectiveness of the Buy Now Pay Later (BNPL) system on the economic growth in Indonesia.
+  - E. E. To convince the readers to use the Buy Now Pay Later (BNPL) system as the ultimate payment system in Indonesia.
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+The Influence of Buy Now Pay Later (BNPL) Existence on the Level of Impulsive Buying Behavior in Society
+
+The impact of the Buy Now Pay Later (BNPL) system is evident in individual behaviors, where it can ease payments in urgent situations, particularly when buying necessary items rather than merely desired ones, especially when financial conditions are inadequate. This phenomenon is notably prevalent among individuals aged 18 to 21 years, as late adolescents are still influenced by various internal and external psychological factors, which hampers their ability to self-regulate. The findings from a study highlight the significant impact of BNPL on impulsive buying behavior among e-commerce users in Indonesia. The increasing integration of pay later options within e-commerce platforms offers a convenient solution for users to defer payments. This convenience, while beneficial for those in need of flexible financial solutions, inadvertently encourages users to make more impulsive purchases, driven by the perceived ease and lack of immediate financial commitment. One notable aspect observed in the study is the correlation between gender and shopping frequency, with women showing a higher tendency for frequent shopping compared to men. Women, for example, tend to be more responsive to promotions and discounts, especially in ecommerce, where targeted advertisements are tailored to attract shoppers with offers that appeal to their preferences. Additionally, the convenience of shopping from home and the availability of various options for household, personal care, and family needs align more closely with women’s purchasing behavior patterns. Technological advancements in online transactions have made shopping easier and more accessible than ever before. Features like BNPL not only add flexibility but also make the purchasing process more seamless. To wrap up, the BNPL system has two sides: the positive aspect, which assists users in acquiring essential products during financial crises and represents an innovation in payment methods; and the negative aspect, where this system may encourage consumerist behavior and lead to impulsive buying tendencies within society.
+
+Adapted from: https://journal.unm.ac.id/index.php/JE3S/article/download/4659/2722
+
+PERTANYAAN:
+How does BNPL affect shopping behaviour of certain gender? There is more than one correct answer. Click on every correct answer.
+OPSI / PERNYATAAN:
+  - A. A. Both men and women have a similar shopping behavior that leads to consumerism.
+  - B. B. BNPL leads women to be more impulsive in their buying behavior as it is easier and more comfortable.
+  - C. C. Factors like age, gender, marketing strategies, and technology are related to the shift of BNPL.
+  - D. D. The BNPL, as the latest payment system, enables men to purchase items they previously could not afford.
+  - E. E. BNPL prevents men from aggressive shopping behaviour as it is mostly used by women.
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: ['A:Agree', 'B:Disagree', 'C:Agree']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+The Influence of Buy Now Pay Later (BNPL) Existence on the Level of Impulsive Buying Behavior in Society
+
+The impact of the Buy Now Pay Later (BNPL) system is evident in individual behaviors, where it can ease payments in urgent situations, particularly when buying necessary items rather than merely desired ones, especially when financial conditions are inadequate. This phenomenon is notably prevalent among individuals aged 18 to 21 years, as late adolescents are still influenced by various internal and external psychological factors, which hampers their ability to self-regulate. The findings from a study highlight the significant impact of BNPL on impulsive buying behavior among e-commerce users in Indonesia. The increasing integration of pay later options within e-commerce platforms offers a convenient solution for users to defer payments. This convenience, while beneficial for those in need of flexible financial solutions, inadvertently encourages users to make more impulsive purchases, driven by the perceived ease and lack of immediate financial commitment. One notable aspect observed in the study is the correlation between gender and shopping frequency, with women showing a higher tendency for frequent shopping compared to men. Women, for example, tend to be more responsive to promotions and discounts, especially in ecommerce, where targeted advertisements are tailored to attract shoppers with offers that appeal to their preferences. Additionally, the convenience of shopping from home and the availability of various options for household, personal care, and family needs align more closely with women’s purchasing behavior patterns. Technological advancements in online transactions have made shopping easier and more accessible than ever before. Features like BNPL not only add flexibility but also make the purchasing process more seamless. To wrap up, the BNPL system has two sides: the positive aspect, which assists users in acquiring essential products during financial crises and represents an innovation in payment methods; and the negative aspect, where this system may encourage consumerist behavior and lead to impulsive buying tendencies within society.
+
+Adapted from: https://journal.unm.ac.id/index.php/JE3S/article/download/4659/2722
+
+PERTANYAAN:
+Please decide whether you agree or disagree with the writer's arguments below.
+OPSI / PERNYATAAN:
+  - A. The arguments presented in the text are not only logical but also persuasive as they are supported by data from a study.
+  - B. The text presents reasonable arguments and may possibly convince readers aged 18–21 to use BNPL.
+  - C. The text has strong points about BNPL because the data are based on research.
+

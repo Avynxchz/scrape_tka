@@ -36,8 +36,19 @@ def _normalize_slug(subject, paket):
         ("ekonomi", 2): "eko_paket_2",
         ("kewirausahaan", 1): "pkw_paket_1",
         ("kewirausahaan", 2): "pkw_paket_2",
+        ("geografi", 1): "geo_paket_1",
+        ("geografi", 2): "geo_paket_2",
+        ("fisika", 1): "fisika_paket_1",
+        ("fisika", 2): "fisika_paket_2",
+        ("kimia", 1): "kim_paket_1",
+        ("kimia", 2): "kim_paket_2",
+        ("biologi", 1): "bio_paket_1",
+        ("biologi", 2): "bio_paket_2",
     }
-    return slug_map.get((subject, int(paket) if paket is not None else None))
+    p = int(paket) if paket is not None else 1
+    if (subject, p) in slug_map:
+        return slug_map[(subject, p)]
+    return f"{subject}_paket_{p}"
 
 
 def load_registry():
@@ -60,6 +71,8 @@ def load_registry():
 def set_active_source(subject, paket, filename):
     """Ganti sumber aktif untuk satu paket (menulis registry.json)."""
     slug = _normalize_slug(subject, paket)
+    p = int(paket) if paket is not None else 1
+    canonical_slug = f"{subject}_paket_{p}"
     if not slug:
         raise ValueError(f"Subject/paket tidak dikenal: {subject} paket {paket}")
     if not os.path.isfile(os.path.join(SOLUTION_DIR, filename)):
@@ -71,19 +84,26 @@ def set_active_source(subject, paket, filename):
         except FileNotFoundError:
             reg = {}
         reg.setdefault(slug, {})["active_source"] = filename
+        reg.setdefault(canonical_slug, {})["active_source"] = filename
         tmp = REGISTRY_PATH + ".tmp"
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(reg, f, ensure_ascii=False, indent=2)
         os.replace(tmp, REGISTRY_PATH)
+        global _registry_cache
+        _registry_cache = None
+        _source_cache.pop((subject, int(paket)), None)
     return load_registry()
 
 
 def resolve_active_source(subject, paket):
     """Kembalikan path file sumber aktif utk paket, atau None bila tidak ada."""
     slug = _normalize_slug(subject, paket)
-    if not slug:
+    p = int(paket) if paket is not None else 1
+    canonical_slug = f"{subject}_paket_{p}"
+    if not slug and not canonical_slug:
         return None
-    entry = load_registry().get(slug) or {}
+    reg = load_registry()
+    entry = reg.get(slug) or reg.get(canonical_slug) or {}
     fname = entry.get("active_source")
     if not fname:
         return None
@@ -121,7 +141,7 @@ def load_solution_doc(subject, paket):
     key = (subject, int(paket))
     mtime = os.path.getmtime(path)
     cached = _source_cache.get(key)
-    if cached and cached["_mtime"] == mtime:
+    if cached and cached.get("_path") == path and cached["_mtime"] == mtime:
         return cached["doc"], cached["meta"]
     with open(path, encoding="utf-8") as f:
         doc = json.load(f)
@@ -133,16 +153,44 @@ def load_solution_doc(subject, paket):
         "provider": "Claude",          # metadata dinormalisasi di registry level
         "model": doc.get("model"),     # hanya diisi bila file sumber memang memuatnya
     }
-    _source_cache[key] = {"doc": doc, "meta": meta, "_mtime": mtime}
+    _source_cache[key] = {"doc": doc, "meta": meta, "_mtime": mtime, "_path": path}
     return doc, meta
 
 
-def _normalize_key(value):
-    """Normalisasi satu nilai kunci utk perbandingan ('(C)' == 'C', dst)."""
-    s = str(value).strip().upper()
-    while s.startswith("(") and s.endswith(")"):
-        s = s[1:-1].strip()
-    return s
+def _extract_normalized_answer_set(val):
+    """Mengekstraksi himpunan string terstandarisasi dari format string, list, atau dict."""
+    if val is None:
+        return set()
+    if isinstance(val, dict):
+        if "correct" in val:
+            return _extract_normalized_answer_set(val["correct"])
+        return {f"{k.upper()}:{str(v).upper()}" for k, v in val.items()}
+    if isinstance(val, (list, tuple)):
+        res = set()
+        for x in val:
+            res.update(_extract_normalized_answer_set(x))
+        return res
+    s = str(val).strip()
+    if (s.startswith("[") and s.endswith("]")) or (s.startswith("{") and s.endswith("}")):
+        try:
+            import ast
+            parsed = ast.literal_eval(s)
+            return _extract_normalized_answer_set(parsed)
+        except Exception:
+            pass
+    import re
+    parts = [p.strip().upper() for p in re.split(r"[,;\n]+", s) if p.strip()]
+    cleaned = set()
+    for p in parts:
+        p = re.sub(r"[\(\)\[\]\'\"]", "", p).strip()
+        # Normalisasi variasi 'A (Benar)' -> 'A:BENAR'
+        if " " in p and not (":" in p):
+            subparts = p.split()
+            if len(subparts) == 2 and subparts[1] in ("BENAR", "SALAH", "TEPAT", "TIDAK_TEPAT"):
+                p = f"{subparts[0]}:{subparts[1]}"
+        if p and p not in ("-", ""):
+            cleaned.add(p)
+    return cleaned
 
 
 def cross_check_keys(solution_entry, authoritative):
@@ -151,34 +199,21 @@ def cross_check_keys(solution_entry, authoritative):
     Return dict: match (bool), detail (str), authoritative (selalu nilai otoritatif).
     TIDAK pernah mengubah kunci otoritatif — hasil hanya untuk flag/audit.
     """
-    fmt = (solution_entry.get("official_answer") or {}).get("format")
-    claude = (solution_entry.get("official_answer") or {}).get("correct")
-    auth_disp = authoritative  # sudah berupa tampilan string dari pemanggil
+    oa = solution_entry.get("official_answer")
+    claude_set = _extract_normalized_answer_set(oa)
+    auth_set = _extract_normalized_answer_set(authoritative)
 
-    if fmt == "per_statement":
-        # pernyataan: Claude = {A: Benar, ...}; otoritatif = 'A (Benar), B (Salah), ...'
-        pairs = []
-        for part in str(authoritative).split(","):
-            if "(" in part and part.strip().endswith(")"):
-                k, v = part.strip()[:-1].split("(", 1)
-                pairs.append((k.strip(), v.strip().lower()))
-        for k, v in pairs:
-            cv = str((claude or {}).get(k, "")).lower()
-            if cv and cv != v:
-                return {"match": False, "authoritative": authoritative,
-                        "detail": f"pernyataan {k}: kunci '{v}' vs Claude '{cv}'"}
-        return {"match": True, "authoritative": authoritative, "detail": "per_statement cocok"}
+    if not auth_set:
+        return {"match": True, "authoritative": authoritative, "detail": "kunci otoritatif kosong/tidak dicek"}
 
-    # single / multiple: bandingkan himpunan huruf
-    claude_set = {_normalize_key(c) for c in (claude or [])} if claude else set()
-    auth_set = set()
-    for part in str(authoritative).replace(" ", "").split(","):
-        part = _normalize_key(part)
-        if part and part not in ("-", ""):
-            auth_set.add(part)
+    # Normalisasi format jika satu sisi pakai 'A:BENAR' dan sisi lain format per_statement
+    # Bandingkan himpunan
     if claude_set != auth_set:
-        return {"match": False, "authoritative": authoritative,
-                "detail": f"kunci otoritatif {sorted(auth_set)} vs Claude {sorted(claude_set)}"}
+        return {
+            "match": False,
+            "authoritative": authoritative,
+            "detail": f"kunci otoritatif {sorted(auth_set)} vs Claude {sorted(claude_set)}"
+        }
     return {"match": True, "authoritative": authoritative, "detail": "kunci cocok"}
 
 
@@ -200,6 +235,8 @@ def get_solution(subject, paket, nomor, authoritative_display=None):
             return {
                 "question_id": s["question_id"],
                 "question_number": s["question_number"],
+                "diketahui": s.get("diketahui"),
+                "ditanyakan": s.get("ditanyakan"),
                 "concept_kunci": s.get("concept_kunci") or [],
                 "glossary": s.get("glossary") or [],
                 "reasoning": s.get("reasoning") or "",

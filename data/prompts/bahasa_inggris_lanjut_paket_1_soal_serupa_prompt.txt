@@ -1,0 +1,255 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Bahasa Inggris Tingkat Lanjut (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: ['A:Yes', 'B:Yes', 'C:No']
+Stimulus Teks: AI is increasingly used in various areas of life, including the workplace. While some support this development, others express concern. Below are arguments for and against the use of AI at work.
+
+Supporters present three main points. First, efficiency and productivity. AI can handle repetitive, monotonous tasks without fatigue, allowing employees to focus on more complex and creative work. This increases output and saves time. Second, better decision- making. AI can analyze vast amounts of data quickly, identifying patterns and trends that help managers make informed, data-driven decisions. This leads to more accurate forecasts, improved employee engagement, and better overall results. Third, learning and development. AI can enhance employee engagement by offering personalized training. AI systems can detect skill gaps and recommend tailored programs, helping employees grow. This benefits both workers—by boosting confidence and capability—and companies—by fostering more skilled, loyal, and satisfied staff.
+
+Critics, however, raise several concerns. First, job displacement. As AI takes over tasks once handled by humans, there’s growing fear of job loss, causing stress among workers. Second, lack of human touch. Despite its capabilities, AI cannot replicate the empathy, emotional intelligence, and connection offered by human leaders—essential in many roles. Third, ethical and privacy issues. Concerns about data use require clear policies to ensure fairness, transparency, and respect for privacy, maintaining employee trust.
+
+Conclusion: AI should be used in the workplace, but with proper regulations to maximize benefits and minimize risks. A cautious, well- planned approach is essential for the future
+[Isi Gambar Soal 63716_7f4857114f8f48821c5bcac58c3214c1.png]:
+Berikut adalah ekstraksi data dari grafik batang horizontal **"AI Impact on Different Industry Sectors"**:
+
+### **Tabel Data Persentase Dampak AI Berdasarkan Sektor Industri**
+
+| No. | Sektor Industri (*Industry Sector*) | Dampak AI / *AI Impact* (%) |
+|:---:|:---|:---:|
+| 1 | Information and Communication | $\approx 58{,}0$ |
+| 2 | Financial and Insurance Activities | $\approx 55{,}0$ |
+| 3 | Business Services | $\approx 52{,}2$ |
+| 4 | Real Estate | $\approx 38{,}8$ |
+| 5 | Public Administration, Defense, Social Security | $\approx 37{,}4$ |
+| 6 | Health and Social Work Activities | $\approx 33{,}9$ |
+| 7 | Wholesale and Retail Trade, Vehicle Repair | $\approx 33{,}6$ |
+| 8 | Electricity and Gas Supply | $\approx 33{,}2$ |
+| 9 | Education Services | $\approx 32{,}9$ |
+| 10 | Mining and Quarrying | $\approx 31{,}5$ |
+| 11 | Other Services | $\approx 30{,}4$ |
+| 12 | Transportation and Warehousing | $\approx 28{,}5$ |
+| 13 | Water Supply, Waste Management, Recycling | $\approx 26{,}1$ |
+| 14 | Construction | $\approx 25{,}5$ |
+| 15 | Manufacturing Industry | $\approx 23{,}5$ |
+| 16 | Accommodation and Food Service Activities | $\approx 18{,}0$ |
+| 17 | Agriculture, Forestry, and Fisheries | $\approx 1{,}3$ |
+
+---
+
+### **Keterangan Grafik:**
+* **Sumbu X (Horizontal):** *AI Impact (%)* dengan rentang $0$ hingga $60\%$ (interval garis kisi utama per $10\%$).
+* **Sumbu Y (Vertikal):** *Industry Sector* (17 kategori industri).
+* **Karakteristik Data:** Sektor dengan dampak AI tertinggi adalah **Information and Communication** ($\approx 58\%$), sedangkan yang terendah adalah **Agriculture, Forestry, and Fisheries** ($\approx 1{,}3\%$).
+Pertanyaan: Based on the information given, Which industry sectors are heavily impacted by AI?
+
+Click the Yes or No option for each statement!
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: A
+Stimulus Teks: AI is increasingly used in various areas of life, including the workplace. While some support this development, others express concern. Below are arguments for and against the use of AI at work.
+
+Supporters present three main points. First, efficiency and productivity. AI can handle repetitive, monotonous tasks without fatigue, allowing employees to focus on more complex and creative work. This increases output and saves time. Second, better decision- making. AI can analyze vast amounts of data quickly, identifying patterns and trends that help managers make informed, data-driven decisions. This leads to more accurate forecasts, improved employee engagement, and better overall results. Third, learning and development. AI can enhance employee engagement by offering personalized training. AI systems can detect skill gaps and recommend tailored programs, helping employees grow. This benefits both workers—by boosting confidence and capability—and companies—by fostering more skilled, loyal, and satisfied staff.
+
+Critics, however, raise several concerns. First, job displacement. As AI takes over tasks once handled by humans, there’s growing fear of job loss, causing stress among workers. Second, lack of human touch. Despite its capabilities, AI cannot replicate the empathy, emotional intelligence, and connection offered by human leaders—essential in many roles. Third, ethical and privacy issues. Concerns about data use require clear policies to ensure fairness, transparency, and respect for privacy, maintaining employee trust.
+
+Conclusion: AI should be used in the workplace, but with proper regulations to maximize benefits and minimize risks. A cautious, well- planned approach is essential for the future
+[Isi Gambar Soal 63716_7f4857114f8f48821c5bcac58c3214c1.png]:
+Berikut adalah ekstraksi data dari grafik batang horizontal **"AI Impact on Different Industry Sectors"**:
+
+### **Tabel Data Persentase Dampak AI Berdasarkan Sektor Industri**
+
+| No. | Sektor Industri (*Industry Sector*) | Dampak AI / *AI Impact* (%) |
+|:---:|:---|:---:|
+| 1 | Information and Communication | $\approx 58{,}0$ |
+| 2 | Financial and Insurance Activities | $\approx 55{,}0$ |
+| 3 | Business Services | $\approx 52{,}2$ |
+| 4 | Real Estate | $\approx 38{,}8$ |
+| 5 | Public Administration, Defense, Social Security | $\approx 37{,}4$ |
+| 6 | Health and Social Work Activities | $\approx 33{,}9$ |
+| 7 | Wholesale and Retail Trade, Vehicle Repair | $\approx 33{,}6$ |
+| 8 | Electricity and Gas Supply | $\approx 33{,}2$ |
+| 9 | Education Services | $\approx 32{,}9$ |
+| 10 | Mining and Quarrying | $\approx 31{,}5$ |
+| 11 | Other Services | $\approx 30{,}4$ |
+| 12 | Transportation and Warehousing | $\approx 28{,}5$ |
+| 13 | Water Supply, Waste Management, Recycling | $\approx 26{,}1$ |
+| 14 | Construction | $\approx 25{,}5$ |
+| 15 | Manufacturing Industry | $\approx 23{,}5$ |
+| 16 | Accommodation and Food Service Activities | $\approx 18{,}0$ |
+| 17 | Agriculture, Forestry, and Fisheries | $\approx 1{,}3$ |
+
+---
+
+### **Keterangan Grafik:**
+* **Sumbu X (Horizontal):** *AI Impact (%)* dengan rentang $0$ hingga $60\%$ (interval garis kisi utama per $10\%$).
+* **Sumbu Y (Vertikal):** *Industry Sector* (17 kategori industri).
+* **Karakteristik Data:** Sektor dengan dampak AI tertinggi adalah **Information and Communication** ($\approx 58\%$), sedangkan yang terendah adalah **Agriculture, Forestry, and Fisheries** ($\approx 1{,}3\%$).
+Pertanyaan: Paragraph two mainly discussed AI as…
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: ['A', 'E']
+Stimulus Teks: AI is increasingly used in various areas of life, including the workplace. While some support this development, others express concern. Below are arguments for and against the use of AI at work.
+
+Supporters present three main points. First, efficiency and productivity. AI can handle repetitive, monotonous tasks without fatigue, allowing employees to focus on more complex and creative work. This increases output and saves time. Second, better decision- making. AI can analyze vast amounts of data quickly, identifying patterns and trends that help managers make informed, data-driven decisions. This leads to more accurate forecasts, improved employee engagement, and better overall results. Third, learning and development. AI can enhance employee engagement by offering personalized training. AI systems can detect skill gaps and recommend tailored programs, helping employees grow. This benefits both workers—by boosting confidence and capability—and companies—by fostering more skilled, loyal, and satisfied staff.
+
+Critics, however, raise several concerns. First, job displacement. As AI takes over tasks once handled by humans, there’s growing fear of job loss, causing stress among workers. Second, lack of human touch. Despite its capabilities, AI cannot replicate the empathy, emotional intelligence, and connection offered by human leaders—essential in many roles. Third, ethical and privacy issues. Concerns about data use require clear policies to ensure fairness, transparency, and respect for privacy, maintaining employee trust.
+
+Conclusion: AI should be used in the workplace, but with proper regulations to maximize benefits and minimize risks. A cautious, well- planned approach is essential for the future
+[Isi Gambar Soal 63716_7f4857114f8f48821c5bcac58c3214c1.png]:
+Berikut adalah ekstraksi data dari grafik batang horizontal **"AI Impact on Different Industry Sectors"**:
+
+### **Tabel Data Persentase Dampak AI Berdasarkan Sektor Industri**
+
+| No. | Sektor Industri (*Industry Sector*) | Dampak AI / *AI Impact* (%) |
+|:---:|:---|:---:|
+| 1 | Information and Communication | $\approx 58{,}0$ |
+| 2 | Financial and Insurance Activities | $\approx 55{,}0$ |
+| 3 | Business Services | $\approx 52{,}2$ |
+| 4 | Real Estate | $\approx 38{,}8$ |
+| 5 | Public Administration, Defense, Social Security | $\approx 37{,}4$ |
+| 6 | Health and Social Work Activities | $\approx 33{,}9$ |
+| 7 | Wholesale and Retail Trade, Vehicle Repair | $\approx 33{,}6$ |
+| 8 | Electricity and Gas Supply | $\approx 33{,}2$ |
+| 9 | Education Services | $\approx 32{,}9$ |
+| 10 | Mining and Quarrying | $\approx 31{,}5$ |
+| 11 | Other Services | $\approx 30{,}4$ |
+| 12 | Transportation and Warehousing | $\approx 28{,}5$ |
+| 13 | Water Supply, Waste Management, Recycling | $\approx 26{,}1$ |
+| 14 | Construction | $\approx 25{,}5$ |
+| 15 | Manufacturing Industry | $\approx 23{,}5$ |
+| 16 | Accommodation and Food Service Activities | $\approx 18{,}0$ |
+| 17 | Agriculture, Forestry, and Fisheries | $\approx 1{,}3$ |
+
+---
+
+### **Keterangan Grafik:**
+* **Sumbu X (Horizontal):** *AI Impact (%)* dengan rentang $0$ hingga $60\%$ (interval garis kisi utama per $10\%$).
+* **Sumbu Y (Vertikal):** *Industry Sector* (17 kategori industri).
+* **Karakteristik Data:** Sektor dengan dampak AI tertinggi adalah **Information and Communication** ($\approx 58\%$), sedangkan yang terendah adalah **Agriculture, Forestry, and Fisheries** ($\approx 1{,}3\%$).
+Pertanyaan: According to the text, as a student who will soon join the workforce, what should you do to compete with AI?
+
+There is more than one correct answer. Click on every correct answer!
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: ['A', 'B']
+Stimulus Teks: Teks untuk soal nomor 4 s.d. 6! In recent years, the world has seen a big change in how people pay for things. More and more people, especially young ones, prefer using digital payment methods like e-wallets, mobile banking, and contactless cards. This new trend has given rise to what many call the “cashless generation.” One main reason for this shift is convenience. Paying with a phone or card is faster and easier than carrying coins and bills. People can now buy food, shop online, or even pay for public transport with just a tap. It also helps reduce the risk of theft since there is no physical money to lose. Another reason is the growth of technology. With smartphones becoming common and the internet being more available, digital payments have become part of daily life. Many schools and cafes now even refuse to accept cash, encouraging young people to adapt to this modern lifestyle. However, there are some concerns. Some people argue that going cashless can exclude older generations or those who do not have access to smartphones or bank accounts. Others worry about privacy and security, as digital payments can be tracked and hacked. Despite these issues, the cashless trend continues to grow. Governments and businesses are working to make digital payments more secure and more available to everyone. It seems likely that the future will be even more digital. In conclusion, the cashless generation represents a big change in how we handle money. While there are both advantages and disadvantages, it is clear that cashless payments offer many benefits in terms of speed and convenience. As long as we ensure that everyone can join this movement, the cashless future could be a smart and inclusive one.
+Pertanyaan: According to the text, what are the main reasons why many people are going cashless?
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: ['A', 'D']
+Stimulus Teks: Teks untuk soal nomor 4 s.d. 6! In recent years, the world has seen a big change in how people pay for things. More and more people, especially young ones, prefer using digital payment methods like e-wallets, mobile banking, and contactless cards. This new trend has given rise to what many call the “cashless generation.” One main reason for this shift is convenience. Paying with a phone or card is faster and easier than carrying coins and bills. People can now buy food, shop online, or even pay for public transport with just a tap. It also helps reduce the risk of theft since there is no physical money to lose. Another reason is the growth of technology. With smartphones becoming common and the internet being more available, digital payments have become part of daily life. Many schools and cafes now even refuse to accept cash, encouraging young people to adapt to this modern lifestyle. However, there are some concerns. Some people argue that going cashless can exclude older generations or those who do not have access to smartphones or bank accounts. Others worry about privacy and security, as digital payments can be tracked and hacked. Despite these issues, the cashless trend continues to grow. Governments and businesses are working to make digital payments more secure and more available to everyone. It seems likely that the future will be even more digital. In conclusion, the cashless generation represents a big change in how we handle money. While there are both advantages and disadvantages, it is clear that cashless payments offer many benefits in terms of speed and convenience. As long as we ensure that everyone can join this movement, the cashless future could be a smart and inclusive one.
+Pertanyaan: Who is the author writing this text for?
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: E
+Stimulus Teks: Teks untuk soal nomor 4 s.d. 6! In recent years, the world has seen a big change in how people pay for things. More and more people, especially young ones, prefer using digital payment methods like e-wallets, mobile banking, and contactless cards. This new trend has given rise to what many call the “cashless generation.” One main reason for this shift is convenience. Paying with a phone or card is faster and easier than carrying coins and bills. People can now buy food, shop online, or even pay for public transport with just a tap. It also helps reduce the risk of theft since there is no physical money to lose. Another reason is the growth of technology. With smartphones becoming common and the internet being more available, digital payments have become part of daily life. Many schools and cafes now even refuse to accept cash, encouraging young people to adapt to this modern lifestyle. However, there are some concerns. Some people argue that going cashless can exclude older generations or those who do not have access to smartphones or bank accounts. Others worry about privacy and security, as digital payments can be tracked and hacked. Despite these issues, the cashless trend continues to grow. Governments and businesses are working to make digital payments more secure and more available to everyone. It seems likely that the future will be even more digital. In conclusion, the cashless generation represents a big change in how we handle money. While there are both advantages and disadvantages, it is clear that cashless payments offer many benefits in terms of speed and convenience. As long as we ensure that everyone can join this movement, the cashless future could be a smart and inclusive one.
+Pertanyaan: How does the writer present different viewpoints about the topic?
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: C
+Stimulus Teks: Teks untuk soal nomor 7 s.d. 10!
+
+Smart Spending and Consumer Awareness
+
+In today’s world, where people encounter many kinds of goods and services every day, it is important to learn how to spend money in a smart way. Smart spending means using money carefully and with a plan. This idea is part of something broader called financial literacy, which helps people make good decisions about their money.
+
+Smart spending starts with understanding the difference between needs and wants. Needs are things people must have to live, like food, water, and shelter. Wants are things people like to have but can live without, such as new clothes, phones, or eating out. People who understand this can manage their money more effectively.
+
+Another aspect of smart spending is planning. Before buying something, it is helpful to make a list or create a budget. A budget is a simple plan that shows how much money comes in and how much goes out. It helps people avoid overspending or buying things they do not really need. This allows them to save money for the future or for something important, like education or housing.
+
+Being a smart consumer also means being aware of how companies try to persuade people to buy more. Many stores use strategies such as big signs, sales, and colorful advertisements to make people feel they need to buy something. Sometimes, people buy things without thinking carefully. This is called impulse buying. A smart buyer will pause and think before making a purchase. They might ask, “Do I really need this? Is this the best price?”
+
+In the academic context, students can practice smart spending in daily life—for example, when buying food at school, getting school supplies, or saving their allowance. Students who learn this skill early will be better prepared to manage their money as they grow up.
+
+In short, smart spending and consumer awareness help people make better decisions with their money. With good habits and thoughtful planning, anyone can learn to use money wisely and avoid financial problems in the future.
+Pertanyaan: According to the text, the purpose of a budget is to ….
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: E
+Stimulus Teks: Teks untuk soal nomor 7 s.d. 10!
+
+Smart Spending and Consumer Awareness
+
+In today’s world, where people encounter many kinds of goods and services every day, it is important to learn how to spend money in a smart way. Smart spending means using money carefully and with a plan. This idea is part of something broader called financial literacy, which helps people make good decisions about their money.
+
+Smart spending starts with understanding the difference between needs and wants. Needs are things people must have to live, like food, water, and shelter. Wants are things people like to have but can live without, such as new clothes, phones, or eating out. People who understand this can manage their money more effectively.
+
+Another aspect of smart spending is planning. Before buying something, it is helpful to make a list or create a budget. A budget is a simple plan that shows how much money comes in and how much goes out. It helps people avoid overspending or buying things they do not really need. This allows them to save money for the future or for something important, like education or housing.
+
+Being a smart consumer also means being aware of how companies try to persuade people to buy more. Many stores use strategies such as big signs, sales, and colorful advertisements to make people feel they need to buy something. Sometimes, people buy things without thinking carefully. This is called impulse buying. A smart buyer will pause and think before making a purchase. They might ask, “Do I really need this? Is this the best price?”
+
+In the academic context, students can practice smart spending in daily life—for example, when buying food at school, getting school supplies, or saving their allowance. Students who learn this skill early will be better prepared to manage their money as they grow up.
+
+In short, smart spending and consumer awareness help people make better decisions with their money. With good habits and thoughtful planning, anyone can learn to use money wisely and avoid financial problems in the future.
+Pertanyaan: What is the best summary of the text?
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: ['A', 'C', 'E']
+Stimulus Teks: Teks untuk soal nomor 7 s.d. 10!
+
+Smart Spending and Consumer Awareness
+
+In today’s world, where people encounter many kinds of goods and services every day, it is important to learn how to spend money in a smart way. Smart spending means using money carefully and with a plan. This idea is part of something broader called financial literacy, which helps people make good decisions about their money.
+
+Smart spending starts with understanding the difference between needs and wants. Needs are things people must have to live, like food, water, and shelter. Wants are things people like to have but can live without, such as new clothes, phones, or eating out. People who understand this can manage their money more effectively.
+
+Another aspect of smart spending is planning. Before buying something, it is helpful to make a list or create a budget. A budget is a simple plan that shows how much money comes in and how much goes out. It helps people avoid overspending or buying things they do not really need. This allows them to save money for the future or for something important, like education or housing.
+
+Being a smart consumer also means being aware of how companies try to persuade people to buy more. Many stores use strategies such as big signs, sales, and colorful advertisements to make people feel they need to buy something. Sometimes, people buy things without thinking carefully. This is called impulse buying. A smart buyer will pause and think before making a purchase. They might ask, “Do I really need this? Is this the best price?”
+
+In the academic context, students can practice smart spending in daily life—for example, when buying food at school, getting school supplies, or saving their allowance. Students who learn this skill early will be better prepared to manage their money as they grow up.
+
+In short, smart spending and consumer awareness help people make better decisions with their money. With good habits and thoughtful planning, anyone can learn to use money wisely and avoid financial problems in the future.
+Pertanyaan: Which of the following opinions are supported by strong reasoning or examples in the text?
+
+There is more than one correct answer. Click on every correct answer!
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: ['A', 'B', 'C']
+Stimulus Teks: Teks untuk soal nomor 7 s.d. 10!
+
+Smart Spending and Consumer Awareness
+
+In today’s world, where people encounter many kinds of goods and services every day, it is important to learn how to spend money in a smart way. Smart spending means using money carefully and with a plan. This idea is part of something broader called financial literacy, which helps people make good decisions about their money.
+
+Smart spending starts with understanding the difference between needs and wants. Needs are things people must have to live, like food, water, and shelter. Wants are things people like to have but can live without, such as new clothes, phones, or eating out. People who understand this can manage their money more effectively.
+
+Another aspect of smart spending is planning. Before buying something, it is helpful to make a list or create a budget. A budget is a simple plan that shows how much money comes in and how much goes out. It helps people avoid overspending or buying things they do not really need. This allows them to save money for the future or for something important, like education or housing.
+
+Being a smart consumer also means being aware of how companies try to persuade people to buy more. Many stores use strategies such as big signs, sales, and colorful advertisements to make people feel they need to buy something. Sometimes, people buy things without thinking carefully. This is called impulse buying. A smart buyer will pause and think before making a purchase. They might ask, “Do I really need this? Is this the best price?”
+
+In the academic context, students can practice smart spending in daily life—for example, when buying food at school, getting school supplies, or saving their allowance. Students who learn this skill early will be better prepared to manage their money as they grow up.
+
+In short, smart spending and consumer awareness help people make better decisions with their money. With good habits and thoughtful planning, anyone can learn to use money wisely and avoid financial problems in the future.
+Pertanyaan: After reading the text, as a senior high school student, what can you do to be considered a smart shopper?
+
+There is more than one correct answer. Click on every correct answer!
+

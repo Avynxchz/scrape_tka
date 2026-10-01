@@ -1,0 +1,564 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Antropologi (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Salah', 'C:Benar']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Di media sosial, video tradisi lokal dari Nias yang memperlihatkan atraksi lompat batu, serta video dari Papua yang menunjukkan ritual bakar batu dalam perayaan adat sempat menjadi viral. Sebagian orang memberi komentar negatif, menyebutnya aneh dan tidak sesuai dengan zaman modern.
+
+PERTANYAAN:
+Sebagai pelajar antropologi yang memahami prinsip relativisme budaya, bagaimana sebaiknya kamu menyikapi komentar dan fenomena tersebut? Klik pilihan Benar atau Salah pada setiap pernyataan berdasarkan isi teks!
+OPSI / PERNYATAAN:
+  - A. Menjelaskan bahwa setiap budaya memiliki nilai dan makna dalam konteks masyarakatnya masing-masing.
+  - B. Membandingkan tradisi tersebut dengan budaya modern untuk menentukan mana yang lebih baik.
+  - C. Mengajak orang lain untuk melihat nilai edukatif dan simbolik dari tradisi-tradisi lokal tersebut.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sekolah Indonesia Emas adalah contoh sekolah multikultural yang menjunjung tinggi keberagaman. Di dalam satu kelas terdapat murid beragama Islam, Kristen, Katolik, Hindu, Buddha dan Konghucu. Meski berbeda keyakinan, mereka belajar bersama dengan rukun. Saat ada teman yang menjalankan ibadah atau merayakan hari besar keagamaan, yang lain menghormatinya. Misalnya saat bulan Ramadan, teman yang tidak berpuasa tetap menjaga sikap. Pada saat Natal, Tahun Baru, Waisak dan Hari Raya Galungan semua ikut memberi ucapan selamat. Suasana ini mencerminkan toleransi dan saling menghargai dalam keberagaman budaya.
+[Konteks Visual Gambar 81766_94707cbb3e42099b737a18bf7ffc2ab3.png]:
+Ilustrasi perbandingan interaksi sosial masyarakat yang terbagi menjadi dua bingkai:- Panel Kiri (Interaksi Komunal Tradisional): Spanduk bertuliskan 'PEKAN BUDAYA BERSAMA' di atas stan festival kuliner tradisional. Terlihat interaksi tatap muka langsung antara warga lintas etnis dan agama (pria berpeci, wanita berhijab, pria bergamis, serta warga berpakaian adat daerah) yang sedang menikmati hidangan dan saling menyapa hangat.- Panel Kanan (Interaksi Generasi Muda Modern): Papan nama toko bertuliskan 'KITA SATU MEJA'. Empat pemuda-pemudi multietnis duduk bersama di satu meja kafe dengan cangkir minuman, namun masing-masing aktif berinteraksi menggunakan telepon pintar (smartphone), disertai ikon balon obrolan media sosial berupa notasi musik dan simbol cinta ('love').
+PERTANYAAN:
+Berdasarkan ilustrasi, bentuk keberagaman apakah yang terjadi di sekolah?
+OPSI / PERNYATAAN:
+  - A. A. Etnis
+  - B. B. Bahasa lokal
+  - C. C. Status sosial
+  - D. D. Adat istiadat
+  - E. E. Religi dan kepercayaan
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Seorang anggota tim arkeolog melakukan penggalian dan menemukan berbagai artefak berikut:
+
+Kapak genggam dari batu kasar yang tampaknya digunakan untuk memotong atau menghancurkan sesuatu.
+
+Tulang belulang binatang liar seperti rusa dan babi hutan, dengan bekas sayatan pada permukaannya
+
+Serpihan batu kecil tajam yang kemungkinan digunakan sebagai pisau sederhana.
+
+Tidak ditemukan jejak tanaman budidaya, tembikar, perhiasan, atau logam.
+
+Tim arkeolog menyimpulkan bahwa artefak-artefak ini berasal dari masa prasejarah yang sangat awal.
+[Konteks Visual Gambar 82378_5a525a467f27fa938141292a1a66bc8c.png]:
+Ilustrasi komparasi kultural antara budaya tradisional lokal versus budaya populer modern:- Sisi Kiri (Budaya Tradisional Lokal, latar kuning): Menampilkan tradisi upacara adat anak melangkah di atas jadah (Tedak Siten), seorang pria berpeci memainkan alat musik rebana/terbang, serta seorang pesinden wanita menyanyi mendampingi wayang golek berhidung panjang (karakter Cepot/Astrajingga).- Sisi Kanan (Budaya Populer/Global Modern, latar ungu): Menampilkan remaja perempuan mengenakan headphone mendengarkan musik lewat gawai, remaja laki-laki bermain game online pada smartphone, serta ilustrasi ikonik budaya populer kontemporer seperti papan selot film (clapperboard), wadah popcorn bioskop, kacamata film 3D, pengontrol game konsol (gamepad), dan pedang fantasi digital.
+PERTANYAAN:
+Manakah yang menggambarkan kehidupan masyarakat pemilik artefak tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Telah bercocok tanam, hidup menetap, dan menyimpan hasil panen dalam tembikar.
+  - B. B. Perajin logam yang membuat alat-alat dari perunggu dan besi.
+  - C. C. Hidup secara berpindah-pindah (nomaden), mengandalkan berburu dan meramu untuk bertahan hidup.
+  - D. D. Hidup dalam sistem kerajaan dan mengenal sistem perdagangan awal.
+  - E. E. Menggunakan alat dari bahan kayu dan sudah menulis simbol-simbol di dinding gua.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: ['A:Sesuai', 'B:Sesuai', 'C:Tidak Sesuai']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Dibawah ini adalah berita yang ditulis di media massa. Judul: Penggunaan Bahasa Gaul dan Campuran Bahasa di Media Sosial: Antara Kreativitas dan Kekhawatiran ‘’Di era digital, media sosial menjadi wadah utama komunikasi, terutama bagi generasi muda. Fenomena penggunaan bahasa gaul, singkatan, serta pencampuran Bahasa Indonesia dengan bahasa daerah atau asing menjadi tren yang meluas. Meskipun mencerminkan kreativitas dan dinamika budaya, penggunaan bahasa yang tidak baku ini menimbulkan kekhawatiran akan degradasi Bahasa Indonesia sebagai bahasa nasional. Beberapa pihak menilai bahwa tren ini dapat mengaburkan pemahaman terhadap tata bahasa yang benar dan mempengaruhi kemampuan berbahasa formal generasi muda’’.
+
+Sumber: https://jurnalpost.com/pengaruh-bahasa-gaul-dalam-penggunaan-bahasa-indonesia-di-media-sosial
+
+PERTANYAAN:
+Tentukan apakah pernyataan-pernyataan berikut Sesuai atau Tidak Sesuai dengan konsep relativisme budaya dalam menyikapi fenomena penggunaan bahasa gaul dan campuran bahasa di media sosial.
+OPSI / PERNYATAAN:
+  - A. Relativisme budaya mendorong pemahaman bahwa penggunaan bahasa gaul di media sosial adalah bentuk ekspresi budaya yang sah dan harus dihargai dalam konteksnya.
+  - B. Menilai penggunaan bahasa gaul sebagai bentuk penyimpangan tanpa memahami konteks sosialnya mencerminkan sikap etnosentrisme.
+  - C. Relativisme budaya membenarkan semua bentuk penggunaan bahasa, termasuk yang menyalahi norma dan tata bahasa baku, tanpa mempertimbangkan dampaknya
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Ritual Ma'nene Suku Toraja di Sulawesi Selatan
+
+Ritual ma'nene merupakan salah satu tradisi yang dilakukan suku Toraja di Sulawesi Selatan. Tradisi ini berupa membersihkan jenazah yang telah meninggal puluhan bahkan ratusan tahun atau yang telah berbentuk mumi. Ritual ma'nene masih dijaga oleh masyarakat suku Toraja. Pada tradisi ini, satu rumpun keluarga melakukan pembersihan mumi leluhur sebagai garis keturunannya. Pemangku adat suku Toraja, Marten Paladan mengatakan, ritual ma'nene adalah salah satu cara masyarakat Toraja untuk menghormati leluhur yang sudah meninggal dunia. Menurutnya, suku Toraja memang sangat menjaga dan menghormati leluhur. Tidak hanya membersihkan mumi leluhur, tradisi mane'ne ini juga memiliki rangkaian ritual lainnya. Diantaranya rumpun keluarga mengadakan acara besar dengan mengorbankan hewan seperti bai atau babi dan kerbau, ritual membuka kuburan atau pa'tene yang berisi mumi leluhur, dan lainnya.
+
+Sumber: https://www.detik.com/sulsel/budaya/d-6271010/mengenal-ritual-manene-suku-toraja-tradisi-membersihkan-mumi-leluhur.
+[Konteks Visual Gambar 51251_4b4fedc2b99dd3eeffd2fbad301e1ad0.png]:
+Visualisasi diorama artefak pembagian babak kebudayaan masa praaksara di Indonesia dengan papan penunjuk teks: 1. 'Zaman Neolitikum': menunjukkan artefak batu yang telah diasah halus berupa beliung persegi dan kapak lonjong. 2. 'Zaman Megalitikum': menunjukkan peninggalan batu besar berupa menhir (tiang batu tegak) dan bangunan meja batu pemujaan/penguburan yang diberi label terpisah 'Dolmen'. 3. 'Zaman Logam': menunjukkan artefak logam perunggu yang terdiri dari mata tombak bertangkai, kapak corong (kapak sepatu), dan pisau/belati bertangkai kayu serta logam.
+PERTANYAAN:
+Informan yang paling tepat pada penelitian etnografi tentang ritual ma'nene adalah ….
+OPSI / PERNYATAAN:
+  - A. A. pedagang kerbau dan babi
+  - B. B. psikolog ahli dan narasumber
+  - C. C. pejabat setempat dan jajarannya
+  - D. D. wartawan yang meliput di lokasi
+  - E. E. keluarga besar jenazah leluhur
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A:Pelaporan', 'B:Pengumpulan Data', 'C:Pengumpulan Data']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Ritual Ma'nene Suku Toraja di Sulawesi Selatan
+
+Ritual ma'nene merupakan salah satu tradisi yang dilakukan suku Toraja di Sulawesi Selatan. Tradisi ini berupa membersihkan jenazah yang telah meninggal puluhan bahkan ratusan tahun atau yang telah berbentuk mumi. Ritual ma'nene masih dijaga oleh masyarakat suku Toraja. Pada tradisi ini, satu rumpun keluarga melakukan pembersihan mumi leluhur sebagai garis keturunannya. Pemangku adat suku Toraja, Marten Paladan mengatakan, ritual ma'nene adalah salah satu cara masyarakat Toraja untuk menghormati leluhur yang sudah meninggal dunia. Menurutnya, suku Toraja memang sangat menjaga dan menghormati leluhur. Tidak hanya membersihkan mumi leluhur, tradisi mane'ne ini juga memiliki rangkaian ritual lainnya. Diantaranya rumpun keluarga mengadakan acara besar dengan mengorbankan hewan seperti bai atau babi dan kerbau, ritual membuka kuburan atau pa'tene yang berisi mumi leluhur, dan lainnya.
+
+Sumber: https://www.detik.com/sulsel/budaya/d-6271010/mengenal-ritual-manene-suku-toraja-tradisi-membersihkan-mumi-leluhur.
+[Konteks Visual Gambar 99783_4b4fedc2b99dd3eeffd2fbad301e1ad0.png]:
+Ilustrasi pelaksanaan ritual adat kematian Ma'nene dari Suku Toraja, Sulawesi Selatan. Dua orang perempuan berbusana kebaya jingga (satu di antaranya mengenakan kerudung biru) berdiri tersenyum merangkul jasad jenazah leluhur (mumi berwujud kerangka bertulang rusuk terbuka dan berambut panjang yang dipakaikan jubah hijau dan kain penutup). Di bagian latar belakang berdiri megah deretan rumah adat tradisional Toraja (Tongkonan) dengan atap lengkung menjulang menyerupai tanduk kerbau atau lunas perahu terbalik, berlatar pemandangan perbukitan hijau yang asri.
+PERTANYAAN:
+Di bawah ini yang merupakan proses tahapan pengumpulan data dan pelaporan dalam penelitian etnografi pada ritual ma'nene. Klik pada pernyataan Pengumpulan Data atau Pelaporan yang merupakan proses tahapan penelitian etnografi.
+OPSI / PERNYATAAN:
+  - A. Peneliti menelaah data dengan cermat untuk menemukan pola, tema, dan makna yang muncul dari ritual ma’nene dan dinamika perubahan budaya.
+  - B. Peneliti tinggal bersama masyarakat, ikut serta dalam kegiatan sehari-hari dan ritual m a’nene secara langsung, sambil mengamati perilaku dan interaksi sosial selama ritual berlangsung.
+  - C. Peneliti melakukan wawancara dengan berbagai pihak, seperti keluarga yang melaksanakan ritual, tokoh adat, dan pemuka agama, untuk memahami makna dan fungsi ritual dari sudut pandang mereka.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Seorang peneliti antropologi melakukan penelitian untuk memahami budaya dan pola hidup masyarakat nelayan di daerah pesisir. Peneliti tinggal bersama masyarakat, mengamati perilaku dan interaksi secara alami tanpa mengubah situasi. Ia ikut melaut dan melakukan observasi serta wawancara santai. Namun, warga enggan menjawab pertanyaan, pejabat dan staf desa tidak bersedia memberikan data atau informasi yang dibutuhkan.
+[Konteks Visual Gambar 40942_fa5811ad1633bbad0076236124716eff.png]:
+Ilustrasi upacara adat Ma'nene dari Suku Toraja, Sulawesi Selatan. Tampak dua orang wanita berbusana adat kebaya oranye berdiri tersenyum mendampingi jenazah leluhur (mumi/tengkorak dengan rambut panjang yang telah diawetkan dan dipakaikan baju hijau serta kain penutup). Di latar belakang berdiri megah rumah adat Tongkonan dengan atap melengkung khas berbentuk perahu terbalik di kawasan perbukitan berumput hijau.
+PERTANYAAN:
+Berdasarkan situasi di atas, apa langkah yang seharusnya dilakukan peneliti sebelum memulai penelitian agar proses berjalan lancar dan etis?
+OPSI / PERNYATAAN:
+  - A. A. Melakukan pendekatan langsung kepada warga karena hubungan personal lebih penting dari pada izin formal.
+  - B. B. Fokus pada observasi partisipatif dan tidak terlalu memikirkan birokrasi atau izin lokal.
+  - C. C. Mengajukan izin resmi dan berkoordinasi dengan kepala desa untuk membangun kepercayaan dan mendukung kelancaran penelitian.
+  - D. D. Mengandalkan data sekunder jika masyarakat tidak bersedia memberikan informasi secara langsung.
+  - E. E. Mengganti lokasi penelitian ke daerah lain yang lebih terbuka.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sumber gambar: https://tobaria.com/hari-ulos-nasional-2024-merayakan-warisan-budaya-batak/
+
+Kain ulos merupakan tenun tradisional Batak Toba yang mengandung nilai filosofis mendalam. Setiap motifnya merepresentasikan identitas, status sosial, dan makna kehidupan, digunakan dalam berbagai ritus adat mulai dari kelahiran hingga kematian. Proses pembuatannya yang tradisional dan turun-temurun menjadikan ulos sebagai warisan budaya tak benda. Industri ulos kini menghadapi tantangan serius. Generasi muda enggan melanjutkan tradisi menenun karena prosesnya rumit dengan imbalan ekonomi yang belum memadai. Masuknya produksi massal berbahan sintetis semakin menggerus keberadaan ulos autentik. Tim peneliti dari berbagai bidang ilmu mencari solusi dan merancang program terpadu. Kegiatan berfokus pada peningkatan nilai ekonomi melalui pemasaran digital, pelestarian motif asli dengan pendokumentasian digital, pelatihan regenerasi penenun muda, dan sertifikasi autentisitas produk. Kegiatan ini diharapkan dapat menjadikan ulos tradisional mampu bersaing di pasar modern tanpa kehilangan nilai budayanya.
+[Konteks Visual Gambar 00674_863c2cc43d8a65e58f47356cfb348191.png]:
+Infografik berjudul 'TOBARIA / FAKTA - FAKTA MENARIK KAIN ULOS / WARISAN BUDYA LELUHUR SUKU BATAK'. Di tengah gambar terdapat ilustrasi sehelai kain ulos bermotif khas Batak berwarna merah dengan hiasan geometris putih dan ornamen tradisional. Rincian teks pada infografik:- 'ULOS TELAH ADA SEJAK 4.000 TAHUN LALU': Berdasarkan hasil studi, Ulos merupakan produk peninggalan peradaban tertua di Asia. Ulos bahkan diperkirakan telah ada jauh sebelum bangsa Eropa mengenal tekstil.- 'PROSES PEMBUATAN MEMAKAN WAKTU LAMA': Ulos dibuat menggunakan Hasuksak Alat Tenun Bukan Mesin, proses pembuatan sehelai kain berkualitas tinggi bisa mencapai empat bulan.- '10 JENIS ULOS YANG UMUM DIPAKAI MASYARAKAT': Berdasarkan aturan baku Ulos: 1. Ulos Jugia, 2. Ulos Ragi Idup, 3. Ulos Sibolang, 4. Ulos Ragi Hotang, 5. Ulos Sadum, 6. Ulos Runjat, 7. Ulos Mangiring, 8. Ulos Bintang Maratur, 9. Ulos Sitolu Tuho, 10. Ulos Suri-Suri Ganjang.- 'RAGAM FUNGSI ULOS': * Sebagai Pakaian Resmi Dalam Upacara Adat, * Sebagai Penghargaan Atau Penghormatan, * Sebagai Balas Jasa Kepada Orang Tua, * Sebagai Pakaian Penari Pada Tari Adat.- 'MEMILIKI TIGA WARNA DASAR': Umumnya motif Ulos terdiri dari minimal dua warna dan maksimal tiga warna berdasarkan warna dasar Merah, Putih, Hitam.
+PERTANYAAN:
+Pernyataan dibawah ini adalah pendekatan yang dilakukan pada revitalisasi kain tenun ulos. Manakah pernyataan yang sesuai bacaan dalam perspektif antropologi terapan?
+OPSI / PERNYATAAN:
+  - A. A. Pengetahuan budaya dimanfaatkan secara praktis untuk mengatasi masalah sosial-ekonomi dan melestarikan warisan budaya komunitas.
+  - B. B. Penelitian etnografi digunakan untuk mendeskripsikan makna filosofis setiap motif kain ulos bagi masyarakat Batak Toba.
+  - C. C. Pendekatan teori evolusi kebudayaan menjelaskan perubahan tradisi menenun dari bentuk sederhana menuju bentuk yang lebih kompleks.
+  - D. D. Strategi pemasaran digital dianggap sebagai satu-satunya cara efektif untuk meningkatkan nilai jual kain ulos di pasar global.
+  - E. E. Analisis strukturalisme dipakai untuk membedah pola-pola biner yang terkandung dalam sistem klasifikasi motif kain ulos.
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sumber gambar: rri.co.id
+
+Mudik atau tradisi pulang ke kampung halaman ketika Lebaran merupakan tradisi masyarakat Indonesia yang sarat makna. Setiap tahun jutaan perantau berbondong-bondong melakukan mudik. Perjalanan ratusan bahkan ribuan kilometer ditempuh demi berkumpul bersama keluarga. Suasana mudik terasa begitu khas; terminal dan stasiun dipadati penumpang, jalan raya ramai oleh kendaraan, dan pasar tradisional hidup dengan aktivitas persiapan lebaran. Di kampung halaman keluarga menyambut hangat, berbagi cerita, sembari menikmati hidangan khusus seperti ketupat dan opor ayam. Ritual mudik juga menjadi momen mempererat ikatan sosial, baik melalui halal bihalal maupun berbagi rezeki kepada sanak saudara. Mudik bukan sekadar perpindahan fisik, melainkan juga bentuk pelestarian nilai-nilai kebersamaan. Mudik adalah cermin identitas budaya Indonesia yang menjunjung kekeluargaan dan kebersamaan.
+[Konteks Visual Gambar 58613_86829db328bc7ebe132bc695e7b18b20.png]:
+Ilustrasi aktivitas penelitian ekskavasi lapangan dalam bidang arkeologi dan paleontologi di area perbukitan terbuka berpasir. Terdapat empat orang peneliti/arkeolog:- Kiri: Seorang arkeolog perempuan berkaus hijau berjongkok membersihkan lapisan tanah menggunakan sekop kecil/cetok (trowel).- Tengah: Dua orang peneliti muda (laki-laki dan perempuan berseragam lapangan krem) sedang melakukan ekskavasi dan konservasi temuan fosil tengkorak mamalia purba bertanduk (tengkorak banteng/bovidae) serta tulang paha menggunakan kuas halus pembersih.- Kanan: Seorang peneliti pria berjanggut mengenakan rompi lapangan dan topi pet sedang menggali tanah menggunakan sekop di samping temuan fosil tengkorak bertanduk rusa.
+PERTANYAAN:
+Dalam penelitian etnografi, apa yang dilakukan oleh peneliti jika ingin memahami interaksi sosial dan simbol budaya muncul selama proses mudik berlangsung?
+OPSI / PERNYATAAN:
+  - A. A. Mengumpulkan data statistik jumlah pemudik dan jalur yang digunakan masyarakat.
+  - B. B. Mengamati langsung perilaku pemudik di stasiun, jalan raya, dan kampung halaman.
+  - C. C. Menganalisis berita dan media sosial tentang arus mudik dan kebijakan pemerintah.
+  - D. D. Melakukan survei kuantitatif tentang tingkat kepuasan pemudik terhadap layanan transportasi.
+  - E. E. Membandingkan tradisi mudik dengan perayaan serupa di negara lain secara historis.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di sebuah pasar tradisional, para pedagang dari berbagai suku seperti Jawa, Batak, Bugis, dan Madura saling berdampingan membuka usaha di lapak dagangan masing-masing. Guna menghindari persaingan tidak sehat, para pedagang sepakat mengatur wilayah atau zona jualan berdasarkan jenis barang dan hari pasar tertentu, sehingga setiap pedagang tetap memiliki pelanggan tanpa harus saling berebut. Selain itu, dalam koperasi pasar yang telah dibentuk secara kolektif, para pedagang menyepakati sistem iuran bersama untuk perbaikan fasilitas pasar tanpa membedakan latar belakang etnis. Kesepakatan-kesepakatan ini mencerminkan bentuk hubungan sosial pada bidang ekonomi yang menjaga keharmonisan dalam keberagaman.
+[Konteks Visual Gambar 91606_1b8c83d7bbc28563345aae5f23ca6d23.png]:
+Foto dokumentasi upacara persembahyangan dan ritual keagamaan umat Hindu di depan arca Dewa Ganesha berukuran besar. Detail elemen gambar:- Arca Ganesha dihiasi kain wastra tradisional (sarung oranye-kuning, selempang emas, dan hiasan kepala), diapit oleh payung ritual tradisional Bali (tedung/pajeng) berwarna kuning dan putih.- Di depan altar terdapat meja sarana upakara yang dipenuhi berbagai sesajen (banten dan canang sari).- Seorang pemangku/rohaniwan pria mengenakan busana serba putih dan udeng memimpin upacara persembahan.- Umat Hindu yang terdiri dari pria (mengenakan baju safari putih, kamen, dan udeng) serta wanita (mengenakan kebaya aneka warna, selendang, dan kamen) duduk bersimpuh/bersila melangsungkan persembahyangan secara khidmat di area pelataran beralaskan lantai motif bata, dengan latar pepohonan palem dan arsitektur pura.
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, apakah bentuk interaksi sosial yang terjadi?
+OPSI / PERNYATAAN:
+  - A. A. Asimilasi.
+  - B. B. Kerjasama.
+  - C. C. Akulturasi.
+  - D. D. Akomodasi.
+  - E. E. Kontravensi.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perkembangan teknologi dan media sosial telah mengubah cara bergaul para pemuda di kawasan pedesaan. Dulu interaksi sosial berlangsung melalui kegiatan gotong royong atau acara adat, namun kini banyak pemuda lebih sering berkomunikasi secara daring. Akibatnya intensitas pertemuan langsung menurun, nilai kebersamaan melemah, dan gaya hidup individualis mulai berkembang. Meskipun demikian, akses informasi yang lebih luas juga membuka peluang bagi pemuda desa untuk mengembangkan potensi diri secara kreatif.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, tindakan apa yang paling tepat untuk mengurangi dampak negatif dari perubahan sosial di kawasan pedesaan?
+OPSI / PERNYATAAN:
+  - A. A. Mengadakan kegiatan rutin seperti diskusi kelompok dan pelatihan keterampilan secara langsung untuk memperkuat kebersamaan dan interaksi sosial pemuda.
+  - B. B. Memanfaatkan media sosial untuk membentuk komunitas online yang mendukung potensi lokal, seperti promosi produk desa dan edukasi budaya.
+  - C. C. Menyelenggarakan gerakan "Hari Tanpa Gadget " agar pemuda lebih mengenal kembali interaksi sosial melalui gotong royong dan seni tradisional.
+  - D. D. Berkolaborasi dengan tokoh adat untuk memodifikasi acara adat agar menarik bagi generasi muda tanpa menghilangkan nilai budayanya.
+  - E. E. Mengutamakan pengembangan diri melalui kursus online secara individu tanpa keterlibatan dalam komunitas sosial.
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Di Kota Harmoni masyarakatnya terdiri dari berbagai kelompok etnis dan agama. Setiap kelompok memiliki tradisi, bahasa, dan kepercayaan yang berbeda. Pemerintah kota memberi ruang bagi semua kelompok untuk mengekspresikan identitas budaya mereka secara terbuka, termasuk dalam kegiatan publik seperti festival, pendidikan, dan media lokal. Dalam kehidupan sehari-hari, interaksi antarkelompok berjalan baik meskipun masing-masing kelompok tetap mempertahankan identitas budayanya. Namun, beberapa warga muda mulai membentuk komunitas lintas budaya dengan identitas campuran.
+[Konteks Visual Gambar 14283_dcd48c72669c9e40e04efd9e3a115392.png]:
+Ilustrasi kartun anak-anak Indonesia dari berbagai latar belakang suku dan etnis bermain bersama di lapangan terbuka. Mereka memainkan permainan tradisional lompat tongkat bambu (seperti tari Rangkuk Alu). Empat anak duduk memegang dan menggerakkan batang bambu yang disusun bersilangan, sementara dua anak melompat di sela-sela bambu: seorang anak perempuan memakai busana adat Tionghoa (cheongsam merah) dan seorang anak dengan pakaian adat Dayak berhias bulu burung di kepala. Anak-anak lain mengenakan busana tradisional nusantara (seperti penutup kepala Melayu, udeng Bali, blangkon Jawa, dan pakaian adat lainnya) tampak bertepuk tangan dan bersuka ria, mencerminkan nilai keberagaman, toleransi, dan persatuan (Bhinneka Tunggal Ika).
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, jenis-jenis masyarakat multikultural yang tampak adalah... Klik pilihan Benar atau Salah pada setiap pernyataan berdasarkan isi teks.
+OPSI / PERNYATAAN:
+  - A. Multikulturalisme akomodatif karena setiap kelompok diberi ruang dan hak yang sama untuk mengekspresikan budayanya.
+  - B. Multikulturalisme otonom karena kelompok-kelompok tetap mempertahankan identitas budaya masing-masing tanpa kehilangan ciri khasnya.
+  - C. Multikulturalisme asimilatif karena seluruh kelompok budaya bergabung menjadi satu budaya dominan.
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Gambar di atas menunjukkan perbandingan kecenderungan hiburan dari masa lalu dan hiburan masa kini. Sisi kiri menunjukkan hiburan tradisional (wayang, nyanyian daerah, dan rebana) yang seringkali bersifat komunal dan lokal. Sementara sisi kanan menunjukkan hiburan modern (film, musik headphone, dan video gim) yang cenderung dapat dinikmati dari mana saja dan sering dinikmati secara personal.
+[Konteks Visual Gambar 89394_c27b2a75a050f299418ebb52a48497b1.png]:
+Ilustrasi suasana bazar multikultural dan akulturasi masyarakat di waktu senja. Rincian elemen gambar:- Stan-stan kuliner berlabel teks: 'Chinese Food', 'Masakan Padang', dan 'Masakan Ambon' yang dijaga oleh pedagang dari berbagai etnis dan budaya.- Latar belakang memperlihatkan koeksistensi harmonis rumah ibadah: bangunan masjid hijau berkubah serta menara berdiri berdampingan dengan kelenteng Tionghoa beratap tumpang dengan lampion merah menyala.- Panggung pertunjukan seni menampilkan tarian tradisional (Tari Piring khas Minangkabau) yang disaksikan secara antusias oleh warga dari berbagai usia.- Bagian depan menampilkan meja bertuliskan 'LAPAK BACA GRATIS' yang dikelilingi anak-anak dan warga yang membaca buku, serta warga saling bergotong royong membersihkan halaman.
+PERTANYAAN:
+Manakah pernyataan yang paling tepat menggambarkan perubahan sosial dan budaya ini dari sudut pandang kecenderungan pemilihan hiburan?
+OPSI / PERNYATAAN:
+  - A. A. Pergeseran minat dan makna hiburan yang bersifat global dan individual.
+  - B. B. Masyarakat hanya bisa menikmati satu jenis hiburan saja dalam satu waktu.
+  - C. C. Hiburan tradisional sepenuhnya hilang karena adanya hiburan modern.
+  - D. D. Hiburan modern selalu lebih baik daripada hiburan tradisional.
+  - E. E. Generasi jaman sekarang, karena sibuk bekerja, sama sekali tidak minat dengan hIburan.
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sumber gambar: https://www.balipost.com/news/2022/03/30/259660/Pagerwesi
+
+Setiap enam bulan sekali umat Hindu melaksanakan tradisi upacara pagerwesi, yang bermakna "pagar dari besi", sebagai simbol pertahanan diri dari pengaruh buruk pikiran dan kejahatan. Upacara ini jatuh pada hari Rabu Kliwon Wuku Sinta, empat hari setelah Hari Saraswati. Sejak pagi, masyarakat mulai melakukan persembahyangan di rumah masing-masing. Ibu-ibu sibuk menyiapkan banten (sesajen), sementara anak-anak mengenakan pakaian adat putih lengkap dan ikut membantu menghaturkan canang (sesaji harian yang berisi bunga, daun dan bahan lainnya) di pelinggih (tempat suci keluarga). Bapak-bapak membersihkan halaman rumah dan ikut dalam doa bersama di pura desa. Di tengah upacara pemangku (pemuka adat) menyampaikan wejangan spiritual tentang pentingnya menjaga pikiran agar tetap positif dan tidak mudah tergoda oleh hal-hal duniawi. Di sisi lain, generasi muda meskipun aktif di media sosial tetap mengikuti upacara ini karena dianggap sebagai identitas dan warisan budaya leluhur.
+[Konteks Visual Gambar 89451_7ac2434f8f628e8dbd58ba21ec383dd2.png]:
+Ilustrasi deretan stan/kios pasar tradisional yang merepresentasikan keberagaman suku bangsa dan integrasi ekonomi antaretnis di Indonesia. Terdapat empat stan dengan penanda teks: 1. 'LAPAK JAWA': Dijaga oleh pedagang pria mengenakan busana tradisional Jawa (beskap hitam dan penutup kepala blangkon). 2. 'LAPAK BATAK': Dijaga oleh pedagang pria berbusana adat Batak (kain ulos bermotif merah dan penutup kepala khas). 3. 'LAPAK BUGIS': Dijaga oleh pedagang pria berbusana adat Bugis/Makassar (jas tutup hitam dan songkok recca/songkok to bone). 4. 'LAPAK MADURA': Dijaga oleh pedagang pria berbusana adat Madura (baju pesa'an serba hitam dan ikat kepala odheng). Di depan masing-masing stan terlihat pembeli wanita yang berinteraksi melakukan transaksi jual beli, menggambarkan konsep pasar multikultural dan kerukunan sosial.
+PERTANYAAN:
+Berdasarkan ilustrasi di atas, manakah unsur sistem sosial budaya dalam masyarakat tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Sistem mata pencaharian, sistem kekerabatan, dan sistem kesenian yang berkembang di masyarakat.
+  - B. B. Sistem hukum adat, sistem politik lokal, dan sistem nilai yang dianut oleh generasi tua.
+  - C. C. Stratifikasi sosial, modernisasi desa, dan dinamika kelompok yang dipengaruhi media sosial.
+  - D. D. Sistem bahasa, jalur pewarisan takhta pemangku, dan sistem ekonomi upacara.
+  - E. E. Sistem kepercayaan, sistem pengetahuan, organisasi sosial, dan peralatan upacara
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+sumber gambar:  https://jafarbuaisme.com/
+
+Di Sulawesi Tengah terdapat komunitas adat Kaili yang memiliki tradisi kuat dalam pengelolaan hutan dan sumber daya alam secara lestari. Pemerintah daerah ingin mengembangkan program pembangunan berkelanjutan di wilayah tersebut. Tim peneliti menggunakan metode etnografi untuk memahami kebiasaan, nilai, dan hubungan sosial masyarakat Kaili secara mendalam sebelum membuat rekomendasi kebijakan.
+[Konteks Visual Gambar 06880_455e14d8b05cc8d005eb9709fdb5bd33.png]:
+Ilustrasi profil samping seorang individu berkarakteristik fisik ras Melanesoid (kulit berwarna gelap, rambut keriting hitam ikal bertekstur gimbal) mengenakan pakaian berwarna ungu muda/biru. Di latar belakang sebelah kiri tampak bangunan candi batu bercorak Hindu-Buddha, dihiasi lanskap padang rumput hijau, pepohonan, serta langit cerah dengan dua awan putih, merepresentasikan keterkaitan antara antropologi ragawi (ras/etnis) dan sejarah arkeologi di Nusantara.
+PERTANYAAN:
+Langkah manakah yang paling tepat dilakukan agar hasil penelitian valid dan program pembangunan selaras dengan nilai-nilai masyarakat Kaili?
+OPSI / PERNYATAAN:
+  - A. A. Melakukan wawancara kepada beberapa warga tanpa tinggal di komunitas.
+  - B. B. Mengumpulkan data dari dokumen pemerintah tanpa berinteraksi dengan masyarakat.
+  - C. C. Memutuskan kebijakan berdasarkan data statistik tanpa memperhatikan adat istiadat.
+  - D. D. Menetapkan program pembangunan yang diterapkan di daerah lain tanpa penyesuaian lokal.
+  - E. E. Mengamati dan berpartisipasi dalam kegiatan masyarakat selama beberapa bulan.
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Setiap hari Minggu Lapangan Merdeka di Kota Harmoni dipadati warga dari berbagai latar belakang etnis: Tionghoa, Sunda, Jawa, Ambon, dan Minang. Ada yang berjualan makanan khas daerah, ada yang menampilkan tarian tradisional, dan ada pula komunitas remaja lintas budaya yang membuka lapak baca gratis. Pada bulan Ramadhan, warga non Muslim turut membantu menjaga keamanan saat salat tarawih. Sementara saat perayaan Imlek, warga Muslim ikut menjaga kebersihan dan lalu lintas di sekitar klenteng. Ketika salah satu komunitas sempat mengusulkan untuk mengganti nama “Lapangan Merdeka” agar lebih “modern”, perdebatan muncul di media sosial, namun akhirnya semua kelompok sepakat mempertahankan nama asli karena dianggap merepresentasikan kebersamaan.
+[Konteks Visual Gambar 84146_8cbaaa28fbb9e495e08dbf41d0a897aa.png]:
+Foto dokumentasi upacara dan tradisi ketangkasan lompat batu (dikenal sebagai 'Fahombo' atau 'Hombo Batu') di Desa Adat Bawomataluo, Nias Selatan, Sumatera Utara. Gambar menampilkan:- Seorang pemuda Nias mengenakan busana adat melayang tinggi di udara melompati monumen tumpukan batu berbentuk piramida terpancung setinggi sekitar dua meter.- Barisan warga dan tetua adat mengenakan pakaian tradisional perang Nias bernuansa merah, kuning, dan hitam berhias mahkota kepala bulu burung berdiri menyaksikan di sisi kiri dan kanan.- Latar belakang memperlihatkan deretan rumah adat tradisional panggung khas Nias (Omo Hada / Omo Sebua) dengan halaman berlantai susunan batu alam di bawah langit biru cerah.
+PERTANYAAN:
+Berdasarkan ilustrasi di atas, manakah bentuk interaksi sosial pada masyarakat multikultural?
+OPSI / PERNYATAAN:
+  - A. A. Kooperasi dan akomodasi.
+  - B. B. Konflik dan segregasi.
+  - C. C. Asimilasi dan dominasi.
+  - D. D. Kontravensi dan kompromi.
+  - E. E. Kompetisi dan integrasi.
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['A:Tidak Sesuai', 'B:Sesuai', 'C:Sesuai']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Koentjaraningrat adalah tokoh sentral dalam perkembangan Antropologi di Indonesia setelah kemerdekaan, sehingga dikenal sebagai bapak Antropologi Indonesia. Beliau dikenal sebagai pelopor pengembangan Ilmu Antropologi di perguruan tinggi, banyak menerjemahkan, dan menyesuaikan teori-teori Antropologi Barat ke dalam konteks Indonesia. Melalui pendekatannya, Antropologi tidak hanya menjadi alat untuk memahami kebudayaan tradisional, tetapi juga untuk melihat perubahan sosial dan pembangunan. Saat ini, warisan pemikiran Koentjaraningrat masih terasa, terutama dalam upaya mengkaji keberagaman budaya Indonesia secara inklusif dan kontekstual.
+[Konteks Visual Gambar 34008_44053168365ed4314c7dbcfd407af6a0.png]:
+Sampul buku akademik berjudul 'Koentjaraningrat: Bapak Antropologi Indonesia'. Teks pada sampul buku:- Judul Utama: 'Koentjaraningrat'- Subjudul atas: 'Bapak Antropologi Indonesia'- Subjudul bawah: 'Membangun Antropologi di Indonesia'- Nama Penulis: 'HEDDY SHRI AHIMSA-PUTRA'- Penerbit: '(UGM) GADJAH MADA UNIVERSITY PRESS' Visual sampul menampilkan foto potret Prof. Dr. Koentjaraningrat mengenakan pakaian kemeja batik bernuansa cokelat kekuningan dengan latar tekstur kertas perkamen.
+PERTANYAAN:
+Klik pilihan Sesua i atau Tidak Sesuai pada pernyataan yang sesuai dengan perkembangan Antropologi di Indonesia melalui peran Koentjaraningrat di atas.
+OPSI / PERNYATAAN:
+  - A. Koentjaraningrat menolak penggunaan teori-teori antropologi Barat karena dianggap tidak relevan untuk Indonesia.
+  - B. Koentjaraningrat berperan penting dalam mengembangkan Antropologi sebagai ilmu yang kontekstual dengan kebudayaan Indonesia
+  - C. Pemikiran Koentjaraningrat menjadi landasan bagi studi Antropologi kontemporer dalam melihat dinamika masyarakat Indonesia secara kritis dan lokal.
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di Kota Sejahtera hidup berdampingan berbagai kelompok etnis seperti Betawi, Sunda, Minang, Ambon, dan Arab. Setiap tahun, kota ini mengadakan “Pekan Budaya Bersama” di mana tiap kelompok menampilkan seni tradisional, mengadakan bazar makanan, dan workshop kebudayaan. Tahun ini muncul masalah, komunitas Minang ingin tampil lebih awal karena harus pulang kampung lebih cepat. Namun komunitas Betawi merasa jadwal awal seharusnya tetap milik mereka karena sebagai "tuan rumah”. Akhirnya, panitia lintas komunitas menyepakati sistem undian terbuka dan membuat giliran berbeda tiap tahun. Sementara itu, di luar acara, anak muda dari berbagai etnis mendirikan kafe budaya bernama “Kita Satu Meja” tempat nongkrong bareng sambil membuat konten media sosial tentang tradisi mereka.
+[Konteks Visual Gambar 51838_618bd7c865caae8e26a97abb8a6f8e1c.png]:
+Ilustrasi bertema fenomena sosial kultural mudik di Indonesia dengan teks utama di bagian bawah berbunyi 'MUDIK LEBARAN'. Komposisi gambar memperlihatkan:- Latar belakang berupa sebuah bus antarkota besar berwarna putih-kebiruan.- Sisi kiri: Mobil minibus hijau berpenumpang anak laki-laki berkopiah dan anak perempuan berkerudung yang melambaikan tangan, dengan tumpukan koper di atas rak atap mobil.- Sisi kanan: Sepeda motor matik abu-abu dikendarai pasangan pria dan wanita berhelm yang melambaikan tangan, membawa tumpukan barang bawaan di bagian belakang motor.- Bagian tengah: Sekelompok pemudik berjalan kaki membawa berbagai barang bawaan, kardus kemasan di atas pundak, tas ransel, dan koper pakaian, merepresentasikan mobilitas sirkuler musiman masyarakat menjelang Idulfitri.
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, manakah bentuk interaksi sosial dalam masyarakat multikultural yang tepat?
+OPSI / PERNYATAAN:
+  - A. A. Kooperasi dan akomodasi, karena ada kerja sama dalam festival dan kesepakatan saat terjadi perbedaan kepentingan.
+  - B. B. Asimilasi dan konflik karena kelompok - kelompok budaya menyatu dan memperebutkan posisi tampil dalam acara.
+  - C. C. Kontravensi dan segregasi, karena masing - masing kelompok berusaha mempertahankan budaya sendiri tanpa interaksi.
+  - D. D. Integrasi dan konflik terbuka, karena komunitas membentuk ruang bersama namun sering terjadi pertentangan keras.
+  - E. E. Kompetisi dan dominasi, karena ada persaingan antar kelompok untuk menonjolkan budayanya dalam festival.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Seorang antropolog tinggal bersama suku Asmat di Papua selama enam bulan untuk mempelajari kebudayaan setempat. Antropolog tersebut bertanya langsung kepada anggota suku mengenai makna dari kebudayaan yang ada di daerah mereka, seperti bahasa daerah, tarian adat, ritual, dan tradisi. Ia mencatat bagaimana anggota suku memahami dan merasakan berbagai makna yang muncul dari kebudayaan tersebut.
+
+PERTANYAAN:
+Manakah yang paling mencerminkan pendekatan emik seperti yang dilakukan oleh antropolog dalam ilustrasi tersebut? Klik pilihan Benar atau Salah pada setiap pernyataan berdasarkan isi teks!
+OPSI / PERNYATAAN:
+  - A. Wawancara mendalam dengan penduduk terkait tarian adat daerah setempat.
+  - B. Observasi partisipatif saat peneliti ikut serta dalam ritual atau kegiatan sehari-hari.
+  - C. Membandingkan praktik budaya satu masyarakat dengan masyarakat lain.
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pulau Nias Sumatera Utara, terkenal dengan tradisi Fahombo atau lompat batu. Tradisi ini merupakan ritual inisiasi bagi para pemuda Nias yang menandai transisi dari masa remaja menuju kedewasaan. Seorang pemuda dianggap dewasa dan layak menikah jika berhasil melompati tumpukan batu setinggi lebih dari dua meter dengan ketebalan sekitar 40 sentimeter, tanpa bantuan alat apa pun. Persiapan untuk Fahombo sangat panjang, melibatkan latihan fisik yang keras, disiplin spiritual, dan pembelajaran nilai-nilai luhur seperti keberanian, kegigihan, tanggung jawab, dan kehormatan keluarga. Tradisi Fahombo bukan sekadar aksi akrobatik, melainkan sebuah manifestasi dari kearifan lokal masyarakat Nias yang telah diwariskan secara turun-temurun. Kearifan ini mencerminkan bagaimana masyarakat Nias memandang konsep kedewasaan. Mereka percaya bahwa kematangan bukan hanya soal usia, tetapi juga kemampuan fisik dan mental untuk menghadapi tantangan hidup, melindungi keluarga, dan mempertahankan harga diri. Batu yang dilompati melambangkan rintangan dan kesulitan yang harus dihadapi dalam hidup. Keberhasilan melompati batu adalah simbol dari kematangan, kekuatan, dan kesiapan seorang pemuda untuk memikul tanggung jawab sebagai orang dewasa dalam komunitas, termasuk dalam perang (di masa lalu) dan dalam kehidupan sosial yang lebih luas. Selain itu, tradisi ini juga mempererat ikatan sosial dan mengajarkan nilai-nilai komunitas. Meskipun zaman telah berubah dan praktik perang sudah tidak relevan, Fahombo tetap dipertahankan sebagai identitas budaya dan sarana pendidikan karakter bagi generasi muda Nias. Upaya pelestarian dilakukan melalui pengajaran nilai-nilai di sekolah dan sanggar-sanggar budaya, serta promosi sebagai warisan budaya tak benda yang menarik wisatawan.
+[Konteks Visual Gambar 52443_2a1511f467019f4fc9456c44394c7493.png]:
+Ilustrasi komparasi dengan teks 'Vs' di bagian tengah, membandingkan dua pendekatan dalam praktik pertanian:- Panel Kiri (Pertanian Tradisional/Organik): Seorang petani mengenakan topi jerami sedang mengolah tanah bedengan menggunakan cangkul/garu secara manual serta memanfaatkan kotoran ternak/kompos alami. Di belakangnya terdapat seekor sapi perah berwarna cokelat-putih yang sedang merumput di ladang.- Panel Kanan (Pertanian Modern/Kimiawi): Seorang petani mengenakan alat pelindung diri (APD) lengkap berupa masker respirator gas dan sarung tangan, menggendong tangki semprot (knapsack sprayer) bertekanan, dan menyemprotkan cairan pestisida atau pupuk kimia sintetis ke tanaman budidaya.
+PERTANYAAN:
+Berdasarkan stimulus di atas, mengapa tradisi Fahombo dapat dianalisis sebagai wujud kearifan lokal yang relevan bagi kehidupan modern masyarakat Nias?
+OPSI / PERNYATAAN:
+  - A. A. Menularkan nilai moral, bentuk karakter esensial Nias meskipun zaman berubah.
+  - B. B. Hanya berfokus pada kekuatan fisik semata, yang masih dibutuhkan di era modern.
+  - C. C. Berhasil mempertahankan ritual perang yang relevan untuk pertahanan negara saat ini.
+  - D. D. Fahombo adalah satu-satunya tradisi di Nias yang masih menghasilkan uang dari pariwisata.
+  - E. E. Masyarakat Nias menolak semua bentuk modernisasi dan hanya ingin hidup berdasarkan tradisi lama.
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sumber gambar: https://www.educba.com/organic-farming-vs-conventional-farming/
+
+Masyarakat Desa Suka-suka sebelumnya mengandalkan pertanian organik secara turun-temurun. Namun, setelah masuknya program modernisasi, sebagian petani beralih ke pertanian anorganik. Hal ini menyebabkan berkurangnya keanekaragaman hayati, menurunnya tradisi gotong royong, meningkatnya pengangguran akibat penggunaan mesin, dan terjadinya polusi air karena penggunaan pupuk kimia.
+[Konteks Visual Gambar 71814_30c2b756302e3dfee401c99ad49717cf.png]:
+Poster bertuliskan teks 'SEKOLAH INDONESIA EMAS' dengan pita bendera merah putih di pojok kiri atas. Ilustrasi terbagi menjadi dua konsep utama:- Bagian Atas: Benda terbang futuristik menyerupai piring terbang (UFO) memancarkan berkas cahaya kuning terang ke bawah, di dalamnya terdapat empat sosok pelajar/generasi muda (laki-laki dan perempuan) yang melayang/melompat ke atas, menyimbolkan cita-cita kemajuan pendidikan dan teknologi.- Bagian Bawah: Simbol kerukunan dan moderasi beragama di Indonesia yang menampilkan rumah ibadah dan pemeluk dari berbagai agama: Candi/Pagoda Buddha dengan seorang biksu sedang bermeditasi; Masjid berkubah megah dengan pasangan Muslim yang berdoa; Gereja beratap salib dengan bendera merah putih serta para pelayan gereja; dan Candi Bentar/Pura Hindu Bali dengan seorang wanita berkebaya putih yang sedang bersembahyang bersimpuh.
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, tindakan reflektif apa yang paling tepat untuk memitigasi dampak negatif dari perubahan sosial-budaya ini?
+OPSI / PERNYATAAN:
+  - A. A. Melarang penggunaan teknologi modern agar masyarakat kembali sepenuhnya ke sistem pertanian organik.
+  - B. B. Membangun pabrik pupuk organik besar-besaran untuk bersaing dengan pupuk anorganik.
+  - C. C. Menerapkan sistem pertanian hybrid yang menggabungkan kearifan lokal dengan penggunaan teknologi secara selektif.
+  - D. D. Mengalihkan pemuda desa ke sektor industri agar pertanian cukup dijalankan dengan mesin.
+  - E. E. Membiarkan masyarakat menentukan sendiri arah pertanian tanpa pendampingan atau dukungan pihak luar.
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di beberapa wilayah tradisi pembagian tanah warisan keluarga secara turun-temurun diberikan hanya kepada anak laki-laki sebagai pewaris utama. Namun generasi muda yang telah mendapat pendidikan formal di perkotaan mulai mempertanyakan keadilan sistem yang berlaku selama ini. Mereka yang mengenyam pendidikan formal mulai mendorong perubahan dalam aturan waris agar perempuan juga memiliki hak yang sama seperti laki-laki atas pewarisan tanah keluarga. Ketegangan pun muncul antara generasi tua yang ingin mempertahankan adat dan generasi muda yang mengenyam pendidikan formal untuk menuntut kesetaraan.
+
+PERTANYAAN:
+Pernyataan manakah yang menunjukkan kajian antropologi sosial dan antropologi budaya secara tepat dari kasus di atas?
+OPSI / PERNYATAAN:
+  - A. A. Antropologi sosial menelaah struktur adat dalam pewarisan tanah, sedangkan antropologi budaya mengkaji bentuk interaksi sosial antara laki-laki dan perempuan.
+  - B. B. Antropologi sosial mengkaji ketegangan antargenerasi terkait hak dan peran sosial, sedangkan antropologi budaya menganalisis nilai budaya patriarki yang mendasari aturan pewarisan.
+  - C. C. Antropologi sosial membahas perubahan sistem kepercayaan masyarakat, sedangkan antropologi budaya meneliti dinamika stratifikasi sosial akibat pembagian warisan.
+  - D. D. Antropologi sosial menyoroti simbol-simbol dalam proses pewarisan tanah, sedangkan antropologi budaya fokus pada struktur sosial masyarakat adat.
+  - E. E. Antropologi sosial meneliti nilai-nilai budaya yang diwariskan dalam adat, sedangkan antropologi budaya mengkaji perilaku kolektif dalam sistem kekerabatan masyarakat.
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Artefak prasejarah memiliki bentuk yang menggambarkan perkembangan kebudayaan dan teknologi pada kehidupan zaman prasejarah. Pada zaman neolitikum, artefak berupa alat dari batu halus seperti kapak persegi dan lonjong. Pada zaman megalitikum memiliki karakteristik artefak yang unik seperti menhir, sarkofagus, dan dolmen. Sedangkan pada zaman logam, artefak sudah bergeser kepada alat-alat yang terbuat dari logam seperti tombak dan kapak.
+[Konteks Visual Gambar 25604_cef6099e889a92b5a247a308bb5fdd56.png]:
+Poster ilustratif bertuliskan teks utama berhuruf kapital tebal: 'SUKU KAILI, SULAWESI TENGAH'. Ilustrasi menampilkan sekelompok masyarakat adat Suku Kaili dalam balutan busana tenun tradisional bermotif garis horizontal dan pakaian adat berwarna jingga, hitam, dan putih. Latar belakang menggambarkan bentang alam khas Sulawesi Tengah berupa perbukitan, teluk atau danau air biru, pepohonan rimbun, ladang/terasering, serta gubuk tradisional dengan perapian ritual di dekatnya.
+PERTANYAAN:
+Berdasarkan pada perkembangan artefak, informasi apa yang didapat dari kehidupan pada zaman megalitikum?
+OPSI / PERNYATAAN:
+  - A. A. Manusia purba membuat gerabah untuk menyimpan makanan.
+  - B. B. Zaman megalitikum sudah mengenal bercocok tanam dan beternak.
+  - C. C. Manusia memiliki pola hidup belum menetap atau nomaden.
+  - D. D. Kelompok sudah memiliki peralatan sudah diasah dan dihaluskan.
+  - E. E. Bangunan memiliki desain bangunan besar dan terbuat dari batu.
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di sebuah wilayah pedalaman, pemerintah berencana membangun infrastruktur modern seperti jalan dan fasilitas kesehatan. Namun, masyarakat adat setempat menolak karena pembangunan dianggap mengganggu tempat sakral dan merusak keseimbangan alam yang mereka jaga secara turun-temurun. Pemerintah tetap bersikeras melanjutkan proyek tersebut tanpa melibatkan masyarakat dalam perencanaan.
+
+PERTANYAAN:
+Berdasarkan prinsip dasar antropologi, upaya penyelesaian yang paling tepat untuk menyelesaikan masalah tersebut adalah...
+OPSI / PERNYATAAN:
+  - A. A. melanjutkan pembangunan tanpa kompromi karena merupakan program nasional.
+  - B. B. mengundang tokoh adat untuk mencari titik temu antara pembangunan dan pelestarian budaya lokal.
+  - C. C. memindahkan seluruh masyarakat adat ke wilayah lain agar tidak menghambat proyek.
+  - D. D. menetapkan wilayah adat sebagai objek wisata agar budaya mereka bisa dilestarikan lewat pariwisata.
+  - E. E. memaksa masyarakat adat menerima perubahan demi kemajuan dan modernisasi.
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Papua memiliki kekayaan tradisi lisan yang mencerminkan kondisi geografis dan cara hidup masyarakatnya.
+
+Di pesisir, tradisi lisan banyak bercerita tentang pelayaran dan laut.
+
+Di pegunungan, kisahnya berpusat pada pertanian dan peperangan.
+
+Di hutan rawa, cerita spiritual dan hubungan dengan roh leluhur lebih menonjol.
+
+Terdapat sebuah tradisi lisan dari masyarakat pesisir Papua yang mengisahkan pelayaran leluhur dengan perahu besar melintasi samudra, penemuan pulau-pulau baru, serta interaksi magis dengan makhluk laut. Kisah ini biasanya diiringi dengan nyanyian dan tarian keberanian.
+
+PERTANYAAN:
+Berdasarkan ciri-ciri tersebut, suku manakah yang paling mungkin menjadi pemilik tradisi lisan tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Suku Dani dari dataran tinggi pegunungan.
+  - B. B. Suku Asmat dari daerah rawa yang kaya tradisi ukiran.
+  - C. C. Suku Korowai dari hutan pedalaman Papua.
+  - D. D. Suku Biak dari pesisir dengan tradisi bahari yang kuat.
+  - E. E. Suku Amungme dari lembah pegunungan yang subur
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Hasil penelitian Irawati dkk. (2023) menunjukkan bentuk kearifan lokal masih dipertahankan dan dilaksanakan oleh masyarakat Gayo Lues provinsi Aceh berupa: (1) larangan menebang pohon, (2) larangan memakan kambing hutan ( Gayo: Noang ), (3) aturan membuka lahan hutan seperti melalui ritual Nebes (kenduri pembukaan lahan), (4) pengkeramatan kawasan hutan seperti bur Tengku Tue, (5) aturan alokasi ruang dalam pengelolaan hutan: bur perutemen, bur peruweren, aih aunen, dan blang penyemuren. Semua bentuk kearifan lokal tersebut berdampak pada keberlanjutan pemanfaatan sumber daya alam dan menjaga ekosistem hutan.
+
+PERTANYAAN:
+Berdasarkan ilustrasi di atas, manakah pernyataan berikut yang menunjukkan bentuk hubungan antara kearifan lokal dan pengelolaan lingkungan secara berkelanjutan?
+OPSI / PERNYATAAN:
+  - A. A. Larangan menebang pohon dan makan kambing hutan semata-mata bertujuan melestarikan hewan langka tanpa ada kaitan dengan adat dan keyakinan.
+  - B. B. Ritual pembukaan lahan dan pengkeramatan hutan mencerminkan bahwa masyarakat Gayo mengandalkan mitos semata dalam bertani.
+  - C. C. Pembagian ruang hutan dan pelarangan berburu hewan tertentu menunjukkan bahwa pengelolaan hutan dilakukan berdasarkan sistem kepercayaan dan nilai kolektif masyarakat.
+  - D. D. Sistem alokasi ruang dan larangan adat justru membatasi potensi ekonomi masyarakat dalam pemanfaatan hutan.
+  - E. E. Kearifan lokal masyarakat Gayo adalah bentuk dari sistem ekonomi tradisional yang sudah tidak relevan di era modern.
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Di sebuah sekolah menengah, siswanya berasal dari beragam suku, agama, dan budaya. Namun tidak semua merasa diperlakukan adil. Dalam kegiatan keagamaan, hanya satu kelompok yang rutin diberi ruang dan waktu untuk beribadah serta merayakan hari besarnya. Sementara kelompok lain sering kali tidak mendapat kesempatan yang sama. Hal ini menimbulkan rasa kecewa, kecemburuan, dan ketegangan antar siswa. Beberapa mulai merasa tidak nyaman bahkan enggan terlibat dalam kegiatan bersama.
+
+PERTANYAAN:
+Berdasarkan ilustrasi diatas, rekomendasi kebijakan apakah yang paling tepat diambil oleh sekolah untuk menciptakan lingkungan yang adil dan inklusif bagi semua siswa? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Mengadakan forum dialog lintas agama dan budaya secara berkala di sekolah.
+  - B. B. Mewajibkan seluruh siswa mengikuti kegiatan keagamaan mayoritas sebagai bentuk toleransi.
+  - C. C. Menyediakan fasilitas ibadah dan ruang perayaan yang setara bagi semua kelompok agama.
+  - D. D. Menunjuk perwakilan dari tiap kelompok untuk merancang kegiatan inklusif di sekolah.
+  - E. E. Membatasi kegiatan agama yang dianggap minoritas agar tidak menimbulkan konflik baru.
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di Dataran Tinggi Dieng, terdapat tradisi unik bernama Rambut Gimbal atau anak gembel. Rambut gimbal diyakini sebagai titipan Kyai Kolodete, leluhur masyarakat Dieng. Anak yang memiliki rambut gimbal akan menjalani prosesi ruwatan sebelum rambutnya dipotong. Ritual ini menjadi simbol pelepasan kekuatan gaib sekaligus wujud syukur atas perlindungan leluhur. Prosesi ruwatan melibatkan serangkaian ritual adat, tarian, dan pemberian sesaji. Masyarakat setempat percaya bahwa rambut gimbal membawa berkah, tetapi juga menjadi ujian bagi orang tua untuk memenuhi permintaan anak sebelum rambutnya dipotong.
+[Konteks Visual Gambar 16723_1a8fb680b35d17f3cd6de222af7e5dab.png]:
+Ilustrasi konseptual yang menggambarkan proses penelitian lapangan, kajian etnografi, atau perancangan proyek bertema kehidupan masyarakat pesisir. Di bagian atas tampak seorang pria berkacamata sedang mengetik di depan laptop di atas meja bundar dengan ekspresi berpikir disertai tanda tanya ('??'), serta lembaran dokumen berlabel 'BRIEF' dan rancangan bagan/storyboard. Di sekelilingnya terhampar berbagai aspek kehidupan nelayan pesisir: rumah panggung tradisional, nelayan yang memamerkan dan membawa hasil tangkapan ikan, keranjang berisi ikan, nelayan merentangkan jaring/jala, perahu-perahu nelayan yang beroperasi di laut, serta bintang laut.
+PERTANYAAN:
+Berdasarkan perspektif antropologi, bagaimana peran kearifan lokal tradisi Rambut Gimbal dalam masyarakat Dieng?
+OPSI / PERNYATAAN:
+  - A. A. Sebagai alat kontrol sosial untuk menertibkan anak-anak yang dianggap nakal dalam perspektif lokal.
+  - B. B. Memperkuat identitas budaya melalui ritual yang memadukan unsur religius dan adat masyarakat lokal.
+  - C. C. Meningkatkan pariwisata dengan menjadikan tradisi sebagai daya tarik komersial bagi wisatawan.
+  - D. D. Menjadi sarana edukasi modern tentang pentingnya kebersihan rambut bagi anak-anak di perdesaan.
+  - E. E. Merefleksikan hubungan simbolis antara manusia, alam, dan dunia spiritual dalam sistem kepercayaan lokal.
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Masyarakat Bali memiliki tradisi lisan sekaa gong, yaitu kelompok penabuh gong atau gamelan yang memainkan komposisi musik sakral dan profan dalam berbagai upacara serta hiburan. Di era globalisasi, sekaa gong menghadapi tantangan seperti menurunnya minat generasi muda akibat dominasi musik modern, keterbatasan waktu latihan karena kesibukan, serta minimnya ruang fisik untuk berlatih bersama.
+
+PERTANYAAN:
+Jika kamu adalah pegiat seni dan budaya Bali, ide kreatif apa yang paling efektif untuk menjawab tantangan tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Mengadakan kompetisi gamelan tingkat nasional dengan hadiah besar untuk menarik perhatian generasi muda.
+  - B. B. Mewajibkan seluruh sekolah memiliki sekaa gong sebagai kegiatan ekstrakurikuler dengan latihan rutin.
+  - C. C. Menciptakan platform belajar gamelan daring yang interaktif dan memfasilitasi kolaborasi virtual antar seniman.
+  - D. D. Membangun gedung pertunjukan gamelan di setiap desa untuk meningkatkan eksistensi gamelan tradisional.
+  - E. E. Melarang semua jenis musik modern di area publik agar gamelan kembali menjadi pilihan utama masyarakat.
+
+---
+[SOAL NO 30]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pantun Banjar adalah salah satu bentuk tradisi lisan yang kaya dari suku Banjar di Kalimantan Selatan. Berupa puisi lisan empat baris, pantun ini seringkali digunakan dalam berbagai acara adat, hiburan rakyat, atau sekadar percakapan sehari-hari untuk menyampaikan nasihat, humor, atau ekspresi perasaan. Pantun Banjar tidak hanya berfungsi sebagai media komunikasi, tetapi juga cerminan nilai-nilai budaya, kearifan lokal, dan identitas masyarakat Banjar. Penyampaiannya yang spontan dan berima menjadikannya seni yang unik. Di era digital kini Pantun Banjar menghadapi tantangan serius. Minat generasi muda untuk mempelajari dan melantunkan pantun secara langsung cenderung menurun drastis. Mereka lebih terpapar pada media sosial dan hiburan visual yang lebih instan. Akibatnya, jumlah "pemantun" atau ahli pantun yang mampu berbalas pantun secara otentik semakin berkurang, mengancam kelangsungan tradisi ini. Kondisi ini membuat para budayawan khawatir Pantun Banjar akan terlupakan.
+
+PERTANYAAN:
+Berdasarkan narasi di atas, bagaimana keterkaitan antara bentuk tradisi lisan Pantun Banjar, problematikanya dan solusi inovatif untuk pelestariannya?
+OPSI / PERNYATAAN:
+  - A. A. Tradisi lisan pantun Banjar rentan terhadap penyebaran melalui media cetak, solusinya adalah membukukan semua pantun.
+  - B. B. Pantun Banjar adalah seni yang sulit dipelajari secara otodidak, solusinya adalah melarang penggunaan teknologi.
+  - C. C. Pantun Banjar kalah bersaing dengan hiburan modern yang instan, solusinya adalah adaptasi format ke platform digital.
+  - D. D. Tradisi lisan pantun Banjar adalah milik kaum tua saja, solusinya adalah mengabaikan partisipasi generasi muda.
+  - E. E. Pementasan pantun Banjar memerlukan banyak biaya, solusinya adalah mencari sponsor dari luar negeri.
+

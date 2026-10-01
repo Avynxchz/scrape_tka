@@ -1,0 +1,153 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Matematika Tingkat Lanjut (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: 
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: 
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: E
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: 
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: D
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Diketahui fungsi trigonometri
+f
+(
+x
+) = –3 sin (2x – 30
+O
+) + 4. Periode fungsi
+f
+(
+x
+) adalah ....
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: E
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Di bawah ini yang merupakan grafik fungsi
+adalah ....
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: D
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Suatu perahu akan menyeberangi sungai selebar 50 meter dari titik A di pinggir sungai. Kecepatan arus sungai 10 meter/menit sejajar dengan pinggiran sungai dengan arah ke hulu dan kecepatan perahu 20 meter/menit dengan arah tegak lurus dengan arah arus sungai. Jika B  berada di seberang sungai dan berjarak terdekat dengan posisi A, jarak titik perahu pada saat sampai di seberang sungai dan titik B adalah … meter.
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: ['B', 'E']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Diketahui persamaan lingkaran
+. Di antara lima pernyataan berikut, tentukan pernyataan yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Bayangan dari kurva
+y
+= 2
+x
+2
+– 5 yang ditranslasikan oleh matriks
+kemudian didilatasikan oleh (O, 2) dengan O merupakan titik koordinat (0,0) adalah .…
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: A
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: 
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: D
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: 
+---
+[SOAL ACUAN NO 11]
+Kunci Resmi: ['A', 'C', 'E']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Pilih semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 12]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Benar']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Seorang murid memperkirakan banyaknya penonton suatu video dalam ribuan yang dibuat oleh
+content creator
+A di media sosial mengikuti model
+dengan t adalah banyaknya hari sejak video diunggah.
+Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 13]
+Kunci Resmi: ['A', 'B', 'D']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Diketahui 𝒖,𝒗 dan 𝒘 merupakan tiga vektor dengan 𝒖 = (1,1,−1),𝒗 = (1, 𝑣1, 2) dan 𝒘 = (0,𝑤1,𝑤2). Berapakah nilai 𝑣1 dan 𝑤1 yang mungkin sehingga memenuhi 𝒘 = 𝒖−𝒗?
+Pilih semua jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 14]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Segitiga PQR dengan titik P (-1,3), Q (3,3), dan R(1,-2) didilatasi dengan pusat titik (0,0) dan faktor skala 3. Luas segitiga tersebut setelah dilakukan dilatasi adalah … satuan luas.
+---
+[SOAL ACUAN NO 15]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Tentukan Benar atau Salah untuk setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 16]
+Kunci Resmi: A
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: 
+---
+[SOAL ACUAN NO 17]
+Kunci Resmi: ['D', 'E']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: 
+---
+[SOAL ACUAN NO 18]
+Kunci Resmi: ['A', 'C', 'D']
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Berdasarkan informasi tersebut, pilihlah semua pernyataan berikut yang benar. Jawaban benar lebih dari satu!
+---
+[SOAL ACUAN NO 19]
+Kunci Resmi: A
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: 
+---
+[SOAL ACUAN NO 20]
+Kunci Resmi: D
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: 
+

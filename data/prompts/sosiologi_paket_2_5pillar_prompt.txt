@@ -1,0 +1,564 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Sosiologi (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pandemi COVID-19 yang melanda dunia sejak awal tahun 2020 telah membawa perubahan dalam berbagai aspek kehidupan, termasuk cara kita berinteraksi dan menjaga hubungan sosial. Kebijakan jaga jarak atau physical distancing menjadi norma baru yang wajib dipatuhi, sementara aktivitas tatap muka, termasuk pembelajaran, beralih secara drastis menjadi daring.
+
+PERTANYAAN:
+Apa yang memungkinkan interaksi sosial tetap terjadi pada masa pandemi meskipun terdapat pembatasan tatap muka secara langsung?
+OPSI / PERNYATAAN:
+  - A. A. Individu memahami teknologi informasi.
+  - B. B. Komunikasi tetap terjalin melalui media daring.
+  - C. C. Semua pihak mengikuti aturan dengan taat.
+  - D. D. Lingkungan sekitar menyediakan jaringan internet.
+  - E. E. Siswa dan guru menggunakan handphone.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Nasionalisme sebagai masyarakat yang lahir di Indonesia muncul pertama kali setelah Indische Partij terbentuk pada 1912. Partai ini melibatkan segala etnis, termasuk Eropa dan peranakan Indo. Kemudian peranakan Indo melebur dengan momentum nasionalisme berikutnya, Sumpah Pemuda 1928. Sumpah Pemuda menjadi ajang persatuan antara peranakan Tionghoa, Arab, dan Indo untuk jati dirinya sebagai orang Indonesia. Peristiwa ini mempertemukan kalangan tersebut untuk mengkampanyekan persatuan. Berangsur-angsur setelah Sumpah Pemuda, berdirilah partai berbasis etnis yang mendukung nasionalisme. Kemudian pergerakan secara etnik perlahan pun melebur dengan kelompok nasionalisme lainnya. Tanpa sekat, dan bermuara pada kemerdekaan Indonesia.
+
+Sumber diadaptasi dari:  https://nationalgeographic.grid.id/
+
+PERTANYAAN:
+Mengapa sumpah pemuda pada kasus tersebut bisa dikategorikan sebagai simbol multikulturalisme?
+OPSI / PERNYATAAN:
+  - A. A. Mencerminkan proses asimilasi nilai dan tujuan budaya-budaya yang berbeda demi menjaga identitas asli setiap etnik.
+  - B. B. Mengakomodasi berbagai etnik dari latar belakang berbeda untuk mendukung penghapusan identitasnya menjadi Indonesia.
+  - C. C. Tedapat dorongan untuk membangun partikularisme melalui partai-partai bernuansa etnik dalam meraih kemerdekaan.
+  - D. D. Bersifat tidak eksklusif untuk satu kelompok etnik melainkan inklusif dan terbuka bagi semua etnik yang hidup di Indonesia.
+  - E. E. Adanya bentuk tuntutan agar etnik yang bergabung turut serta menjadi bagian dari kelompok mayoritas.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di sebuah desa yang sedang berkembang, hidup dua kelompok masyarakat dengan latar belakang budaya dan kebiasaan yang berbeda, yaitu satu kelompok berasal dari penduduk asli desa dan kelompok lainnya berasal dari warga pendatang. Pada awalnya, hubungan antara kedua kelompok kerap diwarnai kesalahpahaman saat rapat desa, karena perbedaan cara pandang dan nilai-nilai budaya yang dianut. Kondisi ini menimbulkan ketegangan sosial yang menghambat pembangunan desa. Melihat hal ini, tokoh masyarakat menginisiasi kegiatan bersama seperti gotong royong, pelatihan kewirausahaan, dan dialog antarbudaya. Melalui proses ini, kedua kelompok mulai saling memahami, menghargai perbedaan, dan bekerja sama dalam pembangunan desa. Mereka juga sepakat untuk tetap mempertahankan budaya masing-masing, sambil merancang kegiatan budaya bersama yang melibatkan semua warga tanpa membedakan asal-usul.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, bentuk hubungan sosial apakah yang akhirnya terwujud di antara kedua kelompok masyarakat di atas?
+OPSI / PERNYATAAN:
+  - A. A. Asimilasi, karena kedua kelompok membentuk budaya baru dengan menghilangkan perbedaan.
+  - B. B. Kontravensi, karena terjadi perbedaan pandangan meskipun belum sampai pada konflik terbuka.
+  - C. C. Koersi, karena kedua kelompok menyelesaikan konflik dengan dominasi kelompok yang lebih kuat.
+  - D. D. Persaingan, karena masing-masing kelompok tetap mempertahankan identitas budaya secara tertutup.
+  - E. E. Akomodasi, karena terdapat upaya meredakan ketegangan dengan kesepakatan bersama dan saling membantu.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: ['A:Benar', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Di salah satu kota besar, warga merasa resah karena sering terjadi penyerangan oleh sekelompok remaja bermotor. Para pelaku membawa senjata tajam. Aksi kekerasan ini umumnya berlangsung pada malam hari, terutama di kawasan Simpang Tiga, jalur utama yang sering dilalui warga ketika malam. Pihak kepolisian menyatakan bahwa insiden ini bukan yang pertama kali terjadi. Dalam dua bulan terakhir, telah terjadi lima kasus serupa dengan pola yang sama yaitu dilakukan oleh remaja dan menyasar warga yang sedang sendirian.
+
+PERTANYAAN:
+Mengapa peristiwa yang terjadi dalam ilustrasi tersebut dianggap sebagai gejala sosial? Klik pilihan Benar atau Salah pada setiap pernyataan berdasarkan isi teks!
+OPSI / PERNYATAAN:
+  - A. Kasus tersebut merupakan gejala sosial dengan dampak keresahan dan menimbulkan ketakutan di masyarakat.
+  - B. Kasus ini termasuk gejala sosial akibat adanya penyimpangan perilaku dari norma sosial yang berlaku di masyarakat.
+  - C. Aksi kekerasan dalam kasus ini terjadi secara individu dan tidak berulang sama sekali sehingga bukan gejala sosial.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 61587_25d5924e0b541ff197a099d8218134b7.png]:
+Infografik berjudul 'JENIS–JENIS KELOMPOK SOSIAL DI SEKITAR KITA' yang terbagi menjadi empat kategori: 1. 'KELOMPOK PRIMER': Menampilkan ilustrasi sebuah keluarga (ayah, ibu, dua anak) sedang makan bersama di meja makan. Keterangan teks: 'Hubungan dekat dan bersifat personal, seperti keluarga atau sahabat'. 2. 'KELOMPOK SEKUNDER': Menampilkan ilustrasi rekan kerja profesional/kantor sedang berdiskusi dengan laptop dan berkas. Keterangan teks: 'Interaksi lebih formal dan berorientasi pada tujuan tertentu, seperti organisasi sekolah'. 3. 'KELOMPOK FORMAL': Menampilkan ilustrasi empat anggota pramuka berseragam lengkap sedang berbaris dan memberi hormat. Keterangan teks: 'Memiliki struktur, aturan, dan keanggotaan resmi'. 4. 'KELOMPOK INFORMAL': Menampilkan ilustrasi sekumpulan remaja/teman sebaya duduk melingkar dan mengobrol di taman terbuka. Keterangan teks: 'Terbentuk secara spontan tanpa aturan resmi, seperti teman bermain'.
+PERTANYAAN:
+Pemerintah desa membiarkan para penduduk melakukan urbanisasi. Jika hal tersebut terus terjadi, apa dampak negatif gejala sosial yang relevan berdasarkan kasus pada infografis?
+OPSI / PERNYATAAN:
+  - A. A. Pengangguran di wilayah pedesaan akan terus meningkat karena lapangan kerja semakin sempit.
+  - B. B. Sumber-sumber hayati akan rusak karena pencemaran lingkungan akibat pembangunan yang masif.
+  - C. C. Kerusakan lingkungan di perdesaan akibat alih fungsi lahan terjadi karena industrialisasi semakin pesat.
+  - D. D. Kenaikan harga terjadi seiring penurunan pasokan pangan karena banyak lahan yang tidak tergarap.
+  - E. E. Pemanasan global terus meningkat karena polusi udara di perkotaan tidak diimbangi dengan penghijauan.
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Pentingnya Keterlibatan Perempuan Dalam Politik
+
+Penelitian ini bertujuan untuk memahami bagaimana keterlibatan perempuan dalam partai politik. Peneliti ingin melihat apakah perempuan benar-benar memiliki kesempatan dan mampu mengambil peran penting di dalamnya. Fokus peneliti adalah mengamati sejauh mana perempuan terlibat sebagai anggota biasa, pengurus partai, atau sebagai calon wakil rakyat dalam pemilihan umum. Dengan ini, peneliti berharap bisa mengetahui posisi perempuan dalam struktur partai dan kontribusi mereka terhadap aktivitas politik. Penelitian ini penting untuk melihat kesetaraan gender dalam dunia politik.
+[Konteks Visual Gambar 36608_9b22b00c1acd114a31c3cda1ac88179a.png]:
+Tabel data kualitatif mengenai evaluasi pelayanan publik yang terbagi menjadi tiga kolom: 'Tema Utama', 'Subtema', dan 'Kutipan Informan'.
+
+| Tema Utama | Subtema | Kutipan Informan | |:--- |:--- |:--- | | Persepsi Pelayanan Publik | Ketepatan waktu | 'Saya sudah datang pagi-pagi, tapi tetap saja harus menunggu lama.' – Informan 1 | | Persepsi Pelayanan Publik | Keramahan petugas | 'Petugasnya sebenarnya ramah, tapi kadang terkesan terburu-buru.' – Informan 3 | | Hambatan dalam Pelayanan | Sistem antrean manual | 'Kalau antrean masih tulis tangan begini, gampang diserobot.' – Informan 4 | | Hambatan dalam Pelayanan | Kurangnya petunjuk informasi | 'Saya bingung harus ke loket mana dulu. Tidak ada papan petunjuk.' – Informan 9 | | Harapan Masyarakat | Digitalisasi pelayanan | 'Kalau bisa, dibuat sistem online biar enggak perlu antre lama di sini.' – Informan 10 | | Harapan Masyarakat | Pelatihan SDM | 'Petugasnya perlu pelatihan biar lebih cepat dan akurat saat melayani.' – Informan 7 |
+PERTANYAAN:
+Manakah pernyataan yang menunjukkan tujuan penelitian kualitatif studi kasus dari permasalahan sosial tersebut? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Untuk mengidentifikasi kesempatan dan peran yang dapat diambil perempuan dalam aktivitas politik di partai.
+  - B. B. Untuk memahami kontribusi spesifik perempuan terhadap dinamika dan keputusan politik di dalam partai.
+  - C. C. Untuk menganalisis korelasi antara tingkat keterlibatan perempuan dengan eksistensi partai politik.
+  - D. D. Untuk mengetahui sejauh mana kesetaraan gender terwujud dalam struktur dan praktik partai politik.
+  - E. E. Untuk menentukan pengaruh keterlibatan perempuan terhadap pengambilan keputusan yang berpihak pada perempuan.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pentingnya Keterlibatan Perempuan Dalam Politik
+
+Penelitian ini bertujuan untuk memahami bagaimana keterlibatan perempuan dalam partai politik. Peneliti ingin melihat apakah perempuan benar-benar memiliki kesempatan dan mampu mengambil peran penting di dalamnya. Fokus peneliti adalah mengamati sejauh mana perempuan terlibat sebagai anggota biasa, pengurus partai, atau sebagai calon wakil rakyat dalam pemilihan umum. Dengan ini, peneliti berharap bisa mengetahui posisi perempuan dalam struktur partai dan kontribusi mereka terhadap aktivitas politik. Penelitian ini penting untuk melihat kesetaraan gender dalam dunia politik. Berikut merupakan langkah-langkah penelitian sosial yang akan dilakukan peneliti:
+
+Mengumpulkan data melalui wawancara, observasi, dan dokumentasi.
+
+Menentukan landasan teori dan konsep yang relevan.
+
+Mengolah dan menganalisis data hasil penelitian.
+
+Menyusun latar belakang penelitian berdasarkan data resmi.
+
+Menarik kesimpulan dan memberikan rekomendasi kebijakan
+[Konteks Visual Gambar 46388_9b22b00c1acd114a31c3cda1ac88179a.png]:
+Ilustrasi demonstrasi penolakan tambang oleh warga. Di bagian depan sebelah kiri tampak alat berat ekskavator/buldoser berwarna kuning. Menghadap ke arah warga yang berdemo terdapat barisan delapan petugas berseragam abu-abu dengan tulisan 'KEAMANAN' di bagian punggung dan mengenakan baret hitam, saling merapatkan barisan. Di belakang petugas keamanan, terdapat kerumunan warga desa (laki-laki dan perempuan berbusana muslim/tradisional) yang bersorak dan membawa spanduk/poster bertuliskan 'TOLAK TAMBANG' dan 'TOLAK ING TAMBANG'. Di latar belakang tampak pemukiman desa, perbukitan hijau, dan beberapa mobil patroli kepolisian.
+PERTANYAAN:
+Manakah urutan langkah-langkah penelitian yang termasuk tahapan pelaksanaan penelitian sosial?
+OPSI / PERNYATAAN:
+  - A. A. Mengumpulkan data melalui wawancara, observasi, dan dokumentasi dan Menentukan landasan teori dan konsep yang relevan.
+  - B. B. Mengumpulkan data melalui wawancara, observasi, dan dokumentasi dan Mengolah dan menganalisis data hasil penelitian.
+  - C. C. Mengumpulkan data melalui wawancara, observasi, dan dokumentasi dan Menarik kesimpulan dan memberikan rekomendasi kebijakan.
+  - D. D. Menentukan landasan teori dan konsep yang relevan dan Menyusun latar belakang penelitian berdasarkan data resmi.
+  - E. E. Menyusun latar belakang penelitian berdasarkan data resmi dan Menarik kesimpulan dan memberikan rekomendasi kebijakan.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Penggunaan media sosial yang sangat banyak digemari oleh remaja menimbulkan kekhawatiran dapat mempengaruhi perilaku dan moral mereka. Kenakalan remaja yang makin rumit sering dihubungkan dengan interaksi mereka dengan konten online tertentu. Sehingga seorang peneliti melakukan penelitian pada remaja usia 13-18 tahun yang sering memakai media sosial. Peneliti tersebut mengumpulkan data dengan menyebarkan kuesioner online kepada 150 remaja. Kuesioner ini mempunyai dua bagian utama yaitu satu untuk mengukur seberapa sering dan bagaimana mereka menggunakan media sosial, dan bagian lainnya untuk mengukur tingkat kenakalan remaja berdasarkan pengalaman dan pandangan mereka sendiri.
+
+PERTANYAAN:
+Manakah pernyataan yang menunjukkan metode penelitian yang sesuai dengan teknik pengumpulan data yang dilakukan?
+OPSI / PERNYATAAN:
+  - A. A. Penelitian eksperimen dengan teknik penentuan sampel stratified sampling karena penelitian ini membandingkan pada kelompok pengguna media sosial maupun yang tidak dari berbagai kalangan yang berbeda tingkatan.
+  - B. B. Penelitian eksploratif dengan teknik penentuan samplel cluster samping berdasarkan wilayah untuk mengeksplorasi fenomena penggunaan media sosial dapat mempengaruhi moral remaja.
+  - C. C. Penelitian kuantitatif dengan teknik penentuan sampel simple random sampling berdasarkan rentang usia yang diambil secara acak untuk menganalisis pengaruh penggunaan media sosial terhadap tingkat kenakalan remaja.
+  - D. D. Penelitian lapangan dengan teknik penentuan sampel area sampling berdasarkan area tertentu untuk mengobservasi fenomena penggunaan media sosial terhadap tingkat kenakalan remaja.
+  - E. E. Penelitian kualitatif dengan teknik penentuan sampel purposive sampling dengan menentukan kriteria tertentu untuk memahami dampak yang ditimbulkan dari fenomena penggunaan media sosial pada remaja.
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['B', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Penelitian ini bertujuan untuk menelaah secara komprehensif fenomena meningkatnya jumlah pengemis anak di ruang publik. Fokus utama diarahkan pada identifikasi faktor-faktor penyebab anak-anak berada di jalanan, seperti kondisi kemiskinan, keterbatasan akses terhadap pendidikan, serta eksploitasi oleh pihak tertentu. Penelitian ini juga mengeksplorasi dampak sosial dan psikologis yang dialami anak-anak tersebut, termasuk hilangnya masa kanak-kanak, kerentanan terhadap tindak kekerasan, dan munculnya stigma sosial. Teknik pengumpulan data yang digunakan meliputi observasi partisipatif, wawancara mendalam, dan kajian pustaka. Temuan dari penelitian ini diharapkan dapat memberikan kontribusi dalam pengembangan ilmu sosial, menjadi dasar pemecahan permasalahan sosial, serta meningkatkan kapasitas dan kompetensi peneliti.
+
+PERTANYAAN:
+Pernyataan manakah yang paling tepat menggambarkan kontribusi penelitian sosial dalam menyelesaikan permasalahan berdasarkan ilustrasi tersebut? Klik pada setiap pilihan jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Menambah wawasan tentang dampak fisik, psikologis maupun sosial yang dialami oleh pengemis di bawah umur.
+  - B. B. Memberikan solusi atau saran kepada pemerintah untuk dapat dijadikan sebagai dasar pengambilan kebijakan.
+  - C. C. Menjadi referensi utama bagi penelitian selanjutnya dan memberikan manfaat bagi para pembaca.
+  - D. D. Meningkatkan kesadaran masyarakat tentang kompleksitas dan bahaya pengemis di bawah umur.
+  - E. E. Mengurangi tingkat kekerasan dan eksploitasi di jalanan pada anak di bawah umur.
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan grafik di bawah ini!
+[Konteks Visual Gambar 79570_3ec9b6972a88d909a3ff87b151cf396d.png]:
+Infografik dari Kementerian Pemberdayaan Perempuan dan Perlindungan Anak Republik Indonesia berjudul 'PENTINGNYA KETERLIBATAN PEREMPUAN DALAM POLITIK'.
+
+Konten memuat tiga pilar utama:- PARTAI POLITIK: 'Perempuan yang berada di partai politik mampu menyuarakan isu kebijakan yang berpihak kepada perempuan melalui wakilnya yang duduk di parlemen. Mendorong perempuan menduduki jabatan penting di partai dan terpenuhinya minimal 30% kepengurusan perempuan.'- PARLEMEN: 'Kehadiran perempuan dalam Parlemen dapat memperjuangkan kebijakan yang berpihak pada perempuan karena perempuanlah yang tahu akan kebutuhannya. Selain itu juga dapat menentukan kebijakan dalam peningkatan kesetaraan dan keadilan gender.'- YUDIKATIF: 'Perempuan dalam Lembaga Yudikatif sebagai pelaksana kebijakan harus terus mendukung terlaksananya semua peraturan yang berpihak kepada perempuan. Selain itu juga dapat mengusulkan kebijakan-kebijakan perlindungan terhadap perempuan.'
+
+Visual pendukung meliputi ilustrasi wanita berjas merah sedang berpidato di mimbar di sisi kiri, megafon di sisi kanan atas, serta sekelompok wanita membawa plakat bertuliskan 'Dukung Keterwakilan Perempuan' dan 'Pilih Perempuan' di sisi kanan bawah. Bagian footer memuat informasi media sosial KemenPPPA.
+PERTANYAAN:
+Berdasarkan grafik hasil penelitian di atas, penjelasan manakah yang paling tepat mengenai pola partisipasi komunitas dalam kegiatan lingkungan?
+OPSI / PERNYATAAN:
+  - A. A. Semua jenis kegiatan lingkungan memiliki tingkat partisipasi yang seragam dan tinggi.
+  - B. B. Kegiatan bersih sungai adalah yang paling populer dan menarik partisipasi komunitas terbanyak.
+  - C. C. Masyarakat cenderung tidak tertarik pada kegiatan lingkungan yang bersifat fisik seperti penanaman pohon.
+  - D. D. Daur ulang sampah merupakan kegiatan yang paling sukses dalam menarik jumlah peserta terbanyak.
+  - E. E. Tidak ada perbedaan yang signifikan antara partisipasi dalam penanaman pohon dan daur ulang sampah.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Penelitian ini bertujuan untuk mengkaji pengaruh permainan gim daring (online) terhadap semangat belajar siswa. Saat ini, banyak siswa yang gemar bermain gim daring. Seorang peneliti tertarik untuk mengetahui apakah kebiasaan tersebut dapat meningkatkan semangat belajar atau justru menurunkannya. Penelitian akan dilakukan di sebuah sekolah dengan melibatkan siswa dari kelas X, XI, dan XII. Pemilihan tiga jenjang kelas ini dimaksudkan agar hasil yang diperoleh lebih komprehensif serta dapat mengungkap adanya perbedaan pengaruh gim daring berdasarkan tingkat usia dan kematangan siswa.
+
+PERTANYAAN:
+Berdasarkan kasus tersebut, teknik sampling manakah yang paling tepat digunakan agar data yang diperoleh relevan dan representatif terhadap fenomena yang diteliti?
+OPSI / PERNYATAAN:
+  - A. A. Simple Random Sampling , karena setiap siswa memiliki peluang yang sama untuk dipilih, tanpa mempertimbangkan jenjang kelas atau tingkat kematangan mereka.
+  - B. B. Purposive Sampling, karena peneliti memilih siswa tertentu yang aktif bermain gim daring, meskipun tidak mewakili setiap kelompok usia.
+  - C. C. Stratified Random Sampling , karena sampel diambil dari kelompok kelas yang berbeda agar hasil mencerminkan perbedaan usia dan kematangan.
+  - D. D. Cluster Sampling, karena responden biasanya diambil berdasarkan wilayah tertentu, sedangkan penelitian ini fokus pada satu sekolah saja.
+  - E. E. Snowball Sampling, karena cocok untuk subjek sulit dijangkau, sedangkan siswa sekolah dapat diakses langsung oleh peneliti.
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan hasil penelitian berikut!
+
+Tabel Perspesi, hambatan, dan harapan publik mengenai pelayanan pemerintah
+[Konteks Visual Gambar 90488_ec4c37e033871c0e73779ac150b7516f.png]:
+Infografik resmi dari Kementerian Pemberdayaan Perempuan dan Perlindungan Anak Republik Indonesia berjudul 'PENTINGNYA KETERLIBATAN PEREMPUAN DALAM POLITIK'.
+
+Isi materi terbagi dalam tiga bagian: 1. 'PARTAI POLITIK': 'Perempuan yang berada di partai politik mampu menyuarakan isu kebijakan yang berpihak kepada perempuan melalui wakilnya yang duduk di parlemen. Mendorong perempuan menduduki jabatan penting di partai dan terpenuhinya minimal 30% kepengurusan perempuan.' 2. 'PARLEMEN': 'Kehadiran perempuan dalam Parlemen dapat memperjuangkan kebijakan yang berpihak pada perempuan karena perempuanlah yang tahu akan kebutuhannya. Selain itu juga dapat menentukan kebijakan dalam peningkatan kesetaraan dan keadilan gender.' 3. 'YUDIKATIF': 'Perempuan dalam Lembaga Yudikatif sebagai pelaksana kebijakan harus terus mendukung terlaksananya semua peraturan yang berpihak kepada perempuan. Selain itu juga dapat mengusulkan kebijakan-kebijakan perlindungan terhadap perempuan.'
+
+Elemen grafis mencakup figur perempuan di podium pidato, simbol pengeras suara, poster kampanye representasi perempuan, dan tautan akun media sosial resmi Kemen PPPA di bagian bawah.
+PERTANYAAN:
+Bagaimana langkah-langkah penelitian yang tepat agar peneliti bisa menghasilkan sajian data tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Peneliti membuat panduan wawancara yang diturunkan dari rumusan masalah penelitian, lalu melakukan pengumpulan data, mengecek kelengkapan jawaban, mengidentifikasi hasil jawaban, lalu mengelompokkannya dalam kategori yang sama.
+  - B. B. Peneliti membuat daftar pertanyaan tertutup, mengujicobakannya dalam kelompok kecil, mengecek kelengkapan jawaban, mengelompokkan jawaban dalam tema tertentu, lalu menyimpulkan jawaban setiap responden.
+  - C. C. Peneliti membuat kuesioner dengan jenis pertanyaan campuran, lalu melakukan pengumpulan data, mengecek kelengkapan jawaban, mengklasifikasi jawaban setiap responden, lalu melakukan penyajian data.
+  - D. D. Peneliti merumuskan pertanyaan-pertanyaan pokok dari judul penelitian, lalu membuat panduan wawancara, melakukan uji coba terbatas, melakukan pengumpulan data, mengecek kelengkapan data, lalu penyajian data.
+  - E. E. Peneliti merumuskan indikator dari variabel, lalu menurunkan indikator menjadi butir pertanyaan, melakukan uji coba terbatas, melakukan pengumpulan data, mengecek kelengkapan data, lalu penyajian data.
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan hasil penelitian berikut!
+
+Tabel Perspesi, hambatan, dan harapan publik mengenai pelayanan pemerintah
+[Konteks Visual Gambar 91960_ec4c37e033871c0e73779ac150b7516f.png]:
+Tabel analisis kualitatif hasil wawancara terkait pelayanan publik, terdiri atas tiga kolom yaitu 'Tema Utama', 'Subtema', dan 'Kutipan Informan':
+
+| Tema Utama | Subtema | Kutipan Informan | |:--- |:--- |:--- | | Persepsi Pelayanan Publik | Ketepatan waktu | 'Saya sudah datang pagi-pagi, tapi tetap saja harus menunggu lama.' – Informan 1 | | Persepsi Pelayanan Publik | Keramahan petugas | 'Petugasnya sebenarnya ramah, tapi kadang terkesan terburu-buru.' – Informan 3 | | Hambatan dalam Pelayanan | Sistem antrean manual | 'Kalau antrean masih tulis tangan begini, gampang diserobot.' – Informan 4 | | Hambatan dalam Pelayanan | Kurangnya petunjuk informasi | 'Saya bingung harus ke loket mana dulu. Tidak ada papan petunjuk.' – Informan 9 | | Harapan Masyarakat | Digitalisasi pelayanan | 'Kalau bisa, dibuat sistem online biar enggak perlu antre lama di sini.' – Informan 10 | | Harapan Masyarakat | Pelatihan SDM | 'Petugasnya perlu pelatihan biar lebih cepat dan akurat saat melayani.' – Informan 7 |
+PERTANYAAN:
+Bagaimana langkah-langkah penelitian yang tepat agar peneliti bisa menghasilkan sajian data tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Peneliti membuat panduan wawancara yang diturunkan dari rumusan masalah penelitian, lalu melakukan pengumpulan data, mengecek kelengkapan jawaban, mengidentifikasi hasil jawaban, lalu mengelompokkannya dalam kategori yang sama.
+  - B. B. Peneliti membuat daftar pertanyaan tertutup, mengujicobakannya dalam kelompok kecil, mengecek kelengkapan jawaban, mengelompokkan jawaban dalam tema tertentu, lalu menyimpulkan jawaban setiap responden.
+  - C. C. Peneliti membuat kuesioner dengan jenis pertanyaan campuran, lalu melakukan pengumpulan data, mengecek kelengkapan jawaban, mengklasifikasi jawaban setiap responden, lalu melakukan penyajian data.
+  - D. D. Peneliti merumuskan pertanyaan-pertanyaan pokok dari judul penelitian, lalu membuat panduan wawancara, melakukan uji coba terbatas, melakukan pengumpulan data, mengecek kelengkapan data, lalu penyajian data.
+  - E. E. Peneliti merumuskan indikator dari variabel, lalu menurunkan indikator menjadi butir pertanyaan, melakukan uji coba terbatas, melakukan pengumpulan data, mengecek kelengkapan data, lalu penyajian data.
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di beberapa kota di Indonesia mulai banyak terjadi konflik antara kelompok pedagang pasar tradisional dan pengelola pusat perbelanjaan modern/mal yang baru dibangun. Para pedagang pasar tradisional merasa dirugikan karena kehadiran mal tersebut mengakibatkan menurunnya jumlah pembeli di pasar tradisional. Mereka menganggap bahwa pembangunan pusat perbelanjaan tidak memperhatikan keberlangsungan ekonomi masyarakat kecil. Sementara itu, pihak pengelola mal merasa bahwa pembangunan tersebut sah dan merupakan bentuk kemajuan ekonomi kota. Ketegangan makin meningkat setelah terjadi aksi demonstrasi yang diwarnai kericuhan. Pemerintah kota mencoba meredam konflik dengan memediasi kedua belah pihak namun hingga kini belum tercapai kesepakatan yang memuaskan semua pihak. Konflik ini menjadi sorotan media dan memunculkan berbagai reaksi dari masyarakat luas.
+
+PERTANYAAN:
+Apa bentuk konflik sosial yang terjadi berdasarkan ilustrasi tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Konflik antar kelas sosial karena terjadi benturan antara pedagang tradisional dan pedagang di mal.
+  - B. B. Konflik antarkelompok kepentingan karena adanya perbedaan kepentingan ekonomi yang berbeda.
+  - C. C. Konflik politik antar institusi dalam hal ini kelompok pedagang di mal ingin mengalahkan pedagang pasar tradisional.
+  - D. D. Konflik budaya akibat perubahan nilai dimana pedagang pasar tradisional kehilangan pelanggan sejak adanya mal.
+  - E. E. Konflik antarpribadi karena perbedaan individu yang terjadi diantara para pedang tradisional kepada pedagang di mal.
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pada suatu daerah terjadi ketegangan antara komunitas adat dengan perusahaan perkebunan sawit. Konflik ini bermulai dari klaim terhadap hak kepemilikan lahan. Perusahaan berpegang pada izin yang mereka miliki, sementara komunitas adat merasa terabaikan. Konflik ini mengakibatkan terjadinya bentrokan fisik dan pemblokiran jalan oleh warga yang mengakibatkan aktivitas distribusi hasil perkebunan sawit menjadi terhambat. Mediasi awal dalam rangka penyelesaian konflik yang terjadi sudah dilakukan tetapi gagal total dan bahkan memperparah ketegangan dan ketidakpercayaan antara kedua belah pihak (komunitas adat dan pihak perusahaan perkebunan sawit). Situasi yang terjadi ini berada pada titik kritis dan memerlukan intervensi yang lebih kuat.
+
+PERTANYAAN:
+Bagaimana strategi yang tepat untuk mencapai kedamaian yang berkelanjutan antara komunitas adat dan perusahaan perkebunan?
+OPSI / PERNYATAAN:
+  - A. A. Memulai kembali negosiasi antara manajemen perusahaan dan perwakilan komunitas adat tanpa melibatkan campur tangan pihak ketiga yang netral.
+  - B. B. Melakukan dialog multi-pihak yang melibatkan pemerintah, akademisi, dan organisasi non pemerintah untuk membangun pemahaman bersama.
+  - C. C. Melakukan arbitrase dengan menunjuk pihak ketiga yang independen dan memiliki kewenangan untuk membuat keputusan mengikat secara hukum.
+  - D. D. Mengembangkan program kemitraan usaha bersama antara kedua belah pihak dengan sistem pembagian keuntungan yang di bagi secara adil.
+  - E. E. Membentuk forum musyawarah desa yang difasilitasi oleh tokoh masyarakat setempat untuk mencari solusi terbaik yang berbasis kearifan lokal.
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di Desa Tanjung Harapan, sebuah perusahaan tambang mulai beroperasi setelah mendapatkan izin dari pemerintah daerah. Perusahaan tersebut membuka lahan secara besar-besaran, termasuk wilayah hutan adat yang selama ini dikelola secara turun-temurun oleh masyarakat lokal. Masyarakat adat menolak keberadaan tambang karena merasa tidak dilibatkan dalam proses perizinan dan khawatir kehilangan sumber penghidupan. Dalam beberapa bulan terakhir, terjadi aksi protes yang berujung pada bentrokan antara warga dan aparat keamanan.
+[Konteks Visual Gambar 33146_433979b768d21e6deaa4821c422fbd3f.png]:
+Diagram batang horizontal dengan judul 'Tingkat Partisipasi Komunitas dalam Kegiatan Lingkungan per Jenis Kegiatan'. Sumbu horizontal menunjukkan jumlah partisipasi dengan rentang nilai 0 hingga 140 (interval 20), dan sumbu vertikal menunjukkan jenis kegiatan lingkungan. Data grafik adalah sebagai berikut:- Daur Ulang Sampah: 50- Penanaman Pohon: 80- Bersih Sungai: 120 Legenda grafik menunjukkan batang berwarna biru mewakili 'Jumlah'.
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, apa penyebab utama terjadinya konflik sosial di Desa Tanjung Harapan?
+OPSI / PERNYATAAN:
+  - A. A. Pemerintah daerah tidak mampu mengelola hasil tambang dengan baik.
+  - B. B. Perusahaan tidak memberikan pelatihan kerja kepada masyarakat sekitar.
+  - C. C. Masyarakat adat tidak memiliki pengetahuan tentang kegiatan pertambangan modern.
+  - D. D. Kurangnya komunikasi dan partisipasi masyarakat dalam proses pengambilan keputusan.
+  - E. E. Terjadi benturan kepentingan antara perusahaan dan hak masyarakat adat atas lahan.
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Konflik mulai terjadi ketika proyek pabrik yang didukung pemerintah lokal mulai dibangun di tanah yang secara tradisional menghidupi petani lokal. Petani mengatakan bahwa mereka tidak diberi informasi dan mengkhawatirkan nasib mereka akibat hilangnya mata pencaharian. Protes petani akhirnya viral di media sosial dan akhinya mendapatkan perhatian dari pemerintah. Pemerintah lokal mengundang pihak petani dan pabrik untuk duduk bersama berdialog dengan fasilitasi tim perdamaian. Kesepakatan akhirnya terwujud dalam bentuk kompensasi, dibangunnya zona penyangga pertanian dan dilibatkannya warga (petani) dalam pengawasan proyek.
+
+PERTANYAAN:
+Berdasarkan ilustrasi tersebut, apa cara yang paling efektif untuk meredakan konflik dan menciptakan harmoni sosial?
+OPSI / PERNYATAAN:
+  - A. A. Memindahkan lahan pertanian ke lokasi lain tanpa perundingan.
+  - B. B. Melakukan dialog untuk menciptakan kesepakatan yang inklusif.
+  - C. C. Menawarkan bagi hasil saham kepada petani tanpa jaminan tanah.
+  - D. D. Menekan protes dengan melakukan mobilisasi aparat keamanan.
+  - E. E. Melanjutkan konstruksi tanpa mempertimbangkan keberatan warga.
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 85430_a835ddfc7e4df0b9c82357d46edb2085.png]:
+Infografik berjudul 'URBANISASI' dengan subjudul: 'Perpindahan dari wilayah jarang penduduk ke wilayah padat penduduk (urbanisasi) dapat diartikan sebagai suatu gejala suatu wilayah bertransformasi menjadi perkotaan. Sayangnya, wilayah jarang penduduk tersebut biasanya adalah perdesaan yang sebenarnya memiliki potensi berikut:'.
+
+Poin-poin potensi perdesaan: 1. 'PUSAT PEMELIHARAAN KEANEKARAGAMAN HAYATI': 'Masyarakat lokal melindungi tanah, air, dan kehidupan hewan serta tumbuhan dengan cara tidak merusak ekosistem melalui pelestarian kearifan lokal.' 2. 'PENGHASIL UTAMA PASOKAN PANGAN': 'Banyak sumber daya alam yang berperan sebagai pemasok sumber pangan dan kebutuhan pokok dihasilkan di wilayah-wilayah perdesaan.' 3. 'PENGURANGAN DAMPAK LINGKUNGAN': 'Lingkungan yang hijau menghasilkan banyak oksigen dan mengurangi risiko polusi udara global.'
+
+Ajakan penutup di bagian bawah: 'Mari kita dukung pertanian berkelanjutan dan menjaga lingkungan untuk masa depan yang lebih baik.' Dilengkapi ilustrasi seorang petani bertopi caping yang memandang hamparan persawahan terasering hijau, tanaman padi, burung walet, dan kincir angin.
+PERTANYAAN:
+Manakah pernyataan yang paling tepat menunjukkan perbedaan kelompok sosial pada infografis tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Keluarga menunjukkan kelompok informal yang terbentuk secara spontan dan alami dari interaksi sosial yang terjadi karena adanya kesamaan minat, hobi, atau tujuan.
+  - B. B. Kelompok belajar menunjukkan kelompok primer yang ditandai oleh adanya hubungan yang sangat erat, personal, intim, dan interaksi tatap muka yang sering.
+  - C. C. Organisasi pramuka menunjukkan kelompok primer yang ditandai dengan adanya hubungan yang sangat erat, personal, intim, dan interaksi tatap muka yang sering.
+  - D. D. Teman bermain menunjukkan kelompok formal yang dibentuk secara sengaja dan terencana dengan tujuan serta struktur yang jelas dan memiliki aturan yang tertulis.
+  - E. E. Organisasi OSIS menunjukkan kelompok sekunder yang dicirikan oleh hubungan yang lebih formal, impersonal, dan berdasarkan tujuan atau kepentingan tertentu.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di Kelurahan Maju Jaya, warga terdiri dari beragam kelompok sosial seperti penduduk asli, pendatang dari kota, serta etnis minoritas. Dalam kegiatan pembangunan balai warga, kelompok penduduk asli selalu diundang dalam rapat musyawarah, sementara kelompok lain jarang dilibatkan. Kelompok pendatang dan etnis minoritas juga kesulitan memperoleh informasi tentang kegiatan warga karena akses informasi hanya beredar di lingkaran tertentu. Akibatnya, kelompok yang tidak terlibat merasa tersisih dan mulai muncul perasaan tidak dihargai. Ketegangan mulai terlihat ketika beberapa warga menyuarakan ketidakpuasan dalam forum daring lokal. Situasi ini menimbulkan saling curiga, bahkan muncul komentar negatif antar kelompok. Dalam masyarakat majemuk seperti ini, praktik ketidaksetaraan sosial dalam partisipasi dapat menjadi awal dari konflik yang lebih besar.
+
+PERTANYAAN:
+Manakah pernyataan yang menjadi pemicu awal terjadinya ketegangan antara kelompok pendatang dan etnis minoritas?
+OPSI / PERNYATAAN:
+  - A. A. Ketidakadilan dalam pengambilan keputusan musyawarah membentuk jarak sosial antar kelompok dan menurunkan rasa dihargai.
+  - B. B. Kesenjangan dalam akses informasi memperkuat stigma sosial dan mendorong eksklusi kelompok minoritas.
+  - C. C. Dominasi kelompok mayoritas memperlemah solidaritas sosial dan merenggangkan relasi antar kelompok masyarakat.
+  - D. D. Ketimpangan dalam hak partisipasi membentuk jurang sosial, menurunkan rasa saling percaya antar kelompok.
+  - E. E. Ketidaksetaraan dalam pembagian peran memperkuat stratifikasi sosial dan menghambat mobilitas kelompok.
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sebuah studi di Kota Bahari menunjukkan bahwa ketimpangan pendapatan antara kelompok kaya dan miskin semakin lebar dalam 10 tahun terakhir. Akses terhadap fasilitas pendidikan, kesehatan, dan pekerjaan berkualitas lebih mudah diperoleh oleh kelompok masyarakat atas. Sementara itu, masyarakat miskin harus bergantung pada layanan publik yang terbatas dan sering kali berkualitas rendah. Ketidakpuasan mulai muncul di media sosial dan ruang publik. Beberapa kelompok masyarakat melakukan aksi protes untuk menuntut keadilan sosial.
+
+PERTANYAAN:
+Apakah dampak sosial yang mungkin terjadi akibat adanya ketidakpuasan masyarakat miskin terhadap layanan publik?
+OPSI / PERNYATAAN:
+  - A. A. Menimbulkan aksi protes masyarakat miskin untuk menyuarakan pendapat.
+  - B. B. Menimbulkan kerentanan kelompok miskin akibat terbatasnya akses terhadap fasilitas publik.
+  - C. C. Menimbulkan ketidaksetaraan yeng membuat kelompok miskin semakin terhambat dan merasa tidak adil.
+  - D. D. Menimbulkan rendahnya partisipasi masyarakat miskin dalam proses pengambilan keputusan publik.
+  - E. E. Menimbulkan kebijakan pemerintah yang diarahkan untuk memperbaiki layanan publik di wilayah miskin.
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pemerintah Kota Madani membuka program beasiswa bagi pelajar SMA yang berasal dari keluarga kurang mampu. Program ini tidak hanya berdasarkan nilai akademik, tetapi juga mempertimbangkan latar belakang ekonomi dan akses pendidikan siswa. Selain itu, fasilitas transportasi gratis diberikan khusus bagi siswa dari daerah terpencil untuk memudahkan mereka bersekolah.
+
+PERTANYAAN:
+Berdasarkan ilustrasi di atas, bagaimana prinsip kesetaraan sosial diterapkan dalam pelayanan publik?
+OPSI / PERNYATAAN:
+  - A. A. Kesetaraan kesempatan, karena siswa diberi peluang yang setara untuk maju.
+  - B. B. Kesetaraan budaya, karena pemerintah menghormati adat dan kebiasaan lokal.
+  - C. C. Kesetaraan ekonomi, karena pemerintah memberikan bantuan kepada semua warga.
+  - D. D. Kesetaraan hukum, karena semua siswa diperlakukan sama tanpa melihat latar belakang.
+  - E. E. Kesetaraan politik, karena semua siswa mendapat hak suara dalam menentukan program.
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di sebuah kawasan pinggiran perkotaan yang padat penduduk, banyak keluarga hidup tanpa memiliki akses ke air bersih, sanitasi dan jaringan listrik yang stabil. Di kawasan ini banyak orang tua yang berkerja di sektor informal dengan pendapatan tidak teratur. Anak-anak di daerah ini sering putus sekolah karena mendukung ekonomi orang tuanya. Penduduknya merasa terasing dari perkembangan kota dan tidak banyak menerima dukungan dari program pemerintah. Hal ini menunjukkan adanya ketimpangan sosial dan hal tersebut pada akhirnya berkontribusi pada meningkatnya kemiskinan, layanan publik yang terbatas dan rendahnya literasi.
+
+PERTANYAAN:
+Mengapa ketimpangan sosial dapat meningkatkan angka kemiskinan pada masyarakat perkotaan pada kasus tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Tradisi budaya yang memprioritaskan pendidikan formal daripada informal, sehingga mengabaikan keterampilan hidup yang relevan dengan kondisi masyarakat.
+  - B. B. Penolakan kelompok marginal untuk direlokasi ke lingkungan yang lebih sehat, yang menyebabkan mereka tetap tinggal di wilayah tanpa akses layanan dasar.
+  - C. C. Kurangnya motivasi warga untuk memperbaiki kehidupan mereka sendiri karena tidak adanya bentuk pengangguran yang nyata di wilayah masyarakat berada.
+  - D. D. Akses yang tidak merata terhadap layanan dasar dan ketidakberpihakan kebijakan yang menyebabkan warga terpinggirkan dan tidak mendapat layanan memadai.
+  - E. E. Perencanaan keuangan buruk dan tingkat konsumsi yang tidak berimbang menyebabkan pendapatan dari sektor informal sulit mencukupi kebutuhan dasar.
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Globalisasi mendorong pertumbuhan ekonomi di negara-negara berkembang terutama di sektor industri dan jasa. Namun, pembangunan seringkali tidak merata dan terpusat di kota-kota besar. Padahal, akses terhadap pendidikan dan teknologi sebelumnya memang sudah banyak terpusat di wilayah kota. Meskipun hal ini tampak menguntungkan, perusahaan multinasional yang masuk ke negara berkembang sebenarnya diuntungkan karena bisa membayar upah rendah kepada pekerja lokal. Sebagian bahkan tidak memberikan hak-hak yang adil seperti pekerja dari negara asal mereka. Sayangnya, hal ini sering dianggap lazim demi mendorong perekonomian negara dan menyerap tanaga kerja tinggi.
+
+PERTANYAAN:
+Mengapa globalisasi pada kasus tersebut dapat menimbulkan kesenjangan sosial?
+OPSI / PERNYATAAN:
+  - A. A. Kesenjangan sosial pada kasus muncul karena pertumbuhan ekonomi Indonesia yang lambat dibandingkan negara lain.
+  - B. B. Kesenjangan sosial pada kasus terjadi karena adanya alienasi/keterasingan pekerja dari produk yang dihasilkannya.
+  - C. C. Kesenjangan sosial pada kasus terjadi karena kurangnya perencanaan dan peran pemerintah dalam pembangunan ekonomi.
+  - D. D. Kesenjangan sosial pada kasus terjadi karena industrialisasi merupakan perubahan sosial dampaknya tidak bisa diprediksi.
+  - E. E. Kesenjangan sosial pada kasus terjadi karena tidak adanya kesadaran dari pekerja untuk memperjuangkan keadilan sosial.
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Desa Wirausaha yang dahulu mengandalkan pertanian tradisional kini mulai berubah. Sejak adanya akses internet dan media sosial, banyak pemuda desa membuka toko daring untuk menjual produk kerajinan tangan ke luar negeri. Selain itu, beberapa keluarga mengadopsi gaya hidup konsumtif dan mulai meninggalkan tradisi gotong royong. Bahasa asing juga mulai sering digunakan dalam pergaulan anak muda.
+
+PERTANYAAN:
+Apa bentuk dampak globalisasi yang paling menonjol terhadap kehidupan ekonomi masyarakat?
+OPSI / PERNYATAAN:
+  - A. A. Globalisasi menyebabkan desa kembali pada ekonomi subsisten dan lokal.
+  - B. B. Globalisasi menyebabkan masyarakat menolak transaksi dengan pihak luar.
+  - C. C. Globalisasi menyebabkan peningkatan aktivitas jual beli melalui platform digital.
+  - D. D. Globalisasi menyebabkan seluruh hasil kerajinan digunakan untuk kebutuhan pribadi.
+  - E. E. Globalisasi menyebabkan masyarakat berhenti memproduksi barang tradisional.
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di sebuah sekolah menengah, para murid mengikuti program pembelajaran berbasis teknologi digital. Setiap siswa dibekali gawai untuk mengakses materi pembelajaran dari rumah maupun di sekolah. Guru memanfaatkan platform pembelajaran daring yang memungkinkan diskusi kelas berlangsung secara virtual. Selain itu, siswa juga diperkenalkan pada tren budaya global melalui media sosial, seperti gaya hidup sehat, komunitas kreatif, hingga diskusi lintas negara tentang isu sosial. Seiring waktu, cara siswa berinteraksi, belajar, dan memandang dunia mengalami perubahan yang nyata, termasuk dalam cara mereka menanggapi keberagaman dan beradaptasi dengan perkembangan zaman
+
+PERTANYAAN:
+Bagaimana keterlibatan masyarakat dalam aktivitas berbasis digital merefleksikan konsekuensi sosial yang diakibatkan oleh arus globalisasi?
+OPSI / PERNYATAAN:
+  - A. A. Teknologi memperluas akses ruang belajar karena siswa belajar dari jejaring global, mencerminkan pendidikan yang kolaboratif.
+  - B. B. Teknologi memudahkan akses nilai baru karena siswa terbiasa informasi global, mencerminkan pola pikir masyarakat yang terbuka.
+  - C. C. Teknologi meningkatkan refleksi terhadap perbedaan karena siswa berdiskusi lintas latar, mencerminkan tumbuhnya toleransi sosial.
+  - D. D. Teknologi mendorong partisipasi budaya digital karena siswa aktif di media sosial, mencerminkan pergeseran ekspresi masyarakat.
+  - E. E. Teknologi memperkuat interaksi lintas budaya karena berinteraksi dengan komunitas global, mencerminkan luasnya wawasan global.
+
+---
+[SOAL NO 26]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Kampung Cempaka dulunya merupakan permukiman padat dengan kegiatan sosial yang tinggi. Warga sering mengadakan kerja bakti, arisan RT, dan kegiatan keagamaan bersama. Namun, sejak banyak rumah dijual dan dibeli oleh pendatang dari luar daerah, suasana sosial berubah. Warga baru lebih tertutup, tidak aktif dalam kegiatan warga, dan lebih memilih berinteraksi melalui media sosial. Meskipun kawasan menjadi lebih bersih dan tertata, namun hubungan antarwarga melemah.
+
+PERTANYAAN:
+Apa dampak jangka panjang dari pola interaksi sosial yang mulai berubah di Kampung Cempaka?
+OPSI / PERNYATAAN:
+  - A. A. Kesadaran kolektif dalam menjaga lingkungan mulai melemah secara bertahap.
+  - B. B. Partisipasi warga dalam kegiatan rutin mengalami penurunan yang tidak disadari.
+  - C. C. Rasa memiliki terhadap komunitas perlahan terkikis karena kurangnya keterlibatan.
+  - D. D. Kegiatan sosial berubah bentuk tanpa memperkuat hubungan antarwarga.
+  - E. E. Norma sosial tetap bertahan meskipun jumlah interaksi warga semakin terbatas.
+
+---
+[SOAL NO 27]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Di era digital saat ini, media sosial menjadi salah satu sumber utama informasi bagi masyarakat. Namun, tidak semua informasi yang tersebar dapat dipertanggungjawabkan. Baru-baru ini, di sebuah kota kecil, beredar pesan berantai di aplikasi pengirim pesan yang menyebutkan akan terjadi gempa besar dan mengimbau warga untuk segera mengungsi. Informasi tersebut ternyata tidak berasal dari lembaga resmi dan terbukti hoaks. Akibatnya, banyak warga panik, meninggalkan rumah, bahkan terjadi penjarahan di beberapa toko. Situasi ini menunjukkan bagaimana penyebaran informasi yang tidak benar bisa menimbulkan kepanikan massal dan merusak tatanan sosial masyarakat.
+[Konteks Visual Gambar 39389_f04c79467fa950ca73d2063e77250913.png]:
+Ilustrasi dua tangan sedang memegang ponsel pintar berlatar biru tua. Di layar ponsel terdapat tulisan tebal berwarna merah berbunyi 'HOAX', dan di bagian bawah layar terdapat tombol oval berwarna merah bertuliskan 'SHARE' yang sedang ditekan oleh ibu jari. Di sekitar ponsel terdapat tiga balon percakapan putih berisi: 1. Bagian kiri atas: ikon kamera foto. 2. Bagian kanan atas: tanda titik tiga (...). 3. Bagian kiri bawah: garis-garis mendatar yang merepresentasikan baris teks.
+PERTANYAAN:
+Mengapa masalah sosial dalam ilustrasi tersebut merupakan dampak dari globalisasi?
+OPSI / PERNYATAAN:
+  - A. A. Globalisasi memfasilitasi peningkatan interaksi dan relasi sosial secara tatap muka yang intens antarwarga.
+  - B. B. Globalisasi mendorong kembalinya nilai-nilai tradisional dan kearifan lokal yang mampu menyaring informasi.
+  - C. C. Globalisasi menyebabkan homogenitas budaya sehingga masyarakat lebih mudah percaya pada satu jenis informasi.
+  - D. D. Globalisasi memungkinkan penyebaran informasi, termasuk hoaks, secara cepat dan masif melintasi batas geografis.
+  - E. E. Globalisasi menekankan pentingnya peran lembaga formal dalam mengontrol setiap bentuk komunikasi masyarakat.
+
+---
+[SOAL NO 28]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Dalam dua tahun terakhir, banyak siswa di sebuah SMA mulai meninggalkan kebiasaan menggunakan bahasa daerah dalam percakapan sehari-hari. Mereka lebih sering menggunakan istilah dalam bahasa Inggris yang dipopulerkan melalui media sosial, film, dan budaya pop barat. Selain itu, pakaian adat mulai jarang dipakai, bahkan saat acara sekolah. Sebagian siswa merasa budaya lokal sudah ketinggalan zaman dan tidak menarik untuk ditampilkan
+
+PERTANYAAN:
+Sikap manakah yang paling sesuai untuk membangun kesadaran siswa agar tetap menghargai budaya daerah tanpa menolak budaya luar?
+OPSI / PERNYATAAN:
+  - A. A. Mendorong siswa untuk lebih sering menampilkan budaya lokal dalam kegiatan sekolah yang bersifat terbuka.
+  - B. B. Mengarahkan siswa untuk menekankan unsur-unsur lokal dalam proyek yang menampilkan identitas global.
+  - C. C. Menanamkan rasa bangga terhadap budaya lokal sambil tetap membuka ruang eksplorasi budaya luar.
+  - D. D. Menyediakan platform yang memfasilitasi siswa dalam menggabungkan nilai-nilai lokal dan global secara kreatif.
+  - E. E. Mengutamakan nilai-nilai budaya daerah dalam seluruh bentuk kegiatan tanpa menghilangkan pengaruh luar sepenuhnya.
+
+---
+[SOAL NO 29]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Indonesia, China, India, Pakistan, Bangladesh, dan Nigeria menyumbang 75% dari total beban polusi udara global karena tingkat polusi udara yang tinggi dan jumlah populasi yang besar. Udara yang berisi partikel halus (PM 2.5) berpotensi mengurangi usia hidup rata-rata warga Indonesia hingga 1,4 tahun dibandingkan jika kualitas udara di Indonesia memenuhi standar WHO, yakni 5 µg/m. Pencemaran udara oleh pelaku industri menjadi sorotan karena berkontribusi tinggi terhadap polusi udara. Selain itu, beberapa pihak juga berencana menggugat pemerintah karena dinilai belum optimal dalam mengatasi masalah polusi udara. Hal ini tidak mengherankan karena beberapa negara juga masih belum memiliki data yang lengkap berupa hasil riset maupun alat untuk memonitor dan mengukur kualitas udara.
+
+Diolah dari: https://www.bbc.com/indonesia/articles/c72enp76622o
+
+PERTANYAAN:
+Apa rekomendasi yang paling tepat diberikan kepada institusi pendidikan tinggi agar bisa berkontribusi dalam mengatasi masalah tersebut?
+OPSI / PERNYATAAN:
+  - A. A. Mendampingi masyarakat menuntut pemerintah menggratiskan pengobatan untuk penyakit gangguan pernafasan.
+  - B. B. Menjalin kerja sama dengan nagara-negara maju agar berinvestasi di sektor industri dengan konsep energi terbaharukan.
+  - C. C. Membangun pusat riset yang berkonsentrasi pada lingkungan agar menghasilkan strategi dan pembangunan berkelanjutan.
+  - D. D. Menjalin kerja sama dengan berbagai pihak untuk membuat program penanaman sejuta pohon di wilayah hutan gundul.
+  - E. E. Mengembangkan program pengabdian kepada masyarakat untuk memberikan edukasi cara mengelola limbah rumah tangga.
+
+---
+[SOAL NO 30]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Masuknya budaya asing ke Indonesia yang dipercepat oleh arus globalisasi dan teknologi membawa pengaruh besar, baik secara positif maupun negatif. Di satu sisi, budaya asing memperluas wawasan, memperkenalkan inovasi, dan memperkaya kebudayaan lokal. Namun, di sisi lain, pengaruh ini juga dapat mengikis nilai-nilai tradisional, memicu perubahan gaya hidup yang bertentangan dengan norma masyarakat, serta menimbulkan ketimpangan sosial. Desa Trunyan di Bali memiliki tradisi pemakaman unik: jenazah tidak dikubur atau dibakar, melainkan diletakkan di atas tanah dan dibiarkan membusuk secara alami. Tradisi ini menarik minat wisatawan, baik domestik maupun mancanegara. Namun, meningkatnya kunjungan wisatawan memunculkan tantangan baru seperti meningkatnya volume sampah, degradasi lingkungan, dan komersialisasi budaya yang berisiko mengubah makna spiritual dari tradisi tersebut.
+
+PERTANYAAN:
+Apa rekomendasi paling strategis yang bisa dilakukan pemuda Desa Trunyan untuk menjaga nilai budaya di tengah arus globalisasi?
+OPSI / PERNYATAAN:
+  - A. A. Mengampanyekan gaya hidup lokal melalui media sosial dengan pendekatan visual modern.
+  - B. B. Meningkatkan daya tarik ekonomi dari tradisi dengan memperluas pasar souvenir khas pemakaman.
+  - C. C. Menjadi pemandu wisata profesional agar bisa menjelaskan budaya secara sistematis dan netral.
+  - D. D. Meningkatkan penggunaan bahasa asing dalam promosi budaya agar lebih diterima wisatawan asing.
+  - E. E. Membuat festival tahunan dengan atraksi budaya yang diatur oleh sponsor dan pihak swasta.
+

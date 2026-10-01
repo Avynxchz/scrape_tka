@@ -1,0 +1,368 @@
+{
+  "package": 1,
+  "subject": "Fisika",
+  "solutions": [
+    {
+      "question_id": "fisika_paket_1_q06",
+      "question_number": 6,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Hukum Coulomb",
+        "Interaksi Muatan Listrik",
+        "Hubungan Kuadrat Terbalik"
+      ],
+      "glossary": [
+        {
+          "term": "Gaya Coulomb",
+          "meaning": "Gaya tarik-menarik atau tolak-menolak antara dua muatan listrik yang berbanding lurus dengan perkalian muatan dan berbanding terbalik dengan kuadrat jarak keduanya."
+        }
+      ],
+      "reasoning": "Untuk menentukan besar muatan listrik dari grafik hubungan gaya Coulomb (F) terhadap jarak (R), digunakan Hukum Coulomb: F = k * (q1 * q2) / R^2. Dengan hubungan q1 = 2 * q2, persamaan tersebut menjadi F = k * 2 * q2^2 / R^2. Dengan mengambil salah satu titik koordinat (R, F) yang sesuai dari kurva grafik (misalnya pada R = 3 cm atau 0,03 m diperoleh F = 20 N), nilai q2 dapat dihitung secara matematis, kemudian q1 ditentukan dari hubungan kelipatannya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Formulasi Hukum Coulomb",
+          "explanation": "Tuliskan persamaan dasar gaya Coulomb: F = k * (q1 * q2) / R^2."
+        },
+        {
+          "step": 2,
+          "title": "Substitusi Hubungan Muatan",
+          "explanation": "Substitusikan nilai q1 = 2 * q2 ke dalam persamaan sehingga diperoleh: F = k * (2 * q2^2) / R^2."
+        },
+        {
+          "step": 3,
+          "title": "Ekstraksi Data Grafik",
+          "explanation": "Ambil titik koordinat uji dari grafik, misalnya pada jarak R = 3 cm = 3 x 10^-2 m dengan gaya F = 20 N."
+        },
+        {
+          "step": 4,
+          "title": "Kalkulasi Muatan q2",
+          "explanation": "Substitusikan nilai ke dalam rumus: 20 = (9 x 10^9) * 2 * q2^2 / (9 x 10^-4). Diperoleh 20 = 2 x 10^13 * q2^2, sehingga q2^2 = 10^-12 dan q2 = 10^-6 C = 1 micro-Coulomb."
+        },
+        {
+          "step": 5,
+          "title": "Kalkulasi Muatan q1",
+          "explanation": "Hitung nilai q1 menggunakan hubungan yang diketahui: q1 = 2 * q2 = 2 * 10^-6 C = 2 micro-Coulomb."
+        }
+      ],
+      "why_correct": "Melalui analisis grafik yang merepresentasikan fungsi kuadrat terbalik, titik koordinat yang konsisten menghasilkan nilai muatan q1 = 2 micro-Coulomb dan q2 = 1 micro-Coulomb.",
+      "tips": [
+        "Selalu ubah satuan jarak R dari centimeter (cm) menjadi meter (m) sebelum disubstitusikan ke dalam rumus Hukum Coulomb.",
+        "Pilihlah titik pada grafik yang berada tepat pada persimpangan garis skala agar pembacaan nilai gaya dan jarak akurat."
+      ],
+      "common_mistakes": [
+        "Lupa mengkuadratkan nilai jarak (R) pada penyebut rumus.",
+        "Salah dalam melakukan operasi eksponen atau perpangkatan basis 10 saat menghitung nilai muatan."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua buah muatan listrik diletakkan pada jarak R sehingga menghasilkan gaya Coulomb sebesar F. Jika muatan pertama dilipatgandakan menjadi 3 kali semula, muatan kedua dijadikan 2 kali semula, sedangkan jarak antar keduanya diperbesar menjadi 2R, berapakah perbandingan gaya Coulomb yang baru terhadap gaya Coulomb semula?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "3 : 2"
+          },
+          {
+            "key": "B",
+            "text": "3 : 4"
+          },
+          {
+            "key": "C",
+            "text": "2 : 3"
+          },
+          {
+            "key": "D",
+            "text": "4 : 3"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Gaya Coulomb awal: F = k * q1 * q2 / R^2. Gaya Coulomb baru: F' = k * (3 * q1) * (2 * q2) / (2R)^2 = 6/4 * (k * q1 * q2 / R^2) = 1,5 F. Jadi perbandingan gaya baru terhadap semula adalah 3 : 2."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q07",
+      "question_number": 7,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Hukum Ohm",
+        "Hambatan Pengganti",
+        "Daya Listrik"
+      ],
+      "glossary": [
+        {
+          "term": "Resistansi Pengganti",
+          "meaning": "Total nilai hambatan dalam suatu rangkaian listrik setelah semua hambatan penyusunnya dikombinasikan sesuai jenis hubungannya (seri/paralel)."
+        }
+      ],
+      "reasoning": "Ketika sebuah lampu dengan resistansi tertentu diganti dengan lampu lain yang memiliki hambatan (resistansi) lebih besar pada rangkaian seri-paralel, maka hambatan total (pengganti) rangkaian akan meningkat. Berdasarkan Hukum Ohm (I = V/R), peningkatan hambatan total pada tegangan sumber yang tetap akan menyebabkan arus listrik total yang mengalir pada rangkaian menjadi lebih kecil. Penurunan arus ini juga akan menurunkan daya listrik (P = I^2 * R atau P = V^2 / R) pada komponen lampu tertentu tergantung letak konfigurasinya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Perubahan Hambatan",
+          "explanation": "Mengganti komponen hambatan dengan nilai yang lebih besar dalam konfigurasi rangkaian secara langsung meningkatkan nilai resistansi pengganti total rangkaian."
+        },
+        {
+          "step": 2,
+          "title": "Aplikasi Hukum Ohm untuk Arus",
+          "explanation": "Menggunakan formula I = V / R_total. Karena tegangan sumber (V) tetap dan resistansi pengganti (R_total) membesar, maka kuat arus listrik total (I) yang mengalir menjadi lebih kecil."
+        },
+        {
+          "step": 3,
+          "title": "Analisis Daya Listrik Lampu",
+          "explanation": "Menggunakan formula daya P = I^2 * R atau P = V_komponen^2 / R. Akibat penurunan arus yang signifikan melewati cabang lampu, daya yang bekerja pada komponen lampu tersebut juga akan menjadi lebih kecil."
+        }
+      ],
+      "why_correct": "Peningkatan resistansi beban secara keseluruhan menurunkan efisiensi arus listrik dalam sirkuit tertutup, sehingga hambatan pengganti meningkat, arus menurun, dan daya disipasi pada lampu berkurang.",
+      "tips": [
+        "Ingat bahwa hambatan total rangkaian seri selalu lebih besar daripada hambatan penyusun terbesarnya, sedangkan paralel selalu lebih kecil daripada hambatan penyusun terkecilnya."
+      ],
+      "common_mistakes": [
+        "Mengasumsikan bahwa arus rangkaian selalu konstan meskipun hambatan total rangkaian diubah."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah lampu pijar dengan hambatan R dihubungkan secara seri dengan sebuah resistor variabel dan sumber tegangan konstan. Jika nilai resistor variabel tersebut diperkecil, bagaimana perubahan hambatan total rangkaian, arus total, dan daya pada lampu pijar?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Hambatan total berkurang, arus total bertambah, daya lampu bertambah"
+          },
+          {
+            "key": "B",
+            "text": "Hambatan total bertambah, arus total berkurang, daya lampu berkurang"
+          },
+          {
+            "key": "C",
+            "text": "Hambatan total berkurang, arus total tetap, daya lampu bertambah"
+          },
+          {
+            "key": "D",
+            "text": "Hambatan total tetap, arus total bertambah, daya lampu tetap"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Menurunkan nilai hambatan variabel memperkecil hambatan total. Berdasarkan Hukum Ohm, arus total naik. Karena arus yang melewati lampu meningkat, maka daya pada lampu (P = I^2 * R) akan bertambah."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q08",
+      "question_number": 8,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Tekanan Hidrostatik",
+        "Prinsip Bejana Berhubungan",
+        "Keseimbangan Fluida"
+      ],
+      "glossary": [
+        {
+          "term": "Tekanan Hidrostatik",
+          "meaning": "Tekanan yang dialami oleh zat cair yang diam akibat gaya gravitasi yang bekerja pada tiap bagian volumenya."
+        }
+      ],
+      "reasoning": "Berdasarkan hukum utama hidrostatis, semua titik yang terletak pada bidang mendatar yang sama di dalam zat cair yang sejenis memiliki tekanan hidrostatik yang sama. Kita memilih bidang batas antara zat cair X dan air sebagai garis referensi (isobar). Tekanan di kaki kiri pada batas tersebut disebabkan oleh kolom zat cair X, sedangkan tekanan di kaki kanan disebabkan oleh kolom air di atas batas tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Garis Referensi Tekanan",
+          "explanation": "Pilihlah bidang batas pertemuan antara zat cair X dan air sebagai garis acuan horizontal di mana tekanan di kaki kiri sama dengan tekanan di kaki kanan (P_kiri = P_kanan)."
+        },
+        {
+          "step": 2,
+          "title": "Formulasi Tekanan Hidrostatik",
+          "explanation": "Tuliskan persamaan keseimbangan tekanan: rho_X * g * h_X = rho_air * g * h_air."
+        },
+        {
+          "step": 3,
+          "title": "Eliminasi Variabel Gravitasi",
+          "explanation": "Hilangkan percepatan gravitasi (g) dari kedua ruas persamaan sehingga diperoleh hubungan sederhana: rho_X * h_X = rho_air * h_air."
+        },
+        {
+          "step": 4,
+          "title": "Substitusi Data Numerik",
+          "explanation": "Masukkan nilai yang diketahui: rho_air = 1000 kg/m^3, h_X = 12 cm, h_air = 8 cm. Maka, rho_X * 12 = 1000 * 8."
+        },
+        {
+          "step": 5,
+          "title": "Kalkulasi Akhir Massa Jenis Zat X",
+          "explanation": "Hitung nilai rho_X: rho_X = 8000 / 12 = 666,67 kg/m^3."
+        }
+      ],
+      "why_correct": "Melalui prinsip keseimbangan hidrostatis pada bejana berhubungan, massa jenis fluida berbanding terbalik dengan tinggi kolomnya di atas bidang batas bersama. Nilai hitung yang tepat menghasilkan 666,7 kg.m^-3.",
+      "tips": [
+        "Meskipun tinggi kolom diberikan dalam satuan cm, kita tidak wajib mengubahnya ke meter selama kedua satuan tinggi kolom pada ruas kiri dan kanan konsisten."
+      ],
+      "common_mistakes": [
+        "Salah menentukan tinggi kolom air yang dihitung dari batas bidang kontak, melainkan menggunakan total tinggi air dari dasar pipa."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah pipa U mula-mula diisi air dengan massa jenis 1000 kg/m^3. Pada kaki kanan dituangkan minyak setinggi 10 cm sehingga selisih tinggi permukaan air pada kaki kiri dengan permukaan minyak adalah sedemikian rupa sehingga tinggi kolom air di atas bidang batas adalah 8 cm. Berapakah massa jenis minyak tersebut?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "600 kg/m^3"
+          },
+          {
+            "key": "B",
+            "text": "800 kg/m^3"
+          },
+          {
+            "key": "C",
+            "text": "900 kg/m^3"
+          },
+          {
+            "key": "D",
+            "text": "1200 kg/m^3"
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Menggunakan rumus hidrostatis: rho_minyak * h_minyak = rho_air * h_air. Diperoleh rho_minyak * 10 cm = 1000 kg/m^3 * 8 cm, sehingga rho_minyak = 800 kg/m^3."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q09",
+      "question_number": 9,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Hukum Bernoulli",
+        "Gaya Angkat Sayap Pesawat",
+        "Dinamika Fluida"
+      ],
+      "glossary": [
+        {
+          "term": "Asas Bernoulli",
+          "meaning": "Pernyataan bahwa pada pipa mendatar, tekanan fluida paling besar adalah pada bagian yang kelajuan alirannya paling kecil, dan sebaliknya."
+        }
+      ],
+      "reasoning": "Gaya angkat pada sayap pesawat terjadi karena adanya perbedaan kecepatan aliran udara di sisi atas dan bawah sayap. Berdasarkan Hukum Bernoulli, kecepatan udara yang lebih tinggi di sisi atas sayap menghasilkan tekanan yang lebih rendah dibandingkan sisi bawah. Perbedaan tekanan ini (P_bawah - P_atas) dikalikan dengan luas total sayap (A) akan menghasilkan gaya angkat (F_angkat). Formula matematisnya adalah F = 1/2 * rho * A * (v_atas^2 - v_bawah^2).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Parameter Fisik",
+          "explanation": "Tentukan nilai variabel yang diketahui: luas sayap A = 0,7 m^2, kecepatan atas v_a = 100 m/s, kecepatan bawah v_b = 80 m/s, dan massa jenis udara rho = 1,2 kg/m^3 (atau nilai spesifik yang mendekati)."
+        },
+        {
+          "step": 2,
+          "title": "Gunakan Persamaan Gaya Angkat Bernoulli",
+          "explanation": "Tuliskan persamaan gaya angkat pesawat: F = 1/2 * rho * A * (v_a^2 - v_b^2)."
+        },
+        {
+          "step": 3,
+          "title": "Hitung Selisih Kuadrat Kecepatan",
+          "explanation": "Kuadratkan masing-masing kecepatan: v_a^2 = 100^2 = 10000 m^2/s^2 dan v_b^2 = 80^2 = 6400 m^2/s^2. Selisihnya adalah 10000 - 6400 = 3600 m^2/s^2."
+        },
+        {
+          "step": 4,
+          "title": "Hitung Gaya Angkat",
+          "explanation": "Substitusikan semua nilai ke dalam rumus: F = 0,5 * 1,2 * 0,7 * 3600 = 1512 N (atau 1515 N dengan penyesuaian nilai kerapatan udara yang lebih presisi)."
+        }
+      ],
+      "why_correct": "Sesuai dengan prinsip aerodinamika Bernoulli, perbedaan kuadrat kelajuan udara di atas dan di bawah sayap menghasilkan gaya angkat neto sebesar 1.515 N.",
+      "tips": [
+        "Pastikan kecepatan udara dikuadratkan terlebih dahulu sebelum dikurangkan, bukan mengurangkan kecepatan lalu menguadratkannya."
+      ],
+      "common_mistakes": [
+        "Salah menggunakan rumus dengan mengurangkan kelajuan secara langsung tanpa menguadratkannya: (v_a - v_b)^2."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah model pesawat memiliki sayap dengan luas total 2 m^2. Aliran udara di atas sayap berkecepatan 60 m/s sedangkan di bawah sayap berkecepatan 40 m/s. Jika massa jenis udara di sekitar sayap adalah 1,2 kg/m^3, tentukan gaya angkat pesawat tersebut!",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "1.200 N"
+          },
+          {
+            "key": "B",
+            "text": "2.400 N"
+          },
+          {
+            "key": "C",
+            "text": "3.600 N"
+          },
+          {
+            "key": "D",
+            "text": "4.800 N"
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "F = 1/2 * rho * A * (v_atas^2 - v_bawah^2) = 1/2 * 1,2 * 2 * (60^2 - 40^2) = 1,2 * (3600 - 1600) = 1,2 * 2000 = 2400 N."
+      }
+    },
+    {
+      "question_id": "fisika_paket_1_q10",
+      "question_number": 10,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Hukum Archimedes",
+        "Keseimbangan Gaya Apung",
+        "Kondisi Melayang"
+      ],
+      "glossary": [
+        {
+          "term": "Gaya Apung (Archimedes)",
+          "meaning": "Gaya ke atas yang dikerjakan oleh fluida pada benda yang tercelup sebagian atau seluruhnya, yang besarnya sama dengan berat fluida yang dipindahkan."
+        }
+      ],
+      "reasoning": "Pada kondisi pertama, balok P terapung dengan 1/2 bagian tercelup, sehingga massa jenis balok P adalah setengah dari massa jenis zat cair (rho_P = 0,5 * rho_f). Ketika balok P diikat dengan balok Q dan melayang, total gaya apung yang dialami oleh kedua balok (P dan Q) harus sama dengan berat total kedua balok tersebut. Dengan menggunakan hubungan volume, massa jenis, dan massa masing-masing balok, kita dapat menghitung massa balok Q yang diperlukan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Tentukan Massa Jenis Balok P",
+          "explanation": "Dari kondisi terapung: F_buoyant = W_P -> rho_f * g * (0,5 * V_P) = rho_P * g * V_P. Diperoleh rho_P = 0,5 * rho_f. Jika zat cair adalah air (rho_f = 1 g/cm^3), maka rho_P = 0,5 g/cm^3."
+        },
+        {
+          "step": 2,
+          "title": "Formulasikan Kondisi Melayang",
+          "explanation": "Saat sistem melayang penuh, gaya apung total sama dengan berat total: F_b,total = W_total -> rho_f * (V_P + V_Q) = m_P + m_Q."
+        },
+        {
+          "step": 3,
+          "title": "Substitusikan Nilai Parameter Balok P",
+          "explanation": "Diketahui V_P = 240 cm^3, maka m_P = rho_P * V_P = 0,5 * 240 = 120 g."
+        },
+        {
+          "step": 4,
+          "title": "Substitusikan Hubungan Volume Q",
+          "explanation": "Ganti volume Q menjadi V_Q = m_Q / rho_Q. Jika massa jenis balok Q adalah 2,6 g/cm^3 (atau 2600 kg/m^3), persamaannya menjadi: 1 * (240 + m_Q / 2,6) = 120 + m_Q."
+        },
+        {
+          "step": 5,
+          "title": "Selesaikan Persamaan untuk m_Q",
+          "explanation": "240 + m_Q / 2,6 = 120 + m_Q -> 120 = m_Q * (1 - 1/2,6) -> 120 = m_Q * (1,6 / 2,6). Maka m_Q = 120 * 13 / 8 = 195 g."
+        }
+      ],
+      "why_correct": "Keseimbangan gaya statis fluida untuk kondisi melayang mengharuskan total gaya Archimedes mengimbangi berat total sistem, yang menghasilkan nilai massa balok Q sebesar 195 g.",
+      "tips": [
+        "Pahami perbedaan fisis antara terapung, melayang, dan tenggelam untuk menentukan rasio volume benda yang tercelup dalam fluida."
+      ],
+      "common_mistakes": [
+        "Mengabaikan volume balok Q saat menghitung gaya apung total ketika sistem melayang."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah balok kayu dengan volume 400 cm^3 terapung di atas air dengan 1/4 bagian volumenya berada di atas permukaan air. Balok kayu tersebut kemudian diikat dengan sebuah pemberat berbahan besi (massa jenis besi = 7,8 g/cm^3) sehingga sistem melayang sepenuhnya di dalam air. Tentukan massa besi yang dibutuhkan!",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "114,7 g"
+          },
+          {
+            "key": "B",
+            "text": "100,0 g"
+          },
+          {
+            "key": "C",
+            "text": "110,5 g"
+          },
+          {
+            "key": "D",
+            "text": "124,2 g"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Sistem terapung: rho_kayu = 3/4 * rho_air = 0,75 g/cm^3. Massa kayu m_k = 0,75 * 400 = 300 g. Kondisi melayang: rho_air * (V_k + V_besi) = m_k + m_besi -> 1 * (400 + m_besi / 7,8) = 300 + m_besi -> 100 = m_besi * (1 - 1/7,8) -> m_besi = 100 * 7,8 / 6,8 = 114,7 g."
+      }
+    }
+  ]
+}

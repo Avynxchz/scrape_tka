@@ -1,0 +1,255 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Bahasa Jepang (Paket 2)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 1]
+Kunci Resmi: D
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 85180_342e85d182828cb91019dcd433858027.png]:
+Ilustrasi suasana kamar tidur di waktu malam hari:- Seorang anak laki-laki sedang tidur nyenyak di atas ranjang dengan mulut terbuka, memeluk bantal di bawah selimut biru muda.- Seorang wanita berambut pirang kecokelatan mengenakan sweter hijau dan celana abu-abu berlutut di samping tempat tidur sambil tersenyum ke arah anak tersebut.- Di samping tempat tidur terdapat nakas dengan jam meja digital bertuliskan waktu '02:30 AM'.- Di belakang ranjang terdapat jendela bertirai merah dengan pemandangan langit malam gelap berbintang dan bulan sabit.- Terdapat sebuah balon percakapan (speech bubble) kosong berukuran besar di atas tempat tidur dengan ujung mengarah ke arah anak/ibu.
+Pertanyaan: Perhatikan ilustrasi gambar dan tentukan jawaban yang sesuai!
+
+Ilustrasi: Canva
+---
+[SOAL ACUAN NO 2]
+Kunci Resmi: E
+Stimulus Teks: Perhatikan ilustrasi gambar dan tentukan jawaban yang sesuai!
+
+Ilustrasi: Canva
+[Isi Gambar Soal 15377_d059720fd4f9466cda0cac28bdb501d1.png]:
+Ilustrasi seorang siswi berseragam SMA Indonesia:- Mengenakan jilbab/kerudung putih menutupi kepala dan dada.- Memakai kemeja seragam putih lengan panjang dengan dasi abu-abu.- Memakai ikat pinggang hitam dan rok panjang warna abu-abu kebiruan (seragam SMA).- Mengenakan kaos kaki putih dan sepatu hitam.- Tersenyum sambil tangan kanannya mengangkat bendera Merah Putih (bendera Indonesia) bertangkai kecil.
+Pertanyaan: こんにちは。 わたしは　サリです。 __________________から きました。 どうぞ　よろしく　おねがいします。
+---
+[SOAL ACUAN NO 3]
+Kunci Resmi: ['A', 'D']
+Stimulus Teks: Yuki san to Tania san wa himana toki yoku kaimono shimasu. Tokidoki isshoni ryouri o shimasu. Tania san wa piano ga suki desuga Yuki san wa karate ga suki desu.
+Pertanyaan: Yuki san to Tania san wa himana toki nani o shimasuka? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: A
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 85953_f00aa4b80ceff7bcd41a073763ca0839.png]:
+Ilustrasi sebuah rumah tampak depan:- Memiliki atap segitiga berwarna merah dengan cerobong asap merah di sisi kiri.- Dinding rumah berwarna krem kecokelatan.- Terdapat satu jendela bundar kecil di bagian atas (bawah bubungan atap).- Memiliki pintu masuk kayu berwarna cokelat di bagian tengah dengan kaca kotak-kotak di bagian atasnya, serta tiga anak tangga menuju pintu.- Di sisi kiri dan kanan pintu terdapat masing-masing satu jendela kaca persegi panjang berbingkai kayu dengan tirai kuning di dalamnya.
+Pertanyaan: めぐみさんの　うちは どう ですか。
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: ['A', 'C', 'D']
+Stimulus Teks: Watashi wa supootsu ga suki desu. Sakkaa to badominton ga dekimasu. Mainichi sakkaa o shimasu. Sore ni, isshuukan ni nikai gurai, tomodachi to badominton o shimasu.
+Pertanyaan: Pilihlah pernyataan yang sesuai dengan teks! Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: D
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 99456_e1feb79033a59d6486b3c3613690e841.png]:
+Ilustrasi perabotan ruang tamu/ruang keluarga (いま / リビング):- Sebuah sofa berwarna hijau di sebelah kiri.- Sebuah televisi layar datar hitam di atas meja rak TV kayu berwarna cokelat di sisi kanan.- Sebuah meja kopi rendah (meja tamu) kayu berwarna cokelat gelap terletak di depan rak televisi.- Di latar belakang terdapat jendela kaca geser besar dengan gorden abu-abu yang tersibak ke kedua sisi.
+Pertanyaan: Perhatikan gambar berikut lalu pilihlah pernyataan yang sesuai!
+
+Ilustrasi: www.irasutoya.com
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: A
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: ちちの　しゅみは　おんがくを　きく　ことです。 よく　ロックを　ききます。 ちちは　なにが　すきですか。
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: ['B', 'D']
+Stimulus Teks: Watashi no Kazoku
+
+Hajimemashite, watashi wa Rika desu. Watashi no kazoku wa yo nin desu. Chichi to haha to imouto to watashi desu. Chichi wa hana ga suki desu. Haha wa itsumo oishii tabemono o tsukurimasu. Asatte wa haha no tanjoubi desu. 5 gatsu 15 nichi desu. Sono hi, haha wa nani mo shimasen. Watashi wa yoku souji wo shimasu. Imouto wa mada 4 sai desu kara, nani mo tetsudaimasen.
+Pertanyaan: Manakah pernyataan yang sesuai dengan teks? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: B
+Stimulus Teks: Watashi no Kazoku
+
+Hajimemashite, watashi wa Rika desu. Watashi no kazoku wa yo nin desu. Chichi to haha to imouto to watashi desu. Chichi wa hana ga suki desu. Haha wa itsumo oishii tabemono o tsukurimasu. Asatte wa haha no tanjoubi desu. 5 gatsu 15 nichi desu. Sono hi, haha wa nani mo shimasen. Watashi wa yoku souji wo shimasu. Imouto wa mada 4 sai desu kara, nani mo tetsudaimasen.
+Pertanyaan: きのうは____________。
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: ['A', 'B']
+Stimulus Teks: カレンダー
+[Isi Gambar Soal 78007_d65790810e6c8fbf6accf6dc31bc319d.png]:
+Kalender bulan Mei 2025 ('5がつ' / '05', '2025') beserta jadwal kegiatan:
+
+| にちようび (Minggu) | げつようび (Senin) | かようび (Selasa) | すいようび (Rabu) | もくようび (Kamis) | きんようび (Jumat) | どようび (Sabtu) | |:---: |:---: |:---: |:---: | | | | | | 1 | 2 | 3 | | 4 | 5 | 6 | 7 | 8 | 9キャンプ | 10キャンプ | | 11 | 12しけん | 13しけん | 14しけん | 15しけん | 16しけん | 17 | | 18 | 19 | 20 | 21 | 22 | 23 | 24 | | 25 | 26 | 27 | 28 | 29りょこう | 30りょこう | 31りょこう |
+
+Keterangan agenda kegiatan:- Tanggal 9–10 Mei: 'キャンプ' (Berkemah / Camping)- Tanggal 12–16 Mei: 'しけん' (Ujian / Test)- Tanggal 29–31 Mei: 'りょこう' (Bepergian / Wisata / Liburan)
+Pertanyaan: Hari apa perkemahan diadakan? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 11]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: カレンダー
+[Isi Gambar Soal 62750_d65790810e6c8fbf6accf6dc31bc319d.png]:
+Kalender bulan Mei 2025 ('5がつ' / '05', '2025') beserta jadwal kegiatan:
+
+| にちようび (Minggu) | げつようび (Senin) | かようび (Selasa) | すいようび (Rabu) | もくようび (Kamis) | きんようび (Jumat) | どようび (Sabtu) | |:---: |:---: |:---: |:---: | | | | | | 1 | 2 | 3 | | 4 | 5 | 6 | 7 | 8 | 9キャンプ | 10キャンプ | | 11 | 12しけん | 13しけん | 14しけん | 15しけん | 16しけん | 17 | | 18 | 19 | 20 | 21 | 22 | 23 | 24 | | 25 | 26 | 27 | 28 | 29りょこう | 30りょこう | 31りょこう |
+
+Keterangan agenda kegiatan:- Tanggal 9–10 Mei: 'キャンプ' (Berkemah / Camping)- Tanggal 12–16 Mei: 'しけん' (Ujian / Test)- Tanggal 29–31 Mei: 'りょこう' (Bepergian / Wisata / Liburan)
+Pertanyaan: きょうは　いつかです。 Klik pada pilihan Benar atau Salah untuk setiap pernyataan sesuai dengan wacana!
+---
+[SOAL ACUAN NO 12]
+Kunci Resmi: E
+Stimulus Teks: たろうさんの　まいにちの　せいかつ
+[Isi Gambar Soal 11108_d30de57ebf86a7e5ed363420e25417e2.png]:
+Tabel jadwal aktivitas harian dalam bahasa Jepang:
+
+| じかん (Waktu) | かつどう (Aktivitas) | |:--- |:--- | | 6じ | おきます。 (Bangun tidur) | | 7じ | あさごはんを たべます。 (Sarapan) | | 8じ | がっこうへ いきます。 (Pergi ke sekolah) | | 12じ | ひるごはんを たべます。 (Makan siang) | | 3じ | うちへ かえります。 (Pulang ke rumah) | | 10じ | ねます。 (Tidur) |
+Pertanyaan: Pilihlah pernyataan dengan urutan waktu dan kegiatan yang runtut dan tepat sesuai dengan tabel!
+---
+[SOAL ACUAN NO 13]
+Kunci Resmi: ['B', 'D']
+Stimulus Teks: Kaneko san no Ichinichi
+
+Kaneko san wa maiban gogo rokujihan ni mizu o abimasu. Sorekara, shichi ji ni kazoku to ban gohan o tabemasu. Hachi ji ni benkyoushimasu. Ku ji han ni miruku o nonde, ha o migakimasu. Soshite, juuji ni nemasu.
+Pertanyaan: かねこさんは _______________。 Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 14]
+Kunci Resmi: D
+Stimulus Teks: Kaneko san no Ichinichi
+
+Kaneko san wa maiban gogo rokujihan ni mizu o abimasu. Sorekara, shichi ji ni kazoku to ban gohan o tabemasu. Hachi ji ni benkyoushimasu. Ku ji han ni miruku o nonde, ha o migakimasu. Soshite, juuji ni nemasu.
+Pertanyaan: Lengkapilah kalimat berikut sesuai dengan susunan kalimat yang benar berdasarkan wacana! かねこさんは　まいばん ________________
+---
+[SOAL ACUAN NO 15]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: Hajimemashite, watashi wa Hikari desu. Konshuu wa kinyoubi kara nichiyoubi made yasumi desu. Kinou, watashi wa eigakan de eiga o mimashita. Kyouwa doyoubi desu. Doyoubi wa itsumo mooru de kaimono shimasu. Demo, mooru de amari hirugohan o tabemasen. Ashita wa umi de oyogimasu.
+Pertanyaan: Bagaimana pernyataan terkait wacana tersebut? Klik pada pilihan Benar atau Salah untuk setiap pernyataan sesuai dengan wacana!
+---
+[SOAL ACUAN NO 16]
+Kunci Resmi: ['B', 'C', 'D']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 30211_cc1033810cfc2bcd3ac9f903fd997325.png]:
+Poster pengumuman sekolah berhias ilustrasi megafon hijau di kiri atas, globe di kanan atas, dan tumpukan buku di bagian bawah.
+
+Teks dalam poster:- Judul: 'おしらせ' (Pemberitahuan)- Butir 1: '・らいしゅうの げつようびから、がっこうで しけんが はじまります。' (Mulai hari Senin minggu depan, ujian di sekolah akan dimulai.)- Butir 2: '・こんしゅうの もくようびときんようびは やすみです。' (Hari Kamis dan Jumat minggu ini libur.)- Pesan penutup: 'がんばって ください！' (Semangat berjuang!)
+Pertanyaan: Manakah pernyataan yang sesuai dengan wacana tersebut? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 17]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: アジ：せんしゅう、なんじに　えいがを　みましたか。
+
+レレ：ごご　３じに _______________。
+---
+[SOAL ACUAN NO 18]
+Kunci Resmi: ['A', 'C', 'D']
+Stimulus Teks: Riri san wa getsuyoubi no gogo 1-ji to suiyoubi no gozen 10-ji ni nihongo o benkyou shite imasu. Suugaku wa getsuyoubi no gogo 3-ji to kayoubi no gozen 10-ji desu. Kamoku no naka de Riri san wa suugaku to Nihonggo ga suki desu.
+Pertanyaan: Manakah pernyataan yang sesuai dengan wacana tersebut? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 19]
+Kunci Resmi: ['A', 'B', 'D']
+Stimulus Teks: わたしは　じゅうねんせいです。 ちちは　いしゃです。ははも　いしゃです。 びょういんで　はたらいています。 あねは　じゅうななさい　です。 いもうとは　まだ　ごさいです。
+Pertanyaan: Manakah pernyataan yang sesuai dengan wacana tersebut? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 20]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Susunlah kosakata berikut menjadi kalimat padu! は／べんきょう／わたし／まいにち／７じ／に／します
+---
+[SOAL ACUAN NO 21]
+Kunci Resmi: D
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 61801_620a3c82c56c2cefe6ecb5fcdc0cd274.png]:
+Memo pengumuman tertulis pada kertas catatan merah muda (sticky note) dengan selotip di bagian atas serta ilustrasi seorang anak perempuan berhijab memegang megafon di sudut kanan bawah.
+
+Teks pengumuman:- Judul: 'おしらせ' (Pengumuman)- Butir 1: '・うんどうかい　　６月１７日～６月２０日' (Pekan olahraga: 17 Juni – 20 Juni)- Butir 2: '・そつぎょうしき　６月２４日' (Upacara kelulusan: 24 Juni)- Butir 3: '・やすみ　　　　　６月２５日～７月１４日' (Libur: 25 Juni – 14 Juli)
+Pertanyaan: Pilih pernyataan yang sesuai dengan wacana tersebut!
+---
+[SOAL ACUAN NO 22]
+Kunci Resmi: D
+Stimulus Teks: アリさんの スケジュール
+[Isi Gambar Soal 96488_76904424038d5726edea445b5f8e05db.png]:
+Tabel jadwal aktivitas mingguan dengan jam (じかん) dari 07:00 hingga 18:00 dan kolom hari: 月 (Senin), 火 (Selasa), 水 (Rabu), 木 (Kamis), 金 (Jumat), 土 (Sabtu, berwarna biru), 日 (Minggu, berwarna merah).
+
+Aktivitas terjadwal:- 月 (Senin), 水 (Rabu), 木 (Kamis):- 07:00 – 15:00: Sekolah (ikon gedung sekolah)- 火 (Selasa):- 07:00 – 15:00: Sekolah (ikon gedung sekolah)- 16:00 – 18:00: 'にほんご クラブ' (Klub Bahasa Jepang)- 金 (Jumat):- 07:00 – 13:00: Sekolah (ikon gedung sekolah)- 14:00 – 17:00: Basket (ikon orang bermain bola basket)- 土 (Sabtu):- 09:00 – 12:00: Bulu tangkis (ikon raket dan kok)- 14:00 – 16:00: 'ゲーム' (Bermain game)- 日 (Minggu):- 11:00 – 14:00: 'かいもの' (Berbelanja)
+Pertanyaan: アリさんは　いつ　バドミントンを　しますか。
+---
+[SOAL ACUAN NO 23]
+Kunci Resmi: E
+Stimulus Teks: アリさんの スケジュール
+[Isi Gambar Soal 54561_76904424038d5726edea445b5f8e05db.png]:
+Tabel jadwal aktivitas mingguan dengan jam (じかん) dari 07:00 hingga 18:00 dan kolom hari: 月 (Senin), 火 (Selasa), 水 (Rabu), 木 (Kamis), 金 (Jumat), 土 (Sabtu, berwarna biru), 日 (Minggu, berwarna merah).
+
+Aktivitas terjadwal:- 月 (Senin), 水 (Rabu), 木 (Kamis):- 07:00 – 15:00: Sekolah (ikon gedung sekolah)- 火 (Selasa):- 07:00 – 15:00: Sekolah (ikon gedung sekolah)- 16:00 – 18:00: 'にほんご クラブ' (Klub Bahasa Jepang)- 金 (Jumat):- 07:00 – 13:00: Sekolah (ikon gedung sekolah)- 14:00 – 17:00: Basket (ikon orang bermain bola basket)- 土 (Sabtu):- 09:00 – 12:00: Bulu tangkis (ikon raket dan kok)- 14:00 – 16:00: 'ゲーム' (Bermain game)- 日 (Minggu):- 11:00 – 14:00: 'かいもの' (Berbelanja)
+Pertanyaan: アリさんは　なんじから　なんじまで　かいものしますか。
+---
+[SOAL ACUAN NO 24]
+Kunci Resmi: ['A', 'D']
+Stimulus Teks: Ilustrasi: Canva
+[Isi Gambar Soal 06359_fa4e42561043c022087a3edc542bda59.png]:
+Denah tata letak tempat duduk di ruang kelas. Di bagian paling atas terdapat papan tulis (balok horizontal berwarna abu-abu kebiruan), dan di kanan atas menghadap miring ke arah meja siswa terdapat meja dan kursi guru bertuliskan 'せんせい' (guru).
+
+Posisi meja dan kursi siswa tersusun dalam format 2 baris x 3 kolom:- Baris depan (dekat papan tulis), dari kiri ke kanan: 1. 'ななこ' (Nanako) 2. 'けんた' (Kenta) 3. 'しのすけ' (Shinosuke)- Baris belakang, dari kiri ke kanan: 1. 'まさお' (Masao) 2. 'かざま' (Kazama) 3. 'よしなが' (Yoshinaga)
+Pertanyaan: ただしいぶんは　どれですか。 Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 25]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Ilustrasi: Canva
+[Isi Gambar Soal 89081_3e0b5043fd3430ec1264885c3a0a826c.png]:
+Ilustrasi percakapan antara dua siswa berseragam SMA Indonesia (atasan putih, bawahan abu-abu). Di sebelah kiri berdiri seorang siswa laki-laki yang melipat kedua tangannya di dada, dan di sebelah kanan berdiri seorang siswi berhijab.
+
+Transkripsi teks dialog: 1. Siswa laki-laki (balon hijau kekuningan): 'きょうは　なんじに　れきしを　べんきょうしますか。' (Hari ini jam berapa belajar sejarah?) 2. Siswi perempuan (balon oranye kecokelatan): '１０じから　１２じまでです。' (Dari jam 10 sampai jam 12.) 3. Siswa laki-laki (balon hijau kekuningan): 'そうですか。あしたも　れきしを　べんきょうしますか。' (Begitu ya. Apakah besok juga belajar sejarah?) 4. Siswi perempuan (balon oranye kecokelatan): 'いいえ、きょうと　あさってです。' (Tidak, hari ini dan lusa.)
+Pertanyaan: Bagaimana informasi pernyataan terkait dengan wacana tersebut? Klik pada pilihan Benar atau Salah untuk setiap pernyataan sesuai isi wacana!
+---
+[SOAL ACUAN NO 26]
+Kunci Resmi: ['A:Salah', 'B:Benar', 'C:Salah']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 47380_f4896cdc911c8e67c723702f2a830fdc.png]:
+Tabel jadwal sepak bola bertajuk 'サッカーの スケジュール' (Jadwal Sepak Bola):
+
+| なまえ (Nama) | 日 (Min) | 月 (Sen) | 火 (Sel) | 水 (Rab) | 木 (Kam) | 金 (Jum) | 土 (Sab) | |:---: |:---: |:---: |:---: | | ミラ (Mira) | V | V | V | V | V | V | V | | ラマ (Rama) | V | | | | | | | | マヤ (Maya) | V | | | V | | V | |
+
+Keterangan jadwal:- Mira (ミラ) bermain sepak bola setiap hari (Minggu s.d. Sabtu).- Rama (ラマ) hanya bermain sepak bola pada hari Minggu (日).- Maya (マヤ) bermain sepak bola pada hari Minggu (日), Rabu (水), dan Jumat (金).
+Pertanyaan: Bagaimana informasi pernyataan terkait dengan tabel tersebut? Klik pada pilihan Benar atau Salah untuk setiap pernyataan sesuai isi tabel!
+---
+[SOAL ACUAN NO 27]
+Kunci Resmi: ['B', 'C']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 25789_2da7814ea54f31ef2479f698462c5c5a.png]:
+Tabel pengumuman sekolah bertajuk 'おしらせ' (Pemberitahuan):
+
+| おしらせ | |:--- |:--- | | テスト (Tes / Ujian) | 6月 2日 ～ 6月 13日 (2 Juni – 13 Juni) | | やすみ (Libur) | 6月 30日 ～ 7月 16日 (30 Juni – 16 Juli) |
+Pertanyaan: Apa saja informasi yang tepat terkait wacana tersebut? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 28]
+Kunci Resmi: ['A', 'B']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 39243_7c838f4769afd4ee1c4c7791306a2d73.png]:
+Tabel jadwal mata pelajaran sekolah bertajuk 'がっこうの スケジュール' (Jadwal Sekolah):
+
+| かもく (Mata Pelajaran) | じかん (Waktu) | |:--- |:--- | | Pendidikan Jasmani | 08:00 ～ 09:30 | | Geografi | 09:30 ～ 11:30 | | Matematika | 12:30 ～ 13:00 | | Musik | 13:00 ～ 14:30 |
+Pertanyaan: Apa saja informasi yang tepat terkait wacana tersebut? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 29]
+Kunci Resmi: ['B', 'C']
+Stimulus Teks: Dina san e, Ogenki desuka. Watashi wa mainichi 6 ji goro okimasu. Gakkou wa getsuyoubi kara kinyoubi made desu. Douyoubi ni yoku tomodachi to eiga o mimasu. Tokidoki puuru de oyogimasu. Nichi youbi no asa itsumo sanposhimasu. Yoru uchi de terebi o mimasu. Dina san wa hima na toki nani o shimasuka. Oshietekudasai. Mata tegami o kakimasu.
+
+5月20日 Yukiko
+Pertanyaan: Apa saja informasi yang tepat terkait wacana tersebut? Klik pada setiap jawaban benar! Jawaban benar lebih dari satu.
+

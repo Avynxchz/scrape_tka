@@ -1,0 +1,908 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Matematika Tingkat Lanjut (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "<Kutipan/konteks kalimat atau variabel yang diketahui>",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: ['A', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Diberikan segitiga pada setengah lingkaran seperti pada gambar berikut.
+
+Kedua sisi segitiga sama dengan jari-jari setengah lingkaran dan titik O merupakan titik pusat lingkaran.
+
+Luas daerah segitiga dinyatakan dengan  dan luas daerah setengah lingkaran dinyatakan dengan  dimana nilai.
+[Konteks Visual Gambar 61765_3b2a90fdf57ce740ce2cb3d9438b3164.png]:
+Berikut adalah analisis dan transkripsi elemen-elemen dari gambar:
+
+### 1. Deskripsi Geometri / Diagram
+* **Bentuk Utama:** Sebuah setengah lingkaran dengan titik pusat $O$ dan jari-jari $r$.
+* **Elemen Segitiga:**
+  * Terbentuk segitiga sama kaki di dalam setengah lingkaran dengan dua sisinya merupakan jari-jari lingkaran ($r$).
+  * Sudut pusat yang dibentuk di titik $O$ antara jari-jari sejajar alas (sebelah kanan) dan jari-jari yang miring adalah $\theta$.
+  * Panjang sisi alas kanan dari $O$ ke ujung kanan diameter adalah $r$.
+  * Sisi ketiga segitiga menghubungkan titik pada busur lingkaran ke titik paling kanan pada diameter.
+
+### 2. Transkripsi Variabel dan Rumus Matematika
+* **Pusat Lingkaran:** Titik $O$
+* **Jari-jari Lingkaran:** $r$
+* **Sudut Pusat:** $\theta$
+
+**Persamaan Terkait (Hubungan Geometri):**
+* **Panjang Tali Busur (sisi di hadapan sudut $\theta$):**
+  $$c = 2r \sin\left(\frac{\theta}{2}\right)$$
+  *Atau menggunakan Aturan Kosinus:*
+  $$c^2 = r^2 + r^2 - 2r^2 \cos\theta = 2r^2(1 - \cos\theta)$$
+
+* **Luas Segitiga yang Terbentuk:**
+  $$L_{\text{segitiga}} = \frac{1}{2} r^2 \sin\theta$$
+
+* **Luas Tembereng (Sektor dikurangi Segitiga):**
+  $$L_{\text{tembereng}} = \frac{1}{2} r^2 (\theta - \sin\theta) \quad \text{(dalam radian)}$$
+[Konteks Visual Gambar 61765_99da5a9414ffeb3583ff6e4baaa0a8ba.png]:
+**Transkripsi Matematika:**
+
+$f(\theta)$
+[Konteks Visual Gambar 61765_3dc59e9beb11d3dfac66c0208d7732d1.png]:
+$g(\theta)$
+[Konteks Visual Gambar 61765_5a1ee00f1e35720bc798b15872c2a0b6.png]:
+$$0 < \theta < \pi$$
+[Konteks Visual Gambar 61765_675f44415cd853dac4d4fbd874c9c170.png]:
+Berikut adalah transkripsi rumus matematika dari gambar dalam format LaTeX:
+
+$$\lim_{\theta \to n} \frac{f(\theta)}{g(\theta)}$$
+PERTANYAAN:
+Suatu limit fungsi dipetakan sebagai. Bagaimana nilai limit fungsi perbandingan luas tersebut?
+
+Pilihlah semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhatikan matriks berikut!
+[Konteks Visual Gambar 82655_d8744f2d8763b85d214f2ffbdb161ff4.png]:
+Transkripsi matematis untuk matriks pada gambar adalah:
+
+$$F = \begin{bmatrix} 2 & 0 \\ 0 & \frac{1}{2} \end{bmatrix}$$
+PERTANYAAN:
+Invers dari matrik F adalah....
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: ['C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Seorang pemilik Hotel mengelola 3 hotel yang berada pada kota yang berbeda. Hotel tersebut memiliki konsep dan tipe kamar yang sama yaitu Standard Room, Deluxe Room, dan Suite Room, dengan kapasitas dan harga per malam sebagai berikut.
+[Konteks Visual Gambar 08388_d93ed4186ea32ecc523ff5707329a2a4.png]:
+Berikut adalah ekstraksi data dari gambar:
+
+### **KAPASITAS KAMAR HOTEL**
+
+| TIPE KAMAR | HOTEL A | HOTEL B | HOTEL C | Harga (per malam) |
+| :--- | :---: | :---: | :---: | :--- |
+| **Standard Room** | $9$ | $6$ | $7$ | $\text{Rp } 150.000$ |
+| **Deluxe Room** | $6$ | $7$ | $5$ | $\text{Rp } 500.000$ |
+| **Suite Room** | $3$ | $2$ | $4$ | $\text{Rp } 1.000.000$ |
+
+---
+
+### **Bentuk Representasi Matriks (jika diperlukan untuk perhitungan):**
+
+* **Matriks Kapasitas Kamar ($K$):**
+  $$K = \begin{pmatrix} 9 & 6 & 7 \\ 6 & 7 & 5 \\ 3 & 2 & 4 \end{pmatrix}$$
+  *(Baris: Tipe Kamar, Kolom: Hotel A, B, C)*
+
+* **Matriks Harga ($P$):**
+  $$P = \begin{pmatrix} 150.000 \\ 500.000 \\ 1.000.000 \end{pmatrix}$$
+PERTANYAAN:
+Pemilik hotel akan melakukan perhitungan pendapatan yang diperoleh dari ketiga hotel tersebut. Bagaimana kondisi pendapatan ketiga hotel tersebut dalam 1 hari jika semua tipe kamar terisi penuh? Pilih pada semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Pendapatan Hotel A dan Hotel C sama besar.
+  - B. B. Pendapatan Hotel B lebih besar daripada Hotel A.
+  - C. C. Pendapatan paling besar diperoleh dari Hotel C.
+  - D. D. Masing-masing hotel memiliki selisih pendapatan yang sama besar.
+  - E. E. Pendapatan yang diperoleh dari ketiga hotel tersebut lebih dari Rp20.000.000.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Pak Andi memiliki beberapa sapi dan kambing. Semua hewan ternaknya selalu diberikan pakan berupa campuran rumput gajah dan rumput gamal. Setiap hari, dia selalu menyediakan 38 kg rumput gajah dan 34 kg rumput gamal untuk seluruh kambing dan sapi miliknya (tanpa sisa). Berikut adalah kebutuhan pakan untuk setiap ekor ternak milik Pak Andi per hari.
+[Konteks Visual Gambar 57613_a9fbed0afa7b2d9eac571bcfd7f631ae.png]:
+Berikut adalah data yang diekstrak dari gambar:
+
+### **Data Kebutuhan Pakan Ternak**
+
+| Jenis Ternak | Kebutuhan Rumput Gajah | Kebutuhan Rumput Gamal |
+| :--- | :---: | :---: |
+| **Sapi** | $10\text{ kg}$ | $10\text{ kg}$ |
+| **Kambing** | $2\text{ kg}$ | $1\text{ kg}$ |
+
+---
+
+### **Representasi Matematis (Model Sistem Linear):**
+Jika $x$ menyatakan jumlah sapi dan $y$ menyatakan jumlah kambing:
+* **Total Rumput Gajah ($R_1$):** $10x + 2y$
+* **Total Rumput Gamal ($R_2$):** $10x + y$
+[Konteks Visual Gambar 57613_8942e852504e3643bf634c418ea22ebe.png]:
+$x$
+[Konteks Visual Gambar 57613_7fbe517896aa2e51c67df243ebd68d81.png]:
+$y$
+[Konteks Visual Gambar 57613_3c6aaf76f1184db133ae8042c44e2790.png]:
+$$\begin{pmatrix} x \\ y \end{pmatrix} = \dots$$
+PERTANYAAN:
+Jika banyaknya sapi dan kambing yang dipelihara oleh Pak Andi berturut-turut adalah   dan , maka
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sebuah pabrik minuman tradisional memproduksi tiga jenis minuman yaitu wedang jahe (WJ), beras kencur (BK), dan kunir asem (KA). Dalam proses produksinya, digunakan tiga bahan utama yaitu jahe (J) dalam gram, gula merah (GM) dalam gram, dan air ( A) dalam mililiter. Setiap botol minuman memerlukan bahan sebagai berikut:
+
+Pada suatu hari pabrik tersebut menerima pesanan sebagai berikut:
+
+Jumlah bahan baku yang digunakan dalam proses pembuatan setiap minuman adalah:
+[Konteks Visual Gambar 48115_d42a68c71c744435eee0930f6510dc27.png]:
+Berikut adalah hasil transkripsi LaTeX untuk matriks pada gambar:
+
+$$\begin{matrix} J & GM & A \end{matrix}$$
+$$\begin{bmatrix} 20 & 15 & 50 \\ 10 & 25 & 40 \\ 12 & 8 & k \end{bmatrix}$$
+[Konteks Visual Gambar 48115_941683d29c6a7b7299e477fbe76a1fcc.png]:
+Berikut adalah transkripsi LaTeX untuk representasi matriks berlabel pada gambar:
+
+$$\begin{matrix} \text{WJ} \\ \text{BK} \\ \text{KA} \end{matrix} \begin{bmatrix} 100 \\ 120 \\ 80 \end{bmatrix}$$
+[Konteks Visual Gambar 48115_d4c85bee67cad14150dcfa0cef878097.png]:
+Berikut adalah transkripsi matriks dalam format LaTeX:
+
+$$\begin{matrix} \text{J} \\ \text{GM} \\ \text{A} \end{matrix} \begin{bmatrix} 4360 \\ 4960 \\ 13000 \end{bmatrix}$$
+PERTANYAAN:
+Banyak air yang dibutuhkan untuk memproduksi satu botol kunir asem adalah....
+OPSI / PERNYATAAN:
+  - A. A. 30 ml
+  - B. B. 35 ml
+  - C. C. 40 ml
+  - D. D. 45 ml
+  - E. E. 50 ml
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 23650_b9f58fa707201f44aae42bc9adad0437.png]:
+Berikut adalah transkripsi ekspresi matematika dari gambar dalam format LaTeX:
+
+$$f(x) = x^3 + 3x^2 - 10x - 24$$
+PERTANYAAN:
+Di manakah koordinat titik perpotongan grafik fungsi   terhadap sumbu X? Pilih pada semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. (-2,0)
+  - B. B. (-1,0)
+  - C. C. (3,0)
+  - D. D. (4,0)
+  - E. E. (5,0)
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Sebuah drum bahan bakar logam mengalami penambahan kapasitas volume saat terkena panas, yang dapat dinyatakan dalam fungsi berikut:
+
+dengan   adalah suhu dalam derajat celsius dan   adalah penambahan volume dalam liter.
+[Konteks Visual Gambar 71595_c86922168c3ced7faa202a8be0835d30.png]:
+**Transkripsi Rumus:**
+
+$$V(T) = 0{,}05T^3 + 0{,}4T^2 + 20T$$
+[Konteks Visual Gambar 71595_2803fd096d72c49ca7a21bf534d2544c.png]:
+$T$
+[Konteks Visual Gambar 71595_b42661f76e5bf0b5a669f758079b74da.png]:
+$V(T)$
+PERTANYAAN:
+Apabila terdapat 10 drum dengan jenis dan ukuran yang sama, total penambahan volume dari drum-drum tersebut ketika terkena panas dengan suhu yang sama dapat dinyatakan dengan....
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: ['A:Tidak Mungkin', 'B:Mungkin', 'C:Mungkin']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Sebuah perusahaan menawarkan saham kepada pembeli. Perusahaan menyiapkan modal saham yang akan dijual dan dapat dinyatakan sebagai fungsi   dimana nilai   dalam jutaan rupiah dan  menyatakan banyak saham dalam satuan unit saham.
+[Konteks Visual Gambar 22551_097a42a68369dbba421aaf4a5dc6228c.png]:
+Berikut adalah transkripsi rumus matematika dari gambar:
+
+$$f(x) = x^3 - 70x^2 - 600x + 74.000$$
+
+*(Catatan: Tanda titik pada angka $74.000$ merupakan pemisah ribuan standar penulisan Indonesia/Eropa, setara dengan $74\text{ }000$)*
+[Konteks Visual Gambar 22551_f7de150c0b5974bb0ecf130953775adc.png]:
+Berikut adalah hasil transkripsi dari gambar yang diberikan:
+
+$$f(x)$$
+[Konteks Visual Gambar 92010_8942e852504e3643bf634c418ea22ebe.png]:
+Berikut adalah hasil transkripsi dari gambar yang diberikan:
+
+$$x$$
+PERTANYAAN:
+Apabila modal saham yang dimiliki perusahaan tersebut adalah 2 milyar (2.000 juta), tentukan Mungkin atau Tidak Mungkin perusahaan dapat menjual sejumlah unit saham berikut!
+OPSI / PERNYATAAN:
+  - A. 30 unit
+  - B. 40 unit
+  - C. 60 unit
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 14684_48d66023c8e271d59d2bbbf00e17268e.png]:
+Format teks/LaTeX dari gambar tersebut adalah:
+
+$$f(x) = x^4 + ax^3 + bx^2 + x - 6$$
+[Konteks Visual Gambar 14684_8420ca637f485035fc6c20444d9463d2.png]:
+**Transkripsi LaTeX:**
+
+$$x^2 + x + 1$$
+[Konteks Visual Gambar 14684_c31105c1750fa33f7e23a3c74b5e8c82.png]:
+$$5x - 1$$
+[Konteks Visual Gambar 14684_7b93e425a4213276dce4df2d8622d305.png]:
+$$a + b = \dots$$
+PERTANYAAN:
+Diketahui suku banyak    apabila dibagi oleh   menghasilkan sisa , Nilai dari
+OPSI / PERNYATAAN:
+  - A. A. 11
+  - B. B. 5
+  - C. C. -1
+  - D. D. -5
+  - E. E. -7
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: ['A:Salah', 'B:Benar', 'C:Salah']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Populasi kelinci di suatu pulau dimodelkan dengan fungsi eksponensial, yaitu:
+
+dengan  menyatakan waktu dalam satuan tahun dan  menyatakan populasi dalam ribu ekor.
+[Konteks Visual Gambar 30391_364b6aac814ff9726deee52a8eecd08a.png]:
+Transkripsi rumus matematika pada gambar:
+
+$$K(t) = 4 \cdot 2^{t/4}$$
+[Konteks Visual Gambar 83889_9aa09008b281c73ac938250f0f3ff200.png]:
+Transkripsi LaTeX dari gambar tersebut adalah:
+
+$t$
+[Konteks Visual Gambar 30391_04a4c2aec94daefa512543668c0cfa36.png]:
+$K(t)$
+PERTANYAAN:
+Bagaimana interpretasi yang tepat mengenai model eksponensial populasi kelinci tersebut?
+OPSI / PERNYATAAN:
+  - A. Setiap 4 tahun populasi bertambah menjadi 4 kalinya.
+  - B. Pada saat awal populasi kelinci berjumlah 4 ribu ekor.
+  - C. Populasi mencapai 1 juta sebelum 20 tahun dari awal pengamatan.
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: ['C', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Seorang peneliti lingkungan melakukan pengamatan terhadap pertumbuhan tanaman eceng gondok di beberapa danau sekitar wilayah X. Pengamatan dilakukan selama 3 tahun dan hasil menunjukkan bahwa pertumbuhan eceng gondok dapat dimodelkan dengan fungsi berikut:
+
+Setelah 3 tahun pengamatan, peneliti mencatat banyak tanaman eceng gondok di beberapa wilayah perairan tersebut. Berikut data yang diperoleh:
+[Konteks Visual Gambar 59784_28f51ab5d7d5d280cb4015b75272ad53.png]:
+Berikut adalah hasil transkripsi dan ekstraksi data dari gambar grafik pertumbuhan eceng gondok:
+
+### 1. Ekstraksi Data Grafik
+
+**Sumbu-X:** Tahun Ke- ($t$)  
+**Sumbu-Y:** Luas Area yang Tertutup Tanaman Eceng Gondok ($L(t)$ dalam $\text{m}^2$)
+
+| Tahun Ke- ($t$) | Luas Area Tertutup ($\text{m}^2$) |
+| :---: | :---: |
+| $0$ | $10$ |
+| $1$ | $70$ |
+| $2$ | $490$ |
+
+---
+
+### 2. Formulasi Persamaan Matematis Grafik
+
+Grafik menunjukkan pertumbuhan eksponensial dengan nilai awal $L(0) = 10$ dan rasio pertumbuhan tiap tahun $r = 7$:
+
+$$L(t) = 10 \times 7^t$$
+
+* **Saat $t = 0$:** $L(0) = 10 \times 7^0 = 10\text{ m}^2$
+* **Saat $t = 1$:** $L(1) = 10 \times 7^1 = 70\text{ m}^2$
+* **Saat $t = 2$:** $L(2) = 10 \times 7^2 = 490\text{ m}^2$
+
+---
+
+### 3. Keterangan Gambar
+* **Foto Sebelah Kanan:** Menunjukkan *Eichhornia crassipes* (Tanaman Eceng Gondok) yang menutupi permukaan wilayah perairan.
+[Konteks Visual Gambar 06417_960f8b89ec9ce6e35f81d2ca30244969.png]:
+Berikut adalah transkripsi data tabel dari gambar:
+
+| Wilayah Perairan | Luas Area yang Tertutupi Tanaman Eceng Gondok ($\text{m}^2$) |
+| :--- | :---: |
+| Danau A | $15.000$ |
+| Danau B | $16.500$ |
+| Danau C | $17.000$ |
+| Danau D | $17.500$ |
+| Danau E | $18.000$ |
+PERTANYAAN:
+Berdasarkan data tersebut, wilayah perairan manakah dengan luas area yang tertutupi tanaman eceng gondok lebih dari 49 m 2 pada awal pengamatan dilakukan? Pilihlah setiap jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Danau A
+  - B. B. Danau B
+  - C. C. Danau C
+  - D. D. Danau D
+  - E. E. Danau E
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Grafik berikut menyatakan perubahan kedalaman air laut di sebuah teluk.
+
+Pada grafik tersebut,  menyatakan kedalaman air laut dalam meter,  dalam jam, serta  dan  adalah konstanta. Berkenaan dengan nilai t pada grafik, nilai t = 6 menyatakan 6 jam setelah pukul 00.00, aturan serupa untuk nilai t lainnya.
+[Konteks Visual Gambar 66250_ad662786b414e4daf18e85cbf6b8fdaa.png]:
+Berikut adalah hasil ekstraksi dan transkripsi data ilmiah dari gambar:
+
+---
+
+### **1. Persamaan/Rumus Matematika**
+$$y = a + b \cos\left(\frac{1}{6}\pi t\right)$$
+
+---
+
+### **2. Data Titik Koordinat Grafik $(t, y)$**
+
+| $t$ (waktu) | $y$ (ketinggian/meter) | Keterangan |
+| :---: | :---: | :--- |
+| $0$ | $14{,}3$ | Titik maksimum lokal |
+| $6$ | $10{,}3$ | Titik minimum lokal |
+| $12$ | $14{,}3$ | Titik maksimum lokal |
+
+---
+
+### **3. Parameter Komponen Fungsi (Hasil Analisis)**
+* **Nilai Maksimum ($y_{\max}$):** $14{,}3\text{ meter}$
+* **Nilai Minimum ($y_{\min}$):** $10{,}3\text{ meter}$
+* **Garis Tengah/Sumbu Simetri ($a$):** 
+  $$a = \frac{y_{\max} + y_{\min}}{2} = \frac{14{,}3 + 10{,}3}{2} = 12{,}3\text{ meter}$$
+* **Amplitudo ($b$):** 
+  $$b = \frac{y_{\max} - y_{\min}}{2} = \frac{14{,}3 - 10{,}3}{2} = 2{,}0\text{ meter}$$
+* **Periode ($T$):** $12\text{ satuan waktu}$ ($\omega = \frac{2\pi}{T} = \frac{1}{6}\pi$)
+[Konteks Visual Gambar 66250_7fbe517896aa2e51c67df243ebd68d81.png]:
+$y$
+[Konteks Visual Gambar 66250_9aa09008b281c73ac938250f0f3ff200.png]:
+$t$
+[Konteks Visual Gambar 66250_2bb1a52fded3d42e12a66544a01e07db.png]:
+$a$
+[Konteks Visual Gambar 66250_caad2eb31faa7be9ecde8a3535c34ba1.png]:
+$b$
+PERTANYAAN:
+Waktu saat kedalaman air laut mencapai 12,3 meter untuk ketiga kalinya setelah pukul 00.00 adalah....
+OPSI / PERNYATAAN:
+  - A. A. 3 jam
+  - B. B. 9 jam
+  - C. C. 10 jam
+  - D. D. 12 jam
+  - E. E. 15 jam
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Diketahui vektor
+[Konteks Visual Gambar 87464_f5b2da8b881eb407e65cc337fbf366a3.png]:
+Transkripsi dari gambar tersebut adalah:
+
+$$\vec{AB} = \begin{pmatrix} 2m \\ m + 3 \\ m \end{pmatrix}$$
+[Konteks Visual Gambar 31777_908f1c87a3be494f9279469085d6f761.png]:
+Berikut adalah hasil transkripsi dari gambar yang diberikan:
+
+$$\vec{AB} = 9$$
+[Konteks Visual Gambar 31777_c3b2aaa5e6988087fc157a54f029143a.png]:
+Berdasarkan analisis gambar, berikut adalah transkripsi notasi matematikanya:
+
+$$\vec{AB}$$ atau $\vec{AB}$
+
+*(Notasi vektor yang menunjukkan Vektor $AB$ dengan titik awal $A$ dan titik ujung $B$)*
+PERTANYAAN:
+Jika nilai vektor   satuan panjang, maka nilai m yang memenuhi vektor   adalah...
+OPSI / PERNYATAAN:
+  - A. A. -4 atau -3
+  - B. B. -4 atau 3
+  - C. C. -3 atau 4
+  - D. D. 3 atau 4
+  - E. E. 4 atau 3
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 81595_8f5411337363a1a31b694ce371f82788.png]:
+Berikut adalah transkripsi LaTeX untuk rumus/vektor pada gambar:
+
+$$\vec{AD} = \begin{pmatrix} 1 \\ 4 \end{pmatrix}, \vec{AB} = \begin{pmatrix} 6 \\ 0 \end{pmatrix}$$
+[Konteks Visual Gambar 81595_3c1d27b202f979cd14bdd6ed3ae61663.png]:
+$$\vec{BC} = \begin{pmatrix} a \\ b \end{pmatrix}$$
+[Konteks Visual Gambar 81595_1064d36361ea7fe24db4936354fc8207.png]:
+$a^2 + 2b = ...$
+PERTANYAAN:
+Diketahui trapesium sama kaki ABCD  dengan AD = BC dan titik A (0,0). Vektor-vektor posisi dari pembentuk trapesium adalah   dan   Nilai dari
+OPSI / PERNYATAAN:
+  - A. A. 5
+  - B. B. 7
+  - C. C. 9
+  - D. D. 10
+  - E. E. 13
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Sebuah kereta api sedang melaju dengan kecepatan konstan pada sebuah lintasan lurus dari stasiun A sampai stasiun E. Diketahui koordinat stasiun A dan E (dalam km) berturut-turut adalah (2, 3, 5) dan (11, 6, 8). Perhatikan gambar berikut yang menggambarkan waktu tempuh (dalam menit) kereta tersebut antar stasiun:
+[Konteks Visual Gambar 63897_2c730a27565b9d6fd681af5935b8e4ec.png]:
+Berikut adalah transkripsi dan analisis data dari gambar:
+
+### 1. Informasi Vektor/Arah Laju
+* **Arah Laju Kereta:** Bergerak ke kanan ($\rightarrow$).
+
+### 2. Garis Waktu Interval Antar Posisi Kereta
+Gambar menunjukkan posisi kereta pada titik waktu berurutan ($A \rightarrow B \rightarrow C \rightarrow D \rightarrow E$) dengan selang waktu ($\Delta t$) antar posisi sebagai berikut:
+
+| Segmen Posisi | Selang Waktu ($\Delta t$) |
+| :---: | :---: |
+| $A \rightarrow B$ | $5 \text{ menit}$ |
+| $B \rightarrow C$ | $3 \text{ menit}$ |
+| $C \rightarrow D$ | $2 \text{ menit}$ |
+| $D \rightarrow E$ | $3 \text{ menit}$ |
+
+### 3. Analisis Jarak dan Gerak (Kinematika)
+* **Jarak Tempuh Spasial ($\Delta s$):** Jarak antarposisi kereta pada gambar tampak relatif konstan/seragam ($\Delta s_{AB} \approx \Delta s_{BC} \approx \Delta s_{CD} \approx \Delta s_{DE}$).
+* **Hubungan Kecepatan Rata-rata ($v = \frac{\Delta s}{\Delta t}$):**
+  * Segmen $C \rightarrow D$ memiliki waktu tempuh terasing/terpendek ($\Delta t = 2 \text{ menit}$), yang mengindikasikan kelajuan rata-rata tertinggi ($v_{CD}$ maksimal).
+  * Segmen $A \rightarrow B$ memiliki waktu tempuh terpanjang ($\Delta t = 5 \text{ menit}$), yang mengindikasikan kelajuan rata-rata terendah ($v_{AB}$ minimal).
+PERTANYAAN:
+Manakah stasiun-stasiun yang jaraknya kurang dari 3,5 km? Pilih semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. AB
+  - B. B. BC
+  - C. C. CD
+  - D. D. DE
+  - E. E. CE
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Perhartikan gambar lingkaran berikut:
+[Konteks Visual Gambar 92865_f0d27987eb16cea2fe0a15b32d3c8a13.png]:
+Berikut adalah analisis dan data dari gambar grafik lingkaran tersebut:
+
+### 1. Ekstraksi Koordinat Titik
+
+Berdasarkan grid diagram Kartesius pada gambar:
+
+| Titik | Deskripsi / Posisi | Koordinat $(x, y)$ |
+| :--- | :--- | :--- |
+| **P** | Titik pusat lingkaran (*Lingkaran A*) | $(-3, 4)$ |
+| **Awal Diameter (Atas)** | Titik pada keliling lingkaran | $(-4, 5.83)$ atau $(-4, 4 + \sqrt{3})$ |
+| **Akhir Diameter (Bawah)** | Titik pada keliling lingkaran | $(-2, 2.17)$ atau $(-2, 4 - \sqrt{3})$ |
+
+---
+
+### 2. Properti Geometri Lingkaran
+
+* **Titik Pusat $(a, b)$:**  
+  $$P(-3, 4)$$
+
+* **Jari-jari ($r$):**  
+  Menggunakan koordinat titik pusat $P(-3, 4)$ dan salah satu titik pada lingkaran, misalnya $(-2, 2.17)$ atau menghitung jarak dari garis kisi:  
+  $$r = \sqrt{(-2 - (-3))^2 + (2.17 - 4)^2} \approx \sqrt{1^2 + (-1.83)^2} \approx 2.08 \text{ unit}$$  
+  *(Atau $r = \sqrt{1^2 + 3} = 2$ bergantung pada titik pasti Geogebra)*
+
+* **Persamaan Lingkaran:**  
+  $$(x - a)^2 + (y - b)^2 = r^2$$  
+  $$(x + 3)^2 + (y - 4)^2 = r^2$$
+PERTANYAAN:
+Diameter lingkaran di atas adalah 4 satuan, persamaan lingkaran yang sepusat dengan lingkaran pada gambar di atas adalah....
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Perhatikan gambar berikut!
+[Konteks Visual Gambar 07072_812097e399e951a855c285970f5b84b2.png]:
+Berikut adalah ekstraksi data dan deskripsi matematis dari gambar:
+
+### 1. Informasi Titik Koordinat
+
+* **Pusat Lingkaran ($c$):**
+  $$A = (2, -3)$$
+
+* **Titik pada Lingkaran ($c$):**
+  $$B = (3, -1)$$
+
+* **Titik-titik pada Garis Lurus ($f$):**
+  $$C = (-1, 0)$$
+  $$D = (0, 2)$$
+
+---
+
+### 2. Persamaan Matematis Terkait
+
+#### **A. Persamaan Lingkaran ($c$)**
+* **Jari-jari ($r$):**
+  $$r = \sqrt{(3 - 2)^2 + (-1 - (-3))^2} = \sqrt{1^2 + 2^2} = \sqrt{5}$$
+
+* **Persamaan Baku Lingkaran:**
+  $$(x - 2)^2 + (y + 3)^2 = 5$$
+
+* **Persamaan Umum Lingkaran:**
+  $$x^2 + y^2 - 4x + 6y + 8 = 0$$
+
+#### **B. Persamaan Garis Lurus ($f$)**
+* **Gradien ($m$):**
+  $$m = \frac{y_2 - y_1}{x_2 - x_1} = \frac{2 - 0}{0 - (-1)} = 2$$
+
+* **Persamaan Garis:**
+  $$y = 2x + 2 \quad \text{atau} \quad 2x - y + 2 = 0$$
+PERTANYAAN:
+Tentukan semua koordinat titik singgung lingkaran dari garis-garis singgung lingkaran yang tegak lurus terhadap garis ƒ!. Klik pada setiap jawaban benar. Jawaban Benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. (3, 1)
+  - B. B. (1, -5)
+  - C. C. (-1, 5)
+  - D. D. (3, -1)
+  - E. E. (-3, -1)
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['A', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Suatu rumah makan terdapat gambar rambu lalu lintas. Gambarnya seperti gambar rambu lalu lintas balai pertolongan pertama namun tidak sama persis. Biasanya rambu lalu lintas itu berfungsi untuk memberikan informasi mengenai lokasi pelayanan kesehatan terdekat seperti balai kesehatan, puskesmas, atau tempat pertolongan pertama jika terjadi keadaan darurat atau kecelakaan. Rumah makan ini mempunyai tanda rambu lalu lintas tersebut tujuannya jika perut pelanggan sedang kelaparan segera merapat ke rumah makan tersebut supaya mendapatkan pertolongan pertama. Berikut gambar rambu lalu lintas balai pertolongan pertama di rumah makan tersebut.
+[Konteks Visual Gambar 78793_07e3eb97d63a3d1d340676151177b080.png]:
+Gambar geometri bangun datar bertumpuk yang memuat dimensi-dimensi ukuran sebagai berikut:
+
+1. Persegi Luar (Warna Biru):- Sisi horizontal bawah memiliki panjang 40tex t cm40 textcm (ditandai dengan panah berujung ganda).- Sisi vertikal kanan memiliki panjang 40tex t cm40 textcm (ditandai dengan panah berujung ganda).- Sudut-sudut persegi di luar lingkaran luar berwarna biru muda.
+
+2. Cincin / Annulus (Warna Hitam):- Lingkaran luar berwarna hitam menyinggung keempat sisi persegi (diameter luar=40tex t cm=40 textcm atau jari-jari R=20tex t cmR=20 textcm).- Lingkaran dalam memiliki garis horizontal putus-putus dari pusat lingkaran ke batas dalam cincin hitam dengan label 14tex t cm14 textcm (jari-jari dalam r=14tex t cmr=14 textcm).
+
+3. Bentuk Palang / Salib (Warna Merah):- Terletak di dalam lingkaran dalam dengan keempat ujung lengannya menyentuh batas dalam cincin hitam.- Di bagian atas lengan horizontal kiri dan kanan (pada daerah berwarna putih), masing-masing terdapat keterangan teks 10tex t cm10 textcm.
+
+Teks pada gambar (verbatim):-40tex t cm40 textcm (bawah)-40tex t cm40 textcm (kanan)-10tex t cm10 textcm (kiri atas lengan palang)-10tex t cm10 textcm (kanan atas lengan palang)-14tex t cm14 textcm (pada garis putus-putus jari-jari dalam)
+PERTANYAAN:
+pemilik rumah makan ingin membuat rambu tersebut dalam jumlah banyak untuk cabang yang baru dan cat yang dibeli dalam ukuran yang sama. Cat warna apakah yang lebih banyak digunakan dibanding cat warna hitam? Klik pada semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. Setengah hitam dan biru.
+  - B. B. Setengah hitam dan merah.
+  - C. C. Setengah hitam dan putih.
+  - D. D. Biru dan putih.
+  - E. E. Biru dan merah.
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: ['A:Tidak Pas', 'B:Tidak Pas', 'C:Pas']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Pak Baskara akan membuat daun pintu dengan ornamen kaca patri berbentuk bulat di tengahnya. Berikut ini adalah detail dari daun pintu yang akan dibuat.
+
+Kerangka ornamen terbuat dari logam. Berfungsi untuk menempelkan potongan-potongan kaca patri. Pak Baskara sedang memilih logam yang dapat digunakan untuk membuat kerangka ornamen kaca patri. Beliau ingin memilih yang pas. Maksud pas di sini adalah: cukup untuk membuat kerangka dan sisanya tidak lebih dari 1 m. Berikut ini adalah jenis logam dan panjangnya yang dapat dipilih Pak Baskara untuk membuat kerangka ornamen.
+[Konteks Visual Gambar 64863_54c6318e02be58fb28ceb05fd412626d.png]:
+Berikut adalah hasil transkripsi dan analisis matematis dari detail gambar ornamen kaca patri:
+
+### 1. Transkripsi Teks dan Rumus
+* **Judul Utama:** Detail Ormanen Kaca Patri
+* **Informasi Luas:**
+  $$\text{Luas 1 potong kaca merah} = 456\text{ cm}^2$$
+* **Konstanta:**
+  $$\text{Gunakan pendekatan } \pi = 3,14$$
+* **Keterangan Komponen:**
+  $$\text{Kerangka ornamen terbuat dari logam}$$
+
+---
+
+### 2. Deskripsi Struktur Geometri Ornamen
+Ornamen berbentuk lingkaran yang terbagi menjadi beberapa wilayah warna dan kerangka logam:
+
+1. **Lingkaran Luar:** Berjari-jari $r$ (atau berdiameter $d = 2r$).
+2. **Persegi / Persegi Panjang di Dalam (Square Inscribed in Circle):**
+   * Sudut-sudut persegi berada tepat pada keliling lingkaran.
+   * Persegi terbagi menjadi 4 segitiga siku-siku sama kaki yang kongruen dengan alas/tinggi sebesar $r$ dan sudut siku-siku di titik pusat lingkaran.
+   * **Pembagian Warna Kaca di Dalam Persegi:**
+     * **Kuning:** 2 potong segitiga.
+     * **Hijau:** 2 potong segitiga.
+3. **Potongan Kaca Merah (Tembereng Lingkaran / Circular Segments):**
+   * Terdapat **4 potong kaca merah** simetris di bagian luar persegi (di antara sisi persegi dan busur lingkaran).
+   * **Rumus Luas 1 Potong Kaca Merah (Tembereng $90^\circ$):**
+     $$\text{Luas Merah} = \text{Luas Tembereng} = \left(\frac{1}{4} \times \pi r^2\right) - \left(\frac{1}{2} \times r^2\right) = \frac{1}{4} r^2 (\pi - 2)$$
+   * Dengan nilai $\text{Luas Merah} = 456\text{ cm}^2$ dan $\pi = 3,14$:
+     $$456 = \frac{1}{4} r^2 (3,14 - 2)$$
+     $$456 = 0,285 \times r^2 \implies r^2 = 1600 \implies r = 40\text{ cm}$$
+
+4. **Kerangka Logam:**
+   * Terdiri dari 1 keliling lingkaran ($2\pi r$), 2 garis diameter ($2 \times 2r$), dan 4 sisi persegi ($4 \times r\sqrt{2}$).
+[Konteks Visual Gambar 93338_b8264572e8bcd3506b50832d40df78a7.png]:
+Berikut adalah hasil ekstraksi data dari gambar:
+
+### Tabel Data Panjang Satuan Logam
+
+| Jenis Logam | Logam A | Logam B | Logam C |
+| :--- | :---: | :---: | :---: |
+| **Panjang satuan** | $4\text{ m}$ | $5\text{ m}$ | $6{,}5\text{ m}$ |
+[Konteks Visual Gambar 64863_66ae096d70f90e90d2b12978c66ba1a7.png]:
+$\sqrt{2} \approx 1,4$
+PERTANYAAN:
+Tentukan apakah pilihan logam yang akan dibeli Pak Baskara berikut ini Pas atau Tidak Pas! Klik pada kolom yang sesuai!
+OPSI / PERNYATAAN:
+  - A. Membeli 2 buah logam A
+  - B. Membeli 1 buah logam B
+  - C. Membeli 1 buah logam C
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Apabila garis  dan  dicerminkan terhadap garis  kemudian dilanjutkan translasi  , menghasilkan bayangan dengan persamaan berturut-turut  dan.
+[Konteks Visual Gambar 01147_9a9eb28c4e55880e2153e0f48c7bcbb6.png]:
+$$ax + y - 9 = 0$$
+[Konteks Visual Gambar 01147_d6be65a917ca3a8f67ce0c12a09da446.png]:
+Teks/rumus pada gambar adalah:
+
+$$x + by + 6 = 0$$
+[Konteks Visual Gambar 01147_c411d51c2df23a68e1e101fe0a05ed8e.png]:
+$$y = x$$
+[Konteks Visual Gambar 01147_0b56cd7d59644d6ce9f7b9eccc8be37d.png]:
+Transkripsi rumus matematika pada gambar:
+
+$$T\begin{pmatrix} 1 \\ -1 \end{pmatrix}$$
+[Konteks Visual Gambar 01147_66adb5330caeac144f55755510bdf888.png]:
+Berikut adalah transkripsi rumus dari gambar:
+
+$$x + 2y - 8 = 0$$
+[Konteks Visual Gambar 01147_20f9b09a9da50cc4721e35a5dc5c9dd6.png]:
+$$2x - y - 9 = 0$$
+[Konteks Visual Gambar 01147_2f6f0a32f8bf2bc0fcc15c1605323e9c.png]:
+$$2a - b = ...$$
+PERTANYAAN:
+Nilai dari
+OPSI / PERNYATAAN:
+  - A. A. -6
+  - B. B. -2
+  - C. C. 0
+  - D. D. 2
+  - E. E. 6
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 30474_598c64dcc5cf4187b5762a54f1141da2.png]:
+Simbol pada gambar merupakan huruf kapital **L** (biasanya melambangkan induktansi diri, panjang, *Lagrangian*, atau transformasi Laplace dalam fisika/matematika):
+
+$$L$$
+
+*(atau bentuk kaligrafi/skrip: $\mathcal{L}$)*
+[Konteks Visual Gambar 30474_598c64dcc5cf4187b5762a54f1141da2_598c64dcc5cf4187b5762a54f1141da2.png]:
+Simbol pada gambar tersebut adalah huruf kapital **$L$** (sering digunakan sebagai notasi panjang/induktansi/momentum sudut dalam fisika, atau simbol himpunan/transformasi):
+
+$$\mathcal{L} \quad \text{atau} \quad L$$
+[Konteks Visual Gambar 30474_598c64dcc5cf4187b5762a54f1141da2_598c64dcc5cf4187b5762a54f1141da2.png]:
+Simbol pada gambar tersebut adalah huruf kapital **$L$** (sering digunakan sebagai notasi panjang/induktansi/momentum sudut dalam fisika, atau simbol himpunan/transformasi):
+
+$$\mathcal{L} \quad \text{atau} \quad L$$
+[Konteks Visual Gambar 30474_bf078422da3c66e12c6d3bb88ced707e.png]:
+Simbol pada gambar adalah:
+
+$$T$$ 
+
+*(Huruf kapital $T$ dalam format miring/italic, umumnya merepresentasikan besaran fisika seperti **Suhu**, **Periode**, atau **Gaya Tegangan Tali**)*
+[Konteks Visual Gambar 30474_598c64dcc5cf4187b5762a54f1141da2_598c64dcc5cf4187b5762a54f1141da2.png]:
+Simbol pada gambar tersebut adalah huruf kapital **$L$** (sering digunakan sebagai notasi panjang/induktansi/momentum sudut dalam fisika, atau simbol himpunan/transformasi):
+
+$$\mathcal{L} \quad \text{atau} \quad L$$
+[Konteks Visual Gambar 30474_de84eed6f6089106f7d7b44d4ac28841.png]:
+$$(x + 4)^2 + (y - 4)^2 = 16$$
+[Konteks Visual Gambar 30474_598c64dcc5cf4187b5762a54f1141da2_598c64dcc5cf4187b5762a54f1141da2.png]:
+Simbol pada gambar tersebut adalah huruf kapital **$L$** (sering digunakan sebagai notasi panjang/induktansi/momentum sudut dalam fisika, atau simbol himpunan/transformasi):
+
+$$\mathcal{L} \quad \text{atau} \quad L$$
+[Konteks Visual Gambar 30474_8f1645989851bd04747a378bd5cefc6e.png]:
+Teks/notasi matematika pada gambar:
+
+$$o(0,0)$$ 
+
+*(atau titik pusat koordinat $O(0,0)$)*
+[Konteks Visual Gambar 30474_bf078422da3c66e12c6d3bb88ced707e_bf078422da3c66e12c6d3bb88ced707e.png]:
+Based on the provided image, the single character is a mathematical symbol rendered in a serif/italic font:
+
+$$\mathcal{T} \quad \text{or} \quad T$$
+PERTANYAAN:
+Lingkaran  memiliki pusat di (-5, 3) dan jari-jari 2. Lingkaran  adalah bayangan dari  setelah dilakukan translasi. Lingkaran  dengan persamaan  adalah bayangan dari  setelah dilakukan dilatasi dengan pusat  dengan faktor skala tertentu. Pernyataan yang benar mengenai translasi  dan faktor skala dilatasi yang dilakukan adalah ….
+OPSI / PERNYATAAN:
+  - A. A. dan skala dilatasi 8
+  - B. B. dan skala dilatasi 4
+  - C. C. dan skala dilatasi 2
+  - D. D. dan skala dilatasi 2
+  - E. E. dan skala dilatasi 8
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: ['D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Garis  merupakan bayangan garis  dirotasikan sejauh 90º berlawanan arah jarum jam dengan pusat rotasi (2,0).
+
+Manakah koordinat titik yang terletak pada garis ?
+[Konteks Visual Gambar 73885_7b3231ad1a3fea45c2fc86a49e9c566f.png]:
+Berdasarkan analisis visual terhadap gambar yang diberikan:
+
+Transkripsi simbol/karakter matematis dalam format LaTeX:
+$I$ atau $\mathcal{I}$
+
+*(Catatan: Gambar menampilkan karakter berupa huruf kapital **I** bermodel italic/script yang biasa digunakan untuk menyimbolkan Arus Listrik, Momen Inersia, atau Intensitas Cahaya dalam fisika).*
+[Konteks Visual Gambar 73885_6fe69b12d000c1a9773b320d435fb8d5.png]:
+$3x + 2y = 6$
+[Konteks Visual Gambar 73885_7b3231ad1a3fea45c2fc86a49e9c566f_7b3231ad1a3fea45c2fc86a49e9c566f.png]:
+Berdasarkan analisis visual terhadap gambar karakter simbol ilmiah yang diberikan, berikut adalah hasil transkripsinya dalam format LaTeX:
+
+$$\tilde{l}$$
+PERTANYAAN:
+Pilihlah semua jawaban benar! Jawaban benar lebih dari satu.
+OPSI / PERNYATAAN:
+  - A. A. (-3, -2)
+  - B. B. (-2, -1)
+  - C. C. (1, 2)
+  - D. D. (2, 0)
+  - E. E. (5, 2)
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: A
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 34647_5afbdd1002168e00ef91d0a457d5be0e.png]:
+$$\lim_{x\to 3} \frac{x^3 - 3x^2 + 2x + 1}{5 + 3x - 9x^2} = \dots$$
+
+**Langkah Penyelesaian Singkat:**
+
+Substitusi langsung nilai $x = 3$:
+
+* **Pembilang:** 
+  $$3^3 - 3(3)^2 + 2(3) + 1 = 27 - 27 + 6 + 1 = 7$$
+
+* **Penyebut:** 
+  $$5 + 3(3) - 9(3)^2 = 5 + 9 - 81 = -67$$
+
+**Hasil Akhir:**
+$$-\frac{7}{67}$$
+PERTANYAAN:
+Nilai dari
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C.
+  - D. D.
+  - E. E.
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Roni, penjual nasi goreng, menjual dagangannya sebanyak  porsi dan akan memperoleh keuntungan (dalam jutaan rupiah) yang dapat dinyatakan dengan fungsi
+[Konteks Visual Gambar 26210_53c19178be4aa7ed59e1a99ffbebddf3.png]:
+$P$
+[Konteks Visual Gambar 26210_4c30d9ca2450bedaf88c474885514bb0.png]:
+Berikut adalah transkripsi rumus matematika dari gambar:
+
+$$K(p) = \frac{9p^2 + 2p + 10}{3p^2 + 3p + 2}$$
+PERTANYAAN:
+Keuntungan yang akan diperoleh Roni, apabila dia menjual nasi goreng dengan porsi sangat banyak adalah ….
+OPSI / PERNYATAAN:
+  - A. A. Rp2.000.000,00
+  - B. B. Rp3.000.000,00
+  - C. C. Rp5.000.000,00
+  - D. D. Rp9.000.000,00
+  - E. E. Rp10.000.000,00
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 88215_aa2a30d1547c22e2582f9325111f9deb.png]:
+Berikut adalah transkripsi rumus matematika dari gambar tersebut ke dalam format LaTeX:
+
+$$\lim_{x \to 3} \frac{1 - \cos(6x - 18)}{\left(x - \frac{9}{x}\right) \sin(6x - 18)} = \dots$$
+PERTANYAAN:
+Nilai
+OPSI / PERNYATAAN:
+  - A. A.
+  - B. B.
+  - C. C. 0
+  - D. D.
+  - E. E.
+

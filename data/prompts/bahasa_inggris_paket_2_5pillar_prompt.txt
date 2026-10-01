@@ -1,0 +1,540 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Inggris (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Lion and the Mouse
+
+Once upon a time, in a thick jungle in Africa, there lived a strong and fierce lion. Every afternoon, the lion would rest under the cool shade of a big tree after walking through the forest. One day, while he was sleeping, a playful little mouse passed by. The mouse saw the lion’s thick mane and was curious. He climbed up and began to jump around on the lion’s head, playing in his mane. The lion woke up suddenly and was not happy at all. He quickly caught the mouse in his big paw and roared, “Who dares to wake me up?” He was very angry and almost killed the mouse. Scared and shaking, the mouse begged the lion, “Please don’t kill me! I didn’t mean to bother you. If you let me go, I promise I’ll help you one day.” The lion laughed loudly. “You? Help me? That’s funny.” But the lion was feeling kind, so he let the mouse go free. A few days later, the lion was walking through the jungle again when he fell into a trap. A net set by hunters caught him, and he couldn’t escape. He tried to bite and tear the ropes, but they were too strong. The lion roared loudly, hoping someone would come. The mouse heard the roar and ran to help. He saw the lion trapped and quickly started to chew the ropes with his sharp teeth. After some time, the net broke, and the lion was free. The lion looked at the mouse with surprise and said, “Thank you! You really saved my life.” The mouse smiled and said, “I told you I would help you one day.” From that moment on, the lion and the mouse became close friends. The lion learned that even small creatures can do great things, and we all need help sometimes.
+
+Source: https://www.vedantu.com/stories/the-lion-and-the-mouse
+
+PERTANYAAN:
+Which option best summarizes the story?
+OPSI / PERNYATAAN:
+  - A. A. Beginning: A lion was walking through the jungle. Problem: The mouse got lost and couldn't find food. Solution: The lion gave food to the mouse. Lesson: Always be generous to those in need.
+  - B. B. Beginning: A mouse accidentally disturbed a sleeping lion. Problem: The lion was caught in a hunter’s net. Solution: The mouse chewed through the net and set the lion free. Lesson: Even the smallest creature can be a great help.
+  - C. C. Beginning: The lion and mouse were best friends. Problem: The lion got hurt in a fight. Solution: The mouse helped him find water. Lesson: Friendship is built on adventure.
+  - D. D. Beginning: A mouse was building a home near a tree. Problem: A storm destroyed the tree and trapped the lion. Solution: The mouse called for help from the jungle. Lesson: Teamwork solves big problems.
+  - E. E. Beginning: A lion was hungry and searching for food. Problem: He couldn’t catch any prey. Solution: The mouse helped him find food. Lesson: Hunger teaches humility.
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: ['B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+The Lion and the Mouse
+
+Once upon a time, in a thick jungle in Africa, there lived a strong and fierce lion. Every afternoon, the lion would rest under the cool shade of a big tree after walking through the forest. One day, while he was sleeping, a playful little mouse passed by. The mouse saw the lion’s thick mane and was curious. He climbed up and began to jump around on the lion’s head, playing in his mane. The lion woke up suddenly and was not happy at all. He quickly caught the mouse in his big paw and roared, “Who dares to wake me up?” He was very angry and almost killed the mouse. Scared and shaking, the mouse begged the lion, “Please don’t kill me! I didn’t mean to bother you. If you let me go, I promise I’ll help you one day.” The lion laughed loudly. “You? Help me? That’s funny.” But the lion was feeling kind, so he let the mouse go free. A few days later, the lion was walking through the jungle again when he fell into a trap. A net set by hunters caught him, and he couldn’t escape. He tried to bite and tear the ropes, but they were too strong. The lion roared loudly, hoping someone would come. The mouse heard the roar and ran to help. He saw the lion trapped and quickly started to chew the ropes with his sharp teeth. After some time, the net broke, and the lion was free. The lion looked at the mouse with surprise and said, “Thank you! You really saved my life.” The mouse smiled and said, “I told you I would help you one day.” From that moment on, the lion and the mouse became close friends. The lion learned that even small creatures can do great things, and we all need help sometimes.
+
+Source: https://www.vedantu.com/stories/the-lion-and-the-mouse
+
+PERTANYAAN:
+Which of the following statements best conveys the message of the story? There is more than one answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. We should never wake up a sleeping animal
+  - B. B. Even the small and weak can help the strong
+  - C. C. It’s always good to ask for help when we need it
+  - D. D. Lions are dangerous animals and should be avoided
+  - E. E. Never trust anyone who plays with your hair
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Lion and the Mouse
+
+Once upon a time, in a thick jungle in Africa, there lived a strong and fierce lion. Every afternoon, the lion would rest under the cool shade of a big tree after walking through the forest. One day, while he was sleeping, a playful little mouse passed by. The mouse saw the lion’s thick mane and was curious. He climbed up and began to jump around on the lion’s head, playing in his mane. The lion woke up suddenly and was not happy at all. He quickly caught the mouse in his big paw and roared, “Who dares to wake me up?” He was very angry and almost killed the mouse. Scared and shaking, the mouse begged the lion, “Please don’t kill me! I didn’t mean to bother you. If you let me go, I promise I’ll help you one day.” The lion laughed loudly. “You? Help me? That’s funny.” But the lion was feeling kind, so he let the mouse go free. A few days later, the lion was walking through the jungle again when he fell into a trap. A net set by hunters caught him, and he couldn’t escape. He tried to bite and tear the ropes, but they were too strong. The lion roared loudly, hoping someone would come. The mouse heard the roar and ran to help. He saw the lion trapped and quickly started to chew the ropes with his sharp teeth. After some time, the net broke, and the lion was free. The lion looked at the mouse with surprise and said, “Thank you! You really saved my life.” The mouse smiled and said, “I told you I would help you one day.” From that moment on, the lion and the mouse became close friends. The lion learned that even small creatures can do great things, and we all need help sometimes.
+
+Source:  https://www.vedantu.com/stories/the-lion-and-the-mouse
+
+PERTANYAAN:
+Why did the lion trust the mouse and decide to let him go instead of eating him?
+OPSI / PERNYATAAN:
+  - A. A. The lion was too tired to eat the mouse
+  - B. B. The mouse told the lion he might help him one day
+  - C. C. The lion was felling happy to see the mouse
+  - D. D. The lion heard someone coming and got scared
+  - E. E. The mouse promised to bring food for the lion
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: ['D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+The Lion and the Mouse
+
+Once upon a time, in a thick jungle in Africa, there lived a strong and fierce lion. Every afternoon, the lion would rest under the cool shade of a big tree after walking through the forest. One day, while he was sleeping, a playful little mouse passed by. The mouse saw the lion’s thick mane and was curious. He climbed up and began to jump around on the lion’s head, playing in his mane. The lion woke up suddenly and was not happy at all. He quickly caught the mouse in his big paw and roared, “Who dares to wake me up?” He was very angry and almost killed the mouse. Scared and shaking, the mouse begged the lion, “Please don’t kill me! I didn’t mean to bother you. If you let me go, I promise I’ll help you one day.” The lion laughed loudly. “You? Help me? That’s funny.” But the lion was feeling kind, so he let the mouse go free. A few days later, the lion was walking through the jungle again when he fell into a trap. A net set by hunters caught him, and he couldn’t escape. He tried to bite and tear the ropes, but they were too strong. The lion roared loudly, hoping someone would come. The mouse heard the roar and ran to help. He saw the lion trapped and quickly started to chew the ropes with his sharp teeth. After some time, the net broke, and the lion was free. The lion looked at the mouse with surprise and said, “Thank you! You really saved my life.” The mouse smiled and said, “I told you I would help you one day.” From that moment on, the lion and the mouse became close friends. The lion learned that even small creatures can do great things, and we all need help sometimes.
+
+Source: https://www.vedantu.com/stories/the-lion-and-the-mouse
+
+PERTANYAAN:
+As you read the part where the lion let the mouse go, which of the following endings do you anticipate? There is more than one answer, click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. The mouse forgets about the lion and never helps him
+  - B. B. The lion gets into trouble and no one helps him
+  - C. C. The lion becomes angry at all small animals
+  - D. D. The mouse spreads the lion's kindnes to other animals
+  - E. E. The mouse becomes the lion’s loyal assistant
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+The Lion and the Mouse
+
+Once upon a time, in a thick jungle in Africa, there lived a strong and fierce lion. Every afternoon, the lion would rest under the cool shade of a big tree after walking through the forest. One day, while he was sleeping, a playful little mouse passed by. The mouse saw the lion’s thick mane and was curious. He climbed up and began to jump around on the lion’s head, playing in his mane. The lion woke up suddenly and was not happy at all. He quickly caught the mouse in his big paw and roared, “Who dares to wake me up?” He was very angry and almost killed the mouse. Scared and shaking, the mouse begged the lion, “Please don’t kill me! I didn’t mean to bother you. If you let me go, I promise I’ll help you one day.” The lion laughed loudly. “You? Help me? That’s funny.” But the lion was feeling kind, so he let the mouse go free. A few days later, the lion was walking through the jungle again when he fell into a trap. A net set by hunters caught him, and he couldn’t escape. He tried to bite and tear the ropes, but they were too strong. The lion roared loudly, hoping someone would come. The mouse heard the roar and ran to help. He saw the lion trapped and quickly started to chew the ropes with his sharp teeth. After some time, the net broke, and the lion was free. The lion looked at the mouse with surprise and said, “Thank you! You really saved my life.” The mouse smiled and said, “I told you I would help you one day.” From that moment on, the lion and the mouse became close friends. The lion learned that even small creatures can do great things, and we all need help sometimes.
+
+Source: https://www.vedantu.com/stories/the-lion-and-the-mouse
+
+PERTANYAAN:
+Which of the following sentences from the story help you understand the lion’s character? There is more than one answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. “The lion always took his afternoon nap under the shade of a big tree in the bushes.”
+  - B. B. “He caught the mouse and questioned him for interrupting his nap.”
+  - C. C. “The lion was amused at the mouse’s words and decided to spare his life.”
+  - D. D. “With his sharp teeth, the mouse nibbled through the net.”
+  - E. E. “The lion thanked the mouse immensely for his help.”
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Effective Study Technique
+[Konteks Visual Gambar 86328_258f74df4430580ef40c593c4a6bc632.png]:
+Tabel data perilaku keuangan siswa:
+
+| Category | Percentage | Notes | |:--- |:---: |:--- | | Students who save regularly | 45% | Save at least 10% of allowance | | Students who track expenses | 35% | Use apps or notes | | Students with financial education | 25% | Have learned budgeting in class | | Students who often borrow from friends | 30% | Due to running out of money | | Students who spend most on food & drinks | 50% | Largest category of spending | | Students who plan monthly budgets | 28% | Usually better savers |
+PERTANYAAN:
+Based on the information given, we can keep our mind focused and fresh by ….
+OPSI / PERNYATAAN:
+  - A. A. knowing your learning style
+  - B. B. using Pomodoro Technique
+  - C. C. using online quizzes apps
+  - D. D. by reviewing materials
+  - E. E. by creating mind maps
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: ['A:Self Management', 'B:Time Management', 'C:Time Management']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Effective Study Technique
+[Konteks Visual Gambar 86920_258f74df4430580ef40c593c4a6bc632.png]:
+Tabel data perilaku keuangan siswa:
+
+| Category | Percentage | Notes | |:--- |:---: |:--- | | Students who save regularly | 45% | Save at least 10% of allowance | | Students who track expenses | 35% | Use apps or notes | | Students with financial education | 25% | Have learned budgeting in class | | Students who often borrow from friends | 30% | Due to running out of money | | Students who spend most on food & drinks | 50% | Largest category of spending | | Students who plan monthly budgets | 28% | Usually better savers |
+PERTANYAAN:
+Based on the infographic, determine whether each study technique listed on the left is categorized as Time Management or Self Management.
+OPSI / PERNYATAAN:
+  - A. Be patient and persistent
+  - B. Use the Pomodoro technique
+  - C. Set a consistent study schedule
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Effective Study Technique
+[Konteks Visual Gambar 47420_258f74df4430580ef40c593c4a6bc632.png]:
+Tabel data perilaku keuangan siswa:
+
+| Category | Percentage | Notes | |:--- |:---: |:--- | | Students who save regularly | 45% | Save at least 10% of allowance | | Students who track expenses | 35% | Use apps or notes | | Students with financial education | 25% | Have learned budgeting in class | | Students who often borrow from friends | 30% | Due to running out of money | | Students who spend most on food & drinks | 50% | Largest category of spending | | Students who plan monthly budgets | 28% | Usually better savers |
+PERTANYAAN:
+From the options provided, choose the sequence that best reflects the information in the infographic “Effective Study Techniques”.
+OPSI / PERNYATAAN:
+  - A. A. Set your goal → Watch lessons videos → Sleep well → Have group chat with friends → Eat nutritious meal
+  - B. B. Plan study time → Join a study group → Take long breaks → Write a to do list  → Write important points
+  - C. C. Know your learning style → Find a quiet area → Set a timetable → Use less gadgets → Be patient and persistent
+  - D. D. Know your study style → Plan your study time → Practice and repeat → Take a break → Watch lessons videos
+  - E. E. Take notes → Join a study groups → Use different medias → Play music you like → Have good meal while studying
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Effective Study Technique
+[Konteks Visual Gambar 89625_258f74df4430580ef40c593c4a6bc632.png]:
+Tabel data perilaku keuangan siswa:
+
+| Category | Percentage | Notes | |:--- |:---: |:--- | | Students who save regularly | 45% | Save at least 10% of allowance | | Students who track expenses | 35% | Use apps or notes | | Students with financial education | 25% | Have learned budgeting in class | | Students who often borrow from friends | 30% | Due to running out of money | | Students who spend most on food & drinks | 50% | Largest category of spending | | Students who plan monthly budgets | 28% | Usually better savers |
+PERTANYAAN:
+Which of the following statements best reflect the author’s purpose in writing the text? There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. To help students find fun strategies to play after studying
+  - B. B. To offer students guidance on how to learn more efficiently
+  - C. C. To encourage students to use simple habits to improve their learning
+  - D. D. To explain why studying tips is difficult for most students
+  - E. E. To show students that they can manage their time and focus better
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: ['C', 'D', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Effective Study Technique
+[Konteks Visual Gambar 08697_258f74df4430580ef40c593c4a6bc632.png]:
+Tabel data perilaku keuangan siswa:
+
+| Category | Percentage | Notes | |:--- |:---: |:--- | | Students who save regularly | 45% | Save at least 10% of allowance | | Students who track expenses | 35% | Use apps or notes | | Students with financial education | 25% | Have learned budgeting in class | | Students who often borrow from friends | 30% | Due to running out of money | | Students who spend most on food & drinks | 50% | Largest category of spending | | Students who plan monthly budgets | 28% | Usually better savers |
+PERTANYAAN:
+If you are preparing for an important exam and want to improve your study routine, which of the following techniques do you think can be implemented effectively in your personal study time? There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Only study when you are in a group discussion with others
+  - B. B. Use technology during all study sessions in or outside class
+  - C. C. Use the Pomodoro Technique to structure your study and break time
+  - D. D. Practice and repeat study material regularly to retain information
+  - E. E. Create a quiet and comfortable study space to improve focus
+
+---
+[SOAL NO 11]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+The Great Barrier Reef
+
+The Great Barrier Reef is one of the most beautiful places in the world. It is located in the Pacific Ocean, near the northeast coast of Australia. The reef is very big. It stretches over 2,000 kilometers and can even be seen from space. There are many small coral islands and clear, warm waters around the reef. This reef is full of life. There are many kinds of colorful fish, sea turtles, dolphins, and even sharks. Coral of different shapes and colors grows under the water. Sea birds fly over the reef and nest on small islands. People can see this beauty by swimming, diving, or joining a boat tour. The colors under the water are amazing. Coral comes in red, yellow, green, and blue. Some coral looks like trees, and some looks like big round stones. Small fish swim in and out of the coral like they are playing a game. In some places, soft coral moves with the water like grass in the wind. When the sun shines, the reef looks bright and full of light. It feels like a different world under the sea. The reef is not only beautiful, but also very important. It helps protect the coast from big waves and storms. It is a home for sea animals and a place where plants can grow. Many people also get food and jobs from the sea near the reef. Without the reef, the ocean would not be the same.
+
+Adapted from: https://www.britannica.com/place/Great-Barrier-Reef
+
+PERTANYAAN:
+Which of the following descriptions are mentioned clearly in the text? There are more than one correct answer. Click on every correct answer.
+OPSI / PERNYATAAN:
+  - A. A. The reef was built by local communities over hundreds of years
+  - B. B. The reef is located in the Pacific Ocean near Australia
+  - C. C. The reef can help protect the coast from big waves
+  - D. D. The reef is home to sea turtles and dolphins
+  - E. E. The reef has more than 10,000 coral islands
+
+---
+[SOAL NO 12]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Great Barrier Reef
+
+The Great Barrier Reef is one of the most beautiful places in the world. It is located in the Pacific Ocean, near the northeast coast of Australia. The reef is very big. It stretches over 2,000 kilometers and can even be seen from space. There are many small coral islands and clear, warm waters around the reef. This reef is full of life. There are many kinds of colorful fish, sea turtles, dolphins, and even sharks. Coral of different shapes and colors grows under the water. Sea birds fly over the reef and nest on small islands. People can see this beauty by swimming, diving, or joining a boat tour. The colors under the water are amazing. Coral comes in red, yellow, green, and blue. Some coral looks like trees, and some looks like big round stones. Small fish swim in and out of the coral like they are playing a game. In some places, soft coral moves with the water like grass in the wind. When the sun shines, the reef looks bright and full of light. It feels like a different world under the sea. The reef is not only beautiful, but also very important. It helps protect the coast from big waves and storms. It is a home for sea animals and a place where plants can grow. Many people also get food and jobs from the sea near the reef. Without the reef, the ocean would not be the same.
+
+Adapted from: https://www.britannica.com/place/Great-Barrier-Reef
+
+PERTANYAAN:
+The author mentioned “It feels like a different world under the sea”. What does the phrase "a different world under the sea" most likely mean?
+OPSI / PERNYATAAN:
+  - A. A. A safe place that has bright reef
+  - B. B. A peaceful place where people can live under water
+  - C. C. A colorful place that looks the same as the land
+  - D. D. A shining reef that is quiet
+  - E. E. A calm place that looks beautiful and unique
+
+---
+[SOAL NO 13]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Great Barrier Reef
+
+The Great Barrier Reef is one of the most beautiful places in the world. It is located in the Pacific Ocean, near the northeast coast of Australia. The reef is very big. It stretches over 2,000 kilometers and can even be seen from space. There are many small coral islands and clear, warm waters around the reef. This reef is full of life. There are many kinds of colorful fish, sea turtles, dolphins, and even sharks. Coral of different shapes and colors grows under the water. Sea birds fly over the reef and nest on small islands. People can see this beauty by swimming, diving, or joining a boat tour. The colors under the water are amazing. Coral comes in red, yellow, green, and blue. Some coral looks like trees, and some looks like big round stones. Small fish swim in and out of the coral like they are playing a game. In some places, soft coral moves with the water like grass in the wind. When the sun shines, the reef looks bright and full of light. It feels like a different world under the sea. The reef is not only beautiful, but also very important. It helps protect the coast from big waves and storms. It is a home for sea animals and a place where plants can grow. Many people also get food and jobs from the sea near the reef. Without the reef, the ocean would not be the same.
+
+Adapted from: https://www.britannica.com/place/Great-Barrier-Reef
+
+PERTANYAAN:
+Which of the following best represents the main idea implied by the text?
+OPSI / PERNYATAAN:
+  - A. A. The reef is useful for fishing and shipping
+  - B. B. The reef is large, but not important to people
+  - C. C. The reef is a natural treasure that must be cared for
+  - D. D. The reef is only for scientists and researchers to explore
+  - E. E. The reef is a protected area that should be closed to visitors
+
+---
+[SOAL NO 14]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The Great Barrier Reef
+
+The Great Barrier Reef is one of the most beautiful places in the world. It is located in the Pacific Ocean, near the northeast coast of Australia. The reef is very big. It stretches over 2,000 kilometers and can even be seen from space. There are many small coral islands and clear, warm waters around the reef. This reef is full of life. There are many kinds of colorful fish, sea turtles, dolphins, and even sharks. Coral of different shapes and colors grows under the water. Sea birds fly over the reef and nest on small islands. People can see this beauty by swimming, diving, or joining a boat tour. The colors under the water are amazing. Coral comes in red, yellow, green, and blue. Some coral looks like trees, and some looks like big round stones. Small fish swim in and out of the coral like they are playing a game. In some places, soft coral moves with the water like grass in the wind. When the sun shines, the reef looks bright and full of light. It feels like a different world under the sea. The reef is not only beautiful, but also very important. It helps protect the coast from big waves and storms. It is a home for sea animals and a place where plants can grow. Many people also get food and jobs from the sea near the reef. Without the reef, the ocean would not be the same.
+
+Adapted from: https://www.britannica.com/place/Great-Barrier-Reef
+
+PERTANYAAN:
+Which detail would best encourage people to visit the Great Barrier Reef?
+OPSI / PERNYATAAN:
+  - A. A. Visitors can see an Australian national park
+  - B. B. Visitors can stay in hotels around the reef
+  - C. C. Visitors can get there by boat or short flights
+  - D. D. Visitors can protect the coral and the animals
+  - E. E. Visitors can see the coral by diving or swimming
+
+---
+[SOAL NO 15]
+KUNCI RESMI PUSMENDIK: ['A', 'B']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+The Great Barrier Reef
+
+The Great Barrier Reef is one of the most beautiful places in the world. It is located in the Pacific Ocean, near the northeast coast of Australia. The reef is very big. It stretches over 2,000 kilometers and can even be seen from space. There are many small coral islands and clear, warm waters around the reef. This reef is full of life. There are many kinds of colorful fish, sea turtles, dolphins, and even sharks. Coral of different shapes and colors grows under the water. Sea birds fly over the reef and nest on small islands. People can see this beauty by swimming, diving, or joining a boat tour. The colors under the water are amazing. Coral comes in red, yellow, green, and blue. Some coral looks like trees, and some looks like big round stones. Small fish swim in and out of the coral like they are playing a game. In some places, soft coral moves with the water like grass in the wind. When the sun shines, the reef looks bright and full of light. It feels like a different world under the sea. The reef is not only beautiful, but also very important. It helps protect the coast from big waves and storms. It is a home for sea animals and a place where plants can grow. Many people also get food and jobs from the sea near the reef. Without the reef, the ocean would not be the same.
+
+Adapted from: https://www.britannica.com/place/Great-Barrier-Reef
+
+PERTANYAAN:
+Which parts of the text best support the idea that the Great Barrier Reef is both beautiful and important? There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. The reef helps protect the coast from big waves
+  - B. B. It is home to sea turtles, dolphins, and colorful fish
+  - C. C. The coral reefs grow best in cold, deep water
+  - D. D. Some areas of the reef are damaged by starfish and warm water
+  - E. E. The reef was discovered by sailors in the 1800s
+
+---
+[SOAL NO 16]
+KUNCI RESMI PUSMENDIK: ['A:Long-term financial goals', 'B:Short-term financial goals', 'C:Long-term financial goals']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Why Teenagers Should Learn to Manage Their Money
+
+Many young people today often spend money on things they like, such as snacks, clothes, or fun activities. But learning to handle money from a young age is very important. Good money habits can help students make a better future. Having a clear plan for the future can show teenagers how to use their money. Students should think about short-term goals, like getting a new phone, and long-term goals, like saving for college or starting a business. Writing these goals down can help students stay motivated and focused. A budget helps students see where their money goes every month. It's important to list basic needs like food and travel, and also other costs like clothes or presents. A budget makes it easier to decide how much money to save, spend, or keep for unexpected problems. Sometimes, students don't know how much they spend on small things. Keeping track of spending with notes or apps can help students understand their habits. This helps them stay within their budget and make changes if needed. Teenagers should also learn the difference between saving money and investing money. Saving is safer but slower, while investing has more risk but can earn more money. Knowing both can help students choose the best way for their money goals. To sum up, students who learn to plan, budget, track, and understand saving choices are more ready for the future. That is why learning about money should start early and be done often. Table 1. How do students manage their money?
+
+(Adapted from https://www.onefamily.com/savings/money-management-tips-for-teens/ )
+[Konteks Visual Gambar 83205_e4b0cb4717fe82cd23be2f17a262a998.png]:
+Ilustrasi bergaya kartun/cat air yang menggambarkan suasana di padang rumput sabana Afrika:- Di sebelah kiri, seekor singa jantan dewasa bertubuh besar dengan surai cokelat lebat duduk tenang di atas tanah, menatap ramah ke arah karakter di depannya.- Di bagian tengah, seekor hewan kecil menyerupai meerkat/musang dengan surai dan ekor berbulu sedang menari/melompat gembira dengan kedua tangan terangkat ke atas, mata terpejam, dan mulut terbuka tertawa lebar di samping gundukan tanah kecil.- Di latar belakang, tampak dua ekor dubuk (hyena) totol yang juga terlihat tertawa bahagia.- Latar lanskap terdiri dari padang rumput kuning keemasan, pohon akasia khas sabana, bukit-bukit di kejauhan, serta langit biru dengan awan tipis.
+PERTANYAAN:
+Based on the text, choose the activity that best fits the description
+OPSI / PERNYATAAN:
+  - A. Saving money for university
+  - B. Saving to buy a new phone
+  - C. Starting a business
+
+---
+[SOAL NO 17]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Why Teenagers Should Learn to Manage Their Money
+
+Many young people today often spend money on things they like, such as snacks, clothes, or fun activities. But learning to handle money from a young age is very important. Good money habits can help students make a better future. Having a clear plan for the future can show teenagers how to use their money. Students should think about short-term goals, like getting a new phone, and long-term goals, like saving for college or starting a business. Writing these goals down can help students stay motivated and focused. A budget helps students see where their money goes every month. It's important to list basic needs like food and travel, and also other costs like clothes or presents. A budget makes it easier to decide how much money to save, spend, or keep for unexpected problems. Sometimes, students don't know how much they spend on small things. Keeping track of spending with notes or apps can help students understand their habits. This helps them stay within their budget and make changes if needed. Teenagers should also learn the difference between saving money and investing money. Saving is safer but slower, while investing has more risk but can earn more money. Knowing both can help students choose the best way for their money goals. To sum up, students who learn to plan, budget, track, and understand saving choices are more ready for the future. That is why learning about money should start early and be done often. Table 1. How do students manage their money?
+
+(Adapted from https://www.onefamily.com/savings/money-management-tips-for-teens/ )
+[Konteks Visual Gambar 69804_e4b0cb4717fe82cd23be2f17a262a998.png]:
+Ilustrasi bergaya kartun/cat air yang menggambarkan suasana di padang rumput sabana Afrika:- Di sebelah kiri, seekor singa jantan dewasa bertubuh besar dengan surai cokelat lebat duduk tenang di atas tanah, menatap ramah ke arah karakter di depannya.- Di bagian tengah, seekor hewan kecil menyerupai meerkat/musang dengan surai dan ekor berbulu sedang menari/melompat gembira dengan kedua tangan terangkat ke atas, mata terpejam, dan mulut terbuka tertawa lebar di samping gundukan tanah kecil.- Di latar belakang, tampak dua ekor dubuk (hyena) totol yang juga terlihat tertawa bahagia.- Latar lanskap terdiri dari padang rumput kuning keemasan, pohon akasia khas sabana, bukit-bukit di kejauhan, serta langit biru dengan awan tipis.
+PERTANYAAN:
+According to the text, which of the following actions support smart money management for students? There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Tracking daily expenses using a notebook or app
+  - B. B. Spending more money than the monthly budget allows
+  - C. C. Setting financial goals for the short and long term
+  - D. D. Borrowing money whenever there is not enough left
+  - E. E. Dividing money into saving, spending, and emergency funds
+
+---
+[SOAL NO 18]
+KUNCI RESMI PUSMENDIK: ['A', 'C', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Why Teenagers Should Learn to Manage Their Money
+
+Many young people today often spend money on things they like, such as snacks, clothes, or fun activities. But learning to handle money from a young age is very important. Good money habits can help students make a better future. Having a clear plan for the future can show teenagers how to use their money. Students should think about short-term goals, like getting a new phone, and long-term goals, like saving for college or starting a business. Writing these goals down can help students stay motivated and focused. A budget helps students see where their money goes every month. It's important to list basic needs like food and travel, and also other costs like clothes or presents. A budget makes it easier to decide how much money to save, spend, or keep for unexpected problems. Sometimes, students don't know how much they spend on small things. Keeping track of spending with notes or apps can help students understand their habits. This helps them stay within their budget and make changes if needed. Teenagers should also learn the difference between saving money and investing money. Saving is safer but slower, while investing has more risk but can earn more money. Knowing both can help students choose the best way for their money goals. To sum up, students who learn to plan, budget, track, and understand saving choices are more ready for the future. That is why learning about money should start early and be done often. Table 1. How do students manage their money?
+
+(Adapted from https://www.onefamily.com/savings/money-management-tips-for-teens/ )
+[Konteks Visual Gambar 79536_e4b0cb4717fe82cd23be2f17a262a998.png]:
+Ilustrasi bergaya kartun/cat air yang menggambarkan suasana di padang rumput sabana Afrika:- Di sebelah kiri, seekor singa jantan dewasa bertubuh besar dengan surai cokelat lebat duduk tenang di atas tanah, menatap ramah ke arah karakter di depannya.- Di bagian tengah, seekor hewan kecil menyerupai meerkat/musang dengan surai dan ekor berbulu sedang menari/melompat gembira dengan kedua tangan terangkat ke atas, mata terpejam, dan mulut terbuka tertawa lebar di samping gundukan tanah kecil.- Di latar belakang, tampak dua ekor dubuk (hyena) totol yang juga terlihat tertawa bahagia.- Latar lanskap terdiri dari padang rumput kuning keemasan, pohon akasia khas sabana, bukit-bukit di kejauhan, serta langit biru dengan awan tipis.
+PERTANYAAN:
+Who is most likely to be the target audience of this text? There is more than one correct answer. Click on every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Teenagers who are learning to manage their money
+  - B. B. Parents looking for tips on how to control their children’s spending
+  - C. C. Students who want to plan for their financial future
+  - D. D. High school readers who need to understand saving and budgeting
+  - E. E. Bankers and financial experts
+
+---
+[SOAL NO 19]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Why Teenagers Should Learn to Manage Their Money
+
+Many young people today often spend money on things they like, such as snacks, clothes, or fun activities. But learning to handle money from a young age is very important. Good money habits can help students make a better future. Having a clear plan for the future can show teenagers how to use their money. Students should think about short-term goals, like getting a new phone, and long-term goals, like saving for college or starting a business. Writing these goals down can help students stay motivated and focused. A budget helps students see where their money goes every month. It's important to list basic needs like food and travel, and also other costs like clothes or presents. A budget makes it easier to decide how much money to save, spend, or keep for unexpected problems. Sometimes, students don't know how much they spend on small things. Keeping track of spending with notes or apps can help students understand their habits. This helps them stay within their budget and make changes if needed. Teenagers should also learn the difference between saving money and investing money. Saving is safer but slower, while investing has more risk but can earn more money. Knowing both can help students choose the best way for their money goals. To sum up, students who learn to plan, budget, track, and understand saving choices are more ready for the future. That is why learning about money should start early and be done often. Table 1. How do students manage their money?
+
+(Adapted from https://www.onefamily.com/savings/money-management-tips-for-teens/ )
+[Konteks Visual Gambar 93749_e4b0cb4717fe82cd23be2f17a262a998.png]:
+Ilustrasi bergaya kartun/cat air yang menggambarkan suasana di padang rumput sabana Afrika:- Di sebelah kiri, seekor singa jantan dewasa bertubuh besar dengan surai cokelat lebat duduk tenang di atas tanah, menatap ramah ke arah karakter di depannya.- Di bagian tengah, seekor hewan kecil menyerupai meerkat/musang dengan surai dan ekor berbulu sedang menari/melompat gembira dengan kedua tangan terangkat ke atas, mata terpejam, dan mulut terbuka tertawa lebar di samping gundukan tanah kecil.- Di latar belakang, tampak dua ekor dubuk (hyena) totol yang juga terlihat tertawa bahagia.- Latar lanskap terdiri dari padang rumput kuning keemasan, pohon akasia khas sabana, bukit-bukit di kejauhan, serta langit biru dengan awan tipis.
+PERTANYAAN:
+Which information would make the text more informative about student spending habits?
+OPSI / PERNYATAAN:
+  - A. A. A paragraph about the history of financial education in schools
+  - B. B. A table showing common monthly high school students expenses
+  - C. C. A graph comparing saving habits between teenagers and adults
+  - D. D. A chart listing popular entertainment choices among students
+  - E. E. A paragraph about students' experiences in managing budget
+
+---
+[SOAL NO 20]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Why Teenagers Should Learn to Manage Their Money
+
+Many young people today often spend money on things they like, such as snacks, clothes, or fun activities. But learning to handle money from a young age is very important. Good money habits can help students make a better future. Having a clear plan for the future can show teenagers how to use their money. Students should think about short-term goals, like getting a new phone, and long-term goals, like saving for college or starting a business. Writing these goals down can help students stay motivated and focused. A budget helps students see where their money goes every month. It's important to list basic needs like food and travel, and also other costs like clothes or presents. A budget makes it easier to decide how much money to save, spend, or keep for unexpected problems. Sometimes, students don't know how much they spend on small things. Keeping track of spending with notes or apps can help students understand their habits. This helps them stay within their budget and make changes if needed. Teenagers should also learn the difference between saving money and investing money. Saving is safer but slower, while investing has more risk but can earn more money. Knowing both can help students choose the best way for their money goals. To sum up, students who learn to plan, budget, track, and understand saving choices are more ready for the future. That is why learning about money should start early and be done often. Table 1. How do students manage their money?
+
+(Adapted from https://www.onefamily.com/savings/money-management-tips-for-teens/ )
+[Konteks Visual Gambar 40609_e4b0cb4717fe82cd23be2f17a262a998.png]:
+Ilustrasi bergaya kartun/cat air yang menggambarkan suasana di padang rumput sabana Afrika:- Di sebelah kiri, seekor singa jantan dewasa bertubuh besar dengan surai cokelat lebat duduk tenang di atas tanah, menatap ramah ke arah karakter di depannya.- Di bagian tengah, seekor hewan kecil menyerupai meerkat/musang dengan surai dan ekor berbulu sedang menari/melompat gembira dengan kedua tangan terangkat ke atas, mata terpejam, dan mulut terbuka tertawa lebar di samping gundukan tanah kecil.- Di latar belakang, tampak dua ekor dubuk (hyena) totol yang juga terlihat tertawa bahagia.- Latar lanskap terdiri dari padang rumput kuning keemasan, pohon akasia khas sabana, bukit-bukit di kejauhan, serta langit biru dengan awan tipis.
+PERTANYAAN:
+Which of the following statements are supported by clear data or facts in the text and table? There is more than one correct answer. Click on every correct answer.
+OPSI / PERNYATAAN:
+  - A. A. 45% of students save money regularly
+  - B. B. Tracking expenses can help understand spending habits
+  - C. C. Most students do not care about money at all
+  - D. D. Saving 10% of allowance is a good practice
+  - E. E. Spending on fun activities is always better than saving
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The False Lion King
+
+Once upon a time, in Africa, there lived two lion kings. One was named Hera and the other was Shero. Hera was very strong and handsome. All the animals loved and respected him. He was a great leader. Shero was not like Hera. He had a small mane and a funny, squeaky voice. Shero liked to pretend he was as powerful as Hera. He often copied Hera’s roar, but it made the other animals laugh. One day, the animals heard that some hyenas were causing trouble near the river. Hera quickly gathered his followers to stop the hyenas. Shero also wanted to come. He wanted to show everyone that he was strong too. When they reached the river, Hera roared loudly. His roar was so powerful that the hyenas got scared. Shero also tried to roar, but his voice was high and silly. The hyenas laughed at him. Their leader, Hank the Hyena, made jokes about Shero. Hera stayed calm and smiled. Shero did not give up. He said, “I am just as strong as Hera!” The hyenas laughed even louder. Shero tried to show his power by jumping on a small dirt hill. But he tripped and fell into the ground. The hyenas laughed so much they cried. Even Hera laughed a little. At the end of the day, the hyenas left, still laughing about Shero. Hera told Shero, “You are not like me, but you make everyone happy with your jokes.” Shero smiled and understood that he had his own special gift. From that day, Shero became the kingdom’s jester. He and Hera ruled together — one with strength, and one with laughter. The animals learned that both power and fun are important in life.
+
+Adapted from:  https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion%20King
+[Konteks Visual Gambar 06060_e9d47a075979b49c3775de9e395395ac.png]:
+Infografis berjudul 'Effective Study Techniques' yang memuat 10 tips teknik belajar efektif: 1. 'Know Your Learning Style': Understand whether you learn best by reading, listening, or watching. 2. 'Set a Consistent Study Schedule': Study at the same time every day. Regularity helps build strong habits. 3. 'Create a Comfortable Study Space': Find a quite, well-lit, and distraction-free area. Have all your materials ready. 4. 'Use the Pomodoro Technique': Study for 25 minutes, then take a 5-minute break. This keeps your mind fresh and focused. 5. 'Take Effective Notes': Write key points using methods like mind maps or tables to help remember important information. 6. 'Practice and Repeat': Regularly review your material and do practice-questions to deepen understanding and improve retention. 7. 'Join a Study Group': Discuss topics with friends to gain new insights and solve problems together. 8. 'Leverage Technology': Use apps and websites for flashcards, video lessons, and online quizzes to support your study routine. 9. 'Get Enough Sleep': Aim for 7-8 hours. 10. 'Be Patient and Persistent': Learning takes time.
+PERTANYAAN:
+Which statement provides the most accurate chronological summary of the story's main events?
+OPSI / PERNYATAAN:
+  - A. A. Shero falls into the dirt. The hyenas cause trouble at the river. Hera tells Shero that he is funny. Shero copies Hera’s roar. Shero becomes the kingdom's funny helper.
+  - B. B. Hera is a strong lion king. Shero likes to pretend to be strong. The hyenas cause trouble near the river. Hera scares the hyenas, but Shero makes them laugh. Shero learns that making others happy is special.
+  - C. C. Hera and Shero are both strong leaders. The hyenas come to help the lions. Shero tells funny stories to the hyenas. Hera is angry with Shero. The lions and hyenas become friends.
+  - D. D. Shero is a strong lion king. Hera is jealous of Shero. The hyenas attack the lions. Shero defeats the hyenas. Shero becomes the new king.
+  - E. E. Shero wants to be king and fights Hera. The hyenas help Shero. Hera leaves the kingdom. Shero becomes king. Hera returns to forgive Shero.
+
+---
+[SOAL NO 22]
+KUNCI RESMI PUSMENDIK: ['A', 'B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+The False Lion King
+
+Once upon a time, in Africa, there lived two lion kings. One was named Hera and the other was Shero. Hera was very strong and handsome. All the animals loved and respected him. He was a great leader. Shero was not like Hera. He had a small mane and a funny, squeaky voice. Shero liked to pretend he was as powerful as Hera. He often copied Hera’s roar, but it made the other animals laugh. One day, the animals heard that some hyenas were causing trouble near the river. Hera quickly gathered his followers to stop the hyenas. Shero also wanted to come. He wanted to show everyone that he was strong too. When they reached the river, Hera roared loudly. His roar was so powerful that the hyenas got scared. Shero also tried to roar, but his voice was high and silly. The hyenas laughed at him. Their leader, Hank the Hyena, made jokes about Shero. Hera stayed calm and smiled. Shero did not give up. He said, “I am just as strong as Hera!” The hyenas laughed even louder. Shero tried to show his power by jumping on a small dirt hill. But he tripped and fell into the ground. The hyenas laughed so much they cried. Even Hera laughed a little. At the end of the day, the hyenas left, still laughing about Shero. Hera told Shero, “You are not like me, but you make everyone happy with your jokes.” Shero smiled and understood that he had his own special gift. From that day, Shero became the kingdom’s jester. He and Hera ruled together — one with strength, and one with laughter. The animals learned that both power and fun are important in life.
+
+Adapted from:  https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion%20King
+[Konteks Visual Gambar 82144_e9d47a075979b49c3775de9e395395ac.png]:
+Infografis berjudul 'Effective Study Techniques' yang memuat 10 tips teknik belajar efektif: 1. 'Know Your Learning Style': Understand whether you learn best by reading, listening, or watching. 2. 'Set a Consistent Study Schedule': Study at the same time every day. Regularity helps build strong habits. 3. 'Create a Comfortable Study Space': Find a quite, well-lit, and distraction-free area. Have all your materials ready. 4. 'Use the Pomodoro Technique': Study for 25 minutes, then take a 5-minute break. This keeps your mind fresh and focused. 5. 'Take Effective Notes': Write key points using methods like mind maps or tables to help remember important information. 6. 'Practice and Repeat': Regularly review your material and do practice-questions to deepen understanding and improve retention. 7. 'Join a Study Group': Discuss topics with friends to gain new insights and solve problems together. 8. 'Leverage Technology': Use apps and websites for flashcards, video lessons, and online quizzes to support your study routine. 9. 'Get Enough Sleep': Aim for 7-8 hours. 10. 'Be Patient and Persistent': Learning takes time.
+PERTANYAAN:
+What can we learn from the story of Hera and Shero? There is more than one correct answer. Click for every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Everyone has something special to give, even if they are not the leader
+  - B. B. Being funny and making others smile is just as important as being strong
+  - C. C. Good friends will support you and help you see your real strengths
+  - D. D. Working together is better when people use their different talents
+  - E. E. Trying your best to help others is more important than always being perfect
+
+---
+[SOAL NO 23]
+KUNCI RESMI PUSMENDIK: B
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+The False Lion King
+
+Once upon a time, in Africa, there lived two lion kings. One was named Hera and the other was Shero. Hera was very strong and handsome. All the animals loved and respected him. He was a great leader. Shero was not like Hera. He had a small mane and a funny, squeaky voice. Shero liked to pretend he was as powerful as Hera. He often copied Hera’s roar, but it made the other animals laugh. One day, the animals heard that some hyenas were causing trouble near the river. Hera quickly gathered his followers to stop the hyenas. Shero also wanted to come. He wanted to show everyone that he was strong too. When they reached the river, Hera roared loudly. His roar was so powerful that the hyenas got scared. Shero also tried to roar, but his voice was high and silly. The hyenas laughed at him. Their leader, Hank the Hyena, made jokes about Shero. Hera stayed calm and smiled. Shero did not give up. He said, “I am just as strong as Hera!” The hyenas laughed even louder. Shero tried to show his power by jumping on a small dirt hill. But he tripped and fell into the ground. The hyenas laughed so much they cried. Even Hera laughed a little. At the end of the day, the hyenas left, still laughing about Shero. Hera told Shero, “You are not like me, but you make everyone happy with your jokes.” Shero smiled and understood that he had his own special gift. From that day, Shero became the kingdom’s jester. He and Hera ruled together — one with strength, and one with laughter. The animals learned that both power and fun are important in life.
+
+Adapted from:  https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion%20King
+[Konteks Visual Gambar 26298_e9d47a075979b49c3775de9e395395ac.png]:
+Infografis berjudul 'Effective Study Techniques' yang memuat 10 tips teknik belajar efektif: 1. 'Know Your Learning Style': Understand whether you learn best by reading, listening, or watching. 2. 'Set a Consistent Study Schedule': Study at the same time every day. Regularity helps build strong habits. 3. 'Create a Comfortable Study Space': Find a quite, well-lit, and distraction-free area. Have all your materials ready. 4. 'Use the Pomodoro Technique': Study for 25 minutes, then take a 5-minute break. This keeps your mind fresh and focused. 5. 'Take Effective Notes': Write key points using methods like mind maps or tables to help remember important information. 6. 'Practice and Repeat': Regularly review your material and do practice-questions to deepen understanding and improve retention. 7. 'Join a Study Group': Discuss topics with friends to gain new insights and solve problems together. 8. 'Leverage Technology': Use apps and websites for flashcards, video lessons, and online quizzes to support your study routine. 9. 'Get Enough Sleep': Aim for 7-8 hours. 10. 'Be Patient and Persistent': Learning takes time.
+PERTANYAAN:
+The hyenas laugh so much when Shero tries to roar like Hera because....
+OPSI / PERNYATAAN:
+  - A. A. Shero tries to roar in a serious way and surprises the hyenas
+  - B. B. Shero’s roar is funny, which the hyenas think he is joking
+  - C. C. Hera tells a joke about Shero to make the hyenas laugh
+  - D. D. Shero is acting like Hera, and it's absolutely brilliant
+  - E. E. Shero trips and falls when trying to show his strength
+
+---
+[SOAL NO 24]
+KUNCI RESMI PUSMENDIK: ['A', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+The False Lion King
+
+Once upon a time, in Africa, there lived two lion kings. One was named Hera and the other was Shero. Hera was very strong and handsome. All the animals loved and respected him. He was a great leader. Shero was not like Hera. He had a small mane and a funny, squeaky voice. Shero liked to pretend he was as powerful as Hera. He often copied Hera’s roar, but it made the other animals laugh. One day, the animals heard that some hyenas were causing trouble near the river. Hera quickly gathered his followers to stop the hyenas. Shero also wanted to come. He wanted to show everyone that he was strong too. When they reached the river, Hera roared loudly. His roar was so powerful that the hyenas got scared. Shero also tried to roar, but his voice was high and silly. The hyenas laughed at him. Their leader, Hank the Hyena, made jokes about Shero. Hera stayed calm and smiled. Shero did not give up. He said, “I am just as strong as Hera!” The hyenas laughed even louder. Shero tried to show his power by jumping on a small dirt hill. But he tripped and fell into the ground. The hyenas laughed so much they cried. Even Hera laughed a little. At the end of the day, the hyenas left, still laughing about Shero. Hera told Shero, “You are not like me, but you make everyone happy with your jokes.” Shero smiled and understood that he had his own special gift. From that day, Shero became the kingdom’s jester. He and Hera ruled together — one with strength, and one with laughter. The animals learned that both power and fun are important in life.
+
+Adapted from:   https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion%20King
+[Konteks Visual Gambar 97208_e9d47a075979b49c3775de9e395395ac.png]:
+Infografis berjudul 'Effective Study Techniques' yang memuat 10 tips teknik belajar efektif: 1. 'Know Your Learning Style': Understand whether you learn best by reading, listening, or watching. 2. 'Set a Consistent Study Schedule': Study at the same time every day. Regularity helps build strong habits. 3. 'Create a Comfortable Study Space': Find a quite, well-lit, and distraction-free area. Have all your materials ready. 4. 'Use the Pomodoro Technique': Study for 25 minutes, then take a 5-minute break. This keeps your mind fresh and focused. 5. 'Take Effective Notes': Write key points using methods like mind maps or tables to help remember important information. 6. 'Practice and Repeat': Regularly review your material and do practice-questions to deepen understanding and improve retention. 7. 'Join a Study Group': Discuss topics with friends to gain new insights and solve problems together. 8. 'Leverage Technology': Use apps and websites for flashcards, video lessons, and online quizzes to support your study routine. 9. 'Get Enough Sleep': Aim for 7-8 hours. 10. 'Be Patient and Persistent': Learning takes time.
+PERTANYAAN:
+If in the beginning of the story, Shero is a strong lion with a loud roar, just like Hera. What would happened in the end of the story? There is more than one correct answer. Click for every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. Shero and Hera would both scare the hyenas away together
+  - B. B. Shero would become the king, and Hera would leave the savannah
+  - C. C. Shero would get respect from the other animals for his strength
+  - D. D. The hyenas would still laugh at Shero because he is funny
+  - E. E. Shero would try to take Hera’s place as the only lion king
+
+---
+[SOAL NO 25]
+KUNCI RESMI PUSMENDIK: ['B', 'C', 'E']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+The False Lion King
+
+Once upon a time, in Africa, there lived two lion kings. One was named Hera and the other was Shero. Hera was very strong and handsome. All the animals loved and respected him. He was a great leader. Shero was not like Hera. He had a small mane and a funny, squeaky voice. Shero liked to pretend he was as powerful as Hera. He often copied Hera’s roar, but it made the other animals laugh. One day, the animals heard that some hyenas were causing trouble near the river. Hera quickly gathered his followers to stop the hyenas. Shero also wanted to come. He wanted to show everyone that he was strong too. When they reached the river, Hera roared loudly. His roar was so powerful that the hyenas got scared. Shero also tried to roar, but his voice was high and silly. The hyenas laughed at him. Their leader, Hank the Hyena, made jokes about Shero. Hera stayed calm and smiled. Shero did not give up. He said, “I am just as strong as Hera!” The hyenas laughed even louder. Shero tried to show his power by jumping on a small dirt hill. But he tripped and fell into the ground. The hyenas laughed so much they cried. Even Hera laughed a little. At the end of the day, the hyenas left, still laughing about Shero. Hera told Shero, “You are not like me, but you make everyone happy with your jokes.” Shero smiled and understood that he had his own special gift. From that day, Shero became the kingdom’s jester. He and Hera ruled together — one with strength, and one with laughter. The animals learned that both power and fun are important in life.
+
+Adapted from:   https://wikibedtimestories.com/bedtime-short-stories-for-kids/The%20False%20Lion%20King
+[Konteks Visual Gambar 79027_e9d47a075979b49c3775de9e395395ac.png]:
+Infografis berjudul 'Effective Study Techniques' yang memuat 10 tips teknik belajar efektif: 1. 'Know Your Learning Style': Understand whether you learn best by reading, listening, or watching. 2. 'Set a Consistent Study Schedule': Study at the same time every day. Regularity helps build strong habits. 3. 'Create a Comfortable Study Space': Find a quite, well-lit, and distraction-free area. Have all your materials ready. 4. 'Use the Pomodoro Technique': Study for 25 minutes, then take a 5-minute break. This keeps your mind fresh and focused. 5. 'Take Effective Notes': Write key points using methods like mind maps or tables to help remember important information. 6. 'Practice and Repeat': Regularly review your material and do practice-questions to deepen understanding and improve retention. 7. 'Join a Study Group': Discuss topics with friends to gain new insights and solve problems together. 8. 'Leverage Technology': Use apps and websites for flashcards, video lessons, and online quizzes to support your study routine. 9. 'Get Enough Sleep': Aim for 7-8 hours. 10. 'Be Patient and Persistent': Learning takes time.
+PERTANYAAN:
+Shero is clumsy and funny, this is shown when he.... There is more than one correct answer. Click for every correct answer!
+OPSI / PERNYATAAN:
+  - A. A. scares the hyenas away with his loud and powerful roar
+  - B. B. makes the other animals smile by pretending to be a great king
+  - C. C. tries to roar like Hera, but his voice is small and makes the hyenas laugh
+  - D. D. walks with Hera to confront the hyenas, acting as if he is an important king too
+  - E. E. tells the hyenas that he is as mighty as King Hera, even though no one believes him
+

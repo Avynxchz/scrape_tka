@@ -1,0 +1,91 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Matematika Tingkat Lanjut (Paket 2)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "<Kutipan/konteks kalimat atau variabel yang diketahui>",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 21]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+(Tidak ada stimulus teks terpisah)
+[Konteks Visual Gambar 30474_598c64dcc5cf4187b5762a54f1141da2.png]:
+Simbol pada gambar merupakan huruf kapital **L** (biasanya melambangkan induktansi diri, panjang, *Lagrangian*, atau transformasi Laplace dalam fisika/matematika):
+
+$$L$$
+
+*(atau bentuk kaligrafi/skrip: $\mathcal{L}$)*
+[Konteks Visual Gambar 30474_598c64dcc5cf4187b5762a54f1141da2_598c64dcc5cf4187b5762a54f1141da2.png]:
+Simbol pada gambar tersebut adalah huruf kapital **$L$** (sering digunakan sebagai notasi panjang/induktansi/momentum sudut dalam fisika, atau simbol himpunan/transformasi):
+
+$$\mathcal{L} \quad \text{atau} \quad L$$
+[Konteks Visual Gambar 30474_598c64dcc5cf4187b5762a54f1141da2_598c64dcc5cf4187b5762a54f1141da2.png]:
+Simbol pada gambar tersebut adalah huruf kapital **$L$** (sering digunakan sebagai notasi panjang/induktansi/momentum sudut dalam fisika, atau simbol himpunan/transformasi):
+
+$$\mathcal{L} \quad \text{atau} \quad L$$
+[Konteks Visual Gambar 30474_bf078422da3c66e12c6d3bb88ced707e.png]:
+Simbol pada gambar adalah:
+
+$$T$$ 
+
+*(Huruf kapital $T$ dalam format miring/italic, umumnya merepresentasikan besaran fisika seperti **Suhu**, **Periode**, atau **Gaya Tegangan Tali**)*
+[Konteks Visual Gambar 30474_598c64dcc5cf4187b5762a54f1141da2_598c64dcc5cf4187b5762a54f1141da2.png]:
+Simbol pada gambar tersebut adalah huruf kapital **$L$** (sering digunakan sebagai notasi panjang/induktansi/momentum sudut dalam fisika, atau simbol himpunan/transformasi):
+
+$$\mathcal{L} \quad \text{atau} \quad L$$
+[Konteks Visual Gambar 30474_de84eed6f6089106f7d7b44d4ac28841.png]:
+$$(x + 4)^2 + (y - 4)^2 = 16$$
+[Konteks Visual Gambar 30474_598c64dcc5cf4187b5762a54f1141da2_598c64dcc5cf4187b5762a54f1141da2.png]:
+Simbol pada gambar tersebut adalah huruf kapital **$L$** (sering digunakan sebagai notasi panjang/induktansi/momentum sudut dalam fisika, atau simbol himpunan/transformasi):
+
+$$\mathcal{L} \quad \text{atau} \quad L$$
+[Konteks Visual Gambar 30474_8f1645989851bd04747a378bd5cefc6e.png]:
+Teks/notasi matematika pada gambar:
+
+$$o(0,0)$$ 
+
+*(atau titik pusat koordinat $O(0,0)$)*
+[Konteks Visual Gambar 30474_bf078422da3c66e12c6d3bb88ced707e_bf078422da3c66e12c6d3bb88ced707e.png]:
+Based on the provided image, the single character is a mathematical symbol rendered in a serif/italic font:
+
+$$\mathcal{T} \quad \text{or} \quad T$$
+PERTANYAAN:
+Lingkaran  memiliki pusat di (-5, 3) dan jari-jari 2. Lingkaran  adalah bayangan dari  setelah dilakukan translasi. Lingkaran  dengan persamaan  adalah bayangan dari  setelah dilakukan dilatasi dengan pusat  dengan faktor skala tertentu. Pernyataan yang benar mengenai translasi  dan faktor skala dilatasi yang dilakukan adalah ….
+OPSI / PERNYATAAN:
+  - A. A. dan skala dilatasi 8
+  - B. B. dan skala dilatasi 4
+  - C. C. dan skala dilatasi 2
+  - D. D. dan skala dilatasi 2
+  - E. E. dan skala dilatasi 8
+

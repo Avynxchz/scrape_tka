@@ -1,0 +1,541 @@
+Kamu adalah Pakar Pembuat Soal TKA SMA Kemdikbud (Matematika (Paket 1)).
+Buatkan SOAL SERUPA / LATIHAN MANDIRI (Text-Only, tanpa memerlukan gambar baru) untuk setiap soal acuan berikut.
+Soal latihan harus menguji konsep materi yang persis sama dengan narasi/variabel baru.
+
+ATURAN WAJIB:
+1. Soal latihan HARUS TEKS MURNI (tidak memerlukan gambar/diagram baru).
+2. Sediakan 5 pilihan jawaban (A, B, C, D, E).
+3. Berikan 1 kunci yang pasti benar (A/B/C/D/E) dan pembahasan singkat.
+4. Teks pertanyaan untuk setiap nomor HARUS UNIK, mandiri, dan tidak boleh sama atau duplikat antar nomor soal.
+5. Output WAJIB berupa JSON ARRAY murni.
+
+FORMAT JSON:
+{
+  "nomor_soal": <nomor_soal_acuan>,
+  "soal_serupa": {
+    "pertanyaan": "<Teks pertanyaan lengkap>",
+    "pilihan": [
+      {"key": "A", "text": "<Pilihan A>"},
+      {"key": "B", "text": "<Pilihan B>"},
+      {"key": "C", "text": "<Pilihan C>"},
+      {"key": "D", "text": "<Pilihan D>"},
+      {"key": "E", "text": "<Pilihan E>"}
+    ],
+    "kunci": "<A/B/C/D/E>",
+    "pembahasan_singkat": "<Penjelasan ringkas>"
+  }
+}
+
+DAFTAR SOAL ACUAN:
+---
+[SOAL ACUAN NO 4]
+Kunci Resmi: B
+Stimulus Teks: Pengusaha di Provinsi Jingga
+
+Pemerintah Provinsi Jingga mendata banyaknya pengusaha yang ada di Provinsi Jingga. Terdapat 7 kota di Provinsi Jingga. Berikut disajikan data banyak pengusaha pada masing – masing kota di Provinsi Jingga pada tahun 2026:
+
+Informasi mengenai banyaknya pengusaha di Kota E hilang, namun Pemerintah Provinsi Jingga sudah mengetahui jumlah total pengusaha di Provinsi Jingga sebanyak 25.000 orang.
+[Isi Gambar Soal 05896_3ad4d2bbdad03e9487f6080ec1c06b63.png]:
+Gambar ilustrasi teknik sipil mengenai uji beban jembatan yang terbagi menjadi dua bagian: 1. Foto di sebelah kiri: Pengujian beban pada jalan jembatan menggunakan deretan truk bermuatan tanah di atas gelagar jembatan yang disaksikan oleh para pekerja proyek bertopi keselamatan. 2. Diagram penampang di sebelah kanan: Ilustrasi 3D struktur jembatan beton dan baja. Terdapat panah merah mengarah ke bawah di atas lintasan mobil yang merepresentasikan beban kendaraan, label 'GIRDER' yang menunjuk ke balok penopang baja/beton di bawah lantai jembatan, serta panah-panah merah vertikal pada pilar beton jembatan yang merepresentasikan gaya yang disalurkan ke pilar. Sebuah panah merah melengkung menghubungkan bagian bawah gelagar jembatan pada foto ke ilustrasi 3D girder di sebelah kanan.
+Pertanyaan: Berdasarkan informasi tersebut, banyak pengusaha di Kota E adalah ….
+---
+[SOAL ACUAN NO 5]
+Kunci Resmi: B
+Stimulus Teks: Perhatikan gambar berikut.
+[Isi Gambar Soal 88819_6837a3202add4799943b1f2837c58003.png]:
+Ilustrasi kerangka geometris bangun ruang kubus $PQRS.TUVW$:- Rusuk-rusuk kubus digambarkan dengan garis tebal berwarna merah marun dengan titik sudut hitam.- Bidang alas terdiri dari titik-titik $P$ (kiri depan), $Q$ (kanan depan), $R$ (kanan belakang), dan $S$ (kiri belakang).- Bidang atas terdiri dari titik-titik $T$ (kiri depan), $U$ (kanan depan), $V$ (kanan belakang), dan $W$ (kiri belakang).- Pada bidang alas $PQRS$, terdapat dua garis diagonal alas berwarna abu-abu yaitu ruas garis $PR$ dan $QS$ yang berpotongan di titik tengah alas berlabel titik $O$.
+[Isi Gambar Soal 95089_d25340b2a7ed58e850e0298630c96c79.png]:
+Sistem pertidaksamaan linear dua variabel: $x + y \le 4; \; x + 3y \ge 6; \; x \ge 0; \; y \ge 0$
+Pertanyaan: Daerah yang memenuhi sistem pertidaksamaan linear  adalah....
+---
+[SOAL ACUAN NO 6]
+Kunci Resmi: E
+Stimulus Teks: Rina mulai berinvestasi melalui aplikasi Bobin. Terdapat beberapa pilihan produk investasi yang ditawarkan di aplikasi Bobin. Rina memilih produk investasi tipe B2026 karena pada setiap akhir tahun, bunga yang diperoleh langsung ditambahkan ke tabungan. Berikut disajikan brosur mengenai produk investasi tipe B2026:
+
+Rina membeli produk investasi B2026 sebesar Rp7.000.000,00 dan berencana menyimpannya sampai jatuh tempo.
+[Isi Gambar Soal 89491_620b7db474defbf5dbec6e442d36408a.png]:
+Gambar pengujian beban jembatan dan visualisasi struktur girder: 1. Bagian kiri: Foto proses uji pembebanan jembatan jalan raya yang sedang dibangun dengan deretan truk tanah terparkir di atas bentang jembatan, disaksikan oleh para insinyur/pekerja berhelm. 2. Bagian kanan: Ilustrasi 3D penampang struktur jembatan beton dan baja:- Panah merah vertikal mengarah ke bawah di atas lintasan mobil yang merepresentasikan beban lalu lintas.- Label 'GIRDER' mengarah ke balok-balok penopang baja I-beam (gelagar) di bawah pelat lantai jembatan.- Tiga panah vertikal merah bolak-balik pada pilar jembatan yang menunjukkan transmisi beban tekan dan reaksi tumpuan pilar. Panah lengkung merah menghubungkan gelagar jembatan pada foto ke model 3D girder di bagian kanan.
+Pertanyaan: Berapakah uang yang diperoleh Rina setelah jatuh tempo?
+---
+[SOAL ACUAN NO 7]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Diketahui fungsi f ( x ) =   , dengan   . Jika f –1 ( x ) adalah invers dari fungsi f ( x ), nilai dari f –1 (3) =....
+---
+[SOAL ACUAN NO 8]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Fungsi  f: R -> R dan g  R -> R . Jika g (x) = x - 1   dan ( f  o   g ) (x) = x 3 – 4x, nilai dari   f (2) = ….
+---
+[SOAL ACUAN NO 9]
+Kunci Resmi: C
+Stimulus Teks: Seorang teknisi di bidang energi menghitung konsumsi energi sebuah alat listrik. Diketahui tegangan listrik sebesar  volt, arus listrik sebesar    ampere, dan waktu pemakaian selama  detik. Energi listrik dirumuskan dengan E= V x I x t.
+
+dengan keterangan:
+
+E = energi listrik (Joule/J)
+
+V = tegangan listrik (Volt/V)
+
+I = kuat arus listrik (Ampere/A)
+
+t = waktu penggunaan listrik (detik)
+[Isi Gambar Soal 85516_5975721b148e4664bb3c600c729fd869.png]:
+Operasi perkalian bilangan berpangkat: $2^4 \times 5^2$
+[Isi Gambar Soal 85516_f0f5a94ba74a3089516e6e0e79e97e2b.png]:
+Operasi perkalian bilangan berpangkat negatif: $2^{-1} \times 5^{-1}$
+[Isi Gambar Soal 85516_59b0b45bb957f09c3d31ac68b8568046.png]:
+Operasi perkalian bilangan berpangkat: $2^3 \times 5$
+[Isi Gambar Soal 85516_ccaddfb64d7186332352e10eee87f6a5.png]:
+Pilihan jawaban yang memuat operasi pecahan bilangan berpangkat: $\text{E } \times \frac{1}{2^2 \cdot 5}$
+
+(Menampilkan huruf 'E' diikuti simbol kali 'x' dan pecahan $\frac{1}{2^2 \cdot 5}$).
+Pertanyaan: Namun, karena adanya rugi sistem sebesar  energi bersih yang dihasilkan menjadi E bersih=   . maka energi bersih sama dengan...
+---
+[SOAL ACUAN NO 10]
+Kunci Resmi: ['C', 'D']
+Stimulus Teks: Sebuah piring besar akan ditata potongan buah dengan susunan melingkar seperti pada gambar berikut.
+
+Tatanan potongan buah tersebut belum selesai dan akan dilanjutkan.
+[Isi Gambar Soal 48351_dde5b9762f31a2a2adec2c56f1c35c8c.png]:
+Diagram penataan irisan buah secara melingkar konsentris pada piring saji bundar beserta legendanya:- Keterangan legenda: * Irisan melon hijau = 'susunan pertama' (lapisan lingkaran terdalam/pusat, terdiri atas 4 potong melon). * Potongan segitiga semangka merah = 'susunan kedua' (lapisan lingkaran tengah, terdiri atas 8 potong semangka). * Cincin nanas kuning berlubang = 'susunan ketiga' (lapisan lingkaran terluar, terdiri atas 16 irisan nanas). Susunan buah tersebut membentuk barisan geometri dengan pola jumlah potongan $4, 8, 16$.
+Pertanyaan: Tentukan manakah banyak potongan buah yang mungkin pada susunan berikutnya?
+
+Pilihlah semua jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 11]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 46140_227a812ca3946080be12cea54f468d36.png]:
+Bentuk pecahan aljabar dengan penyebut dan pembilang memuat bentuk akar: $\frac{2 + \sqrt{2}}{\sqrt{6} - \sqrt{2}}$
+Pertanyaan: Bentuk rasional dari    adalah....
+---
+[SOAL ACUAN NO 12]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Seorang peneliti melakukan pengamatan terhadap bakteri tertentu. Setiap  hari bakteri membelah diri menjadi dua. Pada awal pengamatan terdapat 2 bakteri. Jika setiap 2 hari    dari jumlah bakteri mati, banyaknya bakteri setelah tiga hari adalah....
+---
+[SOAL ACUAN NO 13]
+Kunci Resmi: ['B', 'C', 'D']
+Stimulus Teks: Proses pelumasan pada mesin merupakan hal penting yang harus dilakukan untuk menjaga performa kerja mesin. Kekentalan pelumas akan menurun seiring bertambahnya waktu operasi mesin. Hubungan antara waktu operasi   (jam) dan tingkat kekentalan pelumas    dapat dinyatakan oleh fungsi:
+
+Adapun untuk keperluan pemeliharaan mesin, nilai kekentalan tersebut dapat dikategorikan menjadi tiga interval berikut:
+
+Interval Nilai
+
+Indikator Kekentalan
+
+Interpretasi
+
+Tinggi
+
+Pelumas masih sangat kental, kondisi sangat baik
+
+Sedang
+
+Pelumas masih layak digunakan
+
+Rendah
+
+Pelumas mulai encer, perlu dipertimbangkan untuk diganti
+[Isi Gambar Soal 08227_8f224c2bc94e2ef3cf730b4601ccf5a0.png]:
+Teks berupa pertidaksamaan aljabar satu variabel: $V(x) \le 12$
+Pertanyaan: Setelah mesin beroperasi berapa lamakah kekentalan pelumas pada mesin tersebut masuk pada indikator sedang?
+
+Pilihlah semua jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 14]
+Kunci Resmi: A
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 62193_925f43a370cc2bcce192c20158ee0776.png]:
+Diagram selembar bahan karton persegi untuk membuat kotak tanpa tutup:- Panjang sisi persegi adalah $30\text{ cm}$ (ditunjukkan oleh tanda ukuran di sisi kiri).- Keempat sudutnya dipotong berbentuk persegi berukuran $x \times x$ dengan arsiran garis miring diagonal.- Terdapat tanda garis pembagi kecil di tengah masing-masing sisi luar.
+Pertanyaan: Dari selembar karton berbentuk persegi yang berukuran sisi 30 cm akan dibuat kotak tanpa tutup, dengan cara menggunting empat persegi di setiap pojok karton, seperti pada gambar. Volume kotak terbesar yang dapat dibuat adalah....
+---
+[SOAL ACUAN NO 15]
+Kunci Resmi: D
+Stimulus Teks: Perhatikan desain rak buku berikut!
+
+sumber gambar: https://www.ufurnish.com/en-gb/p/a/16953815/decorotika-pisagor-corner-bookcase-shelving-unit-black-oak
+[Isi Gambar Soal 77237_b3910350d0b2ab699ee398b3188cd24f.png]:
+Foto rak buku/pajangan berbentuk segitiga bermotif marmer hitam yang dimodelkan dengan garis putus-putus oranye membentuk kesebangunan segitiga siku-siku:- Titik puncak rak diberi label $A$.- Garis tinggi vertikal di tengah rak menghubungkan $A - C - E - G - I$, dengan titik $I$ berada di lantai tengah dasar rak.- Sisi miring kiri rak menghubungkan titik-titik $A - B - D - F - H$, dengan titik $H$ berada di sudut kiri bawah lantai.- Papan ambalan horizontal rak membentuk segmen garis $BC$, $DE$, $FG$, dan $HI$ yang saling sejajar dan tegak lurus terhadap tiang tengah $AI$.- Membentuk empat segitiga siku-siku sebangun: $\triangle ABC$, $\triangle ADE$, $\triangle AFG$, dan $\triangle AHI$.
+[Isi Gambar Soal 77237_7996117de11f7ac86c535847971555ec.png]:
+Pecahan perbandingan trigonometri/panjang sisi: $\frac{AB}{AC}$
+Pertanyaan: Manakah perbandingan yang sama dengan?
+---
+[SOAL ACUAN NO 16]
+Kunci Resmi: C
+Stimulus Teks: Seorang teknisi sedang menyambung beberapa pipa untuk membuat saluran air lurus. Setiap pipa yang disambungkan tidak menambah panjang penuh, karena sebagian ujung pipa masuk ke dalam sambungan pipa sebelumnya sehingga panjang saluran pipa mengalami penambahan tetap. Berikut gambar panjang 1 pipa, 2 pipa yang tersambung, dan 3 pipa yang tersambung.
+[Isi Gambar Soal 18987_928b89a174eaca98e50e61a96cb57443.png]:
+Ilustrasi susunan pipa vertikal yang disambungkan: 1. Pipa tunggal (1 buah pipa): memiliki panjang $400\text{ cm}$. 2. Dua buah pipa yang disambungkan (dengan 1 sambungan cincin/soket di tengah): memiliki panjang total $795\text{ cm}$. 3. Tiga buah pipa yang disambungkan (dengan 2 sambungan cincin/soket): memiliki panjang total $1190\text{ cm}$.
+Pertanyaan: Berapa panjang pipa saluran air jika terdapat 8 pipa yang tersambung?
+---
+[SOAL ACUAN NO 17]
+Kunci Resmi: ['A:Salah', 'B:Salah', 'C:Benar']
+Stimulus Teks: Pak Budi ingin membuka cabang baru kafe dalam waktu 12 bulan. Modal awal yang ia miliki saat ini adalah Rp50.000.000,00. Total dana yang dibutuhkan untuk pembukaan cabang baru adalah Rp200.000.000,00.
+
+Untuk mencapai target tersebut, Pak Budi akan menyisihkan laba usahanya mulai bulan depan yaitu bulan Januari. Tabungan awal Pak Budi adalah Rp5.000.000,00. Karena bisnisnya sedang berkembang, ia berkomitmen untuk meningkatkan besar tabungannya secara tetap yaitu selalu bertambah sebesar Rp1.500.000,00 setiap bulannya. Berikut disajikan informasi mengenai hambatan yang dialami oleh Pak Budi:
+
+Pada bulan ke-5 dan ke-9, Pak Budi harus mengeluarkan Rp5.000.000,00 dari tabungannya untuk biaya tak terduga.
+
+Mulai bulan ke-7, kenaikan tabungan per bulan berkurang sebesar 20% dari kenaikan awal karena persaingan usaha.
+
+Pak Budi hanya dapat membuka cabang baru jika total tabungan (termasuk modal awal) mencapai minimal Rp200.000.000,00 tanpa memperhitungkan uang yang sudah terpakai.
+[Isi Gambar Soal 52132_2d7067e75b56c6829bcd92bb3c5d6085.png]:
+Ilustrasi infografis perencanaan target keuangan usaha:- Seorang pemuda berkaus biru dengan pose berpikir memegang dagu.- Di sebelah kiri terdapat rincian target keuangan: * 'Modal Awal: Rp50.000.000,00.' dengan bilah kemajuan (progress bar) hijau terisi sekitar 25%. * 'Target yang dibutuhkan: Rp200.000.000,00.' dengan bilah kemajuan biru penuh (100%). * 'Dalam waktu 12 bulan.'- Di sebelah kanan atas terdapat gelembung impian (thought bubble) memuat teks 'Membuka cabang kafe', ilustrasi kedai bertuliskan 'Kafe', secangkir kopi panas, serta ikon kalender bertuliskan angka '12' dan 'bulan'.
+Pertanyaan: Kondisi seperti apakah yang dapat membuat Pak Budi membuka cabang baru kafe dalam waktu 12 bulan?
+
+Tentukan benar atau salah pada setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 18]
+Kunci Resmi: C
+Stimulus Teks: Seorang desainer percetakan digital diminta membuat kemasan souvenir berikut yang akan dicetak menggunakan kertas laminasi.
+
+Kemasan souvenir tersebut harus didesain pola bentuk (jaring-jaring) yang belum dirakit terlebih dahulu. Desainer bisa memodifikasi pola kemasan souvenir yang belum dirakit agar bisa dicetak tidak lebih dari 1 kertas untuk pola yang sama. Satu pola kemasan utuh yang belum dirakit hanya boleh dibuat posisi horizontal atau vertikal (tidak boleh diagonal). Tersedia pilihan kertas laminasi sebagai berikut.
+
+Jenis Kertas
+
+Ukuran (cm)
+
+Harga per lembar
+
+A3
+
+29,7 x 42
+
+Rp6.000,00
+
+A3+
+
+32,9 x 48,3
+
+Rp8.000,00
+
+Plano
+
+61 x 86
+
+Rp15.000,00
+[Isi Gambar Soal 72299_db97533fa1e7b6a0094191e657d75c62.png]:
+Ilustrasi dimensi kotak kemasan suvenir (paper box) bermotif jendela dan sepeda dengan bagian atas mengerucut (limas) yang diikat pita hijau:- Bentuk gabungan balok dan limas segi empat beralas persegi.- Panjang alas balok: $8\text{ cm}$.- Lebar alas balok: $8\text{ cm}$.- Tinggi bagian balok: $12\text{ cm}$.- Tinggi sisi tegak segitiga atap (apotema/kemiringan sisi limas yang ditunjukkan garis putus-putus hitam): $3\text{ cm}$.
+Pertanyaan: Dengan anggaran maksimal Rp1.200.000,00 berapakah paling banyak kotak souvenir yang bisa dibuat?
+---
+[SOAL ACUAN NO 19]
+Kunci Resmi: D
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Diketahui sin A = , A adalah sudut tumpul. Nilai cos A = ….
+---
+[SOAL ACUAN NO 20]
+Kunci Resmi: E
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 20035_8290fb5c5d179db0ca8d6f0a8a445d0d.png]:
+Diagram batang vertikal dengan pola arsir yang menunjukkan data frekuensi setiap bulan. Sumbu vertikal berskala 0 hingga 180 dengan kelipatan 20, dan sumbu horizontal memuat nama bulan. Di sebelah kanan terdapat legenda bertuliskan 'frekuensi'.
+
+Rincian data per bulan: | Bulan | Frekuensi | |:---: |:---: | | Jan | 122 | | Feb | 136 | | Mar | 112 | | Apr | 151 | | Mei | 18 | | Jun | 81 | | Jul | 133 | | Agt | 150 | | Sept | 166 | | Okt | 87 | | Nov | 153 | | Des | 131 |
+Pertanyaan: Diagram batang berikut menunjukkan produksi pakaian yang dikelola Bu Rahmi selama tahun 2020 dari bulan Januari sampai bulan Desember.
+
+Peningkatan tertinggi jumlah produksi pakaian Bu Rahmi terjadi pada bulan....
+---
+[SOAL ACUAN NO 21]
+Kunci Resmi: E
+Stimulus Teks: Analisis Pembebanan Struktur Jembatan
+
+Dalam proyek pembangunan jembatan layang, tim insinyur struktur melakukan uji beban bertahap pada rangkaian balok penyangga (girder). Uji beban ini dilakukan dengan menempatkan beban statis di sepanjang titik tumpuan secara berurutan untuk melihat respons lendutan material.
+
+(sumber: https://sindomakassar.com/read/sulsel/4974/uji-beban-240-ton-fly-over-pt-bms-dinilai-layak-digunakan-1697033442)
+
+Pada tiga titik tumpuan pertama, beban yang diaplikasikan secara berturut-turut adalah 500 kg, 1.000 kg, 2.000 kg. Tim ahli mencatat bahwa peningkatan beban di setiap titik tumpuan berikutnya direncanakan mengikuti pola tertentu untuk menguji batas elastisitas tertinggi dari beton pracetak yang digunakan.
+[Isi Gambar Soal 87028_e8135501b7e77cdf4d8c5124c5fb4cea.png]:
+Grafik daerah penyelesaian sistem pertidaksamaan linear pada bidang koordinat Cartesius:- Sumbu horizontal $X$ dan sumbu vertikal $Y$.- Garis pertama melalui titik $(0, 4)$ dan $(4, 0)$ yang merepresentasikan persamaan garis $x + y = 4$.- Garis kedua melalui titik $(0, 2)$ dan $(6, 0)$ yang merepresentasikan persamaan garis $x + 3y = 6$.- Titik potong kedua garis berada pada koordinat $(3, 1)$.- Daerah terbagi menjadi beberapa bagian yang diberi label angka Romawi: * Daerah I: Daerah di bawah kedua garis pada kuadran I (memuat titik asal $(0,0)$). * Daerah II: Daerah segitiga yang dibatasi sumbu $Y$ dari $y=2$ hingga $y=4$, di bawah garis $x + y = 4$, dan di atas garis $x + 3y = 6$. * Daerah III: Daerah di atas titik potong kedua garis. * Daerah IV: Daerah segitiga yang dibatasi sumbu $X$ dari $x=4$ hingga $x=6$, di bawah garis $x + 3y = 6$, dan di atas garis $x + y = 4$. * Daerah V: Daerah di sebelah kiri sumbu $Y$ (kuadran II).
+Pertanyaan: Berdasarkan pola berat beban yang diaplikasikan tersebut, beban pada titik tumpuan ke-4, 5, dan 6 berturut-turut adalah....
+---
+[SOAL ACUAN NO 22]
+Kunci Resmi: B
+Stimulus Teks: Toko Jaya menjual alat tulis sekolah. Tiga murid SMK Merdeka yaitu Maya, Sella, dan Elang membeli alat tulis di Toko Jaya dengan rincian sebagai berikut:
+[Isi Gambar Soal 91913_5dce045a546b929279ad74c2f5f37f66.png]:
+Ilustrasi soal sistem persamaan linear tiga variabel (SPLTV) di toko alat tulis 'Toko Jaya':
+
+Rincian pembelian tiga orang siswa: 1. Maya:- 2 Buku Tulis- 1 Bulpoin- 3 Pensil- Membayar Rp19.000,00 2. Sella:- 1 Buku Tulis- 2 Bulpoin- 2 Pensil- Membayar Rp17.000,00 3. Elang:- 3 Buku Tulis- 2 Bulpoin- 1 Pensil- Membayar Rp20.000,00
+Pertanyaan: Apabila Nurul, murid dari sekolah yang sama ingin membeli ketiga alat tulis tersebut masing-masing 1 buah, maka banyaknya uang yang harus dibayarkan oleh Nurul adalah...
+---
+[SOAL ACUAN NO 23]
+Kunci Resmi: D
+Stimulus Teks: UMKM mendapatkan pesanan membuat alas piring untuk di meja makan seperti gambar berikut.
+
+Ukuran diameter alas piring yang dibuat adalah 35 cm. Agar tampilan menjadi lebih menarik, di sekeliling alas tersebut akan dihiasi dengan pita berwarna emas.
+[Isi Gambar Soal 12490_c19935772156d9752ac0194f4dd74b01.png]:
+Foto penataan meja makan (table setting) dari sudut pandang atas:- Panah merah menunjuk pada kain bundar berwarna cokelat/karamel dengan tepian berlipit-lipit (pleated) dengan label teks 'Alas piring'.- Di atas alas piring diletakkan sebuah piring keramik bundar, serbet bermotif kotak-kotak hitam-putih yang diberi simpul pita kain cokelat, sepasang sendok dan garpu berwarna emas dengan gagang hitam, serta cangkir putih berpenampang lingkaran dengan tatakannya di bagian atas.
+Pertanyaan: Jika harga satu meter pita emas Rp5.000,00 dan UMKM tersebut akan memproduksi sebanyak 180 buah, biaya yang dibutuhkan untuk membeli pita emas adalah....
+---
+[SOAL ACUAN NO 24]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 17865_03efca3015969271cc01dd691c5df6f3.png]:
+Tabel distribusi frekuensi nilai data berkelompok:
+
+| Nilai | $f$ | |:---: |:-: | | 58 - 60 | 2 | | 61 - 63 | 6 | | 64 - 66 | 9 | | 67 - 69 | 6 | | 70 - 72 | 4 | | 73 - 75 | 3 |
+Pertanyaan: Perhatikan data pada tabel nilai hasil ulangan matematika kelas XI SMA Z. Modus dari data tersebut adalah....
+---
+[SOAL ACUAN NO 25]
+Kunci Resmi: C
+Stimulus Teks: Analisis Pembebanan Struktur Jembatan
+
+Dalam proyek pembangunan jembatan layang, tim insinyur struktur melakukan uji beban bertahap pada rangkaian balok penyangga (girder). Uji beban ini dilakukan dengan menempatkan beban statis di sepanjang titik tumpuan secara berurutan untuk melihat respons lendutan material.
+
+(sumber: https://sindomakassar.com/read/sulsel/4974/uji-beban-240-ton-fly-over-pt-bms-dinilai-layak-digunakan-1697033442)
+
+Pada tiga titik tumpuan pertama, beban yang diaplikasikan secara berturut-turut adalah 500 kg, 1.000 kg, 2.000 kg. Tim ahli mencatat bahwa peningkatan beban di setiap titik tumpuan berikutnya direncanakan mengikuti pola tertentu untuk menguji batas elastisitas tertinggi dari beton pracetak yang digunakan.
+[Isi Gambar Soal 05322_e8135501b7e77cdf4d8c5124c5fb4cea.png]:
+Diagram batang dengan judul 'DATA BANYAK PENGUSAHA DI PROVINSI JINGGA'. Sumbu vertikal menunjukkan 'Banyak Orang (Ratus)' berskala 0 hingga 70 (kelipatan 10), sedangkan sumbu horizontal menunjukkan 'Nama Kota' (A sampai G).
+
+Data nilai pada diagram:- Kota A: 65 ratus (6.500 orang)- Kota B: 40 ratus (4.000 orang)- Kota C: 25 ratus (2.500 orang)- Kota D: 20 ratus (2.000 orang)- Kota E: 0 (tidak ada batang data)- Kota F: 35 ratus (3.500 orang)- Kota G: 50 ratus (5.000 orang)
+Pertanyaan: Standar Keamanan Bangunan menetapkan bahwa beton pracetak tersebut akan mengalami retak struktur jika diberi beban tunggal yang melampaui 128 ton pada satu titik. Pada titik tumpuan ke-berapakah beban yang diberikan untuk pertama kalinya mencapai batas keamanan struktur?
+---
+[SOAL ACUAN NO 26]
+Kunci Resmi: ['B', 'D']
+Stimulus Teks: Sebuah perusahaan mebel "Awet" memproduksi dua jenis produk yaitu meja dan kursi. Mengenai kebutuhan bahan dan tenaga kerja kedua produk tersebut. Berikut ini disajikan informasi mengenai kebutuhan bahan baku (kayu) dan tenaga kerja untuk pembuatan 1 unit meja dan 1 unit kursi:
+
+Total kayu yang tersedia setiap harinya terbatas, yaitu maksimal 20 m 2 per hari dan total waktu yang tersedia adalah maksimal 48 jam per hari. Keuntungan bersih dari penjualan 1 unit meja adalah Rp500.000,00 dan keuntungan bersih dari penjualan 1 unit kursi adalah Rp300.000,00.
+[Isi Gambar Soal 99632_c7e1264856316d53457c41f7dc820c36.png]:
+Ilustrasi soal program linear mengenai produksi furnitur kayu yang menampilkan dua jenis produk beserta kebutuhan bahan baku dan waktu produksinya:
+
+1. 'Meja Kayu':- Ilustrasi: Sebuah meja kayu berkaki empat berwarna cokelat.- Kebutuhan Kayu = $2\text{ m}^2$
+
+- Lama pengerjaan oleh 1 orang pekerja = $4\text{ jam}$
+
+2. 'Kursi Kayu':- Ilustrasi: Sebuah kursi kayu dengan sandaran berwarna cokelat.- Kebutuhan Kayu = $1\text{ m}^2$
+
+- Lama pengerjaan oleh 1 orang pekerja = $3\text{ jam}$
+
+Ringkasan data: | Jenis Furnitur | Kebutuhan Kayu | Waktu Pengerjaan (1 Pekerja) | |:--- |:---: |:---: | | Meja Kayu | $2\text{ m}^2$ | 4 jam | | Kursi Kayu | $1\text{ m}^2$ | 3 jam |
+Pertanyaan: Berdasarkan kondisi tersebut, manakah pernyataan yang benar mengenai banyak meja dan kursi yang dapat diproduksi serta keuntungan yang diperoleh?
+
+Pilihlah semua jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 27]
+Kunci Resmi: C
+Stimulus Teks: Perhatikan kubus PQRS.TUVW berikut!
+
+Panjang rusuk kubus tersebut 12 cm. Pada gambar terlihat bahwa titik O berada tepat pada perpotongan diagonal garis PR dan QS.
+[Isi Gambar Soal 88970_012bf9a66a3f32ff58813cb9b14595a0.png]:
+Infografis promosi produk investasi aplikasi 'BOBIN':- Header: 'BOBIN APP', logo roket 'BOBIN', judul 'PROMO ISTIMEWA: INVESTASI PASTI B2026', serta lencana 'Tipe Produk: B2026'.- Tiga kartu rincian investasi: 1. 'JANGKA WAKTU': ikon kalender '2024-2026' dengan nilai '3 TAHUN'. 2. 'BESAR KEUNTUNGAN': ikon grafik tren naik dengan nilai '10% PER TAHUN'. 3. 'MODAL AWAL MINIMAL': ikon uang tunai dengan nilai 'Rp5.000.000'.- Teks penutup di bagian bawah: 'Wujudkan Impianmu Bersama BOBIN B2026! Investasi Aman & Menguntungkan.' serta tombol 'Download Sekarang!' di samping ilustrasi aplikasi pada telepon genggam.
+Pertanyaan: Jarak titik V ke O adalah....
+---
+[SOAL ACUAN NO 28]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: Sekolah P akan mengirim 2 perwakilan grup band untuk Pentas Musik Nusantara pada peringatan Hari Sumpah Pemuda. Sekolah tersebut memiliki 6 grup band putra dan 4 grup band putri. Berdasarkan penilaian, kemampuan grup band tersebut merata sehingga penentuan kedua perwakilan grup  band dilakukan dengan cara mengambil secara acak satu persatu. Peluang terambil grup band putra pada pengambilan pertama dan grup band putri pada pengambilan kedua adalah....
+---
+[SOAL ACUAN NO 29]
+Kunci Resmi: A
+Stimulus Teks: Pada tahun 2025, sebuah perusahaan keju memproduksi dua jenis keju kemasan berbentuk gabungan bangun ruang seperti pada gambar berikut.
+
+Karena permintaan pasar meningkat, manajer produksi mengusulkan aturan baru, yaitu:
+
+"Mulai bulan Januari tahun depan, setiap kemasan akan diisi menjadi 75% volumenya tanpa mengubah ukuran kemasan".
+
+Pada bulan Maret 2026, sebuah supermarket memesan 150 keju kemasan A dan 200 keju kemasan B.
+[Isi Gambar Soal 16935_736554a8003d65af408a8ca39de98869.png]:
+Ilustrasi dimensi dua model bangun ruang kemasan produk keju:
+
+1. 'Kemasan Keju A' (Gabungan tabung dan kerucut):- Diameter alas tabung dan kerucut: $d = 8\text{ cm}$ (jari-jari $r = 4\text{ cm}$).- Tinggi tabung: $t_{\text{tabung}} = 10\text{ cm}$.- Tinggi kerucut: $t_{\text{kerucut}} = 6\text{ cm}$.- Label biru melingkar pada tabung bertuliskan 'KEJU' dengan logo keju.
+
+2. 'Kemasan Keju B' (Gabungan prisma segi empat/balok dan limas segi empat):- Alas balok dan limas berbentuk persegi dengan ukuran: $8\text{ cm} \times 8\text{ cm}$.- Tinggi balok: $t_{\text{balok}} = 10\text{ cm}$.- Tinggi limas: $t_{\text{limas}} = 6\text{ cm}$.- Label oranye melingkar pada balok bertuliskan 'KEJU' dengan logo keju.
+Pertanyaan: Apabila adonan keju yang tersedia adalah 220 liter, apakah usulan manajer produksi tersebut dapat diterapkan untuk memenuhi seluruh pesanan?
+---
+[SOAL ACUAN NO 30]
+Kunci Resmi: ['A', 'D']
+Stimulus Teks: Analisis Pembebanan Struktur Jembatan
+
+Dalam proyek pembangunan jembatan layang, tim insinyur struktur melakukan uji beban bertahap pada rangkaian balok penyangga (girder). Uji beban ini dilakukan dengan menempatkan beban statis di sepanjang titik tumpuan secara berurutan untuk melihat respons lendutan material.
+
+(sumber: https://sindomakassar.com/read/sulsel/4974/uji-beban-240-ton-fly-over-pt-bms-dinilai-layak-digunakan-1697033442)
+
+Pada tiga titik tumpuan pertama, beban yang diaplikasikan secara berturut-turut adalah 500 kg, 1.000 kg, 2.000 kg. Tim ahli mencatat bahwa peningkatan beban di setiap titik tumpuan berikutnya direncanakan mengikuti pola tertentu untuk menguji batas elastisitas tertinggi dari beton pracetak yang digunakan.
+[Isi Gambar Soal 29810_e8135501b7e77cdf4d8c5124c5fb4cea.png]:
+Gambar pengujian beban dan komponen struktur jembatan: 1. Foto di sebelah kiri: Pengujian beban nyata pada jembatan yang sedang dibangun menggunakan iringan truk bermuatan tanah yang berjejer di atas badan jembatan dan disaksikan oleh pekerja proyek berhelm. 2. Ilustrasi 3D di sebelah kanan: Penampang struktur jembatan beton dan gelagar baja. Menampilkan panah merah ke bawah yang merepresentasikan beban lalu lintas/kendaraan, label 'GIRDER' yang menunjuk balok penopang lantai jembatan, serta panah-panah merah vertikal pada pilar beton penyangga. Tanda panah merah melengkung menghubungkan bagian bawah gelagar pada foto jembatan ke gambar 3D girder di kanan.
+Pertanyaan: Konsultan pengawas ingin menghitung total akumulasi beban (tonase total) yang ditahan oleh jembatan selama pengujian di 5 hingga 7 titik tumpuan pertama untuk memastikan kekuatan fondasi dasar. Tim logistik kemudian menyiapkan beban statis seberat 32 ton. Pilihlah semua pernyataan yang benar terkait dengan tonase total dan persediaan beban statis tersebut. Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 31]
+Kunci Resmi: ['A:Salah', 'B:Benar', 'C:Salah']
+Stimulus Teks: Manajer pemasaran sebuah biro perjalanan di Pulau Wisata Numerasi sedang merancang strategi promosi untuk periode berikutnya. Ia harus memastikan bahwa anggaran iklan yang terbatas dialokasikan pada target pasar yang memiliki potensi jumlah wisatawan paling besar. Manajer tersebut menggunakan dua data berikut.
+
+Tabel Aktivitas Favorit berdasarkan Negara Asal.
+
+Negara Asal
+
+Aktivitas Favorit
+
+Australia
+
+80% Wisata Budaya dan 20% Berselancar dan Pantai
+
+China
+
+40% Belanja dan 60% Wisata Kuliner
+
+Malaysia
+
+90% Perawatan Tubuh dan 10% Wisata Budaya
+
+Jepang
+
+70% Wisata Kuliner dan 30% Belanja
+[Isi Gambar Soal 92407_88954bddd7cd548d82e63fb1a1fcf3c9.png]:
+Diagram batang berjudul 'Data Jumlah Kunjungan Wisatawan Mancanegara':- Sumbu vertikal: 'Banyak Pengunjung (Dalam Ribuan)' berskala 0 hingga 130 dengan interval 10.- Sumbu horizontal: 'Negara Asal Pengunjung'.
+
+Data tabel: | Negara Asal Pengunjung | Banyak Pengunjung (Ribu) | |:--- |:---: | | Australia | 120 | | China | 85 | | Malaysia | 65 | | Jepang | 40 |
+Pertanyaan: Berdasarkan data yang diberikan, bagaimana potensi jumlah wisatawan pada biro perjalanan tersebut?
+
+Tentukan Benar atau Salah pada setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 32]
+Kunci Resmi: A
+Stimulus Teks: Perusahaan Kertas "Mayang" sedang merapikan data gaji bulanan karyawan tahun 2025 untuk bahan penyusunan laporan pajak. Namun, data pada salah satu rentang gaji tidak terbaca. Berikut data gaji bulanan karyawan di Perusahaan Kertas "Mayang":
+
+Diketahui bahwa modus gaji karyawan di Perusahaan Kertas “Mayang” adalah Rp15.750.000,00.
+[Isi Gambar Soal 80296_bde963b0a490040f5d41d735f15f2108.png]:
+Tabel distribusi frekuensi dengan judul: 'Data Gaji Bulanan Karyawan di Perusahaan Kertas 'Mayang''
+
+| Rentang Gaji (Juta Rupiah) | Frekuensi | |:---: |:---: | | 5 - 7 | 4 | | 8 - 10 | 9 | | 11 - 13 | Tidak terbaca (?) | | 14 - 16 | 24 | | 17 - 19 | 18 | | 20 - 22 | 3 |
+Pertanyaan: Berapakah nilai data yang tidak terbaca tersebut?
+---
+[SOAL ACUAN NO 33]
+Kunci Resmi: B
+Stimulus Teks: Dalam sebuah acara pameran wisata internasional, panitia penyelenggara menyediakan  doorprize  untuk para pengunjung. Pengunjung yang berkesempatan mendapatkan hadiah  doorprize  adalah mereka yang termasuk 40 pengunjung pertama. Mereka akan diminta mengambil satu kupon secara acak. Apabila beruntung, kupon yang diperoleh bertuliskan salah satu jenis hadiah, sedangkan apabila belum beruntung maka akan memperoleh  voucher  kosong. Apabila kupon yang terambil adalah  voucher  kosong, maka kupon dimasukkan lagi ke dalam wadah.
+
+Kupon  doorprize  yang disediakan adalah sebagai berikut:
+
+5 tiket gratis pp Jakarta-Kuala Lumpur
+
+5 tiket gratis pp Jakarta-Bangkok
+
+10  voucher menginap 3 malam di hotel bintang lima
+
+10  voucher  menginap 3 malam di hotel bintang empat
+
+10  voucher kosong
+
+Anto adalah orang ke-6 yang berkesempatan mengambil hadiah  doorprize. Diketahui bahwa 1 tiket pp Jakarta-Kuala Lumpur, 1 tiket pp Jakarta-Bangkok, dan 2  voucher  menginap di hotel bintang empat sudah terambil. Adapun satu orang lainnya gagal mendapatkan  doorprize.
+
+Selanjutnya Anto yang berkesempatan mengambil satu hadiah secara acak.
+Pertanyaan: Berapa peluang Anto mendapatkan tiket gratis pp Jakarta-Kuala Lumpur?
+---
+[SOAL ACUAN NO 34]
+Kunci Resmi: ['A:Salah', 'B:Benar', 'C:Salah']
+Stimulus Teks: Diketahui kubus ABCDEFGH seperti pada gambar.
+[Isi Gambar Soal 31359_01a355f701338519cca03bb689b03427.png]:
+Ilustrasi kerangka geometris bangun ruang kubus $ABCD.EFGH$:- Rusuk-rusuk kubus digambarkan dengan garis berwarna hijau terang.- Titik-titik sudut bidang alas diberi label $A$, $B$, $C$, dan $D$.- Titik-titik sudut bidang atas diberi label $E$, $F$, $G$, dan $H$.- Titik sudut $B$ dan $C$ disorot khusus dengan bulatan berwarna biru/ungu serta label huruf berwarna biru, sedangkan titik-titik sudut lainnya ( $A$, $D$, $E$, $F$, $G$, $H$) berwarna abu-abu.
+Pertanyaan: Bagaimana hubungan antara setiap rusuk atau setiap garis yang menghubungkan dua titik pada sudut tersebut?
+---
+[SOAL ACUAN NO 35]
+Kunci Resmi: C
+Stimulus Teks: (Lihat pertanyaan)
+Pertanyaan: 
+---
+[SOAL ACUAN NO 36]
+Kunci Resmi: E
+Stimulus Teks: Amel memiliki toko bunga. Amel selalu mencatat hasil penjualannya. Hasil penjualannya digunakan untuk bahan evaluasi dan pertimbangan saat membeli bunga. Berikut disajikan data mengenai keuntungan dari penjualan bunga dari bulan Januari sampai Juli 2025:
+[Isi Gambar Soal 45908_139c8958a1a3b453dee84e634a3e27d0.png]:
+Tabel laporan keuangan dengan judul 'Catatan Keuangan Toko Bunga Amel':
+
+| Bulan | Keuntungan | |:--- |:--- | | Januari | Rp1.100.000,00 | | Februari | Rp1.450.000,00 | | Maret | Rp1.200.000,00 | | April | Rp1.530.000,00 | | Mei | Rp2.120.000,00 | | Juni | Rp1.509.000,00 | | Juli | Rp2.090.000,00 |
+
+Di bagian bawah tabel terdapat ilustrasi tumpukan uang koin emas, uang kertas rupiah, grafik batang/garis tren naik berwarna hijau, kantong uang bertuliskan 'Rp', serta bunga tulip hias.
+Pertanyaan: Berdasarkan data tersebut, keuntungan pada bulan manakah yang mengalami penurunan signifikan?
+---
+[SOAL ACUAN NO 37]
+Kunci Resmi: ['A:Salah', 'B:Salah', 'C:Benar']
+Stimulus Teks: Mirna akan memproduksi dua jenis kue dengan modal Rp8.000.000,00. Biaya produksi kue bolu sebesar Rp15.000,00 per kotak dan dijual dengan laba 40%. Sedangkan biaya produksi kue brownies sebesar Rp20.000,00 per kotak dan dijual dengan laba 35%. Setiap harinya, Mirna dapat memproduksi paling banyak 500 kotak kue.
+Pertanyaan: Apabila Mirna ingin memperoleh keuntungan maksimum, tentukan Benar atau Salah untuk setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 38]
+Kunci Resmi: D
+Stimulus Teks: Desain jendela kaca dari sebuah komplek perumahan ( cluster ) yang akan segera dibangun beserta ukurannya diberikan pada gambar berikut
+
+Pihak pengembang konstruksi berencana akan membangun 20 rumah di dalam komplek tersebut. Setiap rumah memiliki satu desain jendela seperti pada gambar.
+[Isi Gambar Soal 62210_455b29c0883de19eb39a076e22a81983.png]:
+Foto dan diagram dimensi sebuah jendela berbingkai hitam dengan bentuk segi lima (gabungan persegi panjang di bagian bawah dan segitiga di bagian atas):- Lebar dasar jendela: $4\text{ m}$.- Tinggi dinding samping tegak (bagian persegi panjang): $2\text{ m}$.- Tinggi puncak atap segitiga (dari batas atas persegi panjang ke puncak runcing): $1,5\text{ m}$.- Bingkai jendela terbagi menjadi 4 bagian vertikal sama lebar serta dipisahkan oleh palang horizontal pada batas ketinggian $2\text{ m}$.
+Pertanyaan: Berdasarkan jumlah rumah dan desain jendela yang akan dibangun, maka total luas kebutuhan kaca yang harus dipersiapkan pihak pengembang adalah....
+---
+[SOAL ACUAN NO 39]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 65502_c1f1ffe270f76a3a1535bde803228b4d.png]:
+Teks soal dan diagram bangun datar trapesium sama kaki:
+
+Teks verbatim: 'Pada trapesium berikut, $AD = BC$, $\overline{AB}$ sejajar $\overline{DC}$, $AB > DC$,, dan.'
+
+Deskripsi diagram geometri:- Trapesium $ABCD$ dengan sisi-sisi berwarna hijau.- Sisi sejajar $\overline{AB}$ (alas bawah) dan $\overline{DC}$ (sisi atas) masing-masing memiliki simbol panah horizontal tunggal yang menunjukkan $\overline{AB} \parallel \overline{DC}$.- Sisi miring $AD$ dan $BC$ diberi tanda strip ganda ( $=$) yang menandakan panjangnya sama ( $AD = BC$).- Sebuah garis diagonal berwarna biru tua ditarik dari titik sudut $D$ ke titik sudut $B$.
+Pertanyaan: Tentukan Benar atau Salah untuk setiap pernyataan berikut terkait dengan besar sudut pada trapesium ABCD!
+---
+[SOAL ACUAN NO 40]
+Kunci Resmi: B
+Stimulus Teks: (Lihat pertanyaan)
+[Isi Gambar Soal 67107_be11e2276f265c5b6e2674d8ba2d2c3d.png]:
+Diagram geometri trapesium siku-siku $ABCD$ beserta teks pertanyaan:
+
+Deskripsi bangun:- Trapesium siku-siku dengan sudut siku-siku di titik $A$ dan titik $B$.- Sisi horizontal atas adalah $AD$, dan sisi horizontal bawah adalah $BC$.- Sisi tegak vertikal kiri adalah $AB$, dan sisi miring adalah $CD$.
+
+Teks verbatim: 'Pada trapesium siku-siku tersebut, AB = 3 dan AD ≤ BC Apakah keliling trapesium tersebut lebih dari 25?'
+Pertanyaan: Putuskan apakah dengan tambahan informasi Pernyataan (1) dan Pernyataan (2) berikut cukup untuk menjawab pertanyaan tersebut! (1)  Luas trapesium ABCD = 24. (2)  BC = 10 dan CD = 5.
+---
+[SOAL ACUAN NO 41]
+Kunci Resmi: C
+Stimulus Teks: Suatu tangga dengan panjang 6 meter disandarkan pada dinding vertikal. Sudut yang dibentuk tangga dengan lantai adalah 60°.
+[Isi Gambar Soal 62066_59d3ef955657eaf8f5a160bbd6c2b198.png]:
+Foto sebuah tangga kayu yang disandarkan miring pada dinding abu-abu:- Tangga memiliki 10 anak tangga horizontal.- Tangga membentuk sudut kemiringan tertentu terhadap lantai dan dinding, dengan bayangan tangga tampak jatuh di permukaan dinding sebelah kanan (konteks masalah trigonometri atau teorema Pythagoras).
+Pertanyaan: Tinggi dinding yang disentuh ujung atas tangga adalah....
+---
+[SOAL ACUAN NO 42]
+Kunci Resmi: ['A', 'B', 'C', 'D']
+Stimulus Teks: Rata-rata nilai ulangan 17 murid dari skala 100 adalah 83. Ada 3 murid yang mengikuti ujian susulan sehingga rata-rata nilai ulangan dari 20 murid menjadi 82.
+Pertanyaan: Tentukan semua pernyataan berikut yang benar terkait dengan nilai ketiga murid yang mengikuti ujian susulan! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 43]
+Kunci Resmi: ['A:Benar', 'B:Salah', 'C:Benar']
+Stimulus Teks: Fungsi didefinisikan oleh
+[Isi Gambar Soal 58301_e1f215c43d145ce6d57d8f93cf319473.png]:
+Fungsi kuadrat matematika: $f(x) = 4(x^2 - 8x + 12)$
+Pertanyaan: Tentukan Benar atau Salah pada setiap pernyataan berikut yang terkait dengan grafik fungsi !
+---
+[SOAL ACUAN NO 44]
+Kunci Resmi: ['A', 'B']
+Stimulus Teks: Tagihan listrik bulanan di sebuah apartemen dihitung berdasarkan jumlah energi listrik (dalam kWh) yang digunakan. Apartemen tersebut masih menggunakan meteran listrik yang berbeda dari penggunaan token.
+
+Biaya tagihan listrik dihitung dengan rumus:
+
+Keterangan:
+
+: total tagihan listrik (dalam rupiah)
+
+: jumlah pemakaian energi listrik (kwh)
+
+Andi merupakan salah satu penghuni apartemen tersebut yang menerima tagihan pembayaran listrik seperti terlihat pada gambar berikut:
+
+Dia menyadari bahwa penggunaan listrik sebulan terakhir lebih dari penggunaan listrik biasanya.
+[Isi Gambar Soal 44044_164f5392e1e6f44c3a774f14c12d5e37.png]:
+Persamaan fungsi linear: $f(x) = 1.350x + 25.000$
+[Isi Gambar Soal 44044_e631f09a579b3dc314ca01f2f776555c.png]:
+Gambar terdiri dari dua panel: 1. Panel kiri: Ilustrasi kWh meter (meteran listrik) analog dengan tampilan angka '0000', komponen kumparan di dalam kotak kaca, dan sakelar MCB berwarna biru di bagian bawah. 2. Panel kanan: Lembar tagihan listrik dengan header 'TAGIHAN LISTRIK' dan ikon petir kuning. Teks pada lembar tagihan:- 'INV/No.11111'- 'Diterbitkan: 22 Maret 2025'- 'Jatuh Tempo: 24 Maret 2025'- 'Tagihan Rp160.000,00'- 'Total Rp160.000,00'- 'Metode Pembayaran'- 'Transfer Bank'- '0123 4567 8901'- 'Perusahaan Listrik Kita'
+Pertanyaan: Berdasarkan informasi tersebut, biasanya berapa besar penggunaan listrik di apartemen Andi?
+
+Pilihlah jawaban yang benar! Jawaban benar lebih dari satu.
+---
+[SOAL ACUAN NO 45]
+Kunci Resmi: ['A:Benar', 'B:Benar', 'C:Salah']
+Stimulus Teks: Pak Andi akan mempresentasikan desain gedung berukuran 60 cm × 60 cm menggunakan proyektor ke layar berukuran 2,4 meter × 1,8 meter yang dipasang di depan ruang rapat (orientasi horizontal). Proyektor menghasilkan pembesaran proporsional tergantung jaraknya dari layar.
+
+Pak Andi menempatkan proyektor dengan jarak yang menghasilkan skala pembesaran seperti terlihat pada gambar berikut:
+[Isi Gambar Soal 10404_f9c9ac794c654d40d2df88cf5ad4c586.png]:
+Diagram proyeksi gambar menggunakan proyektor:- Layar proyeksi memiliki lebar $2,4\text{ m}$.- Pada layar terdapat '[PROYEKSI GAMBAR]' yang menampilkan ilustrasi gedung perkotaan.- Proyektor berada pada jarak tertentu dengan indikasi ukuran '3 meter'.- Terdapat teks keterangan: 'Skala pembesaran: $0,6 \times \text{jarak (m)}$ '.- Di sudut kanan bawah terdapat gambar asli gedung dengan keterangan: 'Ukuran gambar asli: $60\text{ cm} \times 60\text{ cm}$ '.
+Pertanyaan: Bagaimanakah tampilan desain gedung di layar?
+
+Tentukan Benar atau Salah pada setiap pernyataan berikut!
+---
+[SOAL ACUAN NO 46]
+Kunci Resmi: C
+Stimulus Teks: Luki adalah panitia bazar di sekolahnya. Dia mendapat tugas dari ketua pelaksana untuk membuat kupon. Dia ingin di setiap kupon memiliki kode akses yang unik. Kode akses kupon bazar itu memiliki lima karakter dengan format sebagai berikut:
+[Isi Gambar Soal 21232_49c208306a27969b494b0ae6af1cdaab.png]:
+Sebuah kotak persegi dengan batas garis hitam tebal, di dalamnya terdapat teks huruf kapital hitam: 'AXBYC'
+Pertanyaan: dengan A, B, dan C menyatakan huruf, serta X dan Y menyatakan angka. Tidak boleh ada angka dan huruf yang diulang. Berapakah berapa banyak kode akses berbeda yang dapat dibuat?
+

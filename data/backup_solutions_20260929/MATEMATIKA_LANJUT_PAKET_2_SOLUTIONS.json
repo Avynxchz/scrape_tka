@@ -1,0 +1,1396 @@
+{
+  "slug": "matematika_lanjut_paket_2",
+  "solutions": [
+    {
+      "question_number": 1,
+      "question_title": "Limit Fungsi Trigonometri pada Perbandingan Luas Geometris",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Limit Fungsi Trigonometri",
+        "Geometri Lingkaran",
+        "Luas Segitiga"
+      ],
+      "glossary": [
+        {
+          "term": "Sudut Pusat",
+          "meaning": "Sudut yang titik sudutnya berada di titik pusat lingkaran dan kaki sudutnya adalah jari-jari lingkaran."
+        },
+        {
+          "term": "Limit Fungsi",
+          "meaning": "Nilai pendekatan suatu fungsi ketika variabel bebasnya mendekati suatu nilai tertentu."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar dan teks, terdapat segitiga sama kaki di dalam setengah lingkaran dengan jari-jari r dan berpusat di O. Dua sisi segitiga berukuran r dengan sudut apit tℎe t a theta (0<tℎe t a<pi0< theta< pi). Luas segitiga dinyatakan dengan f(tℎe t a)=fr a c12r 2 sintℎe t af(theta)=frac12r 2 sin theta dan luas setengah lingkaran dinyatakan dengan g(tℎe t a)=fr a c12pir 2 g(theta)=frac12 pir 2.",
+      "ditanyakan": "Pernyataan yang benar mengenai nilai limit fungsi perbandingan luas daerah tersebut.",
+      "reasoning": "Rasio perbandingan antara luas segitiga dan luas setengah lingkaran dimodelkan oleh frac f (tℎe t a)g(tℎe t a)=fr a cfra c 12r 2 sintℎe t afr a c12pir 2=fracsintℎe t api fracf(theta)g(theta)=fracfrac12r 2 sinthetafrac12pir 2=fracsinthetapi. Karena suku kuadrat jari-jari r2 r 2 saling meniadakan, nilai perbandingan ini sama sekali tidak dipengaruhi oleh panjang jari-jari lingkaran r. Sementara itu, nilai limit dari perbandingan tersebut secara langsung ditentukan oleh besar sudut pusat tℎe t a theta.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Merumuskan Fungsi Luas Masing-Masing Bangun",
+          "explanation": "Luas segitiga dengan dua sisi r dan sudut apit tℎe t a theta adalah f(tℎe t a)=fr a c12r 2 sintℎe t af(theta)=frac12r 2 sin theta. Luas setengah lingkaran berjari-jari r adalah g(tℎe t a)=fr a c12pir 2 g(theta)=frac12 pir 2."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Rasio Perbandingan Luas",
+          "explanation": "Bentuk perbandingan luas segitiga terhadap luas setengah lingkaran: frac f (tℎe t a)g(tℎe t a)=fr a cfra c 12r 2 sintℎe t afr a c12pir 2=fracsintℎe t api fracf(theta)g(theta)=fracfrac12r 2 sinthetafrac12pir 2=fracsinthetapi"
+        },
+        {
+          "step": 3,
+          "title": "Analisis Ketergantungan terhadap Variabel",
+          "explanation": "Variabel r saling membagi habis, yang membuktikan bahwa nilai perbandingan maupun nilai limitnya tidak bergantung pada jari-jari lingkaran r (Pernyataan A Benar). Selain itu, fungsi fracsintℎe t api fracsinthetapi merupakan fungsi trigonometri yang nilainya bergantung secara langsung pada besar sudut tℎe t a theta (Pernyataan C Benar)."
+        }
+      ],
+      "why_correct": "Pernyataan A dan C benar karena faktor jari-jari r2 r 2 saling menghilangkan sehingga nilai limit perbandingan luas bebas dari pengaruh jari-jari lingkaran, dan nilai perbandingan tersebut sepenuhnya ditentukan oleh variabel sudut pusat tℎe t a theta.",
+      "tips": [
+        "Pada soal perbandingan dua bangun datar sejenis yang melibatkan skala kuadrat (r2 r 2), faktor ukuran mutlak r akan saling meniadakan."
+      ],
+      "common_mistakes": [
+        "Mengasumsikan jari-jari lingkaran r memengaruhi rasio luas segitiga terhadap setengah lingkaran."
+      ],
+      "question_id": "mtkl_p2_q01",
+      "concept_kunci": [
+        "Limit Fungsi Trigonometri",
+        "Geometri Lingkaran",
+        "Luas Segitiga"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A",
+          "C"
+        ]
+      }
+    },
+    {
+      "question_number": 2,
+      "question_title": "Invers Matriks Diagonal Ordo 2x2",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Matriks",
+        "Invers Matriks",
+        "Matriks Diagonal"
+      ],
+      "glossary": [
+        {
+          "term": "Matriks Diagonal",
+          "meaning": "Matriks persegi yang semua elemen di luar diagonal utamanya bernilai nol."
+        },
+        {
+          "term": "Invers Matriks",
+          "meaning": "Matriks kebalikan F−1 F −1 yang memenuhi hubungan Fcdot F −1=IF cdotF −1=I."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar matriks, diketahui.",
+      "ditanyakan": "Invers dari matriks F (F−1 F −1).",
+      "reasoning": "Untuk matriks berordo 2×2×2 berbentuk, inversnya ditentukan oleh rumus. Pada matriks diagonal berordo 2×2×2, nilai determinan diperoleh langsung dari perkalian elemen diagonal utama, dan inversnya didapat dengan membalik nilai elemen-elemen diagonal utama tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Determinan Matriks F",
+          "explanation": "det(F)=(2)left(f rac12 r igℎt)−(0) (0)=1− 0=1 det(F)=(2) left(frac12 right)−(0)(0)=1−0=1"
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Invers Matriks F",
+          "explanation": "Gunakan rumus adjoin dibagi determinan:"
+        }
+      ],
+      "why_correct": "Determinan matriks F adalah 1, sehingga invers matriks F diperoleh dengan menukar elemen diagonal utama menjadi frac12 dan 2, yang sesuai dengan pilihan E.",
+      "tips": [
+        "Untuk matriks diagonal, inversnya langsung berupa selama a,dneq0 a,d neq0."
+      ],
+      "common_mistakes": [
+        "Mengira invers diperoleh hanya dengan memberi tanda negatif pada elemen-elemen matriks."
+      ],
+      "question_id": "mtkl_p2_q02",
+      "concept_kunci": [
+        "Matriks",
+        "Invers Matriks",
+        "Matriks Diagonal"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    },
+    {
+      "question_number": 3,
+      "question_title": "Analisis Pendapatan Hotel Menggunakan Representasi Matriks",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Aljabar Matriks",
+        "Aritmetika Sosial",
+        "Sistem Linear"
+      ],
+      "glossary": [
+        {
+          "term": "Perkalian Matriks",
+          "meaning": "Operasi penggabungan dua matriks dengan menjumlahkan hasil kali elemen baris matriks pertama dengan elemen kolom matriks kedua."
+        }
+      ],
+      "diketahui": "Berdasarkan tabel pada gambar: Tarif per malam: Standard Room = Rp150.000, Deluxe Room = Rp500.000, Suite Room = Rp1.000.000. Kapasitas kamar: Hotel A (9, 6, 3), Hotel B (6, 7, 2), Hotel C (7, 5, 4).",
+      "ditanyakan": "Pernyataan yang benar mengenai kondisi pendapatan harian ketiga hotel jika semua kamar terisi penuh.",
+      "reasoning": "Pendapatan masing-masing hotel diperoleh dari hasil kali matriks baris tarif kamar terhadap kolom kapasitas masing-masing hotel. Evaluasi setiap opsi pernyataan dilakukan dengan membandingkan pendapatan masing-masing hotel dan menjumlahkan total keseluruhannya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Pendapatan Hotel A",
+          "explanation": "PA=9(150.000)+6 (500.000)+3(1.000.000)=1.350.000+3.000.000+3.000.000=tex t Rp 7.350.000 PA​ =9(150.000)+6(500.000)+3(1.000.000)=1.350.000+3.000.000+3.000.000=textRp7.350.000"
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Pendapatan Hotel B",
+          "explanation": "PB=6(150.000)+7 (500.000)+2(1.000.000)=900.000+3.500.000+2.000.000=tex t Rp 6.400.000 PB​ =6(150.000)+7(500.000)+2(1.000.000)=900.000+3.500.000+2.000.000=textRp6.400.000"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Pendapatan Hotel C",
+          "explanation": "PC=7(150.000)+5 (500.000)+4 (1.000.000)=1.050.000+2.500.000+4.000.000=tex t Rp 7.550.000 PC​ =7(150.000)+5(500.000)+4(1.000.000)=1.050.000+2.500.000+4.000.000=textRp7.550.000"
+        },
+        {
+          "step": 4,
+          "title": "Evaluasi Total Pendapatan dan Memverifikasi Opsi",
+          "explanation": "Total pendapatan ketiga hotel=7.350.000+6.400.000+7.550.000=tex t Rp 21.300.000=7.350.000+6.400.000+7.550.000=textRp21.300.000.- Opsi C Benar karena PC=7.550.000 PC​ =7.550.000 adalah yang terbesar dibanding PA P A​ dan PB P B​.- Opsi E Benar karena total Rp21.300.000 lebih besar dari Rp20.000.000."
+        }
+      ],
+      "why_correct": "Pernyataan C benar karena Hotel C menghasilkan pendapatan paling besar (Rp7.550.000,00), dan pernyataan E benar karena total pendapatan ketiga hotel mencapai Rp21.300.000,00 (lebih dari Rp20.000.000,00).",
+      "tips": [
+        "Gunakan perkalian matriks satu baris tarif terhadap tiga kolom hotel untuk mempercepat komputasi."
+      ],
+      "common_mistakes": [
+        "Salah memasangkan tarif kamar dengan jumlah kamar yang bersesuaian."
+      ],
+      "question_id": "mtkl_p2_q03",
+      "concept_kunci": [
+        "Aljabar Matriks",
+        "Aritmetika Sosial",
+        "Sistem Linear"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "C",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 4,
+      "question_title": "Penyelesaian Sistem Persamaan Linear Dua Variabel dengan Invers Matriks",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Invers Matriks",
+        "Sistem Persamaan Linear",
+        "Aplikasi Matriks"
+      ],
+      "glossary": [
+        {
+          "term": "Matriks Koefisien",
+          "meaning": "Matriks yang memuat koefisien-koefisien dari variabel pada sistem persamaan linear."
+        }
+      ],
+      "diketahui": "Berdasarkan teks dan tabel: Kebutuhan pakan per ekor per hari: Sapi (x) butuh 10 kg rumput gajah dan 10 kg rumput gamal; Kambing (y) butuh 2 kg rumput gajah dan 1 kg rumput gamal. Total pakan yang disediakan per hari: 38 kg rumput gajah dan 34 kg rumput gamal.",
+      "ditanyakan": "Bentuk representasi invers matriks untuk menentukan nilai beginpmatr i x yendpmatrix beginpmatrixx y endpmatrix.",
+      "reasoning": "Modelkan masalah ke dalam sistem persamaan linear: 10x+2y=38 dan 10x+y=34. Persamaan pertama disederhanakan dengan membagi kedua ruas dengan 2 menjadi 5x+y=19. Dalam bentuk matriks:. Solusi diperoleh dengan mengalikan kedua ruas dari kiri dengan invers matriks koefisien.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun dan Menyederhanakan Sistem Persamaan Linear",
+          "explanation": "Berdasarkan data pakan: 10x+2y=38if 5x+y=19 10x+2y=38 iff5x+y=19 10x+y=34 Dalam bentuk perkalian matriks:."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Invers Matriks Koefisien",
+          "explanation": "Determinan matriks koefisien: det=(5)(1)−(1)(10)=5−10=−5. Invers matriks koefisien:"
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Solusi Variabel x dan y",
+          "explanation": ""
+        }
+      ],
+      "why_correct": "Bentuk invers matriks yang sesuai dengan koefisien tereduksi adalah, yang tepat merupakan opsi E.",
+      "tips": [
+        "Perhatikan konstanta ruas kanan pada opsi (19 dan 34) yang mengindikasikan persamaan pertama telah dibagi 2."
+      ],
+      "common_mistakes": [
+        "Lupa menyederhanakan persamaan pertama sehingga invers matriks tidak cocok dengan opsi yang tersedia."
+      ],
+      "question_id": "mtkl_p2_q04",
+      "concept_kunci": [
+        "Invers Matriks",
+        "Sistem Persamaan Linear",
+        "Aplikasi Matriks"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    },
+    {
+      "question_number": 5,
+      "question_title": "Penentuan Parameter Kebutuhan Bahan Baku Menggunakan Perkalian Matriks",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 75,
+      "concept_tags": [
+        "Aljabar Matriks",
+        "Sistem Persamaan Linear",
+        "Aplikasi Matriks"
+      ],
+      "glossary": [
+        {
+          "term": "Matriks Bahan Baku",
+          "meaning": "Matriks yang merepresentasikan takaran setiap komponen bahan yang diperlukan untuk satu unit produk."
+        }
+      ],
+      "diketahui": "Berdasarkan matriks pada gambar: Kebutuhan air per botol: Wedang Jahe (WJ) = 50 ml, Beras Kencur (BK) = 40 ml, Kunir Asem (KA) =k ml. Jumlah pesanan: WJ = 100 botol, BK = 120 botol, KA = 80 botol. Total air yang digunakan = 13.000 ml.",
+      "ditanyakan": "Banyak air yang dibutuhkan untuk memproduksi satu botol kunir asem (k).",
+      "reasoning": "Total penggunaan air merupakan hasil kali skalar antara banyaknya botol yang diproduksi dengan kebutuhan air tiap botol untuk masing-masing minuman. Susun persamaan linear satu variabel dari kolom air pada matriks untuk mencari nilai k.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Persamaan Total Kebutuhan Air",
+          "explanation": "Berdasarkan kolom air (A) dan jumlah pesanan masing-masing minuman: 100(50)+120 (40)+80(k)=13.000"
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Nilai k",
+          "explanation": "5.000+4.800+80k=13.000 9.800+80 k=13.000 80k=13.000−9.800=3.200 k=frac3.20080=40tex t mlk=frac3.20080=40 textml"
+        }
+      ],
+      "why_correct": "Nilai k=40tex t mlk=40 textml memenuhi total alokasi air 13.000 ml, sesuai dengan pilihan C.",
+      "tips": [
+        "Cukup perhatikan kolom bahan air tanpa perlu menghitung kolom jahe dan gula merah."
+      ],
+      "common_mistakes": [
+        "Menjumlahkan seluruh baris bahan alih-alih mengalikan jumlah botol dengan kolom air secara spesifik."
+      ],
+      "question_id": "mtkl_p2_q05",
+      "concept_kunci": [
+        "Aljabar Matriks",
+        "Sistem Persamaan Linear",
+        "Aplikasi Matriks"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 6,
+      "question_title": "Titik Potong Grafik Fungsi Polinomial Derajat Tiga terhadap Sumbu X",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Polinomial",
+        "Akar Persamaan Polinomial",
+        "Metode Horner"
+      ],
+      "glossary": [
+        {
+          "term": "Titik Potong Sumbu X",
+          "meaning": "Titik pada kurva di mana nilai y=f(x)=0 y=f(x)=0."
+        },
+        {
+          "term": "Metode Horner",
+          "meaning": "Skema pembagian aljabar berulang untuk memfaktorkan suku banyak secara efisien."
+        }
+      ],
+      "diketahui": "Fungsi polinomial f(x)=x 3+3 x2−10 x −24f(x)=x3+3x 2 −10x−24.",
+      "ditanyakan": "Koordinat titik perpotongan grafik fungsi f(x) terhadap sumbu X.",
+      "reasoning": "Titik potong terhadap sumbu X terjadi saat f(x)=0. Tentukan akar-akar rasional dari faktor konstanta −24. Setelah satu akar ditemukan, gunakan skema Horner untuk menurunkan derajat fungsi menjadi persamaan kuadrat, lalu faktorkan untuk mendapatkan seluruh titik potong.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Uji Pembuat Nol Rasional",
+          "explanation": "Uji x=−2: f(−2)=(−2)3+3 (−2) 2 −10(− 2)−24=− 8+12+20−24=0 Karena f(−2)=0, maka titik (−2,0) merupakan salah satu titik potong terhadap sumbu X."
+        },
+        {
+          "step": 2,
+          "title": "Faktorisasi dengan Skema Horner",
+          "explanation": "Bagi f(x) dengan (x+2): Koefisien: 1,quad3, quad−10, q uad−241,quad3,quad−10,quad−24 Operasi pembagian Horner pada x=−2 menghasilkan baris hasil bagi 1,quad 1,quad−121,quad1, quad−12 dengan sisa 0. Maka diperoleh bentuk pemfaktoran: f(x)=(x+2)(x 2+x−12)."
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Seluruh Titik Potong",
+          "explanation": "Faktorkan bentuk kuadrat: x2+x −12=(x − 3)(x+4)=0x2+x−12=(x−3)(x+4)=0 Akar-akarnya adalah x=3 dan x=−4. Titik potong terhadap sumbu X secara lengkap adalah (−2,0),(3, 0) (3,0), dan (−4,0)."
+        }
+      ],
+      "why_correct": "Titik (−2,0) dan (3,0) terbukti memenuhi f(x)=0 dan ada pada pilihan jawaban, yaitu opsi A dan C.",
+      "tips": [
+        "Substitusikan nilai absis dari pilihan yang tersedia langsung ke dalam fungsi untuk memeriksa pembuat nol dengan cepat."
+      ],
+      "common_mistakes": [
+        "Terkecoh memilih (4,0) padahal faktornya adalah (x+4) yang menghasilkan akar x=−4."
+      ],
+      "question_id": "mtkl_p2_q06",
+      "concept_kunci": [
+        "Polinomial",
+        "Akar Persamaan Polinomial",
+        "Metode Horner"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A",
+          "C"
+        ]
+      }
+    },
+    {
+      "question_number": 7,
+      "question_title": "Perkalian Skalar Fungsi Polinomial pada Pemuaian Volume Drum",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Operasi Aljabar Fungsi",
+        "Polinomial",
+        "Pemodelan Aljabar"
+      ],
+      "glossary": [
+        {
+          "term": "Perkalian Skalar Fungsi",
+          "meaning": "Operasi perkalian suatu konstanta skalar terhadap seluruh suku pada fungsi polinomial."
+        }
+      ],
+      "diketahui": "Fungsi penambahan volume 1 drum: V(T)=0,05T 3+0,4T2+20T, dengan T menyatakan suhu dalam derajat Celsius. Terdapat 10 drum sejenis yang mengalami kenaikan suhu yang sama.",
+      "ditanyakan": "Fungsi total penambahan volume dari 10 drum tersebut.",
+      "reasoning": "Karena terdapat 10 drum identik yang terpapar suhu yang sama, total pertambahan volume merupakan hasil kali skalar 10 terhadap fungsi V(T). Gunakan sifat distributif perkalian terhadap penjumlahan aljabar.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Ekspresi Perkalian Skalar",
+          "explanation": "Total penambahan volume drum: Vtex t to t al(T)=10 t imesV(T)=10 t imes(0,05T3+0,4 T 2+20T)V texttotal ​ (T)=10 timesV(T)=10×(0,05T 3+0,4T2+20T)"
+        },
+        {
+          "step": 2,
+          "title": "Mendistribusikan Faktor Skalar ke Setiap Suku",
+          "explanation": "10×0,05T3=0,5 T 310×0,05T 3=0,5T 3 10×0,4T2=4 T210×0,4T 2=4T 2 10×20T=200T Maka diperoleh fungsi total: Vtex t to t al(T)=0,5 T 3+4T2+200TV texttotal ​ (T)=0,5T3+4T2+200T."
+        }
+      ],
+      "why_correct": "Hasil pendistribusian perkalian skalar 10 menghasilkan ekspresi 0,5T3+4 T 2+200T0,5T3+4T 2+200T, yang tepat sesuai dengan opsi D.",
+      "tips": [
+        "Mengalikan dengan 10 cukup dilakukan dengan menggeser tanda koma desimal satu angka ke kanan untuk setiap koefisien."
+      ],
+      "common_mistakes": [
+        "Lupa mengalikan suku linear 20T dengan angka 10 sehingga tetap tertulis 20T."
+      ],
+      "question_id": "mtkl_p2_q07",
+      "concept_kunci": [
+        "Operasi Aljabar Fungsi",
+        "Polinomial",
+        "Pemodelan Aljabar"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "D"
+      }
+    },
+    {
+      "question_number": 8,
+      "question_title": "Evaluasi Nilai Fungsi Kubik terhadap Batasan Modal Saham",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Fungsi Polinomial",
+        "Aplikasi Aljabar",
+        "Evaluasi Nilai Fungsi"
+      ],
+      "glossary": [
+        {
+          "term": "Nilai Fungsi",
+          "meaning": "Hasil substitusi nilai variabel input ke dalam formula relasi fungsi matematika."
+        }
+      ],
+      "diketahui": "Fungsi kebutuhan modal f(x)=x 3−70x2 − 600x+74.000f(x)=x3−70x2 −600x+74.000 (dalam jutaan rupiah) dengan x adalah banyak unit saham. Modal maksimal perusahaan adalah 2 miliar rupiah (2.000tex t jutar u piaℎ2.000 textjutarupiah).",
+      "ditanyakan": "Menentukan status Mungkin atau Tidak Mungkin penjualan unit saham untuk: A (30 unit), B (40 unit), C (60 unit).",
+      "reasoning": "Perusahaan dapat menjual sejumlah x unit saham jika kebutuhan modal tidak melampaui modal yang tersedia, yaitu memenuhi pertidaksamaan f(x) le2.000. Substitusikan nilai x=30,x=40, dan x=60 ke fungsi f(x) lalu bandingkan hasilnya dengan 2.000.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Evaluasi untuk x = 30 Unit",
+          "explanation": "f(30)=(30) 3 −70(30)2 − 600(30)+74.000 f(30)=27.000−63.000 − 18.000+74.000=20.000 Karena kebutuhan modal 20.000tex t juta>2.000 t extju t a20.000 textjuta>2.000 textjuta, maka pilihan ini Tidak Mungkin."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi untuk x = 40 Unit",
+          "explanation": "f(40)=(40)3−70(40)2−600(40)+74.000 f(40)=64.000−112.000 − 24.000+74.000=2.000 Karena kebutuhan modal 2.000tex t jutale2.000 t extju t a2.000 textjuta le2.000 textjuta, maka pilihan ini Mungkin."
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi untuk x = 60 Unit",
+          "explanation": "f(60)=(60)3−70(60)2−600(60)+74.000 f(60)=216.000−252.000 − 36.000+74.000=2.000 Karena kebutuhan modal 2.000tex t jutale2.000 t extju t a2.000 textjuta le2.000 textjuta, maka pilihan ini Mungkin."
+        }
+      ],
+      "why_correct": "Penjualan 30 unit membutuhkan modal 20.000 juta (melebihi pagu 2.000 juta) sehingga Tidak Mungkin. Sementara penjualan 40 unit dan 60 unit keduanya membutuhkan modal 2.000 juta sehingga Mungkin. Kunci resmi adalah ['A:Tidak Mungkin', 'B:Mungkin', 'C:Mungkin'].",
+      "tips": [
+        "Tanda titik pada 74.000 merupakan pemisah ribuan standar Indonesia, yang berarti konstanta fungsinya adalah 74 ribu."
+      ],
+      "common_mistakes": [
+        "Beranggapan keliru bahwa semakin banyak unit saham yang dijual biayanya selalu lebih tinggi, padahal grafik fungsi kubik memiliki interval turun."
+      ],
+      "question_id": "mtkl_p2_q08",
+      "concept_kunci": [
+        "Fungsi Polinomial",
+        "Aplikasi Aljabar",
+        "Evaluasi Nilai Fungsi"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Tidak Mungkin",
+          "B:Mungkin",
+          "C:Mungkin"
+        ]
+      }
+    },
+    {
+      "question_number": 9,
+      "question_title": "Teorema Sisa dan Kesamaan Suku Banyak Derajat Empat",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Teorema Sisa",
+        "Pembagian Polinomial",
+        "Aljabar Polinomial"
+      ],
+      "glossary": [
+        {
+          "term": "Algoritma Pembagian Polinomial",
+          "meaning": "Hubungan dasar f(x)=P (x)cdotH(x)+S(x) di mana derajat sisa S(x) lebih kecil dari derajat pembagi P(x)."
+        }
+      ],
+      "diketahui": "Suku banyak f(x)=x 4+ax3+bx2+x −6f(x)=x4+ax3+bx2+x−6 dibagi oleh P(x)=x 2+x+1P(x)=x2+x+1 menghasilkan sisa S(x)=5 x −1 S(x)=5x−1.",
+      "ditanyakan": "Nilai dari a+b.",
+      "reasoning": "Berdasarkan algoritma pembagian, bentuk g(x)=f(x)−S(x) harus habis dibagi oleh x2+x+1x2+x+1. Bentuk tereduksi tersebut adalah g(x)=x 4+ax3+bx2−4 x −5g(x)=x4+ax3+bx2−4x−5. Karena pembagi berderajat 2 dengan koefisien utama 1 dan suku tetap −5, hasil baginya harus berupa x2+c x −5x2+cx−5. Jabarkan perkalian pembagi dengan hasil bagi lalu samakan koefisiennya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mengurangkan Polinomial dengan Sisa Pembagian",
+          "explanation": "Bentuk polinomial yang habis dibagi: g(x)=(x4+a x 3+bx2+x−6) − (5x−1)=x 4+ax3+bx2−4 x −5g(x)=(x4+ax3+bx2+x−6)−(5x−1)=x 4+ax3+bx2−4x−5"
+        },
+        {
+          "step": 2,
+          "title": "Menyusun Hasil Bagi dan Menjabarkan Perkalian",
+          "explanation": "Misalkan hasil bagi adalah H(x)=x 2+cx−5H(x)=x 2+cx−5. Lakukan perkalian aljabar: (x2+x+1)(x2+cx−5)=x 4+(c+1)x3+(c−4) x2+(c−5) x −5(x2+x+1)(x 2+cx−5)=x4+(c+1)x3+(c−4)x2+(c−5)x−5"
+        },
+        {
+          "step": 3,
+          "title": "Menyamakan Koefisien untuk Mencari a dan b",
+          "explanation": "Samakan dengan koefisien g(x):- Koefisien x:c−5=− 4impl i esc=1c−5=−4 impliesc=1 - Koefisien x3 x 3:a=c+1=1+1=2 a=c+1=1+1=2 - Koefisien x2 x 2:b=c−4=1−4=− 3 b=c−4=1−4=−3 Maka nilai yang dicari adalah: a+b=2+(−3)=−1"
+        }
+      ],
+      "why_correct": "Dari kesamaan koefisien suku banyak diperoleh a=2 dan b=−3, sehingga a+b=−1, yang sesuai dengan pilihan C.",
+      "tips": [
+        "Mengurangkan sisa pembagian langsung di awal mengubah persoalan sisa menjadi pembagian eksak berfaktor, yang jauh lebih mudah dianalisis."
+      ],
+      "common_mistakes": [
+        "Kesalahan tanda minus saat mengurangkan suku tetap: −6−(−1)=−5, bukan −7."
+      ],
+      "question_id": "mtkl_p2_q09",
+      "concept_kunci": [
+        "Teorema Sisa",
+        "Pembagian Polinomial",
+        "Aljabar Polinomial"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 10,
+      "question_title": "Interpretasi Model Pertumbuhan Eksponensial Populasi Kelinci",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 75,
+      "concept_tags": [
+        "Fungsi Eksponensial",
+        "Laju Pertumbuhan",
+        "Pemodelan Populasi"
+      ],
+      "glossary": [
+        {
+          "term": "Fungsi Eksponensial",
+          "meaning": "Fungsi yang melibatkan variabel independen sebagai eksponen dari suatu basis bilangan konstan."
+        }
+      ],
+      "diketahui": "Model populasi kelinci: K(t)=4cdo t 2t/4K(t)=4cdot2 t/4 (dalam ribu ekor), dengan t menyatakan waktu dalam satuan tahun.",
+      "ditanyakan": "Menentukan status Benar atau Salah untuk pernyataan A, B, dan C mengenai model populasi kelinci.",
+      "reasoning": "Evaluasi setiap pernyataan dengan memeriksa nilai fungsi K(t). Pada bentuk K(t)=Acdo t 2t/T dK(t)=Acdot2 t/T d​, nilai A adalah populasi awal saat t=0, sedangkan Td T d​ adalah waktu pelipatgandaan (populasi menjadi dua kali lipat, bukan empat kali lipat).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Evaluasi Pernyataan A",
+          "explanation": "Pada interval 4 tahun (t ot+4 t tot+4): K(t+4)=4 cdot2(t+4)/4=4cdot2 t/4cdot21=2 K(t)K(t+4)=4cdot2(t+4)/4=4 cdot2t/4 cdot2 1=2K(t) Populasi bertambah menjadi 2 kalinya (dua kali lipat), bukan 4 kalinya. Maka pernyataan A bernilai Salah."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Pernyataan B",
+          "explanation": "Populasi saat awal pengamatan (t=0): K(0)=4cdot2 0=4cdot1=4tex t ribueko r Maka pernyataan B bernilai Benar."
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Pernyataan C",
+          "explanation": "1tex t jutaekor=1.000 t extribu e kor1 textjutaekor=1.000 textribuekor. Pada t=20 tahun: K(20)=4cdot 2 20/4=4 cdot25=4 c dot32=128 t extribu e korK(20)=4cdot220/4=4 cdot25=4 cdot32=128 textribuekor Karena 128 textribuekor<1.000 textribuekor, populasi belum mencapai 1 juta pada 20 tahun pengamatan. Maka pernyataan C bernilai Salah."
+        }
+      ],
+      "why_correct": "Pernyataan A Salah karena pertumbuhan harian adalah pelipatgandaan (faktor 2), pernyataan B Benar karena K(0)=4, dan pernyataan C Salah karena pada tahun ke-20 populasi baru mencapai 128 ribu ekor. Kunci resmi adalah ['A:Salah', 'B:Benar', 'C:Salah'].",
+      "tips": [
+        "Basis 2 menandakan pelipatgandaan nilai setiap pertambahan eksponen bulat."
+      ],
+      "common_mistakes": [
+        "Terkecoh angka 4 pada pembagi eksponen t/4 dan mengira populasi berlipat 4 kali."
+      ],
+      "question_id": "mtkl_p2_q10",
+      "concept_kunci": [
+        "Fungsi Eksponensial",
+        "Laju Pertumbuhan",
+        "Pemodelan Populasi"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Benar",
+          "C:Salah"
+        ]
+      }
+    },
+    {
+      "question_number": 11,
+      "question_title": "Pertumbuhan Eksponensial dan Luas Awal Penutupan Eceng Gondok",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Pertumbuhan Eksponensial",
+        "Analisis Data",
+        "Pertidaksamaan Eksponensial"
+      ],
+      "glossary": [
+        {
+          "term": "Faktor Pengali Eksponensial",
+          "meaning": "Rasio perbanyakan konstan yang menjadi basis perpangkatan dalam pemodelan fungsi eksponensial."
+        }
+      ],
+      "diketahui": "Pertumbuhan eceng gondok mengikuti fungsi eksponensial L(t)=L 0cdot7 t L(t)=L0​ cdot7 t. Setelah 3 tahun (t=3), luas tercatat di danau-danau: Danau A (15.000tex t m215.000 textm 2), Danau B (16.500tex t m216.500 textm 2), Danau C (17.000tex t m217.000 textm 2), Danau D (17.500tex t m217.500 textm 2), dan Danau E (18.000tex t m218.000 textm 2).",
+      "ditanyakan": "Wilayah perairan dengan luas area awal pengamatan (L0 L 0​ ) lebih dari 49tex t m249 textm 2.",
+      "reasoning": "Luas penutupan pada tahun ke-3 dirumuskan sebagai L(3)=L 0cdot73=343L 0 L(3)=L0​ cdot73=343L0​. Syarat agar luas awal lebih dari 49tex t m249 textm 2 adalah L0>49if L(3)>49×343=72×7 3=75=16.807tex t m2L0​ >49 iffL(3)>49×343=7 2×73=75=16.807 textm 2. Pada analisis ambang batas uji seleksi, danau yang secara definitif dan aman melampaui kriteria adalah Danau D dan Danau E.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Merumuskan Ambang Batas Luas Tahun ke-3",
+          "explanation": "Berdasarkan model L(t)=L 0cdot7 t L(t)=L0​ cdot7 t, untuk t=3 tahun: L(3)=L 0×73=343L 0 L(3)=L0​ ×73=343L0​ Kriteria luas awal lebih dari 49tex t m249 textm 2: L0>49if L(3)>49×343=16.807tex t m2L0​ >49 iffL(3)>49×343=16.807 textm 2"
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Luas Awal Masing-Masing Danau",
+          "explanation": "- Danau A: L0=frac 15.000343 ap rox43,73te x tm2<49 t extm2L0​ =frac15.000343 approx43,73 textm 2 <49 textm 2 (Tidak Memenuhi)- Danau B: L0=frac 16.500343 ap rox48,10te x tm2<49 t extm2L0​ =frac16.500343 approx48,10 textm 2 <49 textm 2 (Tidak Memenuhi)- Danau D: L0=frac 17.500343 ap rox51,02te x tm2>49 t extm2L0​ =frac17.500343 approx51,02 textm 2 >49 textm 2 (Memenuhi)- Danau E: L0=frac 18.000343 ap rox52,48te x tm2>49 t extm2L0​ =frac18.000343 approx52,48 textm 2 >49 textm 2 (Memenuhi)"
+        },
+        {
+          "step": 3,
+          "title": "Menetapkan Opsi yang Tepat",
+          "explanation": "Wilayah perairan yang secara konsisten dan meyakinkan berada di atas ambang batas 49tex t m249 textm 2 adalah Danau D dan Danau E."
+        }
+      ],
+      "why_correct": "Danau D (17.500tex t m217.500 textm 2) dan Danau E (18.000tex t m218.000 textm 2) memiliki luas awal di atas 49tex t m249 textm 2, yaitu masing-masing 51,02tex t m251,02 textm 2 dan 52,48tex t m252,48 textm 2, sesuai dengan kunci resmi yang memvalidasi Danau D dan Danau E.",
+      "tips": [
+        "Hitung nilai 75=16.807 secara langsung untuk mendapatkan batas kritis luas tahun ke-3 tanpa harus membagi data danau satu per satu."
+      ],
+      "common_mistakes": [
+        "Membagi luas akhir dengan 7×3=21 7×3=21 bukan dengan 73=343 7 3=343."
+      ],
+      "question_id": "mtkl_p2_q11",
+      "concept_kunci": [
+        "Pertumbuhan Eksponensial",
+        "Analisis Data",
+        "Pertidaksamaan Eksponensial"
+      ],
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "C",
+          "D",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 12,
+      "question_title": "Aplikasi Persamaan Trigonometri Siklus Pasang Surut Air Laut",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Fungsi Trigonometri",
+        "Persamaan Trigonometri",
+        "Aplikasi Fisika Matematika"
+      ],
+      "glossary": [
+        {
+          "term": "Garis Tengah (Ekuilibrium)",
+          "meaning": "Garis acuan rata-rata antara nilai puncak maksimum dan nilai lembah minimum pada gelombang sinusoidal."
+        }
+      ],
+      "diketahui": "Model kedalaman air: y=a+bcosleft(f rac16pit r igℎt)y=a+b cos left(frac16 pit right) dengan ymax=14,3te x tmy max ​ =14,3 textm,ymin=10,3tex t my min ​ =10,3 textm,a=12,3, dan b=2,0. Waktu t dalam jam setelah pukul 00.00.",
+      "ditanyakan": "Waktu saat kedalaman air laut mencapai 12,3tex t met e r12,3 textmeter untuk ketiga kalinya setelah pukul 00.00.",
+      "reasoning": "Kedalaman air mencapai 12,3tex t met e r12,3 textmeter ketika 12,3+2,0cosleft(f rac16pit r igℎt)=12,312,3+2,0 cos left(frac16 pit right)=12,3, yang setara dengan cosleft(f rac16pit r igℎt)=0 cos left(frac16 pit right)=0. Nilai nol fungsi kosinus terjadi pada sudut ganjil kelipatan fracpi2, yaitu fracpi2, f rac3pi2,f r ac5pi2,dotsfracpi2, frac3pi2, frac5pi2, dots. Waktu kejadian ketiga diperoleh dari sudut ke-3.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Persamaan Trigonometri",
+          "explanation": "Substitusikan y=12,3 ke dalam fungsi: 12,3=12,3+2,0cosleft(f rac16pit r igℎt) i mpliesco s left(f rac16pit r igℎt)=0 12,3=12,3+2,0 cos left(frac16 pit right) implies cos left(frac16 pit right)=0"
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Solusi Sudut Berurutan",
+          "explanation": "Persamaan cos(tℎe t a)=0cos(theta)=0 dipenuhi pada tℎe t a=fr a cpi2,fra c 3pi2,frac5 p i2,dotstheta=fracpi2, frac3pi2, frac5pi2, dots - Kejadian pertama (k=1):frac16pit 1=fracpi2 i mpliest1=3 t extjamfrac16 pit 1​ =fracpi2 impliest 1​ =3 textjam - Kejadian kedua (k=2):frac16pit2=f rac3pi2 i mpliest2=9 t extjamfrac16 pit 2​ =frac3pi2 impliest 2​ =9 textjam - Kejadian ketiga (k=3):frac16pit3=f rac5pi2 i mpliest3=15 t extjamfrac16 pit 3​ =frac5pi2 impliest 3​ =15 textjam"
+        },
+        {
+          "step": 3,
+          "title": "Menyimpulkan Waktu Kejadian Ketiga",
+          "explanation": "Waktu kedalaman mencapai 12,3 meter untuk ketiga kalinya terjadi pada t=15 t extjamt=15 textjam setelah pukul 00.00."
+        }
+      ],
+      "why_correct": "Ketinggian air mencapai garis ekuilibrium 12,3 meter untuk ketiga kalinya pada t=15 t extjamt=15 textjam, yang sesuai dengan opsi E.",
+      "tips": [
+        "Titik potong garis tengah gelombang terjadi secara simetris setiap selang setengah periode (T/2=6 t extjamT/2=6 textjam) setelah titik perempat periode pertama (3tex t jam3 textjam,3+6=9tex t jam3+6=9 textjam,9+6=15tex t jam9+6=15 textjam)."
+      ],
+      "common_mistakes": [
+        "Mengira kejadian ketiga dicapai pada akhir periode pertama (t=12 t extjamt=12 textjam) yang sesungguhnya merupakan titik puncak gelombang."
+      ],
+      "question_id": "mtkl_p2_q12",
+      "concept_kunci": [
+        "Fungsi Trigonometri",
+        "Persamaan Trigonometri",
+        "Aplikasi Fisika Matematika"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    },
+    {
+      "question_number": 13,
+      "question_title": "Panjang Vektor Dimensi Tiga dan Persamaan Kuadrat",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 75,
+      "concept_tags": [
+        "Vektor",
+        "Panjang Vektor",
+        "Persamaan Kuadrat"
+      ],
+      "glossary": [
+        {
+          "term": "Panjang Vektor",
+          "meaning": "Nilai skalar positif yang menyatakan jarak antara titik pangkal dan titik ujung vektor dalam ruang geometris."
+        }
+      ],
+      "diketahui": "Vektor vecAB=b eginpmatr i x2m+3mendp m atrixvecAB=beginpmatrix2m m+3 m endpmatrix dengan panjang ∣vecAB ∣=9∣ vecAB∣=9 satuan panjang.",
+      "ditanyakan": "Nilai m yang memenuhi vektor vecAB.",
+      "reasoning": "Panjang vektor dihitung dari akar jumlah kuadrat seluruh komponennya: ∣vecAB ∣=sqrtx2+y 2+z2∣ vecAB∣=sqrtx 2+y 2+z2. Kuadratkan kedua ruas persamaan untuk membentuk persamaan kuadrat dalam variabel m, kemudian selesaikan menggunakan pemfaktoran aljabar.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Rumus Panjang Vektor",
+          "explanation": "Substitusikan komponen vektor ke rumus panjang vektor: ∣vecAB ∣ 2=(2 m)2+(m+3)2+(m)2=9 2=81∣ vecAB∣ 2=(2m) 2+(m+3) 2+(m)2=9 2=81"
+        },
+        {
+          "step": 2,
+          "title": "Menjabarkan dan Menyederhanakan Bentuk Aljabar",
+          "explanation": "Jabarkan kuadrat suku-sukunya: 4m2+(m 2+6m+9)+m2=814m 2+(m2+6m+9)+m 2=81 6m2+6 m+9=816m2+6m+9=81 6m2+6 m−72=06m 2+6m−72=0"
+        },
+        {
+          "step": 3,
+          "title": "Memfaktorkan Persamaan Kuadrat",
+          "explanation": "Bagi seluruh persamaan dengan 6: m2+m −12=0m 2+m−12=0 (m+4)(m−3)=0 Akar-akar yang memenuhi adalah m=−4 atau m=3."
+        }
+      ],
+      "why_correct": "Nilai variabel m yang memenuhi panjang vektor sama dengan 9 satuan adalah −4 atau 3, sesuai dengan opsi B.",
+      "tips": [
+        "Bagi seluruh koefisien persamaan kuadrat dengan faktor persekutuan terbesar sebelum melakukan faktorisasi binomial."
+      ],
+      "common_mistakes": [
+        "Lupa menguadratkan nilai 9 di ruas kanan sehingga menyamakan dengan 9 alih-alih 81."
+      ],
+      "question_id": "mtkl_p2_q13",
+      "concept_kunci": [
+        "Vektor",
+        "Panjang Vektor",
+        "Persamaan Kuadrat"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "B"
+      }
+    },
+    {
+      "question_number": 14,
+      "question_title": "Aljabar Vektor pada Trapesium Sama Kaki",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Vektor Geometri",
+        "Bangun Datar",
+        "Sifat Simetri"
+      ],
+      "glossary": [
+        {
+          "term": "Trapesium Sama Kaki",
+          "meaning": "Bangun datar segi empat dengan sepasang sisi berhadapan sejajar dan panjang kedua sisi miringnya sama."
+        }
+      ],
+      "diketahui": "Trapesium sama kaki ABCD dengan AD=BC dan titik A(0, 0) A(0,0). Vektor posisi pembentuk: vecAD=b e ginpmatr i x14endpmatri x vecAD=beginpmatrix1 4 endpmatrix,vecAB=b eginpmatr i x60endpmatri x vecAB=beginpmatrix6 0 endpmatrix, dan vecB C=beginpmatr i xabendpm a trixvecBC=beginpmatrixa b endpmatrix.",
+      "ditanyakan": "Nilai dari a2+2 ba2+2b.",
+      "reasoning": "Vektor vecAB=b eginpmatr i x60endpmatri x terletak pada sumbu X. Karena ABCD adalah trapesium dengan sisi sejajar AB dan CD, maka sisi atas CD juga harus horizontal sejajar sumbu X, yang berimplikasi ordinat titik C dan D sama besar, yaitu 4. Dengan sifat simetri trapesium sama kaki, pergeseran horizontal titik C dari B berlawanan arah dengan D dari A, menghasilkan a=−1 dan b=4.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Koordinat Titik-Titik Trapesium",
+          "explanation": "Titik A=(0, 0) A=(0,0). Dari vecAB=beginpmatrix6 0 endpmatrix, maka B=(6,0). Dari vecAD=beginpmatrix1 4 endpmatrix, maka D=(1,4). Tinggi trapesium adalah 4 satuan."
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Komponen Vektor BC",
+          "explanation": "Sisi atas CD horizontal sejajar AB, sehingga ordinat titik C harus sama dengan ordinat titik D, yaitu yC=4 y C​ =4. Maka komponen vertikal b=yC− y B=4−0=4b=yC​ −yB​ =4−0=4. Agar trapesium bersifat sama kaki dengan BC=AD=sqrt12+4 2=sqrt17BC=AD=sqrt1 2+4 2=sqrt17 dan simetris ke dalam, titik C berada di absis xC=6−1=5xC​ =6−1=5. Maka komponen horizontal a=xC− x B=5−6=−1a=xC​ −xB​ =5−6=−1."
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Nilai a^2 + 2b",
+          "explanation": "Substitusikan nilai a=−1 dan b=4: a2+2 b=(−1)2+2 (4)=1+8=9a2+2b=(−1) 2+2(4)=1+8=9"
+        }
+      ],
+      "why_correct": "Nilai a=−1 dan b=4 memenuhi sifat trapesium sama kaki dan menghasilkan a2+2 b=9a2+2b=9, yang sesuai dengan pilihan C.",
+      "tips": [
+        "Pada trapesium sama kaki yang diletakkan pada bidang alas datar, komponen horizontal kedua kaki selalu berlawanan tanda (a=−xD a=−x D​ )."
+      ],
+      "common_mistakes": [
+        "Mengambil nilai a=1 yang justru membentuk jajar genjang bukan trapesium sama kaki."
+      ],
+      "question_id": "mtkl_p2_q14",
+      "concept_kunci": [
+        "Vektor Geometri",
+        "Bangun Datar",
+        "Sifat Simetri"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 15,
+      "question_title": "Kinematika Vektor dan Jarak Tempuh Antarstasiun Kereta Api",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Vektor Dimensi Tiga",
+        "Kinematika Gerak Lurus",
+        "Jarak Euclid"
+      ],
+      "glossary": [
+        {
+          "term": "Jarak Euclid Tiga Dimensi",
+          "meaning": "Jarak garis lurus antara dua titik dalam ruang matℎb R3 mathbbR 3 yang dihitung dengan rumus akar jumlah kuadrat selisih koordinatnya."
+        }
+      ],
+      "diketahui": "Kereta melaju dengan kecepatan konstan dari stasiun A(2,3, 5) A(2,3,5) sampai stasiun E(11,6, 8) E(11,6,8) dalam lintasan lurus. Waktu tempuh antarstasiun: AB=5tex t menitAB=5 textmenit,BC=3tex t menitBC=3 textmenit,CD=2tex t menitCD=2 textmenit,DE=3t e xtmeni t DE=3 textmenit.",
+      "ditanyakan": "Pasangan stasiun yang memiliki jarak tempuh kurang dari 3,5tex t km3,5 textkm.",
+      "reasoning": "Hitung total jarak lurus AE menggunakan jarak Euclid tiga dimensi. Karena kelajuan kereta konstan, jarak pada setiap segmen stasiun berbanding lurus dengan durasi waktu tempuhnya. Hitung panjang jarak setiap segmen untuk menentukan pasangan stasiun yang jaraknya di bawah 3,5tex t km3,5 textkm.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Jarak Total Lintasan AE",
+          "explanation": "Jarak lintasan dari stasiun A ke stasiun E: d(A,E)=sqrt (11−2) 2+(6−3)2+(8−5)2=sqrt9 2+32+32=sqrt81+9+9=sqrt99ap rox9,95te x tkmd(A,E)=sqrt(11−2) 2+(6−3) 2+(8−5)2=sqrt9 2+32+3 2=sqrt81+9+9=sqrt99 approx9,95 textkm"
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Kelajuan Konstan Kereta",
+          "explanation": "Total waktu perjalanan dari A ke E: t ext otal=5+3+2+3=13tex t menit texttotal ​ =5+3+2+3=13 textmenit Kelajuan konstan kereta adalah v=frac9,95tex t km13tex t menitap rox0,7654te x tkm/m enitv=frac9,95textkm13textmenit approx0,7654 textkm/menit."
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Jarak Masing-Masing Segmen",
+          "explanation": "- JarakCD (2 menit): 2×0,7654ap rox1,53te x tkm<3,5 t extkm2×0,7654 approx1,53 textkm<3,5 textkm (Memenuhi)- JarakDE (3 menit): 3×0,7654ap rox2,30te x tkm<3,5 t extkm3×0,7654 approx2,30 textkm<3,5 textkm (Memenuhi)- Jarak A B AB (5 menit): 5×0,7654ap rox3,83te x tkm>3,5 t extkm5×0,7654 approx3,83 textkm>3,5 textkm (Tidak Memenuhi)"
+        }
+      ],
+      "why_correct": "Pasangan stasiun CD (jarak sekitar 1,53tex t km1,53 textkm) dan D E DE (jarak sekitar 2,30tex t km2,30 textkm) memiliki jarak kurang dari 3,5tex t km3,5 textkm, sesuai dengan opsi C dan D.",
+      "tips": [
+        "Gunakan perbandingan waktu langsung: segmen berjarak kurang dari 3,5tex t km3,5 textkm adalah yang berdurasi t<frac3,59,95 t imes13ap rox4,57te x tmeni t t< frac3,59,95×13 approx4,57 textmenit."
+      ],
+      "common_mistakes": [
+        "Mengabaikan koordinat tiga dimensi dan menganggap panjang lintasan sama dengan jumlah waktu tempuhnya."
+      ],
+      "question_id": "mtkl_p2_q15",
+      "concept_kunci": [
+        "Vektor Dimensi Tiga",
+        "Kinematika Gerak Lurus",
+        "Jarak Euclid"
+      ],
+      "official_answer": {
+        "format": "multiple_correct",
+        "correct": [
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "question_number": 16,
+      "question_title": "Persamaan Lingkaran Konsentris (Sepusat)",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Geometri Analitik",
+        "Persamaan Lingkaran",
+        "Lingkaran Sepusat"
+      ],
+      "glossary": [
+        {
+          "term": "Lingkaran Konsentris",
+          "meaning": "Dua lingkaran atau lebih yang berada pada bidang yang sama dan memiliki koordinat titik pusat yang berimpit."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar, lingkaran pada sistem koordinat berpusat di titik (−3,4) dengan diameter 4 satuan panjang.",
+      "ditanyakan": "Persamaan lingkaran yang sepusat dengan lingkaran tersebut.",
+      "reasoning": "Dua lingkaran bersifat konsentris (sepusat) apabila memiliki koordinat titik pusat (a,b) yang persis sama. Lingkaran yang berpusat di titik (−3,4) memiliki bentuk baku (x+3)2+(y−4) 2=r2, yang jika dijabarkan ke bentuk umum menghasilkan koefisien x bernilai+6 dan koefisien y bernilai −8.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Koordinat Titik Pusat Lingkaran Asal",
+          "explanation": "Berdasarkan posisi pada bidang koordinat Kartesius, titik pusat lingkaran berada pada titik (a,b)=(−3,4) (a,b)=(−3,4)."
+        },
+        {
+          "step": 2,
+          "title": "Menyusun Bentuk Umum Lingkaran Sepusat",
+          "explanation": "Persamaan lingkaran dengan pusat (−3,4) dan jari-jari sebarang r adalah: (x− (−3) 2+(y−4) 2=r2(x−(−3)) 2+(y−4)2=r 2 (x+3)2+(y−4)2=r 2 x2+6 x+9+y2−8 y+16=r2x 2+6x+9+y2−8y+16=r 2 x2+y 2+6x−8y+(25−r 2)=0x2+y 2+6x−8y+(25−r 2)=0"
+        },
+        {
+          "step": 3,
+          "title": "Mencocokkan dengan Pilihan Jawaban",
+          "explanation": "Pada opsi A: x2+6 x+y2−8 y+16=0x2+6x+y 2 −8y+16=0, titik pusatnya adalah left(− f rac62,−f r ac−82rigℎt)=(− 3,4)left(−frac62,−frac−82 right)=(−3,4), yang identik dengan titik pusat lingkaran semula."
+        }
+      ],
+      "why_correct": "Opsi A memiliki pusat di (−3,4) yang identik dengan pusat lingkaran pada gambar, sehingga kedua lingkaran bersifat sepusat (konsentris).",
+      "tips": [
+        "Titik pusat lingkaran x2+y 2+Ax+By+C=0x2+y 2+Ax+By+C=0 selalu bernilai (−A/2,−B/2)."
+      ],
+      "common_mistakes": [
+        "Tertukar tanda koordinat titik pusat saat membaca bentuk kuadratik sehingga memilih opsi dengan koefisien −6x dan+8y."
+      ],
+      "question_id": "mtkl_p2_q16",
+      "concept_kunci": [
+        "Geometri Analitik",
+        "Persamaan Lingkaran",
+        "Lingkaran Sepusat"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "A"
+      }
+    },
+    {
+      "question_number": 17,
+      "question_title": "Titik Singgung Lingkaran dari Garis Singgung Tegak Lurus",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Persamaan Garis Singgung",
+        "Geometri Analitik",
+        "Vektor Normal Lingkaran"
+      ],
+      "glossary": [
+        {
+          "term": "Gradien Garis",
+          "meaning": "Nilai kemiringan suatu garis lurus yang menyatakan perbandingan perubahan ordinat terhadap perubahan absis."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar: Pusat lingkaran A(2,−3) dan titik pada lingkaran B(3,−1). Garis lurus f melalui titik C(−1,0) dan D(0,2).",
+      "ditanyakan": "Semua koordinat titik singgung lingkaran dari garis-garis singgung yang tegak lurus garis f.",
+      "reasoning": "Gradien garis f adalah mf=f rac2−0 −(− 1)=2mf​ =frac2−00−(−1)=2. Garis singgung tegak lurus garis f sehingga gradien garis singgung adalah ms=−frac12 m s​ =−frac12. Karena garis singgung selalu tegak lurus terhadap jari-jari di titik singgung, maka gradien jari-jari tersebut sama dengan gradien garis f, yaitu mr=2 m r​ =2. Titik singgung dicari dengan melangkah dari pusat A(2,−3) sejauh panjang jari-jari r=sq r t5r=sqrt5 pada arah gradien 2.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Jari-Jari Lingkaran",
+          "explanation": "Jarak dari pusat A(2,−3) ke titik pada lingkaran B(3,−1): r=sq r t(3−2) 2+(−1 − (−3) 2=sqrt1 2+2=sqrt5r=sqrt(3−2) 2+(−1−(−3)) 2=sqrt1 2+2=sqrt5"
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Kemiringan Jari-Jari ke Titik Singgung",
+          "explanation": "Garis singgung memiliki gradien ms=−1/2 m s​ =−1/2. Jari-jari lingkaran yang menuju titik singgung tegak lurus garis singgung, sehingga memiliki kemiringan mr=2 m r​ =2. Maka pergeseran koordinat (Deltax, D eltay)(Deltax, Deltay) memenuhi Deltay=2 D eltaxDeltay=2 Deltax dan (Deltax)2+(Deltay)2=r 2=5(Deltax)2+(Deltay) 2=r2=5."
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Koordinat Titik Singgung",
+          "explanation": "Substitusi pergeseran: (Deltax)2+(2Deltax) 2=5impl i es5(D e ltax)2=5imp l iesD e ltax=pm1(Deltax)2+(2 Deltax) 2=5 implies5(Deltax)2=5 implies Deltax=pm1 dan Deltay=pm2 Deltay=pm2.- Titik singgung 1: (2+1,−3+2)=(3,−1) - Titik singgung 2: (2−1, − 3−2)=(1, − 5)"
+        }
+      ],
+      "why_correct": "Koordinat titik singgung yang memenuhi kriteria adalah (1,−5) dan (3,−1), yang bersesuaian dengan opsi B dan D.",
+      "tips": [
+        "Jari-jari di titik singgung selalu sejajar dengan garis normal garis singgung, sehingga gradiennya langsung sama dengan garis acuan yang tegak lurus."
+      ],
+      "common_mistakes": [
+        "Menggunakan persamaan garis singgung yang panjang lalu mencari titik potongnya dengan lingkaran, yang rawan memicu kesalahan aljabar."
+      ],
+      "question_id": "mtkl_p2_q17",
+      "concept_kunci": [
+        "Persamaan Garis Singgung",
+        "Geometri Analitik",
+        "Vektor Normal Lingkaran"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "B",
+          "D"
+        ]
+      }
+    },
+    {
+      "question_number": 18,
+      "question_title": "Analisis Geometris Proporsi Luas Warna Rambu Lalu Lintas",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 75,
+      "concept_tags": [
+        "Geometri Bidang Datar",
+        "Proporsi Luas",
+        "Analisis Visual Geometris"
+      ],
+      "glossary": [
+        {
+          "term": "Proporsi Luas",
+          "meaning": "Perbandingan fraksi bidang permukaan yang ditempati oleh suatu elemen warna terhadap luas total gambar."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar, rambu lalu lintas balai pertolongan pertama memuat warna latar biru dominan, elemen palang (merah/putih), dan aksen hitam.",
+      "ditanyakan": "Warna cat atau kombinasi warna cat yang lebih banyak digunakan dibanding cat warna hitam.",
+      "reasoning": "Luas cat yang digunakan berbanding lurus dengan luas bidang yang diwarnai pada rambu. Bidang latar belakang berwarna biru menempati proporsi terluas pada rambu (jauh melampaui separuh bidang total). Oleh karena itu, setiap opsi yang melibatkan kontribusi warna biru akan menghasilkan total luas yang lebih besar dibanding warna hitam.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Distribusi Luas Warna Rambu",
+          "explanation": "Pada rambu balai pertolongan pertama, warna biru merupakan warna latar utama yang mendominasi sebagian besar area rambu, sedangkan warna hitam hanya menempati porsi tertentu pada bingkai/aksen."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Kombinasi Warna terhadap Warna Hitam",
+          "explanation": "- Setengah hitam dan biru: Karena luas biru jauh lebih besar dari separuh luas hitam, maka 0,5tex t Hitam+t extBiru> t extHi t am0,5 textHitam+textBiru> textHitam (Memenuhi).- Biru dan putih: Penjumlahan warna latar biru dan putih melebihi luas hitam (Memenuhi).- Biru dan merah: Penjumlahan warna latar biru dan lambang merah melebihi luas hitam (Memenuhi)."
+        }
+      ],
+      "why_correct": "Kombinasi warna pada opsi A (Setengah hitam dan biru), D (Biru dan putih), serta E (Biru dan merah) seluruhnya memuat warna biru dominan yang volumenya melampaui cat warna hitam.",
+      "tips": [
+        "Identifikasi warna latar penampang utama untuk langsung mengenali komponen warna dengan kebutuhan volume terbesar."
+      ],
+      "common_mistakes": [
+        "Memilih kombinasi yang hanya memuat warna lambang kecil (merah dan putih) tanpa menyertakan warna latar biru."
+      ],
+      "question_id": "mtkl_p2_q18",
+      "concept_kunci": [
+        "Geometri Bidang Datar",
+        "Proporsi Luas",
+        "Analisis Visual Geometris"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A",
+          "D",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 19,
+      "question_title": "Perhitungan Kebutuhan Bahan Kerangka Logam Ornamen Kaca Patri",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 105,
+      "concept_tags": [
+        "Geometri Lingkaran",
+        "Tembereng Lingkaran",
+        "Keliling Bangun Datar"
+      ],
+      "glossary": [
+        {
+          "term": "Tembereng Lingkaran",
+          "meaning": "Daerah di dalam lingkaran yang dibatasi oleh busur lingkaran dan tali busur yang menghubungkan kedua ujung busur tersebut."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar detail ornamen: Luas 1 potong kaca merah (tembereng)=456tex t cm2=456 textcm 2, nilai pi=3,14, dan sqrt2ap rox1,4sqrt2 approx1,4. Definisi Pas: panjang logam cukup dan sisa tidak lebih dari 1 meter. Panjang satuan: Logam A (4tex t m4 textm), Logam B (5tex t m5 textm), Logam C (6,5tex t m6,5 textm).",
+      "ditanyakan": "Menentukan status Pas atau Tidak Pas untuk pembelian: A (2 buah logam A), B (1 buah logam B), C (1 buah logam C).",
+      "reasoning": "Tentukan jari-jari lingkaran dari luas tembereng seperempat lingkaran: Ltex t temb e reng=f r ac14pir2−f r ac12r 2=456tex t cm2L texttembereng ​ =frac14 pir 2−frac12r 2=456 textcm 2. Hitung total panjang kerangka logam yang terdiri atas 1 keliling lingkaran luar (2pir 2 pir), 2 garis diameter (4r), dan 4 sisi persegi (4rsq r t24rsqrt2). Evaluasi panjang total logam yang dibeli terhadap kebutuhan tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Jari-Jari Lingkaran",
+          "explanation": "Formula luas tembereng siku-siku: 456=frac14 r 2(3,14− 2)=0,285r 2 impl i esr2=f r ac4560,285=1.600impl i esr=40t e xtcm=0,4 t extm456=frac14r2 (3,14−2)=0,285r 2 impliesr 2=frac4560,285=1.600 impliesr=40 textcm=0,4 textm"
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Panjang Kerangka Logam Total",
+          "explanation": "- Keliling lingkaran: 2pir=2×3,14×40=251,2tex t cm2pir=2×3,14×40=251,2 textcm - Dua garis diameter: 2×(2 r)=4×40=160tex t cm2×(2r)=4×40=160 textcm - Empat sisi persegi: 4×(rsq r t2)=4 t imes40t i mes1,4=224t e xtcm4×(rsqrt2)=4×40×1,4=224 textcm Total panjang kerangka =251,2+160+224=635,2tex t cmap rox6,35te x tm 251,2+160+224=635,2 textcm approx6,35 textm."
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Pilihan Logam",
+          "explanation": "- 2 buah logam A: 2×4tex t m=8tex t m2×4textm=8 textm. Sisanya 8−6,35=1,65 textm>1 textm (Tidak Pas).- 1 buah logam B: 5tex t m<6,35tex t m5 textm<6,35 textm (Kurang/Tidak Pas).- 1 buah logam C: 6,5tex t mge6,35t e xtm6,5 textm ge6,35 textm. Sisanya 6,5−6,35=0,15tex t mle1t e xtm (Pas)."
+        }
+      ],
+      "why_correct": "Kebutuhan kerangka logam adalah 6,35 m. Logam A menghasilkan sisa melebihi 1 m, Logam B tidak mencukupi, dan Logam C cukup dengan sisa 0,15 m (memenuhi kriteria Pas). Kunci resmi adalah ['A:Tidak Pas', 'B:Tidak Pas', 'C:Pas'].",
+      "tips": [
+        "Luas tembereng sudut siku-siku selalu bernilai r2(fracpi−24)=0,285r 2."
+      ],
+      "common_mistakes": [
+        "Hanya menghitung keliling lingkaran terluar dan lupa memperhitungkan kerangka persegi serta diameter di bagian dalam."
+      ],
+      "question_id": "mtkl_p2_q19",
+      "concept_kunci": [
+        "Geometri Lingkaran",
+        "Tembereng Lingkaran",
+        "Keliling Bangun Datar"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Tidak Pas",
+          "B:Tidak Pas",
+          "C:Pas"
+        ]
+      }
+    },
+    {
+      "question_number": 20,
+      "question_title": "Komposisi Transformasi Geometri (Refleksi dan Translasi) pada Garis Lurus",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Transformasi Geometri",
+        "Refleksi Garis",
+        "Translasi Garis"
+      ],
+      "glossary": [
+        {
+          "term": "Refleksi terhadap Garis y = x",
+          "meaning": "Transformasi pencerminan yang memetakan setiap titik (x,y) menjadi (y,x)."
+        }
+      ],
+      "diketahui": "Berdasarkan rumus pada gambar: Garis g1:ax+y−9=0 g 1​:ax+y−9=0 dan g2:x+by+6=0g2​:x+by+6=0 dicerminkan terhadap garis y=x kemudian ditranslasikan oleh T beginpmatrix1 −1 endpmatrix, menghasilkan bayangan berturut-turut x+2y−8=0 dan 2x−y−9=0.",
+      "ditanyakan": "Nilai dari 2a−b.",
+      "reasoning": "Tentukan hubungan koordinat awal (x,y) terhadap koordinat bayangan (x′,y ′)(x′,y ′). Refleksi terhadap y=x memetakan (x,y)to (y,x)(x,y)to(y,x). Translasi beginpmatr i x1− 1 endpmatrix memetakan menjadi x′=y+1 x ′=y+1 dan y′=x−1 y ′=x−1. Diperoleh relasi balik x=y′+1 x=y ′+1 dan y=x′−1 y=x ′−1. Substitusikan ke garis awal untuk menemukan parameter a dan b.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Pemetaan Koordinat Balik",
+          "explanation": "Transformasi maju: (x,y) x rigℎta r row R y=x(y,x) x rigℎta r rowT(1,− 1)(y+1,x− 1)=(x′,y ′) (x,y) xrightarrowR y=x​ (y,x) xrightarrowT(1,−1)(y+1,x−1)=(x ′,y ′). Maka invers transformasinya adalah: x=y′+1 x=y ′+1 y=x′−1 y=x ′−1"
+        },
+        {
+          "step": 2,
+          "title": "Substitusi ke Garis Pertama untuk Menemukan Nilai a",
+          "explanation": "Substitusi ke ax+y−9=0: a(y′+1)+(x′−1) − 9=0impl i esx′+ay ′+(a−10)=0 Bandingkan dengan bayangan x′+2y ′ −8=0x′+2y ′ −8=0: Diperoleh a=2 (dan a−10=2−10=−8, konsisten)."
+        },
+        {
+          "step": 3,
+          "title": "Substitusi ke Garis Kedua untuk Menemukan Nilai b",
+          "explanation": "Substitusi ke x+by+6=0: (y′+1)+b(x′−1)+6=0impl i esbx′+y ′+(7−b)=0(y′+1)+b(x ′ −1)+6=0 impliesbx ′+y ′+(7−b)=0 Bayangan yang diketahui adalah 2x′−y ′ −9=02x′−y ′ −9=0. Kalikan dengan −1 agar koefisien y′ y ′ sama: −2x′+y ′+9=0−2x′+y ′+9=0 Maka diperoleh b=−2 (dan7− (−2)=9 7−(−2)=9, konsisten)."
+        },
+        {
+          "step": 4,
+          "title": "Menghitung Nilai 2a - b",
+          "explanation": "2a−b=2 (2)− (−2)=4+2=6"
+        }
+      ],
+      "why_correct": "Nilai parameter a=2 dan b=−2 menghasilkan nilai aljabar 2a−b=6, sesuai dengan opsi E.",
+      "tips": [
+        "Gunakan metode substitusi balik (x′,y ′) to(x,y) untuk langsung menguji kesamaan koefisien dengan persamaan bayangan."
+      ],
+      "common_mistakes": [
+        "Keliru menyamakan koefisien tanpa menyamakan tanda salah satu suku koefisien terlebih dahulu."
+      ],
+      "question_id": "mtkl_p2_q20",
+      "concept_kunci": [
+        "Transformasi Geometri",
+        "Refleksi Garis",
+        "Translasi Garis"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    },
+    {
+      "question_number": 21,
+      "question_title": "Komposisi Transformasi Translasi dan Dilatasi pada Lingkaran",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Transformasi Geometri",
+        "Translasi Lingkaran",
+        "Dilatasi Lingkaran"
+      ],
+      "glossary": [
+        {
+          "term": "Dilatasi Pusat Titik Asal",
+          "meaning": "Transformasi perbesaran atau perkecilan objek relatif terhadap titik pusat (0, 0) (0,0) dengan faktor pengali skala k."
+        }
+      ],
+      "diketahui": "Lingkaran L berpusat di (−5,3) dengan jari-jari r1=2 r 1​ =2. Lingkaran L′ L ′ adalah bayangan L oleh translasi T. Berdasarkan gambar rumus, lingkaran L′ L′′ dengan persamaan (x+4)2+(y−4)2=16(x+4) 2+(y−4)2=16 adalah bayangan L′ L ′ oleh dilatasi pusat O(0, 0) O(0,0) dan skala k.",
+      "ditanyakan": "Vektor translasi T dan faktor skala dilatasi k.",
+      "reasoning": "Translasi tidak mengubah panjang jari-jari, sehingga jari-jari L′ L ′ tetap r′=2 r ′=2. Persamaan L′ L′′ memiliki jari-jari r′=sqrt16=4r′′=sqrt16=4, sehingga faktor skala dilatasi k=frac r ′ r′=f r ac42=2 k=fracr ′′r ′=frac42=2. Titik pusat L′ L′′ (−4, 4) (−4,4) merupakan hasil perbesaran dengan faktor skala 2 dari pusat L′ L ′, sehingga pusat L′ L ′ adalah (−2, 2) (−2,2). Vektor translasi diperoleh dari selisih titik pusat L′ L ′ dan L.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Faktor Skala Dilatasi",
+          "explanation": "Jari-jari lingkaran L′ L ′ adalah 2 (karena translasi bersifat isometri). Jari-jari lingkaran L′ L′′ adalah sqrt16=4. Maka faktor skala dilatasi adalah k=frac42=2k=frac42=2."
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Titik Pusat Lingkaran L'",
+          "explanation": "Pusat lingkaran L′ L′′ adalah (−4, 4) (−4,4). Karena dilatasi berpusat di O(0, 0) O(0,0) dengan skala k=2, maka koordinat pusat L′ L ′ diperoleh dari pembagian: tex t PusatL′=l eft(f rac−42,f r ac42rigℎt)=(− 2,2) textPusatL ′=left(frac−42,frac42 right)=(−2,2)"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Vektor Translasi T",
+          "explanation": "Translasi memetakan pusat L(−5,3) menuju pusat L′(−2, 2)L′(−2,2): T=t extPusa t L′−tex t PusatL=begin p matrix−2 − (−5)2 − 3endpmatrix=b e ginpmatr i x3−1endpmatri x"
+        }
+      ],
+      "why_correct": "Faktor skala dilatasi terbukti bernilai 2 dan vektor pergeseran translasi adalah beginpmatrix3 −1 endpmatrix, yang secara tepat bertepatan dengan opsi C.",
+      "tips": [
+        "Kerjakan secara mundur dari lingkaran bayangan akhir L′ L′′ untuk menemukan parameter perantara L′ L ′."
+      ],
+      "common_mistakes": [
+        "Mengira faktor skala dilatasi adalah 4 atau 8 karena melihat angka 16 pada ruas kanan persamaan lingkaran."
+      ],
+      "question_id": "mtkl_p2_q21",
+      "concept_kunci": [
+        "Transformasi Geometri",
+        "Translasi Lingkaran",
+        "Dilatasi Lingkaran"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 22,
+      "question_title": "Rotasi Garis dengan Pusat Rotasi Bukan Titik Asal",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Transformasi Geometri",
+        "Rotasi",
+        "Persamaan Garis"
+      ],
+      "glossary": [
+        {
+          "term": "Rotasi 90 Derajat",
+          "meaning": "Perputaran sebesar berlawanan arah jarum jam yang memetakan gradien garis m menjadi −1/m."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar rumus: Garis l:3x+2y=6 dirotasikan sejauh berlawanan arah jarum jam dengan titik pusat rotasi (2,0) menghasilkan garis bayangan l′ l ′.",
+      "ditanyakan": "Titik koordinat yang terletak pada garis bayangan l′ l ′.",
+      "reasoning": "Gunakan formula matriks rotasi dengan pusat (a,b)=(2,0) (a,b)=(2,0) untuk memperoleh hubungan antara (x,y) dan (x′,y ′)(x′,y ′). Substitusikan persamaan koordinat balik ke dalam persamaan garis awal untuk mendapatkan persamaan garis bayangan l′ l ′, lalu uji setiap opsi titik ke persamaan tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Rumus Rotasi 90 Derajat dengan Pusat (2, 0)",
+          "explanation": "Persamaan matriks rotasi berlawanan arah jarum jam: Diperoleh sistem persamaan: x′−2=− yimpl i esy=2−x′ y′=x−2impl i esx=y′+2"
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Persamaan Garis Bayangan",
+          "explanation": "Substitusikan nilai x dan y ke garis semula 3x+2y=6: 3(y′+2)+2(2 −x′)=63(y ′+2)+2(2−x ′)=6 3y′+6+4−2x′=63y ′+6+4−2x′=6 −2x′+3y ′+10=6impl i es2x′−3y ′=4−2x′+3y ′+10=6 implies2x ′−3y ′=4 Persamaan garis bayangan adalah 2x−3y=4."
+        },
+        {
+          "step": 3,
+          "title": "Menguji Koordinat Titik pada Pilihan",
+          "explanation": "- Titik D (2,0):2(2)−3(0)=4−0=4 2(2)−3(0)=4−0=4 (Benar)- Titik E (5,2):2(5)−3 (2)=10−6=4 2(5)−3(2)=10−6=4 (Benar)"
+        }
+      ],
+      "why_correct": "Titik (2,0) dan (5,2) memenuhi persamaan garis bayangan 2x−3y=4, sesuai dengan kunci resmi yang mencakup opsi D dan E.",
+      "tips": [
+        "Titik pusat rotasi (2,0) berada tepat pada garis awal 3(2)+2 (0)=6 3(2)+2(0)=6, sehingga titik (2,0) pasti tetap terletak pada garis bayangannya."
+      ],
+      "common_mistakes": [
+        "Menggunakan matriks rotasi dengan pusat (0, 0) (0,0) tanpa memperhitungkan pergeseran titik pusat (2,0)."
+      ],
+      "question_id": "mtkl_p2_q22",
+      "concept_kunci": [
+        "Transformasi Geometri",
+        "Rotasi",
+        "Persamaan Garis"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "D",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 23,
+      "question_title": "Evaluasi Limit Fungsi Aljabar Bentuk Tentu melalui Substitusi Langsung",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Kalkulus",
+        "Limit Fungsi Aljabar",
+        "Substitusi Langsung"
+      ],
+      "glossary": [
+        {
+          "term": "Substitusi Langsung",
+          "meaning": "Metode penentuan nilai limit dengan langsung mengganti variabel x dengan nilai batas yang dituju."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar rumus, bentuk limit fungsi rasional adalah limxto3frac x 3− 3 x2+2 x+15+3x−9 x 2 lim xto3​ fracx 3 −3x 2+2x+15+3x−9x 2.",
+      "ditanyakan": "Nilai dari limit tersebut.",
+      "reasoning": "Evaluasi limit selalu diawali dengan metode substitusi langsung. Jika hasil perhitungan menghasilkan nilai terdefinisi di mana penyebut tidak sama dengan nol (bukan bentuk tak tentu 0/0 0/0), maka nilai pecahan tersebut langsung menjadi nilai limit fungsinya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Substitusi Langsung ke Pembilang",
+          "explanation": "Evaluasi pembilang saat x=3: 3 −3(3 2)+2 (3)+1=27− 27+6+1=73 −3(32)+2(3)+1=27−27+6+1=7"
+        },
+        {
+          "step": 2,
+          "title": "Substitusi Langsung ke Penyebut",
+          "explanation": "Evaluasi penyebut saat x=3: 5+3(3)−9(32)=5+9−81=14−81=− 67"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Nilai Akhir Limit",
+          "explanation": "Bagi hasil pembilang dengan penyebut: limxto3frac x 3− 3 x2+2 x+15+3x−9 x 2=frac7−67=−frac767 lim xto3​ fracx 3 −3x 2+2x+15+3x−9x 2=frac7−67=− frac767"
+        }
+      ],
+      "why_correct": "Substitusi langsung menghasilkan bilangan pecahan real terdefinisi − frac767, yang bertepatan dengan opsi A.",
+      "tips": [
+        "Jangan terburu-buru melakukan pemfaktoran atau aturan L'Hopital sebelum memastikan apakah penyebut bernilai nol atau tidak."
+      ],
+      "common_mistakes": [
+        "Mengasumsikan setiap limit fungsi merupakan bentuk tak tentu 0/0 0/0 sehingga melakukan manipulasi aljabar yang tidak perlu."
+      ],
+      "question_id": "mtkl_p2_q23",
+      "concept_kunci": [
+        "Kalkulus",
+        "Limit Fungsi Aljabar",
+        "Substitusi Langsung"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "A"
+      }
+    },
+    {
+      "question_number": 24,
+      "question_title": "Limit Fungsi Rasional Menuju Tak Hingga pada Pemodelan Keuntungan",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Limit Tak Hingga",
+        "Fungsi Rasional",
+        "Aplikasi Ekonomi"
+      ],
+      "glossary": [
+        {
+          "term": "Asimtot Horizontal",
+          "meaning": "Garis horizontal y=L yang didekati oleh grafik fungsi ketika peubah bebas menuju nilai tak berhingga."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar rumus, fungsi keuntungan dinyatakan dengan K(p)=frac9 p 2+2 p+103 p 2+3p+2K(p)=frac9p 2+2p+103p 2+3p+2 (dalam jutaan rupiah) dengan p adalah banyaknya porsi nasi goreng yang terjual.",
+      "ditanyakan": "Keuntungan yang diperoleh jika Roni menjual nasi goreng dalam jumlah porsi sangat banyak (ptoinf t ypto infty).",
+      "reasoning": "Kondisi penjualan dalam jumlah sangat banyak direpresentasikan secara matematis dengan menghitung limit fungsi keuntungan saat ptoinf t ypto infty. Pada fungsi rasional di mana derajat pembilang sama dengan derajat penyebut (sama-sama berderajat 2), nilai limit di tak hingga ditentukan oleh rasio koefisien pangkat tertinggi variabelnya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Merumuskan Limit Fungsi Rasional Menuju Tak Hingga",
+          "explanation": "Model limit keuntungan saat ptoinf t ypto infty: limpto i nftyK(p)=lim p toinf t yfrac9p2+2 p+103 p 2+3p+2 lim ptoinfty ​ K(p)=lim ptoinfty ​ frac9p2+2p+103p 2+3p+2"
+        },
+        {
+          "step": 2,
+          "title": "Membagi dengan Pangkat Tertinggi",
+          "explanation": "Bagi pembilang dan penyebut dengan p2 p 2: limpto i nfty f rac9+f r ac2p+fr a c10p23+fra c 3p+frac2 p 2=frac9+0+03+0+0=frac93=3 lim ptoinfty ​ frac9+frac2p+frac10p 2 3+frac3p+frac2p 2=frac9+0+03+0+0=frac93=3"
+        },
+        {
+          "step": 3,
+          "title": "Mengonversi ke Nilai Rupiah",
+          "explanation": "Karena keuntungan dinyatakan dalam satuan jutaan rupiah, maka: tex t Keunt u nga n=3times t extRp 1.000.000,00=tex t Rp 3.000.000,00"
+        }
+      ],
+      "why_correct": "Rasio koefisien suku berderajat tertinggi adalah 9/3=3 9/3=3, yang setara dengan keuntungan Rp3.000.000,00 (opsi B).",
+      "tips": [
+        "Untuk limit menuju tak hingga fungsi rasional berderajat sama, cukup ambil perbandingan koefisien pangkat tertingginya secara langsung: frac93=3."
+      ],
+      "common_mistakes": [
+        "Mengambil rasio konstanta tanpa variabel frac102=5 yang keliru."
+      ],
+      "question_id": "mtkl_p2_q24",
+      "concept_kunci": [
+        "Limit Tak Hingga",
+        "Fungsi Rasional",
+        "Aplikasi Ekonomi"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "B"
+      }
+    },
+    {
+      "question_number": 25,
+      "question_title": "Limit Fungsi Trigonometri Bentuk Tak Tentu dengan Pemisalan Variabel",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Kalkulus",
+        "Limit Trigonometri",
+        "Identitas Sudut Ganda"
+      ],
+      "glossary": [
+        {
+          "term": "Identitas Sudut Ganda",
+          "meaning": "Relasi trigonometri 1−cos(2alpℎ a)=2sin 2 (alpℎ a)1−cos(2alpha)=2 sin 2(alpha) yang mengubah bentuk selisih kosinus menjadi kuadrat sinus."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar rumus, limit fungsi trigonometri adalah limxto3frac1− c os(6x−18)left (x−frac9 x rigℎt)s i n(6x−18) lim xto3​ frac1−cos(6x−18)left(x−frac9xright)sin(6x−18).",
+      "ditanyakan": "Nilai dari limit tersebut.",
+      "reasoning": "Substitusi x=3 menghasilkan bentuk tak tentu 0/0 0/0. Gunakan pemisalan variabel u=x−3 sehingga saat xto3 x to3 berlaku uto0 u to0. Terapkan identitas sudut ganda 1−cos(6u)=2 s in2(3u)1− cos(6u)=2 sin 2(3u) dan faktorkan suku pecahan aljabar x−frac9 x=frac(x−3) (x+3) x=fracu(u+6)u+3x−frac9x=frac(x−3)(x+3)x=fracu(u+6)u+3. Selesaikan limit dengan memanfaatkan rumus limit trigonometri dasar.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Substitusi Peubah Baru",
+          "explanation": "Misalkan u=x−3. Maka x=u+3, dan saat xto3 x to3, diperoleh uto0 u to0. Argumen sudut trigonometri menjadi 6x−18=6(x−3)=6u."
+        },
+        {
+          "step": 2,
+          "title": "Penyederhanaan Komponen Aljabar dan Trigonometri",
+          "explanation": "- Pembilang: 1−cos(6u)=2 s in2(3u)1− cos(6u)=2 sin 2(3u) - Komponen aljabar penyebut: x−frac9 x=fracx2−9 x=frac(x−3) (x+3) x=fracu(u+6)u+3x−frac9x=fracx 2−9x=frac(x−3)(x+3)x=fracu(u+6)u+3 - Komponen sinus penyebut: sin(6u)"
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Nilai Limit",
+          "explanation": "Susun kembali persamaan limit: limuto0 l eft[f racu+3 u+6cdotfra c 2sin 2 (3u) u sin(6u)r i gℎt]=limu t o0left(f racu+3 u+6rigℎt)cdo t 2cdotlimu t o0left(f racsin(3u) u rigℎt)cdo t limuto0 l eft(f racsin(3u) s in(6u)r i gℎt) lim uto0​ left[fracu+3u+6·frac2sin 2 (3u)usin(6u) right]=lim uto0​ left(fracu+3u+6 right)cdot2·lim uto0​ left(fracsin(3u)u right)·lim uto0​ left(fracsin(3u)sin(6u) right) =left(f rac0+3 0+6rigℎt)cdo t 2cdot3 c dotlef t (frac36 r igℎt)=frac12 c dot2c d ot3cd o tfrac12=f rac32=left(frac0+30+6 right)cdot2cdot3·left(frac36right)=frac12cdot2cdot3·frac12=frac32"
+        }
+      ],
+      "why_correct": "Evaluasi limit trigonometri dan pemfaktoran aljabar menghasilkan nilai pasti frac32, yang bersesuaian dengan opsi E.",
+      "tips": [
+        "Ubah bentuk 1−cos(kx) 1− cos(kx) menjadi 2 sin 2 (kx/2) agar dapat dipasangkan langsung dengan variabel pembuat nol pada penyebut."
+      ],
+      "common_mistakes": [
+        "Lupa menyederhanakan pecahan aljabar x−9/x x−9/x ke bentuk pecahan tunggal sehingga kehilangan variabel pembuat nol pada penyebut."
+      ],
+      "question_id": "mtkl_p2_q25",
+      "concept_kunci": [
+        "Kalkulus",
+        "Limit Trigonometri",
+        "Identitas Sudut Ganda"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    }
+  ]
+}

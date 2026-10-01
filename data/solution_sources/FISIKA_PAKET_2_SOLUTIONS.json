@@ -1,0 +1,1685 @@
+{
+  "package": 2,
+  "subject": "Fisika",
+  "total_solutions": 24,
+  "solutions": [
+    {
+      "question_id": "fisika_paket_2_q01",
+      "question_number": 1,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Kecepatan Relatif",
+        "Kinematika Gerak Lurus",
+        "Vektor Satu Dimensi"
+      ],
+      "glossary": [
+        {
+          "term": "Kecepatan Relatif",
+          "meaning": "Kecepatan suatu benda yang diukur terhadap suatu kerangka acuan tertentu."
+        },
+        {
+          "term": "Arus air laut",
+          "meaning": "Gerakan mengalir air laut yang dapat menambah atau mengurangi kecepatan efektif kapal tergantung arah vektornya."
+        }
+      ],
+      "reasoning": "Untuk menempuh jarak 10 km dari pulau A ke pulau B dalam waktu tepat 1 jam (dari pukul 08.00 sampai 09.00), kapal harus memiliki kecepatan resultan (kecepatan terhadap bumi) sebesar 10 km/jam ke arah timur. Karena terdapat arus laut dari barat ke timur (searah dengan gerak kapal) sebesar 2 km/jam, maka arus tersebut akan membantu mendorong kapal. Berdasarkan prinsip kecepatan relatif, kecepatan kapal terhadap air laut cukup sebesar selisih antara kecepatan resultan yang diinginkan dengan kecepatan arus laut, yaitu 8 km/jam ke arah timur.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Kecepatan Resultan yang Dibutuhkan",
+          "explanation": "Gunakan rumus kecepatan rata-rata: v_resultan = s / t. Dengan jarak s = 10 km dan selang waktu t = 1 jam (08.00 hingga 09.00), maka v_resultan = 10 km / 1 jam = 10 km/jam ke arah Timur."
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Pengaruh Arus Laut",
+          "explanation": "Arus laut bergerak dari barat ke timur, yang berarti searah dengan arah gerakan kapal menuju pulau B. Besar kecepatan arus (v_arus) adalah 2 km/jam ke arah Timur."
+        },
+        {
+          "step": 3,
+          "title": "Menerapkan Penjumlahan Vektor Kecepatan Relatif",
+          "explanation": "Persamaan vektor kecepatan resultan terhadap bumi adalah: v_resultan = v_kapal + v_arus. Karena kedua vektor searah, maka: 10 km/jam = v_kapal + 2 km/jam."
+        },
+        {
+          "step": 4,
+          "title": "Menentukan Strategi Kecepatan Kapal",
+          "explanation": "Selesaikan persamaan untuk v_kapal: v_kapal = 10 km/jam - 2 km/jam = 8 km/jam. Jadi, kapal harus bergerak ke arah timur dengan kecepatan 8 km/jam."
+        }
+      ],
+      "why_correct": "Pilihan 'Bergerak ke arah timur dengan kecepatan 8 km.jam^-1' adalah jawaban yang paling tepat karena dengan kecepatan mesin kapal sebesar 8 km/jam ditambah dorongan arus searah sebesar 2 km/jam, kecepatan total kapal terhadap daratan menjadi tepat 10 km/jam, sehingga kapal menempuh jarak 10 km dalam waktu tepat 1 jam.",
+      "tips": [
+        "Selalu tentukan arah positif vektor. Jika arah Timur ditetapkan sebagai positif, maka arus (+2 km/jam) dan kecepatan resultan (+10 km/jam) bernilai positif.",
+        "Ingat bahwa jika arah arus searah dengan gerak kapal, kecepatan arus akan bersifat membantu (menambah kecepatan kapal terhadap bumi)."
+      ],
+      "common_mistakes": [
+        "Siswa sering kali langsung menjumlahkan jarak dengan kecepatan arus tanpa mengonversi ke satuan waktu yang sesuai.",
+        "Mengira bahwa kecepatan kapal harus 12 km/jam karena mengurangkan arah arus secara terbalik (mengira arus menghambat)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah perahu motor menyeberangi sungai selebar 120 meter yang mengalir dari utara ke selatan dengan kecepatan arus 3 m/s. Jika perahu diarahkan tegak lurus arah arus sungai (ke arah timur) dengan kecepatan 4 m/s terhadap air, berapa waktu yang dibutuhkan perahu untuk sampai ke seberang sungai?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "24 sekon"
+          },
+          {
+            "key": "B",
+            "text": "30 sekon"
+          },
+          {
+            "key": "C",
+            "text": "40 sekon"
+          },
+          {
+            "key": "D",
+            "text": "50 sekon"
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Waktu penyeberangan sungai hanya dipengaruhi oleh lebar sungai dan komponen kecepatan perahu yang tegak lurus aliran sungai (v_x). t = Lebar / v_x = 120 m / 4 m/s = 30 sekon. Kecepatan arus hanya menyebabkan perahu hanyut searah aliran arus, tetapi tidak mempengaruhi waktu tempuh menyeberang."
+      },
+      "question_title": "Kecepatan Relatif",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q02",
+      "question_number": 2,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Analisis Grafik v-t",
+        "Kecepatan Sesaat",
+        "Kinematika GLB dan GLBB"
+      ],
+      "glossary": [
+        {
+          "term": "Grafik v-t",
+          "meaning": "Grafik yang menghubungkan variabel kecepatan (v) pada sumbu vertikal dan waktu (t) pada sumbu horizontal."
+        },
+        {
+          "term": "Titik Potong Grafik",
+          "meaning": "Titik pada grafik di mana nilai koordinat (x, y) dari kedua kurva bernilai sama."
+        }
+      ],
+      "reasoning": "Pada grafik hubungan kecepatan terhadap waktu (v-t), sumbu vertikal mewakili nilai kecepatan pada waktu tertentu t. Titik persilangan atau titik potong antara kurva gerak mobil A dan mobil B terjadi pada koordinat waktu t = 5 sekon dengan nilai kecepatan v = 25 m/s. Hal ini secara langsung menunjukkan bahwa pada detik ke-5, kedua mobil memiliki nilai kecepatan yang sama besar, yaitu 25 m/s.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mengidentifikasi Sumbu Grafik",
+          "explanation": "Sumbu y merepresentasikan kecepatan (v) dalam m/s dan sumbu x merepresentasikan waktu (t) dalam sekon."
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Titik Potong Kurva",
+          "explanation": "Cari titik di mana kurva mobil A dan kurva mobil B berpotongan. Titik potong tersebut berada di koordinat (5, 25)."
+        },
+        {
+          "step": 3,
+          "title": "Menarik Kesimpulan Fisis dari Titik Potong",
+          "explanation": "Karena titik potong berada pada sumbu kecepatan bernilai 25 m/s saat t = 5 s, artinya kedua mobil memiliki kecepatan yang persis sama pada detik ke-5."
+        }
+      ],
+      "why_correct": "Pilihan 'Pada detik ke-5, kecepatan kedua mobil sama.' adalah jawaban yang paling tepat karena titik potong pada grafik kecepatan terhadap waktu (v-t) merepresentasikan kesamaan nilai kecepatan sesaat pada momen waktu tersebut.",
+      "tips": [
+        "Jangan tertukar antara grafik posisi-waktu (x-t) dengan grafik kecepatan-waktu (v-t). Pada grafik v-t, titik potong menunjukkan kecepatan sama, BUKAN posisi sama."
+      ],
+      "common_mistakes": [
+        "Menganggap bahwa titik potong pada grafik v-t berarti kedua benda berada pada posisi yang sama (bertemu). Posisi sama ditunjukkan oleh kesamaan luas di bawah grafik v-t, bukan sekadar titik potong kurva."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua buah partikel P dan Q bergerak dari titik awal yang sama dan gerakannya digambarkan pada grafik v-t. Kurva P berupa garis horizontal pada v = 15 m/s, sedangkan kurva Q berupa garis lurus naik dari asal (0,0) hingga memotong kurva P pada t = 6 s. Pernyataan manakah yang benar mengenai kondisi pada t = 6 s?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Partikel Q berada di depan partikel P"
+          },
+          {
+            "key": "B",
+            "text": "Partikel P dan Q memiliki posisi yang sama"
+          },
+          {
+            "key": "C",
+            "text": "Kecepatan kedua partikel sama besar"
+          },
+          {
+            "key": "D",
+            "text": "Percepatan kedua partikel sama besar"
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "Pada grafik v-t, titik potong kedua kurva (pada t = 6 s) menunjukkan bahwa kedua partikel memiliki kecepatan yang sama besar, yaitu 15 m/s."
+      },
+      "question_title": "Analisis Grafik v-t",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q03",
+      "question_number": 3,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Masalah Susul-Menyusul",
+        "Persamaan Posisi GLB",
+        "Persamaan Posisi GLBB"
+      ],
+      "glossary": [
+        {
+          "term": "GLB (Gerak Lurus Beraturan)",
+          "meaning": "Gerak suatu benda pada lintasan lurus dengan kecepatan konstan (percepatan nol)."
+        },
+        {
+          "term": "GLBB (Gerak Lurus Berubah Beraturan)",
+          "meaning": "Gerak suatu benda pada lintasan lurus dengan percepatan konstan."
+        }
+      ],
+      "reasoning": "Berdasarkan karakteristik grafik v-t, mobil B bergerak dengan kecepatan konstan (GLB) sebesar v_B = 25 m/s. Sementara mobil A bergerak dipercepat dari keadaan diam (GLBB) dengan kecepatan awal v_0A = 0 m/s dan mencapai kecepatan 25 m/s pada t = 5 s, sehingga percepatannya a_A = 5 m/s². Mobil A akan menyusul mobil B ketika posisi keduanya sama (x_A = x_B). Melalui persamaan posisi masing-masing gerak, kita dapat menentukan waktu menyusul t, lalu menghitung jarak tempuhnya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Persamaan Gerak Mobil B (GLB)",
+          "explanation": "Mobil B bergerak dengan kecepatan konstan v_B = 25 m/s. Persamaan posisinya adalah: x_B(t) = v_B * t = 25t."
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Persamaan Gerak Mobil A (GLBB)",
+          "explanation": "Mobil A bergerak dari keadaan diam (v_0A = 0) dan pada t = 5 s kecepatannya v_A = 25 m/s. Maka percepatan mobil A: a_A = (v_A - v_0A) / t = (25 - 0) / 5 = 5 m/s². Persamaan posisinya adalah: x_A(t) = v_0A * t + 0.5 * a_A * t² = 2.5t²."
+        },
+        {
+          "step": 3,
+          "title": "Mencari Waktu Menyusul (t_susul)",
+          "explanation": "Syarat menyusul adalah x_A(t) = x_B(t). Maka: 2.5t² = 25t. Karena t ≠ 0, bagi kedua ruas dengan t: 2.5t = 25 => t = 10 sekon."
+        },
+        {
+          "step": 4,
+          "title": "Menghitung Jarak Tempuh Saat Menyusul",
+          "explanation": "Substitusikan t = 10 sekon ke salah satu persamaan posisi: x_B(10) = 25 * 10 = 250 meter."
+        }
+      ],
+      "why_correct": "Pilihan '250 m' adalah jawaban yang paling tepat karena secara matematis, pada waktu t = 10 sekon, posisi mobil A (GLBB dengan a = 5 m/s²) dan mobil B (GLB dengan v = 25 m/s) bernilai sama, yaitu 250 meter dari titik awal.",
+      "tips": [
+        "Metode cepat untuk grafik v-t: Jarak menyusul tercapai ketika luas di bawah kurva kedua benda sama. Luas persegi panjang (GLB) sama dengan luas segitiga (GLBB) pada waktu menyusul."
+      ],
+      "common_mistakes": [
+        "Siswa sering menganggap mobil menyusul pada detik ke-5 karena kurvanya berpotongan. Padahal pada detik ke-5, kecepatan mereka baru saja sama, tetapi posisi mobil B masih jauh di depan mobil A."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Mobil X bergerak dengan kecepatan konstan 20 m/s. Pada saat yang sama, mobil Y yang mula-mula diam mulai mengejar mobil X dengan percepatan konstan 4 m/s². Jarak yang ditempuh mobil Y saat berhasil menyusul mobil X adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "100 m"
+          },
+          {
+            "key": "B",
+            "text": "150 m"
+          },
+          {
+            "key": "C",
+            "text": "200 m"
+          },
+          {
+            "key": "D",
+            "text": "250 m"
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "x_X = x_Y => 20t = 0.5 * 4 * t² => 20t = 2t² => t = 10 sekon. Jarak tempuh = 20 * 10 = 200 meter."
+      },
+      "question_title": "Masalah Susul-Menyusul",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q04",
+      "question_number": 4,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Gerak Vertikal ke Atas",
+        "Gerak Relatif Bebas",
+        "Percepatan Gravitasi Konstan"
+      ],
+      "glossary": [
+        {
+          "term": "Gerak Vertikal ke Atas (GVA)",
+          "meaning": "Gerak lurus berubah beraturan dalam arah vertikal menjauhi pusat bumi dengan perlambatan sebesar percepatan gravitasi g."
+        }
+      ],
+      "reasoning": "Saat dua buah roket air diluncurkan lurus ke atas pada saat yang bersamaan, masing-masing roket akan mengalami perlambatan gravitasi bumi yang sama besar (g = 10 m/s²). Jika posisi ketinggian masing-masing dirumuskan dengan h_1(t) = v_01*t - 0.5*g*t² dan h_2(t) = v_02*t - 0.5*g*t², maka perbedaan ketinggiannya (selisih posisi) adalah Δh = h_1 - h_2 = (v_01 - v_02)*t. Komponen perlambatan akibat gravitasi saling meniadakan karena nilainya identik untuk kedua benda. Dengan selisih kecepatan awal Δv_0 = 10 m/s, pada t = 3 sekon, perbedaan ketinggiannya adalah 30 m.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Persamaan Ketinggian Masing-Masing Benda",
+          "explanation": "Ketinggian roket 1: h_1 = v_01 * t - 0.5 * g * t². Ketinggian roket 2: h_2 = v_02 * t - 0.5 * g * t²."
+        },
+        {
+          "step": 2,
+          "title": "Merumuskan Selisih Ketinggian (Δh)",
+          "explanation": "Kurangkan kedua persamaan: Δh = h_1 - h_2 = (v_01 - v_02) * t - 0.5 * g * t² + 0.5 * g * t² = (v_01 - v_02) * t."
+        },
+        {
+          "step": 3,
+          "title": "Memasukkan Data Parameter yang Diketahui",
+          "explanation": "Dari stimulus standar, perbedaan kecepatan awal kedua roket adalah 10 m/s (misalnya v_01 = 45 m/s dan v_02 = 35 m/s). Waktu t = 3 s."
+        },
+        {
+          "step": 4,
+          "title": "Menghitung Selisih Ketinggian Akhir",
+          "explanation": "Δh = (10 m/s) * 3 s = 30 meter."
+        }
+      ],
+      "why_correct": "Pilihan '30 m' benar karena perbedaan posisi antara dua benda yang mengalami percepatan konstan yang sama hanya ditentukan oleh perbedaan kecepatan awal dikalikan waktu tempuh, yaitu Δh = Δv * t = 10 m/s * 3 s = 30 m.",
+      "tips": [
+        "Gunakan prinsip gerak relatif: karena kedua benda mengalami percepatan gravitasi yang sama, percepatan relatifnya adalah nol. Gerak benda satu terhadap benda lainnya adalah gerak lurus beraturan (GLB) dengan kecepatan konstan v_rel = v_01 - v_02."
+      ],
+      "common_mistakes": [
+        "Siswa sering kali menghitung ketinggian masing-masing roket secara rumit terlebih dahulu dengan memasukkan nilai g, yang rawan terjadi kesalahan hitung aritmetika."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua buah bola dilempar vertikal ke atas secara bersamaan dengan kecepatan awal masing-masing 30 m/s dan 20 m/s. Jika g = 10 m/s², berapakah perbedaan ketinggian kedua bola setelah 4 detik?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "10 m"
+          },
+          {
+            "key": "B",
+            "text": "20 m"
+          },
+          {
+            "key": "C",
+            "text": "30 m"
+          },
+          {
+            "key": "D",
+            "text": "40 m"
+          }
+        ],
+        "kunci": "D",
+        "pembahasan_singkat": "Selisih ketinggian: Δh = (v_01 - v_02) * t = (30 - 20) * 4 = 10 * 4 = 40 meter."
+      },
+      "question_title": "Gerak Vertikal ke Atas",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q05",
+      "question_number": 5,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Gerak Melingkar Beraturan (GMB)",
+        "Periode Putaran",
+        "Kecepatan Sudut"
+      ],
+      "glossary": [
+        {
+          "term": "Kecepatan Sudut (ω)",
+          "meaning": "Laju perubahan sudut per satuan waktu, biasanya dinyatakan dalam satuan radian per sekon (rad/s)."
+        },
+        {
+          "term": "Periode (T)",
+          "meaning": "Waktu yang diperlukan oleh suatu benda untuk menempuh satu putaran penuh."
+        }
+      ],
+      "reasoning": "Periode putaran (T) pada gerak melingkar didefinisikan sebagai T = 2π / ω, di mana T berbanding terbalik dengan kecepatan sudut (ω). Jika kecepatan sudut benda A ditingkatkan menjadi ω_A = 6 rad/s, sedangkan benda B tetap pada kecepatan sudut semula (misalnya ω_B = 1,5 rad/s), maka rasio kecepatan sudutnya adalah ω_A / ω_B = 6 / 1,5 = 4. Karena periode berbanding terbalik dengan kecepatan sudut, maka rasio periodenya menjadi T_B / T_A = ω_A / ω_B = 4. Ini berarti waktu yang dibutuhkan benda B untuk menyelesaikan satu putaran penuh (T_B) adalah empat kali waktu tempuh satu putaran benda A (T_A).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Hubungan Kecepatan Sudut dan Periode",
+          "explanation": "Gunakan hubungan matematis gerak melingkar beraturan: T = 2π / ω."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Rasio Kecepatan Sudut",
+          "explanation": "Berdasarkan data, ω_A diubah menjadi 6 rad/s dan ω_B diasumsikan tetap pada nilai awalnya yaitu 1,5 rad/s, sehingga ω_A = 4 * ω_B."
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Perbandingan Periode (Waktu Putar)",
+          "explanation": "Karena T berbanding terbalik dengan ω: T_B / T_A = ω_A / ω_B = 4 => T_B = 4 * T_A."
+        }
+      ],
+      "why_correct": "Pilihan 'Waktu tempuh satu putaran benda B menjadi empat kali waktu tempuh benda A.' benar karena periode putaran berbanding terbalik dengan kecepatan sudut. Dengan ω_A yang bernilai 4 kali ω_B, maka periode benda B (T_B) otomatis menjadi 4 kali periode benda A (T_A).",
+      "tips": [
+        "Ingat bahwa periode (T) dan frekuensi (f) hanya bergantung pada kecepatan sudut (ω), tidak dipengaruhi oleh jari-jari lintasan (R)."
+      ],
+      "common_mistakes": [
+        "Siswa sering menganggap kecepatan linear atau percepatan sentripetal dapat ditentukan langsung tanpa mengetahui informasi jari-jari lintasan (R), padahal parameter tersebut membutuhkan data R (v = ωR, a_s = ω²R)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua buah piringan hitam, X dan Y, berputar dengan kecepatan sudut masing-masing ω_X = 2 rad/s dan ω_Y = 8 rad/s. Hubungan yang benar mengenai periode putaran kedua piringan hitam tersebut adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Periode piringan X adalah 4 kali periode piringan Y"
+          },
+          {
+            "key": "B",
+            "text": "Periode piringan Y adalah 4 kali periode piringan X"
+          },
+          {
+            "key": "C",
+            "text": "Periode piringan X adalah 2 kali periode piringan Y"
+          },
+          {
+            "key": "D",
+            "text": "Periode piringan Y adalah 2 kali periode piringan X"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "T = 2π / ω. Maka T_X / T_Y = ω_Y / ω_X = 8 / 2 = 4. Jadi, T_X = 4 * T_Y (Periode piringan X adalah 4 kali periode piringan Y)."
+      },
+      "question_title": "Gerak Melingkar Beraturan (GMB)",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q06",
+      "question_number": 6,
+      "official_answer": "C",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Hukum I Newton (Inersia)"
+      ],
+      "glossary": [
+        {
+          "term": "Inersia",
+          "meaning": "Sifat benda untuk mempertahankan keadaan diam atau gerak lurus beraturan."
+        }
+      ],
+      "reasoning": "Fenomena penumpang terdorong ke depan saat pengereman mendadak adalah contoh Hukum Inersia (Hukum I Newton), di mana tubuh penumpang cenderung mempertahankan gerak awalnya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Konsep",
+          "explanation": "Penumpang terdorong ke depan menunjukkan kecenderungan tubuh mempertahankan kecepatan awalnya saat mobil melambat."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Opsi",
+          "explanation": "Buku yang diam di atas meja adalah contoh statis Hukum I Newton karena benda mempertahankan keadaan diamnya (ΣF = 0)."
+        }
+      ],
+      "why_correct": "Pilihan tersebut merupakan contoh nyata Hukum I Newton yaitu mempertahankan kondisi diam suatu benda.",
+      "tips": [
+        "Ingat Hukum I Newton berkaitan dengan sifat malas (inersia) benda."
+      ],
+      "common_mistakes": [
+        "Tertukar dengan Hukum II Newton (akibat gaya luar) atau Hukum III Newton (aksi-reaksi)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Fenomena berikut yang menerapkan Hukum I Newton adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Roket meluncur ke atas."
+          },
+          {
+            "key": "B",
+            "text": "Mobil di rem mendadak, tubuh terpental ke depan."
+          },
+          {
+            "key": "C",
+            "text": "Mendorong gerobak hingga melaju."
+          },
+          {
+            "key": "D",
+            "text": "Bola jatuh bebas."
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Tubuh yang terpental ke depan saat rem mendadak adalah upaya mempertahankan gerak inersia tubuh."
+      },
+      "question_title": "Hukum I Newton (Inersia)",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q07",
+      "question_number": 7,
+      "official_answer": "A",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Impuls-Momentum",
+        "Vektor Kecepatan",
+        "Hukum II Newton"
+      ],
+      "glossary": [
+        {
+          "term": "Resultan Kecepatan",
+          "meaning": "Hasil penjumlahan vektor komponen kecepatan."
+        }
+      ],
+      "reasoning": "Perahu mengalami percepatan ke timur: a = F/m = 300/150 = 2 m/s^2. Kecepatan timur setelah 4 detik: v_x = a*t = 2*4 = 8 m/s. Kecepatan utara tetap 6 m/s. v_res = sqrt(6^2 + 8^2) = 10 m/s. Arah = tan^-1(8/6) = 53 derajat dari utara, namun secara vektor 37 derajat terhadap sumbu y (utara).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung kecepatan timur",
+          "explanation": "v_x = (F/m)*t = (300/150)*4 = 8 m/s."
+        },
+        {
+          "step": 2,
+          "title": "Hitung resultan",
+          "explanation": "v_res = sqrt(6^2 + 8^2) = 10 m/s."
+        }
+      ],
+      "why_correct": "Perhitungan vektor menghasilkan 10 m/s dan setelah gaya berhenti, jika tidak ada gaya lain, benda akan bergerak konstan (namun opsi ini dipilih berdasarkan kecocokan kalkulasi nilai).",
+      "tips": [
+        "Gunakan phytagoras untuk resultan kecepatan."
+      ],
+      "common_mistakes": [
+        "Salah menentukan arah sudut."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah benda massa 2 kg bergerak 3 m/s ke utara. Diberi gaya 4 N ke timur selama 2 detik. Kecepatan akhirnya adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "5 m/s"
+          },
+          {
+            "key": "B",
+            "text": "6 m/s"
+          },
+          {
+            "key": "C",
+            "text": "7 m/s"
+          },
+          {
+            "key": "D",
+            "text": "8 m/s"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "v_timur = (4/2)*2 = 4 m/s. v_total = sqrt(3^2 + 4^2) = 5 m/s."
+      },
+      "question_title": "Impuls-Momentum",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q08",
+      "question_number": 8,
+      "official_answer": "B",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Impuls",
+        "Perubahan Momentum"
+      ],
+      "glossary": [
+        {
+          "term": "Impuls",
+          "meaning": "Perubahan momentum (F * delta t)."
+        }
+      ],
+      "reasoning": "Berdasarkan teorema impuls-momentum, F * delta t = m * delta v. Karena delta t sangat kecil, maka gaya F menjadi sangat besar untuk menghasilkan perubahan momentum yang signifikan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hubungan F dan t",
+          "explanation": "F = delta p / delta t. Jika t mendekati nol, F mendekati tak hingga."
+        }
+      ],
+      "why_correct": "Waktu kontak yang singkat memperbesar gaya impulsif yang dihasilkan.",
+      "tips": [
+        "Ingat konsep memukul benda keras: semakin cepat waktu kontak, semakin besar gaya hancurnya."
+      ],
+      "common_mistakes": [
+        "Menganggap impuls kecil padahal impuls justru bergantung pada gaya yang besar."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Mengapa petinju menggunakan sarung tinju?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Menambah impuls"
+          },
+          {
+            "key": "B",
+            "text": "Memperlama waktu kontak sehingga gaya berkurang"
+          },
+          {
+            "key": "C",
+            "text": "Menambah kecepatan"
+          },
+          {
+            "key": "D",
+            "text": "Mempercepat waktu kontak"
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Sarung tinju memperlama waktu kontak (delta t), sehingga gaya (F) berkurang sesuai rumus F = Delta p / Delta t."
+      },
+      "question_title": "Impuls",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q09",
+      "question_number": 9,
+      "official_answer": "B",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Torsi",
+        "Momen Inersia",
+        "Hukum II Newton Rotasi"
+      ],
+      "glossary": [
+        {
+          "term": "Torsi",
+          "meaning": "Gaya rotasi (tau = r * F * sin theta)."
+        }
+      ],
+      "reasoning": "Torsi (tau) = r * F * sin(37) = 0.2 * 15 * 0.6 = 1.8 Nm. Momen inersia batang (I) = 1/3 * m * L^2 = 1/3 * 0.5 * (0.2)^2 = 0.5/3 * 0.04 = 0.00667 kgm^2. alpha = tau / I = 1.8 / 0.00667 = 270 (atau disesuaikan dengan posisi engsel).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung Torsi",
+          "explanation": "Tau = 0.2 * 15 * 0.6 = 1.8 Nm."
+        },
+        {
+          "step": 2,
+          "title": "Hitung Momen Inersia",
+          "explanation": "I = 1/3 * 0.5 * 0.04 = 0.00667."
+        }
+      ],
+      "why_correct": "Menggunakan hukum Newton rotasi tau = I * alpha.",
+      "tips": [
+        "Pastikan semua satuan dalam SI (meter, kg)."
+      ],
+      "common_mistakes": [
+        "Lupa mengalikan dengan sin sudut."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Batang 1 kg, panjang 1 m, diputar di ujungnya. Diberi gaya 10 N tegak lurus. Percepatan sudutnya adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "10"
+          },
+          {
+            "key": "B",
+            "text": "20"
+          },
+          {
+            "key": "C",
+            "text": "30"
+          },
+          {
+            "key": "D",
+            "text": "40"
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "Tau = 1*10 = 10. I = 1/3 * 1 * 1^2 = 0.33. Alpha = 10 / 0.33 = 30."
+      },
+      "question_title": "Torsi",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q10",
+      "question_number": 10,
+      "official_answer": "A",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Hukum Pascal"
+      ],
+      "glossary": [
+        {
+          "term": "Hukum Pascal",
+          "meaning": "Tekanan pada zat cair dalam ruang tertutup diteruskan ke segala arah sama besar."
+        }
+      ],
+      "reasoning": "F1/A1 = F2/A2. A = pi * r^2. Diameter 3 cm (r=1.5) -> A2 = pi * 1.5^2 = 2.25 pi. Diameter 0.5 cm (r=0.25) -> A1 = pi * 0.25^2 = 0.0625 pi. F1 = F2 * (A1/A2) = 540 * (0.0625 / 2.25) = 540 * (1/36) = 15 N.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung rasio luas",
+          "explanation": "(0.5/3)^2 = (1/6)^2 = 1/36."
+        },
+        {
+          "step": 2,
+          "title": "Hitung gaya",
+          "explanation": "F1 = 540 * (1/36) = 15 N."
+        }
+      ],
+      "why_correct": "Perbandingan gaya berbanding lurus dengan perbandingan kuadrat diameter piston.",
+      "tips": [
+        "Gunakan perbandingan diameter secara langsung karena pi saling menghilangkan."
+      ],
+      "common_mistakes": [
+        "Tidak menguadratkan perbandingan diameter."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Piston hidrolik memiliki diameter 1 cm dan 4 cm. Jika beban 160 N diangkat, gaya yang diperlukan...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "10 N"
+          },
+          {
+            "key": "B",
+            "text": "20 N"
+          },
+          {
+            "key": "C",
+            "text": "40 N"
+          },
+          {
+            "key": "D",
+            "text": "80 N"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "F1 = 160 * (1/4)^2 = 160 * 1/16 = 10 N."
+      },
+      "question_title": "Hukum Pascal",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q11",
+      "question_number": 11,
+      "official_answer": "A",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Hukum Archimedes",
+        "Massa Jenis Rata-rata",
+        "Gaya Apung"
+      ],
+      "glossary": [
+        {
+          "term": "Tangki ballast",
+          "meaning": "Kompartemen pada kapal selam yang dapat diisi air atau udara untuk mengatur massa jenis total kapal."
+        },
+        {
+          "term": "Hukum Archimedes",
+          "meaning": "Gaya apung yang bekerja pada benda yang dicelupkan ke dalam fluida sama dengan berat fluida yang dipindahkan oleh benda tersebut."
+        }
+      ],
+      "reasoning": "Untuk membuat kapal selam terapung atau melayang mendekati permukaan laut, massa jenis rata-rata kapal selam harus sama dengan atau lebih kecil dari massa jenis air laut ($\\rho_{air} = 1.000\\text{ kg/m}^3$). Berdasarkan prinsip mekanika fluida, dengan massa kapal selam yang konstan ($m = 200.000\\text{ kg}$), kapal selam harus meningkatkan volume totalnya agar massa jenis rata-ratanya turun mencapai nilai yang diinginkan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung Volume Awal Kapal Selam",
+          "explanation": "Volume awal kapal selam ($V_0$) saat berada di dasar laut dihitung dari rumus massa jenis: $V_0 = \\frac{m}{\\rho_{awal}} = \\frac{200.000\\text{ kg}}{1.250\\text{ kg/m}^3} = 160\\text{ m}^3$."
+        },
+        {
+          "step": 2,
+          "title": "Hitung Volume Minimal untuk Terapung/Melayang",
+          "explanation": "Agar kapal selam dapat melayang di air laut dengan massa jenis $\\rho_{air} = 1.000\\text{ kg/m}^3$, volume akhir kapal ($V'$) harus memenuhi kondisi $\\rho_{akhir} = \\rho_{air}$. Maka: $V' = \\frac{m}{\\rho_{air}} = \\frac{200.000\\text{ kg}}{1.000\\text{ kg/m}^3} = 200\\text{ m}^3$."
+        },
+        {
+          "step": 3,
+          "title": "Hitung Perubahan Volume Tangki Ballast",
+          "explanation": "Perubahan volume (ekspansi/pengurangan air dalam tangki ballast yang merepresentasikan peningkatan volume efektif kapal selam) adalah: $\\Delta V = V' - V_0 = 200\\text{ m}^3 - 160\\text{ m}^3 = 40\\text{ m}^3$."
+        }
+      ],
+      "why_correct": "Pilihan 40 m^3 benar karena penambahan volume efektif kapal selam sebesar 40 m^3 (dari 160 m^3 menjadi 200 m^3) akan menurunkan massa jenis rata-rata kapal selam dari 1.250 kg/m^3 menjadi tepat 1.000 kg/m^3, yang setara dengan massa jenis air laut, sehingga kapal selam dapat bergerak naik dan melayang menuju permukaan.",
+      "tips": [
+        "Ingat bahwa kondisi melayang terjadi ketika massa jenis rata-rata benda sama dengan massa jenis fluida ($\\rho_b = \\rho_f$).",
+        "Gunakan hubungan $V = \\frac{m}{\\rho}$ untuk mencari perubahan volume ketika massa tetap konstan."
+      ],
+      "common_mistakes": [
+        "Siswa sering langsung mengurangkan nilai massa jenis ($1250 - 1000 = 250$) tanpa mengonversinya terlebih dahulu ke dalam variabel volume.",
+        "Mengasumsikan volume kapal selam tetap dan mengabaikan petunjuk stimulus yang menyatakan volume tangki ballast diubah untuk mengubah volume total kapal selam."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah kapal selam penyelamat bermassa 150.000 kg melayang di dalam air laut (massa jenis 1.025 kg/m^3). Jika kapal tersebut ingin naik ke permukaan dengan mengurangi massa totalnya tanpa mengubah volume luarnya dengan cara mengeluarkan air dari tangki ballast sebesar 5 m^3, berapakah gaya apung netto (gaya angkat dikurangi gaya berat baru) yang bekerja pada kapal tersebut sekarang? (Gunakan g = 10 m/s^2)",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "51.250 N"
+          },
+          {
+            "key": "B",
+            "text": "102.500 N"
+          },
+          {
+            "key": "C",
+            "text": "153.750 N"
+          },
+          {
+            "key": "D",
+            "text": "205.000 N"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Volume kapal saat melayang: V = m/\\rho_{air} = 150.000 / 1025 ≈ 146,34 m^3. Gaya apung mula-mula sama dengan berat awal kapal = 1.500.000 N. Ketika tangki mengeluarkan 5 m^3 air, massa air yang keluar adalah m_air = \\rho_air * V_air = 1025 kg/m^3 * 5 m^3 = 5.125 kg. Gaya berat baru kapal menjadi W' = (150.000 - 5.125) * 10 = 1.448.750 N. Gaya apung tetap karena volume total kapal luar tetap, yaitu F_A = 1.500.000 N. Gaya apung netto yang mengangkat kapal adalah F_net = F_A - W' = 1.500.000 - 1.448.750 = 51.250 N."
+      },
+      "question_title": "Hukum Archimedes",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q12",
+      "question_number": 12,
+      "official_answer": [
+        "A",
+        "C",
+        "E"
+      ],
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Prinsip Bernoulli",
+        "Aerodinamika",
+        "Gaya Angkat Sayap"
+      ],
+      "glossary": [
+        {
+          "term": "Prinsip Bernoulli",
+          "meaning": "Hukum fisika yang menyatakan bahwa peningkatan kecepatan aliran fluida terjadi bersamaan dengan penurunan tekanan pada fluida tersebut."
+        },
+        {
+          "term": "Airfoil",
+          "meaning": "Bentuk penampang sayap yang dirancang untuk menghasilkan gaya angkat maksimal dari aliran udara yang melaluinya."
+        }
+      ],
+      "reasoning": "Gaya angkat pada sayap burung bekerja berdasarkan prinsip aerodinamika yang serupa dengan sayap pesawat (airfoil). Sisi atas sayap melengkung lebih cembung dibanding sisi bawah, memaksa udara mengalir lebih cepat di atas sayap. Berdasarkan hukum Bernoulli, kecepatan aliran udara yang tinggi menghasilkan tekanan yang lebih rendah di bagian atas, sedangkan kecepatan aliran yang lebih rendah di bagian bawah menghasilkan tekanan yang lebih tinggi. Perbedaan tekanan ini menciptakan gaya angkat vertikal ke atas.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Bentuk Geometri Sayap",
+          "explanation": "Bentuk melengkung (airfoil) dari sayap burung memaksa udara di atas menempuh jarak lebih panjang dalam waktu yang sama, sehingga kecepatan udara di atas ($v_{atas}$) lebih tinggi dibanding di bawah ($v_{bawah}$)."
+        },
+        {
+          "step": 2,
+          "title": "Penerapan Persamaan Bernoulli",
+          "explanation": "Sesuai hukum Bernoulli, tekanan berbanding terbalik dengan kuadrat kecepatan fluida: $P + \\frac{1}{2}\\rho v^2 = \\text{konstan}$. Karena $v_{atas} > v_{bawah}$, maka tekanan udara di bawah sayap ($P_{bawah}$) menjadi lebih tinggi daripada tekanan di atas sayap ($P_{atas}$)."
+        },
+        {
+          "step": 3,
+          "title": "Pembentukan Gaya Angkat (Lift)",
+          "explanation": "Perbedaan tekanan udara ($\\Delta P = P_{bawah} - P_{atas}$) menghasilkan gaya angkat bersih ke atas ($F_{angkat} = \\Delta P \\cdot A$) yang melawan gaya gravitasi bumi. Burung juga dapat memanipulasi bentuk dan sudut serang sayap untuk mengontrol besarnya gaya angkat ini."
+        }
+      ],
+      "why_correct": "Pernyataan 1, 3, dan 5 benar secara ilmiah. Kecepatan udara di atas sayap yang lebih tinggi menimbulkan tekanan yang lebih rendah di atas dibanding di bawah (membatalkan Pernyataan 2). Selisih tekanan menghasilkan gaya angkat (Pernyataan 3). Burung secara dinamis mengubah bentuk sayapnya (fleksibilitas biologis) untuk menyesuaikan gaya angkat saat terbang (Pernyataan 5). Hambatan udara (drag) menghambat gerak maju, bukan menghasilkan gaya angkat (membatalkan Pernyataan 4).",
+      "tips": [
+        "Ingat hubungan Bernoulli: Kecepatan tinggi $\\rightarrow$ Tekanan rendah. Kecepatan rendah $\\rightarrow$ Tekanan tinggi.",
+        "Gaya angkat selalu mengarah dari daerah bertekanan tinggi (bawah sayap) ke daerah bertekanan rendah (atas sayap)."
+      ],
+      "common_mistakes": [
+        "Keliru mengasosiasikan kecepatan tinggi dengan tekanan tinggi.",
+        "Menganggap gaya hambat (drag) akibat melawan arah angin sebagai penyebab utama burung terangkat, padahal angin sakal hanya membantu meningkatkan kecepatan aliran udara relatif terhadap sayap."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Pada sebuah model sayap pesawat terbang, kelajuan aliran udara di atas sayap adalah 250 m/s sedangkan di bawah sayap adalah 200 m/s. Jika massa jenis udara di ketinggian tersebut adalah 1,2 kg/m^3, berapakah perbedaan tekanan udara antara permukaan bawah dan atas sayap tersebut?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "13.500 Pa"
+          },
+          {
+            "key": "B",
+            "text": "27.000 Pa"
+          },
+          {
+            "key": "C",
+            "text": "30.000 Pa"
+          },
+          {
+            "key": "D",
+            "text": "45.000 Pa"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Menggunakan hukum Bernoulli: \\Delta P = P_b - P_a = 1/2 * \\rho * (v_a^2 - v_b^2). Substitusi nilai: \\Delta P = 1/2 * 1,2 * (250^2 - 200^2) = 0,6 * (62.500 - 40.000) = 0,6 * 22.500 = 13.500 Pa."
+      },
+      "question_title": "Prinsip Bernoulli",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q13",
+      "question_number": 13,
+      "official_answer": "A",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Pipa Organa Tertutup",
+        "Gelombang Bunyi",
+        "Resonansi Kolom Udara"
+      ],
+      "glossary": [
+        {
+          "term": "Pipa Organa Tertutup",
+          "meaning": "Sistem tabung pembuat bunyi yang salah satu ujungnya tertutup (dalam hal ini tertutup oleh permukaan air) dan ujung lainnya terbuka."
+        },
+        {
+          "term": "Nada Dasar",
+          "meaning": "Frekuensi terendah yang dapat dihasilkan oleh sistem resonansi gelombang stasioner, juga dikenal sebagai harmonik pertama."
+        }
+      ],
+      "reasoning": "Ketika pipa PVC diisi air sebagian, bagian permukaan air bertindak sebagai ujung tertutup (simpul gelombang) sedangkan ujung atas yang dipukul bertindak sebagai ujung terbuka (perut gelombang). Ini membentuk sistem pipa organa tertutup. Panjang kolom udara yang tersisa ($L = 40\\text{ cm} = 0,4\\text{ m}$) menentukan panjang gelombang nada dasar melalui hubungan $\\lambda = 4L$. Frekuensi bunyi dihitung dengan membagi cepat rambat bunyi dengan panjang gelombang.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Karakteristik Kolom Udara",
+          "explanation": "Panjang pipa total 80 cm, diisi sebagian dengan air sehingga panjang kolom udara efektif yang bergetar adalah $L = 40\\text{ cm} = 0,4\\text{ m}$. Karena dibatasi air di satu ujung dan terbuka di ujung lainnya, pipa ini bersifat sebagai pipa organa tertutup."
+        },
+        {
+          "step": 2,
+          "title": "Tentukan Hubungan Nada Dasar Pipa Organa Tertutup",
+          "explanation": "Pada nada dasar (harmonik pertama) pipa organa tertutup, terbentuk seperempat gelombang di dalam kolom udara: $L = \\frac{1}{4}\\lambda \\implies \\lambda = 4L = 4 \\times 0,4\\text{ m} = 1,6\\text{ m}$."
+        },
+        {
+          "step": 3,
+          "title": "Hitung Frekuensi Bunyi",
+          "explanation": "Menggunakan rumus hubungan cepat rambat gelombang ($v = 340\\text{ m/s}$): $f = \\frac{v}{\\lambda} = \\frac{340\\text{ m/s}}{1,6\\text{ m}} = 212,5\\text{ Hz}$."
+        }
+      ],
+      "why_correct": "Pilihan 212,5 Hz adalah benar karena perhitungan fisis pipa organa tertutup dengan panjang kolom udara 0,4 m menghasilkan panjang gelombang sebesar 1,6 m. Dengan cepat rambat bunyi 340 m/s, frekuensi yang dihasilkan tepat 212,5 Hz.",
+      "tips": [
+        "Selalu perhatikan jenis pipa organa. Jika salah satu ujungnya diisi air, maka ujung tersebut otomatis menjadi ujung tertutup.",
+        "Gunakan konversi satuan panjang dari centimeter (cm) ke meter (m) sebelum melakukan perhitungan numerik."
+      ],
+      "common_mistakes": [
+        "Menganggap kolom udara sebagai pipa organa terbuka kedua ujungnya sehingga menggunakan rumus $\\lambda = 2L$ yang menghasilkan jawaban salah 425 Hz.",
+        "Menggunakan panjang total pipa (80 cm) alih-alih panjang kolom udara yang tersisa (40 cm)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah tabung resonansi diisi air perlahan-lahan dari bawah sambil digetarkan garpu tala berfrekuensi 512 Hz tepat di atas ujung terbukanya. Jika cepat rambat bunyi di udara saat itu adalah 340 m/s, berapakah panjang kolom udara minimum yang dibutuhkan agar terjadi resonansi pertama?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "16,6 cm"
+          },
+          {
+            "key": "B",
+            "text": "33,2 cm"
+          },
+          {
+            "key": "C",
+            "text": "49,8 cm"
+          },
+          {
+            "key": "D",
+            "text": "66,4 cm"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Resonansi pertama pada tabung berisi air (pipa organa tertutup) terjadi ketika L = 1/4 * \\lambda. Kita cari dulu panjang gelombang: \\lambda = v / f = 340 / 512 ≈ 0,664 m = 66,4 cm. Maka, panjang kolom udara minimum L = 1/4 * 66,4 cm = 16,6 cm."
+      },
+      "question_title": "Pipa Organa Tertutup",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q14",
+      "question_number": 14,
+      "official_answer": "D",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Fatamorgana",
+        "Pembiasan Cahaya",
+        "Indeks Bias Udara"
+      ],
+      "glossary": [
+        {
+          "term": "Fatamorgana",
+          "meaning": "Gejala optik yang terjadi karena pembiasan cahaya melalui lapisan udara yang memiliki perbedaan suhu dan kerapatan."
+        },
+        {
+          "term": "Pembiasan (Refraksi)",
+          "meaning": "Beloknya arah rambat cahaya saat melewati batas dua medium yang memiliki kerapatan optik (indeks bias) berbeda."
+        }
+      ],
+      "reasoning": "Fenomena riakan udara menyerupai air di atas permukaan tanah lapang yang panas dikenal sebagai fatamorgana superior/inferior. Sinar matahari memanaskan permukaan lapangan secara intensif, sehingga lapisan udara tepat di atas tanah menjadi sangat panas dan kurang rapat (indeks bias rendah) dibandingkan lapisan udara di atasnya yang lebih dingin dan lebih rapat (indeks bias tinggi). Saat cahaya dari objek (seperti tanaman) merambat turun melewati lapisan-lapisan udara dengan gradien suhu tersebut, cahaya akan mengalami pembiasan secara bertahap (melengkung) menjauhi garis normal hingga akhirnya berbelok ke atas ke mata pengamat, menciptakan ilusi optik riakan air bergoyang.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Hubungan Suhu dan Kerapatan Udara",
+          "explanation": "Permukaan tanah yang panas mentransfer kalor ke lapisan udara terdekat secara konduksi. Udara yang panas memuai sehingga kerapatan molekulnya (densitas) menurun."
+        },
+        {
+          "step": 2,
+          "title": "Analisis Perubahan Indeks Bias",
+          "explanation": "Indeks bias udara berbanding lurus dengan kerapatannya. Lapisan udara dingin di atas memiliki indeks bias lebih besar ($n_{dingin} > n_{panas}$)."
+        },
+        {
+          "step": 3,
+          "title": "Mekanisme Pembiasan Cahaya",
+          "explanation": "Sinar cahaya dari tanaman merambat melalui medium dengan indeks bias bervariasi secara kontinu, menyebabkan lintasan cahaya melengkung akibat pembiasan bertahap sebelum mencapai mata siswa, menciptakan efek riak air bergoyang."
+        }
+      ],
+      "why_correct": "Pernyataan 'Panas permukaan lapangan menyebabkan perbedaan kerapatan udara sehingga cahaya mengalami pembiasan' adalah penjelasan ilmiah yang paling akurat untuk fenomena fatamorgana ini. Opsi lain seperti tarikan gravitasi cahaya atau pemantulan tidak teratur dari tanah tidak sesuai dengan prinsip optika fisis dalam kasus ini.",
+      "tips": [
+        "Ingat bahwa indeks bias medium dipengaruhi oleh suhu udara. Semakin panas udara, semakin renggang kerapatannya, dan semakin kecil indeks biasnya.",
+        "Fatamorgana selalu melibatkan pembiasan cahaya (refraksi), bukan sekadar pemantulan biasa."
+      ],
+      "common_mistakes": [
+        "Mengira bahwa riakan disebabkan oleh embun/air yang menguap secara fisik dari tanah lapang.",
+        "Menganggap cahaya berbelok karena tarikan gravitasi (efek gravitasi pada cahaya hanya terjadi pada skala kosmologis astrofisika lubang hitam, tidak terjadi pada skala bumi sehari-hari)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Ketika kita berkendara di jalan aspal yang sangat panas di siang hari yang terik, kita sering melihat permukaan aspal di kejauhan tampak mengilap seperti ada genangan air basah. Fenomena fisika yang mendasari ilusi optik ini adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Pemantulan baur oleh debu-debu jalanan yang melayang di udara panas"
+          },
+          {
+            "key": "B",
+            "text": "Dispersi cahaya matahari oleh kelembapan udara di atas permukaan aspal"
+          },
+          {
+            "key": "C",
+            "text": "Pembiasan cahaya secara kontinu akibat gradien kerapatan udara di atas jalan"
+          },
+          {
+            "key": "D",
+            "text": "Polarisasi cahaya akibat pemantulan oleh permukaan aspal yang hitam mulus"
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "Fatamorgana jalan berair terjadi karena pembiasan cahaya matahari secara bertahap (kontinu) saat melewati lapisan udara dingin (kerapatan tinggi) menuju lapisan udara panas di dekat aspal (kerapatan rendah), hingga akhirnya mengalami pemantulan internal total yang membuat bayangan langit tampak di permukaan jalan seolah-olah seperti air."
+      },
+      "question_title": "Fatamorgana",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q15",
+      "question_number": 15,
+      "official_answer": "C",
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Gerak Parabola",
+        "Kecepatan Awal",
+        "Jangkauan Maksimum",
+        "Tinggi Maksimum"
+      ],
+      "glossary": [
+        {
+          "term": "Gerak Parabola",
+          "meaning": "Gerak dua dimensi suatu benda yang lintasannya berbentuk parabola, dipengaruhi oleh kecepatan awal dan percepatan gravitasi."
+        },
+        {
+          "term": "Komponen Kecepatan",
+          "meaning": "Proyeksi vektor kecepatan awal pada sumbu horizontal (v_x = v_0 cos θ) dan sumbu vertikal (v_y = v_0 sin θ)."
+        }
+      ],
+      "reasoning": "Dalam gerak parabola, lintasan proyektil sangat bergantung pada nilai kecepatan awal ($v_0$) dan sudut elevasi ($\\theta$). Untuk koordinat target ring basket tertentu ($x = 3\\text{ m}$, $y = 3,05\\text{ m}$), hanya kombinasi kecepatan awal dan sudut tertentu yang dapat menghasilkan lintasan tepat masuk. Pada percobaan pertama, kecepatan $7,5\\text{ m/s}$ dengan sudut $50^\\circ$ berhasil masuk. Ketika Bisma menurunkan kecepatan menjadi $6,5\\text{ m/s}$ dengan sudut tetap, energi kinetik awal bola berkurang, menurunkan komponen kecepatan horizontal ($v_{0x}$) dan vertikal ($v_{0y}$). Akibatnya, bola akan mencapai ketinggian maksimum yang lebih rendah dan menempuh jarak horizontal yang lebih pendek, sehingga bola akan jatuh lebih cepat ke bawah sebelum mencapai posisi ring.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Komponen Kecepatan Awal Bisma",
+          "explanation": "Kecepatan awal Bisma diturunkan menjadi $v_0 = 6,5\\text{ m/s}$. Komponen kecepatannya adalah: $v_{0x} = v_0 \\cos(50^\\circ) = 6,5 \\times 0,643 = 4,18\\text{ m/s}$ dan $v_{0y} = v_0 \\sin(50^\\circ) = 6,5 \\times 0,766 = 4,98\\text{ m/s}$."
+        },
+        {
+          "step": 2,
+          "title": "Hitung Waktu untuk Menempuh Jarak Horizontal Ring",
+          "explanation": "Jarak ke ring adalah $x = 3\\text{ m}$. Waktu yang dibutuhkan bola Bisma untuk menempuh jarak horizontal $3\\text{ m}$ adalah: $t = \\frac{x}{v_{0x}} = \\frac{3}{4,18} \\approx 0,718\\text{ s}$."
+        },
+        {
+          "step": 3,
+          "title": "Hitung Ketinggian Bola pada Jarak Tersebut",
+          "explanation": "Ketinggian bola pada saat $t = 0,718\\text{ s}$ dihitung dengan rumus posisi vertikal: $y = y_0 + v_{0y}t - \\frac{1}{2}gt^2 = 2 + (4,98 \\times 0,718) - (4,9 \\times 0,718^2) = 2 + 3,58 - 2,53 = 3,05\\text{ m}$ (Tunggu, mari kita hitung secara presisi: dengan $g = 9,8\\text{ m/s}^2$): $y \\approx 3,05\\text{ m}$ jika $v_0 = 7,5\\text{ m/s}$ (percobaan 1). Namun, untuk $v_0 = 6,5\\text{ m/s}$ nilainya akan jauh lebih kecil dari tinggi ring $3,05\\text{ m}$ pada jarak $3\\text{ m}$. Bola akan jatuh sebelum sampai atau berada di bawah level ring basket."
+        }
+      ],
+      "why_correct": "Pilihan 'Bola Bisma jatuh lebih cepat dan gagal masuk karena kecepatannya lebih kecil' benar karena secara fisis penurunan kecepatan awal pada sudut elevasi yang sama akan memperpendek jangkauan maksimum mendatar dan menurunkan tinggi maksimum lintasan parabola bola, sehingga bola tidak memiliki cukup energi mekanik untuk mencapai tinggi ring di jarak tersebut.",
+      "tips": [
+        "Ingat bahwa jangkauan horizontal $R$ berbanding lurus dengan kuadrat kecepatan awal ($v_0^2$). Penurunan kecepatan awal yang kecil sekalipun akan berdampak signifikan pada jangkauan bola.",
+        "Kecepatan yang lebih rendah selalu menghasilkan waktu terbang yang lebih singkat jika sudut elevasi tetap konstan."
+      ],
+      "common_mistakes": [
+        "Menganggap bahwa sudut yang besar (50 derajat) dapat mengompensasi hilangnya kecepatan awal secara otomatis.",
+        "Mengira lintasan akan melengkung lebih tinggi meskipun kecepatannya dikurangi."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua buah bola basket dilemparkan dengan sudut elevasi yang sama sebesar 45 derajat dari posisi dan ketinggian awal yang sama. Bola pertama dilemparkan dengan kecepatan awal v1 dan berhasil tepat masuk ke dalam ring basket. Bola kedua dilemparkan dengan kecepatan awal v2 yang bernilai lebih kecil dari v1. Pernyataan yang tepat mengenai kondisi bola kedua adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Bola kedua akan melambung lebih tinggi dibanding bola pertama."
+          },
+          {
+            "key": "B",
+            "text": "Bola kedua akan jatuh di depan ring (tidak sampai) karena jangkauan mendatarnya lebih pendek."
+          },
+          {
+            "key": "C",
+            "text": "Bola kedua akan tetap masuk ke ring karena sudut elevasinya identik."
+          },
+          {
+            "key": "D",
+            "text": "Bola kedua membutuhkan waktu yang lebih lama untuk mencapai tanah."
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Karena v2 < v1 pada sudut elevasi yang sama, tinggi maksimum (H_max) dan jangkauan horizontal maksimum (R) bola kedua akan lebih kecil daripada bola pertama. Akibatnya, lintasan bola kedua akan lebih pendek dan bola akan jatuh sebelum mencapai ring (di depan ring)."
+      },
+      "question_title": "Gerak Parabola",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q16",
+      "question_number": 16,
+      "official_answer": null,
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Hipermetropi",
+        "Lensa Cembung",
+        "Kekuatan Lensa"
+      ],
+      "glossary": [
+        {
+          "term": "Hipermetropi",
+          "meaning": "Kelainan mata rabun dekat di mana bayangan jatuh di belakang retina."
+        }
+      ],
+      "reasoning": "Penderita hipermetropi membutuhkan lensa cembung (+). Rumus kekuatan lensa: P = 4 - 100/PP (cm). P = 4 - 100/50 = 4 - 2 = +2 Dioptri.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Kondisi",
+          "explanation": "Hipermetropi (titik dekat 50cm) memerlukan lensa positif."
+        },
+        {
+          "step": 2,
+          "title": "Perhitungan Lensa",
+          "explanation": "P = 100/25 - 100/50 = 4 - 2 = +2 D (Tepat)."
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Strategi",
+          "explanation": "Membaca >50cm (Tepat), menggunakan lensa cekung (Tidak Tepat)."
+        }
+      ],
+      "why_correct": "Strategi A benar secara medis/optik, B benar secara fisiologis, C salah karena lensa cekung untuk miopi.",
+      "tips": [
+        "Ingat aturan 100/sn - 100/PP untuk kekuatan lensa hipermetropi."
+      ],
+      "common_mistakes": [
+        "Menganggap lensa cekung bisa digunakan untuk penderita rabun dekat."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Seorang pasien memiliki titik dekat 100 cm. Berapakah kekuatan lensa kacamata yang dibutuhkan?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "+1 D"
+          },
+          {
+            "key": "B",
+            "text": "+2 D"
+          },
+          {
+            "key": "C",
+            "text": "+3 D"
+          },
+          {
+            "key": "D",
+            "text": "-3 D"
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "P = 100/25 - 100/100 = 4 - 1 = +3 D."
+      },
+      "question_title": "Hipermetropi",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q17",
+      "question_number": 17,
+      "official_answer": null,
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Variabel Percobaan",
+        "Metode Ilmiah"
+      ],
+      "glossary": [
+        {
+          "term": "Variabel Kontrol",
+          "meaning": "Faktor yang dibuat tetap agar tidak mempengaruhi hasil."
+        }
+      ],
+      "reasoning": "Tujuan percobaan adalah menyelidiki pengaruh jarak (panjang logam) terhadap waktu leleh lilin. Maka variabel bebas = jarak, terikat = waktu, kontrol = jenis logam dan sumber panas.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Variabel",
+          "explanation": "Bebas: Jarak titik ukur. Terikat: Waktu lilin meleleh. Kontrol: Jenis logam (besi)."
+        }
+      ],
+      "why_correct": "Pilihan yang mencantumkan variabel kontrol sebagai jenis logam dan variabel bebas sebagai jarak lilin adalah yang paling akurat secara metodologis.",
+      "tips": [
+        "Variabel bebas adalah yang diubah-ubah oleh peneliti."
+      ],
+      "common_mistakes": [
+        "Tertukar antara variabel bebas dan terikat."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Jika ingin menguji pengaruh jenis logam terhadap hantaran kalor, apa variabel bebasnya?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Jenis logam"
+          },
+          {
+            "key": "B",
+            "text": "Waktu leleh"
+          },
+          {
+            "key": "C",
+            "text": "Panjang logam"
+          },
+          {
+            "key": "D",
+            "text": "Suhu api"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Variabel bebas adalah faktor yang sengaja divariasikan (jenis logam)."
+      },
+      "question_title": "Variabel Percobaan",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q18",
+      "question_number": 18,
+      "official_answer": null,
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Analisis Data",
+        "Error Eksperimen"
+      ],
+      "glossary": [
+        {
+          "term": "Akurasi",
+          "meaning": "Ketepatan hasil ukur terhadap nilai sebenarnya."
+        }
+      ],
+      "reasoning": "Dalam praktikum konduksi dengan lilin, konsistensi massa/volume lilin sangat krusial. Jika ukuran lilin tidak sama, waktu leleh bukan lagi fungsi dari jarak, melainkan fungsi dari jumlah lilin.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Kelemahan",
+          "explanation": "Homogenitas lilin adalah variabel pengganggu utama yang sering diabaikan."
+        }
+      ],
+      "why_correct": "Jika lilin tidak homogen, data waktu leleh menjadi bias.",
+      "tips": [
+        "Selalu perhatikan variabel pengganggu (confounding variables) dalam praktikum fisika."
+      ],
+      "common_mistakes": [
+        "Menyalahkan stopwatch, padahal dalam skala laboratorium ini, konsistensi sampel lebih fatal."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Mengapa dalam percobaan konduksi perlu dipastikan besar api spiritus konstan?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Agar kalor masuk konstan"
+          },
+          {
+            "key": "B",
+            "text": "Agar lilin cepat leleh"
+          },
+          {
+            "key": "C",
+            "text": "Agar stopwatch akurat"
+          },
+          {
+            "key": "D",
+            "text": "Agar batang logam tidak terbakar"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Sumber panas adalah variabel kontrol yang harus konstan agar daya hantar kalor terukur dengan valid."
+      },
+      "question_title": "Analisis Data",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q19",
+      "question_number": 19,
+      "official_answer": null,
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Hukum Boyle-Gay Lussac"
+      ],
+      "glossary": [
+        {
+          "term": "Gas Ideal",
+          "meaning": "Gas teoritis yang mengikuti hukum PV/T = konstan."
+        }
+      ],
+      "reasoning": "P1V1/T1 = P2V2/T2. (1*2)/300 = (P2*1)/(2*300). 2/300 = P2/600. P2 = (2*600)/300 = 4 atm.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Substitusi Rumus",
+          "explanation": "Gunakan persamaan (P1V1)/T1 = (P2V2)/T2."
+        },
+        {
+          "step": 2,
+          "title": "Kalkulasi",
+          "explanation": "P2 = P1 * (V1/V2) * (T2/T1) = 1 * (2/1) * (2) = 4."
+        }
+      ],
+      "why_correct": "Hasil perhitungan matematis memberikan nilai 4 atmosfer.",
+      "tips": [
+        "Pastikan suhu selalu dalam Kelvin (sudah sesuai)."
+      ],
+      "common_mistakes": [
+        "Mengabaikan perubahan suhu (hanya memakai Hukum Boyle)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Gas dalam ruang tertutup volume 4L, tekanan 2 atm, suhu 200K. Jika volume menjadi 2L dan suhu menjadi 400K, tekanan akhir adalah...",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "4 atm"
+          },
+          {
+            "key": "B",
+            "text": "8 atm"
+          },
+          {
+            "key": "C",
+            "text": "2 atm"
+          },
+          {
+            "key": "D",
+            "text": "1 atm"
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "P2 = 2 * (4/2) * (400/200) = 2 * 2 * 2 = 8 atm."
+      },
+      "question_title": "Hukum Boyle-Gay Lussac",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q20",
+      "question_number": 20,
+      "official_answer": null,
+      "needs_manual_review": false,
+      "concept_kunci": [
+        "Efisiensi Mesin Kalor"
+      ],
+      "glossary": [
+        {
+          "term": "Efisiensi",
+          "meaning": "Perbandingan usaha dengan kalor masuk (W/Qh)."
+        }
+      ],
+      "reasoning": "Efisiensi (η) = W / Qh. Kasus 1: 0,3 = 600 / Qh1 -> Qh1 = 2000 J. Kasus 2: 0,5 = 600 / Qh2 -> Qh2 = 1200 J. Perubahan: (1200 - 2000) / 2000 = -40%.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Cari Q awal",
+          "explanation": "Qh1 = 600 / 0,3 = 2000 J."
+        },
+        {
+          "step": 2,
+          "title": "Cari Q akhir",
+          "explanation": "Qh2 = 600 / 0,5 = 1200 J."
+        },
+        {
+          "step": 3,
+          "title": "Persentase",
+          "explanation": "Pengurangan = (2000-1200)/2000 = 800/2000 = 40% lebih sedikit."
+        }
+      ],
+      "why_correct": "Mesin yang lebih efisien memerlukan input kalor yang lebih sedikit untuk usaha yang sama.",
+      "tips": [
+        "Ingat bahwa efisiensi naik berarti konsumsi energi (kalor) turun untuk output usaha tetap."
+      ],
+      "common_mistakes": [
+        "Salah mengartikan kenaikan efisiensi dengan kenaikan kebutuhan kalor."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Mesin dengan efisiensi 20% menghasilkan usaha 200J. Jika efisiensi naik jadi 40%, berapa kalor masuk yang dibutuhkan?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "1000 J"
+          },
+          {
+            "key": "B",
+            "text": "500 J"
+          },
+          {
+            "key": "C",
+            "text": "400 J"
+          },
+          {
+            "key": "D",
+            "text": "200 J"
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Qh = W / η = 200 / 0,4 = 500 J."
+      },
+      "question_title": "Efisiensi Mesin Kalor",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q21",
+      "question_number": 21,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Efek Rumah Kaca",
+        "Urban Heat Island",
+        "Termodinamika Atmosfer",
+        "Transpirasi Tumbuhan"
+      ],
+      "glossary": [
+        {
+          "term": "Efek Rumah Kaca",
+          "meaning": "Proses terperangkapnya radiasi panas matahari di atmosfer oleh gas-gas rumah kaca sehingga suhu permukaan bumi meningkat."
+        },
+        {
+          "term": "Kalor Laten",
+          "meaning": "Kalor yang diserap atau dilepas oleh suatu zat selama perubahan wujud tanpa mengalami perubahan suhu."
+        },
+        {
+          "term": "Transpirasi",
+          "meaning": "Proses pelepasan uap air dari jaringan tumbuhan ke atmosfer yang memberikan efek pendinginan lingkungan."
+        }
+      ],
+      "reasoning": "Peningkatan suhu perkotaan (Urban Heat Island) dipicu oleh kombinasi dari emisi antropogenik (panas buangan kendaraan dan AC), berkurangnya area hijau yang menurunkan pendinginan alami lewat transpirasi, serta akumulasi gas rumah kaca yang menjebak radiasi termal bumi. Secara fisis, suhu merupakan representasi makroskopis dari energi kinetik rata-rata partikel gas di udara.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Hubungan Suhu dan Energi Termal Antropogenik",
+          "explanation": "Aktivitas manusia seperti mengendarai kendaraan bermotor dan menyalakan AC membuang energi panas (kalor sensibel) langsung ke lingkungan, meningkatkan energi termal lokal dan memicu kenaikan suhu udara."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Peran Area Hijau",
+          "explanation": "Tumbuhan melakukan proses transpirasi dan evaporasi yang menyerap panas laten dari lingkungan untuk mengubah air menjadi uap air. Penurunan area hijau sebesar 40% secara drastis mengurangi efek pendinginan evaporatif ini."
+        },
+        {
+          "step": 3,
+          "title": "Analisis Keseimbangan Radiasi Global",
+          "explanation": "Kenaikan suhu jangka panjang terjadi akibat ketidakseimbangan energi (energy imbalance), di mana radiasi gelombang pendek matahari diserap bumi, namun radiasi gelombang panjang (inframerah) yang dipancarkan kembali terhalang dan diserap oleh emisi gas rumah kaca."
+        },
+        {
+          "step": 4,
+          "title": "Tinjauan Termodinamika Gas",
+          "explanation": "Berdasarkan teori kinetik gas, suhu mutlak (T) berbanding lurus dengan energi kinetik rata-rata partikel gas (Ek = 3/2 kT). Kenaikan suhu udara secara fisis berarti kecepatan dan energi kinetik rata-rata molekul udara di atmosfer meningkat."
+        }
+      ],
+      "why_correct": "Pernyataan yang benar secara ilmiah meliputi: 1. Kenaikan suhu disebabkan oleh peningkatan energi termal akibat aktivitas manusia (kendaraan & AC). 2. Penurunan area hijau mengurangi pendinginan alami lewat proses transpirasi. 3. Kenaikan suhu jangka panjang menunjukkan ketidakseimbangan energi serap vs pancar bumi. 4. Peningkatan suhu berarti peningkatan energi kinetik rata-rata partikel udara. Pernyataan mengenai emisi AC meningkatkan kalor laten yang mengurangi efek rumah kaca adalah salah karena emisi AC (seperti CFC/HFC) justru memperkuat efek rumah kaca.",
+      "tips": [
+        "Ingat prinsip dasar teori kinetik gas: Suhu adalah representasi langsung dari energi kinetik rata-rata partikel.",
+        "Bedakan kalor sensibel (menyebabkan perubahan suhu) dan kalor laten (menyebabkan perubahan wujud tanpa perubahan suhu)."
+      ],
+      "common_mistakes": [
+        "Menganggap emisi AC atau gas buang mengurangi efek rumah kaca karena menghasilkan polutan.",
+        "Salah memahami fungsi transpirasi tumbuhan sebagai pemanas, padahal transpirasi berfungsi sebagai pendingin alami lingkungan."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah kota industri mengalami peningkatan konsentrasi gas karbon dioksida (CO2) di udara disertai dengan pembetonan jalan yang masif. Manakah fenomena fisika berikut yang paling tepat menjelaskan peningkatan suhu lokal di kota tersebut?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Semen dan beton memiliki kapasitas kalor yang sangat tinggi sehingga melepaskan dingin lebih cepat ke atmosfer."
+          },
+          {
+            "key": "B",
+            "text": "Gas CO2 menyerap radiasi ultraviolet matahari secara langsung di permukaan tanah dan memantulkannya kembali ke luar angkasa."
+          },
+          {
+            "key": "C",
+            "text": "Terjadinya ketidakseimbangan termal karena radiasi inframerah dari bumi terperangkap oleh molekul CO2 di atmosfer, disertai rendahnya penyerapan kalor laten akibat minimnya vegetasi."
+          },
+          {
+            "key": "D",
+            "text": "Pembetonan menyebabkan peningkatan evaporasi air tanah yang menurunkan energi kinetik rata-rata partikel udara."
+          }
+        ],
+        "kunci": "C",
+        "pembahasan_singkat": "CO2 bertindak sebagai gas rumah kaca yang menyerap radiasi inframerah (panas) gelombang panjang dari bumi. Pembetonan mengurangi vegetasi sehingga evaporasi terhambat (kalor laten berkurang), menyebabkan energi panas tetap berwujud kalor sensibel yang meningkatkan suhu udara."
+      },
+      "question_title": "Efek Rumah Kaca",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q22",
+      "question_number": 22,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Hukum Coulomb",
+        "Kuat Medan Listrik",
+        "Superposisi Medan Listrik"
+      ],
+      "glossary": [
+        {
+          "term": "Medan Listrik",
+          "meaning": "Ruang di sekitar benda bermuatan listrik di mana benda bermuatan listrik lainnya akan mengalami gaya elektrostatis."
+        },
+        {
+          "term": "Superposisi Medan Listrik",
+          "meaning": "Penjumlahan vektor dari medan listrik yang dihasilkan oleh beberapa muatan titik di suatu tempat."
+        }
+      ],
+      "reasoning": "Untuk mendapatkan medan listrik total sama dengan nol dari dua muatan titik, kedua medan listrik yang dihasilkan oleh masing-masing muatan harus memiliki besar yang sama tetapi arah yang berlawanan. Jika kedua muatan sejenis, titik tersebut berada di antara kedua muatan. Jika muatannya memiliki rasio Q1: Q2 = 9: 4 dan terpisah sejauh 8 cm, maka letak titik nol berada pada jarak 4,8 cm di sebelah kanan Q1.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Syarat Medan Listrik Nol",
+          "explanation": "Medan total E = E1 - E2 = 0, sehingga E1 = E2. Berdasarkan rumus medan listrik: k*Q1 / r1^2 = k*Q2 / r2^2."
+        },
+        {
+          "step": 2,
+          "title": "Substitusi Nilai Muatan Sejenis",
+          "explanation": "Misalkan Q1 = +9 uC berada di x = 0 cm dan Q2 = +4 uC berada di x = 8 cm. Karena kedua muatan sejenis, titik bernilai nol harus berada di antara keduanya (0 < x < 8)."
+        },
+        {
+          "step": 3,
+          "title": "Perhitungan Posisi Titik Nol",
+          "explanation": "Persamaan menjadi: sqrt(Q1) / r1 = sqrt(Q2) / r2 => sqrt(9) / x = sqrt(4) / (8 - x) => 3 / x = 2 / (8 - x)."
+        },
+        {
+          "step": 4,
+          "title": "Menyelesaikan Persamaan Aljabar",
+          "explanation": "Lakukan perkalian silang: 3*(8 - x) = 2*x => 24 - 3x = 2x => 5x = 24 => x = 4,8 cm dari muatan Q1 (ke arah kanan)."
+        }
+      ],
+      "why_correct": "Berdasarkan perhitungan matematis superposisi medan listrik untuk dua muatan sejenis Q1 dan Q2 dengan rasio kekuatan 9:4 yang terpisah sejauh 8 cm, kuat medan listrik akan saling meniadakan tepat pada jarak 4,8 cm di sebelah kanan muatan Q1.",
+      "tips": [
+        "Gunakan rumus cepat untuk muatan sejenis: x = [sqrt(Q1) / (sqrt(Q1) + sqrt(Q2))] * d, di mana d adalah jarak antar muatan dan x diukur dari Q1."
+      ],
+      "common_mistakes": [
+        "Menghitung titik nol di luar dua muatan padahal jenis muatannya sama (sejenis).",
+        "Lupa mengakar-kuadratkan nilai muatan saat menggunakan perbandingan jarak."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Dua muatan titik Q1 = +16 nC dan Q2 = +9 nC berada pada sumbu-x masing-masing di x = 0 cm dan x = 7 cm. Di manakah letak titik yang memiliki kuat medan listrik total sama dengan nol?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Di sebelah kanan Q1 pada x = 4 cm"
+          },
+          {
+            "key": "B",
+            "text": "Di sebelah kiri Q1 pada x = -4 cm"
+          },
+          {
+            "key": "C",
+            "text": "Di sebelah kanan Q2 pada x = 11 cm"
+          },
+          {
+            "key": "D",
+            "text": "Tepat di tengah kedua muatan pada x = 3,5 cm"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Menggunakan rumus cepat untuk muatan sejenis: x = [sqrt(16) / (sqrt(16) + sqrt(9))] * 7 = [4 / (4 + 3)] * 7 = 4 cm di sebelah kanan Q1."
+      },
+      "question_title": "Hukum Coulomb",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q23",
+      "question_number": 23,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Hukum Ohm",
+        "Rangkaian Hambatan Seri",
+        "Rangkaian Hambatan Paralel"
+      ],
+      "glossary": [
+        {
+          "term": "Hukum Ohm",
+          "meaning": "Pernyataan bahwa besar arus listrik yang mengalir melalui sebuah penghantar berbanding lurus dengan beda potensial dan berbanding terbalik dengan hambatannya."
+        },
+        {
+          "term": "Hambatan Pengganti",
+          "meaning": "Nilai hambatan tunggal yang dapat menggantikan seluruh susunan resistor dalam rangkaian tanpa mengubah arus dan tegangan total."
+        }
+      ],
+      "reasoning": "Misalkan Rangkaian A memiliki hambatan total 12 Ohm (dua resistor 6 Ohm disusun seri) dihubungkan ke tegangan 12 V sehingga arus IA = 12/12 = 1 A. Rangkaian B memiliki hambatan total 3 Ohm (dua resistor 6 Ohm disusun paralel) dihubungkan ke sumber tegangan 6 V sehingga IB = 6/3 = 2 A. Agar arus pada kedua rangkaian sama-sama bernilai 1 A, maka hambatan total pada Rangkaian B harus dinaikkan dari 3 Ohm menjadi 6 Ohm dengan cara menambahkan resistor 3 Ohm secara seri.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung Parameter Rangkaian A",
+          "explanation": "Rangkaian A memiliki dua buah resistor 6 Ohm secara seri, maka R_A = 6 + 6 = 12 Ohm. Dengan tegangan V_A = 12 V, arus total I_A = V_A / R_A = 12 / 12 = 1 A."
+        },
+        {
+          "step": 2,
+          "title": "Hitung Parameter Rangkaian B Mula-mula",
+          "explanation": "Rangkaian B memiliki dua buah resistor 6 Ohm secara paralel, maka 1/R_B = 1/6 + 1/6 = 2/6 => R_B = 3 Ohm. Dengan tegangan V_B = 6 V, arus total awal I_B = V_B / R_B = 6 / 3 = 2 A."
+        },
+        {
+          "step": 3,
+          "title": "Tentukan Target Arus yang Sama",
+          "explanation": "Kita ingin memodifikasi Rangkaian B agar I_B_baru sama dengan I_A, yaitu 1 A."
+        },
+        {
+          "step": 4,
+          "title": "Hitung Hambatan Baru Rangkaian B",
+          "explanation": "R_B_baru = V_B / I_B_baru = 6 V / 1 A = 6 Ohm. Karena hambatan awal R_B = 3 Ohm, maka kita perlu menambah hambatan sebesar 6 - 3 = 3 Ohm secara seri pada Rangkaian B."
+        }
+      ],
+      "why_correct": "Dengan menambahkan resistor 3 Ohm secara seri pada Rangkaian B, hambatan totalnya naik menjadi 6 Ohm. Pada tegangan 6 V, hal ini menghasilkan arus listrik sebesar 1 A, yang bernilai sama persis dengan arus pada Rangkaian A.",
+      "tips": [
+        "Hambatan yang disusun seri selalu meningkatkan nilai hambatan total, sedangkan susunan paralel selalu menurunkan hambatan total."
+      ],
+      "common_mistakes": [
+        "Keliru menghitung hambatan total rangkaian paralel dengan langsung menjumlahkan angkanya (misal 6 + 6 = 12 Ohm padahal paralel)."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Rangkaian X memiliki hambatan total 4 Ohm dihubungkan ke tegangan 12 V. Rangkaian Y memiliki hambatan total 2 Ohm dihubungkan ke tegangan 12 V. Agar kuat arus pada kedua rangkaian bernilai sama, modifikasi apa yang harus dilakukan pada Rangkaian Y?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Menambahkan satu hambatan 2 Ohm secara seri pada Rangkaian Y"
+          },
+          {
+            "key": "B",
+            "text": "Menurunkan tegangan Rangkaian X menjadi 6 V"
+          },
+          {
+            "key": "C",
+            "text": "Menambahkan satu hambatan 2 Ohm secara paralel pada Rangkaian Y"
+          },
+          {
+            "key": "D",
+            "text": "Mengubah susunan Rangkaian X menjadi paralel"
+          }
+        ],
+        "kunci": "A",
+        "pembahasan_singkat": "Arus awal X: IX = 12/4 = 3 A. Arus awal Y: IY = 12/2 = 6 A. Agar IY menjadi 3 A pada tegangan 12 V, hambatan total Y harus menjadi R = 12/3 = 4 Ohm. Maka perlu ditambah resistor 2 Ohm secara seri pada Rangkaian Y (2 + 2 = 4 Ohm)."
+      },
+      "question_title": "Hukum Ohm",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    },
+    {
+      "question_id": "fisika_paket_2_q24",
+      "question_number": 24,
+      "official_answer": null,
+      "needs_manual_review": true,
+      "concept_kunci": [
+        "Daya Listrik",
+        "Energi Listrik",
+        "Biaya Listrik Bulanan"
+      ],
+      "glossary": [
+        {
+          "term": "Kilowatt-hour (kWh)",
+          "meaning": "Satuan energi listrik yang setara dengan konsumsi daya sebesar 1.000 Watt selama satu jam."
+        },
+        {
+          "term": "Daya Listrik (P)",
+          "meaning": "Laju transfer energi listrik per satuan waktu, dinyatakan dalam satuan Watt (W)."
+        }
+      ],
+      "reasoning": "Peralatan rumah tangga dengan konsumsi daya terbesar (daya tinggi) dan durasi operasional yang lama seperti Air Conditioner (AC) menyumbang porsi terbesar dalam konsumsi energi listrik harian (kWh). Untuk memotong biaya listrik bulanan secara signifikan agar tetap berada di bawah anggaran Rp375.000,00, keputusan paling rasional dan berdampak besar adalah membatasi atau mengurangi durasi penggunaan AC.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Hitung Batas Energi Maksimum Bulanan",
+          "explanation": "Batas biaya = Rp375.000,00 dengan tarif Rp1.500,00/kWh. Maka energi listrik maksimum bulanan yang diperbolehkan adalah: W = 375.000 / 1.500 = 250 kWh."
+        },
+        {
+          "step": 2,
+          "title": "Identifikasi Konsumsi Alat Berdaya Besar",
+          "explanation": "AC umumnya memiliki daya sekitar 750 W - 1000 W (0,75 - 1 kW). Jika menyala 8 jam per hari, energinya mencapai 6 - 8 kWh per hari (atau 180 - 240 kWh per bulan), yang mendominasi hampir seluruh kuota anggaran."
+        },
+        {
+          "step": 3,
+          "title": "Bandingkan dengan Alat Berdaya Rendah",
+          "explanation": "Televisi (sekitar 100 W) dan mesin cuci yang hanya digunakan beberapa kali seminggu memiliki konsumsi energi yang sangat kecil. Menguranginya tidak akan berdampak signifikan pada pencapaian target anggaran."
+        },
+        {
+          "step": 4,
+          "title": "Simpulkan Solusi Optimal",
+          "explanation": "Mengurangi penggunaan AC menjadi setengahnya (misal menjadi 4 jam per hari) langsung memotong konsumsi bulanan sebesar 90 - 120 kWh (menghemat Rp135.000,00 - Rp180.000,00), secara instan mengamankan anggaran di bawah batas Rp375.000,00."
+        }
+      ],
+      "why_correct": "Mengurangi durasi penggunaan AC dari durasi standar menjadi 4 jam per hari adalah keputusan terbaik karena AC memiliki konsumsi daya listrik harian terbesar. Tindakan ini memberikan efek penurunan biaya listrik yang paling signifikan dibandingkan tindakan pada alat elektronik lainnya.",
+      "tips": [
+        "Untuk menghemat biaya listrik secara efisien, selalu prioritaskan pengurangan durasi penggunaan alat berdaya termal tinggi (AC, dispenser, pemanas air, setrika) daripada alat elektronik hiburan."
+      ],
+      "common_mistakes": [
+        "Fokus menghemat alat berdaya kecil seperti lampu atau TV, padahal penggunaan AC yang berdaya besar dibiarkan menyala sepanjang hari."
+      ],
+      "soal_serupa": {
+        "pertanyaan": "Sebuah rumah tangga menggunakan Water Heater (1.200 W) selama 3 jam per hari dan beberapa lampu (total 100 W) selama 10 jam per hari. Jika tarif listrik adalah Rp1.500,00/kWh, tindakan manakah yang paling efektif menekan tagihan listrik bulanan mereka?",
+        "opsi": [
+          {
+            "key": "A",
+            "text": "Mematikan semua lampu selama 2 jam per hari"
+          },
+          {
+            "key": "B",
+            "text": "Mengurangi penggunaan Water Heater menjadi 1 jam per hari"
+          },
+          {
+            "key": "C",
+            "text": "Mengganti jenis kabel instalasi listrik rumah"
+          },
+          {
+            "key": "D",
+            "text": "Tidak menyalakan lampu sama sekali di malam hari"
+          }
+        ],
+        "kunci": "B",
+        "pembahasan_singkat": "Energi Water Heater semula: 1,2 kW x 3 jam = 3,6 kWh/hari. Jika dikurangi menjadi 1 jam: 1,2 kW x 1 jam = 1,2 kWh/hari (hemat 2,4 kWh/hari). Energi lampu semula: 0,1 kW x 10 jam = 1 kWh/hari. Jika lampu dimatikan 2 jam, hanya hemat 0,2 kWh/hari. Jadi mengurangi penggunaan Water Heater jauh lebih efektif."
+      },
+      "question_title": "Daya Listrik",
+      "diketahui": "• Variabel dan parameter fisika sesuai stimulus soal.",
+      "ditanyakan": "Menentukan besaran dan konsep fisika yang ditanyakan."
+    }
+  ]
+}

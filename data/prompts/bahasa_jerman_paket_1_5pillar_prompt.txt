@@ -1,0 +1,274 @@
+Kamu adalah Guru Besar dan Pakar Kurikulum Pembuat Soal TKA Saintek & Soshum Kemdikbudristek RI (Bahasa Jerman (Paket 1)).
+Tugasmu adalah menghasilkan PEMBAHASAN 5 PILAR PEDAGOGIS (L3) yang mendalam, presisi, dan ilmiah untuk setiap soal berikut.
+
+ATURAN WAJIB (ZERO-TOLERANCE QUALITY STANDARDS):
+1. KUNCI RESMI PUSMENDIK ADALAH KEBENARAN MUTLAK (GROUND TRUTH). Seluruh alur penalaran harus secara ilmiah membuktikan kebenaran kunci resmi tersebut.
+2. SETIAP LANGKAH HARUS SPESIFIK SOAL INI — WAJIB menyebut nilai, variabel, tokoh, tanggal, atau kutipan kata yang BENAR-BENAR ADA di soal ini. Contoh dibenarkan: "Substitusi x = 4 ke f(x)". Contoh DILARANG: "Substitusikan nilai yang diketahui ke rumus". Langkah yang berlaku untuk soal apa pun dianggap GAGAL mutu.
+3. DILARANG KERAS MENGGUNAKAN KATA 'transkrip' ATAU 'transkripsi' DALAM SELURUH BIDANG TEKS (why_correct, reasoning, steps). Jika merujuk ke gambar atau stimulus, sebut langsung 'Pada kutipan teks...', 'Pada gambar terlihat...', atau 'Berdasarkan teks...'.
+4. UNTUK SOAL HITUNGAN: tuliskan perhitungan nyata dari angka soal ini sampai hasil akhir (bukan deskripsi cara menghitung). Minimum 3 langkah untuk soal hitungan/analisis, minimum 2 langkah untuk soal konseptual.
+5. DILARANG menyalin tempel frasa identik antar soal dalam satu paket. Dua soal berbeda tidak boleh memiliki langkah dengan kalimat pengantar yang sama.
+6. 'diketahui' WAJIB mengutip data spesifik dari soal (angka, nama, istilah kunci) — bukan parafrasa generik seperti 'Data yang diketahui dari soal'.
+7. GUNAKAN KATEX UNTUK SEMUA RUMUS ATAU SIMBOL MATEMATIKA/SAINS ($...$ atau $$...$$).
+8. Output WAJIB berupa JSON ARRAY murni yang valid tanpa teks pengantar atau penutup, tanpa markdown di luar isi string.
+9. Petakan kunci resmi ke opsi/pernyataan: untuk tipe Benar-Salah, kunci 'A:Benar' berarti pernyataan A benar — jelaskan setiap pernyataan satu per satu, jangan mengarang pernyataan yang tidak ada di soal.
+10. DILARANG KERAS MENGGUNAKAN MARKDOWN HEADER (###, ##, #) DAN TABEL PIPA MARKDOWN (|...|) di dalam field 'diketahui', 'ditanyakan', maupun 'steps'. Jika data dari stimulus/gambar berbentuk tabel atau grafik, ubah menjadi daftar poin terstruktur yang rapi (gunakan bullet •) yang langsung menyebut nama kategori dan nilainya. DILARANG menulis preamble teknis seperti 'Berikut adalah analisis/ekstraksi data...' atau 'Transkripsi Rumus:'.
+11. RUMUS DAN PERSAMAAN MATEMATIKA: Setiap persamaan utama atau rumus berurutan WAJIB dipisahkan oleh baris baru (newline) dan menggunakan KaTeX display ($$...$$). DILARANG menumpuk dua persamaan matematika berurutan secara inline ($a$ $b$) dalam satu baris. Matriks ordo 2x1, 2x2, atau lebih besar WAJIB menggunakan format display math $$...$$.
+
+FORMAT JSON PER ELEMEN:
+{
+  "question_number": <nomor_soal>,
+  "question_title": "<Judul/Topik Spesifik Soal>",
+  "difficulty": "Sedang",
+  "estimated_time_seconds": 90,
+  "concept_tags": ["<Tag1>", "<Tag2>"],
+  "glossary": [{"term": "<Istilah>", "meaning": "<Arti ringkas>"}],
+  "diketahui": "• Variabel/Informasi 1: $...$
+• Variabel/Informasi 2: $...$",
+  "ditanyakan": "<Inti hal yang ditanyakan>",
+  "reasoning": "<Penalaran ilmiah mendasar>",
+  "steps": [
+    {"step": 1, "title": "<Judul Tahap 1>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"},
+    {"step": 2, "title": "<Judul Tahap 2>", "explanation": "<Penjelasan rinci dan spesifik pada soal ini>"}
+  ],
+  "why_correct": "<Penjelasan mengapa kunci resmi tersebut adalah opsi yang benar>",
+  "tips": ["<Tips cepat konsep ini>"],
+  "common_mistakes": ["<Jebakan umum yang dialami siswa>"]
+}
+
+DAFTAR SOAL:
+
+---
+[SOAL NO 1]
+KUNCI RESMI PUSMENDIK: E
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 1 s.d. 3!
+[Konteks Visual Gambar 62484_e7444e2b2bb8e4eff4053ea5b7cc9d2a.png]:
+Tangkapan layar jendela surel (email) berbahasa Jerman dengan detail:- Kepada (To): sinta.rusanti@gmail.com- Subjek (Subject): Mein Schultag
+
+Isi surel: 'Liebe Sinta, es freut mich, dir wieder zu schreiben. Meine Schule heißt Internationale Gesamtschule Heidelberg. Ich bin in Klasse 7d. Wir haben von Montag bis Freitag Schule. Ich stehe jeden Tag um halb sieben auf und gehe um Viertel nach sieben aus dem Haus. Von Viertel vor acht morgens bis vier Uhr nachmittags bin ich in der Schule. Der Unterricht beginnt um halb neun. Wir haben am Vormittag fünf Stunden Unterricht bis 12 Uhr 40, und dann eine Stunde Mittagspause, bis 13 Uhr 40 nachmittags haben wir drei Stunden. Jede Unterrichtsstunde hat 45 Minuten. Um vier Uhr ist die Schule zu Ende. Um halb fünf bin ich zu Hause.
+
+Deine, Ulrike'
+PERTANYAAN:
+Lies den folgenden Text!
+
+Welche Informationen hast du im Text gefunden? Ordne die folgenden Sätze in die richtige Reihenfolge.
+
+Die Klasse 7d hat Schule an fünf Tagen pro Woche.
+
+Die Klasse fängt um 8.30 mit dem Unterricht an.
+
+Ulrike ist um 16.30 wieder zu Hause
+
+Ulrike steht täglich um sechs Uhr dreißig auf und danach geht sie zur Schule.
+
+Ulrike ist froh, weil sie Sinta eine E-Mail schreibt.
+
+Sie geht in eine internationale Schule.
+OPSI / PERNYATAAN:
+  - A. A. 1 - 2 - 3 - 4 - 5 - 6
+  - B. B. 2 - 3 - 4 - 5 - 6 - 1
+  - C. C. 3 - 4 - 5 - 6 - 1 - 2
+  - D. D. 4 - 5 - 1 - 2 - 3 - 6
+  - E. E. 5 - 6 - 1 - 4 - 2 - 3
+
+---
+[SOAL NO 2]
+KUNCI RESMI PUSMENDIK: ['B', 'C']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Teks untuk soal nomor 1 s.d. 3!
+[Konteks Visual Gambar 64351_e7444e2b2bb8e4eff4053ea5b7cc9d2a.png]:
+Tangkapan layar jendela surel (email) berbahasa Jerman dengan detail:- Kepada (To): sinta.rusanti@gmail.com- Subjek (Subject): Mein Schultag
+
+Isi surel: 'Liebe Sinta, es freut mich, dir wieder zu schreiben. Meine Schule heißt Internationale Gesamtschule Heidelberg. Ich bin in Klasse 7d. Wir haben von Montag bis Freitag Schule. Ich stehe jeden Tag um halb sieben auf und gehe um Viertel nach sieben aus dem Haus. Von Viertel vor acht morgens bis vier Uhr nachmittags bin ich in der Schule. Der Unterricht beginnt um halb neun. Wir haben am Vormittag fünf Stunden Unterricht bis 12 Uhr 40, und dann eine Stunde Mittagspause, bis 13 Uhr 40 nachmittags haben wir drei Stunden. Jede Unterrichtsstunde hat 45 Minuten. Um vier Uhr ist die Schule zu Ende. Um halb fünf bin ich zu Hause.
+
+Deine, Ulrike'
+PERTANYAAN:
+Welche Aussagen sind richtig?
+
+Klick zwei richtigen Antworten!
+OPSI / PERNYATAAN:
+  - A. A. Um vier Uhr nachmittags ist Ulrike schon zu Hause.
+  - B. B. Um acht Uhr dreißig beginnt der Unterricht
+  - C. C. Um 12 Uhr ist Ulrike noch in der
+  - D. D. Ulrike hat keine Pause in der
+
+---
+[SOAL NO 3]
+KUNCI RESMI PUSMENDIK: ['A:F', 'B:R', 'C:F']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Lies den folgenden Text!
+
+Teks untuk soal nomor 1 s.d. 3!
+[Konteks Visual Gambar 13814_e7444e2b2bb8e4eff4053ea5b7cc9d2a.png]:
+Tangkapan layar jendela penulisan surel (email) berbahasa Jerman dengan detail sebagai berikut:- To: sinta.rusanti@gmail.com- Subject: Mein Schultag
+
+Isi teks surel: 'Liebe Sinta, es freut mich, dir wieder zu schreiben. Meine Schule heißt Internationale Gesamtschule Heidelberg. Ich bin in Klasse 7d. Wir haben von Montag bis Freitag Schule. Ich stehe jeden Tag um halb sieben auf und gehe um Viertel nach sieben aus dem Haus. Von Viertel vor acht morgens bis vier Uhr nachmittags bin ich in der Schule. Der Unterricht beginnt um halb neun. Wir haben am Vormittag fünf Stunden Unterricht bis 12 Uhr 40, und dann eine Stunde Mittagspause, bis 13 Uhr 40 nachmittags haben wir drei Stunden. Jede Unterrichtsstunde hat 45 Minuten. Um vier Uhr ist die Schule zu Ende. Um halb fünf bin ich zu Hause.
+
+Deine, Ulrike'
+PERTANYAAN:
+Welche Aussage passt zu dem Text?
+
+Klick auf Richtig (R) oder Falsch (F)!
+OPSI / PERNYATAAN:
+  - A. Ulrike geht jeden Tag um acht Uhr aus dem Haus.
+  - B. Der Unterricht beginnt um neun Uhr.
+  - C. Ulrike ist von Montag bis Samstag in der Schule.
+
+---
+[SOAL NO 4]
+KUNCI RESMI PUSMENDIK: D
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Hier ist ein Foto von Familie Weber.
+
+Herr und Frau Weber haben zwei             .
+[Konteks Visual Gambar 64940_1b9a60ca5555d9e2ae2962d68d1f444b.png]:
+Ilustrasi keluarga berjumlah 4 orang dengan latar belakang oranye bertuliskan 'Familie Weber' di kanan atas: 1. Anak perempuan kecil (paling kiri): Berambut pendek, mengenakan gaun hitam lengan panjang bermotif polkadot putih, tangan kanannya memegang boneka kelinci abu-abu, tangan kirinya melambai ke depan. 2. Ayah (kedua dari kiri): Bertubuh tinggi, mengenakan baju motif wajik (argyle/harlequin) hitam-putih dan celana panjang putih, tangan kanannya diletakkan di atas kepala anak perempuan. 3. Ibu (ketiga dari kiri): Mengenakan atasan hitam tanpa lengan dan celana panjang putih bermotif polkadot hitam, merangkul pinggang sang ayah dengan tangan kanannya dan meletakkan tangan kirinya di bahu anak laki-laki. 4. Anak laki-laki (paling kanan): Mengenakan kaus bergaris-garis horizontal hitam-putih dan celana pendek hitam, berdiri di samping sang ibu.
+PERTANYAAN:
+Ergänz den Satz!
+OPSI / PERNYATAAN:
+  - A. A. Brüder
+  - B. B. Cousinen
+  - C. C. Geschwister
+  - D. D. Kinder
+  - E. E. Schwestern
+
+---
+[SOAL NO 5]
+KUNCI RESMI PUSMENDIK: ['A', 'B']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lies das folgende Formular!
+[Konteks Visual Gambar 62057_df382f6faa17b931096b2f682a4f7f54.png]:
+Jadwal pelajaran mingguan (Stundenplan) pada papan putih berpetak dengan magnet warna-warni:
+
+| Waktu | MONTAG | DIENSTAG | MITTWOCH | DONNERSTAG | FREITAG | |:--- |:--- |:--- | | 8:00 | DEUTSCH | SPORT | BIO | KUNST | TEXTIL | | 8:50 | MATHE | SPORT | MUSIK | KUNST | BIO | | [Istirahat] | PAUSE | PAUSE | PAUSE | PAUSE | PAUSE | | 10:00 | BIO | DEUTSCH | MATHE | ENGLISCH | DEUTSCH | | 10:50 | RELI | MATHE | WERKEN | DEUTSCH | SPORT | | [Istirahat] | PAUSE | PAUSE | PAUSE | PAUSE | PAUSE | | 12:00 | GEO | ENGLISCH | - | - | SPORT |
+
+Kegiatan Sore / Tambahan:- Montag: 15:00 KLAVIER- Dienstag: Magnet lingkaran merah 'F' (2 buah)- Mittwoch: 16:00 TURNEN- Donnerstag: Magnet lingkaran merah 'F' (2 buah)- Freitag: Magnet lingkaran merah 'F' (2 buah)
+
+Keterangan di pojok kanan bawah: 'F = FREI'. Terdapat spidol biru tergantung di sebelah kanan papan.
+PERTANYAAN:
+Welche Aussagen sind richtig? Klick zwei richtigen Antworten!
+OPSI / PERNYATAAN:
+  - A. A. Tim ist in Bamberg
+  - B. B. Tims Eltern leben in
+  - C. C. Tim ist im Jahr 2017 geboren
+  - D. D. Tim will in der privaten Grundschule in München
+
+---
+[SOAL NO 6]
+KUNCI RESMI PUSMENDIK: ['A:R', 'B:R', 'C:F']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Lies den folgenden Dialog!
+[Konteks Visual Gambar 79574_f1404fdba636b9dd05d7d1aad41c0f40.png]:
+Teks percakapan berbahasa Jerman dengan judul 'Im Restaurant' beserta ilustrasi foto di bagian kanan:
+
+Judul: Im Restaurant
+
+Teks Percakapan:- Kellner: Guten Tag! Was möchten Sie bestellen?- Gast: Hallo! Ich hätte gerne eine Pizza Margherita und eine Cola, bitte.- Kellner: Sehr gern. Möchten Sie noch etwas dazu?- Gast: Nein, das ist alles.- Kellner: In Ordnung. Ihr Essen kommt gleich.
+
+Deskripsi Gambar: Di sebelah kanan dialog terdapat foto yang menampilkan situasi di sebuah restoran. Seorang pelayan pria berseragam kemeja putih dan dasi merah sedang berdiri mencatat pesanan pada buku catatan kecil, sementara seorang pelanggan wanita duduk di meja makan sambil memegang dan membaca buku menu. Di atas meja kaca terlihat beberapa gelas berkaki, wadah garam dan merica putih, serta serbet.
+PERTANYAAN:
+Welche Aussagen passen zu den Dialog?
+
+Klick auf Richtig (R) oder Falsch (F)!
+OPSI / PERNYATAAN:
+  - A. Der Gast bestellt eine Pizza Margherita zum Essen.
+  - B. Der Kellner fragt, ob der Gast noch etwas möchte.
+  - C. Der Gast möchte noch ein Dessert.
+
+---
+[SOAL NO 7]
+KUNCI RESMI PUSMENDIK: ['A:F', 'B:R', 'C:R']
+TIPE SOAL: Benar-Salah
+STIMULUS:
+Lies den folgenden Stundenplan!
+[Konteks Visual Gambar 41728_9e2b95eab13b693bd68f28b63fda8f37.png]:
+Ilustrasi digital berlatar belakang dinding biru toska yang menampilkan seorang pria muda berambut cokelat sedang bersantai menonton televisi:- Pria tersebut mengenakan kaus hijau berlengan pendek, celana panjang biru gelap, dan sepatu hitam.- Ia duduk menyilangkan kaki di sebuah kursi berlengan (armchair) berwarna cokelat dengan motif kancing.- Tangan kanannya memegang remote control yang diarahkan ke layar televisi.- Tangan kirinya memegang gelas berisi minuman dengan sedotan.- Di lantai dekat kursi terdapat wadah popcorn berwarna merah yang tumpah sedikit.- Televisi layar datar diletakkan di atas meja kayu kecil di sebelah kanan dengan layar yang menyala memancarkan cahaya putih.
+PERTANYAAN:
+Ist das Richtig (R) oder Falsch (F)?
+OPSI / PERNYATAAN:
+  - A. Die Schüler lernen am Dienstag um 10.00 Uhr Englisch.
+  - B. Die Schüler lernen am Montag um 12.00 Uhr Geographie.
+  - C. Die Schüler lernen am Mittwoch um 10.50 Uhr Werken.
+
+---
+[SOAL NO 8]
+KUNCI RESMI PUSMENDIK: C
+TIPE SOAL: Pilihan Ganda
+STIMULUS:
+Lies den folgenden Text!
+
+Ludwig geht jeden Tag um 7 Uhr aus dem Haus. Er fährt mit dem Rad zur Schule. Nach der Schule macht er seine Hausaufgaben und spielt mit seinen Freunden Basketball. Am Abend sieht er oft fern oder liest ein Buch.
+
+Was macht Ludwig den ganzen Tag?
+
+1)     Er trifft seine Freunde
+
+2)     Er sieht am Abend fern oder liest ein Buch.
+
+3)     Ludwig geht morgens zur Schule.
+
+4)     Er fährt Fahrrad.
+
+5)     Er macht Hausaufgaben.
+
+PERTANYAAN:
+Ordne die folgenden Sätze in die richtige Reihenfolge.
+OPSI / PERNYATAAN:
+  - A. A. 1 - 2 - 3 - 4 - 5
+  - B. B. 2 - 3 - 4 - 5 - 1
+  - C. C. 3 - 4 - 5 - 1 - 2
+  - D. D. 4 - 5 - 1 - 2 - 3
+  - E. E. 5 - 1 - 2 - 3 - 4
+
+---
+[SOAL NO 9]
+KUNCI RESMI PUSMENDIK: ['B', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lies den folgenden Text!
+[Konteks Visual Gambar 34460_b168b6c5550cd8be8bb8e9217c2afa45.png]:
+Poster promosi kursus menari berbahasa Jerman dengan rincian teks sebagai berikut:- Logo sudut kanan atas: Perisai merah bertuliskan '1848 TiB Berlin'- Judul: 'Anfängerkurs Tanzen'- Durasi: '10 x 90 Minuten'- Deskripsi materi: 'Grundschritte der Standard- & Lateintänze außerdem Discofox und Salsa'- Jadwal & Lokasi: * 'Sonntags, ab 4. März 2018' * 'von 11 - 12:30 Uhr' * 'im TiB-Sportzentrum' * 'Tanzsaal 3'- Biaya ('Teilnahmegebühr'): * 'TiB-Mitglieder: 80€/Person' * 'Gäste: 100€/Person'- Pendaftaran ('Anmeldung'): * 'per E-Mail an tanzkurs@btc-gruen-gold.de oder unter Tel. 0176-4959 2820'- Bagian bawah (latar hijau): * 'btc Grün-Gold & pinkballroom' * 'Tanzsportabteilung der Turngemeinde in Berlin 1848 e.V.' * 'www.btc-gruen-gold.de - Columbiadamm 111 - 10965 Berlin'- Ilustrasi: Siluet pasangan penari di dalam dua lingkaran (ungu dan biru) serta ikon penari di pojok kanan bawah.
+PERTANYAAN:
+Welche Aussagen sind richtig? Zwei Antworten sind richtig.
+
+Im Text geht es um _____.
+OPSI / PERNYATAAN:
+  - A. A. Tanzkursgebühr
+  - B. B. Freizeitaktivität
+  - C. C. Disco
+  - D. D. Tanzkurs
+
+---
+[SOAL NO 10]
+KUNCI RESMI PUSMENDIK: ['A', 'D']
+TIPE SOAL: Pilihan Ganda Kompleks
+STIMULUS:
+Lies den folgenden Text!
+
+Fernsehen ist schon seit mehr als 20 Jahren das liebste Hobby der Deutschen. Kein Wunder: Der Mensch ist ja bequem und liebt Unterhaltung. Das Internet ist natürlich ein Konkurrent für das Fernsehen, aber es gibt immer noch viele TV-Fans. Im Durchschnitt guckt jeder mindestens einmal pro Woche fern.
+
+(Quelle: https://ndla.no/r/tysk-2/was-machen-die-deutschen-in-ihrer-freizeit/820c2a3eff )
+[Konteks Visual Gambar 43459_054c13ed863316b28e24e52cfe4d8ab0.png]:
+Formulir pendaftaran sekolah berbahasa Jerman ('Anmeldeblatt') dengan isi data sebagai berikut:
+
+Kop Sekolah:- Sekolah: TestGS Staatliche Grundschule- Alamat: Praterinsel 2, 80538 München- Kontak: Tel: 089-9316-001, Mail: info@9316.de- Kolom kanan atas: Einschulung: 2017, Blatt: [kosong]
+
+I. Schülerin/Schüler:- Familienname, Rufname, weitere Vornamen: Beethoven, Tim Horst Werner- Jenis Kelamin: M- Geburtsdatum: 07.01.2009- Religionszugeh.: EV- bes. Rel.Unt.: EV- Staatsangehörigkeit: D- Geburtsort: Bamberg - Deutschland- Anschrift: Stobersreuth 4, 96242 Sonnefeld- Telefon: [kosong]
+
+II. Erziehungsberechtigte:- Data 1 (Ayah): * Art (Vater, Mutter, Vormund, etc.): Vater * Name, Vorname(n): Beethoven, Stefan Guenter Martin * Anschrift: Stobersreuth 4, 96242 Sonnefeld- Data 2 (Ibu): * Art d. weiteren Erziehungsberechtigten: Mutter * Name, Vorname(n): Beethoven, Martina Helga * Anschrift: Stobersreuth 4, 96242 Sonnefeld
+PERTANYAAN:
+Welche Aussagen sind richtig? Zwei Antworten sind möglich.
+
+Die Deutschen _____.
+OPSI / PERNYATAAN:
+  - A. A. sehen am liebsten fern
+  - B. B. fühlen sich beim Fernsehen unangeneh
+  - C. C. spielen lieber mit Internet als fernsehen
+  - D. D. sehen nicht täglich fern
+

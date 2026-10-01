@@ -1,0 +1,1394 @@
+{
+  "slug": "matematika_lanjut_paket_2",
+  "solutions": [
+    {
+      "question_number": 1,
+      "question_title": "Limit Fungsi Trigonometri pada Perbandingan Luas Geometris",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Limit Fungsi Trigonometri",
+        "Geometri Lingkaran",
+        "Luas Segitiga"
+      ],
+      "glossary": [
+        {
+          "term": "Sudut Pusat",
+          "meaning": "Sudut yang titik sudutnya berada di titik pusat lingkaran dan kaki sudutnya adalah jari-jari lingkaran."
+        },
+        {
+          "term": "Limit Fungsi",
+          "meaning": "Nilai pendekatan suatu fungsi ketika variabel bebasnya mendekati suatu nilai tertentu."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar dan teks, terdapat segitiga sama kaki di dalam setengah lingkaran dengan jari-jari \n𝑟\nr\n dan berpusat di \n𝑂\nO\n. Dua sisi segitiga berukuran \n𝑟\nr\n dengan sudut apit \n𝑡\nℎ\n𝑒\n𝑡\n𝑎\ntheta\n (\n0\n<\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n<\n𝑝\n𝑖\n0<\ntheta<\npi\n). Luas segitiga dinyatakan dengan \n𝑓\n(\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n)\n=\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑟\n2\n𝑠\n𝑖\n𝑛\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\nf(\ntheta)=\nfrac12r\n2\nsin\ntheta\n dan luas setengah lingkaran dinyatakan dengan \n𝑔\n(\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n)\n=\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑝\n𝑖\n𝑟\n2\ng(\ntheta)=\nfrac12\npir\n2\n.",
+      "ditanyakan": "Pernyataan yang benar mengenai nilai limit fungsi perbandingan luas daerah tersebut.",
+      "reasoning": "Rasio perbandingan antara luas segitiga dan luas setengah lingkaran dimodelkan oleh \n𝑓\n𝑟\n𝑎\n𝑐\n𝑓\n(\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n)\n𝑔\n(\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n)\n=\n𝑓\n𝑟\n𝑎\n𝑐\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑟\n2\n𝑠\n𝑖\n𝑛\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑝\n𝑖\n𝑟\n2\n=\n𝑓\n𝑟\n𝑎\n𝑐\n𝑠\n𝑖\n𝑛\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n𝑝\n𝑖\nfracf(theta)g(theta)=\nfracfrac12r\n2\nsinthetafrac12pir\n2\n=\nfracsinthetapi\n. Karena suku kuadrat jari-jari \n𝑟\n2\nr\n2\n saling meniadakan, nilai perbandingan ini sama sekali tidak dipengaruhi oleh panjang jari-jari lingkaran \n𝑟\nr\n. Sementara itu, nilai limit dari perbandingan tersebut secara langsung ditentukan oleh besar sudut pusat \n𝑡\nℎ\n𝑒\n𝑡\n𝑎\ntheta\n.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Merumuskan Fungsi Luas Masing-Masing Bangun",
+          "explanation": "Luas segitiga dengan dua sisi \n𝑟\nr\n dan sudut apit \n𝑡\nℎ\n𝑒\n𝑡\n𝑎\ntheta\n adalah \n𝑓\n(\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n)\n=\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑟\n2\n𝑠\n𝑖\n𝑛\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\nf(\ntheta)=\nfrac12r\n2\nsin\ntheta\n. Luas setengah lingkaran berjari-jari \n𝑟\nr\n adalah \n𝑔\n(\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n)\n=\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑝\n𝑖\n𝑟\n2\ng(\ntheta)=\nfrac12\npir\n2\n."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Rasio Perbandingan Luas",
+          "explanation": "Bentuk perbandingan luas segitiga terhadap luas setengah lingkaran:\n\n𝑓\n𝑟\n𝑎\n𝑐\n𝑓\n(\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n)\n𝑔\n(\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n)\n=\n𝑓\n𝑟\n𝑎\n𝑐\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑟\n2\n𝑠\n𝑖\n𝑛\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑝\n𝑖\n𝑟\n2\n=\n𝑓\n𝑟\n𝑎\n𝑐\n𝑠\n𝑖\n𝑛\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n𝑝\n𝑖\nfracf(theta)g(theta)=\nfracfrac12r\n2\nsinthetafrac12pir\n2\n=\nfracsinthetapi\n"
+        },
+        {
+          "step": 3,
+          "title": "Analisis Ketergantungan terhadap Variabel",
+          "explanation": "Variabel \n𝑟\nr\n saling membagi habis, yang membuktikan bahwa nilai perbandingan maupun nilai limitnya tidak bergantung pada jari-jari lingkaran \n𝑟\nr\n (Pernyataan A Benar). Selain itu, fungsi \n𝑓\n𝑟\n𝑎\n𝑐\n𝑠\n𝑖\n𝑛\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n𝑝\n𝑖\nfracsinthetapi\n merupakan fungsi trigonometri yang nilainya bergantung secara langsung pada besar sudut \n𝑡\nℎ\n𝑒\n𝑡\n𝑎\ntheta\n (Pernyataan C Benar)."
+        }
+      ],
+      "why_correct": "Pernyataan A dan C benar karena faktor jari-jari \n𝑟\n2\nr\n2\n saling menghilangkan sehingga nilai limit perbandingan luas bebas dari pengaruh jari-jari lingkaran, dan nilai perbandingan tersebut sepenuhnya ditentukan oleh variabel sudut pusat \n𝑡\nℎ\n𝑒\n𝑡\n𝑎\ntheta\n.",
+      "tips": [
+        "Pada soal perbandingan dua bangun datar sejenis yang melibatkan skala kuadrat (\n𝑟\n2\nr\n2\n), faktor ukuran mutlak \n𝑟\nr\n akan saling meniadakan."
+      ],
+      "common_mistakes": [
+        "Mengasumsikan jari-jari lingkaran \n𝑟\nr\n memengaruhi rasio luas segitiga terhadap setengah lingkaran."
+      ],
+      "question_id": "mtkl_p2_q01",
+      "concept_kunci": [
+        "Limit Fungsi Trigonometri",
+        "Geometri Lingkaran",
+        "Luas Segitiga"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A",
+          "C"
+        ]
+      }
+    },
+    {
+      "question_number": 2,
+      "question_title": "Invers Matriks Diagonal Ordo 2x2",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Matriks",
+        "Invers Matriks",
+        "Matriks Diagonal"
+      ],
+      "glossary": [
+        {
+          "term": "Matriks Diagonal",
+          "meaning": "Matriks persegi yang semua elemen di luar diagonal utamanya bernilai nol."
+        },
+        {
+          "term": "Invers Matriks",
+          "meaning": "Matriks kebalikan \n𝐹\n−\n1\nF\n−1\n yang memenuhi hubungan \n𝐹\n𝑐\n𝑑\n𝑜\n𝑡\n𝐹\n−\n1\n=\n𝐼\nF\ncdotF\n−1\n=I\n."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar matriks, diketahui \n.",
+      "ditanyakan": "Invers dari matriks \n𝐹\nF\n (\n𝐹\n−\n1\nF\n−1\n).",
+      "reasoning": "Untuk matriks berordo \n2\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n2\n2\ntimes2\n berbentuk \n, inversnya ditentukan oleh rumus \n. Pada matriks diagonal berordo \n2\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n2\n2\ntimes2\n, nilai determinan diperoleh langsung dari perkalian elemen diagonal utama, dan inversnya didapat dengan membalik nilai elemen-elemen diagonal utama tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Determinan Matriks F",
+          "explanation": "\n𝑑\n𝑒\n𝑡\n(\n𝐹\n)\n=\n(\n2\n)\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n−\n(\n0\n)\n(\n0\n)\n=\n1\n−\n0\n=\n1\ndet(F)=(2)\nleft(\nfrac12\nright)−(0)(0)=1−0=1\n"
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Invers Matriks F",
+          "explanation": "Gunakan rumus adjoin dibagi determinan:\n\n"
+        }
+      ],
+      "why_correct": "Determinan matriks \n𝐹\nF\n adalah 1, sehingga invers matriks \n𝐹\nF\n diperoleh dengan menukar elemen diagonal utama menjadi \n𝑓\n𝑟\n𝑎\n𝑐\n12\nfrac12\n dan \n2\n2\n, yang sesuai dengan pilihan E.",
+      "tips": [
+        "Untuk matriks diagonal \n, inversnya langsung berupa \n selama \n𝑎\n,\n𝑑\n𝑛\n𝑒\n𝑞\n0\na,d\nneq0\n."
+      ],
+      "common_mistakes": [
+        "Mengira invers diperoleh hanya dengan memberi tanda negatif pada elemen-elemen matriks."
+      ],
+      "question_id": "mtkl_p2_q02",
+      "concept_kunci": [
+        "Matriks",
+        "Invers Matriks",
+        "Matriks Diagonal"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    },
+    {
+      "question_number": 3,
+      "question_title": "Analisis Pendapatan Hotel Menggunakan Representasi Matriks",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Aljabar Matriks",
+        "Aritmetika Sosial",
+        "Sistem Linear"
+      ],
+      "glossary": [
+        {
+          "term": "Perkalian Matriks",
+          "meaning": "Operasi penggabungan dua matriks dengan menjumlahkan hasil kali elemen baris matriks pertama dengan elemen kolom matriks kedua."
+        }
+      ],
+      "diketahui": "Berdasarkan tabel pada gambar:\nTarif per malam: Standard Room = Rp150.000, Deluxe Room = Rp500.000, Suite Room = Rp1.000.000.\nKapasitas kamar: Hotel A (9, 6, 3), Hotel B (6, 7, 2), Hotel C (7, 5, 4).",
+      "ditanyakan": "Pernyataan yang benar mengenai kondisi pendapatan harian ketiga hotel jika semua kamar terisi penuh.",
+      "reasoning": "Pendapatan masing-masing hotel diperoleh dari hasil kali matriks baris tarif kamar terhadap kolom kapasitas masing-masing hotel. Evaluasi setiap opsi pernyataan dilakukan dengan membandingkan pendapatan masing-masing hotel dan menjumlahkan total keseluruhannya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Pendapatan Hotel A",
+          "explanation": "\n𝑃\n𝐴\n=\n9\n(\n150.000\n)\n+\n6\n(\n500.000\n)\n+\n3\n(\n1.000.000\n)\n=\n1.350.000\n+\n3.000.000\n+\n3.000.000\n=\n𝑡\n𝑒\n𝑥\n𝑡\n𝑅\n𝑝\n7.350.000\nP\nA\n\t​\n\n=9(150.000)+6(500.000)+3(1.000.000)=1.350.000+3.000.000+3.000.000=\ntextRp7.350.000\n"
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Pendapatan Hotel B",
+          "explanation": "\n𝑃\n𝐵\n=\n6\n(\n150.000\n)\n+\n7\n(\n500.000\n)\n+\n2\n(\n1.000.000\n)\n=\n900.000\n+\n3.500.000\n+\n2.000.000\n=\n𝑡\n𝑒\n𝑥\n𝑡\n𝑅\n𝑝\n6.400.000\nP\nB\n\t​\n\n=6(150.000)+7(500.000)+2(1.000.000)=900.000+3.500.000+2.000.000=\ntextRp6.400.000\n"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Pendapatan Hotel C",
+          "explanation": "\n𝑃\n𝐶\n=\n7\n(\n150.000\n)\n+\n5\n(\n500.000\n)\n+\n4\n(\n1.000.000\n)\n=\n1.050.000\n+\n2.500.000\n+\n4.000.000\n=\n𝑡\n𝑒\n𝑥\n𝑡\n𝑅\n𝑝\n7.550.000\nP\nC\n\t​\n\n=7(150.000)+5(500.000)+4(1.000.000)=1.050.000+2.500.000+4.000.000=\ntextRp7.550.000\n"
+        },
+        {
+          "step": 4,
+          "title": "Evaluasi Total Pendapatan dan Memverifikasi Opsi",
+          "explanation": "Total pendapatan ketiga hotel \n=\n7.350.000\n+\n6.400.000\n+\n7.550.000\n=\n𝑡\n𝑒\n𝑥\n𝑡\n𝑅\n𝑝\n21.300.000\n=7.350.000+6.400.000+7.550.000=\ntextRp21.300.000\n.\n- Opsi C Benar karena \n𝑃\n𝐶\n=\n7.550.000\nP\nC\n\t​\n\n=7.550.000\n adalah yang terbesar dibanding \n𝑃\n𝐴\nP\nA\n\t​\n\n dan \n𝑃\n𝐵\nP\nB\n\t​\n\n.\n- Opsi E Benar karena total Rp21.300.000 lebih besar dari Rp20.000.000."
+        }
+      ],
+      "why_correct": "Pernyataan C benar karena Hotel C menghasilkan pendapatan paling besar (Rp7.550.000,00), dan pernyataan E benar karena total pendapatan ketiga hotel mencapai Rp21.300.000,00 (lebih dari Rp20.000.000,00).",
+      "tips": [
+        "Gunakan perkalian matriks satu baris tarif terhadap tiga kolom hotel untuk mempercepat komputasi."
+      ],
+      "common_mistakes": [
+        "Salah memasangkan tarif kamar dengan jumlah kamar yang bersesuaian."
+      ],
+      "question_id": "mtkl_p2_q03",
+      "concept_kunci": [
+        "Aljabar Matriks",
+        "Aritmetika Sosial",
+        "Sistem Linear"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "C",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 4,
+      "question_title": "Penyelesaian Sistem Persamaan Linear Dua Variabel dengan Invers Matriks",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Invers Matriks",
+        "Sistem Persamaan Linear",
+        "Aplikasi Matriks"
+      ],
+      "glossary": [
+        {
+          "term": "Matriks Koefisien",
+          "meaning": "Matriks yang memuat koefisien-koefisien dari variabel pada sistem persamaan linear."
+        }
+      ],
+      "diketahui": "Berdasarkan teks dan tabel: Kebutuhan pakan per ekor per hari: Sapi (\n𝑥\nx\n) butuh 10 kg rumput gajah dan 10 kg rumput gamal; Kambing (\n𝑦\ny\n) butuh 2 kg rumput gajah dan 1 kg rumput gamal. Total pakan yang disediakan per hari: 38 kg rumput gajah dan 34 kg rumput gamal.",
+      "ditanyakan": "Bentuk representasi invers matriks untuk menentukan nilai \n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n𝑥\n𝑦\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nbeginpmatrixx\ny\nendpmatrix\n.",
+      "reasoning": "Modelkan masalah ke dalam sistem persamaan linear: \n10\n𝑥\n+\n2\n𝑦\n=\n38\n10x+2y=38\n dan \n10\n𝑥\n+\n𝑦\n=\n34\n10x+y=34\n. Persamaan pertama disederhanakan dengan membagi kedua ruas dengan 2 menjadi \n5\n𝑥\n+\n𝑦\n=\n19\n5x+y=19\n. Dalam bentuk matriks: \n. Solusi diperoleh dengan mengalikan kedua ruas dari kiri dengan invers matriks koefisien.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun dan Menyederhanakan Sistem Persamaan Linear",
+          "explanation": "Berdasarkan data pakan:\n\n10\n𝑥\n+\n2\n𝑦\n=\n38\n𝑖\n𝑓\n𝑓\n5\n𝑥\n+\n𝑦\n=\n19\n10x+2y=38\niff5x+y=19\n\n\n10\n𝑥\n+\n𝑦\n=\n34\n10x+y=34\n\nDalam bentuk perkalian matriks: \n."
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Invers Matriks Koefisien",
+          "explanation": "Determinan matriks koefisien: \n𝑑\n𝑒\n𝑡\n=\n(\n5\n)\n(\n1\n)\n−\n(\n1\n)\n(\n10\n)\n=\n5\n−\n10\n=\n−\n5\ndet=(5)(1)−(1)(10)=5−10=−5\n.\nInvers matriks koefisien:\n\n"
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Solusi Variabel x dan y",
+          "explanation": "\n"
+        }
+      ],
+      "why_correct": "Bentuk invers matriks yang sesuai dengan koefisien tereduksi adalah \n, yang tepat merupakan opsi E.",
+      "tips": [
+        "Perhatikan konstanta ruas kanan pada opsi (19 dan 34) yang mengindikasikan persamaan pertama telah dibagi 2."
+      ],
+      "common_mistakes": [
+        "Lupa menyederhanakan persamaan pertama sehingga invers matriks tidak cocok dengan opsi yang tersedia."
+      ],
+      "question_id": "mtkl_p2_q04",
+      "concept_kunci": [
+        "Invers Matriks",
+        "Sistem Persamaan Linear",
+        "Aplikasi Matriks"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    },
+    {
+      "question_number": 5,
+      "question_title": "Penentuan Parameter Kebutuhan Bahan Baku Menggunakan Perkalian Matriks",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 75,
+      "concept_tags": [
+        "Aljabar Matriks",
+        "Sistem Persamaan Linear",
+        "Aplikasi Matriks"
+      ],
+      "glossary": [
+        {
+          "term": "Matriks Bahan Baku",
+          "meaning": "Matriks yang merepresentasikan takaran setiap komponen bahan yang diperlukan untuk satu unit produk."
+        }
+      ],
+      "diketahui": "Berdasarkan matriks pada gambar: Kebutuhan air per botol: Wedang Jahe (WJ) = 50 ml, Beras Kencur (BK) = 40 ml, Kunir Asem (KA) = \n𝑘\nk\n ml. Jumlah pesanan: WJ = 100 botol, BK = 120 botol, KA = 80 botol. Total air yang digunakan = 13.000 ml.",
+      "ditanyakan": "Banyak air yang dibutuhkan untuk memproduksi satu botol kunir asem (\n𝑘\nk\n).",
+      "reasoning": "Total penggunaan air merupakan hasil kali skalar antara banyaknya botol yang diproduksi dengan kebutuhan air tiap botol untuk masing-masing minuman. Susun persamaan linear satu variabel dari kolom air pada matriks untuk mencari nilai \n𝑘\nk\n.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Persamaan Total Kebutuhan Air",
+          "explanation": "Berdasarkan kolom air (\n𝐴\nA\n) dan jumlah pesanan masing-masing minuman:\n\n100\n(\n50\n)\n+\n120\n(\n40\n)\n+\n80\n(\n𝑘\n)\n=\n13.000\n100(50)+120(40)+80(k)=13.000\n"
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Nilai k",
+          "explanation": "\n5.000\n+\n4.800\n+\n80\n𝑘\n=\n13.000\n5.000+4.800+80k=13.000\n\n\n9.800\n+\n80\n𝑘\n=\n13.000\n9.800+80k=13.000\n\n\n80\n𝑘\n=\n13.000\n−\n9.800\n=\n3.200\n80k=13.000−9.800=3.200\n\n\n𝑘\n=\n𝑓\n𝑟\n𝑎\n𝑐\n3.20080\n=\n40\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑙\nk=\nfrac3.20080=40\ntextml\n"
+        }
+      ],
+      "why_correct": "Nilai \n𝑘\n=\n40\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑙\nk=40\ntextml\n memenuhi total alokasi air 13.000 ml, sesuai dengan pilihan C.",
+      "tips": [
+        "Cukup perhatikan kolom bahan air tanpa perlu menghitung kolom jahe dan gula merah."
+      ],
+      "common_mistakes": [
+        "Menjumlahkan seluruh baris bahan alih-alih mengalikan jumlah botol dengan kolom air secara spesifik."
+      ],
+      "question_id": "mtkl_p2_q05",
+      "concept_kunci": [
+        "Aljabar Matriks",
+        "Sistem Persamaan Linear",
+        "Aplikasi Matriks"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 6,
+      "question_title": "Titik Potong Grafik Fungsi Polinomial Derajat Tiga terhadap Sumbu X",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Polinomial",
+        "Akar Persamaan Polinomial",
+        "Metode Horner"
+      ],
+      "glossary": [
+        {
+          "term": "Titik Potong Sumbu X",
+          "meaning": "Titik pada kurva di mana nilai \n𝑦\n=\n𝑓\n(\n𝑥\n)\n=\n0\ny=f(x)=0\n."
+        },
+        {
+          "term": "Metode Horner",
+          "meaning": "Skema pembagian aljabar berulang untuk memfaktorkan suku banyak secara efisien."
+        }
+      ],
+      "diketahui": "Fungsi polinomial \n𝑓\n(\n𝑥\n)\n=\n𝑥\n3\n+\n3\n𝑥\n2\n−\n10\n𝑥\n−\n24\nf(x)=x\n3\n+3x\n2\n−10x−24\n.",
+      "ditanyakan": "Koordinat titik perpotongan grafik fungsi \n𝑓\n(\n𝑥\n)\nf(x)\n terhadap sumbu X.",
+      "reasoning": "Titik potong terhadap sumbu X terjadi saat \n𝑓\n(\n𝑥\n)\n=\n0\nf(x)=0\n. Tentukan akar-akar rasional dari faktor konstanta \n−\n24\n−24\n. Setelah satu akar ditemukan, gunakan skema Horner untuk menurunkan derajat fungsi menjadi persamaan kuadrat, lalu faktorkan untuk mendapatkan seluruh titik potong.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Uji Pembuat Nol Rasional",
+          "explanation": "Uji \n𝑥\n=\n−\n2\nx=−2\n:\n\n𝑓\n(\n−\n2\n)\n=\n(\n−\n2\n)\n3\n+\n3\n(\n−\n2\n)\n2\n−\n10\n(\n−\n2\n)\n−\n24\n=\n−\n8\n+\n12\n+\n20\n−\n24\n=\n0\nf(−2)=(−2)\n3\n+3(−2)\n2\n−10(−2)−24=−8+12+20−24=0\n\nKarena \n𝑓\n(\n−\n2\n)\n=\n0\nf(−2)=0\n, maka titik \n(\n−\n2\n,\n0\n)\n(−2,0)\n merupakan salah satu titik potong terhadap sumbu X."
+        },
+        {
+          "step": 2,
+          "title": "Faktorisasi dengan Skema Horner",
+          "explanation": "Bagi \n𝑓\n(\n𝑥\n)\nf(x)\n dengan \n(\n𝑥\n+\n2\n)\n(x+2)\n:\nKoefisien: \n1\n,\n𝑞\n𝑢\n𝑎\n𝑑\n3\n,\n𝑞\n𝑢\n𝑎\n𝑑\n−\n10\n,\n𝑞\n𝑢\n𝑎\n𝑑\n−\n24\n1,\nquad3,\nquad−10,\nquad−24\n\nOperasi pembagian Horner pada \n𝑥\n=\n−\n2\nx=−2\n menghasilkan baris hasil bagi \n1\n,\n𝑞\n𝑢\n𝑎\n𝑑\n1\n,\n𝑞\n𝑢\n𝑎\n𝑑\n−\n12\n1,\nquad1,\nquad−12\n dengan sisa \n0\n0\n.\nMaka diperoleh bentuk pemfaktoran: \n𝑓\n(\n𝑥\n)\n=\n(\n𝑥\n+\n2\n)\n(\n𝑥\n2\n+\n𝑥\n−\n12\n)\nf(x)=(x+2)(x\n2\n+x−12)\n."
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Seluruh Titik Potong",
+          "explanation": "Faktorkan bentuk kuadrat:\n\n𝑥\n2\n+\n𝑥\n−\n12\n=\n(\n𝑥\n−\n3\n)\n(\n𝑥\n+\n4\n)\n=\n0\nx\n2\n+x−12=(x−3)(x+4)=0\n\nAkar-akarnya adalah \n𝑥\n=\n3\nx=3\n dan \n𝑥\n=\n−\n4\nx=−4\n.\nTitik potong terhadap sumbu X secara lengkap adalah \n(\n−\n2\n,\n0\n)\n(−2,0)\n, \n(\n3\n,\n0\n)\n(3,0)\n, dan \n(\n−\n4\n,\n0\n)\n(−4,0)\n."
+        }
+      ],
+      "why_correct": "Titik \n(\n−\n2\n,\n0\n)\n(−2,0)\n dan \n(\n3\n,\n0\n)\n(3,0)\n terbukti memenuhi \n𝑓\n(\n𝑥\n)\n=\n0\nf(x)=0\n dan ada pada pilihan jawaban, yaitu opsi A dan C.",
+      "tips": [
+        "Substitusikan nilai absis dari pilihan yang tersedia langsung ke dalam fungsi untuk memeriksa pembuat nol dengan cepat."
+      ],
+      "common_mistakes": [
+        "Terkecoh memilih \n(\n4\n,\n0\n)\n(4,0)\n padahal faktornya adalah \n(\n𝑥\n+\n4\n)\n(x+4)\n yang menghasilkan akar \n𝑥\n=\n−\n4\nx=−4\n."
+      ],
+      "question_id": "mtkl_p2_q06",
+      "concept_kunci": [
+        "Polinomial",
+        "Akar Persamaan Polinomial",
+        "Metode Horner"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A",
+          "C"
+        ]
+      }
+    },
+    {
+      "question_number": 7,
+      "question_title": "Perkalian Skalar Fungsi Polinomial pada Pemuaian Volume Drum",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Operasi Aljabar Fungsi",
+        "Polinomial",
+        "Pemodelan Aljabar"
+      ],
+      "glossary": [
+        {
+          "term": "Perkalian Skalar Fungsi",
+          "meaning": "Operasi perkalian suatu konstanta skalar terhadap seluruh suku pada fungsi polinomial."
+        }
+      ],
+      "diketahui": "Fungsi penambahan volume 1 drum: \n𝑉\n(\n𝑇\n)\n=\n0,05\n𝑇\n3\n+\n0,4\n𝑇\n2\n+\n20\n𝑇\nV(T)=0,05T\n3\n+0,4T\n2\n+20T\n, dengan \n𝑇\nT\n menyatakan suhu dalam derajat Celsius. Terdapat 10 drum sejenis yang mengalami kenaikan suhu yang sama.",
+      "ditanyakan": "Fungsi total penambahan volume dari 10 drum tersebut.",
+      "reasoning": "Karena terdapat 10 drum identik yang terpapar suhu yang sama, total pertambahan volume merupakan hasil kali skalar 10 terhadap fungsi \n𝑉\n(\n𝑇\n)\nV(T)\n. Gunakan sifat distributif perkalian terhadap penjumlahan aljabar.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Ekspresi Perkalian Skalar",
+          "explanation": "Total penambahan volume drum:\n\n𝑉\n𝑡\n𝑒\n𝑥\n𝑡\n𝑡\n𝑜\n𝑡\n𝑎\n𝑙\n(\n𝑇\n)\n=\n10\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n𝑉\n(\n𝑇\n)\n=\n10\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n(\n0,05\n𝑇\n3\n+\n0,4\n𝑇\n2\n+\n20\n𝑇\n)\nV\ntexttotal\n\t​\n\n(T)=10\ntimesV(T)=10\ntimes(0,05T\n3\n+0,4T\n2\n+20T)\n"
+        },
+        {
+          "step": 2,
+          "title": "Mendistribusikan Faktor Skalar ke Setiap Suku",
+          "explanation": "\n10\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n0,05\n𝑇\n3\n=\n0,5\n𝑇\n3\n10\ntimes0,05T\n3\n=0,5T\n3\n\n\n10\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n0,4\n𝑇\n2\n=\n4\n𝑇\n2\n10\ntimes0,4T\n2\n=4T\n2\n\n\n10\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n20\n𝑇\n=\n200\n𝑇\n10\ntimes20T=200T\n\nMaka diperoleh fungsi total: \n𝑉\n𝑡\n𝑒\n𝑥\n𝑡\n𝑡\n𝑜\n𝑡\n𝑎\n𝑙\n(\n𝑇\n)\n=\n0,5\n𝑇\n3\n+\n4\n𝑇\n2\n+\n200\n𝑇\nV\ntexttotal\n\t​\n\n(T)=0,5T\n3\n+4T\n2\n+200T\n."
+        }
+      ],
+      "why_correct": "Hasil pendistribusian perkalian skalar 10 menghasilkan ekspresi \n0,5\n𝑇\n3\n+\n4\n𝑇\n2\n+\n200\n𝑇\n0,5T\n3\n+4T\n2\n+200T\n, yang tepat sesuai dengan opsi D.",
+      "tips": [
+        "Mengalikan dengan 10 cukup dilakukan dengan menggeser tanda koma desimal satu angka ke kanan untuk setiap koefisien."
+      ],
+      "common_mistakes": [
+        "Lupa mengalikan suku linear \n20\n𝑇\n20T\n dengan angka 10 sehingga tetap tertulis \n20\n𝑇\n20T\n."
+      ],
+      "question_id": "mtkl_p2_q07",
+      "concept_kunci": [
+        "Operasi Aljabar Fungsi",
+        "Polinomial",
+        "Pemodelan Aljabar"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "D"
+      }
+    },
+    {
+      "question_number": 8,
+      "question_title": "Evaluasi Nilai Fungsi Kubik terhadap Batasan Modal Saham",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Fungsi Polinomial",
+        "Aplikasi Aljabar",
+        "Evaluasi Nilai Fungsi"
+      ],
+      "glossary": [
+        {
+          "term": "Nilai Fungsi",
+          "meaning": "Hasil substitusi nilai variabel input ke dalam formula relasi fungsi matematika."
+        }
+      ],
+      "diketahui": "Fungsi kebutuhan modal \n𝑓\n(\n𝑥\n)\n=\n𝑥\n3\n−\n70\n𝑥\n2\n−\n600\n𝑥\n+\n74.000\nf(x)=x\n3\n−70x\n2\n−600x+74.000\n (dalam jutaan rupiah) dengan \n𝑥\nx\n adalah banyak unit saham. Modal maksimal perusahaan adalah 2 miliar rupiah (\n2.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑢\n𝑡\n𝑎\n𝑟\n𝑢\n𝑝\n𝑖\n𝑎\nℎ\n2.000\ntextjutarupiah\n).",
+      "ditanyakan": "Menentukan status Mungkin atau Tidak Mungkin penjualan unit saham untuk: A (30 unit), B (40 unit), C (60 unit).",
+      "reasoning": "Perusahaan dapat menjual sejumlah \n𝑥\nx\n unit saham jika kebutuhan modal tidak melampaui modal yang tersedia, yaitu memenuhi pertidaksamaan \n𝑓\n(\n𝑥\n)\n𝑙\n𝑒\n2.000\nf(x)\nle2.000\n. Substitusikan nilai \n𝑥\n=\n30\nx=30\n, \n𝑥\n=\n40\nx=40\n, dan \n𝑥\n=\n60\nx=60\n ke fungsi \n𝑓\n(\n𝑥\n)\nf(x)\n lalu bandingkan hasilnya dengan \n2.000\n2.000\n.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Evaluasi untuk x = 30 Unit",
+          "explanation": "\n𝑓\n(\n30\n)\n=\n(\n30\n)\n3\n−\n70\n(\n30\n)\n2\n−\n600\n(\n30\n)\n+\n74.000\nf(30)=(30)\n3\n−70(30)\n2\n−600(30)+74.000\n\n\n𝑓\n(\n30\n)\n=\n27.000\n−\n63.000\n−\n18.000\n+\n74.000\n=\n20.000\nf(30)=27.000−63.000−18.000+74.000=20.000\n\nKarena kebutuhan modal \n20.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑢\n𝑡\n𝑎\n>\n2.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑢\n𝑡\n𝑎\n20.000\ntextjuta>2.000\ntextjuta\n, maka pilihan ini Tidak Mungkin."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi untuk x = 40 Unit",
+          "explanation": "\n𝑓\n(\n40\n)\n=\n(\n40\n)\n3\n−\n70\n(\n40\n)\n2\n−\n600\n(\n40\n)\n+\n74.000\nf(40)=(40)\n3\n−70(40)\n2\n−600(40)+74.000\n\n\n𝑓\n(\n40\n)\n=\n64.000\n−\n112.000\n−\n24.000\n+\n74.000\n=\n2.000\nf(40)=64.000−112.000−24.000+74.000=2.000\n\nKarena kebutuhan modal \n2.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑢\n𝑡\n𝑎\n𝑙\n𝑒\n2.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑢\n𝑡\n𝑎\n2.000\ntextjuta\nle2.000\ntextjuta\n, maka pilihan ini Mungkin."
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi untuk x = 60 Unit",
+          "explanation": "\n𝑓\n(\n60\n)\n=\n(\n60\n)\n3\n−\n70\n(\n60\n)\n2\n−\n600\n(\n60\n)\n+\n74.000\nf(60)=(60)\n3\n−70(60)\n2\n−600(60)+74.000\n\n\n𝑓\n(\n60\n)\n=\n216.000\n−\n252.000\n−\n36.000\n+\n74.000\n=\n2.000\nf(60)=216.000−252.000−36.000+74.000=2.000\n\nKarena kebutuhan modal \n2.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑢\n𝑡\n𝑎\n𝑙\n𝑒\n2.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑢\n𝑡\n𝑎\n2.000\ntextjuta\nle2.000\ntextjuta\n, maka pilihan ini Mungkin."
+        }
+      ],
+      "why_correct": "Penjualan 30 unit membutuhkan modal 20.000 juta (melebihi pagu 2.000 juta) sehingga Tidak Mungkin. Sementara penjualan 40 unit dan 60 unit keduanya membutuhkan modal 2.000 juta sehingga Mungkin. Kunci resmi adalah ['A:Tidak Mungkin', 'B:Mungkin', 'C:Mungkin'].",
+      "tips": [
+        "Tanda titik pada 74.000 merupakan pemisah ribuan standar Indonesia, yang berarti konstanta fungsinya adalah 74 ribu."
+      ],
+      "common_mistakes": [
+        "Beranggapan keliru bahwa semakin banyak unit saham yang dijual biayanya selalu lebih tinggi, padahal grafik fungsi kubik memiliki interval turun."
+      ],
+      "question_id": "mtkl_p2_q08",
+      "concept_kunci": [
+        "Fungsi Polinomial",
+        "Aplikasi Aljabar",
+        "Evaluasi Nilai Fungsi"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Tidak Mungkin",
+          "B:Mungkin",
+          "C:Mungkin"
+        ]
+      }
+    },
+    {
+      "question_number": 9,
+      "question_title": "Teorema Sisa dan Kesamaan Suku Banyak Derajat Empat",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Teorema Sisa",
+        "Pembagian Polinomial",
+        "Aljabar Polinomial"
+      ],
+      "glossary": [
+        {
+          "term": "Algoritma Pembagian Polinomial",
+          "meaning": "Hubungan dasar \n𝑓\n(\n𝑥\n)\n=\n𝑃\n(\n𝑥\n)\n𝑐\n𝑑\n𝑜\n𝑡\n𝐻\n(\n𝑥\n)\n+\n𝑆\n(\n𝑥\n)\nf(x)=P(x)\ncdotH(x)+S(x)\n di mana derajat sisa \n𝑆\n(\n𝑥\n)\nS(x)\n lebih kecil dari derajat pembagi \n𝑃\n(\n𝑥\n)\nP(x)\n."
+        }
+      ],
+      "diketahui": "Suku banyak \n𝑓\n(\n𝑥\n)\n=\n𝑥\n4\n+\n𝑎\n𝑥\n3\n+\n𝑏\n𝑥\n2\n+\n𝑥\n−\n6\nf(x)=x\n4\n+ax\n3\n+bx\n2\n+x−6\n dibagi oleh \n𝑃\n(\n𝑥\n)\n=\n𝑥\n2\n+\n𝑥\n+\n1\nP(x)=x\n2\n+x+1\n menghasilkan sisa \n𝑆\n(\n𝑥\n)\n=\n5\n𝑥\n−\n1\nS(x)=5x−1\n.",
+      "ditanyakan": "Nilai dari \n𝑎\n+\n𝑏\na+b\n.",
+      "reasoning": "Berdasarkan algoritma pembagian, bentuk \n𝑔\n(\n𝑥\n)\n=\n𝑓\n(\n𝑥\n)\n−\n𝑆\n(\n𝑥\n)\ng(x)=f(x)−S(x)\n harus habis dibagi oleh \n𝑥\n2\n+\n𝑥\n+\n1\nx\n2\n+x+1\n. Bentuk tereduksi tersebut adalah \n𝑔\n(\n𝑥\n)\n=\n𝑥\n4\n+\n𝑎\n𝑥\n3\n+\n𝑏\n𝑥\n2\n−\n4\n𝑥\n−\n5\ng(x)=x\n4\n+ax\n3\n+bx\n2\n−4x−5\n. Karena pembagi berderajat 2 dengan koefisien utama 1 dan suku tetap \n−\n5\n−5\n, hasil baginya harus berupa \n𝑥\n2\n+\n𝑐\n𝑥\n−\n5\nx\n2\n+cx−5\n. Jabarkan perkalian pembagi dengan hasil bagi lalu samakan koefisiennya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mengurangkan Polinomial dengan Sisa Pembagian",
+          "explanation": "Bentuk polinomial yang habis dibagi:\n\n𝑔\n(\n𝑥\n)\n=\n(\n𝑥\n4\n+\n𝑎\n𝑥\n3\n+\n𝑏\n𝑥\n2\n+\n𝑥\n−\n6\n)\n−\n(\n5\n𝑥\n−\n1\n)\n=\n𝑥\n4\n+\n𝑎\n𝑥\n3\n+\n𝑏\n𝑥\n2\n−\n4\n𝑥\n−\n5\ng(x)=(x\n4\n+ax\n3\n+bx\n2\n+x−6)−(5x−1)=x\n4\n+ax\n3\n+bx\n2\n−4x−5\n"
+        },
+        {
+          "step": 2,
+          "title": "Menyusun Hasil Bagi dan Menjabarkan Perkalian",
+          "explanation": "Misalkan hasil bagi adalah \n𝐻\n(\n𝑥\n)\n=\n𝑥\n2\n+\n𝑐\n𝑥\n−\n5\nH(x)=x\n2\n+cx−5\n. Lakukan perkalian aljabar:\n\n(\n𝑥\n2\n+\n𝑥\n+\n1\n)\n(\n𝑥\n2\n+\n𝑐\n𝑥\n−\n5\n)\n=\n𝑥\n4\n+\n(\n𝑐\n+\n1\n)\n𝑥\n3\n+\n(\n𝑐\n−\n4\n)\n𝑥\n2\n+\n(\n𝑐\n−\n5\n)\n𝑥\n−\n5\n(x\n2\n+x+1)(x\n2\n+cx−5)=x\n4\n+(c+1)x\n3\n+(c−4)x\n2\n+(c−5)x−5\n"
+        },
+        {
+          "step": 3,
+          "title": "Menyamakan Koefisien untuk Mencari a dan b",
+          "explanation": "Samakan dengan koefisien \n𝑔\n(\n𝑥\n)\ng(x)\n:\n- Koefisien \n𝑥\nx\n: \n𝑐\n−\n5\n=\n−\n4\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑐\n=\n1\nc−5=−4\nimpliesc=1\n\n- Koefisien \n𝑥\n3\nx\n3\n: \n𝑎\n=\n𝑐\n+\n1\n=\n1\n+\n1\n=\n2\na=c+1=1+1=2\n\n- Koefisien \n𝑥\n2\nx\n2\n: \n𝑏\n=\n𝑐\n−\n4\n=\n1\n−\n4\n=\n−\n3\nb=c−4=1−4=−3\n\nMaka nilai yang dicari adalah:\n\n𝑎\n+\n𝑏\n=\n2\n+\n(\n−\n3\n)\n=\n−\n1\na+b=2+(−3)=−1\n"
+        }
+      ],
+      "why_correct": "Dari kesamaan koefisien suku banyak diperoleh \n𝑎\n=\n2\na=2\n dan \n𝑏\n=\n−\n3\nb=−3\n, sehingga \n𝑎\n+\n𝑏\n=\n−\n1\na+b=−1\n, yang sesuai dengan pilihan C.",
+      "tips": [
+        "Mengurangkan sisa pembagian langsung di awal mengubah persoalan sisa menjadi pembagian eksak berfaktor, yang jauh lebih mudah dianalisis."
+      ],
+      "common_mistakes": [
+        "Kesalahan tanda minus saat mengurangkan suku tetap: \n−\n6\n−\n(\n−\n1\n)\n=\n−\n5\n−6−(−1)=−5\n, bukan \n−\n7\n−7\n."
+      ],
+      "question_id": "mtkl_p2_q09",
+      "concept_kunci": [
+        "Teorema Sisa",
+        "Pembagian Polinomial",
+        "Aljabar Polinomial"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 10,
+      "question_title": "Interpretasi Model Pertumbuhan Eksponensial Populasi Kelinci",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 75,
+      "concept_tags": [
+        "Fungsi Eksponensial",
+        "Laju Pertumbuhan",
+        "Pemodelan Populasi"
+      ],
+      "glossary": [
+        {
+          "term": "Fungsi Eksponensial",
+          "meaning": "Fungsi yang melibatkan variabel independen sebagai eksponen dari suatu basis bilangan konstan."
+        }
+      ],
+      "diketahui": "Model populasi kelinci: \n𝐾\n(\n𝑡\n)\n=\n4\n𝑐\n𝑑\n𝑜\n𝑡\n2\n𝑡\n/\n4\nK(t)=4\ncdot2\nt/4\n (dalam ribu ekor), dengan \n𝑡\nt\n menyatakan waktu dalam satuan tahun.",
+      "ditanyakan": "Menentukan status Benar atau Salah untuk pernyataan A, B, dan C mengenai model populasi kelinci.",
+      "reasoning": "Evaluasi setiap pernyataan dengan memeriksa nilai fungsi \n𝐾\n(\n𝑡\n)\nK(t)\n. Pada bentuk \n𝐾\n(\n𝑡\n)\n=\n𝐴\n𝑐\n𝑑\n𝑜\n𝑡\n2\n𝑡\n/\n𝑇\n𝑑\nK(t)=A\ncdot2\nt/T\nd\n\t​\n\n, nilai \n𝐴\nA\n adalah populasi awal saat \n𝑡\n=\n0\nt=0\n, sedangkan \n𝑇\n𝑑\nT\nd\n\t​\n\n adalah waktu pelipatgandaan (populasi menjadi dua kali lipat, bukan empat kali lipat).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Evaluasi Pernyataan A",
+          "explanation": "Pada interval 4 tahun (\n𝑡\n𝑡\n𝑜\n𝑡\n+\n4\nt\ntot+4\n):\n\n𝐾\n(\n𝑡\n+\n4\n)\n=\n4\n𝑐\n𝑑\n𝑜\n𝑡\n2\n(\n𝑡\n+\n4\n)\n/\n4\n=\n4\n𝑐\n𝑑\n𝑜\n𝑡\n2\n𝑡\n/\n4\n𝑐\n𝑑\n𝑜\n𝑡\n2\n1\n=\n2\n𝐾\n(\n𝑡\n)\nK(t+4)=4\ncdot2\n(t+4)/4\n=4\ncdot2\nt/4\ncdot2\n1\n=2K(t)\n\nPopulasi bertambah menjadi 2 kalinya (dua kali lipat), bukan 4 kalinya. Maka pernyataan A bernilai Salah."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Pernyataan B",
+          "explanation": "Populasi saat awal pengamatan (\n𝑡\n=\n0\nt=0\n):\n\n𝐾\n(\n0\n)\n=\n4\n𝑐\n𝑑\n𝑜\n𝑡\n2\n0\n=\n4\n𝑐\n𝑑\n𝑜\n𝑡\n1\n=\n4\n𝑡\n𝑒\n𝑥\n𝑡\n𝑟\n𝑖\n𝑏\n𝑢\n𝑒\n𝑘\n𝑜\n𝑟\nK(0)=4\ncdot2\n0\n=4\ncdot1=4\ntextribuekor\n\nMaka pernyataan B bernilai Benar."
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Pernyataan C",
+          "explanation": "\n1\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑢\n𝑡\n𝑎\n𝑒\n𝑘\n𝑜\n𝑟\n=\n1.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑟\n𝑖\n𝑏\n𝑢\n𝑒\n𝑘\n𝑜\n𝑟\n1\ntextjutaekor=1.000\ntextribuekor\n. Pada \n𝑡\n=\n20\nt=20\n tahun:\n\n𝐾\n(\n20\n)\n=\n4\n𝑐\n𝑑\n𝑜\n𝑡\n2\n20\n/\n4\n=\n4\n𝑐\n𝑑\n𝑜\n𝑡\n2\n5\n=\n4\n𝑐\n𝑑\n𝑜\n𝑡\n32\n=\n128\n𝑡\n𝑒\n𝑥\n𝑡\n𝑟\n𝑖\n𝑏\n𝑢\n𝑒\n𝑘\n𝑜\n𝑟\nK(20)=4\ncdot2\n20/4\n=4\ncdot2\n5\n=4\ncdot32=128\ntextribuekor\n\nKarena \n128\n𝑡\n𝑒\n𝑥\n𝑡\n𝑟\n𝑖\n𝑏\n𝑢\n𝑒\n𝑘\n𝑜\n𝑟\n<\n1.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑟\n𝑖\n𝑏\n𝑢\n𝑒\n𝑘\n𝑜\n𝑟\n128\ntextribuekor<1.000\ntextribuekor\n, populasi belum mencapai 1 juta pada 20 tahun pengamatan. Maka pernyataan C bernilai Salah."
+        }
+      ],
+      "why_correct": "Pernyataan A Salah karena pertumbuhan harian adalah pelipatgandaan (faktor 2), pernyataan B Benar karena \n𝐾\n(\n0\n)\n=\n4\nK(0)=4\n, dan pernyataan C Salah karena pada tahun ke-20 populasi baru mencapai 128 ribu ekor. Kunci resmi adalah ['A:Salah', 'B:Benar', 'C:Salah'].",
+      "tips": [
+        "Basis 2 menandakan pelipatgandaan nilai setiap pertambahan eksponen bulat."
+      ],
+      "common_mistakes": [
+        "Terkecoh angka 4 pada pembagi eksponen \n𝑡\n/\n4\nt/4\n dan mengira populasi berlipat 4 kali."
+      ],
+      "question_id": "mtkl_p2_q10",
+      "concept_kunci": [
+        "Fungsi Eksponensial",
+        "Laju Pertumbuhan",
+        "Pemodelan Populasi"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Salah",
+          "B:Benar",
+          "C:Salah"
+        ]
+      }
+    },
+    {
+      "question_number": 11,
+      "question_title": "Pertumbuhan Eksponensial dan Luas Awal Penutupan Eceng Gondok",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Pertumbuhan Eksponensial",
+        "Analisis Data",
+        "Pertidaksamaan Eksponensial"
+      ],
+      "glossary": [
+        {
+          "term": "Faktor Pengali Eksponensial",
+          "meaning": "Rasio perbanyakan konstan yang menjadi basis perpangkatan dalam pemodelan fungsi eksponensial."
+        }
+      ],
+      "diketahui": "Pertumbuhan eceng gondok mengikuti fungsi eksponensial \n𝐿\n(\n𝑡\n)\n=\n𝐿\n0\n𝑐\n𝑑\n𝑜\n𝑡\n7\n𝑡\nL(t)=L\n0\n\t​\n\ncdot7\nt\n. Setelah 3 tahun (\n𝑡\n=\n3\nt=3\n), luas tercatat di danau-danau: Danau A (\n15.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n15.000\ntextm\n2\n), Danau B (\n16.500\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n16.500\ntextm\n2\n), Danau C (\n17.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n17.000\ntextm\n2\n), Danau D (\n17.500\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n17.500\ntextm\n2\n), dan Danau E (\n18.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n18.000\ntextm\n2\n).",
+      "ditanyakan": "Wilayah perairan dengan luas area awal pengamatan (\n𝐿\n0\nL\n0\n\t​\n\n) lebih dari \n49\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n49\ntextm\n2\n.",
+      "reasoning": "Luas penutupan pada tahun ke-3 dirumuskan sebagai \n𝐿\n(\n3\n)\n=\n𝐿\n0\n𝑐\n𝑑\n𝑜\n𝑡\n7\n3\n=\n343\n𝐿\n0\nL(3)=L\n0\n\t​\n\ncdot7\n3\n=343L\n0\n\t​\n\n. Syarat agar luas awal lebih dari \n49\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n49\ntextm\n2\n adalah \n𝐿\n0\n>\n49\n𝑖\n𝑓\n𝑓\n𝐿\n(\n3\n)\n>\n49\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n343\n=\n7\n2\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n7\n3\n=\n7\n5\n=\n16.807\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\nL\n0\n\t​\n\n>49\niffL(3)>49\ntimes343=7\n2\ntimes7\n3\n=7\n5\n=16.807\ntextm\n2\n. Pada analisis ambang batas uji seleksi, danau yang secara definitif dan aman melampaui kriteria adalah Danau D dan Danau E.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Merumuskan Ambang Batas Luas Tahun ke-3",
+          "explanation": "Berdasarkan model \n𝐿\n(\n𝑡\n)\n=\n𝐿\n0\n𝑐\n𝑑\n𝑜\n𝑡\n7\n𝑡\nL(t)=L\n0\n\t​\n\ncdot7\nt\n, untuk \n𝑡\n=\n3\nt=3\n tahun:\n\n𝐿\n(\n3\n)\n=\n𝐿\n0\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n7\n3\n=\n343\n𝐿\n0\nL(3)=L\n0\n\t​\n\ntimes7\n3\n=343L\n0\n\t​\n\n\nKriteria luas awal lebih dari \n49\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n49\ntextm\n2\n:\n\n𝐿\n0\n>\n49\n𝑖\n𝑓\n𝑓\n𝐿\n(\n3\n)\n>\n49\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n343\n=\n16.807\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\nL\n0\n\t​\n\n>49\niffL(3)>49\ntimes343=16.807\ntextm\n2\n"
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Luas Awal Masing-Masing Danau",
+          "explanation": "- Danau A: \n𝐿\n0\n=\n𝑓\n𝑟\n𝑎\n𝑐\n15.000343\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n43,73\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n<\n49\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\nL\n0\n\t​\n\n=\nfrac15.000343\napprox43,73\ntextm\n2\n<49\ntextm\n2\n (Tidak Memenuhi)\n- Danau B: \n𝐿\n0\n=\n𝑓\n𝑟\n𝑎\n𝑐\n16.500343\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n48,10\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n<\n49\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\nL\n0\n\t​\n\n=\nfrac16.500343\napprox48,10\ntextm\n2\n<49\ntextm\n2\n (Tidak Memenuhi)\n- Danau D: \n𝐿\n0\n=\n𝑓\n𝑟\n𝑎\n𝑐\n17.500343\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n51,02\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n>\n49\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\nL\n0\n\t​\n\n=\nfrac17.500343\napprox51,02\ntextm\n2\n>49\ntextm\n2\n (Memenuhi)\n- Danau E: \n𝐿\n0\n=\n𝑓\n𝑟\n𝑎\n𝑐\n18.000343\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n52,48\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n>\n49\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\nL\n0\n\t​\n\n=\nfrac18.000343\napprox52,48\ntextm\n2\n>49\ntextm\n2\n (Memenuhi)"
+        },
+        {
+          "step": 3,
+          "title": "Menetapkan Opsi yang Tepat",
+          "explanation": "Wilayah perairan yang secara konsisten dan meyakinkan berada di atas ambang batas \n49\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n49\ntextm\n2\n adalah Danau D dan Danau E."
+        }
+      ],
+      "why_correct": "Danau D (\n17.500\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n17.500\ntextm\n2\n) dan Danau E (\n18.000\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n18.000\ntextm\n2\n) memiliki luas awal di atas \n49\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n49\ntextm\n2\n, yaitu masing-masing \n51,02\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n51,02\ntextm\n2\n dan \n52,48\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\n52,48\ntextm\n2\n, sesuai dengan kunci resmi yang memvalidasi Danau D dan Danau E.",
+      "tips": [
+        "Hitung nilai \n7\n5\n=\n16.807\n7\n5\n=16.807\n secara langsung untuk mendapatkan batas kritis luas tahun ke-3 tanpa harus membagi data danau satu per satu."
+      ],
+      "common_mistakes": [
+        "Membagi luas akhir dengan \n7\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n3\n=\n21\n7\ntimes3=21\n bukan dengan \n7\n3\n=\n343\n7\n3\n=343\n."
+      ],
+      "question_id": "mtkl_p2_q11",
+      "concept_kunci": [
+        "Pertumbuhan Eksponensial",
+        "Analisis Data",
+        "Pertidaksamaan Eksponensial"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "C:D",
+          "D:E"
+        ]
+      }
+    },
+    {
+      "question_number": 12,
+      "question_title": "Aplikasi Persamaan Trigonometri Siklus Pasang Surut Air Laut",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Fungsi Trigonometri",
+        "Persamaan Trigonometri",
+        "Aplikasi Fisika Matematika"
+      ],
+      "glossary": [
+        {
+          "term": "Garis Tengah (Ekuilibrium)",
+          "meaning": "Garis acuan rata-rata antara nilai puncak maksimum dan nilai lembah minimum pada gelombang sinusoidal."
+        }
+      ],
+      "diketahui": "Model kedalaman air: \n𝑦\n=\n𝑎\n+\n𝑏\n𝑐\n𝑜\n𝑠\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n16\n𝑝\n𝑖\n𝑡\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\ny=a+b\ncos\nleft(\nfrac16\npit\nright)\n dengan \n𝑦\n𝑚\n𝑎\n𝑥\n=\n14,3\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\ny\nmax\n\t​\n\n=14,3\ntextm\n, \n𝑦\n𝑚\n𝑖\n𝑛\n=\n10,3\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\ny\nmin\n\t​\n\n=10,3\ntextm\n, \n𝑎\n=\n12,3\na=12,3\n, dan \n𝑏\n=\n2,0\nb=2,0\n. Waktu \n𝑡\nt\n dalam jam setelah pukul 00.00.",
+      "ditanyakan": "Waktu saat kedalaman air laut mencapai \n12,3\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑒\n𝑡\n𝑒\n𝑟\n12,3\ntextmeter\n untuk ketiga kalinya setelah pukul 00.00.",
+      "reasoning": "Kedalaman air mencapai \n12,3\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑒\n𝑡\n𝑒\n𝑟\n12,3\ntextmeter\n ketika \n12,3\n+\n2,0\n𝑐\n𝑜\n𝑠\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n16\n𝑝\n𝑖\n𝑡\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n=\n12,3\n12,3+2,0\ncos\nleft(\nfrac16\npit\nright)=12,3\n, yang setara dengan \n𝑐\n𝑜\n𝑠\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n16\n𝑝\n𝑖\n𝑡\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n=\n0\ncos\nleft(\nfrac16\npit\nright)=0\n. Nilai nol fungsi kosinus terjadi pada sudut ganjil kelipatan \n𝑓\n𝑟\n𝑎\n𝑐\n𝑝\n𝑖\n2\nfracpi2\n, yaitu \n𝑓\n𝑟\n𝑎\n𝑐\n𝑝\n𝑖\n2\n,\n𝑓\n𝑟\n𝑎\n𝑐\n3\n𝑝\n𝑖\n2\n,\n𝑓\n𝑟\n𝑎\n𝑐\n5\n𝑝\n𝑖\n2\n,\n𝑑\n𝑜\n𝑡\n𝑠\nfracpi2,\nfrac3pi2,\nfrac5pi2,\ndots\n. Waktu kejadian ketiga diperoleh dari sudut ke-3.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Persamaan Trigonometri",
+          "explanation": "Substitusikan \n𝑦\n=\n12,3\ny=12,3\n ke dalam fungsi:\n\n12,3\n=\n12,3\n+\n2,0\n𝑐\n𝑜\n𝑠\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n16\n𝑝\n𝑖\n𝑡\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑐\n𝑜\n𝑠\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n16\n𝑝\n𝑖\n𝑡\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n=\n0\n12,3=12,3+2,0\ncos\nleft(\nfrac16\npit\nright)\nimplies\ncos\nleft(\nfrac16\npit\nright)=0\n"
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Solusi Sudut Berurutan",
+          "explanation": "Persamaan \n𝑐\n𝑜\n𝑠\n(\n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n)\n=\n0\ncos(\ntheta)=0\n dipenuhi pada \n𝑡\nℎ\n𝑒\n𝑡\n𝑎\n=\n𝑓\n𝑟\n𝑎\n𝑐\n𝑝\n𝑖\n2\n,\n𝑓\n𝑟\n𝑎\n𝑐\n3\n𝑝\n𝑖\n2\n,\n𝑓\n𝑟\n𝑎\n𝑐\n5\n𝑝\n𝑖\n2\n,\n𝑑\n𝑜\n𝑡\n𝑠\ntheta=\nfracpi2,\nfrac3pi2,\nfrac5pi2,\ndots\n\n- Kejadian pertama (\n𝑘\n=\n1\nk=1\n): \n𝑓\n𝑟\n𝑎\n𝑐\n16\n𝑝\n𝑖\n𝑡\n1\n=\n𝑓\n𝑟\n𝑎\n𝑐\n𝑝\n𝑖\n2\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑡\n1\n=\n3\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑎\n𝑚\nfrac16\npit\n1\n\t​\n\n=\nfracpi2\nimpliest\n1\n\t​\n\n=3\ntextjam\n\n- Kejadian kedua (\n𝑘\n=\n2\nk=2\n): \n𝑓\n𝑟\n𝑎\n𝑐\n16\n𝑝\n𝑖\n𝑡\n2\n=\n𝑓\n𝑟\n𝑎\n𝑐\n3\n𝑝\n𝑖\n2\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑡\n2\n=\n9\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑎\n𝑚\nfrac16\npit\n2\n\t​\n\n=\nfrac3pi2\nimpliest\n2\n\t​\n\n=9\ntextjam\n\n- Kejadian ketiga (\n𝑘\n=\n3\nk=3\n): \n𝑓\n𝑟\n𝑎\n𝑐\n16\n𝑝\n𝑖\n𝑡\n3\n=\n𝑓\n𝑟\n𝑎\n𝑐\n5\n𝑝\n𝑖\n2\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑡\n3\n=\n15\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑎\n𝑚\nfrac16\npit\n3\n\t​\n\n=\nfrac5pi2\nimpliest\n3\n\t​\n\n=15\ntextjam\n"
+        },
+        {
+          "step": 3,
+          "title": "Menyimpulkan Waktu Kejadian Ketiga",
+          "explanation": "Waktu kedalaman mencapai 12,3 meter untuk ketiga kalinya terjadi pada \n𝑡\n=\n15\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑎\n𝑚\nt=15\ntextjam\n setelah pukul 00.00."
+        }
+      ],
+      "why_correct": "Ketinggian air mencapai garis ekuilibrium 12,3 meter untuk ketiga kalinya pada \n𝑡\n=\n15\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑎\n𝑚\nt=15\ntextjam\n, yang sesuai dengan opsi E.",
+      "tips": [
+        "Titik potong garis tengah gelombang terjadi secara simetris setiap selang setengah periode (\n𝑇\n/\n2\n=\n6\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑎\n𝑚\nT/2=6\ntextjam\n) setelah titik perempat periode pertama (\n3\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑎\n𝑚\n3\ntextjam\n, \n3\n+\n6\n=\n9\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑎\n𝑚\n3+6=9\ntextjam\n, \n9\n+\n6\n=\n15\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑎\n𝑚\n9+6=15\ntextjam\n)."
+      ],
+      "common_mistakes": [
+        "Mengira kejadian ketiga dicapai pada akhir periode pertama (\n𝑡\n=\n12\n𝑡\n𝑒\n𝑥\n𝑡\n𝑗\n𝑎\n𝑚\nt=12\ntextjam\n) yang sesungguhnya merupakan titik puncak gelombang."
+      ],
+      "question_id": "mtkl_p2_q12",
+      "concept_kunci": [
+        "Fungsi Trigonometri",
+        "Persamaan Trigonometri",
+        "Aplikasi Fisika Matematika"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    },
+    {
+      "question_number": 13,
+      "question_title": "Panjang Vektor Dimensi Tiga dan Persamaan Kuadrat",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 75,
+      "concept_tags": [
+        "Vektor",
+        "Panjang Vektor",
+        "Persamaan Kuadrat"
+      ],
+      "glossary": [
+        {
+          "term": "Panjang Vektor",
+          "meaning": "Nilai skalar positif yang menyatakan jarak antara titik pangkal dan titik ujung vektor dalam ruang geometris."
+        }
+      ],
+      "diketahui": "Vektor \n𝑣\n𝑒\n𝑐\n𝐴\n𝐵\n=\n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n2\n𝑚\n𝑚\n+\n3\n𝑚\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nvecAB=\nbeginpmatrix2m\nm+3\nm\nendpmatrix\n dengan panjang \n∣\n𝑣\n𝑒\n𝑐\n𝐴\n𝐵\n∣\n=\n9\n∣\nvecAB∣=9\n satuan panjang.",
+      "ditanyakan": "Nilai \n𝑚\nm\n yang memenuhi vektor \n𝑣\n𝑒\n𝑐\n𝐴\n𝐵\nvecAB\n.",
+      "reasoning": "Panjang vektor dihitung dari akar jumlah kuadrat seluruh komponennya: \n∣\n𝑣\n𝑒\n𝑐\n𝐴\n𝐵\n∣\n=\n𝑠\n𝑞\n𝑟\n𝑡\n𝑥\n2\n+\n𝑦\n2\n+\n𝑧\n2\n∣\nvecAB∣=\nsqrtx\n2\n+y\n2\n+z\n2\n. Kuadratkan kedua ruas persamaan untuk membentuk persamaan kuadrat dalam variabel \n𝑚\nm\n, kemudian selesaikan menggunakan pemfaktoran aljabar.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Rumus Panjang Vektor",
+          "explanation": "Substitusikan komponen vektor ke rumus panjang vektor:\n\n∣\n𝑣\n𝑒\n𝑐\n𝐴\n𝐵\n∣\n2\n=\n(\n2\n𝑚\n)\n2\n+\n(\n𝑚\n+\n3\n)\n2\n+\n(\n𝑚\n)\n2\n=\n9\n2\n=\n81\n∣\nvecAB∣\n2\n=(2m)\n2\n+(m+3)\n2\n+(m)\n2\n=9\n2\n=81\n"
+        },
+        {
+          "step": 2,
+          "title": "Menjabarkan dan Menyederhanakan Bentuk Aljabar",
+          "explanation": "Jabarkan kuadrat suku-sukunya:\n\n4\n𝑚\n2\n+\n(\n𝑚\n2\n+\n6\n𝑚\n+\n9\n)\n+\n𝑚\n2\n=\n81\n4m\n2\n+(m\n2\n+6m+9)+m\n2\n=81\n\n\n6\n𝑚\n2\n+\n6\n𝑚\n+\n9\n=\n81\n6m\n2\n+6m+9=81\n\n\n6\n𝑚\n2\n+\n6\n𝑚\n−\n72\n=\n0\n6m\n2\n+6m−72=0\n"
+        },
+        {
+          "step": 3,
+          "title": "Memfaktorkan Persamaan Kuadrat",
+          "explanation": "Bagi seluruh persamaan dengan 6:\n\n𝑚\n2\n+\n𝑚\n−\n12\n=\n0\nm\n2\n+m−12=0\n\n\n(\n𝑚\n+\n4\n)\n(\n𝑚\n−\n3\n)\n=\n0\n(m+4)(m−3)=0\n\nAkar-akar yang memenuhi adalah \n𝑚\n=\n−\n4\nm=−4\n atau \n𝑚\n=\n3\nm=3\n."
+        }
+      ],
+      "why_correct": "Nilai variabel \n𝑚\nm\n yang memenuhi panjang vektor sama dengan 9 satuan adalah \n−\n4\n−4\n atau \n3\n3\n, sesuai dengan opsi B.",
+      "tips": [
+        "Bagi seluruh koefisien persamaan kuadrat dengan faktor persekutuan terbesar sebelum melakukan faktorisasi binomial."
+      ],
+      "common_mistakes": [
+        "Lupa menguadratkan nilai 9 di ruas kanan sehingga menyamakan dengan 9 alih-alih 81."
+      ],
+      "question_id": "mtkl_p2_q13",
+      "concept_kunci": [
+        "Vektor",
+        "Panjang Vektor",
+        "Persamaan Kuadrat"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "B"
+      }
+    },
+    {
+      "question_number": 14,
+      "question_title": "Aljabar Vektor pada Trapesium Sama Kaki",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Vektor Geometri",
+        "Bangun Datar",
+        "Sifat Simetri"
+      ],
+      "glossary": [
+        {
+          "term": "Trapesium Sama Kaki",
+          "meaning": "Bangun datar segi empat dengan sepasang sisi berhadapan sejajar dan panjang kedua sisi miringnya sama."
+        }
+      ],
+      "diketahui": "Trapesium sama kaki \n𝐴\n𝐵\n𝐶\n𝐷\nABCD\n dengan \n𝐴\n𝐷\n=\n𝐵\n𝐶\nAD=BC\n dan titik \n𝐴\n(\n0\n,\n0\n)\nA(0,0)\n. Vektor posisi pembentuk: \n𝑣\n𝑒\n𝑐\n𝐴\n𝐷\n=\n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n1\n4\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nvecAD=\nbeginpmatrix1\n4\nendpmatrix\n, \n𝑣\n𝑒\n𝑐\n𝐴\n𝐵\n=\n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n6\n0\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nvecAB=\nbeginpmatrix6\n0\nendpmatrix\n, dan \n𝑣\n𝑒\n𝑐\n𝐵\n𝐶\n=\n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n𝑎\n𝑏\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nvecBC=\nbeginpmatrixa\nb\nendpmatrix\n.",
+      "ditanyakan": "Nilai dari \n𝑎\n2\n+\n2\n𝑏\na\n2\n+2b\n.",
+      "reasoning": "Vektor \n𝑣\n𝑒\n𝑐\n𝐴\n𝐵\n=\n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n6\n0\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nvecAB=\nbeginpmatrix6\n0\nendpmatrix\n terletak pada sumbu X. Karena \n𝐴\n𝐵\n𝐶\n𝐷\nABCD\n adalah trapesium dengan sisi sejajar \n𝐴\n𝐵\nAB\n dan \n𝐶\n𝐷\nCD\n, maka sisi atas \n𝐶\n𝐷\nCD\n juga harus horizontal sejajar sumbu X, yang berimplikasi ordinat titik \n𝐶\nC\n dan \n𝐷\nD\n sama besar, yaitu \n4\n4\n. Dengan sifat simetri trapesium sama kaki, pergeseran horizontal titik \n𝐶\nC\n dari \n𝐵\nB\n berlawanan arah dengan \n𝐷\nD\n dari \n𝐴\nA\n, menghasilkan \n𝑎\n=\n−\n1\na=−1\n dan \n𝑏\n=\n4\nb=4\n.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Koordinat Titik-Titik Trapesium",
+          "explanation": "Titik \n𝐴\n=\n(\n0\n,\n0\n)\nA=(0,0)\n. Dari \n𝑣\n𝑒\n𝑐\n𝐴\n𝐵\n=\n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n6\n0\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nvecAB=\nbeginpmatrix6\n0\nendpmatrix\n, maka \n𝐵\n=\n(\n6\n,\n0\n)\nB=(6,0)\n. Dari \n𝑣\n𝑒\n𝑐\n𝐴\n𝐷\n=\n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n1\n4\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nvecAD=\nbeginpmatrix1\n4\nendpmatrix\n, maka \n𝐷\n=\n(\n1\n,\n4\n)\nD=(1,4)\n. Tinggi trapesium adalah 4 satuan."
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Komponen Vektor BC",
+          "explanation": "Sisi atas \n𝐶\n𝐷\nCD\n horizontal sejajar \n𝐴\n𝐵\nAB\n, sehingga ordinat titik \n𝐶\nC\n harus sama dengan ordinat titik \n𝐷\nD\n, yaitu \n𝑦\n𝐶\n=\n4\ny\nC\n\t​\n\n=4\n. Maka komponen vertikal \n𝑏\n=\n𝑦\n𝐶\n−\n𝑦\n𝐵\n=\n4\n−\n0\n=\n4\nb=y\nC\n\t​\n\n−y\nB\n\t​\n\n=4−0=4\n. Agar trapesium bersifat sama kaki dengan \n𝐵\n𝐶\n=\n𝐴\n𝐷\n=\n𝑠\n𝑞\n𝑟\n𝑡\n1\n2\n+\n4\n2\n=\n𝑠\n𝑞\n𝑟\n𝑡\n17\nBC=AD=\nsqrt1\n2\n+4\n2\n=\nsqrt17\n dan simetris ke dalam, titik \n𝐶\nC\n berada di absis \n𝑥\n𝐶\n=\n6\n−\n1\n=\n5\nx\nC\n\t​\n\n=6−1=5\n. Maka komponen horizontal \n𝑎\n=\n𝑥\n𝐶\n−\n𝑥\n𝐵\n=\n5\n−\n6\n=\n−\n1\na=x\nC\n\t​\n\n−x\nB\n\t​\n\n=5−6=−1\n."
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Nilai a^2 + 2b",
+          "explanation": "Substitusikan nilai \n𝑎\n=\n−\n1\na=−1\n dan \n𝑏\n=\n4\nb=4\n:\n\n𝑎\n2\n+\n2\n𝑏\n=\n(\n−\n1\n)\n2\n+\n2\n(\n4\n)\n=\n1\n+\n8\n=\n9\na\n2\n+2b=(−1)\n2\n+2(4)=1+8=9\n"
+        }
+      ],
+      "why_correct": "Nilai \n𝑎\n=\n−\n1\na=−1\n dan \n𝑏\n=\n4\nb=4\n memenuhi sifat trapesium sama kaki dan menghasilkan \n𝑎\n2\n+\n2\n𝑏\n=\n9\na\n2\n+2b=9\n, yang sesuai dengan pilihan C.",
+      "tips": [
+        "Pada trapesium sama kaki yang diletakkan pada bidang alas datar, komponen horizontal kedua kaki selalu berlawanan tanda (\n𝑎\n=\n−\n𝑥\n𝐷\na=−x\nD\n\t​\n\n)."
+      ],
+      "common_mistakes": [
+        "Mengambil nilai \n𝑎\n=\n1\na=1\n yang justru membentuk jajar genjang bukan trapesium sama kaki."
+      ],
+      "question_id": "mtkl_p2_q14",
+      "concept_kunci": [
+        "Vektor Geometri",
+        "Bangun Datar",
+        "Sifat Simetri"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 15,
+      "question_title": "Kinematika Vektor dan Jarak Tempuh Antarstasiun Kereta Api",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Vektor Dimensi Tiga",
+        "Kinematika Gerak Lurus",
+        "Jarak Euclid"
+      ],
+      "glossary": [
+        {
+          "term": "Jarak Euclid Tiga Dimensi",
+          "meaning": "Jarak garis lurus antara dua titik dalam ruang \n𝑚\n𝑎\n𝑡\nℎ\n𝑏\n𝑏\n𝑅\n3\nmathbbR\n3\n yang dihitung dengan rumus akar jumlah kuadrat selisih koordinatnya."
+        }
+      ],
+      "diketahui": "Kereta melaju dengan kecepatan konstan dari stasiun \n𝐴\n(\n2\n,\n3\n,\n5\n)\nA(2,3,5)\n sampai stasiun \n𝐸\n(\n11\n,\n6\n,\n8\n)\nE(11,6,8)\n dalam lintasan lurus. Waktu tempuh antarstasiun: \n𝐴\n𝐵\n=\n5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑒\n𝑛\n𝑖\n𝑡\nAB=5\ntextmenit\n, \n𝐵\n𝐶\n=\n3\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑒\n𝑛\n𝑖\n𝑡\nBC=3\ntextmenit\n, \n𝐶\n𝐷\n=\n2\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑒\n𝑛\n𝑖\n𝑡\nCD=2\ntextmenit\n, \n𝐷\n𝐸\n=\n3\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑒\n𝑛\n𝑖\n𝑡\nDE=3\ntextmenit\n.",
+      "ditanyakan": "Pasangan stasiun yang memiliki jarak tempuh kurang dari \n3,5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n3,5\ntextkm\n.",
+      "reasoning": "Hitung total jarak lurus \n𝐴\n𝐸\nAE\n menggunakan jarak Euclid tiga dimensi. Karena kelajuan kereta konstan, jarak pada setiap segmen stasiun berbanding lurus dengan durasi waktu tempuhnya. Hitung panjang jarak setiap segmen untuk menentukan pasangan stasiun yang jaraknya di bawah \n3,5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n3,5\ntextkm\n.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Jarak Total Lintasan AE",
+          "explanation": "Jarak lintasan dari stasiun \n𝐴\nA\n ke stasiun \n𝐸\nE\n:\n\n𝑑\n(\n𝐴\n,\n𝐸\n)\n=\n𝑠\n𝑞\n𝑟\n𝑡\n(\n11\n−\n2\n)\n2\n+\n(\n6\n−\n3\n)\n2\n+\n(\n8\n−\n5\n)\n2\n=\n𝑠\n𝑞\n𝑟\n𝑡\n9\n2\n+\n3\n2\n+\n3\n2\n=\n𝑠\n𝑞\n𝑟\n𝑡\n81\n+\n9\n+\n9\n=\n𝑠\n𝑞\n𝑟\n𝑡\n99\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n9,95\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\nd(A,E)=\nsqrt(11−2)\n2\n+(6−3)\n2\n+(8−5)\n2\n=\nsqrt9\n2\n+3\n2\n+3\n2\n=\nsqrt81+9+9=\nsqrt99\napprox9,95\ntextkm\n"
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Kelajuan Konstan Kereta",
+          "explanation": "Total waktu perjalanan dari \n𝐴\nA\n ke \n𝐸\nE\n:\n\n𝑡\n𝑡\n𝑒\n𝑥\n𝑡\n𝑡\n𝑜\n𝑡\n𝑎\n𝑙\n=\n5\n+\n3\n+\n2\n+\n3\n=\n13\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑒\n𝑛\n𝑖\n𝑡\nt\ntexttotal\n\t​\n\n=5+3+2+3=13\ntextmenit\n\nKelajuan konstan kereta adalah \n𝑣\n=\n𝑓\n𝑟\n𝑎\n𝑐\n9,95\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n13\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑒\n𝑛\n𝑖\n𝑡\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n0,7654\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n/\n𝑚\n𝑒\n𝑛\n𝑖\n𝑡\nv=\nfrac9,95textkm13textmenit\napprox0,7654\ntextkm/menit\n."
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Jarak Masing-Masing Segmen",
+          "explanation": "- Jarak \n𝐶\n𝐷\nCD\n (2 menit): \n2\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n0,7654\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n1,53\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n<\n3,5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n2\ntimes0,7654\napprox1,53\ntextkm<3,5\ntextkm\n (Memenuhi)\n- Jarak \n𝐷\n𝐸\nDE\n (3 menit): \n3\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n0,7654\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n2,30\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n<\n3,5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n3\ntimes0,7654\napprox2,30\ntextkm<3,5\ntextkm\n (Memenuhi)\n- Jarak \n𝐴\n𝐵\nAB\n (5 menit): \n5\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n0,7654\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n3,83\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n>\n3,5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n5\ntimes0,7654\napprox3,83\ntextkm>3,5\ntextkm\n (Tidak Memenuhi)"
+        }
+      ],
+      "why_correct": "Pasangan stasiun \n𝐶\n𝐷\nCD\n (jarak sekitar \n1,53\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n1,53\ntextkm\n) dan \n𝐷\n𝐸\nDE\n (jarak sekitar \n2,30\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n2,30\ntextkm\n) memiliki jarak kurang dari \n3,5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n3,5\ntextkm\n, sesuai dengan opsi C dan D.",
+      "tips": [
+        "Gunakan perbandingan waktu langsung: segmen berjarak kurang dari \n3,5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑘\n𝑚\n3,5\ntextkm\n adalah yang berdurasi \n𝑡\n<\n𝑓\n𝑟\n𝑎\n𝑐\n3,59,95\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n13\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n4,57\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑒\n𝑛\n𝑖\n𝑡\nt<\nfrac3,59,95\ntimes13\napprox4,57\ntextmenit\n."
+      ],
+      "common_mistakes": [
+        "Mengabaikan koordinat tiga dimensi dan menganggap panjang lintasan sama dengan jumlah waktu tempuhnya."
+      ],
+      "question_id": "mtkl_p2_q15",
+      "concept_kunci": [
+        "Vektor Dimensi Tiga",
+        "Kinematika Gerak Lurus",
+        "Jarak Euclid"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "C:C",
+          "D:D"
+        ]
+      }
+    },
+    {
+      "question_number": 16,
+      "question_title": "Persamaan Lingkaran Konsentris (Sepusat)",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Geometri Analitik",
+        "Persamaan Lingkaran",
+        "Lingkaran Sepusat"
+      ],
+      "glossary": [
+        {
+          "term": "Lingkaran Konsentris",
+          "meaning": "Dua lingkaran atau lebih yang berada pada bidang yang sama dan memiliki koordinat titik pusat yang berimpit."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar, lingkaran pada sistem koordinat berpusat di titik \n(\n−\n3\n,\n4\n)\n(−3,4)\n dengan diameter 4 satuan panjang.",
+      "ditanyakan": "Persamaan lingkaran yang sepusat dengan lingkaran tersebut.",
+      "reasoning": "Dua lingkaran bersifat konsentris (sepusat) apabila memiliki koordinat titik pusat \n(\n𝑎\n,\n𝑏\n)\n(a,b)\n yang persis sama. Lingkaran yang berpusat di titik \n(\n−\n3\n,\n4\n)\n(−3,4)\n memiliki bentuk baku \n(\n𝑥\n+\n3\n)\n2\n+\n(\n𝑦\n−\n4\n)\n2\n=\n𝑟\n2\n(x+3)\n2\n+(y−4)\n2\n=r\n2\n, yang jika dijabarkan ke bentuk umum menghasilkan koefisien \n𝑥\nx\n bernilai \n+\n6\n+6\n dan koefisien \n𝑦\ny\n bernilai \n−\n8\n−8\n.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Koordinat Titik Pusat Lingkaran Asal",
+          "explanation": "Berdasarkan posisi pada bidang koordinat Kartesius, titik pusat lingkaran berada pada titik \n(\n𝑎\n,\n𝑏\n)\n=\n(\n−\n3\n,\n4\n)\n(a,b)=(−3,4)\n."
+        },
+        {
+          "step": 2,
+          "title": "Menyusun Bentuk Umum Lingkaran Sepusat",
+          "explanation": "Persamaan lingkaran dengan pusat \n(\n−\n3\n,\n4\n)\n(−3,4)\n dan jari-jari sebarang \n𝑟\nr\n adalah:\n\n(\n𝑥\n−\n(\n−\n3\n)\n)\n2\n+\n(\n𝑦\n−\n4\n)\n2\n=\n𝑟\n2\n(x−(−3))\n2\n+(y−4)\n2\n=r\n2\n\n\n(\n𝑥\n+\n3\n)\n2\n+\n(\n𝑦\n−\n4\n)\n2\n=\n𝑟\n2\n(x+3)\n2\n+(y−4)\n2\n=r\n2\n\n\n𝑥\n2\n+\n6\n𝑥\n+\n9\n+\n𝑦\n2\n−\n8\n𝑦\n+\n16\n=\n𝑟\n2\nx\n2\n+6x+9+y\n2\n−8y+16=r\n2\n\n\n𝑥\n2\n+\n𝑦\n2\n+\n6\n𝑥\n−\n8\n𝑦\n+\n(\n25\n−\n𝑟\n2\n)\n=\n0\nx\n2\n+y\n2\n+6x−8y+(25−r\n2\n)=0\n"
+        },
+        {
+          "step": 3,
+          "title": "Mencocokkan dengan Pilihan Jawaban",
+          "explanation": "Pada opsi A: \n𝑥\n2\n+\n6\n𝑥\n+\n𝑦\n2\n−\n8\n𝑦\n+\n16\n=\n0\nx\n2\n+6x+y\n2\n−8y+16=0\n, titik pusatnya adalah \n𝑙\n𝑒\n𝑓\n𝑡\n(\n−\n𝑓\n𝑟\n𝑎\n𝑐\n62\n,\n−\n𝑓\n𝑟\n𝑎\n𝑐\n−\n8\n2\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n=\n(\n−\n3\n,\n4\n)\nleft(−\nfrac62,−\nfrac−82\nright)=(−3,4)\n, yang identik dengan titik pusat lingkaran semula."
+        }
+      ],
+      "why_correct": "Opsi A memiliki pusat di \n(\n−\n3\n,\n4\n)\n(−3,4)\n yang identik dengan pusat lingkaran pada gambar, sehingga kedua lingkaran bersifat sepusat (konsentris).",
+      "tips": [
+        "Titik pusat lingkaran \n𝑥\n2\n+\n𝑦\n2\n+\n𝐴\n𝑥\n+\n𝐵\n𝑦\n+\n𝐶\n=\n0\nx\n2\n+y\n2\n+Ax+By+C=0\n selalu bernilai \n(\n−\n𝐴\n/\n2\n,\n−\n𝐵\n/\n2\n)\n(−A/2,−B/2)\n."
+      ],
+      "common_mistakes": [
+        "Tertukar tanda koordinat titik pusat saat membaca bentuk kuadratik sehingga memilih opsi dengan koefisien \n−\n6\n𝑥\n−6x\n dan \n+\n8\n𝑦\n+8y\n."
+      ],
+      "question_id": "mtkl_p2_q16",
+      "concept_kunci": [
+        "Geometri Analitik",
+        "Persamaan Lingkaran",
+        "Lingkaran Sepusat"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "A"
+      }
+    },
+    {
+      "question_number": 17,
+      "question_title": "Titik Singgung Lingkaran dari Garis Singgung Tegak Lurus",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Persamaan Garis Singgung",
+        "Geometri Analitik",
+        "Vektor Normal Lingkaran"
+      ],
+      "glossary": [
+        {
+          "term": "Gradien Garis",
+          "meaning": "Nilai kemiringan suatu garis lurus yang menyatakan perbandingan perubahan ordinat terhadap perubahan absis."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar: Pusat lingkaran \n𝐴\n(\n2\n,\n−\n3\n)\nA(2,−3)\n dan titik pada lingkaran \n𝐵\n(\n3\n,\n−\n1\n)\nB(3,−1)\n. Garis lurus \n𝑓\nf\n melalui titik \n𝐶\n(\n−\n1\n,\n0\n)\nC(−1,0)\n dan \n𝐷\n(\n0\n,\n2\n)\nD(0,2)\n.",
+      "ditanyakan": "Semua koordinat titik singgung lingkaran dari garis-garis singgung yang tegak lurus garis \n𝑓\nf\n.",
+      "reasoning": "Gradien garis \n𝑓\nf\n adalah \n𝑚\n𝑓\n=\n𝑓\n𝑟\n𝑎\n𝑐\n2\n−\n0\n0\n−\n(\n−\n1\n)\n=\n2\nm\nf\n\t​\n\n=\nfrac2−00−(−1)=2\n. Garis singgung tegak lurus garis \n𝑓\nf\n sehingga gradien garis singgung adalah \n𝑚\n𝑠\n=\n−\n𝑓\n𝑟\n𝑎\n𝑐\n12\nm\ns\n\t​\n\n=−\nfrac12\n. Karena garis singgung selalu tegak lurus terhadap jari-jari di titik singgung, maka gradien jari-jari tersebut sama dengan gradien garis \n𝑓\nf\n, yaitu \n𝑚\n𝑟\n=\n2\nm\nr\n\t​\n\n=2\n. Titik singgung dicari dengan melangkah dari pusat \n𝐴\n(\n2\n,\n−\n3\n)\nA(2,−3)\n sejauh panjang jari-jari \n𝑟\n=\n𝑠\n𝑞\n𝑟\n𝑡\n5\nr=\nsqrt5\n pada arah gradien 2.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Jari-Jari Lingkaran",
+          "explanation": "Jarak dari pusat \n𝐴\n(\n2\n,\n−\n3\n)\nA(2,−3)\n ke titik pada lingkaran \n𝐵\n(\n3\n,\n−\n1\n)\nB(3,−1)\n:\n\n𝑟\n=\n𝑠\n𝑞\n𝑟\n𝑡\n(\n3\n−\n2\n)\n2\n+\n(\n−\n1\n−\n(\n−\n3\n)\n)\n2\n=\n𝑠\n𝑞\n𝑟\n𝑡\n1\n2\n+\n2\n2\n=\n𝑠\n𝑞\n𝑟\n𝑡\n5\nr=\nsqrt(3−2)\n2\n+(−1−(−3))\n2\n=\nsqrt1\n2\n+2\n2\n=\nsqrt5\n"
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Kemiringan Jari-Jari ke Titik Singgung",
+          "explanation": "Garis singgung memiliki gradien \n𝑚\n𝑠\n=\n−\n1\n/\n2\nm\ns\n\t​\n\n=−1/2\n. Jari-jari lingkaran yang menuju titik singgung tegak lurus garis singgung, sehingga memiliki kemiringan \n𝑚\n𝑟\n=\n2\nm\nr\n\t​\n\n=2\n. Maka pergeseran koordinat \n(\n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑥\n,\n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑦\n)\n(\nDeltax,\nDeltay)\n memenuhi \n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑦\n=\n2\n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑥\nDeltay=2\nDeltax\n dan \n(\n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑥\n)\n2\n+\n(\n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑦\n)\n2\n=\n𝑟\n2\n=\n5\n(\nDeltax)\n2\n+(\nDeltay)\n2\n=r\n2\n=5\n."
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Koordinat Titik Singgung",
+          "explanation": "Substitusi pergeseran: \n(\n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑥\n)\n2\n+\n(\n2\n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑥\n)\n2\n=\n5\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n5\n(\n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑥\n)\n2\n=\n5\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑥\n=\n𝑝\n𝑚\n1\n(\nDeltax)\n2\n+(2\nDeltax)\n2\n=5\nimplies5(\nDeltax)\n2\n=5\nimplies\nDeltax=\npm1\n dan \n𝐷\n𝑒\n𝑙\n𝑡\n𝑎\n𝑦\n=\n𝑝\n𝑚\n2\nDeltay=\npm2\n.\n- Titik singgung 1: \n(\n2\n+\n1\n,\n−\n3\n+\n2\n)\n=\n(\n3\n,\n−\n1\n)\n(2+1,−3+2)=(3,−1)\n\n- Titik singgung 2: \n(\n2\n−\n1\n,\n−\n3\n−\n2\n)\n=\n(\n1\n,\n−\n5\n)\n(2−1,−3−2)=(1,−5)\n"
+        }
+      ],
+      "why_correct": "Koordinat titik singgung yang memenuhi kriteria adalah \n(\n1\n,\n−\n5\n)\n(1,−5)\n dan \n(\n3\n,\n−\n1\n)\n(3,−1)\n, yang bersesuaian dengan opsi B dan D.",
+      "tips": [
+        "Jari-jari di titik singgung selalu sejajar dengan garis normal garis singgung, sehingga gradiennya langsung sama dengan garis acuan yang tegak lurus."
+      ],
+      "common_mistakes": [
+        "Menggunakan persamaan garis singgung yang panjang lalu mencari titik potongnya dengan lingkaran, yang rawan memicu kesalahan aljabar."
+      ],
+      "question_id": "mtkl_p2_q17",
+      "concept_kunci": [
+        "Persamaan Garis Singgung",
+        "Geometri Analitik",
+        "Vektor Normal Lingkaran"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "B",
+          "D"
+        ]
+      }
+    },
+    {
+      "question_number": 18,
+      "question_title": "Analisis Geometris Proporsi Luas Warna Rambu Lalu Lintas",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 75,
+      "concept_tags": [
+        "Geometri Bidang Datar",
+        "Proporsi Luas",
+        "Analisis Visual Geometris"
+      ],
+      "glossary": [
+        {
+          "term": "Proporsi Luas",
+          "meaning": "Perbandingan fraksi bidang permukaan yang ditempati oleh suatu elemen warna terhadap luas total gambar."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar, rambu lalu lintas balai pertolongan pertama memuat warna latar biru dominan, elemen palang (merah/putih), dan aksen hitam.",
+      "ditanyakan": "Warna cat atau kombinasi warna cat yang lebih banyak digunakan dibanding cat warna hitam.",
+      "reasoning": "Luas cat yang digunakan berbanding lurus dengan luas bidang yang diwarnai pada rambu. Bidang latar belakang berwarna biru menempati proporsi terluas pada rambu (jauh melampaui separuh bidang total). Oleh karena itu, setiap opsi yang melibatkan kontribusi warna biru akan menghasilkan total luas yang lebih besar dibanding warna hitam.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Analisis Distribusi Luas Warna Rambu",
+          "explanation": "Pada rambu balai pertolongan pertama, warna biru merupakan warna latar utama yang mendominasi sebagian besar area rambu, sedangkan warna hitam hanya menempati porsi tertentu pada bingkai/aksen."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Kombinasi Warna terhadap Warna Hitam",
+          "explanation": "- Setengah hitam dan biru: Karena luas biru jauh lebih besar dari separuh luas hitam, maka \n0,5\n𝑡\n𝑒\n𝑥\n𝑡\n𝐻\n𝑖\n𝑡\n𝑎\n𝑚\n+\n𝑡\n𝑒\n𝑥\n𝑡\n𝐵\n𝑖\n𝑟\n𝑢\n>\n𝑡\n𝑒\n𝑥\n𝑡\n𝐻\n𝑖\n𝑡\n𝑎\n𝑚\n0,5\ntextHitam+\ntextBiru>\ntextHitam\n (Memenuhi).\n- Biru dan putih: Penjumlahan warna latar biru dan putih melebihi luas hitam (Memenuhi).\n- Biru dan merah: Penjumlahan warna latar biru dan lambang merah melebihi luas hitam (Memenuhi)."
+        }
+      ],
+      "why_correct": "Kombinasi warna pada opsi A (Setengah hitam dan biru), D (Biru dan putih), serta E (Biru dan merah) seluruhnya memuat warna biru dominan yang volumenya melampaui cat warna hitam.",
+      "tips": [
+        "Identifikasi warna latar penampang utama untuk langsung mengenali komponen warna dengan kebutuhan volume terbesar."
+      ],
+      "common_mistakes": [
+        "Memilih kombinasi yang hanya memuat warna lambang kecil (merah dan putih) tanpa menyertakan warna latar biru."
+      ],
+      "question_id": "mtkl_p2_q18",
+      "concept_kunci": [
+        "Geometri Bidang Datar",
+        "Proporsi Luas",
+        "Analisis Visual Geometris"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A",
+          "D",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 19,
+      "question_title": "Perhitungan Kebutuhan Bahan Kerangka Logam Ornamen Kaca Patri",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 105,
+      "concept_tags": [
+        "Geometri Lingkaran",
+        "Tembereng Lingkaran",
+        "Keliling Bangun Datar"
+      ],
+      "glossary": [
+        {
+          "term": "Tembereng Lingkaran",
+          "meaning": "Daerah di dalam lingkaran yang dibatasi oleh busur lingkaran dan tali busur yang menghubungkan kedua ujung busur tersebut."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar detail ornamen: Luas 1 potong kaca merah (tembereng \n) \n=\n456\n𝑡\n𝑒\n𝑥\n𝑡\n𝑐\n𝑚\n2\n=456\ntextcm\n2\n, nilai \n𝑝\n𝑖\n=\n3,14\npi=3,14\n, dan \n𝑠\n𝑞\n𝑟\n𝑡\n2\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n1,4\nsqrt2\napprox1,4\n. Definisi Pas: panjang logam cukup dan sisa tidak lebih dari 1 meter. Panjang satuan: Logam A (\n4\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n4\ntextm\n), Logam B (\n5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n5\ntextm\n), Logam C (\n6,5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n6,5\ntextm\n).",
+      "ditanyakan": "Menentukan status Pas atau Tidak Pas untuk pembelian: A (2 buah logam A), B (1 buah logam B), C (1 buah logam C).",
+      "reasoning": "Tentukan jari-jari lingkaran dari luas tembereng seperempat lingkaran: \n𝐿\n𝑡\n𝑒\n𝑥\n𝑡\n𝑡\n𝑒\n𝑚\n𝑏\n𝑒\n𝑟\n𝑒\n𝑛\n𝑔\n=\n𝑓\n𝑟\n𝑎\n𝑐\n14\n𝑝\n𝑖\n𝑟\n2\n−\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑟\n2\n=\n456\n𝑡\n𝑒\n𝑥\n𝑡\n𝑐\n𝑚\n2\nL\ntexttembereng\n\t​\n\n=\nfrac14\npir\n2\n−\nfrac12r\n2\n=456\ntextcm\n2\n. Hitung total panjang kerangka logam yang terdiri atas 1 keliling lingkaran luar (\n2\n𝑝\n𝑖\n𝑟\n2\npir\n), 2 garis diameter (\n4\n𝑟\n4r\n), dan 4 sisi persegi (\n4\n𝑟\n𝑠\n𝑞\n𝑟\n𝑡\n2\n4r\nsqrt2\n). Evaluasi panjang total logam yang dibeli terhadap kebutuhan tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Jari-Jari Lingkaran",
+          "explanation": "Formula luas tembereng siku-siku:\n\n456\n=\n𝑓\n𝑟\n𝑎\n𝑐\n14\n𝑟\n2\n(\n3,14\n−\n2\n)\n=\n0,285\n𝑟\n2\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑟\n2\n=\n𝑓\n𝑟\n𝑎\n𝑐\n4560,285\n=\n1.600\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑟\n=\n40\n𝑡\n𝑒\n𝑥\n𝑡\n𝑐\n𝑚\n=\n0,4\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n456=\nfrac14r\n2\n(3,14−2)=0,285r\n2\nimpliesr\n2\n=\nfrac4560,285=1.600\nimpliesr=40\ntextcm=0,4\ntextm\n"
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Panjang Kerangka Logam Total",
+          "explanation": "- Keliling lingkaran: \n2\n𝑝\n𝑖\n𝑟\n=\n2\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n3,14\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n40\n=\n251,2\n𝑡\n𝑒\n𝑥\n𝑡\n𝑐\n𝑚\n2\npir=2\ntimes3,14\ntimes40=251,2\ntextcm\n\n- Dua garis diameter: \n2\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n(\n2\n𝑟\n)\n=\n4\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n40\n=\n160\n𝑡\n𝑒\n𝑥\n𝑡\n𝑐\n𝑚\n2\ntimes(2r)=4\ntimes40=160\ntextcm\n\n- Empat sisi persegi: \n4\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n(\n𝑟\n𝑠\n𝑞\n𝑟\n𝑡\n2\n)\n=\n4\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n40\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n1,4\n=\n224\n𝑡\n𝑒\n𝑥\n𝑡\n𝑐\n𝑚\n4\ntimes(r\nsqrt2)=4\ntimes40\ntimes1,4=224\ntextcm\n\nTotal panjang kerangka = \n251,2\n+\n160\n+\n224\n=\n635,2\n𝑡\n𝑒\n𝑥\n𝑡\n𝑐\n𝑚\n𝑎\n𝑝\n𝑝\n𝑟\n𝑜\n𝑥\n6,35\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n251,2+160+224=635,2\ntextcm\napprox6,35\ntextm\n."
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Pilihan Logam",
+          "explanation": "- 2 buah logam A: \n2\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n4\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n=\n8\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n2\ntimes4\ntextm=8\ntextm\n. Sisanya \n8\n−\n6,35\n=\n1,65\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n>\n1\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n8−6,35=1,65\ntextm>1\ntextm\n (Tidak Pas).\n- 1 buah logam B: \n5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n<\n6,35\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n5\ntextm<6,35\ntextm\n (Kurang/Tidak Pas).\n- 1 buah logam C: \n6,5\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑔\n𝑒\n6,35\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n6,5\ntextm\nge6,35\ntextm\n. Sisanya \n6,5\n−\n6,35\n=\n0,15\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n𝑙\n𝑒\n1\n𝑡\n𝑒\n𝑥\n𝑡\n𝑚\n6,5−6,35=0,15\ntextm\nle1\ntextm\n (Pas)."
+        }
+      ],
+      "why_correct": "Kebutuhan kerangka logam adalah 6,35 m. Logam A menghasilkan sisa melebihi 1 m, Logam B tidak mencukupi, dan Logam C cukup dengan sisa 0,15 m (memenuhi kriteria Pas). Kunci resmi adalah ['A:Tidak Pas', 'B:Tidak Pas', 'C:Pas'].",
+      "tips": [
+        "Luas tembereng sudut siku-siku \n selalu bernilai \n𝑟\n2\n(\n𝑓\n𝑟\n𝑎\n𝑐\n𝑝\n𝑖\n−\n2\n4\n)\n=\n0,285\n𝑟\n2\nr\n2\n(\nfracpi−24)=0,285r\n2\n."
+      ],
+      "common_mistakes": [
+        "Hanya menghitung keliling lingkaran terluar dan lupa memperhitungkan kerangka persegi serta diameter di bagian dalam."
+      ],
+      "question_id": "mtkl_p2_q19",
+      "concept_kunci": [
+        "Geometri Lingkaran",
+        "Tembereng Lingkaran",
+        "Keliling Bangun Datar"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Tidak Pas",
+          "B:Tidak Pas",
+          "C:Pas"
+        ]
+      }
+    },
+    {
+      "question_number": 20,
+      "question_title": "Komposisi Transformasi Geometri (Refleksi dan Translasi) pada Garis Lurus",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Transformasi Geometri",
+        "Refleksi Garis",
+        "Translasi Garis"
+      ],
+      "glossary": [
+        {
+          "term": "Refleksi terhadap Garis y = x",
+          "meaning": "Transformasi pencerminan yang memetakan setiap titik \n(\n𝑥\n,\n𝑦\n)\n(x,y)\n menjadi \n(\n𝑦\n,\n𝑥\n)\n(y,x)\n."
+        }
+      ],
+      "diketahui": "Berdasarkan rumus pada gambar: Garis \n𝑔\n1\n:\n𝑎\n𝑥\n+\n𝑦\n−\n9\n=\n0\ng\n1\n\t​\n\n:ax+y−9=0\n dan \n𝑔\n2\n:\n𝑥\n+\n𝑏\n𝑦\n+\n6\n=\n0\ng\n2\n\t​\n\n:x+by+6=0\n dicerminkan terhadap garis \n𝑦\n=\n𝑥\ny=x\n kemudian ditranslasikan oleh \n𝑇\n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n1\n−\n1\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nT\nbeginpmatrix1\n−1\nendpmatrix\n, menghasilkan bayangan berturut-turut \n𝑥\n+\n2\n𝑦\n−\n8\n=\n0\nx+2y−8=0\n dan \n2\n𝑥\n−\n𝑦\n−\n9\n=\n0\n2x−y−9=0\n.",
+      "ditanyakan": "Nilai dari \n2\n𝑎\n−\n𝑏\n2a−b\n.",
+      "reasoning": "Tentukan hubungan koordinat awal \n(\n𝑥\n,\n𝑦\n)\n(x,y)\n terhadap koordinat bayangan \n(\n𝑥\n′\n,\n𝑦\n′\n)\n(x\n′\n,y\n′\n)\n. Refleksi terhadap \n𝑦\n=\n𝑥\ny=x\n memetakan \n(\n𝑥\n,\n𝑦\n)\n𝑡\n𝑜\n(\n𝑦\n,\n𝑥\n)\n(x,y)\nto(y,x)\n. Translasi \n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n1\n−\n1\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nbeginpmatrix1\n−1\nendpmatrix\n memetakan menjadi \n𝑥\n′\n=\n𝑦\n+\n1\nx\n′\n=y+1\n dan \n𝑦\n′\n=\n𝑥\n−\n1\ny\n′\n=x−1\n. Diperoleh relasi balik \n𝑥\n=\n𝑦\n′\n+\n1\nx=y\n′\n+1\n dan \n𝑦\n=\n𝑥\n′\n−\n1\ny=x\n′\n−1\n. Substitusikan ke garis awal untuk menemukan parameter \n𝑎\na\n dan \n𝑏\nb\n.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Pemetaan Koordinat Balik",
+          "explanation": "Transformasi maju: \n(\n𝑥\n,\n𝑦\n)\n𝑥\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n𝑎\n𝑟\n𝑟\n𝑜\n𝑤\n𝑅\n𝑦\n=\n𝑥\n(\n𝑦\n,\n𝑥\n)\n𝑥\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n𝑎\n𝑟\n𝑟\n𝑜\n𝑤\n𝑇\n(\n1\n,\n−\n1\n)\n(\n𝑦\n+\n1\n,\n𝑥\n−\n1\n)\n=\n(\n𝑥\n′\n,\n𝑦\n′\n)\n(x,y)\nxrightarrowR\ny=x\n\t​\n\n(y,x)\nxrightarrowT(1,−1)(y+1,x−1)=(x\n′\n,y\n′\n)\n.\nMaka invers transformasinya adalah:\n\n𝑥\n=\n𝑦\n′\n+\n1\nx=y\n′\n+1\n\n\n𝑦\n=\n𝑥\n′\n−\n1\ny=x\n′\n−1\n"
+        },
+        {
+          "step": 2,
+          "title": "Substitusi ke Garis Pertama untuk Menemukan Nilai a",
+          "explanation": "Substitusi ke \n𝑎\n𝑥\n+\n𝑦\n−\n9\n=\n0\nax+y−9=0\n:\n\n𝑎\n(\n𝑦\n′\n+\n1\n)\n+\n(\n𝑥\n′\n−\n1\n)\n−\n9\n=\n0\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑥\n′\n+\n𝑎\n𝑦\n′\n+\n(\n𝑎\n−\n10\n)\n=\n0\na(y\n′\n+1)+(x\n′\n−1)−9=0\nimpliesx\n′\n+ay\n′\n+(a−10)=0\n\nBandingkan dengan bayangan \n𝑥\n′\n+\n2\n𝑦\n′\n−\n8\n=\n0\nx\n′\n+2y\n′\n−8=0\n:\nDiperoleh \n𝑎\n=\n2\na=2\n (dan \n𝑎\n−\n10\n=\n2\n−\n10\n=\n−\n8\na−10=2−10=−8\n, konsisten)."
+        },
+        {
+          "step": 3,
+          "title": "Substitusi ke Garis Kedua untuk Menemukan Nilai b",
+          "explanation": "Substitusi ke \n𝑥\n+\n𝑏\n𝑦\n+\n6\n=\n0\nx+by+6=0\n:\n\n(\n𝑦\n′\n+\n1\n)\n+\n𝑏\n(\n𝑥\n′\n−\n1\n)\n+\n6\n=\n0\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑏\n𝑥\n′\n+\n𝑦\n′\n+\n(\n7\n−\n𝑏\n)\n=\n0\n(y\n′\n+1)+b(x\n′\n−1)+6=0\nimpliesbx\n′\n+y\n′\n+(7−b)=0\n\nBayangan yang diketahui adalah \n2\n𝑥\n′\n−\n𝑦\n′\n−\n9\n=\n0\n2x\n′\n−y\n′\n−9=0\n. Kalikan dengan \n−\n1\n−1\n agar koefisien \n𝑦\n′\ny\n′\n sama:\n\n−\n2\n𝑥\n′\n+\n𝑦\n′\n+\n9\n=\n0\n−2x\n′\n+y\n′\n+9=0\n\nMaka diperoleh \n𝑏\n=\n−\n2\nb=−2\n (dan \n7\n−\n(\n−\n2\n)\n=\n9\n7−(−2)=9\n, konsisten)."
+        },
+        {
+          "step": 4,
+          "title": "Menghitung Nilai 2a - b",
+          "explanation": "\n2\n𝑎\n−\n𝑏\n=\n2\n(\n2\n)\n−\n(\n−\n2\n)\n=\n4\n+\n2\n=\n6\n2a−b=2(2)−(−2)=4+2=6\n"
+        }
+      ],
+      "why_correct": "Nilai parameter \n𝑎\n=\n2\na=2\n dan \n𝑏\n=\n−\n2\nb=−2\n menghasilkan nilai aljabar \n2\n𝑎\n−\n𝑏\n=\n6\n2a−b=6\n, sesuai dengan opsi E.",
+      "tips": [
+        "Gunakan metode substitusi balik \n(\n𝑥\n′\n,\n𝑦\n′\n)\n𝑡\n𝑜\n(\n𝑥\n,\n𝑦\n)\n(x\n′\n,y\n′\n)\nto(x,y)\n untuk langsung menguji kesamaan koefisien dengan persamaan bayangan."
+      ],
+      "common_mistakes": [
+        "Keliru menyamakan koefisien tanpa menyamakan tanda salah satu suku koefisien terlebih dahulu."
+      ],
+      "question_id": "mtkl_p2_q20",
+      "concept_kunci": [
+        "Transformasi Geometri",
+        "Refleksi Garis",
+        "Translasi Garis"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    },
+    {
+      "question_number": 21,
+      "question_title": "Komposisi Transformasi Translasi dan Dilatasi pada Lingkaran",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Transformasi Geometri",
+        "Translasi Lingkaran",
+        "Dilatasi Lingkaran"
+      ],
+      "glossary": [
+        {
+          "term": "Dilatasi Pusat Titik Asal",
+          "meaning": "Transformasi perbesaran atau perkecilan objek relatif terhadap titik pusat \n(\n0\n,\n0\n)\n(0,0)\n dengan faktor pengali skala \n𝑘\nk\n."
+        }
+      ],
+      "diketahui": "Lingkaran \n𝐿\nL\n berpusat di \n(\n−\n5\n,\n3\n)\n(−5,3)\n dengan jari-jari \n𝑟\n1\n=\n2\nr\n1\n\t​\n\n=2\n. Lingkaran \n𝐿\n′\nL\n′\n adalah bayangan \n𝐿\nL\n oleh translasi \n𝑇\nT\n. Berdasarkan gambar rumus, lingkaran \n𝐿\n′\n′\nL\n′′\n dengan persamaan \n(\n𝑥\n+\n4\n)\n2\n+\n(\n𝑦\n−\n4\n)\n2\n=\n16\n(x+4)\n2\n+(y−4)\n2\n=16\n adalah bayangan \n𝐿\n′\nL\n′\n oleh dilatasi pusat \n𝑂\n(\n0\n,\n0\n)\nO(0,0)\n dan skala \n𝑘\nk\n.",
+      "ditanyakan": "Vektor translasi \n𝑇\nT\n dan faktor skala dilatasi \n𝑘\nk\n.",
+      "reasoning": "Translasi tidak mengubah panjang jari-jari, sehingga jari-jari \n𝐿\n′\nL\n′\n tetap \n𝑟\n′\n=\n2\nr\n′\n=2\n. Persamaan \n𝐿\n′\n′\nL\n′′\n memiliki jari-jari \n𝑟\n′\n′\n=\n𝑠\n𝑞\n𝑟\n𝑡\n16\n=\n4\nr\n′′\n=\nsqrt16=4\n, sehingga faktor skala dilatasi \n𝑘\n=\n𝑓\n𝑟\n𝑎\n𝑐\n𝑟\n′\n′\n𝑟\n′\n=\n𝑓\n𝑟\n𝑎\n𝑐\n42\n=\n2\nk=\nfracr\n′′\nr\n′\n=\nfrac42=2\n. Titik pusat \n𝐿\n′\n′\nL\n′′\n \n(\n−\n4\n,\n4\n)\n(−4,4)\n merupakan hasil perbesaran dengan faktor skala 2 dari pusat \n𝐿\n′\nL\n′\n, sehingga pusat \n𝐿\n′\nL\n′\n adalah \n(\n−\n2\n,\n2\n)\n(−2,2)\n. Vektor translasi diperoleh dari selisih titik pusat \n𝐿\n′\nL\n′\n dan \n𝐿\nL\n.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Faktor Skala Dilatasi",
+          "explanation": "Jari-jari lingkaran \n𝐿\n′\nL\n′\n adalah \n2\n2\n (karena translasi bersifat isometri). Jari-jari lingkaran \n𝐿\n′\n′\nL\n′′\n adalah \n𝑠\n𝑞\n𝑟\n𝑡\n16\n=\n4\nsqrt16=4\n. Maka faktor skala dilatasi adalah \n𝑘\n=\n𝑓\n𝑟\n𝑎\n𝑐\n42\n=\n2\nk=\nfrac42=2\n."
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Titik Pusat Lingkaran L'",
+          "explanation": "Pusat lingkaran \n𝐿\n′\n′\nL\n′′\n adalah \n(\n−\n4\n,\n4\n)\n(−4,4)\n. Karena dilatasi berpusat di \n𝑂\n(\n0\n,\n0\n)\nO(0,0)\n dengan skala \n𝑘\n=\n2\nk=2\n, maka koordinat pusat \n𝐿\n′\nL\n′\n diperoleh dari pembagian:\n\n𝑡\n𝑒\n𝑥\n𝑡\n𝑃\n𝑢\n𝑠\n𝑎\n𝑡\n𝐿\n′\n=\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n−\n4\n2\n,\n𝑓\n𝑟\n𝑎\n𝑐\n42\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n=\n(\n−\n2\n,\n2\n)\ntextPusatL\n′\n=\nleft(\nfrac−42,\nfrac42\nright)=(−2,2)\n"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Vektor Translasi T",
+          "explanation": "Translasi memetakan pusat \n𝐿\n(\n−\n5\n,\n3\n)\nL(−5,3)\n menuju pusat \n𝐿\n′\n(\n−\n2\n,\n2\n)\nL\n′\n(−2,2)\n:\n\n𝑇\n=\n𝑡\n𝑒\n𝑥\n𝑡\n𝑃\n𝑢\n𝑠\n𝑎\n𝑡\n𝐿\n′\n−\n𝑡\n𝑒\n𝑥\n𝑡\n𝑃\n𝑢\n𝑠\n𝑎\n𝑡\n𝐿\n=\n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n−\n2\n−\n(\n−\n5\n)\n2\n−\n3\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n=\n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n3\n−\n1\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nT=\ntextPusatL\n′\n−\ntextPusatL=\nbeginpmatrix−2−(−5)\n2−3\nendpmatrix=\nbeginpmatrix3\n−1\nendpmatrix\n"
+        }
+      ],
+      "why_correct": "Faktor skala dilatasi terbukti bernilai 2 dan vektor pergeseran translasi adalah \n𝑏\n𝑒\n𝑔\n𝑖\n𝑛\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\n3\n−\n1\n𝑒\n𝑛\n𝑑\n𝑝\n𝑚\n𝑎\n𝑡\n𝑟\n𝑖\n𝑥\nbeginpmatrix3\n−1\nendpmatrix\n, yang secara tepat bertepatan dengan opsi C.",
+      "tips": [
+        "Kerjakan secara mundur dari lingkaran bayangan akhir \n𝐿\n′\n′\nL\n′′\n untuk menemukan parameter perantara \n𝐿\n′\nL\n′\n."
+      ],
+      "common_mistakes": [
+        "Mengira faktor skala dilatasi adalah 4 atau 8 karena melihat angka 16 pada ruas kanan persamaan lingkaran."
+      ],
+      "question_id": "mtkl_p2_q21",
+      "concept_kunci": [
+        "Transformasi Geometri",
+        "Translasi Lingkaran",
+        "Dilatasi Lingkaran"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 22,
+      "question_title": "Rotasi Garis dengan Pusat Rotasi Bukan Titik Asal",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Transformasi Geometri",
+        "Rotasi",
+        "Persamaan Garis"
+      ],
+      "glossary": [
+        {
+          "term": "Rotasi 90 Derajat",
+          "meaning": "Perputaran sebesar \n berlawanan arah jarum jam yang memetakan gradien garis \n𝑚\nm\n menjadi \n−\n1\n/\n𝑚\n−1/m\n."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar rumus: Garis \n𝑙\n:\n3\n𝑥\n+\n2\n𝑦\n=\n6\nl:3x+2y=6\n dirotasikan sejauh \n berlawanan arah jarum jam dengan titik pusat rotasi \n(\n2\n,\n0\n)\n(2,0)\n menghasilkan garis bayangan \n𝑙\n′\nl\n′\n.",
+      "ditanyakan": "Titik koordinat yang terletak pada garis bayangan \n𝑙\n′\nl\n′\n.",
+      "reasoning": "Gunakan formula matriks rotasi \n dengan pusat \n(\n𝑎\n,\n𝑏\n)\n=\n(\n2\n,\n0\n)\n(a,b)=(2,0)\n untuk memperoleh hubungan antara \n(\n𝑥\n,\n𝑦\n)\n(x,y)\n dan \n(\n𝑥\n′\n,\n𝑦\n′\n)\n(x\n′\n,y\n′\n)\n. Substitusikan persamaan koordinat balik ke dalam persamaan garis awal untuk mendapatkan persamaan garis bayangan \n𝑙\n′\nl\n′\n, lalu uji setiap opsi titik ke persamaan tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Rumus Rotasi 90 Derajat dengan Pusat (2, 0)",
+          "explanation": "Persamaan matriks rotasi berlawanan arah jarum jam:\n\n\nDiperoleh sistem persamaan:\n\n𝑥\n′\n−\n2\n=\n−\n𝑦\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑦\n=\n2\n−\n𝑥\n′\nx\n′\n−2=−y\nimpliesy=2−x\n′\n\n\n𝑦\n′\n=\n𝑥\n−\n2\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n𝑥\n=\n𝑦\n′\n+\n2\ny\n′\n=x−2\nimpliesx=y\n′\n+2\n"
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Persamaan Garis Bayangan",
+          "explanation": "Substitusikan nilai \n𝑥\nx\n dan \n𝑦\ny\n ke garis semula \n3\n𝑥\n+\n2\n𝑦\n=\n6\n3x+2y=6\n:\n\n3\n(\n𝑦\n′\n+\n2\n)\n+\n2\n(\n2\n−\n𝑥\n′\n)\n=\n6\n3(y\n′\n+2)+2(2−x\n′\n)=6\n\n\n3\n𝑦\n′\n+\n6\n+\n4\n−\n2\n𝑥\n′\n=\n6\n3y\n′\n+6+4−2x\n′\n=6\n\n\n−\n2\n𝑥\n′\n+\n3\n𝑦\n′\n+\n10\n=\n6\n𝑖\n𝑚\n𝑝\n𝑙\n𝑖\n𝑒\n𝑠\n2\n𝑥\n′\n−\n3\n𝑦\n′\n=\n4\n−2x\n′\n+3y\n′\n+10=6\nimplies2x\n′\n−3y\n′\n=4\n\nPersamaan garis bayangan adalah \n2\n𝑥\n−\n3\n𝑦\n=\n4\n2x−3y=4\n."
+        },
+        {
+          "step": 3,
+          "title": "Menguji Koordinat Titik pada Pilihan",
+          "explanation": "- Titik D \n(\n2\n,\n0\n)\n(2,0)\n: \n2\n(\n2\n)\n−\n3\n(\n0\n)\n=\n4\n−\n0\n=\n4\n2(2)−3(0)=4−0=4\n (Benar)\n- Titik E \n(\n5\n,\n2\n)\n(5,2)\n: \n2\n(\n5\n)\n−\n3\n(\n2\n)\n=\n10\n−\n6\n=\n4\n2(5)−3(2)=10−6=4\n (Benar)"
+        }
+      ],
+      "why_correct": "Titik \n(\n2\n,\n0\n)\n(2,0)\n dan \n(\n5\n,\n2\n)\n(5,2)\n memenuhi persamaan garis bayangan \n2\n𝑥\n−\n3\n𝑦\n=\n4\n2x−3y=4\n, sesuai dengan kunci resmi yang mencakup opsi D dan E.",
+      "tips": [
+        "Titik pusat rotasi \n(\n2\n,\n0\n)\n(2,0)\n berada tepat pada garis awal \n3\n(\n2\n)\n+\n2\n(\n0\n)\n=\n6\n3(2)+2(0)=6\n, sehingga titik \n(\n2\n,\n0\n)\n(2,0)\n pasti tetap terletak pada garis bayangannya."
+      ],
+      "common_mistakes": [
+        "Menggunakan matriks rotasi dengan pusat \n(\n0\n,\n0\n)\n(0,0)\n tanpa memperhitungkan pergeseran titik pusat \n(\n2\n,\n0\n)\n(2,0)\n."
+      ],
+      "question_id": "mtkl_p2_q22",
+      "concept_kunci": [
+        "Transformasi Geometri",
+        "Rotasi",
+        "Persamaan Garis"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "D",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 23,
+      "question_title": "Evaluasi Limit Fungsi Aljabar Bentuk Tentu melalui Substitusi Langsung",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Kalkulus",
+        "Limit Fungsi Aljabar",
+        "Substitusi Langsung"
+      ],
+      "glossary": [
+        {
+          "term": "Substitusi Langsung",
+          "meaning": "Metode penentuan nilai limit dengan langsung mengganti variabel \n𝑥\nx\n dengan nilai batas yang dituju."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar rumus, bentuk limit fungsi rasional adalah \n𝑙\n𝑖\n𝑚\n𝑥\n𝑡\n𝑜\n3\n𝑓\n𝑟\n𝑎\n𝑐\n𝑥\n3\n−\n3\n𝑥\n2\n+\n2\n𝑥\n+\n1\n5\n+\n3\n𝑥\n−\n9\n𝑥\n2\nlim\nxto3\n\t​\n\nfracx\n3\n−3x\n2\n+2x+15+3x−9x\n2\n.",
+      "ditanyakan": "Nilai dari limit tersebut.",
+      "reasoning": "Evaluasi limit selalu diawali dengan metode substitusi langsung. Jika hasil perhitungan menghasilkan nilai terdefinisi di mana penyebut tidak sama dengan nol (bukan bentuk tak tentu \n0\n/\n0\n0/0\n), maka nilai pecahan tersebut langsung menjadi nilai limit fungsinya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Substitusi Langsung ke Pembilang",
+          "explanation": "Evaluasi pembilang saat \n𝑥\n=\n3\nx=3\n:\n\n3\n3\n−\n3\n(\n3\n2\n)\n+\n2\n(\n3\n)\n+\n1\n=\n27\n−\n27\n+\n6\n+\n1\n=\n7\n3\n3\n−3(3\n2\n)+2(3)+1=27−27+6+1=7\n"
+        },
+        {
+          "step": 2,
+          "title": "Substitusi Langsung ke Penyebut",
+          "explanation": "Evaluasi penyebut saat \n𝑥\n=\n3\nx=3\n:\n\n5\n+\n3\n(\n3\n)\n−\n9\n(\n3\n2\n)\n=\n5\n+\n9\n−\n81\n=\n14\n−\n81\n=\n−\n67\n5+3(3)−9(3\n2\n)=5+9−81=14−81=−67\n"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Nilai Akhir Limit",
+          "explanation": "Bagi hasil pembilang dengan penyebut:\n\n𝑙\n𝑖\n𝑚\n𝑥\n𝑡\n𝑜\n3\n𝑓\n𝑟\n𝑎\n𝑐\n𝑥\n3\n−\n3\n𝑥\n2\n+\n2\n𝑥\n+\n1\n5\n+\n3\n𝑥\n−\n9\n𝑥\n2\n=\n𝑓\n𝑟\n𝑎\n𝑐\n7\n−\n67\n=\n−\n𝑓\n𝑟\n𝑎\n𝑐\n767\nlim\nxto3\n\t​\n\nfracx\n3\n−3x\n2\n+2x+15+3x−9x\n2\n=\nfrac7−67=−\nfrac767\n"
+        }
+      ],
+      "why_correct": "Substitusi langsung menghasilkan bilangan pecahan real terdefinisi \n−\n𝑓\n𝑟\n𝑎\n𝑐\n767\n−\nfrac767\n, yang bertepatan dengan opsi A.",
+      "tips": [
+        "Jangan terburu-buru melakukan pemfaktoran atau aturan L'Hopital sebelum memastikan apakah penyebut bernilai nol atau tidak."
+      ],
+      "common_mistakes": [
+        "Mengasumsikan setiap limit fungsi merupakan bentuk tak tentu \n0\n/\n0\n0/0\n sehingga melakukan manipulasi aljabar yang tidak perlu."
+      ],
+      "question_id": "mtkl_p2_q23",
+      "concept_kunci": [
+        "Kalkulus",
+        "Limit Fungsi Aljabar",
+        "Substitusi Langsung"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "A"
+      }
+    },
+    {
+      "question_number": 24,
+      "question_title": "Limit Fungsi Rasional Menuju Tak Hingga pada Pemodelan Keuntungan",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Limit Tak Hingga",
+        "Fungsi Rasional",
+        "Aplikasi Ekonomi"
+      ],
+      "glossary": [
+        {
+          "term": "Asimtot Horizontal",
+          "meaning": "Garis horizontal \n𝑦\n=\n𝐿\ny=L\n yang didekati oleh grafik fungsi ketika peubah bebas menuju nilai tak berhingga."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar rumus, fungsi keuntungan dinyatakan dengan \n𝐾\n(\n𝑝\n)\n=\n𝑓\n𝑟\n𝑎\n𝑐\n9\n𝑝\n2\n+\n2\n𝑝\n+\n10\n3\n𝑝\n2\n+\n3\n𝑝\n+\n2\nK(p)=\nfrac9p\n2\n+2p+103p\n2\n+3p+2\n (dalam jutaan rupiah) dengan \n𝑝\np\n adalah banyaknya porsi nasi goreng yang terjual.",
+      "ditanyakan": "Keuntungan yang diperoleh jika Roni menjual nasi goreng dalam jumlah porsi sangat banyak (\n𝑝\n𝑡\n𝑜\n𝑖\n𝑛\n𝑓\n𝑡\n𝑦\np\nto\ninfty\n).",
+      "reasoning": "Kondisi penjualan dalam jumlah sangat banyak direpresentasikan secara matematis dengan menghitung limit fungsi keuntungan saat \n𝑝\n𝑡\n𝑜\n𝑖\n𝑛\n𝑓\n𝑡\n𝑦\np\nto\ninfty\n. Pada fungsi rasional di mana derajat pembilang sama dengan derajat penyebut (sama-sama berderajat 2), nilai limit di tak hingga ditentukan oleh rasio koefisien pangkat tertinggi variabelnya.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Merumuskan Limit Fungsi Rasional Menuju Tak Hingga",
+          "explanation": "Model limit keuntungan saat \n𝑝\n𝑡\n𝑜\n𝑖\n𝑛\n𝑓\n𝑡\n𝑦\np\nto\ninfty\n:\n\n𝑙\n𝑖\n𝑚\n𝑝\n𝑡\n𝑜\n𝑖\n𝑛\n𝑓\n𝑡\n𝑦\n𝐾\n(\n𝑝\n)\n=\n𝑙\n𝑖\n𝑚\n𝑝\n𝑡\n𝑜\n𝑖\n𝑛\n𝑓\n𝑡\n𝑦\n𝑓\n𝑟\n𝑎\n𝑐\n9\n𝑝\n2\n+\n2\n𝑝\n+\n10\n3\n𝑝\n2\n+\n3\n𝑝\n+\n2\nlim\nptoinfty\n\t​\n\nK(p)=\nlim\nptoinfty\n\t​\n\nfrac9p\n2\n+2p+103p\n2\n+3p+2\n"
+        },
+        {
+          "step": 2,
+          "title": "Membagi dengan Pangkat Tertinggi",
+          "explanation": "Bagi pembilang dan penyebut dengan \n𝑝\n2\np\n2\n:\n\n𝑙\n𝑖\n𝑚\n𝑝\n𝑡\n𝑜\n𝑖\n𝑛\n𝑓\n𝑡\n𝑦\n𝑓\n𝑟\n𝑎\n𝑐\n9\n+\n𝑓\n𝑟\n𝑎\n𝑐\n2\n𝑝\n+\n𝑓\n𝑟\n𝑎\n𝑐\n10\n𝑝\n2\n3\n+\n𝑓\n𝑟\n𝑎\n𝑐\n3\n𝑝\n+\n𝑓\n𝑟\n𝑎\n𝑐\n2\n𝑝\n2\n=\n𝑓\n𝑟\n𝑎\n𝑐\n9\n+\n0\n+\n0\n3\n+\n0\n+\n0\n=\n𝑓\n𝑟\n𝑎\n𝑐\n93\n=\n3\nlim\nptoinfty\n\t​\n\nfrac9+frac2p+frac10p\n2\n3+frac3p+frac2p\n2\n=\nfrac9+0+03+0+0=\nfrac93=3\n"
+        },
+        {
+          "step": 3,
+          "title": "Mengonversi ke Nilai Rupiah",
+          "explanation": "Karena keuntungan dinyatakan dalam satuan jutaan rupiah, maka:\n\n𝑡\n𝑒\n𝑥\n𝑡\n𝐾\n𝑒\n𝑢\n𝑛\n𝑡\n𝑢\n𝑛\n𝑔\n𝑎\n𝑛\n=\n3\n𝑡\n𝑖\n𝑚\n𝑒\n𝑠\n𝑡\n𝑒\n𝑥\n𝑡\n𝑅\n𝑝\n1.000.000\n,\n00\n=\n𝑡\n𝑒\n𝑥\n𝑡\n𝑅\n𝑝\n3.000.000\n,\n00\ntextKeuntungan=3\ntimes\ntextRp1.000.000,00=\ntextRp3.000.000,00\n"
+        }
+      ],
+      "why_correct": "Rasio koefisien suku berderajat tertinggi adalah \n9\n/\n3\n=\n3\n9/3=3\n, yang setara dengan keuntungan Rp3.000.000,00 (opsi B).",
+      "tips": [
+        "Untuk limit menuju tak hingga fungsi rasional berderajat sama, cukup ambil perbandingan koefisien pangkat tertingginya secara langsung: \n𝑓\n𝑟\n𝑎\n𝑐\n93\n=\n3\nfrac93=3\n."
+      ],
+      "common_mistakes": [
+        "Mengambil rasio konstanta tanpa variabel \n𝑓\n𝑟\n𝑎\n𝑐\n102\n=\n5\nfrac102=5\n yang keliru."
+      ],
+      "question_id": "mtkl_p2_q24",
+      "concept_kunci": [
+        "Limit Tak Hingga",
+        "Fungsi Rasional",
+        "Aplikasi Ekonomi"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "B"
+      }
+    },
+    {
+      "question_number": 25,
+      "question_title": "Limit Fungsi Trigonometri Bentuk Tak Tentu dengan Pemisalan Variabel",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Kalkulus",
+        "Limit Trigonometri",
+        "Identitas Sudut Ganda"
+      ],
+      "glossary": [
+        {
+          "term": "Identitas Sudut Ganda",
+          "meaning": "Relasi trigonometri \n1\n−\n𝑐\n𝑜\n𝑠\n(\n2\n𝑎\n𝑙\n𝑝\nℎ\n𝑎\n)\n=\n2\n𝑠\n𝑖\n𝑛\n2\n(\n𝑎\n𝑙\n𝑝\nℎ\n𝑎\n)\n1−\ncos(2\nalpha)=2\nsin\n2\n(\nalpha)\n yang mengubah bentuk selisih kosinus menjadi kuadrat sinus."
+        }
+      ],
+      "diketahui": "Berdasarkan gambar rumus, limit fungsi trigonometri adalah \n𝑙\n𝑖\n𝑚\n𝑥\n𝑡\n𝑜\n3\n𝑓\n𝑟\n𝑎\n𝑐\n1\n−\n𝑐\n𝑜\n𝑠\n(\n6\n𝑥\n−\n18\n)\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑥\n−\n𝑓\n𝑟\n𝑎\n𝑐\n9\n𝑥\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n𝑠\n𝑖\n𝑛\n(\n6\n𝑥\n−\n18\n)\nlim\nxto3\n\t​\n\nfrac1−cos(6x−18)left(x−frac9xright)sin(6x−18)\n.",
+      "ditanyakan": "Nilai dari limit tersebut.",
+      "reasoning": "Substitusi \n𝑥\n=\n3\nx=3\n menghasilkan bentuk tak tentu \n0\n/\n0\n0/0\n. Gunakan pemisalan variabel \n𝑢\n=\n𝑥\n−\n3\nu=x−3\n sehingga saat \n𝑥\n𝑡\n𝑜\n3\nx\nto3\n berlaku \n𝑢\n𝑡\n𝑜\n0\nu\nto0\n. Terapkan identitas sudut ganda \n1\n−\n𝑐\n𝑜\n𝑠\n(\n6\n𝑢\n)\n=\n2\n𝑠\n𝑖\n𝑛\n2\n(\n3\n𝑢\n)\n1−\ncos(6u)=2\nsin\n2\n(3u)\n dan faktorkan suku pecahan aljabar \n𝑥\n−\n𝑓\n𝑟\n𝑎\n𝑐\n9\n𝑥\n=\n𝑓\n𝑟\n𝑎\n𝑐\n(\n𝑥\n−\n3\n)\n(\n𝑥\n+\n3\n)\n𝑥\n=\n𝑓\n𝑟\n𝑎\n𝑐\n𝑢\n(\n𝑢\n+\n6\n)\n𝑢\n+\n3\nx−\nfrac9x=\nfrac(x−3)(x+3)x=\nfracu(u+6)u+3\n. Selesaikan limit dengan memanfaatkan rumus limit trigonometri dasar.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Substitusi Peubah Baru",
+          "explanation": "Misalkan \n𝑢\n=\n𝑥\n−\n3\nu=x−3\n. Maka \n𝑥\n=\n𝑢\n+\n3\nx=u+3\n, dan saat \n𝑥\n𝑡\n𝑜\n3\nx\nto3\n, diperoleh \n𝑢\n𝑡\n𝑜\n0\nu\nto0\n. Argumen sudut trigonometri menjadi \n6\n𝑥\n−\n18\n=\n6\n(\n𝑥\n−\n3\n)\n=\n6\n𝑢\n6x−18=6(x−3)=6u\n."
+        },
+        {
+          "step": 2,
+          "title": "Penyederhanaan Komponen Aljabar dan Trigonometri",
+          "explanation": "- Pembilang: \n1\n−\n𝑐\n𝑜\n𝑠\n(\n6\n𝑢\n)\n=\n2\n𝑠\n𝑖\n𝑛\n2\n(\n3\n𝑢\n)\n1−\ncos(6u)=2\nsin\n2\n(3u)\n\n- Komponen aljabar penyebut: \n𝑥\n−\n𝑓\n𝑟\n𝑎\n𝑐\n9\n𝑥\n=\n𝑓\n𝑟\n𝑎\n𝑐\n𝑥\n2\n−\n9\n𝑥\n=\n𝑓\n𝑟\n𝑎\n𝑐\n(\n𝑥\n−\n3\n)\n(\n𝑥\n+\n3\n)\n𝑥\n=\n𝑓\n𝑟\n𝑎\n𝑐\n𝑢\n(\n𝑢\n+\n6\n)\n𝑢\n+\n3\nx−\nfrac9x=\nfracx\n2\n−9x=\nfrac(x−3)(x+3)x=\nfracu(u+6)u+3\n\n- Komponen sinus penyebut: \n𝑠\n𝑖\n𝑛\n(\n6\n𝑢\n)\nsin(6u)\n"
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Nilai Limit",
+          "explanation": "Susun kembali persamaan limit:\n\n𝑙\n𝑖\n𝑚\n𝑢\n𝑡\n𝑜\n0\n𝑙\n𝑒\n𝑓\n𝑡\n[\n𝑓\n𝑟\n𝑎\n𝑐\n𝑢\n+\n3\n𝑢\n+\n6\n𝑐\n𝑑\n𝑜\n𝑡\n𝑓\n𝑟\n𝑎\n𝑐\n2\n𝑠\n𝑖\n𝑛\n2\n(\n3\n𝑢\n)\n𝑢\n𝑠\n𝑖\n𝑛\n(\n6\n𝑢\n)\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n]\n=\n𝑙\n𝑖\n𝑚\n𝑢\n𝑡\n𝑜\n0\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n𝑢\n+\n3\n𝑢\n+\n6\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n𝑐\n𝑑\n𝑜\n𝑡\n2\n𝑐\n𝑑\n𝑜\n𝑡\n𝑙\n𝑖\n𝑚\n𝑢\n𝑡\n𝑜\n0\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n𝑠\n𝑖\n𝑛\n(\n3\n𝑢\n)\n𝑢\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n𝑐\n𝑑\n𝑜\n𝑡\n𝑙\n𝑖\n𝑚\n𝑢\n𝑡\n𝑜\n0\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n𝑠\n𝑖\n𝑛\n(\n3\n𝑢\n)\n𝑠\n𝑖\n𝑛\n(\n6\n𝑢\n)\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\nlim\nuto0\n\t​\n\nleft[\nfracu+3u+6\ncdot\nfrac2sin\n2\n(3u)usin(6u)\nright]=\nlim\nuto0\n\t​\n\nleft(\nfracu+3u+6\nright)\ncdot2\ncdot\nlim\nuto0\n\t​\n\nleft(\nfracsin(3u)u\nright)\ncdot\nlim\nuto0\n\t​\n\nleft(\nfracsin(3u)sin(6u)\nright)\n\n\n=\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n0\n+\n3\n0\n+\n6\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n𝑐\n𝑑\n𝑜\n𝑡\n2\n𝑐\n𝑑\n𝑜\n𝑡\n3\n𝑐\n𝑑\n𝑜\n𝑡\n𝑙\n𝑒\n𝑓\n𝑡\n(\n𝑓\n𝑟\n𝑎\n𝑐\n36\n𝑟\n𝑖\n𝑔\nℎ\n𝑡\n)\n=\n𝑓\n𝑟\n𝑎\n𝑐\n12\n𝑐\n𝑑\n𝑜\n𝑡\n2\n𝑐\n𝑑\n𝑜\n𝑡\n3\n𝑐\n𝑑\n𝑜\n𝑡\n𝑓\n𝑟\n𝑎\n𝑐\n12\n=\n𝑓\n𝑟\n𝑎\n𝑐\n32\n=\nleft(\nfrac0+30+6\nright)\ncdot2\ncdot3\ncdot\nleft(\nfrac36\nright)=\nfrac12\ncdot2\ncdot3\ncdot\nfrac12=\nfrac32\n"
+        }
+      ],
+      "why_correct": "Evaluasi limit trigonometri dan pemfaktoran aljabar menghasilkan nilai pasti \n𝑓\n𝑟\n𝑎\n𝑐\n32\nfrac32\n, yang bersesuaian dengan opsi E.",
+      "tips": [
+        "Ubah bentuk \n1\n−\n𝑐\n𝑜\n𝑠\n(\n𝑘\n𝑥\n)\n1−\ncos(kx)\n menjadi \n2\n𝑠\n𝑖\n𝑛\n2\n(\n𝑘\n𝑥\n/\n2\n)\n2\nsin\n2\n(kx/2)\n agar dapat dipasangkan langsung dengan variabel pembuat nol pada penyebut."
+      ],
+      "common_mistakes": [
+        "Lupa menyederhanakan pecahan aljabar \n𝑥\n−\n9\n/\n𝑥\nx−9/x\n ke bentuk pecahan tunggal sehingga kehilangan variabel pembuat nol pada penyebut."
+      ],
+      "question_id": "mtkl_p2_q25",
+      "concept_kunci": [
+        "Kalkulus",
+        "Limit Trigonometri",
+        "Identitas Sudut Ganda"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    }
+  ]
+}

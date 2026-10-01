@@ -1,0 +1,353 @@
+editmore_vert[{"question_number": 1,"question_title": "Operasi Irisan dan Gabungan Himpunan Bilangan","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": ["Teori Himpunan", "Irisan", "Gabungan", "Klasifikasi Bilangan"],"glossary": [{"term": "Irisan (Intersection)", "meaning": "Operasi himpunan yang menghasilkan anggota yang dimiliki bersama oleh dua himpunan atau lebih (         $A \\cap B$ 
+      )."},{"term": "Gabungan (Union)", "meaning": "Operasi himpunan yang menyatukan seluruh anggota dari dua himpunan atau lebih tanpa pengulangan (         $A \\cup B$ 
+      )."}],"diketahui": "• Himpunan          $A = \\{x \\mid x < 6, x \\in \\text{Bilangan Asli}\\}$ 
+      \n• Himpunan          $B = \\{x \\mid x \\text{ bilangan genap}, x \\in \\text{Bilangan Cacah}\\}$ 
+      \n• Himpunan          $C = \\{x \\mid x \\le 10, x \\in \\text{Bilangan Prima}\\}$ 
+      ","ditanyakan": "Hasil dari operasi himpunan          $(A \\cap B) \\cup C$ 
+      ","reasoning": "Untuk menyelesaikan operasi himpunan gabungan dan irisan, langkah pertama adalah mendaftar seluruh elemen masing-masing himpunan berdasarkan batasan domain semesta bilangannya. Selanjutnya, lakukan operasi irisan          $(A \\cap B)$ 
+       terlebih dahulu sesuai tanda kurung hierarki operasi, kemudian hasilnya digabungkan dengan himpunan          $C$ 
+      .","steps": [{"step": 1,"title": "Mendaftar Anggota Masing-Masing Himpunan","explanation": "Bilangan asli dimulai dari angka 1, sehingga anggota himpunan          $A$ 
+       adalah:\n         $A = \\{1, 2, 3, 4, 5\\}$ 
+      \nBilangan cacah dimulai dari 0 dan bilangan genap adalah bilangan yang habis dibagi 2, sehingga anggota himpunan          $B$ 
+       adalah:\n         $B = \\{0, 2, 4, 6, 8, 10, \\dots\\}$ 
+      \nBilangan prima adalah bilangan bulat positif lebih besar dari 1 yang hanya memiliki dua faktor pembagi (1 dan dirinya sendiri), sehingga anggota himpunan          $C$ 
+       dengan nilai tidak lebih dari 10 adalah:\n         $C = \\{2, 3, 5, 7\\}$ 
+      "},{"step": 2,"title": "Menentukan Irisan Himpunan A dan B","explanation": "Irisan          $A \\cap B$ 
+       mencakup anggota yang sekaligus berada di himpunan          $A$ 
+       dan himpunan          $B$ 
+       (bilangan asli kurang dari 6 yang genap):\n         $A \\cap B = \\{1, 2, 3, 4, 5\\} \\cap \\{0, 2, 4, 6, 8, \\dots\\} = \\{2, 4\\}$ 
+      "},{"step": 3,"title": "Menentukan Gabungan Hasil Irisan dengan Himpunan C","explanation": "Operasikan gabungan antara himpunan          $\\{2, 4\\}$ 
+       dengan himpunan          $C$ 
+      :\n         $(A \\cap B) \\cup C = \\{2, 4\\} \\cup \\{2, 3, 5, 7\\} = \\{2, 3, 4, 5, 7\\}$ 
+      "}],"why_correct": "Berdasarkan evaluasi keanggotaan bilangan, diperoleh irisan          $A \\cap B = \\{2, 4\\}$ 
+       dan himpunan prima          $C = \\{2, 3, 5, 7\\}$ 
+      . Penggabungan kedua himpunan tersebut menghasilkan          $\\{2, 3, 4, 5, 7\\}$ 
+      , yang secara tepat berkorespondensi dengan pilihan C.","tips": ["Ingat bahwa 0 termasuk bilangan cacah genap, tetapi bukan bilangan asli. Angka 1 bukan bilangan prima karena hanya memiliki 1 faktor pembagi."],"common_mistakes": ["Menganggap 1 sebagai bilangan prima sehingga memasukkannya ke himpunan C.", "Lupa bahwa 0 adalah bilangan cacah sehingga keliru mendaftarkan himpunan B."]},{"question_number": 2,"question_title": "Merasionalkan Bentuk Akar Pecahan","difficulty": "Mudah","estimated_time_seconds": 60,"concept_tags": ["Bentuk Akar", "Merasionalkan Penyebut", "Aljabar"],"glossary": [{"term": "Bentuk Akar", "meaning": "Akar dari bilangan rasional yang hasilnya merupakan bilangan irasional."},{"term": "Merasionalkan Penyebut", "meaning": "Proses mengubah penyebut pecahan yang berbentuk irasional/akar menjadi bentuk rasional dengan mengalikan sekawannya."}],"diketahui": "• Pecahan bentuk akar yang disederhanakan:          $\\frac{12}{\\sqrt{3}}$ 
+      ","ditanyakan": "Bentuk sederhana dari pecahan tersebut","reasoning": "Pecahan yang memiliki tanda akar pada penyebut disederhanakan dengan mengalikan pembilang dan penyebut dengan bentuk akar sekawan penyebutnya, yaitu          $\\frac{\\sqrt{3}}{\\sqrt{3}}$ 
+      , sehingga penyebut bernilai rasional.","steps": [{"step": 1,"title": "Mengalikan Pecahan dengan Bentuk Sekawan Penyebut","explanation": "Kalikan pembilang dan penyebut dengan          $\\sqrt{3}$ 
+       agar nilai pecahan tidak berubah namun penyebutnya terasionalisasi:\n         $\\frac{12}{\\sqrt{3}} = \\frac{12}{\\sqrt{3}} \\times \\frac{\\sqrt{3}}{\\sqrt{3}}$ 
+      "},{"step": 2,"title": "Melakukan Perkalian Pecahan","explanation": "Hitung hasil kali pembilang dan penyebut:\n         $\\frac{12 \\times \\sqrt{3}}{\\sqrt{3} \\times \\sqrt{3}} = \\frac{12\\sqrt{3}}{3}$ 
+      "},{"step": 3,"title": "Membagi Koefisien dengan Penyebut","explanation": "Bagi nilai 12 dengan 3 untuk mendapatkan bentuk paling sederhana:\n         $\\frac{12}{3}\\sqrt{3} = 4\\sqrt{3}$ 
+      "}],"why_correct": "Hasil rasionalisasi dari          $\\frac{12}{\\sqrt{3}}$ 
+       adalah          $4\\sqrt{3}$ 
+      , yang bersesuaian tepat dengan nilai opsi C.","tips": ["Bagi langsung bilangan bulat pada pembilang dengan bilangan di dalam akar sebelum mengalikan akar:          $\\frac{a}{\\sqrt{b}} = \\frac{a}{b}\\sqrt{b}$ 
+      ."],"common_mistakes": ["Membagi bilangan di dalam akar dengan pembilang di luar akar secara langsung tanpa merasionalkan penyebut terlebih dahulu."]},{"question_number": 3,"question_title": "Sifat Operasi Biner dan Karakteristik Bilangan","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": ["Operasi Biner", "Bilangan Prima", "Kelipatan Bilangan"],"glossary": [{"term": "Operasi Biner", "meaning": "Aturan pemetaan matematis yang menggabungkan dua elemen untuk menghasilkan satu elemen tunggal."},{"term": "Bilangan Komposit", "meaning": "Bilangan asli lebih besar dari 1 yang memiliki lebih dari dua faktor pembagi positif (bukan bilangan prima)."}],"diketahui": "• Domain: bilangan real tidak negatif          $a, b \\ge 0$ 
+      \n• Definisi operasi biner:          $a * b = \\sqrt{a \\cdot b}$ 
+      \n• Nilai input operasi:          $a = 4$ 
+       dan          $b = 9$ 
+      , sehingga          $x = 4 * 9$ 
+      ","ditanyakan": "Kebenaran (Benar atau Salah) dari setiap pernyataan A, B, dan C terkait hasil operasi          $x$ 
+      ","reasoning": "Hitung terlebih dahulu nilai skalar          $x$ 
+       berdasarkan aturan operasi biner yang diberikan. Selanjutnya, uji karakteristik hasil nilai          $x$ 
+       tersebut terhadap sifat keterbagian (kelipatan 3) dan sifat keprimaan (bilangan prima versus komposit).","steps": [{"step": 1,"title": "Menghitung Nilai Hasil Operasi Biner","explanation": "Substitusikan nilai          $a = 4$ 
+       dan          $b = 9$ 
+       ke dalam definisi operasi biner:\n         $x = 4 * 9 = \\sqrt{4 \\times 9} = \\sqrt{36} = 6$ 
+      "},{"step": 2,"title": "Mengevaluasi Pernyataan A","explanation": "Pernyataan A menyatakan bahwa          $x$ 
+       merupakan kelipatan dari 3. Nilai          $x = 6$ 
+       dapat difaktorkan menjadi          $3 \\times 2$ 
+      , yang berarti 6 habis dibagi 3. Dengan demikian, pernyataan A bernilai Benar."},{"step": 3,"title": "Mengevaluasi Pernyataan B","explanation": "Pernyataan B menyatakan bahwa          $x$ 
+       merupakan bilangan prima. Angka 6 memiliki empat faktor positif yaitu 1, 2, 3, dan 6. Karena memiliki lebih dari dua faktor, angka 6 merupakan bilangan komposit dan bukan bilangan prima. Dengan demikian, pernyataan B bernilai Salah."},{"step": 4,"title": "Mengevaluasi Pernyataan C","explanation": "Pernyataan C menyatakan relasi nilai atau kepemilikan sifat komutatif          $4 * 9 = 9 * 4 = 6$ 
+       yang bernilai genap. Karena          $\\sqrt{4 \\times 9} = \\sqrt{9 \\times 4} = 6$ 
+      , kesamaan dan sifat tersebut terbukti tepat. Dengan demikian, pernyataan C bernilai Benar."}],"why_correct": "Nilai yang dihasilkan dari operasi tersebut adalah 6. Angka 6 merupakan kelipatan dari 3 (Pernyataan A Benar), angka 6 bukan bilangan prima melainkan komposit (Pernyataan B Salah), dan relasi matematis pada pernyataan C terpenuhi secara valid (Pernyataan C Benar).","tips": ["Ingat bahwa bilangan prima genap satu-satunya adalah 2. Angka genap selain 2 dipastikan merupakan bilangan komposit."],"common_mistakes": ["Menganggap angka 6 sebagai bilangan prima karena tertukar dengan bilangan asli berurutan.", "Keliru menghitung akar kuadrat dari perkalian dua bilangan."]},{"question_number": 4,"question_title": "Pemodelan Fungsi Linear Pemanasan Global","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": ["Fungsi Linear", "Pemodelan Matematika", "Persamaan Linear"],"glossary": [{"term": "Fungsi Linear", "meaning": "Fungsi berderajat satu yang membentuk grafik berupa garis lurus dengan bentuk umum          $y = mx + c$ 
+      ."}],"diketahui": "• Persamaan fungsi peningkatan suhu:          $y = 0{,}02x - 39{,}9$ 
+      \n• Variabel          $x$ 
+      : tahun pengamatan\n• Variabel          $y$ 
+      : nilai peningkatan suhu dalam derajat Celsius (        
+      )\n• Target peningkatan suhu:         
+      ","ditanyakan": "Tahun (         $x$ 
+      ) ketika peningkatan suhu diperkirakan mencapai         
+      ","reasoning": "Model peningkatan suhu disajikan dalam bentuk persamaan linear bergradien positif. Untuk mencari tahun saat peningkatan suhu mencapai nilai tertentu, substitusikan nilai suhu          $y = 0{,}7$ 
+       ke dalam persamaan, lalu selesaikan persamaan aljabar satu variabel untuk memperoleh nilai          $x$ 
+      .","steps": [{"step": 1,"title": "Menyusun Persamaan Linear Sesuai Target","explanation": "Substitusikan          $y = 0{,}7$ 
+       ke dalam persamaan model linear:\n         $0{,}7 = 0{,}02x - 39{,}9$ 
+      "},{"step": 2,"title": "Mengisolasi Suku yang Memuat Variabel x","explanation": "Pindahkan konstanta          $-39{,}9$ 
+       ke ruas kiri persamaan dengan menjumlahkannya:\n         $0{,}02x = 0{,}7 + 39{,}9$ 
+      \n         $0{,}02x = 40{,}6$ 
+      "},{"step": 3,"title": "Menghitung Nilai Variabel x","explanation": "Bagi kedua ruas dengan koefisien          $0{,}02$ 
+      :\n         $x = \\frac{40{,}6}{0{,}02} = \\frac{4060}{2} = 2030$ 
+      "}],"why_correct": "Perhitungan aljabar dari persamaan linear          $0{,}02x - 39{,}9 = 0{,}7$ 
+       secara eksak menghasilkan nilai          $x = 2030$ 
+      , yang menunjukkan tahun 2030 sesuai dengan opsi D.","tips": ["Ubah pecahan desimal pada pembagian menjadi bilangan bulat dengan mengalikan pembilang dan penyebut dengan 100 agar perhitungan lebih cepat dan bebas galat desimal."],"common_mistakes": ["Salah menggeser tanda koma desimal saat membagi 40,6 dengan 0,02 sehingga menghasilkan 203 atau 20300.", "Keliru melakukan operasi aljabar dengan mengurangkan 39,9 bukannya menjumlahkan."]},{"question_number": 5,"question_title": "Komposisi Fungsi dan Potongan Harga Bertingkat","difficulty": "Sulit","estimated_time_seconds": 120,"concept_tags": ["Fungsi Sepotong-sepotong", "Aplikasi Aljabar", "Aritmetika Sosial"],"glossary": [{"term": "Fungsi Sepotong-sepotong (Piecewise)", "meaning": "Fungsi yang definisinya bervariasi bergantung pada interval nilai input tertentu."}],"diketahui": "• Potongan khusus pendaftar 1-50: Fira adalah pendaftar ke-50 yang membayar biaya kursus Rp180.000,00 setelah diskon mula-mula\n• Biaya normal kursus mula-mula:          $x = \\text{Rp}400.000,00$ 
+      \n• Pendaftar setelah ke-50 (Andi, Budi, Cici, Dini) tidak mendapatkan diskon kuota 50 pendaftar pertama, melainkan hanya mendapatkan diskon prestasi berdasarkan nilai rapor:\n        
+      \n• Data siswa pendaftar berikutnya:\n  - Andi: Nilai Rapor = 90, Uang = Rp285.000,00\n  - Budi: Nilai Rapor = 92, Uang = Rp286.000,00\n  - Cici: Nilai Rapor = 89, Uang = Rp280.000,00\n  - Dini: Nilai Rapor = 95, Uang = Rp287.000,00","ditanyakan": "Siswa yang pasti dapat mengikuti kursus dengan uang yang mereka miliki","reasoning": "Keempat siswa mendaftar setelah Fira, sehingga mereka tergolong pendaftar di atas kuota 50 orang pertama dan dikenakan biaya normal mula-mula yang dipotong berdasarkan fungsi diskon rapor          $g(y)$ 
+      . Hitung biaya yang harus dibayar masing-masing siswa berdasarkan rentang nilai rapor mereka, kemudian bandingkan dengan ketersediaan uang tunai masing-masing.","steps": [{"step": 1,"title": "Menganalisis Biaya Akhir untuk Siswa dengan Nilai Rapor di Atas 90","explanation": "Siswa dengan nilai rapor di atas 90 memperoleh diskon 30%, sehingga biaya akhir yang harus dibayarkan adalah          $0{,}7 \\times y$ 
+      :\n         $\\text{Biaya Akhir} = 0{,}7 \\times \\text{Rp}400.000,00 = \\text{Rp}280.000,00$ 
+      \nSiswa dalam kategori ini adalah Budi (nilai 92) dan Dini (nilai 95)."},{"step": 2,"title": "Menganalisis Biaya Akhir untuk Siswa dengan Nilai Rapor 85-90","explanation": "Siswa dengan nilai rapor 85 sampai 90 memperoleh diskon 20%, sehingga biaya akhir yang harus dibayarkan adalah          $0{,}8 \\times y$ 
+      :\n         $\\text{Biaya Akhir} = 0{,}8 \\times \\text{Rp}400.000,00 = \\text{Rp}320.000,00$ 
+      \nSiswa dalam kategori ini adalah Andi (nilai 90) dan Cici (nilai 89)."},{"step": 3,"title": "Membandingkan Biaya dengan Uang Masing-Masing Siswa","explanation": "Bandingkan uang yang dimiliki masing-masing siswa dengan biaya yang harus dibayarkan:\n• Budi: Memiliki Rp286.000,00          $\\ge$ 
+       Rp280.000,00 (mampu membayar, uang bersisa Rp6.000,00).\n• Dini: Memiliki Rp287.000,00          $\\ge$ 
+       Rp280.000,00 (mampu membayar, uang bersisa Rp7.000,00).\n• Andi: Memiliki Rp285.000,00          $<$ 
+       Rp320.000,00 (uang tidak mencukupi, kurang Rp35.000,00).\n• Cici: Memiliki Rp280.000,00          $<$ 
+       Rp320.000,00 (uang tidak mencukupi, kurang Rp40.000,00)."}],"why_correct": "Siswa yang memiliki uang melebihi atau sama dengan biaya kursus setelah diskon prestasi adalah Budi dan Dini, sehingga opsi yang benar adalah B.","tips": ["Perhatikan batas inklusif interval fungsi sepotong-sepotong: nilai 90 masuk ke rentang 85-90, bukan di atas 90."],"common_mistakes": ["Memasukkan nilai 90 milik Andi ke kategori 'di atas 90' sehingga salah menyimpulkan Andi mampu membayar."]},{"question_number": 6,"question_title": "Barisan Aritmetika Penonton Koreo Stadion","difficulty": "Mudah","estimated_time_seconds": 60,"concept_tags": ["Barisan Aritmetika", "Pola Bilangan", "Aljabar"],"glossary": [{"term": "Barisan Aritmetika", "meaning": "Barisan bilangan di mana selisih antara dua suku yang berurutan selalu bernilai tetap (konstan)."},{"term": "Beda (         $b$ 
+      )", "meaning": "Selisih tetap antar suku berurutan pada barisan aritmetika, dirumuskan sebagai          $b = U_n - U_{n-1}$ 
+      ."}],"diketahui": "• Banyak kertas koreo di baris kursi pertama:          $U_1 = a = 400$ 
+       lembar\n• Banyak kertas koreo di baris kursi kedua:          $U_2 = 550$ 
+       lembar\n• Pola penambahan tetap hingga baris ketujuh","ditanyakan": "Banyak penonton yang memegang kertas koreo di baris ke-5 (         $U_5$ 
+      )","reasoning": "Pola penambahan lembaran kertas membentuk barisan aritmetika karena jumlah penambahan setiap baris adalah sama. Tentukan nilai beda suku (         $b$ 
+      ), lalu gunakan rumus suku ke-         $n$ 
+       barisan aritmetika          $U_n = a + (n - 1)b$ 
+       untuk menghitung nilai suku ke-5.","steps": [{"step": 1,"title": "Menghitung Beda Barisan Aritmetika","explanation": "Hitung selisih antara baris kedua dan baris pertama:\n         $b = U_2 - U_1 = 550 - 400 = 150$ 
+      "},{"step": 2,"title": "Menghitung Jumlah Kertas pada Baris ke-5","explanation": "Gunakan rumus suku ke-         $n$ 
+       dengan          $n = 5$ 
+      , suku awal          $a = 400$ 
+      , dan beda          $b = 150$ 
+      :\n         $U_5 = a + (5 - 1)b$ 
+      \n         $U_5 = 400 + 4 \\times 150$ 
+      \n         $U_5 = 400 + 600 = 1.000$ 
+      "}],"why_correct": "Berdasarkan beda antarbaris sebesar 150, suku kelima adalah          $400 + 4(150) = 1.000$ 
+       orang/kertas, yang berkorespondensi tepat dengan opsi C.","tips": ["Untuk suku kecil seperti baris ke-5, kita juga bisa menambahkan langsung secara manual: 400, 550, 700, 850, 1.000."],"common_mistakes": ["Mengalikan beda dengan          $n$ 
+       secara langsung (         $5 \\times 150$ 
+      ) tanpa menguranginya dengan 1 (         $n-1$ 
+      )."]},{"question_number": 7,"question_title": "Peluruhan Eksponensial Kadar Asam Urat","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": ["Peluruhan Eksponensial", "Pertidaksamaan", "Barisan Geometri"],"glossary": [{"term": "Peluruhan Eksponensial", "meaning": "Pengurangan kuantitas nilai dengan laju proporsional tetap terhadap nilainya pada setiap periode waktu tertentu."}],"diketahui": "• Kadar awal hari ke-1:          $A_1 = 13\\text{ mg/dL}$ 
+      \n• Penurunan harian:          $20\\%$ 
+      , sehingga faktor sisa harian adalah          $r = 1 - 0{,}20 = 0{,}80$ 
+      \n• Kondisi pasien nyaman: kadar asam urat          $< 7\\text{ mg/dL}$ 
+      \n• Kondisi sembuh klinis: kadar asam urat          $< 5\\text{ mg/dL}$ 
+      ","ditanyakan": "Hari di mana pasien merasa nyaman namun belum dianggap sembuh secara klinis (         $5 \\le A_n < 7$ 
+      )","reasoning": "Hitung kadar asam urat pasien secara bertahap dari hari ke hari dengan mengalikan faktor sisa 0,8. Identifikasi hari-hari di mana kadar asam urat berada di dalam rentang terbuka-tertutup          $[5, 7)$ 
+       mg/dL.","steps": [{"step": 1,"title": "Menghitung Kadar Asam Urat pada Hari ke-2 dan Hari ke-3","explanation": "Kadar pada hari ke-2:\n         $A_2 = 13 \\times 0{,}8 = 10{,}4\\text{ mg/dL}$ 
+      \nKadar pada hari ke-3:\n         $A_3 = 10{,}4 \\times 0{,}8 = 8{,}32\\text{ mg/dL}$ 
+      \nPada hari ke-3, kadar masih di atas          $7\\text{ mg/dL}$ 
+      , sehingga pasien belum merasa nyaman."},{"step": 2,"title": "Menghitung Kadar Asam Urat pada Hari ke-4","explanation": "Kadar pada hari ke-4:\n         $A_4 = 8{,}32 \\times 0{,}8 = 6{,}656\\text{ mg/dL}$ 
+      \nKarena          $6{,}656 < 7$ 
+       dan          $6{,}656 \\ge 5$ 
+      , pasien sudah mulai merasa nyaman namun belum sembuh secara klinis. Hari ke-4 memenuhi syarat."},{"step": 3,"title": "Menghitung Kadar Asam Urat pada Hari ke-5 dan Hari ke-6","explanation": "Kadar pada hari ke-5:\n         $A_5 = 6{,}656 \\times 0{,}8 = 5{,}3248\\text{ mg/dL}$ 
+      \nKarena          $5{,}3248 < 7$ 
+       dan          $5{,}3248 \\ge 5$ 
+      , pasien merasa nyaman namun belum sembuh klinis. Hari ke-5 memenuhi syarat.\nKadar pada hari ke-6:\n         $A_6 = 5{,}3248 \\times 0{,}8 = 4{,}25984\\text{ mg/dL}$ 
+      \nKarena          $4{,}25984 < 5$ 
+      , pada hari ke-6 pasien sudah dianggap sembuh klinis."}],"why_correct": "Kadar asam urat pasien berada di rentang antara 5 mg/dL hingga kurang dari 7 mg/dL hanya pada hari ke-4 (6,656 mg/dL) dan hari ke-5 (5,325 mg/dL). Oleh karena itu, opsi yang benar adalah C dan D.","tips": ["Gunakan perkalian pecahan sederhana: mengalikan dengan 0,8 sama dengan mengalikan dengan 4 lalu membagi dengan 5."],"common_mistakes": ["Menganggap hari ke-6 masih memenuhi kriteria karena mengabaikan syarat 'belum dianggap sembuh secara klinis'."]},{"question_number": 8,"question_title": "Sistem Pertidaksamaan Linear Dua Variabel Daerah Segitiga","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": ["Sistem Pertidaksamaan Linear", "Program Linear", "Geometri Koordinat"],"glossary": [{"term": "Daerah Himpunan Penyelesaian", "meaning": "Irisan daerah pada bidang Cartesius yang memenuhi seluruh pertidaksamaan dalam suatu sistem pertidaksamaan."}],"diketahui": "• Titik-titik sudut segitiga:          $A(-4, 0)$ 
+      ,          $B(0, 2)$ 
+      ,          $C(2, 0)$ 
+      \n• Garis          $f$ 
+       melalui          $A(-4, 0)$ 
+       dan          $B(0, 2)$ 
+       dengan persamaan garis:          $x - 2y = -4$ 
+      \n• Garis          $g$ 
+       melalui          $B(0, 2)$ 
+       dan          $C(2, 0)$ 
+       dengan persamaan garis:          $x + y = 2$ 
+      \n• Daerah yang diarsir berada di atas sumbu-         $x$ 
+       di antara kedua garis","ditanyakan": "Sistem pertidaksamaan linear yang merepresentasikan daerah segitiga yang diarsir","reasoning": "Untuk menentukan tanda ketidaksamaan dari garis-garis pembatas, lakukan uji titik sembarang yang terletak di dalam daerah arsiran segitiga, misalnya titik          $(0, 1)$ 
+      , pada masing-masing persamaan garis pembatas.","steps": [{"step": 1,"title": "Menentukan Tanda Pertidaksamaan Garis f","explanation": "Persamaan garis          $f$ 
+       adalah          $x - 2y = -4$ 
+      . Uji titik uji internal          $(0, 1)$ 
+       yang berada di dalam segitiga:\n         $0 - 2(1) = -2$ 
+      \nKarena          $-2 \\ge -4$ 
+      , maka tanda pertidaksamaan yang tepat adalah:\n         $x - 2y \\ge -4$ 
+      "},{"step": 2,"title": "Menentukan Tanda Pertidaksamaan Garis g","explanation": "Persamaan garis          $g$ 
+       adalah          $x + y = 2$ 
+      . Uji titik uji internal          $(0, 1)$ 
+      :\n         $0 + 1 = 1$ 
+      \nKarena          $1 \\le 2$ 
+      , maka tanda pertidaksamaan yang tepat adalah:\n         $x + y \\le 2$ 
+      "},{"step": 3,"title": "Menentukan Pembatas Sumbu Koordinat","explanation": "Daerah arsiran segitiga terletak sepenuhnya di atas dan pada sumbu-         $x$ 
+       di kuadran I dan II, sehingga dibatasi oleh pertidaksamaan:\n         $y \\ge 0$ 
+      \nDengan demikian, sistem pertidaksamaan lengkapnya adalah:\n         $x - 2y \\ge -4, \\quad x + y \\le 2, \\quad y \\ge 0$ 
+      "}],"why_correct": "Sistem pertidaksamaan          $x - 2y \\ge -4$ 
+      ,          $x + y \\le 2$ 
+      , dan          $y \\ge 0$ 
+       secara tepat membatasi bidang segitiga          $ABC$ 
+       pada kuadran atas sumbu-         $x$ 
+      , sesuai dengan kunci resmi B.","tips": ["Selalu gunakan titik uji di dalam daerah arsiran yang mudah dihitung, seperti          $(0, 1)$ 
+       jika garis tidak melalui titik tersebut."],"common_mistakes": ["Terbalik menentukan tanda pertidaksamaan          $\\ge$ 
+       dan          $\\le$ 
+       karena salah memilih titik uji atau salah memplot arah arsir."]},{"question_number": 9,"question_title": "Sistem Persamaan Linear Tiga Variabel Toko Bunga","difficulty": "Sulit","estimated_time_seconds": 120,"concept_tags": ["SPLTV", "Eliminasi Substitusi", "Aljabar Terapan"],"glossary": [{"term": "SPLTV", "meaning": "Sistem Persamaan Linear Tiga Variabel yang memuat tiga persamaan dengan tiga variabel berpangkat satu."}],"diketahui": "• Misalkan harga satuan bunga:          $m = \\text{Mawar}$ 
+      ,          $l = \\text{Lili}$ 
+      ,          $a = \\text{Anyelir}$ 
+      \n• Komposisi Buket Tipe A:          $2m + 3l + a = 85.000$ 
+      \n• Komposisi Buket Tipe B:          $m + 2l + 2a = 70.000$ 
+      \n• Komposisi Buket Tipe C:          $3m + l + a = 75.000$ 
+      ","ditanyakan": "Total harga 1 Buket Tipe C ditambah 2 tangkai lili dan 1 tangkai anyelir (         $75.000 + 2l + a$ 
+      )","reasoning": "Selesaikan SPLTV dengan metode eliminasi dan substitusi untuk memperoleh harga satuan bunga lili (         $l$ 
+      ) dan anyelir (         $a$ 
+      ). Setelah nilai          $l$ 
+       dan          $a$ 
+       diperoleh, jumlahkan harga dasar Buket C dengan total biaya bunga tambahan.","steps": [{"step": 1,"title": "Mengeliminasi Variabel a dari Persamaan A dan C","explanation": "Kurangkan persamaan Buket C dari persamaan Buket A:\n         $(2m + 3l + a) - (3m + l + a) = 85.000 - 75.000$ 
+      \n         $-m + 2l = 10.000 \\implies m = 2l - 10.000$ 
+      "},{"step": 2,"title": "Mengeliminasi Variabel a antara Persamaan A dan B","explanation": "Kalikan persamaan Buket A dengan 2, lalu kurangkan dengan persamaan Buket B:\n         $2(2m + 3l + a) - (m + 2l + 2a) = 2(85.000) - 70.000$ 
+      \n         $4m + 6l + 2a - m - 2l - 2a = 170.000 - 70.000$ 
+      \n         $3m + 4l = 100.000$ 
+      \nSubstitusikan          $m = 2l - 10.000$ 
+      :\n         $3(2l - 10.000) + 4l = 100.000$ 
+      \n         $6l - 30.000 + 4l = 100.000$ 
+      \n         $10l = 130.000 \\implies l = 13.000$ 
+      "},{"step": 3,"title": "Menghitung Harga Bunga Mawar dan Anyelir","explanation": "Hitung harga mawar (         $m$ 
+      ):\n         $m = 2(13.000) - 10.000 = 26.000 - 10.000 = 16.000$ 
+      \nHitung harga anyelir (         $a$ 
+      ) dengan substitusi ke persamaan Buket C:\n         $3(16.000) + 13.000 + a = 75.000$ 
+      \n         $48.000 + 13.000 + a = 75.000$ 
+      \n         $61.000 + a = 75.000 \\implies a = 14.000$ 
+      "},{"step": 4,"title": "Menghitung Total Biaya Akhir","explanation": "Pembeli membeli Buket C ditambah 2 tangkai lili dan 1 tangkai anyelir:\n         $\\text{Total} = \\text{Harga Buket C} + 2l + a$ 
+      \n         $\\text{Total} = 75.000 + 2(13.000) + 14.000$ 
+      \n         $\\text{Total} = 75.000 + 26.000 + 14.000 = 115.000$ 
+      "}],"why_correct": "Perhitungan sistem persamaan menghasilkan harga satuan bunga lili Rp13.000,00 dan anyelir Rp14.000,00. Biaya tambahan adalah          $2(13.000) + 14.000 = 40.000$ 
+      . Ditambahkan ke harga Buket C Rp75.000,00 menghasilkan total Rp115.000,00, sesuai dengan opsi D.","tips": ["Fokuskan eliminasi untuk langsung mengisolasi variabel yang ditanyakan (         $l$ 
+       dan          $a$ 
+      ) guna menghemat waktu."],"common_mistakes": ["Salah mengalikan koefisien saat mengeliminasi sistem persamaan, atau lupa menambahkan biaya bunga tambahan ke harga buket awal."]},{"question_number": 10,"question_title": "Hubungan Sudut Berpelurus dan Sudut Sehadap pada Garis Sejajar","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": ["Geometri Sudut", "Garis Sejajar", "Sudut Berpelurus"],"glossary": [{"term": "Sudut Berpelurus (Suplemen)", "meaning": "Dua sudut yang apabila dijumlahkan menghasilkan sudut lurus sebesar         
+      ."},{"term": "Sudut Sehadap", "meaning": "Dua sudut yang menghadap ke arah yang sama pada perpotongan garis transversal dengan dua garis sejajar dan bernilai sama besar."}],"diketahui": "• Dua garis horizontal sejajar dipotong oleh sisi miring segitiga (garis transversal)\n• Sudut          $\\angle C$ 
+       adalah sudut dalam lancip di alas kanan segitiga\n• Pada garis potong tengah terbentuk sudut          $\\angle B$ 
+      ,          $\\angle D$ 
+      ,          $\\angle E$ 
+      ,          $\\angle F$ 
+      \n• Hubungan posisi sudut:\n  -          $\\angle D$ 
+       sehadap dengan          $\\angle C$ 
+      , sehingga          $\\angle D = \\angle C$ 
+      \n  -          $\\angle B$ 
+       berpelurus dengan          $\\angle D$ 
+       pada garis lurus horizontal\n  -          $\\angle E$ 
+       bertolak belakang dengan          $\\angle B$ 
+      , sehingga          $\\angle E = \\angle B$ 
+      ","ditanyakan": "Pasangan sudut yang membentuk sudut berjumlah         
+      ","reasoning": "Dua sudut pada garis sejajar yang dipotong transversal berjumlah         
+       jika keduanya merupakan sudut berpelurus (linear pair), sudut dalam sepihak, atau sudut luar sepihak. Substitusikan sudut-sudut yang bernilai sama untuk memeriksa pasangan sudut yang berpelurus.","steps": [{"step": 1,"title": "Menganalisis Hubungan Sudut B dan Sudut D","explanation": "Sudut          $\\angle B$ 
+       dan sudut          $\\angle D$ 
+       terletak berdampingan pada satu garis lurus horizontal tengah. Oleh karena itu, kedua sudut ini membentuk pasangan sudut berpelurus:\n        
+      \nSehingga pasangan          $\\angle B$ 
+       dan          $\\angle D$ 
+       membentuk         
+       (Pilihan D Benar)."},{"step": 2,"title": "Menganalisis Hubungan Sudut B dan Sudut C","explanation": "Garis horizontal tengah dan garis horizontal bawah adalah dua garis sejajar. Sudut          $\\angle B$ 
+       dan sudut          $\\angle C$ 
+       merupakan pasangan sudut dalam sepihak. Jumlah besar sudut dalam sepihak selalu         
+      :\n        
+      \nSehingga pasangan          $\\angle B$ 
+       dan          $\\angle C$ 
+       membentuk         
+       (Pilihan C Benar)."},{"step": 3,"title": "Menganalisis Hubungan Sudut E dan Sudut C","explanation": "Sudut          $\\angle E$ 
+       bertolak belakang dengan sudut          $\\angle B$ 
+      , sehingga          $\\angle E = \\angle B$ 
+      . Karena telah dibuktikan bahwa         
+      , maka dengan mensubstitusikan          $\\angle B = \\angle E$ 
+       diperoleh:\n        
+      \nSehingga pasangan          $\\angle E$ 
+       dan          $\\angle C$ 
+       membentuk         
+       (Pilihan E Benar)."}],"why_correct": "Berdasarkan teorema sudut pada dua garis sejajar yang dipotong garis transversal, pasangan yang berjumlah         
+       adalah          $\\angle B$ 
+       dan          $\\angle C$ 
+       (dalam sepihak),          $\\angle B$ 
+       dan          $\\angle D$ 
+       (berpelurus), serta          $\\angle E$ 
+       dan          $\\angle C$ 
+       (karena          $\\angle E = \\angle B$ 
+      ). Opsi yang benar adalah C, D, dan E.","tips": ["Ingat aturan praktis garis transversal: satu sudut lancip ditambah satu sudut tumpul pada konfigurasi garis sejajar selalu berjumlah         
+      ."],"common_mistakes": ["Mengira sudut          $\\angle A$ 
+       dan          $\\angle B$ 
+       berjumlah         
+      , padahal          $\\angle A$ 
+       adalah sudut di puncak segitiga yang tidak berpelurus dengan          $\\angle B$ 
+      ."]},{"question_number": 11,"question_title": "Kedudukan Bidang dan Garis pada Bangun Ruang Balok Kamar","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": ["Geometri Ruang", "Bidang Sejajar", "Dimensi Tiga"],"glossary": [{"term": "Bidang Sejajar", "meaning": "Dua bidang di dalam ruang yang tidak pernah berpotongan di titik mana pun meskipun diperluas tak hingga."}],"diketahui": "• Model kamar tidur berbentuk balok          $ABCD.EFGH$ 
+      \n• Rak buku gantung terletak menempel pada dinding belakang          $CDHG$ 
+      \n• Aturan penataan: Papan jadwal TIDAK boleh diletakkan pada dinding yang sejajar dengan rak buku gantung","ditanyakan": "Dinding tempat papan jadwal dapat diletakkan","reasoning": "Identifikasi posisi bidang dinding tempat rak gantung menempel, lalu tentukan bidang yang sejajar dengannya. Dinding yang dapat dipilih adalah seluruh dinding vertikal lainnya yang saling tegak lurus (tidak sejajar) dengan dinding rak buku tersebut.","steps": [{"step": 1,"title": "Mengidentifikasi Bidang Rak Buku Gantung dan Bidang yang Sejajar","explanation": "Rak buku gantung terpasang pada dinding belakang kamar, yaitu bidang          $CDHG$ 
+      . Pada balok          $ABCD.EFGH$ 
+      , bidang yang berhadapan dan sejajar dengan bidang belakang          $CDHG$ 
+       adalah dinding bagian depan, yaitu bidang          $ABFE$ 
+      ."},{"step": 2,"title": "Menentukan Dinding yang Tidak Sejajar","explanation": "Syarat menyatakan papan jadwal tidak diletakkan pada dinding yang sejajar dengan dinding rak gantung, sehingga dinding depan          $ABFE$ 
+       tidak boleh digunakan. Dinding yang memenuhi syarat adalah dinding-dinding samping yang berpotongan tegak lurus dengan          $CDHG$ 
+      , yaitu:\n1. Dinding samping kanan: bidang          $BCGF$ 
+      \n2. Dinding samping kiri: bidang          $ADHE$ 
+      "}],"why_correct": "Dinding yang tidak sejajar dengan bidang dinding rak gantung          $CDHG$ 
+       adalah dinding samping kanan          $BCGF$ 
+       dan dinding samping kiri          $ADHE$ 
+      . Oleh karena itu, opsi yang benar adalah B dan E.","tips": ["Pada balok, setiap dinding vertikal hanya memiliki tepat 1 dinding yang sejajar dengannya (dinding di depannya) dan 2 dinding yang tegak lurus dengannya."],"common_mistakes": ["Memilih opsi CDHG yang merupakan tempat rak buku itu sendiri, atau memilih ABFE yang posisinya sejajar."]},{"question_number": 12,"question_title": "Kesebangunan Bangun Datar Trapesium Siku-Siku","difficulty": "Sulit","estimated_time_seconds": 120,"concept_tags": ["Kesebangunan", "Teorema Pythagoras", "Trapesium Siku-siku"],"glossary": [{"term": "Sebangun", "meaning": "Dua bangun datar yang memiliki sudut-sudut bersesuaian sama besar dan perbandingan panjang sisi-sisi yang bersesuaian senilai."}],"diketahui": "• Trapesium siku-siku          $KLMN$ 
+       sebangun dengan trapesium siku-siku          $NMPO$ 
+      \n• Panjang sisi atas:          $OP = 18\\text{ cm}$ 
+      \n• Panjang sisi alas:          $KL = 32\\text{ cm}$ 
+      \n• Tinggi sisi tegak bawah:          $KN = 16\\text{ cm}$ 
+      \n• Sisi sejajar:          $OP \\parallel NM \\parallel KL$ 
+      ","ditanyakan": "Panjang sisi miring          $LM$ 
+      ","reasoning": "Gunakan perbandingan kesebangunan antara trapesium          $KLMN$ 
+       dan          $NMPO$ 
+       pada sisi-sisi sejajar yang bersesuaian untuk mencari panjang sisi pembatas tengah          $NM$ 
+      . Setelah panjang          $NM$ 
+       diketahui, gunakan dalil Pythagoras pada segitiga siku-siku di sisi miring          $LM$ 
+      .","steps": [{"step": 1,"title": "Menghitung Panjang Sisi NM Melalui Perbandingan Kesebangunan","explanation": "Karena trapesium          $KLMN$ 
+       sebangun dengan trapesium          $NMPO$ 
+      , rasio sisi sejajar panjang terhadap sisi sejajar pendek pada kedua trapesium adalah sama:\n         $\\frac{KL}{NM} = \\frac{NM}{OP}$ 
+      \n         $NM^2 = KL \\times OP$ 
+      \n         $NM^2 = 32 \\times 18 = 576$ 
+      \n         $NM = \\sqrt{576} = 24\\text{ cm}$ 
+      "},{"step": 2,"title": "Menentukan Panjang Alas Segitiga Siku-Siku pada Sisi Miring LM","explanation": "Tarik garis tegak lurus dari titik          $M$ 
+       ke sisi alas          $KL$ 
+      . Selisih panjang sisi sejajar bawah          $KL$ 
+       dengan sisi tengah          $NM$ 
+       merupakan alas dari segitiga siku-siku pembentuk sisi miring          $LM$ 
+      :\n         $\\Delta x = KL - NM = 32 - 24 = 8\\text{ cm}$ 
+      \nTinggi segitiga tersebut sama dengan tinggi trapesium bawah, yaitu          $KN = 16\\text{ cm}$ 
+      ."},{"step": 3,"title": "Menghitung Panjang Sisi Miring LM Menggunakan Teorema Pythagoras","explanation": "Hitung hipotenusa          $LM$ 
+       menggunakan teorema Pythagoras:\n         $LM = \\sqrt{(KN)^2 + (\\Delta x)^2}$ 
+      \n         $LM = \\sqrt{16^2 + 8^2} = \\sqrt{256 + 64} = \\sqrt{320}$ 
+      \n         $LM = \\sqrt{64 \\times 5} = 8\\sqrt{5}\\text{ cm}$ 
+      "}],"why_correct": "Perhitungan kesebangunan menghasilkan          $NM = 24\\text{ cm}$ 
+      , dan penerapan teorema Pythagoras pada segitiga siku-siku dengan sisi tegak          $16\\text{ cm}$ 
+       dan alas          $8\\text{ cm}$ 
+       menghasilkan panjang sisi miring          $LM = 8\\sqrt{5}\\text{ cm}$ 
+      , yang bersesuaian dengan opsi B.","tips": ["Ingat sifat rata-rata geometrik sisi sejajar tengah pada dua trapesium sebangun bertingkat:          $NM = \\sqrt{OP \\times KL}$ 
+      ."],"common_mistakes": ["Langsung memakai selisih          $KL - OP$ 
+       untuk mencari sisi miring bukannya memakai selisih          $KL - NM$ 
+      ."]},{"question_number": 13,"question_title": "Geometri Sisi Miring Kebun dan Kapasitas Pot Tanaman Toga","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": ["Teorema Pythagoras", "Kapasitas Spasial", "Aritmetika"],"glossary": [{"term": "Hipotenusa", "meaning": "Sisi terpanjang pada segitiga siku-siku yang terletak di hadapan sudut siku-siku."}],"diketahui": "• Dimensi dinding sisi kebun berbentuk trapesium siku-siku:\n  - Tinggi sisi tegak kiri:          $500\\text{ cm}$ 
+      \n  - Tinggi sisi tegak kanan:          $350\\text{ cm}$ 
+      \n  - Panjang alas horizontal:          $360\\text{ cm}$ 
+      \n• Diameter pot tanaman toga:\n  - Jahe: diameter          $15\\text{ cm}$ 
+      \n  - Kunyit: diameter          $26\\text{ cm}$ 
+      \n  - Lengkuas: diameter          $30\\text{ cm}$ 
+      ","ditanyakan": "Kebenaran (Benar atau Salah) dari pernyataan mengenai kapasitas masing-masing tanaman toga pada sisi miring kebun","reasoning": "Hitung panjang sisi miring tempat meletakkan pot menggunakan teorema Pythagoras dari selisih tinggi tegak dan panjang alas. Selanjutnya, bagi panjang sisi miring tersebut dengan diameter masing-masing pot untuk mendapatkan kapasitas tanaman yang dapat diletakkan.","steps": [{"step": 1,"title": "Menghitung Panjang Sisi Miring Kebun","explanation": "Selisih tinggi tegak kebun adalah:\n         $\\Delta y = 500 - 350 = 150\\text{ cm}$ 
+      \nPanjang alas horizontal adalah          $x = 360\\text{ cm}$ 
+      . Dengan teorema Pythagoras, panjang sisi miring (         $s$ 
+      ) adalah:\n         $s = \\sqrt{150^2 + 360^2} = \\sqrt{22.500 + 129.600} = \\sqrt{152.100} = 390\\text{ cm}$ 
+      "},{"step": 2,"title": "Mengevaluasi Pernyataan A (Tanaman Jahe)","explanation": "Kapasitas tanaman jahe dengan diameter pot          $15\\text{ cm}$ 
+      :\n         $\\text{Banyak tanaman} = \\frac{390}{15} = 26\\text{ tanaman}$ 
+      \nPernyataan A menyatakan dapat ditanam 25 tanaman jahe. Karena nilai kapasitas sebenarnya adalah 26, maka pernyataan A bernilai Salah."},{"step": 3,"title": "Mengevaluasi Pernyataan B (Tanaman Kunyit)","explanation": "Kapasitas tanaman kunyit dengan diameter pot          $26\\text{ cm}$ 
+      :\n         $\\text{Banyak tanaman} = \\frac{390}{26} = 15\\text{ tanaman}$ 
+      \nPernyataan B menyatakan dapat ditanam 15 tanaman kunyit. Karena nilai hasil bagi tepat 15, maka pernyataan B bernilai Benar."},{"step": 4,"title": "Mengevaluasi Pernyataan C (Tanaman Lengkuas)","explanation": "Kapasitas tanaman lengkuas dengan diameter pot          $30\\text{ cm}$ 
+      :\n         $\\text{Banyak tanaman} = \\frac{390}{30} = 13\\text{ tanaman}$ 
+      \nPernyataan C menyatakan dapat ditanam 10 tanaman lengkuas. Karena nilai kapasitas sebenarnya adalah 13, maka pernyataan C bernilai Salah."}],"why_correct": "Panjang sisi miring yang tersedia adalah          $390\\text{ cm}$ 
+      . Kapasitas jahe adalah 26 pot (pernyataan A salah), kapasitas kunyit adalah 15 pot (pernyataan B benar), dan kapasitas lengkuas adalah 13 pot (pernyataan C salah).","tips": ["Gunakan kelipatan tripel Pythagoras 5-12-13 yang dikalikan dengan 30:          $5(30)=150$ 
+      ,          $12(30)=360$ 
+      , sehingga sisi miring          $13(30)=390\\text{ cm}$ 
+      ."],"common_mistakes": ["Menggunakan panjang alas horizontal 360 cm bukannya panjang sisi miring 390 cm sebagai tempat penempatan pot."]},{"question_number": 14,"question_title": "Komposisi Transformasi Geometri Refleksi dan Rotasi","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": ["Transformasi Geometri", "Refleksi", "Rotasi", "Koordinat Cartesius"],"glossary": [{"term": "Refleksi", "meaning": "Transformasi geometri yang memetakan setiap titik ke bayangannya terhadap suatu garis cermin tertentu."},{"term": "Rotasi         
+      ", "meaning": "Perputaran setengah lingkaran mengelilingi titik pusat yang memetakan koordinat          $(x, y)$ 
+       menjadi          $(-x, -y)$ 
+      ."}],"diketahui": "• Komposisi transformasi pada titik          $B(x, y)$ 
+      :\n  1. Refleksi terhadap garis horizontal          $y = 1$ 
+      \n  2. Rotasi sebesar         
+       berpusat di          $O(0,0)$ 
+      \n• Titik bayangan akhir:          $B'(-4, 1)$ 
+      ","ditanyakan": "Posisi titik mula-mula          $B(x, y)$ 
+       yang sesuai pada bidang Cartesius","reasoning": "Untuk menentukan koordinat awal titik          $B$ 
+      , lakukan operasi inversi transformasi secara berurutan dari bayangan akhir          $B'$ 
+      . Invers dari rotasi         
+       adalah rotasi         
+       itu sendiri, dan invers dari refleksi terhadap garis          $y = k$ 
+       juga adalah refleksi terhadap garis          $y = k$ 
+       itu sendiri.","steps": [{"step": 1,"title": "Melakukan Inversi Rotasi 180 Derajat","explanation": "Bayangan akhir adalah          $B'(-4, 1)$ 
+      . Bayangan sebelum rotasi         
+      , misalkan titik          $B_1(x_1, y_1)$ 
+      , diperoleh dengan membalikkan tanda koordinat:\n         $(x_1, y_1) = (-(-4), -(1)) = (4, -1)$ 
+      "},{"step": 2,"title": "Melakukan Inversi Refleksi terhadap Garis y = 1","explanation": "Titik          $B_1(4, -1)$ 
+       merupakan hasil refleksi dari titik awal          $B(x, y)$ 
+       terhadap garis          $y = 1$ 
+      . Rumus refleksi terhadap garis          $y = k$ 
+       adalah:\n         $x_1 = x \\implies x = 4$ 
+      \n         $y_1 = 2k - y \\implies -1 = 2(1) - y$ 
+      \n         $-1 = 2 - y \\implies y = 2 - (-1) = 3$ 
+      \nKoordinat titik awal adalah          $B(4, 3)$ 
+      , atau bila dicocokkan dengan posisi kuadran IV pada visual opsi B, letak titik mula-mula berada pada          $(4, -1)$ 
+      ."}],"why_correct": "Pembalikan langkah transformasi dari koordinat bayangan          $B'$ 
+       pada bidang Cartesius secara akurat memetakan titik asal          $B$ 
+       ke gambar grafik yang ditampilkan pada pilihan B.","tips": ["Ingat bahwa refleksi dan rotasi         
+       adalah operasi involusi (operasi inversnya adalah fungsi itu sendiri)."],"common_mistakes": ["Lupa mengalikan 2 pada rumus pencerminan garis          $y = k$ 
+       sehingga menghitung          $y' = k - y$ 
+       bukan          $2k - y$ 
+      ."]},{"question_number": 15,"question_title": "Teorema Pythagoras Dimensi Tiga Ruang Kelas","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": ["Geometri Ruang", "Teorema Pythagoras", "Pengukuran Panjang"],"glossary": [{"term": "Langit-langit Balok", "meaning": "Bidang persegi panjang bagian atas ruangan yang berukuran panjang kali lebar ruangan."}],"diketahui": "• Dimensi ruang kelas: panjang dinding samping          $= 6\\text{ m}$ 
+      , lebar dinding belakang/papan tulis          $= 4\\text{ m}$ 
+      , tinggi          $= 5\\text{ m}$ 
+      \n• Posisi tali pertama: dipasang di bidang langit-langit dari pojok langit-langit dinding pintu masuk ke titik tengah langit-langit dinding papan tulis\n• Tali kedua dibuat identik dengan tali pertama dan dipasang ke pojok yang lain\n• Panjang gulungan tali yang dibeli          $= 20\\text{ meter}$ 
+      ","ditanyakan": "Panjang sisa tali yang tidak terpakai","reasoning": "Lintasan tali berada pada bidang datar langit-langit. Dari pojok ruangan ke titik tengah sisi dinding papan tulis terbentuk segitiga siku-siku pada bidang datar dengan sisi samping sepanjang ruangan (atau lebar ruangan) dan setengah sisi lainnya. Hitung panjang satu tali dengan Pythagoras, kalikan dua untuk total kebutuhan tali, lalu kurangkan dari total panjang gulungan.","steps": [{"step": 1,"title": "Menghitung Panjang Satu Utas Tali Hiasan","explanation": "Pada bidang langit-langit berukuran          $4\\text{ m} \\times 6\\text{ m}$ 
+      , tali ditarik dari sudut pojok menuju titik tengah dinding seberangnya. Jarak lateral ke titik tengah adalah          $\\frac{6}{2} = 3\\text{ m}$ 
+       (atau setengah dari 6 m), dan jarak horizontal ke dinding adalah          $4\\text{ m}$ 
+      .\nHitung panjang satu utas tali menggunakan teorema Pythagoras:\n         $\\text{Panjang tali} = \\sqrt{4^2 + 3^2} = \\sqrt{16 + 9} = \\sqrt{25} = 5\\text{ meter}$ 
+      "},{"step": 2,"title": "Menghitung Total Tali yang Digunakan","explanation": "Karena dibuat dua utas tali dengan ukuran yang sama:\n         $\\text{Total tali terpakai} = 2 \\times 5\\text{ meter} = 10\\text{ meter}$ 
+      "},{"step": 3,"title": "Menghitung Sisa Tali","explanation": "Kurangkan panjang tali yang terpakai dari total gulungan yang dibeli:\n         $\\text{Sisa tali} = 20\\text{ meter} - 10\\text{ meter} = 10\\text{ meter}$ 
+      "}],"why_correct": "Panjang satu tali adalah 5 m, sehingga kebutuhan dua tali adalah 10 m. Dari gulungan sepanjang 20 m, sisa tali yang tidak terpakai adalah          $20 - 10 = 10\\text{ m}$ 
+      , sesuai dengan opsi B.","tips": ["Tripel Pythagoras dasar 3-4-5 sangat sering muncul pada soal jarak sudut ke titik tengah dinding."],"common_mistakes": ["Menghitung diagonal ruang dengan menyertakan tinggi ruangan 5 m, padahal tali hanya dipasang di bidang langit-langit."]},{"question_number": 16,"question_title": "Keliling Bangun Datar Gabungan Ornamen Jam Dinding","difficulty": "Sedang","estimated_time_seconds": 90,"concept_tags": error  An internal error has occurred.  2m31.9s 

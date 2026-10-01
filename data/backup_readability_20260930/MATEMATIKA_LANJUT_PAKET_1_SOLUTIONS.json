@@ -1,0 +1,1142 @@
+{
+  "slug": "matematika_lanjut_paket_1",
+  "solutions": [
+    {
+      "question_number": 1,
+      "question_title": "Determinan Penjumlahan Dua Matriks Ordo 2x2",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Matriks",
+        "Penjumlahan Matriks",
+        "Determinan Matriks"
+      ],
+      "glossary": [
+        {
+          "term": "Determinan Matriks Ordo 2x2",
+          "meaning": "Nilai skalar yang dihitung dari selisih perkalian elemen diagonal utama dengan diagonal sekunder, yaitu          $\\det(M) = ad - bc$ \n      ."
+        },
+        {
+          "term": "Penjumlahan Matriks",
+          "meaning": "Operasi aljabar penjumlahan elemen-elemen seletak pada dua matriks yang berordo sama."
+        }
+      ],
+      "diketahui": "Matriks $P = \\begin{pmatrix} 1 & 2 \\\\ -1 & -4 \\end{pmatrix}$ dan $Q = \\begin{pmatrix} 2 & 5 \\\\ -1 & 2 \\end{pmatrix}$.",
+      "ditanyakan": "Determinan dari matriks $(P + Q)$.",
+      "reasoning": "Untuk menghitung determinan dari $(P + Q)$, matriks $P$ dan $Q$ harus dijumlahkan terlebih dahulu dengan menjumlahkan setiap pasang elemen yang seletak. Setelah diperoleh matriks tunggal berordo $2 \\times 2$, nilai determinannya dihitung menggunakan formula selisih hasil kali diagonal utama dan diagonal samping.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menjumlahkan Matriks P dan Q",
+          "explanation": "Jumlahkan elemen-elemen yang seletak dari matriks $P$ dan $Q$:"
+        },
+        {
+          "step": 2,
+          "title": "Menerapkan Formula Determinan Matriks Ordo 2x2",
+          "explanation": "Untuk matriks, determinannya dirumuskan sebagai: $\\det(P + Q) = (a \\cdot d) - (b \\cdot c) = (3)(-2) - (7)(-2)$"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Hasil Akhir Aritmetika",
+          "explanation": "Selesaikan perkalian dan pengurangan aljabar: $\\det(P + Q) = -6 - (-14) = -6 + 14 = 8$"
+        }
+      ],
+      "why_correct": "Hasil penjumlahan matriks $P + Q$ adalah. Nilai determinannya adalah $(3)(-2) - (7)(-2) = -6 + 14 = 8$, yang bersesuaian persis dengan opsi B.",
+      "tips": [
+        "Ingat bahwa secara umum $\\det(P + Q) \\neq \\det(P) + \\det(Q)$. Jangan mencari determinan masing-masing matriks lalu menjumlahkannya, melainkan lakukan penjumlahan matriks terlebih dahulu."
+      ],
+      "common_mistakes": [
+        "Menghitung $\\det(P) = (1)(-4) - (2)(-1) = -2$ dan $\\det(Q) = (2)(2) - (5)(-1) = 9$, kemudian menjumlahkannya menjadi $-2 + 9 = 7$."
+      ],
+      "question_id": "mtkl_p1_q01",
+      "concept_kunci": [
+        "Matriks",
+        "Penjumlahan Matriks",
+        "Determinan Matriks"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "B"
+      }
+    },
+    {
+      "question_number": 2,
+      "question_title": "Invers Matriks dari Kombinasi Linear dan Transpose",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Aljabar Matriks",
+        "Transpose Matriks",
+        "Invers Matriks"
+      ],
+      "glossary": [
+        {
+          "term": "Transpose Matriks",
+          "meaning": "Operasi menukar baris matriks menjadi kolom, dilambangkan dengan          $C^T$ \n      ."
+        },
+        {
+          "term": "Invers Matriks",
+          "meaning": "Matriks kebalikan sedemikian sehingga          $M \\cdot M^{-1} = I$ \n      , dirumuskan          $M^{-1} = \\frac{1}{\\det(M)} \\operatorname{adj}(M)$ \n      ."
+        }
+      ],
+      "diketahui": "Matriks $A = \\begin{pmatrix} -1 & 2 \\\\ 3 & 4 \\end{pmatrix}$, $B = \\begin{pmatrix} -2 & 0 \\\\ 3 & 3 \\end{pmatrix}$, dan $C = \\begin{pmatrix} -4 & 4 \\\\ -3 & 2 \\end{pmatrix}$.",
+      "ditanyakan": "Invers dari matriks $(3A - 4B + C^T)$.",
+      "reasoning": "Selesaikan operasi skalar dan transpose terlebih dahulu untuk menghasilkan satu matriks utuh $M = 3A - 4B + C^T$. Kemudian, tentukan determinan $\\det(M)$ dan matriks adjoinnya untuk mendapatkan $M^{-1}$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Matriks Skalar 3A, 4B, dan Transpose C",
+          "explanation": "Kalikan skalar ke setiap elemen serta lakukan transpose pada matriks $C$:"
+        },
+        {
+          "step": 2,
+          "title": "Melakukan Operasi Aljabar Matriks M = 3A - 4B + C^T",
+          "explanation": "Lakukan pengurangan dan penjumlahan komponen demi komponen:"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Invers Matriks M",
+          "explanation": "Hitung determinan matriks $M$: $\\det(M) = (1)(2) - (3)(1) = 2 - 3 = -1$\n\nGunakan rumus invers matriks ordo $2 \\times 2$:"
+        }
+      ],
+      "why_correct": "Kombinasi linear matriks menghasilkan dengan $\\det(M) = -1$. Kalikan adjoin matriks dengan $\\frac{1}{-1}$ untuk mendapatkan invers, yang bersesuaian dengan opsi C.",
+      "tips": [
+        "Hati-hati saat melakukan transpose pada matriks $C$: elemen baris 1 kolom 2 berpindah menjadi baris 2 kolom 1."
+      ],
+      "common_mistakes": [
+        "Lupa mengubah tanda elemen diagonal samping saat menyusun matriks adjoin sebelum membaginya dengan determinan."
+      ],
+      "question_id": "mtkl_p1_q02",
+      "concept_kunci": [
+        "Aljabar Matriks",
+        "Transpose Matriks",
+        "Invers Matriks"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 3,
+      "question_title": "Kesamaan Matriks Melibatkan Transpose dan Variabel Aljabar",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Kesamaan Matriks",
+        "Transpose Matriks",
+        "Sistem Persamaan Linear"
+      ],
+      "glossary": [
+        {
+          "term": "Kesamaan Matriks",
+          "meaning": "Kondisi di mana dua matriks memiliki ordo yang identik dan setiap elemen pada posisi yang sama bernilai sama."
+        }
+      ],
+      "diketahui": "Matriks,, dan persamaan $2A^T + B = C$.",
+      "ditanyakan": "Nilai dari $x - y$.",
+      "reasoning": "Transpose matriks $A$ terlebih dahulu lalu kalikan dengan skalar 2. Jumlahkan hasilnya dengan matriks $B$ yang memuat variabel $x$ dan $y$. Gunakan prinsip kesamaan matriks terhadap matriks $C$ untuk membentuk persamaan linear satu variabel dan menghitung nilai $x - y$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Transpose Matriks A dan Matriks 2A^T",
+          "explanation": "Transpose matriks $A$ diperoleh dengan menukar baris dan kolom:\n\nKalikan matriks tersebut dengan skalar 2:"
+        },
+        {
+          "step": 2,
+          "title": "Menyusun Ruas Kiri 2A^T + B",
+          "explanation": "Jumlahkan matriks $2A^T$ dengan matriks $B$:"
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Nilai x, y, dan Nilai x - y",
+          "explanation": "Samakan dengan matriks:- Elemen baris 1 kolom 1: $6 + x = 0 \\implies x = -6$\n\n- Elemen baris 2 kolom 1: $y = 1$\n\nHitung nilai $x - y$: $x - y = -6 - 1 = -7$"
+        }
+      ],
+      "why_correct": "Berdasarkan kesamaan matriks diperoleh $6 + x = 0 \\iff x = -6$ dan $y = 1$. Dengan demikian, selisih $x - y = -6 - 1 = -7$, yang membuktikan kebenaran opsi E.",
+      "tips": [
+        "Perhatikan posisi indeks baris dan kolom pada saat mentranspose matriks $A$, di mana elemen baris 2 kolom 1 yaitu 2 berpindah ke posisi baris 1 kolom 2."
+      ],
+      "common_mistakes": [
+        "Mengabaikan operasi transpose pada $A$ sehingga menuliskan $2A$ langsung tanpa membalik susunan baris dan kolom."
+      ],
+      "question_id": "mtkl_p1_q03",
+      "concept_kunci": [
+        "Kesamaan Matriks",
+        "Transpose Matriks",
+        "Sistem Persamaan Linear"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    },
+    {
+      "question_number": 4,
+      "question_title": "Periode Fungsi Trigonometri Sinus",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Trigonometri",
+        "Fungsi Sinus",
+        "Periode Fungsi"
+      ],
+      "glossary": [
+        {
+          "term": "Periode Fungsi Trigonometri",
+          "meaning": "Interval sudut terkecil yang diperlukan oleh grafik suatu fungsi trigonometri untuk mengulang satu gelombang penuh."
+        }
+      ],
+      "diketahui": "Fungsi trigonometri.",
+      "ditanyakan": "Periode dari fungsi $f(x)$.",
+      "reasoning": "Bentuk umum fungsi sinusoidal adalah $f(x) = A\\sin(kx - c) + d$. Panjang periode suatu gelombang sinus hanya dipengaruhi oleh frekuensi sudut $k$ di depan variabel $x$, dengan rumus periode.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mengidentifikasi Koefisien Variabel Sudut",
+          "explanation": "Pada fungsi, nilai amplitudo $A = -3$, koefisien frekuensi sudut $k = 2$, pergeseran fase, dan konstanta pergeseran vertikal $d = 4$."
+        },
+        {
+          "step": 2,
+          "title": "Menerapkan Formula Periode Gelombang Sinus",
+          "explanation": "Rumus periode fungsi sinus dalam satuan derajat adalah:"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Nilai Periode",
+          "explanation": "Substitusikan nilai $k = 2$ ke dalam formula:"
+        }
+      ],
+      "why_correct": "Koefisien $x$ pada fungsi $f(x)$ adalah $k = 2$. Melalui rumus, diperoleh periode sepanjang, sehingga opsi D adalah jawaban yang benar.",
+      "tips": [
+        "Pergeseran fase horizontal () dan pergeseran vertikal ( $+4$) tidak memengaruhi panjang periode fungsi."
+      ],
+      "common_mistakes": [
+        "Membagi dengan amplitudo $-3$ atau mengalikan dengan 2 sehingga menghasilkan."
+      ],
+      "question_id": "mtkl_p1_q04",
+      "concept_kunci": [
+        "Trigonometri",
+        "Fungsi Sinus",
+        "Periode Fungsi"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "D"
+      }
+    },
+    {
+      "question_number": 5,
+      "question_title": "Analisis Grafik Fungsi Trigonometri Sinus Tergeser",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Trigonometri",
+        "Grafik Sinus",
+        "Amplitudo dan Ekuilibrium"
+      ],
+      "glossary": [
+        {
+          "term": "Garis Ekuilibrium",
+          "meaning": "Garis horizontal tengah          $y = c$ \n       tempat gelombang berosilasi secara simetris ke atas dan ke bawah."
+        }
+      ],
+      "diketahui": "Fungsi trigonometri $y = \\sin(2x) - \\frac{1}{2}$.",
+      "ditanyakan": "Grafik fungsi yang merepresentasikan persamaan tersebut.",
+      "reasoning": "Karakteristik grafik fungsi dapat ditentukan dengan memeriksa periode, garis tengah osilasi $y = -0{,}5$, nilai puncak maksimum, nilai dasar minimum, serta titik potong terhadap sumbu koordinat.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menentukan Periode dan Garis Tengah Gelombang",
+          "explanation": "Karena koefisien sudut adalah $k = 2$, maka periode gelombang adalah (atau $\\pi$ radian). Konstanta $-0{,}5$ menggeser grafik vertikal ke bawah sehingga garis tengah berada pada $y = -\\frac{1}{2} = -0{,}5$."
+        },
+        {
+          "step": 2,
+          "title": "Menentukan Nilai Maksimum dan Minimum",
+          "explanation": "Amplitudo fungsi adalah $A = 1$:- Nilai maksimum: $y_{\\max} = 1 - 0{,}5 = 0{,}5$\n\n- Nilai minimum: $y_{\\min} = -1 - 0{,}5 = -1{,}5$"
+        },
+        {
+          "step": 3,
+          "title": "Menguji Koordinat Titik Kritis Utama",
+          "explanation": "Hitung beberapa titik koordinat penting:- Pada: (memotong sumbu- $Y$ di $(0, -0{,}5)$)- Pada: (titik puncak)- Pada:\n\n- Pada: (titik lembah)- Pada: (menyelesaikan 1 siklus penuh)"
+        }
+      ],
+      "why_correct": "Grafik pada opsi E menunjukkan kurva sinus dengan periode, memotong sumbu- $Y$ pada koordinat $(0, -0{,}5)$, memiliki puncak di, dan lembah di.",
+      "tips": [
+        "Periksa terlebih dahulu perpotongan sumbu- $Y$ saat $x = 0$ untuk mengeliminasi opsi grafik yang memotong titik $(0,0)$."
+      ],
+      "common_mistakes": [
+        "Mengira grafik berosilasi simetris di sekitar sumbu- $X$ ( $y = 0$) dan melupakan efek translasi vertikal turun sebesar $0{,}5$ satuan."
+      ],
+      "question_id": "mtkl_p1_q05",
+      "concept_kunci": [
+        "Trigonometri",
+        "Grafik Sinus",
+        "Amplitudo dan Ekuilibrium"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "E"
+      }
+    },
+    {
+      "question_number": 6,
+      "question_title": "Aplikasi Vektor Kecepatan Relatif pada Gerak Perahu Menyeberang Sungai",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Vektor",
+        "Kecepatan Relatif",
+        "Kinematika"
+      ],
+      "glossary": [
+        {
+          "term": "Kecepatan Relatif",
+          "meaning": "Komposisi vektor dari kecepatan benda terhadap medium ditambah kecepatan gerak medium itu sendiri."
+        }
+      ],
+      "diketahui": "Lebar sungai $= 50\\text{ meter}$, kecepatan arus sungai $v_{\\text{arus}} = 10\\text{ meter/menit}$ sejajar tepi sungai ke arah hulu, kecepatan perahu $v_{\\text{perahu}} = 20\\text{ meter/menit}$ tegak lurus arah arus, dan titik $B$ berada tepat lurus di seberang titik keberangkatan $A$.",
+      "ditanyakan": "Jarak titik perahu mendarat di seberang sungai terhadap titik $B$.",
+      "reasoning": "Gerak perahu terurai menjadi dua komponen ortogonal yang independen: komponen melintasi lebar sungai dan komponen horizontal akibat hanyutan arus sungai. Waktu tempuh menyeberang ditentukan murni oleh lebar sungai dibagi kecepatan menyeberang perahu, kemudian jarak simpangan dari titik $B$ dihitung dari jarak hanyutan selama selang waktu tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Waktu Tempuh Perahu Menyeberangi Sungai",
+          "explanation": "Arah perahu diarahkan tegak lurus terhadap arus secara penuh, sehingga kecepatan menyeberang adalah $20\\text{ m/menit}$: $t = \\frac{\\text{lebar sungai}}{v_{\\text{perahu}}} = \\frac{50\\text{ m}}{20\\text{ m/menit}} = 2{,}5\\text{ menit}$"
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Jarak Hanyutan Perahu Sepanjang Arus",
+          "explanation": "Selama bergerak menyeberang selama $2{,}5\\text{ menit}$, perahu terseret arus ke arah hulu dengan laju $10\\text{ m/menit}$: $\\Delta x = v_{\\text{arus}} \\times t = 10\\text{ m/menit} \\times 2{,}5\\text{ menit} = 25\\text{ meter}$"
+        },
+        {
+          "step": 3,
+          "title": "Menentukan Jarak Titik Tiba ke Titik B",
+          "explanation": "Karena titik $B$ berada tepat di seberang titik $A$ secara tegak lurus, maka pergeseran sejajar tepi sungai sebesar $\\Delta x = 25\\text{ meter}$ merupakan jarak langsung antara titik mendarat perahu dengan titik $B$."
+        }
+      ],
+      "why_correct": "Waktu melintasi sungai selebar 50 meter dengan laju 20 meter/menit adalah 2,5 menit. Dalam 2,5 menit, aliran arus berkecepatan 10 meter/menit menggeser perahu sejauh $10 \\times 2{,}5 = 25\\text{ meter}$ dari titik $B$, sesuai opsi D.",
+      "tips": [
+        "Gerak dua dimensi yang saling tegak lurus dapat diselesaikan secara terpisah untuk masing-masing sumbu koordinat."
+      ],
+      "common_mistakes": [
+        "Menghitung resultan kecepatan menggunakan Pythagoras $\\sqrt{20^2 + 10^2}$ lalu membagi lebar sungai dengan resultan tersebut, padahal komponen kecepatan penyeberangan murni hanya $20\\text{ m/menit}$."
+      ],
+      "question_id": "mtkl_p1_q06",
+      "concept_kunci": [
+        "Vektor",
+        "Kecepatan Relatif",
+        "Kinematika"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "D"
+      }
+    },
+    {
+      "question_number": 7,
+      "question_title": "Analisis Karakteristik Geometri Lingkaran dan Kedudukan Garis",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Geometri Analitik",
+        "Persamaan Lingkaran",
+        "Kedudukan Garis"
+      ],
+      "glossary": [
+        {
+          "term": "Bentuk Baku Lingkaran",
+          "meaning": "Persamaan          $(x - a)^2 + (y - b)^2 = r^2$ \n       dengan pusat          $(a, b)$ \n       dan jari-jari          $r$ \n      ."
+        },
+        {
+          "term": "Garis Memotong Lingkaran",
+          "meaning": "Kedudukan garis yang memiliki jarak ke titik pusat lebih kecil daripada jari-jari lingkaran (         $d < r$ \n      )."
+        }
+      ],
+      "diketahui": "Persamaan lingkaran $x^2 + y^2 - 6x - 2y - 26 = 0$.",
+      "ditanyakan": "Pernyataan-pernyataan yang bernilai benar di antara lima pilihan yang tersedia.",
+      "reasoning": "Ubah persamaan umum lingkaran ke bentuk kuadrat sempurna untuk memperoleh koordinat pusat $(a, b)$ dan panjang jari-jari $r$. Selanjutnya, evaluasi jarak pusat lingkaran ke masing-masing sumbu koordinat serta kedudukan garis sumbu terhadap lingkaran.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mengubah Persamaan Lingkaran ke Bentuk Baku",
+          "explanation": "Kelompokkan suku-suku variabel $x$ dan $y$ lalu lengkapi bentuk kuadrat sempurna: $x^2 - 6x + y^2 - 2y = 26$\n\n$(x - 3)^2 - 9 + (y - 1)^2 - 1 = 26$\n\n$(x - 3)^2 + (y - 1)^2 = 26 + 9 + 1 = 36$\n\nBentuk baku lingkaran adalah $(x - 3)^2 + (y - 1)^2 = 6^2$."
+        },
+        {
+          "step": 2,
+          "title": "Mengevaluasi Pusat, Jari-jari, dan Jarak ke Sumbu Koordinat",
+          "explanation": "- Titik pusat lingkaran adalah $(3, 1)$. Pernyataan A salah karena menyebutkan pusat $(1, 3)$.- Panjang jari-jari lingkaran adalah $r = \\sqrt{36} = 6$. Pernyataan B BENAR.- Jarak pusat $(3, 1)$ ke sumbu- $X$ ( $y = 0$) adalah $|y_p| = |1| = 1$. Pernyataan C salah karena menyebutkan bernilai 3.- Jarak pusat $(3, 1)$ ke sumbu- $Y$ ( $x = 0$) adalah $|x_p| = |3| = 3$. Pernyataan D salah karena menyebutkan bernilai 1."
+        },
+        {
+          "step": 3,
+          "title": "Menganalisis Kedudukan Garis terhadap Lingkaran",
+          "explanation": "Pada pernyataan E, garis $y = 0$ (sumbu- $X$) berjarak $d = 1$ satuan dari pusat $(3, 1)$. Karena jarak $d = 1$ lebih kecil daripada jari-jari $r = 6$ ( $d < r$), maka garis memotong lingkaran di dua titik berlainan (dibuktikan juga dari substitusi $y = 0$ yang menghasilkan $x^2 - 6x - 26 = 0$ dengan diskriminan $D = (-6)^2 - 4(1)(-26) = 140 > 0$). Pernyataan E BENAR."
+        }
+      ],
+      "why_correct": "Pernyataan B benar karena panjang jari-jari lingkaran terbukti $\\sqrt{36} = 6$ satuan panjang. Pernyataan E benar karena jarak garis ke pusat lingkaran kurang dari jari-jarinya ( $1 < 6$), sehingga memotong lingkaran di dua titik berlainan.",
+      "tips": [
+        "Jarak suatu titik $(x_0, y_0)$ ke sumbu- $X$ selalu sama dengan $|y_0|$ dan jarak ke sumbu- $Y$ selalu sama dengan $|x_0|$."
+      ],
+      "common_mistakes": [
+        "Tertukar antara koordinat pusat $(3, 1)$ dengan $(1, 3)$, atau tertukar antara jarak ke sumbu- $X$ dengan jarak ke sumbu- $Y$."
+      ],
+      "question_id": "mtkl_p1_q07",
+      "concept_kunci": [
+        "Geometri Analitik",
+        "Persamaan Lingkaran",
+        "Kedudukan Garis"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "B",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 8,
+      "question_title": "Komposisi Transformasi Translasi dan Dilatasi pada Kurva Parabola",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Transformasi Geometri",
+        "Translasi",
+        "Dilatasi Kurva"
+      ],
+      "glossary": [
+        {
+          "term": "Komposisi Transformasi",
+          "meaning": "Penerapan berurutan dari dua atau lebih operasi pemetaan geometris terhadap suatu kurva atau objek."
+        }
+      ],
+      "diketahui": "Kurva parabola $y = 2x^2 - 5$, ditranslasikan oleh matriks $T = \\begin{pmatrix} -3 \\\\ 2 \\end{pmatrix}$, kemudian dilanjutkan dilatasi $[O, 2]$ berpusat di titik $O(0, 0)$ dengan faktor skala 2.",
+      "ditanyakan": "Persamaan bayangan akhir dari kurva tersebut.",
+      "reasoning": "Nyatakan transformasi gabungan titik $(x, y)$ menjadi koordinat bayangan $(x', y')$. Nyatakan variabel asli $x$ dan $y$ ke dalam bentuk $x'$ dan $y'$, lalu substitusikan kembali ke persamaan kurva awal.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyusun Pemetaan Koordinat Bertahap",
+          "explanation": "Tahap 1: Translasi oleh $T = \\begin{pmatrix} -3 \\\\ 2 \\end{pmatrix}$ memetakan $(x, y)$ ke: $\\begin{pmatrix} x_1 \\\\ y_1 \\end{pmatrix} = \\begin{pmatrix} x - 3 \\\\ y + 2 \\end{pmatrix}$\n\nTahap 2: Dilatasi $[O, 2]$ memetakan $(x_1, y_1)$ ke $(x', y')$: $\\begin{pmatrix} x' \\\\ y' \\end{pmatrix} = 2 \\begin{pmatrix} x_1 \\\\ y_1 \\end{pmatrix} = \\begin{pmatrix} 2(x - 3) \\\\ 2(y + 2) \\end{pmatrix} = \\begin{pmatrix} 2x - 6 \\\\ 2y + 4 \\end{pmatrix}$"
+        },
+        {
+          "step": 2,
+          "title": "Menyatakan Variabel Asli x dan y",
+          "explanation": "Ubah persamaan transformasi ke dalam fungsi dari $x'$ dan $y'$: $x' = 2x - 6 \\implies 2x = x' + 6 \\implies x = \\frac{x' + 6}{2}$\n\n$y' = 2y + 4 \\implies 2y = y' - 4 \\implies y = \\frac{y' - 4}{2}$"
+        },
+        {
+          "step": 3,
+          "title": "Mensubstitusikan ke Persamaan Kurva Parabola",
+          "explanation": "Substitusikan $x$ dan $y$ ke dalam kurva asal $y = 2x^2 - 5$: $\\frac{y' - 4}{2} = 2 \\left(\\frac{x' + 6}{2}\\right)^2 - 5$\n\n$\\frac{y' - 4}{2} = 2 \\cdot \\frac{(x' + 6)^2}{4} - 5 = \\frac{(x' + 6)^2}{2} - 5$\n\nKalikan kedua ruas dengan 2: $y' - 4 = (x' + 6)^2 - 10$\n\n$y' - 4 = (x')^2 + 12x' + 36 - 10 = (x')^2 + 12x' + 26$\n\n$y' = (x')^2 + 12x' + 30$"
+        }
+      ],
+      "why_correct": "Substitusi invers pemetaan ke dalam persamaan parabola menghasilkan bentuk aljabar tereduksi $y = x^2 + 12x + 30$, yang membuktikan kebenaran pilihan C.",
+      "tips": [
+        "Jangan langsung mensubstitusikan $x'$ ke $x$ pada kurva asal; selalu nyatakan variabel lama $(x, y)$ dalam variabel baru $(x', y')$ terlebih dahulu."
+      ],
+      "common_mistakes": [
+        "Mengalikan kurva langsung dengan faktor skala tanpa melakukan substitusi koordinat secara benar pada peubah bebas dan terikat."
+      ],
+      "question_id": "mtkl_p1_q08",
+      "concept_kunci": [
+        "Transformasi Geometri",
+        "Translasi",
+        "Dilatasi Kurva"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 9,
+      "question_title": "Limit Fungsi Aljabar Bentuk Tak Tentu dengan Perkalian Sekawan",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Kalkulus",
+        "Limit Fungsi Aljabar",
+        "Bentuk Tak Tentu"
+      ],
+      "glossary": [
+        {
+          "term": "Bentuk Tak Tentu 0/0",
+          "meaning": "Situasi pada evaluasi limit di mana pembilang dan penyebut bernilai nol sehingga memerlukan faktorisasi atau rasionalisasi."
+        }
+      ],
+      "diketahui": "Limit fungsi aljabar irasional $\\lim_{x \\to 2} \\frac{x^2 + 5x - 14}{4 - \\sqrt{x^2 + 12}}$.",
+      "ditanyakan": "Nilai limit ketika $x$ mendekati 2.",
+      "reasoning": "Substitusi $x = 2$ menghasilkan bentuk tak tentu $\\frac{0}{0}$. Lakukan rasionalisasi penyebut dengan mengalikan bentuk sekawan $4 + \\sqrt{x^2 + 12}$ serta faktorkan pembilang untuk membatalkan faktor pembuat nol $(x - 2)$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mengevaluasi Nilai Substitusi Langsung",
+          "explanation": "Periksa nilai pembilang dan penyebut saat $x = 2$:- Pembilang: $2^2 + 5(2) - 14 = 4 + 10 - 14 = 0$\n\n- Penyebut: $4 - \\sqrt{2^2 + 12} = 4 - \\sqrt{16} = 4 - 4 = 0$\n\nHasil evaluasi merupakan bentuk tak tentu $\\frac{0}{0}$."
+        },
+        {
+          "step": 2,
+          "title": "Merasionalkan Penyebut dan Memfaktorkan Pembilang",
+          "explanation": "Faktorkan pembilang: $x^2 + 5x - 14 = (x - 2)(x + 7)$. Kalikan pembilang dan penyebut dengan bentuk sekawan penyebut $(4 + \\sqrt{x^2 + 12})$: $(4 - \\sqrt{x^2 + 12})(4 + \\sqrt{x^2 + 12}) = 16 - (x^2 + 12) = 4 - x^2 = -(x^2 - 4) = -(x - 2)(x + 2)$"
+        },
+        {
+          "step": 3,
+          "title": "Membatalkan Faktor Nol dan Menghitung Nilai Limit",
+          "explanation": "Tuliskan bentuk limit tereduksi: $\\lim_{x \\to 2} \\frac{(x - 2)(x + 7)(4 + \\sqrt{x^2 + 12})}{-(x - 2)(x + 2)} = \\lim_{x \\to 2} \\frac{(x + 7)(4 + \\sqrt{x^2 + 12})}{-(x + 2)}$\n\nSubstitusikan $x = 2$: $\\frac{(2 + 7)(4 + \\sqrt{2^2 + 12})}{-(2 + 2)} = \\frac{9 \\cdot (4 + 4)}{-4} = \\frac{9 \\cdot 8}{-4} = \\frac{72}{-4} = -18$"
+        }
+      ],
+      "why_correct": "Setelah membatalkan pembuat nol $(x - 2)$, limit terhitung bernilai $\\frac{9 \\times 8}{-4} = -18$, yang membuktikan kebenaran opsi A.",
+      "tips": [
+        "Metode alternatif: Aturan L'Hopital menghasilkan $\\lim_{x \\to 2} \\frac{2x + 5}{-\\frac{2x}{2\\sqrt{x^2+12}}} = \\frac{4+5}{-\\frac{2}{4}} = \\frac{9}{-1/2} = -18$ secara lebih cepat."
+      ],
+      "common_mistakes": [
+        "Keliru mendistribusikan tanda minus pada $16 - (x^2 + 12)$ sehingga salah menuliskan menjadi $4 + x^2$."
+      ],
+      "question_id": "mtkl_p1_q09",
+      "concept_kunci": [
+        "Kalkulus",
+        "Limit Fungsi Aljabar",
+        "Bentuk Tak Tentu"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "A"
+      }
+    },
+    {
+      "question_number": 10,
+      "question_title": "Limit Tak Hingga Fungsi Irasional Selisih Akar",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Kalkulus",
+        "Limit Tak Hingga",
+        "Bentuk Selisih Akar"
+      ],
+      "glossary": [
+        {
+          "term": "Rasionalisasi Selisih Akar",
+          "meaning": "Metode aljabar mengalikan          $(\\sqrt{A} - \\sqrt{B})$ \n       dengan sekawannya untuk mengeliminasi bentuk tak tentu          $\\infty - \\infty$ \n      ."
+        }
+      ],
+      "diketahui": "Ekspresi limit menuju tak terhingga $\\lim_{x \\to \\infty} \\left( (\\sqrt{3x} - \\sqrt{3x-4})(\\sqrt{3x+2}) \\right)$.",
+      "ditanyakan": "Nilai limit ketika $x$ menuju tak hingga.",
+      "reasoning": "Faktor pertama $(\\sqrt{3x} - \\sqrt{3x-4})$ menghasilkan bentuk $\\infty - \\infty$. Kalikan dengan bentuk sekawannya agar diperoleh bentuk pecahan rasional terhadap variabel $x$, lalu evaluasi limit rasional tersebut dengan membagi pangkat tertinggi $\\sqrt{x}$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Merasionalkan Faktor Selisih Bentuk Akar",
+          "explanation": "Kalikan dan bagi faktor pertama dengan sekawannya: $\\sqrt{3x} - \\sqrt{3x-4} = \\frac{(\\sqrt{3x})^2 - (\\sqrt{3x-4})^2}{\\sqrt{3x} + \\sqrt{3x-4}} = \\frac{3x - (3x - 4)}{\\sqrt{3x} + \\sqrt{3x-4}} = \\frac{4}{\\sqrt{3x} + \\sqrt{3x-4}}$"
+        },
+        {
+          "step": 2,
+          "title": "Mengalikan dengan Faktor Ketiga",
+          "explanation": "Gabungkan pecahan hasil rasionalisasi dengan faktor $\\sqrt{3x+2}$: $L = \\lim_{x \\to \\infty} \\frac{4\\sqrt{3x+2}}{\\sqrt{3x} + \\sqrt{3x-4}}$"
+        },
+        {
+          "step": 3,
+          "title": "Membagi Pembilang dan Penyebut dengan Akar x",
+          "explanation": "Bagi pembilang dan penyebut dengan $\\sqrt{x}$: $L = \\lim_{x \\to \\infty} \\frac{4\\sqrt{3 + \\frac{2}{x}}}{\\sqrt{3} + \\sqrt{3 - \\frac{4}{x}}}$\n\nKarena $\\lim_{x \\to \\infty} \\frac{2}{x} = 0$ dan $\\lim_{x \\to \\infty} \\frac{4}{x} = 0$, diperoleh: $L = \\frac{4\\sqrt{3}}{\\sqrt{3} + \\sqrt{3}} = \\frac{4\\sqrt{3}}{2\\sqrt{3}} = 2$"
+        }
+      ],
+      "why_correct": "Penyelesaian limit menghasilkan nilai konstanta tereduksi $\\frac{4\\sqrt{3}}{2\\sqrt{3}} = 2$, sehingga pilihan D adalah jawaban yang benar.",
+      "tips": [
+        "Fokuskan perhatian pada koefisien suku dominan di bawah tanda akar: koefisien pembilang adalah $4\\sqrt{3}$ dan koefisien penyebut adalah $\\sqrt{3} + \\sqrt{3} = 2\\sqrt{3}$."
+      ],
+      "common_mistakes": [
+        "Mengalikan akar secara langsung ke dalam kurva tanpa merasionalkan selisihnya terlebih dahulu, sehingga tetap menghasilkan bentuk tak tentu."
+      ],
+      "question_id": "mtkl_p1_q10",
+      "concept_kunci": [
+        "Kalkulus",
+        "Limit Tak Hingga",
+        "Bentuk Selisih Akar"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "D"
+      }
+    },
+    {
+      "question_number": 11,
+      "question_title": "Persamaan Invers Matriks Ordo 2x2 dengan Pengali Skalar",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Invers Matriks",
+        "Perkalian Skalar",
+        "Persamaan Matriks"
+      ],
+      "glossary": [
+        {
+          "term": "Invers Matriks",
+          "meaning": "Matriks          $M^{-1}$ \n       yang memenuhi hubungan          $M \\cdot M^{-1} = I$ \n      ."
+        }
+      ],
+      "diketahui": "Matriks, $M^{-1}$ adalah invers dari $M$, serta persamaan.",
+      "ditanyakan": "Pasangan nilai $p$ dan $q$ yang memenuhi persamaan tersebut.",
+      "reasoning": "Tentukan matriks invers $M^{-1}$ terlebih dahulu. Selanjutnya, amati hubungan kelipatan skalar antara matriks pada ruas kanan dengan $M^{-1}$ untuk menyusun relasi proporsionalitas antara nilai $p$ dan $q$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Invers Matriks M",
+          "explanation": "Hitung determinan matriks $M$: $\\det(M) = (2)(3) - (5)(1) = 6 - 5 = 1$\n\nRumus invers matriks ordo $2 \\times 2$:"
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Hubungan Skalar pada Persamaan",
+          "explanation": "Perhatikan matriks pada ruas kanan persamaan:\n\nSubstitusikan ke persamaan yang diberikan: $p M^{-1} = q (2 M^{-1}) = (2q) M^{-1}$\n\nKarena matriks $M^{-1} \\neq O$, diperoleh persamaan linear: $p = 2q$"
+        },
+        {
+          "step": 3,
+          "title": "Menguji Opsi Nilai p dan q",
+          "explanation": "Periksa setiap opsi terhadap kondisi $p = 2q$:- Opsi A: $p = 2$ dan $q = 1 \\implies 2 = 2(1)$ (BENAR)- Opsi B: $p = 3$ dan $q = 3 \\implies 3 \\neq 2(3) = 6$ (SALAH)- Opsi C: $p = 4$ dan $q = 2 \\implies 4 = 2(2)$ (BENAR)- Opsi D: $p = 5$ dan $q = 1 \\implies 5 \\neq 2(1) = 2$ (SALAH)- Opsi E: $p = 6$ dan $q = 3 \\implies 6 = 2(3)$ (BENAR)"
+        }
+      ],
+      "why_correct": "Relasi matriks menghasilkan keterkaitan $p = 2q$. Pasangan yang memenuhi relasi ini adalah opsi A ( $p=2, q=1$), opsi C ( $p=4, q=2$), dan opsi E ( $p=6, q=3$).",
+      "tips": [
+        "Faktorkan skalar dari matriks numerik untuk melihat kemiripannya dengan matriks dasar sebelum melakukan perkalian panjang."
+      ],
+      "common_mistakes": [
+        "Lupa membagi matriks ruas kanan dengan faktor skalar 2 sehingga menduga $p = q$."
+      ],
+      "question_id": "mtkl_p1_q11",
+      "concept_kunci": [
+        "Invers Matriks",
+        "Perkalian Skalar",
+        "Persamaan Matriks"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A",
+          "C",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 12,
+      "question_title": "Pemodelan Pertumbuhan Eksponensial Penonton Video di Media Sosial",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Fungsi Eksponensial",
+        "Model Matematika",
+        "Pertumbuhan Berlipat Ganda"
+      ],
+      "glossary": [
+        {
+          "term": "Pertumbuhan Eksponensial",
+          "meaning": "Peningkatan kuantitas yang laju perubahannya sebanding dengan kuantitas itu sendiri, dirumuskan dalam fungsi perpangkatan          $f(t) = a \\cdot b^t$ \n      ."
+        },
+        {
+          "term": "Daya Tampung Jenuh (Carrying Capacity)",
+          "meaning": "Batas maksimum suatu populasi atau keterlibatan pengguna dalam konteks dunia nyata yang membatasi pertumbuhan tak berhingga."
+        }
+      ],
+      "diketahui": "Model perkiraan jumlah penonton (dalam ribuan) adalah $f(t) = 3(2^t)$, dengan $t$ adalah banyaknya hari sejak video diunggah.",
+      "ditanyakan": "Menentukan status kebenaran (Benar atau Salah) dari setiap pernyataan A, B, dan C.",
+      "reasoning": "Uji karakteristik fungsi eksponensial $f(t) = 3(2^t)$ dengan mensubstitusikan nilai waktu $t$, menganalisis rasio pertumbuhan harian antarhari berurutan, serta mengevaluasi kelayakan fisis model matematika untuk nilai $t$ yang sangat besar.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mengevaluasi Pernyataan A Mengenai Jumlah Penonton Setelah 24 Jam",
+          "explanation": "Pada pemodelan ini, $t = 0$ merupakan basis awal pencatatan pada siklus 24 jam pertama penayangan, memberikan $f(0) = 3(2^0) = 3$ ribu penonton $= 3.000$ penonton. Pernyataan A bernilai BENAR."
+        },
+        {
+          "step": 2,
+          "title": "Mengevaluasi Pernyataan B Mengenai Peningkatan Dua Kali Lipat",
+          "explanation": "Bandingkan nilai fungsi pada hari ke- $(t+1)$ terhadap hari ke- $t$: $f(t+1) = 3(2^{t+1}) = 3(2^t \\cdot 2) = 2 \\cdot f(t)$\n\nKarena $f(t+1) = 2f(t)$, jumlah penonton selalu meningkat tepat dua kali lipat dibanding hari sebelumnya selama model eksponensial berlaku. Pernyataan B bernilai BENAR."
+        },
+        {
+          "step": 3,
+          "title": "Mengevaluasi Pernyataan C Mengenai Ketepatan Model untuk Waktu Besar",
+          "explanation": "Pada model eksponensial murni, saat $t \\to \\infty$, nilai $f(t) \\to \\infty$. Di dunia nyata, jumlah pengguna media sosial dan populasi manusia terbatas, sehingga tren penonton video selalu mengalami saturasi (mengikuti kurva logistik). Akibatnya, model ini tidak realistis untuk rentang waktu yang lama. Pernyataan C bernilai BENAR."
+        }
+      ],
+      "why_correct": "Pernyataan A benar sesuai nilai basis awal pengamatan $3.000$ penonton, pernyataan B benar karena rasio pengali harian adalah 2, dan pernyataan C benar karena model eksponensial tak terbatas tidak sesuai dengan kondisi riil batas pengguna. Kunci resmi adalah A: Benar, B: Benar, C: Benar.",
+      "tips": [
+        "Pertumbuhan eksponensial murni $y = a \\cdot b^x$ selalu memiliki keterbatasan validitas fisik karena ketiadaan batas jenuh."
+      ],
+      "common_mistakes": [
+        "Menyatakan C salah karena menganggap rumus matematika selalu berlaku selamanya tanpa meninjau konteks realistis permasalahan."
+      ],
+      "question_id": "mtkl_p1_q12",
+      "concept_kunci": [
+        "Fungsi Eksponensial",
+        "Model Matematika",
+        "Pertumbuhan Berlipat Ganda"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Benar",
+          "C:Benar"
+        ]
+      }
+    },
+    {
+      "question_number": 13,
+      "question_title": "Operasi Pengurangan Vektor Dimensi Tiga dan Kesamaan Komponen",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Vektor Dimensi Tiga",
+        "Pengurangan Vektor",
+        "Kesamaan Komponen"
+      ],
+      "glossary": [
+        {
+          "term": "Kesamaan Vektor",
+          "meaning": "Dua vektor bernilai sama jika dan hanya jika semua komponen seletaknya pada setiap sumbu koordinat bernilai sama."
+        }
+      ],
+      "diketahui": "Vektor $\\vec{u} = (1, 1, -1)$, $\\vec{v} = (1, v_1, 2)$, $\\vec{w} = (0, w_1, w_2)$, dan persamaan $\\vec{w} = \\vec{u} - \\vec{v}$.",
+      "ditanyakan": "Pasangan nilai $v_1$ dan $w_1$ yang mungkin memenuhi persamaan vektor tersebut.",
+      "reasoning": "Lakukan pengurangan vektor $\\vec{u} - \\vec{v}$ per komponen ortogonal. Samakan hasilnya dengan vektor $\\vec{w}$ untuk memperoleh hubungan linear antara komponen $v_1$ dan $w_1$, kemudian uji pasangan nilai yang tersedia pada opsi.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Pengurangan Vektor u - v",
+          "explanation": "Kurangkan setiap komponen yang seletak: $\\vec{u} - \\vec{v} = (1 - 1, \\, 1 - v_1, \\, -1 - 2) = (0, \\, 1 - v_1, \\, -3)$"
+        },
+        {
+          "step": 2,
+          "title": "Menyamakan dengan Komponen Vektor w",
+          "explanation": "Bandingkan dengan $\\vec{w} = (0, w_1, w_2)$:- Komponen pertama: $0 = 0$ (terpenuhi)- Komponen kedua: $w_1 = 1 - v_1 \\iff v_1 + w_1 = 1$\n\n- Komponen ketiga: $w_2 = -3$\n\nDiperoleh satu syarat mutlak: $v_1 + w_1 = 1$."
+        },
+        {
+          "step": 3,
+          "title": "Menguji Setiap Opsi Nilai v1 dan w1",
+          "explanation": "Evaluasi penjumlahan $v_1 + w_1$ untuk setiap pilihan:- Opsi A: $v_1 = 0, w_1 = 1 \\implies 0 + 1 = 1$ (BENAR)- Opsi B: $v_1 = 1, w_1 = 0 \\implies 1 + 0 = 1$ (BENAR)- Opsi C: $v_1 = 1, w_1 = 2 \\implies 1 + 2 = 3 \\neq 1$ (SALAH)- Opsi D: $v_1 = 2, w_1 = -1 \\implies 2 + (-1) = 1$ (BENAR)- Opsi E: $v_1 = 2, w_1 = 2 \\implies 2 + 2 = 4 \\neq 1$ (SALAH)"
+        }
+      ],
+      "why_correct": "Kondisi kesamaan vektor mengharuskan $v_1 + w_1 = 1$. Pilihan yang memenuhi persamaan tersebut adalah A ( $0 + 1 = 1$), B ( $1 + 0 = 1$), dan D ( $2 + (-1) = 1$).",
+      "tips": [
+        "Fokuskan perhatian pada komponen kedua karena komponen pertama ( $1-1=0$) dan ketiga ( $-1-2=-3$) sudah bernilai konstan."
+      ],
+      "common_mistakes": [
+        "Salah tanda aljabar saat mengurangkan komponen kedua: menulis $w_1 = v_1 - 1$ bukannya $w_1 = 1 - v_1$."
+      ],
+      "question_id": "mtkl_p1_q13",
+      "concept_kunci": [
+        "Vektor Dimensi Tiga",
+        "Pengurangan Vektor",
+        "Kesamaan Komponen"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A",
+          "B",
+          "D"
+        ]
+      }
+    },
+    {
+      "question_number": 14,
+      "question_title": "Perubahan Luas Segitiga Akibat Dilatasi Transformasi Geometri",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Geometri Analitik",
+        "Luas Segitiga",
+        "Dilatasi Transformasi"
+      ],
+      "glossary": [
+        {
+          "term": "Efek Dilatasi terhadap Luas",
+          "meaning": "Transformasi dilatasi dengan faktor skala          $k$ \n       memperbesar luas suatu bangun datar sebesar          $k^2$ \n       kali luas semula."
+        }
+      ],
+      "diketahui": "Segitiga $PQR$ dengan titik $P(-1, 3)$, $Q(3, 3)$, dan $R(1, -2)$, didilatasi dengan pusat $(0,0)$ dan faktor skala $k = 3$.",
+      "ditanyakan": "Luas segitiga setelah dilakukan dilatasi.",
+      "reasoning": "Hitung luas mula-mula segitiga $PQR$ menggunakan koordinat titik sudutnya. Selanjutnya, gunakan teorema perbesaran luas bangun datar di bawah pengaruh dilatasi dengan faktor pengali kuadrat skala $k^2$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Luas Awal Segitiga PQR",
+          "explanation": "Titik $P(-1, 3)$ dan $Q(3, 3)$ berada pada garis horizontal yang sama ( $y = 3$), sehingga ruas $PQ$ dapat dijadikan alas segitiga: $\\text{Panjang alas } a = x_Q - x_P = 3 - (-1) = 4$\n\nTinggi segitiga adalah jarak vertikal dari titik $R(1, -2)$ ke garis horizontal $y = 3$: $\\text{Tinggi } t = 3 - (-2) = 5$\n\nLuas awal segitiga $L_0$: $L_0 = \\frac{1}{2} \\times a \\times t = \\frac{1}{2} \\times 4 \\times 5 = 10\\text{ satuan luas}$"
+        },
+        {
+          "step": 2,
+          "title": "Menerapkan Hubungan Luas Hasil Dilatasi",
+          "explanation": "Untuk dilatasi dengan faktor skala $k$, luas bayangan memenuhi rumus: $L' = k^2 \\times L_0$"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Luas Akhir",
+          "explanation": "Dengan faktor skala $k = 3$ dan $L_0 = 10$: $L' = 3^2 \\times 10 = 9 \\times 10 = 90\\text{ satuan luas}$"
+        }
+      ],
+      "why_correct": "Luas awal segitiga adalah 10 satuan luas. Karena skala dilatasi adalah $k = 3$, maka luas bayangan membesar sebesar $3^2 = 9$ kali lipat menjadi $9 \\times 10 = 90$ satuan luas, sesuai opsi C.",
+      "tips": [
+        "Luas bangun dua dimensi selalu dipengaruhi oleh kuadrat dari faktor skala ( $k^2$), sedangkan volume bangun tiga dimensi dipengaruhi oleh $k^3$."
+      ],
+      "common_mistakes": [
+        "Hanya mengalikan luas awal dengan $k = 3$ sehingga menjawab 30 satuan luas."
+      ],
+      "question_id": "mtkl_p1_q14",
+      "concept_kunci": [
+        "Geometri Analitik",
+        "Luas Segitiga",
+        "Dilatasi Transformasi"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "C"
+      }
+    },
+    {
+      "question_number": 15,
+      "question_title": "Analisis Limit Sepihak dan Eksistensi Limit pada Fungsi Piecewise",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Kalkulus",
+        "Limit Fungsi Aljabar",
+        "Fungsi Piecewise",
+        "Limit Sepihak"
+      ],
+      "glossary": [
+        {
+          "term": "Eksistensi Limit",
+          "meaning": "Nilai limit dua sisi          $\\lim_{x \\to c} f(x)$ \n       ada jika dan hanya jika limit kiri sama dengan limit kanan (         $\\lim_{x \\to c^-} f(x) = \\lim_{x \\to c^+} f(x)$ \n      )."
+        }
+      ],
+      "diketahui": "Fungsi sepotong-sepotong (piecewise):",
+      "ditanyakan": "Menentukan status Benar atau Salah untuk pernyataan: A. $\\lim_{x \\to 1} f(x) = 2$\n\nB. $\\lim_{x \\to 3} f(x) = 0$\n\nC. $\\lim_{x \\to 4} f(x) = 2$",
+      "reasoning": "Untuk menentukan nilai limit pada titik pergantian rumus fungsi, evaluasi limit kiri dan limit kanan secara terpisah. Jika kedua limit sepihak bernilai sama, maka limit dua sisi ada dan bernilai sama dengan nilai tersebut.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Mengevaluasi Pernyataan A Mengenai Limit di Titik x = 1",
+          "explanation": "Hitung limit kiri dan limit kanan saat $x \\to 1$:- Limit kiri ( $x < 1$): $\\lim_{x \\to 1^-} f(x) = \\lim_{x \\to 1^-} (2x) = 2(1) = 2$\n\n- Limit kanan ( $x > 1$): $\\lim_{x \\to 1^+} f(x) = \\lim_{x \\to 1^+} (3 - x) = 3 - 1 = 2$\n\nKarena limit kiri sama dengan limit kanan, maka $\\lim_{x \\to 1} f(x) = 2$. Pernyataan A bernilai BENAR."
+        },
+        {
+          "step": 2,
+          "title": "Mengevaluasi Pernyataan B Mengenai Limit di Titik x = 3",
+          "explanation": "Hitung limit kiri dan limit kanan saat $x \\to 3$:- Limit kiri ( $x \\le 3$): $\\lim_{x \\to 3^-} f(x) = \\lim_{x \\to 3^-} (3 - x) = 3 - 3 = 0$\n\n- Limit kanan ( $x > 3$): $\\lim_{x \\to 3^+} f(x) = \\lim_{x \\to 3^+} (1 + (x - 3)^2) = 1 + (3 - 3)^2 = 1 + 0 = 1$\n\nKarena limit kiri ( $0$) tidak sama dengan limit kanan ( $1$), maka $\\lim_{x \\to 3} f(x)$ tidak ada (tidak bernilai 0). Pernyataan B bernilai SALAH."
+        },
+        {
+          "step": 3,
+          "title": "Mengevaluasi Pernyataan C Mengenai Limit di Titik x = 4",
+          "explanation": "Untuk $x = 4$, interval yang berlaku adalah $x > 3$ dengan aturan $f(x) = 1 + (x - 3)^2$. Karena fungsi ini kontinu di $x = 4$, nilai limitnya sama dengan nilai substitusi langsung: $\\lim_{x \\to 4} f(x) = 1 + (4 - 3)^2 = 1 + 1^2 = 2$\n\nPernyataan C bernilai BENAR."
+        }
+      ],
+      "why_correct": "Pernyataan A benar karena limit kiri dan kanan di $x=1$ keduanya bernilai 2. Pernyataan B salah karena limit kiri (0) dan limit kanan (1) di $x=3$ tidak sama sehingga limit dua sisi tidak ada. Pernyataan C benar karena substitusi langsung pada formula untuk $x>3$ menghasilkan $1 + 1 = 2$. Kunci resmi adalah A: Benar, B: Salah, C: Benar.",
+      "tips": [
+        "Perhatikan bahwa nilai fungsi pada titik tertentu seperti $f(1) = 1$ tidak memengaruhi nilai $\\lim_{x \\to 1} f(x)$."
+      ],
+      "common_mistakes": [
+        "Menyimpulkan limit di $x=1$ adalah 1 karena melihat nilai $f(1) = 1$, padahal nilai limit hanya bergantung pada perilaku fungsi di sekitar titik tersebut."
+      ],
+      "question_id": "mtkl_p1_q15",
+      "concept_kunci": [
+        "Kalkulus",
+        "Limit Fungsi Aljabar",
+        "Fungsi Piecewise",
+        "Limit Sepihak"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A:Benar",
+          "B:Salah",
+          "C:Benar"
+        ]
+      }
+    },
+    {
+      "question_number": 16,
+      "question_title": "Limit Trigonometri Menuju Titik Bukan Nol dengan Substitusi Variabel",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Kalkulus",
+        "Limit Fungsi Trigonometri",
+        "Substitusi Limit"
+      ],
+      "glossary": [
+        {
+          "term": "Limit Trigonometri Dasar",
+          "meaning": "Teorema batas dasar fungsi trigonometri:          $\\lim_{u \\to 0} \\frac{\\sin u}{u} = 1$ \n      ."
+        }
+      ],
+      "diketahui": "Ekspresi limit fungsi trigonometri $\\lim_{x \\to \\pi} \\frac{\\sin(x - \\pi)}{3(\\pi - x) \\cos(4x)}$.",
+      "ditanyakan": "Nilai limit fungsi trigonometri tersebut saat $x$ mendekati $\\pi$.",
+      "reasoning": "Bentuk limit ini menghasilkan bentuk tak tentu $\\frac{0}{0}$. Lakukan pemisalan variabel baru $u = x - \\pi$ sehingga ketika $x \\to \\pi$, variabel baru $u \\to 0$. Gunakan sifat relasi sudut cosinus dan teorema limit sinus dasar untuk menyederhanakan ekspresi.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Melakukan Substitusi Pemisalan Variabel",
+          "explanation": "Misalkan $u = x - \\pi$. Ketika $x \\to \\pi$, maka $u \\to 0$. Dari pemisalan ini, diperoleh: $\\pi - x = -(x - \\pi) = -u$\n\n$x = u + \\pi$"
+        },
+        {
+          "step": 2,
+          "title": "Menyederhanakan Suku Trigonometri Cosinus",
+          "explanation": "Ubah sudut pada fungsi cosinus: $\\cos(4x) = \\cos(4(u + \\pi)) = \\cos(4u + 4\\pi)$\n\nKarena periode fungsi cosinus adalah $2\\pi$, maka penambahan $4\\pi$ tidak mengubah nilai cosinus: $\\cos(4u + 4\\pi) = \\cos(4u)$"
+        },
+        {
+          "step": 3,
+          "title": "Menghitung Nilai Limit",
+          "explanation": "Tuliskan limit dalam variabel $u$: $\\lim_{u \\to 0} \\frac{\\sin u}{3(-u) \\cos(4u)} = -\\frac{1}{3} \\cdot \\lim_{u \\to 0} \\left(\\frac{\\sin u}{u}\\right) \\cdot \\lim_{u \\to 0} \\left(\\frac{1}{\\cos(4u)}\\right)$\n\nSubstitusikan nilai batas dasar $\\lim_{u \\to 0} \\frac{\\sin u}{u} = 1$ dan $\\lim_{u \\to 0} \\cos(4u) = \\cos(0) = 1$: $-\\frac{1}{3} \\cdot 1 \\cdot \\frac{1}{1} = -\\frac{1}{3}$"
+        }
+      ],
+      "why_correct": "Transformasi variabel $u = x - \\pi$ mengubah limit menjadi $-\\frac{1}{3} \\lim_{u \\to 0} \\frac{\\sin u}{u} = -\\frac{1}{3}$, yang bersesuaian dengan nilai pada opsi A.",
+      "tips": [
+        "Identifikasi faktor negatif: $\\pi - x = -(x - \\pi)$, tanda minus ini keluar ke depan sebagai pengali pecahan."
+      ],
+      "common_mistakes": [
+        "Mengabaikan tanda minus pada $(\\pi - x)$ sehingga mendapatkan hasil positif $\\frac{1}{3}$."
+      ],
+      "question_id": "mtkl_p1_q16",
+      "concept_kunci": [
+        "Kalkulus",
+        "Limit Fungsi Trigonometri",
+        "Substitusi Limit"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "A"
+      }
+    },
+    {
+      "question_number": 17,
+      "question_title": "Syarat Kompatibilitas Ordo pada Penjumlahan, Perkalian, dan Kesamaan Matriks",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Aljabar Matriks",
+        "Ordo Matriks",
+        "Operasi Matriks"
+      ],
+      "glossary": [
+        {
+          "term": "Syarat Penjumlahan Matriks",
+          "meaning": "Dua matriks hanya dapat dijumlahkan jika kedua matriks memiliki jumlah baris dan kolom yang persis sama."
+        },
+        {
+          "term": "Syarat Perkalian Matriks",
+          "meaning": "Matriks berukuran          $m \\times k$ \n       dapat dikalikan dengan matriks berukuran          $k \\times n$ \n       dan menghasilkan matriks berukuran          $m \\times n$ \n      ."
+        }
+      ],
+      "diketahui": "Matriks $A, B, C, D$ berturut-turut berukuran $p \\times 3$, $2 \\times q$, $r \\times s$, dan $t \\times u$, yang memenuhi persamaan matriks $(2A + B) \\times 4C = 5D$.",
+      "ditanyakan": "Semua nilai tupel $(p, q, r, s, t, u)$ yang dapat memenuhi persamaan matriks tersebut.",
+      "reasoning": "Gunakan aturan aljabar matriks secara berurutan: penjumlahan matriks mengharuskan kesamaan ordo, perkalian matriks menuntut jumlah kolom matriks pertama sama dengan jumlah baris matriks kedua, dan kesamaan matriks mengharuskan ukuran matriks hasil pada kedua ruas sama.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menganalisis Ordo pada Penjumlahan (2A + B)",
+          "explanation": "Matriks $2A$ berukuran $p \\times 3$ dan matriks $B$ berukuran $2 \\times q$. Penjumlahan terdefinisi jika dan hanya jika ordonya sama: $p = 2 \\quad \\text{dan} \\quad q = 3$\n\nSehingga matriks hasil $(2A + B)$ berordo $2 \\times 3$."
+        },
+        {
+          "step": 2,
+          "title": "Menganalisis Ordo pada Perkalian (2A + B) x 4C",
+          "explanation": "Matriks $(2A + B)$ yang berukuran $2 \\times 3$ dikalikan dengan matriks $4C$ yang berukuran $r \\times s$. Perkalian ini sah jika kolom matriks pertama sama dengan baris matriks kedua: $r = 3$\n\nOrdo matriks hasil perkalian pada ruas kiri adalah $2 \\times s$."
+        },
+        {
+          "step": 3,
+          "title": "Menganalisis Kesamaan Matriks dengan Ruas Kanan 5D",
+          "explanation": "Matriks hasil perkalian ruas kiri ( $2 \\times s$) sama dengan matriks $5D$ yang berukuran $t \\times u$. Kesamaan matriks mensyaratkan: $t = 2 \\quad \\text{dan} \\quad u = s$\n\nDengan demikian, tupel harus memenuhi bentuk kanonik: $(p, q, r, s, t, u) = (2, 3, 3, s, 2, s)$\n\nPeriksa opsi yang memenuhi:- Opsi D: $(2, 3, 3, 3, 2, 3)$ memenuhi untuk $s = 3$\n\n- Opsi E: $(2, 3, 3, 4, 2, 4)$ memenuhi untuk $s = 4$"
+        }
+      ],
+      "why_correct": "Tupel nilai ordo harus memiliki format $(2, 3, 3, s, 2, s)$. Pilihan yang memenuhi format ini adalah opsi D (dengan $s=3$) dan opsi E (dengan $s=4$).",
+      "tips": [
+        "Perkalian skalar (seperti $2A, 4C, 5D$) tidak pernah mengubah ukuran/ordo dari matriks yang dikalikan."
+      ],
+      "common_mistakes": [
+        "Memilih opsi C $(2, 3, 3, 3, 2, 2)$ padahal komponen terakhirnya $u = 2$ tidak sama dengan nilai $s = 3$."
+      ],
+      "question_id": "mtkl_p1_q17",
+      "concept_kunci": [
+        "Aljabar Matriks",
+        "Ordo Matriks",
+        "Operasi Matriks"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "D",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 18,
+      "question_title": "Penentuan Koefisien Polinomial Derajat Tiga Menggunakan Teorema Sisa",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Polinomial",
+        "Teorema Sisa",
+        "Fungsi Polinomial"
+      ],
+      "glossary": [
+        {
+          "term": "Teorema Sisa Polinomial",
+          "meaning": "Sisa pembagian suatu suku banyak          $f(x)$ \n       oleh pembagi linear          $(x - k)$ \n       adalah nilai fungsi pada          $x = k$ \n      , yaitu          $S = f(k)$ \n      ."
+        }
+      ],
+      "diketahui": "Fungsi polinomial $f(x) = x^3 + 2x^2 + ax + b$ memiliki sisa pembagian oleh $(x - 1)$ adalah 6 dan sisa pembagian oleh $(x + 1)$ adalah 2.",
+      "ditanyakan": "Pernyataan-pernyataan yang bernilai benar berdasarkan informasi tersebut.",
+      "reasoning": "Gunakan Teorema Sisa untuk membentuk sistem persamaan linear dua variabel dalam $a$ dan $b$ dari nilai $f(1) = 6$ dan $f(-1) = 2$. Selesaikan sistem tersebut untuk memperoleh bentuk utuh fungsi polinomial $f(x)$, lalu uji kebenaran masing-masing pernyataan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Membentuk Sistem Persamaan Linear",
+          "explanation": "Berdasarkan Teorema Sisa:- Dibagi $(x - 1)$ bersisa 6 $\\implies f(1) = 6$: $f(1) = (1)^3 + 2(1)^2 + a(1) + b = 3 + a + b = 6 \\implies a + b = 3$\n\n- Dibagi $(x + 1)$ bersisa 2 $\\implies f(-1) = 2$: $f(-1) = (-1)^3 + 2(-1)^2 + a(-1) + b = 1 - a + b = 2 \\implies -a + b = 1$"
+        },
+        {
+          "step": 2,
+          "title": "Menghitung Nilai Koefisien a dan b",
+          "explanation": "Jumlahkan kedua persamaan: $(a + b) + (-a + b) = 3 + 1 \\implies 2b = 4 \\implies b = 2$\n\nSubstitusikan $b = 2$ ke dalam $a + b = 3$: $a + 2 = 3 \\implies a = 1$\n\nFungsi polinomial lengkapnya adalah $f(x) = x^3 + 2x^2 + x + 2$."
+        },
+        {
+          "step": 3,
+          "title": "Menguji Kebenaran Pernyataan",
+          "explanation": "- Pernyataan A ( $a = 1$): BENAR karena diperoleh $a = 1$.- Pernyataan B ( $f(-2) = 4$): SALAH karena $f(-2) = (-2)^3 + 2(-2)^2 + (-2) + 2 = -8 + 8 - 2 + 2 = 0$.- Pernyataan C ( $f(0) = 2$): BENAR karena $f(0) = 0 + 0 + 0 + 2 = 2$.- Pernyataan D (Sisa pembagian $f(x)$ oleh $x - 2$ adalah 20): BENAR karena $f(2) = 2^3 + 2(2^2) + 2 + 2 = 8 + 8 + 2 + 2 = 20$.- Pernyataan E (Sisa pembagian $f(x)$ oleh $x + 3$ adalah $-2$): SALAH karena $f(-3) = (-3)^3 + 2(-3)^2 + (-3) + 2 = -27 + 18 - 3 + 2 = -10 \\neq -2$."
+        }
+      ],
+      "why_correct": "Fungsi polinomial yang tepat adalah $f(x) = x^3 + 2x^2 + x + 2$. Nilai koefisien $a = 1$ (A benar), evaluasi $f(0) = 2$ (C benar), dan evaluasi $f(2) = 20$ (D benar) membuktikan kebenaran opsi A, C, dan D.",
+      "tips": [
+        "Eliminasi dua persamaan linear sederhana dapat dilakukan cepat dengan menjumlahkan keduanya untuk mencari $b$, lalu mengurangkannya untuk mencari $a$."
+      ],
+      "common_mistakes": [
+        "Salah tanda ketika mengevaluasi $(-1)^3 = -1$ dan $(-1)^2 = 1$ yang menyebabkan kesalahan nilai $a$ dan $b$."
+      ],
+      "question_id": "mtkl_p1_q18",
+      "concept_kunci": [
+        "Polinomial",
+        "Teorema Sisa",
+        "Fungsi Polinomial"
+      ],
+      "official_answer": {
+        "format": "per_statement_benar_salah",
+        "correct": [
+          "A",
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "question_number": 19,
+      "question_title": "Analisis Kombinasi Linear Vektor Posisi pada Segiempat Sembarang",
+      "difficulty": "Tinggi",
+      "estimated_time_seconds": 120,
+      "concept_tags": [
+        "Aljabar Vektor",
+        "Vektor Posisi",
+        "Geometri Vektor"
+      ],
+      "glossary": [
+        {
+          "term": "Vektor Posisi",
+          "meaning": "Vektor yang berpangkal pada suatu titik acuan tertentu menuju suatu titik posisi pada bidang koordinat."
+        },
+        {
+          "term": "Titik Pembagi Ruas Garis",
+          "meaning": "Jika titik          $T$ \n       membagi ruas garis          $PR$ \n       dengan perbandingan          $PT : TR = m : n$ \n      , maka          $\\vec{t} = \\frac{n\\vec{p} + m\\vec{r}}{m + n}$ \n      ."
+        }
+      ],
+      "diketahui": "Segiempat sembarang $PQRS$. Titik $T$ pada ruas garis $PR$ dengan $2PT = TR$ ( $PT: TR = 1: 2$), titik $U$ pada ruas garis $SQ$ dengan $2SU = UQ$ ( $SU: UQ = 1: 2$), serta persamaan vektor $2\\vec{PQ} + 2\\vec{PS} + \\vec{RQ} + \\vec{RS} = a\\vec{SQ} + b\\vec{TU}$.",
+      "ditanyakan": "Nilai dari $(10 \\times a) + b$.",
+      "reasoning": "Pilih titik $P$ sebagai titik acuan vektor posisi (vektor nol). Nyatakan seluruh vektor yang ada pada ruas kiri dan kanan ke dalam kombinasi vektor basis posisi $\\vec{q}, \\vec{r}, \\vec{s}$. Samakan koefisien-koefisien vektor basis tersebut untuk memperoleh nilai skalar $a$ dan $b$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menyatakan Vektor Berdasarkan Titik Acuan P",
+          "explanation": "Tetapkan titik $P$ sebagai acuan (vektor nol $\\vec{p} = \\vec{0}$), sehingga: $\\vec{PQ} = \\vec{q}, \\quad \\vec{PS} = \\vec{s}$\n\n$\\vec{RQ} = \\vec{q} - \\vec{r}, \\quad \\vec{RS} = \\vec{s} - \\vec{r}$\n\nBerdasarkan perbandingan $PT: TR = 1: 2$ dan $SU: UQ = 1: 2$: $\\vec{t} = \\frac{2\\vec{p} + 1\\vec{r}}{3} = \\frac{\\vec{r}}{3}$\n\n$\\vec{u} = \\frac{2\\vec{s} + 1\\vec{q}}{3} = \\frac{\\vec{q} + 2\\vec{s}}{3}$\n\n$\\vec{SQ} = \\vec{q} - \\vec{s}$\n\n$\\vec{TU} = \\vec{u} - \\vec{t} = \\frac{\\vec{q} + 2\\vec{s} - \\vec{r}}{3}$"
+        },
+        {
+          "step": 2,
+          "title": "Menyederhanakan Ruas Kiri (LHS)",
+          "explanation": "Jumlahkan seluruh vektor pada ruas kiri: $\\text{LHS} = 2\\vec{PQ} + 2\\vec{PS} + \\vec{RQ} + \\vec{RS}$\n\n$\\text{LHS} = 2\\vec{q} + 2\\vec{s} + (\\vec{q} - \\vec{r}) + (\\vec{s} - \\vec{r}) = 3\\vec{q} + 3\\vec{s} - 2\\vec{r}$"
+        },
+        {
+          "step": 3,
+          "title": "Menyederhanakan Ruas Kanan (RHS) dan Menyamakan Koefisien",
+          "explanation": "Substitusikan ekspresi vektor ke ruas kanan: $\\text{RHS} = a\\vec{SQ} + b\\vec{TU} = a(\\vec{q} - \\vec{s}) + b\\left(\\frac{\\vec{q} + 2\\vec{s} - \\vec{r}}{3}\\right)$\n\n$\\text{RHS} = \\left(a + \\frac{b}{3}\\right)\\vec{q} + \\left(-a + \\frac{2b}{3}\\right)\\vec{s} - \\frac{b}{3}\\vec{r}$\n\nSamakan koefisien vektor $\\vec{r}$: $-\\frac{b}{3} = -2 \\implies b = 6$\n\nSamakan koefisien vektor $\\vec{q}$: $a + \\frac{b}{3} = 3 \\implies a + \\frac{6}{3} = 3 \\implies a + 2 = 3 \\implies a = 1$\n\nUji pada koefisien vektor $\\vec{s}$: $-a + \\frac{2b}{3} = -1 + \\frac{2(6)}{3} = -1 + 4 = 3 \\quad \\text{(konsisten dengan LHS)}$"
+        },
+        {
+          "step": 4,
+          "title": "Menghitung Nilai (10 x a) + b",
+          "explanation": "Substitusikan nilai $a = 1$ dan $b = 6$: $(10 \\times a) + b = (10 \\times 1) + 6 = 16$"
+        }
+      ],
+      "why_correct": "Penyelesaian persamaan aljabar vektor menghasilkan skalar tunggal $a = 1$ dan $b = 6$. Nilai dari $(10 \\times 1) + 6 = 16$, yang membuktikan kebenaran opsi A.",
+      "tips": [
+        "Menetapkan salah satu titik sudut segiempat sebagai titik pusat koordinat acuan akan menyederhanakan perhitungan kombinasi linear secara drastis."
+      ],
+      "common_mistakes": [
+        "Salah membagi segmen garis: menganggap rasio $PT: TR = 1: 2$ menghasilkan penyebut 2 bukannya $1+2=3$."
+      ],
+      "question_id": "mtkl_p1_q19",
+      "concept_kunci": [
+        "Aljabar Vektor",
+        "Vektor Posisi",
+        "Geometri Vektor"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "A"
+      }
+    },
+    {
+      "question_number": 20,
+      "question_title": "Persamaan Lingkaran Berpusat di Titik Tertentu dan Menyinggung Garis Singgung",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Geometri Analitik",
+        "Persamaan Lingkaran",
+        "Garis Singgung"
+      ],
+      "glossary": [
+        {
+          "term": "Jari-jari Lingkaran",
+          "meaning": "Jarak tegak lurus dari titik pusat lingkaran ke garis singgung lingkaran, yang juga merupakan jarak dari titik pusat ke titik singgungnya."
+        }
+      ],
+      "diketahui": "Lingkaran berpusat di titik $A(-2, 1)$ dan menyinggung garis $4x + 3y - 20 = 0$ di titik $B(2, 4)$.",
+      "ditanyakan": "Persamaan lingkaran tersebut.",
+      "reasoning": "Karena titik singgung $B(2, 4)$ berada pada keliling lingkaran, panjang jari-jari $r$ dapat dihitung langsung sebagai jarak antara titik pusat $A(-2, 1)$ dan titik singgung $B(2, 4)$. Selanjutnya, susun persamaan lingkaran dengan format baku $(x - a)^2 + (y - b)^2 = r^2$.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Menghitung Kuadrat Jari-jari Lingkaran",
+          "explanation": "Jari-jari $r$ adalah jarak dari titik pusat $A(-2, 1)$ ke titik singgung $B(2, 4)$: $r^2 = (x_B - x_A)^2 + (y_B - y_A)^2$\n\n$r^2 = (2 - (-2))^2 + (4 - 1)^2 = (4)^2 + (3)^2 = 16 + 9 = 25$"
+        },
+        {
+          "step": 2,
+          "title": "Menyusun Persamaan Baku Lingkaran",
+          "explanation": "Dengan titik pusat $(a, b) = (-2, 1)$ dan $r^2 = 25$, substitusikan ke dalam bentuk baku persamaan lingkaran: $(x - a)^2 + (y - b)^2 = r^2$\n\n$(x - (-2))^2 + (y - 1)^2 = 25$\n\n$(x + 2)^2 + (y - 1)^2 = 25$"
+        },
+        {
+          "step": 3,
+          "title": "Mengubah ke Bentuk Umum Persamaan Lingkaran",
+          "explanation": "Jabarkan bentuk kuadrat tersebut: $x^2 + 4x + 4 + y^2 - 2y + 1 = 25$\n\n$x^2 + y^2 + 4x - 2y + 5 - 25 = 0$\n\n$x^2 + y^2 + 4x - 2y - 20 = 0$"
+        }
+      ],
+      "why_correct": "Jarak dari pusat $A(-2, 1)$ ke titik singgung $B(2, 4)$ adalah $\\sqrt{4^2 + 3^2} = 5$. Persamaan lingkaran dengan pusat $(-2, 1)$ dan jari-jari 5 adalah $(x + 2)^2 + (y - 1)^2 = 25$ atau $x^2 + y^2 + 4x - 2y - 20 = 0$, yang bersesuaian dengan opsi D.",
+      "tips": [
+        "Ketika titik singgung pada lingkaran sudah diketahui secara eksplisit, panjang jari-jari cukup dihitung menggunakan rumus jarak dua titik tanpa perlu menghitung jarak titik ke garis."
+      ],
+      "common_mistakes": [
+        "Salah tanda saat memasukkan koordinat pusat ke dalam rumus: menulis $(x - 2)^2$ untuk pusat berabsis $-2$."
+      ],
+      "question_id": "mtkl_p1_q20",
+      "concept_kunci": [
+        "Geometri Analitik",
+        "Persamaan Lingkaran",
+        "Garis Singgung"
+      ],
+      "official_answer": {
+        "format": "single_choice",
+        "correct": "D"
+      }
+    }
+  ]
+}
