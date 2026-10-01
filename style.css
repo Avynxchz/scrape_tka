@@ -3130,39 +3130,207 @@ html, body {
   cursor: zoom-in;
 }
 
-/* Arabic RTL support */
-.subject-bahasa_arab .stimulus-body-content,
-.subject-bahasa_arab .prompt-html-wrap,
+/* Arabic Typography & Script-Aware Direction */
+/* Keep containers and question card in natural LTR layout flow */
 .subject-bahasa_arab .cbt-question-col,
 .subject-bahasa_arab .stimulus-container,
 .subject-bahasa_arab .prompt-container,
-[dir="rtl"] {
+.subject-bahasa_arab .option-item,
+.subject-bahasa_arab .bs-table {
+  direction: ltr !important;
+}
+
+.subject-bahasa_arab .stimulus-body-content,
+.subject-bahasa_arab .prompt-html-wrap {
+  direction: ltr;
+}
+
+/* Explicit script direction for text elements */
+.subject-bahasa_arab .text-arabic,
+.subject-bahasa_arab [data-lang="ar"],
+.subject-bahasa_arab p[style*="text-align: right"],
+.subject-bahasa_arab p[style*="text-align:right"] {
   direction: rtl !important;
   text-align: right !important;
+  unicode-bidi: isolate;
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+  font-size: 1.15em;
+  line-height: 1.9;
 }
 
-.subject-bahasa_arab .stimulus-images-single,
-.subject-bahasa_arab .stimulus-images-stack,
-.subject-bahasa_arab .stimulus-img-container {
-  justify-content: flex-start !important;
-  text-align: right !important;
+.subject-bahasa_arab .text-indonesian,
+.subject-bahasa_arab [data-lang="id"] {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate;
+  font-family: inherit;
+  font-size: 14.5px;
+  line-height: 1.6;
 }
 
-.subject-bahasa_arab .stimulus-img,
-.subject-bahasa_arab .stimulus-body-content img,
-.subject-bahasa_arab .prompt-html-wrap img,
-.subject-bahasa_arab .diagram-paragraph img,
-[dir="rtl"] img {
+/* ==========================================================================
+   BAHASA ARAB: PAKET 1 & PAKET 2 CUSTOM LAYOUT RULES
+   ========================================================================== */
+
+/* 1. Paket 1: Secara umum seluruh gambar soal, stimulus, dan pertanyaan di KANAN */
+[data-subject="bahasa_arab"][data-paket="1"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="1"] .prompt-html-wrap img,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .prompt-html-wrap img,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .stimulus-body-content img,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .prompt-html-wrap img,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .stimulus-body-content img,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .prompt-html-wrap img {
+  display: block !important;
   margin-left: auto !important;
   margin-right: 0 !important;
-  display: block !important;
-}
-
-.subject-bahasa_arab p {
+  float: none !important;
   text-align: right !important;
 }
 
+[data-subject="bahasa_arab"][data-paket="1"] .stimulus-body-content p,
+[data-subject="bahasa_arab"][data-paket="1"] .prompt-html-wrap p,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .stimulus-body-content p,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .prompt-html-wrap p,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .stimulus-body-content p,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .prompt-html-wrap p,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .stimulus-body-content p,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .prompt-html-wrap p {
+  text-align: right;
+}
+
+/* Kalimat instruksi / teks Bahasa Indonesia di Paket 1 tetap di KIRI */
+[data-subject="bahasa_arab"][data-paket="1"] .text-indonesian,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .text-indonesian,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .text-indonesian,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .text-indonesian,
+[data-subject="bahasa_arab"][data-paket="1"] p.text-indonesian,
+[data-subject="bahasa_arab"][data-paket="paket_1"] p.text-indonesian,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] p.text-indonesian,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] p.text-indonesian {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* 2. Khusus Paket 1 No 10: HANYA gambar kartun kelas yang di TENGAH */
+[data-subject="bahasa_arab"][data-paket="1"][data-nomor="10"] img[src*="25209_bca9545d0b0b13e0f9ff43c571b2c1b5"],
+[data-subject="bahasa_arab"][data-paket="paket_1"][data-nomor="10"] img[src*="25209_bca9545d0b0b13e0f9ff43c571b2c1b5"],
+body[data-active-subject="bahasa_arab"][data-active-paket="1"][data-active-nomor="10"] img[src*="25209_bca9545d0b0b13e0f9ff43c571b2c1b5"],
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"][data-active-nomor="10"] img[src*="25209_bca9545d0b0b13e0f9ff43c571b2c1b5"] {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+}
+
+/* 3. Paket 1: Opsi Jawaban (A-E)
+   - Gambar opsi (No 1, 3, 4, 5, 6, 10) semuanya di KIRI (di samping huruf A-E).
+   - Teks Arab opsi di No 7, 8, 9 semuanya di KIRI.
+*/
+[data-subject="bahasa_arab"][data-paket="1"] .option-item,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .option-item,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .option-item,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .option-item {
+  direction: ltr !important;
+  text-align: left !important;
+  justify-content: flex-start !important;
+}
+
+[data-subject="bahasa_arab"][data-paket="1"] .opt-body,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .opt-body,
+[data-subject="bahasa_arab"][data-paket="1"] .opt-body.opt-arabic,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .opt-body.opt-arabic,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .opt-body.opt-arabic,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .opt-body.opt-arabic {
+  direction: ltr !important;
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+[data-subject="bahasa_arab"][data-paket="1"] .opt-body img,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .opt-body img,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .opt-body img,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .opt-body img {
+  display: block !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  float: none !important;
+}
+
+/* 4. Paket 2 Rules: Kartun di tengah, opsi Arab di kanan, opsi Indo di kiri */
+[data-subject="bahasa_arab"][data-paket="2"][data-nomor="9"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="2"][data-nomor="10"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="2"][data-nomor="27"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="paket_2"][data-nomor="9"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="paket_2"][data-nomor="10"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="paket_2"][data-nomor="27"] .stimulus-body-content img,
+body[data-active-subject="bahasa_arab"][data-active-paket="2"][data-active-nomor="9"] .stimulus-body-content img,
+body[data-active-subject="bahasa_arab"][data-active-paket="2"][data-active-nomor="10"] .stimulus-body-content img,
+body[data-active-subject="bahasa_arab"][data-active-paket="2"][data-active-nomor="27"] .stimulus-body-content img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+}
+
+[data-subject="bahasa_arab"][data-paket="2"] .option-item.opt-arabic .opt-body,
+[data-subject="bahasa_arab"][data-paket="paket_2"] .option-item.opt-arabic .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="2"] .option-item.opt-arabic .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_2"] .option-item.opt-arabic .opt-body {
+  direction: rtl !important;
+  text-align: right !important;
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+  font-size: 1.18em;
+  line-height: 1.8;
+}
+
+[data-subject="bahasa_arab"][data-paket="2"] .option-item.opt-indonesian .opt-body,
+[data-subject="bahasa_arab"][data-paket="paket_2"] .option-item.opt-indonesian .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="2"] .option-item.opt-indonesian .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_2"] .option-item.opt-indonesian .opt-body {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+
+/* Benar-Salah Table in Bahasa Arab:
+   - Columns stay LTR: # on left, statement in middle, buttons on RIGHT
+   - Inside statement cell: Arabic is RTL, Indonesian is LTR
+*/
+.subject-bahasa_arab .bs-table,
+.subject-bahasa_arab .bs-header,
+.subject-bahasa_arab .bs-row {
+  direction: ltr !important;
+}
+
+.subject-bahasa_arab .bs-cell-no,
+.subject-bahasa_arab .bs-col-no {
+  text-align: center !important;
+}
+
+.subject-bahasa_arab .bs-cell-stmt.stmt-arabic {
+  direction: rtl !important;
+  text-align: right !important;
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+  font-size: 1.12em;
+}
+
+.subject-bahasa_arab .bs-cell-stmt.stmt-indonesian {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+.subject-bahasa_arab .bs-cell-opt,
+.subject-bahasa_arab .bs-col-opt {
+  text-align: center !important;
+}
+
+
 /* Responsive Table Wrappers (Mat P1 Q13, B. Jerman P1 Q10, B. Jerman P2 Q13-15) */
+
 .table-responsive {
   width: 100%;
   overflow-x: auto;
@@ -3464,6 +3632,33 @@ body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active
   transform-origin: left center;
   margin: 8px 4px !important;
 }
+
+/* 14. Sosiologi Paket 1 No 13, 14, 15: Gambar stimulus diperbesar ke ukuran proporsional/jelas */
+[data-subject="sosiologi"][data-paket="1"][data-nomor="13"] #stimulusContainer img,
+[data-subject="sosiologi"][data-paket="1"][data-nomor="14"] #stimulusContainer img,
+[data-subject="sosiologi"][data-paket="1"][data-nomor="15"] #stimulusContainer img,
+[data-subject="sosiologi"][data-paket="paket_1"][data-nomor="13"] #stimulusContainer img,
+[data-subject="sosiologi"][data-paket="paket_1"][data-nomor="14"] #stimulusContainer img,
+[data-subject="sosiologi"][data-paket="paket_1"][data-nomor="15"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="1"][data-active-nomor="13"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="1"][data-active-nomor="14"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="1"][data-active-nomor="15"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-nomor="13"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-nomor="14"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-nomor="15"] #stimulusContainer img {
+  display: block !important;
+  margin: 12px auto 16px auto !important;
+  max-width: 100% !important;
+  max-height: 420px !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 10px !important;
+  padding: 6px !important;
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05) !important;
+}
+
 
 
 

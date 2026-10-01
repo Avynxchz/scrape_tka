@@ -551,7 +551,7 @@ function formatPusmendikHtml(rawHtml, pkgPath) {
     const parts = p1.split('/');
     const fname = parts[parts.length - 1].split('?')[0];
     let base = pkgPath.endsWith('/') ? pkgPath : `${pkgPath}/`;
-    return `src="${base}images/${fname}?v=37"`;
+    return `src="${base}images/${fname}?v=41"`;
   });
 
   // 4. Buat parser DOM lokal agar aman, responsif, dan presisi
@@ -620,9 +620,43 @@ function formatPusmendikHtml(rawHtml, pkgPath) {
           } else if (realText.length === 0) {
             im.classList.add('diagram-img');
           } else {
-            im.classList.add('inline-symbol-img');
+            // Cek jika gambar dipisahkan oleh BR atau berdiri sendiri di baris paragraf
+            const hasBrAdjacent = (im.nextElementSibling && im.nextElementSibling.tagName === 'BR') ||
+                                  (im.previousElementSibling && im.previousElementSibling.tagName === 'BR');
+            if (hasBrAdjacent && !im.hasAttribute('data-latex')) {
+              im.classList.add('diagram-img');
+              p.classList.add('diagram-paragraph');
+            } else {
+              im.classList.add('inline-symbol-img');
+            }
           }
         });
+      }
+    });
+
+    // 4c. Deteksi bahasa & arah skrip presisi (Bahasa Arab vs Bahasa Indonesia)
+    temp.querySelectorAll('p, div, li, h1, h2, h3, h4, h5, h6').forEach(el => {
+      // Abaikan jika hanya kontainer pembungkus yang memiliki elemen blok anak
+      const hasBlockChildren = Array.from(el.children).some(c => ['P', 'DIV', 'TABLE', 'OL', 'UL'].includes(c.tagName));
+      if (hasBlockChildren) return;
+
+      const txt = (el.textContent || '').trim();
+      if (!txt) return;
+
+      const arMatches = txt.match(/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/g);
+      const latMatches = txt.match(/[a-zA-Z]/g);
+      const arCount = arMatches ? arMatches.length : 0;
+      const latCount = latMatches ? latMatches.length : 0;
+
+      if (arCount > latCount) {
+        el.classList.add('text-arabic');
+        el.setAttribute('dir', 'rtl');
+      } else if (latCount >= 2) {
+        el.classList.add('text-indonesian');
+        el.setAttribute('dir', 'ltr');
+        if (el.style.textAlign === 'right') {
+          el.style.textAlign = 'left';
+        }
       }
     });
 
@@ -690,11 +724,28 @@ function cleanUiStimulusText(stimText, stimImages) {
     stimDiv.className = 'stimulus-body-content';
     stimDiv.innerHTML = formatPusmendikHtml(stimHtml, pkgPath);
 
-    // Lightbox click handler untuk seluruh gambar stimulus
+    // Lightbox click handler & responsive size validator untuk seluruh gambar stimulus
     stimDiv.querySelectorAll('img').forEach(img => {
       img.title = 'Klik untuk memperbesar gambar stimulus';
       img.style.cursor = 'zoom-in';
       img.onclick = () => openImageLightbox(img.src, 'Gambar Stimulus');
+
+      const checkStimImgSize = () => {
+        const nw = img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
+        const nh = img.naturalHeight || parseInt(img.getAttribute('height') || '0', 10);
+        const hasLatex = img.hasAttribute('data-latex');
+        if (!hasLatex && (nh > 65 || (nw > 180 && nh > 45))) {
+          img.classList.remove('inline-symbol-img');
+          img.classList.add('diagram-img');
+          const p = img.closest('p');
+          if (p) p.classList.add('diagram-paragraph');
+        }
+      };
+      if (img.complete && img.naturalWidth > 0) {
+        checkStimImgSize();
+      } else {
+        img.onload = checkStimImgSize;
+      }
     });
 
     stimContainer.appendChild(stimDiv);
@@ -724,7 +775,7 @@ function cleanUiStimulusText(stimText, stimImages) {
           const imgWrap = document.createElement('div');
           imgWrap.className = 'stimulus-img-container';
           const img = document.createElement('img');
-          img.src = `${pkgPath}${imgObj.rel_path || 'images/' + imgObj.filename}?v=37`;
+          img.src = `${pkgPath}${imgObj.rel_path || 'images/' + imgObj.filename}?v=41`;
           img.className = 'stimulus-img';
           img.title = 'Klik untuk memperbesar gambar stimulus';
           img.style.cursor = 'zoom-in';
@@ -762,11 +813,28 @@ function cleanUiStimulusText(stimText, stimImages) {
     promptDiv.className = 'prompt-html-wrap';
     promptDiv.innerHTML = formatPusmendikHtml(pertHtml, pkgPath);
 
-    // Lightbox click handler untuk seluruh gambar pertanyaan/prompt
+    // Lightbox click handler & responsive size validator untuk seluruh gambar pertanyaan/prompt
     promptDiv.querySelectorAll('img').forEach(img => {
       img.title = 'Klik untuk memperbesar gambar soal';
       img.style.cursor = 'zoom-in';
       img.onclick = () => openImageLightbox(img.src, 'Gambar Soal');
+
+      const checkPromptImgSize = () => {
+        const nw = img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
+        const nh = img.naturalHeight || parseInt(img.getAttribute('height') || '0', 10);
+        const hasLatex = img.hasAttribute('data-latex');
+        if (!hasLatex && (nh > 65 || (nw > 180 && nh > 45))) {
+          img.classList.remove('inline-symbol-img');
+          img.classList.add('diagram-img');
+          const p = img.closest('p');
+          if (p) p.classList.add('diagram-paragraph');
+        }
+      };
+      if (img.complete && img.naturalWidth > 0) {
+        checkPromptImgSize();
+      } else {
+        img.onload = checkPromptImgSize;
+      }
     });
 
     promptContainer.appendChild(promptDiv);
@@ -882,7 +950,7 @@ function cleanUiStimulusText(stimText, stimImages) {
         if (base.endsWith('images/') && rel.startsWith('images/')) {
           rel = rel.substring(7);
         }
-        mathImg.src = `${base}${rel}?v=37`;
+        mathImg.src = `${base}${rel}?v=41`;
         mathImg.alt = `Pilihan ${opt.key}`;
         mathImg.title = 'Klik untuk memperbesar gambar';
         mathImg.onclick = (e) => {
@@ -938,6 +1006,20 @@ function cleanUiStimulusText(stimText, stimImages) {
           fullContent = opt.text || '';
         }
         body.innerHTML = fullContent;
+      }
+
+      // Deteksi bahasa teks opsi (Arab vs Indonesia)
+      const optRawText = (body.textContent || '').trim();
+      const arMatches = optRawText.match(/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/g);
+      const latMatches = optRawText.match(/[a-zA-Z]/g);
+      const arCount = arMatches ? arMatches.length : 0;
+      const latCount = latMatches ? latMatches.length : 0;
+      if (arCount > latCount) {
+        optItem.classList.add('opt-arabic');
+        body.classList.add('opt-arabic');
+      } else {
+        optItem.classList.add('opt-indonesian');
+        body.classList.add('opt-indonesian');
       }
 
       optItem.appendChild(body);
@@ -1130,6 +1212,17 @@ function renderBsStatements(q, selection, container) {
     } else {
       body.innerHTML = stmtText;
     }
+
+    // Deteksi bahasa teks pernyataan (Arab vs Indonesia)
+    const stmtRaw = (body.textContent || '').trim();
+    const arMatches = stmtRaw.match(/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFF]/g);
+    const latMatches = stmtRaw.match(/[a-zA-Z]/g);
+    if ((arMatches ? arMatches.length : 0) > (latMatches ? latMatches.length : 0)) {
+      body.classList.add('stmt-arabic');
+    } else {
+      body.classList.add('stmt-indonesian');
+    }
+
     row.appendChild(body);
 
     // Tombol nilai (Benar/Salah atau label) — toggle, touch-friendly
