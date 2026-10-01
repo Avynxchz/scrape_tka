@@ -3264,10 +3264,10 @@ html, body {
 .opt-body img.opt-diagram-img {
   max-width: 100%;
   width: auto;
-  max-height: 340px;
-  min-height: 180px;
+  max-height: 280px;
+  min-height: unset;
   display: block;
-  margin: 8px 0;
+  margin: 6px 0;
   object-fit: contain;
   border-radius: 8px;
   background: #ffffff;
@@ -3303,5 +3303,167 @@ html, body {
 .opt-math-img:hover {
   transform: scale(1.05);
 }
+
+/* ==========================================================================
+   PENYESUAIAN UKURAN GAMBAR SPESIFIK SESUAI AUDIT MATEMATIKA & MATEMATIKA LANJUT
+   ========================================================================== */
+
+/* 1. Matematika (Wajib) Paket 1 No 9: gambar di soal dan pertanyaan agak dikecilkan */
+[data-subject="matematika"][data-paket="1"][data-nomor="9"] #stimulusContainer img,
+[data-subject="matematika"][data-paket="1"][data-nomor="9"] #promptContainer img,
+body[data-active-subject="matematika"][data-active-paket="1"][data-active-nomor="9"] #stimulusContainer img,
+body[data-active-subject="matematika"][data-active-paket="1"][data-active-nomor="9"] #promptContainer img {
+  max-height: 1.85em !important;
+  transform: scale(0.85);
+  transform-origin: left center;
+}
+
+/* 2. Matematika (Wajib) Paket 1 No 11: hanya gambar opsi jawaban dikecilkan sedikit */
+[data-subject="matematika"][data-paket="1"][data-nomor="11"] .opt-body img,
+body[data-active-subject="matematika"][data-active-paket="1"][data-active-nomor="11"] .opt-body img {
+  max-height: 2.6em !important;
+  max-width: 175px !important;
+  height: auto !important;
+  padding: 2px !important;
+  margin: 4px 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* 3. Matematika (Wajib) Paket 1 No 19: hanya gambar opsi jawaban dibesarkan sedikit */
+[data-subject="matematika"][data-paket="1"][data-nomor="19"] .opt-body img,
+body[data-active-subject="matematika"][data-active-paket="1"][data-active-nomor="19"] .opt-body img {
+  max-height: 4.6em !important;
+  transform: scale(1.3);
+  transform-origin: left center;
+  margin: 6px 8px !important;
+}
+
+/* 4. Matematika (Wajib) Paket 2 No 8: hanya gambar opsi jawaban (ABCDE) dibesarkan sedikit */
+[data-subject="matematika"][data-paket="2"][data-nomor="8"] .opt-body img,
+body[data-active-subject="matematika"][data-active-paket="2"][data-active-nomor="8"] .opt-body img {
+  max-height: 5.2em !important;
+  transform: scale(1.32);
+  transform-origin: left center;
+  margin: 6px 8px !important;
+}
+
+/* 5. Matematika Tingkat Lanjut Paket 1 No 16: khusus opsi jawaban A dikecilkan */
+[data-subject="matematika_lanjut"][data-paket="1"][data-nomor="16"] [data-key="A"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="1"][data-nomor="16"] [data-opt-key="A"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="1"][data-active-nomor="16"] [data-key="A"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="1"][data-active-nomor="16"] [data-opt-key="A"] .opt-body img {
+  max-height: 2.3em !important;
+  max-width: 42px !important;
+  height: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 2px 0 !important;
+}
+
+/* 6. Matematika Tingkat Lanjut Paket 1 No 18: opsi jawaban (ABCDE) ukuran sedang */
+[data-subject="matematika_lanjut"][data-paket="1"][data-nomor="18"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="1"][data-active-nomor="18"] .opt-body img {
+  max-height: 2.3em !important;
+  height: auto !important;
+  width: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 2px !important;
+  margin: 4px 0 !important;
+}
+
+/* 7. Matematika Tingkat Lanjut Paket 1 No 20: opsi jawaban (ABCDE) ukuran sedang */
+[data-subject="matematika_lanjut"][data-paket="1"][data-nomor="20"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="1"][data-active-nomor="20"] .opt-body img {
+  max-height: 2.4em !important;
+  height: auto !important;
+  width: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 2px !important;
+  margin: 4px 0 !important;
+}
+
+/* 8. Matematika Tingkat Lanjut Paket 2 No 1: hanya opsi jawaban dibesarkan sedikit agar tulisan limit terbaca jelas */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="1"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="1"] .opt-body img {
+  max-height: 4.8em !important;
+  transform: scale(1.35);
+  transform-origin: left center;
+  margin: 6px 8px !important;
+}
+
+/* 9. Matematika Tingkat Lanjut Paket 2 No 4: hanya opsi jawaban diperkecil sedikit */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="4"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="4"] .opt-body img {
+  max-height: 2.7em !important;
+  height: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 2px !important;
+  margin: 4px 0 !important;
+}
+
+/* 10. Matematika Tingkat Lanjut Paket 2 No 16: hanya opsi jawaban (ABCDE) diperkecil */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="16"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="16"] .opt-body img {
+  max-height: 2.0em !important;
+  height: auto !important;
+  width: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 2px !important;
+  margin: 2px 0 !important;
+}
+
+/* 11. Matematika Tingkat Lanjut Paket 2 No 21: gambar opsi A, B, C dikecilkan agar seimbang dengan D & E */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-key="A"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-key="B"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-key="C"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-opt-key="A"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-opt-key="B"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-opt-key="C"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-key="A"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-key="B"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-key="C"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-opt-key="A"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-opt-key="B"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-opt-key="C"] .opt-body img {
+  max-height: 2.6em !important;
+  max-width: 90px !important;
+  height: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 2px 0 !important;
+}
+
+/* 12. Matematika Tingkat Lanjut Paket 2 No 23: hanya gambar pertanyaan diperbesar sedikit */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="23"] #promptContainer img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="23"] #promptContainer img {
+  max-height: 4.8em !important;
+  transform: scale(1.35);
+  transform-origin: left center;
+  margin: 8px 4px !important;
+}
+
+/* 13. Matematika Tingkat Lanjut Paket 2 No 25: hanya gambar pertanyaan diperbesar sedikit */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="25"] #promptContainer img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="25"] #promptContainer img {
+  max-height: 4.8em !important;
+  transform: scale(1.35);
+  transform-origin: left center;
+  margin: 8px 4px !important;
+}
+
 
 

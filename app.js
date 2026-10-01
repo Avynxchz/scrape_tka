@@ -501,6 +501,23 @@ function renderQuestion() {
     }
   } catch (e) {}
 
+  // Set dataset attributes for scoped question styling
+  const card = document.querySelector('.cbt-question-card');
+  if (card) {
+    card.dataset.subject = state.currentSubject;
+    card.dataset.paket = String(state.currentPkg);
+    card.dataset.nomor = String(q.nomor);
+  }
+  const examGridEl = document.getElementById('cbtExamGrid');
+  if (examGridEl) {
+    examGridEl.dataset.subject = state.currentSubject;
+    examGridEl.dataset.paket = String(state.currentPkg);
+    examGridEl.dataset.nomor = String(q.nomor);
+  }
+  document.body.dataset.activeSubject = state.currentSubject;
+  document.body.dataset.activePaket = String(state.currentPkg);
+  document.body.dataset.activeNomor = String(q.nomor);
+
 /**
  * Format dan bersihkan HTML resmi CBT Pusmendik agar aman, responsif,
  * dan terintegrasi rapi dengan sistem layout kartu modern kita.
@@ -534,7 +551,7 @@ function formatPusmendikHtml(rawHtml, pkgPath) {
     const parts = p1.split('/');
     const fname = parts[parts.length - 1].split('?')[0];
     let base = pkgPath.endsWith('/') ? pkgPath : `${pkgPath}/`;
-    return `src="${base}images/${fname}?v=36"`;
+    return `src="${base}images/${fname}?v=37"`;
   });
 
   // 4. Buat parser DOM lokal agar aman, responsif, dan presisi
@@ -707,7 +724,7 @@ function cleanUiStimulusText(stimText, stimImages) {
           const imgWrap = document.createElement('div');
           imgWrap.className = 'stimulus-img-container';
           const img = document.createElement('img');
-          img.src = `${pkgPath}${imgObj.rel_path || 'images/' + imgObj.filename}?v=36`;
+          img.src = `${pkgPath}${imgObj.rel_path || 'images/' + imgObj.filename}?v=37`;
           img.className = 'stimulus-img';
           img.title = 'Klik untuk memperbesar gambar stimulus';
           img.style.cursor = 'zoom-in';
@@ -805,6 +822,7 @@ function cleanUiStimulusText(stimText, stimImages) {
       const optItem = document.createElement('div');
       optItem.className = `option-item ${isSelected ? 'selected' : ''}`;
       optItem.dataset.key = opt.key;
+      optItem.dataset.optKey = opt.key;
       optItem.onclick = () => selectOption(opt.key, isComplex);
 
       // Key indicator
@@ -832,7 +850,9 @@ function cleanUiStimulusText(stimText, stimImages) {
           const checkSize = () => {
             const nw = img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
             const nh = img.naturalHeight || parseInt(img.getAttribute('height') || '0', 10);
-            if ((nw > 100 || nh > 55) && !img.hasAttribute('data-latex')) {
+            // Hanya anggap diagram jika benar-benar tinggi / bukan strip formula horizontal
+            const isFormula = img.hasAttribute('data-latex') || (nh > 0 && nh <= 65);
+            if (!isFormula && (nh > 75 || (nw > 280 && nh > 60))) {
               img.classList.remove('opt-math-img');
               img.classList.add('opt-diagram-img');
             } else {
@@ -862,7 +882,7 @@ function cleanUiStimulusText(stimText, stimImages) {
         if (base.endsWith('images/') && rel.startsWith('images/')) {
           rel = rel.substring(7);
         }
-        mathImg.src = `${base}${rel}?v=36`;
+        mathImg.src = `${base}${rel}?v=37`;
         mathImg.alt = `Pilihan ${opt.key}`;
         mathImg.title = 'Klik untuk memperbesar gambar';
         mathImg.onclick = (e) => {
@@ -873,7 +893,7 @@ function cleanUiStimulusText(stimText, stimImages) {
 
         // Klasifikasi visual diagram vs rumus inline
         mathImg.onload = () => {
-          if (mathImg.naturalHeight > 55 || mathImg.naturalWidth > 90) {
+          if (mathImg.naturalHeight > 75 || (mathImg.naturalWidth > 280 && mathImg.naturalHeight > 60)) {
             mathImg.classList.add('opt-diagram-img');
           } else {
             mathImg.classList.add('opt-math-img');
