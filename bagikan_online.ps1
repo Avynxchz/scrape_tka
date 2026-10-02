@@ -1,10 +1,13 @@
 # ============================================================
 # BAGIKAN ONLINE — ekspos app lokal ke internet via tunnel.
-# Pakai: cloudflared (tanpa akun, default) atau ngrok (jika tersedia).
+# Pakai: cloudflared (tanpa akun, default) atau ngrok (-Tunnel ngrok).
 # Server demo berjalan di port 8081 dengan PUBLIC_DEMO=1
 # (endpoint admin dimatikan otomatis).
 # Matikan: jalankan matikan_bagikan.bat, atau Ctrl+C di jendela ini.
+# Catatan: crawler AI (mis. Claude) diblokir robots.txt milik Cloudflare di
+# domain trycloudflare.com — untuk audit oleh AI, pakai -Tunnel ngrok.
 # ============================================================
+param([string]$Tunnel = "cloudflared")
 $ErrorActionPreference = 'Stop'
 Set-Location $PSScriptRoot
 
@@ -59,19 +62,21 @@ $url = $null
 $cf = $null
 $ng = $null
 
-# 3a. Coba cloudflared dulu (tanpa akun)
-Write-Host "[3/4] Menyalakan tunnel cloudflared..." -ForegroundColor Cyan
-if (Test-Path "scratch\tunnel.log") { Remove-Item "scratch\tunnel.log" -Force -ErrorAction SilentlyContinue }
-$cf = Start-Process -FilePath ".\cloudflared.exe" `
-    -ArgumentList "tunnel", "--url", "http://127.0.0.1:$port", "--logfile", "$PSScriptRoot\scratch\tunnel.log" `
-    -WorkingDirectory $PSScriptRoot -WindowStyle Hidden -PassThru
+# 3a. cloudflared (tanpa akun) — dilewati bila -Tunnel ngrok
+if ($Tunnel -ne "ngrok") {
+    Write-Host "[3/4] Menyalakan tunnel cloudflared..." -ForegroundColor Cyan
+    if (Test-Path "scratch\tunnel.log") { Remove-Item "scratch\tunnel.log" -Force -ErrorAction SilentlyContinue }
+    $cf = Start-Process -FilePath ".\cloudflared.exe" `
+        -ArgumentList "tunnel", "--url", "http://127.0.0.1:$port", "--logfile", "$PSScriptRoot\scratch\tunnel.log" `
+        -WorkingDirectory $PSScriptRoot -WindowStyle Hidden -PassThru
 
-for ($i = 0; $i -lt 45; $i++) {
-    Start-Sleep -Seconds 1
-    if ($cf.HasExited) { break }
-    if (Test-Path "scratch\tunnel.log") {
-        $m = Select-String -Path "scratch\tunnel.log" -Pattern "https://[a-z0-9-]+\.trycloudflare\.com" -ErrorAction SilentlyContinue | Select-Object -First 1
-        if ($m) { $url = $m.Matches[0].Value; $tunnel = "cloudflared"; break }
+    for ($i = 0; $i -lt 45; $i++) {
+        Start-Sleep -Seconds 1
+        if ($cf.HasExited) { break }
+        if (Test-Path "scratch\tunnel.log") {
+            $m = Select-String -Path "scratch\tunnel.log" -Pattern "https://[a-z0-9-]+\.trycloudflare\.com" -ErrorAction SilentlyContinue | Select-Object -First 1
+            if ($m) { $url = $m.Matches[0].Value; $tunnel = "cloudflared"; break }
+        }
     }
 }
 

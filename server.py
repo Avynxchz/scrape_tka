@@ -2,6 +2,7 @@ import re
 import os
 import sys
 import json
+import html as html_lib
 import urllib.request
 import urllib.parse
 import threading
@@ -556,6 +557,189 @@ get_ai_tutor_response = legacy_tutor.get_ai_tutor_response
 
 _client_active_context = {}  # ip -> {"subject": ..., "paket": ...}
 
+# ============================================================================
+# HALAMAN /audit — snapshot konten soal+pembahasan server-rendered (tanpa JS).
+# Dipakai reviewer otomatis / model AI yang hanya bisa fetch HTML mentah.
+# ============================================================================
+_AUDIT_IMG_RE = re.compile(r'<img[^>]*>', re.I)
+
+
+def _audit_text(fragment):
+    """HTML Pusmendik -> teks polos (pertahankan $math$, tandai gambar)."""
+    s = fragment or ''
+    s = re.sub(r'<br\s*/?>', '\n', s, flags=re.I)
+    s = re.sub(r'</(p|div|li|tr|h[1-6]|td)>', '\n', s, flags=re.I)
+    s = _AUDIT_IMG_RE.sub(' [GAMBAR] ', s)
+    s = re.sub(r'<[^>]+>', '', s)
+    s = html_lib.unescape(s)
+    s = re.sub(r'[ \t]+', ' ', s)
+    s = re.sub(r'\n\s*\n\s*\n+', '\n\n', s)
+    return s.strip()
+
+
+def _audit_option_text(opt):
+    if isinstance(opt, str):
+        return _audit_text(opt)
+    if opt.get('text'):
+        return _audit_text(opt['text'])
+    if opt.get('latex'):
+        return '$' + str(opt['latex']).strip('$') + '$'
+    if opt.get('image'):
+        img = opt['image']
+        name = img.get('filename') if isinstance(img, dict) else str(img)
+        return f"[GAMBAR OPSI: {name}]"
+    return '(kosong)'
+
+
+def _audit_block(label, value):
+    if value in (None, '', [], '-'):
+        return ''
+    return f"<p><strong>{html_lib.escape(label)}:</strong></p><div class=\"blk\">{value}</div>"
+
+
+def render_audit_page(subject, paket, dari, sampai):
+    esc = html_lib.escape
+    sections = []
+    for nomor in range(dari, sampai + 1):
+        lrn_q = learning_for(subject, paket, nomor)
+        canon = canonical_for(subject, paket, nomor)
+        if not lrn_q and not canon:
+            sections.append(f"<section><h2 id=\"soal-{nomor}\">SOAL {nomor}</h2><p>(tidak ditemukan di data)</p></section>")
+            continue
+
+        tipe = (lrn_q or {}).get('tipe_soal') or (canon or {}).get('type') or 'Pilihan Ganda'
+        topik = (lrn_q or {}).get('topik') or ''
+        stim = ((lrn_q or {}).get('stimulus') or {}).get('text') or (canon or {}).get('stimulus') or ''
+        tanya = ((lrn_q or {}).get('pertanyaan') or {}).get('text') or (canon or {}).get('question') or ''
+        pilihan = (lrn_q or {}).get('pilihan_jawaban') or (canon or {}).get('options') or []
+        kunci = (lrn_q or {}).get('kunci_jawaban') or (canon or {}).get('official_answer')
+        pernyataan = (lrn_q or {}).get('pernyataan') or []
+
+        # Solusi Layer 3 (bisa gagal bila canon None dsb. -> tandai belum tersedia)
+        pembahasan = None
+        answer_display = None
+        review = {}
+        try:
+            sol = build_solution_payload(canon, lrn_q, subject, paket)
+            pembahasan = sol.get('pembahasan') or {}
+            answer_display = sol.get('answer_display')
+            review = sol.get('review') or {}
+        except Exception:
+            pembahasan = None
+
+        rows = []
+        rows.append(f"<h2 id=\"soal-{nomor}\">SOAL {nomor} — {esc(str(tipe))}</h2>")
+        if topik:
+            rows.append(f"<p class=\"meta\">Topik: {esc(str(topik))}</p>")
+        if _audit_text(stim):
+            rows.append(_audit_block('STIMULUS', esc(_audit_text(stim))))
+        if _audit_text(tanya):
+            rows.append(_audit_block('PERTANYAAN', esc(_audit_text(tanya))))
+        if pernyataan:
+            stmt_rows = []
+            for st in pernyataan:
+                key = esc(str(st.get('key', '')))
+                stmt_rows.append(f"{key}) {esc(_audit_text(st.get('text', '')))}")
+            rows.append(_audit_block('PERNYATAAN', '<br>'.join(stmt_rows)))
+        if pilihan:
+            opt_rows = []
+            for opt in pilihan:
+                key = esc(str(opt.get('key', '?'))) if isinstance(opt, dict) else '?'
+                opt_rows.append(f"{key}) {esc(_audit_option_text(opt))}")
+            rows.append(_audit_block('OPSI JAWABAN', '<br>'.join(opt_rows)))
+
+        if isinstance(kunci, dict):
+            kunci_txt = '; '.join(f"{esc(str(k))}: {esc(str(v))}" for k, v in kunci.items())
+        elif isinstance(kunci, list):
+            kunci_txt = ', '.join(esc(str(k)) for k in kunci)
+        else:
+            kunci_txt = esc(str(kunci or '-'))
+        if answer_display:
+            kunci_txt += f" &nbsp;(answer_display: {esc(str(answer_display))})"
+        rows.append(f"<p><strong>KUNCI RESMI:</strong> {kunci_txt}</p>")
+
+        if pembahasan:
+            rows.append("<h3>PEMBAHASAN (Layer 3)</h3>")
+            if pembahasan.get('diketahui'):
+                rows.append(_audit_block('Diketahui', esc(_audit_text(pembahasan['diketahui']))))
+            if pembahasan.get('ditanyakan'):
+                rows.append(_audit_block('Ditanyakan', esc(_audit_text(pembahasan['ditanyakan']))))
+            if pembahasan.get('konsep_kunci'):
+                rows.append(_audit_block('Konsep kunci', esc(_audit_join_list(pembahasan['konsep_kunci']))))
+            if pembahasan.get('mengapa_begini'):
+                rows.append(_audit_block('Mengapa rumus ini dipakai', esc(_audit_text(pembahasan['mengapa_begini']))))
+            langkah = pembahasan.get('langkah_penyelesaian') or []
+            if langkah:
+                step_rows = []
+                for i, s in enumerate(langkah, 1):
+                    step_rows.append(f"<strong>Langkah {i}:</strong> {esc(_audit_text(str(s)))}")
+                rows.append(_audit_block('Langkah penyelesaian', '<br><br>'.join(step_rows)))
+            if pembahasan.get('glosarium_simbol'):
+                glos_rows = []
+                for g in pembahasan['glosarium_simbol']:
+                    glos_rows.append(f"{esc(str(g.get('simbol', '')))} = {esc(str(g.get('arti', '')))}")
+                rows.append(_audit_block('Glosarium simbol', '<br>'.join(glos_rows)))
+            if pembahasan.get('tips_list'):
+                rows.append(_audit_block('Tips', esc(_audit_join_list(pembahasan['tips_list']))))
+            if pembahasan.get('mistakes_list'):
+                rows.append(_audit_block('Jebakan umum', esc(_audit_join_list(pembahasan['mistakes_list']))))
+            if review.get('needs_manual_review'):
+                rows.append(f"<p class=\"warn\">⚠ PERLU VERIFIKASI MANUAL: {esc(str(review.get('review_reason', '')))}</p>")
+        else:
+            rows.append("<p class=\"warn\">PEMBAHASAN: belum tersedia untuk soal ini.</p>")
+
+        sections.append(f"<section>{''.join(rows)}</section>")
+
+    title = f"Audit Konten — {esc(subject)} Paket {paket} (Nomor {dari}–{sampai})"
+    return f"""<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<link rel="stylesheet" href="style.css?v=46">
+<style>
+  .audit-wrap {{ max-width: 860px; margin: 0 auto; padding: 32px 20px 72px; }}
+  .audit-wrap h1 {{ font-size: 22px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); }}
+  .audit-note {{ font-size: 13px; color: var(--text-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 10px 14px; background: var(--surface); margin: 16px 0 24px; }}
+  .audit-wrap section {{ border: 1px solid var(--border); border-radius: 8px;
+    padding: 18px 20px; margin-bottom: 22px; background: var(--bg-card); }}
+  .audit-wrap h2 {{ font-size: 16px; font-weight: 600; color: var(--text); margin: 0 0 10px; }}
+  .audit-wrap h3 {{ font-size: 13px; font-weight: 600; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: 0.05em; margin: 18px 0 6px; }}
+  .audit-wrap p, .audit-wrap .blk {{ font-size: 14.5px; line-height: 1.7; color: var(--text); }}
+  .audit-wrap .blk {{ white-space: pre-wrap; }}
+  .audit-wrap .meta {{ font-size: 12.5px; color: var(--text-3); }}
+  .audit-wrap .warn {{ color: var(--warn); font-weight: 500; }}
+</style>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script defer>
+window.addEventListener('DOMContentLoaded', function () {{
+  if (window.renderMathInElement) renderMathInElement(document.body, {{
+    delimiters: [{{left: '$$', right: '$$', display: true}}, {{left: '$', right: '$', display: false}}],
+    throwOnError: false
+  }});
+}});
+</script>
+</head>
+<body>
+<div class="audit-wrap">
+<h1>{title}</h1>
+<div class="audit-note">Halaman statis untuk reviewer otomatis — konten apa adanya dari data.
+Teks di dalam <code>$...$</code> adalah LaTeX matematika. [GAMBAR] = gambar soal/opsi asli
+yang hanya terlihat di aplikasi. Halaman interaktif: <code>/app</code>.</div>
+{''.join(sections)}
+</div>
+</body>
+</html>"""
+
+
+def _audit_join_list(items):
+    return ' | '.join(_audit_text(str(x)) for x in items) if items else '-'
+
+
 def _track_client_context(handler):
     try:
         ip = handler.client_address[0] if hasattr(handler, 'client_address') and handler.client_address else '127.0.0.1'
@@ -784,6 +968,27 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 return self._send_json(200, get_full_catalog())
             except Exception as e:
                 return self._send_json(500, {"status": "error", "message": str(e)})
+
+        # Snapshot konten server-rendered untuk reviewer otomatis (Fase bagikan online):
+        # /audit?subject=matematika&paket=1&dari=1&sampai=10
+        if self.path.split('?', 1)[0] == '/audit':
+            try:
+                qs = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+                a_subject = qs.get('subject', ['matematika'])[0]
+                a_paket = int(qs.get('paket', ['1'])[0])
+                a_dari = max(1, int(qs.get('dari', ['1'])[0]))
+                a_sampai = min(int(qs.get('sampai', ['10'])[0]), a_dari + 24)
+                audit_body = render_audit_page(a_subject, a_paket, a_dari, a_sampai).encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Length', str(len(audit_body)))
+                self.end_headers()
+                self.wfile.write(audit_body)
+            except (BrokenPipeError, ConnectionResetError):
+                return
+            except Exception as e:
+                return self._send_json(500, {"status": "error", "message": str(e)})
+            return
 
         # Fase 3: halaman statis (landing, legal) & alias /app untuk aplikasi.
         # "/" -> landing.html (fallback index.html bila file tidak ada).
