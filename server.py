@@ -774,6 +774,37 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             except Exception as e:
                 return self._send_json(500, {"status": "error", "message": str(e)})
 
+        # Fase 3: halaman statis (landing, legal) & alias /app untuk aplikasi.
+        # "/" -> landing.html (fallback index.html bila file tidak ada).
+        route_path = urllib.parse.urlparse(self.path).path or '/'
+        if len(route_path) > 1 and route_path.endswith('/'):
+            route_path = route_path.rstrip('/')
+        page_routes = {
+            '/': 'landing.html',
+            '/app': 'index.html',
+            '/privacy': 'privacy.html',
+            '/terms': 'terms.html',
+        }
+        target_page = page_routes.get(route_path)
+        if target_page:
+            page_file = os.path.join(BASE_DIR, target_page)
+            if os.path.isfile(page_file):
+                try:
+                    with open(page_file, 'rb') as fh:
+                        page_body = fh.read()
+                    self.send_response(200)
+                    self.send_header('Content-Type', 'text/html; charset=utf-8')
+                    self.send_header('Content-Length', str(len(page_body)))
+                    self.send_header('Cache-Control', 'no-cache')
+                    self.end_headers()
+                    self.wfile.write(page_body)
+                    return
+                except (BrokenPipeError, ConnectionResetError):
+                    return
+                except Exception as e:
+                    return self._send_json(500, {"status": "error", "message": str(e)})
+            # File halaman tidak ada -> lanjut ke super() (fallback lama).
+
         return super().do_GET()
 
     def do_POST(self):
