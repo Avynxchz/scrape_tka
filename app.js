@@ -3322,3 +3322,16 @@ function initFeedback() {
 }
 
 document.addEventListener('DOMContentLoaded', initFeedback);
+
+// ===== Mode bagikan online: sembunyikan tombol admin (Reset kuota) =====
+// Muncul lagi bila akses dengan ?admin=1 atau localStorage.tka_admin = '1'.
+(function hideAdminTools() {
+  try {
+    const isAdmin = localStorage.getItem('tka_admin') === '1' ||
+                    window.location.search.includes('admin=1');
+    if (!isAdmin) {
+      const btn = document.getElementById('btnRefreshQuota');
+      if (btn) btn.style.display = 'none';
+    }
+  } catch (e) {}
+})();

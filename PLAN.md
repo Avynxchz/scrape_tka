@@ -108,3 +108,17 @@ Jangan pernah commit `.env`.
   sudah dipasang, CLS penuh menunggu metadata dimensi.
 - **Halaman "Terdaftar"** — menunggu auth; pricing menampilkan badge "segera".
 - Halaman privacy/terms masih draf — perlu ditinjau sebelum dipublikasikan luas.
+
+## Bagikan online untuk demo/feedback
+
+- **Nyalakan**: double-click `bagikan_online.bat` → otomatis menyalakan server demo
+  (port 8081, `PUBLIC_DEMO=1`), tunnel cloudflared (fallback ngrok), lalu menampilkan
+  link publik `https://xxx.trycloudflare.com` untuk dibagikan.
+- **Matikan**: jalankan `matikan_bagikan.bat`, atau Ctrl+C di jendela skrip.
+- Keamanan saat demo: endpoint admin dimatikan (`/api/tutor/reset_quota`, `/api/swarm/*`,
+  `/api/ai-tutor` → 403), tombol Reset kuota disembunyikan di UI (muncul lagi dengan
+  `?admin=1` atau `localStorage.tka_admin='1'`), kuota tamu 5/hari tetap berlaku.
+- URL quick tunnel berubah setiap kali nyalakan. Mau link permanen → pakai ngrok
+  (sudah terauth di mesin ini) atau domain sendiri.
+- Feedback penguji terkumpul di tabel `feedback` SQLite:
+  `python -c "import sqlite3; c=sqlite3.connect('data/ai_tutor.db'); print(c.execute('SELECT rating, message, device, created_at FROM feedback ORDER BY id DESC LIMIT 20').fetchall())"`

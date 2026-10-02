@@ -54,6 +54,17 @@ PORT = int(os.environ.get("PORT", 8080))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # ============================================================================
+# MODE DEMO PUBLIK (bagikan via tunnel)
+# Saat PUBLIC_DEMO=1 (dipakai oleh bagikan_online.ps1), endpoint administratif
+# dimatikan supaya pengunjung publik tidak bisa:
+#   - me-reset kuota AI (/api/tutor/reset_quota)
+#   - menyalakan/menghapus swarm scraper yang memakai API key (/api/swarm/*)
+#   - memakai endpoint tutor legacy tanpa kuota (/api/ai-tutor)
+# ============================================================================
+PUBLIC_DEMO = os.environ.get("PUBLIC_DEMO", "0") == "1"
+DEMO_BLOCKED_PATHS = ('/api/tutor/reset_quota', '/api/swarm/start', '/api/swarm/reset', '/api/ai-tutor')
+
+# ============================================================================
 # LAPISAN KANONIS (data/canonical_questions/) — sumber konteks AI
 # ============================================================================
 # Konteks soal untuk AI Tutor & Tata Cara Penyelesaian kini bersumber dari
@@ -809,6 +820,11 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         _track_client_context(self)
+        if PUBLIC_DEMO and self.path in DEMO_BLOCKED_PATHS:
+            return self._send_json(403, {
+                "status": "forbidden",
+                "message": "Endpoint ini dimatikan saat mode demo publik.",
+            })
         if self.path == '/api/swarm/start':
             try:
                 content_length = int(self.headers.get('Content-Length', 0))
