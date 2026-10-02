@@ -139,7 +139,7 @@ def init_db():
                     WHERE request_id IS NOT NULL;
                 CREATE TABLE IF NOT EXISTS ai_tutor_users (
                     user_key           TEXT PRIMARY KEY,
-                    tier               TEXT NOT NULL DEFAULT 'free',
+                    tier               TEXT NOT NULL DEFAULT 'guest',
                     daily_date         TEXT,
                     daily_count        INTEGER NOT NULL DEFAULT 0,
                     last_request_time  REAL NOT NULL DEFAULT 0,
@@ -148,6 +148,9 @@ def init_db():
                 );
                 """
             )
+            # Fase 4: sebelum ada auth, semua user ber-tier 'free' dari versi lama
+            # sebenarnya adalah guest (tidak pernah login) -> dimigrasi ke 'guest'.
+            conn.execute("UPDATE ai_tutor_users SET tier='guest' WHERE tier='free'")
 
 
 # ---------------------------------------------------------------------------
@@ -155,6 +158,13 @@ def init_db():
 # ---------------------------------------------------------------------------
 def _now():
     return time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime()) + "Z"
+
+
+def _today_wib():
+    """Tanggal hari ini menurut WIB (UTC+7) — batas reset kuota harian 00:00 WIB."""
+    from datetime import datetime, timedelta, timezone
+    wib = timezone(timedelta(hours=7))
+    return datetime.now(wib).strftime("%Y-%m-%d")
 
 
 # ---------------------------------------------------------------------------
@@ -285,21 +295,32 @@ def get_messages(conversation_id, limit=None):
 # ---------------------------------------------------------------------------
 # Kuota Pertanyaan & Cooldown Anti-Spam (Database Per Pengguna)
 # ---------------------------------------------------------------------------
-FREE_DAILY_LIMIT = 10
-SUBSCRIBER_DAILY_LIMIT = 100
+# Fase 4 — satuan kuota = 1 pesan user ke AI Tutor; reset tiap 00:00 WIB
+# (_today_wib). Angka ini harus konsisten dengan landing.html.
+GUEST_DAILY_LIMIT = 5          # tanpa akun (kondisi saat ini: semua pengunjung)
+FREE_DAILY_LIMIT = 20          # terdaftar/login — aktif setelah auth tersedia
+SUBSCRIBER_DAILY_LIMIT = 100   # Pro (Rp20.000/bulan; diaktifkan manual saat beta)
 QUESTION_COOLDOWN_SECONDS = 10
+
+
+def _daily_limit(tier):
+    if tier == "subscriber":
+        return SUBSCRIBER_DAILY_LIMIT
+    if tier == "free":
+        return FREE_DAILY_LIMIT
+    return GUEST_DAILY_LIMIT
 
 
 def get_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
     """Ambil informasi kuota & sisa cooldown pengguna tanpa mengonsumsi kuota."""
     now = time.time()
-    today = time.strftime("%Y-%m-%d")
+    today = _today_wib()
     with _db() as conn:
         row = conn.execute(
             "SELECT * FROM ai_tutor_users WHERE user_key=?", (user_key,)
         ).fetchone()
         if not row:
-            tier = "free"
+            tier = "guest"
             daily_count = 0
             last_req = 0.0
         else:
@@ -311,7 +332,7 @@ def get_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
                 daily_count = 0
             last_req = float(u.get("last_request_time") or 0)
 
-    limit = SUBSCRIBER_DAILY_LIMIT if tier == "subscriber" else FREE_DAILY_LIMIT
+    limit = _daily_limit(tier)
     elapsed = now - last_req
     cooldown_rem = max(0.0, round(cooldown_seconds - elapsed, 1)) if last_req > 0 else 0.0
 
@@ -345,14 +366,14 @@ def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
     Aturan:
       1. Cooldown antar pertanyaan: default 10 detik.
       2. Kuota harian:
-         - Free: 10 pertanyaan / hari
-         - Subscriber: 100 pertanyaan / hari
+         - Guest: 5 pertanyaan / hari (tanpa akun; kondisi saat ini)
+         - Pro/Subscriber: 100 pertanyaan / hari
     Mengembalikan tuple: (allowed: bool, reason: str|None, wait_seconds: float, quota_info: dict)
     reason: None | 'cooldown' | 'quota_exceeded'
     """
     is_test = bool(os.environ.get("PYTEST_CURRENT_TEST"))
     now = time.time()
-    today = time.strftime("%Y-%m-%d")
+    today = _today_wib()
 
     with _lock:
         with _db() as conn:
@@ -363,7 +384,7 @@ def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
                 conn.execute(
                     "INSERT INTO ai_tutor_users "
                     "(user_key, tier, daily_date, daily_count, last_request_time, created_at, updated_at) "
-                    "VALUES (?, 'free', ?, 0, 0, ?, ?)",
+                    "VALUES (?, 'guest', ?, 0, 0, ?, ?)",
                     (user_key, today, _now(), _now()),
                 )
                 row = conn.execute(
@@ -385,7 +406,7 @@ def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
                     (today, _now(), user_key),
                 )
 
-            limit = SUBSCRIBER_DAILY_LIMIT if tier == "subscriber" else FREE_DAILY_LIMIT
+            limit = _daily_limit(tier)
             elapsed = now - last_req
 
             # 1. Cek jeda cooldown (dilewati saat testing agar suite cepat)
@@ -447,7 +468,7 @@ def set_user_tier(user_key, tier):
     with _lock:
         with _db() as conn:
             row = conn.execute("SELECT 1 FROM ai_tutor_users WHERE user_key=?", (user_key,)).fetchone()
-            today = time.strftime("%Y-%m-%d")
+            today = _today_wib()
             if not row:
                 conn.execute(
                     "INSERT INTO ai_tutor_users (user_key, tier, daily_date, daily_count, last_request_time, created_at, updated_at) "

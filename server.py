@@ -969,7 +969,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                         limit_msg = f"Santai dulu ya, tunggu {wait_sec} detik sebelum mengirim pertanyaan berikutnya."
                     else:
                         limit = user_quota.get("daily_limit", 10)
-                        limit_msg = f"Batas kuota harian ({limit} pertanyaan) kamu untuk hari ini telah tercapai. Berlangganan untuk 100 pertanyaan per hari!"
+                        limit_msg = f"Batas kuota harian ({limit} pertanyaan) telah tercapai. Kuota direset setiap 00.00 WIB — Pro mendapat 100 pertanyaan per hari!"
                     return self._send_json(429, {
                         "status": "rate_limited",
                         "reason": quota_reason,

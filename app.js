@@ -2106,8 +2106,8 @@ function updateTutorQuotaUI(quota) {
   if (!badge || !text) return;
 
   const isSub = quota.is_subscriber || quota.tier === 'subscriber';
-  const rem = quota.remaining !== undefined ? quota.remaining : 10;
-  const limit = quota.daily_limit || (isSub ? 100 : 10);
+  const rem = quota.remaining !== undefined ? quota.remaining : 5;
+  const limit = quota.daily_limit || (isSub ? 100 : 5);
 
   text.innerText = `${rem}/${limit} Tanya`;
   badge.className = `tutor-quota-badge ${isSub ? 'subscriber' : 'free'}`;
@@ -2120,7 +2120,7 @@ function updateTutorQuotaUI(quota) {
   const btnSend = document.getElementById('btnSendChat');
   if (rem <= 0) {
     if (chatInput) {
-      chatInput.placeholder = `Kuota harianmu (${limit}/${limit}) telah habis. Berlangganan untuk 100x/hari!`;
+      chatInput.placeholder = `Kuota harianmu habis (${limit}/${limit}). Reset tiap 00:00 WIB — Pro mendapat 100x/hari!`;
       chatInput.disabled = true;
     }
     if (btnSend) btnSend.disabled = true;
