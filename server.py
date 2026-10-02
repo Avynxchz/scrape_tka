@@ -597,14 +597,14 @@ def _audit_block(label, value):
     return f"<p><strong>{html_lib.escape(label)}:</strong></p><div class=\"blk\">{value}</div>"
 
 
-def render_audit_page(subject, paket, dari, sampai):
-    esc = html_lib.escape
-    sections = []
+def _audit_collect(subject, paket, dari, sampai):
+    """Kumpulkan soal+pembahasan sebagai data teks polos utk renderer HTML/TXT."""
+    items = []
     for nomor in range(dari, sampai + 1):
         lrn_q = learning_for(subject, paket, nomor)
         canon = canonical_for(subject, paket, nomor)
         if not lrn_q and not canon:
-            sections.append(f"<section><h2 id=\"soal-{nomor}\">SOAL {nomor}</h2><p>(tidak ditemukan di data)</p></section>")
+            items.append({"nomor": nomor, "missing": True})
             continue
 
         tipe = (lrn_q or {}).get('tipe_soal') or (canon or {}).get('type') or 'Pilihan Ganda'
@@ -615,7 +615,6 @@ def render_audit_page(subject, paket, dari, sampai):
         kunci = (lrn_q or {}).get('kunci_jawaban') or (canon or {}).get('official_answer')
         pernyataan = (lrn_q or {}).get('pernyataan') or []
 
-        # Solusi Layer 3 (bisa gagal bila canon None dsb. -> tandai belum tersedia)
         pembahasan = None
         answer_display = None
         review = {}
@@ -627,67 +626,130 @@ def render_audit_page(subject, paket, dari, sampai):
         except Exception:
             pembahasan = None
 
-        rows = []
-        rows.append(f"<h2 id=\"soal-{nomor}\">SOAL {nomor} — {esc(str(tipe))}</h2>")
-        if topik:
-            rows.append(f"<p class=\"meta\">Topik: {esc(str(topik))}</p>")
-        if _audit_text(stim):
-            rows.append(_audit_block('STIMULUS', esc(_audit_text(stim))))
-        if _audit_text(tanya):
-            rows.append(_audit_block('PERTANYAAN', esc(_audit_text(tanya))))
-        if pernyataan:
-            stmt_rows = []
-            for st in pernyataan:
-                key = esc(str(st.get('key', '')))
-                stmt_rows.append(f"{key}) {esc(_audit_text(st.get('text', '')))}")
-            rows.append(_audit_block('PERNYATAAN', '<br>'.join(stmt_rows)))
-        if pilihan:
-            opt_rows = []
-            for opt in pilihan:
-                key = esc(str(opt.get('key', '?'))) if isinstance(opt, dict) else '?'
-                opt_rows.append(f"{key}) {esc(_audit_option_text(opt))}")
-            rows.append(_audit_block('OPSI JAWABAN', '<br>'.join(opt_rows)))
-
         if isinstance(kunci, dict):
-            kunci_txt = '; '.join(f"{esc(str(k))}: {esc(str(v))}" for k, v in kunci.items())
+            kunci_txt = '; '.join(f"{k}: {v}" for k, v in kunci.items())
         elif isinstance(kunci, list):
-            kunci_txt = ', '.join(esc(str(k)) for k in kunci)
+            kunci_txt = ', '.join(str(k) for k in kunci)
         else:
-            kunci_txt = esc(str(kunci or '-'))
+            kunci_txt = str(kunci or '-')
         if answer_display:
-            kunci_txt += f" &nbsp;(answer_display: {esc(str(answer_display))})"
-        rows.append(f"<p><strong>KUNCI RESMI:</strong> {kunci_txt}</p>")
+            kunci_txt += f" (answer_display: {answer_display})"
 
+        blk = []
         if pembahasan:
-            rows.append("<h3>PEMBAHASAN (Layer 3)</h3>")
             if pembahasan.get('diketahui'):
-                rows.append(_audit_block('Diketahui', esc(_audit_text(pembahasan['diketahui']))))
+                blk.append(('Diketahui', _audit_text(pembahasan['diketahui'])))
             if pembahasan.get('ditanyakan'):
-                rows.append(_audit_block('Ditanyakan', esc(_audit_text(pembahasan['ditanyakan']))))
+                blk.append(('Ditanyakan', _audit_text(pembahasan['ditanyakan'])))
             if pembahasan.get('konsep_kunci'):
-                rows.append(_audit_block('Konsep kunci', esc(_audit_join_list(pembahasan['konsep_kunci']))))
+                blk.append(('Konsep kunci', _audit_join_list(pembahasan['konsep_kunci'])))
             if pembahasan.get('mengapa_begini'):
-                rows.append(_audit_block('Mengapa rumus ini dipakai', esc(_audit_text(pembahasan['mengapa_begini']))))
+                blk.append(('Mengapa rumus ini dipakai', _audit_text(pembahasan['mengapa_begini'])))
             langkah = pembahasan.get('langkah_penyelesaian') or []
             if langkah:
-                step_rows = []
-                for i, s in enumerate(langkah, 1):
-                    step_rows.append(f"<strong>Langkah {i}:</strong> {esc(_audit_text(str(s)))}")
-                rows.append(_audit_block('Langkah penyelesaian', '<br><br>'.join(step_rows)))
+                step_txt = '\n\n'.join(
+                    f"Langkah {i}: {_audit_text(str(s))}" for i, s in enumerate(langkah, 1))
+                blk.append(('Langkah penyelesaian', step_txt))
             if pembahasan.get('glosarium_simbol'):
-                glos_rows = []
-                for g in pembahasan['glosarium_simbol']:
-                    glos_rows.append(f"{esc(str(g.get('simbol', '')))} = {esc(str(g.get('arti', '')))}")
-                rows.append(_audit_block('Glosarium simbol', '<br>'.join(glos_rows)))
+                glos = '\n'.join(f"{g.get('simbol', '')} = {g.get('arti', '')}"
+                                 for g in pembahasan['glosarium_simbol'])
+                blk.append(('Glosarium simbol', glos))
             if pembahasan.get('tips_list'):
-                rows.append(_audit_block('Tips', esc(_audit_join_list(pembahasan['tips_list']))))
+                blk.append(('Tips', _audit_join_list(pembahasan['tips_list'])))
             if pembahasan.get('mistakes_list'):
-                rows.append(_audit_block('Jebakan umum', esc(_audit_join_list(pembahasan['mistakes_list']))))
-            if review.get('needs_manual_review'):
-                rows.append(f"<p class=\"warn\">⚠ PERLU VERIFIKASI MANUAL: {esc(str(review.get('review_reason', '')))}</p>")
+                blk.append(('Jebakan umum', _audit_join_list(pembahasan['mistakes_list'])))
+        warn = None
+        if review.get('needs_manual_review'):
+            warn = str(review.get('review_reason', ''))
+
+        items.append({
+            "nomor": nomor, "missing": False, "tipe": str(tipe), "topik": str(topik),
+            "stimulus": _audit_text(stim), "pertanyaan": _audit_text(tanya),
+            "pernyataan": [f"{st.get('key', '')}) {_audit_text(st.get('text', ''))}"
+                           for st in pernyataan],
+            "opsi": [f"{(o.get('key', '?') if isinstance(o, dict) else '?')}) {_audit_option_text(o)}"
+                     for o in pilihan],
+            "kunci": kunci_txt, "pembahasan": blk, "warn": warn,
+        })
+    return items
+
+
+def render_audit_text(subject, paket, dari, sampai):
+    items = _audit_collect(subject, paket, dari, sampai)
+    out = [
+        f"AUDIT KONTEN — {subject} Paket {paket} — Nomor {dari}-{sampai}",
+        "Teks di dalam $...$ adalah LaTeX matematika. [GAMBAR] = gambar soal/opsi asli",
+        "yang hanya terlihat di aplikasi interaktif.",
+        "=" * 60,
+    ]
+    for it in items:
+        out.append("")
+        out.append("=" * 60)
+        if it.get("missing"):
+            out.append(f"SOAL {it['nomor']} — (tidak ditemukan di data)")
+            continue
+        out.append(f"SOAL {it['nomor']} — {it['tipe']}")
+        if it["topik"]:
+            out.append(f"Topik: {it['topik']}")
+        if it["stimulus"]:
+            out.append("")
+            out.append("STIMULUS:")
+            out.append(it["stimulus"])
+        if it["pertanyaan"]:
+            out.append("")
+            out.append("PERTANYAAN:")
+            out.append(it["pertanyaan"])
+        if it["pernyataan"]:
+            out.append("")
+            out.append("PERNYATAAN:")
+            out.extend(it["pernyataan"])
+        if it["opsi"]:
+            out.append("")
+            out.append("OPSI JAWABAN:")
+            out.extend(it["opsi"])
+        out.append("")
+        out.append(f"KUNCI RESMI: {it['kunci']}")
+        if it["pembahasan"]:
+            out.append("")
+            out.append("PEMBAHASAN (Layer 3):")
+            for label, txt in it["pembahasan"]:
+                out.append(f"--- {label} ---")
+                out.append(txt)
+        else:
+            out.append("PEMBAHASAN: belum tersedia untuk soal ini.")
+        if it["warn"]:
+            out.append(f"PERLU VERIFIKASI MANUAL: {it['warn']}")
+    return "\n".join(out)
+
+
+def render_audit_page(subject, paket, dari, sampai):
+    esc = html_lib.escape
+    items = _audit_collect(subject, paket, dari, sampai)
+    sections = []
+    for it in items:
+        rows = [f"<h2 id=\"soal-{it['nomor']}\">SOAL {it['nomor']} — {esc(it['tipe'])}</h2>"]
+        if it.get("missing"):
+            sections.append(f"<section>{''.join(rows)}<p>(tidak ditemukan di data)</p></section>")
+            continue
+        if it["topik"]:
+            rows.append(f"<p class=\"meta\">Topik: {esc(it['topik'])}</p>")
+        if it["stimulus"]:
+            rows.append(_audit_block('STIMULUS', esc(it["stimulus"])))
+        if it["pertanyaan"]:
+            rows.append(_audit_block('PERTANYAAN', esc(it["pertanyaan"])))
+        if it["pernyataan"]:
+            rows.append(_audit_block('PERNYATAAN', '<br>'.join(esc(p) for p in it["pernyataan"])))
+        if it["opsi"]:
+            rows.append(_audit_block('OPSI JAWABAN', '<br>'.join(esc(o) for o in it["opsi"])))
+        rows.append(f"<p><strong>KUNCI RESMI:</strong> {esc(it['kunci'])}</p>")
+        if it["pembahasan"]:
+            rows.append("<h3>PEMBAHASAN (Layer 3)</h3>")
+            for label, txt in it["pembahasan"]:
+                rows.append(_audit_block(label, esc(txt)))
+            if it["warn"]:
+                rows.append(f"<p class=\"warn\">⚠ PERLU VERIFIKASI MANUAL: {esc(it['warn'])}</p>")
         else:
             rows.append("<p class=\"warn\">PEMBAHASAN: belum tersedia untuk soal ini.</p>")
-
         sections.append(f"<section>{''.join(rows)}</section>")
 
     title = f"Audit Konten — {esc(subject)} Paket {paket} (Nomor {dari}–{sampai})"
@@ -970,17 +1032,24 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 return self._send_json(500, {"status": "error", "message": str(e)})
 
         # Snapshot konten server-rendered untuk reviewer otomatis (Fase bagikan online):
-        # /audit?subject=matematika&paket=1&dari=1&sampai=10
-        if self.path.split('?', 1)[0] == '/audit':
+        # /audit?subject=matematika&paket=1&dari=1&sampai=10  (HTML)
+        # /audit.txt?...                                      (teks polos)
+        _audit_path = self.path.split('?', 1)[0]
+        if _audit_path in ('/audit', '/audit.txt'):
             try:
                 qs = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
                 a_subject = qs.get('subject', ['matematika'])[0]
                 a_paket = int(qs.get('paket', ['1'])[0])
                 a_dari = max(1, int(qs.get('dari', ['1'])[0]))
                 a_sampai = min(int(qs.get('sampai', ['10'])[0]), a_dari + 24)
-                audit_body = render_audit_page(a_subject, a_paket, a_dari, a_sampai).encode('utf-8')
+                if _audit_path == '/audit.txt':
+                    audit_body = render_audit_text(a_subject, a_paket, a_dari, a_sampai).encode('utf-8')
+                    audit_ctype = 'text/plain; charset=utf-8'
+                else:
+                    audit_body = render_audit_page(a_subject, a_paket, a_dari, a_sampai).encode('utf-8')
+                    audit_ctype = 'text/html; charset=utf-8'
                 self.send_response(200)
-                self.send_header('Content-Type', 'text/html; charset=utf-8')
+                self.send_header('Content-Type', audit_ctype)
                 self.send_header('Content-Length', str(len(audit_body)))
                 self.end_headers()
                 self.wfile.write(audit_body)

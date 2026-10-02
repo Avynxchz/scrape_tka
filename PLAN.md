@@ -122,3 +122,13 @@ Jangan pernah commit `.env`.
   (sudah terauth di mesin ini) atau domain sendiri.
 - Feedback penguji terkumpul di tabel `feedback` SQLite:
   `python -c "import sqlite3; c=sqlite3.connect('data/ai_tutor.db'); print(c.execute('SELECT rating, message, device, created_at FROM feedback ORDER BY id DESC LIMIT 20').fetchall())"`
+
+## Audit konten oleh AI (fetch-only model, mis. Claude)
+
+- `/audit?subject=&paket=&dari=&sampai=` → HTML statis; `/audit.txt?...` → teks polos.
+- Regenerate file paste untuk chat AI:
+  `python -c "import server,io; io.open('exports/audit/matematika_paket1_soal1-15.txt','w',encoding='utf-8').write(server.render_audit_text('matematika',1,1,15))"`
+- File siap-paste ada di `exports/audit/` (di-gitignore; regenerate kapan saja).
+- Catatan host tunnel: `*.trycloudflare.com` robots.txt-nya milik Cloudflare (memblock
+  crawler AI), ngrok free punya interstitial untuk browser-UA — keduanya tidak bisa
+  dimatikan dari sisi kita. Jalur paling andal untuk model fetch-only: paste file teks.
