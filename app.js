@@ -1716,7 +1716,7 @@ async function _applyCanonicalSolution(q) {
       banner.innerHTML = `
         <div class="summary-seal-row">
           <div class="summary-seal-left">
-            <div class="summary-seal-icon"><i class="fa-solid fa-shield-check"></i></div>
+            <div class="summary-seal-icon"><i class="fa-solid fa-circle-check"></i></div>
             <div class="summary-seal-text">
               <div class="seal-heading">Kunci Jawaban Resmi & Terverifikasi</div>
               <div class="seal-subheading">Solusi terverifikasi kurikulum dan silabus Pusmendik Kemendikdasmen</div>
@@ -1728,7 +1728,7 @@ async function _applyCanonicalSolution(q) {
           </div>
         </div>
         <div class="summary-meta-bar">
-          <span class="meta-tag meta-verified"><i class="fa-solid fa-shield-check"></i> Status: Solusi Terverifikasi</span>
+          <span class="meta-tag meta-verified"><i class="fa-solid fa-circle-check"></i> Status: Solusi Terverifikasi</span>
           <span class="meta-tag meta-model"><i class="fa-solid fa-microchip"></i> Verifikasi: Claude Opus 4.6</span>
         </div>
       `;
@@ -2640,10 +2640,10 @@ function openFinishModal() {
 
   let msg = `Kamu telah menjawab <strong>${answered}</strong> dari <strong>${total}</strong> soal.`;
   if (ragu > 0) {
-    msg += `<br><span style="color:#f59e0b;"><i class="fa-solid fa-triangle-exclamation"></i> Masih ada <strong>${ragu}</strong> soal ditandai ragu-ragu.</span>`;
+    msg += `<br><span style="color:var(--warn);"><i class="fa-solid fa-triangle-exclamation"></i> Masih ada <strong>${ragu}</strong> soal ditandai ragu-ragu.</span>`;
   }
   if (belum > 0) {
-    msg += `<br><span style="color:#ef4444;"><i class="fa-solid fa-circle-exclamation"></i> Ada <strong>${belum}</strong> soal yang belum dijawab.</span>`;
+    msg += `<br><span style="color:var(--wrong);"><i class="fa-solid fa-circle-exclamation"></i> Ada <strong>${belum}</strong> soal yang belum dijawab.</span>`;
   }
   msg += `<br><br>Apakah kamu yakin ingin menyelesaikan tes ini dan melihat reviu hasil nilai beserta seluruh kunci jawaban resmi TKA?`;
 
@@ -2719,7 +2719,7 @@ function renderReviewHasil() {
         if (base.endsWith('images/') && rel.startsWith('images/')) {
           rel = rel.substring(7);
         }
-        return `<img src="${base}${rel}" alt="Opsi ${k}" style="max-height:48px; max-width:140px; vertical-align:middle; border-radius:4px; border:1px solid #cbd5e1; background:#fff; padding:2px; display:inline-block;" />`;
+        return `<img src="${base}${rel}" alt="Opsi ${k}" style="max-height:48px; max-width:140px; vertical-align:middle; border-radius:4px; border:1px solid var(--border); background:#fff; padding:2px; display:inline-block;" />`;
       }
       return '';
     };
@@ -2747,12 +2747,12 @@ function renderReviewHasil() {
           return `<strong>${st.key}</strong> (&mdash;)`;
         }
         const isRight = picked === kunciMap[st.key];
-        const color = isRight ? '#059669' : '#dc2626';
-        return `<strong>${st.key}</strong> (<span style="color:${color}; font-weight:700;">${picked}</span>)`;
+        const color = isRight ? 'var(--accent)' : 'var(--wrong)';
+        return `<strong>${st.key}</strong> (<span style="color:${color}; font-weight:600;">${picked}</span>)`;
       });
 
       const partsKunci = stmts.map(st => {
-        return `<strong>${st.key}</strong> (<span style="color:#059669; font-weight:700;">${kunciMap[st.key] || '&mdash;'}</span>)`;
+        return `<strong>${st.key}</strong> (<span style="color:var(--accent); font-weight:600;">${kunciMap[st.key] || '&mdash;'}</span>)`;
       });
 
       andaHtml = `<div class="review-ans-multiline">${partsAnda.join('<br>')}</div>`;
