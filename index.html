@@ -21,13 +21,18 @@
   
   <!-- Fase 1: light-only. Dark mode ditunda (gambar soal berlatar putih). -->
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css?v=43">
+  <link rel="stylesheet" href="style.css?v=44">
 </head>
 <body>
 
   <!-- Sticky Modern App Header -->
   <header class="app-header">
     <div class="header-container">
+      <!-- Mobile: menu mapel & paket -->
+      <button class="m-icon-btn" id="btnMobileMenu" aria-label="Pilih mata pelajaran & paket" title="Mata pelajaran & paket">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
       <!-- Left: Logo & Brand -->
       <div class="brand">
         <div class="brand-logo">
@@ -39,8 +44,11 @@
         </div>
       </div>
 
+      <!-- Mobile: posisi soal saat ini -->
+      <div class="m-qnum" id="mQNum">Soal 1/46</div>
+
       <!-- Center: Subject & Package Selectors -->
-      <div class="header-center-controls">
+      <div class="header-center-controls" id="mobileMenuPanel">
         <!-- Subject Selector -->
         <div class="subject-select-wrap">
           <i class="fa-solid fa-layer-group"></i>
@@ -101,6 +109,19 @@
           <span id="timerText">01:45:20</span>
         </div>
 
+        <!-- Mobile: overflow menu -->
+        <button class="m-icon-btn" id="btnMobileOverflow" aria-label="Menu lainnya" title="Menu lainnya">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <div class="m-overflow-panel" id="mOverflowPanel">
+          <button type="button" onclick="openDaftarModal()">
+            <i class="fa-solid fa-table-cells-large"></i> Daftar Soal
+          </button>
+          <button type="button" onclick="closeMobilePanels(); openFinishModal();">
+            <i class="fa-solid fa-flag-checkered"></i> Selesai Tes
+          </button>
+        </div>
+
         <!-- Daftar Soal Button -->
         <button class="btn-daftar-soal" id="btnOpenDaftarSoal" onclick="openDaftarModal()">
           <i class="fa-solid fa-table-cells-large"></i>
@@ -118,6 +139,11 @@
           <span>AR</span>
         </div>
       </div>
+    </div>
+
+    <!-- Mobile: progress line tipis di bawah top bar -->
+    <div class="m-progress" aria-hidden="true">
+      <div class="m-progress-fill" id="mProgressFill" style="width: 2.5%;"></div>
     </div>
   </header>
 
@@ -198,6 +224,9 @@
               <button class="btn-action btn-nav btn-next" id="btnNext" onclick="navigateQuestion(1)">
                 <span>Selanjutnya</span>
                 <i class="fa-solid fa-arrow-right"></i>
+              </button>
+              <button class="btn-action btn-bar-tutor" id="btnBarTutor" onclick="openTutorSheet()" title="Tanya AI Tutor" aria-label="Tanya AI Tutor">
+                <i class="fa-regular fa-comments"></i>
               </button>
             </div>
           </div>
@@ -344,8 +373,13 @@
       </div>
 
       <!-- RIGHT COLUMN: Sticky AI Tutor Sidebar -->
-      <aside class="cbt-sidebar-col">
+      <div class="tutor-backdrop" id="tutorBackdrop" onclick="closeTutorSheet()"></div>
+      <aside class="cbt-sidebar-col" id="cbtSidebarCol">
         <div class="ai-tutor-card" id="aiTutorCard">
+          <!-- Mobile: handle drag bottom sheet -->
+          <div class="tutor-sheet-handle" id="tutorSheetHandle" aria-hidden="true">
+            <span></span>
+          </div>
           <!-- AI Tutor Card Header -->
           <div class="ai-tutor-header">
             <div class="ai-tutor-title">
@@ -553,6 +587,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="app.js?v=43"></script>
+  <script src="app.js?v=44"></script>
 </body>
 </html>

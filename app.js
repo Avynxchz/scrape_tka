@@ -491,6 +491,12 @@ function renderQuestion() {
   const qLabelHeader = document.getElementById('qLabelHeader');
   if (qLabelHeader) qLabelHeader.innerText = `Soal Nomor ${q.nomor} dari ${total}`;
 
+  // Fase 2: sinkron top bar mobile & progress line
+  const mQNumEl = document.getElementById('mQNum');
+  if (mQNumEl) mQNumEl.innerText = `Soal ${q.nomor}/${total}`;
+  const mProgressFill = document.getElementById('mProgressFill');
+  if (mProgressFill) mProgressFill.style.width = `${Math.round(((state.currentIndex + 1) / total) * 100)}%`;
+
   // Sync cookie and URL for persistent subject/paket context across browser and server
   try {
     document.cookie = `active_subject=${state.currentSubject}; path=/; max-age=86400`;
@@ -1070,7 +1076,21 @@ function cleanUiStimulusText(stimText, stimImages) {
 
   // Trigger KaTeX render
   renderMath();
+  prepareQuestionImages();
   updateGridModalActive();
+}
+
+// Fase 2: lazy-load + async decode semua gambar soal untuk mengurangi layout shift.
+// Aspect-ratio per gambar tidak bisa dipasang karena dimensi asli tidak ada di data.
+function prepareQuestionImages() {
+  try {
+    document.querySelectorAll(
+      '.cbt-question-card img, .practice-card img, #stimulusContainer img, #promptContainer img'
+    ).forEach(img => {
+      if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+      img.setAttribute('decoding', 'async');
+    });
+  } catch (e) {}
 }
 
 // Select an option
@@ -3002,3 +3022,137 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
+// ===== Fase 2: Mobile UX =====
+// Top bar (menu mapel/paket + overflow), sticky bottom bar, tutor bottom sheet.
+const MOBILE_MQ = window.matchMedia('(max-width: 1024px)');
+
+function openTutorSheet() {
+  if (!MOBILE_MQ.matches) {
+    scrollToAiTutor();
+    return;
+  }
+  const sheet = document.getElementById('cbtSidebarCol');
+  const backdrop = document.getElementById('tutorBackdrop');
+  if (!sheet) return;
+  sheet.style.transform = '';
+  sheet.classList.add('tutor-open');
+  if (backdrop) backdrop.classList.add('open');
+}
+
+function closeTutorSheet() {
+  const sheet = document.getElementById('cbtSidebarCol');
+  const backdrop = document.getElementById('tutorBackdrop');
+  if (sheet) {
+    sheet.classList.remove('tutor-open');
+    sheet.style.transform = '';
+  }
+  if (backdrop) backdrop.classList.remove('open');
+}
+
+function closeMobilePanels() {
+  const menu = document.getElementById('mobileMenuPanel');
+  const overflow = document.getElementById('mOverflowPanel');
+  if (menu) menu.classList.remove('open');
+  if (overflow) overflow.classList.remove('open');
+}
+
+function toggleMobilePanel(panelId) {
+  const panel = document.getElementById(panelId);
+  if (!panel) return;
+  const willOpen = !panel.classList.contains('open');
+  closeMobilePanels();
+  panel.classList.toggle('open', willOpen);
+}
+
+function initTutorSheetDrag() {
+  const sheet = document.getElementById('cbtSidebarCol');
+  const handle = document.getElementById('tutorSheetHandle');
+  if (!sheet || !handle) return;
+
+  let dragging = false;
+  let startY = 0;
+  let dy = 0;
+
+  handle.addEventListener('pointerdown', (e) => {
+    if (!MOBILE_MQ.matches) return;
+    dragging = true;
+    startY = e.clientY;
+    dy = 0;
+    sheet.classList.add('dragging');
+    try { handle.setPointerCapture(e.pointerId); } catch (err) {}
+  });
+
+  handle.addEventListener('pointermove', (e) => {
+    if (!dragging) return;
+    dy = Math.max(0, e.clientY - startY);
+    sheet.style.transform = `translateY(${dy}px)`;
+  });
+
+  const endDrag = () => {
+    if (!dragging) return;
+    dragging = false;
+    sheet.classList.remove('dragging');
+    sheet.style.transform = '';
+    if (dy > 110) closeTutorSheet();
+  };
+  handle.addEventListener('pointerup', endDrag);
+  handle.addEventListener('pointercancel', endDrag);
+}
+
+function initMobileChrome() {
+  const btnMenu = document.getElementById('btnMobileMenu');
+  const btnOverflow = document.getElementById('btnMobileOverflow');
+  const backdrop = document.getElementById('tutorBackdrop');
+
+  if (btnMenu) btnMenu.addEventListener('click', () => toggleMobilePanel('mobileMenuPanel'));
+  if (btnOverflow) btnOverflow.addEventListener('click', () => toggleMobilePanel('mOverflowPanel'));
+  if (backdrop) backdrop.addEventListener('click', closeTutorSheet);
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#mobileMenuPanel, #btnMobileMenu')) {
+      const menu = document.getElementById('mobileMenuPanel');
+      if (menu) menu.classList.remove('open');
+    }
+    if (!e.target.closest('#mOverflowPanel, #btnMobileOverflow')) {
+      const overflow = document.getElementById('mOverflowPanel');
+      if (overflow) overflow.classList.remove('open');
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeTutorSheet();
+      closeMobilePanels();
+    }
+  });
+
+  initTutorSheetDrag();
+
+  // Tinggi sheet mengikuti visualViewport -> composer tetap terlihat saat keyboard naik
+  if (window.visualViewport) {
+    const vv = window.visualViewport;
+    const syncVvh = () => {
+      document.documentElement.style.setProperty('--vvh', Math.round(vv.height) + 'px');
+    };
+    vv.addEventListener('resize', syncVvh);
+    syncVvh();
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initMobileChrome);
+
+// Fase 2: label tombol Cek dipendekkan di mobile agar muat satu baris di bottom bar
+function syncCheckLabel() {
+  const btn = document.getElementById('btnCheckAnswer');
+  if (!btn) return;
+  const span = btn.querySelector('span');
+  if (!span) return;
+  if (!span.dataset.full) span.dataset.full = span.textContent;
+  span.textContent = MOBILE_MQ.matches ? 'Cek Jawaban' : span.dataset.full;
+}
+try {
+  if (MOBILE_MQ.addEventListener) MOBILE_MQ.addEventListener('change', syncCheckLabel);
+  document.addEventListener('DOMContentLoaded', syncCheckLabel);
+  syncCheckLabel();
+} catch (e) {}

@@ -369,6 +369,17 @@ body {
   flex-shrink: 0;
 }
 
+/* Komponen mobile-only (Fase 2) — tampil lewat media query */
+.m-icon-btn,
+.m-qnum,
+.m-overflow-panel,
+.m-progress,
+.tutor-sheet-handle,
+.tutor-backdrop,
+.btn-bar-tutor {
+  display: none;
+}
+
 /* ==========================================================================
    2-COLUMN DASHBOARD GRID
    ========================================================================== */
@@ -2608,50 +2619,10 @@ body {
   .cbt-dashboard-grid {
     grid-template-columns: 1fr;
   }
-
-  .cbt-sidebar-col {
-    position: static;
-  }
-
-  .floating-ai-jump {
-    display: flex;
-  }
 }
 
 @media (max-width: 768px) {
-  .header-center-controls {
-    display: none;
-  }
-
-  .timer-pill {
-    display: none;
-  }
-
-  .qcard-body {
-    padding: 18px 16px;
-  }
-
-  .exercise-title {
-    font-size: 18px;
-  }
-
-  .qcard-actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .actions-left,
-  .actions-right {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .btn-check,
-  .btn-next {
-    flex: 1;
-    justify-content: center;
-  }
-
+  /* Rule mobile lainnya ada di blok 768 Fase 2 (bagian bawah file) */
   .soal-grid {
     grid-template-columns: repeat(5, 1fr);
   }
@@ -2864,130 +2835,407 @@ html, body {
   .cbt-dashboard-grid {
     display: flex !important;
     flex-direction: column !important;
-    gap: 20px !important;
+    gap: 0 !important;
   }
 
   .cbt-main-col {
     width: 100% !important;
-    padding: 14px 16px 28px !important;
+    padding: 14px 16px calc(28px + env(safe-area-inset-bottom)) !important;
   }
 
+  /* Tutor AI = bottom sheet (Fase 2). Tinggi mengikuti visualViewport agar
+     composer tidak tertutup keyboard. */
   .cbt-sidebar-col {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    bottom: 0 !important;
     width: 100% !important;
-    position: static !important;
-    height: auto !important;
+    height: 86vh;
+    height: calc(min(var(--vvh, 100dvh), 100dvh) * 0.86);
     border-left: none !important;
     border-top: 1px solid var(--border);
+    border-radius: 12px 12px 0 0;
+    background: var(--bg);
+    transform: translateY(103%);
+    transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+    z-index: 70;
+    overflow: hidden;
   }
 
-  .ai-tutor-card {
-    height: auto;
+  .cbt-sidebar-col.tutor-open {
+    transform: translateY(0);
+  }
+
+  .cbt-sidebar-col.dragging {
+    transition: none;
+  }
+
+  .tutor-sheet-handle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0 4px;
+    cursor: grab;
+    touch-action: none;
+    flex-shrink: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .tutor-sheet-handle span {
+    width: 42px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border-strong);
+  }
+
+  .tutor-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 65;
+    background: rgba(9, 9, 11, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .tutor-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .ai-tutor-header {
+    padding-top: 10px;
   }
 
   .chat-messages {
-    max-height: 340px;
+    max-height: none;
   }
 
   .floating-ai-jump {
-    display: inline-flex !important;
+    display: none !important;
   }
 }
 
 @media (max-width: 768px) {
-  /* Header clean mobile */
+  /* ===== Top bar mobile (Fase 2): menu, Soal x/n, timer, overflow ===== */
   .app-header {
     height: 56px;
   }
 
   .header-container {
     height: 56px;
-    padding: 0 12px;
+    padding: 0 10px;
+    gap: 8px;
   }
 
   .brand-logo {
-    width: 34px;
-    height: 34px;
-    font-size: 15px;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
   }
 
-  .brand-title {
-    font-size: 13.5px;
-  }
-
-  .brand-subtitle {
+  .brand-text {
     display: none !important;
   }
 
-  .header-center-controls,
+  .m-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid var(--navbar-border);
+    border-radius: var(--radius-sm);
+    color: var(--navbar-text);
+    font-size: 14px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .m-qnum {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navbar-text);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .timer-pill {
+    display: flex;
+    padding: 5px 9px;
+    font-size: 11.5px;
+    flex-shrink: 0;
+  }
+
+  .btn-daftar-soal,
+  .btn-finish-header,
+  .user-avatar {
     display: none !important;
   }
 
-  .btn-daftar-soal {
-    padding: 6px 10px;
-    font-size: 11.5px;
+  /* Panel menu = selector mata pelajaran & paket */
+  .header-center-controls {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 10px;
+    right: 10px;
+    z-index: 75;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    box-shadow: var(--shadow-lg);
   }
 
-  .user-avatar {
-    width: 32px;
-    height: 32px;
-    font-size: 11px;
+  .header-center-controls.open {
+    display: flex;
   }
 
-  /* Question Card & Content */
+  .header-center-controls .subject-select {
+    background: var(--bg-card);
+    color: var(--text);
+    border-color: var(--border);
+    font-size: 16px;
+  }
+
+  .header-center-controls .subject-select-wrap i {
+    color: var(--text-3);
+  }
+
+  .header-center-controls .package-tabs {
+    background: var(--surface-2);
+    border-color: var(--border);
+  }
+
+  .header-center-controls .pkg-tab {
+    color: var(--text-2);
+  }
+
+  .header-center-controls .pkg-tab.active {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+  }
+
+  /* Panel overflow: Daftar Soal / Selesai Tes */
+  .m-overflow-panel {
+    display: none;
+    position: fixed;
+    top: 64px;
+    right: 10px;
+    z-index: 75;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 6px;
+    box-shadow: var(--shadow-lg);
+    min-width: 190px;
+  }
+
+  .m-overflow-panel.open {
+    display: block;
+  }
+
+  .m-overflow-panel button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 11px 12px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--text);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .m-overflow-panel button:hover {
+    background: var(--surface);
+  }
+
+  .m-overflow-panel button i {
+    color: var(--text-3);
+    width: 16px;
+    text-align: center;
+  }
+
+  /* Progress line tipis di bawah top bar */
+  .m-progress {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--navbar-border);
+  }
+
+  .m-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  /* ===== Konten satu kolom ===== */
+  .cbt-main-col {
+    padding: 12px 16px calc(92px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .topic-header-bar {
+    margin-bottom: 8px;
+  }
+
+  .exercise-title {
+    font-size: 18px;
+  }
+
   .qcard-header {
-    padding: 10px 14px;
+    padding: 10px 16px;
   }
 
   .qcard-body {
-    padding: 16px 14px;
+    padding: 16px;
   }
 
-  .prompt-text {
-    font-size: 15px;
-    line-height: 1.65;
+  .cbt-stimulus-col {
+    padding: 14px 16px;
   }
 
+  /* Teks soal >=16px, line-height ~1.6 (Fase 2) */
+  .prompt-text,
+  .prompt-html-wrap {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .stimulus-content,
+  .stimulus-body-content {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Opsi: full-width, tinggi min 56px, target sentuh >=48px */
   .options-list {
-    gap: 8px;
-    margin-top: 16px;
+    gap: 10px;
+    margin-top: 18px;
   }
 
   .option-item {
-    min-height: 48px;
-    padding: 10px 14px;
-    gap: 10px;
+    min-height: 56px;
+    padding: 12px 14px;
+    gap: 12px;
   }
 
   .opt-indicator {
-    width: 28px;
-    height: 28px;
-    font-size: 12px;
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
   }
 
   .opt-body {
-    font-size: 13.5px;
+    font-size: 16px;
+    line-height: 1.55;
   }
 
-  /* Actions */
+  /* ===== Sticky bottom bar: Sebelumnya | Cek | Selanjutnya | Ragu | Tutor ===== */
   .qcard-actions {
-    padding: 12px 14px;
-    flex-direction: column;
-    gap: 10px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 8px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
   }
 
   .actions-left,
   .actions-right {
-    width: 100%;
-    display: flex;
-    gap: 8px;
+    display: contents;
   }
 
-  .btn-action {
-    flex: 1;
+  .btn-prev { order: 1; }
+  .btn-check { order: 2; }
+  .btn-next { order: 3; }
+  .btn-ragu { order: 4; }
+  .btn-bar-tutor { order: 5; }
+
+  .btn-prev span,
+  .btn-next span,
+  .btn-ragu span {
+    display: none;
+  }
+
+  .btn-prev,
+  .btn-next,
+  .btn-ragu,
+  .btn-bar-tutor {
+    min-width: 46px;
+    padding: 10px 12px;
     justify-content: center;
-    padding: 9px 12px;
-    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .btn-bar-tutor {
+    display: inline-flex;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-2);
+  }
+
+  .btn-check {
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+    font-size: 11.5px;
+    padding: 6px 4px;
+    line-height: 1.25;
+  }
+
+  /* Input >=16px mencegah zoom iOS */
+  .chat-input-form input {
+    font-size: 16px;
+  }
+
+  .ai-model-select {
+    font-size: 16px;
+  }
+
+  /* Modal Daftar Soal = bottom sheet */
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-content {
+    max-width: none;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    max-height: 88dvh;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
   }
 
   /* Solution Banner Mobile */
@@ -3034,12 +3282,9 @@ html, body {
     font-size: 12px;
   }
 
-  .step-card-inner {
-    padding: 14px 14px;
-  }
-
   .step-main-text {
-    font-size: 13.5px;
+    font-size: 16px;
+    line-height: 1.6;
   }
 }
 
