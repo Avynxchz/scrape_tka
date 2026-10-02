@@ -146,6 +146,15 @@ def init_db():
                     created_at         TEXT NOT NULL,
                     updated_at         TEXT NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS feedback (
+                    id         INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_key   TEXT NOT NULL,
+                    rating     INTEGER NOT NULL CHECK (rating BETWEEN 1 AND 5),
+                    message    TEXT,
+                    device     TEXT,
+                    plan       TEXT,
+                    created_at TEXT NOT NULL
+                );
                 """
             )
             # Fase 4: sebelum ada auth, semua user ber-tier 'free' dari versi lama
@@ -564,3 +573,42 @@ def stats():
         m = conn.execute("SELECT COUNT(*) AS n FROM ai_tutor_messages").fetchone()["n"]
         s = conn.execute("SELECT COUNT(*) AS n FROM ai_tutor_conversations WHERE summary IS NOT NULL").fetchone()["n"]
     return {"conversations": c, "messages": m, "with_summary": s}
+
+
+# ---------------------------------------------------------------------------
+# Fase 5: Feedback pengguna (non-intrusif)
+# ---------------------------------------------------------------------------
+FEEDBACK_MIN_GAP_SECONDS = 600   # jeda minimum antar masukan per user
+FEEDBACK_MAX_PER_DAY = 3         # batas masukan per user per 24 jam
+_feedback_lock = threading.Lock()
+_feedback_last = {}              # user_key -> timestamp kirim terakhir (in-memory)
+
+
+def allow_feedback(user_key):
+    """Rate limit masukan: jeda minimum + batas harian. Return (allowed, wait_seconds)."""
+    now = time.time()
+    with _feedback_lock:
+        last = _feedback_last.get(user_key, 0)
+        if now - last < FEEDBACK_MIN_GAP_SECONDS:
+            return False, int(FEEDBACK_MIN_GAP_SECONDS - (now - last))
+    cutoff = time.strftime("%Y-%m-%dT%H:%M:%S", time.gmtime(now - 86400)) + "Z"
+    with _db() as conn:
+        row = conn.execute(
+            "SELECT COUNT(*) FROM feedback WHERE user_key=? AND created_at >= ?",
+            (user_key, cutoff),
+        ).fetchone()
+    if row and row[0] >= FEEDBACK_MAX_PER_DAY:
+        return False, FEEDBACK_MIN_GAP_SECONDS
+    return True, 0
+
+
+def add_feedback(user_key, rating, message, device, plan):
+    """Simpan satu masukan (rating 1-5, pesan opsional)."""
+    with _feedback_lock:
+        _feedback_last[user_key] = time.time()
+    with _db() as conn:
+        conn.execute(
+            "INSERT INTO feedback (user_key, rating, message, device, plan, created_at) "
+            "VALUES (?, ?, ?, ?, ?, ?)",
+            (user_key, rating, message, device, plan, _now()),
+        )

@@ -21,7 +21,7 @@
   
   <!-- Fase 1: light-only. Dark mode ditunda (gambar soal berlatar putih). -->
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css?v=44">
+  <link rel="stylesheet" href="style.css?v=45">
 </head>
 <body>
 
@@ -586,7 +586,20 @@
     </div>
   </div>
 
+  <!-- Fase 5: Feedback non-intrusif (max 2x/sesi) -->
+  <div class="fb-widget" id="fbWidget" style="display: none;">
+    <button class="fb-close" id="fbClose" aria-label="Tutup" type="button">&times;</button>
+    <div class="fb-title">Bagaimana pengalamanmu sejauh ini?</div>
+    <div class="fb-stars" id="fbStars"></div>
+    <textarea class="fb-text" id="fbText" maxlength="1000" rows="2" placeholder="Masukan tambahan (opsional)"></textarea>
+    <div class="fb-actions">
+      <button class="fb-later" id="fbLater" type="button">Nanti</button>
+      <button class="fb-send" id="fbSubmit" type="button" disabled>Kirim</button>
+    </div>
+    <div class="fb-error" id="fbError" style="display: none;"></div>
+  </div>
+
   <!-- Scripts -->
-  <script src="app.js?v=44"></script>
+  <script src="app.js?v=45"></script>
 </body>
 </html>

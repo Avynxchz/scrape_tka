@@ -3156,3 +3156,169 @@ try {
   document.addEventListener('DOMContentLoaded', syncCheckLabel);
   syncCheckLabel();
 } catch (e) {}
+
+// ===== Fase 5: Feedback non-intrusif =====
+// Timing di satu config. Aktif = tab visible + ada interaksi terbaru.
+// Maks 2 tampil per sesi; setelah kirim, suppress via localStorage.
+const FEEDBACK_CFG = {
+  firstAfterMs: 3 * 60 * 1000,      // notif #1: 3 menit pemakaian aktif
+  secondAfterMs: 5 * 60 * 1000,     // notif #2: 5 menit aktif berikutnya
+  suppressDays: 14,                 // setelah kirim: jangan muncul lagi selama 14 hari
+  minTimerSeconds: 5 * 60,          // jangan tampil saat timer ujian < 5 menit
+  activeGapMs: 90 * 1000,           // 'aktif' = ada interaksi dalam 90 detik terakhir
+};
+const FB_KEY_SENT = 'tka_feedback_sent';
+const FB_KEY_COUNT = 'tka_feedback_count';
+
+const _fb = {
+  activeMs: 0,
+  lastInteraction: 0, // 0 = belum ada interaksi; waktu aktif mulai dihitung setelah interaksi pertama
+  shownCount: 0,
+  target: FEEDBACK_CFG.firstAfterMs,
+  rating: 0,
+  busy: false,
+  visible: false, // widget sedang terbuka -> ticker tidak menampilkan lagi
+};
+
+function _fbMarkInteraction() {
+  _fb.lastInteraction = Date.now();
+}
+
+function _fbSentAt() {
+  try { return parseInt(localStorage.getItem(FB_KEY_SENT) || '0', 10); } catch (e) { return 0; }
+}
+
+function _fbSuppressed() {
+  const sent = _fbSentAt();
+  return sent && (Date.now() - sent) < FEEDBACK_CFG.suppressDays * 86400000;
+}
+
+function _fbTimerSeconds() {
+  const el = document.getElementById('timerText');
+  if (!el) return Infinity;
+  const parts = (el.innerText || '').split(':').map(Number);
+  if (parts.length !== 3 || parts.some(n => isNaN(n))) return Infinity;
+  return parts[0] * 3600 + parts[1] * 60 + parts[2];
+}
+
+function _fbCanShow() {
+  if (_fbSuppressed()) return false;
+  try {
+    if (parseInt(sessionStorage.getItem(FB_KEY_COUNT) || '0', 10) >= 2) return false;
+  } catch (e) {}
+  if (Date.now() - _fb.lastInteraction > FEEDBACK_CFG.activeGapMs) return false;
+  const ae = document.activeElement;
+  if (ae && ae.id === 'chatInput') return false;
+  if (_fbTimerSeconds() < FEEDBACK_CFG.minTimerSeconds) return false;
+  return true;
+}
+
+function _fbShow(stage) {
+  const w = document.getElementById('fbWidget');
+  if (!w) return;
+  w.classList.remove('pos-top', 'pos-bottom');
+  w.classList.add(stage === 1 ? 'pos-top' : 'pos-bottom');
+  w.style.display = 'block';
+  try { sessionStorage.setItem(FB_KEY_COUNT, String(stage)); } catch (e) {}
+  _fb.visible = true;
+}
+
+function _fbHide() {
+  const w = document.getElementById('fbWidget');
+  if (w) w.style.display = 'none';
+  _fb.visible = false;
+}
+
+function _fbTicker() {
+  if (document.visibilityState !== 'visible') return;
+  if (_fb.visible || _fb.shownCount >= 2) return;
+  if (_fb.lastInteraction && Date.now() - _fb.lastInteraction <= FEEDBACK_CFG.activeGapMs) {
+    _fb.activeMs += 1000;
+  }
+  if (_fb.busy || _fb.activeMs < _fb.target) return;
+  if (_fbCanShow()) {
+    _fb.shownCount += 1;
+    _fbShow(_fb.shownCount);
+  }
+}
+
+function _fbDismiss() {
+  _fbHide();
+  if (_fb.shownCount === 1) {
+    // ditutup tanpa kirim -> notif #2 setelah 5 menit aktif berikutnya
+    _fb.activeMs = 0;
+    _fb.target = FEEDBACK_CFG.secondAfterMs;
+  }
+}
+
+async function _fbSubmitFeedback() {
+  if (_fb.busy || !_fb.rating) return;
+  const btn = document.getElementById('fbSubmit');
+  const err = document.getElementById('fbError');
+  _fb.busy = true;
+  btn.disabled = true;
+  try {
+    const res = await fetch('/api/feedback', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        rating: _fb.rating,
+        message: (document.getElementById('fbText').value || '').trim(),
+        device: MOBILE_MQ.matches ? 'mobile' : 'desktop',
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok && data.status === 'success') {
+      try {
+        localStorage.setItem(FB_KEY_SENT, String(Date.now()));
+        sessionStorage.setItem(FB_KEY_COUNT, '2');
+      } catch (e) {}
+      _fbHide();
+      _fb.shownCount = 2;
+      _fb.target = Infinity;
+    } else {
+      err.textContent = data.message || 'Gagal mengirim. Coba lagi.';
+      err.style.display = 'block';
+      btn.disabled = false;
+    }
+  } catch (e) {
+    err.textContent = 'Gagal mengirim — periksa koneksi.';
+    err.style.display = 'block';
+    btn.disabled = false;
+  } finally {
+    _fb.busy = false;
+  }
+}
+
+function initFeedback() {
+  const w = document.getElementById('fbWidget');
+  if (!w) return;
+  if (_fbSuppressed()) return;
+
+  ['pointerdown', 'keydown', 'touchstart', 'wheel', 'scroll'].forEach(ev =>
+    document.addEventListener(ev, _fbMarkInteraction, { passive: true }));
+
+  const stars = document.getElementById('fbStars');
+  for (let i = 1; i <= 5; i++) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'fb-star';
+    b.textContent = i;
+    b.setAttribute('aria-label', `Nilai ${i} dari 5`);
+    b.addEventListener('click', () => {
+      _fb.rating = i;
+      stars.querySelectorAll('.fb-star').forEach(s =>
+        s.classList.toggle('active', Number(s.textContent) === i));
+      document.getElementById('fbSubmit').disabled = false;
+    });
+    stars.appendChild(b);
+  }
+
+  document.getElementById('fbClose').addEventListener('click', _fbDismiss);
+  document.getElementById('fbLater').addEventListener('click', _fbDismiss);
+  document.getElementById('fbSubmit').addEventListener('click', _fbSubmitFeedback);
+
+  setInterval(_fbTicker, 1000);
+}
+
+document.addEventListener('DOMContentLoaded', initFeedback);

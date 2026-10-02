@@ -4321,3 +4321,159 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
 
 
 
+
+/* ==========================================================================
+   FASE 5 — WIDGET FEEDBACK NON-INTRUSIF
+   Notif #1: atas di bawah top bar. Notif #2: bawah (strip di atas bottom bar
+   pada mobile, pojok bawah pada desktop). Maks 2x per sesi.
+   ========================================================================== */
+.fb-widget {
+  position: fixed;
+  z-index: 80;
+  width: 320px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 16px;
+  font-family: var(--font-sans);
+}
+
+.fb-widget.pos-top {
+  top: 76px;
+  right: 20px;
+  left: auto;
+}
+
+.fb-widget.pos-bottom {
+  top: auto;
+  bottom: 20px;
+  right: 20px;
+  left: auto;
+}
+
+.fb-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: var(--text-3);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.fb-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+  padding-right: 24px;
+  letter-spacing: -0.01em;
+}
+
+.fb-stars {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.fb-star {
+  flex: 1;
+  height: 36px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-2);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.15s ease;
+}
+
+.fb-star:hover {
+  border-color: var(--border-strong);
+}
+
+.fb-star.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.fb-text {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg-card);
+  resize: none;
+  margin-bottom: 10px;
+}
+
+.fb-text:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.fb-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.fb-later {
+  background: transparent;
+  border: none;
+  color: var(--text-3);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  cursor: pointer;
+  padding: 6px 8px;
+}
+
+.fb-send {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fb-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.fb-error {
+  font-size: 12px;
+  color: var(--wrong);
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .fb-widget {
+    width: auto;
+    left: 12px;
+    right: 12px;
+  }
+
+  .fb-widget.pos-top {
+    top: 66px;
+  }
+
+  .fb-widget.pos-bottom {
+    top: auto;
+    bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+}

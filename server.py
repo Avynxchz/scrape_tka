@@ -1060,6 +1060,38 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             except Exception as e:
                 return self._send_json(500, {"status": "error", "message": str(e)})
 
+        elif self.path == '/api/feedback':
+            # Fase 5: simpan masukan pengguna (rating 1-5 + pesan opsional).
+            # Validasi ketat + rate limit per sesi (jeda 10 menit, maks 3/24 jam).
+            try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                payload = json.loads(self.rfile.read(content_length).decode('utf-8') or '{}')
+                try:
+                    rating = int(payload.get('rating') or 0)
+                except (TypeError, ValueError):
+                    rating = 0
+                message = str(payload.get('message') or '').strip()[:1000]
+                device = 'mobile' if str(payload.get('device') or '').lower() == 'mobile' else 'desktop'
+                if rating < 1 or rating > 5:
+                    return self._send_json(400, {"status": "error",
+                                                 "message": "Rating harus 1-5."})
+                user_key, new_cookie = self._tutor_session()
+                allowed, wait_sec = tutor_store.allow_feedback(user_key)
+                if not allowed:
+                    return self._send_json(429, {
+                        "status": "rate_limited",
+                        "retry_after": wait_sec,
+                        "message": "Masukanmu sudah terkirim baru-baru ini. Terima kasih!",
+                    }, cookie_value=new_cookie)
+                plan = tutor_store.get_user_quota(user_key).get('tier') or 'guest'
+                tutor_store.add_feedback(user_key, rating, message, device, plan)
+                return self._send_json(200, {
+                    "status": "success",
+                    "message": "Terima kasih! Masukanmu terkirim.",
+                }, cookie_value=new_cookie)
+            except Exception as e:
+                return self._send_json(500, {"status": "error", "message": str(e)})
+
         elif self.path == '/api/tutor/reset_quota':
             try:
                 user_key, new_cookie = self._tutor_session()
