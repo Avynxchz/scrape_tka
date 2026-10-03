@@ -538,6 +538,15 @@ function formatPusmendikHtml(rawHtml, pkgPath) {
   // 1. Bersihkan penanda XML dan komentar CBT internal Pusmendik
   html = html.replace(/<!--[\s\S]*?-->/g, '').trim();
 
+  // 1c. Netralkan tinggi tetap & scrollbar warisan Pusmendik di mana pun posisinya
+  //     (wrapper height:520px/340px + overflow:auto bikin area scroll kosong panjang)
+  html = html.replace(/style="([^"]*)"/gi, (m, s) => {
+    const cleaned = s
+      .replace(/(?:^|;)\s*(height|overflow)\s*:[^;"]*/gi, '')
+      .replace(/^;+|;+$/g, '');
+    return 'style="' + cleaned + '"';
+  });
+
   // 1b. Normalisasi simbol ilmiah: derajat Celsius, derajat sudut, plus-minus, dan eksponen
   html = html.replace(/<sup>o<\/sup>\s*C\b/gi, '°C');
   html = html.replace(/<sup>o<\/sup>/gi, '°');
@@ -726,12 +735,13 @@ function cleanUiStimulusText(stimText, stimImages) {
 
   let hasStimulus = false;
   const stimHtml = (q.stimulus && q.stimulus.html) ? q.stimulus.html : '';
+  const stimFormatted = hasVisibleStimulusContent(stimHtml) ? formatPusmendikHtml(stimHtml, pkgPath) : '';
 
-  if (hasVisibleStimulusContent(stimHtml)) {
+  if (stimFormatted && hasVisibleStimulusContent(stimFormatted)) {
     hasStimulus = true;
     const stimDiv = document.createElement('div');
     stimDiv.className = 'stimulus-body-content';
-    stimDiv.innerHTML = formatPusmendikHtml(stimHtml, pkgPath);
+    stimDiv.innerHTML = stimFormatted;
 
     // Lightbox click handler & responsive size validator untuk seluruh gambar stimulus
     stimDiv.querySelectorAll('img').forEach(img => {
@@ -743,7 +753,12 @@ function cleanUiStimulusText(stimText, stimImages) {
         const nw = img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
         const nh = img.naturalHeight || parseInt(img.getAttribute('height') || '0', 10);
         const hasLatex = img.hasAttribute('data-latex');
-        if (!hasLatex && (nh > 65 || (nw > 180 && nh > 45))) {
+        // Hormati atribut HTML sumber: bila sudah menandakan simbol inline (kecil),
+        // jangan demosikan ke diagram hanya karena pixel asli filenya tinggi.
+        const ah = parseInt(img.getAttribute('height') || '0', 10);
+        const aw = parseInt(img.getAttribute('width') || '0', 10);
+        const attrSaysInline = ah > 0 && ah <= 55 && aw <= 95;
+        if (!hasLatex && !attrSaysInline && (nh > 65 || (nw > 180 && nh > 45))) {
           img.classList.remove('inline-symbol-img');
           img.classList.add('diagram-img');
           const p = img.closest('p');
@@ -832,7 +847,12 @@ function cleanUiStimulusText(stimText, stimImages) {
         const nw = img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
         const nh = img.naturalHeight || parseInt(img.getAttribute('height') || '0', 10);
         const hasLatex = img.hasAttribute('data-latex');
-        if (!hasLatex && (nh > 65 || (nw > 180 && nh > 45))) {
+        // Hormati atribut HTML sumber: bila sudah menandakan simbol inline (kecil),
+        // jangan demosikan ke diagram hanya karena pixel asli filenya tinggi.
+        const ah = parseInt(img.getAttribute('height') || '0', 10);
+        const aw = parseInt(img.getAttribute('width') || '0', 10);
+        const attrSaysInline = ah > 0 && ah <= 55 && aw <= 95;
+        if (!hasLatex && !attrSaysInline && (nh > 65 || (nw > 180 && nh > 45))) {
           img.classList.remove('inline-symbol-img');
           img.classList.add('diagram-img');
           const p = img.closest('p');
@@ -3316,7 +3336,8 @@ function _fbShow(stage) {
   const w = document.getElementById('fbWidget');
   if (!w) return;
   w.classList.remove('pos-top', 'pos-bottom');
-  w.classList.add(stage === 1 ? 'pos-top' : 'pos-bottom');
+  // Selalu pojok kanan bawah (desktop: kotak compact, mobile: persegi panjang via media query)
+  w.classList.add('pos-bottom');
   w.style.display = 'block';
   try { sessionStorage.setItem(FB_KEY_COUNT, String(stage)); } catch (e) {}
   _fb.visible = true;

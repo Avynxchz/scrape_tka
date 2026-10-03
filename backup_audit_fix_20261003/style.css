@@ -1,0 +1,4589 @@
+/* ==========================================================================
+   TKA MASTER CBT - V0 MINIMALIST DESIGN SYSTEM
+   Clean, modern, crisp, and pedagogical design inspired by Linear & Notion
+   ========================================================================== */
+
+:root {
+  /* Fonts — --font-ui HANYA untuk chrome (nav, label, tombol, heading).
+     --font-content = font soal, opsi, math (KaTeX): JANGAN diubah dan
+     JANGAN dipasangkan ke elemen chrome. Tidak ada font di * selector. */
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-content: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-ui);
+  --font-sans: var(--font-ui); /* alias lama utk rule yang sudah ada */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* ===== Clean Editorial Tokens — LIGHT (DESIGN.md) ===== */
+  --bg: #FFFFFF;
+  --surface: #FAFAF9;
+  --surface-2: #F5F5F4;
+  --border: #E7E5E4;
+  --border-strong: #D6D3D1;
+  --text: #1C1917;
+  --text-2: #57534E;
+  --text-3: #78716C;
+  --accent: #1F6F4A;
+  --accent-hover: #185A3B;
+  --accent-tint: #EDF5F0;
+  --accent-border: #BFDCCB;
+  --wrong: #B42318;
+  --wrong-hover: #912018;
+  --wrong-tint: #FEF3F2;
+  --wrong-border: #F2C6C3;
+  --warn: #B54708;
+  --warn-tint: #FFFAEB;
+  --warn-border: #EBD9B4;
+  --navbar: #09090B;
+  --navbar-border: #27272A;
+  --navbar-surface: #18181B;
+  --navbar-text: #FAFAF9;
+  --navbar-text-2: #A1A1AA;
+  --btn-primary-bg: #18181B;
+  --btn-primary-text: #FFFFFF;
+  --btn-primary-hover: #2D2D30;
+
+  /* Legacy aliases — dipetakan ke token baru agar seluruh rule lama ikut netral */
+  --bg-page: var(--bg);
+  --bg-card: var(--bg);
+  --bg-subtle: var(--surface);
+  --bg-muted: var(--surface-2);
+
+  --text-main: var(--text);
+  --text-muted: var(--text-2);
+  --text-light: var(--text-3);
+
+  --border-color: var(--border);
+  --border-subtle: var(--surface-2);
+
+  --accent-blue: var(--accent);
+  --accent-blue-hover: var(--accent-hover);
+  --accent-blue-subtle: var(--accent-tint);
+  --accent-blue-border: var(--accent-border);
+
+  --accent-emerald: var(--accent);
+  --accent-emerald-subtle: var(--accent-tint);
+  --accent-emerald-border: var(--accent-border);
+
+  --accent-amber: var(--warn);
+  --accent-amber-subtle: var(--warn-tint);
+  --accent-amber-border: var(--warn-border);
+
+  --accent-indigo: var(--accent);
+  --accent-indigo-subtle: var(--accent-tint);
+
+  --accent-violet: var(--text-2);
+  --accent-violet-subtle: var(--surface);
+
+  --accent-rose: var(--wrong);
+  --accent-rose-subtle: var(--wrong-tint);
+  --accent-rose-border: var(--wrong-border);
+
+  /* Radii & Shadows — kecil & flat */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+  --radius-full: 9999px;
+
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: 0 16px 32px -12px rgba(9, 9, 11, 0.18);
+
+  color-scheme: light;
+}
+
+/* ===== Clean Editorial Tokens — DARK (DESIGN.md) ===== */
+[data-theme="dark"] {
+  --bg: #09090B;
+  --surface: #18181B;
+  --surface-2: #202023;
+  --border: #27272A;
+  --border-strong: #3F3F46;
+  --text: #FAFAF9;
+  --text-2: #A1A1AA;
+  --text-3: #71717A;
+  --accent: #34D399;
+  --accent-hover: #6EE7B7;
+  --accent-tint: #064E3B;
+  --accent-border: #065F46;
+  --wrong: #F87171;
+  --wrong-hover: #FCA5A5;
+  --wrong-tint: #450A0A;
+  --wrong-border: #7F1D1D;
+  --warn: #FBBF24;
+  --warn-tint: #422006;
+  --warn-border: #78350F;
+  --btn-primary-bg: #FAFAF9;
+  --btn-primary-text: #09090B;
+  --btn-primary-hover: #E4E4E7;
+
+  --shadow-lg: 0 16px 32px -12px rgba(0, 0, 0, 0.6);
+
+  color-scheme: dark;
+}
+
+/* Base Resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  /* Font konten soal & math — nilai sama dengan sebelumnya, eksplisit agar
+     perubahan --font-ui ke depan tidak pernah menyentuh konten soal. */
+  font-family: var(--font-content);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   STICKY HEADER (navbar gelap #09090B di kedua mode — DESIGN.md)
+   ========================================================================== */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--navbar);
+  border-bottom: 1px solid var(--navbar-border);
+}
+
+.header-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 16px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* Audit Manus P1-01: cegah overflow header di 1280px — elemen tengah boleh menyusut */
+.header-center-controls {
+  min-width: 0;
+}
+
+.subject-select-wrap {
+  min-width: 0;
+}
+
+.subject-select {
+  max-width: 340px;
+}
+
+@media (max-width: 1360px) {
+  .brand-subtitle {
+    display: none;
+  }
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.brand-logo {
+  width: 32px;
+  height: 32px;
+  background: var(--accent);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navbar-text);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.brand-subtitle {
+  font-size: 11px;
+  color: var(--navbar-text-2);
+}
+
+/* Center Controls */
+.header-center-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.subject-select-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.subject-select-wrap i {
+  position: absolute;
+  left: 11px;
+  color: var(--navbar-text-2);
+  font-size: 11px;
+  pointer-events: none;
+}
+
+.subject-select {
+  appearance: none;
+  background: var(--navbar-surface);
+  border: 1px solid var(--navbar-border);
+  border-radius: var(--radius-sm);
+  padding: 7px 30px 7px 29px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--navbar-text);
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a1a1aa'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 13px;
+  transition: border-color 0.15s ease;
+}
+
+.subject-select:hover {
+  border-color: var(--border-strong);
+}
+
+.subject-select option,
+.subject-select optgroup {
+  color: #1c1917;
+  background: #ffffff;
+}
+
+/* Package Switcher Segmented Tabs */
+.package-tabs {
+  display: flex;
+  background: var(--navbar-surface);
+  border: 1px solid var(--navbar-border);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.pkg-tab {
+  background: transparent;
+  border: none;
+  padding: 7px 14px;
+  min-height: 34px;
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--navbar-text-2);
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s ease;
+}
+
+.pkg-tab:hover {
+  color: var(--navbar-text);
+}
+
+.pkg-tab.active {
+  background: var(--navbar-text);
+  color: var(--navbar);
+  font-weight: 600;
+}
+
+/* Header Right Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.timer-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--navbar-surface);
+  border: 1px solid var(--navbar-border);
+  color: var(--navbar-text);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.timer-pill.timer-habis {
+  border-color: var(--danger-border);
+  color: var(--danger);
+}
+
+.btn-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--navbar-surface);
+  border: 1px solid var(--navbar-border);
+  color: var(--navbar-text-2);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-theme-toggle:hover {
+  color: var(--navbar-text);
+  border-color: var(--border-strong);
+}
+
+.btn-daftar-soal {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--navbar-surface);
+  border: 1px solid var(--navbar-border);
+  color: var(--navbar-text);
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-daftar-soal:hover {
+  border-color: var(--border-strong);
+  color: #ffffff;
+}
+
+.user-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--navbar-surface);
+  border: 1px solid var(--navbar-border);
+  color: var(--navbar-text-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* Komponen mobile-only (Fase 2) — tampil lewat media query */
+.m-icon-btn,
+.m-qnum,
+.m-overflow-panel,
+.m-progress,
+.tutor-sheet-handle,
+.tutor-backdrop,
+.btn-bar-tutor {
+  display: none;
+}
+
+/* ==========================================================================
+   2-COLUMN DASHBOARD GRID
+   ========================================================================== */
+.main-wrapper {
+  /* Kolom baca tenang: konten utama ~756px setelah sidebar 340px (Fase 1) */
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.cbt-dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: 0 28px;
+  align-items: start;
+}
+
+.cbt-main-col {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 28px 40px;
+}
+
+.cbt-sidebar-col {
+  position: sticky;
+  top: 64px;
+  height: calc(100vh - 64px);
+  border-left: 1px solid var(--border);
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ==========================================================================
+   TOPIC HEADER & PROGRESS BAR
+   ========================================================================== */
+.topic-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.topic-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.exercise-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-top: 2px;
+}
+
+.progress-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-bar-track {
+  width: 90px;
+  height: 4px;
+  background: var(--border);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  transition: width 0.3s ease;
+}
+
+/* ==========================================================================
+   CBT QUESTION CARD
+   ========================================================================== */
+.cbt-question-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.qcard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-card);
+}
+
+.qcard-number-tag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+}
+
+.qnum-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 7px;
+  background: var(--surface-2);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.qtype-badge {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-3);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: var(--radius-sm);
+}
+
+.qcard-body {
+  padding: 28px 32px;
+}
+
+.prompt-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.prompt-text p {
+  margin-bottom: 12px;
+}
+
+/* Stimulus Context Box — area soal wajib putih (Fase 1) */
+.stimulus-col {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+}
+
+.stimulus-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+}
+
+.stimulus-content {
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+.stimulus-img-container {
+  margin: 14px 0;
+  text-align: center;
+}
+
+.stimulus-img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+}
+
+/* Options List */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 54px;
+  padding: 12px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  position: relative;
+}
+
+.option-item:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.option-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Audit Kimi P1: zoom gambar opsi kini tombol terpisah dari aksi memilih */
+.opt-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-left: 6px;
+  vertical-align: middle;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  border-radius: 6px;
+  color: var(--text-3);
+  font-size: 11px;
+  cursor: zoom-in;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.opt-zoom-btn:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.opt-indicator {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.opt-body {
+  flex: 1;
+  font-size: 14.5px;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* Option States */
+.option-item.selected {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+}
+
+.option-item.selected .opt-indicator {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+[data-theme="dark"] .option-item.selected .opt-indicator {
+  color: #06281C;
+}
+
+.option-item.selected::after {
+  content: "\f00c";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-left: auto;
+  color: var(--accent);
+  font-size: 14px;
+}
+
+.option-item.correct {
+  border-color: var(--accent-border) !important;
+  background: var(--accent-tint) !important;
+}
+
+.option-item.correct .opt-indicator {
+  background: var(--accent) !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .option-item.correct .opt-indicator {
+  color: #06281C !important;
+}
+
+.option-item.incorrect {
+  border-color: var(--wrong-border) !important;
+  background: var(--wrong-tint) !important;
+}
+
+.option-item.incorrect .opt-indicator {
+  background: var(--wrong) !important;
+  color: #ffffff !important;
+}
+
+/* Question Action Bar */
+.qcard-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.actions-left,
+.actions-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-action {
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  padding: 9px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.btn-check {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+}
+
+.btn-check:hover {
+  background: var(--btn-primary-hover);
+}
+
+.btn-ragu {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-2);
+}
+
+.btn-ragu:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.btn-ragu input[type="checkbox"] {
+  display: none;
+}
+
+.btn-ragu.active,
+.btn-ragu:has(input:checked) {
+  background: var(--warn-tint);
+  border-color: var(--warn-border);
+  color: var(--warn);
+}
+
+.btn-nav {
+  padding: 9px 14px;
+}
+
+.btn-prev {
+  background: transparent;
+  border-color: transparent;
+  color: var(--text-2);
+}
+
+.btn-prev:hover:not(:disabled) {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.btn-prev:disabled,
+.btn-next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-next {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.btn-next:hover:not(:disabled) {
+  background: var(--surface);
+  border-color: var(--border-strong);
+}
+
+/* Feedback Banner */
+.feedback-banner {
+  padding: 12px 20px;
+  font-size: 13.5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.feedback-banner.success {
+  background: var(--accent-tint);
+  color: var(--accent);
+}
+
+.feedback-banner.danger {
+  background: var(--wrong-tint);
+  color: var(--wrong);
+}
+
+/* ==========================================================================
+   SOLUTION ACCORDION BUTTON
+   ========================================================================== */
+.btn-accordion-solution {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-accordion-solution:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.btn-solution-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.btn-solution-label i {
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+.accordion-arrow {
+  color: var(--text-3);
+  font-size: 13px;
+  transition: transform 0.25s ease;
+}
+
+.accordion-arrow.rotated {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   LEARNING SECTION & 5 PILLARS (WORLD-CLASS PEDAGOGICAL STUDIO)
+   ========================================================================== */
+.learning-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.explanation-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Pillar Common Header Bar — netral: tanpa icon circle, tanpa label berwarna */
+.pillar-header-row {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.pillar-icon-badge {
+  display: none;
+}
+
+.pillar-micro-tag {
+  display: block;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  margin-bottom: 4px;
+  color: var(--text-3);
+}
+
+.pillar-micro-tag.emerald,
+.pillar-micro-tag.indigo,
+.pillar-micro-tag.violet,
+.pillar-micro-tag.blue,
+.pillar-micro-tag.amber,
+.pillar-micro-tag.slate {
+  color: var(--text-3);
+}
+
+.pillar-heading {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+/* 1. TOP OFFICIAL ANSWER BANNER — netral + aksen hijau hanya di kunci */
+.solution-summary-banner {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+}
+
+.summary-seal-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.summary-seal-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.summary-seal-icon {
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1.5px solid var(--accent-border);
+  color: var(--accent);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.seal-heading {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.seal-subheading {
+  font-size: 12px;
+  color: var(--text-2);
+  margin-top: 3px;
+}
+
+.summary-seal-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.key-badge-caption {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+  text-transform: uppercase;
+}
+
+.key-badge-large {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 40px;
+  padding: 0 14px;
+  background: var(--accent);
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.02em;
+}
+
+[data-theme="dark"] .key-badge-large {
+  color: #06281C;
+}
+
+.key-pills-wrap {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.key-statement-pill {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.key-statement-pill.key-pill-green {
+  background: var(--accent-tint);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+.key-statement-pill.key-pill-red {
+  background: var(--wrong-tint);
+  color: var(--wrong);
+  border-color: var(--wrong-border);
+}
+
+.key-statement-pill.key-pill-blue {
+  background: var(--surface);
+  color: var(--text-2);
+  border-color: var(--border);
+}
+
+.summary-meta-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  padding-top: 12px;
+}
+
+.meta-tag {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-3);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* 2. PILAR 1: KONSEP & TEORI KUNCI */
+.concept-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+}
+
+.concept-cards-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.concept-card-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text);
+  transition: border-color 0.15s ease;
+}
+
+.concept-card-item:hover {
+  border-color: var(--border-strong);
+}
+
+.concept-card-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.concept-card-text {
+  flex: 1;
+}
+
+/* 3. PILAR 2: GLOSARIUM SIMBOL & NOTASI */
+.symbols-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+}
+
+.symbols-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 10px;
+}
+
+.symbol-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.symbol-card:hover {
+  border-color: var(--border-strong);
+}
+
+.symbol-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.symbol-badge {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border-strong);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.symbol-name {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.symbol-desc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+
+/* 4. PILAR 3: MEMAHAMI LOGIKA KONSEP (MENGAPA RUMUS DIPAKAI) */
+.why-concept-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+}
+
+.why-text-body {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+/* 5. PILAR 4: LANGKAH-LANGKAH PENGERJAAN RINCI */
+.steps-section-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+}
+
+.timeline-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 10px;
+}
+
+.step-timeline-card {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.step-timeline-card:last-child {
+  padding-bottom: 0;
+}
+
+.step-timeline-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 28px;
+}
+
+.step-num-badge {
+  width: 28px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  color: var(--text-2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  font-variant-numeric: tabular-nums;
+}
+
+.step-num-badge.empty {
+  background: var(--surface-2);
+  color: var(--text-3);
+}
+
+.step-timeline-line {
+  width: 1px;
+  background: var(--border);
+  flex-grow: 1;
+  margin-top: 6px;
+  margin-bottom: -6px;
+  z-index: 1;
+}
+
+.step-timeline-body {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Flatten: bukan kartu dalam kartu, cukup blok teks dengan divider */
+.step-card-inner {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0 0 0 0;
+  transition: none;
+}
+
+.step-card-inner:hover {
+  border-color: transparent;
+}
+
+.step-card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.step-tag {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  background: transparent;
+  border: none;
+  padding: 0;
+  letter-spacing: 0.06em;
+  font-family: var(--font-mono);
+}
+
+.step-title {
+  font-family: var(--font-heading);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.35;
+}
+
+.step-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.step-main-text {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text);
+  overflow-x: auto;
+}
+
+.step-note-callout {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 12.5px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+
+.step-note-callout i {
+  color: var(--accent);
+  font-size: 12px;
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+/* 6. PILAR 5: TIPS CEPAT & JEBAKAN SOAL — netral, warna hanya utk status jebakan */
+.tips-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+}
+
+.tips-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.solution-review-alert {
+  background: var(--warn-tint);
+  border: 1px solid var(--warn-border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 18px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--warn);
+}
+
+.solution-review-alert .alert-icon {
+  font-size: 18px;
+  color: var(--warn);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.solution-review-alert .alert-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: var(--warn);
+}
+
+.solution-review-alert .alert-details summary {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--warn);
+  margin-top: 6px;
+}
+
+.solution-review-alert .details-body {
+  margin-top: 6px;
+  font-size: 12.5px;
+  color: var(--text-2);
+  background: var(--surface);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+}
+
+/* Practice Card */
+.practice-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+}
+
+.practice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.practice-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.practice-title i {
+  color: var(--text-3);
+}
+
+.practice-badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+}
+
+.practice-desc {
+  font-size: 13.5px;
+  color: var(--text-2);
+  margin-bottom: 16px;
+}
+
+.sim-opt-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  cursor: pointer;
+  background: var(--bg-card);
+  font-size: 13.5px;
+}
+
+.sim-opt-item:hover {
+  background: var(--surface);
+}
+
+.sim-opt-item.selected {
+  border-color: var(--accent);
+  background: var(--accent-tint);
+}
+
+.sim-indicator {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.btn-sim-check {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  margin-top: 10px;
+}
+
+.btn-sim-check:hover {
+  background: var(--btn-primary-hover);
+}
+
+/* ==========================================================================
+   AI TUTOR — SIDEBAR DOCKED (bukan floating card; menyatu dengan halaman)
+   ========================================================================== */
+.ai-tutor-card {
+  background: var(--surface);
+  border: none;
+  border-radius: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.ai-tutor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px 12px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.ai-tutor-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-avatar {
+  width: 30px;
+  height: 30px;
+  background: var(--accent);
+  color: #ffffff;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .ai-avatar {
+  color: #06281C;
+}
+
+.ai-tutor-title h2 {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+}
+
+.ai-status-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.ai-status {
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+}
+
+.tutor-quota-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  font-weight: 500;
+  padding: 1px 7px;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  transition: all 0.2s ease;
+}
+
+.tutor-quota-badge.free {
+  background: transparent;
+  color: var(--text-3);
+  border: 1px solid var(--border);
+}
+
+.tutor-quota-badge.subscriber {
+  background: transparent;
+  color: var(--text-3);
+  border: 1px solid var(--border);
+}
+
+.btn-refresh-quota {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 500;
+  min-height: 26px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-3);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+}
+
+.btn-refresh-quota:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn-refresh-quota:active {
+  transform: scale(0.95);
+}
+
+.btn-refresh-quota.rotating i {
+  display: inline-block;
+  animation: quotaSpin 0.6s linear infinite;
+}
+
+@keyframes quotaSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.btn-new-chat-tutor {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10px;
+  font-weight: 500;
+  min-height: 26px;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-3);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-sans);
+}
+
+.btn-new-chat-tutor:hover {
+  color: var(--text);
+  border-color: var(--border-strong);
+}
+
+.btn-new-chat-tutor:active {
+  transform: scale(0.95);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+
+.ai-header-badge {
+  color: var(--text-3);
+  font-size: 14px;
+}
+
+/* Tombol tutup eksplisit bottom sheet — hanya tampil di mobile */
+.btn-close-sheet {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  width: 34px;
+  height: 34px;
+  font-size: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.btn-close-sheet:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+/* AI Model Selector Bar */
+.ai-model-selector-bar {
+  padding: 8px 18px;
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.model-select-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.model-select-icon {
+  color: var(--text-3);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+}
+
+.model-select-label {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ai-model-select {
+  flex: 1;
+  min-height: 36px;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  font-family: var(--font-sans);
+  min-width: 0;
+}
+
+.ai-model-select:hover {
+  border-color: var(--border-strong);
+}
+
+.ai-model-select:focus {
+  border-color: var(--accent);
+}
+
+/* Quick Prompt Chips */
+.quick-chips-wrapper {
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.quick-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-btn {
+  background: transparent;
+  color: var(--text-2);
+  border: 1px solid var(--border);
+  min-height: 34px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 400;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.chip-btn:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+  background: var(--bg-card);
+}
+
+/* Chat Messages — gaya dokumen (label kecil + teks), tanpa bubble */
+.chat-messages {
+  padding: 16px 18px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: transparent;
+}
+
+.chat-bubble.user {
+  width: 100%;
+  align-self: stretch;
+  background: transparent;
+  color: var(--text);
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.chat-bubble.user .bubble-content {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.chat-bubble.user .bubble-content::before {
+  content: "Kamu";
+  display: block;
+  font-size: 10.5px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  margin-bottom: 4px;
+}
+
+.chat-bubble.ai {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--border);
+  padding: 12px 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.chat-bubble.ai:first-child {
+  border-top: none;
+}
+
+.bubble-sender-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--text-3);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.bubble-sender-bar .sender-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bubble-sender-bar .sender-avatar {
+  display: none;
+}
+
+.bubble-sender-bar i {
+  color: var(--text-3);
+}
+
+.tutor-model-badge {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 400;
+  color: var(--text-3);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1px 6px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  letter-spacing: 0.02em;
+  max-width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tutor-model-badge i {
+  color: var(--text-3);
+  font-size: 9px;
+}
+
+/* Chat Input */
+.chat-input-area {
+  padding: 12px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+
+.chat-input-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 4px 6px 4px 12px;
+  transition: border-color 0.15s ease;
+}
+
+.chat-input-form:focus-within {
+  border-color: var(--accent);
+}
+
+.chat-input-form input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  color: var(--text);
+  outline: none;
+}
+
+.chat-input-form input::placeholder {
+  color: var(--text-3);
+}
+
+.btn-send-chat {
+  width: 40px;
+  height: 40px;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  flex-shrink: 0;
+}
+
+[data-theme="dark"] .btn-send-chat {
+  color: #06281C;
+}
+
+.btn-send-chat:hover {
+  background: var(--accent-hover);
+}
+
+.btn-send-chat:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ai-disclaimer {
+  font-size: 10px;
+  color: var(--text-3);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Floating AI Button (Mobile Only) */
+.floating-ai-jump {
+  display: none;
+  position: fixed;
+  bottom: 24px;
+  right: 20px;
+  z-index: 40;
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: var(--radius-full);
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+  align-items: center;
+  gap: 8px;
+}
+
+[data-theme="dark"] .floating-ai-jump {
+  color: #06281C;
+}
+
+/* ==========================================================================
+   MODAL DAFTAR SOAL (40-GRID)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  max-width: 540px;
+  width: 100%;
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btn-close-modal {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: var(--text-3);
+  cursor: pointer;
+}
+
+.modal-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--text-2);
+  margin-bottom: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.legend-dot.current { background: var(--text); }
+.legend-dot.answered { background: var(--accent); }
+.legend-dot.ragu { background: var(--warn); }
+.legend-dot.unanswered { background: var(--border-strong); }
+
+.soal-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 8px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.grid-item {
+  aspect-ratio: 1;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.15s ease;
+}
+
+.grid-item:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.grid-item.current {
+  background: var(--btn-primary-bg) !important;
+  color: var(--btn-primary-text) !important;
+  border-color: var(--btn-primary-bg) !important;
+}
+
+.grid-item.answered {
+  background: var(--accent-tint);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+.grid-item.ragu {
+  background: var(--warn-tint);
+  color: var(--warn);
+  border-color: var(--warn-border);
+}
+
+.grid-item.answered.ragu {
+  background: var(--accent-tint);
+  color: var(--accent);
+  border-color: var(--accent-border);
+  position: relative;
+}
+
+.grid-item.answered.ragu::after,
+.grid-item.ragu.current::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--warn);
+}
+
+/* ==========================================================================
+   STATEMENT TABLE (BENAR / SALAH)
+   ========================================================================== */
+.bs-table {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-top: 18px;
+}
+
+.bs-header {
+  display: grid;
+  grid-template-columns: 40px 1fr var(--bs-val-cols, repeat(2, 90px));
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 10px 14px;
+}
+
+.bs-row {
+  display: grid;
+  grid-template-columns: 40px 1fr var(--bs-val-cols, repeat(2, 90px));
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  background: var(--bg-card);
+}
+
+.bs-row:last-child {
+  border-bottom: none;
+}
+
+.bs-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.bs-btn.active {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border-color: var(--btn-primary-bg);
+}
+
+/* ==========================================================================
+   FINISH & REVIEW MODALS
+   ========================================================================== */
+.finish-modal {
+  text-align: center;
+  max-width: 480px;
+}
+
+.finish-icon {
+  font-size: 36px;
+  color: var(--warn);
+  margin-bottom: 14px;
+}
+
+.finish-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+}
+
+.finish-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-2);
+  margin-bottom: 22px;
+}
+
+.finish-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-finish {
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.15s ease;
+}
+
+.btn-finish-danger {
+  background: var(--wrong);
+  color: #ffffff;
+}
+
+.btn-finish-danger:hover {
+  background: var(--wrong-hover);
+}
+
+.btn-finish-back {
+  background: var(--bg-card);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-finish-back:hover {
+  background: var(--surface);
+  border-color: var(--border-strong);
+}
+
+/* Review Overlay (fixed display: none bug) */
+.review-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  background: rgba(9, 9, 11, 0.55);
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.review-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.review-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  max-width: 820px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-shadow: var(--shadow-lg);
+  animation: slideUpFadeReview 0.25s ease-out;
+}
+
+@keyframes slideUpFadeReview {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.review-header h2 {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.review-header h2 i {
+  color: var(--text-3);
+}
+
+.review-header p {
+  font-size: 12.5px;
+  color: var(--text-2);
+  margin-top: 3px;
+}
+
+.review-close {
+  background: transparent;
+  border: none;
+  font-size: 22px;
+  color: var(--text-3);
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+}
+
+.review-close:hover {
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.review-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.review-card {
+  padding: 14px 12px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.review-card-benar {
+  background: var(--accent-tint);
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.review-card-salah {
+  background: var(--wrong-tint);
+  border-color: var(--wrong-border);
+  color: var(--wrong);
+}
+
+.review-card-kosong {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text-2);
+}
+
+.review-card-persen {
+  background: var(--surface);
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.review-card-num,
+.review-persen {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.review-card-label {
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.review-table-wrap {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin-bottom: 18px;
+  max-height: 48vh;
+}
+
+.review-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.review-table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--surface);
+  padding: 11px 14px;
+  font-weight: 500;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-3);
+  border-bottom: 1px solid var(--border-strong);
+  text-align: left;
+}
+
+.review-table tbody tr {
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.review-table tbody tr:hover {
+  background: var(--surface);
+}
+
+.review-table td {
+  padding: 10px 14px;
+  vertical-align: middle;
+}
+
+.review-no {
+  font-weight: 600;
+  color: var(--text-2);
+  width: 50px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.review-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  border: 1px solid;
+}
+
+.review-status-badge.badge-benar {
+  background: var(--accent-tint);
+  color: var(--accent);
+  border-color: var(--accent-border);
+}
+
+.review-status-badge.badge-salah {
+  background: var(--wrong-tint);
+  color: var(--wrong);
+  border-color: var(--wrong-border);
+}
+
+.review-status-badge.badge-kosong {
+  background: var(--surface);
+  color: var(--text-2);
+  border-color: var(--border);
+}
+
+.review-ans {
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.5;
+}
+
+.review-key {
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1.5;
+}
+
+.review-empty {
+  font-style: italic;
+  color: var(--text-3);
+  font-size: 12.5px;
+}
+
+.review-ans-multiline,
+.review-key-multiline {
+  line-height: 1.6;
+}
+
+.review-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 6px;
+}
+
+/* Header & Modal finish buttons */
+.btn-finish-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 13px;
+  background: transparent;
+  border: 1px solid var(--wrong-border);
+  color: var(--wrong);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-finish-header:hover {
+  background: var(--wrong-tint);
+  color: var(--wrong);
+  border-color: var(--wrong);
+}
+
+.btn-nav-finish {
+  background: var(--wrong) !important;
+  color: #ffffff !important;
+  border-color: var(--wrong) !important;
+  font-weight: 600 !important;
+}
+
+.btn-nav-finish:hover {
+  background: var(--wrong-hover) !important;
+}
+
+.modal-footer-action {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-finish-from-modal {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  background: var(--wrong);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-finish-from-modal:hover {
+  background: var(--wrong-hover);
+}
+
+/* Lightbox Modal */
+.lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeInModal 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.lightbox-modal.open {
+  display: flex !important;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 95vw;
+  max-height: 94vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 18px 18px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.lightbox-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.lightbox-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.lightbox-close {
+  background: var(--wrong-tint);
+  border: 1px solid var(--wrong-border);
+  color: var(--wrong);
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 6px;
+  transition: all 0.15s ease;
+}
+
+.lightbox-close:hover {
+  background: var(--wrong);
+  color: #ffffff;
+}
+
+.lightbox-img-wrap {
+  max-width: 90vw;
+  max-height: 75vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 10px;
+}
+
+.lightbox-img-wrap img {
+  max-width: 100%;
+  max-height: 72vh;
+  object-fit: contain;
+  border-radius: 6px;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  transform-origin: center center;
+}
+
+.lightbox-caption {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--text-2);
+  text-align: center;
+  max-width: 800px;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   RESPONSIVENESS & MOBILE-FIRST RULES
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .cbt-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Rule mobile lainnya ada di blok 768 Fase 2 (bagian bawah file) */
+  .soal-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .soal-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+}
+
+
+/* ==========================================================================
+   ENHANCED SPACING & PEDAGOGICAL STYLING (DIK/DIT, OPUS 4.6, PILLAR BREATHING)
+   ========================================================================== */
+
+/* Generous Card-to-Card Spacing Across Pillars */
+.learning-section {
+  gap: 28px !important;
+}
+
+.explanation-card {
+  gap: 26px !important;
+}
+
+.concept-box,
+.symbols-box,
+.why-concept-box,
+.steps-section-card,
+.tips-box {
+  margin-bottom: 24px;
+}
+
+/* Diketahui (Dik) & Ditanyakan (Dit) Grid */
+.dik-dit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.dik-dit-card {
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dik-dit-card.dik {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.dik-dit-card.dit {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+.dik-dit-badge-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+.dik-dit-card.dik .dik-dit-badge-tag {
+  color: var(--text-3);
+}
+
+.dik-dit-card.dit .dik-dit-badge-tag {
+  color: var(--text-3);
+}
+
+.dik-dit-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+  overflow-x: auto;
+}
+
+.dik-dit-text .katex-display,
+.step-main-text .katex-display {
+  margin: 0.85rem 0 !important;
+  padding: 8px 12px;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.pillar-sub-section-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.concept-items-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Permantap Pilar 5: Dual Tips & Traps Grid — netral + warna status */
+.tips-dual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.tips-subcard {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+
+.tips-subcard.shortcut {
+  border-color: var(--border);
+}
+
+.tips-subcard.trap {
+  border-color: var(--wrong-border);
+  background: var(--wrong-tint);
+}
+
+.tips-subcard-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.tips-subcard.shortcut .tips-subcard-header {
+  color: var(--text-2);
+}
+
+.tips-subcard.trap .tips-subcard-header {
+  color: var(--wrong);
+}
+
+.tips-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tips-bullet-list li {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text);
+  position: relative;
+  padding-left: 18px;
+}
+
+.tips-bullet-list li::before {
+  content: "•";
+  position: absolute;
+  left: 4px;
+  color: var(--text-3);
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.tips-bullet-list.trap-list li {
+  color: var(--text);
+}
+
+.tips-bullet-list.trap-list li::before {
+  content: "⚠️";
+  font-size: 12px;
+  left: 0;
+}
+
+/* Floating AI Button: ALWAYS HIDE ON DESKTOP */
+@media (min-width: 1025px) {
+  .floating-ai-jump,
+  #btnFloatingAi {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
+   CRITICAL MOBILE-FIRST RESPONSIVE FIXES
+   (Ensures phones view native mobile UI, NOT zoomed-out desktop)
+   ========================================================================== */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  position: relative;
+}
+
+@media (max-width: 1024px) {
+  .main-wrapper {
+    padding: 0 !important;
+  }
+
+  .cbt-dashboard-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+  }
+
+  .cbt-main-col {
+    width: 100% !important;
+    padding: 14px 16px calc(28px + env(safe-area-inset-bottom)) !important;
+  }
+
+  /* Tutor AI = bottom sheet (Fase 2). Tinggi mengikuti visualViewport agar
+     composer tidak tertutup keyboard. */
+  .cbt-sidebar-col {
+    position: fixed !important;
+    left: 0 !important;
+    right: 0 !important;
+    top: auto !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 86vh;
+    height: calc(min(var(--vvh, 100dvh), 100dvh) * 0.86);
+    border-left: none !important;
+    border-top: 1px solid var(--border);
+    border-radius: 12px 12px 0 0;
+    background: var(--bg);
+    transform: translateY(103%);
+    transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+    z-index: 70;
+    overflow: hidden;
+  }
+
+  .cbt-sidebar-col.tutor-open {
+    transform: translateY(0);
+  }
+
+  .cbt-sidebar-col.dragging {
+    transition: none;
+  }
+
+  .tutor-sheet-handle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0 4px;
+    cursor: grab;
+    touch-action: none;
+    flex-shrink: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .btn-close-sheet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-header-badge {
+    display: none;
+  }
+
+  .tutor-sheet-handle span {
+    width: 42px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border-strong);
+  }
+
+  .tutor-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 65;
+    background: rgba(9, 9, 11, 0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .tutor-backdrop.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .ai-tutor-header {
+    padding-top: 10px;
+  }
+
+  .chat-messages {
+    max-height: none;
+  }
+
+  .floating-ai-jump {
+    display: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  /* ===== Top bar mobile (Fase 2): menu, Soal x/n, timer, overflow ===== */
+  .app-header {
+    height: 56px;
+  }
+
+  .header-container {
+    height: 56px;
+    padding: 0 10px;
+    gap: 8px;
+  }
+
+  .brand-logo {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+
+  .brand-text {
+    display: none !important;
+  }
+
+  .m-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid var(--navbar-border);
+    border-radius: var(--radius-sm);
+    color: var(--navbar-text);
+    font-size: 14px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+
+  .m-qnum {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navbar-text);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .timer-pill {
+    display: flex;
+    padding: 5px 9px;
+    font-size: 11.5px;
+    flex-shrink: 0;
+  }
+
+  .btn-daftar-soal,
+  .btn-finish-header,
+  .user-avatar {
+    display: none !important;
+  }
+
+  /* Panel menu = selector mata pelajaran & paket */
+  .header-center-controls {
+    display: none;
+    position: fixed;
+    top: 64px;
+    left: 10px;
+    right: 10px;
+    z-index: 75;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 12px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .header-center-controls.open {
+    display: flex;
+  }
+
+  .header-center-controls .subject-select {
+    background: var(--bg-card);
+    color: var(--text);
+    border-color: var(--border);
+    font-size: 16px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .header-center-controls .subject-select-wrap i {
+    color: var(--text-3);
+  }
+
+  .header-center-controls .package-tabs {
+    background: var(--surface-2);
+    border-color: var(--border);
+  }
+
+  .header-center-controls .pkg-tab {
+    color: var(--text-2);
+  }
+
+  .header-center-controls .pkg-tab.active {
+    background: var(--btn-primary-bg);
+    color: var(--btn-primary-text);
+  }
+
+  /* Panel overflow: Daftar Soal / Selesai Tes */
+  .m-overflow-panel {
+    display: none;
+    position: fixed;
+    top: 64px;
+    right: 10px;
+    z-index: 75;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 6px;
+    box-shadow: var(--shadow-lg);
+    min-width: 190px;
+  }
+
+  .m-overflow-panel.open {
+    display: block;
+  }
+
+  .m-overflow-panel button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    text-align: left;
+    padding: 11px 12px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--text);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+
+  .m-overflow-panel button:hover {
+    background: var(--surface);
+  }
+
+  .m-overflow-panel button i {
+    color: var(--text-3);
+    width: 16px;
+    text-align: center;
+  }
+
+  /* Progress line tipis di bawah top bar */
+  .m-progress {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 2px;
+    background: var(--navbar-border);
+  }
+
+  .m-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    transition: width 0.3s ease;
+  }
+
+  /* ===== Konten satu kolom ===== */
+  .cbt-main-col {
+    padding: 12px 16px calc(92px + env(safe-area-inset-bottom)) !important;
+  }
+
+  .topic-header-bar {
+    margin-bottom: 8px;
+  }
+
+  .exercise-title {
+    font-size: 18px;
+  }
+
+  .qcard-header {
+    padding: 10px 16px;
+  }
+
+  .qcard-body {
+    padding: 16px;
+  }
+
+  .cbt-stimulus-col {
+    padding: 14px 16px;
+  }
+
+  /* Teks soal >=16px, line-height ~1.6 (Fase 2) */
+  .prompt-text,
+  .prompt-html-wrap {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .stimulus-content,
+  .stimulus-body-content {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* Opsi: full-width, tinggi min 56px, target sentuh >=48px */
+  .options-list {
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .option-item {
+    min-height: 56px;
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .opt-indicator {
+    width: 32px;
+    height: 32px;
+    font-size: 13px;
+  }
+
+  .opt-body {
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  /* ===== Sticky bottom bar: Sebelumnya | Cek | Selanjutnya | Ragu | Tutor ===== */
+  .qcard-actions {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 8px;
+    background: var(--bg-card);
+    border-top: 1px solid var(--border);
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+  }
+
+  .actions-left,
+  .actions-right {
+    display: contents;
+  }
+
+  .btn-prev { order: 1; }
+  .btn-check { order: 2; }
+  .btn-next { order: 3; }
+  .btn-ragu { order: 4; }
+  .btn-bar-tutor { order: 5; }
+
+  .btn-prev span,
+  .btn-next span,
+  .btn-ragu span {
+    display: none;
+  }
+
+  .btn-prev,
+  .btn-next,
+  .btn-ragu,
+  .btn-bar-tutor {
+    min-width: 46px;
+    padding: 10px 12px;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .btn-bar-tutor {
+    display: inline-flex;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-2);
+  }
+
+  .btn-check {
+    flex: 1;
+    min-width: 0;
+    justify-content: center;
+    font-size: 11.5px;
+    padding: 6px 4px;
+    line-height: 1.25;
+  }
+
+  /* Input >=16px mencegah zoom iOS */
+  .chat-input-form input {
+    font-size: 16px;
+  }
+
+  .ai-model-select {
+    font-size: 16px;
+  }
+
+  /* Modal Daftar Soal = bottom sheet */
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-content {
+    max-width: none;
+    width: 100%;
+    border-radius: 12px 12px 0 0;
+    max-height: 88dvh;
+    padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  }
+
+  /* Solution Banner Mobile */
+  .solution-summary-banner {
+    padding: 16px 14px;
+  }
+
+  .summary-seal-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .summary-seal-right {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .key-badge-large {
+    width: 100%;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  /* Pillar Grid Stacking */
+  .dik-dit-grid,
+  .tips-dual-grid,
+  .symbols-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .step-timeline-card {
+    gap: 12px;
+    padding-bottom: 16px;
+  }
+
+  .step-timeline-indicator {
+    width: 30px;
+  }
+
+  .step-num-badge {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  .step-main-text {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+}
+
+
+/* ==========================================================================
+   ENHANCED QUESTION & STIMULUS STYLING
+   ========================================================================== */
+.stimulus-col {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin-bottom: 22px;
+}
+
+.stimulus-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.stimulus-header i {
+  color: var(--text-3);
+  font-size: 13px;
+}
+
+.stimulus-body-content {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--text);
+}
+
+.stimulus-body-content p {
+  margin-bottom: 10px;
+}
+
+.stimulus-body-content p:last-child {
+  margin-bottom: 0;
+}
+
+.prompt-text {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 24px;
+  padding: 4px 0;
+}
+
+.prompt-paragraph {
+  margin-bottom: 12px;
+}
+
+.prompt-paragraph:last-child {
+  margin-bottom: 0;
+}
+
+/* KaTeX formula readability inside question card */
+.prompt-text .katex,
+.stimulus-body-content .katex {
+  font-size: 1.12em;
+}
+
+.prompt-text .katex-display,
+.stimulus-body-content .katex-display {
+  margin: 12px 0;
+  padding: 10px 14px;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+}
+
+.prompt-img-wrap {
+  margin: 16px 0;
+}
+
+
+/* ==========================================================================
+/* ==========================================================================
+   UNIFIED VERTICAL CBT QUESTION FLOW
+   (Stimulus Box -> Question Prompt -> Options / Statements)
+   ========================================================================== */
+.cbt-exam-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 100%;
+}
+
+.cbt-stimulus-col {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+}
+
+.cbt-question-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.cbt-panel-divider {
+  display: none !important;
+}
+
+.stimulus-images-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  margin: 16px 0 6px;
+  width: 100%;
+}
+
+.stimulus-images-single {
+  display: flex;
+  justify-content: center;
+  margin: 16px 0 6px;
+  width: 100%;
+}
+
+.stimulus-img-container {
+  margin: 10px auto;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+}
+
+.stimulus-img {
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: #ffffff;
+  padding: 8px;
+  cursor: zoom-in;
+  transition: border-color 0.2s ease;
+}
+
+.stimulus-img:hover {
+  border-color: var(--border-strong);
+}
+
+/* Authentic Pusmendik CBT Content Styling */
+.prompt-html-wrap {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.prompt-html-wrap p {
+  margin-bottom: 12px;
+}
+
+.prompt-html-wrap p:last-child {
+  margin-bottom: 0;
+}
+
+/* Adaptive Sizing: Authentic Diagram vs Inline Formula */
+.prompt-html-wrap img,
+.stimulus-body-content img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  vertical-align: middle;
+  cursor: zoom-in;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Standalone diagram figures */
+.stimulus-body-content img.diagram-img,
+.prompt-html-wrap img.diagram-img,
+.stimulus-body-content p.diagram-paragraph img,
+.prompt-html-wrap p.diagram-paragraph img {
+  display: block;
+  margin: 14px auto;
+  max-width: 100%;
+  max-height: 460px;
+  width: auto;
+  height: auto;
+  background: #ffffff;
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  border: 1px solid var(--border);
+}
+
+@media (max-width: 640px) {
+  .stimulus-body-content img.diagram-img,
+  .prompt-html-wrap img.diagram-img,
+  .stimulus-body-content p.diagram-paragraph img,
+  .prompt-html-wrap p.diagram-paragraph img {
+    max-height: 320px;
+    padding: 4px;
+  }
+}
+
+/* Inline formula snippets, vectors, letters (L, g, u, v, fractions): keep strictly inline, never stretched, no card border */
+.stimulus-body-content img.inline-symbol-img,
+.prompt-html-wrap img.inline-symbol-img,
+.stimulus-body-content img[data-latex],
+.prompt-html-wrap img[data-latex],
+.stimulus-body-content td img.inline-symbol-img,
+.prompt-html-wrap td img.inline-symbol-img {
+  display: inline-block !important;
+  margin: 0 3px !important;
+  padding: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  max-height: 3.2em !important;
+  vertical-align: middle !important;
+  cursor: zoom-in;
+}
+
+/* Arabic Typography & Script-Aware Direction */
+/* Keep containers and question card in natural LTR layout flow */
+.subject-bahasa_arab .cbt-question-col,
+.subject-bahasa_arab .stimulus-container,
+.subject-bahasa_arab .prompt-container,
+.subject-bahasa_arab .option-item,
+.subject-bahasa_arab .bs-table {
+  direction: ltr !important;
+}
+
+.subject-bahasa_arab .stimulus-body-content,
+.subject-bahasa_arab .prompt-html-wrap {
+  direction: ltr;
+}
+
+/* Explicit script direction for text elements */
+.subject-bahasa_arab .text-arabic,
+.subject-bahasa_arab [data-lang="ar"],
+.subject-bahasa_arab p[style*="text-align: right"],
+.subject-bahasa_arab p[style*="text-align:right"] {
+  direction: rtl !important;
+  text-align: right !important;
+  unicode-bidi: isolate;
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+  font-size: 1.15em;
+  line-height: 1.9;
+}
+
+.subject-bahasa_arab .text-indonesian,
+.subject-bahasa_arab [data-lang="id"] {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: isolate;
+  font-family: inherit;
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   BAHASA ARAB: PAKET 1 & PAKET 2 CUSTOM LAYOUT RULES
+   ========================================================================== */
+
+/* 1. Paket 1: Secara umum seluruh gambar soal, stimulus, dan pertanyaan di KANAN */
+[data-subject="bahasa_arab"][data-paket="1"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="1"] .prompt-html-wrap img,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .prompt-html-wrap img,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .stimulus-body-content img,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .prompt-html-wrap img,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .stimulus-body-content img,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .prompt-html-wrap img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  float: none !important;
+  text-align: right !important;
+}
+
+[data-subject="bahasa_arab"][data-paket="1"] .stimulus-body-content p,
+[data-subject="bahasa_arab"][data-paket="1"] .prompt-html-wrap p,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .stimulus-body-content p,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .prompt-html-wrap p,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .stimulus-body-content p,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .prompt-html-wrap p,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .stimulus-body-content p,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .prompt-html-wrap p {
+  text-align: right;
+}
+
+/* Kalimat instruksi / teks Bahasa Indonesia di Paket 1 tetap di KIRI */
+[data-subject="bahasa_arab"][data-paket="1"] .text-indonesian,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .text-indonesian,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .text-indonesian,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .text-indonesian,
+[data-subject="bahasa_arab"][data-paket="1"] p.text-indonesian,
+[data-subject="bahasa_arab"][data-paket="paket_1"] p.text-indonesian,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] p.text-indonesian,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] p.text-indonesian {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* 2. Khusus Paket 1 No 10: HANYA gambar kartun kelas yang di TENGAH */
+[data-subject="bahasa_arab"][data-paket="1"][data-nomor="10"] img[src*="25209_bca9545d0b0b13e0f9ff43c571b2c1b5"],
+[data-subject="bahasa_arab"][data-paket="paket_1"][data-nomor="10"] img[src*="25209_bca9545d0b0b13e0f9ff43c571b2c1b5"],
+body[data-active-subject="bahasa_arab"][data-active-paket="1"][data-active-nomor="10"] img[src*="25209_bca9545d0b0b13e0f9ff43c571b2c1b5"],
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"][data-active-nomor="10"] img[src*="25209_bca9545d0b0b13e0f9ff43c571b2c1b5"] {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+}
+
+/* 3. Paket 1: Opsi Jawaban (A-E)
+   - Gambar opsi (No 1, 3, 4, 5, 6, 10) semuanya di KIRI (di samping huruf A-E).
+   - Teks Arab opsi di No 7, 8, 9 semuanya di KIRI.
+*/
+[data-subject="bahasa_arab"][data-paket="1"] .option-item,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .option-item,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .option-item,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .option-item {
+  direction: ltr !important;
+  text-align: left !important;
+  justify-content: flex-start !important;
+}
+
+[data-subject="bahasa_arab"][data-paket="1"] .opt-body,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .opt-body,
+[data-subject="bahasa_arab"][data-paket="1"] .opt-body.opt-arabic,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .opt-body.opt-arabic,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .opt-body.opt-arabic,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .opt-body.opt-arabic {
+  direction: ltr !important;
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+[data-subject="bahasa_arab"][data-paket="1"] .opt-body img,
+[data-subject="bahasa_arab"][data-paket="paket_1"] .opt-body img,
+body[data-active-subject="bahasa_arab"][data-active-paket="1"] .opt-body img,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_1"] .opt-body img {
+  display: block !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  float: none !important;
+}
+
+/* 4. Paket 2 Rules: Kartun di tengah, opsi Arab di kanan, opsi Indo di kiri */
+[data-subject="bahasa_arab"][data-paket="2"][data-nomor="9"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="2"][data-nomor="10"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="2"][data-nomor="27"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="paket_2"][data-nomor="9"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="paket_2"][data-nomor="10"] .stimulus-body-content img,
+[data-subject="bahasa_arab"][data-paket="paket_2"][data-nomor="27"] .stimulus-body-content img,
+body[data-active-subject="bahasa_arab"][data-active-paket="2"][data-active-nomor="9"] .stimulus-body-content img,
+body[data-active-subject="bahasa_arab"][data-active-paket="2"][data-active-nomor="10"] .stimulus-body-content img,
+body[data-active-subject="bahasa_arab"][data-active-paket="2"][data-active-nomor="27"] .stimulus-body-content img {
+  display: block !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  text-align: center !important;
+}
+
+[data-subject="bahasa_arab"][data-paket="2"] .option-item.opt-arabic .opt-body,
+[data-subject="bahasa_arab"][data-paket="paket_2"] .option-item.opt-arabic .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="2"] .option-item.opt-arabic .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_2"] .option-item.opt-arabic .opt-body {
+  direction: rtl !important;
+  text-align: right !important;
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+  font-size: 1.18em;
+  line-height: 1.8;
+}
+
+[data-subject="bahasa_arab"][data-paket="2"] .option-item.opt-indonesian .opt-body,
+[data-subject="bahasa_arab"][data-paket="paket_2"] .option-item.opt-indonesian .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="2"] .option-item.opt-indonesian .opt-body,
+body[data-active-subject="bahasa_arab"][data-active-paket="paket_2"] .option-item.opt-indonesian .opt-body {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+
+/* Benar-Salah Table in Bahasa Arab:
+   - Columns stay LTR: # on left, statement in middle, buttons on RIGHT
+   - Inside statement cell: Arabic is RTL, Indonesian is LTR
+*/
+.subject-bahasa_arab .bs-table,
+.subject-bahasa_arab .bs-header,
+.subject-bahasa_arab .bs-row {
+  direction: ltr !important;
+}
+
+.subject-bahasa_arab .bs-cell-no,
+.subject-bahasa_arab .bs-col-no {
+  text-align: center !important;
+}
+
+.subject-bahasa_arab .bs-cell-stmt.stmt-arabic {
+  direction: rtl !important;
+  text-align: right !important;
+  font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+  font-size: 1.12em;
+}
+
+.subject-bahasa_arab .bs-cell-stmt.stmt-indonesian {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+.subject-bahasa_arab .bs-cell-opt,
+.subject-bahasa_arab .bs-col-opt {
+  text-align: center !important;
+}
+
+
+/* Responsive Table Wrappers (Mat P1 Q13, B. Jerman P1 Q10, B. Jerman P2 Q13-15) */
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 14px 0;
+  border-radius: 10px;
+}
+
+.table-responsive table,
+.stimulus-body-content table,
+.prompt-html-wrap table {
+  width: 100% !important;
+  max-width: 100% !important;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
+  overflow: hidden;
+  margin: 0;
+}
+
+.table-responsive td,
+.table-responsive th,
+.stimulus-body-content td,
+.prompt-html-wrap td {
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+/* Tabel 1 sel pembungkus artikel/soal utuh (B. Jerman P2 Q13-15) */
+.table-responsive table.table-layout-single-cell td {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.table-responsive table.table-layout-single-cell td img {
+  max-width: 100% !important;
+  max-height: 460px !important;
+  width: auto !important;
+  height: auto !important;
+  display: block !important;
+  margin: 14px auto !important;
+  border-radius: 8px;
+}
+
+/* Kolom tabel yang memuat gambar ilustrasi khusus pada multi-kolom (B. Jerman P1 Q10) */
+.table-responsive td.td-has-img,
+.stimulus-body-content td.td-has-img {
+  width: 250px;
+  min-width: 180px;
+  text-align: center;
+}
+
+.table-responsive td.td-has-img img,
+.stimulus-body-content td.td-has-img img {
+  width: 100% !important;
+  max-width: 240px !important;
+  height: auto !important;
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+@media (max-width: 640px) {
+  .table-responsive table.table-layout-card,
+  .table-responsive table.table-layout-card tbody,
+  .table-responsive table.table-layout-card tr,
+  .table-responsive table.table-layout-card td {
+    display: block !important;
+    width: 100% !important;
+    min-width: 100% !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    padding: 8px 0 !important;
+  }
+  .table-responsive table.table-layout-card td.td-has-img img {
+    max-width: 100% !important;
+    margin: 0 auto 12px !important;
+  }
+}
+
+.bs-stmt-img {
+  max-width: 100%;
+  max-height: 48px;
+  width: auto;
+  height: auto;
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0 6px;
+  border-radius: 6px;
+  background: transparent;
+  padding: 0;
+  cursor: zoom-in;
+}
+
+/* Option Choices Images (Formulas & Diagram Choices) */
+.opt-body img.opt-diagram-img {
+  max-width: 100%;
+  width: auto;
+  max-height: 280px;
+  min-height: unset;
+  display: block;
+  margin: 6px 0;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  padding: 6px;
+  border: 1px solid var(--border);
+  cursor: zoom-in;
+  transition: border-color 0.15s ease;
+}
+
+.opt-body img.opt-diagram-img:hover {
+  border-color: var(--border-strong);
+}
+
+.opt-body img:not(.opt-diagram-img),
+.opt-math-img {
+  max-width: 100%;
+  width: auto;
+  max-height: 3.2em;
+  min-height: unset;
+  vertical-align: middle;
+  display: inline-block;
+  object-fit: contain;
+  border-radius: 4px;
+  background: transparent;
+  padding: 0 2px;
+  border: none;
+  cursor: zoom-in;
+  transition: transform 0.15s ease;
+}
+
+.opt-body img:not(.opt-diagram-img):hover,
+.opt-math-img:hover {
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   PENYESUAIAN UKURAN GAMBAR SPESIFIK SESUAI AUDIT MATEMATIKA & MATEMATIKA LANJUT
+   ========================================================================== */
+
+/* 1. Matematika (Wajib) Paket 1 No 9: gambar di soal dan pertanyaan agak dikecilkan */
+[data-subject="matematika"][data-paket="1"][data-nomor="9"] #stimulusContainer img,
+[data-subject="matematika"][data-paket="1"][data-nomor="9"] #promptContainer img,
+body[data-active-subject="matematika"][data-active-paket="1"][data-active-nomor="9"] #stimulusContainer img,
+body[data-active-subject="matematika"][data-active-paket="1"][data-active-nomor="9"] #promptContainer img {
+  max-height: 1.85em !important;
+  transform: scale(0.85);
+  transform-origin: left center;
+}
+
+/* 2. Matematika (Wajib) Paket 1 No 11: hanya gambar opsi jawaban dikecilkan sedikit */
+[data-subject="matematika"][data-paket="1"][data-nomor="11"] .opt-body img,
+body[data-active-subject="matematika"][data-active-paket="1"][data-active-nomor="11"] .opt-body img {
+  max-height: 2.6em !important;
+  max-width: 175px !important;
+  height: auto !important;
+  padding: 2px !important;
+  margin: 4px 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* 3. Matematika (Wajib) Paket 1 No 19: hanya gambar opsi jawaban dibesarkan sedikit */
+[data-subject="matematika"][data-paket="1"][data-nomor="19"] .opt-body img,
+body[data-active-subject="matematika"][data-active-paket="1"][data-active-nomor="19"] .opt-body img {
+  max-height: 4.6em !important;
+  transform: scale(1.3);
+  transform-origin: left center;
+  margin: 6px 8px !important;
+}
+
+/* 4. Matematika (Wajib) Paket 2 No 8: hanya gambar opsi jawaban (ABCDE) dibesarkan sedikit */
+[data-subject="matematika"][data-paket="2"][data-nomor="8"] .opt-body img,
+body[data-active-subject="matematika"][data-active-paket="2"][data-active-nomor="8"] .opt-body img {
+  max-height: 5.2em !important;
+  transform: scale(1.32);
+  transform-origin: left center;
+  margin: 6px 8px !important;
+}
+
+/* 5. Matematika Tingkat Lanjut Paket 1 No 16: khusus opsi jawaban A dikecilkan */
+[data-subject="matematika_lanjut"][data-paket="1"][data-nomor="16"] [data-key="A"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="1"][data-nomor="16"] [data-opt-key="A"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="1"][data-active-nomor="16"] [data-key="A"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="1"][data-active-nomor="16"] [data-opt-key="A"] .opt-body img {
+  max-height: 2.3em !important;
+  max-width: 42px !important;
+  height: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 2px 0 !important;
+}
+
+/* 6. Matematika Tingkat Lanjut Paket 1 No 18: opsi jawaban (ABCDE) ukuran sedang */
+[data-subject="matematika_lanjut"][data-paket="1"][data-nomor="18"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="1"][data-active-nomor="18"] .opt-body img {
+  max-height: 2.3em !important;
+  height: auto !important;
+  width: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 2px !important;
+  margin: 4px 0 !important;
+}
+
+/* 7. Matematika Tingkat Lanjut Paket 1 No 20: opsi jawaban (ABCDE) ukuran sedang */
+[data-subject="matematika_lanjut"][data-paket="1"][data-nomor="20"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="1"][data-active-nomor="20"] .opt-body img {
+  max-height: 2.4em !important;
+  height: auto !important;
+  width: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 2px !important;
+  margin: 4px 0 !important;
+}
+
+/* 8. Matematika Tingkat Lanjut Paket 2 No 1: hanya opsi jawaban dibesarkan sedikit agar tulisan limit terbaca jelas */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="1"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="1"] .opt-body img {
+  max-height: 4.8em !important;
+  transform: scale(1.35);
+  transform-origin: left center;
+  margin: 6px 8px !important;
+}
+
+/* 9. Matematika Tingkat Lanjut Paket 2 No 4: hanya opsi jawaban diperkecil sedikit */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="4"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="4"] .opt-body img {
+  max-height: 2.7em !important;
+  height: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 2px !important;
+  margin: 4px 0 !important;
+}
+
+/* 10. Matematika Tingkat Lanjut Paket 2 No 16: hanya opsi jawaban (ABCDE) diperkecil */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="16"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="16"] .opt-body img {
+  max-height: 2.0em !important;
+  height: auto !important;
+  width: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 2px !important;
+  margin: 2px 0 !important;
+}
+
+/* 11. Matematika Tingkat Lanjut Paket 2 No 21: gambar opsi A, B, C dikecilkan agar seimbang dengan D & E */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-key="A"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-key="B"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-key="C"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-opt-key="A"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-opt-key="B"] .opt-body img,
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="21"] [data-opt-key="C"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-key="A"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-key="B"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-key="C"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-opt-key="A"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-opt-key="B"] .opt-body img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="21"] [data-opt-key="C"] .opt-body img {
+  max-height: 2.6em !important;
+  max-width: 90px !important;
+  height: auto !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 2px 0 !important;
+}
+
+/* 12. Matematika Tingkat Lanjut Paket 2 No 23: hanya gambar pertanyaan diperbesar sedikit */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="23"] #promptContainer img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="23"] #promptContainer img {
+  max-height: 4.8em !important;
+  transform: scale(1.35);
+  transform-origin: left center;
+  margin: 8px 4px !important;
+}
+
+/* 13. Matematika Tingkat Lanjut Paket 2 No 25: hanya gambar pertanyaan diperbesar sedikit */
+[data-subject="matematika_lanjut"][data-paket="2"][data-nomor="25"] #promptContainer img,
+body[data-active-subject="matematika_lanjut"][data-active-paket="2"][data-active-nomor="25"] #promptContainer img {
+  max-height: 4.8em !important;
+  transform: scale(1.35);
+  transform-origin: left center;
+  margin: 8px 4px !important;
+}
+
+/* 14. Sosiologi Paket 1 No 13, 14, 15: Gambar stimulus diperbesar ke ukuran proporsional/jelas */
+[data-subject="sosiologi"][data-paket="1"][data-nomor="13"] #stimulusContainer img,
+[data-subject="sosiologi"][data-paket="1"][data-nomor="14"] #stimulusContainer img,
+[data-subject="sosiologi"][data-paket="1"][data-nomor="15"] #stimulusContainer img,
+[data-subject="sosiologi"][data-paket="paket_1"][data-nomor="13"] #stimulusContainer img,
+[data-subject="sosiologi"][data-paket="paket_1"][data-nomor="14"] #stimulusContainer img,
+[data-subject="sosiologi"][data-paket="paket_1"][data-nomor="15"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="1"][data-active-nomor="13"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="1"][data-active-nomor="14"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="1"][data-active-nomor="15"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-nomor="13"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-nomor="14"] #stimulusContainer img,
+body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-nomor="15"] #stimulusContainer img {
+  display: block !important;
+  margin: 12px auto 16px auto !important;
+  max-width: 100% !important;
+  max-height: 420px !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 6px !important;
+  background: #ffffff !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: none !important;
+}
+
+/* ==========================================================================
+   AI TUTOR CHAT — TIPOGRAFI DOKUMEN (formatAiMessage)
+   ========================================================================== */
+.chat-bubble .ai-p {
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.chat-bubble .ai-p:last-child {
+  margin-bottom: 0;
+}
+
+.chat-bubble .ai-space {
+  height: 8px;
+}
+
+.chat-bubble .ai-h2,
+.chat-bubble .ai-h3 {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 10px 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.chat-bubble .ai-h3 i {
+  color: var(--text-3);
+  font-size: 11px;
+}
+
+.chat-bubble .ai-list,
+.chat-bubble .ai-num-list {
+  margin: 4px 0 10px;
+  padding-left: 20px;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.chat-bubble .ai-list li,
+.chat-bubble .ai-num-list li {
+  margin-bottom: 4px;
+}
+
+.chat-bubble .ai-block-math {
+  margin: 10px 0;
+  padding: 8px 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+  font-size: 13px;
+}
+
+.ai-callout {
+  margin: 10px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--bg-card);
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.ai-callout.ai-callout-tip {
+  border-left-color: var(--accent);
+}
+
+.ai-callout.ai-callout-tutor {
+  border-left-color: var(--border-strong);
+}
+
+.ai-callout.ai-callout-refusal {
+  border-left-color: var(--warn);
+  background: var(--warn-tint);
+  color: var(--warn);
+}
+
+.chat-bubble.typing-indicator .bubble-content {
+  color: var(--text-3);
+  font-style: italic;
+}
+
+/* Chat scrollbar halus */
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ==========================================================================
+   COLLAPSED EXPLANATION NOTICE & SIM FEEDBACK
+   ========================================================================== */
+.exp-collapsed-notice {
+  border-top: 1px solid var(--border);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.collapsed-msg {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+.collapsed-msg i {
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+.btn-restore-exp {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-restore-exp:hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.btn-collapse-exp {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.sim-feedback {
+  margin-top: 12px;
+  padding: 10px 14px;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  line-height: 1.6;
+  background: var(--surface);
+  color: var(--text-2);
+}
+
+.sim-feedback.success {
+  background: var(--accent-tint);
+  border-color: var(--accent-border);
+  color: var(--accent);
+}
+
+.sim-feedback.danger {
+  background: var(--wrong-tint);
+  border-color: var(--wrong-border);
+  color: var(--wrong);
+}
+
+.empty-hint {
+  color: var(--text-3);
+  font-size: 13.5px;
+}
+
+.tips-text-legacy {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-2);
+}
+
+.visual-context-item {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.visual-context-item i {
+  color: var(--text-3);
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+/* ==========================================================================
+   DARK MODE ADAPTER — KONTEN
+   KaTeX mewarisi currentColor otomatis; scan/gambar soal sengaja tetap
+   berlatar putih agar tetap terbaca seperti kertas aslinya.
+   Formula inline (PNG transparan, teks hitam) di-invert agar terbaca di dark.
+   ========================================================================== */
+[data-theme="dark"] .katex {
+  color: var(--text);
+}
+
+[data-theme="dark"] .opt-body img:not(.opt-diagram-img),
+[data-theme="dark"] .opt-math-img,
+[data-theme="dark"] .stimulus-body-content img.inline-symbol-img,
+[data-theme="dark"] .prompt-html-wrap img.inline-symbol-img,
+[data-theme="dark"] .stimulus-body-content img[data-latex],
+[data-theme="dark"] .prompt-html-wrap img[data-latex],
+[data-theme="dark"] td img.inline-symbol-img,
+[data-theme="dark"] .bs-stmt-img {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+[data-theme="dark"] .lightbox-img-wrap {
+  background: #ffffff;
+}
+
+[data-theme="dark"] .chat-bubble.user .bubble-content {
+  color: var(--text);
+}
+
+/* Transisi tema halus untuk permukaan utama */
+.cbt-question-card,
+.ai-tutor-card,
+.option-item,
+.concept-box,
+.symbols-box,
+.why-concept-box,
+.steps-section-card,
+.tips-box,
+.practice-card,
+.modal-content,
+.app-header {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* ==========================================================================
+   FASE 1 — AREA SOAL PUTIH & PENANGANAN GAMBAR SOAL
+   Semua gambar soal (scan Pusmendik, formula PNG, diagram) berlatar putih:
+   max-width 100% + height auto + mix-blend-mode: multiply agar tidak muncul
+   kotak putih di atas permukaan apapaun. Container putih + border tipis sudah
+   dipasang di .stimulus-img, img.diagram-img, dan .opt-diagram-img.
+   ========================================================================== */
+.stimulus-img,
+.stimulus-body-content img,
+.prompt-html-wrap img,
+.prompt-text img,
+.opt-body img,
+.bs-stmt-img {
+  mix-blend-mode: multiply;
+}
+
+
+
+
+
+/* ==========================================================================
+   FASE 5 — WIDGET FEEDBACK NON-INTRUSIF
+   Notif #1: atas di bawah top bar. Notif #2: bawah (strip di atas bottom bar
+   pada mobile, pojok bawah pada desktop). Maks 2x per sesi.
+   ========================================================================== */
+.fb-widget {
+  position: fixed;
+  z-index: 80;
+  width: 320px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 16px;
+  font-family: var(--font-sans);
+}
+
+.fb-widget.pos-top {
+  top: 76px;
+  right: 20px;
+  left: auto;
+}
+
+.fb-widget.pos-bottom {
+  top: auto;
+  bottom: 20px;
+  right: 20px;
+  left: auto;
+}
+
+.fb-close {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: var(--text-3);
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.fb-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 10px;
+  padding-right: 24px;
+  letter-spacing: -0.01em;
+}
+
+.fb-stars {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.fb-star {
+  flex: 1;
+  height: 36px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-2);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  transition: border-color 0.15s ease;
+}
+
+.fb-star:hover {
+  border-color: var(--border-strong);
+}
+
+.fb-star.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+.fb-text {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--bg-card);
+  resize: none;
+  margin-bottom: 10px;
+}
+
+.fb-text:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.fb-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+}
+
+.fb-later {
+  background: transparent;
+  border: none;
+  color: var(--text-3);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  cursor: pointer;
+  padding: 6px 8px;
+}
+
+.fb-send {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 6px 14px;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.fb-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.fb-error {
+  font-size: 12px;
+  color: var(--wrong);
+  margin-top: 8px;
+}
+
+@media (max-width: 768px) {
+  .fb-widget {
+    width: auto;
+    left: 12px;
+    right: 12px;
+  }
+
+  .fb-widget.pos-top {
+    top: 66px;
+  }
+
+  .fb-widget.pos-bottom {
+    top: auto;
+    bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+}

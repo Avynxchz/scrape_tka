@@ -12,6 +12,7 @@ from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
 import solution_loader  # noqa: E402  (sumber Layer 3: solusi spesifik Claude)
 import tutor_engine    # noqa: E402  (mesin tutor konversasional berbasis LLM)
 import tutor_llm       # noqa: E402  (abstraksi provider LLM)
+import visitor_log     # noqa: E402  (pencatat pengunjung + dashboard /pengunjung)
 import tutor_store     # noqa: E402  (persistensi percakapan — SQLite)
 import legacy_tutor    # noqa: E402  (arsip mesin heuristik lama)
 
@@ -64,6 +65,9 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # ============================================================================
 PUBLIC_DEMO = os.environ.get("PUBLIC_DEMO", "0") == "1"
 DEMO_BLOCKED_PATHS = ('/api/tutor/reset_quota', '/api/swarm/start', '/api/swarm/reset', '/api/ai-tutor')
+
+# Dashboard pengunjung hanya boleh dibuka di server utama (bukan demo publik)
+ADMIN_VISITOR_PATHS = ('/pengunjung', '/api/admin/visitors')
 
 # ============================================================================
 # LAPISAN KANONIS (data/canonical_questions/) — sumber konteks AI
@@ -1029,6 +1033,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         _track_client_context(self)
+        visitor_log.record(self)
         # 1. Proteksi Path Traversal & File Sensitif
         clean_path = urllib.parse.unquote(self.path).split('?', 1)[0].split('#', 1)[0]
         parts = [p for p in clean_path.split('/') if p]
@@ -1087,6 +1092,32 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 return self._send_json(200, get_full_catalog())
             except Exception as e:
                 return self._send_json(500, {"status": "error", "message": str(e)})
+
+        # Dashboard pengunjung (khusus server utama / bukan demo publik)
+        if self.path.split('?', 1)[0] in ADMIN_VISITOR_PATHS:
+            if PUBLIC_DEMO:
+                return self._send_json(403, {"status": "forbidden", "message": "Dimatikan saat demo publik."})
+            key = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query).get('key', [''])[0]
+            if key != visitor_log.ADMIN_KEY:
+                return self._send_json(401, {"status": "unauthorized", "message": "Kunci admin salah. Pakai ?key=tka-admin"})
+            if self.path.split('?', 1)[0] == '/api/admin/visitors':
+                body = json.dumps(visitor_log.summary(), ensure_ascii=False).encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json; charset=utf-8')
+                self.send_header('Cache-Control', 'no-store')
+                self.send_header('Content-Length', str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+                return
+            with open(os.path.join(BASE_DIR, 'pengunjung.html'), 'rb') as fh:
+                page_body = fh.read()
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Cache-Control', 'no-store')
+            self.send_header('Content-Length', str(len(page_body)))
+            self.end_headers()
+            self.wfile.write(page_body)
+            return
 
         # Snapshot konten server-rendered untuk reviewer otomatis (Fase bagikan online):
         # /audit?subject=matematika&paket=1&dari=1&sampai=10  (HTML)
@@ -1151,6 +1182,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
 
     def do_POST(self):
         _track_client_context(self)
+        visitor_log.record(self)
         if PUBLIC_DEMO and self.path in DEMO_BLOCKED_PATHS:
             return self._send_json(403, {
                 "status": "forbidden",

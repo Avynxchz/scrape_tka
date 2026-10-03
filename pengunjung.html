@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pengunjung — TKA Master</title>
+<style>
+  :root{--bg:#0f1115;--card:#171a21;--line:#262b36;--tx:#e7ebf3;--mut:#8b95a7;--acc:#4f8cff;--ok:#33d69f}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx)}
+  header{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  h1{font-size:18px;margin:0}
+  .mut{color:var(--mut);font-size:13px}
+  main{padding:24px;max-width:1100px;margin:0 auto}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
+  .stat b{display:block;font-size:28px;margin-top:6px}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  th,td{padding:10px 12px;text-align:left;font-size:13px;border-bottom:1px solid var(--line)}
+  th{background:#1c202a;color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+  tr:last-child td{border-bottom:none}
+  .pill{display:inline-block;padding:3px 9px;border-radius:999px;background:#1f2735;font-size:12px}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:var(--ok);margin-right:6px;vertical-align:middle}
+  code{background:#1f2735;padding:2px 6px;border-radius:5px;font-size:12px}
+  .empty{padding:32px;text-align:center;color:var(--mut)}
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>👀 Pemantau Pengunjung</h1>
+    <div class="mut">Server utama (port 8080) · auto-refresh tiap 5 detik</div>
+  </div>
+  <div class="mut">Update terakhir: <span id="ts">—</span></div>
+</header>
+<main>
+  <div class="stats">
+    <div class="stat"><span class="mut">Kunjungan hari ini</span><b id="v-today">0</b></div>
+    <div class="stat"><span class="mut">Perangkat hari ini</span><b id="d-today">0</b></div>
+    <div class="stat"><span class="mut">Total kunjungan</span><b id="v-total">0</b></div>
+    <div class="stat"><span class="mut">Total perangkat</span><b id="d-total">0</b></div>
+  </div>
+
+  <h3 style="font-size:14px;color:var(--mut);margin:0 0 10px">Perangkat hari ini</h3>
+  <table id="dev-table">
+    <thead><tr><th>Status</th><th>Perangkat</th><th>Hits</th><th>Pertama</th><th>Terakhir</th><th>Halaman</th></tr></thead>
+    <tbody><tr><td colspan="6" class="empty" id="dev-empty">Belum ada data.</td></tr></tbody>
+  </table>
+
+  <h3 style="font-size:14px;color:var(--mut);margin:26px 0 10px">Aktivitas terakhir (60)</h3>
+  <table>
+    <thead><tr><th>Waktu</th><th>Perangkat</th><th>Metode</th><th>Halaman</th></tr></thead>
+    <tbody id="act-body"><tr><td colspan="4" class="empty">Belum ada data.</td></tr></tbody>
+  </table>
+</main>
+<script>
+const params = new URLSearchParams(location.search);
+const key = params.get('key') || 'tka-admin';
+
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+async function tick(){
+  try{
+    const r = await fetch('/api/admin/visitors?key=' + encodeURIComponent(key), {cache:'no-store'});
+    if(!r.ok){ document.getElementById('ts').textContent = 'Error ' + r.status + ' (kunci salah?)'; return; }
+    const d = await r.json();
+    document.getElementById('ts').textContent = new Date().toLocaleTimeString('id-ID');
+    document.getElementById('v-today').textContent = d.hari_ini.kunjungan;
+    document.getElementById('d-today').textContent = d.hari_ini.perangkat;
+    document.getElementById('v-total').textContent = d.total_semua.kunjungan;
+    document.getElementById('d-total').textContent = d.total_semua.perangkat;
+
+    const tb = document.querySelector('#dev-table tbody');
+    if(d.perangkat_hari_ini.length === 0){
+      tb.innerHTML = '<tr><td colspan="6" class="empty">Belum ada pengunjung hari ini.</td></tr>';
+    } else {
+      tb.innerHTML = d.perangkat_hari_ini.map(p => `<tr>
+        <td><span class="dot"></span>online</td>
+        <td><span class="pill">${esc(p.dev)}</span> <code>${esc(p.did)}</code></td>
+        <td>${p.hits}</td>
+        <td class="mut">${esc((p.first||'').replace('T',' '))}</td>
+        <td class="mut">${esc((p.last||'').replace('T',' '))}</td>
+        <td class="mut">${p.top_paths.map(esc).join('<br>')}</td>
+      </tr>`).join('');
+    }
+
+    const ab = document.getElementById('act-body');
+    ab.innerHTML = d.aktivitas_terakhir.length === 0
+      ? '<tr><td colspan="4" class="empty">Belum ada data.</td></tr>'
+      : d.aktivitas_terakhir.map(e => `<tr>
+          <td class="mut">${esc((e.t||'').replace('T',' '))}</td>
+          <td>${esc(e.dev)}</td>
+          <td><span class="pill">${esc(e.method)}</span></td>
+          <td><code>${esc(e.path)}</code></td>
+        </tr>`).join('');
+  }catch(err){
+    document.getElementById('ts').textContent = 'Gagal konek: ' + err.message;
+  }
+}
+tick();
+setInterval(tick, 5000);
+</script>
+</body>
+</html>
