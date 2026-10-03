@@ -231,6 +231,23 @@ def clean_katex_artifacts(text):
     if not text or not isinstance(text, str):
         return text
 
+    # (a) Rekonstruksi karakter kontrol peninggalan escape LaTeX yang salah tulis
+    # saat generasi data ("\frac" tertulis sebagai FF+rac, "\rightarrow" sebagai
+    # CR+ightarrow, dst.). CR/FF/VT/BS/BEL diikuti huruf = hampir pasti kasus ini;
+    # \n dan \t tidak disentuh karena dipakai sebagai whitespace sah.
+    _ctl_map = {chr(8): 'b', chr(11): 'v', chr(12): 'f', chr(7): 'a', chr(13): 'r'}
+    text = re.sub(
+        '([' + ''.join(_ctl_map.keys()) + '])([a-zA-Z]+)',
+        lambda m: BS + _ctl_map[m.group(1)] + m.group(2),
+        text,
+    )
+
+    # (b) Audit Kimi T-32/T-19/T-01: buang label internal & pembuka sirkular yang
+    # membocorkan metadata ke siswa tanpa menambah penjelasan apa pun.
+    text = re.sub(r'Kunci Pusmendik \[[^\]]*\]', '', text)
+    text = re.sub(r'[Ss]esuai penetapan kunci resmi,?\s*', 'Hasil evaluasi: ', text)
+    text = re.sub(r'[Bb]erdasarkan kunci resmi,?\s*', 'Hasil evaluasi: ', text)
+
     import text_quality
     text = text_quality.repair_math_text(text)
 
@@ -567,11 +584,42 @@ _AUDIT_IMG_RE = re.compile(r'<img[^>]*>', re.I)
 def _audit_text(fragment):
     """HTML Pusmendik -> teks polos (pertahankan $math$, tandai gambar)."""
     s = fragment or ''
+
+    # Tabel dirender ulang sebagai baris "sel | sel" agar data tabel tidak hilang
+    def _table_to_text(m):
+        rows = re.findall(r'<tr[^>]*>(.*?)</tr>', m.group(0), re.I | re.S)
+        lines = []
+        for r in rows:
+            cells = re.findall(r'<t[dh][^>]*>(.*?)</t[dh]>', r, re.I | re.S)
+            cells = [re.sub(r'<[^>]+>', ' ', c).strip() for c in cells]
+            lines.append(' | '.join(c for c in cells if c))
+        return '\n' + '\n'.join(lines) + '\n'
+    s = re.sub(r'<table[^>]*>.*?</table>', _table_to_text, s, flags=re.I | re.S)
+
     s = re.sub(r'<br\s*/?>', '\n', s, flags=re.I)
     s = re.sub(r'</(p|div|li|tr|h[1-6]|td)>', '\n', s, flags=re.I)
-    s = _AUDIT_IMG_RE.sub(' [GAMBAR] ', s)
+
+    # Gambar: formula data-latex direkonstruksi sebagai $..$; alt text dipertahankan.
+    # (Audit Kimi T-02..T-16: [GAMBAR] telanjang membuat soal tampak rusak padahal
+    # aplikasi merendernya normal.)
+    def _img_to_text(m):
+        tag = m.group(0)
+        lat = re.search(r'data-latex="([^"]*)"', tag)
+        if lat:
+            lat = html_lib.unescape(lat.group(1)).strip()
+            if lat:
+                return ' $' + lat + '$ '
+        alt = re.search(r'alt="([^"]*)"', tag)
+        if alt and alt.group(1).strip() and alt.group(1) != f'Pilihan {""}':
+            return ' [GAMBAR: ' + alt.group(1).strip() + '] '
+        srcm = re.search(r'src="([^"]*)"', tag)
+        fn = srcm.group(1).split('/')[-1] if srcm else '?'
+        return ' [GAMBAR: ' + fn + '] '
+    s = _AUDIT_IMG_RE.sub(_img_to_text, s)
     s = re.sub(r'<[^>]+>', '', s)
     s = html_lib.unescape(s)
+    s = re.sub(r'<sup>|</sup>', '^', s, flags=re.I)
+    s = re.sub(r'<sub>|</sub>', '_', s, flags=re.I)
     s = re.sub(r'[ \t]+', ' ', s)
     s = re.sub(r'\n\s*\n\s*\n+', '\n\n', s)
     return s.strip()
@@ -609,8 +657,10 @@ def _audit_collect(subject, paket, dari, sampai):
 
         tipe = (lrn_q or {}).get('tipe_soal') or (canon or {}).get('type') or 'Pilihan Ganda'
         topik = (lrn_q or {}).get('topik') or ''
-        stim = ((lrn_q or {}).get('stimulus') or {}).get('text') or (canon or {}).get('stimulus') or ''
-        tanya = ((lrn_q or {}).get('pertanyaan') or {}).get('text') or (canon or {}).get('question') or ''
+        # Utamakan html (memuat <img data-latex> & tabel) di atas text agar
+        # halaman audit setia ke soal asli (audit Kimi T-02..T-16).
+        stim = ((lrn_q or {}).get('stimulus') or {}).get('html') or (lrn_q or {}).get('stimulus', {}).get('text') or (canon or {}).get('stimulus') or ''
+        tanya = ((lrn_q or {}).get('pertanyaan') or {}).get('html') or (lrn_q or {}).get('pertanyaan', {}).get('text') or (canon or {}).get('question') or ''
         pilihan = (lrn_q or {}).get('pilihan_jawaban') or (canon or {}).get('options') or []
         kunci = (lrn_q or {}).get('kunci_jawaban') or (canon or {}).get('official_answer')
         pernyataan = (lrn_q or {}).get('pernyataan') or []
@@ -665,8 +715,15 @@ def _audit_collect(subject, paket, dari, sampai):
         items.append({
             "nomor": nomor, "missing": False, "tipe": str(tipe), "topik": str(topik),
             "stimulus": _audit_text(stim), "pertanyaan": _audit_text(tanya),
-            "pernyataan": [f"{st.get('key', '')}) {_audit_text(st.get('text', ''))}"
-                           for st in pernyataan],
+            "pernyataan": [
+                (
+                    lambda st: f"{st.get('key', '')}) " + (
+                        _audit_text(st.get('html') or st.get('text', ''))
+                        or (f"[GAMBAR PERNYATAAN: {(st.get('image') or {}).get('filename', '?')}]" if st.get('image') else '(kosong)')
+                    )
+                )(st)
+                for st in pernyataan
+            ],
             "opsi": [f"{(o.get('key', '?') if isinstance(o, dict) else '?')}) {_audit_option_text(o)}"
                      for o in pilihan],
             "kunci": kunci_txt, "pembahasan": blk, "warn": warn,

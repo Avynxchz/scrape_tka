@@ -1101,6 +1101,10 @@ function cleanUiStimulusText(stimText, stimImages) {
   renderSimilarQuestion(q);
 
   // Toggle explanation visibility
+  // Audit Kimi T-08: kunci resmi tidak boleh tampil otomatis di soal yang BELUM
+  // dijawab — pembahasan tutup saat berpindah ke soal yang belum dijawab, sehingga
+  // kunci seluruh paket tidak bisa "dipanen" hanya dengan membuka pembahasan sekali.
+  if (!isQuestionAnswered(q)) state.explanationVisible = false;
   const learnSec = document.getElementById('learningSection');
   learnSec.style.display = state.explanationVisible ? 'flex' : 'none';
   document.getElementById('txtToggleExp').innerText = state.explanationVisible
