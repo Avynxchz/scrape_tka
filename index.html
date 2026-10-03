@@ -21,7 +21,7 @@
   
   <!-- Fase 1: light-only. Dark mode ditunda (gambar soal berlatar putih). -->
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css?v=46">
+  <link rel="stylesheet" href="style.css?v=47">
 </head>
 <body>
 
@@ -40,12 +40,12 @@
         </div>
         <div class="brand-text">
           <span class="brand-title" id="brandTitle">TKA Master</span>
-          <span class="brand-subtitle">Simulasi Ujian & AI Tutor</span>
+          <span class="brand-subtitle" id="brandSubtitle">Simulasi Ujian & AI Tutor</span>
         </div>
       </div>
 
       <!-- Mobile: posisi soal saat ini -->
-      <div class="m-qnum" id="mQNum">Soal 1/46</div>
+      <div class="m-qnum" id="mQNum">Soal …</div>
 
       <!-- Center: Subject & Package Selectors -->
       <div class="header-center-controls" id="mobileMenuPanel">
@@ -106,7 +106,7 @@
         <!-- Timer Pill -->
         <div class="timer-pill" id="timerPill">
           <i class="fa-regular fa-clock"></i>
-          <span id="timerText">01:45:20</span>
+          <span id="timerText">01:45:00</span>
         </div>
 
         <!-- Mobile: overflow menu -->
@@ -158,14 +158,14 @@
         <div class="topic-header-bar">
           <div class="topic-info">
             <p class="topic-tag" id="badgeTopik">MATEMATIKA SMA · HIMPUNAN</p>
-            <h1 class="exercise-title" id="badgeSoalNomor">Latihan Soal UTBK · Nomor 1</h1>
+            <h1 class="exercise-title" id="badgeSoalNomor">Latihan Soal TKA · Nomor 1</h1>
           </div>
           <div class="progress-indicator">
             <span class="prog-num" id="currQNum">1</span>
             <div class="progress-bar-track">
               <div class="progress-bar-fill" id="progressBarFill" style="width: 2.5%;"></div>
             </div>
-            <span class="prog-num prog-total" id="totalQNum">40</span>
+            <span class="prog-num prog-total" id="totalQNum">—</span>
           </div>
         </div>
 
@@ -175,7 +175,7 @@
           <div class="qcard-header">
             <div class="qcard-number-tag">
               <span class="qnum-badge" id="qNumBadge">01</span>
-              <span class="qlabel-text" id="qLabelHeader">Soal Nomor 1 dari 40</span>
+              <span class="qlabel-text" id="qLabelHeader">Memuat soal…</span>
             </div>
             <span class="qtype-badge" id="badgeTipe">Pilihan Ganda</span>
           </div>
@@ -403,6 +403,10 @@
             <div class="ai-header-badge" title="Tutor Interaktif Cerdas">
               <i class="fa-solid fa-sparkles"></i>
             </div>
+            <!-- Mobile: tombol tutup eksplisit untuk bottom sheet (audit Qwen/Kimi) -->
+            <button class="btn-close-sheet" id="btnCloseSheet" onclick="closeTutorSheet()" aria-label="Tutup panel Tutor" type="button">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
           </div>
 
           <!-- AI Model Selector Bar -->
@@ -600,6 +604,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="app.js?v=46"></script>
+  <script src="app.js?v=47"></script>
 </body>
 </html>

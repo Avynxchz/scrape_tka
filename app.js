@@ -401,7 +401,10 @@ function updateSubjectUI() {
   const meta = SUBJECT_CATALOG[state.currentSubject];
 
   document.title = `Simulasi TKA ${meta.name} - Platform Belajar Interaktif`;
-  document.getElementById('brandTitle').innerText = `SIMULASI TKA ${meta.name.toUpperCase()}`;
+  // Audit Manus: brand tetap konsisten dengan landing, mapel jadi konteks sekunder
+  document.getElementById('brandTitle').innerText = 'TKA Master';
+  const brandSub = document.getElementById('brandSubtitle');
+  if (brandSub) brandSub.innerText = `Simulasi ${meta.name} · Paket ${state.currentPkg}`;
   document.getElementById('aiTutorTitle').innerText = `Tanya AI Tutor ${meta.name}`;
   document.getElementById('modalTitle').innerText = `Daftar Soal - ${meta.name} Paket ${state.currentPkg}`;
 
@@ -473,7 +476,7 @@ function renderQuestion() {
 
   // 1. Metadata Bar & Dynamic Progress Bar
   const badgeNomor = document.getElementById('badgeSoalNomor');
-  if (badgeNomor) badgeNomor.innerText = `Latihan Soal UTBK · Nomor ${q.nomor}`;
+  if (badgeNomor) badgeNomor.innerText = `Latihan Soal TKA · Nomor ${q.nomor}`;
   const badgeTopik = document.getElementById('badgeTopik');
   if (badgeTopik) badgeTopik.innerText = (q.topik || `${subjectMeta.name || state.currentSubject} SMA`).toUpperCase();
   const badgeTipe = document.getElementById('badgeTipe');
@@ -897,7 +900,18 @@ function cleanUiStimulusText(stimText, stimImages) {
       optItem.className = `option-item ${isSelected ? 'selected' : ''}`;
       optItem.dataset.key = opt.key;
       optItem.dataset.optKey = opt.key;
+      // Aksesibilitas (audit Kimi/Qwen): opsi sebagai kontrol semantik radio/checkbox
+      optItem.setAttribute('role', isComplex ? 'checkbox' : 'radio');
+      optItem.setAttribute('aria-checked', String(!!isSelected));
+      optItem.setAttribute('tabindex', '0');
+      optItem.setAttribute('aria-label', `Opsi ${opt.key}`);
       optItem.onclick = () => selectOption(opt.key, isComplex);
+      optItem.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          selectOption(opt.key, isComplex);
+        }
+      };
 
       // Key indicator
       const indicator = document.createElement('div');
@@ -915,8 +929,10 @@ function cleanUiStimulusText(stimText, stimImages) {
       if (opt.html) {
         // 1. Prioritaskan HTML resmi CBT Pusmendik dengan superskrip, subskrip, dan simbol utuh
         let rawOptHtml = (opt.html || '').trim();
-        // Bersihkan prefiks huruf pilihan duplikat "A. " atau "<p>A. "
-        rawOptHtml = rawOptHtml.replace(/^(<p[^>]*>)?\s*[A-E][.\)]\s*/i, '$1');
+        // Bersihkan prefiks huruf pilihan duplikat "A. " / "<p>A. "
+        // Lookahead: label hanya dibuang bila diikuti digit/huruf kapital/(
+        // atau $ (math) — agar teks seperti "E. coli" tidak ikut terpotong.
+        rawOptHtml = rawOptHtml.replace(/^(<p[^>]*>)?\s*[A-E][.\)]\s+(?=[0-9A-Z($])/i, '$1');
         body.innerHTML = formatPusmendikHtml(rawOptHtml, pkgPath);
 
         // Pasang event lightbox dan klasifikasi ukuran gambar pilihan
@@ -941,12 +957,24 @@ function cleanUiStimulusText(stimText, stimImages) {
             img.onload = checkSize;
           }
 
-          img.title = 'Klik untuk memperbesar gambar';
+          img.title = 'Klik untuk memilih opsi';
           img.onclick = (e) => {
+            // Audit Kimi: tap gambar dulu = zoom -> seleksi tak sengaja.
+            // Sekarang: tap gambar = MEMILIH; zoom lewat tombol kaca terpisah.
             e.stopPropagation();
             selectOption(opt.key, isComplex);
+          };
+          const zoomBtn = document.createElement('button');
+          zoomBtn.type = 'button';
+          zoomBtn.className = 'opt-zoom-btn';
+          zoomBtn.setAttribute('aria-label', `Perbesar gambar opsi ${opt.key}`);
+          zoomBtn.title = 'Perbesar gambar';
+          zoomBtn.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
+          zoomBtn.onclick = (e) => {
+            e.stopPropagation();
             openImageLightbox(img.src, `Pilihan Jawaban ${opt.key}`);
           };
+          img.insertAdjacentElement('afterend', zoomBtn);
         });
       } else if (opt.image) {
         // 2. Tampilkan gambar opsi jika tersedia (grafik atau formula matematika)
@@ -958,12 +986,22 @@ function cleanUiStimulusText(stimText, stimImages) {
         }
         mathImg.src = `${base}${rel}?v=41`;
         mathImg.alt = `Pilihan ${opt.key}`;
-        mathImg.title = 'Klik untuk memperbesar gambar';
+        mathImg.title = 'Klik untuk memilih opsi';
         mathImg.onclick = (e) => {
           e.stopPropagation();
           selectOption(opt.key, isComplex);
+        };
+        const zoomBtn2 = document.createElement('button');
+        zoomBtn2.type = 'button';
+        zoomBtn2.className = 'opt-zoom-btn';
+        zoomBtn2.setAttribute('aria-label', `Perbesar gambar opsi ${opt.key}`);
+        zoomBtn2.title = 'Perbesar gambar';
+        zoomBtn2.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
+        zoomBtn2.onclick = (e) => {
+          e.stopPropagation();
           openImageLightbox(mathImg.src, `Pilihan Jawaban ${opt.key}`);
         };
+        mathImg.insertAdjacentElement('afterend', zoomBtn2);
 
         // Klasifikasi visual diagram vs rumus inline
         mathImg.onload = () => {
@@ -1002,7 +1040,7 @@ function cleanUiStimulusText(stimText, stimImages) {
         }
       } else {
         // 3. Fallback teks bersih dengan simbol yang telah diperbaiki
-        let strippedDisplay = (opt.full_display || '').replace(/^[A-E][.\)]\s*/, '').trim();
+        let strippedDisplay = (opt.full_display || '').replace(/^[A-E][.\)]\s+(?=[0-9A-Z($])/i, '').trim();
         let fullContent = '';
         if (strippedDisplay) {
           fullContent = strippedDisplay;
@@ -1113,12 +1151,13 @@ function selectOption(key, isComplex) {
     state.userAnswers[pkgKey()][q.nomor] = key;
   }
 
-  // Update UI selection classes
+  // Update UI selection classes + aria (audit aksesibilitas)
   const selected = state.userAnswers[pkgKey()][q.nomor];
   document.querySelectorAll('.option-item').forEach(el => {
     const k = el.dataset.key;
     const isSel = isComplex ? (selected && selected.includes(k)) : (selected === k);
     el.classList.toggle('selected', !!isSel);
+    el.setAttribute('aria-checked', String(!!isSel));
   });
 
   // Update modal grid
@@ -1513,8 +1552,59 @@ function scrollToAiTutor() {
 // q.pembahasan (enrichment generik lama) TIDAK dipakai lagi di panel ini: konten
 // generik tidak boleh menyamar sebagai pembahasan spesifik soal.
 function renderExplanation(q) {
-  _renderSolutionUnavailable();
+  // Audit Grok: jangan tampilkan pesan pesimis "belum tersedia" selagi fetch
+  // berjalan — tampilkan state loading yang jujur, pesan "belum tersedia" hanya
+  // muncul bila fetch SELESAI dan memang tidak ada solusi.
+  _renderSolutionLoading();
   _applyCanonicalSolution(q);
+}
+
+// State loading: ditampilkan selama request /api/solution berjalan.
+function _renderSolutionLoading() {
+  const banner = document.getElementById('solutionSummaryBanner');
+  if (banner) {
+    banner.style.display = 'none';
+    banner.innerHTML = '';
+  }
+
+  const conceptContainer = document.getElementById('conceptContainer');
+  if (conceptContainer) {
+    conceptContainer.innerHTML =
+      '<div class="concept-card-item loading-state"><i class="fa-solid fa-circle-notch fa-spin"></i> <span>Memuat pembahasan…</span></div>';
+  }
+
+  const symBox = document.getElementById('symbolsBox');
+  if (symBox) {
+    symBox.style.display = 'none';
+    const symContainer = document.getElementById('symbolsContainer');
+    if (symContainer) symContainer.innerHTML = '';
+  }
+
+  const whyBox = document.getElementById('whyConceptBox');
+  if (whyBox) {
+    whyBox.style.display = 'none';
+    const whyContainer = document.getElementById('whyConceptContainer');
+    if (whyContainer) whyContainer.innerHTML = '';
+  }
+
+  const stepsContainer = document.getElementById('stepsContainer');
+  if (stepsContainer) {
+    stepsContainer.innerHTML =
+      '<div class="step-timeline-card"><div class="step-timeline-indicator"><div class="step-num-badge empty"><i class="fa-solid fa-circle-notch fa-spin"></i></div></div>' +
+      '<div class="step-timeline-body"><div class="step-main-text" style="color: var(--text-2);">Memuat langkah penyelesaian…</div></div></div>';
+  }
+
+  const tipsContainer = document.getElementById('tipsContainer');
+  if (tipsContainer) {
+    tipsContainer.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Memuat tips & jebakan…';
+  }
+
+  const visBox = document.getElementById('canonicalVisualBox');
+  if (visBox) {
+    visBox.style.display = 'none';
+    const visList = document.getElementById('canonicalVisualList');
+    if (visList) visList.innerHTML = '';
+  }
 }
 
 // State jujur: semua kartu menandai pembahasan spesifik belum tersedia.
@@ -1528,7 +1618,7 @@ function _renderSolutionUnavailable(note) {
   const conceptContainer = document.getElementById('conceptContainer');
   if (conceptContainer) {
     conceptContainer.innerHTML =
-      '<div class="concept-card-item empty-state"><i class="fa-solid fa-hourglass-half"></i> <span><strong>Pembahasan belum tersedia</strong> untuk soal ini — menunggu solusi spesifik hasil Claude (Layer 3).</span></div>';
+      '<div class="concept-card-item empty-state"><i class="fa-solid fa-hourglass-half"></i> <span><strong>Pembahasan untuk soal ini belum tersedia.</strong> Kamu tetap bisa bertanya lewat AI Tutor di samping.</span></div>';
   }
 
   const symBox = document.getElementById('symbolsBox');
@@ -1553,7 +1643,7 @@ function _renderSolutionUnavailable(note) {
     noteDiv.innerHTML =
       '<div class="step-timeline-indicator"><div class="step-num-badge empty"><i class="fa-solid fa-hourglass-half"></i></div></div>' +
       '<div class="step-timeline-body"><div class="step-card-inner"><div class="step-card-header"><span class="step-tag">STATUS</span><h4 class="step-title">Langkah Penyelesaian Belum Tersedia</h4></div>' +
-      '<div class="step-card-content"><div class="step-main-text">' + _escHtml(note || 'File solusi Claude untuk soal ini belum ada; konten generik lama sengaja tidak ditampilkan. Konteks soal (teks, visual, kunci) tetap bisa ditanyakan ke AI Tutor.') + '</div></div></div></div>';
+      '<div class="step-card-content"><div class="step-main-text">' + _escHtml(note || 'Pembahasan langkah demi langkah untuk soal ini belum tersedia. Kamu tetap bisa bertanya lewat AI Tutor.') + '</div></div></div></div>';
     stepsContainer.appendChild(noteDiv);
   }
 
@@ -1738,8 +1828,8 @@ async function _applyCanonicalSolution(q) {
           <div class="summary-seal-left">
             <div class="summary-seal-icon"><i class="fa-solid fa-circle-check"></i></div>
             <div class="summary-seal-text">
-              <div class="seal-heading">Kunci Jawaban Resmi & Terverifikasi</div>
-              <div class="seal-subheading">Solusi terverifikasi kurikulum dan silabus Pusmendik Kemendikdasmen</div>
+              <div class="seal-heading">Kunci Jawaban Resmi</div>
+              <div class="seal-subheading">Kunci dari publikasi resmi TKA Pusmendik · Pembahasan disusun otomatis (AI) dan masih perlu ditinjau</div>
             </div>
           </div>
           <div class="summary-seal-right">
@@ -1748,8 +1838,8 @@ async function _applyCanonicalSolution(q) {
           </div>
         </div>
         <div class="summary-meta-bar">
-          <span class="meta-tag meta-verified"><i class="fa-solid fa-circle-check"></i> Status: Solusi Terverifikasi</span>
-          <span class="meta-tag meta-model"><i class="fa-solid fa-microchip"></i> Verifikasi: Claude Opus 4.6</span>
+          <span class="meta-tag"><i class="fa-solid fa-book"></i> Sumber kunci: TKA Pusmendik Kemendikdasmen</span>
+          <span class="meta-tag"><i class="fa-solid fa-robot"></i> Pembahasan: disusun AI · belum direview manusia</span>
         </div>
       `;
       banner.style.display = 'block';
@@ -2905,8 +2995,13 @@ function renderGridModal() {
     const isRagu = !!((state.raguStatus[pkgKey()] || {})[no]);
 
     if (isCurrent) btn.classList.add('current');
-    else if (isRagu) btn.classList.add('ragu');
-    else if (isAnswered) btn.classList.add('answered');
+    // Audit Kimi: jawab + ragu bisa berlaku bersamaan — tampilkan dua-duanya
+    if (isRagu) btn.classList.add('ragu');
+    if (isAnswered) btn.classList.add('answered');
+    let gridAria = `Soal ${no}`;
+    if (isAnswered) gridAria += ', sudah dijawab';
+    if (isRagu) gridAria += ', ditandai ragu-ragu';
+    btn.setAttribute('aria-label', gridAria);
 
     btn.onclick = () => {
       state.currentIndex = idx;
@@ -3335,3 +3430,42 @@ document.addEventListener('DOMContentLoaded', initFeedback);
     }
   } catch (e) {}
 })();
+
+// ===== Timer simulasi: hitung mundur nyata + persist per paket (audit Kimi P1) =====
+const TIMER_TOTAL_SECONDS = 105 * 60; // 01:45:00
+let _simTimerInterval = null;
+
+function _timerStorageKey() {
+  return 'tka_timer_remaining_' + pkgKey();
+}
+
+function _fmtTimer(sec) {
+  sec = Math.max(0, sec);
+  const h = String(Math.floor(sec / 3600)).padStart(2, '0');
+  const m = String(Math.floor((sec % 3600) / 60)).padStart(2, '0');
+  const s = String(sec % 60).padStart(2, '0');
+  return `${h}:${m}:${s}`;
+}
+
+function _tickSimTimer() {
+  const el = document.getElementById('timerText');
+  if (!el) return;
+  let rem = parseInt(localStorage.getItem(_timerStorageKey()), 10);
+  if (isNaN(rem)) rem = TIMER_TOTAL_SECONDS;
+  if (rem > 0) {
+    rem -= 1;
+    try { localStorage.setItem(_timerStorageKey(), String(rem)); } catch (e) {}
+  }
+  el.innerText = _fmtTimer(rem);
+  const pill = document.getElementById('timerPill');
+  if (pill) pill.classList.toggle('timer-habis', rem <= 300);
+  if (rem <= 0 && _simTimerInterval) {
+    clearInterval(_simTimerInterval);
+    _simTimerInterval = null;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  _tickSimTimer();
+  if (!_simTimerInterval) _simTimerInterval = setInterval(_tickSimTimer, 1000);
+});

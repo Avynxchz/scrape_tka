@@ -95,6 +95,11 @@
         },
         {
           "step": 3,
+          "title": "Menganalisis Pernyataan C (Peluang Smart Tag)",
+          "explanation": "Peluang terpilihnya smart tag adalah: $$P(\\text{smart tag}) = \\frac{1}{10} = 0,1$$ Pernyataan C menyatakan nilainya $\\frac{1}{5} = 0,2$, sehingga Pernyataan C SALAH."
+        },
+        {
+          "step": 4,
           "title": "Menganalisis Pernyataan D (Peluang Bukan Jam Tangan Pintar)",
           "explanation": "Peluang terpilihnya jam tangan pintar adalah $P(\\text{jam}) = \\frac{3}{10} = 0,30 = 30\\%$. Maka peluang terpilihnya gadget bukan jam tangan pintar adalah: $$P(\\text{bukan jam}) = 1 - 0,30 = 0,70 = 70\\%$$ Pernyataan D bernilai BENAR."
         }
@@ -337,7 +342,7 @@
     },
     {
       "question_number": 7,
-      "question_title": "Nilai Fungsi Invers Pecahan Aljabar",
+      "question_title": "Nilai Fungsi Invers Fungsi Akar",
       "difficulty": "Sedang",
       "estimated_time_seconds": 90,
       "concept_tags": [
@@ -351,38 +356,44 @@
           "meaning": "Fungsi kebalikan yang memetakan kembali nilai kodomain ke domain asalnya, berlaku $f^{-1}(y) = x \\iff f(x) = y$."
         }
       ],
-      "diketahui": "• Fungsi rasional $f(x) = \\frac{ax+b}{cx+d}$ • Nilai yang dicari: $f^{-1}(3)$",
+      "diketahui": "• Fungsi akar $f(x) = \\sqrt{2x+3}$ dengan syarat domain $x \\ge -\\frac{3}{2}$ • Nilai yang dicari: $f^{-1}(3)$",
       "ditanyakan": "Nilai dari fungsi invers $f^{-1}(3)$",
-      "reasoning": "Untuk mencari nilai $f^{-1}(k)$, tidak perlu selalu menurunkan rumus fungsi invers lengkap secara eksplisit. Cukup tetapkan $f(x) = k$ lalu selesaikan nilai $x$ yang memenuhi persamaan tersebut.",
+      "reasoning": "Untuk fungsi akar, cara tercepat mencari $f^{-1}(k)$ adalah menetapkan $f(x) = k$ sehingga tanda akar dapat dihilangkan dengan mengkuadratkan kedua ruas. Pola invers fungsi rasional $\\frac{dx-b}{-cx+a}$ TIDAK berlaku untuk bentuk akar.",
       "steps": [
         {
           "step": 1,
-          "title": "Menerapkan Konsep Dasar Fungsi Invers",
+          "title": "Menerapkan Definisi Invers Fungsi",
           "explanation": "Berdasarkan definisi invers fungsi: $$f^{-1}(3) = x \\iff f(x) = 3$$"
         },
         {
           "step": 2,
-          "title": "Menyusun Persamaan Aljabar",
-          "explanation": "Samakan bentuk fungsi rasional dengan 3 dan lakukan kali silang: $$f(x) = 3$$ Selesaikan persamaan linear yang terbentuk untuk memperoleh nilai tunggal $x$."
+          "title": "Substitusi Bentuk Fungsi Akar",
+          "explanation": "Substitusikan $f(x) = \\sqrt{2x+3}$ ke persamaan: $$\\sqrt{2x+3} = 3$$"
         },
         {
           "step": 3,
-          "title": "Menghitung Nilai Variabel x",
-          "explanation": "Dengan menyelesaikan aljabar pada persamaan tersebut, diperoleh nilai $x$ yang berkorespondensi tepat dengan opsi B."
+          "title": "Menghilangkan Tanda Akar",
+          "explanation": "Kuadratkan kedua ruas agar tanda akar hilang: $$\\left(\\sqrt{2x+3}\\right)^2 = 3^2 \\Rightarrow 2x + 3 = 9$$"
+        },
+        {
+          "step": 4,
+          "title": "Menyelesaikan dan Memeriksa Domain",
+          "explanation": "$$2x = 6 \\Rightarrow x = 3$$ Periksa syarat domain fungsi akar: $x = 3 \\ge -\\frac{3}{2}$ ✓ memenuhi. Jadi $f^{-1}(3) = 3$, sesuai opsi B."
         }
       ],
       "why_correct": "Opsi B terbukti benar secara matematis karena pemetaan mundur dari nilai output 3 menghasilkan nilai input pada opsi B.",
       "tips": [
-        "Gunakan prinsip $f^{-1}(k) = x \\iff f(x) = k$ untuk menghemat waktu ujian dibanding mencari rumus invers terlebih dahulu."
+        "Untuk invers fungsi akar: tetapkan $f(x) = k$, lalu kuadratkan kedua ruas untuk menghilangkan akar.",
+        "Selalu periksa syarat domain $x \\ge -\\frac{n}{m}$ pada fungsi $\\sqrt{mx+n}$ setelah menemukan nilai x."
       ],
       "common_mistakes": [
-        "Mencari invers rumus lalu salah menukar tanda koefisien saat kali silang."
+        "Memakai pola invers fungsi rasional $f^{-1}(x)=\\frac{dx-b}{-cx+a}$ untuk fungsi berbentuk akar — pola itu hanya berlaku untuk $\\frac{ax+b}{cx+d}$.",
+        "Lupa memeriksa syarat domain setelah menemukan nilai x."
       ],
       "question_id": "mtk_p1_q07",
       "concept_kunci": [
         "Fungsi Komposisi dan Invers",
-        "Aljabar",
-        "Fungsi Rasional"
+        "Fungsi Akar (Bentuk $\\sqrt{mx+n}$)"
       ],
       "official_answer": {
         "format": "single_choice",

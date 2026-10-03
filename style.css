@@ -162,7 +162,26 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
+}
+
+/* Audit Manus P1-01: cegah overflow header di 1280px — elemen tengah boleh menyusut */
+.header-center-controls {
+  min-width: 0;
+}
+
+.subject-select-wrap {
+  min-width: 0;
+}
+
+.subject-select {
+  max-width: 340px;
+}
+
+@media (max-width: 1360px) {
+  .brand-subtitle {
+    display: none;
+  }
 }
 
 /* Brand */
@@ -268,7 +287,8 @@ body {
 .pkg-tab {
   background: transparent;
   border: none;
-  padding: 5px 14px;
+  padding: 7px 14px;
+  min-height: 34px;
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 500;
@@ -311,6 +331,11 @@ body {
   font-weight: 500;
   letter-spacing: 0.02em;
   font-variant-numeric: tabular-nums;
+}
+
+.timer-pill.timer-habis {
+  border-color: var(--danger-border);
+  color: var(--danger);
 }
 
 .btn-theme-toggle {
@@ -604,6 +629,34 @@ body {
   background: var(--surface);
 }
 
+.option-item:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Audit Kimi P1: zoom gambar opsi kini tombol terpisah dari aksi memilih */
+.opt-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-left: 6px;
+  vertical-align: middle;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  border-radius: 6px;
+  color: var(--text-3);
+  font-size: 11px;
+  cursor: zoom-in;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.opt-zoom-btn:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
 .opt-indicator {
   width: 30px;
   height: 30px;
@@ -642,7 +695,7 @@ body {
 }
 
 .option-item.selected::after {
-  content: "\\f00c";
+  content: "\f00c";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   margin-left: auto;
@@ -1546,7 +1599,8 @@ body {
   gap: 3px;
   font-size: 10px;
   font-weight: 500;
-  padding: 1px 6px;
+  min-height: 26px;
+  padding: 4px 8px;
   border-radius: var(--radius-sm);
   background: transparent;
   color: var(--text-3);
@@ -1581,7 +1635,8 @@ body {
   gap: 3px;
   font-size: 10px;
   font-weight: 500;
-  padding: 1px 6px;
+  min-height: 26px;
+  padding: 4px 8px;
   border-radius: var(--radius-sm);
   background: transparent;
   color: var(--text-3);
@@ -1611,6 +1666,25 @@ body {
 .ai-header-badge {
   color: var(--text-3);
   font-size: 14px;
+}
+
+/* Tombol tutup eksplisit bottom sheet — hanya tampil di mobile */
+.btn-close-sheet {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  width: 34px;
+  height: 34px;
+  font-size: 15px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.btn-close-sheet:hover {
+  border-color: var(--border-strong);
+  color: var(--text);
 }
 
 /* AI Model Selector Bar */
@@ -1647,8 +1721,9 @@ body {
 
 .ai-model-select {
   flex: 1;
+  min-height: 36px;
   padding: 4px 8px;
-  font-size: 11.5px;
+  font-size: 12px;
   font-weight: 500;
   color: var(--text);
   background: var(--bg-card);
@@ -1691,7 +1766,8 @@ body {
   background: transparent;
   color: var(--text-2);
   border: 1px solid var(--border);
-  padding: 5px 10px;
+  min-height: 34px;
+  padding: 6px 12px;
   border-radius: var(--radius-sm);
   font-family: var(--font-sans);
   font-size: 11px;
@@ -1853,8 +1929,8 @@ body {
 }
 
 .btn-send-chat {
-  width: 32px;
-  height: 32px;
+  width: 40px;
+  height: 40px;
   background: var(--accent);
   color: #ffffff;
   border: none;
@@ -2043,6 +2119,25 @@ body {
   background: var(--warn-tint);
   color: var(--warn);
   border-color: var(--warn-border);
+}
+
+.grid-item.answered.ragu {
+  background: var(--accent-tint);
+  color: var(--accent);
+  border-color: var(--accent-border);
+  position: relative;
+}
+
+.grid-item.answered.ragu::after,
+.grid-item.ragu.current::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--warn);
 }
 
 /* ==========================================================================
@@ -2525,8 +2620,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(30, 41, 59, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
   border-radius: 14px;
   padding: 14px 18px 18px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -2542,9 +2637,9 @@ body {
 }
 
 .lightbox-btn {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #f8fafc;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
   padding: 6px 12px;
   border-radius: 6px;
   font-size: 13px;
@@ -2562,9 +2657,9 @@ body {
 }
 
 .lightbox-close {
-  background: rgba(239, 68, 68, 0.2);
-  border: 1px solid rgba(239, 68, 68, 0.4);
-  color: #fca5a5;
+  background: var(--wrong-tint);
+  border: 1px solid var(--wrong-border);
+  color: var(--wrong);
   width: 32px;
   height: 32px;
   border-radius: 6px;
@@ -2578,7 +2673,7 @@ body {
 }
 
 .lightbox-close:hover {
-  background: rgba(239, 68, 68, 0.85);
+  background: var(--wrong);
   color: #ffffff;
 }
 
@@ -2606,7 +2701,7 @@ body {
 .lightbox-caption {
   margin-top: 10px;
   font-size: 13px;
-  color: #cbd5e1;
+  color: var(--text-2);
   text-align: center;
   max-width: 800px;
   line-height: 1.4;
@@ -2624,7 +2719,14 @@ body {
 @media (max-width: 768px) {
   /* Rule mobile lainnya ada di blok 768 Fase 2 (bagian bawah file) */
   .soal-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .soal-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
 }
 
@@ -2884,6 +2986,16 @@ html, body {
     border-bottom: 1px solid var(--border);
   }
 
+  .btn-close-sheet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-header-badge {
+    display: none;
+  }
+
   .tutor-sheet-handle span {
     width: 42px;
     height: 4px;
@@ -3012,6 +3124,9 @@ html, body {
     color: var(--text);
     border-color: var(--border);
     font-size: 16px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .header-center-controls .subject-select-wrap i {
