@@ -132,3 +132,55 @@ Jangan pernah commit `.env`.
 - Catatan host tunnel: `*.trycloudflare.com` robots.txt-nya milik Cloudflare (memblock
   crawler AI), ngrok free punya interstitial untuk browser-UA — keduanya tidak bisa
   dimatikan dari sisi kita. Jalur paling andal untuk model fetch-only: paste file teks.
+
+## Audit ronde 2 (Kimi K3, salinan beku) — 3 Okt 2026
+
+Temuan & tindak lanjut (commit `0fbac08`..ini):
+- **T-08 kunci bocor antar soal** (buka pembahasan sekali → kunci 46 soal tampil otomatis
+  saat navigasi) → pembahasan kini tertutup otomatis di soal yang belum dijawab.
+- **Halaman /audit.txt buta formula** → T-02/T-03/T-09–T-16 ternyata mayoritas ARTIFAK
+  ekstraksi, bukan bug app (datanya lengkap: img & data-latex). Difix: data-latex
+  direkonstruksi jadi $..$, tabel jadi baris teks, alt/filename gambar dipertahankan,
+  field html diprioritaskan di atas text.
+- **Karakter kontrol peninggalan escape LaTeX** (`\frac`→FF+rac, `\rightarrow`→CR+ightarrow;
+  audit T-27/T-21) → direkonstruksi di `clean_katex_artifacts` (render fix untuk semua mapel).
+- **T-32/T-19/T-01 label internal & pembahasan sirkular** ("Kunci Pusmendik [...]",
+  "Sesuai penetapan kunci resmi…") → disanitasi di render layer, semua mapel.
+- **T-07 Fisika #1**: kunci C:Salah bertentangan dengan pembahasan sendiri (v_B = 10 m/s
+  mendukung C:Benar) → kunci diselaraskan ke C:Benar.
+- **T-05 MTK P2 #9**: langkah ditulis ulang dengan solusi SPLTV hasil hitung ulang auditor
+  (m=16.000, l=13.000, a=14.000 → 115.000 = kunci D) + flag review.
+- **needs_manual_review** di-set untuk soal yang perlu sumber asli (gambar) sebelum bisa
+  diperbaiki: MTK P2 #5 & #15, MTK P1 #31 & #35.
+- **T-37/T-29**: FAQ landing tak lagi klaim "diverifikasi"; /privacy dapat bagian
+  Pengendali Data (placeholder wajib diisi).
+- **T-39**: chip AI Tutor kini wrap, tidak terpotong.
+- **T-25** (LaTeX rusak di tabel reviu): renderMath sudah dipanggil — kasus #15 bermula
+  dari latex kunci yang rusak di data; ditandai via review flag MTK P2 #15.
+
+## Utang konten (status setelah membaca gambar sumber — 3 Okt 2026)
+
+Gua (model) Membaca langsung gambar sumber (tabel siswa, fungsi diskon, diagram ruangan,
+grafik wisatawan) dan menulis ulang 4 soal:
+
+1. **MTK P2 #5 — SELESAI**: gambar fungsi terbaca (y=0,9x; g(y)=0,7y rapor>90; 0,8y
+   85–90; tabel siswa Andi 90/285rb, Budi 92/286rb, Cici 89/280rb, Dini 95/287rb).
+   Keempatnya mampu membayar → kunci resmi B salah, diganti **D** + pembahasan
+   per-siswa. Flag review tetap (konfirmasi kunci resmi Pusmendik).
+2. **MTK P2 #15 — SEBAGIAN**: diagram terbaca (4×6 m, tinggi 5 m) → tali = √40 ≈ 6,32 m
+   (bukan ≈5), 2 tali = 12,65, sisa ≈ 7,35 m — **tidak ada di opsi** (6/10/11/13/15).
+   Pembahasan ditulis ulang dengan hitungan benar + catatan mismatch; flag review tetap
+   (butuh koreksi opsi/stimulus dari sumber resmi).
+3. **MTK P1 #31 — SELESAI**: grafik (Australia 120, China 85, Malaysia 65, Jepang 40
+   ribu) + tabel aktivitas terbaca. Pernyataan C terbukti BENAR (Belanja Jepang
+   30%×40.000 = 12.000 < Belanja China 40%×85.000 = 34.000) → kunci resmi C:Salah
+   salah, diganti **C:Benar** + pembahasan per-pernyataan dengan angka nyata. Flag
+   review tetap (konfirmasi resmi).
+4. **MTK P1 #35 — SELESAI**: soal pecahan ¼ + ¾ × ⁸⁄₂₁ = ¹¹⁄₁₂ (opsi C) — pembahasan
+   generik ditulis ulang jadi langkah nyata; flag review dihapus.
+5. **Fisika #1 — SELESAI**: diagram & pernyataan terbaca; C (v_B = 10 m/s) terbukti
+   benar secara fisika (t_A = 0,4 s dari h = 0,8 m; v_B = 4/0,4). Kunci sudah
+   diselaraskan sebelumnya; tidak perlu tindakan lanjutan.
+
+Sisa utang konten: Bahasa Arab berbasis gambar (aksesibilitas, besar), Sosiologi #2
+mismatch tipe soal, hygiene kecil (typo Kimia, notasi Geografi, duplikasi kata).
