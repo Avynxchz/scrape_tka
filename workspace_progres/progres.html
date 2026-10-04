@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Progres Belajar — TKA Master</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#004a2a",
+            "primary-container": "#1b633e",
+            "accent-mint": "#22C55E",
+            "tertiary-fixed": "#ffdcc3",
+            "tertiary": "#643300",
+            "surface": "#f6fafe",
+            "surface-card": "#FFFFFF",
+            "border-subtle": "#E2E8F0",
+            "text-primary": "#0F172A",
+            "text-muted": "#64748B",
+            "secondary": "#56615c",
+            "secondary-container": "#dae5df",
+            "brand-emerald-dark": "#0B1E13",
+            "brand-emerald-light": "#EBF6F0",
+            "badge-amber-bg": "#FEF3C7",
+            "badge-amber-text": "#92400E",
+            "error": "#ba1a1a",
+            "error-container": "#ffdad6",
+            "surface-subtle": "#F1F5F9",
+            "surface-container": "#eaeef2",
+            "surface-container-high": "#e4e9ed",
+            "surface-container-lowest": "#ffffff"
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined' !important;
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Reset & Base */
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #f6fafe;
+      color: #0F172A;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Breakpoint 900px: Desktop vs Mobile View */
+    #progresDesktop {
+      display: none;
+    }
+    #progresMobile {
+      display: block;
+    }
+    @media (min-width: 900px) {
+      #progresDesktop {
+        display: block;
+      }
+      #progresMobile {
+        display: none;
+      }
+    }
+
+    /* Motion & Animation Rules (Rule 5: 0.3-0.6s transform & opacity only, active scale .97) */
+    button, a, .interactive-btn {
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    button:active, a:active, .interactive-btn:active {
+      transform: scale(0.97) !important;
+    }
+    .fade-in {
+      animation: fadeIn 0.4s ease forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, ::before, ::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+      button:active, a:active {
+        transform: none !important;
+      }
+    }
+
+    /* Custom Scrollbar hide */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Safe Area Insets for Mobile */
+    .pt-safe {
+      padding-top: env(safe-area-inset-top, 0px);
+    }
+    .pb-safe {
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 5rem);
+    }
+
+    /* Progress bar smooth transition */
+    .pg-fill {
+      transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  </style>
+</head>
+<body class="bg-surface text-text-primary min-h-screen flex flex-col antialiased">
+
+  <!-- ========================================================================= -->
+  <!-- DEMO TOOLBAR (Aktif jika ?demo=1 atau dapat dibuka dari footer) -->
+  <!-- ========================================================================= -->
+  <div id="demo-bar" class="hidden bg-brand-emerald-dark text-white text-xs px-4 py-2 border-b border-primary-container z-[9999] sticky top-0 flex items-center justify-between shadow-md">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-[16px] text-accent-mint">science</span>
+      <span class="font-bold">Mode Pengujian Demo</span>
+      <span class="text-white/70 hidden sm:inline">— Verifikasi status riwayat localStorage</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <button id="btn-demo-seed" class="px-2.5 py-1 rounded bg-primary hover:bg-primary-container text-white font-semibold transition-colors">
+        Isi Data Contoh
+      </button>
+      <button id="btn-demo-clear" class="px-2.5 py-1 rounded bg-error/80 hover:bg-error text-white font-semibold transition-colors">
+        Kosongkan Data
+      </button>
+      <button id="btn-demo-close" class="p-1 rounded hover:bg-white/10 text-white/70 hover:text-white" title="Tutup">
+        <span class="material-symbols-outlined text-[16px]">close</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- DESKTOP VIEW CONTAINER (#progresDesktop, min-width: 900px)                 -->
+  <!-- ========================================================================= -->
+  <div id="progresDesktop" class="w-full flex flex-col min-h-screen">
+    
+    <!-- Desktop Header — navbar seragam (sama dengan Beranda/Modul/Akun).
+         Ditulis dengan utility Tailwind murni agar tidak tergantung token config khusus. -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+      <div class="h-20 w-full max-w-7xl mx-auto px-8 flex items-center justify-between gap-6">
+
+        <div class="flex items-center gap-10">
+          <div class="flex items-center gap-3 cursor-pointer group" onclick="handleNavTab('beranda')">
+            <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
+              <span class="material-symbols-outlined text-2xl">school</span>
+            </div>
+            <div class="flex flex-col">
+              <span class="text-lg font-semibold leading-[26px] tracking-[-0.01em] text-primary">TKA Master</span>
+              <span class="text-[11px] leading-4 font-bold text-on-surface-variant uppercase tracking-[0.08em]">SIMULASI &amp; LATIHAN PUSMENDIK</span>
+            </div>
+          </div>
+
+          <nav class="hidden xl:flex items-center gap-1.5">
+            <button onclick="handleNavTab('beranda')" class="px-2 py-1.5 rounded-lg text-sm font-semibold tracking-[0.01em] text-on-surface-variant hover:text-on-surface transition-colors">
+              Beranda
+            </button>
+            <button onclick="handleNavTab('modul')" class="px-2 py-1.5 rounded-lg text-sm font-semibold tracking-[0.01em] text-on-surface-variant hover:text-on-surface transition-colors">
+              Modul Belajar
+            </button>
+            <button aria-current="page" class="px-2 py-1.5 rounded-lg bg-brand-emerald-light text-primary font-bold tracking-[0.01em] text-sm">
+              Progres &amp; Analitik
+            </button>
+          </nav>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="hidden md:flex items-center gap-1 bg-brand-emerald-light px-2 py-1 rounded-full">
+            <span class="w-2 h-2 rounded-full bg-accent-mint"></span>
+            <span class="material-symbols-outlined text-base text-primary-container">neurology</span>
+            <span class="text-[11px] font-bold text-primary">Kuota AI Tamu · 5/hari</span>
+          </div>
+          <div onclick="handleNavTab('akun')" title="Buka Akun" class="flex items-center gap-2 pl-1.5 cursor-pointer">
+            <div class="hidden sm:flex flex-col text-right">
+              <span class="text-sm font-semibold text-on-surface leading-none">Tamu</span>
+              <span class="text-[13px] text-text-muted leading-tight mt-0.5">Mode Tamu</span>
+            </div>
+            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+              <span class="material-symbols-outlined text-lg text-on-primary">person</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Desktop Main Body -->
+    <main class="w-full pt-28 pb-16 bg-surface flex-1">
+      <div class="max-w-7xl mx-auto w-full px-8 space-y-6">
+
+        <!-- Top Header & Banner -->
+        <section class="bg-surface-card p-6 rounded-2xl border border-border-subtle shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1 max-w-2xl">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-0.5 rounded-full bg-brand-emerald-light text-[11px] font-bold text-primary uppercase flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent-mint"></span>
+                Format TKA Pusmendik
+              </span>
+              <span class="text-xs text-text-muted">• 22 Mapel • 44 Paket • 961 Soal</span>
+            </div>
+            <h1 class="text-2xl lg:text-3xl font-extrabold text-text-primary tracking-tight">Progres Belajar</h1>
+            <p class="text-sm text-text-muted">Riwayat pengerjaanmu</p>
+          </div>
+
+          <div class="flex items-center gap-2 self-start md:self-center">
+            <button onclick="confirmReset()" class="inline-flex items-center gap-1.5 px-4 py-2 bg-surface-subtle hover:bg-error-container hover:text-error text-text-muted font-semibold text-xs rounded-xl border border-border-subtle transition-all">
+              <span class="material-symbols-outlined text-[16px]">history</span>
+              <span>Reset Riwayat</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- Dynamic Desktop KPI Summary Cards -->
+        <div id="desktop-kpi-container" class="w-full">
+          <!-- Diisi secara dinamis oleh JavaScript -->
+        </div>
+
+        <!-- 2-Column Desktop Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          
+          <!-- LEFT / MAIN COLUMN (8 cols): Subject Progress Lists -->
+          <div class="lg:col-span-8 space-y-6">
+
+            <!-- Section 1: Mapel dengan Data -->
+            <section class="space-y-3">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h2 class="text-lg font-bold text-text-primary">Mata Pelajaran Aktif</h2>
+                  <p class="text-xs text-text-muted">Progres pengerjaan soal nyata yang tersimpan di perangkat ini</p>
+                </div>
+                <span id="desktop-active-count-badge" class="px-2.5 py-0.5 rounded-full bg-brand-emerald-light text-primary text-xs font-bold">
+                  0 Mapel
+                </span>
+              </div>
+
+              <!-- Container for Active Subjects -->
+              <div id="desktop-active-subjects-list" class="space-y-3">
+                <!-- Diisi secara dinamis oleh JavaScript -->
+              </div>
+            </section>
+
+            <!-- Section 2: Mapel Belum Dikerjakan (Grouped separately, dimmed) -->
+            <section class="space-y-3 pt-2">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h2 class="text-base font-bold text-text-muted">Mata Pelajaran Belum Dikerjakan</h2>
+                  <p class="text-xs text-text-muted">Pilih paket untuk memulai latihan pertama</p>
+                </div>
+                <span id="desktop-unattempted-count-badge" class="text-xs font-medium text-text-muted">
+                  22 Mapel
+                </span>
+              </div>
+
+              <!-- Container for Unattempted Subjects -->
+              <div id="desktop-unattempted-subjects-list" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <!-- Diisi secara dinamis oleh JavaScript -->
+              </div>
+            </section>
+
+          </div>
+
+          <!-- RIGHT COLUMN / SIDEBAR (4 cols): Information & Help -->
+          <aside class="lg:col-span-4 space-y-6">
+            
+            <!-- Card: Standar Pusmendik -->
+            <div class="bg-surface-card p-5 rounded-2xl border border-border-subtle shadow-sm space-y-3">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[22px]">verified</span>
+                <h3 class="text-sm font-bold text-text-primary">Standar Ujian Pusmendik</h3>
+              </div>
+              <p class="text-xs text-text-muted leading-relaxed">
+                Soal disusun mengikuti struktur Tes Kemampuan Akademik. Estimasi pengerjaan rata-rata 1 menit per soal.
+              </p>
+              <div class="pt-2 border-t border-border-subtle space-y-2 text-xs">
+                <div class="flex justify-between text-text-muted">
+                  <span>Total Mata Pelajaran</span>
+                  <span class="font-bold text-text-primary">22 Mapel</span>
+                </div>
+                <div class="flex justify-between text-text-muted">
+                  <span>Total Paket Tersedia</span>
+                  <span class="font-bold text-text-primary">44 Paket</span>
+                </div>
+                <div class="flex justify-between text-text-muted">
+                  <span>Total Bank Soal</span>
+                  <span class="font-bold text-text-primary">961 Soal</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card: AI Tutor Diagnostic Reminder -->
+            <div class="bg-gradient-to-br from-primary to-primary-container text-white p-5 rounded-2xl shadow-sm space-y-3 relative overflow-hidden">
+              <div class="flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-accent-mint animate-pulse"></span>
+                <span class="text-[11px] font-bold uppercase tracking-wider text-accent-mint">Bantuan AI Tutor</span>
+              </div>
+              <h3 class="text-base font-bold leading-snug">Butuh Pembahasan Langkah Demi Langkah?</h3>
+              <p class="text-xs text-white/80 leading-relaxed">
+                Di setiap nomor soal yang salah atau membingungkan, gunakan tombol AI Tutor untuk mendapatkan petunjuk konsep tanpa langsung membocorkan jawaban.
+              </p>
+              <button onclick="handleNavTab('modul')" class="w-full py-2 bg-white text-primary hover:bg-surface text-xs font-bold rounded-xl transition-all shadow-sm">
+                Buka Modul Belajar
+              </button>
+            </div>
+
+            <!-- Card: Reset Riwayat Note -->
+            <div class="bg-surface-subtle/80 p-4 rounded-2xl border border-border-subtle text-xs space-y-2">
+              <div class="flex items-center gap-1.5 text-text-muted font-bold">
+                <span class="material-symbols-outlined text-[16px]">info</span>
+                <span>Penyimpanan Lokal</span>
+              </div>
+              <p class="text-text-muted leading-relaxed">
+                Semua data progres tersimpan aman di peramban Anda. Anda dapat mereset riwayat kapan saja jika ingin mengulang simulasi dari awal.
+              </p>
+              <div class="pt-1">
+                <button onclick="confirmReset()" class="text-error hover:underline font-semibold inline-flex items-center gap-1">
+                  <span>Hapus riwayat sekarang</span>
+                  <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+                </button>
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Desktop Footer -->
+    <footer class="w-full bg-surface-card border-t border-border-subtle py-6">
+      <div class="max-w-7xl mx-auto px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
+        <div class="flex items-center gap-2">
+          <span class="font-bold text-primary">TKA Master</span>
+          <span>• Portal latihan mandiri format TKA Pusmendik</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <span>© 2026 TKA Master Indonesia.</span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MOBILE VIEW CONTAINER (#progresMobile, max-width: 899.98px)               -->
+  <!-- ========================================================================= -->
+  <div id="progresMobile" class="w-full flex flex-col min-h-screen">
+    
+    <!-- Mobile Fixed Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 pt-safe bg-surface/90 backdrop-blur-xl border-b border-[#E2E8F0] shadow-xs">
+      <div class="h-14 px-4 flex items-center justify-between gap-2 max-w-md mx-auto">
+        <div class="flex items-center gap-2.5 min-w-0" onclick="handleNavTab('beranda')" role="button">
+          <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white flex-shrink-0 shadow-sm">
+            <span class="material-symbols-outlined text-[18px]">school</span>
+          </div>
+          <div class="flex flex-col min-w-0">
+            <span class="text-sm font-bold text-primary tracking-tight leading-none truncate">TKA Master</span>
+            <span class="text-[9px] font-bold text-text-muted uppercase tracking-wider truncate mt-0.5">PROGRES BELAJAR</span>
+          </div>
+        </div>
+
+        <div class="flex items-center shrink-0">
+          <button type="button" onclick="handleNavTab('akun')" aria-label="Buka Akun" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm text-white cursor-pointer">
+            <span class="material-symbols-outlined text-[18px]">person</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Main Body -->
+    <main class="flex-1 flex flex-col w-full bg-surface pt-16 pb-safe px-4">
+      <div class="flex flex-col w-full max-w-md mx-auto pt-3 pb-8 space-y-4">
+        
+        <!-- Header Subtitle Ringkas dengan aksi reset & status kuota di dalam konten -->
+        <div class="pt-1 flex items-center justify-between gap-2">
+          <div>
+            <h1 class="text-xl font-extrabold text-text-primary tracking-tight">Progres Belajar</h1>
+            <p class="text-xs text-text-muted mt-0.5">Riwayat pengerjaanmu</p>
+          </div>
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <div class="flex items-center gap-1 px-2.5 py-1 rounded-full bg-brand-emerald-light border border-primary/10 text-primary text-[10px] font-bold">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-mint animate-pulse"></span>
+              <span>AI: 5/hari</span>
+            </div>
+            <button onclick="confirmReset()" aria-label="Reset riwayat" title="Reset riwayat" class="w-8 h-8 rounded-full flex items-center justify-center text-text-muted hover:text-error hover:bg-error-container/30 transition-colors">
+              <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile Dynamic KPI Summary Cards -->
+        <div id="mobile-kpi-container" class="w-full">
+          <!-- Diisi secara dinamis oleh JavaScript -->
+        </div>
+
+        <!-- Section 1: Mapel dengan Data -->
+        <section class="space-y-3 pt-1">
+          <div class="flex items-center justify-between px-0.5">
+            <h2 class="text-sm font-bold text-text-primary">Mata Pelajaran Aktif</h2>
+            <span id="mobile-active-count-badge" class="text-xs font-semibold text-primary bg-brand-emerald-light px-2 py-0.5 rounded-full">
+              0 Mapel
+            </span>
+          </div>
+
+          <!-- Container for Active Subjects (Mobile) -->
+          <div id="mobile-active-subjects-list" class="space-y-2.5">
+            <!-- Diisi secara dinamis oleh JavaScript -->
+          </div>
+        </section>
+
+        <!-- Section 2: Mapel Belum Dikerjakan (Grouped separately, dimmed) -->
+        <section class="space-y-3 pt-2">
+          <div class="flex items-center justify-between px-0.5">
+            <h2 class="text-xs font-bold uppercase tracking-wider text-text-muted">Mapel Belum Dikerjakan</h2>
+            <span id="mobile-unattempted-count-badge" class="text-xs text-text-muted">
+              22 Mapel
+            </span>
+          </div>
+
+          <!-- Container for Unattempted Subjects (Mobile) -->
+          <div id="mobile-unattempted-subjects-list" class="space-y-2 opacity-80 hover:opacity-100 transition-opacity">
+            <!-- Diisi secara dinamis oleh JavaScript -->
+          </div>
+        </section>
+
+        <!-- Reset Button di Bagian Bawah Mobile -->
+        <div class="pt-4 flex flex-col items-center gap-2">
+          <button onclick="confirmReset()" class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-text-muted hover:text-error bg-surface-card rounded-xl border border-border-subtle shadow-2xs transition-colors">
+            <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+            <span>Reset riwayat pengerjaan</span>
+          </button>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation Bar (Tab 'Progres' Aktif Highlight #1b633e) -->
+    <nav class="fixed bottom-0 left-0 right-0 z-50 pb-safe bg-surface/95 backdrop-blur-xl border-t border-[#E2E8F0] shadow-[0_-2px_12px_rgba(0,0,0,0.05)]">
+      <div class="h-14 max-w-md mx-auto px-2 flex items-center justify-around">
+        <button onclick="handleNavTab('beranda')" class="flex flex-col items-center justify-center min-w-[64px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-colors">
+          <span class="material-symbols-outlined text-[22px]">home</span>
+          <span class="text-[11px] leading-none mt-1">Beranda</span>
+        </button>
+        <button onclick="handleNavTab('modul')" class="flex flex-col items-center justify-center min-w-[64px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-colors">
+          <span class="material-symbols-outlined text-[22px]">menu_book</span>
+          <span class="text-[11px] leading-none mt-1">Modul</span>
+        </button>
+        <button aria-current="page" class="flex flex-col items-center justify-center min-w-[64px] min-h-[44px] py-1 text-primary font-bold">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">analytics</span>
+          <span class="text-[11px] leading-none mt-1">Progres</span>
+        </button>
+        <button onclick="handleNavTab('akun')" class="flex flex-col items-center justify-center min-w-[64px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-colors">
+          <span class="material-symbols-outlined text-[22px]">account_circle</span>
+          <span class="text-[11px] leading-none mt-1">Akun</span>
+        </button>
+      </div>
+    </nav>
+
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- MODAL DIALOG KONFIRMASI RESET                                             -->
+  <!-- ========================================================================= -->
+  <div id="reset-modal-backdrop" class="fixed inset-0 z-[9999] bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+    <div id="reset-modal-panel" class="w-full max-w-sm bg-surface-card rounded-2xl shadow-xl p-5 border border-border-subtle transform scale-95 transition-transform duration-300 space-y-4">
+      <div class="w-10 h-10 rounded-full bg-error-container text-error flex items-center justify-center mx-auto">
+        <span class="material-symbols-outlined text-[24px]">warning</span>
+      </div>
+      <div class="text-center space-y-1">
+        <h3 class="text-base font-bold text-text-primary">Reset Riwayat Belajar?</h3>
+        <p class="text-xs text-text-muted leading-relaxed">
+          Semua catatan jawaban dan progres pengerjaan soal akan dihapus dari perangkat ini. Tindakan ini tidak dapat dibatalkan.
+        </p>
+      </div>
+      <div class="flex items-center gap-2 pt-1">
+        <button onclick="closeResetModal()" class="flex-1 py-2 px-3 rounded-xl border border-border-subtle text-xs font-semibold text-secondary hover:bg-surface-subtle transition-colors">
+          Batal
+        </button>
+        <button onclick="executeReset()" class="flex-1 py-2 px-3 rounded-xl bg-error hover:bg-error/90 text-white text-xs font-bold shadow-sm transition-colors">
+          Ya, Reset
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast-msg" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-[10000] bg-text-primary text-white text-xs px-4 py-2 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 flex items-center gap-1.5">
+    <span class="material-symbols-outlined text-[16px] text-accent-mint">check_circle</span>
+    <span id="toast-text">Riwayat berhasil direset</span>
+  </div>
+
+  <!-- ========================================================================= -->
+  <!-- JAVASCRIPT LOGIC                                                          -->
+  <!-- ========================================================================= -->
+  <script>
+    (function () {
+      'use strict';
+
+      /* =========================================================================
+         1. DATA REAL 22 MATA PELAJARAN (Sumber Kebenaran: KONTRAK_DATA.md)
+         Jumlah soal Paket 1 & Paket 2 PERSIS dari kontrak (Total 961 Soal).
+         ========================================================================= */
+      var SUBJECTS = [
+        // WAJIB
+        { key: 'matematika', name: 'Matematika (Wajib)', p1: 46, p2: 25, icon: 'calculate', category: 'Wajib' },
+        { key: 'bahasa_indonesia', name: 'Bahasa Indonesia (Wajib)', p1: 20, p2: 25, icon: 'menu_book', category: 'Wajib' },
+        { key: 'bahasa_inggris', name: 'Bahasa Inggris (Wajib)', p1: 20, p2: 25, icon: 'language', category: 'Wajib' },
+        // SAINTEK (Peminatan)
+        { key: 'fisika', name: 'Fisika (Peminatan)', p1: 20, p2: 24, icon: 'bolt', category: 'Saintek' },
+        { key: 'kimia', name: 'Kimia (Peminatan)', p1: 20, p2: 24, icon: 'science', category: 'Saintek' },
+        { key: 'biologi', name: 'Biologi (Peminatan)', p1: 20, p2: 29, icon: 'psychology', category: 'Saintek' },
+        // SOSHUM (Peminatan)
+        { key: 'ekonomi', name: 'Ekonomi', p1: 20, p2: 29, icon: 'query_stats', category: 'Soshum' },
+        { key: 'geografi', name: 'Geografi', p1: 10, p2: 29, icon: 'public', category: 'Soshum' },
+        { key: 'sosiologi', name: 'Sosiologi', p1: 20, p2: 30, icon: 'groups', category: 'Soshum' },
+        { key: 'sejarah', name: 'Sejarah', p1: 10, p2: 29, icon: 'history_edu', category: 'Soshum' },
+        { key: 'antropologi', name: 'Antropologi', p1: 10, p2: 30, icon: 'diversity_3', category: 'Soshum' },
+        { key: 'kewirausahaan', name: 'Kewirausahaan (PKWU)', p1: 10, p2: 30, icon: 'storefront', category: 'Soshum' },
+        // TINGKAT LANJUT
+        { key: 'matematika_lanjut', name: 'Matematika Lanjut', p1: 20, p2: 25, icon: 'trending_up', category: 'Lanjut' },
+        { key: 'bahasa_indonesia_lanjut', name: 'B. Indonesia Lanjut', p1: 10, p2: 29, icon: 'trending_up', category: 'Lanjut' },
+        { key: 'bahasa_inggris_lanjut', name: 'B. Inggris Lanjut', p1: 10, p2: 29, icon: 'trending_up', category: 'Lanjut' },
+        // BAHASA ASING & LINTAS MINAT
+        { key: 'ppkn', name: 'PPKn', p1: 20, p2: 29, icon: 'gavel', category: 'Bahasa & Lintas Minat' },
+        { key: 'bahasa_arab', name: 'Bahasa Arab', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' },
+        { key: 'bahasa_jepang', name: 'Bahasa Jepang', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' },
+        { key: 'bahasa_jerman', name: 'Bahasa Jerman', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' },
+        { key: 'bahasa_prancis', name: 'Bahasa Prancis', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' },
+        { key: 'bahasa_mandarin', name: 'Bahasa Mandarin', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' },
+        { key: 'bahasa_korea', name: 'Bahasa Korea', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' }
+      ];
+
+      var TOTAL_KURIKULUM_SOAL = 961;
+
+      /* =========================================================================
+         2. BACA DATA LOCALSTORAGE 'tka_progress' SECARA AMAN (try/catch)
+         Format: tka_progress[subjectKey][pkgNum][nomorSoal] = { kunci, benar }
+         ========================================================================= */
+      function readStorageProgress() {
+        try {
+          var raw = localStorage.getItem('tka_progress');
+          if (!raw) return {};
+          var parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') {
+            return parsed;
+          }
+          return {};
+        } catch (e) {
+          console.warn('Gagal membaca data progres dari localStorage:', e);
+          return {};
+        }
+      }
+
+      /* =========================================================================
+         3. PERHITUNGAN STATISTIK NYATA (DILARANG MENGARANG ANGKA)
+         ========================================================================= */
+      function calculateStats(progressData) {
+        var totalDikerjakan = 0;
+        var totalBenar = 0;
+        var totalSalah = 0;
+
+        var activeSubjects = [];
+        var unattemptedSubjects = [];
+
+        SUBJECTS.forEach(function (subj) {
+          var sData = progressData[subj.key] || {};
+          var p1Data = sData['1'] || sData[1] || {};
+          var p2Data = sData['2'] || sData[2] || {};
+
+          var ans1 = Object.keys(p1Data).length;
+          var ans2 = Object.keys(p2Data).length;
+
+          var b1 = 0;
+          Object.keys(p1Data).forEach(function (k) {
+            if (p1Data[k] && p1Data[k].benar === true) b1++;
+          });
+
+          var b2 = 0;
+          Object.keys(p2Data).forEach(function (k) {
+            if (p2Data[k] && p2Data[k].benar === true) b2++;
+          });
+
+          var s1 = ans1 - b1;
+          var s2 = ans2 - b2;
+
+          var subjAnsTotal = ans1 + ans2;
+          var subjBenarTotal = b1 + b2;
+          var subjSalahTotal = s1 + s2;
+
+          totalDikerjakan += subjAnsTotal;
+          totalBenar += subjBenarTotal;
+          totalSalah += subjSalahTotal;
+
+          var pct1 = subj.p1 ? Math.min(100, Math.round((ans1 / subj.p1) * 100)) : 0;
+          var pct2 = subj.p2 ? Math.min(100, Math.round((ans2 / subj.p2) * 100)) : 0;
+          var subjAccuracy = subjAnsTotal > 0 ? Math.round((subjBenarTotal / subjAnsTotal) * 100) : 0;
+
+          var item = {
+            key: subj.key,
+            name: subj.name,
+            icon: subj.icon,
+            category: subj.category,
+            p1Total: subj.p1,
+            p2Total: subj.p2,
+            ans1: ans1,
+            ans2: ans2,
+            b1: b1,
+            b2: b2,
+            s1: s1,
+            s2: s2,
+            pct1: pct1,
+            pct2: pct2,
+            totalAns: subjAnsTotal,
+            totalBenar: subjBenarTotal,
+            totalSalah: subjSalahTotal,
+            accuracy: subjAccuracy
+          };
+
+          if (subjAnsTotal > 0) {
+            activeSubjects.push(item);
+          } else {
+            unattemptedSubjects.push(item);
+          }
+        });
+
+        var accuracy = totalDikerjakan > 0 ? Math.round((totalBenar / totalDikerjakan) * 100) : 0;
+
+        return {
+          hasData: totalDikerjakan > 0,
+          totalDikerjakan: totalDikerjakan,
+          totalBenar: totalBenar,
+          totalSalah: totalSalah,
+          accuracy: accuracy,
+          activeSubjects: activeSubjects,
+          unattemptedSubjects: unattemptedSubjects
+        };
+      }
+
+      /* =========================================================================
+         4. RENDER TAMPILAN DESKTOP & MOBILE
+         ========================================================================= */
+      function renderAll() {
+        var progressData = readStorageProgress();
+        var stats = calculateStats(progressData);
+
+        renderDesktop(stats);
+        renderMobile(stats);
+      }
+
+      /* 4A. Render Desktop */
+      function renderDesktop(stats) {
+        var kpiContainer = document.getElementById('desktop-kpi-container');
+        var activeList = document.getElementById('desktop-active-subjects-list');
+        var unattemptedList = document.getElementById('desktop-unattempted-subjects-list');
+        var activeBadge = document.getElementById('desktop-active-count-badge');
+        var unattemptedBadge = document.getElementById('desktop-unattempted-count-badge');
+
+        activeBadge.textContent = stats.activeSubjects.length + ' Mapel';
+        unattemptedBadge.textContent = stats.unattemptedSubjects.length + ' Mapel';
+
+        // 1. KPI Cards / Keadaan Kosong Jujur
+        if (!stats.hasData) {
+          kpiContainer.innerHTML = [
+            '<div class="bg-surface-card rounded-2xl p-8 border border-border-subtle shadow-sm text-center space-y-3 fade-in">',
+            '  <div class="w-14 h-14 rounded-2xl bg-brand-emerald-light text-primary flex items-center justify-center mx-auto shadow-2xs">',
+            '    <span class="material-symbols-outlined text-[32px]">history_edu</span>',
+            '  </div>',
+            '  <div class="max-w-md mx-auto space-y-1">',
+            '    <h2 class="text-lg font-bold text-text-primary">Belum Ada Riwayat Latihan</h2>',
+            '    <p class="text-sm text-text-muted">Belum ada riwayat. Mulai satu paket dulu, yuk!</p>',
+            '  </div>',
+            '  <div class="pt-2">',
+            '    <button onclick="window.openPackage(\'matematika\', 1)" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-sm shadow-sm transition-all">',
+            '      <span class="material-symbols-outlined text-[18px]">play_circle</span>',
+            '      <span>Mulai Matematika Paket 1</span>',
+            '    </button>',
+            '  </div>',
+            '</div>'
+          ].join('');
+        } else {
+          kpiContainer.innerHTML = [
+            '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 fade-in">',
+            '  <!-- Card 1: Total Dikerjakan -->',
+            '  <div class="bg-surface-card p-5 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between">',
+            '    <div class="flex items-center justify-between">',
+            '      <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Total Soal Selesai</span>',
+            '      <div class="w-8 h-8 rounded-lg bg-brand-emerald-light flex items-center justify-center text-primary">',
+            '        <span class="material-symbols-outlined text-[18px]">assignment_turned_in</span>',
+            '      </div>',
+            '    </div>',
+            '    <div class="mt-3">',
+            '      <div class="flex items-baseline gap-1.5">',
+            '        <span class="text-3xl font-extrabold text-text-primary">' + stats.totalDikerjakan + '</span>',
+            '        <span class="text-xs text-text-muted">/ ' + TOTAL_KURIKULUM_SOAL + ' Soal</span>',
+            '      </div>',
+            '      <div class="mt-2 w-full bg-surface-subtle h-2 rounded-full overflow-hidden">',
+            '        <div class="bg-primary h-full rounded-full pg-fill" style="width: ' + Math.min(100, Math.round((stats.totalDikerjakan / TOTAL_KURIKULUM_SOAL) * 100)) + '%;"></div>',
+            '      </div>',
+            '    </div>',
+            '    <div class="mt-3 pt-2 border-t border-border-subtle/60 flex items-center justify-between text-xs text-text-muted">',
+            '      <span>Porsi Kurikulum</span>',
+            '      <span class="font-bold text-primary">' + Math.round((stats.totalDikerjakan / TOTAL_KURIKULUM_SOAL) * 100) + '% Tercapai</span>',
+            '    </div>',
+            '  </div>',
+            '',
+            '  <!-- Card 2: Jawaban Benar -->',
+            '  <div class="bg-surface-card p-5 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between">',
+            '    <div class="flex items-center justify-between">',
+            '      <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Jawaban Benar</span>',
+            '      <div class="w-8 h-8 rounded-lg bg-brand-emerald-light flex items-center justify-center text-primary">',
+            '        <span class="material-symbols-outlined text-[18px]">check_circle</span>',
+            '      </div>',
+            '    </div>',
+            '    <div class="mt-3">',
+            '      <div class="flex items-baseline gap-1.5">',
+            '        <span class="text-3xl font-extrabold text-primary">' + stats.totalBenar + '</span>',
+            '        <span class="text-xs text-text-muted">soal</span>',
+            '      </div>',
+            '      <p class="text-xs text-text-muted mt-1">' + stats.totalSalah + ' jawaban salah</p>',
+            '    </div>',
+            '    <div class="mt-3 pt-2 border-t border-border-subtle/60 flex items-center justify-between text-xs text-text-muted">',
+            '      <span>Rasio Benar</span>',
+            '      <span class="font-bold text-accent-mint">' + stats.totalBenar + ' B / ' + stats.totalSalah + ' S</span>',
+            '    </div>',
+            '  </div>',
+            '',
+            '  <!-- Card 3: Persentase Ketepatan -->',
+            '  <div class="bg-surface-card p-5 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between">',
+            '    <div class="flex items-center justify-between">',
+            '      <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Persentase Ketepatan</span>',
+            '      <div class="w-8 h-8 rounded-lg bg-brand-emerald-light flex items-center justify-center text-primary">',
+            '        <span class="material-symbols-outlined text-[18px]">percent</span>',
+            '      </div>',
+            '    </div>',
+            '    <div class="mt-3">',
+            '      <div class="flex items-baseline gap-1.5">',
+            '        <span class="text-3xl font-extrabold text-text-primary">' + stats.accuracy + '%</span>',
+            '      </div>',
+            '      <div class="mt-2 w-full bg-surface-subtle h-2 rounded-full overflow-hidden flex">',
+            '        <div class="bg-primary-container h-full rounded-l-full pg-fill" style="width: ' + stats.accuracy + '%;"></div>',
+            '        <div class="bg-error-container h-full rounded-r-full pg-fill" style="width: ' + (100 - stats.accuracy) + '%;"></div>',
+            '      </div>',
+            '    </div>',
+            '    <div class="mt-3 pt-2 border-t border-border-subtle/60 flex items-center justify-between text-xs text-text-muted">',
+            '      <span>Akurasi Kumulatif</span>',
+            '      <span class="font-bold ' + (stats.accuracy >= 75 ? 'text-accent-mint' : 'text-primary') + '">' + stats.accuracy + '% Tepat</span>',
+            '    </div>',
+            '  </div>',
+            '',
+            '  <!-- Card 4: Mapel yang Dikerjakan -->',
+            '  <div class="bg-surface-card p-5 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between">',
+            '    <div class="flex items-center justify-between">',
+            '      <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Mapel Dipelajari</span>',
+            '      <div class="w-8 h-8 rounded-lg bg-brand-emerald-light flex items-center justify-center text-primary">',
+            '        <span class="material-symbols-outlined text-[18px]">library_books</span>',
+            '      </div>',
+            '    </div>',
+            '    <div class="mt-3">',
+            '      <div class="flex items-baseline gap-1.5">',
+            '        <span class="text-3xl font-extrabold text-text-primary">' + stats.activeSubjects.length + '</span>',
+            '        <span class="text-xs text-text-muted">/ 22 Mapel</span>',
+            '      </div>',
+            '      <p class="text-xs text-text-muted mt-1">' + stats.unattemptedSubjects.length + ' mapel belum dimulai</p>',
+            '    </div>',
+            '    <div class="mt-3 pt-2 border-t border-border-subtle/60 flex items-center justify-between text-xs text-text-muted">',
+            '      <span>Kelengkapan Mapel</span>',
+            '      <span class="font-bold text-primary">' + Math.round((stats.activeSubjects.length / 22) * 100) + '%</span>',
+            '    </div>',
+            '  </div>',
+            '</div>'
+          ].join('');
+        }
+
+        // 2. Daftar Mapel yang ADA datanya
+        if (stats.activeSubjects.length === 0) {
+          activeList.innerHTML = [
+            '<div class="bg-surface-card/60 p-6 rounded-2xl border border-dashed border-border-subtle text-center text-text-muted text-xs space-y-1">',
+            '  <p class="font-semibold text-text-primary">Belum ada mapel dengan riwayat pengerjaan</p>',
+            '  <p>Pilih salah satu mapel di bawah untuk mulai berlatih.</p>',
+            '</div>'
+          ].join('');
+        } else {
+          var activeHtml = '';
+          stats.activeSubjects.forEach(function (s) {
+            activeHtml += [
+              '<div class="bg-surface-card p-5 rounded-2xl border border-border-subtle shadow-sm hover:shadow-md transition-shadow space-y-4">',
+              '  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-border-subtle/60 pb-3">',
+              '    <div class="flex items-center gap-3">',
+              '      <div class="w-10 h-10 rounded-xl bg-brand-emerald-light flex items-center justify-center text-primary flex-shrink-0">',
+              '        <span class="material-symbols-outlined text-[22px]">' + s.icon + '</span>',
+              '      </div>',
+              '      <div>',
+              '        <div class="flex items-center gap-2">',
+              '          <h3 class="text-base font-bold text-text-primary">' + s.name + '</h3>',
+              '          <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-surface-subtle text-text-muted">' + s.category + '</span>',
+              '        </div>',
+              '        <p class="text-xs text-text-muted">' + s.totalAns + ' soal selesai dikerjakan (' + s.totalBenar + ' benar, ' + s.totalSalah + ' salah)</p>',
+              '      </div>',
+              '    </div>',
+              '    <div class="flex items-center gap-2 self-start sm:self-center">',
+              '      <span class="text-xs font-bold px-2.5 py-1 rounded-full ' + (s.accuracy >= 75 ? 'bg-brand-emerald-light text-primary' : 'bg-badge-amber-bg text-badge-amber-text') + '">',
+              '        Akurasi ' + s.accuracy + '%',
+              '      </span>',
+              '    </div>',
+              '  </div>',
+              '',
+              '  <!-- Rincian Progres Per Paket -->',
+              '  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">',
+              '    <!-- Paket 1 -->',
+              '    <div class="p-3.5 rounded-xl bg-surface-subtle border border-border-subtle/60 space-y-2">',
+              '      <div class="flex items-center justify-between">',
+              '        <span class="text-xs font-bold text-text-primary">Paket 1</span>',
+              '        <span class="text-xs text-text-muted">' + s.ans1 + ' dari ' + s.p1Total + ' soal (' + s.pct1 + '%)</span>',
+              '      </div>',
+              '      <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">',
+              '        <div class="bg-primary h-full rounded-full pg-fill" style="width: ' + s.pct1 + '%;"></div>',
+              '      </div>',
+              '      <div class="flex items-center justify-between pt-1 text-[11px] text-text-muted">',
+              '        <span>' + s.b1 + ' Benar • ' + s.s1 + ' Salah</span>',
+              '        <button onclick="window.openPackage(\'' + s.key + '\', 1)" class="font-bold text-primary hover:underline inline-flex items-center gap-0.5">',
+              '          <span>' + (s.ans1 > 0 ? 'Lanjut' : 'Mulai') + '</span>',
+              '          <span class="material-symbols-outlined text-[13px]">arrow_forward</span>',
+              '        </button>',
+              '      </div>',
+              '    </div>',
+              '',
+              '    <!-- Paket 2 -->',
+              '    <div class="p-3.5 rounded-xl bg-surface-subtle border border-border-subtle/60 space-y-2">',
+              '      <div class="flex items-center justify-between">',
+              '        <span class="text-xs font-bold text-text-primary">Paket 2</span>',
+              '        <span class="text-xs text-text-muted">' + s.ans2 + ' dari ' + s.p2Total + ' soal (' + s.pct2 + '%)</span>',
+              '      </div>',
+              '      <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">',
+              '        <div class="bg-primary h-full rounded-full pg-fill" style="width: ' + s.pct2 + '%;"></div>',
+              '      </div>',
+              '      <div class="flex items-center justify-between pt-1 text-[11px] text-text-muted">',
+              '        <span>' + s.b2 + ' Benar • ' + s.s2 + ' Salah</span>',
+              '        <button onclick="window.openPackage(\'' + s.key + '\', 2)" class="font-bold text-primary hover:underline inline-flex items-center gap-0.5">',
+              '          <span>' + (s.ans2 > 0 ? 'Lanjut' : 'Mulai') + '</span>',
+              '          <span class="material-symbols-outlined text-[13px]">arrow_forward</span>',
+              '        </button>',
+              '      </div>',
+              '    </div>',
+              '  </div>',
+              '</div>'
+            ].join('');
+          });
+          activeList.innerHTML = activeHtml;
+        }
+
+        // 3. Daftar Mapel Belum Dikerjakan (Redup, Tombol "Mulai")
+        if (stats.unattemptedSubjects.length === 0) {
+          unattemptedList.innerHTML = [
+            '<div class="col-span-2 p-6 rounded-2xl bg-surface-card border border-border-subtle text-center text-xs text-text-muted">',
+            '  Hebat! Semua 22 mata pelajaran sudah Anda mulai!',
+            '</div>'
+          ].join('');
+        } else {
+          var unattemptedHtml = '';
+          stats.unattemptedSubjects.forEach(function (s) {
+            unattemptedHtml += [
+              '<div class="bg-surface-card p-3.5 rounded-xl border border-border-subtle flex items-center justify-between gap-3">',
+              '  <div class="flex items-center gap-2.5 min-w-0">',
+              '    <div class="w-8 h-8 rounded-lg bg-brand-emerald-light flex items-center justify-center text-primary flex-shrink-0">',
+              '      <span class="material-symbols-outlined text-[18px]">' + s.icon + '</span>',
+              '    </div>',
+              '    <div class="min-w-0">',
+              '      <h4 class="text-xs font-bold text-text-primary truncate">' + s.name + '</h4>',
+              '      <p class="text-[11px] text-text-muted truncate">Paket 1: ' + s.p1Total + ' soal • Paket 2: ' + s.p2Total + ' soal</p>',
+              '    </div>',
+              '  </div>',
+              '  <button onclick="window.openPackage(\'' + s.key + '\', 1)" class="flex-shrink-0 px-3 py-1.5 rounded-lg bg-brand-emerald-light hover:bg-primary hover:text-white text-primary text-xs font-bold transition-all shadow-2xs">',
+              '    Mulai',
+              '  </button>',
+              '</div>'
+            ].join('');
+          });
+          unattemptedList.innerHTML = unattemptedHtml;
+        }
+      }
+
+      /* 4B. Render Mobile */
+      function renderMobile(stats) {
+        var kpiContainer = document.getElementById('mobile-kpi-container');
+        var activeList = document.getElementById('mobile-active-subjects-list');
+        var unattemptedList = document.getElementById('mobile-unattempted-subjects-list');
+        var activeBadge = document.getElementById('mobile-active-count-badge');
+        var unattemptedBadge = document.getElementById('mobile-unattempted-count-badge');
+
+        activeBadge.textContent = stats.activeSubjects.length + ' Mapel';
+        unattemptedBadge.textContent = stats.unattemptedSubjects.length + ' Mapel';
+
+        // 1. Mobile KPI / Keadaan Kosong Jujur
+        if (!stats.hasData) {
+          kpiContainer.innerHTML = [
+            '<div class="bg-surface-card rounded-2xl p-6 border border-border-subtle shadow-sm text-center space-y-3 fade-in">',
+            '  <div class="w-12 h-12 rounded-xl bg-brand-emerald-light text-primary flex items-center justify-center mx-auto">',
+            '    <span class="material-symbols-outlined text-[28px]">history_edu</span>',
+            '  </div>',
+            '  <div class="space-y-1">',
+            '    <h3 class="text-base font-bold text-text-primary">Belum Ada Riwayat</h3>',
+            '    <p class="text-xs text-text-muted">Belum ada riwayat. Mulai satu paket dulu, yuk!</p>',
+            '  </div>',
+            '  <div class="pt-1">',
+            '    <button onclick="window.openPackage(\'matematika\', 1)" class="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-1.5">',
+            '      <span class="material-symbols-outlined text-[16px]">play_circle</span>',
+            '      <span>Mulai Latihan Paket 1</span>',
+            '    </button>',
+            '  </div>',
+            '</div>'
+          ].join('');
+        } else {
+          kpiContainer.innerHTML = [
+            '<div class="space-y-3 fade-in">',
+            '  <!-- Baris 2 Metrik -->',
+            '  <div class="grid grid-cols-2 gap-2.5">',
+            '    <div class="bg-surface-card rounded-xl p-3.5 border border-border-subtle shadow-2xs">',
+            '      <span class="text-[11px] font-semibold text-text-muted">Total Soal</span>',
+            '      <div class="mt-1 flex items-baseline gap-1">',
+            '        <span class="text-2xl font-extrabold text-text-primary">' + stats.totalDikerjakan + '</span>',
+            '        <span class="text-[10px] text-text-muted">/ ' + TOTAL_KURIKULUM_SOAL + '</span>',
+            '      </div>',
+            '      <div class="mt-2 w-full bg-surface-subtle h-1.5 rounded-full overflow-hidden">',
+            '        <div class="bg-primary h-full rounded-full pg-fill" style="width: ' + Math.min(100, Math.round((stats.totalDikerjakan / TOTAL_KURIKULUM_SOAL) * 100)) + '%;"></div>',
+            '      </div>',
+            '    </div>',
+            '',
+            '    <div class="bg-surface-card rounded-xl p-3.5 border border-border-subtle shadow-2xs">',
+            '      <span class="text-[11px] font-semibold text-text-muted">Ketepatan</span>',
+            '      <div class="mt-1 flex items-baseline gap-1">',
+            '        <span class="text-2xl font-extrabold text-primary">' + stats.accuracy + '%</span>',
+            '        <span class="text-[10px] text-accent-mint font-bold">' + stats.totalBenar + ' Benar</span>',
+            '      </div>',
+            '      <div class="mt-2 w-full bg-surface-subtle h-1.5 rounded-full overflow-hidden flex">',
+            '        <div class="bg-primary-container h-full rounded-l-full pg-fill" style="width: ' + stats.accuracy + '%;"></div>',
+            '        <div class="bg-error-container h-full rounded-r-full pg-fill" style="width: ' + (100 - stats.accuracy) + '%;"></div>',
+            '      </div>',
+            '    </div>',
+            '  </div>',
+            '',
+            '  <!-- Ringkasan Akurasi Benar & Salah -->',
+            '  <div class="bg-surface-card rounded-xl p-3.5 border border-border-subtle shadow-2xs flex items-center justify-between text-xs">',
+            '    <div class="flex items-center gap-2">',
+            '      <span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>',
+            '      <div>',
+            '        <p class="font-bold text-text-primary">' + stats.totalBenar + ' Benar</p>',
+            '        <p class="text-[10px] text-text-muted">Porsi ' + stats.accuracy + '%</p>',
+            '      </div>',
+            '    </div>',
+            '    <div class="h-6 w-px bg-border-subtle"></div>',
+            '    <div class="flex items-center gap-2">',
+            '      <span class="w-2.5 h-2.5 rounded-full bg-error-container"></span>',
+            '      <div>',
+            '        <p class="font-bold text-text-primary">' + stats.totalSalah + ' Salah</p>',
+            '        <p class="text-[10px] text-text-muted">Porsi ' + (100 - stats.accuracy) + '%</p>',
+            '      </div>',
+            '    </div>',
+            '  </div>',
+            '</div>'
+          ].join('');
+        }
+
+        // 2. Daftar Mapel dengan Data (Mobile)
+        if (stats.activeSubjects.length === 0) {
+          activeList.innerHTML = [
+            '<div class="bg-surface-card p-4 rounded-xl border border-dashed border-border-subtle text-center text-xs text-text-muted">',
+            '  Belum ada riwayat pengerjaan soal.',
+            '</div>'
+          ].join('');
+        } else {
+          var mobileActiveHtml = '';
+          stats.activeSubjects.forEach(function (s) {
+            mobileActiveHtml += [
+              '<article class="bg-surface-card rounded-xl p-3.5 border border-border-subtle shadow-2xs space-y-3">',
+              '  <div class="flex items-center justify-between">',
+              '    <div class="flex items-center gap-2.5 min-w-0">',
+              '      <div class="w-8 h-8 rounded-lg bg-brand-emerald-light flex items-center justify-center text-primary-container flex-shrink-0">',
+              '        <span class="material-symbols-outlined text-[18px]">' + s.icon + '</span>',
+              '      </div>',
+              '      <div class="min-w-0">',
+              '        <h4 class="text-xs font-bold text-text-primary truncate">' + s.name + '</h4>',
+              '        <p class="text-[10px] text-text-muted">' + s.totalAns + ' soal selesai</p>',
+              '      </div>',
+              '    </div>',
+              '    <span class="text-xs font-bold text-primary bg-brand-emerald-light px-2 py-0.5 rounded-full">',
+              '      ' + s.accuracy + '%',
+              '    </span>',
+              '  </div>',
+              '',
+              '  <!-- Rincian Paket Mobile -->',
+              '  <div class="space-y-2 pt-1 border-t border-border-subtle/50 text-xs">',
+              '    <div class="space-y-1">',
+              '      <div class="flex justify-between text-[11px] text-text-muted">',
+              '        <span>Paket 1: ' + s.ans1 + '/' + s.p1Total + ' soal (' + s.pct1 + '%)</span>',
+              '        <button onclick="window.openPackage(\'' + s.key + '\', 1)" class="text-primary font-bold hover:underline">' + (s.ans1 > 0 ? 'Lanjut' : 'Mulai') + '</button>',
+              '      </div>',
+              '      <div class="w-full bg-surface-subtle h-1.5 rounded-full overflow-hidden">',
+              '        <div class="bg-primary h-full rounded-full pg-fill" style="width: ' + s.pct1 + '%;"></div>',
+              '      </div>',
+              '    </div>',
+              '    <div class="space-y-1">',
+              '      <div class="flex justify-between text-[11px] text-text-muted">',
+              '        <span>Paket 2: ' + s.ans2 + '/' + s.p2Total + ' soal (' + s.pct2 + '%)</span>',
+              '        <button onclick="window.openPackage(\'' + s.key + '\', 2)" class="text-primary font-bold hover:underline">' + (s.ans2 > 0 ? 'Lanjut' : 'Mulai') + '</button>',
+              '      </div>',
+              '      <div class="w-full bg-surface-subtle h-1.5 rounded-full overflow-hidden">',
+              '        <div class="bg-primary h-full rounded-full pg-fill" style="width: ' + s.pct2 + '%;"></div>',
+              '      </div>',
+              '    </div>',
+              '  </div>',
+              '</article>'
+            ].join('');
+          });
+          activeList.innerHTML = mobileActiveHtml;
+        }
+
+        // 3. Daftar Mapel Belum Dikerjakan (Mobile, Redup)
+        if (stats.unattemptedSubjects.length === 0) {
+          unattemptedList.innerHTML = [
+            '<div class="bg-surface-card p-3 rounded-xl border border-border-subtle text-center text-xs text-text-muted">',
+            '  Semua mata pelajaran telah dimulai.',
+            '</div>'
+          ].join('');
+        } else {
+          var mobileUnattemptedHtml = '';
+          stats.unattemptedSubjects.forEach(function (s) {
+            mobileUnattemptedHtml += [
+              '<div class="bg-surface-card rounded-xl p-3 border border-border-subtle flex items-center justify-between gap-2">',
+              '  <div class="flex items-center gap-2.5 min-w-0">',
+              '    <div class="w-7 h-7 rounded-lg bg-surface-subtle flex items-center justify-center text-text-muted flex-shrink-0">',
+              '      <span class="material-symbols-outlined text-[16px]">' + s.icon + '</span>',
+              '    </div>',
+              '    <div class="min-w-0">',
+              '      <h4 class="text-xs font-bold text-text-primary truncate">' + s.name + '</h4>',
+              '      <p class="text-[10px] text-text-muted truncate">Paket 1: ' + s.p1Total + ' soal • Paket 2: ' + s.p2Total + ' soal</p>',
+              '    </div>',
+              '  </div>',
+              '  <button onclick="window.openPackage(\'' + s.key + '\', 1)" class="flex-shrink-0 px-3 py-1 rounded-lg bg-brand-emerald-light hover:bg-primary hover:text-white text-primary text-xs font-bold transition-all">',
+              '    Mulai',
+              '  </button>',
+              '</div>'
+            ].join('');
+          });
+          unattemptedList.innerHTML = mobileUnattemptedHtml;
+        }
+      }
+
+      /* =========================================================================
+         5. KONTRAK POSTMESSAGE
+         Kirim:
+           parent.postMessage({ type: 'open-package', subject: key, pkg: 1 }, '*')
+           parent.postMessage({ type: 'nav-tab', tab: 'beranda' | 'modul' }, '*')
+         Dengarkan:
+           'progress-data' -> render ulang
+         ========================================================================= */
+      window.openPackage = function (subjectKey, pkgNum) {
+        var pkg = Number(pkgNum) || 1;
+        if (window.parent) {
+          window.parent.postMessage({
+            type: 'open-package',
+            subject: subjectKey,
+            pkg: pkg
+          }, '*');
+        }
+      };
+
+      window.handleNavTab = function (tabName) {
+        if (window.parent) {
+          window.parent.postMessage({
+            type: 'nav-tab',
+            tab: tabName
+          }, '*');
+        }
+      };
+
+      // Dengarkan postMessage type 'progress-data' dari app utama
+      window.addEventListener('message', function (event) {
+        if (event.data && event.data.type === 'progress-data') {
+          if (event.data.progress && typeof event.data.progress === 'object') {
+            try {
+              localStorage.setItem('tka_progress', JSON.stringify(event.data.progress));
+            } catch (e) {}
+          }
+          renderAll();
+        }
+      });
+
+      // Dengarkan event storage dari window/tab lain
+      window.addEventListener('storage', function (e) {
+        if (e.key === 'tka_progress') {
+          renderAll();
+        }
+      });
+
+      /* =========================================================================
+         6. RESET RIWAYAT (DENGAN KONFIRMASI)
+         ========================================================================= */
+      window.confirmReset = function () {
+        var backdrop = document.getElementById('reset-modal-backdrop');
+        var panel = document.getElementById('reset-modal-panel');
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        panel.classList.remove('scale-95');
+        panel.classList.add('scale-100');
+      };
+
+      window.closeResetModal = function () {
+        var backdrop = document.getElementById('reset-modal-backdrop');
+        var panel = document.getElementById('reset-modal-panel');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        panel.classList.remove('scale-100');
+        panel.classList.add('scale-95');
+      };
+
+      window.executeReset = function () {
+        closeResetModal();
+        try {
+          localStorage.removeItem('tka_progress');
+        } catch (e) {
+          console.warn('Gagal menghapus localStorage:', e);
+        }
+        renderAll();
+        showToast('Riwayat berhasil direset');
+
+        if (window.parent) {
+          window.parent.postMessage({
+            type: 'progress-reset'
+          }, '*');
+        }
+      };
+
+      function showToast(msg) {
+        var toast = document.getElementById('toast-msg');
+        var text = document.getElementById('toast-text');
+        text.textContent = msg;
+        toast.classList.remove('opacity-0', 'pointer-events-none');
+        setTimeout(function () {
+          toast.classList.add('opacity-0', 'pointer-events-none');
+        }, 2200);
+      }
+
+      /* =========================================================================
+         7. DEMO MODE HELPER (Untuk Pengujian & QA)
+         ========================================================================= */
+      window.toggleDemoMode = function () {
+        var bar = document.getElementById('demo-bar');
+        bar.classList.toggle('hidden');
+      };
+
+      function initDemoBar() {
+        var params = new URLSearchParams(window.location.search);
+        if (params.get('demo') === '1' || params.get('demo') === 'true') {
+          document.getElementById('demo-bar').classList.remove('hidden');
+        }
+
+        document.getElementById('btn-demo-close').addEventListener('click', function () {
+          document.getElementById('demo-bar').classList.add('hidden');
+        });
+
+        document.getElementById('btn-demo-clear').addEventListener('click', function () {
+          localStorage.removeItem('tka_progress');
+          renderAll();
+          showToast('Data dikosongkan (Keadaan Kosong)');
+        });
+
+        document.getElementById('btn-demo-seed').addEventListener('click', function () {
+          // Isi data contoh realistis sesuai format tka_progress
+          var sampleData = {
+            "matematika": {
+              "1": {
+                "1": { "kunci": "B", "benar": true },
+                "2": { "kunci": "C", "benar": true },
+                "3": { "kunci": "A", "benar": false },
+                "4": { "kunci": "D", "benar": true },
+                "5": { "kunci": "E", "benar": true },
+                "6": { "kunci": "A", "benar": true },
+                "7": { "kunci": "C", "benar": false },
+                "8": { "kunci": "B", "benar": true },
+                "9": { "kunci": "D", "benar": true },
+                "10": { "kunci": "E", "benar": true },
+                "11": { "kunci": "B", "benar": true },
+                "12": { "kunci": "C", "benar": true }
+              },
+              "2": {
+                "1": { "kunci": "A", "benar": true },
+                "2": { "kunci": "B", "benar": false },
+                "3": { "kunci": "D", "benar": true }
+              }
+            },
+            "fisika": {
+              "1": {
+                "1": { "kunci": "B", "benar": true },
+                "2": { "kunci": "C", "benar": false },
+                "3": { "kunci": "D", "benar": true },
+                "4": { "kunci": "E", "benar": true },
+                "5": { "kunci": "A", "benar": false },
+                "6": { "kunci": "B", "benar": true },
+                "7": { "kunci": "C", "benar": true },
+                "8": { "kunci": "A", "benar": true }
+              }
+            },
+            "bahasa_indonesia": {
+              "1": {
+                "1": { "kunci": "C", "benar": true },
+                "2": { "kunci": "A", "benar": true },
+                "3": { "kunci": "B", "benar": true },
+                "4": { "kunci": "D", "benar": true },
+                "5": { "kunci": "E", "benar": false },
+                "6": { "kunci": "B", "benar": true },
+                "7": { "kunci": "C", "benar": true },
+                "8": { "kunci": "A", "benar": true },
+                "9": { "kunci": "D", "benar": true },
+                "10": { "kunci": "E", "benar": true },
+                "11": { "kunci": "A", "benar": true },
+                "12": { "kunci": "B", "benar": true },
+                "13": { "kunci": "C", "benar": true },
+                "14": { "kunci": "D", "benar": true },
+                "15": { "kunci": "E", "benar": false },
+                "16": { "kunci": "A", "benar": true },
+                "17": { "kunci": "B", "benar": true },
+                "18": { "kunci": "C", "benar": true }
+              }
+            },
+            "ekonomi": {
+              "1": {
+                "1": { "kunci": "A", "benar": true },
+                "2": { "kunci": "B", "benar": true },
+                "3": { "kunci": "C", "benar": true },
+                "4": { "kunci": "D", "benar": false },
+                "5": { "kunci": "E", "benar": true },
+                "6": { "kunci": "A", "benar": true }
+              }
+            }
+          };
+
+          try {
+            localStorage.setItem('tka_progress', JSON.stringify(sampleData));
+            renderAll();
+            showToast('Data contoh berhasil dimuat');
+          } catch (e) {
+            console.error('Gagal menulis data contoh:', e);
+          }
+        });
+      }
+
+      /* Inisialisasi saat DOM siap */
+      document.addEventListener('DOMContentLoaded', function () {
+        initDemoBar();
+        renderAll();
+      });
+
+    })();
+  </script>
+</body>
+</html>
