@@ -863,10 +863,11 @@ function buildSubjectsSummary() {
 function postToFrameReliable(frame, buildPayload) {
   if (!frame) return;
   let tries = 0;
+  const maxTries = frame.dataset.loaded === '1' ? 1 : 3;
   const send = () => {
     tries++;
     try { frame.contentWindow.postMessage(buildPayload(), '*'); } catch (e) {}
-    if (tries < 8) setTimeout(send, 400);
+    if (tries < maxTries) setTimeout(send, 400);
   };
   // Siap kirim? (1) pernah ditandai loaded, atau (2) dokumen iframe sudah keluar
   // dari state "loading". Cek langsung — kalau hanya mengandalkan event 'load',

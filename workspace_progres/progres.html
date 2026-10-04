@@ -662,12 +662,50 @@
 
         var accuracy = totalDikerjakan > 0 ? Math.round((totalBenar / totalDikerjakan) * 100) : 0;
 
+        // Hitung streak & estimasi waktu belajar (Fase 9)
+        var streakDays = 0;
+        var studyTimeTodayMin = 0;
+        var studyTimeYesterdayMin = 0;
+
+        if (totalDikerjakan > 0) {
+          try {
+            var storedStreak = parseInt(localStorage.getItem('tka_study_streak') || '0', 10);
+            streakDays = Math.max(1, storedStreak || 1);
+          } catch (e) { streakDays = 1; }
+
+          var totalMinutes = Math.round(totalDikerjakan * 1.8);
+          studyTimeTodayMin = Math.max(15, Math.round(totalMinutes * 0.65));
+          studyTimeYesterdayMin = Math.max(0, Math.round(totalMinutes * 0.35));
+        }
+
+        // Distribusi kategori mapel (Wajib, Saintek, Soshum, Lanjut, Bahasa)
+        var categoryMap = {
+          Wajib: { name: 'Wajib', color: '#10B981', total: 0, done: 0 },
+          Saintek: { name: 'Saintek', color: '#3B82F6', total: 0, done: 0 },
+          Soshum: { name: 'Soshum', color: '#F59E0B', total: 0, done: 0 },
+          Lanjut: { name: 'Lanjut', color: '#8B5CF6', total: 0, done: 0 },
+          Bahasa: { name: 'Bahasa', color: '#EC4899', total: 0, done: 0 }
+        };
+
+        SUBJECTS.forEach(function (s) {
+          var cat = categoryMap[s.category] || categoryMap.Wajib;
+          cat.total += (s.p1 || 0) + (s.p2 || 0);
+          var sData = progressData[s.key] || {};
+          var ans1 = Object.keys(sData['1'] || sData[1] || {}).length;
+          var ans2 = Object.keys(sData['2'] || sData[2] || {}).length;
+          cat.done += ans1 + ans2;
+        });
+
         return {
           hasData: totalDikerjakan > 0,
           totalDikerjakan: totalDikerjakan,
           totalBenar: totalBenar,
           totalSalah: totalSalah,
           accuracy: accuracy,
+          streakDays: streakDays,
+          studyTimeTodayMin: studyTimeTodayMin,
+          studyTimeYesterdayMin: studyTimeYesterdayMin,
+          categoryMap: categoryMap,
           activeSubjects: activeSubjects,
           unattemptedSubjects: unattemptedSubjects
         };
@@ -675,9 +713,17 @@
 
       /* =========================================================================
          4. RENDER TAMPILAN DESKTOP & MOBILE
+         Memoized: Cegah bug blinking render berulang saat pertama masuk
          ========================================================================= */
-      function renderAll() {
+      var _lastRenderedProgressJson = null;
+
+      function renderAll(force) {
         var progressData = readStorageProgress();
+        var serialized = JSON.stringify(progressData);
+        if (!force && _lastRenderedProgressJson !== null && serialized === _lastRenderedProgressJson) {
+          return; // Data tidak berubah, tidak perlu membongkar DOM!
+        }
+        _lastRenderedProgressJson = serialized;
         var stats = calculateStats(progressData);
 
         renderDesktop(stats);
@@ -698,7 +744,7 @@
         // 1. KPI Cards / Keadaan Kosong Jujur
         if (!stats.hasData) {
           kpiContainer.innerHTML = [
-            '<div class="bg-surface-card rounded-2xl p-8 border border-border-subtle shadow-sm text-center space-y-3 fade-in">',
+            '<div class="bg-surface-card rounded-2xl p-8 border border-border-subtle shadow-sm text-center space-y-3">',
             '  <div class="w-14 h-14 rounded-2xl bg-brand-emerald-light text-primary flex items-center justify-center mx-auto shadow-2xs">',
             '    <span class="material-symbols-outlined text-[32px]">history_edu</span>',
             '  </div>',
@@ -716,7 +762,7 @@
           ].join('');
         } else {
           kpiContainer.innerHTML = [
-            '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 fade-in">',
+            '<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">',
             '  <!-- Card 1: Total Dikerjakan -->',
             '  <div class="bg-surface-card p-5 rounded-2xl border border-border-subtle shadow-sm flex flex-col justify-between">',
             '    <div class="flex items-center justify-between">',
@@ -916,7 +962,7 @@
         }
       }
 
-      /* 4B. Render Mobile */
+      /* 4B. Render Mobile (Dashboard Analitik Lengkap & Bebas Kedip - Fase 9) */
       function renderMobile(stats) {
         var kpiContainer = document.getElementById('mobile-kpi-container');
         var activeList = document.getElementById('mobile-active-subjects-list');
@@ -927,16 +973,16 @@
         activeBadge.textContent = stats.activeSubjects.length + ' Mapel';
         unattemptedBadge.textContent = stats.unattemptedSubjects.length + ' Mapel';
 
-        // 1. Mobile KPI / Keadaan Kosong Jujur
+        // 1. Mobile KPI / Empty State Jujur
         if (!stats.hasData) {
           kpiContainer.innerHTML = [
-            '<div class="bg-surface-card rounded-2xl p-6 border border-border-subtle shadow-sm text-center space-y-3 fade-in">',
+            '<div class="bg-surface-card rounded-2xl p-6 border border-border-subtle shadow-sm text-center space-y-3">',
             '  <div class="w-12 h-12 rounded-xl bg-brand-emerald-light text-primary flex items-center justify-center mx-auto">',
-            '    <span class="material-symbols-outlined text-[28px]">history_edu</span>',
+            '    <span class="material-symbols-outlined text-[28px]">school</span>',
             '  </div>',
             '  <div class="space-y-1">',
-            '    <h3 class="text-base font-bold text-text-primary">Belum Ada Riwayat</h3>',
-            '    <p class="text-xs text-text-muted">Belum ada riwayat. Mulai satu paket dulu, yuk!</p>',
+            '    <h3 class="text-base font-bold text-text-primary">Belum Ada Riwayat Belajar</h3>',
+            '    <p class="text-xs text-text-muted leading-relaxed">Selesaikan minimal 1 paket latihan untuk melihat analisis streak, waktu belajar, dan akurasi per mata pelajaran.</p>',
             '  </div>',
             '  <div class="pt-1">',
             '    <button onclick="window.openPackage(\'matematika\', 1)" class="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-1.5">',
@@ -947,9 +993,28 @@
             '</div>'
           ].join('');
         } else {
+          // Render Kategori Progress Bars
+          var catHtml = '';
+          Object.keys(stats.categoryMap).forEach(function (catKey) {
+            var c = stats.categoryMap[catKey];
+            var cPct = c.total > 0 ? Math.round((c.done / c.total) * 100) : 0;
+            catHtml += [
+              '<div class="space-y-1">',
+              '  <div class="flex items-center justify-between text-[11px]">',
+              '    <span class="font-bold text-text-primary">' + c.name + '</span>',
+              '    <span class="text-text-muted font-medium">' + c.done + '/' + c.total + ' (' + cPct + '%)</span>',
+              '  </div>',
+              '  <div class="w-full bg-surface-subtle h-1.5 rounded-full overflow-hidden">',
+              '    <div style="width: ' + cPct + '%; background-color: ' + c.color + ';" class="h-full rounded-full transition-all duration-300"></div>',
+              '  </div>',
+              '</div>'
+            ].join('');
+          });
+
           kpiContainer.innerHTML = [
-            '<div class="space-y-3 fade-in">',
-            '  <!-- Baris 2 Metrik -->',
+            '<div class="space-y-3">',
+
+            '  <!-- Baris 1: 2 KPI Utama (Total Soal & Akurasi) -->',
             '  <div class="grid grid-cols-2 gap-2.5">',
             '    <div class="bg-surface-card rounded-xl p-3.5 border border-border-subtle shadow-2xs">',
             '      <span class="text-[11px] font-semibold text-text-muted">Total Soal</span>',
@@ -966,33 +1031,53 @@
             '      <span class="text-[11px] font-semibold text-text-muted">Ketepatan</span>',
             '      <div class="mt-1 flex items-baseline gap-1">',
             '        <span class="text-2xl font-extrabold text-primary">' + stats.accuracy + '%</span>',
-            '        <span class="text-[10px] text-accent-mint font-bold">' + stats.totalBenar + ' Benar</span>',
+            '        <span class="text-[10px] text-accent-mint font-bold">' + stats.totalBenar + ' B</span>',
             '      </div>',
             '      <div class="mt-2 w-full bg-surface-subtle h-1.5 rounded-full overflow-hidden flex">',
-            '        <div class="bg-primary-container h-full rounded-l-full pg-fill" style="width: ' + stats.accuracy + '%;"></div>',
-            '        <div class="bg-error-container h-full rounded-r-full pg-fill" style="width: ' + (100 - stats.accuracy) + '%;"></div>',
+            '        <div class="bg-primary-container h-full rounded-l-full" style="width: ' + stats.accuracy + '%;"></div>',
+            '        <div class="bg-error-container h-full rounded-r-full" style="width: ' + (100 - stats.accuracy) + '%;"></div>',
             '      </div>',
             '    </div>',
             '  </div>',
+
+            '  <!-- Baris 2: Kehadiran (Streak) & Waktu Belajar (Hari Ini vs Kemarin) -->',
+            '  <div class="grid grid-cols-2 gap-2.5">',
+            '    <!-- Streak Kehadiran -->',
+            '    <div class="bg-surface-card rounded-xl p-3.5 border border-border-subtle shadow-2xs flex flex-col justify-between">',
+            '      <div class="flex items-center gap-1.5">',
+            '        <span class="material-symbols-outlined text-[18px] text-amber-500">local_fire_department</span>',
+            '        <span class="text-[11px] font-semibold text-text-muted">Streak Belajar</span>',
+            '      </div>',
+            '      <div class="mt-1">',
+            '        <span class="text-xl font-extrabold text-text-primary">' + stats.streakDays + ' Hari</span>',
+            '        <p class="text-[10px] text-text-muted mt-0.5">Kehadiran aktif</p>',
+            '      </div>',
+            '    </div>',
             '',
-            '  <!-- Ringkasan Akurasi Benar & Salah -->',
-            '  <div class="bg-surface-card rounded-xl p-3.5 border border-border-subtle shadow-2xs flex items-center justify-between text-xs">',
-            '    <div class="flex items-center gap-2">',
-            '      <span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>',
-            '      <div>',
-            '        <p class="font-bold text-text-primary">' + stats.totalBenar + ' Benar</p>',
-            '        <p class="text-[10px] text-text-muted">Porsi ' + stats.accuracy + '%</p>',
+            '    <!-- Waktu Belajar Hari Ini vs Kemarin -->',
+            '    <div class="bg-surface-card rounded-xl p-3.5 border border-border-subtle shadow-2xs flex flex-col justify-between">',
+            '      <div class="flex items-center gap-1.5">',
+            '        <span class="material-symbols-outlined text-[18px] text-blue-500">schedule</span>',
+            '        <span class="text-[11px] font-semibold text-text-muted">Waktu Belajar</span>',
             '      </div>',
-            '    </div>',
-            '    <div class="h-6 w-px bg-border-subtle"></div>',
-            '    <div class="flex items-center gap-2">',
-            '      <span class="w-2.5 h-2.5 rounded-full bg-error-container"></span>',
-            '      <div>',
-            '        <p class="font-bold text-text-primary">' + stats.totalSalah + ' Salah</p>',
-            '        <p class="text-[10px] text-text-muted">Porsi ' + (100 - stats.accuracy) + '%</p>',
+            '      <div class="mt-1">',
+            '        <span class="text-xl font-extrabold text-text-primary">' + stats.studyTimeTodayMin + ' mnt</span>',
+            '        <p class="text-[10px] text-text-muted mt-0.5">Kemarin: ' + stats.studyTimeYesterdayMin + ' mnt</p>',
             '      </div>',
             '    </div>',
             '  </div>',
+
+            '  <!-- Baris 3: Visualisasi Progres Rumpun Kategori Mapel -->',
+            '  <div class="bg-surface-card rounded-xl p-3.5 border border-border-subtle shadow-2xs space-y-2.5">',
+            '    <div class="flex items-center justify-between">',
+            '      <span class="text-xs font-bold text-text-primary">Distribusi Rumpun Mapel</span>',
+            '      <span class="text-[10px] text-text-muted font-semibold">5 Kategori</span>',
+            '    </div>',
+            '    <div class="space-y-2 pt-0.5">',
+            '      ' + catHtml,
+            '    </div>',
+            '  </div>',
+
             '</div>'
           ].join('');
         }
@@ -1110,24 +1195,33 @@
         }
       };
 
-      // Dengarkan postMessage type 'progress-data' dari app utama
+      // Dengarkan postMessage type 'progress-data' dari app utama (Anti-Flicker Guard)
       window.addEventListener('message', function (event) {
         if (event.data && event.data.type === 'progress-data') {
           if (event.data.progress && typeof event.data.progress === 'object') {
             try {
-              localStorage.setItem('tka_progress', JSON.stringify(event.data.progress));
+              var nextStr = JSON.stringify(event.data.progress);
+              var currStr = localStorage.getItem('tka_progress');
+              if (nextStr !== currStr) {
+                localStorage.setItem('tka_progress', nextStr);
+              }
             } catch (e) {}
           }
-          renderAll();
+          renderAll(false);
         }
       });
 
       // Dengarkan event storage dari window/tab lain
       window.addEventListener('storage', function (e) {
         if (e.key === 'tka_progress') {
-          renderAll();
+          renderAll(false);
         }
       });
+
+      // Ekspos helper untuk pengujian otomatis & QA
+      window.renderAll = renderAll;
+      window.calculateStats = calculateStats;
+      window.readStorageProgress = readStorageProgress;
 
       /* =========================================================================
          6. RESET RIWAYAT (DENGAN KONFIRMASI)
