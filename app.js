@@ -748,26 +748,37 @@ function renderHome() {
   initHeroCarousel();
 }
 
-// Hero carousel beranda: sinkron dot + lompat slide saat dot diklik
+// Reusable Carousel Controller (dipakai di Beranda Fase 7 & Modul Fase 8)
+function setupCarouselController(carEl, dotsElOrSelector) {
+  if (!carEl) return null;
+  const dots = typeof dotsElOrSelector === 'string' 
+    ? document.querySelectorAll(dotsElOrSelector) 
+    : (dotsElOrSelector || []);
+  const sync = () => {
+    if (!carEl.clientWidth) return;
+    const idx = Math.max(0, Math.min(dots.length - 1, Math.round(carEl.scrollLeft / carEl.clientWidth)));
+    dots.forEach((d, i) => d.classList.toggle('on', i === idx));
+  };
+  carEl.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+  dots.forEach((d, i) => {
+    d.addEventListener('click', () => {
+      carEl.scrollTo({ left: i * carEl.clientWidth, behavior: 'smooth' });
+    });
+  });
+  sync();
+  return { sync };
+}
+window.setupCarouselController = setupCarouselController;
+
 let _heroCarouselBound = false;
 function initHeroCarousel() {
   const car = document.getElementById('heroCarousel');
   const dots = document.querySelectorAll('#heroDots i');
   if (!car || !dots.length) return;
-  const sync = () => {
-    const idx = Math.max(0, Math.min(dots.length - 1, Math.round(car.scrollLeft / car.clientWidth)));
-    dots.forEach((d, i) => d.classList.toggle('on', i === idx));
-  };
   if (!_heroCarouselBound) {
     _heroCarouselBound = true;
-    car.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
-    dots.forEach((d, i) => {
-      d.addEventListener('click', () => {
-        car.scrollTo({ left: i * car.clientWidth, behavior: 'smooth' });
-      });
-    });
+    setupCarouselController(car, dots);
   }
-  sync();
 }
 
 function homeOpen() {
