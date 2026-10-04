@@ -4995,12 +4995,66 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
     position: fixed;
     right: 10px;
     bottom: 96px;
-    z-index: 55;
+    z-index: 75; /* FASE 4: di atas bottom sheet chat AI (z-index 70) */
     background: var(--bg);
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 6px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    touch-action: none;
+    transition: top 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+                bottom 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+                left 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+                right 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                outline 0.2s ease;
+  }
+  .work-rail.rail-dragging {
+    outline: 2.5px solid var(--accent);
+    box-shadow: 0 12px 32px rgba(0, 74, 42, 0.45);
+    z-index: 99 !important;
+    transition: none !important;
+    user-select: none;
+  }
+  /* FASE 4: 6 Snap positions (safe-area aware, tidak menabrak navbar atas & bar aksi bawah) */
+  .work-rail.snap-top-left {
+    top: calc(68px + env(safe-area-inset-top, 0px));
+    left: max(10px, env(safe-area-inset-left, 0px));
+    right: auto;
+    bottom: auto;
+  }
+  .work-rail.snap-top-right {
+    top: calc(68px + env(safe-area-inset-top, 0px));
+    right: max(10px, env(safe-area-inset-right, 0px));
+    left: auto;
+    bottom: auto;
+  }
+  .work-rail.snap-mid-left {
+    top: 50%;
+    transform: translateY(-50%);
+    left: max(10px, env(safe-area-inset-left, 0px));
+    right: auto;
+    bottom: auto;
+  }
+  .work-rail.snap-mid-right {
+    top: 50%;
+    transform: translateY(-50%);
+    right: max(10px, env(safe-area-inset-right, 0px));
+    left: auto;
+    bottom: auto;
+  }
+  .work-rail.snap-bottom-left {
+    bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+    left: max(10px, env(safe-area-inset-left, 0px));
+    right: auto;
+    top: auto;
+  }
+  .work-rail.snap-bottom-right {
+    bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+    right: max(10px, env(safe-area-inset-right, 0px));
+    left: auto;
+    top: auto;
   }
   .rail-btn {
     display: flex;

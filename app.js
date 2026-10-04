@@ -3878,6 +3878,146 @@ function initTutorSheetDrag() {
   handle.addEventListener('pointercancel', endDrag);
 }
 
+// ==================== FASE 4: Navigasi Mengambang (work-rail) Bisa Dipindah ====================
+// Fitur: Long-press 400ms -> Mode geser (outline & haptic) -> Drag -> Snap (kiri/kanan x atas/tengah/bawah)
+// Posisi disimpan di localStorage, aman dari tap biasa, tetap tampil di atas AI chat (z-index 75)
+function initDraggableWorkRail() {
+  const rail = document.getElementById('workRail');
+  if (!rail) return;
+
+  const POSITIONS = [
+    'snap-top-left', 'snap-top-right',
+    'snap-mid-left', 'snap-mid-right',
+    'snap-bottom-left', 'snap-bottom-right'
+  ];
+
+  // Restore saved position
+  try {
+    const saved = localStorage.getItem('tka_work_rail_snap');
+    if (saved && POSITIONS.includes(saved)) {
+      POSITIONS.forEach(c => rail.classList.remove(c));
+      rail.classList.add(saved);
+    }
+  } catch (e) {}
+
+  let longPressTimer = null;
+  let isDragging = false;
+  let startX = 0;
+  let startY = 0;
+  let initialLeft = 0;
+  let initialTop = 0;
+  let moved = false;
+
+  function clearTimer() {
+    if (longPressTimer) {
+      clearTimeout(longPressTimer);
+      longPressTimer = null;
+    }
+  }
+
+  function snapToNearest(clientX, clientY) {
+    const winW = window.innerWidth;
+    const winH = window.innerHeight;
+
+    const snapX = clientX < winW / 2 ? 'left' : 'right';
+    let snapY = 'bottom';
+    if (clientY < winH * 0.35) snapY = 'top';
+    else if (clientY > winH * 0.68) snapY = 'bottom';
+    else snapY = 'mid';
+
+    const snapClass = `snap-${snapY}-${snapX}`;
+    POSITIONS.forEach(c => rail.classList.remove(c));
+    rail.classList.add(snapClass);
+
+    // Reset inline styles so CSS snap class with safe-area rules takes over
+    rail.style.left = '';
+    rail.style.right = '';
+    rail.style.top = '';
+    rail.style.bottom = '';
+    rail.style.transform = '';
+
+    try {
+      localStorage.setItem('tka_work_rail_snap', snapClass);
+    } catch (e) {}
+  }
+
+  rail.addEventListener('pointerdown', (e) => {
+    // Hanya primary pointer (klik kiri / touch tunggal)
+    if (e.button && e.button !== 0) return;
+    startX = e.clientX;
+    startY = e.clientY;
+    moved = false;
+
+    const rect = rail.getBoundingClientRect();
+    initialLeft = rect.left;
+    initialTop = rect.top;
+
+    clearTimer();
+    longPressTimer = setTimeout(() => {
+      isDragging = true;
+      rail.classList.add('rail-dragging');
+      rail.style.left = initialLeft + 'px';
+      rail.style.top = initialTop + 'px';
+      rail.style.right = 'auto';
+      rail.style.bottom = 'auto';
+      rail.style.transform = 'scale(1.08)';
+
+      if (navigator.vibrate) {
+        try { navigator.vibrate(40); } catch (_) {}
+      }
+    }, 400);
+  });
+
+  window.addEventListener('pointermove', (e) => {
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+
+    if (!isDragging) {
+      // Jika digeser sebelum 400ms tercapai, batalkan long-press agar tidak bentrok dengan scroll
+      if (Math.hypot(dx, dy) > 10) {
+        clearTimer();
+      }
+      return;
+    }
+
+    // Sedang dragging aktif
+    if (e.cancelable) e.preventDefault();
+    moved = true;
+
+    const newLeft = initialLeft + dx;
+    const newTop = initialTop + dy;
+
+    // Batas layar agar tidak terlempar keluar
+    const pad = 6;
+    const maxLeft = window.innerWidth - rail.offsetWidth - pad;
+    const maxTop = window.innerHeight - rail.offsetHeight - pad;
+
+    rail.style.left = Math.max(pad, Math.min(maxLeft, newLeft)) + 'px';
+    rail.style.top = Math.max(pad, Math.min(maxTop, newTop)) + 'px';
+  }, { passive: false });
+
+  const endDrag = (e) => {
+    clearTimer();
+    if (!isDragging) return;
+
+    isDragging = false;
+    rail.classList.remove('rail-dragging');
+    snapToNearest(e.clientX, e.clientY);
+  };
+
+  window.addEventListener('pointerup', endDrag);
+  window.addEventListener('pointercancel', endDrag);
+
+  // Jangan trigger aksi klik button jika baru saja selesai drag
+  rail.addEventListener('click', (e) => {
+    if (moved) {
+      e.stopPropagation();
+      e.preventDefault();
+      moved = false;
+    }
+  }, true);
+}
+
 function initMobileChrome() {
   const btnMenu = document.getElementById('btnMobileMenu');
   const btnOverflow = document.getElementById('btnMobileOverflow');
@@ -3906,6 +4046,7 @@ function initMobileChrome() {
   });
 
   initTutorSheetDrag();
+  initDraggableWorkRail();
 
   // Tinggi sheet mengikuti visualViewport -> composer tetap terlihat saat keyboard naik
   if (window.visualViewport) {
