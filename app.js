@@ -378,32 +378,108 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Layar pertama: Home dashboard (kecuali langsung diarahkan ke soal via #soal-N)
   if (window.__homeFirst) homeOpen();
 });
-const HOME_ICONS = {
-  matematika: 'fa-square-root-variable', matematika_lanjut: 'fa-square-root-variable',
-  fisika: 'fa-atom', kimia: 'fa-flask', biologi: 'fa-dna',
-  ekonomi: 'fa-chart-line', geografi: 'fa-earth-asia', sosiologi: 'fa-users',
-  sejarah: 'fa-landmark', antropologi: 'fa-people-group', kewirausahaan: 'fa-store',
-  ppkn: 'fa-scale-balanced', bahasa_indonesia: 'fa-book-open', bahasa_indonesia_lanjut: 'fa-book-open',
-  bahasa_inggris: 'fa-language', bahasa_inggris_lanjut: 'fa-language',
-  bahasa_arab: 'fa-language', bahasa_jepang: 'fa-language', bahasa_jerman: 'fa-language',
-  bahasa_prancis: 'fa-language', bahasa_mandarin: 'fa-language', bahasa_korea: 'fa-language',
+// 22 Mata Pelajaran TKA Master — Meta UI, Ikon Unik Material Symbols, & Tema Warna Harmonis
+const SUBJECT_UI_META = {
+  matematika: {
+    name: 'Matematika (Wajib)', shortName: 'Matematika', chip: 'MATEMATIKA',
+    icon: 'calculate', theme: 'blue', category: 'Wajib'
+  },
+  bahasa_indonesia: {
+    name: 'Bahasa Indonesia (Wajib)', shortName: 'B. Indonesia', chip: 'B. INDONESIA',
+    icon: 'menu_book', theme: 'emerald', category: 'Wajib'
+  },
+  bahasa_inggris: {
+    name: 'Bahasa Inggris (Wajib)', shortName: 'B. Inggris', chip: 'B. INGGRIS',
+    icon: 'language', theme: 'indigo', category: 'Wajib'
+  },
+  fisika: {
+    name: 'Fisika (Peminatan)', shortName: 'Fisika', chip: 'FISIKA',
+    icon: 'bolt', theme: 'amber', category: 'Saintek'
+  },
+  kimia: {
+    name: 'Kimia (Peminatan)', shortName: 'Kimia', chip: 'KIMIA',
+    icon: 'science', theme: 'teal', category: 'Saintek'
+  },
+  biologi: {
+    name: 'Biologi (Peminatan)', shortName: 'Biologi', chip: 'BIOLOGI',
+    icon: 'biotech', theme: 'green', category: 'Saintek'
+  },
+  ekonomi: {
+    name: 'Ekonomi (Peminatan)', shortName: 'Ekonomi', chip: 'EKONOMI',
+    icon: 'payments', theme: 'orange', category: 'Soshum'
+  },
+  geografi: {
+    name: 'Geografi (Peminatan)', shortName: 'Geografi', chip: 'GEOGRAFI',
+    icon: 'public', theme: 'cyan', category: 'Soshum'
+  },
+  sosiologi: {
+    name: 'Sosiologi (Peminatan)', shortName: 'Sosiologi', chip: 'SOSIOLOGI',
+    icon: 'groups', theme: 'rose', category: 'Soshum'
+  },
+  sejarah: {
+    name: 'Sejarah (Peminatan)', shortName: 'Sejarah', chip: 'SEJARAH',
+    icon: 'landmark', theme: 'purple', category: 'Soshum'
+  },
+  antropologi: {
+    name: 'Antropologi (Peminatan)', shortName: 'Antropologi', chip: 'ANTROPOLOGI',
+    icon: 'diversity_3', theme: 'amber', category: 'Soshum'
+  },
+  kewirausahaan: {
+    name: 'Kewirausahaan (PKWU)', shortName: 'PKWU', chip: 'PKWU',
+    icon: 'storefront', theme: 'lime', category: 'Soshum'
+  },
+  matematika_lanjut: {
+    name: 'Matematika Lanjut', shortName: 'Matematika Lanjut', chip: 'MTK LANJUT',
+    icon: 'functions', theme: 'blue', category: 'Lanjut'
+  },
+  bahasa_indonesia_lanjut: {
+    name: 'Bahasa Indonesia Lanjut', shortName: 'B. Indo Lanjut', chip: 'INDO LANJUT',
+    icon: 'auto_stories', theme: 'teal', category: 'Lanjut'
+  },
+  bahasa_inggris_lanjut: {
+    name: 'Bahasa Inggris Lanjut', shortName: 'B. Inggris Lanjut', chip: 'INGGRIS LANJUT',
+    icon: 'translate', theme: 'violet', category: 'Lanjut'
+  },
+  ppkn: {
+    name: 'PPKn', shortName: 'PPKn', chip: 'PPKN',
+    icon: 'gavel', theme: 'red', category: 'Lintas Minat'
+  },
+  bahasa_arab: {
+    name: 'Bahasa Arab', shortName: 'B. Arab', chip: 'B. ARAB',
+    icon: 'edit_note', theme: 'emerald', category: 'Bahasa Asing'
+  },
+  bahasa_jepang: {
+    name: 'Bahasa Jepang', shortName: 'B. Jepang', chip: 'B. JEPANG',
+    icon: 'wb_sunny', theme: 'rose', category: 'Bahasa Asing'
+  },
+  bahasa_jerman: {
+    name: 'Bahasa Jerman', shortName: 'B. Jerman', chip: 'B. JERMAN',
+    icon: 'castle', theme: 'yellow', category: 'Bahasa Asing'
+  },
+  bahasa_prancis: {
+    name: 'Bahasa Prancis', shortName: 'B. Prancis', chip: 'B. PRANCIS',
+    icon: 'architecture', theme: 'sky', category: 'Bahasa Asing'
+  },
+  bahasa_mandarin: {
+    name: 'Bahasa Mandarin', shortName: 'B. Mandarin', chip: 'B. MANDARIN',
+    icon: 'brush', theme: 'red', category: 'Bahasa Asing'
+  },
+  bahasa_korea: {
+    name: 'Bahasa Korea', shortName: 'B. Korea', chip: 'B. KOREA',
+    icon: 'stars', theme: 'pink', category: 'Bahasa Asing'
+  }
 };
-const HOME_SECTIONS = [
-  { keys: ['matematika'], label: 'Matematika (Wajib)', icon: 'calculate', iconClass: '' },
-  { keys: ['fisika'], label: 'Fisika (Peminatan)', icon: 'bolt', iconClass: 'stitch-iconchip--saintek' },
-  { keys: ['kimia'], label: 'Kimia (Peminatan)', icon: 'science', iconClass: 'stitch-iconchip--saintek' },
-  { keys: ['biologi'], label: 'Biologi (Peminatan)', icon: 'psychology', iconClass: 'stitch-iconchip--saintek' },
-  { keys: ['ekonomi', 'geografi', 'sosiologi', 'sejarah', 'antropologi', 'kewirausahaan'], label: 'Soshum (Peminatan)', icon: 'query_stats', iconClass: 'stitch-iconchip--soshum' },
-  { keys: ['bahasa_indonesia', 'bahasa_inggris'], label: 'Bahasa Wajib', icon: 'menu_book', iconClass: 'stitch-iconchip--bahasa' },
-  { keys: ['matematika_lanjut', 'bahasa_indonesia_lanjut', 'bahasa_inggris_lanjut'], label: 'Tingkat Lanjut', icon: 'trending_up', iconClass: 'stitch-iconchip--bahasa' },
-  { keys: ['ppkn', 'bahasa_arab', 'bahasa_jepang', 'bahasa_jerman', 'bahasa_prancis', 'bahasa_mandarin', 'bahasa_korea'], label: 'Bahasa Asing & Lintas Minat', icon: 'translate', iconClass: 'stitch-iconchip--bahasa' },
-];
+window.SUBJECT_UI_META = SUBJECT_UI_META;
+
+// Watermark geometris per rumpun mapel
 const HOME_WATERMARKS = {
   matematika: '<path d="M25 25 L75 25 L45 50 L75 75 L25 75" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/><circle cx="70" cy="50" fill="none" r="8" stroke="currentColor" stroke-width="2.5"/>',
   fisika: '<ellipse cx="50" cy="50" rx="38" ry="14" stroke-width="2.5" transform="rotate(30 50 50)"/><ellipse cx="50" cy="50" rx="38" ry="14" stroke-width="2.5" transform="rotate(90 50 50)"/><ellipse cx="50" cy="50" rx="38" ry="14" stroke-width="2.5" transform="rotate(150 50 50)"/><circle cx="50" cy="50" fill="currentColor" r="5"/>',
+  kimia: '<path d="M40 20 L40 40 L20 75 L80 75 L60 40 L60 20" stroke="currentColor" stroke-width="4" stroke-linejoin="round" fill="none"/><line x1="32" y1="20" x2="68" y2="20" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="62" r="5" fill="currentColor"/>',
+  biologi: '<circle cx="50" cy="50" r="30" stroke="currentColor" stroke-width="3" fill="none"/><path d="M35 50 Q50 30 65 50 T95 50" stroke="currentColor" stroke-width="3" fill="none"/>',
   _default: '<path d="M10 80 L50 15 L90 80 Z" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="55" fill="none" r="16" stroke="currentColor" stroke-width="3"/><path d="M25 80 L75 80" stroke="currentColor" stroke-dasharray="4,4" stroke-width="3"/>',
 };
-const HOME_PKG_MINUTES = { 1: 45, 2: 50 }; // estimasi lama pengerjaan per paket
+const HOME_PKG_MINUTES = { 1: 45, 2: 50 };
 
 // Progres nyata per paket dari jawaban user yang tersimpan (localStorage)
 function homePkgProgress(subjectKey, pkgNum, total) {
@@ -420,82 +496,221 @@ const HOME_PKG_DESC = {
   2: 'Latihan lanjutan + AI Tutor',
 };
 
+// Data statis jumlah soal real dari KONTRAK_DATA.md — 0ms render & tanpa fetch berulang
+const STATIC_SOAL_COUNTS = {
+  matematika: { 1: 46, 2: 25 },
+  bahasa_indonesia: { 1: 20, 2: 25 },
+  bahasa_inggris: { 1: 20, 2: 25 },
+  fisika: { 1: 20, 2: 24 },
+  kimia: { 1: 20, 2: 24 },
+  biologi: { 1: 20, 2: 29 },
+  ekonomi: { 1: 20, 2: 29 },
+  geografi: { 1: 10, 2: 29 },
+  sosiologi: { 1: 20, 2: 30 },
+  sejarah: { 1: 10, 2: 29 },
+  antropologi: { 1: 10, 2: 30 },
+  kewirausahaan: { 1: 10, 2: 30 },
+  matematika_lanjut: { 1: 20, 2: 25 },
+  bahasa_indonesia_lanjut: { 1: 10, 2: 29 },
+  bahasa_inggris_lanjut: { 1: 10, 2: 29 },
+  ppkn: { 1: 20, 2: 29 },
+  bahasa_arab: { 1: 10, 2: 29 },
+  bahasa_jepang: { 1: 10, 2: 29 },
+  bahasa_jerman: { 1: 10, 2: 29 },
+  bahasa_prancis: { 1: 10, 2: 29 },
+  bahasa_mandarin: { 1: 10, 2: 29 },
+  bahasa_korea: { 1: 10, 2: 29 }
+};
+const HOME_SOAL_COUNTS = Object.assign({}, STATIC_SOAL_COUNTS);
+
 function homePkgCount(subjectKey, pkgNum) {
-  // Jumlah soal real per mapel. PRIORITAS: HOME_SOAL_COUNTS (per-mapel, akurat).
-  // Cache state.pkgData hanya dipakai untuk mapel aktif — cache-nya per-slot
-  // pkg1/pkg2 tanpa penanda mapel, jadi tidak boleh dipakai lintas mapel.
   const meta = SUBJECT_CATALOG[subjectKey];
   if (!meta) return null;
   if (subjectKey === state.currentSubject) {
     const cached = state.pkgData[pkgKey(pkgNum)];
     if (cached && cached.soal) return cached.soal.length;
   }
-  return (HOME_SOAL_COUNTS[subjectKey] || {})[pkgNum] || null;
+  return (HOME_SOAL_COUNTS[subjectKey] || {})[pkgNum] || (STATIC_SOAL_COUNTS[subjectKey] || {})[pkgNum] || 20;
 }
 
-// Jumlah soal semua mapel (fetch ringan sekali saat Home dibuka)
-const HOME_SOAL_COUNTS = {};
-let _homePrefetching = null;
+// Pre-seeded: instan selesai tanpa 44 network fetch yang membebani Beranda
 function homePrefetchCounts() {
-  if (_homePrefetching) return _homePrefetching;
-  const keys = Object.keys(SUBJECT_CATALOG);
-  _homePrefetching = Promise.all(keys.map(async k => {
-    for (const pkg of [1, 2]) {
-      try {
-        const res = await fetch(SUBJECT_CATALOG[k].json[pkg]);
-        if (!res.ok) continue;
-        const d = await res.json();
-        if (d && d.soal) {
-          HOME_SOAL_COUNTS[k] = HOME_SOAL_COUNTS[k] || {};
-          HOME_SOAL_COUNTS[k][pkg] = d.soal.length;
-        }
-      } catch (e) { /* paket tidak tersedia: biarkan null */ }
-    }
-  }));
-  return _homePrefetching;
+  return Promise.resolve();
 }
+
+// Pengelolaan Mapel Pilihan User (localStorage: tka_user_subjects)
+function getUserSelectedSubjects() {
+  try {
+    const raw = localStorage.getItem('tka_user_subjects');
+    if (raw) {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr) && arr.length > 0) {
+        const valid = arr.filter(k => SUBJECT_CATALOG[k]);
+        if (valid.length > 0) return valid;
+      }
+    }
+  } catch (e) {}
+  // Default mapel pilihan user: 4 mapel (Wajib + 1 Peminatan Saintek)
+  return ['matematika', 'bahasa_indonesia', 'bahasa_inggris', 'fisika'];
+}
+
+function setUserSelectedSubjects(keys) {
+  try {
+    localStorage.setItem('tka_user_subjects', JSON.stringify(keys));
+  } catch (e) {}
+  renderHome();
+}
+window.getUserSelectedSubjects = getUserSelectedSubjects;
+window.setUserSelectedSubjects = setUserSelectedSubjects;
+
+// Modal Atur Mapel Pilihan
+function openSubjectPickerModal() {
+  let backdrop = document.getElementById('subjectModalBackdrop');
+  if (!backdrop) {
+    createSubjectPickerModalDOM();
+    backdrop = document.getElementById('subjectModalBackdrop');
+  }
+  const list = document.getElementById('subjectPickerList');
+  if (!backdrop || !list) return;
+  const current = getUserSelectedSubjects();
+  list.innerHTML = Object.keys(SUBJECT_UI_META).map(k => {
+    const meta = SUBJECT_UI_META[k];
+    const checked = current.includes(k) ? 'checked' : '';
+    const selClass = current.includes(k) ? 'selected' : '';
+    return `
+      <label class="stitch-modal-item ${selClass}" data-key="${k}">
+        <div class="stitch-modal-item-left">
+          <span class="stitch-iconchip stitch-iconchip--${meta.theme}"><span class="ms-icon">${meta.icon}</span></span>
+          <div>
+            <div class="stitch-modal-item-name">${meta.shortName}</div>
+            <div class="stitch-modal-item-cat">${meta.category}</div>
+          </div>
+        </div>
+        <input type="checkbox" name="subject_pick" value="${k}" ${checked}>
+      </label>
+    `;
+  }).join('');
+  list.querySelectorAll('.stitch-modal-item').forEach(item => {
+    const chk = item.querySelector('input');
+    chk.addEventListener('change', () => {
+      item.classList.toggle('selected', chk.checked);
+    });
+  });
+  backdrop.style.display = 'flex';
+}
+
+function closeSubjectPickerModal() {
+  const backdrop = document.getElementById('subjectModalBackdrop');
+  if (backdrop) backdrop.style.display = 'none';
+}
+
+function saveSubjectPickerModal() {
+  const list = document.getElementById('subjectPickerList');
+  if (!list) return;
+  const checked = Array.from(list.querySelectorAll('input[name="subject_pick"]:checked')).map(el => el.value);
+  if (checked.length === 0) {
+    alert('Pilih minimal 1 mata pelajaran.');
+    return;
+  }
+  setUserSelectedSubjects(checked);
+  closeSubjectPickerModal();
+}
+
+function createSubjectPickerModalDOM() {
+  const div = document.createElement('div');
+  div.id = 'subjectModalBackdrop';
+  div.className = 'stitch-modal-backdrop';
+  div.style.display = 'none';
+  div.innerHTML = `
+    <div class="stitch-modal-panel">
+      <div class="stitch-modal-handle"></div>
+      <div class="stitch-modal-header">
+        <div>
+          <h3 class="stitch-modal-title">Pilih Mapel Dashboard</h3>
+          <p class="stitch-modal-desc">Pilih mapel yang ingin dipelajari dan ditampilkan di beranda.</p>
+        </div>
+        <button type="button" class="stitch-modal-close" onclick="closeSubjectPickerModal()" aria-label="Tutup"><span class="ms-icon">close</span></button>
+      </div>
+      <div class="stitch-modal-body" id="subjectPickerList"></div>
+      <div class="stitch-modal-footer">
+        <button type="button" class="stitch-btn-modal-cancel" onclick="closeSubjectPickerModal()">Batal</button>
+        <button type="button" class="stitch-btn-modal-apply" onclick="saveSubjectPickerModal()">Terapkan Pilihan</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(div);
+  div.addEventListener('click', (e) => {
+    if (e.target === div) closeSubjectPickerModal();
+  });
+}
+window.openSubjectPickerModal = openSubjectPickerModal;
+window.closeSubjectPickerModal = closeSubjectPickerModal;
+window.saveSubjectPickerModal = saveSubjectPickerModal;
 
 function renderHome() {
   const main = document.getElementById('hoMain');
   if (!main) return;
-  main.innerHTML = HOME_SECTIONS.map(sec => {
-    const cards = sec.keys.filter(k => SUBJECT_CATALOG[k]).map(k => {
-      const meta = SUBJECT_CATALOG[k];
-      const wm = HOME_WATERMARKS[k] || HOME_WATERMARKS._default;
-      return [1, 2].map(pkg => {
-        const n = homePkgCount(k, pkg);
-        const total = n || null;
-        const pct = homePkgProgress(k, pkg, total);
-        const isNew = pct === 0; // belum pernah dikerjakan
-        return `
-        <button class="stitch-card" type="button" data-subject="${k}" data-pkg="${pkg}"
-          aria-label="${meta.name} Paket ${pkg}">
-          ${isNew ? '<span class="stitch-newwrap"><span>Baru</span></span>' : ''}
-          <svg class="stitch-watermark" fill="none" stroke="currentColor" viewBox="0 0 100 100" aria-hidden="true">${wm}</svg>
-          <div>
-            <h3>Paket ${pkg}</h3>
-            <p class="stitch-meta"><span class="ms-icon">schedule</span><span>${total ? total + ' Soal • ' + (HOME_PKG_MINUTES[pkg] || 45) + ' Menit' : 'Paket ' + pkg}</span></p>
-            <span class="stitch-chip">${(meta.name || k).toUpperCase()}</span>
-          </div>
-          <div class="stitch-progress">
-            <div class="stitch-progress-labels"><span>Progres Penyelesaian Soal</span><b class="${pct > 0 ? 'on' : ''}">${pct}%</b></div>
-            <div class="stitch-bar"><span class="${pct > 0 ? 'on' : ''}" style="width:${pct}%"></span></div>
-          </div>
-        </button>`;
-      }).join('');
+  const selectedKeys = getUserSelectedSubjects();
+
+  const sectionsHtml = selectedKeys.map(k => {
+    const meta = SUBJECT_UI_META[k] || {
+      name: (SUBJECT_CATALOG[k] && SUBJECT_CATALOG[k].name) || k,
+      shortName: k,
+      chip: k.toUpperCase(),
+      icon: 'school',
+      theme: 'blue',
+      category: 'Mapel'
+    };
+    const wm = HOME_WATERMARKS[k] || HOME_WATERMARKS._default;
+    const cards = [1, 2].map(pkg => {
+      const n = homePkgCount(k, pkg);
+      const total = n || 20;
+      const pct = homePkgProgress(k, pkg, total);
+      const isNew = pct === 0;
+      return `
+      <button class="stitch-card stitch-theme-${meta.theme}" type="button" data-subject="${k}" data-pkg="${pkg}"
+        aria-label="${meta.shortName} Paket ${pkg}">
+        ${isNew ? '<span class="stitch-newwrap"><span>Baru</span></span>' : ''}
+        <svg class="stitch-watermark" fill="none" stroke="currentColor" viewBox="0 0 100 100" aria-hidden="true">${wm}</svg>
+        <div>
+          <h3>Paket ${pkg}</h3>
+          <p class="stitch-meta"><span class="ms-icon">schedule</span><span>${total} Soal • ${(HOME_PKG_MINUTES[pkg] || 45)} Menit</span></p>
+          <span class="stitch-chip">${meta.chip}</span>
+        </div>
+        <div class="stitch-progress">
+          <div class="stitch-progress-labels"><span>Progres Penyelesaian</span><b class="${pct > 0 ? 'on' : ''}">${pct}%</b></div>
+          <div class="stitch-bar"><span class="${pct > 0 ? 'on' : ''}" style="width:${pct}%"></span></div>
+        </div>
+      </button>`;
     }).join('');
+
     return `
-      <section class="stitch-section">
+      <section class="stitch-section" data-subject="${k}">
         <div class="stitch-sec-head">
           <div class="stitch-sec-title">
-            <span class="stitch-iconchip ${sec.iconClass || ''}"><span class="ms-icon">${sec.icon}</span></span>
-            <h2>${sec.label}</h2>
+            <span class="stitch-iconchip stitch-iconchip--${meta.theme}"><span class="ms-icon">${meta.icon}</span></span>
+            <div>
+              <h2>${meta.shortName}</h2>
+              <span class="stitch-sec-sub">${meta.category}</span>
+            </div>
           </div>
-          <button class="stitch-seeall" type="button" data-goto="${sec.keys[0]}">Lihat Semua<span class="ms-icon">chevron_right</span></button>
         </div>
         <div class="stitch-cards">${cards}</div>
       </section>`;
   }).join('');
+
+  main.innerHTML = `
+    <div class="stitch-mapel-header">
+      <div class="stitch-mapel-header-left">
+        <span class="stitch-mapel-header-title">Mapel Pilihanmu</span>
+        <span class="stitch-mapel-header-count">(${selectedKeys.length} Mapel)</span>
+      </div>
+      <button type="button" class="stitch-btn-atur-mapel" id="btnAturMapel" onclick="openSubjectPickerModal()" aria-label="Atur Mapel Pilihan">
+        <span class="ms-icon ms-16">tune</span><span>Atur Mapel</span>
+      </button>
+    </div>
+    ${sectionsHtml}
+  `;
 
   // klik card paket -> masuk soal via fungsi yang sudah ada
   main.querySelectorAll('.stitch-card').forEach(card => {
@@ -506,18 +721,11 @@ function renderHome() {
       await switchPackage(pkg);
     });
   });
-  // "Lihat Semua" -> langsung mapel pertama di section itu
-  main.querySelectorAll('.stitch-seeall').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const k = btn.dataset.goto;
-      if (!k) return;
-      homeClose();
-      if (state.currentSubject !== k) switchSubject(k);
-    });
-  });
+
   // CTA hero -> lanjut mapel aktif
   const heroCta = document.getElementById('heroCta');
   if (heroCta) heroCta.onclick = () => { homeClose(); window.scrollTo(0, 0); };
+
   // nav bawah mobile: switcher panel Beranda / Modul / Progres / Akun
   document.querySelectorAll('.stitch-bottomnav a').forEach(a => {
     a.onclick = (e) => {

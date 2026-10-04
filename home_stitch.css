@@ -170,28 +170,57 @@
 
 /* ---------- Section mapel ---------- */
 .stitch-sections { display: flex; flex-direction: column; }
-.stitch-section { margin-bottom: 28px; }
+.stitch-section { margin-bottom: 24px; }
 .stitch-sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; padding: 0 2px; }
-.stitch-sec-title { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.stitch-sec-title { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.stitch-sec-title > div { display: flex; flex-direction: column; min-width: 0; }
+.stitch-sec-title h2 {
+  font-size: 17px; font-weight: 700; letter-spacing: -0.01em;
+  color: #0F172A; margin: 0; line-height: 1.25;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
+}
+.stitch-sec-sub { font-size: 11px; font-weight: 600; color: #64748B; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 1px; }
+
+/* Icon chip in section head & modal */
 .stitch-iconchip {
-  width: 28px; height: 28px; border-radius: 9px; flex-shrink: 0;
-  display: grid; place-items: center; background: #ffdcc3; color: #643300;
+  width: 32px; height: 32px; border-radius: 10px; flex-shrink: 0;
+  display: grid; place-items: center; background: #F1F5F9; color: #334155;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 .stitch-iconchip .ms-icon { font-size: 18px; }
-.stitch-iconchip--saintek { background: #dae5df; color: #1b633e; }
-.stitch-iconchip--soshum { background: rgba(255,220,195,.3); color: #643300; }
-.stitch-iconchip--bahasa { background: #EBF6F0; color: #004a2a; }
-.stitch-sec-title h2 {
-  font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
-  color: #171c1f; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+.stitch-iconchip--blue { background: #EFF6FF; color: #1D4ED8; }
+.stitch-iconchip--emerald { background: #ECFDF5; color: #047857; }
+.stitch-iconchip--indigo { background: #EEF2FF; color: #4338CA; }
+.stitch-iconchip--amber { background: #FFFBEB; color: #B45309; }
+.stitch-iconchip--teal { background: #F0FDFA; color: #0F766E; }
+.stitch-iconchip--green { background: #F0FDF4; color: #15803D; }
+.stitch-iconchip--orange { background: #FFF7ED; color: #C2410C; }
+.stitch-iconchip--cyan { background: #ECFEFF; color: #0E7490; }
+.stitch-iconchip--rose { background: #FFF1F2; color: #BE123C; }
+.stitch-iconchip--purple { background: #FAF5FF; color: #7E22CE; }
+.stitch-iconchip--red { background: #FEF2F2; color: #B91C1C; }
+.stitch-iconchip--lime { background: #F7FEE7; color: #4D7C0F; }
+.stitch-iconchip--violet { background: #F5F3FF; color: #6D28D9; }
+.stitch-iconchip--pink { background: #FDF2F8; color: #BE185D; }
+.stitch-iconchip--sky { background: #F0F9FF; color: #0369A1; }
+.stitch-iconchip--yellow { background: #FEFCE8; color: #854D0E; }
+
+/* Header of Mapel List with Atur Mapel button */
+.stitch-mapel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 4px 2px 14px; margin-bottom: 12px; border-bottom: 1px solid #E2E8F0;
 }
-.stitch-seeall {
-  display: inline-flex; align-items: center; gap: 2px; flex-shrink: 0;
-  font-size: 12px; font-weight: 700; color: #004a2a; cursor: pointer;
-  background: transparent; border: none; padding: 6px 4px;
+.stitch-mapel-header-title { font-size: 13px; font-weight: 800; color: #0F172A; text-transform: uppercase; letter-spacing: 0.05em; }
+.stitch-mapel-header-count { font-size: 12px; color: #64748B; font-weight: 600; margin-left: 4px; }
+.stitch-btn-atur-mapel {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 5px 12px; border-radius: 999px;
+  background: #EBF6F0; color: #004a2a; border: 1px solid rgba(0,74,42,.2);
+  font-size: 12px; font-weight: 700; cursor: pointer;
+  transition: all .15s ease;
 }
-.stitch-seeall .ms-icon { font-size: 15px; transition: transform .15s; }
-.stitch-seeall:hover .ms-icon { transform: translateX(2px); }
+.stitch-btn-atur-mapel:hover { background: #d3ebd9; }
+.stitch-btn-atur-mapel:active { transform: scale(0.96); }
 
 /* ---------- Card paket (carousel horizontal) ---------- */
 .stitch-cards {
@@ -202,50 +231,189 @@
 .stitch-cards::-webkit-scrollbar { display: none; }
 .stitch-card {
   position: relative; overflow: hidden; flex-shrink: 0; width: 270px;
-  background: rgba(255,220,195,.2); border: 1px solid rgba(255,220,195,.4);
-  border-radius: 12px; padding: 16px;
-  box-shadow: 0 1px 3px rgba(9,9,11,.05);
+  background: #FFFFFF; border: 1px solid #E2E8F0;
+  border-radius: 14px; padding: 16px;
+  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.06);
   display: flex; flex-direction: column; justify-content: space-between;
   cursor: pointer; text-align: left; font-family: inherit;
   scroll-snap-align: start;
-  transition: box-shadow .15s ease, transform .12s ease;
-  min-height: 158px;
+  transition: box-shadow .2s ease, transform .15s ease, border-color .2s ease;
+  min-height: 160px;
 }
-.stitch-card:hover { box-shadow: 0 6px 16px -6px rgba(9,9,11,.15); }
-.stitch-card:active { transform: scale(.98); }
-.stitch-card:focus-visible { outline: 2px solid #1B633E; outline-offset: 2px; }
-.stitch-card h3 { font-size: 18px; font-weight: 700; color: #171c1f; margin: 0 0 2px; }
+.stitch-card:hover {
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.12);
+  border-color: #CBD5E1;
+  transform: translateY(-2px);
+}
+.stitch-card:active { transform: scale(0.98); }
+.stitch-card:focus-visible { outline: 2px solid #004a2a; outline-offset: 2px; }
+
+/* Top accent indicator */
+.stitch-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--card-accent, #004a2a);
+}
+
+.stitch-card h3 {
+  font-size: 17px; font-weight: 700; color: #0F172A; margin: 0 0 3px;
+  letter-spacing: -0.01em;
+}
 .stitch-meta {
   display: flex; align-items: center; gap: 4px;
-  font-size: 13px; color: #56615c; margin: 0 0 12px;
+  font-size: 13px; color: #64748B; margin: 0 0 10px; font-weight: 500;
 }
 .stitch-meta .ms-icon { font-size: 14px; }
+
+/* Chip badges with high contrast */
 .stitch-chip {
   display: inline-flex; align-items: center; align-self: flex-start;
-  padding: 2px 10px; border-radius: 999px;
-  background: #ffdcc3; color: #643300;
-  font-size: 12px; font-weight: 600; margin-bottom: 12px;
+  padding: 3px 10px; border-radius: 999px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.03em;
+  margin-bottom: 12px;
+  background: #F1F5F9; color: #334155; border: 1px solid #E2E8F0;
 }
-.stitch-watermark { position: absolute; right: 4px; bottom: 14px; width: 96px; height: 96px; color: rgba(100,51,0,.1); pointer-events: none; }
-/* Ribbon "Baru" */
-.stitch-newwrap { position: absolute; top: 0; right: 0; width: 80px; height: 80px; overflow: hidden; pointer-events: none; }
+
+/* Theme variations for chips and accents */
+.stitch-theme-blue { --card-accent: #2563EB; }
+.stitch-theme-blue .stitch-chip { background: #EFF6FF; color: #1D4ED8; border-color: #BFDBFE; }
+
+.stitch-theme-emerald { --card-accent: #059669; }
+.stitch-theme-emerald .stitch-chip { background: #ECFDF5; color: #047857; border-color: #A7F3D0; }
+
+.stitch-theme-indigo { --card-accent: #4F46E5; }
+.stitch-theme-indigo .stitch-chip { background: #EEF2FF; color: #4338CA; border-color: #C7D2FE; }
+
+.stitch-theme-amber { --card-accent: #D97706; }
+.stitch-theme-amber .stitch-chip { background: #FFFBEB; color: #B45309; border-color: #FDE68A; }
+
+.stitch-theme-teal { --card-accent: #0D9488; }
+.stitch-theme-teal .stitch-chip { background: #F0FDFA; color: #0F766E; border-color: #99F6E4; }
+
+.stitch-theme-green { --card-accent: #16A34A; }
+.stitch-theme-green .stitch-chip { background: #F0FDF4; color: #15803D; border-color: #BBF7D0; }
+
+.stitch-theme-orange { --card-accent: #EA580C; }
+.stitch-theme-orange .stitch-chip { background: #FFF7ED; color: #C2410C; border-color: #FED7AA; }
+
+.stitch-theme-cyan { --card-accent: #0891B2; }
+.stitch-theme-cyan .stitch-chip { background: #ECFEFF; color: #0E7490; border-color: #A5F3FC; }
+
+.stitch-theme-rose { --card-accent: #E11D48; }
+.stitch-theme-rose .stitch-chip { background: #FFF1F2; color: #BE123C; border-color: #FECDD3; }
+
+.stitch-theme-purple { --card-accent: #9333EA; }
+.stitch-theme-purple .stitch-chip { background: #FAF5FF; color: #7E22CE; border-color: #E9D5FF; }
+
+.stitch-theme-red { --card-accent: #DC2626; }
+.stitch-theme-red .stitch-chip { background: #FEF2F2; color: #B91C1C; border-color: #FECACA; }
+
+.stitch-theme-lime { --card-accent: #65A30D; }
+.stitch-theme-lime .stitch-chip { background: #F7FEE7; color: #4D7C0F; border-color: #D9F99D; }
+
+.stitch-theme-violet { --card-accent: #7C3AED; }
+.stitch-theme-violet .stitch-chip { background: #F5F3FF; color: #6D28D9; border-color: #DDD6FE; }
+
+.stitch-theme-pink { --card-accent: #DB2777; }
+.stitch-theme-pink .stitch-chip { background: #FDF2F8; color: #BE185D; border-color: #FBCFE8; }
+
+.stitch-theme-sky { --card-accent: #0284C7; }
+.stitch-theme-sky .stitch-chip { background: #F0F9FF; color: #0369A1; border-color: #BAE6FD; }
+
+.stitch-theme-yellow { --card-accent: #CA8A04; }
+.stitch-theme-yellow .stitch-chip { background: #FEFCE8; color: #854D0E; border-color: #FEF08A; }
+
+/* Watermark SVG styling */
+.stitch-watermark {
+  position: absolute; right: 4px; bottom: 12px; width: 92px; height: 92px;
+  color: rgba(100, 116, 139, 0.08); pointer-events: none;
+}
+
+/* Ribbon "Baru" modern emerald */
+.stitch-newwrap { position: absolute; top: 0; right: 0; width: 72px; height: 72px; overflow: hidden; pointer-events: none; }
 .stitch-newwrap > span {
-  position: absolute; top: 8px; right: -24px; width: 96px;
-  background: #643300; color: #fff; text-align: center;
+  position: absolute; top: 6px; right: -22px; width: 88px;
+  background: linear-gradient(135deg, #004a2a, #1b633e); color: #fff; text-align: center;
   font-size: 10px; font-weight: 700; padding: 2px 0;
-  transform: rotate(45deg); box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  transform: rotate(45deg); box-shadow: 0 1px 3px rgba(0,0,0,.15);
 }
-/* Progress */
-.stitch-progress { width: 100%; margin-top: 4px; position: relative; z-index: 2; }
+
+/* Progress bar inside card */
+.stitch-progress { width: 100%; margin-top: 6px; position: relative; z-index: 2; }
 .stitch-progress-labels {
   display: flex; align-items: center; justify-content: space-between;
-  font-size: 11px; font-weight: 600; color: #56615c; margin-bottom: 4px;
+  font-size: 11px; font-weight: 600; color: #64748B; margin-bottom: 5px;
 }
-.stitch-progress-labels b { color: #56615c; }
-.stitch-progress-labels b.on { color: #643300; }
-.stitch-bar { width: 100%; height: 8px; border-radius: 999px; background: #e4e9ed; overflow: hidden; }
-.stitch-bar > span { display: block; height: 100%; border-radius: 999px; background: #bfc9bf; transition: width .5s ease; }
-.stitch-bar > span.on { background: #864700; }
+.stitch-progress-labels b { color: #94A3B8; font-weight: 600; }
+.stitch-progress-labels b.on { color: var(--card-accent, #004a2a); font-weight: 700; }
+.stitch-bar { width: 100%; height: 6px; border-radius: 999px; background: #F1F5F9; overflow: hidden; }
+.stitch-bar > span { display: block; height: 100%; border-radius: 999px; background: #CBD5E1; transition: width .5s ease; }
+.stitch-bar > span.on { background: var(--card-accent, #004a2a); }
+
+/* Subject Picker Modal */
+.stitch-modal-backdrop {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px);
+  display: flex; align-items: flex-end; justify-content: center;
+}
+@media (min-width: 640px) {
+  .stitch-modal-backdrop { align-items: center; }
+}
+.stitch-modal-panel {
+  width: 100%; max-width: 480px; max-height: 85vh;
+  background: #FFFFFF; border-radius: 24px 24px 0 0;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.2);
+  display: flex; flex-direction: column; overflow: hidden;
+  padding: 16px 20px 24px;
+}
+@media (min-width: 640px) {
+  .stitch-modal-panel { border-radius: 20px; }
+}
+.stitch-modal-handle {
+  width: 40px; height: 4px; border-radius: 999px; background: #CBD5E1;
+  margin: 0 auto 12px;
+}
+.stitch-modal-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding-bottom: 12px; border-bottom: 1px solid #E2E8F0;
+}
+.stitch-modal-title { font-size: 16px; font-weight: 700; color: #0F172A; margin: 0 0 2px; }
+.stitch-modal-desc { font-size: 12px; color: #64748B; margin: 0; }
+.stitch-modal-close {
+  background: transparent; border: none; color: #64748B; cursor: pointer; padding: 4px;
+  display: flex; align-items: center; justify-content: center; border-radius: 999px;
+}
+.stitch-modal-close:hover { background: #F1F5F9; color: #0F172A; }
+.stitch-modal-body {
+  flex: 1; overflow-y: auto; padding: 12px 0; display: flex; flex-direction: column; gap: 8px;
+}
+.stitch-modal-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; border-radius: 12px; border: 1px solid #E2E8F0;
+  background: #FFFFFF; cursor: pointer; transition: all .15s ease;
+}
+.stitch-modal-item:hover { border-color: #004a2a; background: #F8FAFC; }
+.stitch-modal-item.selected {
+  border-color: #004a2a; background: #EBF6F0;
+}
+.stitch-modal-item-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.stitch-modal-item-name { font-size: 13px; font-weight: 600; color: #0F172A; }
+.stitch-modal-item-cat { font-size: 11px; color: #64748B; }
+.stitch-modal-item input[type="checkbox"] {
+  width: 18px; height: 18px; accent-color: #004a2a; cursor: pointer;
+}
+.stitch-modal-footer {
+  display: flex; gap: 10px; padding-top: 14px; border-top: 1px solid #E2E8F0;
+}
+.stitch-btn-modal-cancel {
+  flex: 1; padding: 10px; border-radius: 12px; border: 1px solid #CBD5E1;
+  background: #FFFFFF; color: #475569; font-weight: 600; font-size: 13px; cursor: pointer;
+}
+.stitch-btn-modal-apply {
+  flex: 2; padding: 10px; border-radius: 12px; border: none;
+  background: #004a2a; color: #FFFFFF; font-weight: 700; font-size: 13px; cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 74, 42, 0.25);
+}
+.stitch-btn-modal-apply:hover { background: #00361f; }
 
 /* ---------- Bottom nav ---------- */
 .stitch-bottomnav {
