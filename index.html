@@ -22,22 +22,138 @@
   <!-- Fase 1: light-only. Dark mode ditunda (gambar soal berlatar putih). -->
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css?v=47">
+  <!-- Stitch home: font & ikon (scoped di .home-overlay) -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="home_stitch.css?v=2">
 </head>
 <body>
 
-  <!-- Sticky Modern App Header -->
+  <!-- ============================================================
+       HOME OVERLAY — dashboard pilih mapel & paket (layar pertama).
+       Muncul sebelum soal; klik card Paket -> masuk soal.
+       Data mapel di-inject dari app.js (SUBJECT_CATALOG).
+============================================================ -->
+  <div id="homeOverlay" class="home-overlay" role="dialog" aria-label="Beranda TKA Master">
+   <!-- PANEL BERANDA (default) — versi mobile .stitch-* + iframe desktop -->
+   <div id="panelBeranda" class="home-panel panel-active" data-panel="beranda">
+    <header class="stitch-fixed-top">
+      <div class="stitch-header-row">
+        <div class="stitch-brand-wrap">
+          <div class="stitch-brand-logo"><span class="ms-icon">school</span></div>
+          <div class="stitch-brand-text">
+            <span class="stitch-brand-title">TKA Master</span>
+            <span class="stitch-brand-sub">BERANDA</span>
+          </div>
+        </div>
+        <div class="stitch-header-actions">
+          <button aria-label="Buka Akun" type="button" class="stitch-avatar" onclick="homeShowPanel('akun')" title="Buka Akun"><span class="ms-icon">person</span></button>
+        </div>
+      </div>
+    </header>
+    <main class="stitch-main">
+      <!-- HERO CAROUSEL: 3 slide, scroll-snap (slide 1 CTA · slide 2 progres real · slide 3 info beta) -->
+      <div class="hero-carousel" id="heroCarousel">
+      <div class="stitch-hero">
+        <div class="stitch-hero-bubble1"></div>
+        <div class="stitch-hero-bubble2"></div>
+        <div class="stitch-hero-subbar">
+          <div class="stitch-hero-subbar-left"><span class="ms-icon stitch-ms-fixed">school</span><span class="stitch-dotrow"><i class="d1"></i><i class="d2"></i><i class="d3"></i><i class="d4"></i></span></div>
+          <div class="stitch-hero-active"><i></i><span>Gratis selama beta</span></div>
+        </div>
+        <div class="stitch-hero-grid">
+          <div class="stitch-hero-copy">
+            <h1>Latihan TKA Terarah &amp; Teruji</h1>
+            <p>Simulasi TKA Pusmendik &amp; AI Tutor diagnostik cepat.</p>
+            <div><button type="button" class="stitch-cta" id="heroCta"><span>Mulai Sekarang</span><span class="ms-icon ms-16">arrow_forward</span></button></div>
+          </div>
+          <div class="stitch-hero-art">
+            <div class="stitch-float">
+              <div class="stitch-glow"></div>
+              <div class="stitch-paper">
+                <div class="stitch-paper-top"><span class="stitch-chk"><span class="ms-icon ms-12">check</span></span><span class="stitch-lines"><i></i><i class="w34"></i></span></div>
+                <div class="stitch-paper-body"><i></i><i class="w56"></i><span class="stitch-paper-row"><span class="stitch-box"><span class="ms-icon ms-8">check</span></span><i class="stitch-minibar"></i></span></div>
+                <div class="stitch-score"><b>46 Soal</b><span>Matematika</span></div>
+              </div>
+              <svg class="stitch-cap" viewBox="0 0 48 48" fill="none"><polygon fill="#171C1F" points="24,6 44,16 24,26 4,16"></polygon><polygon fill="#2C3134" points="24,8 41,16 24,24 7,16"></polygon><path d="M12 21V31C12 34 17 38 24 38C31 38 36 34 36 31V21" fill="#171C1F"></path><path d="M40 18V32" stroke="#FFB77D" stroke-linecap="round" stroke-width="2"></path><circle cx="40" cy="33" fill="#FFB77D" r="2.5"></circle></svg>
+              <svg class="stitch-pencil" viewBox="0 0 24 48" fill="none"><path d="M6 10L18 10L18 36L12 44L6 36Z" fill="#FEF3C7"></path><path d="M6 10L18 10L18 14L6 14Z" fill="#FFB77D"></path><path d="M10 41L12 44L14 41Z" fill="#171C1F"></path><path d="M6 4L18 4L18 10L6 10Z" fill="#BA1A1A"></path></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Ringkasan progres real dari localStorage -->
+      <div class="stitch-hero hero-slide-dark" id="heroSlideStats">
+        <div class="hero-slide-inner">
+          <div class="stitch-hero-subbar">
+            <div class="stitch-hero-subbar-left"><span class="ms-icon stitch-ms-fixed">fact_check</span><span class="hero-slide-tag">LATIHANMU</span></div>
+          </div>
+          <div class="hero-stats-grid">
+            <div class="hero-stat"><b id="hsDone">0</b><span>Dikerjakan</span></div>
+            <div class="hero-stat"><b id="hsBenar">0</b><span>Benar</span></div>
+            <div class="hero-stat"><b id="hsAcc">—</b><span>Ketepatan</span></div>
+          </div>
+          <p class="hero-stats-note">Progres nyata tersimpan otomatis di perangkat ini.</p>
+          <button type="button" class="stitch-cta" onclick="homeClose()"><span>Lanjutkan Latihan</span><span class="ms-icon ms-16">arrow_forward</span></button>
+        </div>
+      </div>
+
+      <!-- Slide 3: Info AI Tutor & beta -->
+      <div class="stitch-hero hero-slide-dark" id="heroSlideInfo">
+        <div class="hero-slide-inner">
+          <div class="stitch-hero-subbar">
+            <div class="stitch-hero-subbar-left"><span class="ms-icon stitch-ms-fixed">smart_toy</span><span class="hero-slide-tag">AI TUTOR</span></div>
+            <div class="stitch-hero-active"><i></i><span>Masa Beta</span></div>
+          </div>
+          <h2 class="hero-info-title">Bingung di tengah soal?</h2>
+          <p class="hero-info-text">Tanya AI Tutor langsung dari pembahasan — kuota tamu 5 pertanyaan per hari, reset pukul 00.00 WIB.</p>
+          <button type="button" class="stitch-cta" onclick="homeShowPanel('akun')"><span>Info Akun &amp; Kuota</span><span class="ms-icon ms-16">arrow_forward</span></button>
+        </div>
+      </div>
+      </div><!-- /heroCarousel -->
+
+      <div class="stitch-dotsrow-center" id="heroDots"><i class="on"></i><i></i><i></i></div>
+      <main id="hoMain" class="stitch-sections"></main>
+    </main>
+    <nav class="stitch-bottomnav" aria-label="Navigasi bawah">
+      <div class="stitch-bottomnav-row">
+        <a href="#" data-nav="beranda" class="on"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">home</span><span>Beranda</span></a>
+        <a href="#" data-nav="modul"><span class="material-symbols-outlined">menu_book</span><span>Modul</span></a>
+        <a href="#" data-nav="progres"><span class="material-symbols-outlined">analytics</span><span>Progres</span></a>
+        <a href="#" data-nav="akun"><span class="material-symbols-outlined">account_circle</span><span>Akun</span></a>
+      </div>
+    </nav>
+      <!-- Desktop (>=900px): dashboard versi Stitch desktop via iframe -->
+    <iframe id="homeDesktopFrame" class="home-desktop-frame" src="/home_desktop.html" title="Beranda TKA Master (Desktop)"></iframe>
+   </div><!-- /#panelBeranda -->
+
+   <!-- PANEL MODUL — file mandiri (Tailwind sendiri), wajib iframe biar CSS-nya tidak konflik -->
+   <div id="panelModul" class="home-panel" data-panel="modul">
+     <iframe id="panelModulFrame" class="home-panel-frame" src="/workspace_modul/modul.html" title="Modul Belajar TKA Master"></iframe>
+   </div>
+
+   <!-- PANEL PROGRES — file mandiri, wajib iframe -->
+   <div id="panelProgres" class="home-panel" data-panel="progres">
+     <iframe id="panelProgresFrame" class="home-panel-frame" src="/workspace_progres/progres.html" title="Progres &amp; Analitik TKA Master"></iframe>
+   </div>
+
+   <!-- PANEL AKUN — file mandiri, wajib iframe -->
+   <div id="panelAkun" class="home-panel" data-panel="akun">
+     <iframe id="panelAkunFrame" class="home-panel-frame" src="/workspace_akun/akun.html" title="Akun &amp; Preferensi TKA Master"></iframe>
+   </div>
+  </div>
+
+<!-- Sticky Modern App Header -->
   <header class="app-header">
     <div class="header-container">
-      <!-- Mobile: menu mapel & paket -->
-      <button class="m-icon-btn" id="btnMobileMenu" aria-label="Pilih mata pelajaran & paket" title="Mata pelajaran & paket">
-        <i class="fa-solid fa-bars"></i>
+      <!-- Tombol Home: kembali ke dashboard (desktop & mobile) -->
+      <button class="btn-home-top" id="btnHome" onclick="askExitToBeranda()" aria-label="Kembali ke beranda" title="Kembali ke beranda">
+        <i class="fa-solid fa-house"></i>
+        <span class="btn-home-label">Beranda</span>
       </button>
 
       <!-- Left: Logo & Brand -->
       <div class="brand">
-        <div class="brand-logo">
-          <i class="fa-solid fa-bullseye"></i>
-        </div>
         <div class="brand-text">
           <span class="brand-title" id="brandTitle">TKA Master</span>
           <span class="brand-subtitle" id="brandSubtitle">Simulasi Ujian & AI Tutor</span>
@@ -147,6 +263,20 @@
     </div>
   </header>
 
+
+  <!-- FASE 3: Dialog konfirmasi keluar ke beranda -->
+  <div class="modal-overlay exit-confirm-overlay" id="exitConfirmModal" onclick="closeExitConfirm(event)">
+    <div class="exit-confirm-card" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Konfirmasi kembali ke beranda">
+      <div class="exit-confirm-icon"><i class="fa-solid fa-house"></i></div>
+      <h3 class="exit-confirm-title">Yakin ingin keluar ke beranda?</h3>
+      <p class="exit-confirm-text">Jawabanmu akan disimpan otomatis di perangkat ini dan bisa dilanjutkan kapan saja.</p>
+      <div class="exit-confirm-actions">
+        <button type="button" class="exit-btn-ya" onclick="doExitToBeranda()"><i class="fa-solid fa-check"></i> Ya, ke beranda</button>
+        <button type="button" class="exit-btn-tidak" onclick="closeExitConfirm(true)"><i class="fa-solid fa-xmark"></i> Tidak</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Main Content Layout (2-Column Dashboard Grid) -->
   <main class="main-wrapper">
     <div class="cbt-dashboard-grid">
@@ -169,6 +299,17 @@
           </div>
         </div>
 
+        <!-- Work Tabs: Lembar Soal vs Pembahasan & AI (Arah 2) -->
+        <div class="work-tabs" id="workTabs" role="tablist" aria-label="Konteks latihan">
+          <button class="work-tab active" id="wtab-soal" type="button" role="tab" aria-selected="true" onclick="switchWorkTab('soal')">
+            <i class="fa-regular fa-file-lines"></i><span>Lembar Soal</span>
+          </button>
+          <button class="work-tab" id="wtab-pemb" type="button" role="tab" aria-selected="false" onclick="switchWorkTab('pembahasan')">
+            <i class="fa-solid fa-book-open"></i><span>Pembahasan &amp; AI</span>
+          </button>
+        </div>
+
+        <div id="workPaneSoal" class="work-pane active">
         <!-- Main CBT Question Card -->
         <article class="cbt-question-card">
           <!-- Card Header Bar -->
@@ -225,18 +366,30 @@
                 <span>Selanjutnya</span>
                 <i class="fa-solid fa-arrow-right"></i>
               </button>
-              <button class="btn-action btn-bar-tutor" id="btnBarTutor" onclick="openTutorSheet()" title="Tanya AI Tutor" aria-label="Tanya AI Tutor">
-                <i class="fa-regular fa-comments"></i>
-              </button>
             </div>
           </div>
 
           <!-- Inline Feedback Alert -->
           <div class="feedback-banner" id="feedbackBanner" style="display: none;"></div>
         </article>
+      </div><!-- /workPaneSoal -->
 
-        <!-- Solution Accordion Trigger Button -->
-        <button class="btn-accordion-solution" id="btnToggleExplanation" onclick="toggleExplanation()">
+      <div id="workPanePembahasan" class="work-pane" style="display: none;">
+        <div class="pemb-subbar" id="pembSubbar" role="tablist" aria-label="Sub-konteks pembahasan">
+          <button class="pemb-sub active" id="psub-materi" type="button" onclick="switchPembSub('materi')">
+            <i class="fa-solid fa-book-open"></i><span>Pembahasan Pilar</span>
+          </button>
+          <button class="pemb-sub" id="psub-ai" type="button" onclick="switchPembSub('ai')">
+            <i class="fa-solid fa-robot"></i><span>Tanya AI</span>
+          </button>
+        </div>
+
+        <!-- Ringkasan hasil cek jawaban (duplikat banner agar terlihat di tab ini) -->
+        <div class="feedback-banner pemb-strip" id="pembResultStrip" style="display: none;"></div>
+
+        <div id="pembSubMateri" class="pemb-subpane">
+        <!-- Solution Accordion Trigger Button (legacy — disembunyikan; pembahasan selalu tampil di tab ini) -->
+        <button class="btn-accordion-solution" id="btnToggleExplanation" onclick="toggleExplanation()" hidden>
           <span class="btn-solution-label">
             <i class="fa-solid fa-book-open"></i>
             <span id="txtToggleExp">Tata Cara & Langkah Penyelesaian</span>
@@ -372,7 +525,10 @@
         </section>
       </div>
 
-      <!-- RIGHT COLUMN: Sticky AI Tutor Sidebar -->
+        </div><!-- /pembSubMateri -->
+
+        <div id="pembSubAI" class="pemb-subpane" style="display: none;">
+      <!-- RIGHT COLUMN: AI Tutor (kini full-pane di tab Pembahasan & AI) -->
       <div class="tutor-backdrop" id="tutorBackdrop" onclick="closeTutorSheet()"></div>
       <aside class="cbt-sidebar-col" id="cbtSidebarCol">
         <div class="ai-tutor-card" id="aiTutorCard">
@@ -460,7 +616,22 @@
           </div>
         </div>
       </aside>
+        </div><!-- /pembSubAI -->
+      </div><!-- /workPanePembahasan -->
     </div>
+
+    <!-- Rail pindah konteks cepat (desktop) -->
+    <nav class="work-rail" id="workRail" aria-label="Pindah konteks latihan">
+      <button class="rail-btn active" data-rail="soal" type="button" onclick="switchWorkTab('soal')" title="Lembar Soal">
+        <i class="fa-regular fa-file-lines"></i><span>Soal</span>
+      </button>
+      <button class="rail-btn" data-rail="materi" type="button" onclick="switchWorkTab('pembahasan','materi')" title="Pembahasan Pilar">
+        <i class="fa-solid fa-book-open"></i><span>Pembahasan</span>
+      </button>
+      <button class="rail-btn" data-rail="ai" type="button" onclick="switchWorkTab('pembahasan','ai')" title="Tanya AI Tutor">
+        <i class="fa-solid fa-robot"></i><span>Tanya AI</span>
+      </button>
+    </nav>
   </main>
 
   <!-- Modal Daftar Soal (40-Grid Navigator) -->

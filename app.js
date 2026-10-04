@@ -357,6 +357,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const paramSub = urlParams.get('subject');
   const paramPkg = parseInt(urlParams.get('paket') || '1', 10);
+  // Home overlay tampil pertama kecuali user langsung menuju soal tertentu (#soal-N)
+  window.__homeFirst = !window.location.hash.startsWith('#soal-');
 
   await syncDynamicCatalog();
 
@@ -372,7 +374,437 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateSubjectUI();
   renderQuestion();
   renderGridModal();
+
+  // Layar pertama: Home dashboard (kecuali langsung diarahkan ke soal via #soal-N)
+  if (window.__homeFirst) homeOpen();
 });
+const HOME_ICONS = {
+  matematika: 'fa-square-root-variable', matematika_lanjut: 'fa-square-root-variable',
+  fisika: 'fa-atom', kimia: 'fa-flask', biologi: 'fa-dna',
+  ekonomi: 'fa-chart-line', geografi: 'fa-earth-asia', sosiologi: 'fa-users',
+  sejarah: 'fa-landmark', antropologi: 'fa-people-group', kewirausahaan: 'fa-store',
+  ppkn: 'fa-scale-balanced', bahasa_indonesia: 'fa-book-open', bahasa_indonesia_lanjut: 'fa-book-open',
+  bahasa_inggris: 'fa-language', bahasa_inggris_lanjut: 'fa-language',
+  bahasa_arab: 'fa-language', bahasa_jepang: 'fa-language', bahasa_jerman: 'fa-language',
+  bahasa_prancis: 'fa-language', bahasa_mandarin: 'fa-language', bahasa_korea: 'fa-language',
+};
+const HOME_SECTIONS = [
+  { keys: ['matematika'], label: 'Matematika (Wajib)', icon: 'calculate', iconClass: '' },
+  { keys: ['fisika'], label: 'Fisika (Peminatan)', icon: 'bolt', iconClass: 'stitch-iconchip--saintek' },
+  { keys: ['kimia'], label: 'Kimia (Peminatan)', icon: 'science', iconClass: 'stitch-iconchip--saintek' },
+  { keys: ['biologi'], label: 'Biologi (Peminatan)', icon: 'psychology', iconClass: 'stitch-iconchip--saintek' },
+  { keys: ['ekonomi', 'geografi', 'sosiologi', 'sejarah', 'antropologi', 'kewirausahaan'], label: 'Soshum (Peminatan)', icon: 'query_stats', iconClass: 'stitch-iconchip--soshum' },
+  { keys: ['bahasa_indonesia', 'bahasa_inggris'], label: 'Bahasa Wajib', icon: 'menu_book', iconClass: 'stitch-iconchip--bahasa' },
+  { keys: ['matematika_lanjut', 'bahasa_indonesia_lanjut', 'bahasa_inggris_lanjut'], label: 'Tingkat Lanjut', icon: 'trending_up', iconClass: 'stitch-iconchip--bahasa' },
+  { keys: ['ppkn', 'bahasa_arab', 'bahasa_jepang', 'bahasa_jerman', 'bahasa_prancis', 'bahasa_mandarin', 'bahasa_korea'], label: 'Bahasa Asing & Lintas Minat', icon: 'translate', iconClass: 'stitch-iconchip--bahasa' },
+];
+const HOME_WATERMARKS = {
+  matematika: '<path d="M25 25 L75 25 L45 50 L75 75 L25 75" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/><circle cx="70" cy="50" fill="none" r="8" stroke="currentColor" stroke-width="2.5"/>',
+  fisika: '<ellipse cx="50" cy="50" rx="38" ry="14" stroke-width="2.5" transform="rotate(30 50 50)"/><ellipse cx="50" cy="50" rx="38" ry="14" stroke-width="2.5" transform="rotate(90 50 50)"/><ellipse cx="50" cy="50" rx="38" ry="14" stroke-width="2.5" transform="rotate(150 50 50)"/><circle cx="50" cy="50" fill="currentColor" r="5"/>',
+  _default: '<path d="M10 80 L50 15 L90 80 Z" fill="none" stroke="currentColor" stroke-width="4"/><circle cx="50" cy="55" fill="none" r="16" stroke="currentColor" stroke-width="3"/><path d="M25 80 L75 80" stroke="currentColor" stroke-dasharray="4,4" stroke-width="3"/>',
+};
+const HOME_PKG_MINUTES = { 1: 45, 2: 50 }; // estimasi lama pengerjaan per paket
+
+// Progres nyata per paket dari jawaban user yang tersimpan (localStorage)
+function homePkgProgress(subjectKey, pkgNum, total) {
+  if (!total) return 0;
+  try {
+    const raw = localStorage.getItem('tka_progress');
+    const store = raw ? JSON.parse(raw) : {};
+    const answered = (store[subjectKey] && store[subjectKey][pkgNum]) || {};
+    return Math.min(100, Math.round((Object.keys(answered).length / total) * 100));
+  } catch (e) { return 0; }
+}
+const HOME_PKG_DESC = {
+  1: 'Latihan + pembahasan + AI Tutor',
+  2: 'Latihan lanjutan + AI Tutor',
+};
+
+function homePkgCount(subjectKey, pkgNum) {
+  // Jumlah soal real per mapel. PRIORITAS: HOME_SOAL_COUNTS (per-mapel, akurat).
+  // Cache state.pkgData hanya dipakai untuk mapel aktif — cache-nya per-slot
+  // pkg1/pkg2 tanpa penanda mapel, jadi tidak boleh dipakai lintas mapel.
+  const meta = SUBJECT_CATALOG[subjectKey];
+  if (!meta) return null;
+  if (subjectKey === state.currentSubject) {
+    const cached = state.pkgData[pkgKey(pkgNum)];
+    if (cached && cached.soal) return cached.soal.length;
+  }
+  return (HOME_SOAL_COUNTS[subjectKey] || {})[pkgNum] || null;
+}
+
+// Jumlah soal semua mapel (fetch ringan sekali saat Home dibuka)
+const HOME_SOAL_COUNTS = {};
+let _homePrefetching = null;
+function homePrefetchCounts() {
+  if (_homePrefetching) return _homePrefetching;
+  const keys = Object.keys(SUBJECT_CATALOG);
+  _homePrefetching = Promise.all(keys.map(async k => {
+    for (const pkg of [1, 2]) {
+      try {
+        const res = await fetch(SUBJECT_CATALOG[k].json[pkg]);
+        if (!res.ok) continue;
+        const d = await res.json();
+        if (d && d.soal) {
+          HOME_SOAL_COUNTS[k] = HOME_SOAL_COUNTS[k] || {};
+          HOME_SOAL_COUNTS[k][pkg] = d.soal.length;
+        }
+      } catch (e) { /* paket tidak tersedia: biarkan null */ }
+    }
+  }));
+  return _homePrefetching;
+}
+
+function renderHome() {
+  const main = document.getElementById('hoMain');
+  if (!main) return;
+  main.innerHTML = HOME_SECTIONS.map(sec => {
+    const cards = sec.keys.filter(k => SUBJECT_CATALOG[k]).map(k => {
+      const meta = SUBJECT_CATALOG[k];
+      const wm = HOME_WATERMARKS[k] || HOME_WATERMARKS._default;
+      return [1, 2].map(pkg => {
+        const n = homePkgCount(k, pkg);
+        const total = n || null;
+        const pct = homePkgProgress(k, pkg, total);
+        const isNew = pct === 0; // belum pernah dikerjakan
+        return `
+        <button class="stitch-card" type="button" data-subject="${k}" data-pkg="${pkg}"
+          aria-label="${meta.name} Paket ${pkg}">
+          ${isNew ? '<span class="stitch-newwrap"><span>Baru</span></span>' : ''}
+          <svg class="stitch-watermark" fill="none" stroke="currentColor" viewBox="0 0 100 100" aria-hidden="true">${wm}</svg>
+          <div>
+            <h3>Paket ${pkg}</h3>
+            <p class="stitch-meta"><span class="ms-icon">schedule</span><span>${total ? total + ' Soal • ' + (HOME_PKG_MINUTES[pkg] || 45) + ' Menit' : 'Paket ' + pkg}</span></p>
+            <span class="stitch-chip">${(meta.name || k).toUpperCase()}</span>
+          </div>
+          <div class="stitch-progress">
+            <div class="stitch-progress-labels"><span>Progres Penyelesaian Soal</span><b class="${pct > 0 ? 'on' : ''}">${pct}%</b></div>
+            <div class="stitch-bar"><span class="${pct > 0 ? 'on' : ''}" style="width:${pct}%"></span></div>
+          </div>
+        </button>`;
+      }).join('');
+    }).join('');
+    return `
+      <section class="stitch-section">
+        <div class="stitch-sec-head">
+          <div class="stitch-sec-title">
+            <span class="stitch-iconchip ${sec.iconClass || ''}"><span class="ms-icon">${sec.icon}</span></span>
+            <h2>${sec.label}</h2>
+          </div>
+          <button class="stitch-seeall" type="button" data-goto="${sec.keys[0]}">Lihat Semua<span class="ms-icon">chevron_right</span></button>
+        </div>
+        <div class="stitch-cards">${cards}</div>
+      </section>`;
+  }).join('');
+
+  // klik card paket -> masuk soal via fungsi yang sudah ada
+  main.querySelectorAll('.stitch-card').forEach(card => {
+    card.addEventListener('click', async () => {
+      const subject = card.dataset.subject, pkg = parseInt(card.dataset.pkg, 10);
+      homeClose();
+      if (state.currentSubject !== subject) await switchSubject(subject);
+      await switchPackage(pkg);
+    });
+  });
+  // "Lihat Semua" -> langsung mapel pertama di section itu
+  main.querySelectorAll('.stitch-seeall').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const k = btn.dataset.goto;
+      if (!k) return;
+      homeClose();
+      if (state.currentSubject !== k) switchSubject(k);
+    });
+  });
+  // CTA hero -> lanjut mapel aktif
+  const heroCta = document.getElementById('heroCta');
+  if (heroCta) heroCta.onclick = () => { homeClose(); window.scrollTo(0, 0); };
+  // nav bawah mobile: switcher panel Beranda / Modul / Progres / Akun
+  document.querySelectorAll('.stitch-bottomnav a').forEach(a => {
+    a.onclick = (e) => {
+      e.preventDefault();
+      const nav = a.dataset.nav;
+      if (nav === 'modul' || nav === 'progres' || nav === 'akun' || nav === 'beranda') homeShowPanel(nav);
+    };
+  });
+
+  // slide 2 hero: ringkasan progres real
+  try {
+    const s = homeProgressSummary();
+    const hsDone = document.getElementById('hsDone');
+    if (hsDone) hsDone.textContent = s.dikerjakan;
+    const hsBenar = document.getElementById('hsBenar');
+    if (hsBenar) hsBenar.textContent = s.benar;
+    const hsAcc = document.getElementById('hsAcc');
+    if (hsAcc) hsAcc.textContent = s.dikerjakan ? s.tepat + '%' : '—';
+  } catch (e) {}
+  initHeroCarousel();
+}
+
+// Hero carousel beranda: sinkron dot + lompat slide saat dot diklik
+let _heroCarouselBound = false;
+function initHeroCarousel() {
+  const car = document.getElementById('heroCarousel');
+  const dots = document.querySelectorAll('#heroDots i');
+  if (!car || !dots.length) return;
+  const sync = () => {
+    const idx = Math.max(0, Math.min(dots.length - 1, Math.round(car.scrollLeft / car.clientWidth)));
+    dots.forEach((d, i) => d.classList.toggle('on', i === idx));
+  };
+  if (!_heroCarouselBound) {
+    _heroCarouselBound = true;
+    car.addEventListener('scroll', () => requestAnimationFrame(sync), { passive: true });
+    dots.forEach((d, i) => {
+      d.addEventListener('click', () => {
+        car.scrollTo({ left: i * car.clientWidth, behavior: 'smooth' });
+      });
+    });
+  }
+  sync();
+}
+
+function homeOpen() {
+  const ov = document.getElementById('homeOverlay');
+  if (!ov) return;
+  ov.classList.remove('home-hidden');
+  document.body.style.overflow = 'hidden';
+  renderHome();
+  homeShowPanel('beranda'); // default yang tampil: Beranda
+  // prefetch jumlah soal semua mapel; render ulang saat selesai biar angka lengkap
+  homePrefetchCounts().then(() => { if (homeIsOpen()) { renderHome(); homeSendDesktopData(); } });
+  homeSendDesktopData();
+}
+
+// Ringkasan progres nyata dari localStorage tka_progress
+function homeProgressSummary() {
+  try {
+    const raw = localStorage.getItem('tka_progress');
+    const store = raw ? JSON.parse(raw) : {};
+    let dikerjakan = 0, benar = 0;
+    Object.values(store || {}).forEach(pkgs => {
+      Object.values(pkgs || {}).forEach(soal => {
+        Object.values(soal || {}).forEach(ans => {
+          dikerjakan++;
+          if (ans && ans.benar) benar++;
+        });
+      });
+    });
+    return { dikerjakan, benar, tepat: dikerjakan ? Math.round((benar / dikerjakan) * 100) : 0 };
+  } catch (e) { return { dikerjakan: 0, benar: 0, tepat: 0 }; }
+}
+
+// Kirim data nyata ke iframe desktop (home_desktop.html).
+// Panel lain (Modul/Progres) memakai helper yang sama lewat postToFrameReliable().
+function homeSendDesktopData() {
+  const frame = document.getElementById('homeDesktopFrame');
+  postToFrameReliable(frame, () => ({
+    type: 'home-desktop-data',
+    subjects: buildSubjectsPayload(['matematika', 'fisika', 'ekonomi']),
+    progress: homeProgressSummary(),
+  }));
+}
+
+// Urutan 22 mapel sesuai daftar KONTRAK_DATA.md (dipakai panel Modul & Progres)
+const PANEL_MODULE_ORDER = ['matematika', 'bahasa_indonesia', 'bahasa_inggris', 'fisika', 'kimia', 'biologi', 'ekonomi', 'geografi', 'sosiologi', 'sejarah', 'antropologi', 'kewirausahaan', 'matematika_lanjut', 'bahasa_indonesia_lanjut', 'bahasa_inggris_lanjut', 'ppkn', 'bahasa_arab', 'bahasa_jepang', 'bahasa_jerman', 'bahasa_prancis', 'bahasa_mandarin', 'bahasa_korea'];
+
+// Raw store tka_progress (bentuk persis kontrak, bukan ringkasan)
+function homeProgressStore() {
+  try {
+    const r = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+    return (r && typeof r === 'object' && !Array.isArray(r)) ? r : {};
+  } catch (e) { return {}; }
+}
+
+function buildSubjectsPayload(keyOrder) {
+  const subjects = [];
+  keyOrder.forEach(k => {
+    const meta = SUBJECT_CATALOG[k] || {};
+    [1, 2].forEach(pkg => {
+      subjects.push({
+        subject: k, pkg,
+        label: meta.name || k,
+        count: homePkgCount(k, pkg),
+        minutes: pkg === 1 ? 45 : 50,
+        progress: homePkgProgress(k, pkg, homePkgCount(k, pkg) || 0),
+      });
+    });
+  });
+  return subjects;
+}
+
+// Daftar 22 mapel + jumlah soal real (untuk panel Progres)
+function buildSubjectsSummary() {
+  return PANEL_MODULE_ORDER.map(k => {
+    const meta = SUBJECT_CATALOG[k] || {};
+    return { key: k, label: meta.name || k, soal: { 1: homePkgCount(k, 1), 2: homePkgCount(k, 2) } };
+  });
+}
+
+// Kirim payload ke frame dengan retry: iframe bisa saja belum load, dan data
+// bisa berubah di antara retry (prefetch count selesai, jawaban baru).
+function postToFrameReliable(frame, buildPayload) {
+  if (!frame) return;
+  let tries = 0;
+  const send = () => {
+    tries++;
+    try { frame.contentWindow.postMessage(buildPayload(), '*'); } catch (e) {}
+    if (tries < 8) setTimeout(send, 400);
+  };
+  // Siap kirim? (1) pernah ditandai loaded, atau (2) dokumen iframe sudah keluar
+  // dari state "loading". Cek langsung — kalau hanya mengandalkan event 'load',
+  // kirim bisa bolong kalau iframe selesai load sebelum fungsi ini dipanggil.
+  let ready = false;
+  try {
+    ready = frame.dataset.loaded === '1' ||
+      (frame.contentWindow && frame.contentWindow.document && frame.contentWindow.document.readyState !== 'loading');
+  } catch (e) { ready = false; }
+  if (ready) {
+    frame.dataset.loaded = '1';
+    send();
+  } else {
+    frame.addEventListener('load', () => { frame.dataset.loaded = '1'; send(); }, { once: true });
+  }
+}
+
+// Terima event dari iframe panel (klik paket, nav, sinyal ready)
+const panelReadyReplied = {}; // throttle balasan sinyal ready per panel
+window.addEventListener('message', async (e) => {
+  const d = e.data || {};
+  if (d.type === 'open-package') {
+    homeClose();
+    try {
+      if (state.currentSubject !== d.subject) await switchSubject(d.subject);
+      await switchPackage(d.pkg);
+    } catch (err) { console.error(err); }
+  } else if (d.type === 'home-desktop-ready' || d.type === 'modul-ready' || d.type === 'request-data') {
+    // Halaman panel baru saja siap -> kirim data terbaru ke frame yang bersangkutan.
+    // Ini menutup race apapun urutan antara load iframe dan init app.
+    // Throttle 1 detik per frame: jangan ikuti ping-pong kalau halaman spam ready.
+    const pairs = [['homeDesktopFrame', 'beranda'], ['panelModulFrame', 'modul'], ['panelProgresFrame', 'progres'], ['panelAkunFrame', 'akun']];
+    const hit = pairs.find(([id]) => {
+      const el = document.getElementById(id);
+      try { return el && el.contentWindow === e.source; } catch (err) { return false; }
+    });
+    if (hit) {
+      const now = Date.now();
+      if (now - (panelReadyReplied[hit[1]] || 0) > 1000) {
+        panelReadyReplied[hit[1]] = now;
+        sendPanelData(hit[1]);
+      }
+    }
+  } else if (d.type === 'nav' || d.type === 'nav-tab') {
+    // Panel switcher: pesan dari iframe panel mana pun (Beranda/Modul/Progres).
+    // Akun, FAQ, Bank Soal dll. belum punya halaman -> tutup overlay (ke soal).
+    const p = String(d.path || d.tab || '').toLowerCase();
+    if (p.includes('modul')) homeShowPanel('modul');
+    else if (p.includes('progres') || p.includes('analitik')) homeShowPanel('progres');
+    else if (p.includes('akun')) homeShowPanel('akun');
+    else if (p.includes('beranda')) homeShowPanel('beranda');
+    else homeClose();
+  }
+});
+
+// ==================== PANEL SWITCHER (Beranda / Modul / Progres) ====================
+let homeActivePanel = 'beranda';
+
+function homeShowPanel(name) {
+  const ov = document.getElementById('homeOverlay');
+  if (!ov) return;
+  if (name !== 'beranda' && name !== 'modul' && name !== 'progres' && name !== 'akun') return;
+  homeActivePanel = name;
+
+  ov.classList.remove('show-panel-modul', 'show-panel-progres', 'show-panel-akun');
+  if (name !== 'beranda') ov.classList.add('show-panel-' + name);
+
+  ['Beranda', 'Modul', 'Progres', 'Akun'].forEach(p => {
+    const el = document.getElementById('panel' + p);
+    if (el) el.classList.toggle('panel-active', p.toLowerCase() === name);
+  });
+
+  // highlight bottom nav mobile
+  document.querySelectorAll('.stitch-bottomnav a[data-nav]').forEach(a => {
+    a.classList.toggle('on', a.getAttribute('data-nav') === name);
+  });
+
+  // Setiap panel dibuka: kirim data terbaru (raw store tka_progress + summary + daftar mapel)
+  if (name === 'beranda') {
+    // iframe Beranda bisa saja ter-reload selama panelnya disembunyikan —
+    // kirim ulang data supaya kartu tidak balik ke placeholder statis
+    sendPanelData('beranda');
+  }
+  if (name === 'modul') {
+    sendPanelData('modul');
+  }
+  if (name === 'progres') {
+    sendPanelData('progres');
+  }
+  if (name === 'akun') {
+    sendPanelData('akun');
+  }
+}
+
+// Kirim data terkini ke satu panel. Dipakai homeShowPanel + handler sinyal ready.
+function sendPanelData(panel) {
+  if (panel === 'beranda') {
+    homeSendDesktopData();
+    return;
+  }
+  const frameId = panel === 'modul' ? 'panelModulFrame'
+    : panel === 'akun' ? 'panelAkunFrame' : 'panelProgresFrame';
+  const frame = document.getElementById(frameId);
+  if (panel === 'akun') {
+    // profil: sistem login belum ada -> null (halaman tampil mode Tamu yang jujur).
+    // kuota AI: data server-side via state.tutorQuota (null jika belum buka sesi tutor).
+    postToFrameReliable(frame, () => ({
+      type: 'akun-data',
+      profile: state.akunProfile || null,
+      quota: state.tutorQuota || null,
+      summary: homeProgressSummary(),
+      progress: homeProgressStore(),
+    }));
+    return;
+  }
+  postToFrameReliable(frame, () => ({
+    type: 'progress-data',
+    progress: homeProgressStore(),
+    summary: homeProgressSummary(),
+    subjects: buildSubjectsSummary(),
+  }));
+  if (panel === 'modul') {
+    // format home-desktop-data juga dikirim (subjects 22 mapel × 2 paket, urut kontrak)
+    postToFrameReliable(frame, () => ({
+      type: 'home-desktop-data',
+      subjects: buildSubjectsPayload(PANEL_MODULE_ORDER),
+      progress: homeProgressSummary(),
+    }));
+  }
+}
+
+function homeClose() {
+  const ov = document.getElementById('homeOverlay');
+  if (!ov) return;
+  ov.classList.add('home-hidden');
+  document.body.style.overflow = '';
+}
+
+function homeIsOpen() {
+  const ov = document.getElementById('homeOverlay');
+  return !!ov && !ov.classList.contains('home-hidden');
+}
+window.homeIsOpen = homeIsOpen;
+
+// Tombol Home di header app: kembali ke dashboard
+function homeToggle() { homeIsOpen() ? homeClose() : homeOpen(); }
+window.homeToggle = homeToggle;
+
+// Carousel dots hero
+(function () {
+  const track = document.getElementById('hoHeroTrack'), dots = document.getElementById('hoHeroDots');
+  if (!track || !dots) return;
+  track.addEventListener('scroll', () => {
+    const i = Math.round(track.scrollLeft / (track.scrollWidth / track.children.length));
+    [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i));
+  }, { passive: true });
+})();
 
 // Load JSON data for current subject + package (cached)
 async function loadPackageData(pkgNum) {
@@ -458,6 +890,44 @@ async function switchPackage(pkgNum) {
   renderGridModal();
 }
 
+// ==================== FASE 3: Keluar ke beranda dengan konfirmasi ====================
+// Jawaban tersimpan otomatis setiap pilihan (persistAnswerProgress).
+// Jika tes belum selesai, tampilkan dialog konfirmasi untuk memastikan user tidak salah pencet.
+// Jika tes sudah selesai (review/hasil), langsung kembali ke beranda tanpa konfirmasi.
+function isTestFinished() {
+  const overlay = document.getElementById('reviewHasilOverlay');
+  if (overlay && overlay.classList.contains('open')) return true;
+  return Boolean(state.testFinished && state.testFinished[pkgKey()]);
+}
+
+function askExitToBeranda() {
+  if (isTestFinished()) {
+    doExitToBeranda();
+    return;
+  }
+  const modal = document.getElementById('exitConfirmModal');
+  if (modal) modal.classList.add('open');
+}
+
+function closeExitConfirm(keepHere) {
+  const modal = document.getElementById('exitConfirmModal');
+  if (modal) modal.classList.remove('open');
+  if (keepHere === true) return;
+}
+
+function doExitToBeranda() {
+  closeExitConfirm();
+  try {
+    const q = getCurrentQuestion();
+    if (q && typeof persistAnswerProgress === 'function') {
+      persistAnswerProgress(q);
+    }
+  } catch (e) {}
+  // jawaban sudah tersimpan otomatis; buka panel Beranda (overlay)
+  if (!homeIsOpen()) homeOpen();
+  else homeShowPanel('beranda');
+}
+
 // Get current question object
 function getCurrentQuestion() {
   const pkg = state.pkgData[pkgKey()];
@@ -469,6 +939,20 @@ function getCurrentQuestion() {
 function renderQuestion() {
   const q = getCurrentQuestion();
   if (!q) return;
+
+  // soal baru tampil: selalu mulai di tab Lembar Soal (kecuali dipaksa review)
+  if (!state.keepWorkTab) switchWorkTab('soal', null, { scroll: false });
+  state.keepWorkTab = false;
+  const strip = document.getElementById('pembResultStrip');
+  if (strip) strip.style.display = 'none';
+
+  // animasi masuk soal (re-trigger tiap soal baru)
+  const qCard = document.querySelector('.cbt-question-card');
+  if (qCard) {
+    qCard.classList.remove('soal-enter');
+    void qCard.offsetWidth;
+    qCard.classList.add('soal-enter');
+  }
 
   const total = state.pkgData[pkgKey()].soal.length;
   const subjectMeta = SUBJECT_CATALOG[state.currentSubject] || {};
@@ -496,7 +980,9 @@ function renderQuestion() {
 
   // Fase 2: sinkron top bar mobile & progress line
   const mQNumEl = document.getElementById('mQNum');
-  if (mQNumEl) mQNumEl.innerText = `Soal ${q.nomor}/${total}`;
+  if (mQNumEl) mQNumEl.innerHTML =
+    '<b>' + (subjectMeta.name || state.currentSubject) + '</b>' +
+    '<span>Paket ' + state.currentPkg + ' · Soal ' + q.nomor + '/' + total + '</span>';
   const mProgressFill = document.getElementById('mProgressFill');
   if (mProgressFill) mProgressFill.style.width = `${Math.round(((state.currentIndex + 1) / total) * 100)}%`;
 
@@ -1186,6 +1672,44 @@ function selectOption(key, isComplex) {
 
   // Update modal grid
   renderGridModal();
+
+  // Persist progres nyata ke localStorage (kontrak KONTRAK_DATA.md):
+  // tka_progress[subjectKey][pkgNumber][nomorSoal] = { kunci, benar }
+  persistAnswerProgress(q);
+}
+
+// Tulis jawaban yang barusan dipilih ke tka_progress. Dipanggil dari selectOption.
+function persistAnswerProgress(q) {
+  try {
+    const subject = state.currentSubject;
+    const pkg = Number(state.currentPkg) || 1;
+    const ans = (state.userAnswers[subject + ':' + pkg] || {})[q.nomor];
+    if (ans === undefined || ans === null || ans === '') return;
+
+    const stmt = statementType(q);
+    let benar = false;
+    if (stmt) {
+      // Soal pernyataan: simpan setelah semua pernyataan dijawab; benar = semua cocok kunci
+      if (typeof ans !== 'object' || Array.isArray(ans)) return;
+      const stmts = q.pernyataan || [];
+      if (!stmts.every(st => ans[st.key])) return;
+      const kunci = parseBsKunci(q);
+      benar = stmts.every(st => ans[st.key] === kunci[st.key]);
+    } else if (Array.isArray(q.kunci_jawaban)) {
+      // Pilihan Ganda Kompleks: himpunan jawaban == himpunan kunci
+      if (!Array.isArray(ans) || ans.length === 0) return;
+      const k = q.kunci_jawaban.map(String);
+      benar = ans.length === k.length && ans.every(x => k.includes(String(x)));
+    } else {
+      benar = String(ans) === String(q.kunci_jawaban);
+    }
+
+    const store = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+    store[subject] = store[subject] || {};
+    store[subject][pkg] = store[subject][pkg] || {};
+    store[subject][pkg][q.nomor] = { kunci: q.kunci_jawaban, benar };
+    localStorage.setItem('tka_progress', JSON.stringify(store));
+  } catch (e) { /* localStorage gagal: jangan ganggu UI */ }
 }
 
 // ==================== SOAL PERNYATAAN (Benar/Salah & Pernyataan-Label) ====================
@@ -1350,6 +1874,9 @@ function selectBsAnswer(stmtKey, value) {
   }
 
   renderGridModal();
+
+  // Persist progres nyata (kontrak tka_progress) — simpan saat semua pernyataan terjawab
+  persistAnswerProgress(q);
 }
 
 // Ambil kunci pernyataan B/S dari kunci_jawaban ["A:Benar", ...]
@@ -1422,6 +1949,7 @@ function checkUserAnswer() {
     }
 
     if (!state.explanationVisible) toggleExplanation();
+    showPembahasanAfterCheck();
     return;
   }
 
@@ -1467,6 +1995,104 @@ function checkUserAnswer() {
   if (!state.explanationVisible) {
     toggleExplanation();
   }
+  showPembahasanAfterCheck();
+}
+
+// ==================== WORK TABS: Lembar Soal vs Pembahasan & AI (Arah 2) ====================
+// Konteks dipisah supaya user tidak scroll maraton: soal di tab sendiri,
+// pembahasan pilar + AI Tutor jadi full-pane dengan sub-switch + rail kanan.
+function switchWorkTab(tab, sub, opts) {
+  const o = opts || {};
+  const paneSoal = document.getElementById('workPaneSoal');
+  const panePemb = document.getElementById('workPanePembahasan');
+  if (!paneSoal || !panePemb) return;
+  if (tab !== 'soal' && tab !== 'pembahasan') return;
+
+  paneSoal.classList.toggle('active', tab === 'soal');
+  panePemb.classList.toggle('active', tab === 'pembahasan');
+  paneSoal.style.display = tab === 'soal' ? 'block' : 'none';
+  panePemb.style.display = tab === 'pembahasan' ? 'block' : 'none';
+
+  const tSoal = document.getElementById('wtab-soal');
+  const tPemb = document.getElementById('wtab-pemb');
+  if (tSoal && tPemb) {
+    tSoal.classList.toggle('active', tab === 'soal');
+    tPemb.classList.toggle('active', tab === 'pembahasan');
+    tSoal.setAttribute('aria-selected', String(tab === 'soal'));
+    tPemb.setAttribute('aria-selected', String(tab === 'pembahasan'));
+  }
+
+  if (tab === 'pembahasan') {
+    // pembahasan selalu tampil penuh di tab ini
+    if (!state.explanationVisible) {
+      state.explanationVisible = true;
+      const ls = document.getElementById('learningSection');
+      if (ls) ls.style.display = 'flex';
+      const t = document.getElementById('txtToggleExp');
+      if (t) t.innerText = 'Tutup Tata Cara & Pembahasan';
+      const arr = document.getElementById('accordionArrow');
+      if (arr) arr.classList.add('rotated');
+      setExplanationCollapsed(false);
+    }
+    switchPembSub(sub || state.pembSub || 'materi', o);
+  }
+  syncRail(tab === 'soal' ? 'soal' : (sub || state.pembSub || 'materi'));
+  if (o.scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function switchPembSub(sub, opts) {
+  const o = opts || {};
+  if (sub !== 'materi' && sub !== 'ai') sub = 'materi';
+  state.pembSub = sub;
+  const mSub = document.getElementById('pembSubMateri');
+  const aSub = document.getElementById('pembSubAI');
+  if (mSub) mSub.style.display = sub === 'materi' ? 'block' : 'none';
+  if (aSub) aSub.style.display = sub === 'ai' ? 'block' : 'none';
+  const bM = document.getElementById('psub-materi');
+  const bA = document.getElementById('psub-ai');
+  if (bM && bA) {
+    bM.classList.toggle('active', sub === 'materi');
+    bA.classList.toggle('active', sub === 'ai');
+  }
+  syncRail(sub);
+  if (sub === 'ai' && isTutorSheetMode()) {
+    // mobile: AI Tutor = bottom sheet — buka sheet yang tinggal di sub-pane ini
+    const sheet = document.getElementById('cbtSidebarCol');
+    const backdrop = document.getElementById('tutorBackdrop');
+    if (sheet) { sheet.style.transform = ''; sheet.classList.add('tutor-open'); }
+    if (backdrop) backdrop.classList.add('open');
+    return;
+  }
+  if (sub === 'ai') {
+    const inp = document.getElementById('chatInput');
+    if (inp) { try { inp.focus({ preventScroll: true }); } catch (e) {} }
+  }
+}
+
+function syncRail(active) {
+  document.querySelectorAll('#workRail .rail-btn').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-rail') === active);
+  });
+}
+
+// Setelah cek jawaban: salin hasil ke tab Pembahasan lalu pindah otomatis
+// (hanya jika user masih di soal yang sama dan soalnya sudah dijawab).
+function showPembahasanAfterCheck() {
+  const fb = document.getElementById('feedbackBanner');
+  const strip = document.getElementById('pembResultStrip');
+  if (fb && strip) {
+    strip.className = fb.className.replace('feedback-banner', 'feedback-banner pemb-strip');
+    strip.innerHTML = fb.innerHTML;
+    strip.style.display = fb.style.display;
+  }
+  const q = getCurrentQuestion();
+  const nomor = q ? q.nomor : null;
+  setTimeout(() => {
+    const cur = getCurrentQuestion();
+    if (cur && cur.nomor === nomor && isQuestionAnswered(cur)) {
+      switchWorkTab('pembahasan', 'materi', { scroll: false });
+    }
+  }, 1100);
 }
 
 // Toggle display of Explanation section
@@ -1708,6 +2334,16 @@ function _fmtText(s) {
   return text;
 }
 
+// Teks yang berisi daftar ber-pemisah " • " dirender sebagai list blok
+// (satu <li> per poin) — bukan menyatu horisontal. Aman untuk teks tanpa bullet.
+function _bulletListHtml(s) {
+  const raw = String(s || '').trim();
+  if (!raw.includes('•')) return _fmtText(raw);
+  const items = raw.split(/\s*•\s*/).map(x => x.trim()).filter(Boolean);
+  if (items.length < 2) return _fmtText(raw);
+  return '<ul class="text-bullet-list">' + items.map(it => '<li>' + _fmtText(it) + '</li>').join('') + '</ul>';
+}
+
 // Helper to render an elevated, structured pedagogical step card
 function _renderStepTimelineCard(stepText, index, totalSteps) {
   let stepNum = index + 1;
@@ -1880,11 +2516,11 @@ async function _applyCanonicalSolution(q) {
           <div class="dik-dit-grid">
             <div class="dik-dit-card dik">
               <div class="dik-dit-badge-tag"><i class="fa-solid fa-clipboard-list"></i> DIKETAHUI (DIK)</div>
-              <div class="dik-dit-text">${_fmtText(p.diketahui || '-')}</div>
+              <div class="dik-dit-text">${_bulletListHtml(p.diketahui || '-')}</div>
             </div>
             <div class="dik-dit-card dit">
               <div class="dik-dit-badge-tag"><i class="fa-solid fa-circle-question"></i> DITANYAKAN (DIT)</div>
-              <div class="dik-dit-text">${_fmtText(p.ditanyakan || '-')}</div>
+              <div class="dik-dit-text">${_bulletListHtml(p.ditanyakan || '-')}</div>
             </div>
           </div>
         `;
@@ -1944,7 +2580,7 @@ async function _applyCanonicalSolution(q) {
     if (whyBox && whyTextEl) {
       if (p.mengapa_begini) {
         whyBox.style.display = 'block';
-        whyTextEl.innerHTML = _fmtText(p.mengapa_begini);
+        whyTextEl.innerHTML = _bulletListHtml(p.mengapa_begini);
       } else {
         whyBox.style.display = 'none';
       }
@@ -2018,7 +2654,7 @@ async function _applyCanonicalSolution(q) {
           </div>
         `;
       } else if (p.tips_trik) {
-        tipsContainer.innerHTML = `<div class="tips-text-legacy">${_fmtText(p.tips_trik)}</div>`;
+        tipsContainer.innerHTML = `<div class="tips-text-legacy">${_bulletListHtml(p.tips_trik)}</div>`;
       } else {
         tipsContainer.innerHTML = '<span class="empty-hint">Lakukan pengecekan teliti pada setiap tahap penurunan rumus di atas.</span>';
       }
@@ -2215,6 +2851,10 @@ let _cooldownSecondsRemaining = 0;
 function updateTutorQuotaUI(quota) {
   if (!quota) return;
   state.tutorQuota = quota;
+  // panel Akun terbuka? perbarui kuota di sana juga secara live
+  if (homeIsOpen() && homeActivePanel === 'akun') {
+    try { sendPanelData('akun'); } catch (e) {}
+  }
   const badge = document.getElementById('tutorQuotaBadge');
   const text = document.getElementById('tutorQuotaText');
   if (!badge || !text) return;
@@ -2820,6 +3460,8 @@ function evaluateQuestion(item) {
 }
 
 function selesaiTes() {
+  if (!state.testFinished) state.testFinished = {};
+  state.testFinished[pkgKey()] = true;
   closeFinishModal();
   renderReviewHasil();
 }
@@ -2967,7 +3609,9 @@ function reviewJumpTo(idx) {
   document.getElementById('reviewHasilOverlay').classList.remove('open');
   state.currentIndex = idx;
   state.explanationVisible = true;
+  state.keepWorkTab = true; // renderQuestion jangan memaksa balik ke tab soal
   renderQuestion();
+  switchWorkTab('pembahasan', 'materi', { scroll: false });
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2978,6 +3622,7 @@ function closeReviewHasil() {
 // Ulangi simulasi: reset jawaban & status ragu paket aktif
 function resetSimulasi() {
   const key = pkgKey();
+  if (state.testFinished) state.testFinished[key] = false;
   state.userAnswers[key] = {};
   state.raguStatus[key] = {};
   state.simAnswers[key] = {};
@@ -3147,10 +3792,13 @@ document.addEventListener('keydown', (e) => {
 const MOBILE_MQ = window.matchMedia('(max-width: 1024px)');
 
 function openTutorSheet() {
-  if (!MOBILE_MQ.matches) {
-    scrollToAiTutor();
+  if (!isTutorSheetMode()) {
+    // desktop / layar lebar: AI Tutor = full pane di tab Pembahasan & AI
+    switchWorkTab('pembahasan', 'ai');
     return;
   }
+  // mobile: tetap bottom sheet — aktifkan sub-pane AI tempat sheet tinggal
+  switchWorkTab('pembahasan', 'ai', { scroll: false });
   const sheet = document.getElementById('cbtSidebarCol');
   const backdrop = document.getElementById('tutorBackdrop');
   if (!sheet) return;
@@ -3167,6 +3815,17 @@ function closeTutorSheet() {
     sheet.style.transform = '';
   }
   if (backdrop) backdrop.classList.remove('open');
+  // pane sub "Tanya AI" di mobile isinya sheet fixed — balik ke materi biar tidak kosong
+  if (isTutorSheetMode() && state.pembSub === 'ai') switchPembSub('materi', { scroll: false });
+}
+
+// Deteksi nyata apakah AI Tutor tampil sebagai bottom sheet: ikuti CSS aktif
+// (media <=1024px), bukan hanya lebar layar — mencegah pane AI kosong di
+// rentang ukuran tertentu.
+function isTutorSheetMode() {
+  const sheet = document.getElementById('cbtSidebarCol');
+  if (!sheet) return false;
+  try { return getComputedStyle(sheet).position === 'fixed'; } catch (e) { return false; }
 }
 
 function closeMobilePanels() {

@@ -33,11 +33,11 @@
   --warn: #B54708;
   --warn-tint: #FFFAEB;
   --warn-border: #EBD9B4;
-  --navbar: #09090B;
-  --navbar-border: #27272A;
-  --navbar-surface: #18181B;
-  --navbar-text: #FAFAF9;
-  --navbar-text-2: #A1A1AA;
+  --navbar: #004a2a;
+  --navbar-border: #00351e;
+  --navbar-surface: rgba(255, 255, 255, 0.1);
+  --navbar-text: #ffffff;
+  --navbar-text-2: #aaf2c2;
   --btn-primary-bg: #18181B;
   --btn-primary-text: #FFFFFF;
   --btn-primary-hover: #2D2D30;
@@ -152,6 +152,7 @@ body {
   z-index: 50;
   background: var(--navbar);
   border-bottom: 1px solid var(--navbar-border);
+  padding-top: env(safe-area-inset-top, 0px);
 }
 
 .header-container {
@@ -304,9 +305,9 @@ body {
 }
 
 .pkg-tab.active {
-  background: var(--navbar-text);
-  color: var(--navbar);
-  font-weight: 600;
+  background: #ffffff;
+  color: #004a2a;
+  font-weight: 700;
 }
 
 /* Header Right Actions */
@@ -417,7 +418,8 @@ body {
 
 .cbt-dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
+  /* Arah 2: sidebar AI pindah ke tab Pembahasan & AI — grid tinggal satu kolom penuh */
+  grid-template-columns: minmax(0, 1fr);
   gap: 0 28px;
   align-items: start;
 }
@@ -491,6 +493,130 @@ body {
   background: var(--accent);
   border-radius: var(--radius-full);
   transition: width 0.3s ease;
+}
+
+/* ==========================================================================
+   HOME OVERLAY — dashboard pilih mapel & paket
+   ========================================================================== */
+.home-overlay {
+  position: fixed; inset: 0; z-index: 90;
+  background: #FBEEDC; /* krem hangat seperti mockup */
+  display: flex; flex-direction: column;
+  overflow-y: auto; overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+.home-overlay.home-hidden { display: none; }
+
+/* Shell: layar HP (sheet putih) di tengah background krem */
+.ho-shell {
+  width: 100%; max-width: 480px; margin: 0 auto; min-height: 100%;
+  background: #fff; display: flex; flex-direction: column;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.04), 0 24px 60px -24px rgba(9,9,11,.25);
+}
+@media (min-width: 520px) { .ho-shell { border-radius: 24px; margin: 16px auto; min-height: calc(100% - 32px); } }
+
+/* --- Header hijau tua (rounded besar, memuat hero card) --- */
+.ho-header {
+  background: #123B2B; color: #fff;
+  border-radius: 0 0 28px 28px;
+  padding: 22px 22px 46px;
+}
+.ho-header-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.ho-title { font-size: 22px; font-weight: 800; letter-spacing: -0.01em; }
+.ho-bell { position: relative; font-size: 18px; color: #fff; opacity: .9; }
+.ho-bell-dot {
+  position: absolute; top: -3px; right: -4px; width: 9px; height: 9px;
+  background: #E4572E; border-radius: 999px; border: 2px solid #123B2B;
+}
+
+/* --- Hero carousel --- */
+.ho-hero-wrap { margin-top: 18px; }
+.ho-hero-track {
+  display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px 2px 10px; scrollbar-width: none;
+}
+.ho-hero-track::-webkit-scrollbar { display: none; }
+.ho-hero-card {
+  position: relative; flex: 0 0 92%; max-width: 400px; min-height: 168px;
+  scroll-snap-align: center;
+  background: #1D5C40; color: #fff;
+  border-radius: 20px; padding: 20px;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+  overflow: hidden;
+  box-shadow: 0 14px 30px -16px rgba(9,9,11,.45);
+}
+/* Tab ikon + dots di pojok kiri atas (elemen mockup) */
+.ho-hero-badge {
+  position: absolute; top: 0; left: 0;
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #123B2B; border-radius: 0 0 14px 0; padding: 8px 14px 8px 12px;
+  font-size: 14px;
+}
+.ho-hero-dots { display: inline-flex; gap: 4px; }
+.ho-hero-dots i { width: 5px; height: 5px; border-radius: 999px; background: rgba(255,255,255,.35); }
+.ho-hero-dots i.on { background: #F59E0B; }
+/* Ribbon oranye di pojok kanan atas */
+.ho-hero-card .ho-ribbon {
+  position: absolute; top: 12px; right: -34px;
+  background: #F59E0B; color: #fff; font-size: 11px; font-weight: 700;
+  padding: 5px 40px; transform: rotate(38deg);
+  box-shadow: 0 4px 10px -4px rgba(9,9,11,.35);
+}
+.ho-hero-copy h2 { font-size: 24px; font-weight: 800; line-height: 1.22; letter-spacing: -0.01em; margin: 0 0 10px; }
+.ho-hero-pill {
+  display: inline-block; font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,.92);
+  background: rgba(255,255,255,.16); border-radius: 999px; padding: 6px 14px;
+}
+.ho-hero-art { font-size: 56px; color: rgba(255,255,255,.28); flex-shrink: 0; }
+.ho-hero-nav { display: flex; gap: 6px; justify-content: center; padding-top: 4px; }
+.ho-hero-nav i { width: 7px; height: 7px; border-radius: 999px; background: #D9D6D1; transition: background .25s, width .25s; }
+.ho-hero-nav i.on { background: #123B2B; width: 22px; }
+
+/* --- Sheet putih: section mapel --- */
+.ho-main { padding: 8px 0 0; background: #fff; }
+.ho-section { margin-top: 26px; }
+.ho-section-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; margin-bottom: 12px;
+}
+.ho-section-head h3 { font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #101B15; margin: 0; }
+.ho-seeall { font-size: 13.5px; font-weight: 600; color: #123B2B; }
+.ho-seeall i { font-size: 11px; margin-left: 5px; }
+.ho-cards {
+  display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x proximity;
+  padding: 2px 20px 10px; scrollbar-width: none;
+}
+.ho-cards::-webkit-scrollbar { display: none; }
+.ho-card {
+  position: relative; overflow: hidden;
+  flex: 0 0 300px; max-width: 300px;
+  background: #FDF3E3; border: 1px solid #F0E2CC;
+  border-radius: 18px; padding: 18px 18px 16px;
+  cursor: pointer; text-align: left; font-family: var(--font-ui);
+  transition: transform .15s ease;
+  scroll-snap-align: start;
+}
+.ho-card:active { transform: scale(.97); }
+.ho-card:focus-visible { outline: 2px solid #F59E0B; outline-offset: 2px; }
+/* Ribbon 'Baru!' diagonal di pojok kanan atas card */
+.ho-card .ho-ribbon { top: 12px; right: -36px; transform: rotate(38deg); font-size: 11.5px; padding: 5px 42px; background: #F59E0B; color: #fff; font-weight: 700; position: absolute; box-shadow: 0 4px 10px -4px rgba(9,9,11,.3); }
+.ho-card h4 { font-size: 21px; font-weight: 800; color: #123B2B; margin: 0 0 5px; }
+.ho-card .ho-meta { font-size: 14.5px; color: #3F3A34; margin: 0 0 12px; }
+.ho-chip {
+  display: inline-block; font-size: 12.5px; font-weight: 600; color: #123B2B;
+  background: #DFEBD8; border-radius: 10px; padding: 5px 12px;
+}
+.ho-bar { margin-top: 14px; height: 8px; border-radius: 999px; background: #F3E4CB; overflow: hidden; }
+.ho-bar > span { display: block; height: 8px; width: 62%; min-width: 0; max-width: 100%; background: #F59E0B; border-radius: 999px; }
+.ho-card .ho-art {
+  position: absolute; right: 4px; top: 30px; font-size: 82px; color: #F59E0B; opacity: .12;
+}
+.ho-empty { margin: 40px 20px; text-align: center; color: var(--text-2); font-size: 13.5px; }
+.ho-foot { text-align: center; font-size: 11.5px; color: #9A938A; padding: 26px 20px 22px; margin: 0; background: #fff; }
+
+@media (min-width: 720px) {
+  .ho-hero-card { flex-basis: 60%; }
+  .ho-card { flex: 0 0 320px; }
 }
 
 /* ==========================================================================
@@ -2524,15 +2650,42 @@ body {
   padding-top: 6px;
 }
 
-/* Header & Modal finish buttons */
+/* Header actions & buttons */
+.btn-home-top {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: var(--navbar-surface);
+  border: 1px solid var(--navbar-border);
+  color: var(--navbar-text);
+  padding: 7px 13px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+.btn-home-top:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+.btn-home-top:active {
+  transform: scale(0.97);
+}
+
 .btn-finish-header {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   padding: 7px 13px;
   background: transparent;
-  border: 1px solid var(--wrong-border);
-  color: var(--wrong);
+  /* FASE 3: di navbar hijau, aksen netral putih agar kontras tetap tinggi */
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: var(--navbar-text);
   border-radius: var(--radius-sm);
   font-family: var(--font-sans);
   font-size: 12.5px;
@@ -2542,9 +2695,9 @@ body {
 }
 
 .btn-finish-header:hover {
-  background: var(--wrong-tint);
-  color: var(--wrong);
-  border-color: var(--wrong);
+  background: rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 .btn-nav-finish {
@@ -2937,7 +3090,8 @@ html, body {
 
   .cbt-main-col {
     width: 100% !important;
-    padding: 14px 16px calc(28px + env(safe-area-inset-bottom)) !important;
+    /* FASE 1: ruang untuk bar aksi fixed di bawah agar opsi terakhir tidak tertutup */
+    padding: 14px 16px calc(96px + env(safe-area-inset-bottom)) !important;
   }
 
   /* Tutor AI = bottom sheet (Fase 2). Tinggi mengikuti visualViewport agar
@@ -3028,55 +3182,89 @@ html, body {
 }
 
 @media (max-width: 768px) {
-  /* ===== Top bar mobile (Fase 2): menu, Soal x/n, timer, overflow ===== */
+  /* ===== Top bar mobile (Fase 2 & Fase 3): Home, Info Soal, Timer, Overflow ===== */
   .app-header {
-    height: 56px;
+    height: auto;
+    min-height: calc(56px + env(safe-area-inset-top, 0px));
   }
 
   .header-container {
     height: 56px;
-    padding: 0 10px;
+    padding: 0 max(10px, env(safe-area-inset-right, 0px)) 0 max(10px, env(safe-area-inset-left, 0px));
     gap: 8px;
   }
 
-  .brand-logo {
-    width: 30px;
-    height: 30px;
-    font-size: 14px;
+  .brand {
+    display: none !important;
   }
 
-  .brand-text {
+  .btn-home-top {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    font-size: 15px;
+    border-radius: var(--radius-sm);
+  }
+  .btn-home-top .btn-home-label {
     display: none !important;
+  }
+
+  /* FASE 3: navigasi paket 1/2 dihapus dari top bar mobile */
+  .package-tabs { display: none !important; }
+
+  /* FASE 3: info mapel + paket di tengah header (2 baris) */
+  .m-qnum {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 1px;
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    padding: 0 4px;
+  }
+  .m-qnum b {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navbar-text);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 170px;
+    display: block;
+  }
+  .m-qnum span {
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--navbar-text-2);
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 170px;
+    display: block;
   }
 
   .m-icon-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    background: transparent;
+    width: 38px;
+    height: 38px;
+    background: var(--navbar-surface);
     border: 1px solid var(--navbar-border);
     border-radius: var(--radius-sm);
     color: var(--navbar-text);
     font-size: 14px;
     cursor: pointer;
     flex-shrink: 0;
-  }
-
-  .m-qnum {
-    display: block;
-    flex: 1;
-    min-width: 0;
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--navbar-text);
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .timer-pill {
@@ -3090,18 +3278,6 @@ html, body {
   .btn-finish-header,
   .user-avatar {
     display: none !important;
-  }
-
-  /* Tab Paket kini di header-actions: dipadatkan agar muat di header mobile */
-  .header-actions .package-tabs {
-    padding: 2px;
-    gap: 3px;
-  }
-
-  .header-actions .pkg-tab {
-    padding: 5px 9px;
-    min-height: 28px;
-    font-size: 11px;
   }
 
   /* Panel menu = selector mata pelajaran & paket */
@@ -3219,7 +3395,8 @@ html, body {
 
   /* ===== Konten satu kolom ===== */
   .cbt-main-col {
-    padding: 12px 16px calc(92px + env(safe-area-inset-bottom)) !important;
+    /* FASE 1: disamakan dengan tinggi bar aksi + safe-area */
+    padding: 12px 16px calc(96px + env(safe-area-inset-bottom)) !important;
   }
 
   .topic-header-bar {
@@ -4597,5 +4774,397 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   .fb-widget.pos-bottom {
     top: auto;
     bottom: calc(78px + env(safe-area-inset-bottom));
+  }
+}
+
+/* ==========================================================================
+   WORK TABS & RAIL — Arah 2: Lembar Soal vs Pembahasan & AI
+   Konteks dipisah agar user tidak scroll maraton:
+   - Tab "Lembar Soal"  : kartu soal + aksi (seperti biasa)
+   - Tab "Pembahasan & AI": pilar 1-5 + soal serupa, dan AI Tutor full-pane
+     (sub-switch Pembahasan/Tanya AI + rail pintas di kanan pada desktop)
+   ========================================================================== */
+.work-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+  width: max-content;
+  max-width: 100%;
+  margin-bottom: 16px;
+}
+
+.work-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-3);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+  white-space: nowrap;
+}
+.work-tab:hover { color: var(--text); }
+.work-tab.active {
+  background: var(--bg);
+  color: var(--accent);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+.work-tab:active { transform: scale(0.97); }
+
+.work-pane { display: none; }
+.work-pane.active { display: block; animation: workPaneFade 0.3s ease; }
+@keyframes workPaneFade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+.pemb-subbar {
+  display: flex;
+  gap: 4px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+  width: max-content;
+  max-width: 100%;
+  margin-bottom: 14px;
+}
+.pemb-sub {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  color: var(--text-3);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 7px 13px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+  white-space: nowrap;
+}
+.pemb-sub:hover { color: var(--text); }
+.pemb-sub.active {
+  background: var(--bg);
+  color: var(--accent);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+.pemb-sub:active { transform: scale(0.97); }
+
+.pemb-strip { margin-bottom: 14px; }
+
+/* AI Tutor dari sidebar sticky menjadi full-pane di tab Pembahasan & AI.
+   HANYA di desktop (>=1025px). Di mobile rule sheet (position fixed
+   !important + height full) tetap berlaku — bottom sheet full screen. */
+@media (min-width: 1025px) {
+  #pembSubAI .cbt-sidebar-col {
+    position: static;
+    height: auto;
+    border-left: none;
+    background: var(--bg);
+  }
+  #pembSubAI .ai-tutor-card {
+    height: calc(100vh - 215px);
+    min-height: 480px;
+    max-height: 900px;
+  }
+}
+
+/* Rail pintas konteks (desktop lebar) */
+.work-rail { display: none; }
+@media (min-width: 1100px) {
+  .work-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: fixed;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 55;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  }
+  .rail-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 64px;
+    padding: 10px 4px;
+    border: none;
+    background: transparent;
+    border-radius: 10px;
+    color: var(--text-3);
+    font-family: var(--font-ui);
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .rail-btn i { font-size: 17px; }
+  .rail-btn:hover { background: var(--surface-2); color: var(--text); }
+  .rail-btn.active { background: var(--accent-tint); color: var(--accent); }
+  .rail-btn:active { transform: scale(0.95); }
+  /* beri ruang agar rail tidak menutupi konten di layar tidak terlalu lebar */
+  @media (max-width: 1420px) {
+    .main-wrapper { padding-right: 88px; }
+  }
+}
+
+/* ==========================================================================
+   MOBILE AUDIT — KaTeX dobel, list pilar, work tabs, rail jempol, chat AI
+   ========================================================================== */
+
+/* 1) KaTeX: sembunyikan lapis MathML (sumber teks dobel "n(S)=30n(S)=30").
+      KaTeX CSS dari CDN biasanya sudah menyembunyikannya — rule ini
+      menjamin walau CDN gagal dimuat. */
+.katex-mathml {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* 2) List rapi untuk teks pembahasan ber-poin (pemisah " • ") */
+.text-bullet-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  list-style: disc;
+}
+.text-bullet-list li { line-height: 1.7; }
+.text-bullet-list li::marker { color: var(--accent); }
+
+/* 3) Animasi masuk soal.
+   PENTING: kartu TIDAK boleh dianimasikan dengan transform — kartu adalah
+   leluhur .qcard-actions (position: fixed); transform mengubahnya menjadi
+   containing block sehingga bar aksi ikut "melayang" ikut kartu.
+   Kartu: fade saja. Badan soal: slide (bukan leluhur bar). */
+@keyframes soalFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes soalBodySlide {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+.cbt-question-card.soal-enter { animation: soalFade 0.3s ease both; }
+.cbt-question-card.soal-enter .qcard-body { animation: soalBodySlide 0.34s ease both; }
+@media (prefers-reduced-motion: reduce) {
+  .cbt-question-card.soal-enter,
+  .cbt-question-card.soal-enter .qcard-body { animation: none; }
+}
+
+/* 4) Work tabs & sub-bar di mobile */
+@media (max-width: 899px) {
+  /* tab bar rata penuh dua kolom (tidak ada ruang kosong kanan) */
+  .work-tabs { width: 100%; }
+  .work-tab { flex: 1; justify-content: center; }
+
+  /* sub-switch pembahasan dipindah ke rail jempol kanan */
+  .pemb-subbar { display: none !important; }
+
+  /* rail jempol kanan (thumb-zone): Soal / Pembahasan / Tanya AI */
+  .work-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: fixed;
+    right: 10px;
+    bottom: 96px;
+    z-index: 55;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 6px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  }
+  .rail-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: 56px;
+    padding: 8px 4px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text-3);
+    font-family: var(--font-ui);
+    font-size: 9px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .rail-btn i { font-size: 18px; }
+  .rail-btn.active { background: var(--accent-tint); color: var(--accent); }
+  .rail-btn:active { transform: scale(0.95); }
+}
+
+/* 5) AI Tutor mobile: full screen + bubble chat terpisah jelas */
+@media (max-width: 1024px) {
+  .cbt-sidebar-col {
+    height: 100vh;
+    height: calc(min(var(--vvh, 100dvh), 100dvh));
+    border-radius: 0;
+  }
+}
+.chat-bubble { margin: 10px 0; }
+.chat-bubble.user {
+  align-self: flex-end;
+  width: auto;
+  max-width: 86%;
+  background: var(--accent-tint);
+  border: 1px solid var(--accent-border);
+  border-top: 1px solid var(--accent-border);
+  border-radius: 14px 14px 4px 14px;
+  padding: 10px 12px;
+  margin: 10px 0 10px auto;
+}
+.chat-bubble.user .bubble-sender-bar { display: none; }
+.chat-bubble.ai { align-self: flex-start; width: auto; max-width: 92%; border: 1px solid var(--border); border-radius: 4px 14px 14px 14px; }
+.chat-messages { display: flex; flex-direction: column; }
+
+/* ==========================================================================
+   FASE 2 — Halaman Soal mobile: tab atas dihapus (fungsi ada di rail bawah),
+   chip saran AI jadi satu baris horizontal agar area chat lebih luas
+   ========================================================================== */
+@media (max-width: 899px) {
+  .work-tabs { display: none !important; }
+}
+
+@media (max-width: 1024px) {
+  .quick-chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+  .quick-chips::-webkit-scrollbar { display: none; }
+  .chip-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    min-height: 30px;
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  .quick-chips-wrapper { padding: 8px 12px; }
+}
+
+/* ==========================================================================
+   FASE 3 — Dialog konfirmasi keluar ke beranda (tema hijau)
+   ========================================================================== */
+.exit-confirm-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(9, 9, 11, 0.55);
+  align-items: center;
+  justify-content: center;
+  padding: max(20px, env(safe-area-inset-top, 20px)) max(20px, env(safe-area-inset-right, 20px)) max(20px, env(safe-area-inset-bottom, 20px)) max(20px, env(safe-area-inset-left, 20px));
+}
+.exit-confirm-overlay.open { display: flex; }
+.exit-confirm-card {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: 14px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+  max-width: 340px;
+  width: 100%;
+  padding: 22px 20px 18px;
+  text-align: center;
+  animation: workPaneFade 0.25s ease both;
+}
+.exit-confirm-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 10px;
+  border-radius: 999px;
+  background: var(--accent-tint);
+  color: var(--accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+.exit-confirm-title {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 6px;
+}
+.exit-confirm-text {
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text-2);
+  margin: 0 0 16px;
+}
+.exit-confirm-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.exit-btn-ya,
+.exit-btn-tidak {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.exit-btn-ya {
+  background: var(--accent);
+  color: #ffffff;
+  border: none;
+}
+.exit-btn-ya:hover { background: var(--accent-hover); }
+.exit-btn-tidak {
+  background: var(--bg);
+  color: var(--text-2);
+  border: 1px solid var(--border);
+}
+.exit-btn-tidak:hover { background: var(--surface-2); }
+.exit-btn-ya:active, .exit-btn-tidak:active { transform: scale(0.97); }
+
+/* FASE 3: tombol Beranda top bar tetap tampil di desktop */
+@media (min-width: 769px) {
+  #btnHome {
+    display: inline-flex !important;
+  }
+  .btn-home-top .btn-home-label {
+    display: inline !important;
   }
 }

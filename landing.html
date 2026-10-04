@@ -1,305 +1,773 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TKA Master — Latihan Soal TKA &amp; AI Tutor</title>
-  <meta name="description" content="Latihan soal TKA Pusmendik dengan pembahasan langkah demi langkah dan AI Tutor. Simulasi ujian dengan timer. Gratis selama masa beta.">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-  <link rel="stylesheet" href="style.css?v=44">
-  <style>
-    /* ===== Landing — Clean Editorial, mobile-first ===== */
-    .lp-wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
-
-    .lp-nav {
-      position: sticky; top: 0; z-index: 40;
-      background: var(--navbar);
-      border-bottom: 1px solid var(--navbar-border);
-    }
-    .lp-nav-inner {
-      max-width: 1080px; margin: 0 auto; padding: 0 20px;
-      height: 60px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    }
-    .lp-brand { display: flex; align-items: center; gap: 10px; color: var(--navbar-text); text-decoration: none; }
-    .lp-brand .brand-logo { width: 30px; height: 30px; font-size: 14px; }
-    .lp-brand b { font-size: 14px; font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; }
-    .lp-nav-actions { display: flex; align-items: center; gap: 8px; }
-    .btn-lp-primary, .btn-lp-secondary, .lp-link-muted { white-space: nowrap; }
-    @media (max-width: 430px) {
-      .lp-brand b { display: none; }
-      .btn-lp-primary { padding: 9px 14px; font-size: 13px; }
-    }
-    .lp-link-muted {
-      color: var(--navbar-text-2); text-decoration: none; font-size: 13px; font-weight: 500;
-      display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border-radius: 6px;
-    }
-    .lp-soon {
-      font-size: 10px; font-weight: 500; color: var(--navbar-text-2);
-      border: 1px solid var(--navbar-border); border-radius: 5px; padding: 1px 5px;
-    }
-    .btn-lp-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--btn-primary-bg); color: var(--btn-primary-text);
-      border: 1px solid transparent; border-radius: 6px;
-      padding: 10px 18px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 500;
-      text-decoration: none; cursor: pointer; transition: background 0.15s ease;
-    }
-    .btn-lp-primary:hover { background: var(--btn-primary-hover); }
-    .btn-lp-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: var(--text);
-      border: 1px solid var(--border-strong); border-radius: 6px;
-      padding: 10px 18px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 500;
-      text-decoration: none; cursor: pointer; transition: border-color 0.15s ease;
-    }
-    .btn-lp-secondary:hover { border-color: var(--text-3); }
-
-    .lp-hero { padding: 72px 0 56px; }
-    .lp-kicker {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--text-3); margin-bottom: 16px;
-    }
-    .lp-hero h1 {
-      font-size: clamp(30px, 6vw, 44px); font-weight: 600; letter-spacing: -0.02em;
-      line-height: 1.15; color: var(--text); max-width: 640px; margin: 0 0 18px;
-    }
-    .lp-hero p {
-      font-size: 17px; line-height: 1.6; color: var(--text-2); max-width: 560px; margin: 0 0 28px;
-    }
-    .lp-hero-cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .lp-hero-note { font-size: 12.5px; color: var(--text-3); margin-top: 14px; }
-
-    .lp-beta {
-      border: 1px solid var(--accent-border); background: var(--accent-tint); color: var(--accent);
-      border-radius: 6px; padding: 10px 14px; font-size: 13px; font-weight: 500;
-      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px;
-    }
-
-    .lp-section { padding: 48px 0; border-top: 1px solid var(--border); }
-    .lp-section-title { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-3); margin: 0 0 28px; }
-
-    .lp-steps { display: grid; grid-template-columns: 1fr; gap: 24px; }
-    .lp-step-num {
-      font-family: var(--font-mono); font-size: 13px; color: var(--text-3);
-      font-variant-numeric: tabular-nums; margin-bottom: 8px;
-    }
-    .lp-step h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 0 0 6px; letter-spacing: -0.01em; }
-    .lp-step p { font-size: 14.5px; line-height: 1.6; color: var(--text-2); margin: 0; }
-
-    .lp-features { display: grid; grid-template-columns: 1fr; gap: 12px; }
-    .lp-feature {
-      border: 1px solid var(--border); border-radius: 8px; padding: 18px 20px; background: var(--bg);
-    }
-    .lp-feature h3 { font-size: 15px; font-weight: 600; color: var(--text); margin: 0 0 6px; display: flex; align-items: center; gap: 8px; }
-    .lp-feature h3 i { color: var(--accent); font-size: 14px; }
-    .lp-feature p { font-size: 14px; line-height: 1.6; color: var(--text-2); margin: 0; }
-
-    .lp-pricing { display: grid; grid-template-columns: 1fr; gap: 12px; align-items: stretch; }
-    .lp-plan {
-      border: 1px solid var(--border); border-radius: 8px; padding: 22px 20px; background: var(--bg);
-      display: flex; flex-direction: column; gap: 0;
-    }
-    .lp-plan.pro { border-color: var(--accent-border); background: var(--accent-tint); }
-    .lp-plan-name { font-size: 13px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--text-3); }
-    .lp-plan.pro .lp-plan-name { color: var(--accent); }
-    .lp-plan-price { font-size: 26px; font-weight: 600; letter-spacing: -0.02em; color: var(--text); margin: 10px 0 2px; }
-    .lp-plan-price small { font-size: 13px; font-weight: 400; color: var(--text-3); }
-    .lp-plan-tag { font-size: 12.5px; color: var(--text-2); margin-bottom: 14px; }
-    .lp-plan ul { list-style: none; margin: 0 0 18px; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-    .lp-plan li { font-size: 13.5px; color: var(--text); display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
-    .lp-plan li i { color: var(--accent); font-size: 12px; margin-top: 3px; }
-    .lp-plan .btn-lp-primary, .lp-plan .btn-lp-secondary { justify-content: center; margin-top: auto; }
-    .btn-lp-disabled {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      background: var(--surface-2); color: var(--text-3);
-      border: 1px solid var(--border); border-radius: 6px;
-      padding: 10px 18px; font-family: var(--font-sans); font-size: 13.5px; font-weight: 500;
-      cursor: not-allowed;
-    }
-    .lp-badge-soon {
-      font-size: 10px; font-weight: 500; color: var(--warn); background: var(--warn-tint);
-      border: 1px solid var(--warn-border); border-radius: 5px; padding: 1px 6px;
-      text-transform: uppercase; letter-spacing: 0.04em; vertical-align: 2px;
-    }
-
-    .lp-faq { display: flex; flex-direction: column; max-width: 720px; }
-    .lp-faq details { border-bottom: 1px solid var(--border); padding: 14px 0; }
-    .lp-faq summary {
-      cursor: pointer; font-size: 15px; font-weight: 500; color: var(--text); list-style: none;
-      display: flex; justify-content: space-between; align-items: center; gap: 12px;
-      min-height: 44px;
-    }
-    .lp-faq summary::-webkit-details-marker { display: none; }
-    .lp-faq summary::after { content: "+"; color: var(--text-3); font-size: 16px; }
-    .lp-faq details[open] summary::after { content: "–"; }
-    .lp-faq .lp-faq-a { font-size: 14px; line-height: 1.65; color: var(--text-2); padding-top: 10px; }
-
-    .lp-footer { border-top: 1px solid var(--border); padding: 28px 0 48px; }
-    .lp-footer-inner {
-      display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between;
-    }
-    .lp-footer nav { display: flex; gap: 18px; }
-    .lp-footer a { color: var(--text-2); text-decoration: none; font-size: 13px; padding: 8px 2px; display: inline-block; min-height: 32px; }
-    .lp-footer a:hover { color: var(--text); }
-    .lp-footer small { display: block; margin-top: 14px; font-size: 12px; color: var(--text-3); line-height: 1.6; }
-
-    @media (min-width: 720px) {
-      .lp-steps { grid-template-columns: repeat(3, 1fr); }
-      .lp-features { grid-template-columns: repeat(3, 1fr); }
-      .lp-pricing { grid-template-columns: repeat(3, 1fr); }
-      .lp-hero { padding: 96px 0 72px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TKA Master — Latihan Soal TKA &amp; AI Tutor</title>
+<meta name="description" content="Latihan soal TKA Pusmendik dengan pembahasan langkah demi langkah dan AI Tutor. Simulasi ujian dengan timer. Gratis selama masa beta.">
+<script>
+/* pasang class gerak sedini mungkin: cegah FOUC sebelum GSAP init */
+document.documentElement.classList.add(window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'motion');
+</script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: { pine:'#0B3D2E', pine2:'#0E4A38', moss:'#15803D', mint:'#E7F3EC', mist:'#F2F7F3',
+              amber:'#F59E0B', cream:'#FAF8F4', ink:'#101B15', mute:'#5F6F66', line:'#E4E9E5' },
+    fontFamily: { sans:['Geist','ui-sans-serif','system-ui','sans-serif'], serifit:['"Instrument Serif"','Georgia','serif'] },
+    borderRadius: { '2xl':'16px' }
+  }}
+}
+</script>
+<style>
+  html{scroll-behavior:auto}
+  body{font-family:Geist,ui-sans-serif,system-ui,sans-serif;background:#FAF8F4;color:#101B15;-webkit-font-smoothing:antialiased}
+  .serifit{font-family:"Instrument Serif",Georgia,serif;font-style:italic}
+  .btn:active{transform:scale(.97)}
+  /* --- fade-up umum: default = frame akhir (terlihat); .motion menyembunyikan dulu --- */
+  .motion [data-anim]{opacity:0;transform:translateY(16px)}
+  /* --- Phone scrub screens --- */
+  .scr{opacity:0;transform:translateY(12px) scale(.985);pointer-events:none;transition:opacity .5s ease,transform .5s ease}
+  .scr.on{opacity:1;transform:none;pointer-events:auto}
+  /* typing dots */
+  .dots i{width:5px;height:5px;border-radius:9999px;background:#9DB5A8;display:inline-block}
+  .motion .dots.run i{animation:dotp 1s ease-in-out infinite}
+  .dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+  @keyframes dotp{0%,100%{transform:translateY(0);opacity:.4}50%{transform:translateY(-3px);opacity:1}}
+  /* highlight stabilo: overlay digambar kiri->kanan */
+  .hl{position:relative;white-space:nowrap}
+  .hl b{position:relative;z-index:1;font-weight:600}
+  .hl i{position:absolute;inset:.05em -.15em .05em -.1em;background:#FDE68A;border-radius:4px;transform:scaleX(0);transform-origin:left center;z-index:0}
+  .reduced .hl i,.done .hl i{transform:scaleX(1)}
+  .reduced #mDots{display:none}
+  /* chip press ripple */
+  .chip{position:relative;overflow:hidden}
+  .chip.pressed{background:#E7F3EC;border-color:#15803D;color:#0B3D2E}
+  .chip.pressed::after{content:"";position:absolute;inset:0;border-radius:9999px;background:#15803D;opacity:0;transform:scale(.6);animation:rip .7s ease-out}
+  @keyframes rip{0%{opacity:.18;transform:scale(.5)}100%{opacity:0;transform:scale(1.4)}}
+  /* exam ring */
+  .ring-spin{animation:ringspin 8s linear infinite;transform-origin:center}
+  @keyframes ringspin{to{transform:rotate(360deg)}}
+  /* pembahasan steps */
+  .step .step-b{opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s ease;display:flex;gap:8px;align-items:flex-start;overflow:hidden}
+  .step.open .step-b{opacity:1;transform:none}
+  .step .chev{transition:transform .4s ease}
+  .step.open .chev{transform:rotate(90deg)}
+  /* timeline cara kerja */
+  .tline{transform:scaleY(0);transform-origin:top center}
+  .reduced .tline{transform:scaleY(1)}
+  .tdot{background:#DCE5DF;color:#7A8C82;transition:background .3s,color .3s,box-shadow .3s}
+  .tdot.lit{background:#15803D;color:#fff;box-shadow:0 0 0 5px #E7F3EC}
+  /* paket segmented */
+  .seg-ind{transition:transform .45s cubic-bezier(.22,.8,.28,1)}
+  .pkgcard{transition:opacity .45s ease,transform .45s ease}
+  .pkgcard.off{opacity:0;transform:translateY(10px);pointer-events:none;position:absolute;inset:0}
+  /* menu overlay */
+  .mnu{opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .35s ease,transform .35s ease}
+  .mnu.open{opacity:1;pointer-events:auto;transform:none}
+  .tabbar{padding-bottom:max(env(safe-area-inset-bottom),8px)}
+  @media (prefers-reduced-motion:reduce){.ring-spin,.dots i{animation:none!important}.scr{transition:none}}
+</style>
 </head>
-<body>
+<body class="bg-cream text-ink antialiased">
 
-  <nav class="lp-nav">
-    <div class="lp-nav-inner">
-      <a class="lp-brand" href="/">
-        <span class="brand-logo"><i class="fa-solid fa-bullseye"></i></span>
-        <b>TKA Master</b>
-      </a>
-      <div class="lp-nav-actions">
-        <span class="lp-link-muted">Masuk <span class="lp-soon">segera</span></span>
-        <a class="btn-lp-primary" href="/app">Mulai Latihan</a>
+<!-- ============================================================
+     KOMPONEN: HEADER / NAV
+============================================================ -->
+<header class="sticky top-0 z-40 bg-pine text-white">
+  <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
+    <a href="/" class="flex items-center gap-2.5">
+      <span class="grid h-9 w-9 place-items-center rounded-2xl bg-white/10 ring-1 ring-white/15">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
+      </span>
+      <span class="text-[17px] font-bold tracking-tight">TKA Master</span>
+    </a>
+    <nav class="hidden items-center gap-7 text-sm text-white/80 md:flex">
+      <a href="#fitur" class="hover:text-white">Fitur</a>
+      <a href="#paket" class="hover:text-white">Harga</a>
+      <a href="#faq" class="hover:text-white">FAQ</a>
+    </nav>
+    <div class="flex items-center gap-3">
+      <a href="/app" class="btn hidden rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-pine md:inline-block">Mulai Latihan</a>
+      <button id="btnMenu" class="btn grid h-10 w-10 place-items-center rounded-2xl bg-white/10 ring-1 ring-white/15 md:hidden" aria-label="Buka menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mnu" class="mnu absolute inset-x-0 top-16 border-t border-white/10 bg-pine px-5 py-4 md:hidden">
+    <div class="flex flex-col text-[15px]">
+      <a href="#fitur" class="mnu-l border-b border-white/10 py-3 text-white/85">Fitur</a>
+      <a href="#paket" class="mnu-l border-b border-white/10 py-3 text-white/85">Harga</a>
+      <a href="#faq" class="mnu-l py-3 text-white/85">FAQ</a>
+      <a href="/app" class="mnu-l mt-3 rounded-2xl bg-white py-3 text-center font-semibold text-pine">Mulai Latihan</a>
+    </div>
+  </div>
+</header>
+
+<main id="beranda">
+
+<!-- ============================================================
+     KOMPONEN: HERO (HP melayang + chip parallax)
+============================================================ -->
+<section class="relative overflow-hidden bg-cream">
+  <div class="pointer-events-none absolute -top-24 right-[-15%] h-72 w-72 rounded-full bg-mint blur-3xl"></div>
+  <div class="pointer-events-none absolute bottom-10 left-[-12%] h-56 w-56 rounded-full bg-amber/10 blur-3xl"></div>
+  <div class="relative mx-auto max-w-6xl px-5 pb-16 pt-10 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:pt-16">
+    <div class="max-w-xl">
+      <span data-anim class="inline-flex items-center gap-2 rounded-2xl bg-mint px-3 py-1.5 text-[12.5px] font-semibold text-pine ring-1 ring-moss/15">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/></svg>
+        Selama beta, semua fitur Pro gratis
+      </span>
+      <h1 data-anim class="mt-4 text-[40px] font-extrabold leading-[1.05] tracking-tight text-pine sm:text-[52px]">
+        Latihan soal TKA, <span class="serifit font-normal text-amber">tanpa panik.</span>
+      </h1>
+      <p data-anim class="mt-3 text-[15.5px] leading-relaxed text-mute">Soal &amp; kunci resmi Pusmendik, simulasi ujian ber-timer, dan AI Tutor — satu aplikasi.</p>
+      <div data-anim class="mt-7 flex flex-wrap items-center gap-3">
+        <a href="/app" class="btn inline-flex items-center gap-2 rounded-2xl bg-pine px-6 py-3.5 text-[15px] font-semibold text-white shadow-lg shadow-pine/20">
+          Mulai latihan
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+        <a href="/app" class="btn inline-flex items-center gap-2 rounded-2xl px-5 py-3.5 text-[15px] font-semibold text-pine ring-1 ring-line hover:bg-mist">
+          Coba tanpa login
+        </a>
+      </div>
+      <p data-anim class="mt-5 text-[13px] text-mute">Tanpa pendaftaran · Kuota AI Tutor 5 pertanyaan/hari untuk tamu</p>
+    </div>
+
+    <div class="relative mt-12 flex justify-center lg:mt-0">
+      <div id="heroFloat" class="relative">
+        <div class="relative w-[290px] rounded-[2.4rem] bg-pine p-2.5 shadow-2xl shadow-pine/30 sm:w-[310px]">
+          <div class="overflow-hidden rounded-[1.9rem] bg-white">
+            <div class="flex items-center justify-between bg-pine px-4 py-2.5 text-white">
+              <span class="text-[11px] font-bold">TKA Master</span>
+              <span class="rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-bold ring-1 ring-white/15">45:00</span>
+            </div>
+            <div class="space-y-3 p-4">
+              <div class="flex items-center justify-between rounded-2xl bg-mist px-3.5 py-2">
+                <span class="text-[10.5px] font-bold text-ink">Matematika (Wajib)</span>
+                <span class="rounded-full bg-pine px-2.5 py-1 text-[9.5px] font-bold text-white">Paket 1</span>
+              </div>
+              <div class="rounded-2xl bg-mint p-3.5">
+                <p class="text-[11px] font-semibold text-pine">AI Tutor · Matematika</p>
+                <p class="mt-1 text-[10.5px] leading-relaxed text-pine/80">Halo! Saya AI Tutor TKA Matematika. Masih bingung dengan arti simbol, rumus, atau langkah pengerjaan?</p>
+                <div class="mt-2.5 flex gap-1.5">
+                  <span class="rounded-full bg-white px-2.5 py-1 text-[9.5px] font-semibold text-pine ring-1 ring-line">Kenapa begitu?</span>
+                  <span class="rounded-full bg-white px-2.5 py-1 text-[9.5px] font-semibold text-pine ring-1 ring-line">Soal mirip</span>
+                </div>
+              </div>
+              <div class="rounded-2xl bg-mist p-3.5">
+                <div class="flex items-center justify-between">
+                  <p class="text-[11px] font-semibold text-ink">Simulasi Ujian</p>
+                  <span class="text-[9.5px] font-semibold text-moss">45:00 · Soal 4/40</span>
+                </div>
+                <div class="mt-2 grid grid-cols-6 gap-1.5">
+                  <span class="grid h-6 place-items-center rounded-md bg-moss text-[9px] font-bold text-white">1</span>
+                  <span class="grid h-6 place-items-center rounded-md bg-moss text-[9px] font-bold text-white">2</span>
+                  <span class="grid h-6 place-items-center rounded-md bg-amber text-[9px] font-bold text-white">3</span>
+                  <span class="grid h-6 place-items-center rounded-md bg-mist text-[9px] font-semibold text-mute">4</span>
+                  <span class="grid h-6 place-items-center rounded-md bg-mist text-[9px] font-semibold text-mute">5</span>
+                  <span class="grid h-6 place-items-center rounded-md bg-mist text-[9px] font-semibold text-mute">6</span>
+                </div>
+              </div>
+              <div class="rounded-2xl bg-mist p-3.5">
+                <p class="text-[11px] font-semibold text-ink">Pembahasan</p>
+                <p class="mt-1 text-[10px] leading-relaxed text-mute">Langkah 2 — x = −b/2a = 2 · Titik puncak <span class="hl done"><b>(2, −1)</b><i></i></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="chipf absolute -left-16 top-16 hidden rounded-2xl bg-white px-3.5 py-2 text-[12px] font-semibold text-pine shadow-lg shadow-pine/10 ring-1 ring-line sm:block" data-speed="-28">
+          <span class="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-mint align-middle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/></svg></span>AI Tutor
+        </div>
+        <div class="chipf absolute -right-14 top-40 hidden rounded-2xl bg-white px-3.5 py-2 text-[12px] font-semibold text-pine shadow-lg shadow-pine/10 ring-1 ring-line sm:block" data-speed="-52">
+          <span class="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-mint align-middle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Timer 45:00
+        </div>
+        <div class="chipf absolute -left-10 bottom-14 hidden rounded-2xl bg-white px-3.5 py-2 text-[12px] font-semibold text-pine shadow-lg shadow-pine/10 ring-1 ring-line sm:block" data-speed="-40">
+          <span class="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-mint align-middle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-2zm0 0a2 2 0 0 1 2-2h13"/></svg></span>Pembahasan
+        </div>
       </div>
     </div>
-  </nav>
+  </div>
+</section>
 
-  <header class="lp-hero">
-    <div class="lp-wrap">
-      <div class="lp-beta"><i class="fa-solid fa-circle-info"></i> Selama masa beta, semua fitur Pro gratis.</div>
-      <h1>Latihan soal TKA dengan pembahasan langkah demi langkah.</h1>
-      <p>Soal dan kunci resmi TKA Pusmendik Kemendikdasmen, simulasi ujian dengan timer, dan AI Tutor untuk bertanya soal konsep, rumus, atau langkah pengerjaan.</p>
-      <div class="lp-hero-cta">
-        <a class="btn-lp-primary" href="/app"><i class="fa-solid fa-arrow-right"></i> Mulai latihan</a>
-        <a class="btn-lp-secondary" href="/app">Coba tanpa login</a>
-      </div>
-      <p class="lp-hero-note">Tanpa pendaftaran. Kuota AI Tutor 5 pertanyaan per hari untuk tamu.</p>
+<!-- ============================================================
+     KOMPONEN: CARA KERJA (timeline + titik menyala)
+============================================================ -->
+<section id="cara" class="bg-white py-20">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="max-w-xl">
+      <p data-anim class="text-[12px] font-bold uppercase tracking-[0.14em] text-moss">Cara kerja</p>
+      <h2 data-anim class="mt-2 text-[30px] font-extrabold tracking-tight text-pine sm:text-[36px]">Alur belajar yang <span class="serifit font-normal text-amber">tenang.</span></h2>
+      <p data-anim class="mt-3 text-[15.5px] leading-relaxed text-mute">Pilih mapel, kerjakan, pahami pembahasannya. Selesai.</p>
     </div>
-  </header>
 
-  <section class="lp-section">
-    <div class="lp-wrap">
-      <h2 class="lp-section-title">Cara kerja</h2>
-      <div class="lp-steps">
-        <div class="lp-step">
-          <div class="lp-step-num">01</div>
-          <h3>Pilih mata pelajaran &amp; paket</h3>
-          <p>Mulai dari Matematika Wajib hingga mapel pilihan. Soal disusun per paket seperti ujian sesungguhnya.</p>
-        </div>
-        <div class="lp-step">
-          <div class="lp-step-num">02</div>
-          <h3>Kerjakan dengan timer</h3>
-          <p>Simulasi ujian dengan penghitung waktu, navigasi antar nomor, dan penanda ragu-ragu.</p>
-        </div>
-        <div class="lp-step">
-          <div class="lp-step-num">03</div>
-          <h3>Pelajari pembahasannya</h3>
-          <p>Kunci resmi, langkah pengerjaan rinci, tips &amp; jebakan — dan tanya AI Tutor bila masih bingung.</p>
-        </div>
+    <div id="cwWrap" class="relative mt-12 space-y-5 pl-10">
+      <div class="absolute bottom-2 left-[13px] top-2 w-px bg-line">
+        <div id="tline" class="tline h-full w-full bg-moss"></div>
       </div>
-    </div>
-  </section>
 
-  <section class="lp-section">
-    <div class="lp-wrap">
-      <h2 class="lp-section-title">Fitur utama</h2>
-      <div class="lp-features">
-        <div class="lp-feature">
-          <h3><i class="fa-solid fa-robot"></i> AI Tutor</h3>
-          <p>Tanya apa saja tentang soal yang sedang dikerjakan — arti simbol, alasan pemilihan rumus, sampai trik cepat. Jawaban mengacu pada soal dan pembahasannya.</p>
-        </div>
-        <div class="lp-feature">
-          <h3><i class="fa-solid fa-stopwatch"></i> Simulasi ujian</h3>
-          <p>Timer, daftar soal dengan status terjawab, dan mode ragu-ragu untuk melatih manajemen waktu seperti hari-H.</p>
-        </div>
-        <div class="lp-feature">
-          <h3><i class="fa-solid fa-book-open"></i> Pembahasan terstruktur</h3>
-          <p>Diketahui–ditanyakan, konsep kunci, langkah penyelesaian bernomor, dan antisipasi jebakan yang sering muncul.</p>
+      <div class="cstep relative" data-dot>
+        <span class="tdot absolute -left-10 top-5 grid h-7 w-7 place-items-center rounded-full text-[12px] font-bold">1</span>
+        <div data-anim class="rounded-2xl border border-line bg-cream p-5 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-2xl bg-mint text-moss"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-2zm0 0a2 2 0 0 1 2-2h13"/></svg></span>
+            <div>
+              <p class="text-[15.5px] font-bold text-pine">Pilih mata pelajaran &amp; paket</p>
+              <p class="text-[13px] text-mute">Mulai dari Matematika Wajib hingga mapel pilihan.</p>
+            </div>
+          </div>
+          <div class="mt-4 flex flex-wrap gap-1.5">
+            <span class="rounded-full bg-mint px-3 py-1.5 text-[11.5px] font-semibold text-pine">Matematika Wajib · Paket 1</span>
+            <span class="rounded-full bg-white px-3 py-1.5 text-[11.5px] font-semibold text-mute ring-1 ring-line">+21 mapel lain</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
 
-  <section class="lp-section">
-    <div class="lp-wrap">
-      <h2 class="lp-section-title">Harga</h2>
-      <div class="lp-pricing">
-        <div class="lp-plan">
-          <span class="lp-plan-name">Tamu</span>
-          <div class="lp-plan-price">Gratis</div>
-          <div class="lp-plan-tag">Tanpa pendaftaran</div>
-          <ul>
-            <li><i class="fa-solid fa-check"></i> Semua soal &amp; pembahasan</li>
-            <li><i class="fa-solid fa-check"></i> 5 tanya AI Tutor per hari</li>
-            <li><i class="fa-solid fa-check"></i> Simulasi ujian dengan timer</li>
+      <div class="cstep relative" data-dot>
+        <span class="tdot absolute -left-10 top-5 grid h-7 w-7 place-items-center rounded-full text-[12px] font-bold">2</span>
+        <div data-anim class="rounded-2xl border border-line bg-cream p-5 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-2xl bg-mint text-moss"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+            <div>
+              <p class="text-[15.5px] font-bold text-pine">Kerjakan dengan timer</p>
+              <p class="text-[13px] text-mute">Navigasi antar nomor dan penanda ragu-ragu.</p>
+            </div>
+          </div>
+          <div class="mt-4 inline-flex items-center gap-2 rounded-2xl bg-pine px-3.5 py-2 text-white">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            <span class="text-[12.5px] font-bold tabular-nums">45:00</span>
+            <span class="text-[11px] text-white/60">· 40 soal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cstep relative" data-dot>
+        <span class="tdot absolute -left-10 top-5 grid h-7 w-7 place-items-center rounded-full text-[12px] font-bold">3</span>
+        <div data-anim class="rounded-2xl border border-line bg-cream p-5 shadow-sm">
+          <div class="flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-2xl bg-mint text-moss"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 1 3.6 10.8c-.6.5-.6 1.2-.6 2.2h-6c0-1-.1-1.7-.7-2.2A6 6 0 0 1 12 3z"/></svg></span>
+            <div>
+              <p class="text-[15.5px] font-bold text-pine">Pelajari pembahasannya</p>
+              <p class="text-[13px] text-mute">Kunci resmi, langkah rinci, tips &amp; jebakan.</p>
+            </div>
+          </div>
+          <div class="mt-4 inline-flex items-center gap-2 rounded-2xl bg-white px-3.5 py-2 ring-1 ring-line">
+            <span class="text-[13px] font-semibold text-ink">x² − 4x + 3 = 0</span>
+            <span class="rounded-full bg-mint px-2 py-0.5 text-[10.5px] font-bold text-moss">titik puncak</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     KOMPONEN: SIGNATURE — HP PINNED (AI Tutor → Simulasi → Pembahasan)
+============================================================ -->
+<section id="fitur" class="bg-mist py-16">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="mx-auto max-w-xl text-center">
+      <p data-anim class="text-[12px] font-bold uppercase tracking-[0.14em] text-moss">Fitur utama</p>
+      <h2 data-anim class="mt-2 text-[30px] font-extrabold tracking-tight text-pine sm:text-[36px]">Tiga fitur, satu <span class="serifit font-normal text-amber">ritme belajar.</span></h2>
+      <p data-anim class="mt-3 text-[15.5px] leading-relaxed text-mute">Lihat layarnya berganti: chat tutor, ruang ujian, pembahasan.</p>
+    </div>
+
+    <div id="scrub" class="mt-10 lg:grid lg:grid-cols-2 lg:gap-14">
+      <!-- Kolom HP: mobile = spotlight statis (layar rotasi otomatis); desktop = sticky scrub -->
+      <div id="phoneCol" class="relative flex justify-center py-4 lg:sticky lg:top-24 lg:self-start lg:py-0">
+        <div class="flex justify-center">
+          <div id="phone" class="w-[250px] rounded-[2.4rem] bg-pine p-2.5 shadow-2xl shadow-pine/30 sm:w-[300px] lg:w-[300px]">
+            <div class="relative aspect-[9/18.6] overflow-hidden rounded-[1.9rem] bg-cream">
+              <div class="absolute inset-x-0 top-0 z-10 flex items-center justify-between px-5 pt-2.5 text-[9.5px] font-semibold text-ink/60">
+                <span>09.41</span>
+                <span class="flex items-center gap-1"><span class="h-1.5 w-1.5 rounded-full bg-moss"></span><span class="h-1.5 w-3 rounded-sm bg-ink/25"></span></span>
+              </div>
+
+              <!-- SCREEN 1 : CHAT AI TUTOR -->
+              <div id="scr1" class="scr on absolute inset-0 flex flex-col pt-8">
+                <div class="flex items-center gap-2.5 border-b border-line bg-white px-4 py-2.5">
+                  <span class="relative grid h-8 w-8 place-items-center rounded-full bg-pine text-[9px] font-bold text-white">AI
+                    <span class="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border-2 border-white bg-moss"></span>
+                  </span>
+                  <div><p class="text-[12px] font-bold leading-tight text-ink">AI Tutor</p><p class="text-[9.5px] text-moss">Matematika (Wajib) · Paket 1</p></div>
+                </div>
+                <div class="flex-1 space-y-2.5 overflow-hidden px-3.5 py-3" id="chatBody">
+                  <div id="mStu" class="ml-auto max-w-[85%] rounded-2xl rounded-br-md bg-pine px-3 py-2 text-[11px] leading-snug text-white">Kak, gimana cari titik puncak f(x) = x² − 4x + 3?</div>
+                  <div id="mDots" class="dots flex w-fit items-center gap-1 rounded-2xl rounded-bl-md bg-white px-3 py-2.5 ring-1 ring-line"><i></i><i></i><i></i></div>
+                  <div id="mAi" class="max-w-[88%] rounded-2xl rounded-bl-md bg-white px-3 py-2.5 text-[11px] leading-relaxed text-ink ring-1 ring-line">Oke, caranya singkat. Titik puncak selalu ada di x = −b/2a. Dengan a = 1 dan b = −4, kamu dapat x = 2. Substitusi ke f(x) dan hasilnya −1.</div>
+                  <div id="fCards" class="space-y-1.5">
+                    <div class="fc w-fit rounded-xl bg-mint px-3 py-1.5 font-mono text-[11px] font-semibold text-pine">x = −b/2a</div>
+                    <div class="fc w-fit rounded-xl bg-mint px-3 py-1.5 font-mono text-[11px] font-semibold text-pine">x = −(−4)/2·1 = 2</div>
+                    <div class="fc w-fit rounded-xl bg-mint px-3 py-1.5 font-mono text-[11px] font-semibold text-pine">f(2) = −1</div>
+                  </div>
+                  <div id="mHl" class="w-fit rounded-2xl bg-white px-3 py-2 text-[11.5px] font-semibold text-ink ring-1 ring-line">Titik puncaknya <span class="hl"><b>(2, −1)</b><i></i></span></div>
+                  <div id="mChips" class="flex gap-1.5 pt-0.5">
+                    <button class="chip rounded-full border border-line bg-white px-3 py-1.5 text-[10.5px] font-semibold text-pine">Kenapa begitu?</button>
+                    <button class="chip rounded-full border border-line bg-white px-3 py-1.5 text-[10.5px] font-semibold text-pine">Soal mirip</button>
+                  </div>
+                </div>
+                <div class="flex items-center gap-2 border-t border-line bg-white px-3.5 py-2.5">
+                  <span class="flex-1 rounded-2xl bg-mist px-3 py-1.5 text-[10.5px] text-mute">Tulis pertanyaan…</span>
+                  <span class="grid h-7 w-7 place-items-center rounded-2xl bg-pine text-white"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></span>
+                </div>
+              </div>
+
+              <!-- SCREEN 2 : SIMULASI UJIAN -->
+              <div id="scr2" class="scr absolute inset-0 flex flex-col pt-8">
+                <div class="flex items-center justify-between border-b border-line bg-white px-4 py-2.5">
+                  <span class="flex items-center gap-2">
+                    <svg width="26" height="26" viewBox="0 0 26 26" class="-rotate-90"><circle cx="13" cy="13" r="10" fill="none" stroke="#E4E9E5" stroke-width="3"/><g class="ring-spin"><circle cx="13" cy="13" r="10" fill="none" stroke="#15803D" stroke-width="3" stroke-linecap="round" stroke-dasharray="20 43"/></g></svg>
+                    <span class="text-[11.5px] font-bold tabular-nums text-ink">44:12</span>
+                  </span>
+                  <span class="rounded-full bg-mint px-2.5 py-1 text-[10px] font-bold text-pine" id="examProg">Soal 4/40</span>
+                </div>
+                <div class="flex-1 space-y-3 px-4 py-3">
+                  <p class="text-[11.5px] font-semibold leading-relaxed text-ink">4. Titik puncak dari f(x) = x² − 4x + 3 adalah …</p>
+                  <div class="space-y-1.5">
+                    <div class="rounded-xl border border-line bg-white px-3 py-2 text-[10.5px] text-mute">A. (2, 3)</div>
+                    <div class="rounded-xl border border-line bg-white px-3 py-2 text-[10.5px] text-mute">B. (−2, 1)</div>
+                    <div class="rounded-xl border-2 border-moss bg-mint px-3 py-2 text-[10.5px] font-semibold text-pine">C. (2, −1) ✓</div>
+                    <div class="rounded-xl border border-line bg-white px-3 py-2 text-[10.5px] text-mute">D. (1, −2)</div>
+                  </div>
+                  <div class="grid grid-cols-8 gap-1 pt-1" id="examGrid"></div>
+                </div>
+                <div class="grid grid-cols-3 gap-1.5 border-t border-line bg-white px-3 py-2.5 text-[10px] font-semibold">
+                  <span class="rounded-xl bg-mist py-1.5 text-center text-mute">Sebelumnya</span>
+                  <span class="rounded-xl bg-amber/15 py-1.5 text-center text-amber">Ragu-ragu</span>
+                  <span class="rounded-xl bg-pine py-1.5 text-center text-white">Selanjutnya</span>
+                </div>
+              </div>
+
+              <!-- SCREEN 3 : PEMBAHASAN -->
+              <div id="scr3" class="scr absolute inset-0 flex flex-col pt-8">
+                <div class="flex items-center justify-between border-b border-line bg-white px-4 py-2.5">
+                  <p class="text-[12px] font-bold text-ink">Pembahasan <span class="text-mute">· Soal 4</span></p>
+                  <span class="rounded-full bg-mint px-2.5 py-1 text-[10px] font-bold text-moss">Benar</span>
+                </div>
+                <div class="flex-1 space-y-1.5 overflow-hidden px-3 py-3" id="stepsWrap">
+                  <p class="pb-1 text-[11px] leading-relaxed text-mute">Cari titik puncak f(x) = x² − 4x + 3, langkah demi langkah:</p>
+                  <div class="step rounded-xl border border-line bg-white px-3 py-2" data-step><p class="flex items-center gap-2 text-[10.5px] font-bold text-pine"><svg class="chev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Langkah 1 — Identifikasi a &amp; b</p><div class="step-b"><p class="pl-4 text-[10px] leading-relaxed text-mute">a = 1, b = −4, c = 3 dari bentuk ax² + bx + c.</p></div></div>
+                  <div class="step rounded-xl border border-line bg-white px-3 py-2" data-step><p class="flex items-center gap-2 text-[10.5px] font-bold text-pine"><svg class="chev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Langkah 2 — Rumus x puncak</p><div class="step-b"><p class="pl-4 text-[10px] leading-relaxed text-mute">x = −b/2a = −(−4)/2·1 = 2.</p></div></div>
+                  <div class="step rounded-xl border border-line bg-white px-3 py-2" data-step><p class="flex items-center gap-2 text-[10.5px] font-bold text-pine"><svg class="chev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Langkah 3 — Substitusi</p><div class="step-b"><p class="pl-4 text-[10px] leading-relaxed text-mute">f(2) = 4 − 8 + 3 = −1.</p></div></div>
+                  <div class="step rounded-xl border border-line bg-white px-3 py-2" data-step><p class="flex items-center gap-2 text-[10.5px] font-bold text-pine"><svg class="chev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Langkah 4 — Tulis titik</p><div class="step-b"><p class="pl-4 text-[10px] leading-relaxed text-mute">Titik puncak <span class="hl done"><b>(2, −1)</b><i></i></span> — parabola terbuka ke atas.</p></div></div>
+                  <div class="step rounded-xl border border-line bg-white px-3 py-2" data-step><p class="flex items-center gap-2 text-[10.5px] font-bold text-pine"><svg class="chev" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>Langkah 5 — Cek ulang</p><div class="step-b"><p class="pl-4 text-[10px] leading-relaxed text-mute">Cocok dengan kunci resmi. Jawaban: C.</p></div></div>
+                </div>
+                <div class="border-t border-line bg-white px-3 py-2.5">
+                  <div class="rounded-2xl bg-pine px-3.5 py-2.5 text-center text-[11px] font-semibold text-white">Masih bingung? <span class="text-amber">Tanya AI Tutor →</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- kolom teks: mobile = kartu biasa urut ke bawah; desktop = panel scrub -->
+      <div id="panels" class="mt-8 space-y-5 lg:mt-0 lg:block lg:space-y-0">
+        <div class="panel relative rounded-2xl border border-line bg-white p-6 pb-6 shadow-sm lg:mt-0 lg:min-h-[92vh] lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:pb-0 lg:shadow-none">
+          <p class="text-[12px] font-bold uppercase tracking-[0.14em] text-moss">01 — AI Tutor</p>
+          <h3 class="mt-2 text-[26px] font-extrabold tracking-tight text-pine sm:text-[30px]">Nanya kayak chat, <span class="serifit font-normal text-amber">dijawab per langkah.</span></h3>
+          <p class="mt-3 max-w-md text-[15px] leading-relaxed text-mute">Jawaban selalu mengacu ke soal dan pembahasan resmi.</p>
+          <ul class="mt-5 space-y-2.5 text-[14px] text-ink/80">
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Kartu rumus bertahap</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Kuota tamu 5 tanya/hari</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Riwayat chat tersimpan</li>
           </ul>
-          <a class="btn-lp-secondary" href="/app">Mulai tanpa daftar</a>
         </div>
-        <div class="lp-plan">
-          <span class="lp-plan-name">Terdaftar</span>
-          <div class="lp-plan-price">Gratis</div>
-          <div class="lp-plan-tag">Akun login <span class="lp-badge-soon">segera</span></div>
-          <ul>
-            <li><i class="fa-solid fa-check"></i> Semua soal &amp; pembahasan</li>
-            <li><i class="fa-solid fa-check"></i> 20 tanya AI Tutor per hari</li>
-            <li><i class="fa-solid fa-check"></i> Riwayat latihan tersimpan</li>
+        <div class="panel relative rounded-2xl border border-line bg-white p-6 pb-6 shadow-sm lg:mt-0 lg:min-h-[92vh] lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:pb-0 lg:shadow-none">
+          <p class="text-[12px] font-bold uppercase tracking-[0.14em] text-moss">02 — Simulasi Ujian</p>
+          <h3 class="mt-2 text-[26px] font-extrabold tracking-tight text-pine sm:text-[30px]">Suasana ujian yang <span class="serifit font-normal text-amber">sesungguhnya.</span></h3>
+          <p class="mt-3 max-w-md text-[15px] leading-relaxed text-mute">Persis hari-H: timer jalan, kamu yang kendalikan.</p>
+          <ul class="mt-5 space-y-2.5 text-[14px] text-ink/80">
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Timer 45:00 + progres soal</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Navigasi grid 40 soal</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Penanda ragu-ragu</li>
           </ul>
-          <button class="btn-lp-disabled" type="button" disabled>Menunggu login</button>
         </div>
-        <div class="lp-plan pro">
-          <span class="lp-plan-name">Pro</span>
-          <div class="lp-plan-price">Rp20.000 <small>/bulan</small></div>
-          <div class="lp-plan-tag">Gratis selama masa beta</div>
-          <ul>
-            <li><i class="fa-solid fa-check"></i> 100 tanya AI Tutor per hari</li>
-            <li><i class="fa-solid fa-check"></i> Semua fitur Tamu &amp; Terdaftar</li>
-            <li><i class="fa-solid fa-check"></i> Mendukung pengembangan berlanjut</li>
+        <div class="panel relative rounded-2xl border border-line bg-white p-6 pb-6 shadow-sm lg:mt-0 lg:min-h-[92vh] lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:pb-0 lg:shadow-none">
+          <p class="text-[12px] font-bold uppercase tracking-[0.14em] text-moss">03 — Pembahasan</p>
+          <h3 class="mt-2 text-[26px] font-extrabold tracking-tight text-pine sm:text-[30px]">Bukan sekadar <span class="serifit font-normal text-amber">kunci jawaban.</span></h3>
+          <p class="mt-3 max-w-md text-[15px] leading-relaxed text-mute">Konsep kunci, langkah bernomor, sampai jebakan yang sering muncul.</p>
+          <ul class="mt-5 space-y-2.5 text-[14px] text-ink/80">
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Langkah 1–5 terstruktur</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Kunci resmi selalu tampil</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Langsung tanya AI Tutor bila bingung</li>
           </ul>
-          <a class="btn-lp-primary" href="/app">Coba sekarang (beta)</a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="lp-section">
-    <div class="lp-wrap">
-      <h2 class="lp-section-title">Pertanyaan umum</h2>
-      <div class="lp-faq">
-        <details>
-          <summary>Dari mana sumber soalnya?</summary>
-          <div class="lp-faq-a">Soal, kunci, dan tampilan berasal dari publikasi resmi TKA Pusmendik Kemendikdasmen, lalu dilengkapi pembahasan langkah demi langkah yang disusun otomatis dengan bantuan AI. Pembahasan bisa mengandung kesalahan — selalu bandingkan dengan kunci resmi yang ditampilkan. Platform ini bukan situs resmi pemerintah.</div>
-        </details>
-        <details>
-          <summary>Apakah perlu membuat akun?</summary>
-          <div class="lp-faq-a">Tidak. Bisa langsung latihan sebagai tamu. Fitur akun login sedang dikembangkan dan akan menambah kuota AI Tutor harian.</div>
-        </details>
-        <details>
-          <summary>Kapan kuota AI Tutor direset?</summary>
-          <div class="lp-faq-a">Setiap hari pukul 00.00 WIB. Satu pertanyaan ke AI Tutor mengurangi satu kuota, berlaku juga untuk jawaban yang gagal dikirim karena gangguan jaringan.</div>
-        </details>
-        <details>
-          <summary>Bagaimana cara berlangganan Pro?</summary>
-          <div class="lp-faq-a">Selama masa beta, seluruh fitur Pro dapat dipakai gratis. Sistem pembayaran akan diumumkan kemudian dengan harga Rp20.000 per bulan.</div>
-        </details>
+<!-- ============================================================
+     KOMPONEN: STATISTIK (count-up) — angka real dari data project
+============================================================ -->
+<section id="statistik" class="bg-cream py-20">
+  <div class="mx-auto max-w-6xl px-5">
+    <p data-anim class="text-[12px] font-bold uppercase tracking-[0.14em] text-moss">Data, bukan janji</p>
+    <h2 data-anim class="mt-2 text-[30px] font-extrabold tracking-tight text-pine sm:text-[36px]">Angka yang <span class="serifit font-normal text-amber">jelas.</span></h2>
+    <div data-anim class="mt-10 grid grid-cols-3 gap-4">
+      <div class="rounded-2xl border border-line bg-white p-5 sm:p-7">
+        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="960">0</span>+</p>
+        <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Soal latihan dengan pembahasan</p>
+      </div>
+      <div class="rounded-2xl border border-line bg-white p-5 sm:p-7">
+        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="22">0</span></p>
+        <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Mata pelajaran TKA</p>
+      </div>
+      <div class="rounded-2xl border border-line bg-white p-5 sm:p-7">
+        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="44">0</span></p>
+        <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Paket soal resmi per mapel</p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer class="lp-footer">
-    <div class="lp-wrap lp-footer-inner">
-      <span style="font-size: 13px; color: var(--text-3);">TKA Master — platform latihan mandiri.</span>
-      <nav>
-        <a href="/privacy">Privasi</a>
-        <a href="/terms">Syarat</a>
-        <a href="/app">Masukan via aplikasi</a>
-      </nav>
+<!-- ============================================================
+     KOMPONEN: HARGA (segmented control + crossfade)
+============================================================ -->
+<section id="paket" class="bg-white py-20">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="max-w-xl">
+      <p data-anim class="text-[12px] font-bold uppercase tracking-[0.14em] text-moss">Harga</p>
+      <h2 data-anim class="mt-2 text-[30px] font-extrabold tracking-tight text-pine sm:text-[36px]">Pilih paket <span class="serifit font-normal text-amber">belajarmu.</span></h2>
+      <p data-anim class="mt-3 text-[15.5px] text-mute">Mulai gratis tanpa daftar. Upgrade pas siap.</p>
     </div>
-    <div class="lp-wrap">
-      <small>TKA Master bukan situs resmi Kemendikdasmen. Nama TKA dan materi ujian adalah milik pemegang hak masing-masing.</small>
-    </div>
-  </footer>
 
+    <div data-anim class="mt-8">
+      <div class="relative mx-auto grid w-full max-w-md grid-cols-2 rounded-2xl bg-mist p-1.5" role="tablist" aria-label="Pilih paket">
+        <span id="segInd" class="seg-ind absolute inset-y-1.5 left-1.5 rounded-xl bg-pine shadow-md" style="width:calc(50% - 6px)"></span>
+        <button id="tabFree" class="btn relative z-10 rounded-xl py-2.5 text-[14px] font-bold text-white" role="tab" aria-selected="true" onclick="setPkg(0)">Gratis</button>
+        <button id="tabPrem" class="btn relative z-10 rounded-xl py-2.5 text-[14px] font-bold text-mute" role="tab" aria-selected="false" onclick="setPkg(1)">Pro (beta)</button>
+      </div>
+
+      <div class="relative mx-auto mt-5 max-w-md">
+        <div id="cardFree" class="pkgcard rounded-2xl border border-line bg-cream p-6">
+          <div class="flex items-baseline justify-between">
+            <h3 class="text-[17px] font-bold text-pine">Gratis</h3>
+            <span class="rounded-full bg-mint px-2.5 py-1 text-[11px] font-bold text-moss">Tanpa daftar</span>
+          </div>
+          <p class="mt-3"><span class="text-[34px] font-extrabold tracking-tight text-pine">Rp0</span><span class="text-[13px] text-mute"> /selamanya</span></p>
+          <ul class="mt-5 space-y-2.5 text-[14px] text-ink/85">
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Semua soal &amp; pembahasan</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>5 tanya AI Tutor per hari</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Simulasi ujian dengan timer</li>
+          </ul>
+          <a href="/app" class="btn mt-6 block rounded-2xl bg-mint py-3.5 text-center text-[15px] font-bold text-pine">Mulai tanpa daftar</a>
+          <p class="mt-4 text-[12.5px] leading-relaxed text-mute">Nanti saat login tersedia: kuota 20 tanya/hari + riwayat tersimpan.</p>
+        </div>
+
+        <div id="cardPrem" class="pkgcard off rounded-2xl border-2 border-pine bg-pine p-6 text-white">
+          <div class="flex items-baseline justify-between">
+            <h3 class="text-[17px] font-bold">Pro</h3>
+            <span class="rounded-full bg-amber px-2.5 py-1 text-[11px] font-bold text-ink">Gratis selama beta</span>
+          </div>
+          <p class="mt-3"><span class="text-[34px] font-extrabold tracking-tight">Rp20.000</span><span class="text-[13px] text-white/60"> /bulan</span></p>
+          <ul class="mt-5 space-y-2.5 text-[14px] text-white/85">
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>100 tanya AI Tutor per hari</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Semua fitur Tamu &amp; Terdaftar</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Mendukung pengembangan berlanjut</li>
+          </ul>
+          <a href="/app" class="btn mt-6 block rounded-2xl bg-white py-3.5 text-center text-[15px] font-bold text-pine">Coba sekarang (beta)</a>
+          <p class="mt-4 text-[12.5px] leading-relaxed text-white/60">Selama beta, semua fitur Pro gratis.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     KOMPONEN: FAQ (konten asli dipertahankan)
+============================================================ -->
+<section id="faq" class="bg-cream py-20">
+  <div class="mx-auto max-w-3xl px-5">
+    <h2 data-anim class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[36px]">Pertanyaan <span class="serifit font-normal text-amber">umum.</span></h2>
+    <div data-anim class="mt-8 divide-y divide-line rounded-2xl border border-line bg-white">
+      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Dari mana sumber soalnya?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Soal, kunci, dan tampilan berasal dari publikasi resmi TKA Pusmendik Kemendikdasmen, lalu dilengkapi pembahasan langkah demi langkah yang disusun otomatis dengan bantuan AI. Pembahasan bisa mengandung kesalahan — selalu bandingkan dengan kunci resmi yang ditampilkan. Platform ini bukan situs resmi pemerintah.</p></details>
+      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Apakah perlu membuat akun?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Tidak. Bisa langsung latihan sebagai tamu. Fitur akun login sedang dikembangkan dan akan menambah kuota AI Tutor harian.</p></details>
+      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Kapan kuota AI Tutor direset?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Setiap hari pukul 00.00 WIB. Satu pertanyaan ke AI Tutor mengurangi satu kuota, berlaku juga untuk jawaban yang gagal dikirim karena gangguan jaringan.</p></details>
+      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Bagaimana cara berlangganan Pro?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Selama masa beta, seluruh fitur Pro dapat dipakai gratis. Sistem pembayaran akan diumumkan kemudian dengan harga Rp20.000 per bulan.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     KOMPONEN: CTA AKHIR
+============================================================ -->
+<section class="bg-pine py-20 text-center text-white">
+  <div class="mx-auto max-w-2xl px-5">
+    <h2 data-anim class="text-[32px] font-extrabold tracking-tight sm:text-[40px]">Siap sukses ujian TKA?</h2>
+    <p data-anim class="mx-auto mt-3 max-w-md text-[15.5px] leading-relaxed text-white/70">Mulai dari satu soal hari ini.</p>
+    <div data-anim class="mt-8">
+      <a href="/app" class="btn inline-flex items-center gap-2 rounded-2xl bg-white px-7 py-4 text-[15.5px] font-bold text-pine shadow-xl shadow-black/20">Mulai Latihan Sekarang<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+      <p class="mt-4 text-[12.5px] text-white/50">Tanpa pendaftaran · Gratis selama beta</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     KOMPONEN: FOOTER (disclaimer asli dipertahankan)
+============================================================ -->
+<footer class="border-t border-white/10 bg-pine pb-24 pt-10 text-white/60 md:pb-10">
+  <div class="mx-auto max-w-6xl px-5">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <span class="text-[13px] text-white/60">TKA Master — platform latihan mandiri.</span>
+      <nav class="flex flex-wrap gap-x-6 gap-y-2 text-[13px]"><a href="/privacy" class="hover:text-white">Privasi</a><a href="/terms" class="hover:text-white">Syarat</a><a href="/app" class="hover:text-white">Masukan via aplikasi</a></nav>
+    </div>
+    <p class="mt-6 text-[12px] leading-relaxed text-white/40">© 2026 TKA Master. TKA Master bukan situs resmi Kemendikdasmen. Nama TKA dan materi ujian adalah milik pemegang hak masing-masing.</p>
+  </div>
+</footer>
+
+<nav class="tabbar fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 backdrop-blur md:hidden" aria-label="Navigasi bawah">
+  <div class="grid grid-cols-4 pt-1.5 text-[10.5px] font-semibold">
+    <a href="#beranda" class="flex flex-col items-center gap-0.5 py-1 text-pine"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2h-4v-6h-6v6H5a2 2 0 0 1-2-2z"/></svg>Beranda</a>
+    <a href="#fitur" class="flex flex-col items-center gap-0.5 py-1 text-mute"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>Fitur</a>
+    <a href="#paket" class="flex flex-col items-center gap-0.5 py-1 text-mute"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="m2 7 10 4 10-4-10-4z"/><path d="M12 11v9"/></svg>Harga</a>
+    <a href="#faq" class="flex flex-col items-center gap-0.5 py-1 text-mute"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .3c0 1.7-2.5 2.2-2.5 3.7"/><path d="M12 17h.01"/></svg>FAQ</a>
+  </div>
+</nav>
+
+<script>
+(function () {
+  'use strict';
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ---------- Lenis smooth scroll + ScrollTrigger ---------- */
+  var lenis = null;
+  if (!reduced && window.Lenis) {
+    lenis = new Lenis({ autoRaf: false, duration: 1.1 });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* ---------- Umum: fade-up (16px, 0.5s, ease-out) ---------- */
+  if (!reduced) {
+    gsap.utils.toArray('[data-anim]').forEach(function (el) {
+      gsap.to(el, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out',
+        scrollTrigger: { trigger: el, start: 'top 86%' } });
+    });
+  }
+
+  /* ---------- Menu mobile ---------- */
+  var mnu = document.getElementById('mnu'), btnMenu = document.getElementById('btnMenu');
+  function closeMenu() { mnu.classList.remove('open'); btnMenu.setAttribute('aria-expanded', 'false'); if (lenis) lenis.start(); }
+  btnMenu.addEventListener('click', function () {
+    var open = mnu.classList.toggle('open');
+    btnMenu.setAttribute('aria-expanded', open);
+    if (lenis) (open ? lenis.stop() : lenis.start());
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.mnu-l'), function (a) { a.addEventListener('click', closeMenu); });
+
+  /* ---------- Hero: HP melayang (±6px, siklus 6s) + chip parallax ---------- */
+  if (!reduced) {
+    gsap.to('#heroFloat', { y: 6, duration: 3, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    gsap.utils.toArray('.chipf').forEach(function (c) {
+      gsap.to(c, { yPercent: parseFloat(c.dataset.speed) || -20, ease: 'none',
+        scrollTrigger: { trigger: '#beranda', start: 'top top', end: 'bottom top', scrub: 0.6 } });
+    });
+  }
+
+  /* ---------- Cara kerja: garis tergambar + titik menyala ---------- */
+  gsap.utils.toArray('[data-dot]').forEach(function (step) {
+    ScrollTrigger.create({ trigger: step, start: 'top 62%',
+      onEnter: function () { step.querySelector('.tdot').classList.add('lit'); },
+      onLeaveBack: function () { step.querySelector('.tdot').classList.remove('lit'); } });
+  });
+  if (!reduced) {
+    gsap.to('#tline', { scaleY: 1, ease: 'none',
+      scrollTrigger: { trigger: '#cwWrap', start: 'top 70%', end: 'bottom 55%', scrub: 0.4 } });
+  }
+
+  /* ---------- Persiapan teks chat (split per huruf / per kata) ---------- */
+  function splitChars(el) {
+    var t = el.textContent; el.textContent = '';
+    return t.split('').map(function (ch) {
+      var s = document.createElement('span'); s.className = 'ch';
+      s.textContent = ch === ' ' ? '\u00A0' : ch; el.appendChild(s); return s;
+    });
+  }
+  function splitWords(el) {
+    var t = el.textContent; el.textContent = '';
+    return t.split(' ').map(function (w, i, arr) {
+      var s = document.createElement('span'); s.className = 'wd';
+      s.textContent = w + (i < arr.length - 1 ? ' ' : ''); el.appendChild(s); return s;
+    });
+  }
+
+  /* ---------- Timeline chat AI tutor (loop, mulai saat masuk layar) ---------- */
+  var chatTL = null;
+  function buildChat() {
+    var stu = document.getElementById('mStu'), ai = document.getElementById('mAi');
+    var dots = document.getElementById('mDots'), cards = gsap.utils.toArray('.fc');
+    var mHl = document.getElementById('mHl');
+    var hl = document.querySelector('#mHl .hl i'), chips = document.querySelectorAll('#mChips .chip');
+    var stuCh = splitChars(stu), aiWd = splitWords(ai);
+    var tl = gsap.timeline({ repeat: -1, repeatDelay: 3, paused: true });
+    tl.set([stu, ai, mHl, cards, chips], { opacity: 0 })
+      .set(cards, { y: 10 })
+      .set(hl, { scaleX: 0 })
+      .set(stuCh, { opacity: 0 })
+      .set(aiWd, { opacity: 0 })
+      .set(dots, { opacity: 0 })
+      // 1. bubble murid diketik per huruf
+      .add(function () { stu.style.opacity = 1; })
+      .to(stuCh, { opacity: 1, duration: 0.01, stagger: 0.02, ease: 'none' })
+      // 2. typing dots ~1 detik
+      .to(dots, { opacity: 1, duration: 0.2 })
+      .add(function () { dots.classList.add('run'); })
+      .to({}, { duration: 1 })
+      .add(function () { dots.classList.remove('run'); })
+      .to(dots, { opacity: 0, duration: 0.15 })
+      // 3. jawaban AI mengalir per kata
+      .add(function () { ai.style.opacity = 1; })
+      .to(aiWd, { opacity: 1, duration: 0.01, stagger: { each: 0.065 }, ease: 'none' })
+      // 4. kartu rumus muncul bertahap
+      .to(cards[0], { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' })
+      .to(cards[1], { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '+=0.25')
+      .to(cards[2], { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }, '+=0.25')
+      // kesimpulan + sorot stabilo kiri -> kanan
+      .to(mHl, { opacity: 1, duration: 0.3, ease: 'power2.out' }, '+=0.2')
+      .add(function () { mHl.classList.add('done'); })
+      .to(hl, { scaleX: 1, duration: 0.55, ease: 'power1.inOut' })
+      // 5. chips + auto-press ripple
+      .to(chips, { opacity: 1, y: 0, duration: 0.35, stagger: 0.12, ease: 'power2.out' }, '+=0.2')
+      .add(function () {
+        chips[0].classList.add('pressed');
+        setTimeout(function () { chips[0].classList.remove('pressed'); }, 750);
+      }, '+=0.4');
+    return tl;
+  }
+
+  /* ---------- Simulasi: nomor soal menyala satu per satu ---------- */
+  var grid = document.getElementById('examGrid'), examN = 0, examTimer = null;
+  for (var i = 1; i <= 16; i++) {
+    var b = document.createElement('span');
+    b.className = 'gn grid h-5 place-items-center rounded-md bg-mist text-[8.5px] font-bold text-mute';
+    b.textContent = i; grid.appendChild(b);
+  }
+  var gns = grid.querySelectorAll('.gn');
+  function examTick() {
+    examN = (examN % 16) + 1;
+    var el = gns[examN - 1];
+    el.className = 'gn grid h-5 place-items-center rounded-md text-[8.5px] font-bold ' +
+      (examN % 7 === 0 ? 'bg-amber text-white' : 'bg-moss text-white');
+    document.getElementById('examProg').textContent = 'Soal ' + (examN + 4) + '/40';
+  }
+  function examStart() { if (!examTimer && !reduced) { examTimer = setInterval(examTick, 500); } }
+  function examStop() { if (examTimer) { clearInterval(examTimer); examTimer = null; } }
+  if (reduced) { for (var k = 0; k < 5; k++) { gns[k].className = 'gn grid h-5 place-items-center rounded-md bg-moss text-[8.5px] font-bold text-white'; } }
+
+  /* ---------- Pembahasan: langkah terbuka berurutan ---------- */
+  var steps = gsap.utils.toArray('#stepsWrap [data-step]');
+  function setSteps(n) { steps.forEach(function (s, i) { s.classList.toggle('open', reduced ? true : i < n); }); }
+  if (reduced) setSteps(steps.length);
+
+  /* ---------- Signature: scrub HP pinned ---------- */
+  var screens = [document.getElementById('scr1'), document.getElementById('scr2'), document.getElementById('scr3')];
+  var cur = -1, chatStarted = false;
+  function setScreen(idx) {
+    if (idx === cur) return;
+    cur = idx;
+    screens.forEach(function (s, i) { s.classList.toggle('on', i === idx); });
+    if (idx === 1) examStart(); else examStop();
+  }
+  var mm = gsap.matchMedia();
+
+  /* Desktop (≥1024px): HP sticky + scrub mengikuti scroll */
+  mm.add('(min-width: 1024px)', function () {
+    ScrollTrigger.create({
+      trigger: '#scrub', start: 'top 62%', end: 'bottom bottom', scrub: true,
+      onUpdate: function (self) {
+        var p = self.progress * 3, idx = Math.min(2, Math.floor(p)), local = p - idx;
+        setScreen(idx);
+        if (idx === 2) setSteps(Math.min(5, Math.floor(local * 7.5)));
+      },
+      onEnter: function () {
+        if (!chatStarted) { chatStarted = true; if (chatTL) chatTL.play(); }
+      }
+    });
+    gsap.utils.toArray('.panel').forEach(function (p, idx) {
+      gsap.fromTo(p, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out',
+        scrollTrigger: { trigger: p, start: 'top 88%', end: 'top 55%', scrub: true } });
+      if (idx < 2) gsap.to(p, { opacity: 0, ease: 'none',
+        scrollTrigger: { trigger: p, start: 'center 38%', end: 'center 16%', scrub: true } });
+    });
+    return function () { examStop(); };
+  });
+
+  /* Mobile (<1024px): HP dapat panggung sendiri — layar berganti otomatis;
+     kartu 01–03 jadi kartu biasa, tanpa HP nempel di belakangnya */
+  mm.add('(max-width: 1023px)', function () {
+    if (reduced) return;
+    gsap.utils.toArray('.panel').forEach(function (p) {
+      gsap.fromTo(p, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out',
+        scrollTrigger: { trigger: p, start: 'top 88%' } });
+    });
+    var idx = 0, rot = null;
+    function show(i) {
+      idx = i; setScreen(i);
+      if (i === 2) { steps.forEach(function (s) { s.classList.add('open'); }); }
+      else { steps.forEach(function (s) { s.classList.remove('open'); }); }
+      if (i === 1) examStart(); else examStop();
+    }
+    ScrollTrigger.create({
+      trigger: '#fitur', start: 'top 75%', end: 'bottom 20%',
+      onToggle: function (self) {
+        if (self.isActive) {
+          if (!rot) { rot = setTimeout(function tick() { show((idx + 1) % 3); rot = setTimeout(tick, 4000); }, 6000); }
+        } else {
+          if (rot) { clearTimeout(rot); rot = null; }
+          examStop();
+        }
+      }
+    });
+    return function () { if (rot) { clearTimeout(rot); rot = null; } examStop(); };
+  });
+
+  /* ---------- Chat: bangun timeline hanya bila gerak diizinkan ---------- */
+  if (!reduced) {
+    chatTL = buildChat();
+    chatTL.pause(0); // render posisi 0: semua elemen demo tersembunyi rapi
+    ScrollTrigger.create({ trigger: '#fitur', start: 'top 70%', once: true, onEnter: function () {
+      if (!chatStarted) { chatStarted = true; chatTL.play(); } } });
+  }
+
+  /* ---------- Angka: count-up saat terlihat ---------- */
+  function fmt(n) { return n.toLocaleString('id-ID'); }
+  gsap.utils.toArray('.cnt').forEach(function (el) {
+    var to = parseInt(el.dataset.to, 10);
+    if (reduced) { el.textContent = fmt(to); return; }
+    var o = { v: 0 };
+    ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: function () {
+      gsap.to(o, { v: to, duration: 1.4, ease: 'power1.out', onUpdate: function () { el.textContent = fmt(Math.round(o.v)); } });
+    }});
+  });
+
+  /* ---------- Harga: segmented control + crossfade ---------- */
+  window.setPkg = function (i) {
+    var ind = document.getElementById('segInd');
+    ind.style.transform = i === 0 ? 'translateX(0)' : 'translateX(' + ind.offsetWidth + 'px)';
+    document.getElementById('cardFree').classList.toggle('off', i !== 0);
+    document.getElementById('cardPrem').classList.toggle('off', i !== 1);
+    document.getElementById('tabFree').classList.toggle('text-white', i === 0);
+    document.getElementById('tabFree').classList.toggle('text-mute', i !== 0);
+    document.getElementById('tabPrem').classList.toggle('text-white', i === 1);
+    document.getElementById('tabPrem').classList.toggle('text-mute', i !== 1);
+    document.getElementById('tabFree').setAttribute('aria-selected', i === 0);
+    document.getElementById('tabPrem').setAttribute('aria-selected', i === 1);
+  };
+
+  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+})();
+</script>
 </body>
 </html>
