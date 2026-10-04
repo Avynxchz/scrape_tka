@@ -55,6 +55,73 @@ button:active { transform: scale(0.97); }
 [data-sections] { scroll-margin-top: 150px; }
 @media (max-width: 899px) { [data-sections] { scroll-margin-top: 132px; } }
 
+/* ---- Carousel Reusable Modul (Fase 8) ---- */
+.hero-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  gap: 12px;
+}
+.hero-carousel::-webkit-scrollbar { display: none; }
+.hero-carousel > * {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+#modulCarousel h1,
+#modulCarousel h2,
+#modulCarousel h3,
+#modulCarousel p,
+#modulCarousel span,
+#modulCarousel b,
+#modulCarousel strong,
+#modulCarousel div {
+  color: #FFFFFF;
+}
+.modul-dotsrow-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+.modul-dotsrow-center i {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(0, 74, 42, 0.25);
+  transition: all .25s ease;
+  cursor: pointer;
+}
+.modul-dotsrow-center i.on {
+  width: 24px;
+  background: #004a2a;
+}
+
+/* Animasi Robot Membaca Buku */
+@keyframes stAntennaPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.85); } }
+@keyframes stRobotBlink { 0%, 90%, 100% { transform: scaleY(1); } 95% { transform: scaleY(0.1); } }
+@keyframes stBookPageFlip { 0%, 100% { transform: rotateY(0deg); } 50% { transform: rotateY(-22deg); } }
+@keyframes stFloatModul { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+.modul-robot-reading {
+  animation: stFloatModul 3.5s ease-in-out infinite;
+}
+.modul-antenna-circle {
+  transform-origin: 55px 14px;
+  animation: stAntennaPulse 1.8s ease-in-out infinite;
+}
+.modul-robot-eyes {
+  transform-origin: 55px 45px;
+  animation: stRobotBlink 3.2s infinite;
+}
+.modul-book-page {
+  transform-origin: 54px 85px;
+  animation: stBookPageFlip 2.5s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -373,55 +440,120 @@ button:active { transform: scale(0.97); }
   <main class="flex flex-col relative w-full pt-16 pb-24 bg-surface max-w-[480px] mx-auto min-h-screen">
     <div class="flex flex-col w-full px-gutter space-y-space-lg pb-10">
 
-      <!-- Hero ringkasan -->
-      <section class="w-full rounded-[18px] bg-primary text-on-primary p-5 shadow-lg relative overflow-hidden">
-        <div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-primary-fixed opacity-10 pointer-events-none blur-2xl"></div>
-        <div class="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-tertiary-fixed opacity-15 pointer-events-none blur-xl"></div>
-        <div class="relative z-10 flex flex-col space-y-4">
-          <div class="flex items-center justify-between">
-            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-emerald-light/15 text-primary-fixed font-label-caps text-label-caps tracking-wide">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent-mint"></span>
-              FORMAT TKA PUSMENDIK
-            </div>
-            <span class="material-symbols-outlined text-primary-fixed-dim text-xl">auto_stories</span>
-          </div>
-          <div class="grid grid-cols-3 gap-2 py-2">
-            <div class="flex flex-col bg-on-primary/10 rounded-xl p-2.5">
-              <span class="font-headline-md text-headline-md text-primary-fixed leading-tight">22</span>
-              <span class="font-label-caps text-label-caps text-on-primary/80 leading-snug mt-0.5">Mata Pelajaran</span>
-            </div>
-            <div class="flex flex-col bg-on-primary/10 rounded-xl p-2.5">
-              <span class="font-headline-md text-headline-md text-primary-fixed leading-tight">44</span>
-              <span class="font-label-caps text-label-caps text-on-primary/80 leading-snug mt-0.5">Paket Latihan</span>
-            </div>
-            <div class="flex flex-col bg-on-primary/10 rounded-xl p-2.5">
-              <span class="font-headline-md text-headline-md text-tertiary-fixed leading-tight">961</span>
-              <span class="font-label-caps text-label-caps text-on-primary/80 leading-snug mt-0.5">Butir Soal</span>
-            </div>
-          </div>
-          <div class="bg-black/20 rounded-xl p-3.5 space-y-2.5">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary-fixed text-lg">flag</span>
-                <span class="font-label-lg text-label-lg text-on-primary">Progres Pengerjaan</span>
+      <!-- Hero Carousel Reusable Modul (Fase 8) -->
+      <section class="w-full relative">
+        <div class="hero-carousel" id="modulCarousel">
+
+          <!-- Slide 1: Kurikulum & Animasi Robot Membaca Buku -->
+          <div class="w-full rounded-[18px] bg-gradient-to-b from-[#0B1E13] via-[#004a2a] to-[#1b633e] text-white p-5 shadow-lg relative overflow-hidden flex flex-col justify-between" style="min-height: 220px;">
+            <div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-accent-mint/10 pointer-events-none blur-2xl"></div>
+            <div class="relative z-10 flex flex-col space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/15 text-white font-label-caps text-label-caps tracking-wide">
+                  <span class="w-1.5 h-1.5 rounded-full bg-accent-mint"></span>
+                  <span style="color:#FFFFFF;">FORMAT TKA PUSMENDIK</span>
+                </div>
+                <span class="material-symbols-outlined text-white text-xl">auto_stories</span>
               </div>
-              <span class="font-label-caps text-label-caps bg-primary-fixed/20 text-primary-fixed px-2 py-0.5 rounded-md" data-done-pct>0%</span>
-            </div>
-            <div class="w-full bg-black/30 h-2.5 rounded-full overflow-hidden p-0.5">
-              <div class="bg-accent-mint h-full rounded-full" data-done-bar style="width: 0%;"></div>
-            </div>
-            <div class="flex items-center justify-between text-on-primary/80">
-              <span class="font-body-sm text-body-sm" data-done-label>0 dari 961 soal dikerjakan</span>
-              <span class="font-label-caps text-label-caps text-tertiary-fixed font-bold">Target: 100%</span>
+              <div class="grid grid-cols-[1fr_auto] gap-2 items-center">
+                <div class="flex flex-col space-y-1">
+                  <h2 class="text-xl font-extrabold text-white leading-tight">Modul &amp; Bank Soal</h2>
+                  <p class="text-xs text-white leading-relaxed">22 mapel komprehensif standar Pusmendik dengan AI Tutor.</p>
+                </div>
+                <div class="shrink-0 flex items-center justify-center pl-1">
+                  <!-- SVG Maskot Robot Membaca Buku -->
+                  <svg viewBox="0 0 110 110" width="96" height="96" class="modul-robot-reading drop-shadow-md">
+                    <circle cx="55" cy="55" r="42" fill="rgba(34,197,94,0.18)" filter="blur(5px)"/>
+                    <!-- Antena Robot -->
+                    <line x1="55" y1="16" x2="55" y2="28" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+                    <circle class="modul-antenna-circle" cx="55" cy="14" r="5" fill="#22C55E" stroke="#FFFFFF" stroke-width="1.5"/>
+                    <!-- Headphones -->
+                    <rect x="23" y="38" width="6" height="18" rx="3" fill="#EBF6F0"/>
+                    <rect x="79" y="38" width="6" height="18" rx="3" fill="#EBF6F0"/>
+                    <path d="M26 40 C26 22 82 22 82 40" fill="none" stroke="#EBF6F0" stroke-width="3"/>
+                    <!-- Kepala Robot -->
+                    <rect x="27" y="27" width="54" height="40" rx="12" fill="#EBF6F0" stroke="#004a2a" stroke-width="2.5"/>
+                    <!-- Layar Wajah -->
+                    <rect x="33" y="33" width="42" height="26" rx="7" fill="#0B1E13"/>
+                    <!-- Mata Digital Berkedip -->
+                    <g class="modul-robot-eyes">
+                      <ellipse cx="43" cy="45" rx="4.5" ry="5" fill="#38BDF8"/>
+                      <circle cx="44.5" cy="43.5" r="1.5" fill="#FFFFFF"/>
+                      <ellipse cx="65" cy="45" rx="4.5" ry="5" fill="#38BDF8"/>
+                      <circle cx="66.5" cy="43.5" r="1.5" fill="#FFFFFF"/>
+                    </g>
+                    <!-- Senyum -->
+                    <path d="M50 52 Q54 55 58 52" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Tangan & Buku Terbuka -->
+                    <circle cx="34" cy="74" r="5" fill="#EBF6F0" stroke="#004a2a" stroke-width="1.5"/>
+                    <circle cx="74" cy="74" r="5" fill="#EBF6F0" stroke="#004a2a" stroke-width="1.5"/>
+                    <!-- Sampul Buku Hijau -->
+                    <path d="M30 76 Q54 82 78 76 L80 94 Q54 99 28 94 Z" fill="#004a2a" stroke="#FFFFFF" stroke-width="1.2"/>
+                    <!-- Lembar Kiri -->
+                    <path d="M31 75 Q54 79 54 79 L54 95 Q54 95 30 92 Z" fill="#FFFFFF"/>
+                    <line x1="36" y1="80" x2="50" y2="81" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="36" y1="84" x2="48" y2="85" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="36" y1="88" x2="46" y2="89" stroke="#CBD5E1" stroke-width="1.5" stroke-linecap="round"/>
+                    <!-- Lembar Kanan Beranimasi Membalik -->
+                    <g class="modul-book-page">
+                      <path d="M54 79 Q54 79 77 75 L78 92 Q54 95 54 95 Z" fill="#F8FAFC"/>
+                      <line x1="58" y1="81" x2="72" y2="80" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                      <line x1="58" y1="85" x2="70" y2="84" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                      <line x1="58" y1="89" x2="68" y2="88" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
+                    </g>
+                    <line x1="54" y1="78" x2="54" y2="95" stroke="#CBD5E1" stroke-width="1.5"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="grid grid-cols-3 gap-2 pt-1">
+                <div class="flex flex-col bg-white/10 rounded-xl p-2 text-center">
+                  <span class="font-headline-sm text-white font-extrabold leading-tight">22</span>
+                  <span class="text-[10px] font-bold text-white uppercase tracking-wider mt-0.5">Mapel</span>
+                </div>
+                <div class="flex flex-col bg-white/10 rounded-xl p-2 text-center">
+                  <span class="font-headline-sm text-white font-extrabold leading-tight">44</span>
+                  <span class="text-[10px] font-bold text-white uppercase tracking-wider mt-0.5">Paket</span>
+                </div>
+                <div class="flex flex-col bg-white/10 rounded-xl p-2 text-center">
+                  <span class="font-headline-sm text-white font-extrabold leading-tight">961</span>
+                  <span class="text-[10px] font-bold text-white uppercase tracking-wider mt-0.5">Soal</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="flex items-center gap-2 pt-1 text-on-primary/90">
-            <span class="material-symbols-outlined text-tertiary-fixed text-lg shrink-0">lightbulb</span>
-            <p class="font-body-sm text-body-sm leading-snug text-primary-fixed-dim">
-              Mulai langkah pertamamu dari <span class="font-semibold text-on-primary">kategori Wajib</span>
-            </p>
+
+          <!-- Slide 2: Progres Gabungan Bersegmen (Mapel Pilihan User) -->
+          <div class="w-full rounded-[18px] bg-gradient-to-b from-[#0B1E13] via-[#004a2a] to-[#1b633e] text-white p-5 shadow-lg relative overflow-hidden flex flex-col justify-between" style="min-height: 220px;">
+            <div class="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-accent-mint/10 pointer-events-none blur-xl"></div>
+            <div class="relative z-10 flex flex-col space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/15 text-white font-label-caps text-label-caps tracking-wide">
+                  <span class="material-symbols-outlined text-[14px] text-white">checklist</span>
+                  <span style="color:#FFFFFF;">PROGRES GABUNGAN</span>
+                </div>
+                <span class="font-label-caps text-label-caps bg-white/20 text-white font-extrabold px-2.5 py-0.5 rounded-md" id="modulCombinedPct">0%</span>
+              </div>
+              <div class="flex flex-col">
+                <h2 class="text-xl font-extrabold text-white leading-tight">Mapel Pilihanmu</h2>
+                <span class="text-xs text-white mt-0.5" id="modulCombinedLabel">0 dari 0 soal dikerjakan</span>
+              </div>
+
+              <!-- Multi-Segmented Progress Bar -->
+              <div class="w-full bg-black/40 h-3 rounded-full overflow-hidden p-0.5 flex" id="modulCombinedBar">
+                <div class="h-full bg-accent-mint rounded-full transition-all duration-300" style="width: 0%;"></div>
+              </div>
+
+              <!-- Compact Legend: Chip Mapel & Selesai/Total -->
+              <div class="grid grid-cols-2 gap-1.5 pt-1" id="modulCombinedLegend">
+                <!-- Diisi dinamis oleh JS -->
+              </div>
+            </div>
           </div>
+
         </div>
+
+        <!-- Dots Indicator -->
+        <div class="modul-dotsrow-center" id="modulDots"><i class="on"></i><i></i></div>
       </section>
 
       <!-- Bar filter sticky -->
@@ -708,7 +840,142 @@ button:active { transform: scale(0.97); }
     });
 
     refreshContinue();
+    renderCombinedProgressBar();
   }
+
+  /* ================= PROGRES GABUNGAN MAPEL PILIHAN (FASE 8) ================= */
+  var SUBJECT_COLORS = {
+    matematika: '#3B82F6',
+    bahasa_indonesia: '#10B981',
+    bahasa_inggris: '#6366F1',
+    fisika: '#F59E0B',
+    kimia: '#06B6D4',
+    biologi: '#84CC16',
+    ekonomi: '#EC4899',
+    geografi: '#8B5CF6',
+    sosiologi: '#14B8A6',
+    sejarah: '#D97706',
+    antropologi: '#64748B',
+    kewirausahaan: '#E11D48',
+    matematika_lanjut: '#2563EB',
+    bahasa_indonesia_lanjut: '#059669',
+    bahasa_inggris_lanjut: '#4F46E5',
+    ppkn: '#DC2626',
+    bahasa_arab: '#0D9488',
+    bahasa_jepang: '#EA580C',
+    bahasa_jerman: '#475569',
+    bahasa_prancis: '#7C3AED',
+    bahasa_mandarin: '#B91C1C',
+    bahasa_korea: '#0284C7'
+  };
+
+  function getUserSelectedKeys() {
+    try {
+      var raw = localStorage.getItem('tka_user_subjects');
+      if (raw) {
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr) && arr.length > 0) return arr;
+      }
+    } catch (e) {}
+    return ['matematika', 'bahasa_indonesia', 'bahasa_inggris', 'fisika'];
+  }
+
+  function getCombinedProgress() {
+    var keys = getUserSelectedKeys();
+    var selectedMapels = [];
+    var totalSoalCombined = 0;
+    var totalDoneCombined = 0;
+
+    keys.forEach(function (k) {
+      var sub = null;
+      for (var i = 0; i < SUBJECTS.length; i++) {
+        if (SUBJECTS[i].key === k) { sub = SUBJECTS[i]; break; }
+      }
+      if (!sub) return;
+      var totalSub = (sub.p1 || 0) + (sub.p2 || 0);
+      var doneSub = countDone(sub.key, 1) + countDone(sub.key, 2);
+      totalSoalCombined += totalSub;
+      totalDoneCombined += doneSub;
+      selectedMapels.push({
+        key: sub.key,
+        nama: sub.nama.replace(/\s*\([^)]*\)/g, '').trim(),
+        total: totalSub,
+        done: doneSub,
+        color: SUBJECT_COLORS[sub.key] || '#22C55E'
+      });
+    });
+
+    var pctCombined = totalSoalCombined > 0 ? Math.round((totalDoneCombined / totalSoalCombined) * 100) : 0;
+    return {
+      mapels: selectedMapels,
+      totalSoal: totalSoalCombined,
+      totalDone: totalDoneCombined,
+      pct: pctCombined
+    };
+  }
+
+  function renderCombinedProgressBar() {
+    var prog = getCombinedProgress();
+    var barContainer = document.getElementById('modulCombinedBar');
+    var pctEl = document.getElementById('modulCombinedPct');
+    var labelEl = document.getElementById('modulCombinedLabel');
+    var legendEl = document.getElementById('modulCombinedLegend');
+    if (!barContainer) return;
+
+    if (pctEl) pctEl.textContent = prog.pct + '%';
+    if (labelEl) {
+      labelEl.textContent = prog.totalDone + ' dari ' + prog.totalSoal + ' soal dikerjakan (' + prog.mapels.length + ' mapel)';
+    }
+
+    // Render multi-segmen berjejer
+    var segmentsHtml = '';
+    prog.mapels.forEach(function (m) {
+      if (m.done > 0 && prog.totalSoal > 0) {
+        var widthPct = (m.done / prog.totalSoal) * 100;
+        segmentsHtml += '<div style="width: ' + widthPct + '%; background-color: ' + m.color + '; height: 100%; transition: width 0.4s ease;" title="' + m.nama + ': ' + m.done + '/' + m.total + ' soal"></div>';
+      }
+    });
+    if (!segmentsHtml) {
+      segmentsHtml = '<div style="width: 0%; height: 100%;"></div>';
+    }
+    barContainer.innerHTML = segmentsHtml;
+
+    // Render legenda ringkas
+    if (legendEl) {
+      legendEl.innerHTML = prog.mapels.map(function (m) {
+        return '<div class="flex items-center gap-1.5 text-[11px] text-white bg-white/10 px-2 py-1 rounded-lg truncate">' +
+          '<span class="w-2 h-2 rounded-full shrink-0" style="background-color: ' + m.color + '"></span>' +
+          '<span class="font-medium text-white truncate">' + m.nama + '</span>' +
+          '<span class="font-bold text-white ml-auto shrink-0">' + m.done + '/' + m.total + '</span>' +
+        '</div>';
+      }).join('');
+    }
+  }
+
+  /* ================= Carousel Controller Modul ================= */
+  function initModulCarousel() {
+    var car = document.getElementById('modulCarousel');
+    var dots = document.querySelectorAll('#modulDots i');
+    if (!car || !dots.length) return;
+    var sync = function () {
+      if (!car.clientWidth) return;
+      var idx = Math.max(0, Math.min(dots.length - 1, Math.round(car.scrollLeft / car.clientWidth)));
+      dots.forEach(function (d, i) { d.classList.toggle('on', i === idx); });
+    };
+    car.addEventListener('scroll', function () { requestAnimationFrame(sync); }, { passive: true });
+    dots.forEach(function (d, i) {
+      d.addEventListener('click', function () {
+        car.scrollTo({ left: i * car.clientWidth, behavior: 'smooth' });
+      });
+    });
+    sync();
+  }
+
+  // Ekspos ke window untuk verifikasi data tiruan
+  window.getCombinedProgress = getCombinedProgress;
+  window.renderCombinedProgressBar = renderCombinedProgressBar;
+  window.readLocalProgress = readLocalProgress;
+  window.refreshProgress = refreshProgress;
 
   function refreshContinue() {
     var box = document.querySelector('[data-continue]');
@@ -828,6 +1095,7 @@ button:active { transform: scale(0.97); }
   syncTabs();
   applyFilter();
   refreshProgress();
+  initModulCarousel();
   send({ type: 'request-data' });
   send({ type: 'modul-ready' });
 })();
