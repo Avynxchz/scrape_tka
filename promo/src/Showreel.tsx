@@ -3,6 +3,7 @@ import { AbsoluteFill, Img, interpolate, spring, staticFile, useCurrentFrame, us
 import { loadFont } from '@remotion/google-fonts/PlusJakartaSans';
 import { C, Cam, camAt, CamKey, clamp, easeIn, easeOut, K, manifest, mbox, mnum, ramp, SW, toCanvas, W } from './lib';
 import { Background, Burst, Caption, Confetti, Phone, ProgressBar, ScreenStack, Seg, Tap } from './parts';
+import { AudioLayer } from './AudioLayer';
 
 const { fontFamily } = loadFont('normal', { weights: ['600', '800'], subsets: ['latin'] });
 
@@ -28,41 +29,41 @@ const wrongDelta = Math.round(P.wrong.cy - P.wrongFb.cy); // 100
 const rightDelta = Math.round(P.right.cy - P.rightFb.cy); // 90
 
 // ------------------------------------------------------------------
-// Screen timeline (frame â†’ real screenshot + in-screen transition)
+// Screen timeline (frame -> real screenshot + in-screen transition)
 // ------------------------------------------------------------------
-const stream = new Array(10).fill(0).map((_, i): Seg => ({ f: 270 + i * 4, shot: `tutor_stream_${String(i + 1).padStart(2, '0')}` }));
+const stream = new Array(10).fill(0).map((_, i): Seg => ({ f: 382 + i * 4, shot: `tutor_stream_${String(i + 1).padStart(2, '0')}` }));
 const SEGS: Seg[] = [
   { f: 0, shot: 'home_top' },
-  { f: 60, shot: 'home_card', tr: 'scroll', d: 14, delta: homeDelta, bandTop: 64, bandBottom: 56 },
-  { f: 110, shot: 'q_top', tr: 'zoomIn', d: 10 },
-  { f: 132, shot: 'q_options', tr: 'scroll', d: 14, delta: qDelta, bandBottom: 51 },
-  { f: 150, shot: 'q_wrong_selected' },
-  { f: 165, shot: 'q_wrong_feedback', tr: 'scroll', d: 6, delta: wrongDelta, bandBottom: 51 },
-  { f: 196, shot: 'pemb_top', tr: 'slideLeft', d: 10 },
-  { f: 208, shot: 'pemb_mid', tr: 'scroll', d: 11, delta: 700 },
-  { f: 221, shot: 'rail_open' },
-  { f: 233, shot: 'tutor_open', tr: 'sheetUp', d: 10 },
-  { f: 249, shot: 'tutor_typing1' },
-  { f: 253, shot: 'tutor_typing2' },
-  { f: 259, shot: 'tutor_thinking' },
+  { f: 68, shot: 'home_card', tr: 'scroll', d: 16, delta: homeDelta, bandTop: 64, bandBottom: 56 },
+  { f: 165, shot: 'q_top', tr: 'zoomIn', d: 12 },
+  { f: 190, shot: 'q_options', tr: 'scroll', d: 16, delta: qDelta, bandBottom: 51 },
+  { f: 216, shot: 'q_wrong_selected' },
+  { f: 232, shot: 'q_wrong_feedback', tr: 'scroll', d: 7, delta: wrongDelta, bandBottom: 51 },
+  { f: 270, shot: 'pemb_top', tr: 'slideLeft', d: 11 },
+  { f: 286, shot: 'pemb_mid', tr: 'scroll', d: 14, delta: 700 },
+  { f: 308, shot: 'rail_open' },
+  { f: 324, shot: 'tutor_open', tr: 'sheetUp', d: 11 },
+  { f: 348, shot: 'tutor_typing1' },
+  { f: 356, shot: 'tutor_typing2' },
+  { f: 366, shot: 'tutor_thinking' },
   ...stream,
-  { f: 316, shot: 'q_retry', tr: 'whip', d: 9 },
-  { f: 330, shot: 'q_right_selected' },
-  { f: 341, shot: 'q_right_feedback', tr: 'scroll', d: 6, delta: rightDelta, bandBottom: 51 },
-  { f: 361, shot: 'result', tr: 'pushUp', d: 11 },
-  { f: 405, shot: 'progres_top', tr: 'slideLeft', d: 10 },
-  { f: 418, shot: 'progres_mid', tr: 'scroll', d: 12, delta: 560, bandTop: 57, bandBottom: 56 },
+  { f: 480, shot: 'q_retry', tr: 'whip', d: 11 },
+  { f: 504, shot: 'q_right_selected' },
+  { f: 518, shot: 'q_right_feedback', tr: 'scroll', d: 7, delta: rightDelta, bandBottom: 51 },
+  { f: 555, shot: 'result', tr: 'pushUp', d: 12 },
+  { f: 630, shot: 'progres_top', tr: 'slideLeft', d: 11 },
+  { f: 646, shot: 'progres_mid', tr: 'scroll', d: 14, delta: 560, bandTop: 57, bandBottom: 56 },
 ];
 
 const TAPS = [
-  { at: 98, ...P.card },
-  { at: 150, ...P.wrong },
-  { at: 163, ...P.check },
-  { at: 220, ...P.rail },
-  { at: 232, ...P.ai },
-  { at: 258, ...P.send },
-  { at: 330, ...P.right },
-  { at: 340, ...P.check2 },
+  { at: 132, ...P.card },
+  { at: 216, ...P.wrong },
+  { at: 230, ...P.check },
+  { at: 308, ...P.rail },
+  { at: 324, ...P.ai },
+  { at: 366, ...P.send },
+  { at: 504, ...P.right },
+  { at: 517, ...P.check2 },
 ];
 
 // ------------------------------------------------------------------
@@ -70,41 +71,41 @@ const TAPS = [
 // ------------------------------------------------------------------
 const KEYS: CamKey[] = [
   { f: 0, s: 1, ry: -16, rx: 8 },
-  { f: 46, s: 1, ry: 0, rx: 0, e: easeOut },
+  { f: 50, s: 1, ry: 0, rx: 0, e: easeOut },
   { f: 60, s: 1 },
-  { f: 78, s: 1.32, fx: 150, fy: 422, ty: 1120 },
-  { f: 100, s: 1.42, fx: 140, fy: 422, ty: 1110 },
-  { f: 110, s: 2.1, fx: 135, fy: 422, ty: 1100, e: easeIn },
-  { f: 110.01, s: 1.12 },
-  { f: 124, s: 1, e: easeOut },
-  { f: 132, s: 1 },
-  { f: 146, s: 1.28, fx: 195, fy: 430, ty: 1110 },
-  { f: 162, s: 1.34, fx: 195, fy: 450, ty: 1110 },
-  { f: 172, s: 1.14, fx: 195, fy: 470, ty: 1100, e: easeOut },
-  { f: 194, s: 1.18, fx: 195, fy: 470, ty: 1100 },
-  { f: 204, s: 1, ry: 9 },
-  { f: 212, s: 1, ry: 0 },
-  { f: 222, s: 1.5, fx: 300, fy: 660, ty: 1230 },
-  { f: 233, s: 1.55, fx: 300, fy: 670, ty: 1230 },
-  { f: 245, s: 1, e: easeOut },
-  { f: 250, s: 1 },
-  { f: 258, s: 1.42, fx: 195, fy: 720, ty: 1250 },
-  { f: 264, s: 1.42, fx: 195, fy: 720, ty: 1250 },
-  { f: 276, s: 1.2, fx: 195, fy: 400, ty: 1110 },
-  { f: 312, s: 1.32, fx: 195, fy: 470, ty: 1110 },
-  { f: 319, s: 1.04, ry: -24, e: easeIn },
-  { f: 328, s: 1, ry: 0, e: easeOut },
-  { f: 336, s: 1.28, fx: 195, fy: 480, ty: 1120 },
-  { f: 348, s: 1.16, fx: 195, fy: 480, ty: 1100, e: easeOut },
-  { f: 359, s: 1.18, fx: 195, fy: 480, ty: 1100 },
-  { f: 366, s: 0.94 },
-  { f: 374, s: 1, e: easeOut },
-  { f: 384, s: 1.5, fx: 205, fy: 215, ty: 960 },
-  { f: 403, s: 1.56, fx: 205, fy: 215, ty: 960 },
-  { f: 412, s: 1 },
-  { f: 424, s: 1.06, fy: 380 },
-  { f: 440, s: 0.6, fy: 422, ty: 1420, e: easeOut },
-  { f: 450, s: 0.6, fy: 422, ty: 1420 },
+  { f: 88, s: 1.32, fx: 150, fy: 422, ty: 1120 },
+  { f: 132, s: 1.42, fx: 140, fy: 422, ty: 1110 },
+  { f: 165, s: 2.1, fx: 135, fy: 422, ty: 1100, e: easeIn },
+  { f: 165.01, s: 1.12 },
+  { f: 182, s: 1, e: easeOut },
+  { f: 190, s: 1 },
+  { f: 210, s: 1.28, fx: 195, fy: 430, ty: 1110 },
+  { f: 228, s: 1.34, fx: 195, fy: 450, ty: 1110 },
+  { f: 242, s: 1.14, fx: 195, fy: 470, ty: 1100, e: easeOut },
+  { f: 268, s: 1.18, fx: 195, fy: 470, ty: 1100 },
+  { f: 278, s: 1, ry: 9 },
+  { f: 290, s: 1, ry: 0 },
+  { f: 308, s: 1.5, fx: 300, fy: 660, ty: 1230 },
+  { f: 324, s: 1.55, fx: 300, fy: 670, ty: 1230 },
+  { f: 342, s: 1, e: easeOut },
+  { f: 350, s: 1 },
+  { f: 362, s: 1.42, fx: 195, fy: 720, ty: 1250 },
+  { f: 372, s: 1.42, fx: 195, fy: 720, ty: 1250 },
+  { f: 388, s: 1.2, fx: 195, fy: 400, ty: 1110 },
+  { f: 472, s: 1.32, fx: 195, fy: 470, ty: 1110 },
+  { f: 483, s: 1.04, ry: -24, e: easeIn },
+  { f: 494, s: 1, ry: 0, e: easeOut },
+  { f: 508, s: 1.28, fx: 195, fy: 480, ty: 1120 },
+  { f: 526, s: 1.16, fx: 195, fy: 480, ty: 1100, e: easeOut },
+  { f: 550, s: 1.18, fx: 195, fy: 480, ty: 1100 },
+  { f: 560, s: 0.94 },
+  { f: 572, s: 1, e: easeOut },
+  { f: 590, s: 1.5, fx: 205, fy: 215, ty: 960 },
+  { f: 625, s: 1.56, fx: 205, fy: 215, ty: 960 },
+  { f: 636, s: 1 },
+  { f: 652, s: 1.06, fy: 380 },
+  { f: 678, s: 0.6, fy: 422, ty: 1420, e: easeOut },
+  { f: 720, s: 0.6, fy: 422, ty: 1420 },
 ];
 
 // ------------------------------------------------------------------
@@ -113,11 +114,11 @@ const KEYS: CamKey[] = [
 const ScoreOverlay: React.FC<{ font: string }> = ({ font }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
-  if (f < 362 || f > 408) return null;
-  const inS = spring({ frame: f - 364, fps, config: { damping: 12, stiffness: 160 } });
-  const out = ramp(f, 399, 407, easeIn);
-  const n = Math.round(interpolate(f, [368, 390], [0, 80], { ...clamp, easing: easeOut }));
-  const bump = f >= 390 ? 1 + 0.12 * Math.sin(Math.min(1, (f - 390) / 8) * Math.PI) : 1;
+  if (f < 556 || f > 632) return null;
+  const inS = spring({ frame: f - 558, fps, config: { damping: 12, stiffness: 160 } });
+  const out = ramp(f, 622, 630, easeIn);
+  const n = Math.round(interpolate(f, [564, 598], [0, 80], { ...clamp, easing: easeOut }));
+  const bump = f >= 598 ? 1 + 0.12 * Math.sin(Math.min(1, (f - 598) / 8) * Math.PI) : 1;
   const chip = (at: number, target: number, label: string, color: string, icon: string, x: number) => {
     const s = spring({ frame: f - at, fps, config: { damping: 11, stiffness: 180 } });
     const v = Math.round(interpolate(f, [at + 2, at + 14], [0, target], { ...clamp, easing: easeOut }));
@@ -138,8 +139,8 @@ const ScoreOverlay: React.FC<{ font: string }> = ({ font }) => {
           <span style={{ fontFamily: font, fontWeight: 800, fontSize: 110, lineHeight: 1.3, color: C.lime, marginLeft: 6 }}>%</span>
         </div>
       </div>
-      {chip(374, 8, 'correct', C.mint, '\u2713', W * 0.29)}
-      {chip(380, 2, 'wrong', C.red, '\u2715', W * 0.73)}
+      {chip(574, 8, 'correct', C.mint, '\u2713', W * 0.29)}
+      {chip(582, 2, 'wrong', C.red, '\u2715', W * 0.73)}
     </>
   );
 };
@@ -150,12 +151,12 @@ const ScoreOverlay: React.FC<{ font: string }> = ({ font }) => {
 const Outro: React.FC<{ font: string }> = ({ font }) => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
-  if (f < 424) return null;
-  const logoS = spring({ frame: f - 426, fps, config: { damping: 11, stiffness: 170 } });
+  if (f < 670) return null;
+  const logoS = spring({ frame: f - 672, fps, config: { damping: 11, stiffness: 170 } });
   const LOGO = 190;
   const sc = LOGO / 96; // logo is 96x96 px in the @3x capture (CSS 16..48 x 12..44)
   const title = 'TKA Master';
-  const tag = spring({ frame: f - 437, fps, config: { damping: 14, stiffness: 160 } });
+  const tag = spring({ frame: f - 688, fps, config: { damping: 14, stiffness: 160 } });
   return (
     <div style={{ position: 'absolute', left: 0, right: 0, top: 210, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <div style={{ width: LOGO, height: LOGO, borderRadius: 52, overflow: 'hidden', position: 'relative', transform: `scale(${logoS}) rotate(${(1 - logoS) * -120}deg)`, boxShadow: `0 24px 70px rgba(0,0,0,0.5), 0 0 0 6px rgba(195,245,107,${0.35 * logoS})` }}>
@@ -163,7 +164,7 @@ const Outro: React.FC<{ font: string }> = ({ font }) => {
       </div>
       <div style={{ display: 'flex', marginTop: 34 }}>
         {title.split('').map((ch, i) => {
-          const s = spring({ frame: f - 429 - i * 1.2, fps, config: { damping: 12, stiffness: 210, mass: 0.6 } });
+          const s = spring({ frame: f - 676 - i * 1.2, fps, config: { damping: 12, stiffness: 210, mass: 0.6 } });
           return (
             <span key={i} style={{ display: 'inline-block', whiteSpace: 'pre', fontFamily: font, fontWeight: 800, fontSize: 138, lineHeight: 1.05, letterSpacing: '-0.04em', color: i >= 4 ? C.lime : C.white, transform: `translateY(${(1 - s) * 120}px) scale(${0.5 + 0.5 * s})`, opacity: Math.min(1, s * 1.6), textShadow: '0 14px 50px rgba(0,0,0,0.5)' }}>
               {ch}
@@ -171,7 +172,7 @@ const Outro: React.FC<{ font: string }> = ({ font }) => {
           );
         })}
       </div>
-      <div style={{ marginTop: 18, fontFamily: font, fontWeight: 600, fontSize: 50, color: C.white, opacity: tag, transform: `translateY(${(1 - tag) * 50}px)`, letterSpacing: '-0.01em' }}>
+      <div style={{ marginTop: 18, fontFamily: font, fontWeight: 600, fontSize: 50, color: C.white, opacity: tag, transform: `translateY(${(1 - tag) * 50}px)`, letterSpacing: '-0.01em', textAlign: 'center', maxWidth: 960, whiteSpace: 'normal' }}>
         Practice smarter. <span style={{ color: C.mint }}>Score higher.</span>
       </div>
     </div>
@@ -184,10 +185,10 @@ const Outro: React.FC<{ font: string }> = ({ font }) => {
 const CardLift: React.FC = () => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
-  if (f < 76 || f >= 111) return null;
-  const l = spring({ frame: f - 78, fps, config: { damping: 12, stiffness: 150 } });
-  const press = f >= 98 ? interpolate(f, [98, 101, 104], [1, 0.95, 1], clamp) : 1;
-  const grow = ramp(f, 103, 111, easeIn);
+  if (f < 96 || f >= 165) return null;
+  const l = spring({ frame: f - 98, fps, config: { damping: 12, stiffness: 150 } });
+  const press = f >= 132 ? interpolate(f, [132, 136, 140], [1, 0.95, 1], clamp) : 1;
+  const grow = ramp(f, 154, 165, easeIn);
   const b = P.card;
   const scale = (1 + 0.08 * l) * press * (1 + grow * 0.5);
   return (
@@ -222,16 +223,16 @@ export const Showreel: React.FC = () => {
   };
 
   // wrong-answer shake
-  const ts = f - 167;
-  const shakeX = ts >= 0 && ts < 20 ? 30 * Math.sin(ts * 2.3) * Math.exp(-ts / 6) : 0;
-  const shakeR = ts >= 0 && ts < 20 ? 1.4 * Math.sin(ts * 2.3 + 1) * Math.exp(-ts / 6) : 0;
-  const red = f >= 166 ? interpolate(f, [166, 169, 190], [0, 1, 0], clamp) : 0;
-  const green = f >= 342 ? interpolate(f, [342, 346, 368], [0, 1, 0], clamp) : 0;
+  const ts = f - 234;
+  const shakeX = ts >= 0 && ts < 22 ? 30 * Math.sin(ts * 2.3) * Math.exp(-ts / 6) : 0;
+  const shakeR = ts >= 0 && ts < 22 ? 1.4 * Math.sin(ts * 2.3 + 1) * Math.exp(-ts / 6) : 0;
+  const red = f >= 233 ? interpolate(f, [233, 236, 262], [0, 1, 0], clamp) : 0;
+  const green = f >= 520 ? interpolate(f, [520, 524, 552], [0, 1, 0], clamp) : 0;
   const flash = Math.max(
-    interpolate(f, [109, 111, 116], [0, 0.55, 0], clamp),
-    interpolate(f, [423, 425, 434], [0, 0.35, 0], clamp),
+    interpolate(f, [164, 166, 172], [0, 0.55, 0], clamp),
+    interpolate(f, [669, 672, 682], [0, 0.35, 0], clamp),
   );
-  const glare = f < 60 ? ramp(f, 8, 40) : f < 424 ? (f >= 361 && f < 395 ? ramp(f, 361, 395) : 0) : ramp(f, 424, 450);
+  const glare = f < 60 ? ramp(f, 8, 48) : f < 670 ? (f >= 555 && f < 595 ? ramp(f, 555, 595) : 0) : ramp(f, 670, 720);
 
   const wrongC = toCanvas(cam, P.wrongFb.cx, P.wrongFb.cy);
   const rightC = toCanvas(cam, P.rightFb.cx, P.rightFb.cy);
@@ -248,26 +249,27 @@ export const Showreel: React.FC = () => {
         ))}
       </Phone>
 
-      <Burst at={167} x={wrongC.x} y={wrongC.y} color={C.red} />
-      <Burst at={343} x={rightC.x} y={rightC.y} color={C.mint} />
-      <Confetti at={343} x={rightC.x} y={rightC.y} />
+      <Burst at={234} x={wrongC.x} y={wrongC.y} color={C.red} />
+      <Burst at={522} x={rightC.x} y={rightC.y} color={C.mint} />
+      <Confetti at={522} x={rightC.x} y={rightC.y} />
 
       {/* legibility band for captions */}
       <AbsoluteFill style={{ background: 'linear-gradient(180deg, rgba(2,16,9,0.85) 0%, rgba(2,16,9,0.55) 15%, rgba(2,16,9,0) 27%)', pointerEvents: 'none' }} />
 
-      <Caption font={fontFamily} from={4} to={44} y={150} size={150} lines={[[{ t: 'Ace' }, { t: 'the' }, { t: 'TKA.', hl: 'lime' }]]} />
-      <Caption font={fontFamily} from={50} to={106} y={170} size={128} lines={[[{ t: 'Pick' }, { t: 'a' }, { t: 'subject.', hl: 'lime' }]]} />
-      <Caption font={fontFamily} from={114} to={160} y={170} size={128} lines={[[{ t: 'Test' }, { t: 'yourself.', hl: 'mint' }]]} />
-      <Caption font={fontFamily} from={166} to={194} y={170} size={128} lines={[[{ t: 'Wrong?', hl: 'red' }, { t: 'No' }, { t: 'stress.' }]]} />
-      <Caption font={fontFamily} from={199} to={240} y={170} size={128} lines={[[{ t: 'Learn' }, { t: 'why.', hl: 'lime' }]]} />
-      <Caption font={fontFamily} from={244} to={312} y={120} size={118} lines={[[{ t: 'Ask' }, { t: 'your' }], [{ t: 'AI tutor.', hl: 'lime' }]]} />
-      <Caption font={fontFamily} from={318} to={338} y={170} size={128} lines={[[{ t: 'Try' }, { t: 'again.' }]]} />
-      <Caption font={fontFamily} from={342} to={360} y={170} size={136} lines={[[{ t: 'Nailed' }, { t: 'it!', hl: 'mint' }]]} />
-      <Caption font={fontFamily} from={407} to={423} y={170} size={128} lines={[[{ t: 'Watch' }, { t: 'it' }, { t: 'grow.', hl: 'lime' }]]} />
+      <Caption font={fontFamily} from={6} to={54} y={150} size={138} lines={[[{ t: 'Ace' }, { t: 'the' }, { t: 'TKA.', hl: 'lime' }]]} />
+      <Caption font={fontFamily} from={66} to={156} y={170} size={124} lines={[[{ t: 'Pick' }, { t: 'a' }, { t: 'subject.', hl: 'lime' }]]} />
+      <Caption font={fontFamily} from={170} to={224} y={170} size={124} lines={[[{ t: 'Test' }, { t: 'yourself.', hl: 'mint' }]]} />
+      <Caption font={fontFamily} from={232} to={266} y={170} size={124} lines={[[{ t: 'Wrong?', hl: 'red' }, { t: 'No' }, { t: 'stress.' }]]} />
+      <Caption font={fontFamily} from={274} to={340} y={170} size={124} lines={[[{ t: 'Learn' }, { t: 'why.', hl: 'lime' }]]} />
+      <Caption font={fontFamily} from={348} to={474} y={120} size={114} lines={[[{ t: 'Ask' }, { t: 'your' }], [{ t: 'AI tutor.', hl: 'lime' }]]} />
+      <Caption font={fontFamily} from={484} to={516} y={170} size={124} lines={[[{ t: 'Try' }, { t: 'again.' }]]} />
+      <Caption font={fontFamily} from={520} to={552} y={170} size={132} lines={[[{ t: 'Nailed' }, { t: 'it!', hl: 'mint' }]]} />
+      <Caption font={fontFamily} from={632} to={666} y={170} size={124} lines={[[{ t: 'Watch' }, { t: 'it' }, { t: 'grow.', hl: 'lime' }]]} />
 
       <ScoreOverlay font={fontFamily} />
       <Outro font={fontFamily} />
       <ProgressBar />
+      <AudioLayer />
     </AbsoluteFill>
   );
 };

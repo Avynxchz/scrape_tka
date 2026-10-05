@@ -4,7 +4,7 @@ import manifestJson from '../public/shots/manifest.json';
 export const FPS = 30;
 export const W = 1080;
 export const H = 1920;
-export const DUR = 450; // 15s
+export const DUR = 720; // 24s @ 30fps
 
 // Real captures are 390x844 CSS px @3x (1170x2532)
 export const VW = 390;

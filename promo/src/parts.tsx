@@ -224,9 +224,34 @@ export const Caption: React.FC<{ from: number; to: number; lines: Word[][]; y: n
   if (f < from - 1 || f > to + 6) return null;
   let idx = 0;
   return (
-    <div style={{ position: 'absolute', left: 0, right: 0, top: y, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: size * 0.02 }}>
+    <div
+      style={{
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: y,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: size * 0.02,
+        width: '100%',
+        maxWidth: 1040,
+        margin: '0 auto',
+        pointerEvents: 'none',
+      }}
+    >
       {lines.map((line, li) => (
-        <div key={li} style={{ display: 'flex', justifyContent: 'center', gap: size * 0.22 }}>
+        <div
+          key={li}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: size * 0.22,
+            maxWidth: '100%',
+            whiteSpace: 'normal',
+          }}
+        >
           {line.map((w) => {
             const k = idx++;
             const sp = spring({ frame: f - from - k * 3, fps, config: { damping: 13, stiffness: 200, mass: 0.7 } });
@@ -237,15 +262,34 @@ export const Caption: React.FC<{ from: number; to: number; lines: Word[][]; y: n
             const pillColor = w.hl === 'red' ? C.red : w.hl === 'mint' ? C.mint : C.lime;
             const txtColor = w.hl && w.hl !== 'red' && pill > 0.5 ? C.ink : C.white;
             return (
-              <div key={k} style={{ position: 'relative', overflow: 'hidden', padding: `${size * 0.04}px ${size * 0.12}px ${size * 0.1}px` }}>
+              <div
+                key={k}
+                style={{
+                  position: 'relative',
+                  overflow: 'hidden',
+                  padding: `${size * 0.04}px ${size * 0.12}px ${size * 0.1}px`,
+                  flexShrink: 0,
+                  maxWidth: '100%',
+                }}
+              >
                 {w.hl && (
                   <div style={{ position: 'absolute', left: size * 0.02, right: size * 0.02, top: size * 0.12, bottom: size * 0.08, borderRadius: size * 0.2, background: pillColor, transformOrigin: '0% 50%', transform: `scaleX(${pill * (1 - out)})` }} />
                 )}
                 <div
                   style={{
-                    position: 'relative', fontFamily: font, fontWeight: 800, fontSize: size, lineHeight: 1.05, letterSpacing: '-0.035em',
-                    color: txtColor, transform: `translateY(${ty}px) rotate(${rot}deg)`, transformOrigin: '0% 100%',
-                    textShadow: w.hl ? 'none' : '0 10px 40px rgba(0,0,0,0.5)', whiteSpace: 'nowrap',
+                    position: 'relative',
+                    fontFamily: font,
+                    fontWeight: 800,
+                    fontSize: Math.min(size, 138),
+                    lineHeight: 1.08,
+                    letterSpacing: '-0.035em',
+                    color: txtColor,
+                    transform: `translateY(${ty}px) rotate(${rot}deg)`,
+                    transformOrigin: '0% 100%',
+                    textShadow: w.hl ? 'none' : '0 10px 40px rgba(0,0,0,0.5)',
+                    whiteSpace: 'normal',
+                    wordBreak: 'normal',
+                    overflowWrap: 'normal',
                   }}
                 >
                   {w.t}
