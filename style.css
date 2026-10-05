@@ -5987,4 +5987,175 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   border-color: #1E4D34 !important;
 }
 
+/* ==========================================================================
+   FIX TEKS PANJANG TERPECAH VERTIKAL (MOBILE ONLY: <=899px)
+   ========================================================================== */
+@media (max-width: 899px) {
+  /* 1. Modal Reviu Hasil Simulasi: anti kolom sempit & huruf jatuh ke bawah */
+  .review-container {
+    padding: 18px 14px 14px !important;
+    width: 95% !important;
+    max-width: 480px !important;
+  }
+  .review-header > div {
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+  .review-header p {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  .review-close {
+    flex-shrink: 0 !important;
+  }
+  .review-summary {
+    gap: 6px !important;
+    margin-bottom: 14px !important;
+  }
+  .review-card {
+    padding: 8px 4px !important;
+    min-width: 0 !important;
+  }
+  .review-card i {
+    font-size: 13px !important;
+  }
+  .review-card-num,
+  .review-persen {
+    font-size: 18px !important;
+  }
+  .review-card-label {
+    font-size: 9.5px !important;
+    letter-spacing: 0.02em !important;
+  }
+  .review-table-wrap {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .review-table {
+    min-width: 550px !important;
+    width: 100% !important;
+    table-layout: auto !important;
+  }
+  .review-table thead th:nth-child(1),
+  .review-table tbody td:nth-child(1) {
+    width: 44px !important;
+    min-width: 44px !important;
+    text-align: center !important;
+    padding: 10px 6px !important;
+  }
+  .review-table thead th:nth-child(2),
+  .review-table tbody td:nth-child(2) {
+    width: 92px !important;
+    min-width: 92px !important;
+    padding: 10px 8px !important;
+  }
+  .review-table thead th:nth-child(3),
+  .review-table tbody td:nth-child(3) {
+    min-width: 170px !important;
+    padding: 10px 10px !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+  .review-table thead th:nth-child(4),
+  .review-table tbody td:nth-child(4) {
+    min-width: 240px !important;
+    padding: 10px 10px !important;
+    white-space: normal !important;
+    word-break: normal !important;
+    overflow-wrap: break-word !important;
+  }
+  .review-table thead th:nth-child(4) {
+    white-space: nowrap !important;
+  }
+
+  /* 2. Header Soal Mobile: hapus batas 170px magic number, cegah pemotongan teks */
+  .m-qnum b {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  .m-qnum span {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* 3. Modal Daftar Soal: judul panjang & tombol close tidak berebut ruang */
+  .modal-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+  .modal-title {
+    min-width: 0 !important;
+    flex: 1 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    line-height: 1.3 !important;
+  }
+  .btn-close-modal {
+    flex-shrink: 0 !important;
+  }
+
+  /* 4. AI Tutor Header: judul tidak menabrak kontrol aksi */
+  .ai-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+  }
+  .ai-tutor-title {
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+  .ai-tutor-title h2 {
+    min-width: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+  }
+
+  /* 5. Kartu Mapel Beranda: proteksi flex item & line clamp */
+  .stitch-sec-title {
+    min-width: 0 !important;
+  }
+  .stitch-sec-title > div {
+    min-width: 0 !important;
+    flex: 1 !important;
+  }
+  .stitch-sec-title h2 {
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+  }
+  .stitch-card {
+    min-width: 250px !important;
+  }
+  .stitch-meta {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* 6. Work Rail Expanded: teks tidak pecah per huruf */
+  .work-rail.is-expanded .rail-btn span {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100% !important;
+  }
+}
+
+
 

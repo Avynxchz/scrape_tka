@@ -1206,9 +1206,13 @@ function renderQuestion() {
 
   // Fase 2: sinkron top bar mobile & progress line
   const mQNumEl = document.getElementById('mQNum');
-  if (mQNumEl) mQNumEl.innerHTML =
-    '<b>' + (subjectMeta.name || state.currentSubject) + '</b>' +
-    '<span>Paket ' + state.currentPkg + ' · Soal ' + q.nomor + '/' + total + '</span>';
+  if (mQNumEl) {
+    const fullSubj = subjectMeta.name || state.currentSubject;
+    const shortSubj = (SUBJECT_UI_META[state.currentSubject] && SUBJECT_UI_META[state.currentSubject].shortName) || fullSubj;
+    mQNumEl.innerHTML =
+      '<b title="' + _escHtml(fullSubj) + '">' + _escHtml(shortSubj) + '</b>' +
+      '<span>Paket ' + state.currentPkg + ' · Soal ' + q.nomor + '/' + total + '</span>';
+  }
   const mProgressFill = document.getElementById('mProgressFill');
   if (mProgressFill) mProgressFill.style.width = `${Math.round(((state.currentIndex + 1) / total) * 100)}%`;
 
@@ -3969,8 +3973,11 @@ function renderReviewHasil() {
   const persen = totalQuestions ? Math.round((benar / totalQuestions) * 100) : 0;
 
   const subjName = (SUBJECT_CATALOG[state.currentSubject] && SUBJECT_CATALOG[state.currentSubject].name) || state.currentSubject;
-  document.getElementById('reviewMetaText').innerText =
-    `${subjName} — Paket ${state.currentPkg} (${totalQuestions} Soal)`;
+  const reviewMetaEl = document.getElementById('reviewMetaText');
+  if (reviewMetaEl) {
+    reviewMetaEl.innerText = `${subjName} — Paket ${state.currentPkg} (${totalQuestions} Soal)`;
+    reviewMetaEl.title = `${subjName} — Paket ${state.currentPkg}`;
+  }
   document.getElementById('reviewScoreBenar').innerText = benar;
   document.getElementById('reviewScoreSalah').innerText = salah;
   document.getElementById('reviewScoreKosong').innerText = kosong;
