@@ -373,6 +373,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   loadPackageData(state.currentPkg === 1 ? 2 : 1);
   updateSubjectUI();
   renderQuestion();
+  updateModelPickerUI();
   renderGridModal();
 
   // Layar pertama: Home dashboard (kecuali langsung diarahkan ke soal via #soal-N)
@@ -2926,6 +2927,11 @@ function formatAiMessage(rawText) {
   let inCallout = false;
   let calloutType = '';
   let calloutLines = [];
+  let inCode = false;
+  let codeLang = '';
+  let codeLines = [];
+  let inTable = false;
+  let tableRows = [];
 
   function inline(text) {
     // Lindungi token matematika agar tidak terpotong oleh html-escape atau markdown italic
@@ -2965,9 +2971,80 @@ function formatAiMessage(rawText) {
     }
   }
 
+  function flushTable() {
+    if (inTable && tableRows.length > 0) {
+      let tableHtml = '<div class="ai-table-wrap"><table>';
+      const hasHeader = tableRows.length >= 2 && tableRows[1].some(c => /^:?-+:?$/.test(c.trim()));
+      if (hasHeader) {
+        tableHtml += '<thead><tr>';
+        tableRows[0].forEach(cell => {
+          tableHtml += `<th>${inline(cell.trim())}</th>`;
+        });
+        tableHtml += '</tr></thead><tbody>';
+        for (let r = 2; r < tableRows.length; r++) {
+          tableHtml += '<tr>';
+          tableRows[r].forEach(cell => {
+            tableHtml += `<td>${inline(cell.trim())}</td>`;
+          });
+          tableHtml += '</tr>';
+        }
+        tableHtml += '</tbody>';
+      } else {
+        tableHtml += '<tbody>';
+        tableRows.forEach(row => {
+          tableHtml += '<tr>';
+          row.forEach(cell => {
+            tableHtml += `<td>${inline(cell.trim())}</td>`;
+          });
+          tableHtml += '</tr>';
+        });
+        tableHtml += '</tbody>';
+      }
+      tableHtml += '</table></div>';
+      html += tableHtml;
+      inTable = false;
+      tableRows = [];
+    }
+  }
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const trimmed = line.trim();
+
+    // Fenced Code Block handling (```)
+    if (trimmed.startsWith('```')) {
+      flushList();
+      flushCallout();
+      flushTable();
+      if (!inCode) {
+        inCode = true;
+        codeLang = trimmed.slice(3).trim();
+        codeLines = [];
+      } else {
+        inCode = false;
+        html += `<pre><code class="${codeLang ? 'language-' + _escHtml(codeLang) : ''}">${_escHtml(codeLines.join('\n'))}</code></pre>`;
+        codeLines = [];
+        codeLang = '';
+      }
+      continue;
+    }
+
+    if (inCode) {
+      codeLines.push(line);
+      continue;
+    }
+
+    // Markdown Table handling (| col | col |)
+    if (trimmed.startsWith('|') && trimmed.endsWith('|') && trimmed.length > 2) {
+      flushList();
+      flushCallout();
+      inTable = true;
+      const cells = trimmed.split('|').slice(1, -1);
+      tableRows.push(cells);
+      continue;
+    } else if (inTable) {
+      flushTable();
+    }
 
     // Check if line triggers a Callout Box
     if (trimmed.startsWith('📌') || trimmed.includes('Catatan Tutor:')) {
@@ -3058,6 +3135,10 @@ function formatAiMessage(rawText) {
     }
   }
 
+  if (inCode && codeLines.length > 0) {
+    html += `<pre><code>${_escHtml(codeLines.join('\n'))}</code></pre>`;
+  }
+  flushTable();
   flushList();
   flushCallout();
 
@@ -3283,11 +3364,85 @@ function changeTutorModel(val) {
   } catch (e) {}
   const sel = document.getElementById('aiTutorModelSelect');
   if (sel && sel.value !== val) sel.value = val;
+  updateModelPickerUI(val);
   const q = getCurrentQuestion();
   if (q) {
     renderChatHistory(q);
   }
 }
+
+// Fase 12: Model Picker Popover UI Handlers
+function updateModelPickerUI(modelId) {
+  if (!modelId) modelId = state.selectedTutorModel || 'qwen-groq';
+  const btn = document.getElementById('btnModelPicker');
+  const icon = document.getElementById('modelPickerIcon');
+  
+  let iconClass = 'fa-solid fa-bolt';
+  let modelName = 'Qwen 2.5 27B';
+  if (modelId === 'gemini-flash') {
+    iconClass = 'fa-solid fa-wand-magic-sparkles';
+    modelName = 'Gemini 3.8 Flash';
+  } else if (modelId === 'gemini-pro') {
+    iconClass = 'fa-solid fa-brain';
+    modelName = 'Gemini Pro';
+  } else {
+    iconClass = 'fa-solid fa-bolt';
+    modelName = 'Qwen 2.5 27B';
+  }
+
+  if (icon) {
+    icon.className = iconClass;
+  }
+  if (btn) {
+    btn.setAttribute('aria-label', `Model AI: ${modelName}`);
+    btn.setAttribute('title', `Model AI: ${modelName}`);
+  }
+
+  const items = document.querySelectorAll('.model-popover-item');
+  items.forEach(it => {
+    const m = it.getAttribute('data-model');
+    if (m === modelId) {
+      it.classList.add('active');
+      it.setAttribute('aria-selected', 'true');
+    } else {
+      it.classList.remove('active');
+      it.removeAttribute('aria-selected');
+    }
+  });
+}
+
+function toggleModelPicker(e) {
+  if (e) e.stopPropagation();
+  const pop = document.getElementById('modelPopover');
+  if (!pop) return;
+  const isHidden = pop.style.display === 'none' || !pop.style.display;
+  pop.style.display = isHidden ? 'block' : 'none';
+  if (isHidden) {
+    updateModelPickerUI(state.selectedTutorModel);
+  }
+}
+
+function closeModelPopover(e) {
+  if (e) e.stopPropagation();
+  const pop = document.getElementById('modelPopover');
+  if (pop) pop.style.display = 'none';
+}
+
+function selectModelFromPopover(modelId) {
+  changeTutorModel(modelId);
+  closeModelPopover();
+}
+
+// Global click-outside listener untuk menutup model popover
+document.addEventListener('click', function(e) {
+  const pop = document.getElementById('modelPopover');
+  const btn = document.getElementById('btnModelPicker');
+  if (pop && pop.style.display !== 'none') {
+    if (!pop.contains(e.target) && (!btn || !btn.contains(e.target))) {
+      pop.style.display = 'none';
+    }
+  }
+});
 
 function syncModelSelectorUI(provider) {
   const sel = document.getElementById('aiTutorModelSelect');
@@ -3311,6 +3466,7 @@ function syncModelSelectorUI(provider) {
   } else if (sel.options.length > 0) {
     state.selectedTutorModel = sel.value;
   }
+  updateModelPickerUI(state.selectedTutorModel);
 }
 
 // Mulai percakapan BARU untuk soal ini (riwayat lama diarsipkan di server).

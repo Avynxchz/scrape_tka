@@ -17,7 +17,7 @@ Baseline: Fase 0 - 3 Selesai (11/11 tes lolos)
 | **Fase 8** | Menu Modul: carousel reusable, progress gabungan bersegmen mapel pilihan | **SELESAI** | 16/16 uji `_tes_fase8.js` PASS. Carousel 2-slide reusable, teks serba putih solid. Slide 1: Kurikulum & Maskot Robot AI sedang membaca buku beranimasi. Slide 2: Progres Gabungan Mapel Pilihan (multi-segmented progress bar dengan warna unik tiap mapel + legenda ringkas interaktif). Semua 22 mapel dan 5 kategori dipertahankan utuh. |
 | **Fase 9** | Menu Progress: fix blinking cards, dashboard analitik belajar, empty state | **SELESAI** | 10/10 uji `_tes_fase9.js` PASS. Bug kartu berkedip berhasil diperbaiki total dengan memoization state data (`_lastRenderedProgressJson`) dan penghapusan class `.fade-in` pada re-render berulang. Dashboard analitik dilengkapi widget streak kehadiran, waktu belajar hari ini vs kemarin, visualisasi distribusi 5 rumpun kategori, dan empty state ramah. |
 | **Fase 11** | Diagnosis & perbaikan bottom nav terlalu tinggi (menu dashboard, mobile) | **SELESAI** | 11/11 uji `_tes_fase11.js` PASS. Akar masalah ditemukan di `progres.html` (`.pb-safe` hardcoded `+ 5rem` = 80px pada nav). Setelah perbaikan, tinggi (57px) dan posisi bottom (menempel flush) 100% IDENTIK di 4 menu (Beranda, Modul, Progres, Akun) pada 360, 390, dan 412 px (selisih 0px). |
-| **Fase 12** | Chat AI: tampilan jawaban & pemilih model (warna bubble, padding 12-16px, logo pemilih model ringkas) | BELUM | Menunggu eksekusi |
+| **Fase 12** | Chat AI: tampilan jawaban & pemilih model (warna bubble, padding 12-16px, logo pemilih model ringkas) | **SELESAI** | 34/34 uji `_tes_fase12.js` PASS, 0 error console. Bubble AI putih bersih (#FFFFFF) di atas background chat (#F8FAFC) dengan aksen hijau dan padding 16px (line-height 1.55). Fenced code blocks & tabel ber-scroll horizontal mandiri tanpa meluber. Tombol logo model compact (32px) dengan popover picker rapi (checkmark, icons, persist ke localStorage). Dark mode terverifikasi kontras tinggi. |
 | **Fase 13** | Tombol navigasi mengambang bisa mengecil otomatis (auto-minimize 36-44px + expand on tap + auto collapse) | BELUM | Menunggu eksekusi (tergantung Fase 4 & 12) |
 | **Fase 14** | Kontrol ukuran teks mobile (90%, 100%, 115%, 130% di menu overflow Soal & Akun, persist localStorage) | BELUM | Menunggu eksekusi (tergantung Fase 11-13) |
 
@@ -85,6 +85,22 @@ Baseline: Fase 0 - 3 Selesai (11/11 tes lolos)
     - 412px: Beranda = 57px, Modul = 57px, Progres = 57px, Akun = 57px (selisih 0px, 100% IDENTIK).
     - Semua menempel flush di posisi paling bawah (`rect.bottom === window.innerHeight`).
     - 11/11 tes otomatis lulus, 0 console errors, desktop 1280px tetap menyembunyikan bottom nav mobile (`display: none`).
+- **Fase 12**:
+  - **Warna & Padding Bubble Chat AI**:
+    - Background chat messages disetel ke `#F8FAFC` (slate-50 ramah mata) dan `#0A1611` pada mode gelap.
+    - Bubble jawaban AI memakai background `#FFFFFF` (putih solid bersih) dengan border halus `#E2E8F0` dan border-left hijau `#004a2a` 3px, kontras teks `#0F172A` (> 10:1 kontras ratio).
+    - Mode gelap bubble AI memakai `#11261B` dengan teks `#ECFDF5` (kontras ratio > 11:1).
+    - Padding dalam 16px nyaman, line-height 1.55, margin list 6px, bullet point rapi.
+  - **Anti-Meluber Konten Markdown**:
+    - Fenced code block (```) diubah menjadi `<div class="ai-code-block"><pre><code>` dengan background slate gelap `#0F172A`, font monospace, dan `overflow-x: auto !important` mandiri.
+    - Markdown table diubah menjadi `<div class="ai-table-wrap"><table>` dengan padding header rapi, border table, dan `overflow-x: auto !important` mandiri tanpa meluber keluar bubble.
+  - **Pemilih Model Ringkas (Logo Button & Popover)**:
+    - Selector bar model yang lama dan bulky disembunyikan (`display: none`).
+    - Digantikan tombol logo model bulat compact 32px (`#btnModelPicker`) yang ditempatkan sejajar di bar aksi atas bersama tombol "Chat Baru" dan quick suggestion chips.
+    - Ikon model berubah dinamis sesuai model aktif: Petir (`fa-bolt`) untuk Qwen 2.5 27B, Tongkat Sihir (`fa-wand-magic-sparkles`) untuk Gemini 3.8 Flash, dan Otak (`fa-brain`) untuk Gemini Pro.
+    - Saat logo diklik, popover melayang anggun di bawah tombol menampilkan daftar model, deskripsi singkat, dan tanda centang aktif. Memilih model langsung mengubah state, meng-update tombol & dropdown lama (kompatibilitas penuh), menyimpan ke `localStorage['tka_tutor_model']`, dan menutup popover otomatis.
+  - **Hasil Verifikasi**:
+    - 34/34 uji lolos di 360px, 390px, 412px, dan desktop 1280px via `scratch/_tes_fase12.js`. 0 error console.
 
 ---
 

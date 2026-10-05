@@ -621,9 +621,6 @@
                   <button type="button" class="btn-refresh-quota" id="btnRefreshQuota" onclick="refreshTutorQuota()" title="[Mode Testing Admin] Klik untuk reset kuota kembali penuh!">
                     <i class="fa-solid fa-arrows-rotate"></i> Reset
                   </button>
-                  <button type="button" class="btn-new-chat-tutor" id="btnStartNewChat" onclick="startNewTutorConversation()" title="Mulai obrolan baru untuk soal ini">
-                    <i class="fa-solid fa-plus"></i> Chat Baru
-                  </button>
                 </div>
               </div>
             </div>
@@ -636,23 +633,59 @@
             </button>
           </div>
 
-          <!-- AI Model Selector Bar -->
-          <div class="ai-model-selector-bar">
-            <div class="model-select-group">
-              <span class="model-select-icon"><i class="fa-solid fa-brain"></i></span>
-              <label for="aiTutorModelSelect" class="model-select-label">Model:</label>
-              <select id="aiTutorModelSelect" class="ai-model-select" onchange="changeTutorModel(this.value)">
-                <option value="qwen-groq" selected>Qwen 2.5 27B (Groq Fast — Default)</option>
-                <option value="gemini-flash">Gemini 3.8 Flash (Vision Multimodal)</option>
-                <option value="gemini-pro">Gemini Pro (Advanced)</option>
-              </select>
+          <!-- Bar Aksi Atas AI: Chat Baru + Tombol Logo Model + Chip Pertanyaan Saran -->
+          <div class="ai-top-actions-bar" id="aiTopActionsBar">
+            <button type="button" class="btn-new-chat-tutor" id="btnStartNewChat" onclick="startNewTutorConversation()" title="Mulai obrolan baru untuk soal ini">
+              <i class="fa-solid fa-plus"></i> <span>Chat Baru</span>
+            </button>
+            <div class="model-picker-wrap">
+              <button type="button" class="btn-model-logo" id="btnModelPicker" onclick="toggleModelPicker(event)" aria-label="Pilih Model AI: Qwen 2.5 27B" title="Pilih Model AI">
+                <i class="fa-solid fa-bolt" id="modelPickerIcon"></i>
+              </button>
+              <!-- Popover daftar model -->
+              <div class="model-popover" id="modelPopover" style="display: none;" role="menu" aria-label="Pilih Model AI">
+                <div class="model-popover-header">
+                  <span>Pilih Model AI</span>
+                  <button type="button" class="btn-popover-close" onclick="closeModelPopover(event)" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="model-popover-list" id="modelPopoverList">
+                  <div class="model-popover-item active" data-model="qwen-groq" onclick="selectModelFromPopover('qwen-groq')">
+                    <div class="model-item-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <div class="model-item-text">
+                      <div class="model-item-title">Qwen 2.5 27B</div>
+                      <div class="model-item-desc">Groq Fast · Respon Kilat</div>
+                    </div>
+                    <div class="model-item-check"><i class="fa-solid fa-check"></i></div>
+                  </div>
+                  <div class="model-popover-item" data-model="gemini-flash" onclick="selectModelFromPopover('gemini-flash')">
+                    <div class="model-item-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <div class="model-item-text">
+                      <div class="model-item-title">Gemini 3.8 Flash</div>
+                      <div class="model-item-desc">Vision Multimodal</div>
+                    </div>
+                    <div class="model-item-check"><i class="fa-solid fa-check"></i></div>
+                  </div>
+                  <div class="model-popover-item" data-model="gemini-pro" onclick="selectModelFromPopover('gemini-pro')">
+                    <div class="model-item-icon"><i class="fa-solid fa-brain"></i></div>
+                    <div class="model-item-text">
+                      <div class="model-item-title">Gemini Pro</div>
+                      <div class="model-item-desc">Penalaran Mendalam</div>
+                    </div>
+                    <div class="model-item-check"><i class="fa-solid fa-check"></i></div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <!-- Quick Prompt Chips -->
-          <div class="quick-chips-wrapper">
+            <!-- Quick Prompt Chips -->
             <div class="quick-chips" id="quickChipsContainer"></div>
           </div>
+
+          <!-- Hidden legacy select element kept for 100% backward-compatibility -->
+          <select id="aiTutorModelSelect" class="ai-model-select" onchange="changeTutorModel(this.value)" style="display: none;" aria-hidden="true">
+            <option value="qwen-groq" selected>Qwen 2.5 27B (Groq Fast — Default)</option>
+            <option value="gemini-flash">Gemini 3.8 Flash (Vision Multimodal)</option>
+            <option value="gemini-pro">Gemini Pro (Advanced)</option>
+          </select>
 
           <!-- Chat Conversation Stream -->
           <div class="chat-messages" id="chatMessages">
