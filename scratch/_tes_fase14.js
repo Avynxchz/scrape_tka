@@ -151,51 +151,35 @@ async function runTests() {
     // Tangkap screenshot soal pada 130%
     await page.screenshot({ path: `exports/fase14_soal_130pct_${vp.name}.png` });
 
-    // 3. Verifikasi Aksesibilitas dari Tampilan AI Tutor
+    // 3. Verifikasi Tampilan AI Tutor menerima skala teks dari menu overflow/global
     await page.evaluate(() => {
       if (typeof openTutorSheet === 'function') openTutorSheet();
       else if (typeof switchWorkTab === 'function') switchWorkTab('pembahasan', 'ai');
     });
     await page.waitForTimeout(400);
 
-    // Buka popover font scale di header AI
-    await page.click('#btnTutorScale');
-    await page.waitForTimeout(250);
-
-    const tutorScaleCheck = await page.evaluate(() => {
-      const popover = document.getElementById('tutorScalePopover');
-      const popVisible = popover && popover.style.display !== 'none';
-      const ind = document.getElementById('tutorScaleIndicator')?.textContent;
-      return { popVisible, ind };
-    });
-
-    report(`${vp.name}: Pengaturan ukuran teks dapat diakses dari dalam header AI Tutor`,
-      tutorScaleCheck.popVisible && tutorScaleCheck.ind === '130%',
-      JSON.stringify(tutorScaleCheck)
-    );
-
-    // Turunkan kembali skala dari popover AI Tutor (130% -> 115% -> 100%)
-    await page.click('#btnTutorScaleDec');
-    await page.waitForTimeout(200);
-    await page.click('#btnTutorScaleDec');
-    await page.waitForTimeout(300);
-
-    const tutorScaleAfterDec = await page.evaluate(() => {
-      const ind = document.getElementById('tutorScaleIndicator')?.textContent;
+    const tutorCheck = await page.evaluate(() => {
+      const bubble = document.querySelector('.chat-bubble .bubble-content') || document.querySelector('.chat-bubble .ai-p') || document.querySelector('.chat-bubble');
       const attr = document.documentElement.getAttribute('data-text-scale');
-      return { ind, attr };
+      const hasIntrusiveScaleBtn = !!document.getElementById('btnTutorScale');
+      return {
+        attr,
+        hasIntrusiveScaleBtn,
+        fontSize: bubble ? parseFloat(getComputedStyle(bubble).fontSize) : null
+      };
     });
 
-    report(`${vp.name}: Tombol A- di popover AI menurunkan skala kembali ke 100%`,
-      tutorScaleAfterDec.ind === '100%' && tutorScaleAfterDec.attr === '100',
-      JSON.stringify(tutorScaleAfterDec)
+    report(`${vp.name}: Tampilan AI Tutor menerima skala teks 130% dan header AI bersih (tanpa tombol pengganggu)`,
+      tutorCheck.attr === '130' && !tutorCheck.hasIntrusiveScaleBtn && tutorCheck.fontSize >= 15,
+      JSON.stringify(tutorCheck)
     );
 
-    // Tangkap screenshot AI pada 100%
-    await page.screenshot({ path: `exports/fase14_ai_100pct_${vp.name}.png` });
+    // Tangkap screenshot AI pada 130%
+    await page.screenshot({ path: `exports/fase14_ai_130pct_${vp.name}.png` });
 
-    // Tutup AI sheet
+    // Restorasi skala ke 100% via setTextScale
     await page.evaluate(() => {
+      if (typeof setTextScale === 'function') setTextScale(100);
       if (typeof closeTutorSheet === 'function') closeTutorSheet();
     });
     await page.waitForTimeout(300);
