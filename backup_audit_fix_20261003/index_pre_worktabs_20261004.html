@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TKA Master - Simulasi Ujian & AI Tutor</title>
+  <meta name="description" content="Platform belajar interaktif dan simulasi ujian TKA Pusmendik Kemendikdasmen dilengkapi pembahasan langkah terstruktur dan AI Tutor cerdas.">
+  
+  <!-- Google Fonts: Inter (UI chrome; font konten soal tidak diubah) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- KaTeX for beautiful math formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  
+  <!-- Fase 1: light-only. Dark mode ditunda (gambar soal berlatar putih). -->
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css?v=47">
+  <!-- Stitch home: font & ikon (scoped di .home-overlay) -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+  <link rel="stylesheet" href="home_stitch.css?v=2">
+</head>
+<body>
+
+  <!-- ============================================================
+       HOME OVERLAY — dashboard pilih mapel & paket (layar pertama).
+       Muncul sebelum soal; klik card Paket -> masuk soal.
+       Data mapel di-inject dari app.js (SUBJECT_CATALOG).
+============================================================ -->
+  <div id="homeOverlay" class="home-overlay" role="dialog" aria-label="Beranda TKA Master">
+   <!-- PANEL BERANDA (default) — versi mobile .stitch-* + iframe desktop -->
+   <div id="panelBeranda" class="home-panel panel-active" data-panel="beranda">
+    <header class="stitch-fixed-top">
+      <div class="stitch-header-row">
+        <div class="stitch-brand-wrap">
+          <div class="stitch-brand-logo"><span class="ms-icon">school</span></div>
+          <div class="stitch-brand-text">
+            <span class="stitch-brand-title">TKA Master</span>
+            <span class="stitch-brand-sub">BERANDA</span>
+          </div>
+        </div>
+        <div class="stitch-header-actions">
+          <button aria-label="Notifikasi" type="button" class="stitch-iconbtn"><span class="ms-icon">notifications</span><span class="stitch-ndot"></span></button>
+          <div class="stitch-avatar"><span class="ms-icon">person</span></div>
+        </div>
+      </div>
+    </header>
+    <main class="stitch-main">
+      <div class="stitch-hero">
+        <div class="stitch-hero-bubble1"></div>
+        <div class="stitch-hero-bubble2"></div>
+        <div class="stitch-hero-subbar">
+          <div class="stitch-hero-subbar-left"><span class="ms-icon stitch-ms-fixed">school</span><span class="stitch-dotrow"><i class="d1"></i><i class="d2"></i><i class="d3"></i><i class="d4"></i></span></div>
+          <div class="stitch-hero-active"><i></i><span>Gratis selama beta</span></div>
+        </div>
+        <div class="stitch-hero-grid">
+          <div class="stitch-hero-copy">
+            <h1>Latihan TKA Terarah &amp; Teruji</h1>
+            <p>Simulasi TKA Pusmendik &amp; AI Tutor diagnostik cepat.</p>
+            <div><button type="button" class="stitch-cta" id="heroCta"><span>Mulai Sekarang</span><span class="ms-icon ms-16">arrow_forward</span></button></div>
+          </div>
+          <div class="stitch-hero-art">
+            <div class="stitch-float">
+              <div class="stitch-glow"></div>
+              <div class="stitch-paper">
+                <div class="stitch-paper-top"><span class="stitch-chk"><span class="ms-icon ms-12">check</span></span><span class="stitch-lines"><i></i><i class="w34"></i></span></div>
+                <div class="stitch-paper-body"><i></i><i class="w56"></i><span class="stitch-paper-row"><span class="stitch-box"><span class="ms-icon ms-8">check</span></span><i class="stitch-minibar"></i></span></div>
+                <div class="stitch-score"><b>46 Soal</b><span>Matematika</span></div>
+              </div>
+              <svg class="stitch-cap" viewBox="0 0 48 48" fill="none"><polygon fill="#171C1F" points="24,6 44,16 24,26 4,16"></polygon><polygon fill="#2C3134" points="24,8 41,16 24,24 7,16"></polygon><path d="M12 21V31C12 34 17 38 24 38C31 38 36 34 36 31V21" fill="#171C1F"></path><path d="M40 18V32" stroke="#FFB77D" stroke-linecap="round" stroke-width="2"></path><circle cx="40" cy="33" fill="#FFB77D" r="2.5"></circle></svg>
+              <svg class="stitch-pencil" viewBox="0 0 24 48" fill="none"><path d="M6 10L18 10L18 36L12 44L6 36Z" fill="#FEF3C7"></path><path d="M6 10L18 10L18 14L6 14Z" fill="#FFB77D"></path><path d="M10 41L12 44L14 41Z" fill="#171C1F"></path><path d="M6 4L18 4L18 10L6 10Z" fill="#BA1A1A"></path></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stitch-dotsrow-center"><i class="on"></i><i></i><i></i></div>
+      <main id="hoMain" class="stitch-sections"></main>
+    </main>
+    <nav class="stitch-bottomnav" aria-label="Navigasi bawah">
+      <div class="stitch-bottomnav-row">
+        <a href="#" data-nav="beranda" class="on"><span class="ms-icon">dashboard</span><span>Beranda</span></a>
+        <a href="#" data-nav="modul"><span class="ms-icon">auto_stories</span><span>Modul</span></a>
+        <a href="#" data-nav="progres"><span class="ms-icon">analytics</span><span>Progres</span></a>
+        <a href="#" data-nav="akun"><span class="ms-icon">account_circle</span><span>Akun</span></a>
+      </div>
+    </nav>
+      <!-- Desktop (>=900px): dashboard versi Stitch desktop via iframe -->
+    <iframe id="homeDesktopFrame" class="home-desktop-frame" src="/home_desktop.html" title="Beranda TKA Master (Desktop)"></iframe>
+   </div><!-- /#panelBeranda -->
+
+   <!-- PANEL MODUL — file mandiri (Tailwind sendiri), wajib iframe biar CSS-nya tidak konflik -->
+   <div id="panelModul" class="home-panel" data-panel="modul">
+     <iframe id="panelModulFrame" class="home-panel-frame" src="/workspace_modul/modul.html" title="Modul Belajar TKA Master"></iframe>
+   </div>
+
+   <!-- PANEL PROGRES — file mandiri, wajib iframe -->
+   <div id="panelProgres" class="home-panel" data-panel="progres">
+     <iframe id="panelProgresFrame" class="home-panel-frame" src="/workspace_progres/progres.html" title="Progres &amp; Analitik TKA Master"></iframe>
+   </div>
+
+   <!-- PANEL AKUN — file mandiri, wajib iframe -->
+   <div id="panelAkun" class="home-panel" data-panel="akun">
+     <iframe id="panelAkunFrame" class="home-panel-frame" src="/workspace_akun/akun.html" title="Akun &amp; Preferensi TKA Master"></iframe>
+   </div>
+  </div>
+
+<!-- Sticky Modern App Header -->
+  <header class="app-header">
+    <div class="header-container">
+      <!-- Mobile: menu mapel & paket -->
+      <button class="m-icon-btn" id="btnMobileMenu" aria-label="Pilih mata pelajaran & paket" title="Mata pelajaran & paket">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <!-- Left: Logo & Brand -->
+      <div class="brand">
+        <div class="brand-logo">
+          <i class="fa-solid fa-bullseye"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title" id="brandTitle">TKA Master</span>
+          <span class="brand-subtitle" id="brandSubtitle">Simulasi Ujian & AI Tutor</span>
+        </div>
+      </div>
+
+      <!-- Mobile: posisi soal saat ini -->
+      <div class="m-qnum" id="mQNum">Soal …</div>
+
+      <!-- Center: Subject & Package Selectors -->
+      <div class="header-center-controls" id="mobileMenuPanel">
+        <!-- Subject Selector -->
+        <div class="subject-select-wrap">
+          <i class="fa-solid fa-layer-group"></i>
+          <select class="subject-select" id="subjectSelect" onchange="switchSubject(this.value)" aria-label="Pilih Mata Pelajaran">
+            <optgroup label="Mapel Wajib">
+              <option value="matematika">Matematika (Wajib)</option>
+              <option value="bahasa_indonesia">Bahasa Indonesia (Wajib)</option>
+              <option value="bahasa_inggris">Bahasa Inggris (Wajib)</option>
+            </optgroup>
+            <optgroup label="Saintek Pilihan">
+              <option value="fisika">Fisika (Pilihan)</option>
+              <option value="kimia">Kimia (Pilihan)</option>
+              <option value="biologi">Biologi (Pilihan)</option>
+            </optgroup>
+            <optgroup label="Soshum Pilihan">
+              <option value="ekonomi">Ekonomi (Pilihan)</option>
+              <option value="geografi">Geografi (Pilihan)</option>
+              <option value="sosiologi">Sosiologi (Pilihan)</option>
+              <option value="sejarah">Sejarah (Pilihan)</option>
+              <option value="antropologi">Antropologi (Pilihan)</option>
+              <option value="kewirausahaan">Kewirausahaan / PKWU (Pilihan)</option>
+            </optgroup>
+            <optgroup label="Tingkat Lanjut">
+              <option value="matematika_lanjut">Matematika Lanjut</option>
+              <option value="bahasa_indonesia_lanjut">Bahasa Indonesia Lanjut</option>
+              <option value="bahasa_inggris_lanjut">Bahasa Inggris Lanjut</option>
+            </optgroup>
+            <optgroup label="Lintas Minat">
+              <option value="ppkn">Pendidikan Pancasila / PPKn</option>
+            </optgroup>
+            <optgroup label="Bahasa Asing">
+              <option value="bahasa_arab">Bahasa Arab</option>
+              <option value="bahasa_jepang">Bahasa Jepang</option>
+              <option value="bahasa_jerman">Bahasa Jerman</option>
+              <option value="bahasa_prancis">Bahasa Prancis</option>
+              <option value="bahasa_mandarin">Bahasa Mandarin</option>
+              <option value="bahasa_korea">Bahasa Korea</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <!-- Right: Timer, Daftar Soal, Avatar -->
+      <div class="header-actions">
+        <!-- Tombol Home: kembali ke dashboard pilih mapel -->
+        <button class="m-icon-btn" id="btnHome" onclick="homeToggle()" aria-label="Beranda" title="Beranda">
+          <i class="fa-solid fa-house"></i>
+        </button>
+
+        <!-- Segmented Package Tabs (dipindah ke kanan agar tidak tertutup popup dropdown mapel) -->
+        <div class="package-tabs" role="tablist">
+          <button class="pkg-tab active" id="tabPkg1" onclick="switchPackage(1)">
+            <span id="tabPkg1Label">Paket 1</span>
+          </button>
+          <button class="pkg-tab" id="tabPkg2" onclick="switchPackage(2)">
+            <span id="tabPkg2Label">Paket 2</span>
+          </button>
+        </div>
+
+        <!-- Timer Pill -->
+        <div class="timer-pill" id="timerPill">
+          <i class="fa-regular fa-clock"></i>
+          <span id="timerText">01:45:00</span>
+        </div>
+
+        <!-- Mobile: overflow menu -->
+        <button class="m-icon-btn" id="btnMobileOverflow" aria-label="Menu lainnya" title="Menu lainnya">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+        <div class="m-overflow-panel" id="mOverflowPanel">
+          <button type="button" onclick="openDaftarModal()">
+            <i class="fa-solid fa-table-cells-large"></i> Daftar Soal
+          </button>
+          <button type="button" onclick="closeMobilePanels(); openFinishModal();">
+            <i class="fa-solid fa-flag-checkered"></i> Selesai Tes
+          </button>
+        </div>
+
+        <!-- Daftar Soal Button -->
+        <button class="btn-daftar-soal" id="btnOpenDaftarSoal" onclick="openDaftarModal()">
+          <i class="fa-solid fa-table-cells-large"></i>
+          <span>Daftar Soal</span>
+        </button>
+
+        <!-- Selesai Tes Button -->
+        <button class="btn-finish-header" id="btnFinishHeader" onclick="openFinishModal()" title="Selesai dan lihat hasil tes">
+          <i class="fa-solid fa-flag-checkered"></i>
+          <span>Selesai Tes</span>
+        </button>
+
+        <!-- User Avatar -->
+        <div class="user-avatar" title="Peserta Ujian">
+          <span>AR</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile: progress line tipis di bawah top bar -->
+    <div class="m-progress" aria-hidden="true">
+      <div class="m-progress-fill" id="mProgressFill" style="width: 2.5%;"></div>
+    </div>
+  </header>
+
+  <!-- Main Content Layout (2-Column Dashboard Grid) -->
+  <main class="main-wrapper">
+    <div class="cbt-dashboard-grid">
+      
+      <!-- LEFT COLUMN: Main CBT Question, Solution Accordion, Similar Practice -->
+      <div class="cbt-main-col">
+        
+        <!-- Topic Header & Progress Bar -->
+        <div class="topic-header-bar">
+          <div class="topic-info">
+            <p class="topic-tag" id="badgeTopik">MATEMATIKA SMA · HIMPUNAN</p>
+            <h1 class="exercise-title" id="badgeSoalNomor">Latihan Soal TKA · Nomor 1</h1>
+          </div>
+          <div class="progress-indicator">
+            <span class="prog-num" id="currQNum">1</span>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="progressBarFill" style="width: 2.5%;"></div>
+            </div>
+            <span class="prog-num prog-total" id="totalQNum">—</span>
+          </div>
+        </div>
+
+        <!-- Main CBT Question Card -->
+        <article class="cbt-question-card">
+          <!-- Card Header Bar -->
+          <div class="qcard-header">
+            <div class="qcard-number-tag">
+              <span class="qnum-badge" id="qNumBadge">01</span>
+              <span class="qlabel-text" id="qLabelHeader">Memuat soal…</span>
+            </div>
+            <span class="qtype-badge" id="badgeTipe">Pilihan Ganda</span>
+          </div>
+
+          <!-- Card Content Body (Pusmendik 2-Column Split Layout) -->
+          <div class="qcard-body">
+            <div class="cbt-exam-grid" id="cbtExamGrid">
+              <!-- Stimulus Column (Kiri / cont-soal) -->
+              <div class="cbt-stimulus-col" id="stimulusCol">
+                <div class="stimulus-header">
+                  <i class="fa-regular fa-file-lines"></i>
+                  <span>Stimulus / Konteks Soal</span>
+                </div>
+                <div class="stimulus-content" id="stimulusContainer"></div>
+              </div>
+
+              <!-- Vertical Dotted Divider (seperti CBT Pusmendik asli) -->
+              <div class="cbt-panel-divider" id="cbtPanelDivider"></div>
+
+              <!-- Question & Options Column (Kanan / isi-soal) -->
+              <div class="cbt-question-col" id="questionCol">
+                <div class="prompt-text" id="promptContainer"></div>
+                <div class="options-list" id="optionsContainer"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Question Action Bar -->
+          <div class="qcard-actions">
+            <div class="actions-left">
+              <button class="btn-action btn-check" id="btnCheckAnswer" onclick="checkUserAnswer()">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>Cek Jawaban & Pembahasan</span>
+              </button>
+              <button class="btn-action btn-ragu" id="btnRagu" onclick="toggleRagu()">
+                <input type="checkbox" id="chkRagu" pointer-events="none">
+                <i class="fa-regular fa-circle-question"></i>
+                <span>Ragu-ragu</span>
+              </button>
+            </div>
+            <div class="actions-right">
+              <button class="btn-action btn-nav btn-prev" id="btnPrev" onclick="navigateQuestion(-1)">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Sebelumnya</span>
+              </button>
+              <button class="btn-action btn-nav btn-next" id="btnNext" onclick="navigateQuestion(1)">
+                <span>Selanjutnya</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+              <button class="btn-action btn-bar-tutor" id="btnBarTutor" onclick="openTutorSheet()" title="Tanya AI Tutor" aria-label="Tanya AI Tutor">
+                <i class="fa-regular fa-comments"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Inline Feedback Alert -->
+          <div class="feedback-banner" id="feedbackBanner" style="display: none;"></div>
+        </article>
+
+        <!-- Solution Accordion Trigger Button -->
+        <button class="btn-accordion-solution" id="btnToggleExplanation" onclick="toggleExplanation()">
+          <span class="btn-solution-label">
+            <i class="fa-solid fa-book-open"></i>
+            <span id="txtToggleExp">Tata Cara & Langkah Penyelesaian</span>
+          </span>
+          <i class="fa-solid fa-chevron-down accordion-arrow" id="accordionArrow"></i>
+        </button>
+
+        <!-- Structured Pedagogical Solution Section -->
+        <section class="learning-section" id="learningSection" style="display: none;">
+          <div class="explanation-card" id="explanationCard">
+            <!-- Hidden collapse toggle button kept for backward-compatibility -->
+            <button type="button" class="btn-collapse-exp" id="btnToggleExpCollapse" onclick="toggleExplanationCollapse()" style="display: none;">
+              <i class="fa-solid fa-eye-slash" id="iconExpCollapse"></i>
+              <span id="txtExpCollapse">Sembunyikan Tata Cara</span>
+            </button>
+
+            <!-- Collapsible Body -->
+            <div class="exp-body" id="expBody">
+              <!-- Top Verified Solution & Answer Key Banner -->
+              <div class="solution-summary-banner" id="solutionSummaryBanner" style="display: none;"></div>
+
+              <!-- Pilar 1: Konsep & Teori Kunci -->
+              <div class="concept-box" id="conceptBox">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge emerald"><i class="fa-solid fa-compass"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag emerald">PILAR 1 · IDENTIFIKASI & FONDASI TEORI</span>
+                    <h3 class="pillar-heading">Identifikasi Masalah (Dik & Dit) & Konsep Kunci</h3>
+                  </div>
+                </div>
+                <div class="concept-cards-grid" id="conceptContainer"></div>
+              </div>
+
+              <!-- Pilar 2: Glosarium Simbol & Notasi -->
+              <div class="symbols-box" id="symbolsBox">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge indigo"><i class="fa-solid fa-book-bookmark"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag indigo">PILAR 2 · NOTASI MATEMATIKA</span>
+                    <h3 class="pillar-heading">Glosarium Simbol & Istilah</h3>
+                  </div>
+                </div>
+                <div class="symbols-grid" id="symbolsContainer"></div>
+              </div>
+
+              <!-- Pilar 3: Memahami Logika Konsep (Mengapa Rumus Ini Dipakai?) -->
+              <div class="why-concept-box" id="whyConceptBox">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge violet"><i class="fa-solid fa-lightbulb"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag violet">PILAR 3 · INTUISI BERPIKIR</span>
+                    <h3 class="pillar-heading">Mengapa Rumus Ini Dipakai?</h3>
+                  </div>
+                </div>
+                <div class="why-text-body" id="whyConceptContainer"></div>
+              </div>
+
+              <!-- Pilar 4: Langkah-Langkah Pengerjaan Rinci -->
+              <div class="steps-section-card">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge blue"><i class="fa-solid fa-list-check"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag blue">PILAR 4 · LANGKAH SISTEMATIS</span>
+                    <h3 class="pillar-heading">Langkah-Langkah Pengerjaan Rinci</h3>
+                  </div>
+                </div>
+                <div class="timeline-steps" id="stepsContainer"></div>
+              </div>
+
+              <!-- Konteks Visual Soal (Bila Ada) -->
+              <div class="steps-section-card" id="canonicalVisualBox" style="display: none !important;">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge slate"><i class="fa-solid fa-image"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag slate">KONTEKS VISUAL</span>
+                    <h3 class="pillar-heading">Konteks Visual Soal</h3>
+                  </div>
+                </div>
+                <div class="timeline-steps" id="canonicalVisualList"></div>
+              </div>
+
+              <!-- Pilar 5: Tips Cepat & Jebakan Soal -->
+              <div class="tips-box">
+                <div class="pillar-header-row">
+                  <div class="pillar-icon-badge amber"><i class="fa-solid fa-bolt"></i></div>
+                  <div>
+                    <span class="pillar-micro-tag amber">PILAR 5 · TRIK UJIAN & JEBAKAN</span>
+                    <h3 class="pillar-heading">Tips Cepat & Antisipasi Jebakan</h3>
+                  </div>
+                </div>
+                <div class="tips-text" id="tipsContainer"></div>
+              </div>
+            </div>
+
+            <!-- Collapsed Notice -->
+            <div class="exp-collapsed-notice" id="expCollapsedNotice" style="display: none;">
+              <div class="collapsed-msg">
+                <i class="fa-solid fa-lightbulb"></i>
+                <span>Tata cara & langkah pengerjaan disembunyikan agar soal di atas tetap terlihat saat tanya AI.</span>
+              </div>
+              <button type="button" class="btn-restore-exp" onclick="toggleExplanationCollapse()">
+                <i class="fa-solid fa-eye"></i> Tampilkan Langkah
+              </button>
+            </div>
+          </div>
+
+          <!-- Drill Practice: Similar Question Card -->
+          <div class="practice-card">
+            <div class="practice-header">
+              <div class="practice-title">
+                <i class="fa-solid fa-crosshairs"></i>
+                <h3>Latihan Pemantapan (Soal Serupa)</h3>
+              </div>
+              <span class="practice-badge">Eksekusi Mandiri</span>
+            </div>
+
+            <p class="practice-desc">
+              Setelah membaca teori dan cara penyelesaian di atas, coba selesaikan soal serupa berikut secara mandiri untuk memperkuat pemahamanmu:
+            </p>
+
+            <div class="practice-prompt" id="simPromptContainer"></div>
+            <div class="practice-options" id="simOptionsContainer"></div>
+
+            <div class="practice-action-bar">
+              <button class="btn-action btn-sim-check" id="btnCheckSimAnswer" onclick="checkSimilarAnswer()">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Periksa Jawaban Latihan</span>
+              </button>
+            </div>
+
+            <div class="sim-feedback" id="simFeedback" style="display: none;"></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- RIGHT COLUMN: Sticky AI Tutor Sidebar -->
+      <div class="tutor-backdrop" id="tutorBackdrop" onclick="closeTutorSheet()"></div>
+      <aside class="cbt-sidebar-col" id="cbtSidebarCol">
+        <div class="ai-tutor-card" id="aiTutorCard">
+          <!-- Mobile: handle drag bottom sheet -->
+          <div class="tutor-sheet-handle" id="tutorSheetHandle" aria-hidden="true">
+            <span></span>
+          </div>
+          <!-- AI Tutor Card Header -->
+          <div class="ai-tutor-header">
+            <div class="ai-tutor-title">
+              <div class="ai-avatar"><i class="fa-solid fa-robot"></i></div>
+              <div>
+                <h2 id="aiTutorTitle">AI Tutor Cerdas</h2>
+                <div class="ai-status-row">
+                  <p class="ai-status"><span class="status-dot"></span> Sedang aktif</p>
+                  <span class="tutor-quota-badge free" id="tutorQuotaBadge" title="Sisa kuota harian tanya AI Tutor">
+                    <i class="fa-solid fa-bolt"></i> <span id="tutorQuotaText">5/5 Tanya</span>
+                  </span>
+                  <button type="button" class="btn-refresh-quota" id="btnRefreshQuota" onclick="refreshTutorQuota()" title="[Mode Testing Admin] Klik untuk reset kuota kembali penuh!">
+                    <i class="fa-solid fa-arrows-rotate"></i> Reset
+                  </button>
+                  <button type="button" class="btn-new-chat-tutor" id="btnStartNewChat" onclick="startNewTutorConversation()" title="Mulai obrolan baru untuk soal ini">
+                    <i class="fa-solid fa-plus"></i> Chat Baru
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="ai-header-badge" title="Tutor Interaktif Cerdas">
+              <i class="fa-solid fa-sparkles"></i>
+            </div>
+            <!-- Mobile: tombol tutup eksplisit untuk bottom sheet (audit Qwen/Kimi) -->
+            <button class="btn-close-sheet" id="btnCloseSheet" onclick="closeTutorSheet()" aria-label="Tutup panel Tutor" type="button">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+
+          <!-- AI Model Selector Bar -->
+          <div class="ai-model-selector-bar">
+            <div class="model-select-group">
+              <span class="model-select-icon"><i class="fa-solid fa-brain"></i></span>
+              <label for="aiTutorModelSelect" class="model-select-label">Model:</label>
+              <select id="aiTutorModelSelect" class="ai-model-select" onchange="changeTutorModel(this.value)">
+                <option value="qwen-groq" selected>Qwen 2.5 27B (Groq Fast — Default)</option>
+                <option value="gemini-flash">Gemini 3.8 Flash (Vision Multimodal)</option>
+                <option value="gemini-pro">Gemini Pro (Advanced)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Quick Prompt Chips -->
+          <div class="quick-chips-wrapper">
+            <div class="quick-chips" id="quickChipsContainer"></div>
+          </div>
+
+          <!-- Chat Conversation Stream -->
+          <div class="chat-messages" id="chatMessages">
+            <div class="chat-bubble ai">
+              <div class="bubble-sender-bar">
+                <span class="sender-avatar"><i class="fa-solid fa-robot"></i></span>
+                <span class="sender-name">AI Tutor</span>
+              </div>
+              <div class="bubble-content">
+                <p class="ai-p">Hai! Aku siap membantu kamu memahami konsep dan langkah pada soal ini.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Chat Input Area -->
+          <div class="chat-input-area">
+            <form class="chat-input-form" id="chatForm" onsubmit="sendChatMessage(event)">
+              <input type="text" id="chatInput" placeholder="Tanyakan langkah atau rumus..." autocomplete="off">
+              <button type="submit" class="btn-send-chat" id="btnSendChat" aria-label="Kirim Pesan">
+                <i class="fa-solid fa-paper-plane"></i>
+              </button>
+            </form>
+            <p class="ai-disclaimer">AI dapat membuat kesalahan. Verifikasi jawabanmu.</p>
+          </div>
+
+          <!-- Hidden legacy buttons kept for backward-compatibility -->
+          <div style="display: none;">
+            <button id="btnToggleStepsFromAi"></button>
+            <i id="iconToggleStepsFromAi"></i>
+            <span id="txtToggleStepsFromAi"></span>
+            <button id="btnNewTutorChat"></button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Modal Daftar Soal (40-Grid Navigator) -->
+  <div class="modal-overlay" id="modalDaftarSoal" onclick="closeDaftarModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i class="fa-solid fa-table-cells-large"></i>
+          <h3 id="modalTitle">Daftar Soal</h3>
+        </div>
+        <button class="btn-close-modal" onclick="closeDaftarModal()">&times;</button>
+      </div>
+      
+      <div class="modal-legend">
+        <div class="legend-item"><span class="legend-dot current"></span> Sedang dikerjakan</div>
+        <div class="legend-item"><span class="legend-dot answered"></span> Sudah dijawab</div>
+        <div class="legend-item"><span class="legend-dot ragu"></span> Ragu-ragu</div>
+        <div class="legend-item"><span class="legend-dot unanswered"></span> Belum dijawab</div>
+      </div>
+
+      <div class="soal-grid" id="soalGrid"></div>
+
+      <div class="modal-footer-action">
+        <button class="btn-finish-from-modal" onclick="closeDaftarModal(); openFinishModal();">
+          <i class="fa-solid fa-flag-checkered"></i> Selesai Tes & Lihat Hasil
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Konfirmasi Selesai Tes -->
+  <div class="modal-overlay" id="modalKonfirmasiSelesai" onclick="closeFinishModal()">
+    <div class="modal-content finish-modal" onclick="event.stopPropagation()">
+      <div class="finish-icon"><i class="fa-solid fa-flag-checkered"></i></div>
+      <h2 class="finish-title">Konfirmasi Tes</h2>
+      <p class="finish-text" id="finishSummaryText"></p>
+      <div class="finish-actions">
+        <button class="btn-finish btn-finish-danger" onclick="selesaiTes()">
+          <i class="fa-solid fa-circle-check"></i> SELESAI TES
+        </button>
+        <button class="btn-finish btn-finish-back" onclick="closeFinishModal()">
+          <i class="fa-solid fa-rotate-left"></i> KEMBALI
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay Reviu Hasil Simulasi -->
+  <div class="review-overlay" id="reviewHasilOverlay">
+    <div class="review-container">
+      <div class="review-header">
+        <div>
+          <h2><i class="fa-solid fa-clipboard-check"></i> Reviu Hasil Simulasi</h2>
+          <p id="reviewMetaText"></p>
+        </div>
+        <button class="review-close" onclick="closeReviewHasil()" aria-label="Tutup reviu hasil">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="review-summary">
+        <div class="review-card review-card-benar">
+          <i class="fa-solid fa-circle-check"></i>
+          <span class="review-card-num" id="reviewScoreBenar">0</span>
+          <span class="review-card-label">Benar</span>
+        </div>
+        <div class="review-card review-card-salah">
+          <i class="fa-solid fa-circle-xmark"></i>
+          <span class="review-card-num" id="reviewScoreSalah">0</span>
+          <span class="review-card-label">Salah</span>
+        </div>
+        <div class="review-card review-card-kosong">
+          <i class="fa-regular fa-circle-question"></i>
+          <span class="review-card-num" id="reviewScoreKosong">0</span>
+          <span class="review-card-label">Kosong</span>
+        </div>
+        <div class="review-card review-card-persen">
+          <span class="review-persen" id="reviewScorePersen">0%</span>
+          <span class="review-card-label">Skor</span>
+        </div>
+      </div>
+
+      <div class="review-table-wrap">
+        <table class="review-table">
+          <thead>
+            <tr>
+              <th style="width: 50px; text-align: center;">NO.</th>
+              <th style="width: 105px;">STATUS</th>
+              <th>JAWABAN ANDA</th>
+              <th>KUNCI JAWABAN (RESMI TKA)</th>
+            </tr>
+          </thead>
+          <tbody id="reviewTableBody"></tbody>
+        </table>
+      </div>
+
+      <div class="review-actions">
+        <button class="btn-finish btn-finish-back" onclick="closeReviewHasil()">
+          <i class="fa-solid fa-book-open"></i> Kembali Belajar
+        </button>
+        <button class="btn-finish btn-finish-danger" onclick="resetSimulasi()">
+          <i class="fa-solid fa-rotate-right"></i> Ulangi Simulasi
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Jump to AI Tutor Button (Mobile only) -->
+  <button id="btnFloatingAi" class="floating-ai-jump" onclick="scrollToAiTutor()" aria-label="Tanya AI Tutor">
+    <i class="fa-solid fa-comments"></i>
+    <span>Tanya AI</span>
+  </button>
+
+  <!-- Lightbox Image Zoom Modal -->
+  <div class="lightbox-modal" id="imageLightboxModal" onclick="closeImageLightbox(event)">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <div class="lightbox-toolbar">
+        <button type="button" class="lightbox-btn" onclick="zoomLightbox(0.25)" title="Perbesar (+)"><i class="fa-solid fa-magnifying-glass-plus"></i> Perbesar</button>
+        <button type="button" class="lightbox-btn" onclick="zoomLightbox(-0.25)" title="Perkecil (-)"><i class="fa-solid fa-magnifying-glass-minus"></i> Perkecil</button>
+        <button type="button" class="lightbox-btn" onclick="resetLightboxZoom()" title="Reset Ukuran"><i class="fa-solid fa-arrows-rotate"></i> 100%</button>
+        <button type="button" class="lightbox-close" onclick="closeImageLightbox()" title="Tutup (Esc)"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="lightbox-img-wrap" id="lightboxImgWrap">
+        <img id="lightboxImg" src="" alt="Pratinjau Gambar">
+      </div>
+      <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+  </div>
+
+  <!-- Fase 5: Feedback non-intrusif (max 2x/sesi) -->
+  <div class="fb-widget" id="fbWidget" style="display: none;">
+    <button class="fb-close" id="fbClose" aria-label="Tutup" type="button">&times;</button>
+    <div class="fb-title">Bagaimana pengalamanmu sejauh ini?</div>
+    <div class="fb-stars" id="fbStars"></div>
+    <textarea class="fb-text" id="fbText" maxlength="1000" rows="2" placeholder="Masukan tambahan (opsional)"></textarea>
+    <div class="fb-actions">
+      <button class="fb-later" id="fbLater" type="button">Nanti</button>
+      <button class="fb-send" id="fbSubmit" type="button" disabled>Kirim</button>
+    </div>
+    <div class="fb-error" id="fbError" style="display: none;"></div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="app.js?v=47"></script>
+</body>
+</html>

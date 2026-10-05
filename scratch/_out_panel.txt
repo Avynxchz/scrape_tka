@@ -1,0 +1,19 @@
+PASS | Desktop: default panel Beranda + iframe tampil -> {"beranda":true,"modul":false,"overlayOpen":true,"desktopFrame":true}
+PASS | Desktop: nav Modul -> panel modul tampil -> {"modul":true,"modulFrame":true,"beranda":false}
+PASS | Desktop: klik paket fisika P1 di Modul -> soal tampil -> Soal Nomor 1 dari 20
+PASS | Desktop: home dibuka lagi -> default panel Beranda
+PASS | Desktop: nav Progres -> panel progres tampil -> {"progres":true,"frame":true}
+PASS | Desktop: halaman Progres menampilkan 2 (dikerjakan) -> total=2
+PASS | Desktop: nav Beranda -> kembali + kartu beranda terisi data real -> {"beranda":true,"progres":false,"loaded":"1","bridge":true,"list":"46,25,20,24,20,29","kartuTerisi":true}
+PASS | Desktop: jawab 1 soal -> tka_progress terisi -> {"subj":"fisika","nomor":1,"entry":{"kunci":["A:Salah","B:Benar","C:Benar"],"benar":true}}
+PASS | Desktop: Progres menampilkan 3 setelah jawab soal -> total=3
+STEP: screenshot beranda+modul desktop
+STEP: beranda desktop tersimpan
+STEP: modul desktop tersimpan
+STEP: mobile mulai
+STEP: mobile loaded
+PASS | Mobile: default Beranda, bottomnav tampil, item Akun tersedia -> {"beranda":true,"nav":"block","akun":"flex","card":44}
+PASS | Mobile: nav Modul -> iframe tampil, bottomnav beranda hilang -> {"modul":true,"frame":true,"navHidden":true}
+PASS | Mobile: nav beranda -> kembali, bottomnav muncul lagi -> {"beranda":true,"nav":"block"}
+
+=== 12/12 PASS ===

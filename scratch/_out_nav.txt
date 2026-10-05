@@ -1,0 +1,10 @@
+PASS | Beranda: nav 3 item tanpa Akun + kuota + user, tanpa item mati -> {"ada":true,"navItems":["Beranda","Modul Belajar","Progres & Analitik"],"kuota":true,"user":true,"akunDiNav":false,"tidakAda":[],"notif":false}
+PASS | Beranda -> Modul Belajar: panel Modul tampil
+PASS | Modul: struktur navbar sama (3 item, tanpa Akun) -> {"ada":true,"navItems":["Beranda","Modul Belajar","Progres & Analitik"],"kuota":true,"user":true,"akunDiNav":false,"tidakAda":[],"notif":false}
+PASS | Modul -> klik ikon profil: panel Akun tampil
+PASS | Akun -> Progres & Analitik: panel Progres tampil
+PASS | Progres: struktur navbar sama (3 item, tanpa Akun) -> {"ada":true,"navItems":["Beranda","Modul Belajar","Progres & Analitik"],"kuota":true,"user":true,"akunDiNav":false,"tidakAda":[],"notif":false}
+PASS | Progres -> klik ikon profil: panel Akun tampil
+PASS | Akun -> Beranda: panel Beranda tampil
+
+=== 8/8 PASS ===

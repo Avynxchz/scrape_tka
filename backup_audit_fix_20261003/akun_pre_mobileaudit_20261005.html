@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Akun · TKA Master</title>
+<!--
+  HALAMAN AKUN — TKA Master (file mandiri, CSS/JS inline, Tailwind CDN).
+  Pola sama dengan workspace_modul/modul.html: dua versi (#akunDesktop >=900px,
+  #akunMobile <900px), bridge postMessage ke parent.
+  KEJUJURAN DATA (prinsip project): sistem login belum ada -> profil tampil
+  sebagai "Tamu"; slot profil (nama/NISN/email/WA) otomatis terisi begitu
+  parent mengirim {type:'akun-data', profile:{...}}. Kuota AI dari server
+  (parent kirim state.tutorQuota). Statistik belajar dihitung dari
+  localStorage "tka_progress". Aksi yang fiturnya belum ada diberi badge
+  "Segera" dan tidak interaktif (bukan tombol mati).
+  Kirim ke parent: {type:'nav', path} | {type:'akun-ready'} | {type:'request-data'}
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"border-focus":"#1B633E","tertiary-fixed-dim":"#ffb77d","surface-bright":"#f6fafe","surface":"#f6fafe","on-tertiary-fixed-variant":"#6e3900","on-secondary-fixed":"#141e1a","secondary-fixed":"#dae5df","on-surface-variant":"#404942","primary-fixed":"#aaf2c2","text-primary":"#0F172A","surface-container-highest":"#dfe3e7","primary":"#004a2a","on-tertiary":"#ffffff","outline-variant":"#bfc9bf","badge-amber-bg":"#FEF3C7","surface-tint":"#246b45","tertiary-container":"#864700","text-muted":"#64748B","inverse-primary":"#8fd6a8","surface-dim":"#d6dade","tertiary-fixed":"#ffdcc3","inverse-surface":"#2c3134","error-container":"#ffdad6","primary-container":"#1b633e","on-secondary-container":"#5c6762","surface-subtle":"#F1F5F9","surface-variant":"#dfe3e7","error":"#ba1a1a","on-error-container":"#93000a","background":"#f6fafe","on-error":"#ffffff","surface-container-high":"#e4e9ed","on-primary-fixed":"#002110","on-secondary-fixed-variant":"#3f4945","surface-container-low":"#f0f4f8","tertiary":"#643300","secondary":"#56615c","brand-emerald-dark":"#0B1E13","brand-emerald-light":"#EBF6F0","on-surface":"#171c1f","surface-container":"#eaeef2","on-tertiary-container":"#ffc190","primary-fixed-dim":"#8fd6a8","on-background":"#171c1f","border-subtle":"#E2E8F0","secondary-container":"#dae5df","on-tertiary-fixed":"#2f1500","on-secondary":"#ffffff","accent-mint":"#22C55E","surface-card":"#FFFFFF","on-primary":"#ffffff","outline":"#707971","on-primary-fixed-variant":"#00522f","badge-amber-text":"#92400E","on-primary-container":"#96ddae","surface-container-lowest":"#ffffff","surface-canvas":"#F8FAFC","inverse-on-surface":"#edf1f5","secondary-fixed-dim":"#bec9c3"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-xl":"2.5rem","space-lg":"1.5rem","margin-desktop":"3rem","gutter-tablet":"1.5rem","space-sm":"0.5rem","margin":"1rem","space-md":"1rem","space-2xl":"4rem","margin-tablet":"2rem","space-2xs":"0.25rem","space-xs":"0.375rem","gutter":"1rem","gutter-desktop":"2rem"},"fontFamily":{"headline-xl":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"label-caps":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"headline-lg-mobile":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"]},"fontSize":{"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.03em","fontWeight":"800"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"label-caps":["11px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.025em","fontWeight":"800"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"headline-lg":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"700"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}]}}}};
+</script>
+<style>
+@layer base {
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { overscroll-behavior-y: none; font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif; }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+}
+::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+#akunDesktop, #akunMobile { display: none; }
+@media (min-width: 900px) { #akunDesktop { display: block; } #akunMobile { display: none; } }
+@media (max-width: 899px) { #akunMobile { display: block; } #akunDesktop { display: none; } }
+
+button { transition: transform 0.3s ease, opacity 0.3s ease; }
+button:active { transform: scale(0.97); }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body class="bg-surface text-on-surface antialiased">
+
+<!-- ================= VERSI DESKTOP (>=900px) ================= -->
+<div id="akunDesktop">
+  <header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-20 w-full max-w-7xl mx-auto px-gutter-desktop flex items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-xl">
+        <a href="#" data-nav="beranda" class="flex items-center gap-space-sm group">
+          <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
+            <span class="material-symbols-outlined text-[24px]">school</span>
+          </div>
+          <div class="flex flex-col">
+            <span class="font-headline-sm text-headline-sm text-primary leading-tight tracking-tight group-hover:text-primary-container transition-colors">TKA Master</span>
+            <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">SIMULASI &amp; LATIHAN PUSMENDIK</span>
+          </div>
+        </a>
+        <nav class="hidden xl:flex items-center gap-space-xs">
+          <a class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-nav="beranda" href="#">Beranda</a>
+          <a class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-nav="modul" href="#">Modul Belajar</a>
+          <a class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-nav="progres" href="#">Progres &amp; Analitik</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-space-md">
+        <div class="hidden md:flex items-center gap-space-2xs bg-brand-emerald-light px-space-sm py-space-2xs rounded-full">
+          <span class="w-2 h-2 rounded-full bg-accent-mint"></span>
+          <span class="material-symbols-outlined text-[16px] text-primary-container">neurology</span>
+          <span class="font-label-caps text-label-caps text-primary font-bold">Kuota AI Tamu · 5/hari</span>
+        </div>
+        <a href="#" data-nav="akun" title="Kamu di halaman Akun" class="flex items-center gap-space-sm pl-space-xs">
+          <div class="hidden sm:flex flex-col text-right">
+            <span class="text-sm font-semibold text-[#0F172A] leading-none" data-d-name>Tamu</span>
+            <span class="text-[13px] text-text-muted leading-tight mt-0.5">Mode Tamu</span>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full pt-20 bg-surface">
+    <div class="w-full max-w-7xl mx-auto px-gutter-desktop py-space-lg flex flex-col gap-space-lg pb-space-xl">
+      <!-- Breadcrumb + judul -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md bg-surface-card p-space-lg rounded-xl shadow-sm border border-border-subtle">
+        <div class="flex flex-col gap-space-2xs">
+          <div class="flex items-center gap-space-xs text-text-muted font-body-sm text-body-sm">
+            <a class="hover:text-primary transition-colors flex items-center gap-1" data-nav="beranda" href="#">
+              <span class="material-symbols-outlined text-[16px]">home</span>
+              Beranda
+            </a>
+            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+            <span class="text-primary font-label-md text-label-md font-semibold">Akun &amp; Profil</span>
+          </div>
+          <h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Akun &amp; Preferensi Belajar</h1>
+          <p class="font-body-md text-body-md text-text-muted">Kelola data akun dan lihat ringkasan latihanmu. Semua angka di halaman ini dihitung dari perangkatmu sendiri.</p>
+        </div>
+        <div class="flex items-center gap-space-xs shrink-0">
+          <button class="inline-flex items-center gap-space-2xs px-space-md py-space-xs rounded-lg bg-surface-card border border-border-subtle hover:bg-surface-subtle text-text-primary font-label-lg text-label-lg transition-all shadow-sm" id="d-btn-reset" type="button">
+            <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+            Reset Riwayat Latihan
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+        <!-- KOLOM KIRI -->
+        <div class="lg:col-span-8 flex flex-col gap-space-lg">
+          <!-- Hero profil -->
+          <div class="bg-surface-card rounded-xl shadow-sm border border-border-subtle overflow-hidden">
+            <div class="h-24 w-full bg-gradient-to-r from-primary-container via-primary to-brand-emerald-dark relative overflow-hidden flex items-start justify-end px-space-lg pt-3">
+              <div class="absolute -right-6 -bottom-10 w-48 h-48 rounded-full bg-primary-fixed/10 blur-2xl pointer-events-none"></div>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/20 backdrop-blur-md text-on-primary font-label-caps text-label-caps uppercase tracking-wider">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent-mint"></span>
+                Mode Tamu &middot; Masa Beta
+              </span>
+            </div>
+            <div class="p-space-lg pt-0 relative flex flex-col gap-space-lg">
+              <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-space-md -mt-10">
+                <div class="flex items-end gap-space-md">
+                  <div class="relative">
+                    <div class="w-20 h-20 rounded-2xl bg-primary flex items-center justify-center shadow-md ring-4 ring-surface-card text-on-primary">
+                      <span class="material-symbols-outlined text-[40px]">person</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col pb-1">
+                    <div class="flex items-center gap-space-xs">
+                      <h2 class="font-headline-md text-headline-md text-text-primary" data-d-name>Tamu</h2>
+                      <span class="px-2 py-0.5 rounded-full bg-brand-emerald-light text-primary font-label-caps text-label-caps">Belum login</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-text-muted mt-0.5" data-d-sub>Profil siswa akan terisi setelah fitur login aktif (masa beta).</p>
+                  </div>
+                </div>
+                <span class="inline-flex sm:self-center items-center gap-1.5 px-3 py-1.5 rounded-full bg-brand-emerald-light text-primary font-label-caps text-label-caps font-bold">
+                  <span class="material-symbols-outlined text-[16px] text-accent-mint" style="font-variation-settings: 'FILL' 1;">stars</span>
+                  Gratis selama beta
+                </span>
+              </div>
+              <!-- Dua sub-kartu: Kuota AI + Ringkasan -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md pt-space-xs">
+                <div class="bg-surface-subtle p-space-md rounded-xl flex flex-col justify-between gap-space-md">
+                  <div class="flex items-start justify-between gap-space-sm">
+                    <div class="flex items-center gap-space-xs">
+                      <div class="w-9 h-9 rounded-lg bg-brand-emerald-light flex items-center justify-center text-primary-container shrink-0">
+                        <span class="material-symbols-outlined text-[20px]">neurology</span>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="font-label-lg text-label-lg text-text-primary">Alokasi AI Tutor Harian</span>
+                        <span class="font-body-sm text-body-sm text-text-muted">Reset otomatis pukul 00.00 WIB</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-1.5">
+                    <div class="flex items-baseline justify-between">
+                      <span class="font-headline-md text-headline-md text-primary font-bold"><span data-d-quota-remain>&mdash;</span> <span class="font-body-md text-body-md text-text-muted font-normal">/ <span data-d-quota-limit>5</span> pertanyaan tersisa</span></span>
+                    </div>
+                    <div class="w-full h-2.5 rounded-full bg-surface-container-highest overflow-hidden">
+                      <div class="h-full bg-primary rounded-full transition-all duration-500" style="width: 0%" data-d-quota-bar></div>
+                    </div>
+                    <span class="font-body-sm text-body-sm text-text-muted flex items-center gap-1" data-d-quota-note>
+                      <span class="material-symbols-outlined text-[14px]">schedule</span>
+                      Buka sesi AI Tutor untuk melihat sisa kuota hari ini.
+                    </span>
+                  </div>
+                  <button class="w-full py-space-xs px-space-sm rounded-lg bg-primary-container text-on-primary hover:bg-primary font-label-md text-label-md transition-colors text-center shadow-sm" data-open-tutor type="button">
+                    Tanya AI Tutor Sekarang
+                  </button>
+                </div>
+                <div class="bg-surface-subtle p-space-md rounded-xl flex flex-col justify-between gap-space-md">
+                  <div class="flex items-start justify-between gap-space-sm">
+                    <div class="flex items-center gap-space-xs">
+                      <div class="w-9 h-9 rounded-lg bg-brand-emerald-light flex items-center justify-center text-primary-container shrink-0">
+                        <span class="material-symbols-outlined text-[20px]">fact_check</span>
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="font-label-lg text-label-lg text-text-primary">Ringkasan Latihan</span>
+                        <span class="font-body-sm text-body-sm text-text-muted">Dari perangkat ini</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-space-sm">
+                    <div class="bg-surface-card rounded-lg p-space-sm flex flex-col">
+                      <span class="font-label-caps text-label-caps text-text-muted uppercase">Dikerjakan</span>
+                      <span class="font-headline-sm text-headline-sm text-text-primary font-bold" data-d-stat-done>0</span>
+                    </div>
+                    <div class="bg-surface-card rounded-lg p-space-sm flex flex-col">
+                      <span class="font-label-caps text-label-caps text-text-muted uppercase">Ketepatan</span>
+                      <span class="font-headline-sm text-headline-sm text-text-primary font-bold" data-d-stat-acc>&mdash;</span>
+                    </div>
+                  </div>
+                  <p class="font-body-sm text-body-sm text-text-muted">Progres tersimpan otomatis di perangkat ini setiap kamu menjawab soal.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Preferensi (fitur menyusul) -->
+          <div class="bg-surface-card rounded-xl shadow-sm border border-border-subtle p-space-lg flex flex-col gap-space-md">
+            <div class="flex items-center justify-between pb-space-xs">
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-primary text-[24px]">tune</span>
+                <h3 class="font-headline-sm text-headline-sm text-text-primary">Preferensi Belajar</h3>
+              </div>
+              <span class="font-label-caps text-label-caps text-on-surface-variant bg-surface-subtle px-2.5 py-1 rounded-full">Konfigurasi Siswa</span>
+            </div>
+            <div class="flex flex-col gap-space-md">
+              <div class="p-space-md rounded-xl bg-surface-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+                <div class="flex items-start gap-space-sm">
+                  <div class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-primary shrink-0 shadow-sm">
+                    <span class="material-symbols-outlined text-[20px]">science</span>
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-label-lg text-label-lg text-text-primary">Rumpun Minat Ujian</span>
+                    <p class="font-body-md text-body-md text-text-muted mt-0.5">Belum diatur &mdash; semua mapel tersedia untuk semua pengunjung.</p>
+                  </div>
+                </div>
+                <span class="px-space-md py-space-xs rounded-lg bg-surface-card border border-border-subtle text-text-muted font-label-md text-label-md self-start sm:self-center shrink-0 inline-flex items-center gap-1">Segera</span>
+              </div>
+              <div class="p-space-md rounded-xl bg-surface-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+                <div class="flex items-start gap-space-sm">
+                  <div class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-primary shrink-0 shadow-sm">
+                    <span class="material-symbols-outlined text-[20px]">notifications_active</span>
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-label-lg text-label-lg text-text-primary">Pengingat Belajar Harian</span>
+                    <p class="font-body-md text-body-md text-text-muted mt-0.5">Fitur pengingat sedang dikembangkan selama masa beta.</p>
+                  </div>
+                </div>
+                <span class="px-space-md py-space-xs rounded-lg bg-surface-card border border-border-subtle text-text-muted font-label-md text-label-md self-start sm:self-center shrink-0 inline-flex items-center gap-1">Segera</span>
+              </div>
+              <div class="p-space-md rounded-xl bg-surface-subtle flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+                <div class="flex items-start gap-space-sm">
+                  <div class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-primary shrink-0 shadow-sm">
+                    <span class="material-symbols-outlined text-[20px]">account_balance</span>
+                  </div>
+                  <div class="flex flex-col">
+                    <span class="font-label-lg text-label-lg text-text-primary">Target Universitas &amp; Program Studi</span>
+                    <p class="font-body-md text-body-md text-text-muted mt-0.5">Belum diatur &mdash; fitur target PTN sedang disiapkan.</p>
+                  </div>
+                </div>
+                <span class="px-space-md py-space-xs rounded-lg bg-surface-card border border-border-subtle text-text-muted font-label-md text-label-md self-start sm:self-center shrink-0 inline-flex items-center gap-1">Segera</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kontak & keamanan -->
+          <div class="bg-surface-card rounded-xl shadow-sm border border-border-subtle p-space-lg flex flex-col gap-space-md">
+            <div class="flex items-center justify-between pb-space-xs">
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-primary text-[24px]">lock_person</span>
+                <h3 class="font-headline-sm text-headline-sm text-text-primary">Kontak &amp; Keamanan</h3>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+              <div class="p-space-md rounded-xl bg-surface-subtle flex flex-col justify-between gap-space-sm">
+                <div class="flex flex-col">
+                  <span class="font-label-md text-label-md text-text-muted">Email Terdaftar</span>
+                  <span class="font-label-lg text-label-lg text-text-primary mt-1" data-d-email>Belum diatur</span>
+                </div>
+                <span class="inline-flex items-center gap-1 text-text-muted font-label-caps text-label-caps self-start">Segera</span>
+              </div>
+              <div class="p-space-md rounded-xl bg-surface-subtle flex flex-col justify-between gap-space-sm">
+                <div class="flex flex-col">
+                  <span class="font-label-md text-label-md text-text-muted">Nomor WhatsApp Notifikasi</span>
+                  <span class="font-label-lg text-label-lg text-text-primary mt-1" data-d-wa>Belum diatur</span>
+                </div>
+                <span class="inline-flex items-center gap-1 text-text-muted font-label-caps text-label-caps self-start">Segera</span>
+              </div>
+            </div>
+            <p class="font-body-sm text-body-sm text-text-muted">Riwayat latihanmu tersimpan lokal di perangkat ini (localStorage) dan tidak dikirim ke mana pun.</p>
+          </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="lg:col-span-4 flex flex-col gap-space-lg">
+          <div class="bg-surface-card rounded-xl shadow-sm border border-border-subtle p-space-lg flex flex-col gap-space-md">
+            <div class="flex items-center justify-between">
+              <h3 class="font-headline-sm text-headline-sm text-text-primary">Statistik Belajar</h3>
+              <span class="font-label-caps text-label-caps text-text-muted uppercase">Perangkat ini</span>
+            </div>
+            <div class="grid grid-cols-2 gap-space-sm">
+              <div class="p-space-sm rounded-lg bg-surface-subtle flex flex-col gap-0.5">
+                <span class="font-label-caps text-label-caps text-text-muted uppercase">Soal Dikerjakan</span>
+                <span class="font-headline-sm text-headline-sm text-text-primary font-bold" data-d-stat-done>0</span>
+              </div>
+              <div class="p-space-sm rounded-lg bg-surface-subtle flex flex-col gap-0.5">
+                <span class="font-label-caps text-label-caps text-text-muted uppercase">Jawaban Benar</span>
+                <span class="font-headline-sm text-headline-sm text-text-primary font-bold" data-d-stat-benar>0</span>
+              </div>
+              <div class="p-space-sm rounded-lg bg-surface-subtle flex flex-col gap-0.5">
+                <span class="font-label-caps text-label-caps text-text-muted uppercase">Ketepatan</span>
+                <span class="font-headline-sm text-headline-sm text-text-primary font-bold" data-d-stat-acc>&mdash;</span>
+              </div>
+              <div class="p-space-sm rounded-lg bg-surface-subtle flex flex-col gap-0.5">
+                <span class="font-label-caps text-label-caps text-text-muted uppercase">Mapel Dipelajari</span>
+                <span class="font-headline-sm text-headline-sm text-text-primary font-bold" data-d-stat-mapel>0</span>
+              </div>
+            </div>
+            <p class="font-body-sm text-body-sm text-text-muted">Streak, jam belajar, dan peringkat baru tampil setelah fiturnya aktif &mdash; kami tidak menampilkan angka rekaan.</p>
+          </div>
+
+          <div class="bg-surface-card rounded-xl shadow-sm border border-border-subtle p-space-lg flex flex-col gap-space-md">
+            <h3 class="font-headline-sm text-headline-sm text-text-primary">Bantuan &amp; Informasi</h3>
+            <div class="flex flex-col gap-space-xs">
+              <div class="p-space-sm rounded-lg bg-surface-subtle flex items-center justify-between">
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-primary text-[20px]">support_agent</span>
+                  <span class="font-label-md text-label-md text-text-primary">Tanya Konselor / CS</span>
+                </div>
+                <span class="font-label-caps text-label-caps text-text-muted">Segera</span>
+              </div>
+              <div class="p-space-sm rounded-lg bg-surface-subtle flex items-center justify-between">
+                <div class="flex items-center gap-space-xs">
+                  <span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
+                  <span class="font-label-md text-label-md text-text-primary">Kebijakan Privasi</span>
+                </div>
+                <span class="font-label-caps text-label-caps text-text-muted">Segera</span>
+              </div>
+            </div>
+            <div class="p-space-md rounded-xl bg-brand-emerald-light/70 flex items-start gap-space-xs">
+              <span class="material-symbols-outlined text-primary text-[20px] shrink-0 mt-0.5">info</span>
+              <div class="flex flex-col">
+                <span class="font-label-md text-label-md text-primary font-bold">Informasi Akses Masa Beta</span>
+                <p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 leading-snug">Selama masa beta, seluruh paket soal dan AI Tutor dapat diakses tanpa biaya.</p>
+              </div>
+            </div>
+            <div class="pt-space-2xs text-center">
+              <span class="font-label-caps text-label-caps text-text-muted">Format TKA Pusmendik &middot; Portal latihan mandiri</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ================= VERSI MOBILE (<900px) ================= -->
+<div id="akunMobile">
+  <header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-16 px-gutter flex items-center justify-between max-w-md mx-auto">
+      <div class="flex items-center gap-space-xs">
+        <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
+          <span class="material-symbols-outlined text-[20px]">school</span>
+        </div>
+        <span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">Akun</span>
+      </div>
+      <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+        <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-1 flex flex-col relative w-full max-w-md mx-auto px-gutter pt-16 pb-24 bg-surface">
+    <div class="flex flex-col w-full gap-space-lg pb-space-lg">
+      <!-- Kartu profil -->
+      <section class="bg-surface-card rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col gap-space-md">
+        <div class="absolute -right-10 -top-10 w-36 h-36 rounded-full bg-brand-emerald-light/50 pointer-events-none"></div>
+        <div class="flex items-center gap-space-md relative z-10">
+          <div class="relative w-16 h-16 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-on-primary">
+            <span class="material-symbols-outlined text-[32px]">person</span>
+          </div>
+          <div class="flex flex-col min-w-0 flex-1">
+            <div class="flex items-center justify-between gap-space-xs">
+              <h2 class="font-headline-md text-headline-md text-text-primary truncate" data-m-name>Tamu</h2>
+            </div>
+            <p class="font-body-sm text-body-sm text-text-muted mt-0.5 truncate" data-m-sub>Belum login &middot; Masa Beta</p>
+            <span class="font-label-caps text-label-caps text-on-surface-variant/70 mt-1 uppercase tracking-wider" data-m-nisn-wrap hidden data-m-nisn></span>
+          </div>
+        </div>
+        <div class="bg-brand-emerald-light rounded-lg p-space-xs px-space-sm flex items-center justify-between gap-space-xs">
+          <div class="flex items-center gap-space-xs min-w-0">
+            <div class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-[15px]" style="font-variation-settings: &quot;FILL&quot; 1;">workspace_premium</span>
+            </div>
+            <div class="flex flex-col min-w-0">
+              <span class="font-label-md text-label-md text-primary font-bold truncate">Mode Tamu (Masa Beta)</span>
+              <span class="font-label-caps text-label-caps text-secondary truncate">Gratis selama beta</span>
+            </div>
+          </div>
+          <span class="px-space-xs py-0.5 rounded-full bg-badge-amber-bg text-badge-amber-text font-label-caps text-label-caps flex-shrink-0">Beta</span>
+        </div>
+      </section>
+
+      <!-- Kuota AI -->
+      <section class="bg-surface-card rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-space-xs">
+            <div class="w-8 h-8 rounded-full bg-brand-emerald-light flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[18px]">smart_toy</span>
+            </div>
+            <div>
+              <h3 class="font-label-lg text-label-lg text-text-primary">Kuota AI Tutor Hari Ini</h3>
+              <p class="font-label-caps text-label-caps text-text-muted">Reset otomatis pukul 00.00 WIB</p>
+            </div>
+          </div>
+          <div class="text-right">
+            <span class="font-headline-sm text-headline-sm text-primary font-bold" data-m-quota-remain>&mdash;</span>
+            <span class="font-body-sm text-body-sm text-text-muted">/<span data-m-quota-limit>5</span></span>
+          </div>
+        </div>
+        <div class="w-full bg-surface-container rounded-full h-2 mt-space-2xs overflow-hidden">
+          <div class="bg-primary h-2 rounded-full transition-all duration-500" style="width: 0%;" data-m-quota-bar></div>
+        </div>
+        <div class="flex justify-between items-center pt-1 text-text-muted font-label-caps text-label-caps">
+          <span data-m-quota-note>Buka sesi AI Tutor untuk lihat sisa kuota</span>
+        </div>
+      </section>
+
+      <!-- Statistik -->
+      <section class="bg-surface-card rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+        <div class="flex items-center gap-space-xs pb-1">
+          <div class="w-8 h-8 rounded-full bg-brand-emerald-light flex items-center justify-center text-primary">
+            <span class="material-symbols-outlined text-[18px]">fact_check</span>
+          </div>
+          <h3 class="font-label-lg text-label-lg text-text-primary">Statistik Latihan</h3>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="bg-surface-subtle rounded-lg p-space-sm flex flex-col">
+            <span class="font-label-caps text-label-caps text-text-muted uppercase">Dikerjakan</span>
+            <span class="font-headline-sm text-headline-sm text-text-primary font-bold" data-m-stat-done>0</span>
+          </div>
+          <div class="bg-surface-subtle rounded-lg p-space-sm flex flex-col">
+            <span class="font-label-caps text-label-caps text-text-muted uppercase">Benar</span>
+            <span class="font-headline-sm text-headline-sm text-text-primary font-bold" data-m-stat-benar>0</span>
+          </div>
+          <div class="bg-surface-subtle rounded-lg p-space-sm flex flex-col">
+            <span class="font-label-caps text-label-caps text-text-muted uppercase">Ketepatan</span>
+            <span class="font-headline-sm text-headline-sm text-text-primary font-bold" data-m-stat-acc>&mdash;</span>
+          </div>
+          <div class="bg-surface-subtle rounded-lg p-space-sm flex flex-col">
+            <span class="font-label-caps text-label-caps text-text-muted uppercase">Mapel</span>
+            <span class="font-headline-sm text-headline-sm text-text-primary font-bold" data-m-stat-mapel>0</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Menu -->
+      <section class="flex flex-col gap-space-md">
+        <div class="flex flex-col gap-space-2xs">
+          <h3 class="font-label-caps text-label-caps text-text-muted uppercase tracking-wider px-space-xs">Dukungan &amp; Informasi</h3>
+          <div class="bg-surface-card rounded-xl shadow-sm overflow-hidden flex flex-col">
+            <div class="p-space-md flex items-center justify-between">
+              <div class="flex items-center gap-space-sm min-w-0">
+                <div class="w-9 h-9 rounded-lg bg-surface-subtle flex items-center justify-center text-secondary flex-shrink-0">
+                  <span class="material-symbols-outlined text-[20px]">support_agent</span>
+                </div>
+                <div class="flex flex-col min-w-0">
+                  <span class="font-label-lg text-label-lg text-text-primary truncate">Bantuan &amp; Tanya Konselor</span>
+                  <span class="font-body-sm text-body-sm text-text-muted truncate">WhatsApp hotline &amp; FAQ</span>
+                </div>
+              </div>
+              <span class="font-label-caps text-label-caps text-text-muted flex-shrink-0">Segera</span>
+            </div>
+            <div class="h-px bg-surface-subtle mx-space-md"></div>
+            <div class="p-space-md flex items-center justify-between">
+              <div class="flex items-center gap-space-sm min-w-0">
+                <div class="w-9 h-9 rounded-lg bg-surface-subtle flex items-center justify-center text-secondary flex-shrink-0">
+                  <span class="material-symbols-outlined text-[20px]">verified_user</span>
+                </div>
+                <div class="flex flex-col min-w-0">
+                  <span class="font-label-lg text-label-lg text-text-primary truncate">Syarat &amp; Kebijakan Privasi</span>
+                  <span class="font-body-sm text-body-sm text-text-muted truncate">Keamanan data &amp; privasi soal</span>
+                </div>
+              </div>
+              <span class="font-label-caps text-label-caps text-text-muted flex-shrink-0">Segera</span>
+            </div>
+            <div class="h-px bg-surface-subtle mx-space-md"></div>
+            <div class="p-space-md flex items-center justify-between">
+              <div class="flex items-center gap-space-sm min-w-0">
+                <div class="w-9 h-9 rounded-lg bg-surface-subtle flex items-center justify-center text-secondary flex-shrink-0">
+                  <span class="material-symbols-outlined text-[20px]">info</span>
+                </div>
+                <div class="flex flex-col min-w-0">
+                  <span class="font-label-lg text-label-lg text-text-primary truncate">Tentang TKA Master</span>
+                  <span class="font-body-sm text-body-sm text-text-muted truncate">Masa beta &middot; Format TKA Pusmendik</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Aksi -->
+      <section class="flex flex-col gap-space-sm mt-space-2xs">
+        <button class="w-full h-12 rounded-xl bg-surface-card hover:bg-surface-subtle active:scale-[0.99] text-primary flex items-center justify-center gap-space-xs transition-all shadow-sm border border-border-subtle" id="m-btn-reset" type="button">
+          <span class="material-symbols-outlined text-[20px]">restart_alt</span>
+          <span class="font-label-lg text-label-lg font-bold">Reset Riwayat Latihan</span>
+        </button>
+        <div class="w-full h-12 rounded-xl bg-surface-card border border-border-subtle text-text-muted flex items-center justify-center gap-space-xs">
+          <span class="material-symbols-outlined text-[20px]">login</span>
+          <span class="font-label-lg text-label-lg font-bold">Masuk / Daftar</span>
+          <span class="px-space-xs py-0.5 rounded-full bg-surface-subtle font-label-caps text-label-caps">Segera</span>
+        </div>
+        <p class="text-center font-label-caps text-label-caps text-text-muted">Riwayat latihan tersimpan lokal di perangkat ini</p>
+      </section>
+    </div>
+  </main>
+
+  <nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.05)]">
+    <div class="flex justify-around items-center h-16 max-w-md mx-auto px-space-xs">
+      <a class="flex flex-col items-center justify-center min-w-[64px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-all" data-nav="beranda" href="#">
+        <span class="material-symbols-outlined text-[22px]">home</span>
+        <span class="font-label-md text-label-md mt-0.5">Beranda</span>
+      </a>
+      <a class="flex flex-col items-center justify-center min-w-[64px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-all" data-nav="modul" href="#">
+        <span class="material-symbols-outlined text-[22px]">menu_book</span>
+        <span class="font-label-md text-label-md mt-0.5">Modul</span>
+      </a>
+      <a class="flex flex-col items-center justify-center min-w-[64px] min-h-[44px] py-1 text-on-surface-variant hover:text-on-surface transition-all" data-nav="progres" href="#">
+        <span class="material-symbols-outlined text-[22px]">analytics</span>
+        <span class="font-label-md text-label-md mt-0.5">Progres</span>
+      </a>
+      <a aria-current="page" class="flex flex-col items-center justify-center min-w-[64px] min-h-[44px] py-1 transition-all text-primary font-bold" data-nav="akun" href="#">
+        <span class="material-symbols-outlined text-[22px]">account_circle</span>
+        <span class="font-label-md text-label-md mt-0.5">Akun</span>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  function send(payload) {
+    try { parent.postMessage(payload, '*'); } catch (e) {}
+  }
+
+  /* ---------- data ---------- */
+  var PROFILE = null;   // diisi parent saat fitur login aktif
+  var QUOTA = null;     // { remaining, daily_limit } dari server via parent
+
+  function readStore() {
+    try {
+      var raw = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+      return (raw && typeof raw === 'object') ? raw : {};
+    } catch (e) { return {}; }
+  }
+
+  function summary() {
+    var store = readStore();
+    var dikerjakan = 0, benar = 0, mapel = 0;
+    Object.keys(store).forEach(function (s) {
+      var has = false;
+      Object.keys(store[s] || {}).forEach(function (p) {
+        Object.keys(store[s][p] || {}).forEach(function (n) {
+          dikerjakan++; has = true;
+          var a = store[s][p][n];
+          if (a && a.benar) benar++;
+        });
+      });
+      if (has) mapel++;
+    });
+    return { dikerjakan: dikerjakan, benar: benar, tepat: dikerjakan ? Math.round((benar / dikerjakan) * 100) : 0, mapel: mapel };
+  }
+
+  /* ---------- render ---------- */
+  function renderProfile() {
+    var nama = (PROFILE && PROFILE.nama) || 'Tamu';
+    var login = !!(PROFILE && PROFILE.login);
+    document.querySelectorAll('[data-d-name], [data-m-name]').forEach(function (el) { el.textContent = nama; });
+    var dSub = document.querySelector('[data-d-sub]');
+    if (dSub) dSub.textContent = login ? (PROFILE.sub || 'Siswa TKA Master') : 'Profil siswa akan terisi setelah fitur login aktif (masa beta).';
+    var mSub = document.querySelector('[data-m-sub]');
+    if (mSub) mSub.textContent = login ? (PROFILE.sub || 'Siswa TKA Master') : 'Belum login \u00B7 Masa Beta';
+    var nisnWrap = document.querySelector('[data-m-nisn-wrap]');
+    if (nisnWrap) {
+      if (PROFILE && PROFILE.nisn) { nisnWrap.hidden = false; nisnWrap.textContent = 'NISN: ' + PROFILE.nisn; }
+      else nisnWrap.hidden = true;
+    }
+    var dNisn = document.querySelector('[data-d-nisn]');
+    if (dNisn) dNisn.textContent = (PROFILE && PROFILE.nisn) ? 'NISN: ' + PROFILE.nisn : '';
+    document.querySelectorAll('[data-d-email]').forEach(function (el) { el.textContent = (PROFILE && PROFILE.email) || 'Belum diatur'; });
+    document.querySelectorAll('[data-d-wa]').forEach(function (el) { el.textContent = (PROFILE && PROFILE.wa) || 'Belum diatur'; });
+  }
+
+  function renderQuota() {
+    var limit = QUOTA && QUOTA.daily_limit ? QUOTA.daily_limit : 5;
+    var remain = (QUOTA && typeof QUOTA.remaining === 'number') ? QUOTA.remaining : null;
+    document.querySelectorAll('[data-d-quota-limit], [data-m-quota-limit]').forEach(function (el) { el.textContent = limit; });
+    var pct = remain === null ? 0 : Math.max(0, Math.min(100, Math.round((remain / limit) * 100)));
+    document.querySelectorAll('[data-d-quota-bar], [data-m-quota-bar]').forEach(function (el) { el.style.width = (remain === null ? 0 : pct) + '%'; });
+    document.querySelectorAll('[data-d-quota-remain], [data-m-quota-remain]').forEach(function (el) {
+      el.textContent = remain === null ? '\u2014' : remain;
+    });
+    var dNote = document.querySelector('[data-d-quota-note]');
+    if (dNote) dNote.innerHTML = '<span class="material-symbols-outlined text-[14px]">schedule</span> ' +
+      (remain === null ? 'Buka sesi AI Tutor untuk melihat sisa kuota hari ini.' : 'Sisa kuota hari ini: ' + remain + ' dari ' + limit + ' pertanyaan.');
+    var mNote = document.querySelector('[data-m-quota-note]');
+    if (mNote) mNote.textContent = remain === null ? 'Buka sesi AI Tutor untuk lihat sisa kuota' : 'Tersisa ' + remain + ' dari ' + limit + ' pertanyaan';
+  }
+
+  function renderStats() {
+    var s = summary();
+    document.querySelectorAll('[data-d-stat-done], [data-m-stat-done]').forEach(function (el) { el.textContent = s.dikerjakan; });
+    document.querySelectorAll('[data-d-stat-benar], [data-m-stat-benar]').forEach(function (el) { el.textContent = s.benar; });
+    document.querySelectorAll('[data-d-stat-acc], [data-m-stat-acc]').forEach(function (el) { el.textContent = s.dikerjakan ? s.tepat + '%' : '\u2014'; });
+    document.querySelectorAll('[data-d-stat-mapel], [data-m-stat-mapel]').forEach(function (el) { el.textContent = s.mapel; });
+  }
+
+  function renderAll() { renderProfile(); renderQuota(); renderStats(); }
+
+  /* ---------- interaksi ---------- */
+  document.addEventListener('click', function (e) {
+    var el;
+    el = e.target.closest('[data-nav]');
+    if (el) {
+      e.preventDefault();
+      send({ type: 'nav', path: el.getAttribute('data-nav') });
+      return;
+    }
+    el = e.target.closest('[data-open-tutor]');
+    if (el) {
+      // tutup overlay akun: parent membawa user kembali ke soal, AI Tutor ada di sana
+      send({ type: 'nav', path: 'beranda' });
+      return;
+    }
+    el = e.target.closest('#d-btn-reset, #m-btn-reset');
+    if (el) {
+      var ok = confirm('Hapus semua riwayat latihan yang tersimpan di perangkat ini?');
+      if (ok) {
+        try { localStorage.removeItem('tka_progress'); } catch (err) {}
+        renderStats();
+        send({ type: 'progress-reset' });
+        el.querySelector('span:last-child') && (el.querySelector('span:last-child').textContent = 'Riwayat Dihapus');
+      }
+    }
+  });
+
+  window.addEventListener('message', function (e) {
+    var d = e.data || {};
+    if (d.type === 'akun-data') {
+      if (d.profile && typeof d.profile === 'object') PROFILE = d.profile;
+      if (d.quota && typeof d.quota === 'object') QUOTA = d.quota;
+      renderAll();
+    } else if (d.type === 'progress-data') {
+      if (d.quota && typeof d.quota === 'object') QUOTA = d.quota;
+      renderStats(); renderQuota();
+    }
+  });
+
+  // sinkron antar-tab/window: localStorage berubah
+  window.addEventListener('storage', function (e) {
+    if (e.key === 'tka_progress') renderStats();
+  });
+
+  renderAll();
+  send({ type: 'request-data' });
+  send({ type: 'akun-ready' });
+})();
+</script>
+</body>
+</html>

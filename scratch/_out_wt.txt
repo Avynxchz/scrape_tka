@@ -1,0 +1,9 @@
+PASS | Desktop: default tab Lembar Soal + rail aktif soal -> {"soal":true,"soalVisible":true,"pembHidden":true,"rail":true}
+PASS | Desktop: tab Pembahasan -> pilar tampil (sub Pembahasan) -> {"pane":true,"sub":true,"pilar1":true,"learningOpen":true,"rail":true}
+PASS | Desktop: rail AI -> full pane Tanya AI -> {"ai":true,"chat":true,"rail":true}
+PASS | Desktop: rail Soal -> kembali ke lembar soal
+PASS | Desktop: cek jawaban -> strip muncul lalu auto pindah ke Pembahasan -> {"s5a":{"strip":true,"stillSoal":true},"s5b":{"moved":true,"stripVisible":true}}
+PASS | Mobile: default tab Lembar Soal -> {"soal":true,"tabs":"flex"}
+PASS | Mobile: tombol AI -> bottom sheet terbuka -> {"sheet":true,"pembActive":true}
+
+=== 7/7 PASS ===

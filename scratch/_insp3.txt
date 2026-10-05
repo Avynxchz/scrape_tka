@@ -1,0 +1,16 @@
+=== at 14352 ===
+a postMessage, update angka
+   di card, dan kirim klik paket balik ke parent.
+   Urutan card di kode Stitch (fixed): section 1..3, masing2 2 card
+   (Paket 1, Paket 2) -> mapping ke daftar subject dari parent.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var BRIDGE = {
+    render: function (data) {
+      if (!data || !data.subjects) return;
+      // subjects: daftar terurut sesuai SECTION Stitch:
+      // [ {subject,pkg,label,count,minutes,progress} x6 ]
+      var cards = document.querySel
+

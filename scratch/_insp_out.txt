@@ -1,0 +1,61 @@
+﻿idx Paket 1: 14352
+endik
+              </span>
+<span class="material-symbols-outlined text-[16px] text-text-muted">open_in_new</span>
+</a>
+<a class="p-space-xs rounded-lg hover:bg-surface-card transition-colors flex items-center justify-between text-on-surface" href="#">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-accent-mint">chat</span>
+                Konselor &amp; Hotline Akademik
+              </span>
+<span class="material-symbols-outlined text-[16px] text-text-muted">chevron_right</span>
+</a>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</div>
+
+
+<script>
+/* ============================================================
+   BRIDGE — home_desktop.html (desain Stitch desktop)
+   Terima data nyata dari app utama via postMessage, update angka
+   di card, dan kirim klik paket balik ke parent.
+   Urutan card di kode Stitch (fixed): section 1..3, masing2 2 card
+   (Paket 1, Paket 2) -> mapping ke daftar subject dari parent.
+   ============================================================ */
+(function () {
+  'use strict';
+
+  var BRIDGE = {
+    render: function (data) {
+      if (!data || !data.subjects) return;
+      // subjects: daftar terurut sesuai SECTION Stitch:
+      // [ {subject,pkg,label,count,minutes,progress} x6 ]
+      var cards = document.querySelectorAll(
+        'main section .grid.grid-cols-1.md\\:grid-cols-2 > div.relative'
+      );
+      var list = data.subjects;
+      var i = 0;
+      cards.forEach(function (card) {
+        if (i >= list.length) return;
+        var d = list[i++];
+        card.dataset.subject = d.subject;
+        card.dataset.pkg = d.pkg;
+        card.style.cursor = 'pointer';
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', (d.label || '') + ' Paket ' + d.pkg);
+
+        // chip mapel (MATEMATIKA / FISIKA / EKONOMI)
+        var chip = card.querySelector('span.rounded-full.bg-brand-emerald-light');
+        if (chip && d.label) chip.textContent = d.label.toUpperCase();
+
+        // jumlah soal: span yang berisi ikon list + "N Soal ..."
+        // (struktur Stitch: <span class=flex...><span.ikon>format_list_numbered</span> 20 Soal HOTS</span>)
+        var spans = card.querySelectorAll('span');
+        spans.forEach(function (s) {
+          if (/\d+\s*Soal/.test(s.textContent)) {
+            var icon = s.querySelector('span.materi

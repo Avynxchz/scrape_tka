@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light">
+<title>Modul Belajar · TKA Master</title>
+<!--
+  HALAMAN MODUL — TKA Master (deliverable: file tunggal, CSS+JS inline)
+  Wilayah kerja: workspace_modul/ (lihat ATURAN_AI.md)
+  Data angka: KONTRAK_DATA.md (22 mapel · 44 paket · 961 soal). Progres dibaca
+  dari localStorage "tka_progress". Kirim ke parent:
+    { type:'open-package', subject, pkg } | { type:'nav', path } | { type:'request-data' }
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script id="tailwind-config">
+tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"tertiary-fixed":"#ffdcc3","outline":"#707971","primary-container":"#1b633e","on-surface-variant":"#404942","outline-variant":"#bfc9bf","primary-fixed":"#aaf2c2","tertiary":"#643300","surface-canvas":"#F8FAFC","surface-subtle":"#F1F5F9","surface-variant":"#dfe3e7","border-subtle":"#E2E8F0","surface-dim":"#d6dade","on-secondary-fixed":"#141e1a","on-secondary-container":"#5c6762","tertiary-fixed-dim":"#ffb77d","on-tertiary-fixed-variant":"#6e3900","surface-container-highest":"#dfe3e7","surface-tint":"#246b45","on-surface":"#171c1f","tertiary-container":"#864700","on-secondary":"#ffffff","surface-container-low":"#f0f4f8","secondary-container":"#dae5df","surface-bright":"#f6fafe","on-primary-container":"#96ddae","surface":"#f6fafe","text-muted":"#64748B","on-primary":"#ffffff","accent-mint":"#22C55E","brand-emerald-light":"#EBF6F0","on-background":"#171c1f","background":"#f6fafe","on-tertiary":"#ffffff","brand-emerald-dark":"#0B1E13","on-secondary-fixed-variant":"#3f4945","on-error":"#ffffff","on-tertiary-container":"#ffc190","inverse-surface":"#2c3134","badge-amber-bg":"#FEF3C7","on-tertiary-fixed":"#2f1500","surface-card":"#FFFFFF","secondary":"#56615c","on-primary-fixed-variant":"#00522f","primary":"#004a2a","error-container":"#ffdad6","secondary-fixed-dim":"#bec9c3","badge-amber-text":"#92400E","surface-container":"#eaeef2","on-primary-fixed":"#002110","on-error-container":"#93000a","inverse-primary":"#8fd6a8","surface-container-high":"#e4e9ed","text-primary":"#0F172A","surface-container-lowest":"#ffffff","error":"#ba1a1a","border-focus":"#1B633E","primary-fixed-dim":"#8fd6a8","inverse-on-surface":"#edf1f5","secondary-fixed":"#dae5df"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-2xs":"0.25rem","gutter":"1rem","space-md":"1rem","gutter-tablet":"1.5rem","margin":"1rem","margin-tablet":"2rem","space-2xl":"4rem","space-lg":"1.5rem","space-xs":"0.375rem","space-sm":"0.5rem","margin-desktop":"3rem","gutter-desktop":"2rem","space-xl":"2.5rem"},"fontFamily":{"headline-lg-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-caps":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-xl":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"]},"fontSize":{"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"700"}],"headline-lg":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"700"}],"label-caps":["11px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.03em","fontWeight":"800"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.025em","fontWeight":"800"}]}}}};
+</script>
+<style>
+@layer base {
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    overscroll-behavior-y: none;
+    font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+}
+::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ---- Dua versi tampilan: hanya satu yang aktif sesuai lebar layar ---- */
+#modulDesktop, #modulMobile { display: none; }
+@media (min-width: 900px) { #modulDesktop { display: block; } #modulMobile { display: none; } }
+@media (max-width: 899px) { #modulMobile { display: block; } #modulDesktop { display: none; } }
+
+/* ---- Disiplin animasi: hanya transform & opacity, 0.3-0.6s ---- */
+.lift { transition: transform 0.3s ease, opacity 0.3s ease; }
+.lift:hover { transform: translateY(-2px); }
+button { transition: transform 0.3s ease, opacity 0.3s ease; }
+button:active { transform: scale(0.97); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: fadeUp 0.35s ease both; }
+
+/* Keadaan kosong */
+[data-empty] { display: none; }
+[data-empty].on { display: flex; }
+
+/* Target scroll agar tidak tertutup header + bar filter sticky */
+[data-sections] { scroll-margin-top: 150px; }
+@media (max-width: 899px) { [data-sections] { scroll-margin-top: 132px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body class="bg-surface font-body-md text-body-md text-on-surface antialiased">
+
+<!-- ================================================================
+     VERSI DESKTOP (≥900px) — berbasis desain Stitch desktop
+     ================================================================ -->
+<div id="modulDesktop">
+
+  <header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-20 w-full max-w-7xl mx-auto px-gutter-desktop flex items-center justify-between gap-space-md">
+      <div class="flex items-center gap-space-xl">
+        <a href="#" data-nav="beranda" class="flex items-center gap-space-sm group">
+          <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
+            <span class="material-symbols-outlined text-[24px]">school</span>
+          </div>
+          <div class="flex flex-col text-left">
+            <span class="font-headline-sm text-headline-sm text-primary leading-tight tracking-tight group-hover:text-primary-container transition-colors">TKA Master</span>
+            <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">SIMULASI &amp; LATIHAN PUSMENDIK</span>
+          </div>
+        </a>
+        <nav class="hidden xl:flex items-center gap-space-xs">
+          <a class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-nav="beranda" href="#">Beranda</a>
+          <a aria-current="page" class="px-space-sm py-space-xs rounded-lg bg-brand-emerald-light text-primary font-bold font-label-lg text-label-lg" data-nav="modul" href="#">Modul Belajar</a>
+          <a class="px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg transition-colors" data-nav="progres" href="#">Progres &amp; Analitik</a>
+        </nav>
+      </div>
+      <div class="flex items-center gap-space-md">
+        <div class="hidden md:flex items-center gap-space-2xs bg-brand-emerald-light px-space-sm py-space-2xs rounded-full">
+          <span class="w-2 h-2 rounded-full bg-accent-mint"></span>
+          <span class="material-symbols-outlined text-[16px] text-primary-container">neurology</span>
+          <span class="font-label-caps text-label-caps text-primary font-bold">Kuota AI Tamu · 5/hari</span>
+        </div>
+        <a href="#" data-nav="akun" title="Buka Akun" class="flex items-center gap-space-sm pl-space-xs">
+          <div class="hidden sm:flex flex-col text-right">
+            <span class="text-sm font-semibold text-[#0F172A] leading-none">Tamu</span>
+            <span class="text-[13px] text-text-muted leading-tight mt-0.5">Mode Tamu</span>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full pt-20 bg-surface">
+    <div class="max-w-7xl mx-auto w-full px-6 lg:px-12 py-space-lg flex flex-col gap-space-xl">
+
+      <!-- 1. Judul halaman -->
+      <div class="flex flex-col gap-space-sm">
+        <nav aria-label="Breadcrumb" class="flex items-center gap-space-xs text-on-surface-variant font-label-md text-label-md">
+          <a class="hover:text-primary transition-colors flex items-center gap-1" data-nav="beranda" href="#">
+            <span class="material-symbols-outlined text-[16px]">home</span>
+            <span>Beranda</span>
+          </a>
+          <span class="text-outline-variant font-bold">/</span>
+          <span class="text-primary font-semibold">Modul Belajar</span>
+        </nav>
+        <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md mt-1">
+          <div class="flex flex-col gap-space-2xs max-w-3xl">
+            <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Modul Belajar</h1>
+            <p class="font-label-lg text-label-lg text-primary font-bold">22 Mapel · 44 Paket · 961 Soal</p>
+            <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+              Bank paket soal 22 mata pelajaran TKA. Pilih mapel, kerjakan paketnya, dan gunakan AI Tutor saat terbuntuan.
+            </p>
+          </div>
+          <div class="flex items-center gap-space-xs shrink-0">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-emerald-light text-primary font-label-caps text-label-caps">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-mint"></span>
+              Selaras format TKA Pusmendik
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. Ringkasan angka real (dari KONTRAK_DATA.md) -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-space-md">
+        <div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-sm">
+          <div class="flex items-center justify-between">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Total Kurikulum</span>
+            <div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[20px]">layers</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2">
+              <span class="font-headline-lg text-headline-lg text-on-surface font-extrabold">22</span>
+              <span class="font-label-lg text-label-lg text-on-surface-variant">Mata Pelajaran</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-1 font-body-sm text-body-sm text-on-surface-variant">
+              <span class="font-semibold text-primary">44 Paket</span>
+              <span>•</span>
+              <span>961 Butir Soal</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-sm">
+          <div class="flex items-center justify-between">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Progres Pengerjaan</span>
+            <span class="font-label-md text-label-md px-2 py-0.5 rounded-full bg-brand-emerald-light text-primary font-bold" data-done-pct>0%</span>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-1.5">
+              <span class="font-headline-lg text-headline-lg text-on-surface font-extrabold" data-done-num>0</span>
+              <span class="font-headline-sm text-headline-sm text-on-surface-variant font-medium">/ 961 Soal</span>
+            </div>
+            <div class="w-full bg-surface-container h-2 rounded-full mt-2.5 overflow-hidden">
+              <div class="bg-primary h-full rounded-full" data-done-bar style="width: 0%;"></div>
+            </div>
+            <p class="font-body-sm text-body-sm text-text-muted mt-1" data-done-sub>Belum ada yang dikerjakan</p>
+          </div>
+        </div>
+        <div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-sm">
+          <div class="flex items-center justify-between">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Peminatan</span>
+            <div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[20px]">category</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2">
+              <span class="font-headline-lg text-headline-lg text-on-surface font-extrabold">9</span>
+              <span class="font-label-lg text-label-lg text-on-surface-variant">Mapel Saintek + Soshum</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-1 font-body-sm text-body-sm text-on-surface-variant">
+              <span class="font-semibold text-primary">18 Paket</span>
+              <span>•</span>
+              <span>394 Soal</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-surface-card rounded-xl p-space-md shadow-sm border border-border-subtle flex flex-col justify-between gap-space-sm">
+          <div class="flex items-center justify-between">
+            <span class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Lanjut &amp; Lintas Minat</span>
+            <div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[20px]">translate</span>
+            </div>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-2">
+              <span class="font-headline-lg text-headline-lg text-on-surface font-extrabold">10</span>
+              <span class="font-label-lg text-label-lg text-on-surface-variant">Mapel Lanjut + Bahasa</span>
+            </div>
+            <div class="flex items-center gap-1.5 mt-1 font-body-sm text-body-sm text-on-surface-variant">
+              <span class="font-semibold text-primary">20 Paket</span>
+              <span>•</span>
+              <span>406 Soal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Bar filter sticky: tab kategori + pencarian -->
+      <div class="sticky top-20 z-40 bg-surface py-2 -mx-1 px-1">
+        <div class="bg-surface-card rounded-xl p-2.5 shadow-sm border border-border-subtle flex flex-col lg:flex-row lg:items-center justify-between gap-2.5">
+          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar w-full lg:w-auto" aria-label="Filter kategori mapel">
+            <button type="button" data-cat-tab="semua" class="px-4 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap shadow-sm">Semua</button>
+            <button type="button" data-cat-tab="wajib" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Wajib</button>
+            <button type="button" data-cat-tab="saintek" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Saintek</button>
+            <button type="button" data-cat-tab="soshum" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Soshum</button>
+            <button type="button" data-cat-tab="lanjut" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Lanjut</button>
+            <button type="button" data-cat-tab="bahasa" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Bahasa &amp; Lintas Minat</button>
+          </div>
+          <div class="relative w-full lg:w-64 shrink-0">
+            <input type="search" data-search aria-label="Cari nama mapel" placeholder="Cari mapel..."
+              class="w-full bg-surface-container-low focus:bg-surface-card text-on-surface font-body-sm text-body-sm pl-9 pr-3 py-2 rounded-lg outline-none border border-transparent focus:border-border-subtle">
+            <span class="material-symbols-outlined text-[16px] text-text-muted absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">search</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Konten utama: daftar mapel + sidebar -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start pb-space-xl">
+        <div class="lg:col-span-8 flex flex-col gap-space-2xl" data-sections id="dSections"></div>
+
+        <div data-empty aria-live="polite" class="flex-col items-center justify-center text-center gap-2 py-14 lg:col-span-8">
+          <span class="material-symbols-outlined text-[44px] text-outline">search_off</span>
+          <p class="font-headline-sm text-headline-sm text-on-surface">Tidak ada mapel yang cocok</p>
+          <p class="font-body-sm text-body-sm text-text-muted max-w-xs">Coba kata kunci lain, atau pilih kategori "Semua".</p>
+          <button type="button" data-reset class="mt-1 px-4 py-2 rounded-xl bg-surface-card border border-border-subtle text-primary font-label-md text-label-md font-bold shadow-sm">Reset Pencarian</button>
+        </div>
+
+        <aside class="lg:col-span-4 flex flex-col gap-space-lg w-full lg:sticky lg:top-40">
+          <!-- AI Tutor -->
+          <div class="bg-surface-card rounded-2xl p-space-lg shadow-sm border border-border-subtle flex flex-col gap-space-md">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center gap-space-xs">
+                <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
+                  <span class="material-symbols-outlined text-[22px]">smart_toy</span>
+                </div>
+                <div class="flex flex-col">
+                  <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">AI Tutor</h3>
+                  <span class="font-body-sm text-body-sm text-text-muted">Pendamping saat latihan</span>
+                </div>
+              </div>
+            </div>
+            <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Terbuntuan di tengah soal? AI Tutor membedah konsep, memberi analogi sederhana, dan trik eliminasi jawaban salah.
+            </p>
+            <button type="button" data-nav="ai-tutor" class="w-full py-2.5 px-4 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-lg text-label-lg font-semibold shadow-sm flex items-center justify-center gap-2">
+              <span class="material-symbols-outlined text-[18px]">psychology</span>
+              <span>Buka AI Tutor</span>
+            </button>
+            <p class="font-label-md text-label-md text-text-muted text-center">Tersedia di dalam setiap paket soal</p>
+          </div>
+
+          <!-- Lanjutkan belajar (data real dari localStorage) -->
+          <div class="bg-surface-card rounded-2xl p-space-lg shadow-sm border border-border-subtle flex flex-col gap-space-sm">
+            <div class="flex items-center gap-space-xs">
+              <div class="w-8 h-8 rounded-lg bg-brand-emerald-light flex items-center justify-center text-primary shrink-0">
+                <span class="material-symbols-outlined text-[18px]">history</span>
+              </div>
+              <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Lanjutkan Belajar</h3>
+            </div>
+            <div data-continue class="flex flex-col gap-2"></div>
+          </div>
+
+          <!-- Alur kategori: pintasan tab -->
+          <div class="bg-surface-card rounded-2xl p-space-lg shadow-sm border border-border-subtle flex flex-col gap-space-md">
+            <h3 class="font-headline-sm text-headline-sm text-on-surface font-bold">Jelajahi Kategori</h3>
+            <div class="flex flex-col gap-space-md relative pl-2">
+              <div class="absolute left-[19px] top-4 bottom-4 w-0.5 bg-surface-variant"></div>
+              <button type="button" data-step="wajib" class="flex items-start gap-space-sm relative text-left">
+                <span class="w-6 h-6 rounded-full bg-primary text-on-primary flex items-center justify-center text-[12px] font-bold shrink-0 shadow-sm">1</span>
+                <span class="font-label-lg text-label-lg font-bold text-on-surface pt-0.5">Wajib</span>
+              </button>
+              <button type="button" data-step="saintek" class="flex items-start gap-space-sm relative text-left">
+                <span class="w-6 h-6 rounded-full bg-brand-emerald-light text-primary flex items-center justify-center text-[12px] font-bold shrink-0">2</span>
+                <span class="font-label-lg text-label-lg font-semibold text-on-surface pt-0.5">Saintek (Peminatan)</span>
+              </button>
+              <button type="button" data-step="soshum" class="flex items-start gap-space-sm relative text-left">
+                <span class="w-6 h-6 rounded-full bg-brand-emerald-light text-primary flex items-center justify-center text-[12px] font-bold shrink-0">3</span>
+                <span class="font-label-lg text-label-lg font-semibold text-on-surface pt-0.5">Soshum (Peminatan)</span>
+              </button>
+              <button type="button" data-step="lanjut" class="flex items-start gap-space-sm relative text-left">
+                <span class="w-6 h-6 rounded-full bg-brand-emerald-light text-primary flex items-center justify-center text-[12px] font-bold shrink-0">4</span>
+                <span class="font-label-lg text-label-lg font-semibold text-on-surface pt-0.5">Tingkat Lanjut</span>
+              </button>
+              <button type="button" data-step="bahasa" class="flex items-start gap-space-sm relative text-left">
+                <span class="w-6 h-6 rounded-full bg-brand-emerald-light text-primary flex items-center justify-center text-[12px] font-bold shrink-0">5</span>
+                <span class="font-label-lg text-label-lg font-semibold text-on-surface pt-0.5">Bahasa Asing &amp; Lintas Minat</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="w-full bg-surface-container-low mt-space-2xl">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-xl">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl">
+        <div class="flex flex-col gap-space-sm">
+          <div class="flex items-center gap-space-sm">
+            <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+              <span class="material-symbols-outlined text-[20px]">school</span>
+            </div>
+            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">TKA Master</span>
+          </div>
+          <p class="font-body-sm text-body-sm text-text-muted leading-relaxed">
+            Portal belajar mandiri pihak ketiga untuk latihan soal dengan format TKA Pusmendik Kemendikdasmen. Konten disiapkan untuk keperluan persiapan akademis.
+          </p>
+        </div>
+        <div class="flex flex-col gap-space-xs">
+          <span class="font-label-lg text-label-lg text-on-surface font-bold">Navigasi</span>
+          <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" data-nav="beranda" href="#">Beranda</a>
+          <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" data-nav="progres-dan-analitik" href="#">Progres &amp; Analitik</a>
+          <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" data-nav="faq-dan-bantuan" href="#">FAQ / Bantuan</a>
+        </div>
+        <div class="flex flex-col gap-space-xs">
+          <span class="font-label-lg text-label-lg text-on-surface font-bold">Kategori Mapel</span>
+          <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#" data-step="wajib">Wajib</a>
+          <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#" data-step="saintek">Saintek</a>
+          <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#" data-step="soshum">Soshum</a>
+          <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#" data-step="lanjut">Lanjut</a>
+          <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors" href="#" data-step="bahasa">Bahasa &amp; Lintas Minat</a>
+        </div>
+      </div>
+      <div class="mt-space-lg pt-space-md border-t border-border-subtle flex flex-col md:flex-row items-center justify-between gap-space-sm text-text-muted font-body-sm text-body-sm">
+        <p>© 2026 TKA Master. Bukan situs resmi Pusmendik / Kemendikdasmen.</p>
+        <p class="font-label-md text-label-md">22 Mapel · 44 Paket · 961 Soal</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ================================================================
+     VERSI MOBILE (<900px) — berbasis desain Stitch mobile
+     ================================================================ -->
+<div id="modulMobile">
+
+  <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
+    <div class="h-16 px-gutter flex items-center justify-between max-w-[480px] mx-auto">
+      <div class="flex items-center gap-space-xs min-w-0">
+        <div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm shrink-0">
+          <span class="material-symbols-outlined text-[20px]">school</span>
+        </div>
+        <div class="flex flex-col min-w-0">
+          <span class="font-label-caps text-label-caps text-primary uppercase leading-none tracking-wider">TKA Master</span>
+          <h1 class="font-headline-sm text-headline-sm text-on-surface truncate leading-tight">Modul Belajar</h1>
+        </div>
+      </div>
+      <div class="flex items-center gap-space-2xs shrink-0">
+        <button aria-label="Cari mapel" data-focus-search class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface hover:bg-surface-container">
+          <span class="material-symbols-outlined text-[22px]">search</span>
+        </button>
+        <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm shrink-0">
+          <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex flex-col relative w-full pt-16 pb-24 bg-surface max-w-[480px] mx-auto min-h-screen">
+    <div class="flex flex-col w-full px-gutter space-y-space-lg pb-10">
+
+      <!-- Hero ringkasan -->
+      <section class="w-full rounded-[18px] bg-primary text-on-primary p-5 shadow-lg relative overflow-hidden">
+        <div class="absolute -right-8 -top-8 w-36 h-36 rounded-full bg-primary-fixed opacity-10 pointer-events-none blur-2xl"></div>
+        <div class="absolute -left-6 -bottom-6 w-28 h-28 rounded-full bg-tertiary-fixed opacity-15 pointer-events-none blur-xl"></div>
+        <div class="relative z-10 flex flex-col space-y-4">
+          <div class="flex items-center justify-between">
+            <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-emerald-light/15 text-primary-fixed font-label-caps text-label-caps tracking-wide">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent-mint"></span>
+              FORMAT TKA PUSMENDIK
+            </div>
+            <span class="material-symbols-outlined text-primary-fixed-dim text-xl">auto_stories</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2 py-2">
+            <div class="flex flex-col bg-on-primary/10 rounded-xl p-2.5">
+              <span class="font-headline-md text-headline-md text-primary-fixed leading-tight">22</span>
+              <span class="font-label-caps text-label-caps text-on-primary/80 leading-snug mt-0.5">Mata Pelajaran</span>
+            </div>
+            <div class="flex flex-col bg-on-primary/10 rounded-xl p-2.5">
+              <span class="font-headline-md text-headline-md text-primary-fixed leading-tight">44</span>
+              <span class="font-label-caps text-label-caps text-on-primary/80 leading-snug mt-0.5">Paket Latihan</span>
+            </div>
+            <div class="flex flex-col bg-on-primary/10 rounded-xl p-2.5">
+              <span class="font-headline-md text-headline-md text-tertiary-fixed leading-tight">961</span>
+              <span class="font-label-caps text-label-caps text-on-primary/80 leading-snug mt-0.5">Butir Soal</span>
+            </div>
+          </div>
+          <div class="bg-black/20 rounded-xl p-3.5 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary-fixed text-lg">flag</span>
+                <span class="font-label-lg text-label-lg text-on-primary">Progres Pengerjaan</span>
+              </div>
+              <span class="font-label-caps text-label-caps bg-primary-fixed/20 text-primary-fixed px-2 py-0.5 rounded-md" data-done-pct>0%</span>
+            </div>
+            <div class="w-full bg-black/30 h-2.5 rounded-full overflow-hidden p-0.5">
+              <div class="bg-accent-mint h-full rounded-full" data-done-bar style="width: 0%;"></div>
+            </div>
+            <div class="flex items-center justify-between text-on-primary/80">
+              <span class="font-body-sm text-body-sm" data-done-label>0 dari 961 soal dikerjakan</span>
+              <span class="font-label-caps text-label-caps text-tertiary-fixed font-bold">Target: 100%</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 pt-1 text-on-primary/90">
+            <span class="material-symbols-outlined text-tertiary-fixed text-lg shrink-0">lightbulb</span>
+            <p class="font-body-sm text-body-sm leading-snug text-primary-fixed-dim">
+              Mulai langkah pertamamu dari <span class="font-semibold text-on-primary">kategori Wajib</span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Bar filter sticky -->
+      <div class="sticky top-16 z-40 bg-surface py-2 -mx-1 px-1 rounded-xl">
+        <div class="bg-surface-card rounded-2xl p-2.5 shadow-sm border border-border-subtle flex flex-col gap-2.5">
+          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar" aria-label="Filter kategori mapel">
+            <button type="button" data-cat-tab="semua" class="px-3.5 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap shadow-sm">Semua</button>
+            <button type="button" data-cat-tab="wajib" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Wajib</button>
+            <button type="button" data-cat-tab="saintek" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Saintek</button>
+            <button type="button" data-cat-tab="soshum" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Soshum</button>
+            <button type="button" data-cat-tab="lanjut" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Lanjut</button>
+            <button type="button" data-cat-tab="bahasa" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Bahasa &amp; Lintas Minat</button>
+          </div>
+          <div class="relative w-full">
+            <input type="search" data-search aria-label="Cari nama mapel" placeholder="Cari mapel..."
+              class="w-full bg-surface-container-low focus:bg-surface-card text-on-surface font-body-sm text-body-sm pl-9 pr-3 py-2.5 rounded-xl outline-none border border-transparent focus:border-border-subtle">
+            <span class="material-symbols-outlined text-[16px] text-text-muted absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">search</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Daftar mapel per kategori -->
+      <div class="flex flex-col gap-space-xl" data-sections id="mSections"></div>
+
+      <div data-empty aria-live="polite" class="flex-col items-center justify-center text-center gap-2 py-14">
+        <span class="material-symbols-outlined text-[44px] text-outline">search_off</span>
+        <p class="font-headline-sm text-headline-sm text-on-surface">Tidak ada mapel yang cocok</p>
+        <p class="font-body-sm text-body-sm text-text-muted max-w-xs">Coba kata kunci lain, atau pilih kategori "Semua".</p>
+        <button type="button" data-reset class="mt-1 px-4 py-2 rounded-xl bg-surface-card border border-border-subtle text-primary font-label-md text-label-md font-bold shadow-sm">Reset Pencarian</button>
+      </div>
+    </div>
+  </main>
+
+  <nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-4px_20px_rgba(0,0,0,0.05)]">
+    <div class="max-w-[480px] mx-auto h-16 px-gutter flex items-center justify-around">
+      <a class="flex flex-col items-center justify-center gap-1 w-20 h-14 rounded-xl text-on-surface-variant" data-nav="beranda" href="#">
+        <span class="material-symbols-outlined text-[24px]">grid_view</span>
+        <span class="font-label-md text-label-md tracking-tight">Beranda</span>
+      </a>
+      <a aria-current="page" class="flex flex-col items-center justify-center gap-1 w-20 h-14 rounded-xl text-primary font-bold" data-nav="modul-belajar" href="#">
+        <span class="material-symbols-outlined text-[24px]">menu_book</span>
+        <span class="font-label-md text-label-md tracking-tight">Modul</span>
+      </a>
+      <a class="flex flex-col items-center justify-center gap-1 w-20 h-14 rounded-xl text-on-surface-variant" data-nav="progres-dan-analitik" href="#">
+        <span class="material-symbols-outlined text-[24px]">analytics</span>
+        <span class="font-label-md text-label-md tracking-tight">Progres</span>
+      </a>
+    </div>
+  </nav>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ================= DATA REAL (KONTRAK_DATA.md, per 4 Okt 2026) ================= */
+  var CATS = [
+    { id: 'wajib',  num: 1, tab: 'Wajib',  nama: 'Wajib',                        desc: 'Fondasi untuk semua peserta TKA.' },
+    { id: 'saintek', num: 2, tab: 'Saintek', nama: 'Saintek (Peminatan)',         desc: 'Peminatan rumpun IPA sesuai jurusan tujuan.' },
+    { id: 'soshum', num: 3, tab: 'Soshum', nama: 'Soshum (Peminatan)',           desc: 'Peminatan rumpun IPS sesuai jurusan tujuan.' },
+    { id: 'lanjut', num: 4, tab: 'Lanjut', nama: 'Tingkat Lanjut',               desc: 'Matematika dan bahasa tingkat lanjut.' },
+    { id: 'bahasa', num: 5, tab: 'Bahasa & Lintas Minat', nama: 'Bahasa Asing & Lintas Minat', desc: 'PPKn dan bahasa asing lintas minat.' }
+  ];
+
+  var SUBJECTS = [
+    { key: 'matematika',              nama: 'Matematika (Wajib)',      p1: 46, p2: 25, cat: 'wajib',   icon: 'calculate' },
+    { key: 'bahasa_indonesia',        nama: 'Bahasa Indonesia (Wajib)', p1: 20, p2: 25, cat: 'wajib',  icon: 'menu_book' },
+    { key: 'bahasa_inggris',          nama: 'Bahasa Inggris (Wajib)',  p1: 20, p2: 25, cat: 'wajib',   icon: 'language' },
+    { key: 'fisika',                  nama: 'Fisika (Peminatan)',      p1: 20, p2: 24, cat: 'saintek', icon: 'bolt' },
+    { key: 'kimia',                   nama: 'Kimia (Peminatan)',       p1: 20, p2: 24, cat: 'saintek', icon: 'science' },
+    { key: 'biologi',                 nama: 'Biologi (Peminatan)',     p1: 20, p2: 29, cat: 'saintek', icon: 'psychology' },
+    { key: 'ekonomi',                 nama: 'Ekonomi',                 p1: 20, p2: 29, cat: 'soshum',  icon: 'query_stats' },
+    { key: 'geografi',                nama: 'Geografi',                p1: 10, p2: 29, cat: 'soshum',  icon: 'public' },
+    { key: 'sosiologi',               nama: 'Sosiologi',               p1: 20, p2: 30, cat: 'soshum',  icon: 'groups' },
+    { key: 'sejarah',                 nama: 'Sejarah',                 p1: 10, p2: 29, cat: 'soshum',  icon: 'history_edu' },
+    { key: 'antropologi',             nama: 'Antropologi',             p1: 10, p2: 30, cat: 'soshum',  icon: 'diversity_3' },
+    { key: 'kewirausahaan',           nama: 'Kewirausahaan (PKWU)',    p1: 10, p2: 30, cat: 'soshum',  icon: 'storefront' },
+    { key: 'matematika_lanjut',       nama: 'Matematika Lanjut',       p1: 20, p2: 25, cat: 'lanjut',  icon: 'trending_up' },
+    { key: 'bahasa_indonesia_lanjut', nama: 'B. Indonesia Lanjut',     p1: 10, p2: 29, cat: 'lanjut',  icon: 'trending_up' },
+    { key: 'bahasa_inggris_lanjut',   nama: 'B. Inggris Lanjut',       p1: 10, p2: 29, cat: 'lanjut',  icon: 'trending_up' },
+    { key: 'ppkn',                    nama: 'PPKn',                    p1: 20, p2: 29, cat: 'bahasa',  icon: 'gavel' },
+    { key: 'bahasa_arab',             nama: 'Bahasa Arab',             p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
+    { key: 'bahasa_jepang',           nama: 'Bahasa Jepang',           p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
+    { key: 'bahasa_jerman',           nama: 'Bahasa Jerman',           p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
+    { key: 'bahasa_prancis',          nama: 'Bahasa Prancis',          p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
+    { key: 'bahasa_mandarin',         nama: 'Bahasa Mandarin',         p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
+    { key: 'bahasa_korea',            nama: 'Bahasa Korea',            p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' }
+  ];
+
+  var TOTAL_SOAL = 961; // hasil jumlah tabel (terverifikasi saat build)
+
+  /* ================= BRIDGE ke app utama ================= */
+  function send(payload) {
+    try { parent.postMessage(payload, '*'); } catch (e) { /* standalone: parent = diri sendiri */ }
+  }
+
+  /* ================= Progres real dari localStorage ================= */
+  var PROGRESS = {};
+
+  function readLocalProgress() {
+    try {
+      var raw = localStorage.getItem('tka_progress');
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === 'object') PROGRESS = parsed;
+      }
+    } catch (e) { PROGRESS = {}; }
+  }
+
+  function countDone(subject, pkg) {
+    var s = PROGRESS[subject];
+    if (!s) return 0;
+    var p = s[String(pkg)] || s[pkg];
+    if (!p) return 0;
+    try { return Object.keys(p).length; } catch (e) { return 0; }
+  }
+
+  function totalDone() {
+    var t = 0;
+    SUBJECTS.forEach(function (s) { t += countDone(s.key, 1) + countDone(s.key, 2); });
+    return t;
+  }
+
+  /* ================= Render daftar mapel ================= */
+  function catById(id) {
+    for (var i = 0; i < CATS.length; i++) if (CATS[i].id === id) return CATS[i];
+    return CATS[0];
+  }
+
+  function cardHTML(s) {
+    var prog =
+      '<div class="hidden flex-col gap-1.5" data-progs="' + s.key + '"></div>';
+    return (
+      '<article class="bg-surface-card rounded-2xl border border-border-subtle shadow-sm p-4 md:p-5 flex flex-col gap-3 lift" ' +
+        'data-card data-nama="' + (s.nama + ' ' + s.key.split('_').join(' ')).toLowerCase() + '">' +
+        '<div class="flex items-center gap-3 min-w-0">' +
+          '<div class="w-10 h-10 rounded-xl bg-brand-emerald-light text-primary flex items-center justify-center shrink-0">' +
+            '<span class="material-symbols-outlined text-[22px]">' + s.icon + '</span>' +
+          '</div>' +
+          '<h3 class="font-headline-sm text-headline-sm text-on-surface leading-tight min-w-0">' + s.nama + '</h3>' +
+        '</div>' +
+        '<div class="flex flex-wrap gap-1.5">' +
+          '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold">Paket 1 · ' + s.p1 + ' soal</span>' +
+          '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold">Paket 2 · ' + s.p2 + ' soal</span>' +
+        '</div>' +
+        prog +
+        '<div class="grid grid-cols-2 gap-2 pt-1">' +
+          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="1" aria-label="' + s.nama + ' Paket 1 (' + s.p1 + ' soal)" ' +
+            'class="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
+            '<span>Paket 1</span><span class="material-symbols-outlined text-[16px]">play_arrow</span>' +
+          '</button>' +
+          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="2" aria-label="' + s.nama + ' Paket 2 (' + s.p2 + ' soal)" ' +
+            'class="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-surface-card hover:bg-surface-subtle text-primary font-label-md text-label-md font-bold shadow-sm border border-border-subtle">' +
+            '<span>Paket 2</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>' +
+          '</button>' +
+        '</div>' +
+      '</article>'
+    );
+  }
+
+  function sectionHTML(c, twoCols) {
+    var subs = SUBJECTS.filter(function (s) { return s.cat === c.id; });
+    var nSoal = 0, nPaket = 0;
+    subs.forEach(function (s) { nSoal += s.p1 + s.p2; nPaket += 2; });
+    return (
+      '<section class="flex flex-col gap-3 md:gap-4 fade-in" data-cat-section="' + c.id + '">' +
+        '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">' +
+          '<div class="flex items-center gap-2.5">' +
+            '<div class="w-7 h-7 rounded-lg bg-primary text-on-primary flex items-center justify-center font-bold text-[13px] shrink-0">' + c.num + '</div>' +
+            '<div>' +
+              '<h2 class="font-headline-md text-headline-md text-on-surface">' + c.nama.toUpperCase() + '</h2>' +
+              '<p class="font-body-sm text-body-sm text-on-surface-variant">' + c.desc + '</p>' +
+            '</div>' +
+          '</div>' +
+          '<span class="inline-flex items-center self-start sm:self-center px-2.5 py-1 rounded-full bg-brand-emerald-light text-primary font-label-caps text-label-caps font-bold">' +
+            subs.length + ' Mapel · ' + nPaket + ' Paket · ' + nSoal + ' Soal</span>' +
+        '</div>' +
+        '<div class="grid grid-cols-1 ' + (twoCols ? 'sm:grid-cols-2 ' : '') + 'gap-3 md:gap-4">' +
+          subs.map(cardHTML).join('') +
+        '</div>' +
+      '</section>'
+    );
+  }
+
+  function renderSections() {
+    var dSec = document.getElementById('dSections');
+    var mSec = document.getElementById('mSections');
+    if (dSec) dSec.innerHTML = CATS.map(function (c) { return sectionHTML(c, true); }).join('');
+    if (mSec) mSec.innerHTML = CATS.map(function (c) { return sectionHTML(c, false); }).join('');
+  }
+
+  /* ================= Filter: tab kategori + pencarian ================= */
+  var state = { cat: 'semua', q: '' };
+
+  var TAB_ON = ['bg-primary', 'text-on-primary', 'shadow-sm'];
+  var TAB_OFF = ['bg-surface-container-low', 'text-on-surface-variant'];
+
+  function syncTabs() {
+    document.querySelectorAll('[data-cat-tab]').forEach(function (b) {
+      var active = b.getAttribute('data-cat-tab') === state.cat;
+      TAB_ON.forEach(function (c) { b.classList.toggle(c, active); });
+      TAB_OFF.forEach(function (c) { b.classList.toggle(c, !active); });
+      b.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+
+  function applyFilter() {
+    var q = state.q.trim().toLowerCase();
+    ['#modulDesktop', '#modulMobile'].forEach(function (sel) {
+      var root = document.querySelector(sel);
+      if (!root) return;
+      var total = 0;
+      root.querySelectorAll('[data-cat-section]').forEach(function (sec) {
+        var cat = sec.getAttribute('data-cat-section');
+        var inCat = state.cat === 'semua' || state.cat === cat;
+        var vis = 0;
+        sec.querySelectorAll('[data-card]').forEach(function (card) {
+          var ok = inCat && (!q || card.getAttribute('data-nama').indexOf(q) !== -1);
+          card.style.display = ok ? '' : 'none';
+          if (ok) vis++;
+        });
+        sec.style.display = vis ? '' : 'none';
+        total += vis;
+      });
+      var empty = root.querySelector('[data-empty]');
+      if (empty) empty.classList.toggle('on', total === 0);
+    });
+  }
+
+  function setCat(cat) {
+    state.cat = cat;
+    syncTabs();
+    applyFilter();
+  }
+
+  function resetFilters() {
+    state.cat = 'semua';
+    state.q = '';
+    document.querySelectorAll('[data-search]').forEach(function (i) { i.value = ''; });
+    syncTabs();
+    applyFilter();
+  }
+
+  /* ================= Refresh angka progres (semua real) ================= */
+  function refreshProgress() {
+    var done = totalDone();
+    var pct = Math.round((done / TOTAL_SOAL) * 100);
+    document.querySelectorAll('[data-done-num]').forEach(function (el) { el.textContent = done; });
+    document.querySelectorAll('[data-done-pct]').forEach(function (el) { el.textContent = pct + '%'; });
+    document.querySelectorAll('[data-done-label]').forEach(function (el) { el.textContent = done + ' dari ' + TOTAL_SOAL + ' soal dikerjakan'; });
+    document.querySelectorAll('[data-done-sub]').forEach(function (el) {
+      el.textContent = done > 0 ? done + ' dari ' + TOTAL_SOAL + ' soal dikerjakan' : 'Belum ada yang dikerjakan';
+    });
+    document.querySelectorAll('[data-done-bar]').forEach(function (el) { el.style.width = pct + '%'; });
+
+    // bar progres per paket di tiap kartu
+    document.querySelectorAll('[data-progs]').forEach(function (box) {
+      var key = box.getAttribute('data-progs');
+      var s = null;
+      for (var i = 0; i < SUBJECTS.length; i++) if (SUBJECTS[i].key === key) { s = SUBJECTS[i]; break; }
+      if (!s) return;
+      var rows = '';
+      [[1, s.p1], [2, s.p2]].forEach(function (pair) {
+        var pkg = pair[0], total = pair[1];
+        var d = countDone(key, pkg);
+        if (d <= 0) return;
+        var p = Math.round((d / total) * 100);
+        rows +=
+          '<div class="flex items-center justify-between font-label-md text-label-md text-text-muted">' +
+            '<span>Paket ' + pkg + ' · dikerjakan ' + d + ' dari ' + total + '</span>' +
+            '<span class="font-bold text-primary">' + p + '%</span>' +
+          '</div>' +
+          '<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">' +
+            '<div class="bg-primary h-full rounded-full" style="width:' + p + '%"></div>' +
+          '</div>';
+      });
+      box.innerHTML = rows;
+      box.classList.toggle('hidden', rows === '');
+      box.classList.toggle('flex', rows !== '');
+    });
+
+    refreshContinue();
+  }
+
+  function refreshContinue() {
+    var box = document.querySelector('[data-continue]');
+    if (!box) return;
+    var found = null;
+    for (var i = 0; i < SUBJECTS.length && !found; i++) {
+      var s = SUBJECTS[i];
+      var pairs = [[1, s.p1], [2, s.p2]];
+      for (var j = 0; j < pairs.length; j++) {
+        var d = countDone(s.key, pairs[j][0]);
+        if (d > 0 && d < pairs[j][1]) { found = { s: s, pkg: pairs[j][0], done: d, total: pairs[j][1] }; break; }
+      }
+    }
+    if (found) {
+      box.innerHTML =
+        '<div class="bg-surface-container-low rounded-xl p-3 flex flex-col gap-2">' +
+          '<div class="flex items-center justify-between font-label-md text-label-md">' +
+            '<span class="font-bold text-on-surface">' + found.s.nama + ' · Paket ' + found.pkg + '</span>' +
+            '<span class="font-bold text-primary">' + Math.round((found.done / found.total) * 100) + '%</span>' +
+          '</div>' +
+          '<p class="font-body-sm text-body-sm text-on-surface-variant">Dikerjakan ' + found.done + ' dari ' + found.total + ' soal.</p>' +
+          '<button type="button" data-open data-subject="' + found.s.key + '" data-pkg="' + found.pkg + '" ' +
+            'class="w-full py-2.5 px-4 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm flex items-center justify-center gap-1.5">' +
+            '<span>Lanjutkan</span><span class="material-symbols-outlined text-[16px]">play_arrow</span>' +
+          '</button>' +
+        '</div>';
+    } else {
+      box.innerHTML =
+        '<div class="bg-surface-container-low rounded-xl p-3 flex flex-col gap-2">' +
+          '<p class="font-body-sm text-body-sm text-on-surface-variant">Belum ada riwayat pengerjaan.</p>' +
+          '<button type="button" data-step="wajib" ' +
+            'class="w-full py-2.5 px-4 rounded-xl bg-surface-card border border-border-subtle text-primary font-label-md text-label-md font-bold shadow-sm flex items-center justify-center gap-1.5">' +
+            '<span>Mulai dari kategori Wajib</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>' +
+          '</button>' +
+        '</div>';
+    }
+  }
+
+  /* ================= Interaksi ================= */
+  function visibleSectionsEl() {
+    return window.matchMedia('(min-width: 900px)').matches
+      ? document.getElementById('dSections')
+      : document.getElementById('mSections');
+  }
+
+  function scrollToSections() {
+    var el = visibleSectionsEl();
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  document.addEventListener('click', function (e) {
+    var el;
+
+    el = e.target.closest('[data-open]');
+    if (el) {
+      send({ type: 'open-package', subject: el.getAttribute('data-subject'), pkg: parseInt(el.getAttribute('data-pkg'), 10) });
+      return;
+    }
+
+    el = e.target.closest('[data-cat-tab]');
+    if (el) { setCat(el.getAttribute('data-cat-tab')); return; }
+
+    el = e.target.closest('[data-step]');
+    if (el) {
+      setCat(el.getAttribute('data-step'));
+      scrollToSections();
+      return;
+    }
+
+    el = e.target.closest('[data-reset]');
+    if (el) { resetFilters(); return; }
+
+    el = e.target.closest('[data-focus-search]');
+    if (el) {
+      var root = window.matchMedia('(min-width: 900px)').matches ? '#modulDesktop' : '#modulMobile';
+      var input = document.querySelector(root + ' [data-search]');
+      if (input) {
+        input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        input.focus();
+      }
+      return;
+    }
+
+    el = e.target.closest('[data-nav]');
+    if (el) {
+      e.preventDefault();
+      var path = el.getAttribute('data-nav');
+      if (path !== 'modul-belajar') send({ type: 'nav', path: path });
+    }
+  });
+
+  document.querySelectorAll('[data-search]').forEach(function (input) {
+    input.addEventListener('input', function () {
+      state.q = input.value;
+      // sinkronkan input versi lain
+      document.querySelectorAll('[data-search]').forEach(function (other) {
+        if (other !== input && other.value !== input.value) other.value = input.value;
+      });
+      applyFilter();
+    });
+  });
+
+  window.addEventListener('message', function (e) {
+    var d = e.data || {};
+    if (d.type === 'progress-data') {
+      var p = d.progress || d.data || (d.subjects ? null : null);
+      if (p && typeof p === 'object' && !Array.isArray(p)) {
+        PROGRESS = p;
+        refreshProgress();
+      }
+    }
+  });
+
+  /* ================= Init ================= */
+  readLocalProgress();
+  renderSections();
+  syncTabs();
+  applyFilter();
+  refreshProgress();
+  send({ type: 'request-data' });
+  send({ type: 'modul-ready' });
+})();
+</script>
+</body>
+</html>
