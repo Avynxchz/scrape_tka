@@ -4267,6 +4267,11 @@ function initDraggableWorkRail() {
     'snap-bottom-left', 'snap-bottom-right'
   ];
 
+  // Default snap class if not present
+  if (!POSITIONS.some(c => rail.classList.contains(c))) {
+    rail.classList.add('snap-bottom-right');
+  }
+
   // Restore saved position
   try {
     const saved = localStorage.getItem('tka_work_rail_snap');
@@ -4276,6 +4281,14 @@ function initDraggableWorkRail() {
     }
   } catch (e) {}
 
+  // Pastikan ada active tab
+  if (!rail.querySelector('.rail-btn.active')) {
+    const soalBtn = rail.querySelector('[data-rail="soal"]');
+    if (soalBtn) soalBtn.classList.add('active');
+  }
+
+  // FASE 13: Auto-Minimize State (Mobile only <= 899px)
+  let autoCollapseTimer = null;
   let longPressTimer = null;
   let isDragging = false;
   let startX = 0;
@@ -4284,11 +4297,50 @@ function initDraggableWorkRail() {
   let initialTop = 0;
   let moved = false;
 
-  function clearTimer() {
+  function clearLongPress() {
     if (longPressTimer) {
       clearTimeout(longPressTimer);
       longPressTimer = null;
     }
+  }
+
+  function clearAutoCollapse() {
+    if (autoCollapseTimer) {
+      clearTimeout(autoCollapseTimer);
+      autoCollapseTimer = null;
+    }
+  }
+
+  function collapseRail() {
+    if (window.innerWidth > 899) return;
+    clearAutoCollapse();
+    rail.classList.remove('is-expanded');
+    rail.classList.add('is-minimized');
+  }
+
+  function expandRail() {
+    if (window.innerWidth > 899) return;
+    clearAutoCollapse();
+    rail.classList.remove('is-minimized');
+    rail.classList.add('is-expanded');
+    // Diam 4 detik tanpa interaksi -> otomatis mengecil lagi
+    autoCollapseTimer = setTimeout(collapseRail, 4000);
+  }
+
+  function resetAutoCollapse() {
+    if (rail.classList.contains('is-expanded')) {
+      clearAutoCollapse();
+      autoCollapseTimer = setTimeout(collapseRail, 4000);
+    }
+  }
+
+  // Expose global methods for testing/programmatic control
+  window._collapseWorkRail = collapseRail;
+  window._expandWorkRail = expandRail;
+
+  // Initial state mobile: minimized
+  if (window.innerWidth <= 899) {
+    collapseRail();
   }
 
   function snapToNearest(clientX, clientY) {
@@ -4328,9 +4380,10 @@ function initDraggableWorkRail() {
     initialLeft = rect.left;
     initialTop = rect.top;
 
-    clearTimer();
+    clearLongPress();
     longPressTimer = setTimeout(() => {
       isDragging = true;
+      clearAutoCollapse(); // jangan auto collapse saat dragging
       rail.classList.add('rail-dragging');
       rail.style.left = initialLeft + 'px';
       rail.style.top = initialTop + 'px';
@@ -4351,7 +4404,7 @@ function initDraggableWorkRail() {
     if (!isDragging) {
       // Jika digeser sebelum 400ms tercapai, batalkan long-press agar tidak bentrok dengan scroll
       if (Math.hypot(dx, dy) > 10) {
-        clearTimer();
+        clearLongPress();
       }
       return;
     }
@@ -4373,25 +4426,61 @@ function initDraggableWorkRail() {
   }, { passive: false });
 
   const endDrag = (e) => {
-    clearTimer();
+    clearLongPress();
     if (!isDragging) return;
 
     isDragging = false;
     rail.classList.remove('rail-dragging');
     snapToNearest(e.clientX, e.clientY);
+
+    // Jika tadinya expanded, restart timer 4s
+    if (rail.classList.contains('is-expanded')) {
+      resetAutoCollapse();
+    }
   };
 
   window.addEventListener('pointerup', endDrag);
   window.addEventListener('pointercancel', endDrag);
 
-  // Jangan trigger aksi klik button jika baru saja selesai drag
+  // Click & Tap handling (Capture phase)
   rail.addEventListener('click', (e) => {
     if (moved) {
       e.stopPropagation();
       e.preventDefault();
       moved = false;
+      return;
+    }
+
+    if (window.innerWidth <= 899) {
+      // 1. Jika dalam kondisi minimized: Tap berfungsi untuk EXPAND
+      if (rail.classList.contains('is-minimized') || !rail.classList.contains('is-expanded')) {
+        e.stopPropagation();
+        e.preventDefault();
+        expandRail();
+        return;
+      }
+
+      // 2. Jika dalam kondisi expanded:
+      resetAutoCollapse();
+      const btn = e.target.closest('.rail-btn');
+      if (btn) {
+        // Biarkan onclick button terpanggil (switchWorkTab), lalu collapse rail
+        setTimeout(collapseRail, 250);
+      }
     }
   }, true);
+
+  // Tap di luar rail -> collapse rail jika sedang expanded
+  document.addEventListener('pointerdown', (e) => {
+    if (window.innerWidth <= 899 && rail.classList.contains('is-expanded')) {
+      if (!e.target.closest('#workRail')) {
+        collapseRail();
+      }
+    }
+  });
+
+  // Interaksi kursor di dalam rail me-reset timer 4 detik
+  rail.addEventListener('pointerenter', resetAutoCollapse);
 }
 
 function initMobileChrome() {

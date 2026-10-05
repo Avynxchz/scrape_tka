@@ -18,7 +18,7 @@ Baseline: Fase 0 - 3 Selesai (11/11 tes lolos)
 | **Fase 9** | Menu Progress: fix blinking cards, dashboard analitik belajar, empty state | **SELESAI** | 10/10 uji `_tes_fase9.js` PASS. Bug kartu berkedip berhasil diperbaiki total dengan memoization state data (`_lastRenderedProgressJson`) dan penghapusan class `.fade-in` pada re-render berulang. Dashboard analitik dilengkapi widget streak kehadiran, waktu belajar hari ini vs kemarin, visualisasi distribusi 5 rumpun kategori, dan empty state ramah. |
 | **Fase 11** | Diagnosis & perbaikan bottom nav terlalu tinggi (menu dashboard, mobile) | **SELESAI** | 11/11 uji `_tes_fase11.js` PASS. Akar masalah ditemukan di `progres.html` (`.pb-safe` hardcoded `+ 5rem` = 80px pada nav). Setelah perbaikan, tinggi (57px) dan posisi bottom (menempel flush) 100% IDENTIK di 4 menu (Beranda, Modul, Progres, Akun) pada 360, 390, dan 412 px (selisih 0px). |
 | **Fase 12** | Chat AI: tampilan jawaban & pemilih model (warna bubble, padding 12-16px, logo pemilih model ringkas) | **SELESAI** | 34/34 uji `_tes_fase12.js` PASS, 0 error console. Bubble AI putih bersih (#FFFFFF) di atas background chat (#F8FAFC) dengan aksen hijau dan padding 16px (line-height 1.55). Fenced code blocks & tabel ber-scroll horizontal mandiri tanpa meluber. Tombol logo model compact (32px) dengan popover picker rapi (checkmark, icons, persist ke localStorage). Dark mode terverifikasi kontras tinggi. |
-| **Fase 13** | Tombol navigasi mengambang bisa mengecil otomatis (auto-minimize 36-44px + expand on tap + auto collapse) | BELUM | Menunggu eksekusi (tergantung Fase 4 & 12) |
+| **Fase 13** | Tombol navigasi mengambang bisa mengecil otomatis (auto-minimize 36-44px + expand on tap + auto collapse) | **SELESAI** | 22/22 uji `_tes_fase13.js` PASS, 0 error console. Mode normal idle berupa 1 tombol bulat compact 42px transparan (opacity 0.88) dengan ikon tab aktif. Tap mengembang menampilkan 3 tombol (Soal, Pembahasan, Tanya AI). Diam 4 detik atau memilih tombol otomatis mengecil kembali. Drag long-press (>=400ms) tetap berfungsi dan snap aman ke 6 posisi tanpa meluber keluar layar. Desktop 1280px tetap format sidebar asli. |
 | **Fase 14** | Kontrol ukuran teks mobile (90%, 100%, 115%, 130% di menu overflow Soal & Akun, persist localStorage) | BELUM | Menunggu eksekusi (tergantung Fase 11-13) |
 
 ---
@@ -101,6 +101,23 @@ Baseline: Fase 0 - 3 Selesai (11/11 tes lolos)
     - Saat logo diklik, popover melayang anggun di bawah tombol menampilkan daftar model, deskripsi singkat, dan tanda centang aktif. Memilih model langsung mengubah state, meng-update tombol & dropdown lama (kompatibilitas penuh), menyimpan ke `localStorage['tka_tutor_model']`, dan menutup popover otomatis.
   - **Hasil Verifikasi**:
     - 34/34 uji lolos di 360px, 390px, 412px, dan desktop 1280px via `scratch/_tes_fase12.js`. 0 error console.
+- **Fase 13**:
+  - **Auto-Minimize State (Idle)**:
+    - Mode normal mobile berupa 1 tombol lingkaran kecil 42px x 42px (`.is-minimized`) dengan opacity 0.88 dan bayangan lembut. Teks label disembunyikan, hanya menampilkan ikon konteks aktif (Soal: `fa-file-lines`, Pembahasan: `fa-book-open`, Tanya AI: `fa-robot`).
+    - Tidak menutupi isi soal maupun opsi jawaban, dan berada 24px di atas chat input box pada tampilan AI Tutor (`railBottom: 545px` vs `inputTop: 569px` pada 360px).
+  - **Expand on Tap & Auto-Collapse**:
+    - Tap cepat (< 400ms) pada tombol mini memicu ekspansi halus (`.is-expanded`) menjadi 3 tombol vertikal berlabel lengkap (Soal, Pembahasan, Tanya AI).
+    - Timer auto-collapse 4 detik (4000ms): jika tidak ada interaksi selama 4s, rail mengecil kembali secara otomatis dengan animasi kubik mulus.
+    - Mengetuk salah satu tombol langsung berpindah tab dan mengecilkan rail kembali setelah 250ms.
+    - Mengetuk di luar rail saat terbuka langsung mengecilkan rail.
+    - Mendukung `prefers-reduced-motion: reduce` (animasi dimatikan seketika tanpa transisi).
+  - **Integritas Gestur Drag & Off-screen Clamping**:
+    - Long-press >= 400ms tetap mengaktifkan drag mode (`.rail-dragging`) dengan haptic feedback.
+    - Saat mengembang di seluruh 6 posisi snap (`snap-top-left`, `snap-top-right`, `snap-mid-left`, `snap-mid-right`, `snap-bottom-left`, `snap-bottom-right`), bounding clamp dinamis dan safe-area menjamin 3 tombol tidak pernah terpotong atau keluar layar (`rect.top >= 0`, `rect.bottom <= innerHeight`, `rect.left >= 0`, `rect.right <= innerWidth`).
+  - **Isolasi Desktop**:
+    - Pada desktop (>= 1100px), rule CSS membatalkan class `.is-minimized` dan mempertahankan sidebar 3 tombol penuh dengan posisi `fixed right: 16px; top: 50%`.
+  - **Hasil Verifikasi**:
+    - 22/22 uji lolos di 360px, 390px, 412px, dan desktop 1280px via `scratch/_tes_fase13.js`. 0 error console. Regresi Fase 4 lulus 8/8 via `scratch/_tes_fase4.js`.
 
 ---
 

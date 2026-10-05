@@ -34,7 +34,7 @@ function report(name, pass, extra) {
   const buttonsInfo = await m.evaluate(() => {
     const rail = document.getElementById('workRail');
     if (!rail) return null;
-    const btns = Array.from(rail.querySelectorAll('.rail-btn')).map(b => b.innerText.trim());
+    const btns = Array.from(rail.querySelectorAll('.rail-btn')).map(b => b.textContent.trim());
     const cs = getComputedStyle(rail);
     return {
       visible: cs.display !== 'none',
