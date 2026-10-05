@@ -1,0 +1,23 @@
+{
+  "name": "tka-master-promo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "15s vertical motion-graphics showreel for TKA Master, built with Remotion from real app screenshots.",
+  "scripts": {
+    "capture": "node capture/capture.js",
+    "studio": "remotion studio src/index.ts",
+    "test-render": "remotion render src/index.ts Showreel out/test_lowres.mp4 --scale=0.4 --crf=28",
+    "render": "remotion render src/index.ts Showreel out/showreel.mp4 --codec=h264 --crf=16"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.290",
+    "@remotion/google-fonts": "4.0.290",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}
