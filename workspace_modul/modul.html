@@ -37,7 +37,14 @@ tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"tertiary-fix
 /* ---- Dua versi tampilan: hanya satu yang aktif sesuai lebar layar ---- */
 #modulDesktop, #modulMobile { display: none; }
 @media (min-width: 900px) { #modulDesktop { display: block; } #modulMobile { display: none; } }
-@media (max-width: 899px) { #modulMobile { display: block; } #modulDesktop { display: none; } }
+@media (max-width: 899px) {
+  #modulMobile { display: block; }
+  #modulDesktop { display: none; }
+  html[data-text-scale="90"] { font-size: 14.4px !important; }
+  html[data-text-scale="100"] { font-size: 16px !important; }
+  html[data-text-scale="115"] { font-size: 18.4px !important; }
+  html[data-text-scale="130"] { font-size: 20.8px !important; }
+}
 
 /* ---- Disiplin animasi: hanya transform & opacity, 0.3-0.6s ---- */
 .lift { transition: transform 0.3s ease, opacity 0.3s ease; }
@@ -1086,8 +1093,15 @@ button:active { transform: scale(0.97); }
         PROGRESS = p;
         refreshProgress();
       }
+    } else if (d.type === 'set-font-scale') {
+      document.documentElement.setAttribute('data-text-scale', d.scale.toString());
     }
   });
+
+  try {
+    var savedScale = localStorage.getItem('tka_font_scale');
+    if (savedScale) document.documentElement.setAttribute('data-text-scale', savedScale);
+  } catch (e) {}
 
   /* ================= Init ================= */
   readLocalProgress();

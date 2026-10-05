@@ -972,6 +972,11 @@ function sendPanelData(panel) {
   const frameId = panel === 'modul' ? 'panelModulFrame'
     : panel === 'akun' ? 'panelAkunFrame' : 'panelProgresFrame';
   const frame = document.getElementById(frameId);
+  if (frame && frame.contentWindow && typeof currentTextScale !== 'undefined') {
+    try {
+      frame.contentWindow.postMessage({ type: 'set-font-scale', scale: currentTextScale }, '*');
+    } catch (e) {}
+  }
   if (panel === 'akun') {
     // profil: sistem login belum ada -> null (halaman tampil mode Tamu yang jujur).
     // kuota AI: data server-side via state.tutorQuota (null jika belum buka sesi tutor).
@@ -4759,3 +4764,113 @@ document.addEventListener('DOMContentLoaded', () => {
   _tickSimTimer();
   if (!_simTimerInterval) _simTimerInterval = setInterval(_tickSimTimer, 1000);
 });
+
+// ==========================================================================
+// FASE 14: KONTROL UKURAN TEKS MOBILE (90%, 100%, 115%, 130%)
+// ==========================================================================
+const TEXT_SCALE_LEVELS = [90, 100, 115, 130];
+let currentTextScale = 100;
+
+function initTextScale() {
+  try {
+    const saved = localStorage.getItem('tka_font_scale');
+    if (saved && TEXT_SCALE_LEVELS.includes(parseInt(saved, 10))) {
+      currentTextScale = parseInt(saved, 10);
+    }
+  } catch (e) {}
+
+  applyTextScale(currentTextScale);
+
+  // Listener pesan dari iframe panel (misal dari menu Akun)
+  window.addEventListener('message', (e) => {
+    if (e.data && e.data.type === 'set-font-scale') {
+      const s = parseInt(e.data.scale, 10);
+      if (TEXT_SCALE_LEVELS.includes(s)) {
+        setTextScale(s);
+      }
+    }
+  });
+
+  // Listener storage perubahan dari tab lain
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'tka_font_scale') {
+      const s = parseInt(e.newValue, 10);
+      if (TEXT_SCALE_LEVELS.includes(s)) {
+        applyTextScale(s);
+      }
+    }
+  });
+}
+
+function applyTextScale(scale) {
+  currentTextScale = scale;
+  document.documentElement.setAttribute('data-text-scale', scale.toString());
+
+  // Update indikator UI di overflow menu & popover AI
+  document.querySelectorAll('.scale-indicator, #scaleIndicator, #tutorScaleIndicator').forEach(el => {
+    el.textContent = scale + '%';
+  });
+
+  // Update disabled buttons
+  document.querySelectorAll('.btn-scale-dec, #btnScaleDec, #btnTutorScaleDec').forEach(btn => {
+    btn.disabled = scale <= TEXT_SCALE_LEVELS[0];
+  });
+  document.querySelectorAll('.btn-scale-inc, #btnScaleInc, #btnTutorScaleInc').forEach(btn => {
+    btn.disabled = scale >= TEXT_SCALE_LEVELS[TEXT_SCALE_LEVELS.length - 1];
+  });
+
+  // Broadcast ke semua panel iframe (Modul, Progres, Akun)
+  ['panelModulFrame', 'panelProgresFrame', 'panelAkunFrame'].forEach(id => {
+    const iframe = document.getElementById(id);
+    if (iframe && iframe.contentWindow) {
+      try {
+        iframe.contentWindow.postMessage({ type: 'set-font-scale', scale: scale }, '*');
+      } catch (e) {}
+    }
+  });
+}
+
+function setTextScale(scale) {
+  if (!TEXT_SCALE_LEVELS.includes(scale)) return;
+  applyTextScale(scale);
+  try {
+    localStorage.setItem('tka_font_scale', scale.toString());
+  } catch (e) {}
+}
+
+function stepTextScale(delta) {
+  const currentIndex = TEXT_SCALE_LEVELS.indexOf(currentTextScale);
+  const nextIndex = Math.max(0, Math.min(TEXT_SCALE_LEVELS.length - 1, (currentIndex === -1 ? 1 : currentIndex) + delta));
+  setTextScale(TEXT_SCALE_LEVELS[nextIndex]);
+}
+
+function toggleTutorScaleMenu(e) {
+  if (e) {
+    e.stopPropagation();
+    e.preventDefault();
+  }
+  const pop = document.getElementById('tutorScalePopover');
+  if (pop) {
+    pop.style.display = pop.style.display === 'none' ? 'flex' : 'none';
+  }
+}
+
+// Tutup popover skala jika klik di luar
+document.addEventListener('pointerdown', (e) => {
+  const pop = document.getElementById('tutorScalePopover');
+  if (pop && pop.style.display !== 'none') {
+    if (!e.target.closest('#tutorScalePopover, #btnTutorScale')) {
+      pop.style.display = 'none';
+    }
+  }
+});
+
+// Panggil saat DOM siap
+document.addEventListener('DOMContentLoaded', initTextScale);
+
+// Expose fungsi ke window untuk aksesibilitas & tes
+window.initTextScale = initTextScale;
+window.setTextScale = setTextScale;
+window.stepTextScale = stepTextScale;
+window.toggleTutorScaleMenu = toggleTutorScaleMenu;
+

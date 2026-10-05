@@ -46,6 +46,13 @@ button:active { transform: scale(0.97); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+@media (max-width: 899px) {
+  html[data-text-scale="90"] { font-size: 14.4px !important; }
+  html[data-text-scale="100"] { font-size: 16px !important; }
+  html[data-text-scale="115"] { font-size: 18.4px !important; }
+  html[data-text-scale="130"] { font-size: 20.8px !important; }
+}
 </style>
 </head>
 <body class="bg-surface text-on-surface antialiased">
@@ -449,6 +456,27 @@ button:active { transform: scale(0.97); }
 
       <!-- Menu -->
       <section class="flex flex-col gap-space-md">
+        <!-- Pengaturan Tampilan & Aksesibilitas (Fase 14) -->
+        <div class="flex flex-col gap-space-2xs">
+          <h3 class="font-label-caps text-label-caps text-text-muted uppercase tracking-wider px-space-xs">Pengaturan Tampilan</h3>
+          <div class="bg-surface-card rounded-xl shadow-sm p-space-md flex items-center justify-between">
+            <div class="flex items-center gap-space-sm min-w-0">
+              <div class="w-9 h-9 rounded-lg bg-brand-emerald-light flex items-center justify-center text-primary flex-shrink-0">
+                <span class="material-symbols-outlined text-[20px]">format_size</span>
+              </div>
+              <div class="flex flex-col min-w-0">
+                <span class="font-label-lg text-label-lg text-text-primary font-bold truncate">Ukuran Teks Aplikasi</span>
+                <span class="font-body-sm text-body-sm text-text-muted truncate">Skala keterbacaan soal, AI, &amp; menu</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-1.5 bg-surface-subtle p-1 rounded-lg border border-border-subtle shrink-0">
+              <button type="button" class="w-8 h-8 rounded-md bg-surface-card text-text-primary font-bold text-xs shadow-xs hover:bg-white active:scale-95 flex items-center justify-center border border-border-subtle cursor-pointer" id="btnAkunScaleDec" onclick="stepAkunScale(-1)" aria-label="Kecilkan teks">A-</button>
+              <span class="text-xs font-bold text-primary px-2 min-w-[42px] text-center" id="akunScaleIndicator">100%</span>
+              <button type="button" class="w-8 h-8 rounded-md bg-surface-card text-text-primary font-bold text-xs shadow-xs hover:bg-white active:scale-95 flex items-center justify-center border border-border-subtle cursor-pointer" id="btnAkunScaleInc" onclick="stepAkunScale(1)" aria-label="Besarkan teks">A+</button>
+            </div>
+          </div>
+        </div>
+
         <div class="flex flex-col gap-space-2xs">
           <h3 class="font-label-caps text-label-caps text-text-muted uppercase tracking-wider px-space-xs">Dukungan &amp; Informasi</h3>
           <div class="bg-surface-card rounded-xl shadow-sm overflow-hidden flex flex-col">
@@ -655,8 +683,63 @@ button:active { transform: scale(0.97); }
   // sinkron antar-tab/window: localStorage berubah
   window.addEventListener('storage', function (e) {
     if (e.key === 'tka_progress') renderStats();
+    if (e.key === 'tka_font_scale') {
+      var s = parseInt(e.newValue, 10);
+      if (s) applyAkunScale(s);
+    }
   });
 
+  /* ---------- Fase 14: Text Scale Synchronization ---------- */
+  var AKUN_LEVELS = [90, 100, 115, 130];
+  function applyAkunScale(scale) {
+    document.documentElement.setAttribute('data-text-scale', scale.toString());
+    var ind = document.getElementById('akunScaleIndicator');
+    if (ind) ind.textContent = scale + '%';
+    var dec = document.getElementById('btnAkunScaleDec');
+    if (dec) dec.disabled = scale <= AKUN_LEVELS[0];
+    var inc = document.getElementById('btnAkunScaleInc');
+    if (inc) inc.disabled = scale >= AKUN_LEVELS[AKUN_LEVELS.length - 1];
+  }
+
+  function initAkunTextScale() {
+    var scale = 100;
+    try {
+      var saved = localStorage.getItem('tka_font_scale');
+      if (saved && AKUN_LEVELS.indexOf(parseInt(saved, 10)) !== -1) {
+        scale = parseInt(saved, 10);
+      }
+    } catch (e) {}
+    applyAkunScale(scale);
+  }
+
+  window.stepAkunScale = function (delta) {
+    var current = 100;
+    try {
+      var saved = localStorage.getItem('tka_font_scale');
+      if (saved) current = parseInt(saved, 10);
+    } catch (e) {}
+    var idx = AKUN_LEVELS.indexOf(current);
+    if (idx === -1) idx = 1;
+    var nextIdx = Math.max(0, Math.min(AKUN_LEVELS.length - 1, idx + delta));
+    var newScale = AKUN_LEVELS[nextIdx];
+    try {
+      localStorage.setItem('tka_font_scale', newScale.toString());
+    } catch (e) {}
+    applyAkunScale(newScale);
+    send({ type: 'set-font-scale', scale: newScale });
+  };
+
+  window.addEventListener('message', function (e) {
+    var d = e.data || {};
+    if (d.type === 'set-font-scale') {
+      var s = parseInt(d.scale, 10);
+      if (AKUN_LEVELS.indexOf(s) !== -1) {
+        applyAkunScale(s);
+      }
+    }
+  });
+
+  initAkunTextScale();
   renderAll();
   send({ type: 'request-data' });
   send({ type: 'akun-ready' });

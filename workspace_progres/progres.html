@@ -94,6 +94,12 @@
         display: none;
       }
     }
+    @media (max-width: 899px) {
+      html[data-text-scale="90"] { font-size: 14.4px !important; }
+      html[data-text-scale="100"] { font-size: 16px !important; }
+      html[data-text-scale="115"] { font-size: 18.4px !important; }
+      html[data-text-scale="130"] { font-size: 20.8px !important; }
+    }
 
     /* Motion & Animation Rules (Rule 5: 0.3-0.6s transform & opacity only, active scale .97) */
     button, a, .interactive-btn {
@@ -1380,6 +1386,19 @@
       document.addEventListener('DOMContentLoaded', function () {
         initDemoBar();
         renderAll();
+      });
+
+      /* Fase 14: Text Scale Synchronization */
+      try {
+        var savedScale = localStorage.getItem('tka_font_scale');
+        if (savedScale) document.documentElement.setAttribute('data-text-scale', savedScale);
+      } catch (e) {}
+
+      window.addEventListener('message', function (e) {
+        var d = e.data || {};
+        if (d.type === 'set-font-scale') {
+          document.documentElement.setAttribute('data-text-scale', d.scale.toString());
+        }
       });
 
     })();

@@ -19,7 +19,7 @@ Baseline: Fase 0 - 3 Selesai (11/11 tes lolos)
 | **Fase 11** | Diagnosis & perbaikan bottom nav terlalu tinggi (menu dashboard, mobile) | **SELESAI** | 11/11 uji `_tes_fase11.js` PASS. Akar masalah ditemukan di `progres.html` (`.pb-safe` hardcoded `+ 5rem` = 80px pada nav). Setelah perbaikan, tinggi (57px) dan posisi bottom (menempel flush) 100% IDENTIK di 4 menu (Beranda, Modul, Progres, Akun) pada 360, 390, dan 412 px (selisih 0px). |
 | **Fase 12** | Chat AI: tampilan jawaban & pemilih model (warna bubble, padding 12-16px, logo pemilih model ringkas) | **SELESAI** | 34/34 uji `_tes_fase12.js` PASS, 0 error console. Bubble AI putih bersih (#FFFFFF) di atas background chat (#F8FAFC) dengan aksen hijau dan padding 16px (line-height 1.55). Fenced code blocks & tabel ber-scroll horizontal mandiri tanpa meluber. Tombol logo model compact (32px) dengan popover picker rapi (checkmark, icons, persist ke localStorage). Dark mode terverifikasi kontras tinggi. |
 | **Fase 13** | Tombol navigasi mengambang bisa mengecil otomatis (auto-minimize 36-44px + expand on tap + auto collapse) | **SELESAI** | 22/22 uji `_tes_fase13.js` PASS, 0 error console. Mode normal idle berupa 1 tombol bulat compact 42px transparan (opacity 0.88) dengan ikon tab aktif. Tap mengembang menampilkan 3 tombol (Soal, Pembahasan, Tanya AI). Diam 4 detik atau memilih tombol otomatis mengecil kembali. Drag long-press (>=400ms) tetap berfungsi dan snap aman ke 6 posisi tanpa meluber keluar layar. Desktop 1280px tetap format sidebar asli. |
-| **Fase 14** | Kontrol ukuran teks mobile (90%, 100%, 115%, 130% di menu overflow Soal & Akun, persist localStorage) | BELUM | Menunggu eksekusi (tergantung Fase 11-13) |
+| **Fase 14** | Kontrol ukuran teks mobile (90%, 100%, 115%, 130% di menu overflow Soal & Akun, persist localStorage) | **SELESAI** | 22/22 uji `_tes_fase14.js` PASS, 0 error console. Skala teks 4 tingkat (90%, 100%, 115%, 130%) dapat diakses dari menu overflow (⋮) Soal, popover header AI Tutor, dan menu Akun. Sinkron real-time antar iframe via postMessage & localStorage. Pada 130% di 360px: 0 horizontal overflow, font membesar proporsional, bar atas/bawah terproteksi. Desktop 1280px tetap 16px. |
 
 ---
 
@@ -118,6 +118,31 @@ Baseline: Fase 0 - 3 Selesai (11/11 tes lolos)
     - Pada desktop (>= 1100px), rule CSS membatalkan class `.is-minimized` dan mempertahankan sidebar 3 tombol penuh dengan posisi `fixed right: 16px; top: 50%`.
   - **Hasil Verifikasi**:
     - 22/22 uji lolos di 360px, 390px, 412px, dan desktop 1280px via `scratch/_tes_fase13.js`. 0 error console. Regresi Fase 4 lulus 8/8 via `scratch/_tes_fase4.js`.
+- **Fase 14**:
+  - **Audit Ukuran Font di CSS**:
+    - Audit menunjukkan `style.css` mayoritas menggunakan unit `px` pada komponen Soal, Opsi Jawaban, dan Dialog CBT, sementara halaman modular (`workspace_modul`, `workspace_progres`, `workspace_akun`) menggunakan Tailwind CSS yang berbasis `rem`.
+    - Diputuskan pendekatan **Hybrid Scaling Tanpa Perombakan Ekstrem**:
+      1. Pada mobile media query `@media (max-width: 899px)`, set root `html[data-text-scale="X"]` dengan `font-size: calc(16px * var(--text-scale, 1)) !important` (90% = 14.4px, 100% = 16px, 115% = 18.4px, 130% = 20.8px). Hal ini secara otomatis menskalakan semua komponen berbasis Tailwind `rem` di iframe Modul, Progres, dan Akun.
+      2. Pada `style.css`, rule font spesifik untuk elemen teks kunci (pertanyaan `.question-text`, stimulus `.stimulus-body`, opsi jawaban `.cbt-opt-text`, pembahasan `.solution-body`, bubble chat AI `.tutor-bubble`, kartu ringkasan, dan dialog konfirmasi) diskalakan secara presisi menggunakan `calc(base_px * var(--text-scale, 1)) !important`.
+      3. **Proteksi Tinggi Bar**: Teks pada top navbar (`.app-header`) dan bottom navbar (`.stitch-bottomnav`) dibatasi skalanya (maks. 108% dengan `clamp(10px, calc(12px * min(...)), 14px)`) agar ukuran tinggi fixed bar (57px) yang telah distandarkan di Fase 5 dan 11 tidak rusak atau membesar berlebihan.
+  - **Titik Akses & UI Stepper**:
+    - Titik akses (1): Di dalam menu overflow (⋮) halaman Soal terdapat baris `Ukuran Teks` dengan stepper `A-`, persentase (`100%`), dan `A+`.
+    - Titik akses (1b): Di header AI Tutor (tampilan bottom sheet / tab AI), tombol `A` memunculkan popover compact yang memungkinkan user langsung mengatur ukuran teks tanpa harus keluar dari percakapan AI.
+    - Titik akses (2): Di menu Akun, ditambahkan kartu `Pengaturan Tampilan` dengan baris `Ukuran Teks Aplikasi` berdesain senada kartu Tailwind Akun.
+  - **Sinkronisasi Antar-Iframe & Persistensi**:
+    - Nilai skala disimpan di `localStorage['tka_font_scale']` dengan penanganan `try/catch`.
+    - Saat user mengubah skala di Soal atau Akun, perubahan dibroadcast ke seluruh frame (`panelModulFrame`, `panelProgresFrame`, `panelAkunFrame`, dan parent window) via `postMessage({ type: 'set-font-scale', scale })` dan `window.addEventListener('storage')`.
+    - Setiap panel yang dibuka via `sendPanelData()` langsung menerima sinkronisasi skala terkini.
+  - **Uji Stres 130% pada Lebar 360px**:
+    - Terverifikasi 0 scroll horizontal (`scrollWidth === window.innerWidth = 360px`).
+    - Teks pertanyaan dan opsi tidak terpotong (`overflow-x: hidden`, `word-break: break-word`).
+    - Opsi jawaban tetap dapat diklik dengan padding proporsional.
+    - Tombol mengambang (rail mini) dan bottom action bar tetap fungsional di posisinya masing-masing.
+  - **Isolasi Desktop & Mode Tamu**:
+    - Aturan skala teks sepenuhnya dibungkus `@media (max-width: 899px)`. Pada desktop (1280px), `html` font-size tetap 16px murni (0 perubahan).
+    - Mode Tamu di akun dan sistem autentikasi tidak tersentuh.
+  - **Hasil Verifikasi**:
+    - 22/22 uji lolos di 360px, 390px, 412px, dan desktop 1280px via `scratch/_tes_fase14.js`. 0 error console. Persistensi reload dan sinkronisasi lintas halaman teruji 100%.
 
 ---
 

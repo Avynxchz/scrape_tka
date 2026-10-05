@@ -307,6 +307,16 @@
           <button type="button" onclick="closeMobilePanels(); openFinishModal();">
             <i class="fa-solid fa-flag-checkered"></i> Selesai Tes
           </button>
+          <div class="overflow-text-scale-row" id="overflowTextScaleRow">
+            <div class="scale-label">
+              <i class="fa-solid fa-font"></i> <span>Ukuran Teks</span>
+            </div>
+            <div class="scale-btn-group">
+              <button type="button" class="btn-scale-step btn-scale-dec" id="btnScaleDec" onclick="stepTextScale(-1)" aria-label="Kecilkan teks">A-</button>
+              <span class="scale-indicator" id="scaleIndicator">100%</span>
+              <button type="button" class="btn-scale-step btn-scale-inc" id="btnScaleInc" onclick="stepTextScale(1)" aria-label="Besarkan teks">A+</button>
+            </div>
+          </div>
         </div>
 
         <!-- Daftar Soal Button -->
@@ -627,10 +637,23 @@
             <div class="ai-header-badge" title="Tutor Interaktif Cerdas">
               <i class="fa-solid fa-sparkles"></i>
             </div>
-            <!-- Mobile: tombol tutup eksplisit untuk bottom sheet (audit Qwen/Kimi) -->
-            <button class="btn-close-sheet" id="btnCloseSheet" onclick="closeTutorSheet()" aria-label="Tutup panel Tutor" type="button">
-              <i class="fa-solid fa-xmark"></i>
-            </button>
+            <!-- Mobile: aksi header AI (skala teks + tutup bottom sheet) -->
+            <div class="tutor-header-actions">
+              <button class="btn-tutor-scale" id="btnTutorScale" onclick="toggleTutorScaleMenu(event)" aria-label="Ubah ukuran teks" title="Ukuran Teks" type="button">
+                <i class="fa-solid fa-font"></i>
+              </button>
+              <div class="tutor-scale-popover" id="tutorScalePopover" style="display: none;">
+                <span style="font-size: 11.5px; font-weight: 600; color: var(--text-2);">Teks:</span>
+                <div class="scale-btn-group">
+                  <button type="button" class="btn-scale-step btn-scale-dec" id="btnTutorScaleDec" onclick="stepTextScale(-1)" aria-label="Kecilkan teks">A-</button>
+                  <span class="scale-indicator" id="tutorScaleIndicator">100%</span>
+                  <button type="button" class="btn-scale-step btn-scale-inc" id="btnTutorScaleInc" onclick="stepTextScale(1)" aria-label="Besarkan teks">A+</button>
+                </div>
+              </div>
+              <button class="btn-close-sheet" id="btnCloseSheet" onclick="closeTutorSheet()" aria-label="Tutup panel Tutor" type="button">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
           </div>
 
           <!-- Bar Aksi Atas AI: Chat Baru + Tombol Logo Model + Chip Pertanyaan Saran -->
@@ -879,6 +902,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="app.js?v=47"></script>
+  <script src="app.js?v=48"></script>
 </body>
 </html>

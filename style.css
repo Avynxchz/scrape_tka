@@ -5771,3 +5771,220 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   color: #D1FAE5 !important;
 }
 
+/* ==========================================================================
+   FASE 14: KONTROL UKURAN TEKS MOBILE (90%, 100%, 115%, 130%)
+   ========================================================================== */
+:root {
+  --text-scale: 1;
+}
+
+@media (max-width: 899px) {
+  html[data-text-scale="90"] { --text-scale: 0.9; }
+  html[data-text-scale="100"] { --text-scale: 1; }
+  html[data-text-scale="115"] { --text-scale: 1.15; }
+  html[data-text-scale="130"] { --text-scale: 1.3; }
+
+  html {
+    font-size: calc(16px * var(--text-scale, 1)) !important;
+  }
+
+  /* Elemen Soal & Opsi Jawaban */
+  .cbt-question-card,
+  .qcard-body,
+  .stimulus-body,
+  .question-text {
+    font-size: calc(15px * var(--text-scale, 1)) !important;
+    line-height: 1.6 !important;
+  }
+  .qcard-instruction,
+  .qcard-statement {
+    font-size: calc(13.5px * var(--text-scale, 1)) !important;
+  }
+  .cbt-opt-text {
+    font-size: calc(14px * var(--text-scale, 1)) !important;
+    line-height: 1.5 !important;
+  }
+  .opt-label {
+    font-size: calc(13px * var(--text-scale, 1)) !important;
+  }
+  .cbt-table-pgk th,
+  .cbt-table-pgk td {
+    font-size: calc(13px * var(--text-scale, 1)) !important;
+  }
+
+  /* Pembahasan & Materi Pilar */
+  .pemb-tab-content,
+  .pilar-content,
+  .pilar-card,
+  .pilar-explain-body,
+  .solution-section,
+  .solution-step {
+    font-size: calc(14px * var(--text-scale, 1)) !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Chat AI */
+  .chat-messages {
+    font-size: calc(14px * var(--text-scale, 1)) !important;
+  }
+  .chat-bubble.ai .bubble-content,
+  .chat-bubble.user .bubble-content,
+  .chat-bubble .ai-p {
+    font-size: calc(13.5px * var(--text-scale, 1)) !important;
+    line-height: 1.55 !important;
+  }
+  .chat-bubble.ai pre {
+    font-size: calc(12px * var(--text-scale, 1)) !important;
+  }
+  .chat-bubble.ai table th,
+  .chat-bubble.ai table td {
+    font-size: calc(12.5px * var(--text-scale, 1)) !important;
+  }
+  #chatInput {
+    font-size: calc(13.5px * var(--text-scale, 1)) !important;
+  }
+
+  /* Modal Dialog */
+  .modal-dialog,
+  .modal-content,
+  .confirm-dialog {
+    font-size: calc(14px * var(--text-scale, 1)) !important;
+  }
+
+  /* Beranda Stitch */
+  .stitch-hero h1 { font-size: calc(24px * var(--text-scale, 1)) !important; }
+  .stitch-hero p { font-size: calc(13px * var(--text-scale, 1)) !important; }
+  .stitch-card .stitch-title { font-size: calc(14px * var(--text-scale, 1)) !important; }
+  .stitch-card .stitch-desc { font-size: calc(12px * var(--text-scale, 1)) !important; }
+
+  /* Batasi skala teks di navbar atas dan bottom nav (maks 108%) agar tinggi bar tetap 57px seragam */
+  .app-header .header-container,
+  .app-header .timer-box,
+  .app-header .btn-home-top,
+  .stitch-bottomnav,
+  .stitch-bottomnav a {
+    font-size: clamp(10px, calc(12px * min(var(--text-scale, 1), 1.08)), 14px) !important;
+  }
+
+  /* Anti horizontal scroll pada 130% */
+  html, body {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+  }
+}
+
+/* UI Kontrol Skala Teks di Overflow Menu */
+.overflow-text-scale-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 10px 14px !important;
+  border-top: 1px solid var(--border) !important;
+  background: var(--surface) !important;
+  gap: 8px !important;
+}
+.overflow-text-scale-row .scale-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  color: var(--text-2) !important;
+}
+.overflow-text-scale-row .scale-label i {
+  color: var(--accent) !important;
+  font-size: 14px !important;
+}
+.scale-btn-group {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: var(--bg) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: 8px !important;
+  padding: 2px !important;
+}
+.btn-scale-step {
+  width: 28px !important;
+  height: 28px !important;
+  border: none !important;
+  background: transparent !important;
+  color: var(--text) !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.15s ease !important;
+}
+.btn-scale-step:hover {
+  background: var(--surface-2) !important;
+}
+.btn-scale-step:active {
+  transform: scale(0.92) !important;
+}
+.btn-scale-step:disabled {
+  opacity: 0.35 !important;
+  cursor: not-allowed !important;
+}
+.scale-indicator {
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: var(--accent) !important;
+  padding: 0 6px !important;
+  min-width: 42px !important;
+  text-align: center !important;
+}
+
+/* UI Kontrol Skala Teks di Header AI Tutor */
+.tutor-header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  position: relative !important;
+}
+.btn-tutor-scale {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 8px !important;
+  background: #F1F5F9 !important;
+  border: 1px solid #CBD5E1 !important;
+  color: #004a2a !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  transition: all 0.2s ease !important;
+}
+.btn-tutor-scale:hover {
+  background: #E2E8F0 !important;
+}
+[data-theme="dark"] .btn-tutor-scale {
+  background: #11261B !important;
+  border-color: #1E4D34 !important;
+  color: #86EFAC !important;
+}
+.tutor-scale-popover {
+  position: absolute !important;
+  top: 40px !important;
+  right: 0 !important;
+  background: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  border-radius: 12px !important;
+  padding: 8px 12px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18) !important;
+  z-index: 130 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  white-space: nowrap !important;
+}
+[data-theme="dark"] .tutor-scale-popover {
+  background: #11261B !important;
+  border-color: #1E4D34 !important;
+}
+
+
