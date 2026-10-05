@@ -16,9 +16,8 @@ Baseline: Fase 0 - 3 Selesai (11/11 tes lolos)
 | **Fase 7** | Beranda: carousel hijau hero (semua teks putih, hapus hiasan toga/titik, animasi SVG/CSS kanan) | **SELESAI** | 9/9 uji `_tes_fase7.js` PASS. Semua teks carousel putih solid (#FFFFFF / rgb(255,255,255)). Titik-titik dan topi toga dihapus total. Slide 2: SVG Pie Chart animasi ring pulse. Slide 3: SVG Robot AI animasi mata berkedip & antena berdenyut. Carousel controller reusable di-export ke `window.setupCarouselController`. |
 | **Fase 8** | Menu Modul: carousel reusable, progress gabungan bersegmen mapel pilihan | **SELESAI** | 16/16 uji `_tes_fase8.js` PASS. Carousel 2-slide reusable, teks serba putih solid. Slide 1: Kurikulum & Maskot Robot AI sedang membaca buku beranimasi. Slide 2: Progres Gabungan Mapel Pilihan (multi-segmented progress bar dengan warna unik tiap mapel + legenda ringkas interaktif). Semua 22 mapel dan 5 kategori dipertahankan utuh. |
 | **Fase 9** | Menu Progress: fix blinking cards, dashboard analitik belajar, empty state | **SELESAI** | 10/10 uji `_tes_fase9.js` PASS. Bug kartu berkedip berhasil diperbaiki total dengan memoization state data (`_lastRenderedProgressJson`) dan penghapusan class `.fade-in` pada re-render berulang. Dashboard analitik dilengkapi widget streak kehadiran, waktu belajar hari ini vs kemarin, visualisasi distribusi 5 rumpun kategori, dan empty state ramah. |
-| **Fase 10** | QA Akhir: regresi Fase 3-9, 0 console error, verifikasi 360/390/412px & desktop | **SELESAI** | 15/15 uji `_qa_akhir_fase10.js` PASS. Total 84/84 pengujian otomatis seluruh fase lulus 100%. Mode Tamu utuh, desktop aman, 0 console errors, tidak ada teks hijau di atas hijau, safe-area aware. |
-| **Fase 11** | Diagnosis & perbaikan bottom nav terlalu tinggi (menu dashboard, mobile) | BELUM | Menunggu eksekusi (diagnosis getBoundingClientRect di 360, 390, 412 px; telusuri 100vh vs dvh, safe-area ganda, iframe wrapper) |
-| **Fase 12** | Chat AI: tampilan jawaban & pemilih model (warna bubble, padding 12-16px, logo pemilih model ringkas) | BELUM | Menunggu eksekusi (tergantung Fase 11) |
+| **Fase 11** | Diagnosis & perbaikan bottom nav terlalu tinggi (menu dashboard, mobile) | **SELESAI** | 11/11 uji `_tes_fase11.js` PASS. Akar masalah ditemukan di `progres.html` (`.pb-safe` hardcoded `+ 5rem` = 80px pada nav). Setelah perbaikan, tinggi (57px) dan posisi bottom (menempel flush) 100% IDENTIK di 4 menu (Beranda, Modul, Progres, Akun) pada 360, 390, dan 412 px (selisih 0px). |
+| **Fase 12** | Chat AI: tampilan jawaban & pemilih model (warna bubble, padding 12-16px, logo pemilih model ringkas) | BELUM | Menunggu eksekusi |
 | **Fase 13** | Tombol navigasi mengambang bisa mengecil otomatis (auto-minimize 36-44px + expand on tap + auto collapse) | BELUM | Menunggu eksekusi (tergantung Fase 4 & 12) |
 | **Fase 14** | Kontrol ukuran teks mobile (90%, 100%, 115%, 130% di menu overflow Soal & Akun, persist localStorage) | BELUM | Menunggu eksekusi (tergantung Fase 11-13) |
 
@@ -66,6 +65,26 @@ Baseline: Fase 0 - 3 Selesai (11/11 tes lolos)
 - **Fase 10**:
   - Seluruh skrip verifikasi otomatis Fase 3 s/d 9 dan QA Akhir dijalankan berturut-turut dalam satu alur eksekusi.
   - Hasil: 84/84 checks PASS, 0 console errors, tidak ada layout patah/rusak di viewport mobile (360px, 390px, 412px) maupun desktop (1280px). Mode Tamu dipertahankan 100% utuh tanpa modifikasi struktural.
+- **Fase 11 (Diagnosis & Perbaikan Bottom Nav Terlalu Tinggi)**:
+  - **Bukti Ukur Awal (Pra-perbaikan)** via `scratch/_diagnosa_fase11.js`:
+    - Viewport 360x640: Beranda = 57px (pb: 0px), Modul = 57px (pb: 0px), **Progres = 137px (pb: 80px)**, Akun = 57px (pb: 0px).
+    - Viewport 390x844: Beranda = 57px (pb: 0px), Modul = 57px (pb: 0px), **Progres = 137px (pb: 80px)**, Akun = 57px (pb: 0px).
+    - Viewport 412x915: Beranda = 57px (pb: 0px), Modul = 57px (pb: 0px), **Progres = 137px (pb: 80px)**, Akun = 57px (pb: 0px).
+    - Terlihat jelas bottom nav di menu Progres membengkak setinggi 137px (selisih 80px dari menu lainnya) karena `padding-bottom: 80px`.
+  - **Akar Masalah**:
+    Di `workspace_progres/progres.html`, rule `.pb-safe` didefinisikan sebagai:
+    `padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 5rem);` (5rem = 80px).
+    Class `.pb-safe` ini awalnya dirancang untuk padding bawah elemen konten agar tidak tertutup nav, namun kemudian secara tidak sengaja dipasang langsung pada elemen `<nav class="... pb-safe ...">`. Akibatnya, `<nav>` itu sendiri mendapatkan padding bawah 80px di luar tinggi bar 56px (`h-14`) dan border 1px, sehingga menjulang setinggi 137px (atau mencapai 170px pada iPhone dengan home bar).
+  - **Solusi**:
+    1. Memisahkan fungsi: `.pb-safe` di `workspace_progres/progres.html` dikembalikan murni ke `env(safe-area-inset-bottom, 0px)` untuk elemen `<nav>`.
+    2. Menambahkan class `.pb-safe-content` (`calc(env(safe-area-inset-bottom, 0px) + 5.5rem)`) yang dipasang khusus pada elemen `<main>` agar konten tidak tertutup saat discroll ke paling bawah.
+    3. Menambahkan properti `height: 100dvh` pada `.home-overlay` dan `.home-panel-frame` di `home_stitch.css`, serta `min-h-[100dvh]` pada `#progresMobile` untuk menjamin stabilitas ketinggian viewport saat mobile address bar muncul/hilang secara dinamis.
+  - **Bukti Ukur Pasca-perbaikan** via `scratch/_tes_fase11.js`:
+    - 360px: Beranda = 57px, Modul = 57px, Progres = 57px, Akun = 57px (selisih 0px, 100% IDENTIK).
+    - 390px: Beranda = 57px, Modul = 57px, Progres = 57px, Akun = 57px (selisih 0px, 100% IDENTIK).
+    - 412px: Beranda = 57px, Modul = 57px, Progres = 57px, Akun = 57px (selisih 0px, 100% IDENTIK).
+    - Semua menempel flush di posisi paling bawah (`rect.bottom === window.innerHeight`).
+    - 11/11 tes otomatis lulus, 0 console errors, desktop 1280px tetap menyembunyikan bottom nav mobile (`display: none`).
 
 ---
 

@@ -135,7 +135,10 @@
       padding-top: env(safe-area-inset-top, 0px);
     }
     .pb-safe {
-      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 5rem);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .pb-safe-content {
+      padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 5.5rem);
     }
 
     /* Progress bar smooth transition */
@@ -381,7 +384,7 @@
   <!-- ========================================================================= -->
   <!-- MOBILE VIEW CONTAINER (#progresMobile, max-width: 899.98px)               -->
   <!-- ========================================================================= -->
-  <div id="progresMobile" class="w-full flex flex-col min-h-screen">
+  <div id="progresMobile" class="w-full flex flex-col min-h-screen min-h-[100dvh]">
     
     <!-- Mobile Fixed Header -->
     <header class="fixed top-0 left-0 right-0 z-50 pt-safe bg-surface/90 backdrop-blur-xl border-b border-[#E2E8F0] shadow-xs">
@@ -405,7 +408,7 @@
     </header>
 
     <!-- Mobile Main Body -->
-    <main class="flex-1 flex flex-col w-full bg-surface pt-16 pb-safe px-4">
+    <main class="flex-1 flex flex-col w-full bg-surface pt-16 pb-safe-content px-4">
       <div class="flex flex-col w-full max-w-md mx-auto pt-3 pb-8 space-y-4">
         
         <!-- Header Subtitle Ringkas dengan aksi reset & status kuota di dalam konten -->
