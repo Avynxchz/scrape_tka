@@ -923,16 +923,59 @@ function showMiniToast(msg) {
   } catch (e) { console.warn('toast gagal', e); }
 }
 
+// Handler konfirmasi mulai belajar mapel (Desktop & Mobile)
+let _pendingStartPackage = null;
+
+function showStartPackageConfirmModal(subject, pkg) {
+  _pendingStartPackage = { subject, pkg: parseInt(pkg || 1, 10) };
+  const meta = SUBJECT_CATALOG[subject] || {};
+  const subjName = meta.name || subject;
+  const count = (typeof homePkgCount === 'function' ? homePkgCount(subject, _pendingStartPackage.pkg) : 20) || 20;
+  const minutes = _pendingStartPackage.pkg === 1 ? 45 : 50;
+  
+  const titleEl = document.getElementById('startMapelTitle');
+  const descEl = document.getElementById('startMapelDesc');
+  const modal = document.getElementById('modalKonfirmasiMulaiMapel');
+  
+  if (titleEl) {
+    titleEl.innerText = `Mulai Belajar ${subjName}?`;
+  }
+  if (descEl) {
+    descEl.innerHTML = `Kamu akan memulai pengerjaan latihan <strong>${subjName} &middot; Paket ${_pendingStartPackage.pkg}</strong>.<br>`
+      + `Terdiri dari <strong>${count} Soal</strong> dengan estimasi waktu <strong>${minutes} Menit</strong>.<br><br>`
+      + `Jawaban dan nilai kamu otomatis tersimpan di dalam progres belajar.`;
+  }
+  if (modal) {
+    modal.classList.add('open');
+  }
+}
+
+function closeStartPackageModal() {
+  const modal = document.getElementById('modalKonfirmasiMulaiMapel');
+  if (modal) modal.classList.remove('open');
+  _pendingStartPackage = null;
+}
+
+async function executeStartPackage() {
+  if (!_pendingStartPackage) return;
+  const target = { ..._pendingStartPackage };
+  closeStartPackageModal();
+  // Beranda ditutup setelah konfirmasi mulai belajar
+  if (typeof homeClose === 'function') homeClose();
+  try {
+    if (state.currentSubject !== target.subject) await switchSubject(target.subject);
+    await switchPackage(target.pkg);
+  } catch (err) {
+    console.error('Gagal membuka paket mapel:', err);
+  }
+}
+
 // Terima event dari iframe panel (klik paket, nav, sinyal ready)
 const panelReadyReplied = {}; // throttle balasan sinyal ready per panel
 window.addEventListener('message', async (e) => {
   const d = e.data || {};
   if (d.type === 'open-package') {
-    homeClose();
-    try {
-      if (state.currentSubject !== d.subject) await switchSubject(d.subject);
-      await switchPackage(d.pkg);
-    } catch (err) { console.error(err); }
+    showStartPackageConfirmModal(d.subject, d.pkg);
   } else if (d.type === 'home-desktop-ready' || d.type === 'modul-ready' || d.type === 'request-data' || d.type === 'akun-ready') {
     // Halaman panel baru saja siap -> kirim data terbaru ke frame yang bersangkutan.
     // Ini menutup race apapun urutan antara load iframe dan init app.
@@ -983,6 +1026,7 @@ function homeShowPanel(name) {
   if (!ov) return;
   if (name !== 'beranda' && name !== 'modul' && name !== 'progres' && name !== 'akun') return;
   homeActivePanel = name;
+  window.homeActivePanel = name;
 
   ov.classList.remove('show-panel-modul', 'show-panel-progres', 'show-panel-akun');
   if (name !== 'beranda') ov.classList.add('show-panel-' + name);
@@ -4276,6 +4320,27 @@ function reviewJumpTo(idx) {
 
 function closeReviewHasil() {
   document.getElementById('reviewHasilOverlay').classList.remove('open');
+}
+
+// Kembali ke beranda dari modal konfirmasi selesai tes
+function selesaiDanKeBeranda() {
+  const key = pkgKey();
+  if (!state.testFinished) state.testFinished = {};
+  state.testFinished[key] = true;
+  closeFinishModal();
+  if (typeof homeOpen === 'function') {
+    homeOpen();
+    if (typeof homeShowPanel === 'function') homeShowPanel('beranda');
+  }
+}
+
+// Kembali ke beranda dari overlay reviu hasil
+function reviewKeBeranda() {
+  closeReviewHasil();
+  if (typeof homeOpen === 'function') {
+    homeOpen();
+    if (typeof homeShowPanel === 'function') homeShowPanel('beranda');
+  }
 }
 
 // Ulangi simulasi: reset jawaban & status ragu paket aktif

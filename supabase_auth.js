@@ -19,26 +19,73 @@ function loadSupabaseJS() {
 let supabaseClient = null;
 let currentUser = null;
 
+// Segera pulihkan sesi login dari perangkat ini tanpa menunggu loading CDN
+(function restoreDeviceLoginImmediately() {
+  try {
+    const saved = localStorage.getItem('tka_user');
+    const isEverLoggedIn = localStorage.getItem('tka_device_logged_in') === 'true';
+    if (saved && isEverLoggedIn) {
+      const u = JSON.parse(saved);
+      if (u && u.loggedIn) {
+        window.TKA_USER = u;
+        window.currentUser = {
+          email: u.email,
+          user_metadata: { full_name: u.name, avatar_url: u.avatar }
+        };
+        // Update tampilan login segera setelah DOM siap
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', () => {
+            if (typeof updateLoginUI === 'function') updateLoginUI(true);
+          });
+        } else {
+          if (typeof updateLoginUI === 'function') updateLoginUI(true);
+        }
+      }
+    }
+  } catch (e) {}
+})();
+
 async function initSupabase() {
   await loadSupabaseJS();
-  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true,
+      storageKey: 'tka_supabase_auth_token'
+    }
+  });
   
-  // Cek session yang tersimpan
-  const { data: { session } } = await supabaseClient.auth.getSession();
-  if (session) {
-    currentUser = session.user;
-    await syncUserToDB(session.user);
-    updateLoginUI(true);
+  // Cek session yang tersimpan di perangkat ini
+  try {
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    if (session && session.user) {
+      currentUser = session.user;
+      localStorage.setItem('tka_device_logged_in', 'true');
+      await syncUserToDB(session.user);
+      updateLoginUI(true);
+    } else {
+      // Jika session tidak ada tapi ada cache perangkat, coba refresh session
+      const isEverLoggedIn = localStorage.getItem('tka_device_logged_in') === 'true';
+      if (isEverLoggedIn && window.TKA_USER && window.TKA_USER.loggedIn) {
+        // Biarkan login cache aktif kecuali jika user eksplisit logout
+        updateLoginUI(true);
+      }
+    }
+  } catch (e) {
+    console.warn('Gagal cek session:', e);
   }
   
-  // Listen perubahan auth
+  // Listen perubahan status otentikasi
   supabaseClient.auth.onAuthStateChange(async (event, session) => {
-    if (event === 'SIGNED_IN' && session) {
+    if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && session) {
       currentUser = session.user;
+      localStorage.setItem('tka_device_logged_in', 'true');
       await syncUserToDB(session.user);
       updateLoginUI(true);
     } else if (event === 'SIGNED_OUT') {
       currentUser = null;
+      localStorage.removeItem('tka_device_logged_in');
       updateLoginUI(false);
     }
   });
@@ -309,6 +356,7 @@ function updateLoginUI(isLoggedIn) {
     };
     try {
       localStorage.setItem('tka_user', JSON.stringify(window.TKA_USER));
+      localStorage.setItem('tka_device_logged_in', 'true');
     } catch (e) {}
     
     if (btn) btn.style.display = 'none';
@@ -337,6 +385,7 @@ function updateLoginUI(isLoggedIn) {
     window.TKA_USER = { name: 'Tamu', loggedIn: false };
     try {
       localStorage.removeItem('tka_user');
+      localStorage.removeItem('tka_device_logged_in');
     } catch (e) {}
     if (btn) btn.style.display = 'inline-flex';
     if (avatarBtn) avatarBtn.style.display = 'grid';
