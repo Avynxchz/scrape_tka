@@ -81,12 +81,26 @@ _key_cooldowns = {}  # {key: timestamp_until_cooldown_expires}
 
 
 def get_api_keys():
-    """Mengambil semua API key dari LLM_API_KEYS (koma/spasi/baris baru) atau LLM_API_KEY."""
-    raw = _first_env("LLM_API_KEYS", "LLM_API_KEY", default="")
+    """Mengambil semua API key dari LLM_API_KEYS (koma/spasi/baris baru) atau LLM_API_KEY.
+    Untuk kompatibilitas: juga membaca GROQ_API_KEYS sebagai alias."""
+    raw = _first_env("LLM_API_KEYS", "LLM_API_KEY", "GROQ_API_KEYS", default="")
     if not raw:
         return []
     parts = [k.strip() for k in re.split(r"[,;\s\n\r]+", raw) if k.strip()]
     return parts
+
+
+def get_openrouter_api_keys():
+    """API keys khusus OpenRouter (fallback kedua setelah Groq)."""
+    raw = _first_env("OPENROUTER_API_KEYS", default="")
+    if not raw:
+        return []
+    return [k.strip() for k in re.split(r"[,;\s\n\r]+", raw) if k.strip()]
+
+
+def get_alibaba_api_key():
+    """API key Alibaba/DashScope (fallback ketiga)."""
+    return _first_env("ALIBABA_API_KEY", default="").strip() or None
 
 
 def next_api_key():
@@ -278,25 +292,53 @@ def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tok
         timeout = DEFAULT_TIMEOUT
 
     gemini_key = get_gemini_api_key()
-    cloud = _first_env("OPENAI_COMPATIBLE_BASE_URL", "LLM_BASE_URL")
-    cloud_keys = get_api_keys()
 
-    want_gemini = (model and "gemini" in model.lower()) or (not model and gemini_key)
-    want_qwen = ((model and "qwen" in model.lower())
-                 or (not model and not gemini_key and cloud and cloud_keys))
+    # Multi-provider: Groq (cepat, utama) -> OpenRouter (gratis) -> Alibaba -> Gemini
+    # Setiap provider punya keys + base_url + model sendiri.
+    providers = []
 
-    routes = []
-    if want_gemini and gemini_key:
-        routes.append("gemini")
-    if (want_qwen or (cloud and cloud_keys)) and cloud:
-        routes.append("qwen")
-    if "gemini" not in routes and gemini_key:
-        routes.append("gemini")
+    # 1. Groq (utama - cepat)
+    groq_keys = get_api_keys()  # LLM_API_KEYS / GROQ_API_KEYS
+    groq_url = _first_env("OPENAI_COMPATIBLE_BASE_URL", "LLM_BASE_URL", "GROQ_BASE_URL",
+                          default="https://api.groq.com/openai/v1")
+    groq_model = _first_env("GROQ_MODEL", "LLM_MODEL", default="qwen/qwen3.8-27b")
+    if groq_keys:
+        providers.append({"name": "groq", "base_url": groq_url,
+                          "keys": groq_keys, "model": groq_model})
+
+    # 2. OpenRouter (fallback - model gratis)
+    or_keys = get_openrouter_api_keys()
+    or_url = _first_env("OPENROUTER_BASE_URL", default="https://openrouter.ai/api/v1")
+    or_model = _first_env("OPENROUTER_MODEL", default="openrouter/free")
+    if or_keys:
+        providers.append({"name": "openrouter", "base_url": or_url,
+                          "keys": or_keys, "model": or_model})
+
+    # 3. Alibaba/DashScope (fallback)
+    ali_key = get_alibaba_api_key()
+    ali_url = _first_env("ALIBABA_BASE_URL",
+                         default="https://dashscope.aliyuncs.com/compatible-mode/v1")
+    ali_model = _first_env("ALIBABA_MODEL", default="qwen-plus")
+    if ali_key:
+        providers.append({"name": "alibaba", "base_url": ali_url,
+                          "keys": [ali_key], "model": ali_model})
+
+    # 4. Gemini (fallback terakhir)
+    if gemini_key:
+        providers.append({"name": "gemini", "base_url": None,
+                          "keys": [gemini_key], "model": "gemini-flash"})
+
+    # Jika user pilih model spesifik, prioritaskan provider yang cocok
+    if model:
+        ml = model.lower()
+        if "gemini" in ml:
+            providers = [p for p in providers if p["name"] == "gemini"] + \
+                        [p for p in providers if p["name"] != "gemini"]
 
     last_err = None
-    for i, route in enumerate(routes):
+    for i, prov in enumerate(providers):
         try:
-            if route == "gemini":
+            if prov["name"] == "gemini":
                 model_choice = model or "gemini-flash"
                 text, actual_model = _post_gemini(messages, model_choice=model_choice,
                                                   image_paths=image_paths,
@@ -305,25 +347,24 @@ def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tok
                 if return_meta:
                     return text, {"model": actual_model, "provider": "google_gemini"}
                 return text
-            # Rute openai-compatible (Qwen/Groq) — teks murni, gambar tidak terkirim
+            # Provider OpenAI-compatible (groq/openrouter/alibaba)
             if image_paths:
-                print(f"[tutor_llm] Catatan: fallback ke provider teks — {len(image_paths)} "
+                print(f"[tutor_llm] Catatan: fallback ke {prov['name']} — {len(image_paths)} "
                       f"gambar tidak dikirim (konteks gambar terwakili transkripsi).")
-            info = {"provider": "openai_compatible", "base_url": cloud,
-                    "model": _first_env("LLM_MODEL", default="qwen/qwen3.8-27b")}
+            info = {"provider": prov["name"], "base_url": prov["base_url"],
+                    "model": model or prov["model"], "_keys": prov["keys"]}
             text, actual_model = _post_openai_compatible(messages, info, temperature,
                                                          max_tokens, timeout)
             if return_meta:
-                return text, {"model": actual_model, "provider": "openai_compatible"}
+                return text, {"model": actual_model, "provider": prov["name"]}
             return text
         except LLMError as e:
             last_err = e
-            # Gagal fatal (malformed / pesan tidak layak) tidak dicoba ke provider lain
             if e.kind not in ("rate_limit", "timeout", "connection", "provider_error"):
                 raise
-            if i < len(routes) - 1:
-                print(f"[tutor_llm] Rute {route} gagal ({e.kind}) — mencoba rute cadangan...",
-                      flush=True)
+            if i < len(providers) - 1:
+                print(f"[tutor_llm] Provider {prov['name']} gagal ({e.kind}) — "
+                      f"coba {providers[i+1]['name']}...", flush=True)
             continue
     raise last_err or LLMError("Tidak ada provider LLM yang terkonfigurasi.", kind="provider_error")
 
@@ -416,13 +457,16 @@ def _post_openai_compatible(messages, info, temperature, max_tokens, timeout):
         "max_tokens": max_tokens or DEFAULT_NUM_PREDICT,
     }
     body = json.dumps(payload).encode("utf-8")
-    keys = get_api_keys()
+    # Pakai keys khusus provider ini (dari info["_keys"]) jika ada,
+    # fallback ke get_api_keys() global untuk kompatibilitas lama.
+    keys = info.get("_keys") or get_api_keys()
     max_attempts = max(3, len(keys) * 2 if keys else 3)
     data = None
     last_err = None
 
     for attempt in range(max_attempts):
-        key = next_api_key()
+        # Round-robin sederhana per-provider
+        key = keys[attempt % len(keys)] if keys else next_api_key()
         headers = {"Content-Type": "application/json", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) CBT-TKA-Tutor/1.0"}
         if key:
             headers["Authorization"] = f"Bearer {key}"
