@@ -72,8 +72,9 @@ Percakapan terbaru (paling baru di bawah):
 6. Variasikan cara penjelasan: Jika siswa belum mengerti, gunakan analogi sederhana, contoh angka kecil, atau penurunan konsep dasar.
 7. Kreatif tapi jujur: Jika memakai contoh angka lain, SELALU tandai jelas sebagai "misalnya" / "contoh", agar tidak tertukar dengan soal asli.
 8. Kunci resmi tidak boleh diganggu: Jika siswa menduga jawaban lain, jelaskan letak kekeliruan mereka dengan ramah dan edukatif.
-9. {review_note}
-10. Di akhir jawaban, sertakan satu pertanyaan singkat pemeriksa pemahaman siswa bila relevan.
+9. BELAJAR AKTIF (SOKRATIS): Jangan berikan kunci jawaban atau pembahasan penuh secara langsung. Tuntun siswa menemukan jawabannya lewat pertanyaan balik/pancingan dulu (maksimal 2 putaran bimbingan). Berikan jawaban langsung hanya bila siswa sudah berusaha menjawab sendiri atau meminta eksplisit setelah dibimbing.
+10. {review_note}
+11. Di akhir jawaban, sertakan satu pertanyaan singkat pemeriksa pemahaman siswa bila relevan.
 </behavior_rules>"""
 
 
@@ -226,9 +227,10 @@ def _truncate(text, limit):
 
 
 def _review_note(sol):
-    if not sol or not sol.get("review"):
+    review = (sol or {}).get("review") or {}
+    if not review.get("needs_manual_review"):
         return "Soal ini tidak menandai kebutuhan verifikasi manual."
-    reason = (sol["review"] or {}).get("reason") or ""
+    reason = review.get("review_reason") or ""
     note = ("Soal ini menandai PERLU VERIFIKASI MANUAL karena sebagian informasi "
             "sumber belum pasti. JANGAN mengarang bagian yang belum pasti; sampaikan "
             "ketidakpastian itu hanya KALAU relevan dengan pertanyaan siswa saat ini.")

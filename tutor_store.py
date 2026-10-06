@@ -179,12 +179,13 @@ def _today_wib():
 # ---------------------------------------------------------------------------
 # Operasi percakapan
 # ---------------------------------------------------------------------------
-def get_or_create_conversation(user_key, canonical_id, subject, paket, nomor,
-                               title=None, create=True):
-    """Ambil percakapan aktif user utk soal ini; buat baru bila belum ada.
+def _get_or_create_conversation(user_key, canonical_id, subject, paket, nomor,
+                                title=None, create=True):
+    """Implementasi dalam get-or-create; pemanggil WAJIB sudah memegang _lock.
 
-    Satu percakapan aktif per (user, soal). `create=False` -> tidak pernah
-    membuat (dipakai frontend utk mengecek riwayat saat panel dibuka).
+    Dipisah dari get_or_create_conversation agar start_new_conversation
+    (yang juga memegang _lock) bisa memanggil tanpa deadlock — threading.Lock
+    bersifat non-reentrant.
     """
     with _db() as conn:
         row = conn.execute(
@@ -212,6 +213,22 @@ def get_or_create_conversation(user_key, canonical_id, subject, paket, nomor,
         return dict(row)
 
 
+def get_or_create_conversation(user_key, canonical_id, subject, paket, nomor,
+                               title=None, create=True):
+    """Ambil percakapan aktif user utk soal ini; buat baru bila belum ada.
+
+    Satu percakapan aktif per (user, soal). `create=False` -> tidak pernah
+    membuat (dipakai frontend utk mengecek riwayat saat panel dibuka).
+
+    Dibungkus _lock agar aman di server multi-thread: tanpa lock, dua request
+    bersamaan bisa sama-sama lolos SELECT lalu INSERT sehingga riwayat
+    percakapan terbelah/duplikat.
+    """
+    with _lock:
+        return _get_or_create_conversation(user_key, canonical_id, subject, paket,
+                                           nomor, title=title, create=create)
+
+
 def start_new_conversation(user_key, canonical_id, subject, paket, nomor, title=None):
     """Tutup percakapan aktif lama untuk soal ini lalu buat percakapan baru.
 
@@ -224,7 +241,7 @@ def start_new_conversation(user_key, canonical_id, subject, paket, nomor, title=
                 "WHERE user_key=? AND canonical_question_id=? AND status='active'",
                 (_now(), user_key, canonical_id),
             )
-        conv = get_or_create_conversation(
+        conv = _get_or_create_conversation(  # lock sudah dipegang di atas
             user_key, canonical_id, subject, paket, nomor, title=title, create=True)
     return conv
 
