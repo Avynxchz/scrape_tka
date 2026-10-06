@@ -1,205 +1,1539 @@
 {
+  "schema_version": "1.0",
   "slug": "fisika_paket_1",
+  "subject": "Fisika",
+  "package": 1,
+  "total_questions": 20,
+  "source": {
+    "raw_scrape": "data/fisika/paket_1/fisika_paket_1.json",
+    "official_key_evidence": "data/kunci/fisika_paket_1_kunci.json",
+    "official_key_scraped_at": "2026-09-26 13:06:30",
+    "learning_reference": "data/fisika_paket_1_learning.json",
+    "extraction": "deterministic structured extraction (data-latex + source text); no OCR"
+  },
   "questions": [
     {
-      "id": "fisika_paket_1_q01",
-      "number": 1,
-      "stimulus": "",
-      "question": "Dua orang mencoba cara yang berbeda untuk menembak sasaran pada titik C. Orang pertama menggunakan bola A dan diletakkan di tepi meja. Orang kedua menggunakan bola B yang berada di lantai. Bola A dan B kemudian dihentakkan secara bersamaan pada arah mendatar (g = 10 m.s-2 dan gesekan diabaikan).\nTernyata kedua bola sampai dan mengenai sasaran di titik C secara bersamaan.\nApa saja kondisi awal yang dapat menyebabkan hal tersebut?\nPilihlah Benar atau Salah untuk setiap kondisi berikut.\nKeterangan: Gesekan antara bola dengan lantai, permukaan meja, maupun udara diabaikan.\n#\nKondisi\nBenar\nSalah\nA.\nMassa bola A dan bola B sama.\nB.\nPosisi bola A saat itu adalah 0,8 m di atas tanah.\nC.\nBola B dihentakkan dengan kecepatan awal sebesar 10 m.s\n-1",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q01",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 1,
+      "source_id": "soal-no-1",
+      "type": "BS",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Dua orang mencoba cara yang berbeda untuk menembak sasaran pada titik C. Orang pertama menggunakan bola A dan diletakkan di tepi meja. Orang kedua menggunakan bola B yang berada di lantai. Bola A dan B kemudian dihentakkan secara bersamaan pada arah mendatar (g = 10 m.s-2 dan gesekan diabaikan).\nTernyata kedua bola sampai dan mengenai sasaran di titik C secara bersamaan.\nApa saja kondisi awal yang dapat menyebabkan hal tersebut?\nPilihlah Benar atau Salah untuk setiap kondisi berikut.\nKeterangan: Gesekan antara bola dengan lantai, permukaan meja, maupun udara diabaikan.\n[Diagram — 01896_46d4c32348c2dd427b14f92222413698.png]: Transkripsi visual otomatis untuk 01896_46d4c32348c2dd427b14f92222413698.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "01896_46d4c32348c2dd427b14f92222413698.png",
+          "rel_path": "images/01896_46d4c32348c2dd427b14f92222413698.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/01896_46d4c32348c2dd427b14f92222413698.png",
+          "role": "question"
+        }
+      ],
+      "statements": [
+        {
+          "key": "A",
+          "text": "Massa bola A dan bola B sama.",
+          "display": "Massa bola A dan bola B sama."
+        },
+        {
+          "key": "B",
+          "text": "Posisi bola A saat itu adalah 0,8 m di atas tanah.",
+          "display": "Posisi bola A saat itu adalah 0,8 m di atas tanah."
+        },
+        {
+          "key": "C",
+          "text": "Bola B dihentakkan dengan kecepatan awal sebesar 10 m.s -1",
+          "display": "Bola B dihentakkan dengan kecepatan awal sebesar 10 m.s -1"
+        }
+      ],
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/01896_46d4c32348c2dd427b14f92222413698.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 01896_46d4c32348c2dd427b14f92222413698.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "01896_46d4c32348c2dd427b14f92222413698.png",
+          "rel_path": "images/01896_46d4c32348c2dd427b14f92222413698.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/01896_46d4c32348c2dd427b14f92222413698.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "per_statement",
+        "statements": {
+          "A": "Salah",
+          "B": "Benar",
+          "C": "Salah"
+        }
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q02",
-      "number": 2,
-      "stimulus": "",
-      "question": "Sebuah meja pembuat perkakas keramik dapat berputar secara horizontal terhadap titik tengah dan di atas meja tersebut terdapat sebuah beban seperti pada gambar.\nMeja berputar dengan kecepatan sudut 4 rad.s–1 dan koefisien gesekan statis antara beban dan permukaan meja 0,48 (percepatan gravitasi bumi 10 m.s–2).\nDimana sajakah beban dapat diletakkan agar beban tersebut tidak terlempar dari meja?\nPilihlah setiap jarak berikut. Jarak (nilai R) tersebut dihitung dari pusat meja.\nJawaban benar lebih dari satu.\n8 cm\n16 cm\n24 cm\n30 cm\n40 cm",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q02",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 2,
+      "source_id": "soal-no-2",
+      "type": "PGK",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Sebuah meja pembuat perkakas keramik dapat berputar secara horizontal terhadap titik tengah dan di atas meja tersebut terdapat sebuah beban seperti pada gambar.\nMeja berputar dengan kecepatan sudut 4 rad.s–1 dan koefisien gesekan statis antara beban dan permukaan meja 0,48 (percepatan gravitasi bumi 10 m.s–2).\nDimana sajakah beban dapat diletakkan agar beban tersebut tidak terlempar dari meja?\nPilihlah setiap jarak berikut. Jarak (nilai R) tersebut dihitung dari pusat meja.\nJawaban benar lebih dari satu.\n[Diagram — 24342_437570c801e52163e79a6c9d0379704a.png]: Transkripsi visual otomatis untuk 24342_437570c801e52163e79a6c9d0379704a.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "24342_437570c801e52163e79a6c9d0379704a.png",
+          "rel_path": "images/24342_437570c801e52163e79a6c9d0379704a.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/24342_437570c801e52163e79a6c9d0379704a.png",
+          "role": "question"
+        }
+      ],
+      "options": {
+        "A": "8 cm",
+        "B": "16 cm",
+        "C": "24 cm",
+        "D": "30 cm",
+        "E": "40 cm"
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/24342_437570c801e52163e79a6c9d0379704a.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 24342_437570c801e52163e79a6c9d0379704a.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "24342_437570c801e52163e79a6c9d0379704a.png",
+          "rel_path": "images/24342_437570c801e52163e79a6c9d0379704a.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/24342_437570c801e52163e79a6c9d0379704a.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q03",
-      "number": 3,
-      "stimulus": "",
-      "question": "Perhatikan gambar peristiwa tumbukan antara mobil boks dan mobil sedan berikut ini.\nSetelah bertumbukan, kedua mobil bergerak menjadi satu dalam keadaan mobil boks mendorong mobil sedan.\nApa sajakah kondisi yang terpenuhi saat proses maupun setelah tumbukan?\nPilihlah Benar atau Salah untuk kondisi berikut!\n#\nKondisi\nBenar\nSalah\nA.\nSetelah tumbukan, kecepatan kedua mobil itu sama besar.\nB.\nMomentum kedua mobil sebelum tumbukan lebih besar daripada sesudah tumbukan.\nC.\nKoefisien restitusi tumbukan bernilai nol.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q03",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 3,
+      "source_id": "soal-no-3",
+      "type": "BS",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Perhatikan gambar peristiwa tumbukan antara mobil boks dan mobil sedan berikut ini.\nSetelah bertumbukan, kedua mobil bergerak menjadi satu dalam keadaan mobil boks mendorong mobil sedan.\nApa sajakah kondisi yang terpenuhi saat proses maupun setelah tumbukan?\nPilihlah Benar atau Salah untuk kondisi berikut!\n[Diagram — 89639_0365f6f2126396bb3220ae607ae0c92a.png]: Transkripsi visual otomatis untuk 89639_0365f6f2126396bb3220ae607ae0c92a.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "89639_0365f6f2126396bb3220ae607ae0c92a.png",
+          "rel_path": "images/89639_0365f6f2126396bb3220ae607ae0c92a.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/89639_0365f6f2126396bb3220ae607ae0c92a.png",
+          "role": "question"
+        }
+      ],
+      "statements": [
+        {
+          "key": "A",
+          "text": "Setelah tumbukan, kecepatan kedua mobil itu sama besar.",
+          "display": "Setelah tumbukan, kecepatan kedua mobil itu sama besar."
+        },
+        {
+          "key": "B",
+          "text": "Momentum kedua mobil sebelum tumbukan lebih besar daripada sesudah tumbukan.",
+          "display": "Momentum kedua mobil sebelum tumbukan lebih besar daripada sesudah tumbukan."
+        },
+        {
+          "key": "C",
+          "text": "Koefisien restitusi tumbukan bernilai nol.",
+          "display": "Koefisien restitusi tumbukan bernilai nol."
+        }
+      ],
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/89639_0365f6f2126396bb3220ae607ae0c92a.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 89639_0365f6f2126396bb3220ae607ae0c92a.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "89639_0365f6f2126396bb3220ae607ae0c92a.png",
+          "rel_path": "images/89639_0365f6f2126396bb3220ae607ae0c92a.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/89639_0365f6f2126396bb3220ae607ae0c92a.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "per_statement",
+        "statements": {
+          "A": "Benar",
+          "B": "Salah",
+          "C": null
+        },
+        "evidence_gap": [
+          "C"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q04",
-      "number": 4,
-      "stimulus": "",
-      "question": "Seorang pengendara motor (PM) mengendarai motornya dengan kecepatan tertentu berada pada satu garis lurus dengan mobil ambulans (MA) yang saat itu membunyikan sirine dengan frekuensi tertentu yang juga bergerak dengan kecepatan tertentu. Saat itu nilai kecepatan gerak PM lebih kecil dari MA.\nPada kondisi apa sajakah pengendara motor akan mendengar bunyi sirine ambulans dengan frekuensi bunyi lebih besar dari kondisi awalnya?\nKlik pada setiap kondisi yang benar. Jawaban benar lebih dari satu.\nPM bergerak mendekati MA, MA bergerak mendekati PM\nPM bergerak menjauhi MA, MA bergerak mendekati PM\nPM diam, MA bergerak mendekati PM\nPM bergerak mendekati MA, MA bergerak menjauhi PM\nPM bergerak menjauhi MA, MA diam",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q04",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 4,
+      "source_id": "soal-no-4",
+      "type": "PGK",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Seorang pengendara motor (PM) mengendarai motornya dengan kecepatan tertentu berada pada satu garis lurus dengan mobil ambulans (MA) yang saat itu membunyikan sirine dengan frekuensi tertentu yang juga bergerak dengan kecepatan tertentu. Saat itu nilai kecepatan gerak PM lebih kecil dari MA.\nPada kondisi apa sajakah pengendara motor akan mendengar bunyi sirine ambulans dengan frekuensi bunyi lebih besar dari kondisi awalnya?\nKlik pada setiap kondisi yang benar. Jawaban benar lebih dari satu.",
+      "question_images": [],
+      "options": {
+        "A": "PM bergerak mendekati MA, MA bergerak mendekati PM",
+        "B": "PM bergerak menjauhi MA, MA bergerak mendekati PM",
+        "C": "PM diam, MA bergerak mendekati PM",
+        "D": "PM bergerak mendekati MA, MA bergerak menjauhi PM",
+        "E": "PM bergerak menjauhi MA, MA diam"
+      },
+      "visual_context": {
+        "description": "No visual elements in this question.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [],
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "A",
+          "B",
+          "C"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q05",
-      "number": 5,
-      "stimulus": "",
-      "question": "Perhatikan gambar berikut!\nSeorang siswa yang tingginya 160 cm berdiri di depan cermin cembung yang mempunyai jarak fokus 16 cm. Dia mengamati bayangan dirinya dalam cermin cembung. Dia melangkah mundur menjauhi cermin sejauh 16 cm, dia kembali melihat bayangan dirinya di cermin. Perbandingan tinggi bayangan sebelum dan sesudah siswa tersebut bergeser adalah ....\n1 : 2\n2 : 3\n3 : 4\n4 : 5\n5 : 4",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q05",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 5,
+      "source_id": "soal-no-5",
+      "type": "PG",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Perhatikan gambar berikut!\nSeorang siswa yang tingginya 160 cm berdiri di depan cermin cembung yang mempunyai jarak fokus 16 cm. Dia mengamati bayangan dirinya dalam cermin cembung. Dia melangkah mundur menjauhi cermin sejauh 16 cm, dia kembali melihat bayangan dirinya di cermin. Perbandingan tinggi bayangan sebelum dan sesudah siswa tersebut bergeser adalah ....\n[Diagram — 93293_75cf9078fd8375cbac9f01d0df41132b.png]: Transkripsi visual otomatis untuk 93293_75cf9078fd8375cbac9f01d0df41132b.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "93293_75cf9078fd8375cbac9f01d0df41132b.png",
+          "rel_path": "images/93293_75cf9078fd8375cbac9f01d0df41132b.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/93293_75cf9078fd8375cbac9f01d0df41132b.png",
+          "role": "question"
+        }
+      ],
+      "options": {
+        "A": "1 : 2",
+        "B": "2 : 3",
+        "C": "3 : 4",
+        "D": "4 : 5",
+        "E": "5 : 4"
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/93293_75cf9078fd8375cbac9f01d0df41132b.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 93293_75cf9078fd8375cbac9f01d0df41132b.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "93293_75cf9078fd8375cbac9f01d0df41132b.png",
+          "rel_path": "images/93293_75cf9078fd8375cbac9f01d0df41132b.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/93293_75cf9078fd8375cbac9f01d0df41132b.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "E"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q06",
-      "number": 6,
-      "stimulus": "",
-      "question": "Di sebuah laboratorium fisika, dua benda kecil bermuatan listrik diletakkan di atas meja isolator. Peneliti dapat mengatur jarak antara kedua benda menggunakan penggeser, lalu mengukur gaya listrik yang timbul dengan sensor gaya digital.\nHasil percobaan kemudian ditampilkan dalam grafik hubungan antara gaya listrik (F) terhadap jarak antar kedua benda (R) berikut ini:\nDiketahui bahwa muatan pada benda pertama selalu dua kali lebih besar daripada muatan pada benda kedua dan percobaan dilakukan di udara (anggap sama dengan ruang hampa), dengan konstanta Coulomb k = 9.109 Nm2.C-2. Berapakah besar masing-masing muatan listrik tersebut?",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q06",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 6,
+      "source_id": "soal-no-6",
+      "type": "PG",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Di sebuah laboratorium fisika, dua benda kecil bermuatan listrik diletakkan di atas meja isolator. Peneliti dapat mengatur jarak antara kedua benda menggunakan penggeser, lalu mengukur gaya listrik yang timbul dengan sensor gaya digital.\nHasil percobaan kemudian ditampilkan dalam grafik hubungan antara gaya listrik (F) terhadap jarak antar kedua benda (R) berikut ini:\nDiketahui bahwa muatan pada benda pertama selalu dua kali lebih besar daripada muatan pada benda kedua dan percobaan dilakukan di udara (anggap sama dengan ruang hampa), dengan konstanta Coulomb k = 9.109 Nm2.C-2. Berapakah besar masing-masing muatan listrik tersebut?\n[Graph — 16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png]: Transkripsi visual otomatis untuk 16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png",
+          "rel_path": "images/16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png",
+          "role": "question"
+        }
+      ],
+      "options": {
+        "A": "${q}_{1}\\, =\\, 0,1\\, .\\, {10}^{-6}\\, C;\\, {q}_{2}\\, =\\, 0,2\\, .\\, {10}^{-6}\\, C$",
+        "B": "${q}_{1}\\, =\\, 0,2\\, .\\, {10}^{-6}\\, C;\\, {q}_{2}\\, =\\, 0,1\\, .\\, {10}^{-6}\\, C$",
+        "C": "${q}_{1}\\, =\\, 1,0\\, .\\, {10}^{-6}\\, C;\\, {q}_{2}\\, =\\, 0,5\\, .\\, {10}^{-6}\\, C$",
+        "D": "${q}_{1}\\, =\\, 2,0\\, .\\, {10}^{-6}\\, C;\\, {q}_{2}\\, =\\, 1,0\\, .\\, {10}^{-6}\\, C$",
+        "E": "${q}_{1}\\, =\\, 3,0\\, .\\, {10}^{-6}\\, C;\\, {q}_{2}\\, =\\, 1,5\\, .\\, {10}^{-6}\\, C$"
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [
+          {
+            "image": "images/16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "diagrams": [],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png",
+          "rel_path": "images/16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/16247_cc06d5de91a5d3d1aa4788ea3c0cf046.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q07",
-      "number": 7,
-      "stimulus": "",
-      "question": "Suatu rangkaian listrik lampu warna-warni menggunakan lampu dengan resistansi tertulis pada bagian lampu.\nWarna Lampu\nPembacaan\nLampu tersebut memiliki resistansi 15 ohm\nLampu-lampu tersebut dipasang dan dihubungkan dengan dua buah sumber tegangan seperti pada gambar.\nJika lampu\ndiganti dengan lampu berwarna kuning dengan resistansi\n. Apakah yang terjadi dengan rangkaian lampu sekarang?\nPilihlah “lebih besar”, “lebih kecil”, atau “tetap” untuk setiap besaran fisis pada rangkaian.\n#\nBesaran fisis\nLebih besar\nLebih kecil\nTetap\nA.\nResistansi pengganti rangkaian.\nB.\nKuat arus yang mengalir pada rangkaian.\nC.\nDaya yang bekerja pada lampu\n.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q07",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 7,
+      "source_id": "soal-no-7",
+      "type": "LABEL",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Suatu rangkaian listrik lampu warna-warni menggunakan lampu dengan resistansi tertulis pada bagian lampu.\nWarna Lampu\nPembacaan\nLampu tersebut memiliki resistansi 15 ohm\nLampu-lampu tersebut dipasang dan dihubungkan dengan dua buah sumber tegangan seperti pada gambar.\nJika lampu\ndiganti dengan lampu berwarna kuning dengan resistansi\n. Apakah yang terjadi dengan rangkaian lampu sekarang?\nPilihlah “lebih besar”, “lebih kecil”, atau “tetap” untuk setiap besaran fisis pada rangkaian.\n[Formula — 26776_63f2c45072a60b2922a023ddccb28332.png]: Transkripsi visual otomatis untuk 26776_63f2c45072a60b2922a023ddccb28332.png: Memuat elemen diagram/skema pendukung soal. [Diagram — 26776_c6c52899188ed5beee95412a5cec44eb.png]: Transkripsi visual otomatis untuk 26776_c6c52899188ed5beee95412a5cec44eb.png: Memuat elemen diagram/skema pendukung soal. [Formula — 26776_f15f6709a998270456c1166392cc8c0e.png]: Transkripsi visual otomatis untuk 26776_f15f6709a998270456c1166392cc8c0e.png: Memuat elemen diagram/skema pendukung soal. [Formula — 26776_2af2c83de9870eb7b5423e1a976b13a2.png]: Transkripsi visual otomatis untuk 26776_2af2c83de9870eb7b5423e1a976b13a2.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "26776_63f2c45072a60b2922a023ddccb28332.png",
+          "rel_path": "images/26776_63f2c45072a60b2922a023ddccb28332.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/26776_63f2c45072a60b2922a023ddccb28332.png",
+          "role": "question"
+        },
+        {
+          "filename": "26776_c6c52899188ed5beee95412a5cec44eb.png",
+          "rel_path": "images/26776_c6c52899188ed5beee95412a5cec44eb.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/26776_c6c52899188ed5beee95412a5cec44eb.png",
+          "role": "question"
+        },
+        {
+          "filename": "26776_f15f6709a998270456c1166392cc8c0e.png",
+          "rel_path": "images/26776_f15f6709a998270456c1166392cc8c0e.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/26776_f15f6709a998270456c1166392cc8c0e.png",
+          "role": "question"
+        },
+        {
+          "filename": "26776_2af2c83de9870eb7b5423e1a976b13a2.png",
+          "rel_path": "images/26776_2af2c83de9870eb7b5423e1a976b13a2.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/26776_2af2c83de9870eb7b5423e1a976b13a2.png",
+          "role": "question"
+        }
+      ],
+      "statements": [
+        {
+          "key": "A",
+          "text": "Resistansi pengganti rangkaian.",
+          "display": "Resistansi pengganti rangkaian."
+        },
+        {
+          "key": "B",
+          "text": "Kuat arus yang mengalir pada rangkaian.",
+          "display": "Kuat arus yang mengalir pada rangkaian."
+        },
+        {
+          "key": "C",
+          "text": "Daya yang bekerja pada lampu .",
+          "image": {
+            "filename": "26776_340125c939274c997695c4c041621f77.png",
+            "rel_path": "images/26776_340125c939274c997695c4c041621f77.png"
+          },
+          "display": "Daya yang bekerja pada lampu . [Formula — 26776_340125c939274c997695c4c041621f77.png]: Transkripsi visual otomatis untuk 26776_340125c939274c997695c4c041621f77.png: Memuat elemen diagram/skema pendukung soal."
+        }
+      ],
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/26776_c6c52899188ed5beee95412a5cec44eb.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 26776_c6c52899188ed5beee95412a5cec44eb.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [
+          {
+            "image": "images/26776_63f2c45072a60b2922a023ddccb28332.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 26776_63f2c45072a60b2922a023ddccb28332.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/26776_f15f6709a998270456c1166392cc8c0e.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 26776_f15f6709a998270456c1166392cc8c0e.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/26776_2af2c83de9870eb7b5423e1a976b13a2.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 26776_2af2c83de9870eb7b5423e1a976b13a2.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/26776_340125c939274c997695c4c041621f77.png",
+            "location": "statement C",
+            "description": "Transkripsi visual otomatis untuk 26776_340125c939274c997695c4c041621f77.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "26776_63f2c45072a60b2922a023ddccb28332.png",
+          "rel_path": "images/26776_63f2c45072a60b2922a023ddccb28332.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/26776_63f2c45072a60b2922a023ddccb28332.png",
+          "role": "question"
+        },
+        {
+          "filename": "26776_c6c52899188ed5beee95412a5cec44eb.png",
+          "rel_path": "images/26776_c6c52899188ed5beee95412a5cec44eb.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/26776_c6c52899188ed5beee95412a5cec44eb.png",
+          "role": "question"
+        },
+        {
+          "filename": "26776_f15f6709a998270456c1166392cc8c0e.png",
+          "rel_path": "images/26776_f15f6709a998270456c1166392cc8c0e.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/26776_f15f6709a998270456c1166392cc8c0e.png",
+          "role": "question"
+        },
+        {
+          "filename": "26776_2af2c83de9870eb7b5423e1a976b13a2.png",
+          "rel_path": "images/26776_2af2c83de9870eb7b5423e1a976b13a2.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/26776_2af2c83de9870eb7b5423e1a976b13a2.png",
+          "role": "question"
+        },
+        {
+          "filename": "26776_340125c939274c997695c4c041621f77.png",
+          "rel_path": "images/26776_340125c939274c997695c4c041621f77.png",
+          "remote_url": null,
+          "role": "statement C"
+        }
+      ],
+      "official_answer": {
+        "format": "per_statement",
+        "statements": {
+          "A": "Lebih kecil",
+          "B": "Lebih besar",
+          "C": "Lebih besar"
+        }
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q08",
-      "number": 8,
-      "stimulus": "",
-      "question": "Perhatikan gambar pipa U berikut ini!\nPipa U mula-mula diisi dengan air yang massa jenisnya 1000 kg.m‑3 kemudian pada salah satu ujung pipa dituangkan zat cair X. Zat cair X tidak bercampur dengan air dan interaksi seluruh zat cair dengan dinding pipa U diabaikan.\nJika pipa U dalam keadaan setimbang dengan tinggi zat cair X adalah 12 cm dan tinggi air 8 cm, berapa massa jenis zat X?\n666,7 kg.m‑3\n750,0 kg.m‑3\n800,0 kg.m‑3\n850,5 kg.m‑3\n900,0 kg.m‑3",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q08",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 8,
+      "source_id": "soal-no-8",
+      "type": "PG",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Perhatikan gambar pipa U berikut ini!\nPipa U mula-mula diisi dengan air yang massa jenisnya 1000 kg.m‑3 kemudian pada salah satu ujung pipa dituangkan zat cair X. Zat cair X tidak bercampur dengan air dan interaksi seluruh zat cair dengan dinding pipa U diabaikan.\nJika pipa U dalam keadaan setimbang dengan tinggi zat cair X adalah 12 cm dan tinggi air 8 cm, berapa massa jenis zat X?\n[Diagram — 28914_375257aca64731035c6b292e7968d33d.png]: Transkripsi visual otomatis untuk 28914_375257aca64731035c6b292e7968d33d.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "28914_375257aca64731035c6b292e7968d33d.png",
+          "rel_path": "images/28914_375257aca64731035c6b292e7968d33d.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/28914_375257aca64731035c6b292e7968d33d.png",
+          "role": "question"
+        }
+      ],
+      "options": {
+        "A": "666,7 kg.m‑3",
+        "B": "750,0 kg.m‑3",
+        "C": "800,0 kg.m‑3",
+        "D": "850,5 kg.m‑3",
+        "E": "900,0 kg.m‑3"
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/28914_375257aca64731035c6b292e7968d33d.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 28914_375257aca64731035c6b292e7968d33d.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "28914_375257aca64731035c6b292e7968d33d.png",
+          "rel_path": "images/28914_375257aca64731035c6b292e7968d33d.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/28914_375257aca64731035c6b292e7968d33d.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q09",
-      "number": 9,
-      "stimulus": "",
-      "question": "Sayap suatu pesawat terbang mainan mempunyai luas\ndan udara yang mengalir horizontal melalui sayap pesawat terbang sehingga kecepatan di bagian atas sayap pesawat\ndan bagian bawah sayap\n.\nMassa jenis udara pada saat itu sebesar\n, maka besarnya gaya angkat pesawat terbang adalah....\n4.515 N\n3.000 N\n1.515 N\n515 N\n0 N",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q09",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 9,
+      "source_id": "soal-no-9",
+      "type": "PG",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Sayap suatu pesawat terbang mainan mempunyai luas\ndan udara yang mengalir horizontal melalui sayap pesawat terbang sehingga kecepatan di bagian atas sayap pesawat\ndan bagian bawah sayap\n.\nMassa jenis udara pada saat itu sebesar\n, maka besarnya gaya angkat pesawat terbang adalah....\n${10\\, m}^{2}$ ${40\\, m.s}^{-1}$ ${30\\, m.s}^{-1}$ [Diagram — 41778_f7f5318b60f8c3ab8b141a077cc633f7.png]: Transkripsi visual otomatis untuk 41778_f7f5318b60f8c3ab8b141a077cc633f7.png: Memuat elemen diagram/skema pendukung soal. ${1,29\\, kg.m}^{-3}$",
+      "question_images": [
+        {
+          "filename": "41778_e17d19b36c47aa54e28a5b9fb9e4fcc4.png",
+          "rel_path": "images/41778_e17d19b36c47aa54e28a5b9fb9e4fcc4.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/41778_e17d19b36c47aa54e28a5b9fb9e4fcc4.png",
+          "role": "question",
+          "data_latex": "{10\\, m}^{2}"
+        },
+        {
+          "filename": "41778_101340832f0d58d8ae8b4ed70f43a1af.png",
+          "rel_path": "images/41778_101340832f0d58d8ae8b4ed70f43a1af.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/41778_101340832f0d58d8ae8b4ed70f43a1af.png",
+          "role": "question",
+          "data_latex": "{40\\, m.s}^{-1}"
+        },
+        {
+          "filename": "41778_04cddba03be07e712dfac7323bc3cddc.png",
+          "rel_path": "images/41778_04cddba03be07e712dfac7323bc3cddc.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/41778_04cddba03be07e712dfac7323bc3cddc.png",
+          "role": "question",
+          "data_latex": "{30\\, m.s}^{-1}"
+        },
+        {
+          "filename": "41778_f7f5318b60f8c3ab8b141a077cc633f7.png",
+          "rel_path": "images/41778_f7f5318b60f8c3ab8b141a077cc633f7.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/41778_f7f5318b60f8c3ab8b141a077cc633f7.png",
+          "role": "question"
+        },
+        {
+          "filename": "41778_19b167be0233ad973a2e73303195bbc9.png",
+          "rel_path": "images/41778_19b167be0233ad973a2e73303195bbc9.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/41778_19b167be0233ad973a2e73303195bbc9.png",
+          "role": "question",
+          "data_latex": "{1,29\\, kg.m}^{-3}"
+        }
+      ],
+      "options": {
+        "A": "4.515 N",
+        "B": "3.000 N",
+        "C": "1.515 N",
+        "D": "515 N",
+        "E": "0 N"
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [
+          {
+            "latex": "{10\\, m}^{2}",
+            "image": "images/41778_e17d19b36c47aa54e28a5b9fb9e4fcc4.png",
+            "location": "question",
+            "source": "official data-latex"
+          },
+          {
+            "latex": "{40\\, m.s}^{-1}",
+            "image": "images/41778_101340832f0d58d8ae8b4ed70f43a1af.png",
+            "location": "question",
+            "source": "official data-latex"
+          },
+          {
+            "latex": "{30\\, m.s}^{-1}",
+            "image": "images/41778_04cddba03be07e712dfac7323bc3cddc.png",
+            "location": "question",
+            "source": "official data-latex"
+          },
+          {
+            "latex": "{1,29\\, kg.m}^{-3}",
+            "image": "images/41778_19b167be0233ad973a2e73303195bbc9.png",
+            "location": "question",
+            "source": "official data-latex"
+          }
+        ],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/41778_f7f5318b60f8c3ab8b141a077cc633f7.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 41778_f7f5318b60f8c3ab8b141a077cc633f7.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "41778_e17d19b36c47aa54e28a5b9fb9e4fcc4.png",
+          "rel_path": "images/41778_e17d19b36c47aa54e28a5b9fb9e4fcc4.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/41778_e17d19b36c47aa54e28a5b9fb9e4fcc4.png",
+          "role": "question",
+          "data_latex": "{10\\, m}^{2}"
+        },
+        {
+          "filename": "41778_101340832f0d58d8ae8b4ed70f43a1af.png",
+          "rel_path": "images/41778_101340832f0d58d8ae8b4ed70f43a1af.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/41778_101340832f0d58d8ae8b4ed70f43a1af.png",
+          "role": "question",
+          "data_latex": "{40\\, m.s}^{-1}"
+        },
+        {
+          "filename": "41778_04cddba03be07e712dfac7323bc3cddc.png",
+          "rel_path": "images/41778_04cddba03be07e712dfac7323bc3cddc.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/41778_04cddba03be07e712dfac7323bc3cddc.png",
+          "role": "question",
+          "data_latex": "{30\\, m.s}^{-1}"
+        },
+        {
+          "filename": "41778_f7f5318b60f8c3ab8b141a077cc633f7.png",
+          "rel_path": "images/41778_f7f5318b60f8c3ab8b141a077cc633f7.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/41778_f7f5318b60f8c3ab8b141a077cc633f7.png",
+          "role": "question"
+        },
+        {
+          "filename": "41778_19b167be0233ad973a2e73303195bbc9.png",
+          "rel_path": "images/41778_19b167be0233ad973a2e73303195bbc9.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/41778_19b167be0233ad973a2e73303195bbc9.png",
+          "role": "question",
+          "data_latex": "{1,29\\, kg.m}^{-3}"
+        }
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q10",
-      "number": 10,
-      "stimulus": "",
-      "question": "Balok P yang memiliki volume\nterapung di atas suatu zat cair\ndengan 1/2 bagian balok muncul di atas permukaan zat cair seperti gambar. Balok P kemudian diikat dengan balok Q menggunakan tali yang massanya diabaikan dan dimasukkan ke dalam zat cair yang sama.\nMassa jenis balok\n, massa balok Q yang dibutuhkan agar balok gabungan melayang di dalam zat cair tersebut adalah....\n50 g\n130 g\n195 g\n395 g\n520 g",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q10",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 10,
+      "source_id": "soal-no-10",
+      "type": "PG",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Balok P yang memiliki volume\nterapung di atas suatu zat cair\ndengan 1/2 bagian balok muncul di atas permukaan zat cair seperti gambar. Balok P kemudian diikat dengan balok Q menggunakan tali yang massanya diabaikan dan dimasukkan ke dalam zat cair yang sama.\nMassa jenis balok\n, massa balok Q yang dibutuhkan agar balok gabungan melayang di dalam zat cair tersebut adalah....\n${200\\, cm}^{3}$ $\\left ( {{\\rho }_{c}={1,3\\, g.cm}^{-3}} \\right )$ [Formula — 66560_16e4fd3893961592d67554619b8684e5.png]: Transkripsi visual otomatis untuk 66560_16e4fd3893961592d67554619b8684e5.png: Memuat elemen diagram/skema pendukung soal. ${Q\\, =\\, 3,9\\, g.cm}^{-3}$",
+      "question_images": [
+        {
+          "filename": "66560_aea7a85d9f667a69b388f6d609be4375.png",
+          "rel_path": "images/66560_aea7a85d9f667a69b388f6d609be4375.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66560_aea7a85d9f667a69b388f6d609be4375.png",
+          "role": "question",
+          "data_latex": "{200\\, cm}^{3}"
+        },
+        {
+          "filename": "66560_af03c2ad5c8171a3c2e754880969c877.png",
+          "rel_path": "images/66560_af03c2ad5c8171a3c2e754880969c877.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66560_af03c2ad5c8171a3c2e754880969c877.png",
+          "role": "question",
+          "data_latex": "\\left ( {{\\rho }_{c}={1,3\\, g.cm}^{-3}} \\right )"
+        },
+        {
+          "filename": "66560_16e4fd3893961592d67554619b8684e5.png",
+          "rel_path": "images/66560_16e4fd3893961592d67554619b8684e5.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66560_16e4fd3893961592d67554619b8684e5.png",
+          "role": "question"
+        },
+        {
+          "filename": "66560_fac033236b27e0e9d59b111734029ee1.png",
+          "rel_path": "images/66560_fac033236b27e0e9d59b111734029ee1.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66560_fac033236b27e0e9d59b111734029ee1.png",
+          "role": "question",
+          "data_latex": "{Q\\, =\\, 3,9\\, g.cm}^{-3}"
+        }
+      ],
+      "options": {
+        "A": "50 g",
+        "B": "130 g",
+        "C": "195 g",
+        "D": "395 g",
+        "E": "520 g"
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [
+          {
+            "latex": "{200\\, cm}^{3}",
+            "image": "images/66560_aea7a85d9f667a69b388f6d609be4375.png",
+            "location": "question",
+            "source": "official data-latex"
+          },
+          {
+            "latex": "\\left ( {{\\rho }_{c}={1,3\\, g.cm}^{-3}} \\right )",
+            "image": "images/66560_af03c2ad5c8171a3c2e754880969c877.png",
+            "location": "question",
+            "source": "official data-latex"
+          },
+          {
+            "latex": "{Q\\, =\\, 3,9\\, g.cm}^{-3}",
+            "image": "images/66560_fac033236b27e0e9d59b111734029ee1.png",
+            "location": "question",
+            "source": "official data-latex"
+          }
+        ],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [],
+        "others": [
+          {
+            "image": "images/66560_16e4fd3893961592d67554619b8684e5.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 66560_16e4fd3893961592d67554619b8684e5.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "66560_aea7a85d9f667a69b388f6d609be4375.png",
+          "rel_path": "images/66560_aea7a85d9f667a69b388f6d609be4375.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66560_aea7a85d9f667a69b388f6d609be4375.png",
+          "role": "question",
+          "data_latex": "{200\\, cm}^{3}"
+        },
+        {
+          "filename": "66560_af03c2ad5c8171a3c2e754880969c877.png",
+          "rel_path": "images/66560_af03c2ad5c8171a3c2e754880969c877.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66560_af03c2ad5c8171a3c2e754880969c877.png",
+          "role": "question",
+          "data_latex": "\\left ( {{\\rho }_{c}={1,3\\, g.cm}^{-3}} \\right )"
+        },
+        {
+          "filename": "66560_16e4fd3893961592d67554619b8684e5.png",
+          "rel_path": "images/66560_16e4fd3893961592d67554619b8684e5.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66560_16e4fd3893961592d67554619b8684e5.png",
+          "role": "question"
+        },
+        {
+          "filename": "66560_fac033236b27e0e9d59b111734029ee1.png",
+          "rel_path": "images/66560_fac033236b27e0e9d59b111734029ee1.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66560_fac033236b27e0e9d59b111734029ee1.png",
+          "role": "question",
+          "data_latex": "{Q\\, =\\, 3,9\\, g.cm}^{-3}"
+        }
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q11",
-      "number": 11,
-      "stimulus": "",
-      "question": "Pada suatu percobaan, kecepatan sebuah benda diamati selama 4 sekon dan tabel berikut menunjukkan data kecepatan benda tersebut.\nJika gerak benda tersebut disajikan ke dalam grafik berbagai besaran terhadap waktu, mana sajakah grafik yang tepat?\nPilihlah jawaban yang benar! Jawaban benar lebih dari satu.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q11",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 11,
+      "source_id": "soal-no-11",
+      "type": "PGK",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Pada suatu percobaan, kecepatan sebuah benda diamati selama 4 sekon dan tabel berikut menunjukkan data kecepatan benda tersebut.\nJika gerak benda tersebut disajikan ke dalam grafik berbagai besaran terhadap waktu, mana sajakah grafik yang tepat?\nPilihlah jawaban yang benar! Jawaban benar lebih dari satu.\n[Table — 50068_273d97dead1978bd7ab5127f4a041111.png]: Transkripsi visual otomatis untuk 50068_273d97dead1978bd7ab5127f4a041111.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "50068_273d97dead1978bd7ab5127f4a041111.png",
+          "rel_path": "images/50068_273d97dead1978bd7ab5127f4a041111.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/50068_273d97dead1978bd7ab5127f4a041111.png",
+          "role": "question"
+        }
+      ],
+      "options": {
+        "A": "[Table — 50068_ca40489487288966e3aaf7a02f64cc15.png]: Transkripsi visual otomatis untuk 50068_ca40489487288966e3aaf7a02f64cc15.png: Memuat elemen diagram/skema pendukung soal.",
+        "B": "[Table — 50068_4be097469ad6414657b07e3f4ecd2021.png]: Transkripsi visual otomatis untuk 50068_4be097469ad6414657b07e3f4ecd2021.png: Memuat elemen diagram/skema pendukung soal.",
+        "C": "[Table — 50068_1fa66841be7ebef98df0858b4b2bad2b.png]: Transkripsi visual otomatis untuk 50068_1fa66841be7ebef98df0858b4b2bad2b.png: Memuat elemen diagram/skema pendukung soal.",
+        "D": "[Table — 50068_eaa6d6451c454edb4b64645ae58f6247.png]: Transkripsi visual otomatis untuk 50068_eaa6d6451c454edb4b64645ae58f6247.png: Memuat elemen diagram/skema pendukung soal.",
+        "E": "[Table — 50068_3a3742a00d8095012ebd005df22c856a.png]: Transkripsi visual otomatis untuk 50068_3a3742a00d8095012ebd005df22c856a.png: Memuat elemen diagram/skema pendukung soal."
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [
+          {
+            "image": "images/50068_273d97dead1978bd7ab5127f4a041111.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 50068_273d97dead1978bd7ab5127f4a041111.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/50068_ca40489487288966e3aaf7a02f64cc15.png",
+            "location": "option A",
+            "description": "Transkripsi visual otomatis untuk 50068_ca40489487288966e3aaf7a02f64cc15.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/50068_4be097469ad6414657b07e3f4ecd2021.png",
+            "location": "option B",
+            "description": "Transkripsi visual otomatis untuk 50068_4be097469ad6414657b07e3f4ecd2021.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/50068_1fa66841be7ebef98df0858b4b2bad2b.png",
+            "location": "option C",
+            "description": "Transkripsi visual otomatis untuk 50068_1fa66841be7ebef98df0858b4b2bad2b.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/50068_eaa6d6451c454edb4b64645ae58f6247.png",
+            "location": "option D",
+            "description": "Transkripsi visual otomatis untuk 50068_eaa6d6451c454edb4b64645ae58f6247.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/50068_3a3742a00d8095012ebd005df22c856a.png",
+            "location": "option E",
+            "description": "Transkripsi visual otomatis untuk 50068_3a3742a00d8095012ebd005df22c856a.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "graphs": [],
+        "diagrams": [],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "50068_273d97dead1978bd7ab5127f4a041111.png",
+          "rel_path": "images/50068_273d97dead1978bd7ab5127f4a041111.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/50068_273d97dead1978bd7ab5127f4a041111.png",
+          "role": "question"
+        },
+        {
+          "filename": "50068_ca40489487288966e3aaf7a02f64cc15.png",
+          "rel_path": "images/50068_ca40489487288966e3aaf7a02f64cc15.png",
+          "remote_url": null,
+          "role": "option A"
+        },
+        {
+          "filename": "50068_4be097469ad6414657b07e3f4ecd2021.png",
+          "rel_path": "images/50068_4be097469ad6414657b07e3f4ecd2021.png",
+          "remote_url": null,
+          "role": "option B"
+        },
+        {
+          "filename": "50068_1fa66841be7ebef98df0858b4b2bad2b.png",
+          "rel_path": "images/50068_1fa66841be7ebef98df0858b4b2bad2b.png",
+          "remote_url": null,
+          "role": "option C"
+        },
+        {
+          "filename": "50068_eaa6d6451c454edb4b64645ae58f6247.png",
+          "rel_path": "images/50068_eaa6d6451c454edb4b64645ae58f6247.png",
+          "remote_url": null,
+          "role": "option D"
+        },
+        {
+          "filename": "50068_3a3742a00d8095012ebd005df22c856a.png",
+          "rel_path": "images/50068_3a3742a00d8095012ebd005df22c856a.png",
+          "remote_url": null,
+          "role": "option E"
+        }
+      ],
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "A",
+          "B"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q12",
-      "number": 12,
-      "stimulus": "",
-      "question": "Seorang pemain sirkus berjalan di atas seutas tali sambil memegang tongkat panjang yang ujung-ujungnya terkulai ke bawah. Gambar berikut ini memperlihatkan situasi tersebut.\nTongkat panjang yang terkulai ke bawah membantu pemain sirkus menjaga keseimbangan karena tongkat ….\nmemperbesar gaya berat sehingga pergerakan ke samping menjadi lebih lambat\nmenyebabkan pusat massa sistem berada di bawah titik tumpu yang membuat sistem seimbang\nmemperbesar gaya gesek antara kaki dan tali sehingga orang dapat bertahan lebih lama di tali\nmenarik tubuh ke bawah sehingga tubuh pemain sirkus tidak mudah terangkat\nmenambah gaya dorong ke depan agar pemain sirkus dapat lebih mudah dan cepat berjalan",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q12",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 12,
+      "source_id": "soal-no-12",
+      "type": "PG",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Seorang pemain sirkus berjalan di atas seutas tali sambil memegang tongkat panjang yang ujung-ujungnya terkulai ke bawah. Gambar berikut ini memperlihatkan situasi tersebut.\nTongkat panjang yang terkulai ke bawah membantu pemain sirkus menjaga keseimbangan karena tongkat ….\n[Diagram — 27198_48ac3029613d80a30c0d0659d26d6f90.png]: Transkripsi visual otomatis untuk 27198_48ac3029613d80a30c0d0659d26d6f90.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "27198_48ac3029613d80a30c0d0659d26d6f90.png",
+          "rel_path": "images/27198_48ac3029613d80a30c0d0659d26d6f90.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/27198_48ac3029613d80a30c0d0659d26d6f90.png",
+          "role": "question"
+        }
+      ],
+      "options": {
+        "A": "memperbesar gaya berat sehingga pergerakan ke samping menjadi lebih lambat",
+        "B": "menyebabkan pusat massa sistem berada di bawah titik tumpu yang membuat sistem seimbang",
+        "C": "memperbesar gaya gesek antara kaki dan tali sehingga orang dapat bertahan lebih lama di tali",
+        "D": "menarik tubuh ke bawah sehingga tubuh pemain sirkus tidak mudah terangkat",
+        "E": "menambah gaya dorong ke depan agar pemain sirkus dapat lebih mudah dan cepat berjalan"
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/27198_48ac3029613d80a30c0d0659d26d6f90.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 27198_48ac3029613d80a30c0d0659d26d6f90.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "27198_48ac3029613d80a30c0d0659d26d6f90.png",
+          "rel_path": "images/27198_48ac3029613d80a30c0d0659d26d6f90.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/27198_48ac3029613d80a30c0d0659d26d6f90.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q13",
-      "number": 13,
-      "stimulus": "",
-      "question": "Pada botol semprotan parfum, udara ditiupkan cepat ke atas lubang tabung sempit yang tersambung ke cairan parfum.\nMana sajakah penjelasan yang benar mengenai cara kerja alat tersebut?\nPilihlah jawaban yang benar! Jawaban benar lebih dari satu.\nUdara yang mengalir cepat di atas permukaan parfum menyebabkan tekanan di tempat itu bertambah besar.\nTekanan di permukaan cairan parfum menjadi lebih tinggi daripada tekanan di atasnya.\nCairan parfum terdorong naik ke atas karena faktor tekanan udara luar.\nVolume cairan yang berada di dalam botol parfum mempengaruhi aliran parfum.\nAlat ini memanfaatkan hukum Pascal dalam proses penyemprotannya.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q13",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 13,
+      "source_id": "soal-no-13",
+      "type": "PGK",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Pada botol semprotan parfum, udara ditiupkan cepat ke atas lubang tabung sempit yang tersambung ke cairan parfum.\nMana sajakah penjelasan yang benar mengenai cara kerja alat tersebut?\nPilihlah jawaban yang benar! Jawaban benar lebih dari satu.\n[Diagram — 35088_cd907bfb0c0e3a22c2381d3590690bf7.png]: Transkripsi visual otomatis untuk 35088_cd907bfb0c0e3a22c2381d3590690bf7.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "35088_cd907bfb0c0e3a22c2381d3590690bf7.png",
+          "rel_path": "images/35088_cd907bfb0c0e3a22c2381d3590690bf7.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/35088_cd907bfb0c0e3a22c2381d3590690bf7.png",
+          "role": "question"
+        }
+      ],
+      "options": {
+        "A": "Udara yang mengalir cepat di atas permukaan parfum menyebabkan tekanan di tempat itu bertambah besar.",
+        "B": "Tekanan di permukaan cairan parfum menjadi lebih tinggi daripada tekanan di atasnya.",
+        "C": "Cairan parfum terdorong naik ke atas karena faktor tekanan udara luar.",
+        "D": "Volume cairan yang berada di dalam botol parfum mempengaruhi aliran parfum.",
+        "E": "Alat ini memanfaatkan hukum Pascal dalam proses penyemprotannya."
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/35088_cd907bfb0c0e3a22c2381d3590690bf7.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 35088_cd907bfb0c0e3a22c2381d3590690bf7.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "35088_cd907bfb0c0e3a22c2381d3590690bf7.png",
+          "rel_path": "images/35088_cd907bfb0c0e3a22c2381d3590690bf7.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/35088_cd907bfb0c0e3a22c2381d3590690bf7.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "B",
+          "C"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q14",
-      "number": 14,
-      "stimulus": "",
-      "question": "Seorang pemanah sedang mengikuti lomba menombak ikan di kolam dangkal. Ilusi yang dialaminya seperti tampak pada gambar berikut:\nSinar cahaya dari ikan menuju mata pemanah membentuk sudut 60° terhadap garis normal (garis tegak lurus permukaan air). Berdasarkan pengalamannya, pemanah tersebut tidak membidik langsung ke arah ikan yang terlihat, melainkan membidik ke posisi yang lebih rendah supaya anak panahnya tepat mengenai ikan. (Indeks bias air = 4/3, Indeks bias udara = 1).\nBerdasarkan pemahamanmu tentang pembiasan cahaya, evaluasilah pernyataan yang dilakukan oleh pemanah berikut ini!\nTentukan apakah pernyataan-pernyataan berikut Benar atau Salah!\n#\nPernyataan\nBenar\nSalah\nA.\nStrategi pemanah membidik lebih rendah dari posisi ikan yang terlihat merupakan strategi yang tepat berdasarkan prinsip pembiasan cahaya.\nB.\nPenambahan kecepatan saat melempar tombak dapat meminimalisir kesalahan bidikan yang terjadi akibat pembiasan cahaya.\nC.\nSemakin besar sudut pengamatan pemanah terhadap garis normal, semakin besar pula perbedaan antara posisi ikan yang terlihat dengan posisi ikan yang sebenarnya.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q14",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 14,
+      "source_id": "soal-no-14",
+      "type": "BS",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Seorang pemanah sedang mengikuti lomba menombak ikan di kolam dangkal. Ilusi yang dialaminya seperti tampak pada gambar berikut:\nSinar cahaya dari ikan menuju mata pemanah membentuk sudut 60° terhadap garis normal (garis tegak lurus permukaan air). Berdasarkan pengalamannya, pemanah tersebut tidak membidik langsung ke arah ikan yang terlihat, melainkan membidik ke posisi yang lebih rendah supaya anak panahnya tepat mengenai ikan. (Indeks bias air = 4/3, Indeks bias udara = 1).\nBerdasarkan pemahamanmu tentang pembiasan cahaya, evaluasilah pernyataan yang dilakukan oleh pemanah berikut ini!\nTentukan apakah pernyataan-pernyataan berikut Benar atau Salah!\n[Diagram — 32250_d3fdf9d003416b7943df57c410161c00.png]: Transkripsi visual otomatis untuk 32250_d3fdf9d003416b7943df57c410161c00.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "32250_d3fdf9d003416b7943df57c410161c00.png",
+          "rel_path": "images/32250_d3fdf9d003416b7943df57c410161c00.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/32250_d3fdf9d003416b7943df57c410161c00.png",
+          "role": "question"
+        }
+      ],
+      "statements": [
+        {
+          "key": "A",
+          "text_provenance": "learning_reference (raw scrape missing)",
+          "text": "Strategi pemanah membidik lebih rendah dari posisi ikan yang terlihat merupakan strategi yang tepat berdasarkan prinsip pembiasan cahaya.",
+          "display": "Strategi pemanah membidik lebih rendah dari posisi ikan yang terlihat merupakan strategi yang tepat berdasarkan prinsip pembiasan cahaya."
+        },
+        {
+          "key": "B",
+          "text": "Penambahan kecepatan saat melempar tombak dapat meminimalisir kesalahan bidikan yang terjadi akibat pembiasan cahaya.",
+          "display": "Penambahan kecepatan saat melempar tombak dapat meminimalisir kesalahan bidikan yang terjadi akibat pembiasan cahaya."
+        },
+        {
+          "key": "C",
+          "text": "Semakin besar sudut pengamatan pemanah terhadap garis normal, semakin besar pula perbedaan antara posisi ikan yang terlihat dengan posisi ikan yang sebenarnya.",
+          "display": "Semakin besar sudut pengamatan pemanah terhadap garis normal, semakin besar pula perbedaan antara posisi ikan yang terlihat dengan posisi ikan yang sebenarnya."
+        }
+      ],
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/32250_d3fdf9d003416b7943df57c410161c00.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 32250_d3fdf9d003416b7943df57c410161c00.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": [
+          {
+            "kind": "statement_text",
+            "element": "statement A",
+            "reason": "fisika_paket_1 soal 14: teks pernyataan A tidak ada di raw scrape; disalin verbatim dari learning reference"
+          }
+        ]
+      },
+      "source_images": [
+        {
+          "filename": "32250_d3fdf9d003416b7943df57c410161c00.png",
+          "rel_path": "images/32250_d3fdf9d003416b7943df57c410161c00.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/32250_d3fdf9d003416b7943df57c410161c00.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "per_statement",
+        "statements": {
+          "A": "Benar",
+          "B": "Salah",
+          "C": "Benar"
+        }
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 1,
+      "transcription_status": "manual_review"
     },
     {
-      "id": "fisika_paket_1_q15",
-      "number": 15,
-      "stimulus": "",
-      "question": "Pada eksperimen termodinamika sebuah mesin Carnot beroperasi antara reservoir suhu tinggi 800 K dan reservoir suhu rendah 480 K. Seorang peneliti ingin mengganti mesin tersebut dengan mesin Carnot yang memiliki efisiensi lebih tinggi agar proses eksperimen menjadi lebih efektif. Mesin Carnot mana saja yang dapat digunakan sebagai pengganti mesin Carnot semula?\nPilihlah pada setiap mesin Carnot yang memenuhi! Jawaban benar lebih dari satu.\nSuhu tinggi 600 K dan suhu rendah 480 K.\nSuhu tinggi 800 K dan suhu rendah 400 K.\nSuhu tinggi 900 K dan suhu rendah 500 K.\nSuhu tinggi 900 K dan suhu rendah 600 K.\nSuhu tinggi 1.000 K dan suhu rendah 600 K.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q15",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 15,
+      "source_id": "soal-no-15",
+      "type": "PGK",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Pada eksperimen termodinamika sebuah mesin Carnot beroperasi antara reservoir suhu tinggi 800 K dan reservoir suhu rendah 480 K. Seorang peneliti ingin mengganti mesin tersebut dengan mesin Carnot yang memiliki efisiensi lebih tinggi agar proses eksperimen menjadi lebih efektif. Mesin Carnot mana saja yang dapat digunakan sebagai pengganti mesin Carnot semula?\nPilihlah pada setiap mesin Carnot yang memenuhi! Jawaban benar lebih dari satu.",
+      "question_images": [],
+      "options": {
+        "A": "Suhu tinggi 600 K dan suhu rendah 480 K.",
+        "B": "Suhu tinggi 800 K dan suhu rendah 400 K.",
+        "C": "Suhu tinggi 900 K dan suhu rendah 500 K.",
+        "D": "Suhu tinggi 900 K dan suhu rendah 600 K.",
+        "E": "Suhu tinggi 1.000 K dan suhu rendah 600 K."
+      },
+      "visual_context": {
+        "description": "No visual elements in this question.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [],
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "B",
+          "C"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q16",
-      "number": 16,
-      "stimulus": "",
-      "question": "Sebuah perusahaan elektronik sedang mengembangkan mesin fotokopi generasi baru yang menggunakan teknologi transfer toner elektrostatis yang lebih efisien. Dalam sistem ini, partikel toner bermuatan negatif q=1×10−7 C dipindahkan dari drum ke kertas melalui medan listrik yang dihasilkan oleh dua pelat sejajar.\nSpesifikasi teknis mesin fotokopi tersebut menunjukkan bahwa:\nJarak antara pelat transfer dan drum adalah 2 mm\nBeda potensial yang tersedia adalah 200 V\nAgar proses transfer toner berjalan optimal, gaya listrik minimum yang diperlukan untuk memindahkan partikel toner adalah 0,01 N\nTim sedang menguji prototipe mesin fotokopi ini di laboratorium pengujian. Mereka menemukan bahwa pada beberapa kondisi, hasil cetakan menunjukkan kualitas yang buruk dengan banyak area yang tidak tercetak dengan baik.\nUntuk setiap pernyataan analisis berikut, tentukan apakah pernyataan berikut\nBenar\natau\nSalah!\n#\nPernyataan\nBenar\nSalah\nA.\nJika jarak antar pelat dikurangi menjadi 1,5 mm dengan beda potensial tetap, gaya listrik pada partikel toner akan meningkat sehingga memenuhi syarat fungsional.\nB.\nUntuk mempertahankan jarak antar pelat tetap 2 mm, beda potensial minimal yang diperlukan agar mesin berfungsi optimal adalah 100 V.\nC.\nJika muatan partikel toner ditingkatkan menjadi 2 ×10\n−7\nC, mesin fotokopi akan berfungsi dengan baik tanpa perlu mengubah parameter lainnya.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q16",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 16,
+      "source_id": "soal-no-16",
+      "type": "BS",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Sebuah perusahaan elektronik sedang mengembangkan mesin fotokopi generasi baru yang menggunakan teknologi transfer toner elektrostatis yang lebih efisien. Dalam sistem ini, partikel toner bermuatan negatif q=1×10−7 C dipindahkan dari drum ke kertas melalui medan listrik yang dihasilkan oleh dua pelat sejajar.\nSpesifikasi teknis mesin fotokopi tersebut menunjukkan bahwa:\nJarak antara pelat transfer dan drum adalah 2 mm\nBeda potensial yang tersedia adalah 200 V\nAgar proses transfer toner berjalan optimal, gaya listrik minimum yang diperlukan untuk memindahkan partikel toner adalah 0,01 N\nTim sedang menguji prototipe mesin fotokopi ini di laboratorium pengujian. Mereka menemukan bahwa pada beberapa kondisi, hasil cetakan menunjukkan kualitas yang buruk dengan banyak area yang tidak tercetak dengan baik.\nUntuk setiap pernyataan analisis berikut, tentukan apakah pernyataan berikut\nBenar\natau\nSalah!",
+      "question_images": [],
+      "statements": [
+        {
+          "key": "A",
+          "text": "Jika jarak antar pelat dikurangi menjadi 1,5 mm dengan beda potensial tetap, gaya listrik pada partikel toner akan meningkat sehingga memenuhi syarat fungsional.",
+          "display": "Jika jarak antar pelat dikurangi menjadi 1,5 mm dengan beda potensial tetap, gaya listrik pada partikel toner akan meningkat sehingga memenuhi syarat fungsional."
+        },
+        {
+          "key": "B",
+          "text": "Untuk mempertahankan jarak antar pelat tetap 2 mm, beda potensial minimal yang diperlukan agar mesin berfungsi optimal adalah 100 V.",
+          "display": "Untuk mempertahankan jarak antar pelat tetap 2 mm, beda potensial minimal yang diperlukan agar mesin berfungsi optimal adalah 100 V."
+        },
+        {
+          "key": "C",
+          "text": "Jika muatan partikel toner ditingkatkan menjadi 2 ×10 −7 C, mesin fotokopi akan berfungsi dengan baik tanpa perlu mengubah parameter lainnya.",
+          "display": "Jika muatan partikel toner ditingkatkan menjadi 2 ×10 −7 C, mesin fotokopi akan berfungsi dengan baik tanpa perlu mengubah parameter lainnya."
+        }
+      ],
+      "visual_context": {
+        "description": "No visual elements in this question.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [],
+      "official_answer": {
+        "format": "per_statement",
+        "statements": {
+          "A": "Benar",
+          "B": "Salah",
+          "C": "Benar"
+        }
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q17",
-      "number": 17,
-      "stimulus": "",
-      "question": "Siswa SMA mengukur diameter sebuah bola bekel secara berulang sehingga diperoleh data sebagai berikut. Semua pengukuran dilakukan dengan jangka sorong. Berikut hasil pengukuran yang telah dilakukan.\nPengukuran ke-\nTampilan Jangka Sorong\nHasil Pengukuran\n1\n1,06 cm\n2\n1,88 cm\n3\n1,44 cm\n4\n1,16 cm\nPernyataan berikut yang sesuai dengan pengukuran diameter bola bekel tersebut adalah….\nData yang dihasilkan dapat dipercaya karena pengukuran dilakukan lebih dari satu kali.\nTerdapat hasil pembacaan yang tidak sesuai dengan tampilan jangka sorong sehingga data tidak dapat dipercaya.\nHasil pengukuran berbeda-beda seperti yang ditunjukkan pada gambar merupakan kewajaran karena bola bekel elastis.\nPengukuran dilakukan oleh orang yang berbeda sehingga dapat dipastikan hasil pengukurannya juga berbeda.\nKesimpulan akhir diameter bola bekel dapat dihitung dengan merata-rata seluruh hasil pengukuran.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q17",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 17,
+      "source_id": "soal-no-17",
+      "type": "PG",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Siswa SMA mengukur diameter sebuah bola bekel secara berulang sehingga diperoleh data sebagai berikut. Semua pengukuran dilakukan dengan jangka sorong. Berikut hasil pengukuran yang telah dilakukan.\nPengukuran ke-\nTampilan Jangka Sorong\nHasil Pengukuran\n1\n1,06 cm\n2\n1,88 cm\n3\n1,44 cm\n4\n1,16 cm\nPernyataan berikut yang sesuai dengan pengukuran diameter bola bekel tersebut adalah….\n[Diagram — 66646_9a5ac05893fb3614ba403c557d81189e.png]: Transkripsi visual otomatis untuk 66646_9a5ac05893fb3614ba403c557d81189e.png: Memuat elemen diagram/skema pendukung soal. [Diagram — 66646_ef235a3c5b782e62f11d89afd8c27ee4.png]: Transkripsi visual otomatis untuk 66646_ef235a3c5b782e62f11d89afd8c27ee4.png: Memuat elemen diagram/skema pendukung soal. [Diagram — 66646_4ea231a28aebabedd6e049bdeec75846.png]: Transkripsi visual otomatis untuk 66646_4ea231a28aebabedd6e049bdeec75846.png: Memuat elemen diagram/skema pendukung soal. [Diagram — 66646_1844ed51f8b29fc7bacf1411f286b05e.png]: Transkripsi visual otomatis untuk 66646_1844ed51f8b29fc7bacf1411f286b05e.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "66646_9a5ac05893fb3614ba403c557d81189e.png",
+          "rel_path": "images/66646_9a5ac05893fb3614ba403c557d81189e.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66646_9a5ac05893fb3614ba403c557d81189e.png",
+          "role": "question"
+        },
+        {
+          "filename": "66646_ef235a3c5b782e62f11d89afd8c27ee4.png",
+          "rel_path": "images/66646_ef235a3c5b782e62f11d89afd8c27ee4.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66646_ef235a3c5b782e62f11d89afd8c27ee4.png",
+          "role": "question"
+        },
+        {
+          "filename": "66646_4ea231a28aebabedd6e049bdeec75846.png",
+          "rel_path": "images/66646_4ea231a28aebabedd6e049bdeec75846.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66646_4ea231a28aebabedd6e049bdeec75846.png",
+          "role": "question"
+        },
+        {
+          "filename": "66646_1844ed51f8b29fc7bacf1411f286b05e.png",
+          "rel_path": "images/66646_1844ed51f8b29fc7bacf1411f286b05e.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66646_1844ed51f8b29fc7bacf1411f286b05e.png",
+          "role": "question"
+        }
+      ],
+      "options": {
+        "A": "Data yang dihasilkan dapat dipercaya karena pengukuran dilakukan lebih dari satu kali.",
+        "B": "Terdapat hasil pembacaan yang tidak sesuai dengan tampilan jangka sorong sehingga data tidak dapat dipercaya.",
+        "C": "Hasil pengukuran berbeda-beda seperti yang ditunjukkan pada gambar merupakan kewajaran karena bola bekel elastis.",
+        "D": "Pengukuran dilakukan oleh orang yang berbeda sehingga dapat dipastikan hasil pengukurannya juga berbeda.",
+        "E": "Kesimpulan akhir diameter bola bekel dapat dihitung dengan merata-rata seluruh hasil pengukuran."
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/66646_9a5ac05893fb3614ba403c557d81189e.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 66646_9a5ac05893fb3614ba403c557d81189e.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/66646_ef235a3c5b782e62f11d89afd8c27ee4.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 66646_ef235a3c5b782e62f11d89afd8c27ee4.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/66646_4ea231a28aebabedd6e049bdeec75846.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 66646_4ea231a28aebabedd6e049bdeec75846.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          },
+          {
+            "image": "images/66646_1844ed51f8b29fc7bacf1411f286b05e.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 66646_1844ed51f8b29fc7bacf1411f286b05e.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "66646_9a5ac05893fb3614ba403c557d81189e.png",
+          "rel_path": "images/66646_9a5ac05893fb3614ba403c557d81189e.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66646_9a5ac05893fb3614ba403c557d81189e.png",
+          "role": "question"
+        },
+        {
+          "filename": "66646_ef235a3c5b782e62f11d89afd8c27ee4.png",
+          "rel_path": "images/66646_ef235a3c5b782e62f11d89afd8c27ee4.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66646_ef235a3c5b782e62f11d89afd8c27ee4.png",
+          "role": "question"
+        },
+        {
+          "filename": "66646_4ea231a28aebabedd6e049bdeec75846.png",
+          "rel_path": "images/66646_4ea231a28aebabedd6e049bdeec75846.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66646_4ea231a28aebabedd6e049bdeec75846.png",
+          "role": "question"
+        },
+        {
+          "filename": "66646_1844ed51f8b29fc7bacf1411f286b05e.png",
+          "rel_path": "images/66646_1844ed51f8b29fc7bacf1411f286b05e.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/66646_1844ed51f8b29fc7bacf1411f286b05e.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "B"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q18",
-      "number": 18,
-      "stimulus": "",
-      "question": "Perhatikan gambar berikut!\nSeorang penjaga gawang menangkap bola yang bergerak sangat cepat dengan cara menarik tangannya sedikit ke belakang saat menangkap bola.\nApa tujuan penjaga gawang tersebut menarik tangannya ke belakang?\nPilihlah jawaban yang benar! Jawaban benar lebih dari satu.\nMemperlama waktu kontak dengan bola.\nMemperkecil gaya yang dirasakan tangan.\nMemperkecil impuls yang diterima bola.\nMemperbesar kecepatan bola.\nMemperkecil tekanan yang diberikan tangan.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q18",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 18,
+      "source_id": "soal-no-18",
+      "type": "PGK",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Perhatikan gambar berikut!\nSeorang penjaga gawang menangkap bola yang bergerak sangat cepat dengan cara menarik tangannya sedikit ke belakang saat menangkap bola.\nApa tujuan penjaga gawang tersebut menarik tangannya ke belakang?\nPilihlah jawaban yang benar! Jawaban benar lebih dari satu.\n[Diagram — 93990_9d03a1e2ff76b1988e993f8d0af7253d.png]: Transkripsi visual otomatis untuk 93990_9d03a1e2ff76b1988e993f8d0af7253d.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "93990_9d03a1e2ff76b1988e993f8d0af7253d.png",
+          "rel_path": "images/93990_9d03a1e2ff76b1988e993f8d0af7253d.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/93990_9d03a1e2ff76b1988e993f8d0af7253d.png",
+          "role": "question"
+        }
+      ],
+      "options": {
+        "A": "Memperlama waktu kontak dengan bola.",
+        "B": "Memperkecil gaya yang dirasakan tangan.",
+        "C": "Memperkecil impuls yang diterima bola.",
+        "D": "Memperbesar kecepatan bola.",
+        "E": "Memperkecil tekanan yang diberikan tangan."
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/93990_9d03a1e2ff76b1988e993f8d0af7253d.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 93990_9d03a1e2ff76b1988e993f8d0af7253d.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "93990_9d03a1e2ff76b1988e993f8d0af7253d.png",
+          "rel_path": "images/93990_9d03a1e2ff76b1988e993f8d0af7253d.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/93990_9d03a1e2ff76b1988e993f8d0af7253d.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "A",
+          "B"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q19",
-      "number": 19,
-      "stimulus": "",
-      "question": "Sebuah bola logam hanya dapat melewati cincin logam jika keduanya berada pada suhu ruang. Gambarnya seperti tampak berikut:\nSuatu saat Dita memanaskan bola, bola tidak lagi dapat melewati cincin.\nDita kemudian melakukan percobaan baru: ia memanaskan cincin tanpa memanaskan bola. Ia ingin mengetahui apa yang akan terjadi terhadap ukuran lubang cincin.\nApa yang akan terjadi terhadap ukuran lubang cincin ketika suhu cincin dinaikkan?\nukuran lubang berkurang karena cincin mengembang ke arah luar dan menutup lubang.\nukuran lubang berkurang karena pemuaian membuat cincin menjadi tebal dan padat.\nukuran lubang tetap sama karena hanya bagian luar cincin yang mengembang..\nukuran lubang bertambah dan memungkinkan bola kembali bisa melewati cincin.\nukuran lubang bertambah tetapi cincin akan kehilangan bentuk bundarnya.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q19",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 19,
+      "source_id": "soal-no-19",
+      "type": "PG",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Sebuah bola logam hanya dapat melewati cincin logam jika keduanya berada pada suhu ruang. Gambarnya seperti tampak berikut:\nSuatu saat Dita memanaskan bola, bola tidak lagi dapat melewati cincin.\nDita kemudian melakukan percobaan baru: ia memanaskan cincin tanpa memanaskan bola. Ia ingin mengetahui apa yang akan terjadi terhadap ukuran lubang cincin.\nApa yang akan terjadi terhadap ukuran lubang cincin ketika suhu cincin dinaikkan?\n[Diagram — 09631_fe0918e77d157f3e7042319caf331567.png]: Transkripsi visual otomatis untuk 09631_fe0918e77d157f3e7042319caf331567.png: Memuat elemen diagram/skema pendukung soal.",
+      "question_images": [
+        {
+          "filename": "09631_fe0918e77d157f3e7042319caf331567.png",
+          "rel_path": "images/09631_fe0918e77d157f3e7042319caf331567.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/09631_fe0918e77d157f3e7042319caf331567.png",
+          "role": "question"
+        }
+      ],
+      "options": {
+        "A": "ukuran lubang berkurang karena cincin mengembang ke arah luar dan menutup lubang.",
+        "B": "ukuran lubang berkurang karena pemuaian membuat cincin menjadi tebal dan padat.",
+        "C": "ukuran lubang tetap sama karena hanya bagian luar cincin yang mengembang..",
+        "D": "ukuran lubang bertambah dan memungkinkan bola kembali bisa melewati cincin.",
+        "E": "ukuran lubang bertambah tetapi cincin akan kehilangan bentuk bundarnya."
+      },
+      "visual_context": {
+        "description": "This question contains visual elements that are also represented above in text where a semantic representation existed; unresolved elements are explicitly marked.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [
+          {
+            "image": "images/09631_fe0918e77d157f3e7042319caf331567.png",
+            "location": "question",
+            "description": "Transkripsi visual otomatis untuk 09631_fe0918e77d157f3e7042319caf331567.png: Memuat elemen diagram/skema pendukung soal.",
+            "source": "vision transcription"
+          }
+        ],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [
+        {
+          "filename": "09631_fe0918e77d157f3e7042319caf331567.png",
+          "rel_path": "images/09631_fe0918e77d157f3e7042319caf331567.png",
+          "remote_url": "https://pusmendik.kemendikdasmen.go.id/tka/cbt_images/09631_fe0918e77d157f3e7042319caf331567.png",
+          "role": "question"
+        }
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "D"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     },
     {
-      "id": "fisika_paket_1_q20",
-      "number": 20,
-      "stimulus": "",
-      "question": "Dua kelompok siswa melakukan pengamatan di dua rumah berbeda selama 10 hari untuk mengamati dan menganalisis penggunaan listriknya. Berikut data hasil pengamatan.\nRumah\nJenis Lampu\nDaya Lampu\nJumlah Lampu\nRangkaian\nDurasi Menyala per Hari\nResistensi Kabel\nA\nLampu LED\n10 watt\n10\nParalel\n5 jam\n0,5 Ω per lampu\nB\nLampu Pijar\n40 watt\n6\nSeri\n8 jam\n0,2 Ω per lampu\nDiketahui tegangan listrik: 220 V.\nSetelah penelitian selesai, tim memperoleh data bahwa energi listrik yang terukur pada rumah B jauh lebih rendah dari yang diperkirakan, sementara pencahayaan yang dihasilkan juga tidak optimal.\nRekomendasi strategi yang tepat untuk optimalisasi penerangan di rumah B sesuai dengan hasil pengamatan tersebut adalah….\nPilihlah jawaban yang benar! Jawaban benar lebih dari satu.\nrumah B sebaiknya mengganti lampu pijar dengan LED tanpa mengubah rangkaian seri.\nmengubah rangkaian lampu di rumah B dari seri menjadi paralel akan meningkatkan intensitas cahaya.\nmasalah rumah B dapat diatasi dengan menambahkan resistor untuk menstabilkan tegangan.\nrumah B sebaiknya mengganti lampu dengan daya yang lebih tinggi tanpa mengubah rangkaian seri.\nrumah B perlu mengganti rangkaian menjadi paralel agar setiap lampu menerima tegangan penuh dan bekerja secara optimal.",
-      "options": [],
-      "images": [],
-      "official_answer": null,
-      "status": "ai_ready"
+      "id": "fis_p1_q20",
+      "slug": "fisika_paket_1",
+      "subject": "Fisika",
+      "package": 1,
+      "question_number": 20,
+      "source_id": "soal-no-20",
+      "type": "PGK",
+      "stimulus_text": "",
+      "stimulus_images": [],
+      "question_text": "Dua kelompok siswa melakukan pengamatan di dua rumah berbeda selama 10 hari untuk mengamati dan menganalisis penggunaan listriknya. Berikut data hasil pengamatan.\nRumah\nJenis Lampu\nDaya Lampu\nJumlah Lampu\nRangkaian\nDurasi Menyala per Hari\nResistensi Kabel\nA\nLampu LED\n10 watt\n10\nParalel\n5 jam\n0,5 Ω per lampu\nB\nLampu Pijar\n40 watt\n6\nSeri\n8 jam\n0,2 Ω per lampu\nDiketahui tegangan listrik: 220 V.\nSetelah penelitian selesai, tim memperoleh data bahwa energi listrik yang terukur pada rumah B jauh lebih rendah dari yang diperkirakan, sementara pencahayaan yang dihasilkan juga tidak optimal.\nRekomendasi strategi yang tepat untuk optimalisasi penerangan di rumah B sesuai dengan hasil pengamatan tersebut adalah….\nPilihlah jawaban yang benar! Jawaban benar lebih dari satu.",
+      "question_images": [],
+      "options": {
+        "A": "rumah B sebaiknya mengganti lampu pijar dengan LED tanpa mengubah rangkaian seri.",
+        "B": "mengubah rangkaian lampu di rumah B dari seri menjadi paralel akan meningkatkan intensitas cahaya.",
+        "C": "masalah rumah B dapat diatasi dengan menambahkan resistor untuk menstabilkan tegangan.",
+        "D": "rumah B sebaiknya mengganti lampu dengan daya yang lebih tinggi tanpa mengubah rangkaian seri.",
+        "E": "rumah B perlu mengganti rangkaian menjadi paralel agar setiap lampu menerima tegangan penuh dan bekerja secara optimal."
+      },
+      "visual_context": {
+        "description": "No visual elements in this question.",
+        "formulas": [],
+        "tables": [],
+        "graphs": [],
+        "diagrams": [],
+        "others": [],
+        "unresolved": []
+      },
+      "source_images": [],
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "B",
+          "E"
+        ]
+      },
+      "answer_source": "official_review_scrape (data/kunci/, review_hasil Pusmendik)",
+      "unresolved_count": 0,
+      "transcription_status": "ai_ready"
     }
   ]
 }
