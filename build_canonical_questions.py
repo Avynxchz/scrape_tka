@@ -51,6 +51,9 @@ PACKAGES = [
     ("kewirausahaan_paket_1", "Kewirausahaan", 1, "data/kewirausahaan/paket_1"),
     ("kewirausahaan_paket_2", "Kewirausahaan", 2, "data/kewirausahaan/paket_2"),
     ("geografi_paket_1", "Geografi", 1, "data/geografi/paket_1"),
+    ("geografi_paket_2", "Geografi", 2, "data/geografi/paket_2"),
+    ("fisika_paket_1", "Fisika", 1, "data/fisika/paket_1"),
+    ("fisika_paket_2", "Fisika", 2, "data/fisika/paket_2"),
 ]
 
 SUBJECT_PREFIX = {
@@ -59,6 +62,7 @@ SUBJECT_PREFIX = {
     "Ekonomi": "eko",
     "Kewirausahaan": "pkwu",
     "Geografi": "geo",
+    "Fisika": "fis",
 }
 
 # --- Klasifikasi visual (deterministik, berbasis ukuran + konteks teks) -----
@@ -101,8 +105,23 @@ def classify_visual(width, height, nbytes, context_text):
     return "diagram"
 
 
+# Lipat varian tipografis Unicode ke ASCII sebelum normalisasi, agar
+# cross-check tidak false-positive pada teks yang semakna beda penulisan
+# (mis. 'm.s -1' vs 'm·s⁻¹' — kasus nyata fisika_paket_1 q1 pernyataan C).
+_FOLD_TIPOGRAFIS = str.maketrans({
+    "·": ".", "×": "x", "°": "",
+    "⁰": "0", "¹": "1", "²": "2", "³": "3", "⁴": "4",
+    "⁵": "5", "⁶": "6", "⁷": "7", "⁸": "8", "⁹": "9",
+    "⁻": "-", "⁺": "+",
+    "₀": "0", "₁": "1", "₂": "2", "₃": "3", "₄": "4",
+    "₅": "5", "₆": "6", "₇": "7", "₈": "8", "₉": "9",
+    "−": "-", "–": "-", "—": "-",
+    "\u201c": "", "\u201d": "", "\u2018": "", "\u2019": "",
+})
+
+
 def norm(s):
-    return re.sub(r"[^a-z0-9]+", "", (s or "").lower())
+    return re.sub(r"[^a-z0-9]+", "", (s or "").translate(_FOLD_TIPOGRAFIS).lower())
 
 
 def unresolved_marker(kind, filename, note):
@@ -130,7 +149,9 @@ def image_entry(img, role, represented_by=None):
     e = {
         "filename": img["filename"],
         "rel_path": img["rel_path"],
-        "remote_url": img["remote_url"],
+        # remote_url tidak selalu ada (mis. gambar pernyataan di raw
+        # fisika/geografi) — opsional.
+        "remote_url": img.get("remote_url"),
         "role": role,
     }
     if img.get("data_latex"):
@@ -205,6 +226,33 @@ def option_display(opt, ctx, dims, unres, formulas, visuals):
     return " ".join(parts).strip()
 
 
+def partial_statement_pairs(kunci_text):
+    """Selamatkan baris kunci pernyataan yang tak lengkap ('X ()' nilai kosong).
+
+    Kasus nyata: fisika_paket_1 q3 bukti resmi 'A (Benar)\\nB (Salah)\\nC ()' —
+    nilai C kosong pada scrape review resmi (pola sama di BI p1 q4). Kembalikan
+    dict {kunci: nilai | None} bila baris jelas berupa daftar pasangan
+    pernyataan A/B/C dengan >=1 nilai kosong; None bila bukan pola itu
+    (mis. format PGK '(A) teks' tidak tersentuh).
+    """
+    ktx = (kunci_text or "").strip()
+    pairs = re.findall(r"([A-Z])\s*\(([^)]*)\)", ktx)
+    if not pairs:
+        return None
+    residue = re.sub(r"([A-Z])\s*\(([^)]*)\)", "", ktx)
+    if re.search(r"[A-Za-z0-9]", residue):
+        return None
+    stmts, has_empty = {}, False
+    for k, v in pairs:
+        v = v.strip()
+        if not v:
+            has_empty = True
+        stmts[k] = v or None
+    if not has_empty or sorted(stmts) != ["A", "B", "C"]:
+        return None
+    return stmts
+
+
 def derive_official_answer(kunci, nomor, qtype):
     """Turunkan kunci resmi dari bukti mentah (raw_rows) — sumber satu-satunya."""
     row = kunci["raw_rows"].get(str(nomor))
@@ -213,6 +261,16 @@ def derive_official_answer(kunci, nomor, qtype):
     kind, payload = parse_official_row(row["kunci"])
     if qtype in ("BS", "LABEL"):
         if kind not in ("bs", "label"):
+            # Bukti resmi tak lengkap namun jelas soal pernyataan
+            # (mis. 'C ()'): kunci yang hilang = null + celah bukti dicatat
+            # eksplisit, TIDAK ditebak dari learning.
+            partial = partial_statement_pairs(row["kunci"])
+            if partial is not None:
+                out = {"format": "per_statement", "statements": partial}
+                gaps = sorted(k for k, v in partial.items() if v is None)
+                if gaps:
+                    out["evidence_gap"] = gaps
+                return out
             raise ValueError(f"{kunci['slug']} soal {nomor}: bukti bukan format pernyataan ({kind})")
         return {"format": "per_statement", "statements": payload}
     if qtype == "PG":
@@ -236,6 +294,10 @@ def check_against_learning(q, official, lrn_q, slug):
             key, _, val = item.partition(":")
             lrn_map[key] = val
         for key, val in official["statements"].items():
+            if val is None:
+                # Celah bukti resmi (nilai kosong 'X ()'): tak ada yang bisa
+                # diverifikasi — dicatat di official_answer.evidence_gap.
+                continue
             if norm(lrn_map.get(key, "")) != norm(val):
                 probs.append(f"kunci pernyataan {key}: bukti={val!r} learning={lrn_map.get(key)!r}")
     elif official["format"] == "single":
@@ -266,6 +328,11 @@ def build_question(raw_q, kunci, lrn_q, slug, subject, package, images_root, dim
         qtype = "BS"
     elif kind == "label":
         qtype = "LABEL"
+    elif kind == "unknown" and partial_statement_pairs(prov) is not None:
+        # Bukti resmi tak lengkap ('X ()') namun jelas soal pernyataan:
+        # bedakan BS vs LABEL dari nilai yang terbaca.
+        vals = [v for v in partial_statement_pairs(prov).values() if v]
+        qtype = "BS" if all(v in ("Benar", "Salah") for v in vals) else "LABEL"
     elif kind == "multi" and qtype == "PG":
         # Bukti resmi multi-kunci mendahului deteksi tipe dari HTML mentah
         qtype = "PGK"
@@ -315,12 +382,56 @@ def build_question(raw_q, kunci, lrn_q, slug, subject, package, images_root, dim
                     represented_by="option latex" if opt.get("latex") else None,
                 ))
     else:
-        # Soal pernyataan: opsi resmi B/C/D adalah pernyataan A/B/C (opsi A = header tabel)
+        # Soal pernyataan — dua varian sumber pada raw scrape:
+        #   (a) field `pernyataan` langsung (fisika/geografi; kunci A/B/C asli);
+        #   (b) opsi B/C/D pada HTML mentah — opsi A = header tabel (paket lama).
+        src_stmts = []
+        raw_stmts = list(raw_q.get("pernyataan") or [])
+        # Baris header tabel kadang ikut terekam dengan kunci duplikat di posisi
+        # awal (mis. geo_p2 q23/q27: ['A','A','B','C']) → buang baris header itu.
+        while len(raw_stmts) >= 2 and raw_stmts[0].get("key") == raw_stmts[1].get("key"):
+            raw_stmts.pop(0)
+        if raw_stmts:
+            for st in raw_stmts:
+                src_stmts.append({
+                    "key": st.get("key"), "text": st.get("text"),
+                    "latex": st.get("latex"), "image": st.get("image"),
+                    "provenance": "raw",
+                })
+        else:
+            opts = {o["key"]: o for o in raw_q.get("pilihan_jawaban") or []}
+            for stmt_key, src_key in zip(["A", "B", "C"], ["B", "C", "D"]):
+                src = opts.get(src_key, {})
+                src_stmts.append({
+                    "key": stmt_key, "text": src.get("text"),
+                    "latex": src.get("latex"), "image": src.get("image"),
+                    "provenance": "raw",
+                })
+        # Pernyataan yang hilang di raw tetapi ada di learning (mis. fis_p1 q14-A):
+        # ambil verbatim dari learning dengan penanda provenance eksplisit —
+        # TIDAK dibiarkan hilang diam-diam, TIDAK pula diklaim dari raw.
+        lrn_stmts_all = {s["key"]: s for s in (lrn_q.get("pernyataan") or [])}
+        have_keys = {s["key"] for s in src_stmts}
+        for lk in sorted(lrn_stmts_all):
+            if lk not in have_keys:
+                ls = lrn_stmts_all[lk]
+                src_stmts.append({
+                    "key": lk, "text": ls.get("text"), "latex": None,
+                    "image": ls.get("image"), "provenance": "learning_fallback",
+                })
+                unres.append({
+                    "kind": "statement_text",
+                    "element": f"statement {lk}",
+                    "reason": (f"{slug} soal {nomor}: teks pernyataan {lk} tidak ada "
+                               "di raw scrape; disalin verbatim dari learning reference"),
+                })
+        src_stmts.sort(key=lambda s: s["key"] or "")
         statements = []
-        opts = {o["key"]: o for o in raw_q.get("pilihan_jawaban") or []}
-        for stmt_key, src_key in zip(["A", "B", "C"], ["B", "C", "D"]):
-            src = opts.get(src_key, {})
+        for src in src_stmts:
+            stmt_key = src["key"]
             item = {"key": stmt_key}
+            if src["provenance"] == "learning_fallback":
+                item["text_provenance"] = "learning_reference (raw scrape missing)"
             text_bits = []
             if (src.get("text") or "").strip():
                 text_bits.append(src["text"].strip())
@@ -354,6 +465,8 @@ def build_question(raw_q, kunci, lrn_q, slug, subject, package, images_root, dim
             ls = lrn_stmts.get(st["key"])
             if not ls:
                 raise ValueError(f"{slug} soal {nomor}: pernyataan {st['key']} tidak ada di learning")
+            if st.get("text_provenance", "").startswith("learning_reference"):
+                continue  # teks memang berasal dari learning; sudah ditandai
             if (ls.get("text") or "").strip():
                 if norm(ls["text"]) != norm(st.get("text") or ""):
                     raise ValueError(

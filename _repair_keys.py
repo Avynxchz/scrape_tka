@@ -54,24 +54,74 @@ def parse_official_row(kunci_text):
     ktx = (kunci_text or "").strip()
 
     # 1) Benar/Salah: pasangan 'X (Benar|Salah)' dan tanpa sisa teks
-    pairs_bs = re.findall(r"([A-Z])\s*\((Benar|Salah)\)", ktx)
+    #    (spasi di dalam kurung ditoleransi — kasus nyata mtl_p1 q12 'A (Benar )',
+    #     q15 'A ( Benar)'; anotasi simbol di dalam kurung ditoleransi —
+    #     korea_p1 q6 'A (Salah (X))')
+    pairs_bs = re.findall(r"([A-Z])\s*\(\s*(Benar|Salah)(?:\s*\([^)]*\))?\s*\)", ktx)
     if pairs_bs:
-        residue = re.sub(r"([A-Z])\s*\((Benar|Salah)\)", "", ktx)
+        residue = re.sub(r"([A-Z])\s*\(\s*(Benar|Salah)(?:\s*\([^)]*\))?\s*\)", "", ktx)
         if not re.search(r"[A-Za-z0-9]", residue):
             return "bs", {k: v for k, v in pairs_bs}
 
-    # 2) Label-pair: pasangan 'X (Label)', huruf A/B/C berurutan, label >=2 huruf
+    # 1b) Benar/Salah bahasa Arab: 'X (الصَحِيْح)' = Benar, 'X (الخَطَأ)' = Salah
+    #     (harakat opsional — kasus nyata bahasa_arab_paket_2). Bukan label:
+    #     pertanyaan eksplisit meminta pilih benar/salah per pernyataan.
+    _AR_TASHKEEL = re.compile(r"[ً-ٰٟ]")
+    pairs_ar = re.findall(r"([A-Z])\s*\(([^)]+)\)", ktx)
+    if pairs_ar:
+        vals_ar, ok_ar = {}, True
+        for k, v in pairs_ar:
+            vv = _AR_TASHKEEL.sub("", v).strip()
+            if vv == "الصحيح":
+                vals_ar[k] = "Benar"
+            elif vv == "الخطأ":
+                vals_ar[k] = "Salah"
+            else:
+                ok_ar = False
+                break
+        if ok_ar and vals_ar:
+            residue = re.sub(r"([A-Z])\s*\(([^)]+)\)", "", ktx)
+            keys = sorted(vals_ar)
+            if (
+                not re.search(r"[A-Za-z0-9\u0600-\u06ff]", residue)
+                and 3 <= len(keys) <= 6
+                and keys == [chr(ord("A") + i) for i in range(len(keys))]
+            ):
+                return "bs", vals_ar
+
+    # 2) Label-pair: pasangan 'X (Label)'; kunci A..(huruf berurutan, 3-6 pernyataan),
+    #    label >=2 huruf. Diperluas dari tepat-3 (A/B/C) ke N pernyataan karena
+    #    soal 4-pernyataan riil ada (mis. sosiologi_paket_1 q5/q8).
     pairs_lb = re.findall(r"([A-Z])\s*\(([^)]+)\)", ktx)
     if pairs_lb:
         residue = re.sub(r"([A-Z])\s*\(([^)]+)\)", "", ktx)
         vals = {k: v.strip() for k, v in pairs_lb}
+        keys = sorted(vals)
         if (
             not re.search(r"[A-Za-z0-9]", residue)
-            and sorted(vals) == ["A", "B", "C"]
+            and 3 <= len(keys) <= 6
+            and keys == [chr(ord("A") + i) for i in range(len(keys))]
             and all(v not in ("Benar", "Salah") for v in vals.values())
             and all(re.fullmatch(r"[A-Za-z][A-Za-z \-/&]*", v) and len(v) >= 2 for v in vals.values())
         ):
             return "label", vals
+
+    # 2b) Benar/Salah 1-huruf multibahasa: Jerman R(esichtig)/F(alsch),
+    #     Korea O/X. Label 1-huruf tidak valid (cabang 2 menolak len<2), dan
+    #     format PGK '(X) teks' selalu menaruh huruf DI DALAM kurung di awal —
+    #     bukan pola 'X (Y)' — sehingga cabang ini aman.
+    pairs_1h = re.findall(r"([A-Z])\s*\(([RFOX])\)", ktx)
+    if pairs_1h:
+        residue = re.sub(r"([A-Z])\s*\(([RFOX])\)", "", ktx)
+        vals_1h = {k: v for k, v in pairs_1h}
+        keys = sorted(vals_1h)
+        if (
+            not re.search(r"[A-Za-z0-9]", residue)
+            and 3 <= len(keys) <= 6
+            and keys == [chr(ord("A") + i) for i in range(len(keys))]
+        ):
+            return "bs", {k: {"R": "Benar", "O": "Benar"}.get(v, "Salah")
+                          for k, v in vals_1h.items()}
 
     # 3) Format semicolon: '(A)' atau '(A;D)' — spasi di dalam kurung ditoleransi
     #    (kasus nyata: '( B)' pada en1 no=5)
