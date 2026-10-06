@@ -83,19 +83,27 @@ _key_cooldowns = {}  # {key: timestamp_until_cooldown_expires}
 def get_api_keys():
     """Mengambil semua API key dari LLM_API_KEYS (koma/spasi/baris baru) atau LLM_API_KEY.
     Untuk kompatibilitas: juga membaca GROQ_API_KEYS sebagai alias."""
-    raw = _first_env("LLM_API_KEYS", "LLM_API_KEY", "GROQ_API_KEYS", default="")
+    raw = _first_env("GROQ_API_KEYS", "GROQ_API_KEY", "LLM_API_KEYS", "LLM_API_KEY", default="")
     if not raw:
         return []
-    parts = [k.strip() for k in re.split(r"[,;\s\n\r]+", raw) if k.strip()]
+    parts = [k.strip() for k in re.split(r"[,;\s\n\r]+", raw) if k.strip() and not k.strip().startswith("sk-or-")]
     return parts
 
 
 def get_openrouter_api_keys():
-    """API keys khusus OpenRouter (fallback kedua setelah Groq)."""
-    raw = _first_env("OPENROUTER_API_KEYS", default="")
-    if not raw:
-        return []
-    return [k.strip() for k in re.split(r"[,;\s\n\r]+", raw) if k.strip()]
+    """API keys khusus OpenRouter (fallback kedua setelah Groq atau provider mandiri)."""
+    keys = []
+    raw = _first_env("OPENROUTER_API_KEYS", "OPENROUTER_API_KEY", "OPEN_ROUTER_API_KEY", default="")
+    if raw:
+        keys.extend([k.strip() for k in re.split(r"[,;\s\n\r]+", raw) if k.strip()])
+    # Cek juga apakah ada key OpenRouter (sk-or-v1-...) tercantum di LLM_API_KEYS
+    llm_keys = _first_env("LLM_API_KEYS", "LLM_API_KEY", default="")
+    if llm_keys:
+        for k in re.split(r"[,;\s\n\r]+", llm_keys):
+            k = k.strip()
+            if k.startswith("sk-or-") and k not in keys:
+                keys.append(k)
+    return keys
 
 
 def get_alibaba_api_key():
@@ -178,6 +186,7 @@ def active_provider_info():
     """Info provider aktif (untuk ditampilkan/diagnosa — tanpa membocorkan API key)."""
     gemini_key = get_gemini_api_key()
     keys = get_api_keys()
+    or_keys = get_openrouter_api_keys()
     cloud = _first_env("OPENAI_COMPATIBLE_BASE_URL", "LLM_BASE_URL")
     ollama = _first_env("OLLAMA_BASE_URL", default="http://127.0.0.1:11434")
 
@@ -188,6 +197,15 @@ def active_provider_info():
             "name": "Qwen 2.5 27B (Groq Fast)",
             "tier": "cloud",
             "default": not bool(gemini_key)
+        })
+    if or_keys:
+        or_model_name = _first_env("OPENROUTER_MODEL", default="qwen/qwen-2.5-7b-instruct")
+        clean_or_label = or_model_name.split("/")[-1].replace("-instruct", "").capitalize()
+        model_options.append({
+            "id": "openrouter-qwen",
+            "name": f"{clean_or_label} (OpenRouter Cloud)",
+            "tier": "free",
+            "default": not model_options and not bool(gemini_key)
         })
     if gemini_key:
         model_options.append({
@@ -211,6 +229,8 @@ def active_provider_info():
             "api_key_set": True,
             "has_gemini": True,
             "has_groq": bool(cloud and keys),
+            "has_openrouter": len(or_keys) > 0,
+            "openrouter_keys_count": len(or_keys),
             "model_options": model_options,
         }
     if cloud:
@@ -218,10 +238,12 @@ def active_provider_info():
             "provider": "openai_compatible",
             "base_url": cloud,
             "model": _first_env("LLM_MODEL", default=""),
-            "api_key_set": len(keys) > 0,
-            "keys_count": len(keys),
+            "api_key_set": len(keys) > 0 or len(or_keys) > 0,
+            "keys_count": len(keys) + len(or_keys),
             "has_gemini": False,
-            "has_groq": True,
+            "has_groq": bool(keys),
+            "has_openrouter": len(or_keys) > 0,
+            "openrouter_keys_count": len(or_keys),
             "model_options": model_options,
         }
     return {
@@ -232,6 +254,7 @@ def active_provider_info():
         "keys_count": 0,
         "has_gemini": False,
         "has_groq": False,
+        "has_openrouter": len(or_keys) > 0,
         "model_options": model_options,
     }
 
@@ -306,10 +329,10 @@ def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tok
         providers.append({"name": "groq", "base_url": groq_url,
                           "keys": groq_keys, "model": groq_model})
 
-    # 2. OpenRouter (fallback - model gratis)
+    # 2. OpenRouter (fallback / rute terkonfigurasi)
     or_keys = get_openrouter_api_keys()
     or_url = _first_env("OPENROUTER_BASE_URL", default="https://openrouter.ai/api/v1")
-    or_model = _first_env("OPENROUTER_MODEL", default="openrouter/free")
+    or_model = _first_env("OPENROUTER_MODEL", default="qwen/qwen-2.5-7b-instruct")
     if or_keys:
         providers.append({"name": "openrouter", "base_url": or_url,
                           "keys": or_keys, "model": or_model})
@@ -334,6 +357,12 @@ def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tok
         if "gemini" in ml:
             providers = [p for p in providers if p["name"] == "gemini"] + \
                         [p for p in providers if p["name"] != "gemini"]
+        elif "openrouter" in ml or "or-" in ml:
+            providers = [p for p in providers if p["name"] == "openrouter"] + \
+                        [p for p in providers if p["name"] != "openrouter"]
+        elif "groq" in ml:
+            providers = [p for p in providers if p["name"] == "groq"] + \
+                        [p for p in providers if p["name"] != "groq"]
 
     last_err = None
     for i, prov in enumerate(providers):
@@ -351,8 +380,20 @@ def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tok
             if image_paths:
                 print(f"[tutor_llm] Catatan: fallback ke {prov['name']} — {len(image_paths)} "
                       f"gambar tidak dikirim (konteks gambar terwakili transkripsi).")
+
+            # Sesuaikan model aktual yang dikirim ke provider
+            target_model = prov["model"]
+            if model:
+                ml = model.lower()
+                if prov["name"] == "openrouter":
+                    target_model = prov["model"] if ("openrouter" in ml or "or-" in ml) else model
+                elif prov["name"] == "groq":
+                    target_model = prov["model"] if ("groq" in ml) else model
+                elif "/" in model or "." in model:
+                    target_model = model
+
             info = {"provider": prov["name"], "base_url": prov["base_url"],
-                    "model": model or prov["model"], "_keys": prov["keys"]}
+                    "model": target_model, "_keys": prov["keys"]}
             text, actual_model = _post_openai_compatible(messages, info, temperature,
                                                          max_tokens, timeout)
             if return_meta:
@@ -467,7 +508,12 @@ def _post_openai_compatible(messages, info, temperature, max_tokens, timeout):
     for attempt in range(max_attempts):
         # Round-robin sederhana per-provider
         key = keys[attempt % len(keys)] if keys else next_api_key()
-        headers = {"Content-Type": "application/json", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) CBT-TKA-Tutor/1.0"}
+        headers = {
+            "Content-Type": "application/json",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) CBT-TKA-Tutor/1.0",
+            "HTTP-Referer": "https://tka-master.up.railway.app",
+            "X-Title": "TKA Master AI Tutor",
+        }
         if key:
             headers["Authorization"] = f"Bearer {key}"
         req = urllib.request.Request(url, data=body, headers=headers, method="POST")

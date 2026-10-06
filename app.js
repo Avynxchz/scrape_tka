@@ -955,9 +955,11 @@ window.addEventListener('message', async (e) => {
     if (typeof loginWithGoogle === 'function') {
       loginWithGoogle();
     }
-  } else if (d.type === 'logout') {
-    // Iframe minta logout
-    if (typeof logout === 'function') {
+  } else if (d.type === 'logout' || d.type === 'request-logout') {
+    // Iframe minta logout — tampilkan modal konfirmasi keluar yang estetik
+    if (typeof showLogoutConfirmationModal === 'function') {
+      showLogoutConfirmationModal();
+    } else if (typeof logout === 'function') {
       logout();
     }
   } else if (d.type === 'nav' || d.type === 'nav-tab') {
@@ -1077,10 +1079,52 @@ function sendPanelData(panel) {
   }
 }
 
+// Helper pengenal unik perangkat (Device Tracking & Fingerprinting untuk kuota tamu)
+function getOrCreateDeviceId() {
+  let did = null;
+  try {
+    did = localStorage.getItem('tka_device_id');
+  } catch (e) {}
+  if (!did) {
+    did = 'did_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+    try {
+      localStorage.setItem('tka_device_id', did);
+    } catch (e) {}
+  }
+  return did;
+}
+
+function getDeviceFingerprint() {
+  try {
+    const nav = window.navigator || {};
+    const scr = window.screen || {};
+    const parts = [
+      nav.userAgent || '',
+      nav.language || '',
+      (scr.width || 0) + 'x' + (scr.height || 0) + 'x' + (scr.colorDepth || 0),
+      new Date().getTimezoneOffset(),
+      nav.hardwareConcurrency || '',
+      nav.deviceMemory || '',
+      nav.platform || ''
+    ];
+    const str = parts.join('|');
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = ((hash << 5) - hash) + str.charCodeAt(i);
+      hash |= 0;
+    }
+    return 'dfp_' + Math.abs(hash).toString(36);
+  } catch (e) {
+    return 'dfp_unknown';
+  }
+}
+
 // Helper otentikasi AI Tutor ke backend server.py
 function getTutorAuthHeaders() {
   const user = typeof getTKAUser === 'function' ? getTKAUser() : (window.TKA_USER || null);
   const headers = {};
+  headers['X-Device-Id'] = getOrCreateDeviceId();
+  headers['X-Device-Fingerprint'] = getDeviceFingerprint();
   if (user && user.loggedIn) {
     headers['X-User-Email'] = user.email || '';
     headers['X-User-Logged-In'] = 'true';
@@ -3466,14 +3510,15 @@ function startTutorCooldown(seconds = 10) {
 // Render Chat Conversation History
 // Helper pembersih nama model AI (tanpa emoji, nama rapi konsisten)
 function cleanModelName(raw) {
-  if (!raw) return 'Gemini 3 Flash';
+  if (!raw) return 'Qwen 2.5 27B';
   const str = String(raw).trim();
   const noEmoji = str.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F1E0}-\u{1F1FF}]/gu, '').trim();
   const lower = noEmoji.toLowerCase();
+  if (lower.includes('openrouter') || lower.includes('qwen-openrouter')) return 'Qwen 7B (OpenRouter)';
   if (lower.includes('flash') || lower === 'gemini-flash') return 'Gemini 3 Flash';
   if (lower.includes('pro') || lower === 'gemini-pro') return 'Gemini Pro';
   if (lower.includes('qwen') || lower === 'qwen-groq') return 'Qwen 2.5 27B';
-  return noEmoji || 'Gemini 3 Flash';
+  return noEmoji || 'AI Tutor';
 }
 
 // Render Chat Conversation History
@@ -3554,7 +3599,8 @@ async function syncTutorConversation() {
     const user = typeof getTKAUser === 'function' ? getTKAUser() : (window.TKA_USER || null);
     const isLogin = !!(user && user.loggedIn);
     const userQuery = isLogin ? `&user_email=${encodeURIComponent(user.email || '')}&is_logged_in=true` : '';
-    const res = await fetch(`/api/tutor/state?subject=${encodeURIComponent(state.currentSubject)}&paket=${state.currentPkg}&nomor=${q.nomor}${userQuery}`, {
+    const didQuery = `&device_id=${encodeURIComponent(getOrCreateDeviceId())}&device_fp=${encodeURIComponent(getDeviceFingerprint())}`;
+    const res = await fetch(`/api/tutor/state?subject=${encodeURIComponent(state.currentSubject)}&paket=${state.currentPkg}&nomor=${q.nomor}${userQuery}${didQuery}`, {
       headers: getTutorAuthHeaders()
     });
     const data = await res.json();
@@ -3609,6 +3655,9 @@ function updateModelPickerUI(modelId) {
   } else if (modelId === 'gemini-pro') {
     iconClass = 'fa-solid fa-brain';
     modelName = 'Gemini Pro';
+  } else if (modelId === 'openrouter-qwen') {
+    iconClass = 'fa-solid fa-network-wired';
+    modelName = 'Qwen 7B (OpenRouter)';
   } else {
     iconClass = 'fa-solid fa-bolt';
     modelName = 'Qwen 2.5 27B';
@@ -3791,7 +3840,9 @@ async function sendChatMessage(e) {
         model: state.selectedTutorModel || 'gemini-flash',
         request_id: clientRequestId,
         user_email: isLogin ? (user.email || '') : null,
-        is_logged_in: isLogin
+        is_logged_in: isLogin,
+        device_id: getOrCreateDeviceId(),
+        device_fp: getDeviceFingerprint()
       })
     });
 

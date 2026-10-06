@@ -857,8 +857,10 @@ button:active { transform: scale(0.97); }
     send({ type: 'login-google' });
   };
   window.logoutFromAkun = function () {
-    if (confirm('Keluar dari akun TKA Master?')) {
-      send({ type: 'logout' });
+    if (window.parent && window.parent !== window && typeof window.parent.showLogoutConfirmationModal === 'function') {
+      window.parent.showLogoutConfirmationModal();
+    } else {
+      send({ type: 'request-logout' });
     }
   };
 

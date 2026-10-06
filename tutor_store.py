@@ -155,6 +155,19 @@ def init_db():
                     plan       TEXT,
                     created_at TEXT NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS ai_tutor_devices (
+                    device_id          TEXT PRIMARY KEY,
+                    fingerprint        TEXT,
+                    ip_address         TEXT,
+                    last_user_key      TEXT,
+                    daily_date         TEXT,
+                    daily_count        INTEGER NOT NULL DEFAULT 0,
+                    last_request_time  REAL NOT NULL DEFAULT 0,
+                    created_at         TEXT NOT NULL,
+                    updated_at         TEXT NOT NULL
+                );
+                CREATE INDEX IF NOT EXISTS ix_devices_fp ON ai_tutor_devices(fingerprint, daily_date);
+                CREATE INDEX IF NOT EXISTS ix_devices_ip ON ai_tutor_devices(ip_address, daily_date);
                 """
             )
             # Fase 4: sebelum ada auth, semua user ber-tier 'free' dari versi lama
@@ -320,10 +333,37 @@ def _daily_limit(tier):
     return GUEST_DAILY_LIMIT
 
 
-def get_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
-    """Ambil informasi kuota & sisa cooldown pengguna tanpa mengonsumsi kuota."""
+def _find_device_row(conn, device_id=None, fingerprint=None, ip_address=None):
+    """Cari catatan perangkat berdasarkan device_id, atau kombinasi fingerprint + IP."""
+    if device_id:
+        r = conn.execute("SELECT * FROM ai_tutor_devices WHERE device_id=?", (device_id,)).fetchone()
+        if r:
+            return dict(r)
+    if fingerprint and ip_address:
+        r = conn.execute(
+            "SELECT * FROM ai_tutor_devices WHERE fingerprint=? AND ip_address=? ORDER BY updated_at DESC LIMIT 1",
+            (fingerprint, ip_address)
+        ).fetchone()
+        if r:
+            return dict(r)
+    if fingerprint:
+        r = conn.execute(
+            "SELECT * FROM ai_tutor_devices WHERE fingerprint=? ORDER BY updated_at DESC LIMIT 1",
+            (fingerprint,)
+        ).fetchone()
+        if r:
+            return dict(r)
+    return None
+
+
+def get_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS,
+                   device_id=None, fingerprint=None, ip_address=None):
+    """Ambil informasi kuota & sisa cooldown pengguna dan perangkat tanpa mengonsumsi kuota."""
     now = time.time()
     today = _today_wib()
+    dev_count = 0
+    dev_limited = False
+
     with _db() as conn:
         row = conn.execute(
             "SELECT * FROM ai_tutor_users WHERE user_key=?", (user_key,)
@@ -341,6 +381,16 @@ def get_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
                 daily_count = 0
             last_req = float(u.get("last_request_time") or 0)
 
+        # Pengenalan perangkat untuk akun tamu (guest anti-abuse)
+        if tier == "guest" and (device_id or fingerprint):
+            dev_row = _find_device_row(conn, device_id, fingerprint, ip_address)
+            if dev_row:
+                dev_count = dev_row.get("daily_count", 0) if dev_row.get("daily_date") == today else 0
+                if dev_count > daily_count:
+                    daily_count = dev_count
+                if dev_count >= GUEST_DAILY_LIMIT:
+                    dev_limited = True
+
     is_test = bool(os.environ.get("PYTEST_CURRENT_TEST"))
     limit = _daily_limit(tier)
     elapsed = now - last_req
@@ -348,6 +398,7 @@ def get_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
 
     return {
         "user_key": user_key,
+        "device_id": device_id,
         "tier": tier,
         "is_subscriber": tier == "subscriber",
         "daily_count": daily_count,
@@ -356,10 +407,11 @@ def get_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
         "cooldown_seconds": cooldown_seconds,
         "cooldown_remaining": cooldown_rem,
         "can_ask": (daily_count < limit or is_test) and cooldown_rem <= 0,
+        "device_limited": dev_limited,
     }
 
 
-def reset_user_quota(user_key):
+def reset_user_quota(user_key, device_id=None):
     """Reset kuota harian dan cooldown pengguna ke 0 (khusus mode admin testing / dev)."""
     with _lock:
         with _db() as conn:
@@ -367,16 +419,22 @@ def reset_user_quota(user_key):
                 "UPDATE ai_tutor_users SET daily_count=0, last_request_time=0, updated_at=? WHERE user_key=?",
                 (_now(), user_key),
             )
-    return get_user_quota(user_key)
+            if device_id:
+                conn.execute(
+                    "UPDATE ai_tutor_devices SET daily_count=0, last_request_time=0, updated_at=? WHERE device_id=?",
+                    (_now(), device_id),
+                )
+    return get_user_quota(user_key, device_id=device_id)
 
 
-def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS, tier_override=None):
-    """Cek dan konsumsi kuota pertanyaan pengguna.
+def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS, tier_override=None,
+                       device_id=None, fingerprint=None, ip_address=None):
+    """Cek dan konsumsi kuota pertanyaan pengguna dan perangkat.
 
     Aturan:
       1. Cooldown antar pertanyaan: default 10 detik.
       2. Kuota harian:
-         - Guest: 5 pertanyaan / hari (tanpa akun)
+         - Guest: 5 pertanyaan / hari (diikat ke perangkat agar tidak dieksploitasi)
          - Free / Login Google: 25 pertanyaan / hari
          - Pro/Subscriber: 100 pertanyaan / hari
     Mengembalikan tuple: (allowed: bool, reason: str|None, wait_seconds: float, quota_info: dict)
@@ -432,6 +490,7 @@ def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS, tie
                 wait_sec = round(cooldown_seconds - elapsed, 1)
                 quota_info = {
                     "user_key": user_key,
+                    "device_id": device_id,
                     "tier": tier,
                     "is_subscriber": tier == "subscriber",
                     "daily_count": daily_count,
@@ -443,38 +502,76 @@ def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS, tie
                 }
                 return False, "cooldown", wait_sec, quota_info
 
-            # 2. Cek batas harian (dilewati saat testing agar simulasi riwayat panjang berhasil)
-            if not is_test and daily_count >= limit:
+            # 2. Cek batas harian (akun pengguna DAN pengenal perangkat jika guest)
+            dev_row = None
+            dev_count = 0
+            if tier == "guest" and (device_id or fingerprint):
+                dev_row = _find_device_row(conn, device_id, fingerprint, ip_address)
+                if dev_row:
+                    dev_count = dev_row.get("daily_count", 0) if dev_row.get("daily_date") == today else 0
+
+            effective_count = max(daily_count, dev_count) if tier == "guest" else daily_count
+
+            if not is_test and effective_count >= limit:
                 quota_info = {
                     "user_key": user_key,
+                    "device_id": device_id,
                     "tier": tier,
                     "is_subscriber": tier == "subscriber",
-                    "daily_count": daily_count,
+                    "daily_count": effective_count,
                     "daily_limit": limit,
                     "remaining": 0,
                     "cooldown_seconds": cooldown_seconds,
                     "cooldown_remaining": 0,
                     "can_ask": False,
+                    "device_limited": tier == "guest" and dev_count >= limit,
                 }
                 return False, "quota_exceeded", 0, quota_info
 
-            # 3. Berhasil: tambah hitungan & set last_request_time
+            # 3. Berhasil: tambah hitungan & set last_request_time pengguna
             new_count = daily_count + 1
             conn.execute(
                 "UPDATE ai_tutor_users SET daily_date=?, daily_count=?, last_request_time=?, updated_at=? "
                 "WHERE user_key=?",
                 (today, new_count, now, _now(), user_key),
             )
+
+            # 4. Tambah hitungan perangkat jika akun tamu (guest)
+            new_dev_count = dev_count
+            if tier == "guest" and (device_id or fingerprint):
+                target_did = device_id or (dev_row and dev_row.get("device_id")) or f"fp_{fingerprint}"
+                existing_dev = conn.execute("SELECT * FROM ai_tutor_devices WHERE device_id=?", (target_did,)).fetchone()
+                if existing_dev:
+                    ed = dict(existing_dev)
+                    new_dev_count = (ed.get("daily_count", 0) + 1) if ed.get("daily_date") == today else 1
+                    conn.execute(
+                        "UPDATE ai_tutor_devices SET daily_date=?, daily_count=?, last_request_time=?, "
+                        "last_user_key=?, fingerprint=COALESCE(?, fingerprint), ip_address=COALESCE(?, ip_address), "
+                        "updated_at=? WHERE device_id=?",
+                        (today, new_dev_count, now, user_key, fingerprint, ip_address, _now(), target_did),
+                    )
+                else:
+                    new_dev_count = 1
+                    conn.execute(
+                        "INSERT INTO ai_tutor_devices "
+                        "(device_id, fingerprint, ip_address, last_user_key, daily_date, daily_count, last_request_time, created_at, updated_at) "
+                        "VALUES (?, ?, ?, ?, ?, 1, ?, ?, ?)",
+                        (target_did, fingerprint, ip_address, user_key, today, now, _now(), _now()),
+                    )
+
+            final_effective_count = max(new_count, new_dev_count) if tier == "guest" else new_count
             updated_quota = {
                 "user_key": user_key,
+                "device_id": device_id,
                 "tier": tier,
                 "is_subscriber": tier == "subscriber",
-                "daily_count": new_count,
+                "daily_count": final_effective_count,
                 "daily_limit": limit,
-                "remaining": max(0, limit - new_count),
+                "remaining": max(0, limit - final_effective_count),
                 "cooldown_seconds": cooldown_seconds,
                 "cooldown_remaining": cooldown_seconds if not is_test else 0,
-                "can_ask": new_count < limit,
+                "can_ask": final_effective_count < limit,
+                "device_limited": tier == "guest" and new_dev_count >= limit,
             }
             return True, None, 0, updated_quota
 

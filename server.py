@@ -1090,6 +1090,30 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 return True
         return False
 
+    def _extract_device_info(self, payload=None):
+        """Ambil pengenal perangkat (device_id, fingerprint, client_ip) untuk guest anti-abuse."""
+        dev_id = (self.headers.get('X-Device-Id') or '').strip()
+        dev_fp = (self.headers.get('X-Device-Fingerprint') or '').strip()
+
+        try:
+            q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+            if not dev_id:
+                dev_id = (q.get('device_id', [''])[0]).strip()
+            if not dev_fp:
+                dev_fp = (q.get('device_fp', [''])[0] or q.get('fingerprint', [''])[0]).strip()
+        except Exception:
+            pass
+
+        if payload and isinstance(payload, dict):
+            if not dev_id:
+                dev_id = str(payload.get('device_id') or '').strip()
+            if not dev_fp:
+                dev_fp = str(payload.get('device_fp') or payload.get('fingerprint') or '').strip()
+
+        fwd = (self.headers.get('X-Forwarded-For') or '').split(',')[0].strip()
+        client_ip = fwd or (self.client_address[0] if hasattr(self, 'client_address') and self.client_address else '')
+        return dev_id or None, dev_fp or None, client_ip or None
+
     def _cors_allow_origin(self):
         """Nilai header Access-Control-Allow-Origin.
 
@@ -1220,7 +1244,8 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             # Muat ulang percakapan tersimpan soal ini (resume tanpa isi kosong)
             user_key, new_cookie = self._tutor_session()
             is_login = self._is_logged_in_request()
-            current_q = tutor_store.get_user_quota(user_key)
+            dev_id, dev_fp, client_ip = self._extract_device_info()
+            current_q = tutor_store.get_user_quota(user_key, device_id=dev_id, fingerprint=dev_fp, ip_address=client_ip)
             if current_q.get("tier") != "subscriber":
                 target_tier = "free" if is_login else "guest"
                 if current_q.get("tier") != target_tier:
@@ -1238,7 +1263,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 conv = tutor_store.get_or_create_conversation(
                     user_key, ctx["canonical_id"], subject, paket, nomor, create=False)
                 messages = tutor_store.get_messages(conv["id"]) if conv else []
-                user_quota = tutor_store.get_user_quota(user_key)
+                user_quota = tutor_store.get_user_quota(user_key, device_id=dev_id, fingerprint=dev_fp, ip_address=client_ip)
                 user_quota["is_logged_in"] = is_login or (user_quota.get("tier") == "subscriber")
                 return self._send_json(200, {
                     "status": "success",
@@ -1477,6 +1502,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
 
                 # Sinkronkan tier kuota jika request berasal dari pengguna login
                 is_login = self._is_logged_in_request(payload)
+                dev_id, dev_fp, client_ip = self._extract_device_info(payload)
                 tier_target = "free" if is_login else None
                 if is_login:
                     tutor_store.set_user_tier(user_key, tier="free")
@@ -1484,7 +1510,8 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 # Fase 2, Fix 1: cek cooldown & kuota TANPA mengonsumsi.
                 # Kuota hanya dipotong SETELAH LLM berhasil menjawab — bila LLM
                 # gagal, kuota user tidak hangus.
-                _quota = tutor_store.get_user_quota(user_key, cooldown_seconds=10)
+                _quota = tutor_store.get_user_quota(user_key, cooldown_seconds=10,
+                                                    device_id=dev_id, fingerprint=dev_fp, ip_address=client_ip)
                 _quota["is_logged_in"] = is_login or (_quota.get("tier") in ("free", "subscriber"))
                 if not _quota.get("can_ask"):
                     if _quota.get("cooldown_remaining", 0) > 0:
@@ -1495,7 +1522,10 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                         quota_reason = "quota_exceeded"
                         wait_sec = 0
                         limit = _quota.get("daily_limit", 25 if is_login else 5)
-                        limit_msg = f"Batas kuota harian ({limit} pertanyaan) telah tercapai. Kuota direset setiap 00.00 WIB — Pro mendapat 100 pertanyaan per hari!"
+                        if not is_login and _quota.get("device_limited"):
+                            limit_msg = "Batas 5 pertanyaan gratis untuk perangkat ini telah habis hari ini. Silakan masuk dengan akun Google untuk mendapatkan 25 pertanyaan per hari!"
+                        else:
+                            limit_msg = f"Batas kuota harian ({limit} pertanyaan) telah tercapai. Kuota direset setiap 00.00 WIB — Masuk Google dapat 25 pertanyaan per hari!"
                     return self._send_json(429, {
                         "status": "rate_limited",
                         "reason": quota_reason,
@@ -1555,11 +1585,14 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 # Konsumsi kuota SETELAH jawaban LLM sukses tersimpan.
                 # (LLM gagal -> kuota tidak dipotong; lihat blok LLMError.)
                 _ok, _reason, _wait, user_quota = tutor_store.consume_user_quota(
-                    user_key, cooldown_seconds=10, tier_override=tier_target)
+                    user_key, cooldown_seconds=10, tier_override=tier_target,
+                    device_id=dev_id, fingerprint=dev_fp, ip_address=client_ip)
                 if not _ok:
                     # Balapan antar-request: jawaban sudah terkirim, segarkan
                     # info kuota utk respons.
-                    user_quota = tutor_store.get_user_quota(user_key, cooldown_seconds=10)
+                    user_quota = tutor_store.get_user_quota(
+                        user_key, cooldown_seconds=10,
+                        device_id=dev_id, fingerprint=dev_fp, ip_address=client_ip)
                 user_quota["is_logged_in"] = is_login or (user_quota.get("tier") in ("free", "subscriber"))
                 return self._send_json(200, {
                     "status": "success", "reply": reply,
@@ -1672,7 +1705,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             self.send_header('Access-Control-Allow-Origin', allow_origin)
             self.send_header('Vary', 'Origin')
         self.send_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type, X-Device-Id, X-Device-Fingerprint, X-User-Logged-In, X-User-Email, X-User-Name')
         self.end_headers()
 
 def run_server():
