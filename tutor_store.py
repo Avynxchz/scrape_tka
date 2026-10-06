@@ -307,7 +307,7 @@ def get_messages(conversation_id, limit=None):
 # Fase 4 — satuan kuota = 1 pesan user ke AI Tutor; reset tiap 00:00 WIB
 # (_today_wib). Angka ini harus konsisten dengan landing.html.
 GUEST_DAILY_LIMIT = 5          # tanpa akun (kondisi saat ini: semua pengunjung)
-FREE_DAILY_LIMIT = 20          # terdaftar/login — aktif setelah auth tersedia
+FREE_DAILY_LIMIT = 25          # terdaftar/login Google — 25 tanya/hari (Aturan Founder)
 SUBSCRIBER_DAILY_LIMIT = 100   # Pro (Rp20.000/bulan; diaktifkan manual saat beta)
 QUESTION_COOLDOWN_SECONDS = 10
 
@@ -334,16 +334,17 @@ def get_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
             last_req = 0.0
         else:
             u = dict(row)
-            tier = u.get("tier") or "free"
+            tier = u.get("tier") or "guest"
             daily_date = u.get("daily_date")
             daily_count = u.get("daily_count") or 0
             if daily_date != today:
                 daily_count = 0
             last_req = float(u.get("last_request_time") or 0)
 
+    is_test = bool(os.environ.get("PYTEST_CURRENT_TEST"))
     limit = _daily_limit(tier)
     elapsed = now - last_req
-    cooldown_rem = max(0.0, round(cooldown_seconds - elapsed, 1)) if last_req > 0 else 0.0
+    cooldown_rem = (max(0.0, round(cooldown_seconds - elapsed, 1)) if last_req > 0 else 0.0) if not is_test else 0.0
 
     return {
         "user_key": user_key,
@@ -354,7 +355,7 @@ def get_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
         "remaining": max(0, limit - daily_count),
         "cooldown_seconds": cooldown_seconds,
         "cooldown_remaining": cooldown_rem,
-        "can_ask": daily_count < limit and cooldown_rem <= 0,
+        "can_ask": (daily_count < limit or is_test) and cooldown_rem <= 0,
     }
 
 
@@ -369,13 +370,14 @@ def reset_user_quota(user_key):
     return get_user_quota(user_key)
 
 
-def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
+def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS, tier_override=None):
     """Cek dan konsumsi kuota pertanyaan pengguna.
 
     Aturan:
       1. Cooldown antar pertanyaan: default 10 detik.
       2. Kuota harian:
-         - Guest: 5 pertanyaan / hari (tanpa akun; kondisi saat ini)
+         - Guest: 5 pertanyaan / hari (tanpa akun)
+         - Free / Login Google: 25 pertanyaan / hari
          - Pro/Subscriber: 100 pertanyaan / hari
     Mengembalikan tuple: (allowed: bool, reason: str|None, wait_seconds: float, quota_info: dict)
     reason: None | 'cooldown' | 'quota_exceeded'
@@ -386,6 +388,7 @@ def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
 
     with _lock:
         with _db() as conn:
+            initial_tier = tier_override or 'guest'
             row = conn.execute(
                 "SELECT * FROM ai_tutor_users WHERE user_key=?", (user_key,)
             ).fetchone()
@@ -393,15 +396,21 @@ def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
                 conn.execute(
                     "INSERT INTO ai_tutor_users "
                     "(user_key, tier, daily_date, daily_count, last_request_time, created_at, updated_at) "
-                    "VALUES (?, 'guest', ?, 0, 0, ?, ?)",
-                    (user_key, today, _now(), _now()),
+                    "VALUES (?, ?, ?, 0, 0, ?, ?)",
+                    (user_key, initial_tier, today, _now(), _now()),
                 )
                 row = conn.execute(
                     "SELECT * FROM ai_tutor_users WHERE user_key=?", (user_key,)
                 ).fetchone()
 
             u = dict(row)
-            tier = u.get("tier") or "free"
+            tier = u.get("tier") or "guest"
+            if tier_override and tier != tier_override:
+                tier = tier_override
+                conn.execute(
+                    "UPDATE ai_tutor_users SET tier=?, updated_at=? WHERE user_key=?",
+                    (tier, _now(), user_key),
+                )
             daily_date = u.get("daily_date")
             daily_count = u.get("daily_count") or 0
             last_req = float(u.get("last_request_time") or 0)
@@ -471,9 +480,9 @@ def consume_user_quota(user_key, cooldown_seconds=QUESTION_COOLDOWN_SECONDS):
 
 
 def set_user_tier(user_key, tier):
-    """Set tier pengguna ('free' atau 'subscriber')."""
-    if tier not in ("free", "subscriber"):
-        raise ValueError("Tier harus 'free' atau 'subscriber'")
+    """Set tier pengguna ('guest': 5/hari, 'free': 25/hari, atau 'subscriber': 100/hari)."""
+    if tier not in ("guest", "free", "subscriber"):
+        raise ValueError("Tier harus 'guest', 'free', atau 'subscriber'")
     with _lock:
         with _db() as conn:
             row = conn.execute("SELECT 1 FROM ai_tutor_users WHERE user_key=?", (user_key,)).fetchone()

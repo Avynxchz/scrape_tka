@@ -1069,6 +1069,27 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         cookie_val = tutor_store.make_user_cookie_value()
         return cookie_val.split('.', 1)[0], cookie_val
 
+    def _is_logged_in_request(self, payload=None):
+        """Deteksi apakah request berasal dari pengguna yang login Google/akun."""
+        # 1. Cek headers (X-User-Logged-In, X-User-Email, X-TKA-User)
+        hdr_login = (self.headers.get('X-User-Logged-In') or '').strip().lower()
+        if hdr_login in ('true', '1'):
+            return True
+        if (self.headers.get('X-User-Email') or '').strip():
+            return True
+        # 2. Cek query parameter bila ada
+        try:
+            q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+            if q.get('is_logged_in', [''])[0].lower() in ('true', '1') or q.get('user_email', [''])[0].strip():
+                return True
+        except Exception:
+            pass
+        # 3. Cek payload JSON bila ada
+        if payload and isinstance(payload, dict):
+            if payload.get('is_logged_in') is True or (payload.get('user_email') or '').strip():
+                return True
+        return False
+
     def _cors_allow_origin(self):
         """Nilai header Access-Control-Allow-Origin.
 
@@ -1198,6 +1219,12 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         if self.path.split('?', 1)[0] == '/api/tutor/state':
             # Muat ulang percakapan tersimpan soal ini (resume tanpa isi kosong)
             user_key, new_cookie = self._tutor_session()
+            is_login = self._is_logged_in_request()
+            current_q = tutor_store.get_user_quota(user_key)
+            if current_q.get("tier") != "subscriber":
+                target_tier = "free" if is_login else "guest"
+                if current_q.get("tier") != target_tier:
+                    tutor_store.set_user_tier(user_key, tier=target_tier)
             try:
                 params = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
                 subject = params.get('subject', ['matematika'])[0]
@@ -1212,6 +1239,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                     user_key, ctx["canonical_id"], subject, paket, nomor, create=False)
                 messages = tutor_store.get_messages(conv["id"]) if conv else []
                 user_quota = tutor_store.get_user_quota(user_key)
+                user_quota["is_logged_in"] = is_login or (user_quota.get("tier") == "subscriber")
                 return self._send_json(200, {
                     "status": "success",
                     "canonical_id": ctx["canonical_id"],
@@ -1446,10 +1474,18 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 if not ctx:
                     return self._send_json(404, {"status": "error",
                                                  "message": "Soal tidak ditemukan."})
+
+                # Sinkronkan tier kuota jika request berasal dari pengguna login
+                is_login = self._is_logged_in_request(payload)
+                tier_target = "free" if is_login else None
+                if is_login:
+                    tutor_store.set_user_tier(user_key, tier="free")
+
                 # Fase 2, Fix 1: cek cooldown & kuota TANPA mengonsumsi.
                 # Kuota hanya dipotong SETELAH LLM berhasil menjawab — bila LLM
                 # gagal, kuota user tidak hangus.
                 _quota = tutor_store.get_user_quota(user_key, cooldown_seconds=10)
+                _quota["is_logged_in"] = is_login or (_quota.get("tier") in ("free", "subscriber"))
                 if not _quota.get("can_ask"):
                     if _quota.get("cooldown_remaining", 0) > 0:
                         quota_reason = "cooldown"
@@ -1458,7 +1494,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                     else:
                         quota_reason = "quota_exceeded"
                         wait_sec = 0
-                        limit = _quota.get("daily_limit", 10)
+                        limit = _quota.get("daily_limit", 25 if is_login else 5)
                         limit_msg = f"Batas kuota harian ({limit} pertanyaan) telah tercapai. Kuota direset setiap 00.00 WIB — Pro mendapat 100 pertanyaan per hari!"
                     return self._send_json(429, {
                         "status": "rate_limited",
@@ -1519,11 +1555,12 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 # Konsumsi kuota SETELAH jawaban LLM sukses tersimpan.
                 # (LLM gagal -> kuota tidak dipotong; lihat blok LLMError.)
                 _ok, _reason, _wait, user_quota = tutor_store.consume_user_quota(
-                    user_key, cooldown_seconds=10)
+                    user_key, cooldown_seconds=10, tier_override=tier_target)
                 if not _ok:
                     # Balapan antar-request: jawaban sudah terkirim, segarkan
                     # info kuota utk respons.
                     user_quota = tutor_store.get_user_quota(user_key, cooldown_seconds=10)
+                user_quota["is_logged_in"] = is_login or (user_quota.get("tier") in ("free", "subscriber"))
                 return self._send_json(200, {
                     "status": "success", "reply": reply,
                     "conversation_id": conv_id, "message_id": am["id"],
@@ -1602,6 +1639,26 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 }, cookie_value=new_cookie)
             except Exception as e:
                 return self._send_500(e, "/api/tutor/reset_quota", cookie_value=new_cookie)
+
+        elif self.path == '/api/tutor/sync_user':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            user_key, new_cookie = self._tutor_session()
+            try:
+                payload = json.loads(post_data) if post_data else {}
+                is_login = bool(payload.get('logged_in') or payload.get('email') or payload.get('is_logged_in'))
+                tier = "free" if is_login else "guest"
+                quota = tutor_store.set_user_tier(user_key, tier=tier)
+                quota["is_logged_in"] = is_login
+                return self._send_json(200, {
+                    "status": "success",
+                    "tier": tier,
+                    "daily_limit": quota.get("daily_limit"),
+                    "remaining": quota.get("remaining"),
+                    "quota": quota,
+                }, cookie_value=new_cookie)
+            except Exception as e:
+                return self._send_500(e, "/api/tutor/sync_user", cookie_value=new_cookie)
 
         else:
             self.send_response(404)
