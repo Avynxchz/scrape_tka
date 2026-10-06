@@ -2,6 +2,8 @@ import re
 import os
 import sys
 import json
+import gzip
+import traceback
 import html as html_lib
 import urllib.request
 import urllib.parse
@@ -14,7 +16,6 @@ import tutor_engine    # noqa: E402  (mesin tutor konversasional berbasis LLM)
 import tutor_llm       # noqa: E402  (abstraksi provider LLM)
 import visitor_log     # noqa: E402  (pencatat pengunjung + dashboard /pengunjung)
 import tutor_store     # noqa: E402  (persistensi percakapan — SQLite)
-import legacy_tutor    # noqa: E402  (arsip mesin heuristik lama)
 
 tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
 
@@ -82,6 +83,65 @@ if not os.environ.get("VISITOR_ADMIN_KEY"):
         "Set environment variable VISITOR_ADMIN_KEY dengan kunci acak yang kuat "
         "sebelum menjalankan server."
     )
+
+# ============================================================================
+# KONSTANTA KEAMANAN (Fase 2)
+# ============================================================================
+# Batas ukuran body POST: request lebih besar ditolak 413 di awal do_POST.
+MAX_POST_BYTES = 1 * 1024 * 1024
+# Drain dibatasi agar koneksi tetap bersih tanpa menyedot memori tak terbatas.
+MAX_DRAIN_BYTES = 8 * 1024 * 1024
+
+# Allowlist ekstensi file statis frontend yang boleh disajikan.
+_STATIC_EXTS = (
+    '.html', '.htm', '.css', '.js', '.mjs', '.map',
+    '.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico',
+    '.woff', '.woff2', '.ttf', '.otf', '.eot',
+    '.json', '.txt', '.xml', '.webmanifest', '.mp4', '.webm', '.mp3',
+)
+_IMAGE_EXTS = ('.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico')
+# Direktori top-level yang isinya boleh disajikan (selain root proyek).
+# 'data' ditangani khusus: hanya file gambar di dalam folder images/.
+_STATIC_OK_TOPDIRS = ('images', 'cbt_images', 'tka',
+                      'workspace_akun', 'workspace_modul', 'workspace_progres')
+
+# ============================================================================
+# INDEKS NAMA FILE data/ (Fase 2, Fix 5)
+# Dibangun SEKALI saat server start — menggantikan os.walk() per-request
+# yang lambat di folder data/ (~268MB) pada find_question_image_paths &
+# translate_path.
+# ============================================================================
+def _build_data_file_index():
+    idx = {}
+    data_root = os.path.join(BASE_DIR, "data")
+    try:
+        for root, _dirs, files in os.walk(data_root):
+            for fn in files:
+                idx.setdefault(fn, []).append(os.path.join(root, fn))
+    except Exception:
+        pass
+    return idx
+
+_DATA_FILE_INDEX = _build_data_file_index()
+
+# ============================================================================
+# LOG ERROR SERVER (Fase 2, Fix 3c)
+# Traceback lengkap HANYA ditulis ke file ini — klien menerima pesan generik.
+# ============================================================================
+_ERROR_LOG_PATH = os.path.join(BASE_DIR, "scratch", "server_errors.log")
+
+
+def _log_server_error(exc, context=""):
+    """Tulis traceback lengkap ke scratch/server_errors.log (tidak ke klien)."""
+    try:
+        os.makedirs(os.path.dirname(_ERROR_LOG_PATH), exist_ok=True)
+        ts = time.strftime("%Y-%m-%d %H:%M:%S")
+        with open(_ERROR_LOG_PATH, "a", encoding="utf-8") as fh:
+            fh.write(f"[{ts}] {context} :: {type(exc).__name__}: {exc}\n")
+            traceback.print_exception(type(exc), exc, exc.__traceback__, file=fh)
+            fh.write("\n")
+    except Exception:
+        pass
 
 # ============================================================================
 # LAPISAN KANONIS (data/canonical_questions/) — sumber konteks AI
@@ -548,13 +608,11 @@ def find_question_image_paths(subject, paket, lrn_q, canon):
                 found = True
                 break
         if not found:
-            # Cari rekursif di folder data bila letak gambar ada di subfolder lain
-            for root, dirs, files in os.walk(os.path.join(BASE_DIR, "data")):
-                if fn in files:
-                    cand = os.path.join(root, fn)
-                    if cand not in found_paths:
-                        found_paths.append(cand)
-                    break
+            # Fallback: cari di indeks nama file (dibangun sekali saat start,
+            # bukan os.walk per-request). Ambil kandidat pertama seperti dulu.
+            hits = _DATA_FILE_INDEX.get(fn)
+            if hits and hits[0] not in found_paths:
+                found_paths.append(hits[0])
 
     return found_paths
 
@@ -591,8 +649,8 @@ def _refresh_tutor_summary(conversation_id):
     except Exception:
         pass
 
-# Arsip mesin tutor heuristik berbasis aturan dipindahkan ke legacy_tutor.py
-get_ai_tutor_response = legacy_tutor.get_ai_tutor_response
+# (Arsip mesin tutor heuristik berbasis aturan tetap ada di legacy_tutor.py,
+#  tetapi endpoint /api/ai-tutor sudah dihapus — lihat do_POST -> 410 Gone.)
 
 
 _client_active_context = {}  # ip -> {"subject": ..., "paket": ...}
@@ -1016,9 +1074,10 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                         if os.path.isfile(cand):
                             return cand
 
-                for root, dirs, files in os.walk(data_root):
-                    if filename in files:
-                        return os.path.join(root, filename)
+                # Fallback terakhir: indeks nama file (dibangun sekali saat start).
+                hits = _DATA_FILE_INDEX.get(filename)
+                if hits:
+                    return hits[0]
 
         return std_path
 
@@ -1039,16 +1098,90 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         cookie_val = tutor_store.make_user_cookie_value()
         return cookie_val.split('.', 1)[0], cookie_val
 
+    def _cors_allow_origin(self):
+        """Nilai header Access-Control-Allow-Origin.
+
+        Hanya mengembalikan Origin bila request benar-benar same-origin
+        (host Origin == host request). Respons ber-cookie TIDAK memakai '*'
+        agar situs lain tidak bisa membaca respons API lewat browser.
+        """
+        origin = (self.headers.get('Origin') or '').strip()
+        if not origin:
+            return None
+        host = (self.headers.get('Host') or '').split(':')[0].strip().lower()
+        try:
+            o_host = (urllib.parse.urlparse(origin).hostname or '').lower()
+        except Exception:
+            return None
+        if o_host and host and o_host == host:
+            return origin
+        return None
+
     def _send_json(self, status, obj, cookie_value=None):
+        body = json.dumps(obj, ensure_ascii=False).encode('utf-8')
+        # Fase 2, Fix 6: gzip utk application/json bila klien mendukung
+        # (penting utk HP berkuota terbatas).
+        accept = (self.headers.get('Accept-Encoding') or '').lower()
+        use_gzip = 'gzip' in accept
+        if use_gzip:
+            body = gzip.compress(body)
         self.send_response(status)
         self.send_header('Content-Type', 'application/json; charset=utf-8')
-        self.send_header('Access-Control-Allow-Origin', '*')
+        allow_origin = self._cors_allow_origin()
+        if allow_origin:
+            self.send_header('Access-Control-Allow-Origin', allow_origin)
+            self.send_header('Vary', 'Origin, Accept-Encoding')
+        elif use_gzip:
+            self.send_header('Vary', 'Accept-Encoding')
+        if use_gzip:
+            self.send_header('Content-Encoding', 'gzip')
         if cookie_value:
             self.send_header('Set-Cookie',
                              f'tutor_uid={cookie_value}; Path=/; HttpOnly; '
                              f'SameSite=Lax; Max-Age=31536000')
+        self.send_header('Content-Length', str(len(body)))
         self.end_headers()
-        self.wfile.write(json.dumps(obj, ensure_ascii=False).encode('utf-8'))
+        self.wfile.write(body)
+
+    def _send_500(self, exc, context="", cookie_value=None):
+        """Error 500: pesan generik ke klien, traceback lengkap ke log file."""
+        _log_server_error(exc, context or self.path)
+        return self._send_json(500, {
+            "status": "error",
+            "message": "Terjadi kesalahan pada server. Coba lagi beberapa saat.",
+        }, cookie_value=cookie_value)
+
+    def _static_serve_allowed(self):
+        """Allowlist static serving (Fase 2, Fix 4).
+
+        Seluruh folder proyek TIDAK tersaji statis lagi (dulu dokumen .md
+        internal ikut terbuka). Hanya file frontend di lokasi wajar:
+        root proyek, workspace_akun/modul/progres, prefix gambar, dan
+        data/<mapel>/paket_N/images/ (dipakai frontend utk gambar soal).
+        """
+        clean = urllib.parse.unquote(self.path).split('?', 1)[0].split('#', 1)[0]
+        lower = clean.lower()
+        parts = [p for p in lower.split('/') if p]
+        if not parts:
+            return True  # '/' ditangani page_routes sebelum mencapai sini
+        if not any(lower.endswith(ext) for ext in _STATIC_EXTS):
+            return False
+        top = parts[0]
+        if top == 'data':
+            # /data/... hanya utk file gambar di dalam folder images/
+            return 'images' in parts and lower.endswith(_IMAGE_EXTS)
+        if top in _STATIC_OK_TOPDIRS:
+            return True
+        # Root proyek: hanya file langsung (tanpa subdirektori).
+        return len(parts) == 1
+
+    def do_HEAD(self):
+        # Samakan proteksi static serving utk HEAD (SimpleHTTPRequestHandler
+        # punya do_HEAD bawaan yang akan lolos tanpa cek ini).
+        if not self._static_serve_allowed():
+            return self._send_json(403, {"status": "forbidden",
+                                         "message": "Akses statis ke file ini tidak diizinkan."})
+        return super().do_HEAD()
 
     def do_GET(self):
         _track_client_context(self)
@@ -1076,12 +1209,12 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
 
         if self.path.split('?', 1)[0] == '/api/tutor/state':
             # Muat ulang percakapan tersimpan soal ini (resume tanpa isi kosong)
+            user_key, new_cookie = self._tutor_session()
             try:
                 params = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
                 subject = params.get('subject', ['matematika'])[0]
                 paket = int(params.get('paket', ['1'])[0])
                 nomor = int(params.get('nomor', ['1'])[0])
-                user_key, new_cookie = self._tutor_session()
                 ctx = resolve_tutor_context(subject, paket, nomor)
                 if not ctx:
                     return self._send_json(404, {"status": "error",
@@ -1103,21 +1236,21 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                                   "model": m.get("model")} for m in messages],
                 }, cookie_value=new_cookie)
             except Exception as e:
-                return self._send_json(500, {"status": "error", "message": str(e)})
+                return self._send_500(e, "/api/tutor/state", cookie_value=new_cookie)
 
         if self.path.split('?', 1)[0] == '/api/swarm/status':
             try:
                 from pipeline.swarm_manager import swarm_engine
                 return self._send_json(200, swarm_engine.get_status())
             except Exception as e:
-                return self._send_json(500, {"status": "error", "message": str(e)})
+                return self._send_500(e, "/api/swarm/status")
 
         if self.path.split('?', 1)[0] == '/api/swarm/subjects':
             try:
                 from pipeline.subject_catalog import get_full_catalog
                 return self._send_json(200, get_full_catalog())
             except Exception as e:
-                return self._send_json(500, {"status": "error", "message": str(e)})
+                return self._send_500(e, "/api/swarm/subjects")
 
         # Dashboard pengunjung (khusus server utama / bukan demo publik)
         if self.path.split('?', 1)[0] in ADMIN_VISITOR_PATHS:
@@ -1170,7 +1303,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             except (BrokenPipeError, ConnectionResetError):
                 return
             except Exception as e:
-                return self._send_json(500, {"status": "error", "message": str(e)})
+                return self._send_500(e, "/audit")
             return
 
         # Fase 3: halaman statis (landing, legal) & alias /app untuk aplikasi.
@@ -1201,12 +1334,38 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 except (BrokenPipeError, ConnectionResetError):
                     return
                 except Exception as e:
-                    return self._send_json(500, {"status": "error", "message": str(e)})
+                    return self._send_500(e, f"/page:{target_page}")
             # File halaman tidak ada -> lanjut ke super() (fallback lama).
+
+        # Fase 2, Fix 4: batasi static serving ke allowlist frontend.
+        if not self._static_serve_allowed():
+            return self._send_json(403, {
+                "status": "forbidden",
+                "message": "Akses statis ke file ini tidak diizinkan.",
+            })
 
         return super().do_GET()
 
     def do_POST(self):
+        # Fase 2, Fix 3b: tolak body > 1MB di awal (413) sebelum dibaca penuh.
+        try:
+            _clen = int(self.headers.get('Content-Length', 0) or 0)
+        except (TypeError, ValueError):
+            _clen = 0
+        if _clen > MAX_POST_BYTES:
+            # Buang body (dibatasi) agar koneksi tetap bersih, lalu tolak.
+            _remaining = min(_clen, MAX_DRAIN_BYTES)
+            while _remaining > 0:
+                _chunk = self.rfile.read(min(65536, _remaining))
+                if not _chunk:
+                    break
+                _remaining -= len(_chunk)
+            if _clen > MAX_DRAIN_BYTES:
+                self.close_connection = True
+            return self._send_json(413, {
+                "status": "error",
+                "message": "Ukuran permintaan melebihi batas 1 MB.",
+            })
         _track_client_context(self)
         visitor_log.record(self)
         if PUBLIC_DEMO and self.path in DEMO_BLOCKED_PATHS:
@@ -1229,7 +1388,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 ok, msg = swarm_engine.start_swarm_pipeline(targets=targets)
                 return self._send_json(200 if ok else 400, {"status": "success" if ok else "error", "message": msg})
             except Exception as e:
-                return self._send_json(500, {"status": "error", "message": str(e)})
+                return self._send_500(e, "/api/swarm/start")
 
         if self.path == '/api/swarm/reset':
             try:
@@ -1237,59 +1396,16 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 swarm_engine.reset()
                 return self._send_json(200, {"status": "success", "message": "Swarm status reset."})
             except Exception as e:
-                return self._send_json(500, {"status": "error", "message": str(e)})
+                return self._send_500(e, "/api/swarm/reset")
 
         if self.path == '/api/ai-tutor':
-            content_length = int(self.headers.get('Content-Length', 0))
-            post_data = self.rfile.read(content_length).decode('utf-8')
-            
-            try:
-                payload = json.loads(post_data)
-                paket = payload.get('paket', 1)
-                nomor = payload.get('nomor', 1)
-                user_msg = payload.get('message', '')
-                q_data = payload.get('question_data', {})
-
-                # Subject dari frontend (payload root) diprioritaskan
-                subject = payload.get('subject')
-                if subject:
-                    q_data['subject'] = subject
-
-                # --- Konteks kanonis (sumber kebenaran AI) ---------------------
-                canon = canonical_for(subject, paket, nomor)
-                lrn_q = learning_for(subject, paket, nomor)
-                canon_ctx = build_canonical_context(canon, lrn_q) if canon else None
-                if canon_ctx:
-                    q_data['_canonical'] = canon_ctx
-
-                # Layer 3 aktif (solusi spesifik Claude dari sumber registry)
-                if subject:
-                    try:
-                        _l3 = solution_loader.get_solution(
-                            subject, paket, nomor, format_kunci_display(lrn_q or {}))
-                    except Exception:
-                        _l3 = None
-                    if _l3:
-                        q_data['_solution_layer3'] = _l3
-
-                reply = get_ai_tutor_response(paket, nomor, user_msg, q_data)
-                
-                response_data = {
-                    "status": "success",
-                    "reply": reply,
-                    "nomor": nomor
-                }
-                
-                self.send_response(200)
-                self.send_header('Content-Type', 'application/json; charset=utf-8')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.end_headers()
-                self.wfile.write(json.dumps(response_data, ensure_ascii=False).encode('utf-8'))
-            except Exception as e:
-                self.send_response(500)
-                self.send_header('Content-Type', 'application/json')
-                self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": str(e)}).encode('utf-8'))
+            # Endpoint legacy DIHAPUS (Fase 2): tanpa kuota/proteksi & duplikasi
+            # ~700 baris via legacy_tutor. 410 Gone agar klien lama tahu ini
+            # disengaja — gunakan /api/tutor/chat.
+            return self._send_json(410, {
+                "status": "gone",
+                "message": "Endpoint /api/ai-tutor sudah tidak tersedia. Gunakan /api/tutor/chat.",
+            })
 
         elif self.path == '/api/solution':
             # Pembahasan kanonis utk panel 'Tata Cara & Langkah Penyelesaian Soal'
@@ -1325,22 +1441,13 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                         "bukan konten generik lama)."
                     ),
                 }
-                self.send_response(200)
-                self.send_header('Content-Type', 'application/json; charset=utf-8')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.end_headers()
-                self.wfile.write(json.dumps(response_data, ensure_ascii=False).encode('utf-8'))
-            except LookupError as e:
-                self.send_response(404)
-                self.send_header('Content-Type', 'application/json; charset=utf-8')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": str(e)}).encode('utf-8'))
+                return self._send_json(200, response_data)
+            except LookupError:
+                # Soal tidak ditemukan — pesan aman tanpa detail internal.
+                return self._send_json(404, {"status": "error",
+                                             "message": "Soal tidak ditemukan."})
             except Exception as e:
-                self.send_response(500)
-                self.send_header('Content-Type', 'application/json')
-                self.end_headers()
-                self.wfile.write(json.dumps({"status": "error", "message": str(e)}).encode('utf-8'))
+                return self._send_500(e, "/api/solution")
 
         elif self.path == '/api/tutor/chat':
             # =============================================================
@@ -1351,6 +1458,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             # =============================================================
             content_length = int(self.headers.get('Content-Length', 0))
             post_data = self.rfile.read(content_length).decode('utf-8')
+            user_key, new_cookie = self._tutor_session()
             try:
                 payload = json.loads(post_data)
                 subject = payload.get('subject', 'matematika')
@@ -1366,14 +1474,19 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 if not ctx:
                     return self._send_json(404, {"status": "error",
                                                  "message": "Soal tidak ditemukan."})
-                user_key, new_cookie = self._tutor_session()
-                # Cooldown 10s & Kuota Harian (10x free / 100x langganan) per user
-                quota_ok, quota_reason, wait_sec, user_quota = tutor_store.consume_user_quota(user_key, cooldown_seconds=10)
-                if not quota_ok:
-                    if quota_reason == "cooldown":
+                # Fase 2, Fix 1: cek cooldown & kuota TANPA mengonsumsi.
+                # Kuota hanya dipotong SETELAH LLM berhasil menjawab — bila LLM
+                # gagal, kuota user tidak hangus.
+                _quota = tutor_store.get_user_quota(user_key, cooldown_seconds=10)
+                if not _quota.get("can_ask"):
+                    if _quota.get("cooldown_remaining", 0) > 0:
+                        quota_reason = "cooldown"
+                        wait_sec = _quota["cooldown_remaining"]
                         limit_msg = f"Santai dulu ya, tunggu {wait_sec} detik sebelum mengirim pertanyaan berikutnya."
                     else:
-                        limit = user_quota.get("daily_limit", 10)
+                        quota_reason = "quota_exceeded"
+                        wait_sec = 0
+                        limit = _quota.get("daily_limit", 10)
                         limit_msg = f"Batas kuota harian ({limit} pertanyaan) telah tercapai. Kuota direset setiap 00.00 WIB — Pro mendapat 100 pertanyaan per hari!"
                     return self._send_json(429, {
                         "status": "rate_limited",
@@ -1381,7 +1494,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                         "error_kind": "rate_limit",
                         "retryable": quota_reason == "cooldown",
                         "wait_seconds": wait_sec,
-                        "quota": user_quota,
+                        "quota": _quota,
                         "message": limit_msg,
                     }, cookie_value=new_cookie)
                 conv = tutor_store.get_or_create_conversation(
@@ -1431,6 +1544,14 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                               "model": model_name,
                               "provider": meta.get("provider") or tutor_llm.active_provider_info()["provider"]})
                 _refresh_tutor_summary(conv_id)
+                # Konsumsi kuota SETELAH jawaban LLM sukses tersimpan.
+                # (LLM gagal -> kuota tidak dipotong; lihat blok LLMError.)
+                _ok, _reason, _wait, user_quota = tutor_store.consume_user_quota(
+                    user_key, cooldown_seconds=10)
+                if not _ok:
+                    # Balapan antar-request: jawaban sudah terkirim, segarkan
+                    # info kuota utk respons.
+                    user_quota = tutor_store.get_user_quota(user_key, cooldown_seconds=10)
                 return self._send_json(200, {
                     "status": "success", "reply": reply,
                     "conversation_id": conv_id, "message_id": am["id"],
@@ -1439,13 +1560,14 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                     "quota": user_quota,
                 }, cookie_value=new_cookie)
             except Exception as e:
-                return self._send_json(500, {"status": "error", "message": str(e)})
+                return self._send_500(e, "/api/tutor/chat", cookie_value=new_cookie)
 
         elif self.path == '/api/tutor/new':
             # Mulai percakapan BARU utk soal ini; riwayat lama diarsipkan,
             # tidak dihapus (auditable). Frontend menampilkan chat bersih.
             content_length = int(self.headers.get('Content-Length', 0))
             post_data = self.rfile.read(content_length).decode('utf-8')
+            user_key, new_cookie = self._tutor_session()
             try:
                 payload = json.loads(post_data)
                 subject = payload.get('subject', 'matematika')
@@ -1455,7 +1577,6 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 if not ctx:
                     return self._send_json(404, {"status": "error",
                                                  "message": "Soal tidak ditemukan."})
-                user_key, new_cookie = self._tutor_session()
                 conv = tutor_store.start_new_conversation(
                     user_key, ctx["canonical_id"], subject, paket, nomor)
                 return self._send_json(200, {
@@ -1463,14 +1584,16 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                     "messages": [], "summary": None,
                 }, cookie_value=new_cookie)
             except Exception as e:
-                return self._send_json(500, {"status": "error", "message": str(e)})
+                return self._send_500(e, "/api/tutor/new", cookie_value=new_cookie)
 
         elif self.path == '/api/feedback':
             # Fase 5: simpan masukan pengguna (rating 1-5 + pesan opsional).
             # Validasi ketat + rate limit per sesi (jeda 10 menit, maks 3/24 jam).
+            content_length = int(self.headers.get('Content-Length', 0))
+            _payload_raw = self.rfile.read(content_length).decode('utf-8') or '{}'
+            user_key, new_cookie = self._tutor_session()
             try:
-                content_length = int(self.headers.get('Content-Length', 0))
-                payload = json.loads(self.rfile.read(content_length).decode('utf-8') or '{}')
+                payload = json.loads(_payload_raw)
                 try:
                     rating = int(payload.get('rating') or 0)
                 except (TypeError, ValueError):
@@ -1480,7 +1603,6 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 if rating < 1 or rating > 5:
                     return self._send_json(400, {"status": "error",
                                                  "message": "Rating harus 1-5."})
-                user_key, new_cookie = self._tutor_session()
                 allowed, wait_sec = tutor_store.allow_feedback(user_key)
                 if not allowed:
                     return self._send_json(429, {
@@ -1495,11 +1617,11 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                     "message": "Terima kasih! Masukanmu terkirim.",
                 }, cookie_value=new_cookie)
             except Exception as e:
-                return self._send_json(500, {"status": "error", "message": str(e)})
+                return self._send_500(e, "/api/feedback", cookie_value=new_cookie)
 
         elif self.path == '/api/tutor/reset_quota':
+            user_key, new_cookie = self._tutor_session()
             try:
-                user_key, new_cookie = self._tutor_session()
                 quota = tutor_store.reset_user_quota(user_key)
                 return self._send_json(200, {
                     "status": "success",
@@ -1507,7 +1629,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                     "quota": quota,
                 }, cookie_value=new_cookie)
             except Exception as e:
-                return self._send_json(500, {"status": "error", "message": str(e)})
+                return self._send_500(e, "/api/tutor/reset_quota", cookie_value=new_cookie)
 
         else:
             self.send_response(404)
@@ -1515,7 +1637,11 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
 
     def do_OPTIONS(self):
         self.send_response(200)
-        self.send_header('Access-Control-Allow-Origin', '*')
+        # Same-origin saja: tidak ada '*' utk respons ber-cookie.
+        allow_origin = self._cors_allow_origin()
+        if allow_origin:
+            self.send_header('Access-Control-Allow-Origin', allow_origin)
+            self.send_header('Vary', 'Origin')
         self.send_header('Access-Control-Allow-Methods', 'POST, GET, OPTIONS')
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
