@@ -689,13 +689,9 @@
       });
     } else if (label === 'Login') {
       btn.addEventListener('click', function () {
-        // Login Google beneran via Supabase
-        if (typeof loginWithGoogle === 'function') {
-          loginWithGoogle();
-        } else {
-          // Fallback: navigasi ke halaman Akun kalau auth belum load
-          BRIDGE.send({ type: 'nav', path: 'Akun' });
-        }
+        // Minta parent (window utama) yang jalanin OAuth Google —
+        // Google blokir login dari dalam iframe.
+        BRIDGE.send({ type: 'login-google' });
       });
     }
   });

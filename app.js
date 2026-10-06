@@ -936,7 +936,14 @@ window.addEventListener('message', async (e) => {
         panelReadyReplied[hit[1]] = now;
         sendPanelData(hit[1]);
       }
-    }
+    
+    } else if (d.type === 'login-google') {
+  // Iframe (home_desktop) minta login Google — jalanin di window utama
+  // (Google blokir OAuth dalam iframe). supabase_auth.js dimuat di parent.
+  if (typeof loginWithGoogle === 'function') {
+    loginWithGoogle();
+  }
+
   } else if (d.type === 'nav' || d.type === 'nav-tab') {
     // Panel switcher: pesan dari iframe panel mana pun (Beranda/Modul/Progres).
     // Halaman untuk FAQ, Bank Soal dll. belum ada -> tampilkan toast "segera hadir",
