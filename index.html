@@ -65,6 +65,8 @@
           </div>
         </div>
         <div class="stitch-header-actions">
+          <div id="userInfo" style="display:none;align-items:center;gap:8px"></div>
+          <button id="loginBtn" onclick="loginWithGoogle()" style="background:#4285f4;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600">Login Google</button>
           <button aria-label="Buka Akun" type="button" class="stitch-avatar" onclick="homeShowPanel('akun')" title="Buka Akun"><span class="ms-icon">person</span></button>
         </div>
       </div>
@@ -908,5 +910,6 @@
 
   <!-- Scripts -->
   <script src="app.js?v=48"></script>
+  <script src="supabase_auth.js?v=1"></script>
 </body>
 </html>
