@@ -11,8 +11,10 @@ pada provider konkret. Prioritas provider (pertama yang terkonfigurasi menang):
 Tidak ada fallback diam antar provider: bila provider aktif gagal, error
 dilempar apa adanya agar UI bisa menampilkan state retry yang jujur.
 """
+import hashlib
 import json
 import os
+import sqlite3
 import sys
 import time
 import urllib.error
@@ -257,12 +259,21 @@ def resolve_ollama_model():
     return models[0], None
 
 
-def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tokens=None, timeout=None, return_meta=False):
+def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tokens=None,
+             timeout=None, return_meta=False, cache_canonical_id=None,
+             cache_intent=None, use_cache=True):
     """Kirim daftar pesan {role, content} ke provider aktif, balas teks murni.
 
     Bila return_meta=True, kembalikan tuple (text, {"model": actual_model, "provider": provider}).
     Melempar LLMError dengan `kind` yang jelas agar pemanggil bisa
     menampilkan pesan retry yang tepat tanpa mengorupsi riwayat.
+
+    Cache: sebelum memanggil API, jawaban dicari di cache SQLite berdasarkan
+    kunci (canonical_id, intent, hash_pesan). Bila hit & belum kedaluwarsa
+    (TTL 24 jam), jawaban dikembalikan langsung tanpa API call. Hanya jawaban
+    SUKSES yang di-cache; error tidak pernah disimpan. Set use_cache=False
+    untuk melewati cache. cache_canonical_id/cache_intent bersifat opsional —
+    bila tidak diisi, kunci tetap unik dari hash pesan + parameter.
 
     Failover lintas-provider: bila rute utama gagal karena kesalahan sementara
     (rate_limit / timeout / connection / provider_error), rute cadangan
@@ -276,6 +287,19 @@ def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tok
         timeout = float(timeout)
     except (TypeError, ValueError):
         timeout = DEFAULT_TIMEOUT
+
+    # --- Cek cache dulu (tanpa API call bila hit) ---
+    cache_key = None
+    if use_cache:
+        _llm_cache_init()
+        cache_key = _llm_cache_key(cache_canonical_id, cache_intent, model,
+                                   temperature, max_tokens, messages, image_paths)
+        cached = _llm_cache_get(cache_key)
+        if cached is not None:
+            text, c_model, c_provider = cached
+            if return_meta:
+                return text, {"model": c_model, "provider": c_provider, "cached": True}
+            return text
 
     gemini_key = get_gemini_api_key()
     cloud = _first_env("OPENAI_COMPATIBLE_BASE_URL", "LLM_BASE_URL")
@@ -302,19 +326,22 @@ def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tok
                                                   image_paths=image_paths,
                                                   temperature=temperature,
                                                   max_tokens=max_tokens, timeout=timeout)
-                if return_meta:
-                    return text, {"model": actual_model, "provider": "google_gemini"}
-                return text
-            # Rute openai-compatible (Qwen/Groq) — teks murni, gambar tidak terkirim
-            if image_paths:
-                print(f"[tutor_llm] Catatan: fallback ke provider teks — {len(image_paths)} "
-                      f"gambar tidak dikirim (konteks gambar terwakili transkripsi).")
-            info = {"provider": "openai_compatible", "base_url": cloud,
-                    "model": _first_env("LLM_MODEL", default="qwen/qwen3.8-27b")}
-            text, actual_model = _post_openai_compatible(messages, info, temperature,
-                                                         max_tokens, timeout)
+                provider = "google_gemini"
+            else:
+                # Rute openai-compatible (Qwen/Groq) — teks murni, gambar tidak terkirim
+                if image_paths:
+                    print(f"[tutor_llm] Catatan: fallback ke provider teks — {len(image_paths)} "
+                          f"gambar tidak dikirim (konteks gambar terwakili transkripsi).")
+                info = {"provider": "openai_compatible", "base_url": cloud,
+                        "model": _first_env("LLM_MODEL", default="qwen/qwen3.8-27b")}
+                text, actual_model = _post_openai_compatible(messages, info, temperature,
+                                                             max_tokens, timeout)
+                provider = "openai_compatible"
+            # --- Simpan jawaban sukses ke cache ---
+            if cache_key:
+                _llm_cache_set(cache_key, text, actual_model, provider)
             if return_meta:
-                return text, {"model": actual_model, "provider": "openai_compatible"}
+                return text, {"model": actual_model, "provider": provider, "cached": False}
             return text
         except LLMError as e:
             last_err = e
@@ -332,6 +359,128 @@ def generate_with_meta(messages, **kwargs):
     """Kembalikan tuple (text, metadata) termasuk nama model yang sebenarnya merespons."""
     kwargs["return_meta"] = True
     return generate(messages, **kwargs)
+
+
+# ---------------------------------------------------------------------------
+# Cache jawaban LLM (SQLite, TTL 24 jam)
+#
+# Tiap pertanyaan identik = 1 API call penuh (mahal & lambat). Cache ini
+# menyimpan jawaban sukses per kunci unik sehingga pertanyaan yang sama
+# (soal + intent + pesan yang sama) dijawab instan tanpa memanggil API lagi.
+# ---------------------------------------------------------------------------
+LLM_CACHE_TTL_SECONDS = 24 * 3600  # 24 jam
+LLM_CACHE_PATH = os.path.join(BASE_DIR, "data", "llm_cache.db")
+_llm_cache_lock = threading.Lock()
+
+
+def _llm_cache_key(canonical_id, intent, model, temperature, max_tokens,
+                   messages, image_paths):
+    """Kunci cache = SHA-256 dari (canonical_id, intent, hash_pesan, ...).
+
+    Selain tiga komponen wajib audit (canonical_id, intent, hash_pesan),
+    model/temperature/max_tokens/image_paths ikut di-hash agar kunci unik per
+    konfigurasi pemanggilan penuh — mencegah cache hit yang salah (misal
+    model berbeda mengembalikan jawaban dari model lain).
+    """
+    try:
+        pesan_json = json.dumps(messages, ensure_ascii=False, sort_keys=True)
+    except (TypeError, ValueError):
+        pesan_json = repr(messages)
+    parts = [
+        str(canonical_id or ""),
+        str(intent or ""),
+        str(model or ""),
+        str(temperature),
+        str(max_tokens or ""),
+        pesan_json,
+        json.dumps(sorted(image_paths or [])),
+    ]
+    return hashlib.sha256("\x1f".join(parts).encode("utf-8")).hexdigest()
+
+
+def _llm_cache_init():
+    """Buat file & tabel cache bila belum ada (idempoten, thread-safe)."""
+    with _llm_cache_lock:
+        os.makedirs(os.path.dirname(LLM_CACHE_PATH), exist_ok=True)
+        conn = sqlite3.connect(LLM_CACHE_PATH, timeout=10)
+        try:
+            conn.execute(
+                "CREATE TABLE IF NOT EXISTS llm_cache ("
+                "key TEXT PRIMARY KEY, response TEXT, created_at REAL)"
+            )
+            conn.commit()
+        finally:
+            conn.close()
+
+
+def _llm_cache_delete(key):
+    with _llm_cache_lock:
+        try:
+            conn = sqlite3.connect(LLM_CACHE_PATH, timeout=10)
+            try:
+                conn.execute("DELETE FROM llm_cache WHERE key=?", (key,))
+                conn.commit()
+            finally:
+                conn.close()
+        except sqlite3.Error:
+            pass
+
+
+def _llm_cache_get(key):
+    """Ambil dari cache; kembalikan (text, model, provider) bila hit & segar.
+
+    Entri kedaluwarsa (> TTL 24 jam) atau rusak dihapus & dianggap miss.
+    """
+    with _llm_cache_lock:
+        try:
+            conn = sqlite3.connect(LLM_CACHE_PATH, timeout=10)
+            try:
+                row = conn.execute(
+                    "SELECT response, created_at FROM llm_cache WHERE key=?",
+                    (key,),
+                ).fetchone()
+            finally:
+                conn.close()
+        except sqlite3.Error:
+            return None
+    if not row:
+        return None
+    response_json, created_at = row
+    if not created_at or (time.time() - created_at) > LLM_CACHE_TTL_SECONDS:
+        _llm_cache_delete(key)
+        return None
+    try:
+        data = json.loads(response_json)
+        text = data["text"]
+        if not text or not text.strip():
+            raise ValueError("respons kosong")
+        return text, data.get("model", ""), data.get("provider", "")
+    except (ValueError, KeyError, TypeError):
+        _llm_cache_delete(key)
+        return None
+
+
+def _llm_cache_set(key, text, model, provider):
+    """Simpan jawaban sukses ke cache. Kegagalan tulis TIDAK boleh menggagalkan
+    pemanggilan LLM (cache bersifat best-effort)."""
+    payload = json.dumps(
+        {"text": text, "model": model, "provider": provider},
+        ensure_ascii=False,
+    )
+    with _llm_cache_lock:
+        try:
+            conn = sqlite3.connect(LLM_CACHE_PATH, timeout=10)
+            try:
+                conn.execute(
+                    "INSERT OR REPLACE INTO llm_cache (key, response, created_at) "
+                    "VALUES (?,?,?)",
+                    (key, payload, time.time()),
+                )
+                conn.commit()
+            finally:
+                conn.close()
+        except sqlite3.Error:
+            pass
 
 
 # ---------------------------------------------------------------------------
@@ -490,6 +639,19 @@ GEMINI_PRO_CANDIDATES = [
 ]
 
 
+def _gemini_default_max_tokens():
+    """Batas token keluaran default Gemini: 2048 (hemat biaya/latensi).
+
+    Default lama 16384 terlalu boros untuk jawaban tutor yang ringkas.
+    Dapat dioverride via env LLM_GEMINI_MAX_TOKENS; argumen max_tokens
+    eksplisit selalu menang.
+    """
+    try:
+        return int(os.environ.get("LLM_GEMINI_MAX_TOKENS", "2048"))
+    except ValueError:
+        return 2048
+
+
 def _post_gemini(messages, model_choice="gemini-3.8-flash", image_paths=None, temperature=0.7, max_tokens=None, timeout=120):
     """Kirim percakapan + gambar diagram visual ke Google Gemini API dengan auto-failover multi-model & key rotation."""
     import base64
@@ -536,7 +698,7 @@ def _post_gemini(messages, model_choice="gemini-3.8-flash", image_paths=None, te
     full_prompt = "\n\n".join(full_prompt_chunks).strip()
     parts.append({"text": full_prompt})
 
-    out_tokens = max_tokens or 16384
+    out_tokens = max_tokens or _gemini_default_max_tokens()
     payload = {
         "contents": [{"parts": parts}],
         "generationConfig": {

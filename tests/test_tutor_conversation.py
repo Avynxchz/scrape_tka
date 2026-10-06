@@ -123,7 +123,7 @@ def test_intent_distribution():
 
 def test_review_flag_enter_context():
     canon_ctx, solution = _mk_ctx()
-    solution["review"] = {"reason": "uji alasan verifikasi"}
+    solution["review"] = {"needs_manual_review": True, "review_reason": "uji alasan verifikasi"}
     messages, _ = tutor_engine.build_tutor_prompt(
         canon_ctx, solution, "C", [], "kenapa?")
     assert "VERIFIKASI MANUAL" in messages[0]["content"]
