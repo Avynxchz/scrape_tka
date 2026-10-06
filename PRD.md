@@ -1,6 +1,22 @@
 # PRODUCT REQUIREMENTS DOCUMENT (PRD)
 # SISTEM SIMULASI TKA, PIPELINE SCRAPING, DATA ENGINE KANONIS, & AI TUTOR
 
+> ⚠️ **ARSIP — dokumen ini sudah tidak mencerminkan kondisi terkini.**
+> PRD ini ditulis untuk arsitektur awal (server.py monolit, satu template beranda).
+> Kondisi sekarang (Okt 2026) berbeda — lihat bagian **Delta** di bawah dan
+> `PLAN.md` sebagai sumber kebenaran status terkini. Jangan jadikan file ini
+> acuan implementasi baru.
+
+## Delta — apa yang sudah berubah sejak PRD ditulis
+
+| Area | Dulu (PRD) | Sekarang (Okt 2026) |
+|------|------------|---------------------|
+| **Kuota** | Belum didefinisikan | Guest 5 / Free(login) 20 / Pro 100 pesan per hari; reset 00:00 WIB; enforcement server-side (`_daily_limit`, `_today_wib`). Lihat PLAN.md Fase 4. |
+| **Struktur folder** | Satu template beranda + `server.py` | Beranda dual-mode (Stitch mobile inline + `home_desktop.html` via iframe); panel Modul/Progres/Akun sebagai file mandiri di `workspace_modul/`, `workspace_progres/`, `workspace_akun/` (iframe + postMessage). Lihat `docs/adr/`. |
+| **Model AI** | Groq, rotasi 3 key, cooldown 10 dtk | Provider utama Groq/Qwen (multi-key round-robin), Gemini 3.8 Flash opsional, Ollama fallback lokal. User bisa ganti model dari UI (popover pemilih model, persist `localStorage['tka_active_ai_model']`). Lihat PLAN.md Fase 12. |
+| **Aturan Emas #2 (kunci)** | "Kunci resmi = MUTLAK, DILARANG ubah" | Direvisi: koreksi kunci **diperbolehkan** dengan flag `needs_manual_review: true` + bukti terdokumentasi di `review_reason` (bukan dilarang mutlak). Lihat revisi di §9 PRD ini. |
+| **Cache busting** | — | Manual via `?v=N` di `index.html` (style.css v=47, app.js v=48); `privacy.html`/`terms.html` disamakan ke v=47. |
+
 ---
 
 | Dokumen | Product Requirements Document (PRD) |
@@ -411,8 +427,8 @@ flowchart TD
 [Uji Kelengkapan 5 Pilar]                 [Uji Kesesuaian Kunci Resmi]
 • concept_kunci tidak kosong              • Bandingkan kunci hasil AI vs
 • glossary berisi istilah                   kunci resmi Pusmendik
-• steps berisi langkah nyata              • Kunci resmi = MUTLAK!
-       │                                         │
+• steps berisi langkah nyata              • Kunci resmi = prioritas utama
+       │                                    (bukan mutlak)
        └────────────────────┬────────────────────┘
                             │
                             ▼
@@ -423,7 +439,10 @@ flowchart TD
       Tandai status:            Tandai flag:
       match: true               needs_manual_review: true
                                 Tulis alasan di review_reason.
-                                DILARANG ubah kunci Pusmendik!
+                                Koreksi kunci BOLEH jika ada bukti kuat
+                                (gambar sumber terbaca / hitung ulang
+                                terverifikasi); flag review tetap aktif
+                                sampai dikonfirmasi.
                │                         │
                └────────────┬────────────┘
                             │
@@ -639,7 +658,7 @@ CREATE TABLE IF NOT EXISTS ai_tutor_messages (
 | No | Komponen | Aturan Emas yang Menjamin Keberhasilan |
 | :---: | :--- | :--- |
 | **1** | **Scraping** | Wajib klik tombol `Refresh` token sebelum submit formulir peserta ujian. |
-| **2** | **Kunci Jawaban** | Diserap langsung dari tabel rekap hasil ujian Pusmendik (Ground Truth Otoritatif). |
+| **2** | **Kunci Jawaban** | Diserap langsung dari tabel rekap hasil ujian Pusmendik (Ground Truth Otoritatif). Koreksi **diperbolehkan** hanya dengan `needs_manual_review: true` + bukti di `review_reason` — bukan dilarang mutlak. |
 | **3** | **Gambar Siswa** | Tampilan siswa murni menampilkan gambar asli; transkripsi teks teknis disembunyikan khusus untuk AI. |
 | **4** | **Rumus KaTeX** | Diekstrak dari atribut resmi `data-latex` agar simbol matematika tidak rusak oleh OCR. |
 | **5** | **Pengerjaan Solusi**| Dicicil 5 soal per batch dengan checkpoint disk agar tidak terkena batas token. |

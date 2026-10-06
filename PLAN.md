@@ -14,7 +14,9 @@ Prioritas: clean editorial (serius, rapi) → mobile experience enak → convers
   fallback). API key tidak pernah ke client. Enforcement kuota tetap di server.
 - `tka-by-v0/` = ekspor desain Next.js, TIDAK dipakai — jangan disentuh.
 - Tidak ada package.json / build step. Cache busting manual via `?v=N` di `index.html`
-  (saat ini v=45) — bump setiap mengubah `style.css`/`app.js`.
+  (saat ini `style.css?v=47`, `app.js?v=48`, `home_stitch.css?v=2`) — bump setiap
+  mengubah `style.css`/`app.js`/`home_stitch.css`, dan samakan di `privacy.html`/
+  `terms.html` yang juga memuat `style.css`.
 
 ## Status fase (SEMUA SELESAI)
 
@@ -25,6 +27,74 @@ Prioritas: clean editorial (serius, rapi) → mobile experience enak → convers
 | 3 | Landing + Pricing + Legal | `e5b35dd` | ✅ |
 | 4 | Kuota & plan | `2924a78` | ✅ |
 | 5 | Feedback non-intrusif | `8fd43fd` | ✅ |
+| 6 | Beranda: performa render & kartu mapel | `7dff081` | ✅ |
+| 7 | Beranda: carousel hero hijau reusable | `cf5cdc7` | ✅ |
+| 8 | Modul: carousel & progres gabungan bersegmen | `0ca9163` | ✅ |
+| 9 | Progres: fix blinking & dashboard analitik | `4c85ec0` | ✅ |
+| 10 | QA akhir lintas viewport | — | ✅ |
+| 11 | Diagnosis & fix bottom nav | `8a9e004` | ✅ |
+| 12 | Chat AI: bubble & pemilih model | `2944a7a` | ✅ |
+| 13 | Rail mengambang auto-minimize | `77f2b6d` | ✅ |
+| 14 | Kontrol ukuran teks mobile | `f76d325` | ✅ |
+
+### Fase 6–14 — Overhaul UI Mobile (branch `ui-overhaul-mobile`, SELESAI 2026-10-05)
+
+Kelanjutan dari `scratch/` (sumber: `scratch/PROGRESS.md`, `scratch/LAPORAN_AKHIR.md`,
+`scratch/_tes_fase6..14.js`). Aturan kerja tiap fase: implementasi → skrip uji Playwright
+otomatis → screenshot 360/390/412 px + desktop 1280 px → 0 error console → commit.
+Hasil akhir: **173/173 checks lolos (100%)**, mode Tamu 100% utuh, semua fitur mobile
+dibungkus `@media (max-width: 899px)` sehingga desktop tidak tersentuh.
+
+- **Fase 6 — Beranda: performa render & kartu mapel** (`7dff081`). Akar masalah lambat:
+  `homePrefetchCounts()` fetch 44 file JSON soal berurutan saat Beranda dibuka. Fix:
+  jumlah soal di-preseed dari data statis terverifikasi `KONTRAK_DATA.md`
+  (`STATIC_SOAL_COUNTS`) → 0 network roundtrip, render turun ~39.6ms → **12.0ms**.
+  Hanya mapel pilihan user (default 4 mapel = 8 kartu); tombol "Lihat Semua" dihapus;
+  modal "Atur Mapel" (`localStorage['tka_user_subjects']`). 22 ikon Material Symbols
+  100% unik; nama panjang diringkas (PPKn, PKWU, line-clamp 2); kontras Matematika
+  diperbaiki (#1D4ED8). Uji: 7/7 PASS.
+- **Fase 7 — Beranda: carousel hero hijau reusable** (`cf5cdc7`). Semua teks carousel
+  putih solid (#FFFFFF); dekorasi titik-titik (`.stitch-dotrow`) & topi toga
+  (`.stitch-cap`) dihapus. Slide 2: SVG Pie Chart animasi ring pulse; Slide 3: maskot
+  Robot AI (antena berdenyut, mata berkedip). Controller diekstrak ke
+  `window.setupCarouselController`. Uji: 9/9 PASS.
+- **Fase 8 — Menu Modul: carousel & progres gabungan bersegmen** (`0ca9163`).
+  Carousel 2-slide reusable (Kurikulum + maskot robot membaca buku); teks serba putih.
+  "0 dari 961" diganti **Progres Gabungan Mapel Pilihan**: multi-segmented bar berwarna
+  tematik per mapel + legenda ringkas. Uji: 16/16 PASS.
+- **Fase 9 — Menu Progres: fix bug blinking & dashboard analitik** (`4c85ec0`).
+  Blinking diperbaiki total via memoization (`_lastRenderedProgressJson`), hapus
+  `.fade-in` pada re-render, kurangi retry `postToFrameReliable`. Dashboard analitik:
+  streak harian, waktu belajar hari ini vs kemarin, distribusi 5 rumpun kategori;
+  empty state ramah. Uji: 10/10 PASS.
+- **Fase 10 — QA akhir & verifikasi lintas viewport.** 84 checks (Fase 3–10) lolos 100%;
+  4 viewport (360/390/412/1280 px), 5 layar utama; mode Tamu utuh; 0 console error;
+  tidak ada teks hijau di atas hijau.
+- **Fase 11 — Diagnosis & perbaikan bottom nav terlalu tinggi** (`8a9e004`). Diagnosis
+  terukur: `.pb-safe` di `progres.html` = `calc(env(safe-area-inset-bottom)+5rem)` →
+  nav Progres 137px vs 57px di menu lain. Fix di akar: pisah `.pb-safe` (nav, murni
+  safe-area) vs `.pb-safe-content` (container scroll); `100vh` → `100dvh`. Hasil:
+  57px & flush di 4 menu (selisih 0px) pada 360/390/412 px. Uji: 11/11 PASS.
+- **Fase 12 — Chat AI: tampilan jawaban & pemilih model** (`2944a7a`). Bubble AI: kartu
+  putih #FFFFFF + border hijau #D1FAE5 di atas #F8FAFC (kontras >7:1); bubble user hijau
+  #004a2a; padding 16px, line-height 1.55; code/tabel scroll horizontal mandiri.
+  Bar pemilih model lama disembunyikan → tombol logo compact 32px + popover picker
+  (model aktif centang, persist `localStorage['tka_active_ai_model']`). Uji: 34/34 PASS.
+- **Fase 13 — Tombol navigasi mengambang auto-minimize** (`77f2b6d`). Idle: 1 tombol
+  bulat 42px transparan (opacity 0.88, ikon tab aktif); tap → mengembang 3 tombol;
+  diam 4 detik / pilih tombol → auto-collapse; hormati `prefers-reduced-motion`.
+  Long-press ≥400ms tetap drag & snap 6 kuadran (`localStorage['tka_rail_snap_pos']`);
+  clamping off-screen; desktop ≥1100px tetap sidebar penuh. Uji: 22/22 PASS.
+- **Fase 14 — Kontrol ukuran teks mobile** (`f76d325`). 4 tingkat: 90/100/115/130%,
+  persist `localStorage['tka_font_scale']`; akses via menu overflow (⋮) halaman Soal &
+  kartu "Pengaturan Tampilan" di menu Akun. Hybrid scaling: `html[data-text-scale]`
+  (rem Tailwind di iframe) + `calc(base_px * var(--text-scale))` (px di style.css);
+  top/bottom bar dibatasi maks ~108% agar tinggi 57px tidak rusak; sinkron antar-iframe
+  via postMessage. Uji stres 130% @360px: 0 horizontal overflow; desktop tetap 16px.
+  Uji: 22/22 PASS.
+
+Catatan: file uji `scratch/_tes_fase4..14.js` & `scratch/_qa_akhir_fase10.js` tetap di
+`scratch/` (tidak dipindah — hanya ringkasannya yang dimasukkan ke sini).
 
 ### Fase 1 — Design system + Light theme
 - Token `:root` (DESIGN.md): `--bg #FFFFFF`, `--surface #FAFAF9`, `--accent #1F6F4A`,
