@@ -1,0 +1,300 @@
+/* ==========================================================================
+   mobile-improve.css — FASE 4: peningkatan pengalaman belajar di HP
+   --------------------------------------------------------------------------
+   File kecil (ringan untuk HP kentang & kuota terbatas) berisi override
+   khusus mobile. SEMUA aturan di dalam @media (max-width: 900px) sehingga
+   tampilan desktop tidak berubah sama sekali.
+   Dimuat SETELAH style.css agar override menang.
+
+   Isi:
+   1. Touch target minimal 44px (jempol mudah kena, anti salah-tap)
+   2. Keterbacaan soal & opsi (font cukup besar, line-height lega)
+   3. Zona jempol (aksi penting di bawah layar, mudah dijangkau)
+   4. Performa (hanya animasi transform/opacity = murah di GPU)
+   5. Safe-area (HP berponi/notch tidak tertutup konten)
+   ========================================================================== */
+
+@media (max-width: 900px) {
+
+  /* ================= 0. Dasar: anti delay tap =================
+     Hilangkan delay 300ms saat tap di browser mobile lama + hapus
+     highlight biru saat tap agar terasa responsif. */
+  html {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ================= 1. TOUCH TARGET MINIMAL 44px =================
+     Standar aksesibilitas sentuh: tombol < 44px bikin siswa salah tap,
+     apalagi di HP kecil atau saat menjawab cepat di bawah tekanan waktu. */
+
+  /* Tombol zoom gambar opsi (rumus/grafik): 28px -> 44px.
+     Rumus sering kecil & kabur di HP; tombol perbesar harus mudah kena. */
+  .opt-zoom-btn {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  /* Chip saran cepat AI tutor: tinggi 30px -> 44px (sering ditap siswa). */
+  .chip-btn {
+    min-height: 44px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  /* Tombol A- / A+ skala teks di menu: 28px -> 44px. */
+  .btn-scale-step {
+    width: 44px !important;
+    height: 44px !important;
+  }
+
+  /* Tombol ikon di navbar atas (menu overflow): 38px -> 44px. */
+  .m-icon-btn {
+    width: 44px;
+    height: 44px;
+    font-size: 16px;
+  }
+
+  /* Tombol toolbar lightbox (perbesar/perkecil/reset gambar): target 44px. */
+  .lightbox-btn {
+    min-height: 44px;
+    padding: 8px 14px;
+  }
+  .lightbox-close {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* Tombol X di modal daftar soal: area tap 44px (tidak hanya ikon). */
+  .btn-close-modal {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Tombol aksi di sticky bar bawah soal (Cek, Ragu, Prev, Next):
+     tinggi minimal 44px agar nyaman dijangkau jempol. */
+  .qcard-actions .btn-action {
+    min-height: 44px;
+  }
+
+  /* Tombol "SELESAI TES / KEMBALI" & aksi reviu: tinggi nyaman di-tap. */
+  .btn-finish {
+    min-height: 48px;
+  }
+  .review-close {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Tombol kirim chat AI tutor: 44px (siswa sering kirim pertanyaan). */
+  .btn-send-chat {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Widget feedback: tombol tutup & kirim mudah di-tap. */
+  .fb-widget {
+    width: min(320px, calc(100vw - 32px));
+  }
+  .fb-close {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 22px;
+  }
+  .fb-send,
+  .fb-later {
+    min-height: 44px;
+    padding: 8px 16px;
+  }
+
+  /* ================= 2. KETERBACAAN =================
+     Siswa baca soal lama di layar kecil: font cukup besar,
+     baris tidak rapat, kontras label aksi tetap jelas. */
+
+  /* Teks soal: minimal 16px + baris lega agar tidak capek dibaca. */
+  .prompt-text {
+    font-size: calc(16px * var(--text-scale, 1)) !important;
+    line-height: 1.65 !important;
+  }
+  .cbt-opt-text,
+  .opt-body {
+    line-height: 1.6 !important;
+  }
+  .stimulus-content {
+    line-height: 1.6 !important;
+  }
+
+  /* Label "Cek Jawaban & Pembahasan": 11.5px terlalu kecil untuk tombol
+     terpenting di layar soal -> 13px agar terbaca sekilas. */
+  .btn-check {
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  /* Label rail jempol (Soal/Pembahasan/Tanya AI): 9px -> 10.5px. */
+  .work-rail.is-expanded .rail-btn span {
+    font-size: 10.5px !important;
+  }
+
+  /* Judul nomor soal tidak terlalu rapat. */
+  .exercise-title {
+    line-height: 1.4 !important;
+  }
+
+  /* Tabel review hasil: teks tidak terlalu kecil di HP. */
+  .review-table {
+    font-size: 13px;
+  }
+
+  /* ================= 3. ZONA JEMPOL =================
+     Navigasi utama sudah ada di bawah (sticky bar + rail). Bagian ini:
+     a) Memperbesar rail jempol saat mode lingkaran (36px -> 44px).
+     b) Mengaktifkan sticky bar bawah juga di rentang 769–900px
+        (tablet kecil / HP landscape) yang sebelumnya tidak dapat. */
+
+  /* Rail mode lingkaran: 42px -> 52px, tombol aktif 36px -> 44px. */
+  .work-rail.is-minimized {
+    width: 52px !important;
+    height: 52px !important;
+    min-height: 52px !important;
+    max-height: 52px !important;
+    opacity: 1 !important;
+  }
+  .work-rail.is-minimized .rail-btn.active {
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+  .work-rail.is-minimized .rail-btn.active i {
+    font-size: 20px !important;
+  }
+
+  /* Sticky bar bawah untuk 769–900px: Sebelumnya | Cek | Berikutnya | Ragu,
+     menempel di bawah layar dalam jangkauan jempol + aman dari notch. */
+  @media (min-width: 769px) {
+    .cbt-main-col {
+      padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)) !important;
+    }
+    .qcard-actions {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: stretch;
+      gap: 8px;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+    }
+    .qcard-actions .actions-left,
+    .qcard-actions .actions-right {
+      display: contents;
+    }
+    .qcard-actions .btn-prev { order: 1; }
+    .qcard-actions .btn-check { order: 2; }
+    .qcard-actions .btn-next { order: 3; }
+    .qcard-actions .btn-ragu { order: 4; }
+    .qcard-actions .btn-prev span,
+    .qcard-actions .btn-next span,
+    .qcard-actions .btn-ragu span {
+      display: none;
+    }
+    .qcard-actions .btn-prev,
+    .qcard-actions .btn-next,
+    .qcard-actions .btn-ragu {
+      min-width: 46px;
+      padding: 10px 12px;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .qcard-actions .btn-check {
+      flex: 1;
+      min-width: 0;
+      justify-content: center;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    /* Input >= 16px mencegah auto-zoom iOS saat fokus ketik. */
+    .chat-input-form input,
+    .ai-model-select {
+      font-size: 16px;
+    }
+  }
+
+  /* ================= 4. PERFORMA (HP kentang) =================
+     Animasi yang mengubah layout (width/height/top/bottom) bikin HP
+     murah lag. Ganti hanya dengan transform & opacity (murah, via GPU). */
+
+  /* Rail jempol: transisi layout berat -> hanya transform/opacity. */
+  .work-rail {
+    transition: transform 0.2s ease, opacity 0.25s ease !important;
+  }
+  .work-rail .rail-btn {
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease !important;
+  }
+
+  /* Tombol aksi bawah: hindari `transition: all` (mahal di HP murah). */
+  .qcard-actions .btn-action,
+  .chip-btn,
+  .lightbox-btn,
+  .btn-finish {
+    transition: transform 0.15s ease, background-color 0.15s ease,
+                color 0.15s ease, border-color 0.15s ease, opacity 0.15s ease !important;
+  }
+
+  /* ================= 5. SAFE-AREA (HP berponi) =================
+     Sebagian besar bar sudah aman di style.css; ini menutup celah. */
+
+  /* Konten utama tidak tertutup poni atas di HP notch. */
+  .cbt-main-col {
+    padding-top: max(12px, env(safe-area-inset-top, 0px)) !important;
+  }
+
+  /* Sidebar chat AI (mode bottom sheet): hormati notch kiri/kanan. */
+  .cbt-sidebar-col {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+  }
+
+  /* Tombol AI mengambang tidak menempel tepi layar berponi. */
+  .floating-ai-jump {
+    bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    right: max(20px, env(safe-area-inset-right, 0px));
+  }
+
+  /* Widget feedback tidak tenggelam di area gesture bawah. */
+  .fb-widget.pos-bottom {
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  /* Modal reviu: hormati notch saat jadi bottom sheet. */
+  .review-container {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Hormati preferensi pengguna yang mengurangi animasi (hemat baterai). */
+  @media (prefers-reduced-motion: reduce) {
+    .work-rail,
+    .work-rail *,
+    .qcard-actions .btn-action,
+    .chip-btn {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+}
