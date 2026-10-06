@@ -1077,6 +1077,52 @@ function sendPanelData(panel) {
   }
 }
 
+// Helper otentikasi AI Tutor ke backend server.py
+function getTutorAuthHeaders() {
+  const user = typeof getTKAUser === 'function' ? getTKAUser() : (window.TKA_USER || null);
+  const headers = {};
+  if (user && user.loggedIn) {
+    headers['X-User-Email'] = user.email || '';
+    headers['X-User-Logged-In'] = 'true';
+    if (user.name) headers['X-User-Name'] = encodeURIComponent(user.name);
+  }
+  return headers;
+}
+
+// Sinkronkan tier kuota (guest=5 vs free=25) langsung ke server.py
+async function syncTutorUserToServer(user) {
+  try {
+    const isLogin = !!(user && user.loggedIn);
+    const res = await fetch('/api/tutor/sync_user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        logged_in: isLogin,
+        is_logged_in: isLogin,
+        email: isLogin ? (user.email || '') : null
+      })
+    });
+    const data = await res.json();
+    if (data && data.quota) {
+      updateTutorQuotaUI(data.quota);
+    }
+  } catch (e) {
+    // Offline / fallback lokal
+  }
+}
+
+// Cek simpanan user saat pertama kali app dimuat
+try {
+  const initSavedUser = localStorage.getItem('tka_user');
+  if (initSavedUser) {
+    const parsedUser = JSON.parse(initSavedUser);
+    if (parsedUser && parsedUser.loggedIn) {
+      window.TKA_USER = parsedUser;
+      syncTutorUserToServer(parsedUser);
+    }
+  }
+} catch (e) {}
+
 // Listener sinkronisasi status login & kuota dari supabase_auth.js
 window.addEventListener('tka-login', (e) => {
   const user = e.detail || (typeof getTKAUser === 'function' ? getTKAUser() : null);
@@ -1096,6 +1142,7 @@ window.addEventListener('tka-login', (e) => {
     if (typeof updateTutorQuotaUI === 'function') {
       updateTutorQuotaUI(state.tutorQuota);
     }
+    syncTutorUserToServer(user);
     sendPanelData('akun');
     sendPanelData('beranda');
   }
@@ -1103,10 +1150,11 @@ window.addEventListener('tka-login', (e) => {
 
 window.addEventListener('tka-logout', () => {
   state.akunProfile = null;
-  state.tutorQuota = { remaining: 5, daily_limit: 5, tier: 'free', is_logged_in: false };
+  state.tutorQuota = { remaining: 5, daily_limit: 5, tier: 'guest', is_logged_in: false };
   if (typeof updateTutorQuotaUI === 'function') {
     updateTutorQuotaUI(state.tutorQuota);
   }
+  syncTutorUserToServer({ loggedIn: false });
   sendPanelData('akun');
   sendPanelData('beranda');
 });
@@ -3274,15 +3322,32 @@ let _cooldownSecondsRemaining = 0;
 
 function updateTutorQuotaUI(quota) {
   if (!quota) return;
-  state.tutorQuota = quota;
+  const tkaUser = typeof getTKAUser === 'function' ? getTKAUser() : (window.TKA_USER || null);
+  const isLogin = tkaUser ? !!tkaUser.loggedIn : !!quota.is_logged_in;
+  const isSub = quota.is_subscriber || quota.tier === 'subscriber';
+  // Aturan pasti Founder: Pro=100, Login Google=25, Tamu=5
+  const limit = isSub ? 100 : (isLogin ? 25 : 5);
+
+  let used = 0;
+  if (typeof quota.daily_count === 'number') {
+    used = quota.daily_count;
+  } else if (typeof quota.daily_limit === 'number' && typeof quota.remaining === 'number') {
+    used = Math.max(0, quota.daily_limit - quota.remaining);
+  }
+  const rem = Math.max(0, limit - used);
+
+  state.tutorQuota = {
+    daily_limit: limit,
+    remaining: rem,
+    daily_count: used,
+    is_logged_in: isLogin,
+    tier: isSub ? 'subscriber' : (isLogin ? 'free' : 'guest')
+  };
+
   // panel Akun terbuka? perbarui kuota di sana juga secara live
   if (homeIsOpen() && homeActivePanel === 'akun') {
     try { sendPanelData('akun'); } catch (e) {}
   }
-  const isLogin = !!(quota.is_logged_in || (typeof getTKAUser === 'function' && getTKAUser().loggedIn));
-  const isSub = quota.is_subscriber || quota.tier === 'subscriber';
-  const limit = quota.daily_limit || (isSub ? 100 : (isLogin ? 25 : 5));
-  const rem = quota.remaining !== undefined ? quota.remaining : limit;
 
   const badge = document.getElementById('tutorQuotaBadge');
   const text = document.getElementById('tutorQuotaText');
@@ -3486,7 +3551,12 @@ async function syncTutorConversation() {
   const q = getCurrentQuestion();
   if (!q) return;
   try {
-    const res = await fetch(`/api/tutor/state?subject=${encodeURIComponent(state.currentSubject)}&paket=${state.currentPkg}&nomor=${q.nomor}`);
+    const user = typeof getTKAUser === 'function' ? getTKAUser() : (window.TKA_USER || null);
+    const isLogin = !!(user && user.loggedIn);
+    const userQuery = isLogin ? `&user_email=${encodeURIComponent(user.email || '')}&is_logged_in=true` : '';
+    const res = await fetch(`/api/tutor/state?subject=${encodeURIComponent(state.currentSubject)}&paket=${state.currentPkg}&nomor=${q.nomor}${userQuery}`, {
+      headers: getTutorAuthHeaders()
+    });
     const data = await res.json();
     if (data.status === 'success') {
       state.tutorMsgs = data.messages || [];
@@ -3707,16 +3777,21 @@ async function sendChatMessage(e) {
   btnSend.disabled = true;
 
   try {
+    const user = typeof getTKAUser === 'function' ? getTKAUser() : (window.TKA_USER || null);
+    const isLogin = !!(user && user.loggedIn);
+    const headers = Object.assign({ 'Content-Type': 'application/json' }, getTutorAuthHeaders());
     const res = await fetch('/api/tutor/chat', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         subject: state.currentSubject,
         paket: state.currentPkg,
         nomor: q.nomor,
         message: msg,
         model: state.selectedTutorModel || 'gemini-flash',
-        request_id: clientRequestId
+        request_id: clientRequestId,
+        user_email: isLogin ? (user.email || '') : null,
+        is_logged_in: isLogin
       })
     });
 
