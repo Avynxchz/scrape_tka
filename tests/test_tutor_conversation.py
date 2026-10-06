@@ -11,6 +11,8 @@ import tempfile
 import threading
 import urllib.request
 
+os.environ.setdefault("VISITOR_ADMIN_KEY", "test_admin_key_for_testing")
+
 import pytest
 
 import server
