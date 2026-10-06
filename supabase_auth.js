@@ -91,24 +91,59 @@ function updateLoginUI(isLoggedIn) {
   const userInfo = document.getElementById('userInfo');
   
   if (isLoggedIn && currentUser) {
+    const userName = currentUser.user_metadata?.full_name || currentUser.email;
+    const avatarUrl = currentUser.user_metadata?.avatar_url || '';
+    
+    // Simpan global biar bisa diakses semua bagian app
+    window.TKA_USER = {
+      name: userName,
+      email: currentUser.email,
+      avatar: avatarUrl,
+      loggedIn: true
+    };
+    try {
+      localStorage.setItem('tka_user', JSON.stringify(window.TKA_USER));
+    } catch (e) {}
+    
     if (btn) btn.style.display = 'none';
     if (userInfo) {
       userInfo.style.display = 'flex';
       userInfo.innerHTML = `
-        <img src="${currentUser.user_metadata?.avatar_url || ''}" 
+        <img src="${avatarUrl}" 
              style="width:32px;height:32px;border-radius:50%" alt="">
-        <span>${currentUser.user_metadata?.full_name || currentUser.email}</span>
+        <span>${userName}</span>
         <button onclick="logout()" style="margin-left:8px">Keluar</button>
       `;
     }
-    // Update quota: logged-in dapat 25/hari
+    // Update quota: logged-in dapat 25/hari — sinkron ke semua tampilan
+    const quotaData = { remaining: 25, daily_limit: 25, tier: 'free', is_logged_in: true };
     if (typeof updateTutorQuotaUI === 'function') {
-      updateTutorQuotaUI({ remaining: 25, daily_limit: 25, tier: 'free' });
+      updateTutorQuotaUI(quotaData);
     }
+    // Trigger event biar bagian lain bisa update
+    window.dispatchEvent(new CustomEvent('tka-login', { detail: window.TKA_USER }));
   } else {
+    window.TKA_USER = { name: 'Tamu', loggedIn: false };
+    try {
+      localStorage.removeItem('tka_user');
+    } catch (e) {}
     if (btn) btn.style.display = 'block';
     if (userInfo) userInfo.style.display = 'none';
+    window.dispatchEvent(new CustomEvent('tka-logout'));
   }
+}
+
+// Ambil info user (untuk AI greeting dll)
+function getTKAUser() {
+  if (window.TKA_USER) return window.TKA_USER;
+  try {
+    const saved = localStorage.getItem('tka_user');
+    if (saved) {
+      window.TKA_USER = JSON.parse(saved);
+      return window.TKA_USER;
+    }
+  } catch (e) {}
+  return { name: 'Tamu', loggedIn: false };
 }
 
 // Kirim feedback/rating
