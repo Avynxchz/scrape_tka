@@ -787,6 +787,8 @@ function homeOpen() {
   if (!ov) return;
   ov.classList.remove('home-hidden');
   document.body.style.overflow = 'hidden';
+  // Kembali ke beranda: hapus tanda mode kuis
+  delete document.body.dataset.quizMode;
   renderHome();
   homeShowPanel('beranda'); // default yang tampil: Beranda
   // prefetch jumlah soal semua mapel; render ulang saat selesai biar angka lengkap
@@ -886,6 +888,29 @@ function postToFrameReliable(frame, buildPayload) {
   }
 }
 
+// Toast kecil mandiri (fase 3): dipakai untuk menu yang halamannya belum ada.
+// Membuat elemen sendiri + inline style supaya tidak bergantung pada style.css.
+function showMiniToast(msg) {
+  try {
+    let t = document.getElementById('miniToast');
+    if (!t) {
+      t = document.createElement('div');
+      t.id = 'miniToast';
+      t.style.cssText = 'position:fixed;left:50%;bottom:84px;transform:translateX(-50%) translateY(20px);'
+        + 'background:rgba(17,24,39,.94);color:#fff;font-size:13px;padding:10px 18px;border-radius:999px;'
+        + 'z-index:99999;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;max-width:88vw;'
+        + 'text-align:center;box-shadow:0 6px 24px rgba(0,0,0,.25);';
+      document.body.appendChild(t);
+    }
+    t.textContent = msg;
+    requestAnimationFrame(() => { t.style.opacity = '1'; t.style.transform = 'translateX(-50%) translateY(0)'; });
+    clearTimeout(showMiniToast._h);
+    showMiniToast._h = setTimeout(() => {
+      t.style.opacity = '0'; t.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 2200);
+  } catch (e) { console.warn('toast gagal', e); }
+}
+
 // Terima event dari iframe panel (klik paket, nav, sinyal ready)
 const panelReadyReplied = {}; // throttle balasan sinyal ready per panel
 window.addEventListener('message', async (e) => {
@@ -914,13 +939,14 @@ window.addEventListener('message', async (e) => {
     }
   } else if (d.type === 'nav' || d.type === 'nav-tab') {
     // Panel switcher: pesan dari iframe panel mana pun (Beranda/Modul/Progres).
-    // Akun, FAQ, Bank Soal dll. belum punya halaman -> tutup overlay (ke soal).
+    // Halaman untuk FAQ, Bank Soal dll. belum ada -> tampilkan toast "segera hadir",
+    // tetap di overlay saat ini (jangan lempar ke layar soal; dulu homeClose() membingungkan).
     const p = String(d.path || d.tab || '').toLowerCase();
     if (p.includes('modul')) homeShowPanel('modul');
     else if (p.includes('progres') || p.includes('analitik')) homeShowPanel('progres');
     else if (p.includes('akun')) homeShowPanel('akun');
     else if (p.includes('beranda')) homeShowPanel('beranda');
-    else homeClose();
+    else showMiniToast('Halaman ini segera hadir 🙏');
   }
 });
 
@@ -1010,6 +1036,9 @@ function homeClose() {
   if (!ov) return;
   ov.classList.add('home-hidden');
   document.body.style.overflow = '';
+  // Tandai mode kuis: di desktop, pemilih mapel & paket disembunyikan
+  // (user sudah memilih di beranda, tidak perlu ganti-ganti di tengah kuis)
+  document.body.dataset.quizMode = '1';
 }
 
 function homeIsOpen() {
@@ -2567,7 +2596,12 @@ function _fmtText(s) {
 // Teks yang berisi daftar ber-pemisah " • " dirender sebagai list blok
 // (satu <li> per poin) — bukan menyatu horisontal. Aman untuk teks tanpa bullet.
 function _bulletListHtml(s) {
-  const raw = String(s || '').trim();
+  let raw = String(s || '').trim();
+  // Normalisasi: dash yang dipakai sebagai pemisah item list (pola ":- " atau "$- "
+  // diikuti huruf kapital) diubah jadi bullet • agar terpecah rapi.
+  // Contoh data: "matematika:- Kelas 58 - 60: $f=2$- Kelas 61..." -> tiap "- Kelas" jadi item sendiri.
+  // Aman: "58 - 60" tidak tersentuh karena dash-nya tidak didahului ":" atau "$".
+  raw = raw.replace(/([:$])- (?=[A-ZÀ-Þ\u0600-\u06FF0-9])/g, '$1• ');
   if (!raw.includes('•')) return _fmtText(raw);
   const items = raw.split(/\s*•\s*/).map(x => x.trim()).filter(Boolean);
   if (items.length < 2) return _fmtText(raw);
