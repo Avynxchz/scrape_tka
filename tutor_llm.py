@@ -33,6 +33,16 @@ class LLMError(Exception):
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+def _looks_like_placeholder(value):
+    """True bila nilai tampak seperti placeholder .env.example (bukan key asli).
+
+    Nilai seperti 'gsk_AKUN_1_DISINI' harus dilewati agar tidak dianggap
+    API key valid (menghindari error 401 berulang). Case-insensitive.
+    """
+    marker = value.upper()
+    return "DISINI" in marker or "EXAMPLE" in marker
+
+
 def _auto_load_env():
     if "pytest" in sys.modules or os.environ.get("PYTEST_CURRENT_TEST"):
         return
@@ -46,7 +56,7 @@ def _auto_load_env():
                         if line and not line.startswith("#") and "=" in line:
                             k, v = line.split("=", 1)
                             k, v = k.strip(), v.strip()
-                            if k and k not in os.environ and v:
+                            if k and k not in os.environ and v and not _looks_like_placeholder(v):
                                 os.environ[k] = v
             except Exception:
                 pass

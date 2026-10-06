@@ -668,6 +668,32 @@
     });
   });
 
+  // Tombol hero "Mulai Sekarang" & "Login" sebelumnya tidak punya listener
+  // (tampak mati). Perbaikan Fase 1: sambungkan ke pola postMessage yang sama
+  // seperti card paket & nav di atas — parent (app.js) sudah menanganinya.
+  document.querySelectorAll('main button[type="button"]').forEach(function (btn) {
+    var labelSpan = btn.querySelector('span:not(.material-symbols-outlined)');
+    var label = labelSpan ? labelSpan.textContent.trim() : '';
+    if (label === 'Mulai Sekarang') {
+      btn.addEventListener('click', function () {
+        // Setara mengklik card paket pertama yang sudah ter-render;
+        // fallback ke entri pertama data parent bila render belum terjadi.
+        var card = document.querySelector('main section .grid > div.relative[data-subject]');
+        if (card) { card.click(); return; }
+        var first = BRIDGE._list && BRIDGE._list[0];
+        BRIDGE.send({
+          type: 'open-package',
+          subject: first ? first.subject : 'matematika',
+          pkg: first ? first.pkg : 1
+        });
+      });
+    } else if (label === 'Login') {
+      btn.addEventListener('click', function () {
+        BRIDGE.send({ type: 'nav', path: 'Akun' });
+      });
+    }
+  });
+
   // terima data
   window.addEventListener('message', function (e) {
     var d = e.data || {};
