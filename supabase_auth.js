@@ -108,12 +108,26 @@ function updateLoginUI(isLoggedIn) {
     if (btn) btn.style.display = 'none';
     if (userInfo) {
       userInfo.style.display = 'flex';
+      userInfo.style.alignItems = 'center';
+      userInfo.style.gap = '6px';
+      userInfo.style.maxWidth = '180px';
+      userInfo.style.overflow = 'hidden';
+      // Compact: avatar + nama pendek (truncate) + tombol keluar kecil
+      // Di HP nama disembunyikan biar header nggak rusak
+      const shortName = userName.length > 12 ? userName.substring(0, 12) + '…' : userName;
       userInfo.innerHTML = `
-        <img src="${avatarUrl}" 
-             style="width:32px;height:32px;border-radius:50%" alt="">
-        <span>${userName}</span>
-        <button onclick="logout()" style="margin-left:8px">Keluar</button>
+        <img src="${avatarUrl}"
+             style="width:28px;height:28px;border-radius:50%;flex-shrink:0" alt="">
+        <span class="user-name" style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px">${shortName}</span>
+        <button onclick="logout()" style="flex-shrink:0;font-size:11px;padding:4px 8px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer">Keluar</button>
       `;
+      // Sembunyikan nama di layar kecil via CSS
+      const style = document.createElement('style');
+      style.textContent = '@media (max-width: 640px) { #userInfo .user-name { display: none !important; } #userInfo { max-width: 90px !important; } }';
+      if (!document.getElementById('userInfo-mobile-css')) {
+        style.id = 'userInfo-mobile-css';
+        document.head.appendChild(style);
+      }
     }
     // Update quota: logged-in dapat 25/hari — sinkron ke semua tampilan
     const quotaData = { remaining: 25, daily_limit: 25, tier: 'free', is_logged_in: true };
