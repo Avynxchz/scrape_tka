@@ -78,6 +78,81 @@
 }
 .stitch-avatar .ms-icon { font-size: 20px; }
 
+/* Login button & User Info di header mobile & desktop */
+.stitch-login-btn {
+  background: #004a2a;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  transition: background .15s;
+}
+.stitch-login-btn:hover {
+  background: #1b633e;
+}
+@media (max-width: 480px) {
+  .stitch-login-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+#userInfo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+#userInfo .user-avatar-img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: 2px solid #22C55E;
+  object-fit: cover;
+}
+#userInfo .user-name {
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+  color: #0F172A;
+  cursor: pointer;
+}
+#userInfo .user-logout-btn {
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border: 1px solid #E2E8F0;
+  border-radius: 6px;
+  background: #fff;
+  color: #BA1A1A;
+  cursor: pointer;
+  transition: all .15s;
+}
+#userInfo .user-logout-btn:hover {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+@media (max-width: 640px) {
+  #userInfo .user-name {
+    display: none !important;
+  }
+  #userInfo {
+    max-width: 95px !important;
+  }
+}
+
 /* ---------- Konten utama ---------- */
 .stitch-main { flex: 1; width: 100%; padding: 16px 16px 116px; background: #f6fafe; }
 

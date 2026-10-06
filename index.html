@@ -65,9 +65,12 @@
           </div>
         </div>
         <div class="stitch-header-actions">
-          <div id="userInfo" style="display:none;align-items:center;gap:8px"></div>
-          <button id="loginBtn" onclick="loginWithGoogle()" style="background:#4285f4;color:white;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-weight:600">Login Google</button>
-          <button aria-label="Buka Akun" type="button" class="stitch-avatar" onclick="homeShowPanel('akun')" title="Buka Akun"><span class="ms-icon">person</span></button>
+          <div id="userInfo" style="display:none"></div>
+          <button id="loginBtn" onclick="loginWithGoogle()" class="stitch-login-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24"><path fill="currentColor" d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"/></svg>
+            <span>Login</span>
+          </button>
+          <button id="headerAvatarBtn" aria-label="Buka Akun" type="button" class="stitch-avatar" onclick="homeShowPanel('akun')" title="Buka Akun"><span class="ms-icon">person</span></button>
         </div>
       </div>
     </header>
