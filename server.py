@@ -1150,8 +1150,14 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             return False
         top = parts[0]
         if top == 'data':
-            # /data/... hanya utk file gambar di dalam folder images/
-            return 'images' in parts and lower.endswith(_IMAGE_EXTS)
+            # /data/... hanya utk:
+            # 1. file gambar di dalam folder images/
+            # 2. file soal *_learning.json di root data/ (dibutuhkan frontend quiz)
+            if 'images' in parts and lower.endswith(_IMAGE_EXTS):
+                return True
+            if len(parts) == 2 and lower.endswith('_learning.json'):
+                return True
+            return False
         if top in _STATIC_OK_TOPDIRS:
             return True
         # Root proyek: hanya file langsung (tanpa subdirektori).
