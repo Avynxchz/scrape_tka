@@ -55,7 +55,7 @@
 </main>
 <script>
 const params = new URLSearchParams(location.search);
-const key = params.get('key') || 'tka-admin';
+const key = params.get('key') || '';
 
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
 

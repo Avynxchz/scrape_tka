@@ -64,10 +64,24 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 #   - memakai endpoint tutor legacy tanpa kuota (/api/ai-tutor)
 # ============================================================================
 PUBLIC_DEMO = os.environ.get("PUBLIC_DEMO", "0") == "1"
-DEMO_BLOCKED_PATHS = ('/api/tutor/reset_quota', '/api/swarm/start', '/api/swarm/reset', '/api/ai-tutor')
+DEMO_BLOCKED_PATHS = ('/api/tutor/reset_quota', '/api/swarm/start', '/api/swarm/reset', '/api/ai-tutor',
+                       # Endpoint tutor pemakai kuota LLM (dulu bocor ke publik saat demo)
+                       '/api/tutor/chat', '/api/tutor/new', '/api/tutor/state')
 
-# Dashboard pengunjung hanya boleh dibuka di server utama (bukan demo publik)
-ADMIN_VISITOR_PATHS = ('/pengunjung', '/api/admin/visitors')
+# Dashboard pengunjung hanya boleh dibuka di server utama (bukan demo publik).
+# '/pengunjung.html' ikut diblokir: cek lama hanya cocok path eksak '/pengunjung',
+# padahal file statisnya bisa diakses langsung lewat static serving.
+ADMIN_VISITOR_PATHS = ('/pengunjung', '/pengunjung.html', '/api/admin/visitors')
+
+# FAIL-FAST keamanan: kunci admin dashboard pengunjung WAJIB diset lewat env
+# VISITOR_ADMIN_KEY. Nilai default "tka-admin" (mudah ditebak) tidak boleh lagi
+# dipakai — server menolak start bila env belum diset.
+if not os.environ.get("VISITOR_ADMIN_KEY"):
+    raise SystemExit(
+        "FATAL: VISITOR_ADMIN_KEY belum diset. "
+        "Set environment variable VISITOR_ADMIN_KEY dengan kunci acak yang kuat "
+        "sebelum menjalankan server."
+    )
 
 # ============================================================================
 # LAPISAN KANONIS (data/canonical_questions/) — sumber konteks AI
@@ -221,6 +235,11 @@ def format_kunci_display(q_data):
             return ", ".join(f"{str(x).split(':', 1)[0]} ({str(x).split(':', 1)[1]})" for x in kunci)
         return ", ".join(str(x) for x in kunci)
     return str(kunci)
+
+
+# Konstanta backslash untuk clean_katex_artifacts() (rekonstruksi "\frac" dst.
+# dari karakter kontrol peninggalan escape LaTeX yang salah tulis).
+BS = "\\"
 
 
 def clean_katex_artifacts(text):
@@ -1048,6 +1067,13 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         if lower_path.endswith(forbidden_exts) or 'secret' in lower_path:
             return self._send_json(403, {"status": "forbidden", "message": "Akses ditolak: tipe file dilindungi."})
 
+        # 1b. Mode demo publik: matikan endpoint administratif & pemakai kuota LLM.
+        # (do_POST punya cek serupa; di sini perlu versi GET untuk /api/tutor/state,
+        #  dan path dilucuti query string agar "?subject=..." tidak lolos.)
+        if PUBLIC_DEMO and self.path.split('?', 1)[0] in DEMO_BLOCKED_PATHS:
+            return self._send_json(403, {"status": "forbidden",
+                                         "message": "Endpoint ini dimatikan saat mode demo publik."})
+
         if self.path.split('?', 1)[0] == '/api/tutor/state':
             # Muat ulang percakapan tersimpan soal ini (resume tanpa isi kosong)
             try:
@@ -1099,7 +1125,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 return self._send_json(403, {"status": "forbidden", "message": "Dimatikan saat demo publik."})
             key = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query).get('key', [''])[0]
             if key != visitor_log.ADMIN_KEY:
-                return self._send_json(401, {"status": "unauthorized", "message": "Kunci admin salah. Pakai ?key=tka-admin"})
+                return self._send_json(401, {"status": "unauthorized", "message": "Kunci admin salah atau tidak diberikan."})
             if self.path.split('?', 1)[0] == '/api/admin/visitors':
                 body = json.dumps(visitor_log.summary(), ensure_ascii=False).encode('utf-8')
                 self.send_response(200)

@@ -18,7 +18,7 @@ import time
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PORT = os.environ.get("PORT", "8080")
-ADMIN_KEY = os.environ.get("VISITOR_ADMIN_KEY", "tka-admin")
+ADMIN_KEY = os.environ.get("VISITOR_ADMIN_KEY")  # wajib diset; server.py fail-fast bila kosong
 LOG_DIR = os.path.join(BASE_DIR, "data")
 LOG_PATH = os.path.join(LOG_DIR, f"visitors_{PORT}.jsonl")
 
