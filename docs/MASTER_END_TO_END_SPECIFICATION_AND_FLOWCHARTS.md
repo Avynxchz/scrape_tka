@@ -564,8 +564,8 @@ Sebelum dokumen solusi dikonsumsi oleh siswa dan AI Tutor, sistem menjalankan au
 [Uji Kelengkapan 5 Pilar]                 [Uji Kesesuaian Kunci Resmi]
 • concept_kunci tidak kosong              • Bandingkan kunci hasil AI vs
 • glossary berisi istilah                   kunci resmi Pusmendik
-• steps berisi langkah nyata              • Kunci resmi = MUTLAK!
-       │                                         │
+• steps berisi langkah nyata              • Kunci resmi = prioritas utama
+       │                                    (bukan mutlak)
        └────────────────────┬────────────────────┘
                             │
                             ▼
@@ -576,7 +576,10 @@ Sebelum dokumen solusi dikonsumsi oleh siswa dan AI Tutor, sistem menjalankan au
       Tandai status:            Tandai flag:
       match: true               needs_manual_review: true
                                 Tulis alasan di review_reason.
-                                DILARANG ubah kunci Pusmendik!
+                                Koreksi kunci BOLEH jika ada bukti kuat
+                                (gambar sumber terbaca / hitung ulang
+                                terverifikasi); flag review tetap aktif
+                                sampai dikonfirmasi.
                │                         │
                └────────────┬────────────┘
                             │
@@ -843,7 +846,7 @@ CREATE TABLE IF NOT EXISTS ai_tutor_messages (
 | No | Komponen | Aturan Emas yang Menjamin Keberhasilan |
 | :---: | :--- | :--- |
 | **1** | **Scraping** | Wajib klik `Refresh` token sebelum submit formulir data peserta. |
-| **2** | **Kunci Jawaban** | Diserap langsung dari halaman rekap hasil tes Pusmendik (Ground Truth Otoritatif). |
+| **2** | **Kunci Jawaban** | Diserap langsung dari halaman rekap hasil tes Pusmendik (Ground Truth Otoritatif). Koreksi **diperbolehkan** hanya dengan `needs_manual_review: true` + bukti di `review_reason` — bukan dilarang mutlak. |
 | **3** | **Gambar Siswa** | Tampilan siswa murni menampilkan gambar visual; transkrip teknis bahasa Inggris disembunyikan khusus untuk AI. |
 | **4** | **Rumus** | Rumus diekstrak dari atribut `data-latex` agar tidak pecah oleh OCR. |
 | **5** | **Pengerjaan Solusi**| Dicicil 5 soal per batch dengan checkpoint disk agar tidak terkena pemotongan token. |
