@@ -177,18 +177,36 @@ def get_gemini_api_key():
 def active_provider_info():
     """Info provider aktif (untuk ditampilkan/diagnosa — tanpa membocorkan API key)."""
     gemini_key = get_gemini_api_key()
-    keys = get_api_keys()
-    cloud = _first_env("OPENAI_COMPATIBLE_BASE_URL", "LLM_BASE_URL")
-    ollama = _first_env("OLLAMA_BASE_URL", default="http://127.0.0.1:11434")
+    groq_keys = get_api_keys()
+    or_keys = get_openrouter_api_keys()
+    ali_key = get_alibaba_api_key()
 
     model_options = []
-    if cloud and keys:
+    # Groq (utama - cepat)
+    if groq_keys:
         model_options.append({
             "id": "qwen-groq",
-            "name": "Qwen 2.5 27B (Groq Fast)",
+            "name": "Qwen 3.8 27B (Groq - Cepat)",
             "tier": "cloud",
-            "default": not bool(gemini_key)
+            "default": True
         })
+    # OpenRouter (gratis)
+    if or_keys:
+        model_options.append({
+            "id": "openrouter-free",
+            "name": "Auto Free Model (OpenRouter)",
+            "tier": "cloud",
+            "default": not model_options
+        })
+    # Alibaba
+    if ali_key:
+        model_options.append({
+            "id": "qwen-alibaba",
+            "name": "Qwen Plus (Alibaba)",
+            "tier": "cloud",
+            "default": False
+        })
+    # Gemini
     if gemini_key:
         model_options.append({
             "id": "gemini-flash",
@@ -196,42 +214,14 @@ def active_provider_info():
             "tier": "paid",
             "default": not model_options
         })
-        model_options.append({
-            "id": "gemini-pro",
-            "name": "Gemini Pro (Advanced)",
-            "tier": "paid",
-            "default": False
-        })
 
-    if gemini_key:
-        return {
-            "provider": "google_gemini",
-            "base_url": cloud or ollama,
-            "model": "gemini-3.8-flash",
-            "api_key_set": True,
-            "has_gemini": True,
-            "has_groq": bool(cloud and keys),
-            "model_options": model_options,
-        }
-    if cloud:
-        return {
-            "provider": "openai_compatible",
-            "base_url": cloud,
-            "model": _first_env("LLM_MODEL", default=""),
-            "api_key_set": len(keys) > 0,
-            "keys_count": len(keys),
-            "has_gemini": False,
-            "has_groq": True,
-            "model_options": model_options,
-        }
     return {
-        "provider": "ollama",
-        "base_url": ollama,
-        "model": _first_env("LLM_MODEL", default=""),
-        "api_key_set": False,
-        "keys_count": 0,
-        "has_gemini": False,
-        "has_groq": False,
+        "provider": "multi",
+        "api_key_set": bool(groq_keys or or_keys or ali_key or gemini_key),
+        "has_groq": bool(groq_keys),
+        "has_openrouter": bool(or_keys),
+        "has_alibaba": bool(ali_key),
+        "has_gemini": bool(gemini_key),
         "model_options": model_options,
     }
 
@@ -328,12 +318,19 @@ def generate(messages, *, model=None, image_paths=None, temperature=0.7, max_tok
         providers.append({"name": "gemini", "base_url": None,
                           "keys": [gemini_key], "model": "gemini-flash"})
 
-    # Jika user pilih model spesifik, prioritaskan provider yang cocok
+    # Jika user pilih model spesifik, HANYA pakai provider itu (tanpa fallback lintas provider).
+    # Round-robin hanya dalam keys provider yang dipilih.
     if model:
         ml = model.lower()
         if "gemini" in ml:
-            providers = [p for p in providers if p["name"] == "gemini"] + \
-                        [p for p in providers if p["name"] != "gemini"]
+            providers = [p for p in providers if p["name"] == "gemini"]
+        elif "openrouter" in ml:
+            providers = [p for p in providers if p["name"] == "openrouter"]
+        elif "alibaba" in ml:
+            providers = [p for p in providers if p["name"] == "alibaba"]
+        elif "groq" in ml or "qwen" in ml:
+            # qwen-groq -> provider groq
+            providers = [p for p in providers if p["name"] == "groq"]
 
     last_err = None
     for i, prov in enumerate(providers):
