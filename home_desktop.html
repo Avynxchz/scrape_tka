@@ -689,7 +689,13 @@
       });
     } else if (label === 'Login') {
       btn.addEventListener('click', function () {
-        BRIDGE.send({ type: 'nav', path: 'Akun' });
+        // Login Google beneran via Supabase
+        if (typeof loginWithGoogle === 'function') {
+          loginWithGoogle();
+        } else {
+          // Fallback: navigasi ke halaman Akun kalau auth belum load
+          BRIDGE.send({ type: 'nav', path: 'Akun' });
+        }
       });
     }
   });
@@ -705,5 +711,6 @@
 })();
 
 </script>
+<script src="supabase_auth.js?v=1"></script>
 </body>
 </html>

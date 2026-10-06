@@ -62,6 +62,10 @@ async function syncUserToDB(user) {
 
 // Login dengan Google
 async function loginWithGoogle() {
+  if (!supabaseClient) {
+    alert('Sistem login belum siap, coba lagi sebentar...');
+    return;
+  }
   const { error } = await supabaseClient.auth.signInWithOAuth({
     provider: 'google',
     options: {
