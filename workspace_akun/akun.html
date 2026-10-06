@@ -79,15 +79,16 @@ button:active { transform: scale(0.97); }
         <div class="hidden md:flex items-center gap-space-2xs bg-brand-emerald-light px-space-sm py-space-2xs rounded-full">
           <span class="w-2 h-2 rounded-full bg-accent-mint"></span>
           <span class="material-symbols-outlined text-[16px] text-primary-container">neurology</span>
-          <span class="font-label-caps text-label-caps text-primary font-bold">Kuota AI Tamu · 5/hari</span>
+          <span class="font-label-caps text-label-caps text-primary font-bold" id="d-header-quota">Kuota AI Tamu · 5/hari</span>
         </div>
         <a href="#" data-nav="akun" title="Kamu di halaman Akun" class="flex items-center gap-space-sm pl-space-xs">
           <div class="hidden sm:flex flex-col text-right">
             <span class="text-sm font-semibold text-[#0F172A] leading-none" data-d-name>Tamu</span>
-            <span class="text-[13px] text-text-muted leading-tight mt-0.5">Mode Tamu</span>
+            <span class="text-[13px] text-text-muted leading-tight mt-0.5" id="d-header-status">Mode Tamu</span>
           </div>
-          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center">
-            <span class="material-symbols-outlined text-on-primary text-[18px]">person</span>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center overflow-hidden" id="d-header-avatar-wrap">
+            <span class="material-symbols-outlined text-on-primary text-[18px]" id="d-header-avatar-icon">person</span>
+            <img id="d-header-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;">
           </div>
         </a>
       </div>
@@ -111,6 +112,7 @@ button:active { transform: scale(0.97); }
           <p class="font-body-md text-body-md text-text-muted">Kelola data akun dan lihat ringkasan latihanmu. Semua angka di halaman ini dihitung dari perangkatmu sendiri.</p>
         </div>
         <div class="flex items-center gap-space-xs shrink-0">
+          <div id="d-auth-btn-wrap" class="inline-flex items-center gap-space-2xs"></div>
           <button class="inline-flex items-center gap-space-2xs px-space-md py-space-xs rounded-lg bg-surface-card border border-border-subtle hover:bg-surface-subtle text-text-primary font-label-lg text-label-lg transition-all shadow-sm" id="d-btn-reset" type="button">
             <span class="material-symbols-outlined text-[18px]">restart_alt</span>
             Reset Riwayat Latihan
@@ -125,23 +127,24 @@ button:active { transform: scale(0.97); }
           <div class="bg-surface-card rounded-xl shadow-sm border border-border-subtle overflow-hidden">
             <div class="h-24 w-full bg-gradient-to-r from-primary-container via-primary to-brand-emerald-dark relative overflow-hidden flex items-start justify-end px-space-lg pt-3">
               <div class="absolute -right-6 -bottom-10 w-48 h-48 rounded-full bg-primary-fixed/10 blur-2xl pointer-events-none"></div>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/20 backdrop-blur-md text-on-primary font-label-caps text-label-caps uppercase tracking-wider">
+              <span id="d-badge-banner" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/20 backdrop-blur-md text-on-primary font-label-caps text-label-caps uppercase tracking-wider">
                 <span class="w-1.5 h-1.5 rounded-full bg-accent-mint"></span>
-                Mode Tamu &middot; Masa Beta
+                <span id="d-badge-banner-text">Mode Tamu &middot; Masa Beta</span>
               </span>
             </div>
             <div class="p-space-lg pt-0 relative flex flex-col gap-space-lg">
               <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md -mt-10">
                 <div style="display:flex;align-items:center;gap:16px;">
                   <div style="width:80px;height:80px;flex-shrink:0;">
-                    <div class="w-20 h-20 rounded-2xl bg-primary flex items-center justify-center shadow-md ring-4 ring-surface-card text-on-primary">
-                      <span class="material-symbols-outlined text-[40px]">person</span>
+                    <div class="w-20 h-20 rounded-2xl bg-primary flex items-center justify-center shadow-md ring-4 ring-surface-card text-on-primary overflow-hidden" id="d-avatar-wrap">
+                      <span class="material-symbols-outlined text-[40px]" id="d-avatar-icon">person</span>
+                      <img id="d-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;">
                     </div>
                   </div>
                   <div style="min-width:0;">
                     <div style="display:flex;align-items:center;gap:8px;">
                       <h2 class="font-headline-md text-headline-md" data-d-name style="margin:0;color:#0f172a !important;">Tamu</h2>
-                      <span class="px-2 py-0.5 rounded-full bg-brand-emerald-light text-primary font-label-caps text-label-caps">Belum login</span>
+                      <span class="px-2 py-0.5 rounded-full bg-brand-emerald-light text-primary font-label-caps text-label-caps" id="d-badge-status">Belum login</span>
                     </div>
                     <p class="font-body-md text-body-md text-text-muted" data-d-sub style="margin:4px 0 0 0;">Profil siswa akan terisi setelah fitur login aktif (masa beta).</p>
                   </div>
@@ -362,8 +365,9 @@ button:active { transform: scale(0.97); }
           <span class="text-[9px] font-bold text-text-muted uppercase tracking-wider truncate mt-0.5">AKUN</span>
         </div>
       </div>
-      <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm shrink-0">
-        <span class="material-symbols-outlined text-[18px]">person</span>
+      <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm shrink-0 overflow-hidden" id="m-header-avatar-wrap">
+        <span class="material-symbols-outlined text-[18px]" id="m-header-avatar-icon">person</span>
+        <img id="m-header-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;">
       </div>
     </div>
   </header>
@@ -374,8 +378,9 @@ button:active { transform: scale(0.97); }
       <section class="bg-surface-card rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col gap-space-md">
         <div class="absolute -right-10 -top-10 w-36 h-36 rounded-full bg-brand-emerald-light/50 pointer-events-none"></div>
         <div class="flex items-center gap-space-md relative z-10">
-          <div class="relative w-16 h-16 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-on-primary">
-            <span class="material-symbols-outlined text-[32px]">person</span>
+          <div class="relative w-16 h-16 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-on-primary overflow-hidden" id="m-avatar-wrap">
+            <span class="material-symbols-outlined text-[32px]" id="m-avatar-icon">person</span>
+            <img id="m-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;">
           </div>
           <div class="flex flex-col min-w-0 flex-1">
             <div class="flex items-center justify-between gap-space-xs">
@@ -391,8 +396,8 @@ button:active { transform: scale(0.97); }
               <span class="material-symbols-outlined text-[15px]" style="font-variation-settings: &quot;FILL&quot; 1;">workspace_premium</span>
             </div>
             <div class="flex flex-col min-w-0">
-              <span class="font-label-md text-label-md text-primary font-bold truncate">Mode Tamu (Masa Beta)</span>
-              <span class="font-label-caps text-label-caps text-secondary truncate">Gratis selama beta</span>
+              <span class="font-label-md text-label-md text-primary font-bold truncate" id="m-badge-title">Mode Tamu (Masa Beta)</span>
+              <span class="font-label-caps text-label-caps text-secondary truncate" id="m-badge-sub">Gratis selama beta</span>
             </div>
           </div>
           <span class="px-space-xs py-0.5 rounded-full bg-badge-amber-bg text-badge-amber-text font-label-caps text-label-caps flex-shrink-0">Beta</span>
@@ -525,10 +530,12 @@ button:active { transform: scale(0.97); }
           <span class="material-symbols-outlined text-[20px]">restart_alt</span>
           <span class="font-label-lg text-label-lg font-bold">Reset Riwayat Latihan</span>
         </button>
-        <div class="w-full h-12 rounded-xl bg-surface-card border border-border-subtle text-text-muted flex items-center justify-center gap-space-xs">
-          <span class="material-symbols-outlined text-[20px]">login</span>
-          <span class="font-label-lg text-label-lg font-bold">Masuk / Daftar</span>
-          <span class="px-space-xs py-0.5 rounded-full bg-surface-subtle font-label-caps text-label-caps">Segera</span>
+        <div id="m-auth-btn-wrap" class="w-full">
+          <div class="w-full h-12 rounded-xl bg-surface-card border border-border-subtle text-text-muted flex items-center justify-center gap-space-xs">
+            <span class="material-symbols-outlined text-[20px]">login</span>
+            <span class="font-label-lg text-label-lg font-bold">Masuk / Daftar</span>
+            <span class="px-space-xs py-0.5 rounded-full bg-surface-subtle font-label-caps text-label-caps">Segera</span>
+          </div>
         </div>
         <p class="text-center font-label-caps text-label-caps text-text-muted">Riwayat latihan tersimpan lokal di perangkat ini</p>
       </section>
@@ -595,13 +602,22 @@ button:active { transform: scale(0.97); }
 
   /* ---------- render ---------- */
   function renderProfile() {
-    var nama = (PROFILE && PROFILE.nama) || 'Tamu';
-    var login = !!(PROFILE && PROFILE.login);
+    var nama = (PROFILE && (PROFILE.nama || PROFILE.name)) || 'Tamu';
+    var login = !!(PROFILE && (PROFILE.login || PROFILE.loggedIn));
+    var email = (PROFILE && PROFILE.email) || '';
+    var avatar = (PROFILE && (PROFILE.avatar || PROFILE.avatar_url)) || '';
+
+    // Nama & Subtitle
     document.querySelectorAll('[data-d-name], [data-m-name]').forEach(function (el) { el.textContent = nama; });
     var dSub = document.querySelector('[data-d-sub]');
-    if (dSub) dSub.textContent = login ? (PROFILE.sub || 'Siswa TKA Master') : 'Profil siswa akan terisi setelah fitur login aktif (masa beta).';
+    if (dSub) dSub.textContent = login ? (email || 'Siswa TKA Master (Google Login)') : 'Profil siswa akan terisi setelah fitur login aktif (masa beta).';
     var mSub = document.querySelector('[data-m-sub]');
-    if (mSub) mSub.textContent = login ? (PROFILE.sub || 'Siswa TKA Master') : 'Belum login \u00B7 Masa Beta';
+    if (mSub) mSub.textContent = login ? (email || 'Akun Google Terverifikasi') : 'Belum login \u00B7 Masa Beta';
+    
+    var dHeaderStatus = document.getElementById('d-header-status');
+    if (dHeaderStatus) dHeaderStatus.textContent = login ? 'Akun Google' : 'Mode Tamu';
+
+    // NISN & Kontak
     var nisnWrap = document.querySelector('[data-m-nisn-wrap]');
     if (nisnWrap) {
       if (PROFILE && PROFILE.nisn) { nisnWrap.hidden = false; nisnWrap.textContent = 'NISN: ' + PROFILE.nisn; }
@@ -609,16 +625,92 @@ button:active { transform: scale(0.97); }
     }
     var dNisn = document.querySelector('[data-d-nisn]');
     if (dNisn) dNisn.textContent = (PROFILE && PROFILE.nisn) ? 'NISN: ' + PROFILE.nisn : '';
-    document.querySelectorAll('[data-d-email]').forEach(function (el) { el.textContent = (PROFILE && PROFILE.email) || 'Belum diatur'; });
+    document.querySelectorAll('[data-d-email]').forEach(function (el) { el.textContent = email || 'Belum diatur'; });
     document.querySelectorAll('[data-d-wa]').forEach(function (el) { el.textContent = (PROFILE && PROFILE.wa) || 'Belum diatur'; });
+
+    // Avatar Gambar Desktop & Mobile
+    var dIcon = document.getElementById('d-avatar-icon');
+    var dImg = document.getElementById('d-avatar-img');
+    if (avatar && dImg && dIcon) {
+      dImg.src = avatar; dImg.style.display = 'block'; dIcon.style.display = 'none';
+    } else if (dIcon && dImg) {
+      dImg.style.display = 'none'; dIcon.style.display = 'block';
+    }
+
+    var dHIcon = document.getElementById('d-header-avatar-icon');
+    var dHImg = document.getElementById('d-header-avatar-img');
+    if (avatar && dHImg && dHIcon) {
+      dHImg.src = avatar; dHImg.style.display = 'block'; dHIcon.style.display = 'none';
+    } else if (dHIcon && dHImg) {
+      dHImg.style.display = 'none'; dHIcon.style.display = 'block';
+    }
+
+    var mIcon = document.getElementById('m-avatar-icon');
+    var mImg = document.getElementById('m-avatar-img');
+    if (avatar && mImg && mIcon) {
+      mImg.src = avatar; mImg.style.display = 'block'; mIcon.style.display = 'none';
+    } else if (mIcon && mImg) {
+      mImg.style.display = 'none'; mIcon.style.display = 'block';
+    }
+
+    var mHIcon = document.getElementById('m-header-avatar-icon');
+    var mHImg = document.getElementById('m-header-avatar-img');
+    if (avatar && mHImg && mHIcon) {
+      mHImg.src = avatar; mHImg.style.display = 'block'; mHIcon.style.display = 'none';
+    } else if (mHIcon && mHImg) {
+      mHImg.style.display = 'none'; mHIcon.style.display = 'block';
+    }
+
+    // Status Badges
+    var dBadgeText = document.getElementById('d-badge-banner-text');
+    if (dBadgeText) dBadgeText.textContent = login ? 'Akun Terverifikasi \u00B7 Google' : 'Mode Tamu \u00B7 Masa Beta';
+    
+    var dBadgeStatus = document.getElementById('d-badge-status');
+    if (dBadgeStatus) {
+      dBadgeStatus.textContent = login ? 'Terhubung (25 Tanya/Hari)' : 'Belum login';
+      dBadgeStatus.className = login 
+        ? 'px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-label-caps text-label-caps'
+        : 'px-2 py-0.5 rounded-full bg-brand-emerald-light text-primary font-label-caps text-label-caps';
+    }
+
+    var mBadgeTitle = document.getElementById('m-badge-title');
+    if (mBadgeTitle) mBadgeTitle.textContent = login ? 'Akun Terverifikasi (Gratis)' : 'Mode Tamu (Masa Beta)';
+    var mBadgeSub = document.getElementById('m-badge-sub');
+    if (mBadgeSub) mBadgeSub.textContent = login ? '25 pertanyaan AI Tutor/hari' : 'Gratis selama beta';
+
+    // Tombol Login / Keluar Desktop & Mobile
+    var dAuthWrap = document.getElementById('d-auth-btn-wrap');
+    if (dAuthWrap) {
+      if (login) {
+        dAuthWrap.innerHTML = '<button onclick="logoutFromAkun()" type="button" class="inline-flex items-center gap-space-2xs px-space-md py-space-xs rounded-lg bg-surface-card border border-red-200 text-red-600 hover:bg-red-50 font-label-lg text-label-lg transition-all shadow-sm cursor-pointer"><span class="material-symbols-outlined text-[18px]">logout</span>Keluar</button>';
+      } else {
+        dAuthWrap.innerHTML = '<button onclick="loginFromAkun()" type="button" class="inline-flex items-center gap-space-2xs px-space-md py-space-xs rounded-lg bg-primary text-white hover:bg-primary-container font-label-lg text-label-lg transition-all shadow-sm cursor-pointer"><span class="material-symbols-outlined text-[18px]">login</span>Login Google</button>';
+      }
+    }
+
+    var mAuthWrap = document.getElementById('m-auth-btn-wrap');
+    if (mAuthWrap) {
+      if (login) {
+        mAuthWrap.innerHTML = '<button onclick="logoutFromAkun()" type="button" class="w-full h-12 rounded-xl bg-surface-card border border-red-200 text-red-600 flex items-center justify-center gap-space-xs font-label-lg text-label-lg font-bold transition-all shadow-sm active:scale-[0.99] cursor-pointer hover:bg-red-50"><span class="material-symbols-outlined text-[20px]">logout</span><span>Keluar dari Akun</span></button>';
+      } else {
+        mAuthWrap.innerHTML = '<button onclick="loginFromAkun()" type="button" class="w-full h-12 rounded-xl bg-primary text-white flex items-center justify-center gap-space-xs font-label-lg text-label-lg font-bold transition-all shadow-sm active:scale-[0.99] cursor-pointer"><span class="material-symbols-outlined text-[20px]">login</span><span>Login dengan Google</span></button>';
+      }
+    }
   }
 
   function renderQuota() {
-    var limit = QUOTA && QUOTA.daily_limit ? QUOTA.daily_limit : 5;
-    var remain = (QUOTA && typeof QUOTA.remaining === 'number') ? QUOTA.remaining : null;
+    var isLogin = !!(PROFILE && (PROFILE.login || PROFILE.loggedIn));
+    var limit = QUOTA && QUOTA.daily_limit ? QUOTA.daily_limit : (isLogin ? 25 : 5);
+    var remain = (QUOTA && typeof QUOTA.remaining === 'number') ? QUOTA.remaining : (isLogin ? 25 : 5);
+
+    var dHQuota = document.getElementById('d-header-quota');
+    if (dHQuota) {
+      dHQuota.textContent = isLogin ? ('Kuota AI \u00B7 ' + limit + '/hari') : 'Kuota AI Tamu \u00B7 5/hari';
+    }
+
     document.querySelectorAll('[data-d-quota-limit], [data-m-quota-limit]').forEach(function (el) { el.textContent = limit; });
     var pct = remain === null ? 0 : Math.max(0, Math.min(100, Math.round((remain / limit) * 100)));
-    document.querySelectorAll('[data-d-quota-bar], [data-m-quota-bar]').forEach(function (el) { el.style.width = (remain === null ? 0 : pct) + '%'; });
+    document.querySelectorAll('[data-d-quota-bar], [data-m-quota-bar]').forEach(function (el) { el.style.width = pct + '%'; });
     document.querySelectorAll('[data-d-quota-remain], [data-m-quota-remain]').forEach(function (el) {
       el.textContent = remain === null ? '\u2014' : remain;
     });
@@ -736,6 +828,35 @@ button:active { transform: scale(0.97); }
       }
     }
   });
+
+  window.loginFromAkun = function () {
+    send({ type: 'login-google' });
+  };
+  window.logoutFromAkun = function () {
+    if (confirm('Keluar dari akun TKA Master?')) {
+      send({ type: 'logout' });
+    }
+  };
+
+  // Baca user & kuota dari localStorage agar langsung tampil tanpa menunggu pesan
+  try {
+    var savedUser = localStorage.getItem('tka_user');
+    if (savedUser) {
+      var su = JSON.parse(savedUser);
+      if (su && su.loggedIn) {
+        PROFILE = {
+          nama: su.name,
+          name: su.name,
+          email: su.email,
+          avatar: su.avatar,
+          login: true,
+          loggedIn: true,
+          sub: su.email
+        };
+        QUOTA = { remaining: 25, daily_limit: 25 };
+      }
+    }
+  } catch (e) {}
 
   initAkunTextScale();
   renderAll();

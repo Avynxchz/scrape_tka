@@ -89,6 +89,7 @@ async function logout() {
 function updateLoginUI(isLoggedIn) {
   const btn = document.getElementById('loginBtn');
   const userInfo = document.getElementById('userInfo');
+  const avatarBtn = document.getElementById('headerAvatarBtn') || document.querySelector('.stitch-header-actions .stitch-avatar');
   
   if (isLoggedIn && currentUser) {
     const userName = currentUser.user_metadata?.full_name || currentUser.email;
@@ -106,28 +107,19 @@ function updateLoginUI(isLoggedIn) {
     } catch (e) {}
     
     if (btn) btn.style.display = 'none';
+    if (avatarBtn) avatarBtn.style.display = 'none'; // Sembunyikan avatar default agar tidak bertumpuk/dobel di header
+    
     if (userInfo) {
       userInfo.style.display = 'flex';
-      userInfo.style.alignItems = 'center';
-      userInfo.style.gap = '6px';
-      userInfo.style.maxWidth = '180px';
-      userInfo.style.overflow = 'hidden';
-      // Compact: avatar + nama pendek (truncate) + tombol keluar kecil
-      // Di HP nama disembunyikan biar header nggak rusak
-      const shortName = userName.length > 12 ? userName.substring(0, 12) + '…' : userName;
+      const shortName = userName.length > 15 ? userName.substring(0, 15) + '…' : userName;
       userInfo.innerHTML = `
-        <img src="${avatarUrl}"
-             style="width:28px;height:28px;border-radius:50%;flex-shrink:0" alt="">
-        <span class="user-name" style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px">${shortName}</span>
-        <button onclick="logout()" style="flex-shrink:0;font-size:11px;padding:4px 8px;border:1px solid #ddd;border-radius:6px;background:#fff;cursor:pointer">Keluar</button>
+        <img src="${avatarUrl}" onclick="if(typeof homeShowPanel==='function')homeShowPanel('akun')"
+             class="user-avatar-img"
+             title="Buka Akun (${userName})" alt="Avatar">
+        <span class="user-name" onclick="if(typeof homeShowPanel==='function')homeShowPanel('akun')"
+              title="${userName}">${shortName}</span>
+        <button onclick="logout()" class="user-logout-btn" type="button" title="Keluar dari akun">Keluar</button>
       `;
-      // Sembunyikan nama di layar kecil via CSS
-      const style = document.createElement('style');
-      style.textContent = '@media (max-width: 640px) { #userInfo .user-name { display: none !important; } #userInfo { max-width: 90px !important; } }';
-      if (!document.getElementById('userInfo-mobile-css')) {
-        style.id = 'userInfo-mobile-css';
-        document.head.appendChild(style);
-      }
     }
     // Update quota: logged-in dapat 25/hari — sinkron ke semua tampilan
     const quotaData = { remaining: 25, daily_limit: 25, tier: 'free', is_logged_in: true };
@@ -141,7 +133,8 @@ function updateLoginUI(isLoggedIn) {
     try {
       localStorage.removeItem('tka_user');
     } catch (e) {}
-    if (btn) btn.style.display = 'block';
+    if (btn) btn.style.display = 'inline-flex';
+    if (avatarBtn) avatarBtn.style.display = 'grid';
     if (userInfo) userInfo.style.display = 'none';
     window.dispatchEvent(new CustomEvent('tka-logout'));
   }

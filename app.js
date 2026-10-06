@@ -818,10 +818,22 @@ function homeProgressSummary() {
 // Panel lain (Modul/Progres) memakai helper yang sama lewat postToFrameReliable().
 function homeSendDesktopData() {
   const frame = document.getElementById('homeDesktopFrame');
+  let user = null;
+  if (typeof getTKAUser === 'function') user = getTKAUser();
+  else if (window.TKA_USER) user = window.TKA_USER;
+  const isLogin = !!(user && user.loggedIn);
+  const quota = state.tutorQuota || {
+    remaining: isLogin ? 25 : 5,
+    daily_limit: isLogin ? 25 : 5,
+    tier: 'free',
+    is_logged_in: isLogin
+  };
   postToFrameReliable(frame, () => ({
     type: 'home-desktop-data',
     subjects: buildSubjectsPayload(['matematika', 'fisika', 'ekonomi']),
     progress: homeProgressSummary(),
+    user: user,
+    quota: quota,
   }));
 }
 
@@ -921,7 +933,7 @@ window.addEventListener('message', async (e) => {
       if (state.currentSubject !== d.subject) await switchSubject(d.subject);
       await switchPackage(d.pkg);
     } catch (err) { console.error(err); }
-  } else if (d.type === 'home-desktop-ready' || d.type === 'modul-ready' || d.type === 'request-data') {
+  } else if (d.type === 'home-desktop-ready' || d.type === 'modul-ready' || d.type === 'request-data' || d.type === 'akun-ready') {
     // Halaman panel baru saja siap -> kirim data terbaru ke frame yang bersangkutan.
     // Ini menutup race apapun urutan antara load iframe dan init app.
     // Throttle 1 detik per frame: jangan ikuti ping-pong kalau halaman spam ready.
@@ -936,16 +948,20 @@ window.addEventListener('message', async (e) => {
         panelReadyReplied[hit[1]] = now;
         sendPanelData(hit[1]);
       }
-    
-    } else if (d.type === 'login-google') {
-  // Iframe (home_desktop) minta login Google — jalanin di window utama
-  // (Google blokir OAuth dalam iframe). supabase_auth.js dimuat di parent.
-  if (typeof loginWithGoogle === 'function') {
-    loginWithGoogle();
-  }
-
+    }
+  } else if (d.type === 'login-google') {
+    // Iframe (home_desktop/akun) minta login Google — jalankan di window utama
+    // (Google blokir OAuth dalam iframe). supabase_auth.js dimuat di parent.
+    if (typeof loginWithGoogle === 'function') {
+      loginWithGoogle();
+    }
+  } else if (d.type === 'logout') {
+    // Iframe minta logout
+    if (typeof logout === 'function') {
+      logout();
+    }
   } else if (d.type === 'nav' || d.type === 'nav-tab') {
-    // Panel switcher: pesan dari iframe panel mana pun (Beranda/Modul/Progres).
+    // Panel switcher: pesan dari iframe panel mana pun (Beranda/Modul/Progres/Akun).
     // Halaman untuk FAQ, Bank Soal dll. belum ada -> tampilkan toast "segera hadir",
     // tetap di overlay saat ini (jangan lempar ke layar soal; dulu homeClose() membingungkan).
     const p = String(d.path || d.tab || '').toLowerCase();
@@ -1011,12 +1027,35 @@ function sendPanelData(panel) {
     } catch (e) {}
   }
   if (panel === 'akun') {
-    // profil: sistem login belum ada -> null (halaman tampil mode Tamu yang jujur).
-    // kuota AI: data server-side via state.tutorQuota (null jika belum buka sesi tutor).
+    let profile = state.akunProfile || null;
+    if (!profile && typeof getTKAUser === 'function') {
+      const u = getTKAUser();
+      if (u && u.loggedIn) {
+        profile = {
+          name: u.name,
+          nama: u.name,
+          email: u.email,
+          avatar: u.avatar,
+          avatar_url: u.avatar,
+          login: true,
+          loggedIn: true,
+          tier: 'Gratis',
+          sub: u.email
+        };
+        state.akunProfile = profile;
+      }
+    }
+    const isLogin = !!(profile && profile.loggedIn);
+    const quota = state.tutorQuota || {
+      remaining: isLogin ? 25 : 5,
+      daily_limit: isLogin ? 25 : 5,
+      tier: 'free',
+      is_logged_in: isLogin
+    };
     postToFrameReliable(frame, () => ({
       type: 'akun-data',
-      profile: state.akunProfile || null,
-      quota: state.tutorQuota || null,
+      profile: profile,
+      quota: quota,
       summary: homeProgressSummary(),
       progress: homeProgressStore(),
     }));
@@ -1037,6 +1076,40 @@ function sendPanelData(panel) {
     }));
   }
 }
+
+// Listener sinkronisasi status login & kuota dari supabase_auth.js
+window.addEventListener('tka-login', (e) => {
+  const user = e.detail || (typeof getTKAUser === 'function' ? getTKAUser() : null);
+  if (user && user.loggedIn) {
+    state.akunProfile = {
+      name: user.name,
+      nama: user.name,
+      email: user.email,
+      avatar: user.avatar,
+      avatar_url: user.avatar,
+      login: true,
+      loggedIn: true,
+      tier: 'Gratis',
+      sub: user.email
+    };
+    state.tutorQuota = { remaining: 25, daily_limit: 25, tier: 'free', is_logged_in: true };
+    if (typeof updateTutorQuotaUI === 'function') {
+      updateTutorQuotaUI(state.tutorQuota);
+    }
+    sendPanelData('akun');
+    sendPanelData('beranda');
+  }
+});
+
+window.addEventListener('tka-logout', () => {
+  state.akunProfile = null;
+  state.tutorQuota = { remaining: 5, daily_limit: 5, tier: 'free', is_logged_in: false };
+  if (typeof updateTutorQuotaUI === 'function') {
+    updateTutorQuotaUI(state.tutorQuota);
+  }
+  sendPanelData('akun');
+  sendPanelData('beranda');
+});
 
 function homeClose() {
   const ov = document.getElementById('homeOverlay');
@@ -3206,19 +3279,33 @@ function updateTutorQuotaUI(quota) {
   if (homeIsOpen() && homeActivePanel === 'akun') {
     try { sendPanelData('akun'); } catch (e) {}
   }
+  const isLogin = !!(quota.is_logged_in || (typeof getTKAUser === 'function' && getTKAUser().loggedIn));
+  const isSub = quota.is_subscriber || quota.tier === 'subscriber';
+  const limit = quota.daily_limit || (isSub ? 100 : (isLogin ? 25 : 5));
+  const rem = quota.remaining !== undefined ? quota.remaining : limit;
+
   const badge = document.getElementById('tutorQuotaBadge');
   const text = document.getElementById('tutorQuotaText');
-  if (!badge || !text) return;
+  if (badge && text) {
+    text.innerText = `${rem}/${limit} Tanya`;
+    badge.className = `tutor-quota-badge ${isSub ? 'subscriber' : (isLogin ? 'user-login' : 'free')}`;
+    badge.title = isSub
+      ? `Akun Langganan: ${rem} dari ${limit} pertanyaan tersisa hari ini`
+      : (isLogin 
+          ? `Akun Google: ${rem} dari ${limit} pertanyaan tersisa hari ini` 
+          : `Akun Tamu: ${rem} dari ${limit} pertanyaan tersisa hari ini. Login untuk 25 tanya/hari!`);
+  }
 
-  const isSub = quota.is_subscriber || quota.tier === 'subscriber';
-  const rem = quota.remaining !== undefined ? quota.remaining : 5;
-  const limit = quota.daily_limit || (isSub ? 100 : 5);
-
-  text.innerText = `${rem}/${limit} Tanya`;
-  badge.className = `tutor-quota-badge ${isSub ? 'subscriber' : 'free'}`;
-  badge.title = isSub
-    ? `Akun Langganan: ${rem} dari ${limit} pertanyaan tersisa hari ini`
-    : `Akun Gratis: ${rem} dari ${limit} pertanyaan tersisa hari ini. Jeda 10 detik per pertanyaan.`;
+  // Update hero slide 3 info bila ada
+  const heroSlideInfo = document.getElementById('heroSlideInfo');
+  if (heroSlideInfo) {
+    const p = heroSlideInfo.querySelector('p');
+    if (p) {
+      p.textContent = isLogin
+        ? `Bingung di tengah soal? Konsultasikan pembahasannya — ${limit} tanya/hari untuk akunmu.`
+        : 'Bingung di tengah soal? Konsultasikan pembahasannya — 5 tanya/hari gratis.';
+    }
+  }
 
   // Disable input bila kuota harian habis
   const chatInput = document.getElementById('chatInput');
@@ -3229,6 +3316,14 @@ function updateTutorQuotaUI(quota) {
       chatInput.disabled = true;
     }
     if (btnSend) btnSend.disabled = true;
+  } else {
+    if (chatInput && chatInput.disabled) {
+      chatInput.placeholder = 'Tanyakan langkah atau rumus...';
+      chatInput.disabled = false;
+    }
+    if (btnSend && btnSend.disabled) {
+      btnSend.disabled = false;
+    }
   }
 }
 
@@ -3333,6 +3428,15 @@ function renderChatHistory(q) {
     const defaultWelcome = document.createElement('div');
     defaultWelcome.className = 'chat-bubble ai';
     const modelBadge = `<span class="tutor-model-badge" title="Model AI Aktif"><i class="fa-solid fa-microchip"></i> ${_escHtml(activeModelDisplay)}</span>`;
+    // Sapaan personal dengan nama user jika sudah login (Aturan Founder)
+    let greetingText = '';
+    const tkaUser = typeof getTKAUser === 'function' ? getTKAUser() : (window.TKA_USER || null);
+    if (tkaUser && tkaUser.loggedIn && tkaUser.name && tkaUser.name !== 'Tamu') {
+      greetingText = `Halo ${tkaUser.name}! Ada yang bisa saya bantu?`;
+    } else {
+      greetingText = (SUBJECT_CATALOG[state.currentSubject] && SUBJECT_CATALOG[state.currentSubject].welcome) || 'Halo! Masih bingung dengan konsep atau langkah pengerjaan pada soal ini? Tanyakan langsung di bawah ya!';
+    }
+
     defaultWelcome.innerHTML = `
       <div class="bubble-sender-bar">
         <div class="sender-left">
@@ -3342,7 +3446,7 @@ function renderChatHistory(q) {
         ${modelBadge}
       </div>
       <div class="bubble-content">
-        <p class="ai-p">${(SUBJECT_CATALOG[state.currentSubject] && SUBJECT_CATALOG[state.currentSubject].welcome) || 'Halo! Masih bingung dengan konsep atau langkah pengerjaan pada soal ini? Tanyakan langsung di bawah ya!'}</p>
+        <p class="ai-p">${greetingText}</p>
       </div>
     `;
     chatMessages.appendChild(defaultWelcome);
