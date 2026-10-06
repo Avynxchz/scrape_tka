@@ -1,0 +1,154 @@
+/* ============================================================
+   desktop-improve.css — Fase 5: perbaikan visual desktop
+   Target : home_desktop.html (ditampilkan via iframe pada
+            layar >= 900px). Hanya visual/UX — tidak mengubah
+   struktur fungsional maupun perilaku JS bridge (postMessage).
+   Warna mengikuti palet Stitch: primary #004A2A,
+   primary-container #1B633E, aksen mint #22C55E.
+   ============================================================ */
+
+/* ---------- 1. Hierarki tipografi ----------
+   Sebelumnya: judul mapel (h2), judul kartu "Paket N" (h3),
+   dan judul kartu sidebar (h3) semuanya 18px/600 sehingga
+   tidak ada pembeda level. Sekarang berjenjang. */
+.dk-subject-head h2 {
+  font-size: 20px;
+  line-height: 28px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #171C1F;
+}
+/* Judul kartu sidebar satu tingkat di bawah judul mapel */
+aside .font-headline-sm {
+  font-size: 16px;
+  line-height: 24px;
+}
+/* Sub-judul kecil pada header mapel (ikon + nama mapel) */
+.dk-subject-head {
+  margin-bottom: 0.25rem;
+}
+
+/* ---------- 2. Chip filter: status aktif terlihat ----------
+   Sebelumnya: .filter-btn.active tidak punya gaya pembeda
+   (sama persis dengan chip non-aktif). */
+#filterChips .filter-btn {
+  border: 1px solid transparent;
+  transition: background-color .2s ease, color .2s ease,
+              box-shadow .2s ease, border-color .2s ease;
+}
+#filterChips .filter-btn:hover {
+  background-color: #EBF6F0;
+  color: #004A2A;
+  border-color: #D5E8DC;
+}
+#filterChips .filter-btn.active {
+  background-color: #1B633E;
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(27, 99, 62, .28);
+}
+
+/* ---------- 3. Kartu paket: hover informatif ----------
+   Seluruh kartu bisa diklik (role=button dari JS), jadi
+   hover harus memberi sinyal affordance yang jelas:
+   kartu terangkat + aksen emerald + tombol CTA menyala. */
+.dk-pkg {
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: transform .25s ease, box-shadow .25s ease,
+              border-color .25s ease;
+}
+.dk-pkg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 18px;
+  right: 18px;
+  height: 3px;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(90deg, #1B633E, #22C55E);
+  opacity: 0;
+  transition: opacity .25s ease;
+  z-index: 20;
+  pointer-events: none;
+}
+.dk-pkg:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 74, 42, .14);
+  border-color: #DCEBE2;
+}
+.dk-pkg:hover::before {
+  opacity: 1;
+}
+/* CTA ikut menyala saat kartu di-hover (khusus tombol sekunder) */
+.dk-pkg:hover button {
+  background-color: #1B633E;
+  color: #FFFFFF;
+}
+.dk-pkg:focus-visible {
+  outline: 2px solid #1B633E;
+  outline-offset: 3px;
+}
+
+/* ---------- 4. Pemisah antar bagian mapel ----------
+   Daftar paket panjang: beri jeda visual yang konsisten
+   antar blok mapel agar tidak menyatu. */
+.dk-col-main > .dk-subject {
+  border-top: 1px solid #E5EDF3;
+  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+/* ---------- 5. Progress bar: gradien emerald ----------
+   Bar datar satu warna -> gradien agar progres terasa
+   "maju". Hanya bar h-2 di kartu paket (bar kuota AI h-2.5
+   tidak tersentuh). */
+.dk-pkg .h-2 > div {
+  background: linear-gradient(90deg, #1B633E, #34D399);
+}
+
+/* ---------- 6. Fokus keyboard yang terlihat ----------
+   Kartu paket bisa difokuskan via tabindex (JS). */
+button:focus-visible,
+a:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #1B633E;
+  outline-offset: 2px;
+}
+
+/* ================= DESKTOP (>=1024px) ================= */
+@media (min-width: 1024px) {
+  /* Sidebar menempel saat kolom paket di-scroll: kuota AI
+     & estimasi waktu tetap terlihat di layar lebar. */
+  aside.lg\:col-span-4 {
+    position: sticky;
+    top: 6.25rem;
+    align-self: flex-start;
+  }
+  /* Ruang napas ekstra untuk judul mapel di layar lebar */
+  .dk-subject-head h2 {
+    font-size: 21px;
+  }
+}
+
+/* ============ RIBBON METRIK HERO (>=768px) ============
+   Pisahkan 4 metrik dengan garis vertikal halus agar
+   ritme baca lebih rapi di layar lebar. */
+@media (min-width: 768px) {
+  .dk-metrics > div + div {
+    border-left: 1px solid rgba(255, 255, 255, .22);
+    padding-left: 1.25rem;
+  }
+}
+
+/* Hormati preferensi gerak pengguna */
+@media (prefers-reduced-motion: reduce) {
+  .dk-pkg,
+  .dk-pkg::before,
+  #filterChips .filter-btn {
+    transition: none;
+  }
+  .dk-pkg:hover {
+    transform: none;
+  }
+}
