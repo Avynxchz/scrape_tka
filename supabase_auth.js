@@ -66,6 +66,24 @@ async function loginWithGoogle() {
     alert('Sistem login belum siap, coba lagi sebentar...');
     return;
   }
+  // Kalau di dalam iframe, redirect window utama (Google blokir OAuth dalam iframe)
+  if (window.self !== window.top) {
+    const { data, error } = await supabaseClient.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin + '/app',
+        skipBrowserRedirect: true
+      }
+    });
+    if (error) {
+      alert('Login gagal: ' + error.message);
+      return;
+    }
+    if (data?.url) {
+      window.top.location.href = data.url;
+    }
+    return;
+  }
   const { error } = await supabaseClient.auth.signInWithOAuth({
     provider: 'google',
     options: {
