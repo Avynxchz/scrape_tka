@@ -1,11 +1,9 @@
 import re
 import os
-import sys
 import json
 import gzip
 import traceback
 import html as html_lib
-import urllib.request
 import urllib.parse
 import threading
 import time
@@ -20,38 +18,10 @@ import tutor_store     # noqa: E402  (persistensi percakapan — SQLite)
 tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
 
 # ============================================================================
-# ANTI-SPAM RATE LIMITER PER USER
-# ============================================================================
-_user_rate_limits = {}
-_rate_limit_lock = threading.Lock()
-
-# ============================================================================
 # CONCURRENCY QUEUE UNTUK 50 USER (SEMAPHORE)
 # ============================================================================
 MAX_CONCURRENT_LLM = int(os.environ.get("LLM_MAX_CONCURRENT", "6"))
 _llm_concurrency_semaphore = threading.Semaphore(MAX_CONCURRENT_LLM)
-
-def _check_user_rate_limit(user_key):
-    """Mencegah satu user melakukan spam agar kuota user lain tetap terjaga."""
-    if os.environ.get("PYTEST_CURRENT_TEST"):
-        return True, None
-    cooldown = float(os.environ.get("RATE_LIMIT_COOLDOWN_SEC", "1.5"))
-    max_per_min = int(os.environ.get("RATE_LIMIT_MAX_PER_MIN", "20"))
-    if cooldown <= 0:
-        return True, None
-    now = time.time()
-    with _rate_limit_lock:
-        timestamps = _user_rate_limits.get(user_key, [])
-        timestamps = [t for t in timestamps if now - t < 60]
-        if timestamps:
-            if (now - timestamps[-1]) < cooldown:
-                wait_sec = round(cooldown - (now - timestamps[-1]), 1)
-                return False, f"Santai dulu ya, tunggu {wait_sec} detik sebelum mengirim pesan berikutnya."
-            if len(timestamps) >= max_per_min:
-                return False, "Batas pengiriman pesan per menit tercapai. Tunggu sebentar ya!"
-        timestamps.append(now)
-        _user_rate_limits[user_key] = timestamps
-        return True, None
 
 PORT = int(os.environ.get("PORT", 8080))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -1151,6 +1121,17 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             "message": "Terjadi kesalahan pada server. Coba lagi beberapa saat.",
         }, cookie_value=cookie_value)
 
+    def _send_body(self, status, content_type, body, extra_headers=None):
+        """Kirim respons biner mentah (Fase 3: dedup pola send_response+headers+write
+        yang sebelumnya terduplikasi ~6x di do_GET). Header ekstra opsional."""
+        self.send_response(status)
+        self.send_header('Content-Type', content_type)
+        for k, v in (extra_headers or {}).items():
+            self.send_header(k, v)
+        self.send_header('Content-Length', str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def _static_serve_allowed(self):
         """Allowlist static serving (Fase 2, Fix 4).
 
@@ -1261,21 +1242,13 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 return self._send_json(401, {"status": "unauthorized", "message": "Kunci admin salah atau tidak diberikan."})
             if self.path.split('?', 1)[0] == '/api/admin/visitors':
                 body = json.dumps(visitor_log.summary(), ensure_ascii=False).encode('utf-8')
-                self.send_response(200)
-                self.send_header('Content-Type', 'application/json; charset=utf-8')
-                self.send_header('Cache-Control', 'no-store')
-                self.send_header('Content-Length', str(len(body)))
-                self.end_headers()
-                self.wfile.write(body)
+                self._send_body(200, 'application/json; charset=utf-8', body,
+                                {'Cache-Control': 'no-store'})
                 return
             with open(os.path.join(BASE_DIR, 'pengunjung.html'), 'rb') as fh:
                 page_body = fh.read()
-            self.send_response(200)
-            self.send_header('Content-Type', 'text/html; charset=utf-8')
-            self.send_header('Cache-Control', 'no-store')
-            self.send_header('Content-Length', str(len(page_body)))
-            self.end_headers()
-            self.wfile.write(page_body)
+            self._send_body(200, 'text/html; charset=utf-8', page_body,
+                            {'Cache-Control': 'no-store'})
             return
 
         # Snapshot konten server-rendered untuk reviewer otomatis (Fase bagikan online):
@@ -1295,11 +1268,7 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 else:
                     audit_body = render_audit_page(a_subject, a_paket, a_dari, a_sampai).encode('utf-8')
                     audit_ctype = 'text/html; charset=utf-8'
-                self.send_response(200)
-                self.send_header('Content-Type', audit_ctype)
-                self.send_header('Content-Length', str(len(audit_body)))
-                self.end_headers()
-                self.wfile.write(audit_body)
+                self._send_body(200, audit_ctype, audit_body)
             except (BrokenPipeError, ConnectionResetError):
                 return
             except Exception as e:
@@ -1324,12 +1293,8 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 try:
                     with open(page_file, 'rb') as fh:
                         page_body = fh.read()
-                    self.send_response(200)
-                    self.send_header('Content-Type', 'text/html; charset=utf-8')
-                    self.send_header('Content-Length', str(len(page_body)))
-                    self.send_header('Cache-Control', 'no-cache')
-                    self.end_headers()
-                    self.wfile.write(page_body)
+                    self._send_body(200, 'text/html; charset=utf-8', page_body,
+                                    {'Cache-Control': 'no-cache'})
                     return
                 except (BrokenPipeError, ConnectionResetError):
                     return
