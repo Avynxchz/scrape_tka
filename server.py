@@ -1155,6 +1155,9 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             self.send_header('Set-Cookie',
                              f'tutor_uid={cookie_value}; Path=/; HttpOnly; '
                              f'SameSite=Lax; Max-Age=31536000')
+        _vck = getattr(self, '_visitor_cookie', None)
+        if _vck:
+            self.send_header('Set-Cookie', _vck)
         self.send_header('Content-Length', str(len(body)))
         self.end_headers()
         self.wfile.write(body)
@@ -1174,6 +1177,9 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         self.send_header('Content-Type', content_type)
         for k, v in (extra_headers or {}).items():
             self.send_header(k, v)
+        _vck = getattr(self, '_visitor_cookie', None)
+        if _vck:
+            self.send_header('Set-Cookie', _vck)
         self.send_header('Content-Length', str(len(body)))
         self.end_headers()
         self.wfile.write(body)
@@ -1218,7 +1224,9 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
 
     def do_GET(self):
         _track_client_context(self)
-        visitor_log.record(self)
+        _did, _need_ck = visitor_log.record(self)
+        self._visitor_did = _did
+        self._visitor_cookie = visitor_log.cookie_header_value(_did) if (_did and _need_ck) else None
         # 1. Proteksi Path Traversal & File Sensitif
         clean_path = urllib.parse.unquote(self.path).split('?', 1)[0].split('#', 1)[0]
         parts = [p for p in clean_path.split('/') if p]
@@ -1392,7 +1400,9 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 "message": "Ukuran permintaan melebihi batas 1 MB.",
             })
         _track_client_context(self)
-        visitor_log.record(self)
+        _did, _need_ck = visitor_log.record(self)
+        self._visitor_did = _did
+        self._visitor_cookie = visitor_log.cookie_header_value(_did) if (_did and _need_ck) else None
         if PUBLIC_DEMO and self.path in DEMO_BLOCKED_PATHS:
             return self._send_json(403, {
                 "status": "forbidden",
@@ -1683,6 +1693,15 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 tier = "free" if is_login else "guest"
                 quota = tutor_store.set_user_tier(user_key, tier=tier)
                 quota["is_logged_in"] = is_login
+                # Pemantau pengunjung: tautkan perangkat -> identitas login
+                # supaya dashboard menampilkan nama, bukan cuma "Android · Chrome".
+                if is_login and payload.get('email'):
+                    try:
+                        visitor_log.identify(
+                            getattr(self, '_visitor_did', '') or '',
+                            payload.get('email'), payload.get('name') or '')
+                    except Exception:
+                        pass
                 return self._send_json(200, {
                     "status": "success",
                     "tier": tier,
