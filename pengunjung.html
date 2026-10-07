@@ -5,94 +5,146 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Pengunjung — TKA Master</title>
 <style>
-  :root{--bg:#0f1115;--card:#171a21;--line:#262b36;--tx:#e7ebf3;--mut:#8b95a7;--acc:#4f8cff;--ok:#33d69f}
+  :root{--bg:#0f1115;--card:#171a21;--line:#262b36;--tx:#e7ebf3;--mut:#8b95a7;--acc:#4f8cff;--ok:#33d69f;--warn:#f5b83d}
   *{box-sizing:border-box}
   body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--tx)}
   header{padding:20px 24px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
   h1{font-size:18px;margin:0}
   .mut{color:var(--mut);font-size:13px}
-  main{padding:24px;max-width:1100px;margin:0 auto}
+  main{padding:24px;max-width:1150px;margin:0 auto}
   .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:24px}
   .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px}
   .stat b{display:block;font-size:28px;margin-top:6px}
-  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-  th,td{padding:10px 12px;text-align:left;font-size:13px;border-bottom:1px solid var(--line)}
-  th{background:#1c202a;color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+  .stat .sub{font-size:12px;color:var(--mut)}
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--card)}
+  table{width:100%;border-collapse:collapse;min-width:760px}
+  th,td{padding:10px 12px;text-align:left;font-size:13px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:#1c202a;color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
   tr:last-child td{border-bottom:none}
-  .pill{display:inline-block;padding:3px 9px;border-radius:999px;background:#1f2735;font-size:12px}
+  .pill{display:inline-block;padding:3px 9px;border-radius:999px;background:#1f2735;font-size:12px;white-space:nowrap}
+  .pill.user{background:#1e2a45;color:#9fc0ff}
+  .pill.guest{background:#262b36;color:var(--mut)}
   .dot{width:8px;height:8px;border-radius:50%;display:inline-block;background:var(--ok);margin-right:6px;vertical-align:middle}
+  .dot.off{background:#5b6474}
+  .uname{font-weight:600;font-size:13px}
+  .umail{font-size:11px;color:var(--mut);word-break:break-all}
   code{background:#1f2735;padding:2px 6px;border-radius:5px;font-size:12px}
   .empty{padding:32px;text-align:center;color:var(--mut)}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:0 0 10px;font-size:12px;color:var(--mut)}
 </style>
 </head>
 <body>
 <header>
   <div>
     <h1>👀 Pemantau Pengunjung</h1>
-    <div class="mut">Server utama (port 8080) · auto-refresh tiap 5 detik</div>
+    <div class="mut">ID perangkat via cookie (akurat per browser) · auto-refresh tiap 5 detik</div>
   </div>
   <div class="mut">Update terakhir: <span id="ts">—</span></div>
 </header>
 <main>
   <div class="stats">
     <div class="stat"><span class="mut">Kunjungan hari ini</span><b id="v-today">0</b></div>
-    <div class="stat"><span class="mut">Perangkat hari ini</span><b id="d-today">0</b></div>
-    <div class="stat"><span class="mut">Total kunjungan</span><b id="v-total">0</b></div>
+    <div class="stat"><span class="mut">Perangkat hari ini</span><b id="d-today">0</b><span class="sub" id="d-online-sub"></span></div>
+    <div class="stat"><span class="mut">User login hari ini</span><b id="u-today">0</b></div>
     <div class="stat"><span class="mut">Total perangkat</span><b id="d-total">0</b></div>
   </div>
 
+  <div class="legend">
+    <span><span class="dot"></span>online = aktif &lt; 5 mnt lalu</span>
+    <span><span class="pill user">nama</span> = sudah login Google</span>
+    <span><span class="pill guest">Tamu</span> = belum login</span>
+  </div>
+
   <h3 style="font-size:14px;color:var(--mut);margin:0 0 10px">Perangkat hari ini</h3>
+  <div class="tbl-wrap">
   <table id="dev-table">
-    <thead><tr><th>Status</th><th>Perangkat</th><th>Hits</th><th>Pertama</th><th>Terakhir</th><th>Halaman</th></tr></thead>
-    <tbody><tr><td colspan="6" class="empty" id="dev-empty">Belum ada data.</td></tr></tbody>
+    <thead><tr><th>Status</th><th>Pengguna</th><th>Perangkat</th><th>Hits</th><th>Terakhir aktif</th><th>Halaman</th></tr></thead>
+    <tbody><tr><td colspan="6" class="empty">Belum ada data.</td></tr></tbody>
   </table>
+  </div>
 
   <h3 style="font-size:14px;color:var(--mut);margin:26px 0 10px">Aktivitas terakhir (60)</h3>
+  <div class="tbl-wrap">
   <table>
-    <thead><tr><th>Waktu</th><th>Perangkat</th><th>Metode</th><th>Halaman</th></tr></thead>
+    <thead><tr><th>Waktu</th><th>Pengguna</th><th>Perangkat</th><th>Halaman</th></tr></thead>
     <tbody id="act-body"><tr><td colspan="4" class="empty">Belum ada data.</td></tr></tbody>
   </table>
+  </div>
 </main>
 <script>
 const params = new URLSearchParams(location.search);
 const key = params.get('key') || '';
+let serverNow = 0;
 
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// Selisih waktu pakai jam SERVER (bukan jam HP) biar akurat lintas zona waktu
+function rel(sec){
+  if(sec < 0) return '—';
+  if(sec < 60) return sec + ' dtk lalu';
+  const m = Math.floor(sec/60);
+  if(m < 60) return m + ' mnt lalu';
+  const h = Math.floor(m/60);
+  if(h < 24) return h + ' jam lalu';
+  return Math.floor(h/24) + ' hari lalu';
+}
+
+function userCell(name, email, loggedIn){
+  if(loggedIn && (name || email)){
+    return `<div class="uname">${esc(name || email)}</div>` +
+           (email && name !== email ? `<div class="umail">${esc(email)}</div>` : '');
+  }
+  return '<span class="pill guest">Tamu</span>';
+}
 
 async function tick(){
   try{
     const r = await fetch('/api/admin/visitors?key=' + encodeURIComponent(key), {cache:'no-store'});
     if(!r.ok){ document.getElementById('ts').textContent = 'Error ' + r.status + ' (kunci salah?)'; return; }
     const d = await r.json();
+    serverNow = d.now || Math.floor(Date.now()/1000);
     document.getElementById('ts').textContent = new Date().toLocaleTimeString('id-ID');
     document.getElementById('v-today').textContent = d.hari_ini.kunjungan;
     document.getElementById('d-today').textContent = d.hari_ini.perangkat;
-    document.getElementById('v-total').textContent = d.total_semua.kunjungan;
     document.getElementById('d-total').textContent = d.total_semua.perangkat;
+    const devs = d.perangkat_hari_ini || [];
+    const onlineN = devs.filter(p => p.online).length;
+    const loginN = devs.filter(p => p.logged_in).length;
+    document.getElementById('d-online-sub').textContent = onlineN + ' online sekarang';
+    document.getElementById('u-today').textContent = loginN;
 
     const tb = document.querySelector('#dev-table tbody');
-    if(d.perangkat_hari_ini.length === 0){
-      tb.innerHTML = '<tr><td colspan="6" class="empty">Belum ada pengunjung hari ini.</td></tr>';
-    } else {
-      tb.innerHTML = d.perangkat_hari_ini.map(p => `<tr>
-        <td><span class="dot"></span>online</td>
-        <td><span class="pill">${esc(p.dev)}</span> <code>${esc(p.did)}</code></td>
-        <td>${p.hits}</td>
-        <td class="mut">${esc((p.first||'').replace('T',' '))}</td>
-        <td class="mut">${esc((p.last||'').replace('T',' '))}</td>
-        <td class="mut">${p.top_paths.map(esc).join('<br>')}</td>
-      </tr>`).join('');
-    }
+    tb.innerHTML = devs.length === 0
+      ? '<tr><td colspan="6" class="empty">Belum ada pengunjung hari ini.</td></tr>'
+      : devs.map(p => {
+          const seenSec = (typeof p.last_seen_sec === 'number' && p.last_seen_sec >= 0)
+            ? p.last_seen_sec : Math.max(0, serverNow - Math.floor(Date.now()/1000) + 1);
+          const status = p.online
+            ? '<span class="dot"></span>online'
+            : '<span class="dot off"></span><span class="mut">' + esc(rel(p.last_seen_sec)) + '</span>';
+          return `<tr>
+            <td style="white-space:nowrap">${status}</td>
+            <td>${userCell(p.user_name, p.user_email, p.logged_in)}</td>
+            <td><span class="pill">${esc(p.dev)}</span><br><code style="font-size:11px">${esc(p.did)}</code></td>
+            <td>${p.hits}</td>
+            <td class="mut" style="white-space:nowrap">${esc(rel(p.last_seen_sec))}</td>
+            <td class="mut">${p.top_paths.map(esc).join('<br>')}</td>
+          </tr>`;
+        }).join('');
 
     const ab = document.getElementById('act-body');
-    ab.innerHTML = d.aktivitas_terakhir.length === 0
+    const acts = d.aktivitas_terakhir || [];
+    ab.innerHTML = acts.length === 0
       ? '<tr><td colspan="4" class="empty">Belum ada data.</td></tr>'
-      : d.aktivitas_terakhir.map(e => `<tr>
-          <td class="mut">${esc((e.t||'').replace('T',' '))}</td>
-          <td>${esc(e.dev)}</td>
-          <td><span class="pill">${esc(e.method)}</span></td>
-          <td><code>${esc(e.path)}</code></td>
-        </tr>`).join('');
+      : acts.map(e => {
+          const sec = e.ts ? Math.max(0, serverNow - e.ts) : -1;
+          return `<tr>
+            <td class="mut" style="white-space:nowrap">${esc(rel(sec))}</td>
+            <td>${userCell(e.user_name, '', e.logged_in)}</td>
+            <td><span class="pill">${esc(e.dev)}</span></td>
+            <td><code>${esc(e.path)}</code> <span class="pill">${esc(e.method)}</span></td>
+          </tr>`;
+        }).join('');
   }catch(err){
     document.getElementById('ts').textContent = 'Gagal konek: ' + err.message;
   }
