@@ -2424,13 +2424,53 @@ function checkUserAnswer() {
     feedback.style.display = 'flex';
     if (benar === stmts.length) {
       feedback.className = 'feedback-banner success';
-      feedback.innerHTML = `<i class="fa-solid fa-circle-check"></i> <strong>Sempurna! Semua ${stmts.length} pernyataan benar!</strong> Cermati pembahasan di bawah untuk memperdalam teori.`;
+      feedback.innerHTML = `
+        <div class="fb-card-inner">
+          <div class="fb-main-info">
+            <div class="fb-status-badge correct">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Sempurna! Semua ${stmts.length} Pernyataan Benar!</span>
+            </div>
+            <div class="fb-text-msg">Analisis logikamu tepat. Mau mengecek pembahasan materi lengkapnya?</div>
+          </div>
+          <div class="fb-action-buttons">
+            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Lihat Pembahasan</span>
+            </button>
+            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+              <span>Soal Berikutnya</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
     } else {
       feedback.className = 'feedback-banner danger';
-      feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> <strong>${benar} dari ${stmts.length} pernyataan benar.</strong> Baris bertanda merah belum tepat — perhatikan kunci pada baris hijau dan pelajari tata caranya di bawah.`;
+      feedback.innerHTML = `
+        <div class="fb-card-inner">
+          <div class="fb-main-info">
+            <div class="fb-status-badge incorrect">
+              <i class="fa-solid fa-circle-xmark"></i>
+              <span>${benar} dari ${stmts.length} Pernyataan Benar</span>
+            </div>
+            <div class="fb-text-msg">Baris bertanda merah belum tepat. Mau mengecek pembahasan dan penjelasannya?</div>
+          </div>
+          <div class="fb-action-buttons">
+            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Lihat Pembahasan</span>
+            </button>
+            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+              <span>Soal Berikutnya</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
     }
 
-    if (!state.explanationVisible) toggleExplanation();
+    state.explanationVisible = true;
     showPembahasanAfterCheck();
     return;
   }
@@ -2464,19 +2504,36 @@ function checkUserAnswer() {
     }
   });
 
+  const kunciStr = Array.isArray(correctKey) ? correctKey.join(', ') : (correctKey || '-');
   feedback.style.display = 'flex';
-  if (isCorrect) {
-    feedback.className = 'feedback-banner success';
-    feedback.innerHTML = '<i class="fa-solid fa-circle-check"></i> <strong>Luar Biasa! Jawabanmu Tepat Sekali!</strong> Cermati pembahasan di bawah untuk memperdalam teori.';
-  } else {
-    feedback.className = 'feedback-banner danger';
-    feedback.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> <strong>Jawaban Belum Tepat.</strong> Kunci yang benar adalah <strong>${Array.isArray(correctKey) ? correctKey.join(', ') : correctKey}</strong>. Silakan pelajari tata cara pengerjaannya di bawah.`;
-  }
+  feedback.className = `feedback-banner ${isCorrect ? 'success' : 'danger'}`;
+  feedback.innerHTML = `
+    <div class="fb-card-inner">
+      <div class="fb-main-info">
+        <div class="fb-status-badge ${isCorrect ? 'correct' : 'incorrect'}">
+          <i class="fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
+          <span>${isCorrect ? 'Jawaban Kamu Benar!' : 'Jawaban Belum Tepat'}</span>
+        </div>
+        <div class="fb-text-msg">
+          ${isCorrect 
+            ? 'Pilihan jawabanmu tepat sekali! Ingin memperdalam rumus atau materi pada soal ini?' 
+            : `Kunci jawaban yang benar adalah <strong>${kunciStr}</strong>. Mau mengecek pembahasan langkahnya?`}
+        </div>
+      </div>
+      <div class="fb-action-buttons">
+        <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+          <i class="fa-solid fa-lightbulb"></i>
+          <span>Lihat Pembahasan</span>
+        </button>
+        <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+          <span>Soal Berikutnya</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  `;
 
-  // Auto-open explanation so student can immediately learn
-  if (!state.explanationVisible) {
-    toggleExplanation();
-  }
+  state.explanationVisible = true;
   showPembahasanAfterCheck();
 }
 
@@ -2557,8 +2614,9 @@ function syncRail(active) {
   });
 }
 
-// Setelah cek jawaban: salin hasil ke tab Pembahasan lalu pindah otomatis
-// (hanya jika user masih di soal yang sama dan soalnya sudah dijawab).
+// Setelah cek jawaban: salin hasil ke strip tab Pembahasan
+// TIDAK ADA auto-redirect paksa — user bebas memilih apakah ingin klik "Lihat Pembahasan"
+// atau tetap di lembar soal / lanjut ke nomor berikutnya.
 function showPembahasanAfterCheck() {
   const fb = document.getElementById('feedbackBanner');
   const strip = document.getElementById('pembResultStrip');
@@ -2567,15 +2625,17 @@ function showPembahasanAfterCheck() {
     strip.innerHTML = fb.innerHTML;
     strip.style.display = fb.style.display;
   }
-  const q = getCurrentQuestion();
-  const nomor = q ? q.nomor : null;
-  setTimeout(() => {
-    const cur = getCurrentQuestion();
-    if (cur && cur.nomor === nomor && isQuestionAnswered(cur)) {
-      switchWorkTab('pembahasan', 'materi', { scroll: false });
-    }
-  }, 1100);
 }
+
+function kePembahasanDariCheck() {
+  state.explanationVisible = true;
+  const learnSec = document.getElementById('learningSection');
+  if (learnSec) learnSec.style.display = 'flex';
+  const txtToggle = document.getElementById('txtToggleExp');
+  if (txtToggle) txtToggle.innerText = 'Tutup Tata Cara & Pembahasan';
+  switchWorkTab('pembahasan', 'materi', { scroll: true });
+}
+window.kePembahasanDariCheck = kePembahasanDariCheck;
 
 // Toggle display of Explanation section
 function toggleExplanation() {
@@ -3575,7 +3635,7 @@ function cleanModelName(raw) {
 // Render Chat Conversation History
 // Sumber data = percakapan tersimpan di server (tutor_store, per user+soal).
 // state.tutorMsgs adalah cache tampilan; sinkronisasi dari /api/tutor/state.
-// C9: Kartu soal collapsible di atas chat AI
+// C9: Kartu soal collapsible di atas chat AI (Soal & Opsi Lengkap termasuk Gambar/Rumus)
 function updateChatQuestionCard(q) {
   const card = document.getElementById('chatQuestionCard');
   const title = document.getElementById('chatQuestionTitle');
@@ -3585,20 +3645,109 @@ function updateChatQuestionCard(q) {
     return;
   }
   card.style.display = 'block';
-  if (title) title.textContent = `Soal No. ${q.nomor}`;
+  if (title) title.textContent = `Soal No. ${q.nomor} — Pratinjau Soal`;
+
   if (body) {
-    let html = `<div style="font-weight:600;margin-bottom:8px">${q.pertanyaan || q.teks || ''}</div>`;
-    if (q.pilihan_jawaban && q.pilihan_jawaban.length) {
-      html += '<div style="display:flex;flex-direction:column;gap:4px">';
-      q.pilihan_jawaban.forEach(o => {
-        html += `<div style="padding:6px 10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;font-size:13px"><b>${o.key}.</b> ${o.text || ''}</div>`;
+    const subjectMeta = (typeof SUBJECT_CATALOG !== 'undefined' && SUBJECT_CATALOG[state.currentSubject]) || {};
+    const pkgPath = (subjectMeta.imgBase && subjectMeta.imgBase[state.currentPkg]) || `data/${state.currentSubject}/paket_${state.currentPkg}/`;
+
+    let html = '';
+
+    // 1. Stimulus (bila tersedia)
+    if (q.stimulus) {
+      if (q.stimulus.html && typeof formatPusmendikHtml === 'function') {
+        html += `<div class="chat-qcard-stimulus" style="font-size:13px;color:#374151;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed #e5e7eb">${formatPusmendikHtml(q.stimulus.html, pkgPath)}</div>`;
+      } else if (q.stimulus.text) {
+        html += `<div class="chat-qcard-stimulus" style="font-size:13px;color:#374151;margin-bottom:8px;padding-bottom:8px;border-bottom:1px dashed #e5e7eb">${_fmtText(q.stimulus.text)}</div>`;
+      }
+      if (Array.isArray(q.stimulus.images) && q.stimulus.images.length > 0) {
+        html += '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">';
+        q.stimulus.images.forEach(sImg => {
+          const sRel = (sImg.rel_path || `images/${sImg.filename}`).replace(/^\.?\//, '');
+          const sSrc = `${pkgPath}${sRel}?v=41`;
+          html += `<img src="${sSrc}" alt="Stimulus" style="max-width:100%;max-height:120px;border-radius:6px;border:1px solid #e5e7eb;cursor:zoom-in" onclick="openImageLightbox('${sSrc}', 'Gambar Stimulus')" />`;
+        });
+        html += '</div>';
+      }
+    }
+
+    // 2. Pertanyaan
+    let pertContent = '';
+    if (q.pertanyaan) {
+      if (q.pertanyaan.html && typeof formatPusmendikHtml === 'function') {
+        pertContent = formatPusmendikHtml(q.pertanyaan.html, pkgPath);
+      } else if (q.pertanyaan.text) {
+        pertContent = _fmtText(q.pertanyaan.text);
+      } else if (typeof q.pertanyaan === 'string') {
+        pertContent = _fmtText(q.pertanyaan);
+      }
+    } else if (q.teks) {
+      pertContent = _fmtText(q.teks);
+    }
+
+    html += `<div class="chat-qcard-prompt" style="font-weight:600;font-size:13.5px;color:#111827;margin-bottom:10px;line-height:1.45">${pertContent || 'Pertanyaan tidak dapat dimuat.'}</div>`;
+
+    if (q.pertanyaan && Array.isArray(q.pertanyaan.images) && q.pertanyaan.images.length > 0) {
+      html += '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px">';
+      q.pertanyaan.images.forEach(pImg => {
+        const pRel = (pImg.rel_path || `images/${pImg.filename}`).replace(/^\.?\//, '');
+        const pSrc = `${pkgPath}${pRel}?v=41`;
+        html += `<img src="${pSrc}" alt="Gambar Soal" style="max-width:100%;max-height:120px;border-radius:6px;border:1px solid #e5e7eb;cursor:zoom-in" onclick="openImageLightbox('${pSrc}', 'Gambar Soal')" />`;
       });
       html += '</div>';
     }
-    if (q.gambar || q.image) {
-      html += '<div style="margin-top:8px;font-size:12px;color:#666"><i class="fa-solid fa-image"></i> Soal ini ada gambar (lihat di panel soal)</div>';
+
+    // 3. Pilihan Jawaban / Pernyataan
+    const opts = q.pilihan_jawaban || [];
+    if (opts.length > 0) {
+      html += '<div class="chat-qcard-options" style="display:flex;flex-direction:column;gap:6px">';
+      opts.forEach(o => {
+        let optBody = '';
+        if (o.html && typeof formatPusmendikHtml === 'function') {
+          // Bersihkan prefiks huruf duplikat jika ada di HTML
+          let cleanHtml = (o.html || '').replace(/^(<p[^>]*>)?\s*[A-E][.\)]\s+(?=[0-9A-Z($])/i, '$1');
+          optBody = formatPusmendikHtml(cleanHtml, pkgPath);
+        } else if (o.image) {
+          let base = pkgPath.endsWith('/') ? pkgPath : `${pkgPath}/`;
+          let rel = (o.image.rel_path || `images/${o.image.filename}`).replace(/^\.?\//, '');
+          if (base.endsWith('images/') && rel.startsWith('images/')) rel = rel.substring(7);
+          const imgSrc = `${base}${rel}?v=41`;
+          optBody = `<div style="display:flex;align-items:center;gap:6px"><img src="${imgSrc}" alt="Opsi ${o.key}" style="max-height:48px;max-width:240px;border-radius:4px" />${o.text ? `<span>${_fmtText(o.text)}</span>` : ''}</div>`;
+        } else if (o.latex) {
+          optBody = `$${o.latex}$`;
+        } else if (o.text) {
+          optBody = _fmtText(o.text);
+        } else if (o.full_display) {
+          optBody = _fmtText(o.full_display);
+        }
+
+        html += `
+          <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 10px;background:#ffffff;border:1px solid #e5e7eb;border-radius:8px;font-size:13px;line-height:1.4">
+            <span style="font-weight:700;color:#004a2a;min-width:18px">${o.key}.</span>
+            <div style="flex:1;overflow-x:auto">${optBody}</div>
+          </div>
+        `;
+      });
+      html += '</div>';
+    } else if (Array.isArray(q.pernyataan) && q.pernyataan.length > 0) {
+      // Tabel pernyataan Benar/Salah
+      html += '<div style="display:flex;flex-direction:column;gap:4px">';
+      q.pernyataan.forEach(st => {
+        html += `
+          <div style="padding:6px 10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;font-size:12.5px">
+            <b>${st.key || ''}.</b> ${st.teks || st.text || ''}
+          </div>
+        `;
+      });
+      html += '</div>';
     }
+
     body.innerHTML = html;
+
+    // Render KaTeX pada konten kartu soal di chat
+    if (typeof renderMath === 'function') {
+      renderMath(body);
+    }
   }
 }
 
@@ -4099,11 +4248,78 @@ function _isGenericSim(sim) {
   return sameCount > 1;
 }
 
+// Toggle Tampilkan / Sembunyikan Soal Serupa
+function togglePracticeCard() {
+  const card = document.getElementById('practiceCard');
+  const icon = document.getElementById('iconTogglePractice');
+  const txt = document.getElementById('txtTogglePractice');
+  if (!card) return;
+  const isCollapsed = card.classList.toggle('is-collapsed');
+  if (icon) icon.className = isCollapsed ? 'fa-solid fa-chevron-down' : 'fa-solid fa-chevron-up';
+  if (txt) txt.textContent = isCollapsed ? 'Tampilkan' : 'Ciutkan';
+  try {
+    localStorage.setItem('tka_practice_collapsed', isCollapsed ? '1' : '0');
+  } catch (e) {}
+}
+window.togglePracticeCard = togglePracticeCard;
+
+// Format pembahasan soal serupa agar rumus dan langkah terstruktur rapi
+function formatSimilarPembahasan(rawText) {
+  if (!rawText) return '';
+  let str = String(rawText).trim();
+
+  // Ubah pecahan a/b menjadi \frac{a}{b} agar KaTeX me-render pecahan bertingkat
+  str = str.replace(/(\b\d+)\/(\d+\b)/g, (match, n, d) => {
+    return `\\frac{${n}}{${d}}`;
+  });
+
+  // Pecah berdasarkan titik setelah rumus atau akhir kalimat
+  const sentences = str
+    .split(/(?<=\.)\s+(?=[A-Z0-9\$\(])/g)
+    .map(s => s.trim())
+    .filter(Boolean);
+
+  if (sentences.length <= 1) {
+    return `<div style="font-size:13.5px;line-height:1.5">${_fmtText(str)}</div>`;
+  }
+
+  let html = '<div class="sim-pemb-steps">';
+  sentences.forEach((s, idx) => {
+    const isConclusion = /opsi\s+[A-E]|jawaban\s*(?:yang\s*benar)?/i.test(s);
+    if (isConclusion) {
+      html += `
+        <div class="sim-pemb-step conclusion">
+          <i class="fa-solid fa-flag-checkered" style="margin-right:4px"></i>
+          <span class="step-text"><strong>Kesimpulan:</strong> ${_fmtText(s)}</span>
+        </div>`;
+    } else {
+      html += `
+        <div class="sim-pemb-step">
+          <span class="step-badge">Tahap ${idx + 1}</span>
+          <span class="step-text">${_fmtText(s)}</span>
+        </div>`;
+    }
+  });
+  html += '</div>';
+  return html;
+}
+
 function renderSimilarQuestion(q) {
   const sim = q.soal_serupa;
   const promptEl = document.getElementById('simPromptContainer');
   const optsEl = document.getElementById('simOptionsContainer');
   const feedbackEl = document.getElementById('simFeedback');
+  const card = document.getElementById('practiceCard');
+  const icon = document.getElementById('iconTogglePractice');
+  const txt = document.getElementById('txtTogglePractice');
+
+  // Pulihkan status ciutkan/tampilkan dari localStorage
+  if (card) {
+    const savedCollapsed = localStorage.getItem('tka_practice_collapsed') === '1';
+    card.classList.toggle('is-collapsed', savedCollapsed);
+    if (icon) icon.className = savedCollapsed ? 'fa-solid fa-chevron-down' : 'fa-solid fa-chevron-up';
+    if (txt) txt.textContent = savedCollapsed ? 'Tampilkan' : 'Ciutkan';
+  }
 
   feedbackEl.style.display = 'none';
 
@@ -4132,9 +4348,15 @@ function renderSimilarQuestion(q) {
     ind.innerText = opt.key;
     item.appendChild(ind);
 
-    const txt = document.createElement('span');
-    txt.innerHTML = _fmtText(opt.text);
-    item.appendChild(txt);
+    const txtSpan = document.createElement('span');
+    let optText = opt.text || '';
+    // Format pecahan angka murni seperti "2/5", "3/5", "4/5" menjadi pecahan KaTeX
+    if (/^\d+\/\d+$/.test(optText.trim())) {
+      const parts = optText.trim().split('/');
+      optText = `$\\frac{${parts[0]}}{${parts[1]}}$`;
+    }
+    txtSpan.innerHTML = _fmtText(optText);
+    item.appendChild(txtSpan);
 
     optsEl.appendChild(item);
   });
@@ -4202,20 +4424,28 @@ function evaluateSimilarDisplay(sim, selectedKey) {
     }
   });
 
+  const formattedPemb = formatSimilarPembahasan(sim.pembahasan || sim.pembahasan_singkat || '');
+
   if (isCorrect) {
     fb.className = 'sim-feedback success';
     fb.innerHTML = `
-      <div style="font-weight: 700; margin-bottom: 4px;"><i class="fa-solid fa-circle-check"></i> Jawaban Latihan Benar! (Opsi ${sim.kunci})</div>
-      <div>${_fmtText(sim.pembahasan || sim.pembahasan_singkat || '')}</div>
+      <div style="font-weight: 700; display:flex; align-items:center; gap:6px;">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>Jawaban Latihan Benar! (Opsi ${sim.kunci})</span>
+      </div>
+      <div>${formattedPemb}</div>
     `;
   } else {
     fb.className = 'sim-feedback danger';
     fb.innerHTML = `
-      <div style="font-weight: 700; margin-bottom: 4px;"><i class="fa-solid fa-circle-xmark"></i> Jawaban Latihan Belum Tepat. Kunci: Opsi ${sim.kunci}</div>
-      <div>${_fmtText(sim.pembahasan || sim.pembahasan_singkat || '')}</div>
+      <div style="font-weight: 700; display:flex; align-items:center; gap:6px;">
+        <i class="fa-solid fa-circle-xmark"></i>
+        <span>Jawaban Latihan Belum Tepat. Kunci: Opsi ${sim.kunci}</span>
+      </div>
+      <div>${formattedPemb}</div>
     `;
   }
-  renderMath();
+  renderMath(fb);
 }
 
 // Navigate Next / Previous (Next di soal terakhir = pemicu Konfirmasi Selesai Tes)
