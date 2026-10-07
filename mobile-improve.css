@@ -1,0 +1,102 @@
+/* ==========================================================================
+   MOBILE IMPROVE CSS — OPTIMASI PERFORMA HP KENTANG & PENGALAMAN MOBILE
+   Fokus: Ringan, 60fps tanpa jank, hemat memori RAM, dan responsif instan.
+   ========================================================================== */
+
+/* 1. Hilangkan jeda sentuh 300ms (Tap Delay) di seluruh browser HP */
+html, body, button, a, input, select, textarea, .option-item, .sim-opt-item, .chip-btn {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 2. Optimasi Smooth Scrolling Mobile dengan GPU Compositing */
+.cbt-exam-grid,
+.review-table-wrap,
+.home-overlay,
+.cbt-sidebar-col,
+#chatQuestionBody,
+#chatMessages {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* 3. Hardware Compositing hemat daya untuk modal & bottom-sheet */
+.modal-overlay,
+.review-overlay,
+.lightbox-modal,
+.cbt-sidebar-col {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* 4. Content Visibility: Skip render elemen di luar layar agar hemat CPU/RAM */
+.review-table tr {
+  content-visibility: auto;
+  contain-intrinsic-size: 40px;
+}
+
+.sim-pemb-step {
+  content-visibility: auto;
+  contain-intrinsic-size: 50px;
+}
+
+/* 5. ATURAN KHUSUS MODE RINGAN (Otomatis aktif di HP Kentang / Spek Rendah) */
+.mode-ringan * {
+  /* Matikan efek blur real-time yang membebani GPU */
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.mode-ringan .modal-content,
+.mode-ringan .review-card,
+.mode-ringan .feedback-banner,
+.mode-ringan .practice-card,
+.mode-ringan .cbt-question-card,
+.mode-ringan .option-item {
+  /* Ganti bayangan berlapis (box-shadow) berat dengan border ringan */
+  box-shadow: none !important;
+  border: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+.mode-ringan .animate-pulse,
+.mode-ringan .pulse-ring,
+.mode-ringan .loading-spinner {
+  animation: none !important;
+}
+
+.mode-ringan * {
+  /* Percepat transisi agar tidak memakan frame rendering */
+  transition-duration: 0.05s !important;
+}
+
+/* 6. Optimasi Responsivitas Sentuhan Opsi Jawaban di Mobile */
+@media (max-width: 768px) {
+  .option-item {
+    padding: 12px 14px;
+    margin-bottom: 8px;
+  }
+
+  .btn-action {
+    padding: 10px 14px;
+    min-height: 44px; /* Standar minimal target sentuh Apple & Android (44-48px) */
+  }
+
+  .qcard-actions {
+    gap: 8px;
+  }
+
+  .feedback-banner {
+    padding: 12px 14px;
+  }
+
+  .fb-action-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-fb-action {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 14px;
+  }
+}
