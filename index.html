@@ -749,6 +749,14 @@
           </select>
 
           <!-- Chat Conversation Stream -->
+          <!-- C9: Kartu soal collapsible di atas chat (maks 35% layar) -->
+          <div id="chatQuestionCard" style="display:none;max-height:35vh;overflow:hidden;border-bottom:1px solid #e5e7eb;background:#f9fafb">
+            <button id="chatQuestionToggle" onclick="toggleChatQuestion()" style="width:100%;padding:8px 12px;background:none;border:none;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-size:13px;font-weight:600;color:#374151">
+              <span><i class="fa-solid fa-file-lines" style="margin-right:6px"></i><span id="chatQuestionTitle">Soal</span></span>
+              <i id="chatQuestionChevron" class="fa-solid fa-chevron-up"></i>
+            </button>
+            <div id="chatQuestionBody" style="padding:0 12px 12px;overflow-y:auto;max-height:calc(35vh - 40px);font-size:14px"></div>
+          </div>
           <div class="chat-messages" id="chatMessages">
             <div class="chat-bubble ai">
               <div class="bubble-sender-bar">
