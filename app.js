@@ -947,6 +947,7 @@ function showStartPackageConfirmModal(subject, pkg) {
   }
   if (modal) {
     modal.classList.add('open');
+    if (window.TKAHistory) TKAHistory.push('modal-start');
   }
 }
 
@@ -2562,6 +2563,9 @@ function switchWorkTab(tab, sub, opts) {
   }
 
   if (tab === 'pembahasan') {
+    if (!o.fromBack && window.TKAHistory) {
+      TKAHistory.push('tab-pembahasan');
+    }
     // pembahasan selalu tampil penuh di tab ini
     if (!state.explanationVisible) {
       state.explanationVisible = true;
@@ -4486,6 +4490,7 @@ function openFinishModal() {
 
   document.getElementById('finishSummaryText').innerHTML = msg;
   document.getElementById('modalKonfirmasiSelesai').classList.add('open');
+  if (window.TKAHistory) TKAHistory.push('modal-finish');
 }
 
 function closeFinishModal() {
@@ -4701,6 +4706,7 @@ function renderReviewHasil() {
   }
 
   document.getElementById('reviewHasilOverlay').classList.add('open');
+  if (window.TKAHistory) TKAHistory.push('review-overlay');
 
   // Trigger KaTeX untuk render rumus matematika di tabel hasil
   renderMath(document.getElementById('reviewTableBody'));
@@ -4817,6 +4823,7 @@ function updateGridModalActive() {
 function openDaftarModal() {
   renderGridModal();
   document.getElementById('modalDaftarSoal').classList.add('open');
+  if (window.TKAHistory) TKAHistory.push('daftar-soal');
 }
 
 function closeDaftarModal(event) {
@@ -4842,23 +4849,31 @@ window.addEventListener('beforeunload', (e) => {
   }
 });
 
-// Trigger KaTeX math formula rendering (Targeted for fast 60fps rendering)
+// Trigger KaTeX math formula rendering (Targeted 60fps untuk HP Kentang & Mobile)
 function renderMath(targetEl) {
-  if (window.renderMathInElement) {
-    try {
-      const container = targetEl || document.querySelector('.main-container') || document.body;
-      renderMathInElement(container, {
-        delimiters: [
-          { left: '$$', right: '$$', display: true },
-          { left: '$', right: '$', display: false },
-          { left: '\\(', right: '\\)', display: false },
-          { left: '\\[', right: '\\]', display: true }
-        ],
-        throwOnError: false
-      });
-    } catch (e) {
-      console.warn('KaTeX rendering notice:', e);
+  if (typeof window.renderMathInElement !== 'function') return;
+  try {
+    const container = targetEl || document.getElementById('cbtExamGrid') || document.querySelector('.cbt-workspace') || document.querySelector('.main-container');
+    if (!container) return;
+
+    // Fast bail-out: Jika tidak ada token matematika sama sekali, lewati parsing KaTeX untuk hemat CPU
+    const text = container.textContent || '';
+    if (!text.includes('$') && !text.includes('\\(') && !text.includes('\\[') && !container.innerHTML.includes('data-latex')) {
+      return;
     }
+
+    renderMathInElement(container, {
+      delimiters: [
+        { left: '$$', right: '$$', display: true },
+        { left: '$', right: '$', display: false },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option', 'iframe', 'svg'],
+      throwOnError: false
+    });
+  } catch (e) {
+    console.warn('KaTeX rendering notice:', e);
   }
 }
 
@@ -4876,6 +4891,7 @@ function openImageLightbox(src, caption) {
   img.style.transform = 'scale(1)';
   if (cap) cap.innerText = caption || 'Pratinjau Gambar';
   modal.classList.add('open');
+  if (window.TKAHistory) TKAHistory.push('lightbox');
 }
 
 function closeImageLightbox(e) {
@@ -5620,4 +5636,148 @@ window.initTextScale = initTextScale;
 window.setTextScale = setTextScale;
 window.stepTextScale = stepTextScale;
 window.toggleTutorScaleMenu = toggleTutorScaleMenu;
+
+// ==========================================================================
+// MOBILE NATIVE BACK BUTTON & NAVIGATION HISTORY MANAGER
+// Standar Industri Web App Mobile (Android Back Button & iOS Swipe Back):
+// - Menutup modal/lightbox/sheet satu per satu saat tombol Back HP ditekan.
+// - Menghindari reload atau keluar web secara tidak sengaja saat ujian berlangsung.
+// - Jika di tab Pembahasan, tombol Back HP membawa kembali ke Lembar Soal.
+// ==========================================================================
+const TKAHistory = {
+  _isHandlingPop: false,
+
+  push(type, data) {
+    if (this._isHandlingPop) return;
+    try {
+      const stateObj = { tka_type: type, tka_data: data || null, tka_ts: Date.now() };
+      window.history.pushState(stateObj, '');
+    } catch (e) {}
+  },
+
+  init() {
+    try {
+      if (!window.history.state || !window.history.state.tka_init) {
+        window.history.replaceState({ tka_init: true }, '');
+      }
+    } catch (e) {}
+
+    window.addEventListener('popstate', (e) => {
+      this._isHandlingPop = true;
+      try {
+        const handled = this.handleBack();
+        if (handled) {
+          // Jaga guard state agar tombol back berikutnya tetap bisa ditangkap
+          try {
+            window.history.pushState({ tka_active: true }, '');
+          } catch (err) {}
+        }
+      } finally {
+        setTimeout(() => {
+          this._isHandlingPop = false;
+        }, 100);
+      }
+    });
+  },
+
+  handleBack() {
+    // 1. Lightbox Gambar Zoom
+    const lbModal = document.getElementById('imageLightboxModal');
+    if (lbModal && lbModal.classList.contains('open')) {
+      if (typeof closeImageLightbox === 'function') closeImageLightbox();
+      return true;
+    }
+
+    // 2. Modal Grid Nomor Soal
+    const gridModal = document.getElementById('modalDaftarSoal');
+    if (gridModal && gridModal.classList.contains('open')) {
+      if (typeof closeDaftarModal === 'function') closeDaftarModal();
+      return true;
+    }
+
+    // 3. Modal Konfirmasi Selesai Tes
+    const finModal = document.getElementById('modalKonfirmasiSelesai');
+    if (finModal && finModal.classList.contains('open')) {
+      if (typeof closeFinishModal === 'function') closeFinishModal();
+      return true;
+    }
+
+    // 4. Modal Konfirmasi Mulai Mapel
+    const startModal = document.getElementById('modalKonfirmasiMulaiMapel');
+    if (startModal && startModal.classList.contains('open')) {
+      if (typeof closeStartPackageModal === 'function') closeStartPackageModal();
+      return true;
+    }
+
+    // 5. Overlay Reviu Hasil
+    const revOverlay = document.getElementById('reviewHasilOverlay');
+    if (revOverlay && revOverlay.classList.contains('open')) {
+      if (typeof closeReviewHasil === 'function') closeReviewHasil();
+      return true;
+    }
+
+    // 6. Modal Logout (jika ada)
+    const logoutModal = document.getElementById('modalKonfirmasiLogout');
+    if (logoutModal && logoutModal.classList.contains('open')) {
+      if (typeof closeLogoutModal === 'function') closeLogoutModal();
+      return true;
+    }
+
+    // 7. Modal Exit Confirm (jika ada)
+    const exitModal = document.getElementById('exitConfirmModal');
+    if (exitModal && exitModal.classList.contains('open')) {
+      if (typeof closeExitConfirm === 'function') closeExitConfirm();
+      return true;
+    }
+
+    // 8. Bottom Sheet AI Tutor di Mobile
+    const tutorCol = document.getElementById('cbtSidebarCol');
+    if (tutorCol && tutorCol.classList.contains('tutor-open')) {
+      if (typeof closeTutorSheet === 'function') closeTutorSheet();
+      return true;
+    }
+
+    // 9. Tab Pembahasan -> Kembali ke Lembar Soal
+    const pPemb = document.getElementById('workPanePembahasan');
+    if (pPemb && pPemb.classList.contains('active')) {
+      if (typeof switchWorkTab === 'function') {
+        switchWorkTab('soal', null, { scroll: false, fromBack: true });
+      }
+      return true;
+    }
+
+    // 10. Jika mode kuis aktif & Beranda terbuka -> tutup Beranda
+    if (document.body.dataset.quizMode === '1' && typeof homeIsOpen === 'function' && homeIsOpen()) {
+      if (typeof homeClose === 'function') homeClose();
+      return true;
+    }
+
+    // 11. Jika sedang mengerjakan kuis di Lembar Soal:
+    // Cegah keluar web tiba-tiba saat tombol Back HP ditekan. Tampilkan konfirmasi selesai tes.
+    if (document.body.dataset.quizMode === '1') {
+      if (typeof openFinishModal === 'function') {
+        openFinishModal();
+      }
+      return true;
+    }
+
+    // 12. Jika di Beranda Mobile dan panel bukan 'beranda' (misal di Modul/Progres/Akun)
+    if (typeof homeActivePanel !== 'undefined' && homeActivePanel !== 'beranda') {
+      if (typeof homeShowPanel === 'function') {
+        homeShowPanel('beranda');
+      }
+      return true;
+    }
+
+    // Jika tidak ada modal atau kuis aktif, biarkan browser bertindak normal
+    return false;
+  }
+};
+
+window.TKAHistory = TKAHistory;
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => TKAHistory.init());
+} else {
+  TKAHistory.init();
+}
 
