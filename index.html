@@ -621,30 +621,38 @@
           </div>
 
           <!-- Drill Practice: Similar Question Card -->
-          <div class="practice-card">
+          <div class="practice-card" id="practiceCard">
             <div class="practice-header">
               <div class="practice-title">
                 <i class="fa-solid fa-crosshairs"></i>
                 <h3>Latihan Pemantapan (Soal Serupa)</h3>
               </div>
-              <span class="practice-badge">Eksekusi Mandiri</span>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="practice-badge">Eksekusi Mandiri</span>
+                <button type="button" class="btn-toggle-practice" id="btnTogglePractice" onclick="togglePracticeCard()" title="Tampilkan / Sembunyikan Soal Serupa">
+                  <i class="fa-solid fa-chevron-up" id="iconTogglePractice"></i>
+                  <span id="txtTogglePractice">Ciutkan</span>
+                </button>
+              </div>
             </div>
 
-            <p class="practice-desc">
-              Setelah membaca teori dan cara penyelesaian di atas, coba selesaikan soal serupa berikut secara mandiri untuk memperkuat pemahamanmu:
-            </p>
+            <div id="practiceContentBody">
+              <p class="practice-desc">
+                Setelah membaca teori dan cara penyelesaian di atas, coba selesaikan soal serupa berikut secara mandiri untuk memperkuat pemahamanmu:
+              </p>
 
-            <div class="practice-prompt" id="simPromptContainer"></div>
-            <div class="practice-options" id="simOptionsContainer"></div>
+              <div class="practice-prompt" id="simPromptContainer"></div>
+              <div class="practice-options" id="simOptionsContainer"></div>
 
-            <div class="practice-action-bar">
-              <button class="btn-action btn-sim-check" id="btnCheckSimAnswer" onclick="checkSimilarAnswer()">
-                <i class="fa-solid fa-paper-plane"></i>
-                <span>Periksa Jawaban Latihan</span>
-              </button>
+              <div class="practice-action-bar">
+                <button class="btn-action btn-sim-check" id="btnCheckSimAnswer" onclick="checkSimilarAnswer()">
+                  <i class="fa-solid fa-paper-plane"></i>
+                  <span>Periksa Jawaban Latihan</span>
+                </button>
+              </div>
+
+              <div class="sim-feedback" id="simFeedback" style="display: none;"></div>
             </div>
-
-            <div class="sim-feedback" id="simFeedback" style="display: none;"></div>
           </div>
         </section>
       </div>
@@ -860,14 +868,11 @@
       <div class="finish-icon"><i class="fa-solid fa-flag-checkered"></i></div>
       <h2 class="finish-title">Konfirmasi Tes</h2>
       <p class="finish-text" id="finishSummaryText"></p>
-      <div class="finish-actions" style="display: flex; flex-wrap: wrap; gap: 8px;">
-        <button class="btn-finish btn-finish-danger" onclick="selesaiTes()">
+      <div class="finish-actions" style="display: flex; flex-wrap: wrap; gap: 10px;">
+        <button class="btn-finish btn-finish-danger" onclick="selesaiTes()" style="flex: 1.2;">
           <i class="fa-solid fa-circle-check"></i> SELESAI &amp; REVIU
         </button>
-        <button class="btn-finish" style="background: #0284c7; color: #ffffff;" onclick="selesaiDanKeBeranda()">
-          <i class="fa-solid fa-house"></i> KEMBALI KE BERANDA
-        </button>
-        <button class="btn-finish btn-finish-back" onclick="closeFinishModal()">
+        <button class="btn-finish btn-finish-back" onclick="closeFinishModal()" style="flex: 1;">
           <i class="fa-solid fa-rotate-left"></i> LANJUTKAN SOAL
         </button>
       </div>
@@ -889,23 +894,24 @@
 
       <div class="review-summary">
         <div class="review-card review-card-benar">
-          <i class="fa-solid fa-circle-check"></i>
+          <div class="review-card-icon-wrap"><i class="fa-solid fa-circle-check"></i></div>
           <span class="review-card-num" id="reviewScoreBenar">0</span>
-          <span class="review-card-label">Benar</span>
+          <span class="review-card-label">Jawaban Benar</span>
         </div>
         <div class="review-card review-card-salah">
-          <i class="fa-solid fa-circle-xmark"></i>
+          <div class="review-card-icon-wrap"><i class="fa-solid fa-circle-xmark"></i></div>
           <span class="review-card-num" id="reviewScoreSalah">0</span>
-          <span class="review-card-label">Salah</span>
+          <span class="review-card-label">Jawaban Salah</span>
         </div>
         <div class="review-card review-card-kosong">
-          <i class="fa-regular fa-circle-question"></i>
+          <div class="review-card-icon-wrap"><i class="fa-regular fa-circle-question"></i></div>
           <span class="review-card-num" id="reviewScoreKosong">0</span>
-          <span class="review-card-label">Kosong</span>
+          <span class="review-card-label">Belum Terjawab</span>
         </div>
         <div class="review-card review-card-persen">
+          <div class="review-card-icon-wrap"><i class="fa-solid fa-trophy"></i></div>
           <span class="review-persen" id="reviewScorePersen">0%</span>
-          <span class="review-card-label">Skor</span>
+          <span class="review-card-label">Skor Akurasi</span>
         </div>
       </div>
 
@@ -923,14 +929,14 @@
         </table>
       </div>
 
-      <div class="review-actions" style="display: flex; flex-wrap: wrap; gap: 8px;">
-        <button class="btn-finish" style="background: #0284c7; color: #ffffff;" onclick="reviewKeBeranda()">
+      <div class="review-actions">
+        <button class="btn-review-act btn-review-primary" onclick="reviewKeBeranda()">
           <i class="fa-solid fa-house"></i> Kembali ke Beranda
         </button>
-        <button class="btn-finish btn-finish-back" onclick="closeReviewHasil()">
-          <i class="fa-solid fa-book-open"></i> Kembali Belajar
+        <button class="btn-review-act btn-review-secondary" onclick="closeReviewHasil()">
+          <i class="fa-solid fa-book-open"></i> Pelajari Pembahasan
         </button>
-        <button class="btn-finish btn-finish-danger" onclick="resetSimulasi()">
+        <button class="btn-review-act btn-review-danger" onclick="resetSimulasi()">
           <i class="fa-solid fa-rotate-right"></i> Ulangi Simulasi
         </button>
       </div>
