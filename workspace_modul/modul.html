@@ -1112,6 +1112,25 @@ button:active { transform: scale(0.97); }
   initModulCarousel();
   send({ type: 'request-data' });
   send({ type: 'modul-ready' });
+
+  // Hide-on-scroll untuk tab filter [sembunyi saat scroll bawah, muncul saat scroll atas]
+  (function() {
+    var lastY = 0;
+    var tabBar = document.querySelector('[data-cat-tab="semua"]')?.closest('.sticky');
+    if (tabBar) tabBar.style.transition = 'transform 0.3s ease';
+    window.addEventListener('scroll', function() {
+      var y = window.scrollY;
+      var goingDown = y > lastY && y > 100;
+      if (tabBar) {
+        tabBar.style.transform = goingDown ? 'translateY(-120%)' : 'translateY(0)';
+      }
+      // Kasih tau parent (index.html) biar navbar juga ngumpet
+      try {
+        window.parent.postMessage({ type: 'modul-scroll', direction: goingDown ? 'down' : 'up' }, '*');
+      } catch(e) {}
+      lastY = y;
+    }, { passive: true });
+  })();
 })();
 </script>
 </body>

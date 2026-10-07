@@ -44,6 +44,31 @@
       }
     }
   </style>
+  <script>
+  // Mode ringan otomatis untuk HP kentang [deteksi HP spek rendah]
+  (function() {
+    try {
+      var isLowEnd = false;
+      // Cek RAM (jika browser support)
+      if (navigator.deviceMemory && navigator.deviceMemory <= 3) isLowEnd = true;
+      // Cek CPU cores
+      if (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) isLowEnd = true;
+      // Cek koneksi lambat
+      if (navigator.connection && navigator.connection.effectiveType) {
+        var et = navigator.connection.effectiveType;
+        if (et === 'slow-2g' || et === '2g') isLowEnd = true;
+      }
+      if (isLowEnd) {
+        document.documentElement.classList.add('mode-ringan');
+        var st = document.createElement('style');
+        st.textContent = '.mode-ringan *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}' +
+          '.mode-ringan .animate-pulse{animation:none!important}' +
+          '.mode-ringan *{transition-duration:0.01ms!important}';
+        document.head.appendChild(st);
+      }
+    } catch(e) {}
+  })();
+  </script>
 </head>
 <body>
 

@@ -910,6 +910,69 @@ button:active { transform: scale(0.97); }
   renderAll();
   send({ type: 'request-data' });
   send({ type: 'akun-ready' });
+
+  // D10: Tombol Lapor Bug [formulir laporan masalah]
+  (function() {
+    // Cari container menu akun, tambah tombol
+    var menuContainer = document.querySelector('.akun-menu, .menu-list, main');
+    if (!menuContainer) return;
+
+    var bugBtn = document.createElement('button');
+    bugBtn.id = 'btnLaporBug';
+    bugBtn.innerHTML = '<i class="fa-solid fa-bug"></i> Lapor Bug / Masukan';
+    bugBtn.style.cssText = 'display:flex;align-items:center;gap:10px;width:100%;padding:14px 16px;margin-top:12px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;color:#9a3412;font-weight:600;font-size:14px;cursor:pointer';
+    bugBtn.onclick = openBugModal;
+    menuContainer.appendChild(bugBtn);
+
+    function openBugModal() {
+      var overlay = document.createElement('div');
+      overlay.id = 'bugModalOverlay';
+      overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px';
+      overlay.innerHTML = `
+        <div style="background:#fff;border-radius:16px;padding:20px;width:100%;max-width:400px;max-height:90vh;overflow-y:auto">
+          <h3 style="margin:0 0 4px;font-size:17px;font-weight:700">🐞 Lapor Bug</h3>
+          <p style="margin:0 0 16px;font-size:13px;color:#666">Ceritakan masalah yang kamu temui. Laporanmu tersimpan dan akan dibaca admin.</p>
+          <input id="bugTitle" placeholder="Judul singkat (mis: Tombol tidak bisa diklik)"
+            style="width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:10px;margin-bottom:10px;font-size:14px;box-sizing:border-box">
+          <textarea id="bugDesc" rows="4" placeholder="Jelaskan detailnya: di halaman apa, langkah apa yang dilakukan, apa yang terjadi..."
+            style="width:100%;padding:10px 12px;border:1px solid #ddd;border-radius:10px;margin-bottom:12px;font-size:14px;box-sizing:border-box;resize:vertical"></textarea>
+          <div style="display:flex;gap:8px">
+            <button id="bugCancel" style="flex:1;padding:10px;border:1px solid #ddd;border-radius:10px;background:#fff;font-weight:600;cursor:pointer">Batal</button>
+            <button id="bugSubmit" style="flex:2;padding:10px;border:none;border-radius:10px;background:#1b633e;color:#fff;font-weight:700;cursor:pointer">Kirim Laporan</button>
+          </div>
+          <p id="bugStatus" style="margin:10px 0 0;font-size:13px;text-align:center"></p>
+        </div>
+      `;
+      document.body.appendChild(overlay);
+      document.getElementById('bugCancel').onclick = () => overlay.remove();
+      overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+      document.getElementById('bugSubmit').onclick = async () => {
+        var title = document.getElementById('bugTitle').value.trim();
+        var desc = document.getElementById('bugDesc').value.trim();
+        var status = document.getElementById('bugStatus');
+        if (!title) { status.textContent = '⚠️ Isi judul dulu ya'; status.style.color = '#c00'; return; }
+        status.textContent = '⏳ Mengirim...'; status.style.color = '#666';
+        try {
+          // Panggil via parent (supabase_auth.js ada di parent window)
+          var ok = false;
+          if (window.parent && typeof window.parent.submitBugReport === 'function') {
+            ok = await window.parent.submitBugReport(title, desc);
+          }
+          if (ok) {
+            status.textContent = '✅ Terkirim! Makasih laporannya 🙏';
+            status.style.color = '#1b633e';
+            setTimeout(() => overlay.remove(), 1500);
+          } else {
+            status.textContent = '❌ Gagal kirim, coba lagi';
+            status.style.color = '#c00';
+          }
+        } catch(e) {
+          status.textContent = '❌ Error: ' + e.message;
+          status.style.color = '#c00';
+        }
+      };
+    }
+  })();
 })();
 </script>
 </body>
