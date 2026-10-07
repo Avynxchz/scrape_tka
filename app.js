@@ -998,6 +998,13 @@ window.addEventListener('message', async (e) => {
     if (typeof loginWithGoogle === 'function') {
       loginWithGoogle();
     }
+  } else if (d.type === 'modul-scroll') {
+    // Iframe Modul kasih tau arah scroll -> navbar parent ngumpet/muncul
+    var header = document.querySelector('.stitch-fixed-top, header.stitch-fixed-top');
+    if (header) {
+      header.style.transition = 'transform 0.3s ease';
+      header.style.transform = d.direction === 'down' ? 'translateY(-100%)' : 'translateY(0)';
+    }
   } else if (d.type === 'logout' || d.type === 'request-logout') {
     // Iframe minta logout — tampilkan modal konfirmasi keluar yang estetik
     if (typeof showLogoutConfirmationModal === 'function') {
@@ -3568,10 +3575,64 @@ function cleanModelName(raw) {
 // Render Chat Conversation History
 // Sumber data = percakapan tersimpan di server (tutor_store, per user+soal).
 // state.tutorMsgs adalah cache tampilan; sinkronisasi dari /api/tutor/state.
+// C9: Kartu soal collapsible di atas chat AI
+function updateChatQuestionCard(q) {
+  const card = document.getElementById('chatQuestionCard');
+  const title = document.getElementById('chatQuestionTitle');
+  const body = document.getElementById('chatQuestionBody');
+  if (!card || !q) {
+    if (card) card.style.display = 'none';
+    return;
+  }
+  card.style.display = 'block';
+  if (title) title.textContent = `Soal No. ${q.nomor}`;
+  if (body) {
+    let html = `<div style="font-weight:600;margin-bottom:8px">${q.pertanyaan || q.teks || ''}</div>`;
+    if (q.pilihan_jawaban && q.pilihan_jawaban.length) {
+      html += '<div style="display:flex;flex-direction:column;gap:4px">';
+      q.pilihan_jawaban.forEach(o => {
+        html += `<div style="padding:6px 10px;background:#fff;border:1px solid #e5e7eb;border-radius:8px;font-size:13px"><b>${o.key}.</b> ${o.text || ''}</div>`;
+      });
+      html += '</div>';
+    }
+    if (q.gambar || q.image) {
+      html += '<div style="margin-top:8px;font-size:12px;color:#666"><i class="fa-solid fa-image"></i> Soal ini ada gambar (lihat di panel soal)</div>';
+    }
+    body.innerHTML = html;
+  }
+}
+
+function toggleChatQuestion() {
+  const body = document.getElementById('chatQuestionBody');
+  const chevron = document.getElementById('chatQuestionChevron');
+  if (!body) return;
+  const isHidden = body.style.display === 'none';
+  body.style.display = isHidden ? 'block' : 'none';
+  if (chevron) chevron.className = isHidden ? 'fa-solid fa-chevron-up' : 'fa-solid fa-chevron-down';
+}
+
+// Otomatis kecilkan kartu saat keyboard muncul (mobile)
+if (typeof window !== 'undefined') {
+  window.addEventListener('resize', () => {
+    const card = document.getElementById('chatQuestionCard');
+    const body = document.getElementById('chatQuestionBody');
+    if (!card || card.style.display === 'none') return;
+    // Jika viewport mengecil drastis (keyboard muncul), sembunyikan body kartu
+    if (window.innerHeight < 500 && body && body.style.display !== 'none') {
+      body.style.display = 'none';
+      const chevron = document.getElementById('chatQuestionChevron');
+      if (chevron) chevron.className = 'fa-solid fa-chevron-down';
+    }
+  });
+}
+
 function renderChatHistory(q) {
   const chatMessages = document.getElementById('chatMessages');
   if (!chatMessages) return;
   chatMessages.innerHTML = '';
+
+  // C9: Update kartu soal collapsible
+  updateChatQuestionCard(q);
 
   const history = state.tutorMsgs || [];
   const subjectName = (SUBJECT_CATALOG[state.currentSubject] && SUBJECT_CATALOG[state.currentSubject].name) || 'TKA';
@@ -3601,6 +3662,10 @@ function renderChatHistory(q) {
       </div>
       <div class="bubble-content">
         <p class="ai-p">${greetingText}</p>
+        <div style="margin-top:8px;padding:6px 10px;background:#e8f5e9;border-radius:8px;font-size:12px;color:#2e7d32;display:flex;align-items:center;gap:6px">
+          <i class="fa-solid fa-check-circle"></i>
+          <span>AI sudah membaca soal nomor ${q ? q.nomor : ''} ini</span>
+        </div>
       </div>
     `;
     chatMessages.appendChild(defaultWelcome);
@@ -3672,6 +3737,16 @@ async function syncTutorConversation() {
 
 // Model Selector UI Helpers (tanpa emoji, sinkronisasi instan)
 function changeTutorModel(val) {
+  // B4: Jika ada request yang masih loading, batalkan dulu biar tidak bug
+  if (window._tutorAbortController) {
+    window._tutorAbortController.abort();
+    window._tutorAbortController = null;
+    const typingEl = document.getElementById('aiTypingBubble');
+    if (typingEl) {
+      if (typingEl._timerInt) clearInterval(typingEl._timerInt);
+      typingEl.remove();
+    }
+  }
   state.selectedTutorModel = val;
   try {
     localStorage.setItem('tka_tutor_model', val);
@@ -3845,7 +3920,7 @@ async function sendChatMessage(e) {
   });
   renderChatHistory(q);
 
-  // Show typing indicator
+  // Show typing indicator dengan timer + tombol batal
   const chatMessages = document.getElementById('chatMessages');
   const typingBubble = document.createElement('div');
   const subjectName = (SUBJECT_CATALOG[state.currentSubject] && SUBJECT_CATALOG[state.currentSubject].name) || 'TKA';
@@ -3860,26 +3935,67 @@ async function sendChatMessage(e) {
       <span class="tutor-model-badge" title="Model Sedang Menjawab"><i class="fa-solid fa-microchip"></i> ${_escHtml(cleanModelName(state.selectedTutorModel))}</span>
     </div>
     <div class="bubble-content" style="color: var(--text-muted); font-style: italic;">
-      <i class="fa-solid fa-circle-notch fa-spin"></i> Sedang menyusun penjelasan...
+      <i class="fa-solid fa-circle-notch fa-spin"></i> <span id="aiTypingStage">Menghubungi AI...</span>
+      <span id="aiTypingTimer" style="margin-left:8px;font-size:12px;opacity:0.7">0s</span>
     </div>
+    <button id="aiCancelBtn" style="margin-top:8px;padding:6px 16px;background:#fee;border:1px solid #fcc;border-radius:8px;color:#c00;font-size:13px;cursor:pointer">Batalkan</button>
   `;
   chatMessages.appendChild(typingBubble);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 
+  // Timer + stage messages
+  const startTime = Date.now();
+  const stageEl = document.getElementById('aiTypingStage');
+  const timerEl = document.getElementById('aiTypingTimer');
+  const stages = ['Menghubungi AI...', 'AI sedang berpikir...', 'Menyusun penjelasan...', 'Hampir selesai...'];
+  let stageIdx = 0;
+  const timerInt = setInterval(() => {
+    const el = document.getElementById('aiTypingBubble');
+    if (!el) { clearInterval(timerInt); return; }
+    const secs = Math.floor((Date.now() - startTime) / 1000);
+    if (timerEl) timerEl.textContent = secs + 's';
+    const newIdx = Math.min(Math.floor(secs / 8), stages.length - 1);
+    if (newIdx !== stageIdx && stageEl) {
+      stageIdx = newIdx;
+      stageEl.textContent = stages[stageIdx];
+    }
+  }, 500);
+  // Simpan untuk dibersihkan nanti
+  typingBubble._timerInt = timerInt;
+
+  // Tombol batal -> abort request (juga untuk B4)
+  const cancelBtn = document.getElementById('aiCancelBtn');
+  if (cancelBtn) {
+    cancelBtn.onclick = () => {
+      if (window._tutorAbortController) {
+        window._tutorAbortController.abort();
+      }
+    };
+  }
+
   const btnSend = document.getElementById('btnSendChat');
   btnSend.disabled = true;
+
+  // AbortController untuk tombol Batal + ganti model saat loading (B3/B4)
+  window._tutorAbortController = new AbortController();
 
   try {
     const user = typeof getTKAUser === 'function' ? getTKAUser() : (window.TKA_USER || null);
     const isLogin = !!(user && user.loggedIn);
     const headers = Object.assign({ 'Content-Type': 'application/json' }, getTutorAuthHeaders());
     const res = await fetch('/api/tutor/chat', {
+      signal: window._tutorAbortController.signal,
       method: 'POST',
       headers,
       body: JSON.stringify({
         subject: state.currentSubject,
         paket: state.currentPkg,
         nomor: q.nomor,
+        // B5: Kirim konteks soal lengkap biar AI tidak salah konteks
+        question_id: `${state.currentSubject}_p${state.currentPkg}_n${q.nomor}`,
+        question_text: q.pertanyaan || q.teks || '',
+        question_options: (q.pilihan_jawaban || []).map(o => ({ key: o.key, text: o.text || '' })),
+        has_image: !!(q.gambar || q.image),
         message: msg,
         model: state.selectedTutorModel || 'gemini-flash',
         request_id: clientRequestId,
@@ -3892,7 +4008,11 @@ async function sendChatMessage(e) {
 
     const data = await res.json();
     const typingEl = document.getElementById('aiTypingBubble');
-    if (typingEl) typingEl.remove();
+    if (typingEl) {
+      if (typingEl._timerInt) clearInterval(typingEl._timerInt);
+      typingEl.remove();
+    }
+    window._tutorAbortController = null;
 
     if (data.quota) {
       updateTutorQuotaUI(data.quota);
@@ -3934,13 +4054,26 @@ async function sendChatMessage(e) {
   } catch (err) {
     console.error("AI Tutor error:", err);
     const typingEl = document.getElementById('aiTypingBubble');
-    if (typingEl) typingEl.remove();
+    if (typingEl) {
+      if (typingEl._timerInt) clearInterval(typingEl._timerInt);
+      typingEl.remove();
+    }
+    window._tutorAbortController = null;
 
-    state.tutorMsgs.push({
-      role: 'assistant',
-      content: '⚠️ Koneksi ke server AI Tutor terputus. Pesanmu sudah masuk — coba kirim ulang pesanmu.',
-      error: true
-    });
+    // Jika user yang membatalkan, jangan tampilkan error
+    if (err.name === 'AbortError') {
+      state.tutorMsgs.push({
+        role: 'assistant',
+        content: '⏹️ Permintaan dibatalkan.',
+        error: true
+      });
+    } else {
+      state.tutorMsgs.push({
+        role: 'assistant',
+        content: '⚠️ Koneksi ke server AI Tutor terputus. Pesanmu sudah masuk — coba kirim ulang pesanmu.',
+        error: true
+      });
+    }
     renderChatHistory(q);
   } finally {
     if (!_cooldownTimer && (!state.tutorQuota || state.tutorQuota.remaining > 0)) {
@@ -4299,7 +4432,43 @@ function renderReviewHasil() {
   document.getElementById('reviewScorePersen').innerText = `${persen}%`;
   document.getElementById('reviewScorePersen').className =
     'review-persen ' + (persen >= 70 ? 'good' : persen >= 40 ? 'mid' : 'low');
-  document.getElementById('reviewTableBody').innerHTML = rows.join('');
+
+  // Render bertahap untuk HP kentang: 10 soal per batch biar tidak lag
+  const tbody = document.getElementById('reviewTableBody');
+  const isLowEnd = document.documentElement.classList.contains('mode-ringan');
+  const batchSize = isLowEnd ? 10 : rows.length;
+
+  if (isLowEnd && rows.length > batchSize) {
+    tbody.innerHTML = rows.slice(0, batchSize).join('');
+    let rendered = batchSize;
+    const loadMore = () => {
+      const next = rows.slice(rendered, rendered + batchSize).join('');
+      tbody.insertAdjacentHTML('beforeend', next);
+      rendered += batchSize;
+      renderMath(tbody);
+      if (rendered >= rows.length) {
+        window.removeEventListener('scroll', onScroll);
+      }
+    };
+    const onScroll = () => {
+      const nearBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 500;
+      if (nearBottom) loadMore();
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    // Tombol "Muat lebih banyak" sebagai fallback
+    const moreBtn = document.createElement('button');
+    moreBtn.textContent = `Muat ${Math.min(batchSize, rows.length - rendered)} soal lagi`;
+    moreBtn.className = 'btn-load-more';
+    moreBtn.style.cssText = 'display:block;margin:16px auto;padding:10px 24px;background:#1b633e;color:#fff;border:none;border-radius:12px;font-weight:600';
+    moreBtn.onclick = () => {
+      loadMore();
+      if (rendered >= rows.length) moreBtn.remove();
+      else moreBtn.textContent = `Muat ${Math.min(batchSize, rows.length - rendered)} soal lagi`;
+    };
+    tbody.parentElement.appendChild(moreBtn);
+  } else {
+    tbody.innerHTML = rows.join('');
+  }
 
   document.getElementById('reviewHasilOverlay').classList.add('open');
 
@@ -4531,12 +4700,17 @@ function openTutorSheet() {
   if (backdrop) backdrop.classList.add('open');
 }
 
-function closeTutorSheet() {
+function closeTutorSheet(force) {
   const sheet = document.getElementById('cbtSidebarCol');
   const backdrop = document.getElementById('tutorBackdrop');
   if (sheet) {
     sheet.classList.remove('tutor-open');
     sheet.style.transform = '';
+    // B6: Force-close untuk pastikan sheet benar-benar tertutup
+    if (force) {
+      sheet.style.display = 'none';
+      setTimeout(() => { sheet.style.display = ''; }, 50);
+    }
   }
   if (backdrop) backdrop.classList.remove('open');
   // pane sub "Tanya AI" di mobile isinya sheet fixed — balik ke materi biar tidak kosong
