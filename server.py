@@ -14,8 +14,10 @@ import tutor_engine    # noqa: E402  (mesin tutor konversasional berbasis LLM)
 import tutor_llm       # noqa: E402  (abstraksi provider LLM)
 import visitor_log     # noqa: E402  (pencatat pengunjung + dashboard /pengunjung)
 import tutor_store     # noqa: E402  (persistensi percakapan — SQLite)
+import feature_flags   # noqa: E402  (feature flags Autopsi/Sprint — FASE 0 T0.7)
 
 tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
+feature_flags.init_flags()  # tabel feature_flags + seed 7 flag OFF (idempoten)
 
 # ============================================================================
 # CONCURRENCY QUEUE UNTUK 50 USER (SEMAPHORE)
@@ -1287,6 +1289,18 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             except Exception as e:
                 return self._send_500(e, "/api/tutor/state", cookie_value=new_cookie)
 
+        # FASE 0 T0.7: feature flags. Klien membaca lewat SATU endpoint ini;
+        # nilai sudah dihitung di server (sumber kebenaran = tabel feature_flags).
+        if self.path.split('?', 1)[0] == '/api/flags':
+            try:
+                return self._send_json(200, {
+                    "status": "success",
+                    "version": feature_flags.FLAGS_VERSION,
+                    "flags": feature_flags.get_all_flags(),
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/flags")
+
         if self.path.split('?', 1)[0] == '/api/swarm/status':
             try:
                 from pipeline.swarm_manager import swarm_engine
@@ -1711,6 +1725,40 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 }, cookie_value=new_cookie)
             except Exception as e:
                 return self._send_500(e, "/api/tutor/sync_user", cookie_value=new_cookie)
+
+        elif self.path.split('?', 1)[0] == '/api/admin/flags':
+            # FASE 0 T0.7: ubah flag TANPA deploy ulang. Proteksi: kunci admin
+            # yang sama dengan dashboard /pengunjung (?key=VISITOR_ADMIN_KEY).
+            # Body JSON: {"name": "autopsy_logging", "enabled": true,
+            #            "rollout_pct": 100}
+            try:
+                key = urllib.parse.parse_qs(
+                    urllib.parse.urlparse(self.path).query).get('key', [''])[0]
+                if key != visitor_log.ADMIN_KEY:
+                    return self._send_json(401, {
+                        "status": "unauthorized",
+                        "message": "Kunci admin salah atau tidak diberikan.",
+                    })
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') \
+                    if content_length > 0 else '{}'
+                payload = json.loads(post_data) if post_data else {}
+                name = str(payload.get('name', ''))
+                enabled = bool(payload.get('enabled', False))
+                rollout = payload.get('rollout_pct')
+                ok = feature_flags.set_flag(name, enabled, rollout)
+                if not ok:
+                    return self._send_json(400, {
+                        "status": "error",
+                        "message": "Nama flag tidak dikenal.",
+                        "known": sorted(feature_flags.DEFAULT_FLAGS.keys()),
+                    })
+                return self._send_json(200, {
+                    "status": "success",
+                    "flags": feature_flags.get_all_flags(),
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/admin/flags")
 
         else:
             self.send_response(404)
