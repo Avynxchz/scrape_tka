@@ -1,9 +1,9 @@
 # STATUS — TKA Master (Autopsi + Sprint Pass)
 
-Diperbarui: 2026-10-08 19:10 WIB · Branch: `dev` · Fase aktif: **0 SELESAI** (menunggu "lanjut" untuk Fase 1)
+Diperbarui: 2026-10-08 19:30 WIB · Branch: `dev` · Fase aktif: **0 SELESAI** (menunggu "lanjut" untuk Fase 1)
 
 ## Posisi sekarang
-- FASE 0 selesai dan di-push ke `dev`. Laporan: `reports/FASE-0.md`.
+- FASE 0 selesai dan di-push ke `dev` (`b2f9450` docs, `d06381c` arsitektur, `2ef4551` feature flag). Laporan: `reports/FASE-0.md`.
 - `main` tetap di `3605aab` (merge PR #35). **Jangan merge ke `main` tanpa kata "MERGE" dari Agus.**
 - Tag `pre-autopsi-v0` BELUM dibuat (tidak ada tool untuk membuat tag; Agus perlu buat manual — langkah di `reports/FASE-0.md` §5).
 
