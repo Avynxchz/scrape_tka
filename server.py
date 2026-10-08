@@ -15,6 +15,7 @@ import tutor_llm       # noqa: E402  (abstraksi provider LLM)
 import visitor_log     # noqa: E402  (pencatat pengunjung + dashboard /pengunjung)
 import tutor_store     # noqa: E402  (persistensi percakapan — SQLite)
 import feature_flags   # noqa: E402  (feature flags Autopsi/Sprint — FASE 0 T0.7)
+import auth_verify     # noqa: E402  (verifikasi JWT Supabase — FASE 2 T2.11)
 
 tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
 feature_flags.init_flags()  # tabel feature_flags + seed 7 flag OFF (idempoten)
@@ -1703,7 +1704,21 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             user_key, new_cookie = self._tutor_session()
             try:
                 payload = json.loads(post_data) if post_data else {}
-                is_login = bool(payload.get('logged_in') or payload.get('email') or payload.get('is_logged_in'))
+                if auth_verify.auth_verify_enabled():
+                    # T2.11: JANGAN percaya klaim klien. Tier 'free' hanya bila
+                    # JWT Supabase valid (header Authorization: Bearer ...).
+                    # Tanpa token valid -> guest (user tidak terkunci, hanya
+                    # kuota tamu sampai token terkirim).
+                    _vok, _claims = auth_verify.verify_request(self.headers)
+                    is_login = bool(_vok)
+                    if is_login and isinstance(_claims, dict):
+                        payload = dict(payload)
+                        payload['email'] = _claims.get('email') or payload.get('email')
+                        payload['name'] = (
+                            (_claims.get('user_metadata') or {}).get('full_name')
+                            or payload.get('name'))
+                else:
+                    is_login = bool(payload.get('logged_in') or payload.get('email') or payload.get('is_logged_in'))
                 tier = "free" if is_login else "guest"
                 quota = tutor_store.set_user_tier(user_key, tier=tier)
                 quota["is_logged_in"] = is_login
