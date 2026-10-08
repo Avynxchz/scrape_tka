@@ -1392,7 +1392,47 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 "message": "Akses statis ke file ini tidak diizinkan.",
             })
 
+        # T2.1: sajikan aset teks statis (html/css/js/json) dengan gzip bila
+        # klien mendukung — transfer ~3-4x lebih kecil untuk HP berkuota.
+        if self._send_gzipped_static():
+            return
+
         return super().do_GET()
+
+    _GZIP_STATIC_EXTS = ('.html', '.css', '.js', '.json', '.svg', '.txt')
+
+    def _send_gzipped_static(self):
+        """Kirim file statis teks dengan gzip. Kembalikan True bila terkirim."""
+        accept = (self.headers.get('Accept-Encoding') or '').lower()
+        if 'gzip' not in accept:
+            return False
+        clean = urllib.parse.unquote(self.path).split('?', 1)[0].split('#', 1)[0]
+        if not clean.lower().endswith(self._GZIP_STATIC_EXTS):
+            return False
+        fpath = self.translate_path(self.path)
+        if not os.path.isfile(fpath):
+            return False
+        size = os.path.getsize(fpath)
+        if size < 1024 or size > 2_000_000:
+            return False
+        try:
+            with open(fpath, 'rb') as fh:
+                body = gzip.compress(fh.read(), compresslevel=6)
+        except OSError:
+            return False
+        ctype = self.guess_type(fpath)
+        self.send_response(200)
+        self.send_header('Content-Type', ctype)
+        self.send_header('Content-Encoding', 'gzip')
+        self.send_header('Vary', 'Accept-Encoding')
+        self.send_header('Content-Length', str(len(body)))
+        self.end_headers()
+        if self.command != 'HEAD':
+            try:
+                self.wfile.write(body)
+            except (BrokenPipeError, ConnectionResetError):
+                pass
+        return True
 
     def do_POST(self):
         # Fase 2, Fix 3b: tolak body > 1MB di awal (413) sebelum dibaca penuh.
