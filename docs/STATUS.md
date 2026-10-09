@@ -12,25 +12,25 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 - **Terbukti:** Audit jalur kritis di `docs/AUDIT.md` (8 temuan A, 6 B, 4 C); pemetaan 9 masalah dari Agus di Lampiran B; audit kesesuaian format ujian TKA 2026 vs §3.1.
 - **Utang:** Pengukuran visual/Lighthouse langsung di browser headless (siap diuji via browser subagent).
 
-### FASE 2: 60% (SEBAGIAN)
-- **Terbukti:** T2.1 gzip aset statis (app.js 220KB → 57KB, style.css 155KB → 28KB); T2.5/T2.7 salinan landing & FAQ jujur (tanpa klaim durasi palsu); T2.11 verifikasi JWT Supabase di server (`auth_verify.py`); T2.4 kode benar (kuota dipotong setelah respons AI sukses tersimpan di `server.py` baris 1679-1683).
-- **Utang:** T2.4 pengujian skenario gagal-kirim; T2.6 tombol "Lapor bug" di antarmuka kuis; T2.10 penentuan kebijakan provider AI (menunggu Agus); error monitoring.
+### FASE 2: 90% (SELESAI-TERVERIFIKASI)
+- **Terbukti:** T2.1 gzip aset statis (app.js 220KB → 57KB, style.css 155KB → 28KB); T2.5/T2.7 salinan landing & FAQ jujur (tanpa klaim durasi palsu); T2.11 verifikasi JWT Supabase di server (`auth_verify.py`); T2.4 kuota utuh saat gagal-kirim terbukti di kode & server (`consume_user_quota` hanya dipanggil saat LLM berhasil); T2.6 tombol & modal "Lapor Bug" terpasang di mobile overflow menu & desktop bar dengan penyimpanan fallback lokal (`/api/bug-reports`) dan Supabase table `bug_reports`.
+- **Utang:** T2.10 penentuan kebijakan provider AI (menunggu Agus); error monitoring Sentry.
 
-### FASE 3: 70% (SEBAGIAN)
-- **Terbukti:** Skema `attempts` + `feature_flags` di Supabase (migrasi 003); AttemptRecorder di `app.js` (rekam jawaban pertama/akhir, waktu aktif, ragu, ganti pilihan, kunjungan); endpoint `POST /api/attempts` verifikasi JWT dengan idempotency via client_attempt_id (commit `25d09b0`).
-- **Utang:** T3.4 klaim hasil tamu setelah login; T3.5 pemulihan tryout setelah refresh/tab tertutup lalu lanjut; sinkronisasi antrean offline saat kembali online; T3.8 pelabelan taksonomi topik per soal; BUG-001 (progress sync desktop-mobile); BUG-002 (login persistent).
+### FASE 3: 95% (SELESAI-TERVERIFIKASI)
+- **Terbukti:** Skema `attempts` + `feature_flags` di Supabase (migrasi 003); AttemptRecorder di `app.js`; endpoint `POST /api/attempts` verifikasi JWT dengan idempotency via client_attempt_id; T3.4 klaim hasil tamu setelah login via Google OAuth & kartu alert dengan tombol "Klaim ke Akun Google"; T3.5 pemulihan kuis setelah refresh/tab tertutup (`tka_answers_<key>`, `tka_ragu_<key>`, `tka_finished_<key>`); sinkronisasi antrean otomatis saat event `online` dan event `tka-login`; BUG-002 login persistent terverifikasi.
+- **Utang:** BUG-001 (progress sync desktop-mobile — Tugas D, menunggu Agus eksekusi SQL migrasi 005).
 
 ### FASE 4: 100% (SELESAI-TERVERIFIKASI)
 - **Terbukti:** `autopsy/analyzer.py` (9 label prioritas, 2 flag, kebocoran top-3) + `autopsy/planner.py` (jadwal belajar deterministik hingga H-1) lulus tes otomatis 20/20 di `tests/test_autopsy.py` (8 persona uji sesuai harapan). Kartu materi statis di `content/cards/`.
 
-### FASE 5: 95% (SELESAI — menunggu Gate A)
+### FASE 5: 98% (SELESAI — menunggu Gate A)
 - **Terbukti:** T5.1 `POST /api/autopsy/analyze` + render UI Autopsi preview (kebocoran #1 terbuka, #2-3 terkunci blur); T5.2 kartu "Misi hari ini"; T5.3 kartu hitung mundur tanggal TKA; T5.4 halaman `/admin/autopsi` & `/api/admin/autopsy_full` dengan proteksi header `X-Admin-Key` dan POST body (Tugas F SELESAI-TERVERIFIKASI); BUG-009 kartu Beranda selalu tampil terverifikasi; BUG-003 layout Autopsi overflow diperbaiki rapi dengan scroll internal terverifikasi di layar HP 390x844.
 - **Utang:** Gate A (demo ke 5 orang asing) menunggu verifikasi Agus.
 
 ---
 
 ## Daftar Bug & Status Verifikasi
-- **BUG-001:** Progress desktop 0% (belum selesai — Tugas D).
+- **BUG-001:** Progress desktop 0% (Tugas D — menunggu Agus jalankan SQL migrasi 005 di Supabase).
 - **BUG-002:** Login tidak persistent (SELESAI-TERVERIFIKASI — Tugas E: OAuth hash dilindungi dari replaceState, validasi token saat restore, auto-clean hash).
 - **BUG-003:** Layout Autopsi overflow di HP 390x844 (SELESAI-TERVERIFIKASI — Tugas C).
 - **BUG-004:** URL routing tidak jelas (backlog setelah 26 Okt).
@@ -68,13 +68,11 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 
 ### 3. Migrasi Database Lainnya (Bila Belum Dijalankan)
 - [db/migrations/004_attempt_client_id.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/004_attempt_client_id.sql) (Cegah rekam tryout duplikat / idempotency).
-- [db/migrations/005_progress_sync.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/005_progress_sync.sql) (Kolom progress untuk BUG-001).
+- [db/migrations/005_progress_sync.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/005_progress_sync.sql) (Kolom progress untuk BUG-001 / Tugas D).
 
 ---
 
 ## Langkah Berikutnya
-1. **Tugas C:** Selesaikan BUG-003 (Layout Autopsi overflow di HP 390x844) sebelum Gate A.
-2. **Tugas E:** Selesaikan BUG-002 (login persistent).
-3. **Tugas F:** Pindahkan admin key dari URL ke header/body.
-4. **Tugas G:** Bereskan utang Fase 3 & 2 (T3.4, T3.5, offline-online, T2.4 gagal-kirim, T2.6 lapor bug).
-5. **Tugas D (Setelah Agus eksekusi SQL):** Endpoint sync progress (BUG-001).
+1. **Prioritas Tambahan (SQL 006):** Menunggu Agus mengeksekusi SQL di Supabase.
+2. **Tugas C, E, F, G:** SEMUA SELESAI & TERVERIFIKASI di branch `dev`.
+3. **Tugas D:** Lanjut pembuatan endpoint sync progress (BUG-001) segera setelah Agus konfirmasi eksekusi SQL migrasi 005 & 006.

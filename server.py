@@ -1920,6 +1920,34 @@ function salinWA() {
             except Exception as e:
                 return self._send_500(e, "/api/feedback", cookie_value=new_cookie)
 
+        elif self.path == '/api/bug-reports':
+            # FASE 2 (T2.6): Simpan laporan kendala / bug soal dari pengguna
+            content_length = int(self.headers.get('Content-Length', 0))
+            _payload_raw = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            user_key, new_cookie = self._tutor_session()
+            try:
+                payload = json.loads(_payload_raw) if _payload_raw else {}
+                title = str(payload.get('title') or '').strip()[:200]
+                description = str(payload.get('description') or '').strip()[:2000]
+                if not description:
+                    return self._send_json(400, {"status": "error", "message": "Deskripsi kendala wajib diisi."})
+                reports_path = os.path.join(BASE_DIR, 'data', 'bug_reports.jsonl')
+                record = {
+                    "timestamp": time.strftime('%Y-%m-%d %H:%M:%S'),
+                    "user_key": user_key,
+                    "title": title,
+                    "description": description,
+                    "ip": self.client_address[0]
+                }
+                with open(reports_path, 'a', encoding='utf-8') as f:
+                    f.write(json.dumps(record, ensure_ascii=False) + '\n')
+                return self._send_json(200, {
+                    "status": "success",
+                    "message": "Laporan kendala berhasil disimpan.",
+                }, cookie_value=new_cookie)
+            except Exception as e:
+                return self._send_500(e, "/api/bug-reports", cookie_value=new_cookie)
+
         elif self.path == '/api/tutor/reset_quota':
             user_key, new_cookie = self._tutor_session()
             try:

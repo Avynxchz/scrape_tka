@@ -1346,6 +1346,10 @@ window.addEventListener('tka-login', (e) => {
     syncTutorUserToServer(user);
     sendPanelData('akun');
     sendPanelData('beranda');
+    // FASE 3 (T3.4): Tamu-claim — klaim antrean hasil tryout yang dikerjakan saat mode tamu
+    try {
+      setTimeout(syncAttempts, 500);
+    } catch (e) {}
   }
 });
 
@@ -1419,6 +1423,17 @@ async function loadPackageData(pkgNum) {
     if (!state.raguStatus[key]) state.raguStatus[key] = {};
     if (!state.simAnswers[key]) state.simAnswers[key] = {};
     if (!state.chatHistory[key]) state.chatHistory[key] = {};
+    // FASE 3 (T3.5): Pulihkan jawaban & status ragu tersimpan jika user me-refresh tab
+    try {
+      const savedAns = localStorage.getItem('tka_answers_' + key);
+      if (savedAns) state.userAnswers[key] = Object.assign({}, JSON.parse(savedAns), state.userAnswers[key]);
+      const savedRagu = localStorage.getItem('tka_ragu_' + key);
+      if (savedRagu) state.raguStatus[key] = Object.assign({}, JSON.parse(savedRagu), state.raguStatus[key]);
+      if (localStorage.getItem('tka_finished_' + key) === 'true') {
+        if (!state.testFinished) state.testFinished = {};
+        state.testFinished[key] = true;
+      }
+    } catch (e) {}
     // Riwayat percakapan tutor soal ini dimuat dari server (resume)
     syncTutorConversation();
   } catch (err) {
@@ -2273,6 +2288,8 @@ function selectOption(key, isComplex) {
 
   // FASE 3 (T3.2): rekam jawaban untuk Autopsi
   try { AttemptRecorder.onAnswer(q.nomor, key); } catch (e) {}
+  // FASE 3 (T3.5): simpan jawaban ke localStorage agar tahan refresh
+  try { localStorage.setItem('tka_answers_' + pkgKey(), JSON.stringify(state.userAnswers[pkgKey()])); } catch (e) {}
 
   // Update UI selection classes + aria (audit aksesibilitas)
   const selected = state.userAnswers[pkgKey()][q.nomor];
@@ -2476,6 +2493,8 @@ function selectBsAnswer(stmtKey, value) {
   const sel = (cur && typeof cur === 'object' && !Array.isArray(cur)) ? { ...cur } : {};
   sel[stmtKey] = value;
   state.userAnswers[pkgKey()][q.nomor] = sel;
+  // FASE 3 (T3.5): simpan jawaban BS ke localStorage
+  try { localStorage.setItem('tka_answers_' + pkgKey(), JSON.stringify(state.userAnswers[pkgKey()])); } catch (e) {}
 
   // Update tampilan tombol pada baris terkait
   const row = document.querySelector(`.bs-row[data-stmt="${stmtKey}"]`);
@@ -4671,6 +4690,8 @@ function selesaiTes() {
   } catch (e) {}
   if (!state.testFinished) state.testFinished = {};
   state.testFinished[pkgKey()] = true;
+  // FASE 3 (T3.5): simpan status finished ke localStorage
+  try { localStorage.setItem('tka_finished_' + pkgKey(), 'true'); } catch (e) {}
   closeFinishModal();
   renderReviewHasil();
 }
@@ -5033,6 +5054,13 @@ function resetSimulasi() {
   if (state.testFinished) state.testFinished[key] = false;
   // FASE 3 (T3.2): reset perekam saat ulangi
   try { AttemptRecorder.reset(); } catch (e) {}
+  // FASE 3 (T3.5): bersihkan data tersimpan paket ini di localStorage
+  try {
+    localStorage.removeItem('tka_answers_' + key);
+    localStorage.removeItem('tka_ragu_' + key);
+    localStorage.removeItem('tka_finished_' + key);
+    localStorage.removeItem('tka_timer_remaining_' + key);
+  } catch (e) {}
   state.userAnswers[key] = {};
   state.raguStatus[key] = {};
   state.simAnswers[key] = {};
@@ -5060,6 +5088,8 @@ function toggleRagu() {
   document.getElementById('chkRagu').checked = !current;
   // FASE 3 (T3.2): rekam flag ragu-ragu
   try { AttemptRecorder.onRagu(q.nomor, !current); } catch (e) {}
+  // FASE 3 (T3.5): simpan status ragu ke localStorage agar tahan refresh
+  try { localStorage.setItem('tka_ragu_' + pkgKey(), JSON.stringify(state.raguStatus[pkgKey()])); } catch (e) {}
   renderGridModal();
 }
 
@@ -5881,6 +5911,7 @@ const AttemptQueue = {
   _save(q) { try { localStorage.setItem(this.KEY, JSON.stringify(q)); } catch (e) {} try { updateAttemptBadge(); } catch (e2) {} },
   push(att) { if (!att) return; const q = this.all(); q.push(att); this._save(q); },
   remove(client_id) { this._save(this.all().filter(x => x.client_id !== client_id)); },
+  clear() { this._save([]); },
   count() { return this.all().length; }
 };
 
@@ -5946,6 +5977,14 @@ function updateAttemptBadge() {
     const el = document.getElementById('attemptSyncBadge');
     if (!el) return;
     const n = AttemptQueue.count();
+    const logged = _isLoggedIn();
+    if (!logged && n > 0) {
+      el.style.cssText = 'text-align:center;font-size:13px;font-weight:600;margin:10px 12px;padding:12px;border-radius:10px;border:1px solid #fed7aa;background:#fff7ed;color:#c2410c;';
+      el.innerHTML = '&#9888; Kamu mengerjakan sebagai <strong>Tamu</strong> (' + n + ' hasil tersimpan di HP).<br>' +
+        '<span style="font-size:12px;display:block;margin:6px 0 8px 0;color:#9a3412;">Masuk dengan Google agar statistik dan analitik Autopsi tersimpan permanen di akunmu.</span>' +
+        '<button type="button" onclick="loginWithGoogle()" style="background:#004a2a;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;">Klaim ke Akun Google</button>';
+      return;
+    }
     const ok = n === 0;
     el.style.cssText = 'text-align:center;font-size:14px;font-weight:700;margin:10px 12px;padding:10px 12px;border-radius:10px;border:1px solid;' +
       (ok ? 'background:#f0fdf4;color:#15803d;border-color:#bbf7d0;'
@@ -6167,6 +6206,13 @@ const TKAHistory = {
   },
 
   handleBack() {
+    // 0. Modal Lapor Bug
+    const bugModal = document.getElementById('modalLaporBug');
+    if (bugModal && bugModal.classList.contains('open')) {
+      if (typeof closeBugReportModal === 'function') closeBugReportModal();
+      return true;
+    }
+
     // 1. Lightbox Gambar Zoom
     const lbModal = document.getElementById('imageLightboxModal');
     if (lbModal && lbModal.classList.contains('open')) {
@@ -6266,4 +6312,102 @@ if (document.readyState === 'loading') {
 } else {
   TKAHistory.init();
 }
+
+// ==================== FASE 2 / T2.6: Modal Lapor Bug Soal & Sistem ====================
+function openBugReportModal() {
+  const modal = document.getElementById('modalLaporBug');
+  if (!modal) return;
+  const desc = document.getElementById('bugDescription');
+  const msg = document.getElementById('bugReportMsg');
+  if (desc) desc.value = '';
+  if (msg) {
+    msg.style.display = 'none';
+    msg.innerText = '';
+  }
+  const btn = document.getElementById('btnSubmitBug');
+  if (btn) {
+    btn.disabled = false;
+    btn.innerText = 'Kirim Laporan';
+  }
+  modal.classList.add('open');
+  if (window.TKAHistory) {
+    window.TKAHistory.push('modal-lapor-bug');
+  }
+}
+
+function closeBugReportModal(e) {
+  if (e && e.target && e.target !== e.currentTarget) return;
+  const modal = document.getElementById('modalLaporBug');
+  if (modal) modal.classList.remove('open');
+}
+
+async function sendBugReport() {
+  const cat = document.getElementById('bugCategory') ? document.getElementById('bugCategory').value : 'Umum';
+  const descEl = document.getElementById('bugDescription');
+  const desc = descEl ? descEl.value.trim() : '';
+  const msg = document.getElementById('bugReportMsg');
+  const btn = document.getElementById('btnSubmitBug');
+  if (!desc) {
+    if (msg) {
+      msg.style.display = 'block';
+      msg.style.background = '#fef2f2';
+      msg.style.color = '#dc2626';
+      msg.innerText = 'Mohon tuliskan penjelasan kendala terlebih dahulu.';
+    }
+    return;
+  }
+  const q = (typeof getCurrentQuestion === 'function') ? getCurrentQuestion() : null;
+  const subj = state.currentSubject || 'unknown';
+  const pkg = state.currentPkg || '1';
+  const qNo = q ? q.nomor : '-';
+  const title = `[${cat}] Mapel ${subj} Paket ${pkg} Soal #${qNo}`;
+  const fullDesc = `Mapel: ${subj}\nPaket: ${pkg}\nNomor: ${qNo}\nKategori: ${cat}\nKendala: ${desc}\nURL: ${window.location.href}`;
+
+  if (btn) {
+    btn.disabled = true;
+    btn.innerText = 'Mengirim...';
+  }
+  try {
+    let ok = false;
+    if (typeof submitBugReport === 'function') {
+      try {
+        const timeoutPromise = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 2000));
+        ok = await Promise.race([submitBugReport(title, fullDesc), timeoutPromise]);
+      } catch (e) {
+        ok = false;
+      }
+    }
+    // Jika belum berhasil atau tanpa Supabase, kirim ke server local fallback
+    if (!ok) {
+      const res = await fetch('/api/bug-reports', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, description: fullDesc })
+      });
+      ok = res.ok;
+    }
+
+    if (msg) {
+      msg.style.display = 'block';
+      msg.style.background = '#f0fdf4';
+      msg.style.color = '#15803d';
+      msg.innerText = 'Terima kasih! Laporan kendala berhasil dikirim.';
+    }
+    setTimeout(() => {
+      closeBugReportModal();
+    }, 1200);
+  } catch (err) {
+    if (msg) {
+      msg.style.display = 'block';
+      msg.style.background = '#fef2f2';
+      msg.style.color = '#dc2626';
+      msg.innerText = 'Gagal mengirim laporan: ' + (err.message || 'Error koneksi');
+    }
+    if (btn) {
+      btn.disabled = false;
+      btn.innerText = 'Kirim Laporan';
+    }
+  }
+}
+
 
