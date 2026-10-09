@@ -1978,6 +1978,117 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             except Exception as e:
                 return self._send_500(e, "/api/autopsy/analyze")
 
+        elif self.path.split('?', 1)[0] == '/admin/autopsi':
+            # FASE 5 (T5.4): mode demo/concierge untuk admin (Gate A).
+            # Query: ?key=VISITOR_ADMIN_KEY
+            # Menampilkan daftar attempt terbaru + tombol lihat Autopsi penuh + salin WA.
+            try:
+                key = urllib.parse.parse_qs(
+                    urllib.parse.urlparse(self.path).query).get('key', [''])[0]
+                import visitor_log as _vl
+                if key != _vl.ADMIN_KEY:
+                    return self._send_json(401, {"status": "unauthorized", "message": "Kunci admin salah."})
+                sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+                sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+                # Ambil 20 attempt terbaru via service key? Pakai anon + RLS tidak bisa.
+                # Untuk demo: admin memasukkan attempt_id manual atau via query.
+                # Sederhana: tampilkan form input attempt_id.
+                html = '''<!DOCTYPE html><html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demo Autopsi (Admin)</title>
+<style>body{font-family:system-ui;max-width:720px;margin:0 auto;padding:20px}
+.card{border:1px solid #ddd;border-radius:12px;padding:16px;margin:12px 0}
+.locked{filter:blur(6px);user-select:none;pointer-events:none}
+button{background:#004a2a;color:#fff;border:0;border-radius:8px;padding:10px 16px;cursor:pointer}
+input{padding:10px;border:1px solid #ddd;border-radius:8px;width:100%;box-sizing:border-box}
+pre{background:#f5f5f5;padding:12px;border-radius:8px;overflow:auto;font-size:13px}</style>
+</head><body>
+<h1>Demo Autopsi (Admin)</h1>
+<p>Tempel <b>attempt_id</b> dari tabel Supabase <code>attempts</code>, lalu klik Lihat.</p>
+<input id="aid" placeholder="attempt_id (uuid)">
+<p><button onclick="lihat()">Lihat Autopsi Penuh</button>
+<button onclick="salinWA()">Salin Teks untuk WA</button></p>
+<div id="out"></div>
+<script>
+const KEY = new URLSearchParams(location.search).get('key') || '';
+async function lihat() {
+  const aid = document.getElementById('aid').value.trim();
+  if (!aid) return alert('Isi attempt_id dulu');
+  document.getElementById('out').innerHTML = 'Memuat...';
+  // Ambil attempt dari Supabase via server (admin bypass RLS pakai service key di server)
+  const r = await fetch('/api/admin/autopsy_full?key=' + encodeURIComponent(KEY) + '&attempt_id=' + encodeURIComponent(aid));
+  const j = await r.json();
+  if (j.status !== 'success') { document.getElementById('out').innerHTML = 'Gagal: ' + (j.message||r.status); return; }
+  window._lastAutopsy = j;
+  const k = j.kebocoran || [];
+  let h = '<div class="card"><h3>Skor: ' + j.skor_pct + '% (' + j.n_correct + '/' + j.n_answered + ')</h3>';
+  h += '<p>Data tipis: ' + (j.data_tipis?'ya':'tidak') + '</p></div>';
+  k.forEach((x,i) => {
+    h += '<div class="card"><h3>Kebocoran #' + (i+1) + ': ' + x.label + '</h3>';
+    h += '<p><b>Bukti:</b> ' + x.bukti + '</p>';
+    h += '<p><b>Contoh soal:</b> ' + (x.contoh||[]).join(', ') + '</p></div>';
+  });
+  document.getElementById('out').innerHTML = h;
+}
+function salinWA() {
+  const j = window._lastAutopsy; if (!j) return alert('Lihat dulu autopsi-nya');
+  const k = j.kebocoran || [];
+  let t = 'Hasil Autopsi Tryout\nSkor: ' + j.skor_pct + '%\n';
+  k.forEach((x,i) => { t += (i+1) + '. ' + x.label + ': ' + x.bukti + '\n'; });
+  navigator.clipboard.writeText(t).then(()=>alert('Tersalin!'));
+}
+</script></body></html>'''
+                return self._send_body(200, 'text/html; charset=utf-8', html.encode('utf-8'), {'Cache-Control': 'no-cache'})
+            except Exception as e:
+                return self._send_500(e, "/admin/autopsi")
+
+        elif self.path.split('?', 1)[0] == '/api/admin/autopsy_full':
+            # Ambil attempt + jalankan analyzer penuh (admin only).
+            try:
+                key = urllib.parse.parse_qs(
+                    urllib.parse.urlparse(self.path).query).get('key', [''])[0]
+                import visitor_log as _vl2
+                if key != _vl2.ADMIN_KEY:
+                    return self._send_json(401, {"status": "unauthorized", "message": "Kunci admin salah."})
+                if autopsy_analyzer is None:
+                    return self._send_json(503, {"status": "error", "message": "Analyzer belum tersedia."})
+                q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+                attempt_id = (q.get('attempt_id', [''])[0] or '').strip()
+                if not attempt_id:
+                    return self._send_json(400, {"status": "error", "message": "attempt_id wajib."})
+                sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+                # Pakai service key jika ada, fallback anon (RLS mungkin blokir)
+                sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+                req = urllib.request.Request(
+                    sb_url + "/rest/v1/attempts?id=eq." + urllib.parse.quote(attempt_id) + "&select=*",
+                    headers={"apikey": sb_svc, "Authorization": "Bearer " + sb_svc})
+                with urllib.request.urlopen(req, timeout=15) as resp:
+                    rows = json.loads(resp.read().decode("utf-8") or "[]")
+                if not rows:
+                    return self._send_json(404, {"status": "error", "message": "Attempt tidak ditemukan."})
+                att = rows[0]
+                items = att.get('items') or []
+                attempt_data = {
+                    'n_questions': int(att.get('n_questions') or len(items)),
+                    'duration_limit_s': int(att.get('duration_limit_s') or 4500),
+                    'ended_by': att.get('ended_by') or 'user',
+                    'kunci': {},
+                    'items': items,
+                }
+                result = autopsy_analyzer.analyze(attempt_data)
+                n_corr = sum(1 for it in items if it.get('is_correct'))
+                return self._send_json(200, {
+                    "status": "success",
+                    "skor_pct": round(100 * n_corr / max(1, len([i for i in items if i.get('final_answer')]))),
+                    "n_correct": n_corr,
+                    "n_answered": len([i for i in items if i.get('final_answer')]),
+                    "data_tipis": result.get('data_tipis'),
+                    "kebocoran": result.get('kebocoran'),
+                    "rapuh_ids": result.get('rapuh_ids'),
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/admin/autopsy_full")
+
         elif self.path.split('?', 1)[0] == '/api/admin/flags':
             # FASE 0 T0.7: ubah flag TANPA deploy ulang. Proteksi: kunci admin
             # yang sama dengan dashboard /pengunjung (?key=VISITOR_ADMIN_KEY).
