@@ -4577,7 +4577,7 @@ function selesaiTes() {
   try {
     const _att = AttemptRecorder.finish(window._finishByTimer ? 'timer' : 'user');
     window._finishByTimer = false;
-    if (_att) { AttemptQueue.push(_att); syncAttempts(); }
+    if (_att) { window._lastFinishedAttempt = _att; AttemptQueue.push(_att); syncAttempts(); }
   } catch (e) {}
   if (!state.testFinished) state.testFinished = {};
   state.testFinished[pkgKey()] = true;
@@ -4775,6 +4775,122 @@ function renderReviewHasil() {
 
   // Trigger KaTeX untuk render rumus matematika di tabel hasil
   renderMath(document.getElementById('reviewTableBody'));
+
+  // FASE 5 (T5.1): tampilkan Autopsi setelah review dirender
+  try { renderAutopsiSection(); } catch (e) { console.warn('Autopsi:', e); }
+}
+
+// FASE 5 (T5.1): Ambil analisis Autopsi dari server dan tampilkan.
+// Kebocoran #1 terbuka lengkap; #2-3 terkunci (blur) untuk non-pass.
+async function renderAutopsiSection() {
+  // Cari container atau buat baru
+  let cont = document.getElementById('autopsiSection');
+  if (!cont) {
+    cont = document.createElement('div');
+    cont.id = 'autopsiSection';
+    const overlay = document.getElementById('reviewHasilOverlay');
+    const tableWrap = overlay.querySelector('.review-table-wrap') || overlay.querySelector('table');
+    if (tableWrap && tableWrap.parentElement) {
+      tableWrap.parentElement.insertBefore(cont, tableWrap);
+    } else {
+      overlay.appendChild(cont);
+    }
+  }
+  cont.innerHTML = '<div style="text-align:center;padding:20px;color:#6b7280">Memuat Autopsi...</div>';
+
+  try {
+    // Ambil attempt terakhir dari antrean atau yang baru selesai
+    const q = (typeof AttemptQueue !== 'undefined') ? AttemptQueue.all() : [];
+    // Cari attempt yang baru saja selesai (atau pakai data dari state)
+    let payload = null;
+    if (window._lastFinishedAttempt) {
+      payload = window._lastFinishedAttempt;
+    } else if (q.length > 0) {
+      payload = q[q.length - 1];
+    }
+    if (!payload || !payload.items || !payload.items.length) {
+      cont.innerHTML = '';
+      return;
+    }
+    // Dapatkan token
+    let hdr = {};
+    if (typeof _attemptAuthHeader === 'function') {
+      hdr = await _attemptAuthHeader();
+    }
+    if (!hdr.Authorization) {
+      cont.innerHTML = '<div style="text-align:center;padding:16px;color:#6b7280;font-size:13px">Login untuk melihat Autopsi tryout-mu.</div>';
+      return;
+    }
+    const res = await fetch('/api/autopsy/analyze', {
+      method: 'POST',
+      headers: Object.assign({'Content-Type': 'application/json'}, hdr),
+      body: JSON.stringify({
+        items: payload.items,
+        n_questions: payload.n_questions,
+        duration_limit_s: payload.duration_limit_s,
+        ended_by: payload.ended_by,
+        mapel: payload.subject || payload.mapel
+      })
+    });
+    if (!res.ok) {
+      cont.innerHTML = '';
+      return;
+    }
+    const d = await res.json();
+    if (d.status !== 'success') {
+      cont.innerHTML = '';
+      return;
+    }
+    // Render Autopsi
+    const labelNama = {
+      'terburu': 'Terburu-buru',
+      'overthinking': 'Overthinking (plin-plan)',
+      'macet': 'Macet (terlalu lama)',
+      'yakin_salah': 'Yakin tapi salah',
+      'ragu_salah': 'Ragu-ragu dan salah',
+      'ragu_benar': 'Ragu tapi benar (rapuh)',
+      'waktu_habis': 'Kehabisan waktu',
+      'kosong': 'Dikosongkan'
+    };
+    let h = '<div style="margin:20px 12px;padding:0">';
+    h += '<h3 style="font-size:18px;font-weight:700;margin:0 0 4px">🔍 Autopsi Tryout</h3>';
+    h += '<p style="font-size:13px;color:#6b7280;margin:0 0 12px">Pola pengerjaanmu, bukan nilaimu. Ini yang bikin skor bocor.</p>';
+    if (d.data_tipis) {
+      h += '<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:12px">Datanya masih sedikit, jadi anggap ini gambaran awal.</div>';
+    }
+    // Kebocoran #1 (terbuka)
+    const k1 = d.kebocoran_1;
+    if (k1) {
+      h += '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:16px;margin-bottom:12px">';
+      h += '<div style="font-size:12px;font-weight:700;color:#15803d;text-transform:uppercase;margin-bottom:6px">Kebocoran #1 (terbuka)</div>';
+      h += '<div style="font-size:16px;font-weight:700;margin-bottom:6px">' + (labelNama[k1.label] || k1.label) + '</div>';
+      h += '<div style="font-size:14px;color:#374151;margin-bottom:8px">' + (k1.bukti || '') + '</div>';
+      if (k1.contoh && k1.contoh.length) {
+        h += '<div style="font-size:12px;color:#6b7280">Contoh: ' + k1.contoh.slice(0,3).join(', ') + '</div>';
+      }
+      h += '<button onclick="alert('Fitur Pelajari segera hadir')" style="margin-top:10px;background:#004a2a;color:#fff;border:0;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer">📚 Pelajari</button>';
+      h += '</div>';
+    }
+    // Kebocoran #2-3 (terkunci)
+    (d.kebocoran_locked || []).forEach((k, idx) => {
+      h += '<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden">';
+      h += '<div style="filter:blur(6px);user-select:none;pointer-events:none">';
+      h += '<div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:6px">Kebocoran #' + (idx+2) + '</div>';
+      h += '<div style="font-size:16px;font-weight:700;margin-bottom:6px">' + (labelNama[k.label] || k.label) + '</div>';
+      h += '<div style="font-size:14px;color:#374151">' + k.soal_hilang + ' soal terpengaruh</div>';
+      h += '</div>';
+      h += '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.7)">';
+      h += '<span style="font-size:13px;font-weight:600;color:#374151">🔒 Buka dengan Paket Sprint</span>';
+      h += '</div></div>';
+    });
+    if (d.rapuh_count > 0) {
+      h += '<div style="font-size:12px;color:#6b7280;text-align:center;margin-top:8px">' + d.rapuh_count + ' soal kamu jawab benar tapi ragu-ragu (rapuh).</div>';
+    }
+    h += '</div>';
+    cont.innerHTML = h;
+  } catch (e) {
+    cont.innerHTML = '';
+  }
 }
 
 // Klik baris reviu -> lompat ke soal terkait (pembahasan terbuka)
