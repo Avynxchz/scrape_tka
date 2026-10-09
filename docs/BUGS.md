@@ -28,11 +28,15 @@ Setiap bug baru wajib dicatat di sini.
 - **Keputusan:** Refactor besar, setelah 26 Okt.
 - **Status:** Backlog.
 
-### BUG-009: Kartu Beranda tidak muncul [belum selesai]
+## Bug Selesai
+
+### BUG-009: Kartu Beranda tidak muncul [sudah diselesaikan pada 10 Okt 2026]
 - **Lapor:** Gemini / Agus, 10 Okt 2026
 - **Deskripsi:** Kartu Beranda ("Tanggal TKA kamu" dan "Misi hari ini") tidak muncul saat reload / buka ulang. Penyebab: di `app.js` ~baris 361 `window.__homeFirst = !window.location.hash.startsWith('#soal-')`; fungsi `renderQuestion()` menulis `#soal-N` ke URL (baris ~1599), sehingga saat dibuka ulang dengan hash, `window.__homeFirst` bernilai false dan melewati `homeOpen()`, menyebabkan `#hoMain` kosong.
 - **Solusi:** Ganti jadi `window.__homeFirst = true;`.
-- **Status:** Dalam pengerjaan (Tugas A).
+- **Bukti:** Terverifikasi via Chromium headless ukuran HP 390x844 untuk dua URL (`/app` dan `/app?subject=matematika&paket=1#soal-1`), dua-duanya memuat kartu "Tanggal TKA kamu" dan "Misi hari ini".
+- **File:** `app.js`
+- **Status:** SELESAI-TERVERIFIKASI.
 
 ## Bug Menunggu Verifikasi
 

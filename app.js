@@ -357,8 +357,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const paramSub = urlParams.get('subject');
   const paramPkg = parseInt(urlParams.get('paket') || '1', 10);
-  // Home overlay tampil pertama kecuali user langsung menuju soal tertentu (#soal-N)
-  window.__homeFirst = !window.location.hash.startsWith('#soal-');
+  // Home overlay selalu tampil pertama kali (BUG-009)
+  window.__homeFirst = true;
 
   await syncDynamicCatalog();
 

@@ -23,9 +23,9 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 ### FASE 4: 100% (SELESAI-TERVERIFIKASI)
 - **Terbukti:** `autopsy/analyzer.py` (9 label prioritas, 2 flag, kebocoran top-3) + `autopsy/planner.py` (jadwal belajar deterministik hingga H-1) lulus tes otomatis 20/20 di `tests/test_autopsy.py` (8 persona uji sesuai harapan). Kartu materi statis di `content/cards/`.
 
-### FASE 5: 75% (SEBAGIAN — diturunkan dari 95%)
-- **Terbukti:** T5.1 `POST /api/autopsy/analyze` + render UI Autopsi preview (kebocoran #1 terbuka, #2-3 terkunci blur); T5.2 kartu "Misi hari ini"; T5.3 kartu hitung mundur tanggal TKA; T5.4 halaman `/admin/autopsi` & `/api/admin/autopsy_full`.
-- **Utang:** BUG-009: kartu Beranda hilang jika halaman dibuka dengan URL berhash `#soal-N` (melewati `homeOpen()`); BUG-003: layout Autopsi overflow di layar mobile HP (390x844); T5.4 belum diuji end-to-end dengan attempt riil; Gate A (demo ke 5 orang asing) menunggu verifikasi Agus.
+### FASE 5: 85% (SEBAGIAN)
+- **Terbukti:** T5.1 `POST /api/autopsy/analyze` + render UI Autopsi preview (kebocoran #1 terbuka, #2-3 terkunci blur); T5.2 kartu "Misi hari ini"; T5.3 kartu hitung mundur tanggal TKA; T5.4 halaman `/admin/autopsi` & `/api/admin/autopsy_full`; BUG-009 kartu Beranda selalu tampil terverifikasi di viewport HP 390x844 baik di `/app` maupun URL berhash.
+- **Utang:** BUG-003: layout Autopsi overflow di layar mobile HP (390x844); T5.4 belum diuji end-to-end dengan attempt riil; Gate A (demo ke 5 orang asing) menunggu verifikasi Agus.
 
 ---
 
@@ -38,7 +38,7 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 - **BUG-006:** Opsi diklik setelah cek (TIDAK TERVERIFIKASI — Tugas B).
 - **BUG-007:** Teks geser centang (TIDAK TERVERIFIKASI — Tugas B).
 - **BUG-008:** Popup mobile besar (TIDAK TERVERIFIKASI — Tugas B).
-- **BUG-009:** Kartu Beranda tidak muncul (belum selesai — Tugas A).
+- **BUG-009:** Kartu Beranda tidak muncul (SELESAI-TERVERIFIKASI — Tugas A).
 
 ---
 
