@@ -720,6 +720,12 @@ function renderHome() {
       homeClose();
       if (state.currentSubject !== subject) await switchSubject(subject);
       await switchPackage(pkg);
+      // FASE 3 (T3.2): mulai perekaman attempt (jalur kartu langsung / mobile)
+      try {
+        const _pkg = state.pkgData[pkgKey()];
+        const _n = (_pkg && _pkg.soal) ? _pkg.soal.length : 0;
+        AttemptRecorder.start(subject, pkg, _n, getTimerTotalSeconds());
+      } catch (e) {}
     });
   });
 
@@ -4587,7 +4593,7 @@ function renderReviewHasil() {
     if (!document.getElementById('attemptSyncBadge')) {
       const _b = document.createElement('div');
       _b.id = 'attemptSyncBadge';
-      _b.style.cssText = 'text-align:center;font-size:12px;margin:8px 0;color:#666';
+      _b.setAttribute('data-fase3', '1');
       const _ov = document.getElementById('reviewHasilOverlay');
       if (_ov) _ov.prepend(_b);
     }
@@ -4808,6 +4814,8 @@ function reviewKeBeranda() {
 function resetSimulasi() {
   const key = pkgKey();
   if (state.testFinished) state.testFinished[key] = false;
+  // FASE 3 (T3.2): reset perekam saat ulangi
+  try { AttemptRecorder.reset(); } catch (e) {}
   state.userAnswers[key] = {};
   state.raguStatus[key] = {};
   state.simAnswers[key] = {};
@@ -5678,9 +5686,12 @@ function updateAttemptBadge() {
     const el = document.getElementById('attemptSyncBadge');
     if (!el) return;
     const n = AttemptQueue.count();
-    el.innerHTML = n > 0
-      ? '&#9203; ' + n + ' hasil menunggu upload'
-      : '&#10003; Hasil tersimpan di akunmu';
+    const ok = n === 0;
+    el.style.cssText = 'text-align:center;font-size:14px;font-weight:700;margin:10px 12px;padding:10px 12px;border-radius:10px;border:1px solid;' +
+      (ok ? 'background:#f0fdf4;color:#15803d;border-color:#bbf7d0;'
+          : 'background:#fffbeb;color:#b45309;border-color:#fde68a;');
+    el.innerHTML = ok ? '&#10003; Hasil tersimpan di akunmu'
+      : '&#9203; ' + n + ' hasil menunggu upload (akan dikirim otomatis)';
   } catch (e) {}
 }
 
