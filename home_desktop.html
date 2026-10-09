@@ -973,7 +973,7 @@
 </script>
 <script src="supabase_auth.js?v=1"></script>
 <script>
-// FASE 5 (T5.2, T5.3): kartu countdown + misi di desktop.
+// FASE 5 (T5.2, T5.3): kartu countdown + misi di desktop. (v2 robust)
 (function() {
   function getTkaDate() {
     try {
@@ -982,19 +982,14 @@
     } catch (e) {}
     return '2026-10-26';
   }
-  function renderCards() {
-    // Cari container utama (sebelum filter mapel)
-    var filter = document.getElementById('filterChips');
-    if (!filter || document.getElementById('tkaDeskCards')) return;
-    var wrap = document.createElement('div');
-    wrap.id = 'tkaDeskCards';
-    wrap.style.cssText = 'margin-bottom:16px;display:flex;flex-direction:column;gap:12px';
+  function buildHtml() {
     var tka = getTkaDate();
     var today = new Date(); today.setHours(0,0,0,0);
     var tkaD = new Date(tka + 'T00:00:00');
     var diff = Math.round((tkaD - today) / 86400000);
     var label = diff > 0 ? 'H-' + diff : (diff === 0 ? 'Hari H!' : 'Lewat ' + (-diff) + ' hari');
-    var h = '<div style="background:linear-gradient(135deg,#004a2a,#006b3f);color:#fff;border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">'
+    var h = '<div id="tkaDeskCards" style="margin:0 0 16px;display:flex;flex-direction:column;gap:12px">';
+    h += '<div style="background:linear-gradient(135deg,#004a2a,#006b3f);color:#fff;border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">'
       + '<div><div style="font-size:12px;opacity:0.9">Tanggal TKA kamu</div>'
       + '<div style="font-size:22px;font-weight:800">' + label + '</div></div>'
       + '<label style="font-size:12px;display:flex;align-items:center;gap:8px">Ubah: '
@@ -1017,15 +1012,47 @@
         + '<div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
         + '<div style="font-size:13px;color:#6b7280">Kerjakan 1 tryout untuk membuka misi harianmu.</div></div>';
     }
-    wrap.innerHTML = h;
-    filter.parentElement.parentElement.insertBefore(wrap, filter.parentElement);
+    h += '</div>';
+    return h;
+  }
+  function tryInsert(attempt) {
+    if (document.getElementById('tkaDeskCards')) return true;
+    // Coba beberapa selector
+    var targets = [
+      document.getElementById('filterChips'),
+      document.querySelector('main section'),
+      document.querySelector('main')
+    ];
+    for (var i = 0; i < targets.length; i++) {
+      var t = targets[i];
+      if (!t) continue;
+      var wrap = document.createElement('div');
+      wrap.innerHTML = buildHtml();
+      var card = wrap.firstChild;
+      if (i === 0) {
+        // Insert sebelum parent dari filterChips
+        var parent = t.parentElement;
+        if (parent && parent.parentElement) {
+          parent.parentElement.insertBefore(card, parent);
+          return true;
+        }
+      } else {
+        // Prepend ke section/main
+        t.insertBefore(card, t.firstChild);
+        return true;
+      }
+    }
+    // Retry 5x dengan interval
+    if (attempt < 5) {
+      setTimeout(function() { tryInsert(attempt + 1); }, 1000);
+    }
+    return false;
   }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() { setTimeout(renderCards, 500); });
+    document.addEventListener('DOMContentLoaded', function() { setTimeout(function() { tryInsert(0); }, 800); });
   } else {
-    setTimeout(renderCards, 500);
+    setTimeout(function() { tryInsert(0); }, 800);
   }
-})();
-</script>
+})();</script>
 </body>
 </html>
