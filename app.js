@@ -4599,6 +4599,8 @@ function renderReviewHasil() {
       else { const _ov = document.getElementById('reviewHasilOverlay'); if (_ov) _ov.prepend(_b); }
     }
     updateAttemptBadge();
+    // Retry otomatis: janji ke user — buka halaman review = coba kirim lagi.
+    try { syncAttempts(); } catch (e2) {}
   } catch (e) {}
   const soalList = pkg.soal;
   const subjectMeta = SUBJECT_CATALOG[state.currentSubject] || {};
@@ -5665,7 +5667,11 @@ function _attemptAuthHeader() {
   return {};
 }
 
+let _syncAttemptsInFlight = false;
 async function syncAttempts() {
+  if (_syncAttemptsInFlight) return; // cegah kirim ganda bersamaan
+  _syncAttemptsInFlight = true;
+  try {
   const q = AttemptQueue.all();
   if (!q.length) { try { updateAttemptBadge(); } catch (e) {} return; }
   for (const att of q) {
@@ -5675,11 +5681,16 @@ async function syncAttempts() {
         headers: Object.assign({ 'Content-Type': 'application/json' }, _attemptAuthHeader()),
         body: JSON.stringify(att)
       });
-      if (res.ok) AttemptQueue.remove(att.client_id);
-      else break;
+      if (res.ok) { AttemptQueue.remove(att.client_id); }
+      else {
+        try { const _ej = await res.json(); if (_ej && _ej.message) syncAttempts._lastErr = String(_ej.message).slice(0, 90); }
+        catch (e) { syncAttempts._lastErr = 'HTTP ' + res.status; }
+        break;
+      }
     } catch (e) { break; }
   }
   try { updateAttemptBadge(); } catch (e) {}
+  } finally { _syncAttemptsInFlight = false; }
 }
 
 function updateAttemptBadge() {
@@ -5692,7 +5703,9 @@ function updateAttemptBadge() {
       (ok ? 'background:#f0fdf4;color:#15803d;border-color:#bbf7d0;'
           : 'background:#fffbeb;color:#b45309;border-color:#fde68a;');
     el.innerHTML = ok ? '&#10003; Hasil tersimpan di akunmu'
-      : '&#9203; ' + n + ' hasil menunggu upload (akan dikirim otomatis)';
+      : '&#9203; ' + n + ' hasil menunggu upload' +
+        (syncAttempts._lastErr ? '<br><small style="font-weight:400">(' + syncAttempts._lastErr + ')</small>'
+                              : '<br><small style="font-weight:400">(akan dikirim otomatis)</small>');
   } catch (e) {}
 }
 
