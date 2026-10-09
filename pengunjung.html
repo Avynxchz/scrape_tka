@@ -73,7 +73,17 @@
 </main>
 <script>
 const params = new URLSearchParams(location.search);
-const key = params.get('key') || '';
+let key = params.get('key') || sessionStorage.getItem('tka_admin_key') || '';
+if (key) {
+  sessionStorage.setItem('tka_admin_key', key);
+  if (location.search.includes('key=')) {
+    try {
+      const u = new URL(location.href);
+      u.searchParams.delete('key');
+      history.replaceState(null, '', u.pathname + (u.search ? u.search : ''));
+    } catch(e) {}
+  }
+}
 let serverNow = 0;
 
 function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
@@ -99,7 +109,14 @@ function userCell(name, email, loggedIn){
 
 async function tick(){
   try{
-    const r = await fetch('/api/admin/visitors?key=' + encodeURIComponent(key), {cache:'no-store'});
+    if (!key) {
+      key = prompt('Masukkan Kunci Admin:') || '';
+      if (key) sessionStorage.setItem('tka_admin_key', key);
+    }
+    const r = await fetch('/api/admin/visitors', {
+      headers: key ? { 'X-Admin-Key': key } : {},
+      cache: 'no-store'
+    });
     if(!r.ok){ document.getElementById('ts').textContent = 'Error ' + r.status + ' (kunci salah?)'; return; }
     const d = await r.json();
     serverNow = d.now || Math.floor(Date.now()/1000);

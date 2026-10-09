@@ -42,6 +42,7 @@ _SKIP_PATHS = (
 )
 _SKIP_PREFIXES = (
     '/api/admin/',             # dashboard pemantauan: JANGAN catat diri sendiri
+    '/admin/',                 # rute admin internal
     '/pengunjung',
 )
 
