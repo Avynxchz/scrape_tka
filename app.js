@@ -4594,8 +4594,9 @@ function renderReviewHasil() {
       const _b = document.createElement('div');
       _b.id = 'attemptSyncBadge';
       _b.setAttribute('data-fase3', '1');
-      const _ov = document.getElementById('reviewHasilOverlay');
-      if (_ov) _ov.prepend(_b);
+      const _rh = document.querySelector('#reviewHasilOverlay .review-header');
+      if (_rh) { _rh.after(_b); }
+      else { const _ov = document.getElementById('reviewHasilOverlay'); if (_ov) _ov.prepend(_b); }
     }
     updateAttemptBadge();
   } catch (e) {}
