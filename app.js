@@ -931,7 +931,25 @@ function showStartPackageConfirmModal(subject, pkg) {
   const meta = SUBJECT_CATALOG[subject] || {};
   const subjName = meta.name || subject;
   const count = (typeof homePkgCount === 'function' ? homePkgCount(subject, _pendingStartPackage.pkg) : 20) || 20;
-  const minutes = _pendingStartPackage.pkg === 1 ? 45 : 50;
+  // FASE 3 (T3.4): kuis wajib login — hasil tryout tersimpan di akun untuk Autopsi.
+  if (typeof _isLoggedIn === 'function' && !_isLoggedIn()) {
+    _pendingStartPackage = { subject, pkg: parseInt(pkg || 1, 10) };
+    const _t = document.getElementById('startMapelTitle');
+    const _d = document.getElementById('startMapelDesc');
+    const _b = document.getElementById('btnConfirmStartMapel');
+    const _m = document.getElementById('modalKonfirmasiMulaiMapel');
+    if (_t) _t.innerText = 'Login dulu yuk';
+    if (_d) _d.innerHTML = 'Mulai Fase 3, hasil tryout tersimpan di akunmu untuk dianalisis (<strong>Autopsi</strong>).<br><br>Login dengan Google — gratis, 10 detik.';
+    if (_b) { _b.innerHTML = 'Login dengan Google'; _b.onclick = function() { try { closeStartPackageModal(); if (typeof loginWithGoogle === 'function') loginWithGoogle(); } catch (e) {} }; }
+    if (_m) { _m.classList.add('open'); if (window.TKAHistory) TKAHistory.push('modal-start'); }
+    return;
+  }
+  // Kembalikan tombol ke fungsi semula (setelah pernah jadi tombol login)
+  const _b0 = document.getElementById('btnConfirmStartMapel');
+  if (_b0) { _b0.innerHTML = '<i class="fa-solid fa-play"></i> Mulai Sekarang'; _b0.onclick = function() { executeStartPackage(); }; }
+  // T2.7: estimasi menit mengikuti timer per paket (bukan 45/50 basi)
+  const _jh3 = { matematika: 3.0, bahasa_indonesia: 2.5, bahasa_inggris: 2.5 };
+  const minutes = Math.round(count * (_jh3[subject] || 2.4));
   
   const titleEl = document.getElementById('startMapelTitle');
   const descEl = document.getElementById('startMapelDesc');
@@ -966,6 +984,12 @@ async function executeStartPackage() {
   try {
     if (state.currentSubject !== target.subject) await switchSubject(target.subject);
     await switchPackage(target.pkg);
+    // FASE 3 (T3.2): mulai perekaman attempt
+    try {
+      const _pkg = state.pkgData[pkgKey()];
+      const _n = (_pkg && _pkg.soal) ? _pkg.soal.length : 0;
+      AttemptRecorder.start(target.subject, target.pkg, _n, getTimerTotalSeconds());
+    } catch (e) {}
   } catch (err) {
     console.error('Gagal membuka paket mapel:', err);
   }
@@ -1189,9 +1213,19 @@ function getTutorAuthHeaders() {
 async function syncTutorUserToServer(user) {
   try {
     const isLogin = !!(user && user.loggedIn);
+    // T2.11: sertakan Supabase access token agar server bisa memverifikasi
+    // login bila AUTH_VERIFY=1. Tanpa token, server menganggap tamu (aman).
+    let authHeader = {};
+    try {
+      const sessRaw = localStorage.getItem('tka_supabase_auth_token');
+      if (sessRaw) {
+        const sess = JSON.parse(sessRaw);
+        if (sess && sess.access_token) authHeader = { 'Authorization': 'Bearer ' + sess.access_token };
+      }
+    } catch (e) {}
     const res = await fetch('/api/tutor/sync_user', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: Object.assign({ 'Content-Type': 'application/json' }, authHeader),
       body: JSON.stringify({
         logged_in: isLogin,
         is_logged_in: isLogin,
@@ -1418,6 +1452,8 @@ function getCurrentQuestion() {
 function renderQuestion() {
   const q = getCurrentQuestion();
   if (!q) return;
+  // FASE 3 (T3.2): rekam kunjungan + waktu aktif per soal
+  try { AttemptRecorder.onVisit(q.nomor, q.topik || null); } catch (e) {}
 
   // soal baru tampil: selalu mulai di tab Lembar Soal (kecuali dipaksa review)
   if (!state.keepWorkTab) switchWorkTab('soal', null, { scroll: false });
@@ -2143,6 +2179,9 @@ function selectOption(key, isComplex) {
     if (!state.userAnswers[pkgKey()]) state.userAnswers[pkgKey()] = {};
     state.userAnswers[pkgKey()][q.nomor] = key;
   }
+
+  // FASE 3 (T3.2): rekam jawaban untuk Autopsi
+  try { AttemptRecorder.onAnswer(q.nomor, key); } catch (e) {}
 
   // Update UI selection classes + aria (audit aksesibilitas)
   const selected = state.userAnswers[pkgKey()][q.nomor];
@@ -3669,7 +3708,7 @@ function updateChatQuestionCard(q) {
         q.stimulus.images.forEach(sImg => {
           const sRel = (sImg.rel_path || `images/${sImg.filename}`).replace(/^\.?\//, '');
           const sSrc = `${pkgPath}${sRel}?v=41`;
-          html += `<img src="${sSrc}" alt="Stimulus" style="max-width:100%;max-height:120px;border-radius:6px;border:1px solid #e5e7eb;cursor:zoom-in" onclick="openImageLightbox('${sSrc}', 'Gambar Stimulus')" />`;
+          html += `<img loading="lazy" src="${sSrc}" alt="Stimulus" style="max-width:100%;max-height:120px;border-radius:6px;border:1px solid #e5e7eb;cursor:zoom-in" onclick="openImageLightbox('${sSrc}', 'Gambar Stimulus')" />`;
         });
         html += '</div>';
       }
@@ -3696,7 +3735,7 @@ function updateChatQuestionCard(q) {
       q.pertanyaan.images.forEach(pImg => {
         const pRel = (pImg.rel_path || `images/${pImg.filename}`).replace(/^\.?\//, '');
         const pSrc = `${pkgPath}${pRel}?v=41`;
-        html += `<img src="${pSrc}" alt="Gambar Soal" style="max-width:100%;max-height:120px;border-radius:6px;border:1px solid #e5e7eb;cursor:zoom-in" onclick="openImageLightbox('${pSrc}', 'Gambar Soal')" />`;
+        html += `<img loading="lazy" src="${pSrc}" alt="Gambar Soal" style="max-width:100%;max-height:120px;border-radius:6px;border:1px solid #e5e7eb;cursor:zoom-in" onclick="openImageLightbox('${pSrc}', 'Gambar Soal')" />`;
       });
       html += '</div>';
     }
@@ -3716,7 +3755,7 @@ function updateChatQuestionCard(q) {
           let rel = (o.image.rel_path || `images/${o.image.filename}`).replace(/^\.?\//, '');
           if (base.endsWith('images/') && rel.startsWith('images/')) rel = rel.substring(7);
           const imgSrc = `${base}${rel}?v=41`;
-          optBody = `<div style="display:flex;align-items:center;gap:6px"><img src="${imgSrc}" alt="Opsi ${o.key}" style="max-height:48px;max-width:240px;border-radius:4px" />${o.text ? `<span>${_fmtText(o.text)}</span>` : ''}</div>`;
+          optBody = `<div style="display:flex;align-items:center;gap:6px"><img loading="lazy" src="${imgSrc}" alt="Opsi ${o.key}" style="max-height:48px;max-width:240px;border-radius:4px" />${o.text ? `<span>${_fmtText(o.text)}</span>` : ''}</div>`;
         } else if (o.latex) {
           optBody = `$${o.latex}$`;
         } else if (o.text) {
@@ -4528,6 +4567,12 @@ function evaluateQuestion(item) {
 }
 
 function selesaiTes() {
+  // FASE 3 (T3.2/T3.3): simpan attempt ke antrean lalu upload sekali.
+  try {
+    const _att = AttemptRecorder.finish(window._finishByTimer ? 'timer' : 'user');
+    window._finishByTimer = false;
+    if (_att) { AttemptQueue.push(_att); syncAttempts(); }
+  } catch (e) {}
   if (!state.testFinished) state.testFinished = {};
   state.testFinished[pkgKey()] = true;
   closeFinishModal();
@@ -4537,6 +4582,17 @@ function selesaiTes() {
 function renderReviewHasil() {
   const pkg = state.pkgData[pkgKey()];
   if (!pkg || !pkg.soal) return;
+  // FASE 3 (T3.3): indikator status simpan hasil
+  try {
+    if (!document.getElementById('attemptSyncBadge')) {
+      const _b = document.createElement('div');
+      _b.id = 'attemptSyncBadge';
+      _b.style.cssText = 'text-align:center;font-size:12px;margin:8px 0;color:#666';
+      const _ov = document.getElementById('reviewHasilOverlay');
+      if (_ov) _ov.prepend(_b);
+    }
+    updateAttemptBadge();
+  } catch (e) {}
   const soalList = pkg.soal;
   const subjectMeta = SUBJECT_CATALOG[state.currentSubject] || {};
   const pkgPath = (subjectMeta.imgBase && subjectMeta.imgBase[state.currentPkg]) || `data/${state.currentSubject}/paket_${state.currentPkg}/`;
@@ -4563,7 +4619,7 @@ function renderReviewHasil() {
         if (base.endsWith('images/') && rel.startsWith('images/')) {
           rel = rel.substring(7);
         }
-        return `<img src="${base}${rel}" alt="Opsi ${k}" style="max-height:48px; max-width:140px; vertical-align:middle; border-radius:4px; border:1px solid var(--border); background:#fff; padding:2px; display:inline-block;" />`;
+        return `<img loading="lazy" src="${base}${rel}" alt="Opsi ${k}" style="max-height:48px; max-width:140px; vertical-align:middle; border-radius:4px; border:1px solid var(--border); background:#fff; padding:2px; display:inline-block;" />`;
       }
       return '';
     };
@@ -4758,6 +4814,12 @@ function resetSimulasi() {
   state.currentIndex = 0;
   state.explanationVisible = false;
   closeReviewHasil();
+  // FASE 3: ulangi = rekaman attempt baru
+  try {
+    const _pkg = state.pkgData[pkgKey()];
+    const _n = (_pkg && _pkg.soal) ? _pkg.soal.length : 0;
+    AttemptRecorder.start(state.currentSubject, state.currentPkg, _n, getTimerTotalSeconds());
+  } catch (e) {}
   renderQuestion();
   renderGridModal();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -4771,6 +4833,8 @@ function toggleRagu() {
   const current = !!state.raguStatus[pkgKey()][q.nomor];
   state.raguStatus[pkgKey()][q.nomor] = !current;
   document.getElementById('chkRagu').checked = !current;
+  // FASE 3 (T3.2): rekam flag ragu-ragu
+  try { AttemptRecorder.onRagu(q.nomor, !current); } catch (e) {}
   renderGridModal();
 }
 
@@ -5490,7 +5554,148 @@ document.addEventListener('DOMContentLoaded', initFeedback);
 })();
 
 // ===== Timer simulasi: hitung mundur nyata + persist per paket (audit Kimi P1) =====
-const TIMER_TOTAL_SECONDS = 105 * 60; // 01:45:00
+// T2.7: timer mengikuti format resmi TKA 2026 (brief §3.1): jatah per soal
+// matematika 3,0 mnt · B.Indonesia/B.Inggris 2,5 mnt · mapel pilihan 2,4 mnt.
+// Timer per paket = jumlah soal x jatah (MTK P2: 25x3 = 75 mnt = pas resmi).
+const TIMER_TOTAL_SECONDS = 105 * 60; // fallback bila data paket belum dimuat
+const _JATAH_MENIT_PER_SOAL = { matematika: 3.0, bahasa_indonesia: 2.5, bahasa_inggris: 2.5 };
+function _jatahMenit(subject) { return _JATAH_MENIT_PER_SOAL[subject] || 2.4; }
+function getTimerTotalSeconds() {
+  try {
+    const pkg = state.pkgData[pkgKey()];
+    const n = (pkg && pkg.soal) ? pkg.soal.length : 0;
+    if (n > 0) return Math.round(n * _jatahMenit(state.currentSubject) * 60);
+  } catch (e) {}
+  return TIMER_TOTAL_SECONDS;
+}
+
+// ============================================================================
+// FASE 3 (T3.2/T3.3): Perekam attempt untuk Autopsi
+// Per soal: waktu aktif, jawaban pertama vs akhir, jumlah ganti, flag ragu,
+// kunjungan ulang. Buffer di localStorage; upload sekali saat "Selesai Tes"
+// (atau saat online kembali). Tanpa login -> tidak direkam (T3.4).
+// ============================================================================
+const AttemptRecorder = {
+  active: null, _lastQ: null, _lastT: 0,
+  start(subject, paket, n, duration_s) {
+    this.active = { subject, paket, n, duration_s, started_at: Date.now(), items: {} };
+    this._lastQ = null; this._lastT = Date.now();
+  },
+  _ensure(nomor) {
+    const a = this.active; if (!a) return null;
+    if (!a.items[nomor]) a.items[nomor] = {
+      soal_id: a.subject + ':' + a.paket + ':' + nomor,
+      position: nomor, topic_id: null,
+      first_answer: null, final_answer: null,
+      active_ms: 0, first_answer_ms: null,
+      change_count: 0, flagged_ragu: false, visit_count: 0, _firstVisitT: 0
+    };
+    return a.items[nomor];
+  },
+  onVisit(nomor, topic_id) {
+    const a = this.active; if (!a) return;
+    const now = Date.now();
+    if (this._lastQ != null && a.items[this._lastQ])
+      a.items[this._lastQ].active_ms += now - this._lastT;
+    const it = this._ensure(nomor);
+    if (!it._firstVisitT) it._firstVisitT = now;
+    if (topic_id) it.topic_id = topic_id;
+    it.visit_count += 1;
+    this._lastQ = nomor; this._lastT = now;
+  },
+  onAnswer(nomor, answer) {
+    const it = this._ensure(nomor); if (!it) return;
+    const ans = Array.isArray(answer) ? answer.join(',') : String(answer);
+    if (it.first_answer == null) {
+      it.first_answer = ans;
+      it.first_answer_ms = Date.now() - (it._firstVisitT || Date.now());
+    } else if (it.final_answer !== ans) {
+      it.change_count += 1;
+    }
+    it.final_answer = ans;
+  },
+  onRagu(nomor, flagged) {
+    const it = this._ensure(nomor); if (it) it.flagged_ragu = !!flagged;
+  },
+  finish(ended_by) {
+    const a = this.active; if (!a) return null;
+    const now = Date.now();
+    if (this._lastQ != null && a.items[this._lastQ])
+      a.items[this._lastQ].active_ms += now - this._lastT;
+    const items = Object.values(a.items).map(it => {
+      const c = Object.assign({}, it); delete c._firstVisitT; return c;
+    });
+    const payload = {
+      client_id: 'att_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+      subject: a.subject, paket: a.paket,
+      n_questions: a.n, duration_limit_s: a.duration_s,
+      ended_by: ended_by === 'timer' ? 'timer' : 'user',
+      started_at: new Date(a.started_at).toISOString(),
+      finished_at: new Date(now).toISOString(),
+      items
+    };
+    this.active = null; this._lastQ = null;
+    return payload;
+  }
+};
+
+const AttemptQueue = {
+  KEY: 'tka_attempt_queue',
+  all() { try { return JSON.parse(localStorage.getItem(this.KEY) || '[]'); } catch (e) { return []; } },
+  _save(q) { try { localStorage.setItem(this.KEY, JSON.stringify(q)); } catch (e) {} try { updateAttemptBadge(); } catch (e2) {} },
+  push(att) { if (!att) return; const q = this.all(); q.push(att); this._save(q); },
+  remove(client_id) { this._save(this.all().filter(x => x.client_id !== client_id)); },
+  count() { return this.all().length; }
+};
+
+function _attemptAuthHeader() {
+  try {
+    const s = localStorage.getItem('tka_supabase_auth_token');
+    if (s) { const sess = JSON.parse(s); if (sess && sess.access_token) return { 'Authorization': 'Bearer ' + sess.access_token }; }
+  } catch (e) {}
+  return {};
+}
+
+async function syncAttempts() {
+  const q = AttemptQueue.all();
+  if (!q.length) { try { updateAttemptBadge(); } catch (e) {} return; }
+  for (const att of q) {
+    try {
+      const res = await fetch('/api/attempts', {
+        method: 'POST',
+        headers: Object.assign({ 'Content-Type': 'application/json' }, _attemptAuthHeader()),
+        body: JSON.stringify(att)
+      });
+      if (res.ok) AttemptQueue.remove(att.client_id);
+      else break;
+    } catch (e) { break; }
+  }
+  try { updateAttemptBadge(); } catch (e) {}
+}
+
+function updateAttemptBadge() {
+  try {
+    const el = document.getElementById('attemptSyncBadge');
+    if (!el) return;
+    const n = AttemptQueue.count();
+    el.innerHTML = n > 0
+      ? '&#9203; ' + n + ' hasil menunggu upload'
+      : '&#10003; Hasil tersimpan di akunmu';
+  } catch (e) {}
+}
+
+window.addEventListener('online', () => { try { syncAttempts(); } catch (e) {} });
+document.addEventListener('DOMContentLoaded', () => { try { setTimeout(syncAttempts, 3000); } catch (e) {} });
+
+// FASE 3 (T3.4): status login
+function _isLoggedIn() {
+  try {
+    const u = JSON.parse(localStorage.getItem('tka_user') || 'null');
+    if (u && u.loggedIn) return true;
+    const s = JSON.parse(localStorage.getItem('tka_supabase_auth_token') || 'null');
+    return !!(s && s.access_token);
+  } catch (e) { return false; }
+}
 let _simTimerInterval = null;
 
 function _timerStorageKey() {
@@ -5509,7 +5714,7 @@ function _tickSimTimer() {
   const el = document.getElementById('timerText');
   if (!el) return;
   let rem = parseInt(localStorage.getItem(_timerStorageKey()), 10);
-  if (isNaN(rem)) rem = TIMER_TOTAL_SECONDS;
+  if (isNaN(rem)) rem = getTimerTotalSeconds();
   if (rem > 0) {
     rem -= 1;
     try { localStorage.setItem(_timerStorageKey(), String(rem)); } catch (e) {}
@@ -5520,6 +5725,14 @@ function _tickSimTimer() {
   if (rem <= 0 && _simTimerInterval) {
     clearInterval(_simTimerInterval);
     _simTimerInterval = null;
+    // FASE 3: waktu habis -> arahkan selesai (ended_by=timer untuk Autopsi)
+    try {
+      if (!((state.testFinished || {})[pkgKey()])) {
+        window._finishByTimer = true;
+        if (typeof openFinishModal === 'function') openFinishModal();
+        else if (typeof selesaiTes === 'function') selesaiTes();
+      }
+    } catch (e) {}
   }
 }
 
