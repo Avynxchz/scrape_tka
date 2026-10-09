@@ -5,6 +5,8 @@ import gzip
 import traceback
 import html as html_lib
 import urllib.parse
+import urllib.request
+import urllib.error
 import threading
 import time
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
@@ -1780,6 +1782,97 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 }, cookie_value=new_cookie)
             except Exception as e:
                 return self._send_500(e, "/api/tutor/sync_user", cookie_value=new_cookie)
+
+        elif self.path == '/api/attempts':
+            # FASE 3 (T3.2): terima attempt dari klien, teruskan ke Supabase.
+            # Identitas dari JWT yang diverifikasi — JANGAN percaya user_id klien.
+            # Server meneruskan Bearer token user ke Supabase REST; RLS
+            # (attempts_owner) menegakkan user_id = auth.uid().
+            try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') \
+                    if content_length > 0 else '{}'
+                payload = json.loads(post_data) if post_data else {}
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[len('Bearer '):].strip() \
+                    if _auth.startswith('Bearer ') else ''
+                _vok, _claims = auth_verify.verify_token(
+                    _token, os.environ.get('SUPABASE_JWT_SECRET', '')) \
+                    if _token else (False, None)
+                if not _vok or not (_claims or {}).get('sub'):
+                    return self._send_json(401, {
+                        "status": "unauthorized",
+                        "message": "Login diperlukan untuk menyimpan hasil tryout.",
+                    })
+                user_id = _claims['sub']
+                sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+                sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+                if not sb_url or not sb_key:
+                    return self._send_json(503, {
+                        "status": "error",
+                        "message": "Penyimpanan server belum dikonfigurasi "
+                                   "(SUPABASE_URL / SUPABASE_ANON_KEY).",
+                    })
+                items = payload.get('items')
+                if not isinstance(items, list) or not (1 <= len(items) <= 200):
+                    return self._send_json(400, {
+                        "status": "error",
+                        "message": "Items tidak valid (1-200 soal).",
+                    })
+                clean_items = []
+                for it in items:
+                    if not isinstance(it, dict):
+                        continue
+                    clean_items.append({
+                        "soal_id": str(it.get("soal_id") or "")[:128],
+                        "position": int(it.get("position") or 0),
+                        "topic_id": (str(it.get("topic_id") or "")[:128] or None),
+                        "first_answer": (str(it.get("first_answer") or "")[:64] or None),
+                        "final_answer": (str(it.get("final_answer") or "")[:64] or None),
+                        "active_ms": max(0, min(int(it.get("active_ms") or 0), 3600000)),
+                        "first_answer_ms": it.get("first_answer_ms"),
+                        "change_count": max(0, min(int(it.get("change_count") or 0), 100)),
+                        "flagged_ragu": bool(it.get("flagged_ragu")),
+                        "visit_count": max(0, min(int(it.get("visit_count") or 0), 1000)),
+                    })
+                row = {
+                    "user_id": user_id,  # dari token, bukan dari klien
+                    "mapel": str(payload.get("subject") or payload.get("mapel") or "")[:64],
+                    "paket": max(0, min(int(payload.get("paket") or 0), 99)),
+                    "n_questions": max(1, min(int(payload.get("n_questions") or len(clean_items)), 200)),
+                    "duration_limit_s": max(0, min(int(payload.get("duration_limit_s") or 0), 86400)),
+                    "ended_by": "timer" if payload.get("ended_by") == "timer" else "user",
+                    "started_at": payload.get("started_at"),
+                    "finished_at": payload.get("finished_at"),
+                    "score": payload.get("score") if isinstance(payload.get("score"), int) else None,
+                    "items": clean_items,
+                }
+                req = urllib.request.Request(
+                    sb_url + "/rest/v1/attempts",
+                    data=json.dumps(row).encode("utf-8"), method="POST",
+                    headers={"apikey": sb_key,
+                             "Authorization": "Bearer " + _token,
+                             "Content-Type": "application/json",
+                             "Prefer": "return=representation"})
+                try:
+                    with urllib.request.urlopen(req, timeout=15) as resp:
+                        saved = json.loads(resp.read().decode("utf-8") or "[]")
+                    return self._send_json(200, {
+                        "status": "success",
+                        "attempt_id": (saved[0].get("id") if saved else None),
+                    })
+                except urllib.error.HTTPError as e:
+                    return self._send_json(502, {
+                        "status": "error",
+                        "message": f"Supabase menolak penyimpanan (HTTP {e.code}).",
+                    })
+                except urllib.error.URLError:
+                    return self._send_json(502, {
+                        "status": "error",
+                        "message": "Tidak dapat menghubungi Supabase.",
+                    })
+            except Exception as e:
+                return self._send_500(e, "/api/attempts")
 
         elif self.path.split('?', 1)[0] == '/api/admin/flags':
             # FASE 0 T0.7: ubah flag TANPA deploy ulang. Proteksi: kunci admin
