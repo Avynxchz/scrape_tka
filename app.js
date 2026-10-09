@@ -4868,7 +4868,7 @@ async function renderAutopsiSection() {
       if (k1.contoh && k1.contoh.length) {
         h += '<div style="font-size:12px;color:#6b7280">Contoh: ' + k1.contoh.slice(0,3).join(', ') + '</div>';
       }
-      h += '<button onclick="alert('Fitur Pelajari segera hadir')" style="margin-top:10px;background:#004a2a;color:#fff;border:0;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer">📚 Pelajari</button>';
+      h += '<button onclick="alert(\'Fitur Pelajari segera hadir\')" style="margin-top:10px;background:#004a2a;color:#fff;border:0;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer">📚 Pelajari</button>';
       h += '</div>';
     }
     // Kebocoran #2-3 (terkunci)
