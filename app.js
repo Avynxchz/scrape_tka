@@ -649,6 +649,43 @@ window.closeSubjectPickerModal = closeSubjectPickerModal;
 window.saveSubjectPickerModal = saveSubjectPickerModal;
 
 
+// FASE 5 (T5.2, T5.3): HTML kartu countdown + misi (return string, bukan prepend).
+function getTkaCardsHtml() {
+  try {
+    const tka = getTkaDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+    const tkaD = new Date(tka + 'T00:00:00');
+    const diff = Math.round((tkaD - today) / 86400000);
+    const label = diff > 0 ? 'H-' + diff : (diff === 0 ? 'Hari H!' : 'Lewat ' + (-diff) + ' hari');
+    let h = '<div style="margin:0 0 12px">';
+    h += '<div style="background:linear-gradient(135deg,#004a2a,#006b3f);color:#fff;border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">'
+      + '<div><div style="font-size:12px;opacity:0.9">Tanggal TKA kamu</div>'
+      + '<div style="font-size:22px;font-weight:800">' + label + '</div></div>'
+      + '<label style="font-size:12px;display:flex;align-items:center;gap:8px">Ubah: '
+      + '<input type="date" min="2026-10-26" max="2026-11-29" value="' + tka + '" '
+      + 'style="padding:6px 8px;border-radius:8px;border:0;font-size:13px" onchange="setTkaDate(this.value);renderHome()">'
+      + '</label></div></div>';
+    // Misi hari ini
+    let misi = null;
+    try {
+      const last = JSON.parse(localStorage.getItem('tka_last_autopsy') || 'null');
+      if (last && last.kebocoran_1) misi = last.kebocoran_1;
+    } catch (e) {}
+    const labelNama = {'terburu':'Terburu-buru','overthinking':'Overthinking','macet':'Macet','yakin_salah':'Yakin tapi salah','ragu_salah':'Ragu-ragu dan salah','waktu_habis':'Kehabisan waktu','kosong':'Dikosongkan'};
+    if (misi) {
+      h += '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
+        + '<div style="font-size:12px;font-weight:700;color:#b45309;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
+        + '<div style="font-size:15px;font-weight:700;margin-bottom:4px">Perbaiki: ' + (labelNama[misi.label] || misi.label) + '</div>'
+        + '<div style="font-size:13px;color:#6b7280">' + (misi.bukti || '') + '</div></div>';
+    } else {
+      h += '<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
+        + '<div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
+        + '<div style="font-size:13px;color:#6b7280">Kerjakan 1 tryout untuk membuka misi harianmu.</div></div>';
+    }
+    return h;
+  } catch (e) { return ''; }
+}
+
 // FASE 5 (T5.3): Date picker "Tanggal TKA kamu?" + hitung mundur H-n.
 function getTkaDate() {
   try {
@@ -674,75 +711,9 @@ function setTkaDate(v) {
     }
   } catch (e) {}
 }
-function renderTkaCountdown(main) {
-  let wrap = document.getElementById('tkaCountdownWrap');
-  if (!wrap) {
-    wrap = document.createElement('div');
-    wrap.id = 'tkaCountdownWrap';
-    wrap.style.cssText = 'margin:12px 16px 0';
-    main.prepend(wrap);
-  }
-  const tka = getTkaDate();
-  const today = new Date(); today.setHours(0,0,0,0);
-  const tkaD = new Date(tka + 'T00:00:00');
-  const diff = Math.round((tkaD - today) / 86400000);
-  const label = diff > 0 ? 'H-' + diff : (diff === 0 ? 'Hari H!' : 'Lewat ' + (-diff) + ' hari');
-  wrap.innerHTML =
-    '<div style="background:linear-gradient(135deg,#004a2a,#006b3f);color:#fff;border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">'
-    + '<div><div style="font-size:12px;opacity:0.9">Tanggal TKA kamu</div>'
-    + '<div style="font-size:22px;font-weight:800">' + label + '</div></div>'
-    + '<label style="font-size:12px;display:flex;align-items:center;gap:8px">Ubah: '
-    + '<input type="date" id="tkaDateInput" min="2026-10-26" max="2026-11-29" value="' + tka + '" '
-    + 'style="padding:6px 8px;border-radius:8px;border:0;font-size:13px" onchange="setTkaDate(this.value);renderTkaCountdown(document.getElementById(\'hoMain\'))">'
-    + '</label></div>'
-    + '<div style="font-size:11px;color:#6b7280;margin-top:6px">Tanyakan jadwal ke sekolahmu jika ragu.</div>';
-}
-
-// FASE 5 (T5.2): Kartu "Misi hari ini" di Beranda.
-function renderMisiHariIni(main) {
-  let wrap = document.getElementById('misiHariIniWrap');
-  if (!wrap) {
-    wrap = document.createElement('div');
-    wrap.id = 'misiHariIniWrap';
-    wrap.style.cssText = 'margin:12px 16px 0';
-    const tc = document.getElementById('tkaCountdownWrap');
-    if (tc && tc.nextSibling) tc.parentElement.insertBefore(wrap, tc.nextSibling);
-    else main.prepend(wrap);
-  }
-  // Ambil kebocoran terakhir dari localStorage (disimpan saat Autopsi ditampilkan)
-  let misi = null;
-  try {
-    const last = JSON.parse(localStorage.getItem('tka_last_autopsy') || 'null');
-    if (last && last.kebocoran_1) misi = last.kebocoran_1;
-  } catch (e) {}
-  const labelNama = {
-    'terburu': 'Terburu-buru', 'overthinking': 'Overthinking',
-    'macet': 'Macet', 'yakin_salah': 'Yakin tapi salah',
-    'ragu_salah': 'Ragu-ragu dan salah', 'waktu_habis': 'Kehabisan waktu',
-    'kosong': 'Dikosongkan'
-  };
-  if (misi) {
-    wrap.innerHTML =
-      '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px">'
-      + '<div style="font-size:12px;font-weight:700;color:#b45309;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
-      + '<div style="font-size:15px;font-weight:700;margin-bottom:4px">Perbaiki: ' + (labelNama[misi.label] || misi.label) + '</div>'
-      + '<div style="font-size:13px;color:#6b7280">' + (misi.bukti || '') + '</div>'
-      + '</div>';
-  } else {
-    wrap.innerHTML =
-      '<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px">'
-      + '<div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
-      + '<div style="font-size:13px;color:#6b7280">Kerjakan 1 tryout untuk membuka misi harianmu.</div>'
-      + '</div>';
-  }
-}
-
 function renderHome() {
   const main = document.getElementById('hoMain');
   if (!main) return;
-  // FASE 5 (T5.3): tanggal TKA + hitung mundur. (T5.2): misi hari ini.
-  try { renderTkaCountdown(main); } catch (e) {}
-  try { renderMisiHariIni(main); } catch (e) {}
   const selectedKeys = getUserSelectedSubjects();
 
   const sectionsHtml = selectedKeys.map(k => {
@@ -792,7 +763,9 @@ function renderHome() {
       </section>`;
   }).join('');
 
-  main.innerHTML = `
+  // FASE 5 (T5.2, T5.3): kartu countdown + misi di atas daftar mapel
+  const tkaCardsHtml = getTkaCardsHtml();
+  main.innerHTML = tkaCardsHtml + `
     <div class="stitch-mapel-header">
       <div class="stitch-mapel-header-left">
         <span class="stitch-mapel-header-title">Mapel Pilihanmu</span>
