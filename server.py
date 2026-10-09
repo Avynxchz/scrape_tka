@@ -2089,6 +2089,36 @@ function salinWA() {
             except Exception as e:
                 return self._send_500(e, "/api/admin/autopsy_full")
 
+        elif self.path == '/api/user/tka_date':
+            # FASE 5 (T5.3): simpan tanggal TKA user.
+            try:
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[7:] if _auth.startswith('Bearer ') else ''
+                if not _token:
+                    return self._send_json(401, {"status": "unauthorized"})
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok:
+                    return self._send_json(401, {"status": "unauthorized"})
+                user_id = _user['id']
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+                payload = json.loads(post_data) if post_data else {}
+                tka_date = str(payload.get('tka_date') or '')[:10]
+                if not re.match(r'^\d{4}-\d{2}-\d{2}$', tka_date):
+                    return self._send_json(400, {"status": "error", "message": "Format tanggal salah."})
+                sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+                sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+                req = urllib.request.Request(
+                    sb_url + "/rest/v1/users?id=eq." + user_id,
+                    data=json.dumps({"tka_date": tka_date}).encode('utf-8'), method="PATCH",
+                    headers={"apikey": sb_key, "Authorization": "Bearer " + _token,
+                             "Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=10):
+                    pass
+                return self._send_json(200, {"status": "success", "tka_date": tka_date})
+            except Exception as e:
+                return self._send_500(e, "/api/user/tka_date")
+
         elif self.path.split('?', 1)[0] == '/api/admin/flags':
             # FASE 0 T0.7: ubah flag TANPA deploy ulang. Proteksi: kunci admin
             # yang sama dengan dashboard /pengunjung (?key=VISITOR_ADMIN_KEY).
