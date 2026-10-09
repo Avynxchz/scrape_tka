@@ -1167,6 +1167,29 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+def _verify_supabase_token(token):
+    """Verifikasi token user via Supabase Auth API (GET /auth/v1/user).
+    Bekerja untuk semua alg (HS256/ES256/RS256) tanpa butuh JWT_SECRET.
+    Mengembalikan (ok: bool, user: dict|None)."""
+    try:
+        if not token:
+            return False, None
+        sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+        sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+        if not sb_url or not sb_key:
+            return False, None
+        req = urllib.request.Request(
+            sb_url + '/auth/v1/user',
+            headers={'apikey': sb_key, 'Authorization': 'Bearer ' + token})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            user = json.loads(resp.read().decode('utf-8') or '{}')
+        if isinstance(user, dict) and user.get('id'):
+            return True, user
+        return False, None
+    except Exception:
+        return False, None
+
+
     def _send_500(self, exc, context="", cookie_value=None):
         """Error 500: pesan generik ke klien, traceback lengkap ke log file."""
         _log_server_error(exc, context or self.path)
@@ -1796,15 +1819,19 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 _auth = self.headers.get('Authorization', '') or ''
                 _token = _auth[len('Bearer '):].strip() \
                     if _auth.startswith('Bearer ') else ''
-                _vok, _claims = auth_verify.verify_token(
-                    _token, os.environ.get('SUPABASE_JWT_SECRET', '')) \
-                    if _token else (False, None)
-                if not _vok or not (_claims or {}).get('sub'):
+                if not _token:
                     return self._send_json(401, {
                         "status": "unauthorized",
                         "message": "Login diperlukan untuk menyimpan hasil tryout.",
                     })
-                user_id = _claims['sub']
+                # Verifikasi via Supabase Auth API (mendukung HS256/ES256/RS256).
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok or not (_user or {}).get('id'):
+                    return self._send_json(401, {
+                        "status": "unauthorized",
+                        "message": "Sesi login tidak valid atau kadaluarsa. Coba logout lalu login lagi.",
+                    })
+                user_id = _user['id']
                 sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
                 sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
                 if not sb_url or not sb_key:
