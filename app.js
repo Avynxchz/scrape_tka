@@ -4942,39 +4942,45 @@ async function renderAutopsiSection() {
       'waktu_habis': 'Kehabisan waktu',
       'kosong': 'Dikosongkan'
     };
-    let h = '<div style="margin:20px 12px;padding:0">';
-    h += '<h3 style="font-size:18px;font-weight:700;margin:0 0 4px">🔍 Autopsi Tryout</h3>';
-    h += '<p style="font-size:13px;color:#6b7280;margin:0 0 12px">Pola pengerjaanmu, bukan nilaimu. Ini yang bikin skor bocor.</p>';
+    let h = '<div class="autopsy-widget" style="margin:12px 0;padding:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px">';
+    h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">'
+      + '<h3 style="font-size:15px;font-weight:700;margin:0;color:#0f172a">🔍 Autopsi Tryout</h3>'
+      + '<span style="font-size:11px;background:#e2e8f0;color:#475569;padding:2px 6px;border-radius:4px;font-weight:600">Pola Pengerjaan</span>'
+      + '</div>';
+    h += '<p style="font-size:12px;color:#64748b;margin:0 0 10px;line-height:1.4">Pola ini yang bikin skor bocor, bukan sekadar nilai akhir.</p>';
     if (d.data_tipis) {
-      h += '<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:10px;font-size:13px;margin-bottom:12px">Datanya masih sedikit, jadi anggap ini gambaran awal.</div>';
+      h += '<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:8px">Datanya masih sedikit, jadi anggap ini gambaran awal.</div>';
     }
+    // Container scroll internal agar tidak overflow di layar HP
+    h += '<div class="autopsy-scroll-wrap" style="max-height:260px;overflow-y:auto;padding-right:4px;-webkit-overflow-scrolling:touch">';
     // Kebocoran #1 (terbuka)
     const k1 = d.kebocoran_1;
     if (k1) {
-      h += '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:16px;margin-bottom:12px">';
-      h += '<div style="font-size:12px;font-weight:700;color:#15803d;text-transform:uppercase;margin-bottom:6px">Kebocoran #1 (terbuka)</div>';
-      h += '<div style="font-size:16px;font-weight:700;margin-bottom:6px">' + (labelNama[k1.label] || k1.label) + '</div>';
-      h += '<div style="font-size:14px;color:#374151;margin-bottom:8px">' + (k1.bukti || '') + '</div>';
+      h += '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;margin-bottom:8px">';
+      h += '<div style="font-size:11px;font-weight:700;color:#15803d;text-transform:uppercase;margin-bottom:4px">Kebocoran #1 (terbuka)</div>';
+      h += '<div style="font-size:14px;font-weight:700;margin-bottom:4px;color:#14532d">' + (labelNama[k1.label] || k1.label) + '</div>';
+      h += '<div style="font-size:12px;color:#374151;margin-bottom:6px;line-height:1.4">' + (k1.bukti || '') + '</div>';
       if (k1.contoh && k1.contoh.length) {
-        h += '<div style="font-size:12px;color:#6b7280">Contoh: ' + k1.contoh.slice(0,3).join(', ') + '</div>';
+        h += '<div style="font-size:11px;color:#6b7280;margin-bottom:6px">Contoh: ' + k1.contoh.slice(0,3).join(', ') + '</div>';
       }
-      h += '<button onclick="alert(\'Fitur Pelajari segera hadir\')" style="margin-top:10px;background:#004a2a;color:#fff;border:0;border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer">📚 Pelajari</button>';
+      h += '<button onclick="alert(\'Fitur Pelajari segera hadir\')" style="background:#004a2a;color:#fff;border:0;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer">📚 Pelajari</button>';
       h += '</div>';
     }
     // Kebocoran #2-3 (terkunci)
     (d.kebocoran_locked || []).forEach((k, idx) => {
-      h += '<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:16px;margin-bottom:12px;position:relative;overflow:hidden">';
-      h += '<div style="filter:blur(6px);user-select:none;pointer-events:none">';
-      h += '<div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:6px">Kebocoran #' + (idx+2) + '</div>';
-      h += '<div style="font-size:16px;font-weight:700;margin-bottom:6px">' + (labelNama[k.label] || k.label) + '</div>';
-      h += '<div style="font-size:14px;color:#374151">' + k.soal_hilang + ' soal terpengaruh</div>';
+      h += '<div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 12px;margin-bottom:8px;position:relative;overflow:hidden">';
+      h += '<div style="filter:blur(4px);user-select:none;pointer-events:none">';
+      h += '<div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:3px">Kebocoran #' + (idx+2) + '</div>';
+      h += '<div style="font-size:13px;font-weight:700;margin-bottom:3px">' + (labelNama[k.label] || k.label) + '</div>';
+      h += '<div style="font-size:12px;color:#374151">' + k.soal_hilang + ' soal terpengaruh</div>';
       h += '</div>';
-      h += '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.7)">';
-      h += '<span style="font-size:13px;font-weight:600;color:#374151">🔒 Buka dengan Paket Sprint</span>';
+      h += '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.75)">';
+      h += '<span style="font-size:12px;font-weight:600;color:#374151">🔒 Buka dengan Paket Sprint</span>';
       h += '</div></div>';
     });
+    h += '</div>'; // Tutup autopsy-scroll-wrap
     if (d.rapuh_count > 0) {
-      h += '<div style="font-size:12px;color:#6b7280;text-align:center;margin-top:8px">' + d.rapuh_count + ' soal kamu jawab benar tapi ragu-ragu (rapuh).</div>';
+      h += '<div style="font-size:11px;color:#64748b;text-align:center;margin-top:6px">' + d.rapuh_count + ' soal kamu jawab benar tapi ragu-ragu (rapuh).</div>';
     }
     h += '</div>';
     cont.innerHTML = h;

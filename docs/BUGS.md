@@ -16,11 +16,7 @@ Setiap bug baru wajib dicatat di sini.
 - **Deskripsi:** Selalu harus login ulang. Setelah logout masuk ke landing page yang nunjukin tombol login Google. Anehnya, kalau sudah pernah login lalu pilih "coba tanpa akun Google", malah masuk ke akun Google.
 - **Status:** Perlu reproduksi & investigasi akar masalah (Tugas E).
 
-### BUG-003: Layout Autopsi overflow [belum selesai]
-- **Lapor:** Agus, 9 Okt 2026 18:05 WIB
-- **Deskripsi:** Section Autopsi di halaman hasil terlalu besar, overflow di desktop & mobile (390x844). Harus zoom out 50% baru kelihatan bagus.
-- **Keputusan:** Selesaikan sebelum Gate A (Tugas C).
-- **Status:** Dalam antrean pengerjaan.
+
 
 ### BUG-004: URL routing tidak jelas [belum selesai]
 - **Lapor:** Agus, 9 Okt 2026 18:32 WIB
@@ -29,6 +25,14 @@ Setiap bug baru wajib dicatat di sini.
 - **Status:** Backlog.
 
 ## Bug Selesai
+
+### BUG-003: Layout Autopsi overflow di mobile & desktop [sudah diselesaikan pada 10 Okt 2026]
+- **Lapor:** Agus, 9 Okt 2026 18:05 WIB
+- **Deskripsi:** Section Autopsi di halaman hasil terlalu besar, overflow di desktop & mobile (390x844). Harus zoom out 50% baru kelihatan bagus.
+- **Perbaikan:** Template `renderAutopsiSection()` di `app.js` diperkecil secara proporsional (margin/padding/font-size lebih ramping) dan ditambahkan container scroll internal (`.autopsy-scroll-wrap`, `max-height: 260px; overflow-y: auto`).
+- **Bukti:** Tinggi Autopsi turun dari 582px menjadi 405px, total scroll height modal turun dari 1035px menjadi 858px. Terverifikasi via Chromium headless ukuran HP 390x844: tombol aksi ("Kembali ke Beranda" / "Pelajari Pembahasan") langsung terlihat rapi tanpa perlu zoom-out.
+- **File:** `app.js`
+- **Status:** SELESAI-TERVERIFIKASI (Tugas C).
 
 ### BUG-009: Kartu Beranda tidak muncul [sudah diselesaikan pada 10 Okt 2026]
 - **Lapor:** Gemini / Agus, 10 Okt 2026
