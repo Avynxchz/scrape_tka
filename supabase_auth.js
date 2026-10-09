@@ -342,7 +342,20 @@ function showLogoutConfirmationModal() {
       try {
         await supabaseClient.auth.signOut();
       } catch (e) {}
+      // BUGFIX (10 Okt 2026): bersihkan SEMUA key login agar tidak nyangkut
+      try {
+        localStorage.removeItem('tka_supabase_auth_token');
+        localStorage.removeItem('tka_device_logged_in');
+        localStorage.removeItem('tka_user');
+        // Hapus juga key Supabase default (jika ada)
+        for (var i = localStorage.length - 1; i >= 0; i--) {
+          var k = localStorage.key(i);
+          if (k && k.indexOf('sb-') === 0) localStorage.removeItem(k);
+        }
+      } catch (e2) {}
       currentUser = null;
+      window.TKA_USER = null;
+      window.currentUser = null;
       updateLoginUI(false);
       location.reload();
     };
