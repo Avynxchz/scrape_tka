@@ -34,19 +34,17 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 - **BUG-002:** Login tidak persistent (belum selesai — Tugas E).
 - **BUG-003:** Layout Autopsi overflow di HP 390x844 (belum selesai — Tugas C).
 - **BUG-004:** URL routing tidak jelas (backlog setelah 26 Okt).
-- **BUG-005:** Overlay Beranda nutupin kuis desktop (TIDAK TERVERIFIKASI — Tugas B).
-- **BUG-006:** Opsi diklik setelah cek (TIDAK TERVERIFIKASI — Tugas B).
-- **BUG-007:** Teks geser centang (TIDAK TERVERIFIKASI — Tugas B).
-- **BUG-008:** Popup mobile besar (TIDAK TERVERIFIKASI — Tugas B).
+- **BUG-005:** Overlay Beranda nutupin kuis desktop (SELESAI-TERVERIFIKASI — Tugas B).
+- **BUG-006:** Opsi diklik setelah cek (SELESAI-TERVERIFIKASI — Tugas B).
+- **BUG-007:** Teks geser centang (SELESAI-TERVERIFIKASI — Tugas B, diperbaiki langsung di style.css).
+- **BUG-008:** Popup mobile besar (SELESAI-TERVERIFIKASI — Tugas B).
 - **BUG-009:** Kartu Beranda tidak muncul (SELESAI-TERVERIFIKASI — Tugas A).
 
 ---
 
 ## Langkah Berikutnya
-1. **Tugas A:** Perbaiki BUG-009 di `app.js` (`window.__homeFirst = true;`), buktikan di browser headless ukuran HP (390x844) dengan URL berhash dan tanpa hash.
-2. **Tugas B:** Verifikasi BUG-005..008 satu per satu di browser headless.
-3. **Tugas C:** Atasi overflow Autopsi (BUG-003) di resolusi 390x844.
-4. **Tugas D:** Konfirmasi migrasi SQL 004/005, selesaikan BUG-001 (sync progress).
-5. **Tugas E:** Selesaikan BUG-002 (login persistent).
-6. **Tugas F:** Pindahkan admin key dari URL ke header/body.
-7. **Tugas G:** Bereskan utang Fase 3 & 2.
+1. **Tugas C:** Selesaikan BUG-003 (Layout Autopsi overflow di HP 390x844) sebelum Gate A.
+2. **Tugas D:** Tanya status migrasi SQL 004 & 005 ke Agus, selesaikan BUG-001 (sync progress).
+3. **Tugas E:** Selesaikan BUG-002 (login persistent).
+4. **Tugas F:** Pindahkan admin key dari URL ke header/body.
+5. **Tugas G:** Bereskan utang Fase 3 & 2.

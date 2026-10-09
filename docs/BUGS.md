@@ -38,32 +38,28 @@ Setiap bug baru wajib dicatat di sini.
 - **File:** `app.js`
 - **Status:** SELESAI-TERVERIFIKASI.
 
-## Bug Menunggu Verifikasi
-
-### BUG-005: Overlay Beranda nutupin kuis di desktop [TIDAK TERVERIFIKASI]
+### BUG-005: Overlay Beranda nutupin kuis di desktop [sudah diselesaikan pada 10 Okt 2026]
 - **Lapor:** Ditemukan Muse via browser test, 9 Okt 2026 21:37 WIB
-- **Deskripsi:** `#homeOverlay` menutupi seluruh kuis di desktop dan tidak bisa ditutup (tidak ada tombol ×). Opsi jawaban tidak bisa diklik.
-- **Fix yang diajukan:** Auto-close overlay jika URL mengandung `?subject=`.
+- **Deskripsi:** `#homeOverlay` menutupi seluruh kuis di desktop dan tidak bisa ditutup. Opsi jawaban tidak bisa diklik.
+- **Hasil Verifikasi:** SELESAI-TERVERIFIKASI. Diuji via Chromium headless di desktop (1280x800) dan HP (390x844). Saat kartu paket diklik, `homeClose()` menutup `#homeOverlay` (`home-hidden` aktif) dan lembar kuis tampil penuh dengan opsi jawaban yang dapat diklik secara normal.
 - **File:** `app.js`
-- **Status:** TIDAK TERVERIFIKASI (akan diverifikasi di browser headless pada Tugas B).
 
-### BUG-006: Opsi jawaban bisa diklik lagi setelah Cek Jawaban [TIDAK TERVERIFIKASI]
+### BUG-006: Opsi jawaban bisa diklik lagi setelah Cek Jawaban [sudah diselesaikan pada 10 Okt 2026]
 - **Lapor:** Agus, 10 Okt 2026 01:26 WIB
 - **Deskripsi:** Setelah klik "Cek Jawaban", opsi masih bisa diklik dan jawaban bisa dicek ulang. Khawatir jawaban pertama ketimpa.
-- **Fix yang diajukan:** Kunci opsi via `window._answerChecked[nomor]` — `selectOption()` return early jika sudah dicek.
+- **Hasil Verifikasi:** SELESAI-TERVERIFIKASI. Diuji di browser headless (390x844). Setelah tombol "Cek Jawaban" diklik, percobaan memilih Opsi B tidak memindahkan pilihan (jawaban tetap terkunci di Opsi A) karena `selectOption()` membaca `window._answerChecked[q.nomor]`.
 - **File:** `app.js`
-- **Status:** TIDAK TERVERIFIKASI (akan diverifikasi di browser headless pada Tugas B).
 
-### BUG-007: Teks opsi geser-geser saat logo centang muncul [TIDAK TERVERIFIKASI]
+### BUG-007: Teks opsi geser-geser saat logo centang muncul [sudah diselesaikan pada 10 Okt 2026]
 - **Lapor:** Agus, 10 Okt 2026 01:26 WIB
 - **Deskripsi:** Teks opsi berubah-ubah/geser karena logo centang baru muncul (layout shift).
-- **Fix yang diajukan:** CSS `.opt-check` selalu reserve space 24px (visibility hidden saat tidak aktif).
+- **Temuan Jujur:** Class `.opt-check` di rule CSS lama sama sekali tidak berefek karena tidak pernah dipakai di HTML `app.js`. Centang sebenarnya dirender via pseudo-element `.option-item.selected::after`. Akibatnya, saat opsi diklik, lebar teks tertekan sebesar -24.25px.
+- **Perbaikan Nyata:** Di `style.css`, rule `.option-item::after` diberi `visibility: hidden;` secara permanen sehingga ruang centang sudah di-reserve sejak awal. Saat `.selected`, hanya diubah menjadi `visibility: visible`.
+- **Hasil Verifikasi:** SELESAI-TERVERIFIKASI. Pengukuran DOM membuktikan pergeseran posisi X = 0px dan perubahan lebar teks = 0.0px (0 layout shift).
 - **File:** `style.css`
-- **Status:** TIDAK TERVERIFIKASI (akan diverifikasi di browser headless pada Tugas B).
 
-### BUG-008: Popup mobile terlalu besar [TIDAK TERVERIFIKASI]
+### BUG-008: Popup mobile terlalu besar [sudah diselesaikan pada 10 Okt 2026]
 - **Lapor:** Agus, 10 Okt 2026 01:26 WIB
 - **Deskripsi:** Popup di mobile terlalu besar dan menghalangi. Desktop oke.
-- **Fix yang diajukan:** CSS media query max-width 640px — batasi ukuran popup.
+- **Hasil Verifikasi:** SELESAI-TERVERIFIKASI. Diuji di viewport HP (390x844). Rule media query membatasi lebar modal maksimal 358px (`calc(100vw - 32px)`). Baik Modal Daftar Soal (358x673px) maupun Modal Konfirmasi Selesai (358x356px) tampil rapi tanpa overflow horizontal maupun vertikal (`overflowsX: false`, `overflowsY: false`).
 - **File:** `style.css`
-- **Status:** TIDAK TERVERIFIKASI (akan diverifikasi di browser headless pada Tugas B).

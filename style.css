@@ -820,13 +820,18 @@ body {
   color: #06281C;
 }
 
-.option-item.selected::after {
+.option-item::after {
   content: "\f00c";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   margin-left: auto;
   color: var(--accent);
   font-size: 14px;
+  visibility: hidden; /* Reserve space sejak awal agar teks tidak geser (BUG-007) */
+}
+
+.option-item.selected::after {
+  visibility: visible;
 }
 
 .option-item.correct {
@@ -6465,18 +6470,11 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   text-align: center;
 }
 
-/* BUGFIX (10 Okt 2026): cegah teks geser saat centang muncul */
-.option-item .opt-check {
-  width: 24px;
-  min-width: 24px;
-  height: 24px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  /* Selalu reserve space, visibility hidden saat tidak aktif */
+/* BUGFIX (10 Okt 2026 - BUG-007): reserve space centang kini langsung ditangani di .option-item::after */
+.option-item::after {
   visibility: hidden;
 }
-.option-item.selected .opt-check {
+.option-item.selected::after {
   visibility: visible;
 }
 
