@@ -1595,7 +1595,9 @@ function renderQuestion() {
     document.cookie = `active_subject=${state.currentSubject}; path=/; max-age=86400`;
     document.cookie = `active_paket=${state.currentPkg}; path=/; max-age=86400`;
     const targetUrl = `?subject=${encodeURIComponent(state.currentSubject)}&paket=${state.currentPkg}`;
-    if (window.location.search !== targetUrl) {
+    const hasOAuthHash = window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('refresh_token=') || window.location.hash.includes('error_description='));
+    const hasOAuthSearch = window.location.search && (window.location.search.includes('code=') || window.location.search.includes('error='));
+    if (!hasOAuthHash && !hasOAuthSearch && window.location.search !== targetUrl) {
       window.history.replaceState(null, '', `${targetUrl}#soal-${q.nomor}`);
     }
   } catch (e) {}

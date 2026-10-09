@@ -31,7 +31,7 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 
 ## Daftar Bug & Status Verifikasi
 - **BUG-001:** Progress desktop 0% (belum selesai — Tugas D).
-- **BUG-002:** Login tidak persistent (belum selesai — Tugas E).
+- **BUG-002:** Login tidak persistent (SELESAI-TERVERIFIKASI — Tugas E: OAuth hash dilindungi dari replaceState, validasi token saat restore, auto-clean hash).
 - **BUG-003:** Layout Autopsi overflow di HP 390x844 (SELESAI-TERVERIFIKASI — Tugas C).
 - **BUG-004:** URL routing tidak jelas (backlog setelah 26 Okt).
 - **BUG-005:** Overlay Beranda nutupin kuis desktop (SELESAI-TERVERIFIKASI — Tugas B).

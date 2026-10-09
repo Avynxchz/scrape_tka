@@ -24,7 +24,9 @@ let currentUser = null;
   try {
     const saved = localStorage.getItem('tka_user');
     const isEverLoggedIn = localStorage.getItem('tka_device_logged_in') === 'true';
-    if (saved && isEverLoggedIn) {
+    const hasAuthToken = !!localStorage.getItem('tka_supabase_auth_token');
+    // Hanya pulihkan tampilan jika token otentikasi benar-benar tersimpan di perangkat
+    if (saved && isEverLoggedIn && hasAuthToken) {
       const u = JSON.parse(saved);
       if (u && u.loggedIn) {
         window.TKA_USER = u;
@@ -64,12 +66,23 @@ async function initSupabase() {
       localStorage.setItem('tka_device_logged_in', 'true');
       await syncUserToDB(session.user);
       updateLoginUI(true);
+      // Bersihkan hash OAuth jika masih ada di URL
+      if (window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('refresh_token='))) {
+        try {
+          const cleanUrl = window.location.pathname + window.location.search;
+          window.history.replaceState(null, '', cleanUrl);
+        } catch (e) {}
+      }
     } else {
-      // Jika session tidak ada tapi ada cache perangkat, coba refresh session
-      const isEverLoggedIn = localStorage.getItem('tka_device_logged_in') === 'true';
-      if (isEverLoggedIn && window.TKA_USER && window.TKA_USER.loggedIn) {
-        // Biarkan login cache aktif kecuali jika user eksplisit logout
-        updateLoginUI(true);
+      // Jika session tidak ada di Supabase dan tidak ada token, jangan pertahankan status login palsu
+      const hasAuthToken = !!localStorage.getItem('tka_supabase_auth_token');
+      if (!hasAuthToken) {
+        currentUser = null;
+        window.TKA_USER = null;
+        window.currentUser = null;
+        localStorage.removeItem('tka_device_logged_in');
+        localStorage.removeItem('tka_user');
+        updateLoginUI(false);
       }
     }
   } catch (e) {
@@ -83,9 +96,18 @@ async function initSupabase() {
       localStorage.setItem('tka_device_logged_in', 'true');
       await syncUserToDB(session.user);
       updateLoginUI(true);
+      // Bersihkan hash OAuth dari URL setelah sukses diproses
+      if (window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('refresh_token='))) {
+        try {
+          const cleanUrl = window.location.pathname + window.location.search;
+          window.history.replaceState(null, '', cleanUrl);
+        } catch (e) {}
+      }
     } else if (event === 'SIGNED_OUT') {
       currentUser = null;
       localStorage.removeItem('tka_device_logged_in');
+      localStorage.removeItem('tka_supabase_auth_token');
+      localStorage.removeItem('tka_user');
       updateLoginUI(false);
     }
   });

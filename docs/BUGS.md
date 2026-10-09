@@ -11,13 +11,6 @@ Setiap bug baru wajib dicatat di sini.
 - **Dugaan:** Progress disimpan di localStorage HP saja, tidak sync ke server.
 - **Status:** Perlu investigasi & implementasi sync server (Tugas D).
 
-### BUG-002: Login tidak persistent [belum selesai]
-- **Lapor:** Agus, 10 Okt 2026 01:26 WIB
-- **Deskripsi:** Selalu harus login ulang. Setelah logout masuk ke landing page yang nunjukin tombol login Google. Anehnya, kalau sudah pernah login lalu pilih "coba tanpa akun Google", malah masuk ke akun Google.
-- **Status:** Perlu reproduksi & investigasi akar masalah (Tugas E).
-
-
-
 ### BUG-004: URL routing tidak jelas [belum selesai]
 - **Lapor:** Agus, 9 Okt 2026 18:32 WIB
 - **Deskripsi:** URL tidak pindah-pindah (pakai query param + hash). Susah debug & share link. Minta URL khusus: /app/beranda, /app/modul, /app/soal, dll.
@@ -25,6 +18,20 @@ Setiap bug baru wajib dicatat di sini.
 - **Status:** Backlog.
 
 ## Bug Selesai
+
+### BUG-002: Login tidak persistent [sudah diselesaikan pada 10 Okt 2026]
+- **Lapor:** Agus, 10 Okt 2026 01:26 WIB
+- **Deskripsi:** Selalu harus login ulang. Setelah logout masuk ke landing page yang nunjukin tombol login Google. Anehnya, kalau sudah pernah login lalu pilih "coba tanpa akun Google", malah masuk ke akun Google.
+- **Akar Masalah:**
+  1. Di `app.js` ~baris 1599, `window.history.replaceState` menimpa hash URL menjadi `#soal-1` saat inisialisasi aplikasi, SEBELUM SDK Supabase selesai diunduh dan sempat membaca hash otentikasi Google (`#access_token=...`). Akibatnya sesi OAuth tidak pernah tersimpan di Supabase token storage.
+  2. Di `supabase_auth.js`, `restoreDeviceLoginImmediately()` memulihkan sesi hanya berdasarkan flag `tka_device_logged_in` dan cache `tka_user` tanpa memvalidasi keberadaan `tka_supabase_auth_token`, sehingga terjadi "ghost login" saat user memilih coba tanpa login.
+- **Perbaikan:**
+  1. Diberikan guard di `app.js` agar `replaceState` tidak menimpa hash atau parameter URL bila terdeteksi parameter OAuth (`access_token`, `refresh_token`, `code`, dll).
+  2. `supabase_auth.js` diperbarui agar pemulihan sesi mewajibkan token otentikasi yang valid, dan secara otomatis membersihkan hash OAuth setelah sesi berhasil diproses.
+  3. Pembersihan menyeluruh seluruh key login di localStorage saat logout maupun bila sesi Supabase tidak valid.
+- **Bukti:** Terverifikasi via Chromium headless ukuran HP 390x844: sesi tersimpan persisten melintasi reload browser (`bug002_login_persistent.png`), dan setelah logout lalu klik "Coba tanpa login" dari landing page, aplikasi bersih dalam status Tamu tanpa ghost login (`bug002_logout_guest.png`).
+- **File:** `app.js`, `supabase_auth.js`
+- **Status:** SELESAI-TERVERIFIKASI (Tugas E).
 
 ### BUG-003: Layout Autopsi overflow di mobile & desktop [sudah diselesaikan pada 10 Okt 2026]
 - **Lapor:** Agus, 9 Okt 2026 18:05 WIB
