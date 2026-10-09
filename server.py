@@ -1862,8 +1862,34 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                         "flagged_ragu": bool(it.get("flagged_ragu")),
                         "visit_count": max(0, min(int(it.get("visit_count") or 0), 1000)),
                     })
+                # Idempotency: client_id dari klien jadi client_attempt_id.
+                # Kirim dua kali dengan client_id sama -> satu baris.
+                client_attempt_id = str(payload.get("client_id") or "")[:64]
+                if not client_attempt_id:
+                    return self._send_json(400, {
+                        "status": "error",
+                        "message": "client_id wajib diisi.",
+                    })
+                # Cek apakah sudah ada (idempotent)
+                try:
+                    chk = urllib.request.Request(
+                        sb_url + "/rest/v1/attempts?user_id=eq." + user_id +
+                        "&client_attempt_id=eq." + urllib.parse.quote(client_attempt_id) +
+                        "&select=id",
+                        headers={"apikey": sb_key, "Authorization": "Bearer " + _token})
+                    with urllib.request.urlopen(chk, timeout=10) as cresp:
+                        existing = json.loads(cresp.read().decode("utf-8") or "[]")
+                    if existing:
+                        return self._send_json(200, {
+                            "status": "success",
+                            "attempt_id": existing[0].get("id"),
+                            "duplicate": True,
+                        })
+                except Exception:
+                    pass  # lanjut ke INSERT; constraint UNIQUE jadi pengaman akhir
                 row = {
                     "user_id": user_id,  # dari token, bukan dari klien
+                    "client_attempt_id": client_attempt_id,
                     "mapel": str(payload.get("subject") or payload.get("mapel") or "")[:64],
                     "paket": max(0, min(int(payload.get("paket") or 0), 99)),
                     "n_questions": max(1, min(int(payload.get("n_questions") or len(clean_items)), 200)),
