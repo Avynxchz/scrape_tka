@@ -12,3 +12,5 @@ Satu baris per ide; dikerjakan hanya bila brief/fase memintanya.
 - B8 (keputusan Agus, MODE MALAM): `feature_flags` pindah dari SQLite ke Supabase di Fase 3 — saat ini perubahan flag via admin ikut hilang tiap redeploy Railway (ephemeral).
 
 - URL routing yang jelas (/app/beranda, /app/kuis/:mapel/:paket, /app/hasil/:id) — SPA saat ini pakai query param + hash, bikin susah debug & share link. Refactor besar, setelah 26 Okt.
+
+- Layout section Autopsi di halaman hasil terlalu besar (overflow di desktop & mobile). Perkecil + buat scroll internal yang rapi. (temuan 9 Okt 2026)
