@@ -6464,3 +6464,29 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   display: inline-block;
   text-align: center;
 }
+
+/* BUGFIX (10 Okt 2026): cegah teks geser saat centang muncul */
+.option-item .opt-check {
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  /* Selalu reserve space, visibility hidden saat tidak aktif */
+  visibility: hidden;
+}
+.option-item.selected .opt-check {
+  visibility: visible;
+}
+
+/* BUGFIX (10 Okt 2026): popup mobile terlalu besar */
+@media (max-width: 640px) {
+  .modal-content, .popup-content, [role="dialog"] .dialog-content {
+    max-width: calc(100vw - 32px) !important;
+    max-height: calc(100vh - 80px) !important;
+    margin: 16px !important;
+    padding: 16px !important;
+    font-size: 14px !important;
+  }
+}
