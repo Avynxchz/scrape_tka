@@ -935,6 +935,29 @@ def _track_client_context(handler):
         pass
 
 
+def _verify_supabase_token(token):
+    """Verifikasi token user via Supabase Auth API (GET /auth/v1/user).
+    Bekerja untuk semua alg (HS256/ES256/RS256) tanpa butuh JWT_SECRET.
+    Mengembalikan (ok: bool, user: dict|None)."""
+    try:
+        if not token:
+            return False, None
+        sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+        sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+        if not sb_url or not sb_key:
+            return False, None
+        req = urllib.request.Request(
+            sb_url + '/auth/v1/user',
+            headers={'apikey': sb_key, 'Authorization': 'Bearer ' + token})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            user = json.loads(resp.read().decode('utf-8') or '{}')
+        if isinstance(user, dict) and user.get('id'):
+            return True, user
+        return False, None
+    except Exception:
+        return False, None
+
+
 class AppRequestHandler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=BASE_DIR, **kwargs)
@@ -1166,29 +1189,6 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         self.send_header('Content-Length', str(len(body)))
         self.end_headers()
         self.wfile.write(body)
-
-def _verify_supabase_token(token):
-    """Verifikasi token user via Supabase Auth API (GET /auth/v1/user).
-    Bekerja untuk semua alg (HS256/ES256/RS256) tanpa butuh JWT_SECRET.
-    Mengembalikan (ok: bool, user: dict|None)."""
-    try:
-        if not token:
-            return False, None
-        sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
-        sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
-        if not sb_url or not sb_key:
-            return False, None
-        req = urllib.request.Request(
-            sb_url + '/auth/v1/user',
-            headers={'apikey': sb_key, 'Authorization': 'Bearer ' + token})
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            user = json.loads(resp.read().decode('utf-8') or '{}')
-        if isinstance(user, dict) and user.get('id'):
-            return True, user
-        return False, None
-    except Exception:
-        return False, None
-
 
     def _send_500(self, exc, context="", cookie_value=None):
         """Error 500: pesan generik ke klien, traceback lengkap ke log file."""
