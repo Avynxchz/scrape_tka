@@ -18,6 +18,10 @@ import visitor_log     # noqa: E402  (pencatat pengunjung + dashboard /pengunjun
 import tutor_store     # noqa: E402  (persistensi percakapan — SQLite)
 import feature_flags   # noqa: E402  (feature flags Autopsi/Sprint — FASE 0 T0.7)
 import auth_verify     # noqa: E402  (verifikasi JWT Supabase — FASE 2 T2.11)
+try:
+    from autopsy import analyzer as autopsy_analyzer  # noqa: E402  (Fase 4)
+except ImportError:
+    autopsy_analyzer = None
 
 tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
 feature_flags.init_flags()  # tabel feature_flags + seed 7 flag OFF (idempoten)
@@ -1926,6 +1930,53 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                     })
             except Exception as e:
                 return self._send_500(e, "/api/attempts")
+
+        elif self.path == '/api/autopsy/analyze':
+            # FASE 5 (T5.1): analisis Autopsi untuk attempt.
+            # Input: {items, n_questions, duration_limit_s, ended_by, mapel}
+            # Output: hasil analyzer. Preview gratis = kebocoran #1 terbuka, sisanya terkunci.
+            try:
+                if autopsy_analyzer is None:
+                    return self._send_json(503, {"status": "error", "message": "Analyzer belum tersedia."})
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+                payload = json.loads(post_data) if post_data else {}
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[7:] if _auth.startswith('Bearer ') else ''
+                if not _token:
+                    return self._send_json(401, {"status": "unauthorized", "message": "Login diperlukan."})
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok:
+                    return self._send_json(401, {"status": "unauthorized", "message": "Sesi tidak valid."})
+                items = payload.get('items')
+                if not isinstance(items, list) or not items:
+                    return self._send_json(400, {"status": "error", "message": "Items kosong."})
+                # Siapkan input analyzer
+                attempt_data = {
+                    'n_questions': int(payload.get('n_questions') or len(items)),
+                    'duration_limit_s': int(payload.get('duration_limit_s') or 4500),
+                    'ended_by': payload.get('ended_by') or 'user',
+                    'kunci': {},  # is_correct dari klien untuk preview; server hitung ulang saat ada kunci
+                    'items': items,
+                }
+                # Jika klien kirim is_correct, pakai itu (preview). Server akan validasi ulang via kunci di Fase 6+.
+                result = autopsy_analyzer.analyze(attempt_data)
+                # Preview gratis: kebocoran #1 lengkap, #2-3 hanya label (terkunci)
+                keb = result.get('kebocoran') or []
+                preview = {
+                    'status': 'success',
+                    'preview': True,
+                    'n_questions': result.get('n_questions'),
+                    'n_answered': result.get('n_answered'),
+                    'n_correct': result.get('n_correct'),
+                    'data_tipis': result.get('data_tipis'),
+                    'kebocoran_1': keb[0] if keb else None,
+                    'kebocoran_locked': [{'label': k.get('label'), 'soal_hilang': k.get('soal_hilang')} for k in keb[1:3]],
+                    'rapuh_count': len(result.get('rapuh_ids') or []),
+                }
+                return self._send_json(200, preview)
+            except Exception as e:
+                return self._send_500(e, "/api/autopsy/analyze")
 
         elif self.path.split('?', 1)[0] == '/api/admin/flags':
             # FASE 0 T0.7: ubah flag TANPA deploy ulang. Proteksi: kunci admin
