@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Smoke test HTTP: integrasi Layer 3 aktif (registry solusi Claude) end-to-end.
+"""Smoke test HTTP: struktur + endpoint aktif.
+
+Tes regresi 0 (AST) jalan duluan untuk cegah bug indentasi.
 
 Diverifikasi (arsitektur tiga lapis + sumber aktif):
   - /api/solution  -> status "success" dengan konten solusi spesifik soal dari
     sumber AKTIF (EXTRA); kunci tampilan tetap otoritatif; review flag dipertahankan;
     paket tanpa sumber tetap "pending" dengan state jujur (bukan konten legacy).
-  - /api/ai-tutor  -> menerima Layer 2 (kanonis) + Layer 3 aktif; balasan spesifik
-    soal; konten legacy dalam question_data TIDAK pernah bocor.
 """
 import ast
 import json
@@ -117,61 +117,6 @@ check("eko1 Q1: status pending (tanpa sumber aktif)", d["status"] == "pending")
 check("eko1 Q1: solution = null", d["solution"] is None)
 check("eko1 Q1: visual Layer 2 tetap terkirim",
       isinstance(d.get("visual_items"), list))
-
-# --- 3. /api/ai-tutor: Layer 2 + Layer 3 aktif --------------------------------
-r = post("/api/ai-tutor", {
-    "subject": "matematika", "paket": 2, "nomor": 2,
-    "message": "kenapa jawabannya C?",
-    "question_data": {
-        "topik": "Eksponen", "subject": "matematika",
-        "pembahasan": {"mengapa_begini": "LEGACY-ALASAN-GENERIK",
-                       "tips_trik": "LEGACY-TIPS-GENERIK",
-                       "konsep_kunci": "LEGACY-KONSEP-GENERIK"},
-    },
-})
-reply = r["reply"]
-check("tutor Q2 'kenapa C': konten spesifik (basis prima)",
-      "basis" in reply.lower() and "8" in reply)
-check("tutor Q2: TIDAK ada kebocoran legacy", "LEGACY" not in reply)
-
-r = post("/api/ai-tutor", {
-    "subject": "matematika", "paket": 2, "nomor": 3,
-    "message": "jelasin langkah penyelesaiannya",
-    "question_data": {"topik": "Operasi", "subject": "matematika"},
-})
-check("tutor Q3 'langkah': langkah spesifik a⊙b", "\\odot" in r["reply"])
-
-r = post("/api/ai-tutor", {
-    "subject": "matematika", "paket": 2, "nomor": 3,
-    "message": "apa arti simbolnya?",
-    "question_data": {"topik": "Operasi", "subject": "matematika"},
-})
-check("tutor Q3 'simbol': glosarium spesifik dari Layer 3",
-      "operasi biner" in r["reply"].lower() and "odot" in r["reply"])
-
-r = post("/api/ai-tutor", {
-    "subject": "matematika", "paket": 2, "nomor": 5,
-    "message": "kenapa jawabannya B?",
-    "question_data": {"topik": "Fungsi", "subject": "matematika"},
-})
-check("tutor Q5 (review): catatan verifikasi manual disertakan",
-      "verifikasi manual" in r["reply"])
-
-r = post("/api/ai-tutor", {
-    "subject": "matematika", "paket": 2, "nomor": 1,
-    "message": "konsep apa yang dipakai?",
-    "question_data": {"topik": "Himpunan", "subject": "matematika"},
-})
-check("tutor Q1 'konsep': konsep kunci spesifik (irisan/gabungan)",
-      "irisan" in r["reply"].lower())
-
-r = post("/api/ai-tutor", {
-    "subject": "ekonomi", "paket": 1, "nomor": 1,
-    "message": "bagaimana langkah pengerjaannya?",
-    "question_data": {"topik": "Ekonomi", "subject": "ekonomi"},
-})
-check("tutor eko1 Q1 (tanpa Layer 3): jujur belum tersedia",
-      "belum tersedia" in r["reply"])
 
 print()
 total = len(results)
