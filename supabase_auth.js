@@ -91,6 +91,25 @@ async function initSupabase() {
   });
 }
 
+// Sumber kebenaran tunggal untuk token: supabase.auth.getSession().
+// getSession() otomatis refresh token jika kedaluwarsa (autoRefreshToken: true).
+async function getFreshToken() {
+  try {
+    if (typeof supabaseClient === 'undefined' || !supabaseClient) return null;
+    const { data: { session } } = await supabaseClient.auth.getSession();
+    return (session && session.access_token) ? session.access_token : null;
+  } catch (e) { return null; }
+}
+// Paksa refresh token (dipakai saat server return 401).
+async function refreshTokenNow() {
+  try {
+    if (typeof supabaseClient === 'undefined' || !supabaseClient) return null;
+    const { data: { session }, error } = await supabaseClient.auth.refreshSession();
+    if (error || !session) return null;
+    return session.access_token || null;
+  } catch (e) { return null; }
+}
+
 // Simpan/update user ke database
 async function syncUserToDB(user) {
   const { data, error } = await supabaseClient
