@@ -8,11 +8,43 @@ Diverifikasi (arsitektur tiga lapis + sumber aktif):
   - /api/ai-tutor  -> menerima Layer 2 (kanonis) + Layer 3 aktif; balasan spesifik
     soal; konten legacy dalam question_data TIDAK pernah bocor.
 """
+import ast
 import json
+import os
 import sys
 import threading
 import time
 import urllib.request
+
+# --- Tes regresi 0: struktur server.py (cegah bug indentasi terulang) ---------
+# Bug 2026-10-09: _verify_supabase_token nyelip di tengah class AppRequestHandler,
+# bikin do_GET/do_POST jadi nested function. Server nyala tapi routing mati.
+# Tes ini jalan SEBELUM import server, jadi tidak butuh dependensi.
+_results0 = []
+def _check0(name, cond, detail=""):
+    _results0.append((name, bool(cond), detail))
+    print(("PASS" if cond else "FAIL"), "-", name, ("| " + detail if detail and not cond else ""))
+
+_src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "server.py"),
+            encoding="utf-8").read()
+_tree = ast.parse(_src)
+_handler = None
+for _node in ast.walk(_tree):
+    if isinstance(_node, ast.ClassDef) and _node.name == "AppRequestHandler":
+        _handler = _node
+        break
+_methods = [n.name for n in _handler.body if isinstance(n, ast.FunctionDef)] if _handler else []
+_check0("AppRequestHandler punya do_GET", "do_GET" in _methods)
+_check0("AppRequestHandler punya do_POST", "do_POST" in _methods)
+_check0("AppRequestHandler punya do_OPTIONS", "do_OPTIONS" in _methods)
+_modfuncs = [n.name for n in _tree.body if isinstance(n, ast.FunctionDef)]
+_check0("_verify_supabase_token di level modul (bukan di dalam class)",
+         "_verify_supabase_token" in _modfuncs and "_verify_supabase_token" not in _methods)
+if not all(c for _, c, _ in _results0):
+    print("STRUKTUR: gagal — perbaiki indentasi server.py sebelum push")
+    sys.exit(1)
+print("STRUKTUR: OK")
+print()
 
 sys.path.insert(0, ".")
 import server  # noqa: E402
