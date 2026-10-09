@@ -42,9 +42,39 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 
 ---
 
+## MENUNGGU AGUS (Tindakan di Supabase)
+
+### 1. Eksekusi SQL Perbaikan Tabel Users (Prioritas Utama)
+- **Penyebab masalah:** Tabel `public.users` kosong (`count = 0`) karena RLS policy di Supabase hanya mengizinkan `SELECT` dan `UPDATE`, **tanpa policy `INSERT`**. Saat login Google memanggil `upsert`, database menolak dan error ditelan diam-diam di console browser.
+- **File SQL:** [db/migrations/006_fix_users_policy.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/006_fix_users_policy.sql)
+- **Langkah klik-per-klik untuk Mas Agus:**
+  1. Buka browser di HP/Laptop, login ke dashboard Supabase: https://supabase.com/dashboard/project/auhqgzrrgvjbfvzvayzg
+  2. Di bilah menu kiri, ketuk ikon **SQL Editor** (ikon kode `>_`).
+  3. Ketuk tombol **+ New query**.
+  4. Salin dan tempel (paste) seluruh isi file [db/migrations/006_fix_users_policy.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/006_fix_users_policy.sql).
+  5. Ketuk tombol hijau **Run** (atau tekan Ctrl+Enter).
+  6. Hasil benar: Muncul pesan *"Success. No rows returned"*.
+
+### 2. Cara Cek Hasilnya (Query Pengecekan)
+- Di SQL Editor Supabase, ketik dan jalankan query berikut:
+  ```sql
+  -- Cek jumlah akun yang sekarang sudah masuk:
+  SELECT count(*) FROM public.users;
+
+  -- Lihat 5 data user teratas:
+  SELECT id, email, name, last_login_at FROM public.users LIMIT 5;
+  ```
+- **Hasil yang benar:** `count` bernilai **lebih dari 0** (akun Mas Agus & teman-teman yang pernah login otomatis tersinkronisasi).
+
+### 3. Migrasi Database Lainnya (Bila Belum Dijalankan)
+- [db/migrations/004_attempt_client_id.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/004_attempt_client_id.sql) (Cegah rekam tryout duplikat / idempotency).
+- [db/migrations/005_progress_sync.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/005_progress_sync.sql) (Kolom progress untuk BUG-001).
+
+---
+
 ## Langkah Berikutnya
 1. **Tugas C:** Selesaikan BUG-003 (Layout Autopsi overflow di HP 390x844) sebelum Gate A.
-2. **Tugas D:** Tanya status migrasi SQL 004 & 005 ke Agus, selesaikan BUG-001 (sync progress).
-3. **Tugas E:** Selesaikan BUG-002 (login persistent).
-4. **Tugas F:** Pindahkan admin key dari URL ke header/body.
-5. **Tugas G:** Bereskan utang Fase 3 & 2.
+2. **Tugas E:** Selesaikan BUG-002 (login persistent).
+3. **Tugas F:** Pindahkan admin key dari URL ke header/body.
+4. **Tugas G:** Bereskan utang Fase 3 & 2 (T3.4, T3.5, offline-online, T2.4 gagal-kirim, T2.6 lapor bug).
+5. **Tugas D (Setelah Agus eksekusi SQL):** Endpoint sync progress (BUG-001).
