@@ -6419,5 +6419,48 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   }
 }
 
-
-
+/* === FIX 2026-10-09: popup mobile + layout shift (LANGKAH 2.3, 2.4) === */
+@media (max-width: 480px) {
+  /* 2.3: popup tidak boleh lebih tinggi dari layar; konten scroll di dalam */
+  .modal-content {
+    max-height: 88vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px;
+    margin: 0 8px;
+  }
+  .finish-modal {
+    max-height: 88vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Review overlay: badge dan konten tidak kepotong */
+  #reviewHasilOverlay .review-container {
+    max-height: 92vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+/* 2.4: cegah teks bergeser (layout shift) */
+/* Timer: lebar tetap, angka tabular */
+.timer-display, #timerText, .sim-timer {
+  font-variant-numeric: tabular-nums;
+  min-width: 4.5em;
+  display: inline-block;
+  text-align: center;
+}
+/* Gambar soal: reservasi ruang agar tidak melompat saat load */
+.soal-image, .question-image img, .pembahasan img {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+}
+/* Tombol dengan ikon: lebar ikon tetap agar teks tidak geser */
+.btn-check-answer, .btn-ragu {
+  min-width: 0;
+}
+.btn-check-answer .icon, .btn-ragu .icon {
+  width: 1.2em;
+  display: inline-block;
+  text-align: center;
+}

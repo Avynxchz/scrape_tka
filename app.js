@@ -5633,9 +5633,20 @@ const AttemptRecorder = {
     const now = Date.now();
     if (this._lastQ != null && a.items[this._lastQ])
       a.items[this._lastQ].active_ms += now - this._lastT;
-    const items = Object.values(a.items).map(it => {
-      const c = Object.assign({}, it); delete c._firstVisitT; return c;
-    });
+    // Isi item untuk SEMUA soal (1..n); yang tak dikunjungi dapat nilai nol.
+    // Ini mencegah "Items tidak valid" saat user selesai tanpa buka semua soal.
+    const items = [];
+    for (let nomor = 1; nomor <= a.n; nomor++) {
+      const it = a.items[nomor] || {
+        soal_id: a.subject + ':' + a.paket + ':' + nomor,
+        position: nomor, topic_id: null,
+        first_answer: null, final_answer: null,
+        active_ms: 0, first_answer_ms: null,
+        change_count: 0, flagged_ragu: false, visit_count: 0
+      };
+      const c = Object.assign({}, it); delete c._firstVisitT;
+      items.push(c);
+    }
     const payload = {
       client_id: 'att_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
       subject: a.subject, paket: a.paket,
@@ -5659,7 +5670,15 @@ const AttemptQueue = {
   count() { return this.all().length; }
 };
 
-function _attemptAuthHeader() {
+async function _attemptAuthHeader() {
+  // Ambil token segar via getSession() (otomatis refresh jika kedaluwarsa).
+  try {
+    if (typeof getFreshToken === 'function') {
+      const t = await getFreshToken();
+      if (t) return { 'Authorization': 'Bearer ' + t };
+    }
+  } catch (e) {}
+  // Fallback: baca mentah dari localStorage
   try {
     const s = localStorage.getItem('tka_supabase_auth_token');
     if (s) { const sess = JSON.parse(s); if (sess && sess.access_token) return { 'Authorization': 'Bearer ' + sess.access_token }; }
@@ -5676,12 +5695,27 @@ async function syncAttempts() {
   if (!q.length) { try { updateAttemptBadge(); } catch (e) {} return; }
   for (const att of q) {
     try {
-      const res = await fetch('/api/attempts', {
+      const sendOnce = async (hdr) => await fetch('/api/attempts', {
         method: 'POST',
-        headers: Object.assign({ 'Content-Type': 'application/json' }, _attemptAuthHeader()),
+        headers: Object.assign({ 'Content-Type': 'application/json' }, hdr),
         body: JSON.stringify(att)
       });
+      let res = await sendOnce(await _attemptAuthHeader());
+      // Jika 401, coba refresh token sekali lalu kirim ulang.
+      if (res.status === 401 && typeof refreshTokenNow === 'function') {
+        try {
+          const t = await refreshTokenNow();
+          if (t) res = await sendOnce({ 'Authorization': 'Bearer ' + t });
+        } catch (e) {}
+      }
       if (res.ok) { AttemptQueue.remove(att.client_id); }
+      else if (res.status === 400) {
+        // 400 = data rusak permanen -> karantina (hapus dari antrean) agar tidak macet.
+        try { const _ej = await res.json(); if (_ej && _ej.message) syncAttempts._lastErr = String(_ej.message).slice(0, 90); }
+        catch (e) { syncAttempts._lastErr = 'HTTP 400'; }
+        AttemptQueue.remove(att.client_id);
+        continue;
+      }
       else {
         try { const _ej = await res.json(); if (_ej && _ej.message) syncAttempts._lastErr = String(_ej.message).slice(0, 90); }
         catch (e) { syncAttempts._lastErr = 'HTTP ' + res.status; }
