@@ -1547,6 +1547,16 @@ async function loadPackageData(pkgNum) {
         if (!state.testFinished) state.testFinished = {};
         state.testFinished[key] = true;
       }
+      const savedChecked = localStorage.getItem('tka_checked_' + key);
+      if (savedChecked) {
+        const parsed = JSON.parse(savedChecked);
+        if (parsed && typeof parsed === 'object') {
+          if (!window._answerChecked) window._answerChecked = {};
+          Object.keys(parsed).forEach(nomor => {
+            if (parsed[nomor]) window._answerChecked[key + ':' + nomor] = true;
+          });
+        }
+      }
     } catch (e) {}
     // Riwayat percakapan tutor soal ini dimuat dari server (resume)
     syncTutorConversation();
@@ -2906,10 +2916,13 @@ function checkUserAnswer() {
   `;
 
   state.explanationVisible = true;
-  // BUGFIX (10 Okt 2026): tandai sudah dicek agar opsi terkunci spesifik per mapel dan paket
+  // BUGFIX (10 Okt 2026): tandai sudah dicek agar opsi terkunci spesifik per mapel dan paket (tahan refresh via localStorage)
   try {
     if (!window._answerChecked) window._answerChecked = {};
     window._answerChecked[pkgKey() + ':' + q.nomor] = true;
+    const curChecked = JSON.parse(localStorage.getItem('tka_checked_' + pkgKey()) || '{}');
+    curChecked[q.nomor] = true;
+    localStorage.setItem('tka_checked_' + pkgKey(), JSON.stringify(curChecked));
   } catch (e) {}
   showPembahasanAfterCheck();
 }
@@ -5304,6 +5317,12 @@ function resetSimulasi() {
     localStorage.removeItem('tka_ragu_' + key);
     localStorage.removeItem('tka_finished_' + key);
     localStorage.removeItem('tka_timer_remaining_' + key);
+    localStorage.removeItem('tka_checked_' + key);
+    if (window._answerChecked) {
+      Object.keys(window._answerChecked).forEach(k => {
+        if (k.startsWith(key + ':')) delete window._answerChecked[k];
+      });
+    }
   } catch (e) {}
   state.userAnswers[key] = {};
   state.raguStatus[key] = {};
