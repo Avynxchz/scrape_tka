@@ -22,10 +22,12 @@ try:
     from autopsy import analyzer as autopsy_analyzer  # noqa: E402  (Fase 4)
     from autopsy import evidence as autopsy_evidence  # noqa: E402  (Fase A2)
     from autopsy import coach as autopsy_coach        # noqa: E402  (Fase A3)
+    from autopsy import quota as autopsy_quota        # noqa: E402  (Fase A5)
 except ImportError:
     autopsy_analyzer = None
     autopsy_evidence = None
     autopsy_coach = None
+    autopsy_quota = None
 
 tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
 feature_flags.init_flags()  # tabel feature_flags + seed 7 flag OFF (idempoten)
@@ -1540,7 +1542,11 @@ function salinWA() {
             _auth = self.headers.get('Authorization', '') or ''
             _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
             if not _token:
-                return self._send_json(401, {"status": "unauthorized", "message": "Login diperlukan untuk mengakses Guru Autopsi."})
+                return self._send_json(401, {
+                    "status": "unauthorized",
+                    "is_guest": True,
+                    "message": "Login Google untuk mendapatkan analisis Guru Autopsi gratis."
+                })
             _vok, _user = _verify_supabase_token(_token)
             if not _vok or not (_user or {}).get('id'):
                 return self._send_json(401, {"status": "unauthorized", "message": "Token tidak valid atau sesi berakhir."})
@@ -1599,8 +1605,29 @@ function salinWA() {
             # Bangun evidence pack (fungsi murni)
             evidence = autopsy_evidence.build_evidence(attempt_data)
 
-            # Panggil layanan Guru AI (dengan fallback template otomatis jika LLM/validasi gagal)
-            coach_out, meta = autopsy_coach.generate_coach(evidence)
+            # Pengecekan kuota & anggaran berbasis database (Bagian 7 A5)
+            q_ok = True
+            q_reason = ""
+            q_usage = {}
+            if autopsy_quota:
+                q_ok, q_reason, q_usage = autopsy_quota.check_quota(user_id, sb_url, sb_svc)
+
+            if not q_ok:
+                # Kuota habis atau dinonaktifkan -> fallback instan ke template (tanpa error mentah)
+                coach_out = autopsy_coach.coach_template.generate_template(evidence)
+                coach_out["sumber"] = "template"
+                meta = {
+                    "latensi_ms": 0,
+                    "sumber": "template",
+                    "alasan": q_reason,
+                    "model": "template",
+                    "kuota": q_usage,
+                }
+            else:
+                # Panggil layanan Guru AI (dengan fallback template otomatis jika LLM/validasi gagal)
+                coach_out, meta = autopsy_coach.generate_coach(evidence)
+                if q_usage:
+                    meta["kuota"] = q_usage
 
             # Simpan cache
             if attempt_id:
@@ -1624,6 +1651,38 @@ function salinWA() {
             })
         except Exception as e:
             return self._send_500(e, "POST /api/autopsy/coach")
+
+    def _handle_get_autopsy_quota(self):
+        """GET /api/autopsy/quota — Memeriksa status dan sisa kuota Guru Autopsi."""
+        try:
+            if autopsy_quota is None:
+                return self._send_json(503, {"status": "error", "message": "Layanan kuota belum tersedia."})
+            _auth = self.headers.get('Authorization', '') or ''
+            _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
+            if not _token:
+                return self._send_json(200, {
+                    "status": "guest",
+                    "is_guest": True,
+                    "message": "Login Google untuk mendapatkan Guru AI gratis.",
+                    "limits": autopsy_quota.get_quota_limits(),
+                })
+            _vok, _user = _verify_supabase_token(_token)
+            if not _vok or not (_user or {}).get('id'):
+                return self._send_json(401, {"status": "unauthorized", "message": "Token tidak valid atau sesi berakhir."})
+            user_id = str(_user['id'])
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+            allowed, reason, usage = autopsy_quota.check_quota(user_id, sb_url, sb_svc)
+            return self._send_json(200, {
+                "status": "success",
+                "user_id": user_id,
+                "allowed": allowed,
+                "reason": reason,
+                "usage": usage,
+                "limits": autopsy_quota.get_quota_limits(),
+            })
+        except Exception as e:
+            return self._send_500(e, "GET /api/autopsy/quota")
 
     def do_HEAD(self):
         # Samakan proteksi static serving utk HEAD (SimpleHTTPRequestHandler
@@ -1799,6 +1858,10 @@ function salinWA() {
         # FASE A3: API Guru Autopsi Cached (GET)
         if self.path.split('?', 1)[0] == '/api/autopsy/coach':
             return self._handle_get_autopsy_coach()
+
+        # FASE A5: API Kuota Guru Autopsi (GET)
+        if self.path.split('?', 1)[0] == '/api/autopsy/quota':
+            return self._handle_get_autopsy_quota()
 
         # Snapshot konten server-rendered untuk reviewer otomatis (Fase bagikan online):
         # /audit?subject=matematika&paket=1&dari=1&sampai=10  (HTML)
