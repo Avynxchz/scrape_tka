@@ -573,10 +573,16 @@
         { key: 'bahasa_jerman', name: 'Bahasa Jerman', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' },
         { key: 'bahasa_prancis', name: 'Bahasa Prancis', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' },
         { key: 'bahasa_mandarin', name: 'Bahasa Mandarin', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' },
-        { key: 'bahasa_korea', name: 'Bahasa Korea', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' }
+        { key: 'bahasa_korea', name: 'Bahasa Korea', p1: 10, p2: 29, icon: 'translate', category: 'Bahasa & Lintas Minat' },
+        // KEJURUAN SMK
+        { key: 'teknik_mesin', name: 'SMK - Teknik Mesin', p1: 6, p2: 0, icon: 'precision_manufacturing', category: 'SMK' },
+        { key: 'teknik_otomotif', name: 'SMK - Teknik Otomotif', p1: 6, p2: 0, icon: 'directions_car', category: 'SMK' },
+        { key: 'teknik_jaringan', name: 'SMK - Teknik Jaringan & Telko', p1: 6, p2: 0, icon: 'router', category: 'SMK' },
+        { key: 'akuntansi', name: 'SMK - Akuntansi & Keuangan', p1: 6, p2: 0, icon: 'account_balance', category: 'SMK' },
+        { key: 'manajemen_perkantoran', name: 'SMK - Manajemen Perkantoran', p1: 6, p2: 0, icon: 'business_center', category: 'SMK' }
       ];
 
-      var TOTAL_KURIKULUM_SOAL = 961;
+      var TOTAL_KURIKULUM_SOAL = 991;
 
       /* =========================================================================
          2. BACA DATA LOCALSTORAGE 'tka_progress' SECARA AMAN (try/catch)
@@ -687,13 +693,14 @@
           studyTimeYesterdayMin = Math.max(0, Math.round(totalMinutes * 0.35));
         }
 
-        // Distribusi kategori mapel (Wajib, Saintek, Soshum, Lanjut, Bahasa)
+        // Distribusi kategori mapel (Wajib, Saintek, Soshum, Lanjut, Bahasa, SMK)
         var categoryMap = {
           Wajib: { name: 'Wajib', color: '#10B981', total: 0, done: 0 },
           Saintek: { name: 'Saintek', color: '#3B82F6', total: 0, done: 0 },
           Soshum: { name: 'Soshum', color: '#F59E0B', total: 0, done: 0 },
           Lanjut: { name: 'Lanjut', color: '#8B5CF6', total: 0, done: 0 },
-          Bahasa: { name: 'Bahasa', color: '#EC4899', total: 0, done: 0 }
+          Bahasa: { name: 'Bahasa', color: '#EC4899', total: 0, done: 0 },
+          SMK: { name: 'Kejuruan SMK', color: '#059669', total: 0, done: 0 }
         };
 
         SUBJECTS.forEach(function (s) {

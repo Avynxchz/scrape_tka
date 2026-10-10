@@ -296,6 +296,7 @@ button:active { transform: scale(0.97); }
             <button type="button" data-cat-tab="soshum" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Soshum</button>
             <button type="button" data-cat-tab="lanjut" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Lanjut</button>
             <button type="button" data-cat-tab="bahasa" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Bahasa &amp; Lintas Minat</button>
+            <button type="button" data-cat-tab="smk" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-bold text-primary shrink-0 whitespace-nowrap">Kejuruan SMK (5)</button>
           </div>
           <div class="relative w-full lg:w-64 shrink-0">
             <input type="search" data-search aria-label="Cari nama mapel" placeholder="Cari mapel..."
@@ -573,6 +574,7 @@ button:active { transform: scale(0.97); }
             <button type="button" data-cat-tab="soshum" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Soshum</button>
             <button type="button" data-cat-tab="lanjut" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Lanjut</button>
             <button type="button" data-cat-tab="bahasa" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Bahasa &amp; Lintas Minat</button>
+            <button type="button" data-cat-tab="smk" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-bold text-primary shrink-0 whitespace-nowrap">Kejuruan SMK (5)</button>
           </div>
           <div class="relative w-full">
             <input type="search" data-search aria-label="Cari nama mapel" placeholder="Cari mapel..."
@@ -626,7 +628,8 @@ button:active { transform: scale(0.97); }
     { id: 'saintek', num: 2, tab: 'Saintek', nama: 'Saintek (Peminatan)',         desc: 'Peminatan rumpun IPA sesuai jurusan tujuan.' },
     { id: 'soshum', num: 3, tab: 'Soshum', nama: 'Soshum (Peminatan)',           desc: 'Peminatan rumpun IPS sesuai jurusan tujuan.' },
     { id: 'lanjut', num: 4, tab: 'Lanjut', nama: 'Tingkat Lanjut',               desc: 'Matematika dan bahasa tingkat lanjut.' },
-    { id: 'bahasa', num: 5, tab: 'Bahasa & Lintas Minat', nama: 'Bahasa Asing & Lintas Minat', desc: 'PPKn dan bahasa asing lintas minat.' }
+    { id: 'bahasa', num: 5, tab: 'Bahasa & Lintas Minat', nama: 'Bahasa Asing & Lintas Minat', desc: 'PPKn dan bahasa asing lintas minat.' },
+    { id: 'smk',    num: 6, tab: 'Kejuruan SMK', nama: 'Kejuruan SMK (Peminatan)', desc: 'Konsentrasi keahlian Teknik Mesin, Otomotif, TKJ, Akuntansi, dan MPLB.' }
   ];
 
   var SUBJECTS = [
@@ -651,10 +654,15 @@ button:active { transform: scale(0.97); }
     { key: 'bahasa_jerman',           nama: 'Bahasa Jerman',           p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
     { key: 'bahasa_prancis',          nama: 'Bahasa Prancis',          p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
     { key: 'bahasa_mandarin',         nama: 'Bahasa Mandarin',         p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
-    { key: 'bahasa_korea',            nama: 'Bahasa Korea',            p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' }
+    { key: 'bahasa_korea',            nama: 'Bahasa Korea',            p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
+    { key: 'teknik_mesin',            nama: 'SMK - Teknik Mesin',      p1: 6,  p2: 0,  cat: 'smk',     icon: 'precision_manufacturing' },
+    { key: 'teknik_otomotif',         nama: 'SMK - Teknik Otomotif',   p1: 6,  p2: 0,  cat: 'smk',     icon: 'directions_car' },
+    { key: 'teknik_jaringan',         nama: 'SMK - Teknik Jaringan & Telko', p1: 6, p2: 0, cat: 'smk', icon: 'router' },
+    { key: 'akuntansi',               nama: 'SMK - Akuntansi & Keuangan', p1: 6, p2: 0, cat: 'smk',   icon: 'account_balance' },
+    { key: 'manajemen_perkantoran',   nama: 'SMK - Manajemen Perkantoran', p1: 6, p2: 0, cat: 'smk', icon: 'business_center' }
   ];
 
-  var TOTAL_SOAL = 961; // hasil jumlah tabel (terverifikasi saat build)
+  var TOTAL_SOAL = 991; // 961 umum + 30 SMK (resmi Pusmendik)
 
   /* ================= BRIDGE ke app utama ================= */
   function send(payload) {
@@ -697,6 +705,29 @@ button:active { transform: scale(0.97); }
   function cardHTML(s) {
     var prog =
       '<div class="hidden flex-col gap-1.5" data-progs="' + s.key + '"></div>';
+    var paketBadges = s.p2 > 0
+      ? '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold">Paket 1 · ' + s.p1 + ' soal</span>' +
+        '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold">Paket 2 · ' + s.p2 + ' soal</span>'
+      : '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-brand-emerald-light text-primary font-label-md text-label-md font-bold">Paket 1 · ' + s.p1 + ' soal (Resmi Pusmendik)</span>';
+
+    var actionButtons = s.p2 > 0
+      ? '<div class="grid grid-cols-2 gap-2 pt-1">' +
+          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="1" aria-label="' + s.nama + ' Paket 1 (' + s.p1 + ' soal)" ' +
+            'class="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
+            '<span>Paket 1</span><span class="material-symbols-outlined text-[16px]">play_arrow</span>' +
+          '</button>' +
+          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="2" aria-label="' + s.nama + ' Paket 2 (' + s.p2 + ' soal)" ' +
+            'class="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-surface-card hover:bg-surface-subtle text-primary font-label-md text-label-md font-bold shadow-sm border border-border-subtle">' +
+            '<span>Paket 2</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>' +
+          '</button>' +
+        '</div>'
+      : '<div class="grid grid-cols-1 gap-2 pt-1">' +
+          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="1" aria-label="' + s.nama + ' Paket 1 (' + s.p1 + ' soal)" ' +
+            'class="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
+            '<span>Kerjakan Paket 1 (' + s.p1 + ' Soal)</span><span class="material-symbols-outlined text-[16px]">play_arrow</span>' +
+          '</button>' +
+        '</div>';
+
     return (
       '<article class="bg-surface-card rounded-2xl border border-border-subtle shadow-sm p-4 md:p-5 flex flex-col gap-3 lift" ' +
         'data-card data-nama="' + (s.nama + ' ' + s.key.split('_').join(' ')).toLowerCase() + '">' +
@@ -707,20 +738,10 @@ button:active { transform: scale(0.97); }
           '<h3 class="font-headline-sm text-headline-sm text-on-surface leading-tight min-w-0">' + s.nama + '</h3>' +
         '</div>' +
         '<div class="flex flex-wrap gap-1.5">' +
-          '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold">Paket 1 · ' + s.p1 + ' soal</span>' +
-          '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold">Paket 2 · ' + s.p2 + ' soal</span>' +
+          paketBadges +
         '</div>' +
         prog +
-        '<div class="grid grid-cols-2 gap-2 pt-1">' +
-          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="1" aria-label="' + s.nama + ' Paket 1 (' + s.p1 + ' soal)" ' +
-            'class="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
-            '<span>Paket 1</span><span class="material-symbols-outlined text-[16px]">play_arrow</span>' +
-          '</button>' +
-          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="2" aria-label="' + s.nama + ' Paket 2 (' + s.p2 + ' soal)" ' +
-            'class="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-surface-card hover:bg-surface-subtle text-primary font-label-md text-label-md font-bold shadow-sm border border-border-subtle">' +
-            '<span>Paket 2</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>' +
-          '</button>' +
-        '</div>' +
+        actionButtons +
       '</article>'
     );
   }
@@ -728,7 +749,10 @@ button:active { transform: scale(0.97); }
   function sectionHTML(c, twoCols) {
     var subs = SUBJECTS.filter(function (s) { return s.cat === c.id; });
     var nSoal = 0, nPaket = 0;
-    subs.forEach(function (s) { nSoal += s.p1 + s.p2; nPaket += 2; });
+    subs.forEach(function (s) {
+      nSoal += s.p1 + s.p2;
+      nPaket += (s.p2 > 0 ? 2 : 1);
+    });
     return (
       '<section class="flex flex-col gap-3 md:gap-4 fade-in" data-cat-section="' + c.id + '">' +
         '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">' +

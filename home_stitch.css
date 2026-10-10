@@ -15,7 +15,15 @@
   overflow-y: auto; overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
-.home-overlay.home-hidden { display: none; }
+.home-overlay.home-hidden {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+.home-overlay.home-hidden iframe {
+  display: none !important;
+  pointer-events: none !important;
+}
 .home-overlay .ms-icon,
 .stitch-modal-backdrop .ms-icon,
 .ms-icon {

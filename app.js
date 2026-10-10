@@ -407,8 +407,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const paramSub = urlParams.get('subject');
   const paramPkg = parseInt(urlParams.get('paket') || '1', 10);
-  // Home overlay selalu tampil pertama kali (BUG-009)
-  window.__homeFirst = true;
+  
+  // Tampilkan beranda hanya jika tidak ada parameter mapel di URL
+  const isDirectQuiz = Boolean(paramSub || (window.location.hash && window.location.hash.includes('soal-')));
+  window.__homeFirst = !isDirectQuiz;
 
   await syncDynamicCatalog();
 
@@ -426,8 +428,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateModelPickerUI();
   renderGridModal();
 
-  // Layar pertama: Home dashboard (kecuali langsung diarahkan ke soal via #soal-N)
-  if (window.__homeFirst) homeOpen();
+  // Layar pertama: Home dashboard jika bukan direct kuis; jika direct kuis pastikan homeClose()
+  if (window.__homeFirst) {
+    homeOpen();
+  } else {
+    homeClose();
+  }
   try { syncProgressWithServer(); } catch (e) {}
 });
 // 22 Mata Pelajaran TKA Master — Meta UI, Ikon Unik Material Symbols, & Tema Warna Harmonis
@@ -934,6 +940,8 @@ function homeOpen() {
   const ov = document.getElementById('homeOverlay');
   if (!ov) return;
   ov.classList.remove('home-hidden');
+  ov.style.display = '';
+  ov.style.pointerEvents = '';
   document.body.style.overflow = 'hidden';
   // Kembali ke beranda: hapus tanda mode kuis
   delete document.body.dataset.quizMode;
@@ -985,8 +993,14 @@ function homeSendDesktopData() {
   }));
 }
 
-// Urutan 22 mapel sesuai daftar KONTRAK_DATA.md (dipakai panel Modul & Progres)
-const PANEL_MODULE_ORDER = ['matematika', 'bahasa_indonesia', 'bahasa_inggris', 'fisika', 'kimia', 'biologi', 'ekonomi', 'geografi', 'sosiologi', 'sejarah', 'antropologi', 'kewirausahaan', 'matematika_lanjut', 'bahasa_indonesia_lanjut', 'bahasa_inggris_lanjut', 'ppkn', 'bahasa_arab', 'bahasa_jepang', 'bahasa_jerman', 'bahasa_prancis', 'bahasa_mandarin', 'bahasa_korea'];
+// Urutan 22 mapel umum + 5 mapel SMK sesuai kurikulum Pusmendik (dipakai panel Modul & Progres)
+const PANEL_MODULE_ORDER = [
+  'matematika', 'bahasa_indonesia', 'bahasa_inggris', 'fisika', 'kimia', 'biologi',
+  'ekonomi', 'geografi', 'sosiologi', 'sejarah', 'antropologi', 'kewirausahaan',
+  'matematika_lanjut', 'bahasa_indonesia_lanjut', 'bahasa_inggris_lanjut',
+  'ppkn', 'bahasa_arab', 'bahasa_jepang', 'bahasa_jerman', 'bahasa_prancis', 'bahasa_mandarin', 'bahasa_korea',
+  'teknik_mesin', 'teknik_otomotif', 'teknik_jaringan', 'akuntansi', 'manajemen_perkantoran'
+];
 
 // Raw store tka_progress (bentuk persis kontrak, bukan ringkasan)
 function homeProgressStore() {
@@ -1445,21 +1459,22 @@ function homeClose() {
   const ov = document.getElementById('homeOverlay');
   if (!ov) return;
   ov.classList.add('home-hidden');
+  ov.style.display = 'none';
+  ov.style.pointerEvents = 'none';
   document.body.style.overflow = '';
   // Tandai mode kuis: di desktop, pemilih mapel & paket disembunyikan
   // (user sudah memilih di beranda, tidak perlu ganti-ganti di tengah kuis)
   document.body.dataset.quizMode = '1';
 }
 
-// BUGFIX (9 Okt 2026): overlay beranda menutupi kuis di desktop saat akses via URL langsung.
+// BUGFIX (9 Okt 2026): overlay beranda tidak menutupi kuis saat akses via URL langsung atau dalam kuis
 (function() {
   try {
     var q = new URLSearchParams(window.location.search);
     if (q.get('subject')) {
+      homeClose();
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() { setTimeout(homeClose, 300); });
-      } else {
-        setTimeout(homeClose, 300);
+        document.addEventListener('DOMContentLoaded', homeClose);
       }
     }
   } catch (e) {}
@@ -2319,6 +2334,45 @@ function cleanUiStimulusText(stimText, stimImages) {
 
   // Sinkronkan status ciut/tampil Tata Cara
   setExplanationCollapsed(state.explanationCollapsed);
+
+  // Sinkronkan status Tes Selesai / Mode Reviu (Pengecekan Nilai & Kunci Jawaban)
+  const isFinished = isTestFinished();
+  const btnFinishHeader = document.getElementById('btnFinishHeader');
+  const btnMobileReviu = document.getElementById('btnMobileReviuHeader');
+  const btnCheck = document.getElementById('btnCheckAnswer');
+  const btnFinishModal = document.querySelector('.btn-finish-from-modal');
+
+  if (isFinished) {
+    if (btnFinishHeader) {
+      btnFinishHeader.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> <span>Reviu Hasil</span>';
+      btnFinishHeader.title = 'Buka Reviu Nilai & Kunci Jawaban';
+      btnFinishHeader.onclick = () => renderReviewHasil();
+      btnFinishHeader.classList.add('btn-reviu-active');
+    }
+    if (btnMobileReviu) {
+      btnMobileReviu.style.display = 'inline-flex';
+    }
+    if (btnCheck) {
+      btnCheck.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> <span>Reviu Hasil & Kunci</span>';
+      btnCheck.onclick = () => renderReviewHasil();
+      btnCheck.style.background = '#004a2a';
+      btnCheck.style.color = '#ffffff';
+    }
+    if (btnFinishModal) {
+      btnFinishModal.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Buka Reviu Hasil & Kunci Jawaban';
+      btnFinishModal.onclick = () => { closeDaftarModal(); renderReviewHasil(); };
+    }
+  } else {
+    if (btnFinishHeader) {
+      btnFinishHeader.innerHTML = '<i class="fa-solid fa-flag-checkered"></i> <span>Selesai Tes</span>';
+      btnFinishHeader.title = 'Selesai dan lihat hasil tes';
+      btnFinishHeader.onclick = () => openFinishModal();
+      btnFinishHeader.classList.remove('btn-reviu-active');
+    }
+    if (btnMobileReviu) {
+      btnMobileReviu.style.display = 'none';
+    }
+  }
 
   // Trigger KaTeX render
   renderMath();
@@ -4840,6 +4894,7 @@ function selesaiTes() {
 }
 
 function renderReviewHasil() {
+  if (typeof homeClose === 'function') homeClose();
   const pkg = state.pkgData[pkgKey()];
   if (!pkg || !pkg.soal) return;
   // FASE 3 (T3.3): indikator status simpan hasil
@@ -5037,20 +5092,21 @@ function renderReviewHasil() {
 // FASE 5 (T5.1): Ambil analisis Autopsi dari server dan tampilkan.
 // Kebocoran #1 terbuka lengkap; #2-3 terkunci (blur) untuk non-pass.
 async function renderAutopsiSection() {
-  // Cari container atau buat baru
+  // Cari container atau buat baru (diletakkan DI BAWAH tabel agar nomor & kunci tidak tertutup)
   let cont = document.getElementById('autopsiSection');
   if (!cont) {
     cont = document.createElement('div');
     cont.id = 'autopsiSection';
     const overlay = document.getElementById('reviewHasilOverlay');
     const tableWrap = overlay.querySelector('.review-table-wrap') || overlay.querySelector('table');
-    if (tableWrap && tableWrap.parentElement) {
-      tableWrap.parentElement.insertBefore(cont, tableWrap);
+    if (tableWrap) {
+      tableWrap.after(cont);
     } else {
       overlay.appendChild(cont);
     }
   }
-  cont.innerHTML = '<div style="text-align:center;padding:20px;color:#6b7280">Memuat Autopsi...</div>';
+  cont.innerHTML = '';
+  cont.style.display = 'none';
 
   try {
     // Ambil attempt terakhir dari antrean atau yang baru selesai
@@ -5064,6 +5120,7 @@ async function renderAutopsiSection() {
     }
     if (!payload || !payload.items || !payload.items.length) {
       cont.innerHTML = '';
+      cont.style.display = 'none';
       return;
     }
     // Dapatkan token
@@ -5072,9 +5129,12 @@ async function renderAutopsiSection() {
       hdr = await _attemptAuthHeader();
     }
     if (!hdr.Authorization) {
-      cont.innerHTML = '<div style="text-align:center;padding:16px;color:#6b7280;font-size:13px">Login untuk melihat Autopsi tryout-mu.</div>';
+      cont.innerHTML = '';
+      cont.style.display = 'none';
       return;
     }
+    cont.style.display = 'block';
+    cont.innerHTML = '<div style="text-align:center;padding:12px;color:#6b7280;font-size:12px">Memuat analisis Autopsi...</div>';
     const res = await fetch('/api/autopsy/analyze', {
       method: 'POST',
       headers: Object.assign({'Content-Type': 'application/json'}, hdr),
@@ -5168,6 +5228,8 @@ function reviewJumpTo(idx) {
 
 function closeReviewHasil() {
   document.getElementById('reviewHasilOverlay').classList.remove('open');
+  if (typeof homeClose === 'function') homeClose();
+  if (typeof renderQuestion === 'function') renderQuestion();
 }
 
 // Kembali ke beranda dari modal konfirmasi selesai tes
@@ -6122,20 +6184,19 @@ function updateAttemptBadge() {
     const n = AttemptQueue.count();
     const logged = _isLoggedIn();
     if (!logged && n > 0) {
-      el.style.cssText = 'text-align:center;font-size:13px;font-weight:600;margin:10px 12px;padding:12px;border-radius:10px;border:1px solid #fed7aa;background:#fff7ed;color:#c2410c;';
-      el.innerHTML = '&#9888; Kamu mengerjakan sebagai <strong>Tamu</strong> (' + n + ' hasil tersimpan di HP).<br>' +
-        '<span style="font-size:12px;display:block;margin:6px 0 8px 0;color:#9a3412;">Masuk dengan Google agar statistik dan analitik Autopsi tersimpan permanen di akunmu.</span>' +
-        '<button type="button" onclick="loginWithGoogle()" style="background:#004a2a;color:#fff;border:none;padding:6px 14px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;">Klaim ke Akun Google</button>';
+      el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11.5px;font-weight:600;margin:6px 0 10px;padding:7px 12px;border-radius:10px;border:1px solid #fed7aa;background:#fff7ed;color:#c2410c;';
+      el.innerHTML = '<span style="display:flex;align-items:center;gap:6px;">&#9888; <strong>Mode Tamu</strong> (' + n + ' hasil di HP)</span>' +
+        '<button type="button" onclick="loginWithGoogle()" style="background:#004a2a;color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;">Klaim ke Google</button>';
       return;
     }
     const ok = n === 0;
-    el.style.cssText = 'text-align:center;font-size:14px;font-weight:700;margin:10px 12px;padding:10px 12px;border-radius:10px;border:1px solid;' +
+    el.style.cssText = 'text-align:center;font-size:12px;font-weight:700;margin:6px 0 8px;padding:6px 12px;border-radius:8px;border:1px solid;' +
       (ok ? 'background:#f0fdf4;color:#15803d;border-color:#bbf7d0;'
           : 'background:#fffbeb;color:#b45309;border-color:#fde68a;');
     el.innerHTML = ok ? '&#10003; Hasil tersimpan di akunmu'
       : '&#9203; ' + n + ' hasil menunggu upload' +
-        (syncAttempts._lastErr ? '<br><small style="font-weight:400">(' + syncAttempts._lastErr + ')</small>'
-                              : '<br><small style="font-weight:400">(akan dikirim otomatis)</small>');
+        (syncAttempts._lastErr ? ' <small style="font-weight:400">(' + syncAttempts._lastErr + ')</small>'
+                              : ' <small style="font-weight:400">(akan dikirim otomatis)</small>');
   } catch (e) {}
 }
 

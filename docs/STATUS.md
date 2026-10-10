@@ -26,7 +26,17 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
   3. `SMK - Teknik Jaringan dan Telekomunikasi` (TKJ) (`teknik_jaringan_paket_1` - 6 soal, val: 49)
   4. `SMK - Akuntansi dan Keuangan Lembaga` (AKL) (`akuntansi_paket_1` - 6 soal, val: 66)
   5. `SMK - Manajemen Perkantoran dan Layanan Bisnis` (MPLB) (`manajemen_perkantoran_paket_1` - 6 soal, val: 65)
-- **UI/UX:** Terdaftar di `MASTER_CATALOG`, `SUBJECT_CATALOG`, dan `SUBJECT_UI_META` kategori `"Kejuruan SMK"`. Modal "Atur Mapel" menampilkan ikon glyph rapi. Kartu Beranda menyajikan Paket 1 (6 Soal) dan langsung dapat dibuka di HP 390x844.
+- **UI/UX & Modul Desktop:** Terdaftar di `MASTER_CATALOG`, `SUBJECT_CATALOG`, dan `SUBJECT_UI_META` kategori `"Kejuruan SMK"`. Beranda Desktop (`home_desktop.html`), Modul Belajar (`workspace_modul/modul.html`), dan Progres (`workspace_progres/progres.html`) terintegrasi 100% dengan total 991 butir soal.
+
+### PERBAIKAN MASUKAN AGUS (3 MASALAH UTAMA): 100% SELESAI & TERVERIFIKASI
+1. **Masalah 1 (Mapel SMK di Desktop):** Beranda Desktop, Modul Belajar, dan Progres & Analitik menampilkan filter & kartu 5 mapel kejuruan SMK secara konsisten.
+2. **Masalah 2 (Solusi 5 Pilar & Konteks AI Mapel SMK):** File Layer 3 solusi resmi Pusmendik dibuat di `data/solution_sources/`, terdaftar di `registry.json`, dan terinjeksi ke semua data learning SMK. Audit via `audit_smk.py`: 0 Critical Issues.
+3. **Masalah 3 (Pengecekan Nilai Tertutup Tryout & Terpotong):**
+   - Tabel Reviu Mobile kini 100% responsif 4 kolom berdampingan tanpa terpotong horizontal di HP 360-390px.
+   - Peringatan akun tamu dirampingkan, Autopsi dipindahkan ke bawah tabel agar baris soal langsung tampil.
+   - Tombol Reviu Hasil terpasang di header mobile (`[📊 Reviu]`), header desktop (`[📊 Reviu Hasil]`), dan bilah aksi bawah kuis (`[📊 Reviu Hasil & Kunci]`), sehingga siswa dapat bolak-balik antara kuis/pembahasan dan hasil tryout dengan 1 klik.
+   - Penutupan iframe overlay desktop kuis langsung otomatis saat membuka kuis via URL parameter.
+
 
 ### FASE 4: 100% (SELESAI-TERVERIFIKASI)
 - **Terbukti:** `autopsy/analyzer.py` (9 label prioritas, 2 flag, kebocoran top-3) + `autopsy/planner.py` (jadwal belajar deterministik hingga H-1) lulus tes otomatis 20/20 di `tests/test_autopsy.py` (8 persona uji sesuai harapan). Kartu materi statis di `content/cards/`.

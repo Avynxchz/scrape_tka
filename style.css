@@ -527,7 +527,11 @@ body {
   overflow-y: auto; overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
-.home-overlay.home-hidden { display: none; }
+.home-overlay.home-hidden {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
 
 /* Shell: layar HP (sheet putih) di tengah background krem */
 .ho-shell {
@@ -2782,8 +2786,9 @@ body {
   overflow-y: auto;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  margin-bottom: 18px;
-  max-height: 48vh;
+  margin-bottom: 14px;
+  min-height: 250px;
+  max-height: 58vh;
 }
 
 .review-table {
@@ -2940,6 +2945,33 @@ body {
   background: rgba(255, 255, 255, 0.18);
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-finish-header.btn-reviu-active {
+  background: #004a2a !important;
+  color: #ffffff !important;
+  border: 1px solid #22c55e !important;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.35) !important;
+  font-weight: 700 !important;
+}
+
+.m-btn-reviu-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #004a2a;
+  color: #ffffff;
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.15s ease;
+}
+.m-btn-reviu-header:hover {
+  background: #1b633e;
 }
 
 .btn-nav-finish {
@@ -6281,85 +6313,157 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
    FIX TEKS PANJANG TERPECAH VERTIKAL (MOBILE ONLY: <=899px)
    ========================================================================== */
 @media (max-width: 899px) {
-  /* 1. Modal Reviu Hasil Simulasi: anti kolom sempit & huruf jatuh ke bawah */
+  /* 1. Modal Reviu Hasil Simulasi: 4 kolom pas di layar HP, nomor & kunci tampak jelas */
   .review-container {
-    padding: 18px 14px 14px !important;
-    width: 95% !important;
-    max-width: 480px !important;
+    padding: 14px 12px 14px !important;
+    width: 96% !important;
+    max-width: 540px !important;
+    max-height: 94vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .review-header {
+    margin-bottom: 8px !important;
+    padding-bottom: 8px !important;
+  }
+  .review-header h2 {
+    font-size: 15px !important;
   }
   .review-header > div {
     min-width: 0 !important;
     flex: 1 !important;
   }
   .review-header p {
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
   }
   .review-close {
     flex-shrink: 0 !important;
+    padding: 4px 8px !important;
   }
   .review-summary {
-    gap: 6px !important;
-    margin-bottom: 14px !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 4px !important;
+    margin-bottom: 8px !important;
   }
   .review-card {
-    padding: 8px 4px !important;
+    padding: 6px 2px !important;
     min-width: 0 !important;
+    text-align: center !important;
+    border-radius: 8px !important;
   }
-  .review-card i {
-    font-size: 13px !important;
+  .review-card-icon-wrap {
+    display: none !important;
   }
   .review-card-num,
   .review-persen {
-    font-size: 18px !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
   }
   .review-card-label {
-    font-size: 9.5px !important;
-    letter-spacing: 0.02em !important;
+    font-size: 9px !important;
+    letter-spacing: 0.01em !important;
+    margin-top: 2px !important;
   }
   .review-table-wrap {
-    overflow-x: auto !important;
+    flex: 1 !important;
+    min-height: 220px !important;
+    max-height: 52vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 10px !important;
+    margin-bottom: 10px !important;
   }
   .review-table {
-    min-width: 550px !important;
     width: 100% !important;
-    table-layout: auto !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+    font-size: 12px !important;
+  }
+  .review-table thead th {
+    padding: 8px 4px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.02em !important;
+  }
+  .review-table tbody td {
+    padding: 8px 4px !important;
+    vertical-align: middle !important;
   }
   .review-table thead th:nth-child(1),
   .review-table tbody td:nth-child(1) {
-    width: 44px !important;
-    min-width: 44px !important;
+    width: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
     text-align: center !important;
-    padding: 10px 6px !important;
+    font-weight: 700 !important;
+    padding: 8px 2px !important;
   }
   .review-table thead th:nth-child(2),
   .review-table tbody td:nth-child(2) {
-    width: 92px !important;
-    min-width: 92px !important;
-    padding: 10px 8px !important;
+    width: 72px !important;
+    min-width: 72px !important;
+    max-width: 72px !important;
+    text-align: center !important;
+    padding: 8px 2px !important;
+  }
+  .review-status-badge {
+    padding: 2px 5px !important;
+    font-size: 10px !important;
+    letter-spacing: 0 !important;
+  }
+  .review-status-badge i {
+    font-size: 9px !important;
   }
   .review-table thead th:nth-child(3),
   .review-table tbody td:nth-child(3) {
-    min-width: 170px !important;
-    padding: 10px 10px !important;
+    width: calc(50% - 53px) !important;
+    padding: 8px 4px !important;
     white-space: normal !important;
-    word-break: normal !important;
+    word-break: break-word !important;
     overflow-wrap: break-word !important;
+    font-size: 11.5px !important;
   }
   .review-table thead th:nth-child(4),
   .review-table tbody td:nth-child(4) {
-    min-width: 240px !important;
-    padding: 10px 10px !important;
+    width: calc(50% - 53px) !important;
+    padding: 8px 4px !important;
     white-space: normal !important;
-    word-break: normal !important;
+    word-break: break-word !important;
     overflow-wrap: break-word !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    color: var(--accent) !important;
   }
   .review-table thead th:nth-child(4) {
+    font-weight: 600 !important;
+    color: var(--text-3) !important;
+  }
+  .review-ans, .review-key {
+    font-size: 11.5px !important;
+    line-height: 1.35 !important;
+  }
+  .review-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    padding-top: 4px !important;
+  }
+  .review-actions .btn-review-act {
+    padding: 10px 8px !important;
+    font-size: 12px !important;
+    justify-content: center !important;
     white-space: nowrap !important;
+  }
+  .review-actions .btn-review-danger {
+    grid-column: span 2 !important;
+    padding: 8px !important;
+    font-size: 11.5px !important;
   }
 
   /* 2. Header Soal Mobile: hapus batas 170px magic number, cegah pemotongan teks */
