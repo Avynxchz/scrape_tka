@@ -2215,6 +2215,9 @@ function salinWA() {
         elif self.path == '/api/user/progress':
             # BUG-001 (Tugas D): simpan progress belajar user ke Supabase.
             try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                if content_length > 256 * 1024:
+                    return self._send_json(413, {"status": "error", "message": "Ukuran data progress melebihi batas 256 KB."})
                 _auth = self.headers.get('Authorization', '') or ''
                 _token = _auth[7:] if _auth.startswith('Bearer ') else ''
                 if not _token:
@@ -2223,7 +2226,6 @@ function salinWA() {
                 if not _vok:
                     return self._send_json(401, {"status": "unauthorized"})
                 user_id = _user['id']
-                content_length = int(self.headers.get('Content-Length', 0))
                 post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
                 payload = json.loads(post_data) if post_data else {}
                 progress_data = payload.get('progress')

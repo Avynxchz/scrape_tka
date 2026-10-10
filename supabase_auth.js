@@ -361,18 +361,29 @@ function showLogoutConfirmationModal() {
     confirmBtn.onclick = async () => {
       confirmBtn.disabled = true;
       confirmBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>Mengeluarkan...</span>';
+      // T3b: Simpan progres terakhir ke server sebelum logout
+      if (typeof saveProgressToServer === 'function') {
+        try { await saveProgressToServer(); } catch (e) {}
+      }
       try {
         await supabaseClient.auth.signOut();
       } catch (e) {}
-      // BUGFIX (10 Okt 2026): bersihkan SEMUA key login agar tidak nyangkut
+      // BUGFIX (10 Okt 2026 - T3b): bersihkan SEMUA data akun & progres agar tidak bocor ke user berikutnya
       try {
         localStorage.removeItem('tka_supabase_auth_token');
         localStorage.removeItem('tka_device_logged_in');
         localStorage.removeItem('tka_user');
-        // Hapus juga key Supabase default (jika ada)
+        localStorage.removeItem('tka_progress');
+        localStorage.removeItem('tka_progress_owner');
+        // Hapus juga semua paket tersimpan (tka_answers_*, tka_ragu_*, tka_finished_*, tka_checked_*, tka_timer_remaining_*, sb-*)
         for (var i = localStorage.length - 1; i >= 0; i--) {
           var k = localStorage.key(i);
-          if (k && k.indexOf('sb-') === 0) localStorage.removeItem(k);
+          if (!k) continue;
+          if (k.indexOf('tka_answers_') === 0 || k.indexOf('tka_ragu_') === 0 || 
+              k.indexOf('tka_finished_') === 0 || k.indexOf('tka_checked_') === 0 || 
+              k.indexOf('tka_timer_remaining_') === 0 || k.indexOf('sb-') === 0) {
+            localStorage.removeItem(k);
+          }
         }
       } catch (e2) {}
       currentUser = null;

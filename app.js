@@ -1473,6 +1473,8 @@ window.addEventListener('tka-login', (e) => {
 });
 
 window.addEventListener('tka-logout', () => {
+  _progressServerSynced = false;
+  window._progressServerSynced = false;
   state.akunProfile = null;
   state.tutorQuota = { remaining: 5, daily_limit: 5, tier: 'guest', is_logged_in: false };
   if (typeof updateTutorQuotaUI === 'function') {
@@ -2530,6 +2532,8 @@ function persistAnswerProgress(q) {
   } catch (e) { /* localStorage gagal: jangan ganggu UI */ }
 }
 
+window._progressServerSynced = false;
+
 let _progressSyncTimer = null;
 function scheduleSyncProgressToServer() {
   if (_progressSyncTimer) clearTimeout(_progressSyncTimer);
@@ -2540,6 +2544,11 @@ function scheduleSyncProgressToServer() {
 
 async function saveProgressToServer() {
   try {
+    // T3c: hanya boleh POST jika GET sudah sukses (window._progressServerSynced = true)
+    if (!window._progressServerSynced) {
+      await syncProgressWithServer();
+      if (!window._progressServerSynced) return;
+    }
     if (typeof _attemptAuthHeader !== 'function') return;
     const hdr = await _attemptAuthHeader();
     if (!hdr.Authorization) return;
@@ -2551,40 +2560,73 @@ async function saveProgressToServer() {
     });
   } catch (e) {}
 }
+window.saveProgressToServer = saveProgressToServer;
 
 async function syncProgressWithServer() {
   try {
     if (typeof _attemptAuthHeader !== 'function') return;
     const hdr = await _attemptAuthHeader();
     if (!hdr.Authorization) return;
+
+    // T3a: Identifikasi akun yang sedang login
+    const u = (typeof getTKAUser === 'function' ? getTKAUser() : null) || window.TKA_USER || {};
+    const currentOwner = u.email || u.id || (typeof currentUser !== 'undefined' && currentUser && currentUser.email) || 'user';
+    const savedOwner = localStorage.getItem('tka_progress_owner');
+
     const res = await fetch('/api/user/progress', {
       headers: hdr
     });
     if (!res.ok) return;
     const data = await res.json();
     if (data.status === 'success') {
+      _progressServerSynced = true;
+      window._progressServerSynced = true;
       const serverProgress = data.progress || {};
-      const localProgress = JSON.parse(localStorage.getItem('tka_progress') || '{}');
-      
-      // Deep merge local dan server progress
-      const merged = Object.assign({}, localProgress);
-      for (const [sub, pkgs] of Object.entries(serverProgress)) {
-        if (!merged[sub]) merged[sub] = {};
-        for (const [pkgNo, questions] of Object.entries(pkgs)) {
-          if (!merged[sub][pkgNo]) merged[sub][pkgNo] = {};
-          for (const [qNo, qVal] of Object.entries(questions)) {
-            if (!merged[sub][pkgNo][qNo]) {
-              merged[sub][pkgNo][qNo] = qVal;
+      let finalProgress = {};
+
+      if (savedOwner && savedOwner !== currentOwner) {
+        // T3a: Akun berbeda di perangkat yang sama (misal komputer lab)!
+        // Buang data lokal akun sebelumnya, gunakan data bersih milik akun ini dari server.
+        finalProgress = serverProgress;
+      } else if (!savedOwner) {
+        // Data dari tamu yang baru pertama kali login: gabungkan (merge) ke server
+        const localProgress = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+        finalProgress = Object.assign({}, localProgress);
+        for (const [sub, pkgs] of Object.entries(serverProgress)) {
+          if (!finalProgress[sub]) finalProgress[sub] = {};
+          for (const [pkgNo, questions] of Object.entries(pkgs)) {
+            if (!finalProgress[sub][pkgNo]) finalProgress[sub][pkgNo] = {};
+            for (const [qNo, qVal] of Object.entries(questions)) {
+              if (!finalProgress[sub][pkgNo][qNo]) {
+                finalProgress[sub][pkgNo][qNo] = qVal;
+              }
+            }
+          }
+        }
+      } else {
+        // Akun yang sama: gabungkan local dan server
+        const localProgress = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+        finalProgress = Object.assign({}, localProgress);
+        for (const [sub, pkgs] of Object.entries(serverProgress)) {
+          if (!finalProgress[sub]) finalProgress[sub] = {};
+          for (const [pkgNo, questions] of Object.entries(pkgs)) {
+            if (!finalProgress[sub][pkgNo]) finalProgress[sub][pkgNo] = {};
+            for (const [qNo, qVal] of Object.entries(questions)) {
+              if (!finalProgress[sub][pkgNo][qNo]) {
+                finalProgress[sub][pkgNo][qNo] = qVal;
+              }
             }
           }
         }
       }
-      localStorage.setItem('tka_progress', JSON.stringify(merged));
-      
+
+      localStorage.setItem('tka_progress', JSON.stringify(finalProgress));
+      localStorage.setItem('tka_progress_owner', currentOwner);
+
       if (data.tka_date && !localStorage.getItem('tka_date')) {
         localStorage.setItem('tka_date', data.tka_date);
       }
-      
+
       if (typeof renderHome === 'function') renderHome();
       saveProgressToServer();
     }
