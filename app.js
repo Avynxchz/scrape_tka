@@ -761,6 +761,86 @@ window.openSubjectPickerModal = openSubjectPickerModal;
 window.closeSubjectPickerModal = closeSubjectPickerModal;
 window.saveSubjectPickerModal = saveSubjectPickerModal;
 
+// B5: Invalidate Daily Mission & Rekam Kebocoran Autopsi ke Misi Hari Ini
+function updateDailyMissionFromAutopsy(autopsyData, subject, pkg) {
+  try {
+    let k1 = null;
+    if (autopsyData) {
+      if (autopsyData.kebocoran_1) {
+        k1 = autopsyData.kebocoran_1;
+      } else if (Array.isArray(autopsyData.kebocoran) && autopsyData.kebocoran[0]) {
+        k1 = {
+          label: autopsyData.kebocoran[0].label,
+          bukti: autopsyData.kebocoran[0].bukti || autopsyData.kebocoran[0].judul || '',
+          contoh: autopsyData.kebocoran[0].contoh || []
+        };
+      } else if (Array.isArray(autopsyData.kebocoran_all) && autopsyData.kebocoran_all[0]) {
+        k1 = autopsyData.kebocoran_all[0];
+      }
+    }
+    
+    // Fallback lokal jika API belum/tidak mengembalikan kebocoran eksplisit
+    if (!k1) {
+      const pKey = (subject || state.currentSubject) + ':' + (pkg || state.currentPkg);
+      const pkgData = (state.pkgData && state.pkgData[pKey]) || {};
+      const soalList = pkgData.soal || [];
+      const userAnswers = (state.userAnswers && state.userAnswers[pKey]) || {};
+      let wrongCount = 0;
+      let firstWrongNo = 1;
+      
+      soalList.forEach(s => {
+        const ans = userAnswers[s.nomor];
+        const correct = s.kunci_jawaban;
+        const isRight = Array.isArray(correct) ? correct.includes(ans) : (ans === correct);
+        if (!isRight) {
+          wrongCount++;
+          if (wrongCount === 1) firstWrongNo = s.nomor;
+        }
+      });
+      
+      if (wrongCount > 0) {
+        k1 = {
+          label: 'terburu',
+          bukti: `${wrongCount} soal perlu diperbaiki ritme pengerjaannya`,
+          contoh: [firstWrongNo]
+        };
+      }
+    }
+
+    if (k1) {
+      localStorage.setItem('tka_last_autopsy', JSON.stringify({
+        kebocoran_1: k1,
+        subject: subject || state.currentSubject,
+        paket: pkg || state.currentPkg,
+        updated_at: Date.now()
+      }));
+    }
+    invalidateDailyMission();
+  } catch (e) {
+    console.warn('Gagal update daily mission:', e);
+  }
+}
+window.updateDailyMissionFromAutopsy = updateDailyMissionFromAutopsy;
+
+function invalidateDailyMission() {
+  try {
+    if (typeof renderHome === 'function') {
+      renderHome();
+    }
+    if (typeof homeSendDesktopData === 'function') {
+      homeSendDesktopData();
+    }
+    const dFrame = document.getElementById('homeDesktopFrame');
+    if (dFrame && dFrame.contentWindow) {
+      try {
+        dFrame.contentWindow.postMessage({ type: 'refresh-daily-mission' }, '*');
+      } catch (e) {}
+    }
+  } catch (e) {
+    console.warn('Gagal invalidate daily mission:', e);
+  }
+}
+window.invalidateDailyMission = invalidateDailyMission;
 
 // FASE 5 (T5.2, T5.3): HTML kartu countdown + misi (return string, bukan prepend).
 function getTkaCardsHtml() {
@@ -787,14 +867,14 @@ function getTkaCardsHtml() {
     const labelNama = {'terburu':'Terburu-buru','overthinking':'Overthinking','macet':'Macet','yakin_salah':'Yakin tapi salah','ragu_salah':'Ragu-ragu dan salah','waktu_habis':'Kehabisan waktu','kosong':'Belum terjawab'};
     if (misi) {
       const cthRef = (misi.contoh && misi.contoh[0]) ? String(misi.contoh[0]) : '';
-      h += '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
+      h += '<div id="dailyMissionCard" class="stitch-mission-card" style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
         + '<div style="font-size:12px;font-weight:700;color:#b45309;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
         + '<div style="font-size:15px;font-weight:700;margin-bottom:4px;color:#92400e">Perbaiki: ' + (labelNama[misi.label] || misi.label) + '</div>'
         + '<div style="font-size:13px;color:#6b7280;margin-bottom:10px">' + (misi.bukti || '') + '</div>'
         + `<button type="button" onclick="bukaKartuStrategi('${misi.label}', '${cthRef}')" style="background:#b45309;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">📖 Pelajari Strategi Misi</button>`
         + '</div>';
     } else {
-      h += '<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
+      h += '<div id="dailyMissionCard" class="stitch-mission-card" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
         + '<div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
         + '<div style="font-size:13px;color:#6b7280;margin-bottom:10px">Selesaikan 1 tryout untuk mengidentifikasi kebocoran skor dan membuka misi belajarmu.</div>'
         + '<button type="button" onclick="homeClose();" style="background:#004a2a;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;">🚀 Mulai Latihan Tryout</button>'
@@ -5403,6 +5483,8 @@ function selesaiTes() {
   state.testFinished[pkgKey()] = true;
   // B11: Komet progres seluruh paket sekaligus HANYA saat selesai tes
   commitPackageProgressOnFinish(state.currentSubject, state.currentPkg);
+  // B5: Invalidate & perbarui misi hari ini segera saat tes selesai
+  updateDailyMissionFromAutopsy(null, state.currentSubject, state.currentPkg);
   // FASE 3 (T3.5): simpan status finished & jawaban ke localStorage
   try {
     localStorage.setItem(examStorageKey('finished', pkgKey()), 'true');
@@ -5803,7 +5885,12 @@ async function renderAutopsiSection() {
             is_guest: true
           })
         });
-        if (aRes.ok) analyzeData = await aRes.json();
+        if (aRes.ok) {
+          analyzeData = await aRes.json();
+          if (analyzeData) {
+            updateDailyMissionFromAutopsy(analyzeData, payload.subject || payload.mapel, payload.paket || 1);
+          }
+        }
       } catch (e) {}
 
       let guestHtml = '';
@@ -5858,6 +5945,9 @@ async function renderAutopsiSection() {
     }
 
     try { localStorage.setItem('tka_last_coach', JSON.stringify(coach)); } catch (e) {}
+    if (coach) {
+      updateDailyMissionFromAutopsy(coach, payload.subject || payload.mapel, payload.paket || 1);
+    }
 
     // 1. Badge Sumber
     if (badgeStatus) {
