@@ -1003,7 +1003,7 @@ function renderHome() {
 
     return `
       <section class="stitch-section" data-subject="${k}">
-        <div class="stitch-sec-head">
+        <div class="stitch-sec-head" style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
           <div class="stitch-sec-title">
             <span class="stitch-iconchip stitch-iconchip--${meta.theme}"><span class="ms-icon">${meta.icon}</span></span>
             <div>
@@ -1011,16 +1011,35 @@ function renderHome() {
               <span class="stitch-sec-sub">${meta.category}</span>
             </div>
           </div>
+          <a href="/ruang/${k}" class="stitch-btn-ruang" style="display:inline-flex;align-items:center;gap:5px;background:#f0fdf4;border:1px solid #bbf7d0;color:#004a2a;padding:5px 10px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none;"><span class="material-symbols-outlined" style="font-size:14px;color:#059669;">smart_toy</span>Ruang ${meta.shortName}</a>
         </div>
         <div class="stitch-cards">${cards}</div>
       </section>`;
   }).join('');
 
+  // B12: Quick access chips untuk Ruang AI per Mapel
+  const aiRoomsChips = selectedKeys.map(k => {
+    const meta = SUBJECT_UI_META[k] || { shortName: k };
+    return `<a href="/ruang/${k}" class="stitch-ai-chip" style="display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:999px;background:#ffffff;border:1px solid #bbf7d0;color:#004a2a;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;box-shadow:0 1px 3px rgba(0,74,42,0.06);"><span class="material-symbols-outlined" style="font-size:15px;color:#059669;">smart_toy</span><span>Ruang ${meta.shortName}</span></a>`;
+  }).join('');
+
+  const aiRoomsBarHtml = `
+    <div id="aiRoomsBar" style="margin:0 0 14px;padding:12px 14px;background:linear-gradient(135deg,#f0fdf4 0%,#ffffff 100%);border:1px solid #bbf7d0;border-radius:14px;box-shadow:0 2px 8px rgba(0,74,42,0.04);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <span style="font-size:12px;font-weight:800;color:#064e3b;display:flex;align-items:center;gap:6px;"><span class="material-symbols-outlined" style="font-size:17px;color:#059669;">forum</span>Ruang AI per Mapel</span>
+        <span style="font-size:11px;color:#047857;font-weight:600;">Konsultasi Materi</span>
+      </div>
+      <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+        ${aiRoomsChips}
+      </div>
+    </div>
+  `;
+
   // FASE 5 (T5.2, T5.3): kartu countdown + misi di atas daftar mapel
   // B6: Banner ajakan login tamu di Beranda (disimpan di sessionStorage saat ditutup)
   const guestBannerHtml = getGuestLoginBannerHtml();
   const tkaCardsHtml = getTkaCardsHtml();
-  main.innerHTML = guestBannerHtml + tkaCardsHtml + `
+  main.innerHTML = guestBannerHtml + tkaCardsHtml + aiRoomsBarHtml + `
     <div class="stitch-mapel-header">
       <div class="stitch-mapel-header-left">
         <span class="stitch-mapel-header-title">Mapel Pilihanmu</span>

@@ -683,19 +683,52 @@
     }
 
     function updateWelcomeMessage(ctx) {
-      const disp = ctx.display_name || 'Mata Pelajaran ini';
+      const disp = ctx.display_name || currentMapelSlug.replace(/_/g, ' ').toUpperCase();
       const weak = (ctx.topik_terlemah || [])[0] || 'materi utama';
       const total = ctx.total_soal || 0;
       const acc = ctx.akurasi || 0;
 
       let msg = '';
+      const chipsEl = document.getElementById('quickChips');
       if (total > 0) {
         msg = `Berdasarkan rekam jejakmu, kamu sudah menyelesaikan <strong>${total} butir soal</strong> dengan akurasi <strong>${acc}%</strong>. ` +
               `Fokus utama kita saat ini adalah menguatkan topik <strong>${weak}</strong>. ` +
               `Ada materi atau pola soal yang ingin kita bedah bersama sekarang?`;
+        if (chipsEl) {
+          chipsEl.innerHTML = `
+            <button class="quick-chip" onclick="sendQuickPrompt('Bagaimana strategi paling efektif untuk menaikkan akurasi di topik terlemah saya?')">
+              <i class="fa-solid fa-bullseye" style="color: #e11d48;"></i> Strategi topik terlemah
+            </button>
+            <button class="quick-chip" onclick="sendQuickPrompt('Bahas dan analisis 5 soal terakhir yang salah saya kerjakan!')">
+              <i class="fa-solid fa-magnifying-glass" style="color: #1b633e;"></i> Bedah 5 salah terakhir
+            </button>
+            <button class="quick-chip" onclick="sendQuickPrompt('Bagaimana cara mengatasi pola kesalahan saya agar tidak terulang?')">
+              <i class="fa-solid fa-stopwatch" style="color: #d97706;"></i> Evaluasi pola kesalahan
+            </button>
+            <button class="quick-chip" onclick="sendQuickPrompt('Berikan 1 contoh soal konsep beserta trik pengerjaannya.')">
+              <i class="fa-solid fa-lightbulb" style="color: #2563eb;"></i> Contoh soal & trik konsep
+            </button>
+          `;
+        }
       } else {
-        msg = `Selamat datang! Di ruang ini, aku akan menganalisis setiap performa latihanmu di <strong>${disp}</strong>. ` +
-              `Kamu bisa menanyakan konsep, trik cepat, atau strategi belajar. Apa yang ingin kamu pelajari hari ini?`;
+        msg = `Selamat datang! Di ruang ini, aku adalah asisten AI pribadimu untuk mata pelajaran <strong>${disp}</strong>. ` +
+              `Kamu bisa menanyakan konsep materi, trik pengerjaan cepat, bedah rumus, atau langsung mencoba pemanasan soal bersama!`;
+        if (chipsEl) {
+          chipsEl.innerHTML = `
+            <button class="quick-chip" onclick="sendQuickPrompt('Jelaskan materi dan konsep penting yang paling sering keluar di ${disp}!')">
+              <i class="fa-solid fa-lightbulb" style="color: #2563eb;"></i> Konsep sering keluar
+            </button>
+            <button class="quick-chip" onclick="sendQuickPrompt('Berikan ringkasan rumus dan trik cepat pengerjaan soal ${disp}.')">
+              <i class="fa-solid fa-bolt" style="color: #d97706;"></i> Rumus & trik cepat
+            </button>
+            <button class="quick-chip" onclick="sendQuickPrompt('Berikan 1 contoh soal latihan dan bimbing aku cara menjawabnya.')">
+              <i class="fa-solid fa-brain" style="color: #059669;"></i> 1 Soal pemanasan
+            </button>
+            <a class="quick-chip" href="/app" style="text-decoration:none;display:inline-flex;align-items:center;color:inherit;">
+              <i class="fa-solid fa-play" style="color: #1b633e;"></i> Mulai Latihan Paket 1
+            </a>
+          `;
+        }
       }
       document.getElementById('welcomeGreeting').innerHTML = msg;
     }
@@ -709,7 +742,7 @@
       document.getElementById('valWaktu').innerText = '0s / soal';
       document.getElementById('valKuat').innerText = 'Belum ada';
       document.getElementById('txtPola').innerText = 'Mulai kerjakan tryout untuk mengaktifkan analisis performa.';
-      document.getElementById('welcomeGreeting').innerText = `Selamat datang di Ruang ${disp}. Tanyakan apa saja seputar materi ini!`;
+      updateWelcomeMessage({ display_name: disp, total_soal: 0 });
     }
 
     // Kirim Pesan Cepat dari Chip Saran

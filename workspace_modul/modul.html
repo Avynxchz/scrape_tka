@@ -728,6 +728,12 @@ button:active { transform: scale(0.97); }
           '</button>' +
         '</div>';
 
+    var aiRoomButton =
+      '<a href="/ruang/' + s.key + '" target="_top" class="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-brand-emerald-light/60 hover:bg-brand-emerald-light text-primary font-label-md text-label-md font-bold border border-primary/20 transition-colors" style="text-decoration:none;">' +
+        '<span class="material-symbols-outlined text-[16px]">smart_toy</span>' +
+        '<span>Ruang AI ' + s.nama + '</span>' +
+      '</a>';
+
     return (
       '<article class="bg-surface-card rounded-2xl border border-border-subtle shadow-sm p-4 md:p-5 flex flex-col gap-3 lift" ' +
         'data-card data-nama="' + (s.nama + ' ' + s.key.split('_').join(' ')).toLowerCase() + '">' +
@@ -742,6 +748,7 @@ button:active { transform: scale(0.97); }
         '</div>' +
         prog +
         actionButtons +
+        aiRoomButton +
       '</article>'
     );
   }
