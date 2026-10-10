@@ -1093,7 +1093,8 @@ function showStartPackageConfirmModal(subject, pkg) {
   const meta = SUBJECT_CATALOG[subject] || {};
   const subjName = meta.name || subject;
   const count = (typeof homePkgCount === 'function' ? homePkgCount(subject, _pendingStartPackage.pkg) : 20) || 20;
-  // FASE 3 (T3.4): kuis wajib login — hasil tryout tersimpan di akun untuk Autopsi.
+  // FASE 3 (T3.4): kuis direkomendasikan login — hasil tryout tersimpan di akun untuk Autopsi.
+  let _bguest = document.getElementById('btnConfirmStartGuest');
   if (typeof _isLoggedIn === 'function' && !_isLoggedIn()) {
     _pendingStartPackage = { subject, pkg: parseInt(pkg || 1, 10) };
     const _t = document.getElementById('startMapelTitle');
@@ -1101,11 +1102,31 @@ function showStartPackageConfirmModal(subject, pkg) {
     const _b = document.getElementById('btnConfirmStartMapel');
     const _m = document.getElementById('modalKonfirmasiMulaiMapel');
     if (_t) _t.innerText = 'Login dulu yuk';
-    if (_d) _d.innerHTML = 'Mulai Fase 3, hasil tryout tersimpan di akunmu untuk dianalisis (<strong>Autopsi</strong>).<br><br>Login dengan Google — gratis, 10 detik.';
-    if (_b) { _b.innerHTML = 'Login dengan Google'; _b.onclick = function() { try { closeStartPackageModal(); if (typeof loginWithGoogle === 'function') loginWithGoogle(); } catch (e) {} }; }
+    if (_d) _d.innerHTML = 'Hasil tryout dapat tersimpan di akunmu untuk dianalisis (<strong>Autopsi Belajar</strong>).<br><br>Login dengan Google — gratis &amp; cepat.<br><span style="display:inline-block;margin-top:6px;font-size:12px;color:#6b7280;">Atau coba dulu sebagai Tamu (dapat diklaim setelah selesai kuis).</span>';
+    if (_b) { 
+      _b.innerHTML = '<i class="fa-brands fa-google"></i> Login Google'; 
+      _b.onclick = function() { try { closeStartPackageModal(); if (typeof loginWithGoogle === 'function') loginWithGoogle(); } catch (e) {} }; 
+    }
+    if (!_bguest && _m) {
+      const actions = _m.querySelector('.finish-actions');
+      if (actions) {
+        _bguest = document.createElement('button');
+        _bguest.id = 'btnConfirmStartGuest';
+        _bguest.className = 'btn-finish';
+        _bguest.type = 'button';
+        _bguest.style.cssText = 'flex: 1; background: #f3f4f6; color: #374151; font-size: 13px; font-weight: 600; border: 1px solid #d1d5db; border-radius: 10px; cursor: pointer; padding: 10px 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;';
+        _bguest.innerHTML = '<i class="fa-solid fa-user"></i> Coba Tamu';
+        actions.appendChild(_bguest);
+      }
+    }
+    if (_bguest) {
+      _bguest.style.display = 'inline-flex';
+      _bguest.onclick = function() { executeStartPackage(); };
+    }
     if (_m) { _m.classList.add('open'); if (window.TKAHistory) TKAHistory.push('modal-start'); }
     return;
   }
+  if (_bguest) _bguest.style.display = 'none';
   // Kembalikan tombol ke fungsi semula (setelah pernah jadi tombol login)
   const _b0 = document.getElementById('btnConfirmStartMapel');
   if (_b0) { _b0.innerHTML = '<i class="fa-solid fa-play"></i> Mulai Sekarang'; _b0.onclick = function() { executeStartPackage(); }; }
@@ -1505,6 +1526,7 @@ async function loadPackageData(pkgNum) {
   const key = pkgKey(pkgNum);
   if (state.pkgData[key]) return;
   const subject = SUBJECT_CATALOG[state.currentSubject];
+  if (!subject || !subject.json || !subject.json[pkgNum]) return;
   try {
     const res = await fetch(`${subject.json[pkgNum]}?t=${Date.now()}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1567,7 +1589,11 @@ async function switchSubject(subjectKey) {
   state.currentIndex = 0;
   state.explanationVisible = false;
 
-  await Promise.all([loadPackageData(1), loadPackageData(2)]);
+  const loads = [loadPackageData(1)];
+  if (SUBJECT_CATALOG[subjectKey]?.json?.[2]) {
+    loads.push(loadPackageData(2));
+  }
+  await Promise.all(loads);
 
   document.getElementById('subjectSelect').value = subjectKey;
   updateSubjectUI();

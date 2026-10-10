@@ -26,7 +26,7 @@
               Simulasi TKA Pusmendik yang terintregasikan AI Tutor didalamnya.<br>Data soal diambil langsung dari TKA SIMULASI yang Pusmendik sebarkan.</p>
 </div>
 <div class="flex flex-wrap items-center gap-space-sm pt-space-xs">
-<button class="inline-flex items-center justify-center gap-space-xs px-space-lg py-3 rounded-xl bg-on-primary text-primary font-label-lg text-label-lg shadow-md hover:bg-surface-bright transition-all transform active:scale-95 group" type="button">
+<button id="deskHeroStartBtn" class="inline-flex items-center justify-center gap-space-xs px-space-lg py-3 rounded-xl bg-on-primary text-primary font-label-lg text-label-lg shadow-md hover:bg-surface-bright transition-all transform active:scale-95 group cursor-pointer" type="button">
 <span class="">Mulai Sekarang</span>
 <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
 </button>
@@ -1055,14 +1055,10 @@
     var sections = document.querySelectorAll('.subject-section');
     sections.forEach(function (sec) {
       var s = sec.getAttribute('data-subject');
-      var cat = sec.getAttribute('data-category');
-      var isChosen = chosen.indexOf(s) !== -1;
-      if (!isChosen) {
-        sec.style.display = 'none';
-        return;
-      }
+      var cat = (sec.getAttribute('data-category') || '').toLowerCase();
       if (category === 'all' || category === 'semua' || category === 'semua mapel') {
-        sec.style.display = 'flex';
+        var isChosen = chosen.indexOf(s) !== -1;
+        sec.style.display = isChosen ? 'flex' : 'none';
       } else if (category.indexOf('wajib') !== -1 && cat === 'wajib') {
         sec.style.display = 'flex';
       } else if (category.indexOf('saintek') !== -1 && cat === 'saintek') {
@@ -1142,16 +1138,20 @@
   document.querySelectorAll('main button[type="button"]').forEach(function (btn) {
     var labelSpan = btn.querySelector('span:not(.material-symbols-outlined)');
     var label = labelSpan ? labelSpan.textContent.trim() : '';
-    if (label === 'Mulai Sekarang') {
+    if (label === 'Mulai Sekarang' || btn.id === 'deskHeroStartBtn') {
       btn.addEventListener('click', function () {
-        var card = document.querySelector('main section .grid > div.relative[data-subject]');
-        if (card) { card.click(); return; }
-        var first = BRIDGE._list && BRIDGE._list[0];
-        BRIDGE.send({
-          type: 'open-package',
-          subject: first ? first.subject : 'matematika',
-          pkg: first ? first.pkg : 1
-        });
+        var targetSection = document.getElementById('filterChips') || document.querySelector('.subject-section');
+        if (targetSection) {
+          targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          var card = document.querySelector('.subject-section .grid > div.relative[data-subject]');
+          if (card) { card.click(); return; }
+          BRIDGE.send({
+            type: 'open-package',
+            subject: 'matematika',
+            pkg: 1
+          });
+        }
       });
     } else if (label === 'Login' || label === 'Keluar' || btn.id === 'deskHeroLoginBtn') {
       btn.addEventListener('click', function () {
