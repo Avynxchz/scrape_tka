@@ -1499,6 +1499,33 @@ function salinWA() {
             except Exception as e:
                 return self._send_500(e, "/api/swarm/subjects")
 
+        # BUG-001 (Tugas D): Ambil progress belajar user dari Supabase
+        if self.path.split('?', 1)[0] == '/api/user/progress':
+            try:
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[7:] if _auth.startswith('Bearer ') else ''
+                if not _token:
+                    return self._send_json(401, {"status": "unauthorized"})
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok:
+                    return self._send_json(401, {"status": "unauthorized"})
+                user_id = _user['id']
+                sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+                sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+                req = urllib.request.Request(
+                    sb_url + "/rest/v1/users?id=eq." + user_id + "&select=progress,tka_date",
+                    headers={"apikey": sb_key, "Authorization": "Bearer " + _token})
+                with urllib.request.urlopen(req, timeout=10) as resp:
+                    rows = json.loads(resp.read().decode('utf-8') or '[]')
+                row = rows[0] if rows else {}
+                return self._send_json(200, {
+                    "status": "success",
+                    "progress": row.get("progress") or {},
+                    "tka_date": row.get("tka_date")
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/user/progress")
+
         # Dashboard pengunjung (khusus server utama / bukan demo publik)
         if self.path.split('?', 1)[0] in ADMIN_VISITOR_PATHS:
             if PUBLIC_DEMO:
@@ -2185,7 +2212,35 @@ function salinWA() {
                 payload = json.loads(post_data) if post_data else {}
             except Exception:
                 payload = {}
-            return self._handle_admin_autopsy_full(payload=payload)
+        elif self.path == '/api/user/progress':
+            # BUG-001 (Tugas D): simpan progress belajar user ke Supabase.
+            try:
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[7:] if _auth.startswith('Bearer ') else ''
+                if not _token:
+                    return self._send_json(401, {"status": "unauthorized"})
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok:
+                    return self._send_json(401, {"status": "unauthorized"})
+                user_id = _user['id']
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+                payload = json.loads(post_data) if post_data else {}
+                progress_data = payload.get('progress')
+                if not isinstance(progress_data, dict):
+                    return self._send_json(400, {"status": "error", "message": "Format progress harus JSON object."})
+                sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+                sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+                req = urllib.request.Request(
+                    sb_url + "/rest/v1/users?id=eq." + user_id,
+                    data=json.dumps({"progress": progress_data}).encode('utf-8'), method="PATCH",
+                    headers={"apikey": sb_key, "Authorization": "Bearer " + _token,
+                             "Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=10):
+                    pass
+                return self._send_json(200, {"status": "success"})
+            except Exception as e:
+                return self._send_500(e, "/api/user/progress")
 
         elif self.path == '/api/user/tka_date':
             # FASE 5 (T5.3): simpan tanggal TKA user.

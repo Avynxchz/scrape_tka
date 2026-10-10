@@ -270,6 +270,56 @@ const SUBJECT_CATALOG = {
       2: 'data/bahasa_korea/paket_2/'
     },
     welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Korea</strong>. Masih bingung dengan hangeul, partikel, tata bahasa (munbeop), atau pemahaman bacaan pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  teknik_mesin: {
+    name: 'SMK - Teknik Mesin',
+    json: {
+      1: 'data/teknik_mesin_paket_1_learning.json'
+    },
+    imgBase: {
+      1: 'data/teknik_mesin/paket_1/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Teknik Mesin</strong>. Ada kendala dalam memahami prinsip pemesinan, K3 bengkel, toleransi suaian, atau material teknik di soal ini? Tanyakan langsung di bawah ya!`
+  },
+  teknik_otomotif: {
+    name: 'SMK - Teknik Otomotif (TKR)',
+    json: {
+      1: 'data/teknik_otomotif_paket_1_learning.json'
+    },
+    imgBase: {
+      1: 'data/teknik_otomotif/paket_1/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Teknik Otomotif</strong>. Butuh penjelasan mengenai sistem kelistrikan bodi, mesin kendaraan ringan, chasis, atau perawatan otomotif? Tanyakan langsung di bawah ya!`
+  },
+  teknik_jaringan: {
+    name: 'SMK - Teknik Jaringan & Telekomunikasi (TKJ)',
+    json: {
+      1: 'data/teknik_jaringan_paket_1_learning.json'
+    },
+    imgBase: {
+      1: 'data/teknik_jaringan/paket_1/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Teknik Jaringan Komputer & Telekomunikasi (TKJ)</strong>. Bingung dengan subnetting, routing, konfigurasi mikrotik/cisco, atau transmisi fiber optik? Tanyakan langsung di bawah ya!`
+  },
+  akuntansi: {
+    name: 'SMK - Akuntansi & Keuangan Lembaga',
+    json: {
+      1: 'data/akuntansi_paket_1_learning.json'
+    },
+    imgBase: {
+      1: 'data/akuntansi/paket_1/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Akuntansi & Keuangan Lembaga</strong>. Ada pertanyaan seputar jurnal penyesuaian, buku besar, neraca lajur, atau laporan keuangan? Tanyakan langsung di bawah ya!`
+  },
+  manajemen_perkantoran: {
+    name: 'SMK - Manajemen Perkantoran & Layanan Bisnis (MPLB)',
+    json: {
+      1: 'data/manajemen_perkantoran_paket_1_learning.json'
+    },
+    imgBase: {
+      1: 'data/manajemen_perkantoran/paket_1/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Manajemen Perkantoran & Layanan Bisnis (MPLB)</strong>. Butuh bantuan memahami tata kelola administrasi surat, kearsipan elektronik, atau etika pelayanan kantor? Tanyakan langsung di bawah ya!`
   }
 };
 
@@ -378,6 +428,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Layar pertama: Home dashboard (kecuali langsung diarahkan ke soal via #soal-N)
   if (window.__homeFirst) homeOpen();
+  try { syncProgressWithServer(); } catch (e) {}
 });
 // 22 Mata Pelajaran TKA Master — Meta UI, Ikon Unik Material Symbols, & Tema Warna Harmonis
 const SUBJECT_UI_META = {
@@ -468,6 +519,26 @@ const SUBJECT_UI_META = {
   bahasa_korea: {
     name: 'Bahasa Korea', shortName: 'B. Korea', chip: 'B. KOREA',
     icon: 'stars', theme: 'pink', category: 'Bahasa Asing'
+  },
+  teknik_mesin: {
+    name: 'SMK - Teknik Mesin', shortName: 'Teknik Mesin', chip: 'MESIN',
+    icon: 'build', theme: 'slate', category: 'Kejuruan SMK'
+  },
+  teknik_otomotif: {
+    name: 'SMK - Teknik Otomotif (TKR)', shortName: 'Teknik Otomotif', chip: 'OTOMOTIF',
+    icon: 'directions_car', theme: 'amber', category: 'Kejuruan SMK'
+  },
+  teknik_jaringan: {
+    name: 'SMK - Teknik Jaringan & Telekomunikasi (TKJ)', shortName: 'TKJ', chip: 'TKJ',
+    icon: 'router', theme: 'cyan', category: 'Kejuruan SMK'
+  },
+  akuntansi: {
+    name: 'SMK - Akuntansi & Keuangan Lembaga', shortName: 'Akuntansi (AKL)', chip: 'AKUNTANSI',
+    icon: 'account_balance', theme: 'teal', category: 'Kejuruan SMK'
+  },
+  manajemen_perkantoran: {
+    name: 'SMK - Manajemen Perkantoran & Layanan Bisnis (MPLB)', shortName: 'MPLB', chip: 'MPLB',
+    icon: 'business_center', theme: 'indigo', category: 'Kejuruan SMK'
   }
 };
 window.SUBJECT_UI_META = SUBJECT_UI_META;
@@ -520,7 +591,12 @@ const STATIC_SOAL_COUNTS = {
   bahasa_jerman: { 1: 10, 2: 29 },
   bahasa_prancis: { 1: 10, 2: 29 },
   bahasa_mandarin: { 1: 10, 2: 29 },
-  bahasa_korea: { 1: 10, 2: 29 }
+  bahasa_korea: { 1: 10, 2: 29 },
+  teknik_mesin: { 1: 6 },
+  teknik_otomotif: { 1: 6 },
+  teknik_jaringan: { 1: 6 },
+  akuntansi: { 1: 6 },
+  manajemen_perkantoran: { 1: 6 }
 };
 const HOME_SOAL_COUNTS = Object.assign({}, STATIC_SOAL_COUNTS);
 
@@ -662,7 +738,7 @@ function getTkaCardsHtml() {
       + '<div><div style="font-size:12px;opacity:0.9">Tanggal TKA kamu</div>'
       + '<div style="font-size:22px;font-weight:800">' + label + '</div></div>'
       + '<label style="font-size:12px;display:flex;align-items:center;gap:8px">Ubah: '
-      + '<input type="date" min="2026-10-26" max="2026-11-29" value="' + tka + '" '
+      + '<input type="date" min="2026-10-10" max="2026-11-29" value="' + tka + '" '
       + 'style="padding:6px 8px;border-radius:8px;border:0;font-size:13px" onchange="setTkaDate(this.value);renderHome()">'
       + '</label></div></div>';
     // Misi hari ini
@@ -726,7 +802,8 @@ function renderHome() {
       category: 'Mapel'
     };
     const wm = HOME_WATERMARKS[k] || HOME_WATERMARKS._default;
-    const cards = [1, 2].map(pkg => {
+    const availablePkgs = SUBJECT_CATALOG[k] && SUBJECT_CATALOG[k].json ? Object.keys(SUBJECT_CATALOG[k].json).map(Number) : [1, 2];
+    const cards = availablePkgs.map(pkg => {
       const n = homePkgCount(k, pkg);
       const total = n || 20;
       const pct = homePkgProgress(k, pkg, total);
@@ -2339,8 +2416,74 @@ function persistAnswerProgress(q) {
     store[subject][pkg] = store[subject][pkg] || {};
     store[subject][pkg][q.nomor] = { kunci: q.kunci_jawaban, benar };
     localStorage.setItem('tka_progress', JSON.stringify(store));
+    scheduleSyncProgressToServer();
   } catch (e) { /* localStorage gagal: jangan ganggu UI */ }
 }
+
+let _progressSyncTimer = null;
+function scheduleSyncProgressToServer() {
+  if (_progressSyncTimer) clearTimeout(_progressSyncTimer);
+  _progressSyncTimer = setTimeout(() => {
+    saveProgressToServer();
+  }, 1200);
+}
+
+async function saveProgressToServer() {
+  try {
+    if (typeof _attemptAuthHeader !== 'function') return;
+    const hdr = await _attemptAuthHeader();
+    if (!hdr.Authorization) return;
+    const store = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+    await fetch('/api/user/progress', {
+      method: 'POST',
+      headers: Object.assign({ 'Content-Type': 'application/json' }, hdr),
+      body: JSON.stringify({ progress: store })
+    });
+  } catch (e) {}
+}
+
+async function syncProgressWithServer() {
+  try {
+    if (typeof _attemptAuthHeader !== 'function') return;
+    const hdr = await _attemptAuthHeader();
+    if (!hdr.Authorization) return;
+    const res = await fetch('/api/user/progress', {
+      headers: hdr
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.status === 'success') {
+      const serverProgress = data.progress || {};
+      const localProgress = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+      
+      // Deep merge local dan server progress
+      const merged = Object.assign({}, localProgress);
+      for (const [sub, pkgs] of Object.entries(serverProgress)) {
+        if (!merged[sub]) merged[sub] = {};
+        for (const [pkgNo, questions] of Object.entries(pkgs)) {
+          if (!merged[sub][pkgNo]) merged[sub][pkgNo] = {};
+          for (const [qNo, qVal] of Object.entries(questions)) {
+            if (!merged[sub][pkgNo][qNo]) {
+              merged[sub][pkgNo][qNo] = qVal;
+            }
+          }
+        }
+      }
+      localStorage.setItem('tka_progress', JSON.stringify(merged));
+      
+      if (data.tka_date && !localStorage.getItem('tka_date')) {
+        localStorage.setItem('tka_date', data.tka_date);
+      }
+      
+      if (typeof renderHome === 'function') renderHome();
+      saveProgressToServer();
+    }
+  } catch (e) {
+    console.warn("syncProgressWithServer failed:", e);
+  }
+}
+window.syncProgressWithServer = syncProgressWithServer;
+window.addEventListener('tka-login', () => { syncProgressWithServer(); });
 
 // ==================== SOAL PERNYATAAN (Benar/Salah & Pernyataan-Label) ====================
 

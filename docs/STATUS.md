@@ -16,21 +16,29 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 - **Terbukti:** T2.1 gzip aset statis (app.js 220KB → 57KB, style.css 155KB → 28KB); T2.5/T2.7 salinan landing & FAQ jujur (tanpa klaim durasi palsu); T2.11 verifikasi JWT Supabase di server (`auth_verify.py`); T2.4 kuota utuh saat gagal-kirim terbukti di kode & server (`consume_user_quota` hanya dipanggil saat LLM berhasil); T2.6 tombol & modal "Lapor Bug" terpasang di mobile overflow menu & desktop bar dengan penyimpanan fallback lokal (`/api/bug-reports`) dan Supabase table `bug_reports`.
 - **Utang:** T2.10 penentuan kebijakan provider AI (menunggu Agus); error monitoring Sentry.
 
-### FASE 3: 95% (SELESAI-TERVERIFIKASI)
-- **Terbukti:** Skema `attempts` + `feature_flags` di Supabase (migrasi 003); AttemptRecorder di `app.js`; endpoint `POST /api/attempts` verifikasi JWT dengan idempotency via client_attempt_id; T3.4 klaim hasil tamu setelah login via Google OAuth & kartu alert dengan tombol "Klaim ke Akun Google"; T3.5 pemulihan kuis setelah refresh/tab tertutup (`tka_answers_<key>`, `tka_ragu_<key>`, `tka_finished_<key>`); sinkronisasi antrean otomatis saat event `online` dan event `tka-login`; BUG-002 login persistent terverifikasi.
-- **Utang:** BUG-001 (progress sync desktop-mobile — Tugas D, menunggu Agus eksekusi SQL migrasi 005).
+### FASE 3: 100% (SELESAI-TERVERIFIKASI)
+- **Terbukti:** Skema `attempts` + `feature_flags` di Supabase (migrasi 003); AttemptRecorder di `app.js`; endpoint `POST /api/attempts` verifikasi JWT dengan idempotency via client_attempt_id; T3.4 klaim hasil tamu setelah login via Google OAuth & kartu alert dengan tombol "Klaim ke Akun Google"; T3.5 pemulihan kuis setelah refresh/tab tertutup (`tka_answers_<key>`, `tka_ragu_<key>`, `tka_finished_<key>`); sinkronisasi antrean otomatis saat event `online` dan event `tka-login`; BUG-002 login persistent terverifikasi; **BUG-001 (Tugas D) sync progress desktop-mobile dua arah terverifikasi (Supabase kolom users.progress via GET/POST /api/user/progress)**.
+
+### KEJURUAN SMK: 100% LIVE (5 JURUSAN UTAMA)
+- **Terbukti:** 5 mapel kejuruan SMK di sekolah Agus berhasil di-scrape lengkap dengan kunci jawaban otoritatif resmi Pusmendik:
+  1. `SMK - Teknik Mesin` (`teknik_mesin_paket_1` - 6 soal, val: 33)
+  2. `SMK - Teknik Otomotif` (TKR) (`teknik_otomotif_paket_1` - 6 soal, val: 34)
+  3. `SMK - Teknik Jaringan dan Telekomunikasi` (TKJ) (`teknik_jaringan_paket_1` - 6 soal, val: 49)
+  4. `SMK - Akuntansi dan Keuangan Lembaga` (AKL) (`akuntansi_paket_1` - 6 soal, val: 66)
+  5. `SMK - Manajemen Perkantoran dan Layanan Bisnis` (MPLB) (`manajemen_perkantoran_paket_1` - 6 soal, val: 65)
+- **UI/UX:** Terdaftar di `MASTER_CATALOG`, `SUBJECT_CATALOG`, dan `SUBJECT_UI_META` kategori `"Kejuruan SMK"`. Modal "Atur Mapel" menampilkan ikon glyph rapi. Kartu Beranda menyajikan Paket 1 (6 Soal) dan langsung dapat dibuka di HP 390x844.
 
 ### FASE 4: 100% (SELESAI-TERVERIFIKASI)
 - **Terbukti:** `autopsy/analyzer.py` (9 label prioritas, 2 flag, kebocoran top-3) + `autopsy/planner.py` (jadwal belajar deterministik hingga H-1) lulus tes otomatis 20/20 di `tests/test_autopsy.py` (8 persona uji sesuai harapan). Kartu materi statis di `content/cards/`.
 
 ### FASE 5: 98% (SELESAI — menunggu Gate A)
-- **Terbukti:** T5.1 `POST /api/autopsy/analyze` + render UI Autopsi preview (kebocoran #1 terbuka, #2-3 terkunci blur); T5.2 kartu "Misi hari ini"; T5.3 kartu hitung mundur tanggal TKA; T5.4 halaman `/admin/autopsi` & `/api/admin/autopsy_full` dengan proteksi header `X-Admin-Key` dan POST body (Tugas F SELESAI-TERVERIFIKASI); BUG-009 kartu Beranda selalu tampil terverifikasi; BUG-003 layout Autopsi overflow diperbaiki rapi dengan scroll internal terverifikasi di layar HP 390x844.
+- **Terbukti:** T5.1 `POST /api/autopsy/analyze` + render UI Autopsi preview (kebocoran #1 terbuka, #2-3 terkunci blur); T5.2 kartu "Misi hari ini"; T5.3 kartu hitung mundur tanggal TKA (min date disesuaikan ke 10 Okt untuk Gladi Bersih SMK 12 Okt); T5.4 halaman `/admin/autopsi` & `/api/admin/autopsy_full` dengan proteksi header `X-Admin-Key` dan POST body (Tugas F SELESAI-TERVERIFIKASI); BUG-009 kartu Beranda selalu tampil terverifikasi; BUG-003 layout Autopsi overflow diperbaiki rapi dengan scroll internal terverifikasi di layar HP 390x844.
 - **Utang:** Gate A (demo ke 5 orang asing) menunggu verifikasi Agus.
 
 ---
 
 ## Daftar Bug & Status Verifikasi
-- **BUG-001:** Progress desktop 0% (Tugas D — menunggu Agus jalankan SQL migrasi 005 di Supabase).
+- **BUG-001:** Progress desktop 0% padahal HP sudah ngisi (SELESAI-TERVERIFIKASI — Tugas D: Kolom users.progress di Supabase, endpoint GET/POST /api/user/progress, auto-sync debounce di frontend).
 - **BUG-002:** Login tidak persistent (SELESAI-TERVERIFIKASI — Tugas E: OAuth hash dilindungi dari replaceState, validasi token saat restore, auto-clean hash).
 - **BUG-003:** Layout Autopsi overflow di HP 390x844 (SELESAI-TERVERIFIKASI — Tugas C).
 - **BUG-004:** URL routing tidak jelas (backlog setelah 26 Okt).
@@ -73,6 +81,8 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 ---
 
 ## Langkah Berikutnya
-1. **Prioritas Tambahan (SQL 006):** Menunggu Agus mengeksekusi SQL di Supabase.
-2. **Tugas C, E, F, G:** SEMUA SELESAI & TERVERIFIKASI di branch `dev`.
-3. **Tugas D:** Lanjut pembuatan endpoint sync progress (BUG-001) segera setelah Agus konfirmasi eksekusi SQL migrasi 005 & 006.
+1. **Prioritas Tambahan (SQL 005 & 006):** SELESAI dijalankan oleh Mas Agus ("Success. No rows returned").
+2. **Tugas D (BUG-001):** SELESAI-TERVERIFIKASI (sinkronisasi progress antar-device dua arah via Supabase).
+3. **Scraping Kejuruan SMK:** SELESAI-TERVERIFIKASI (5 jurusan utama SMK resmi live di CBT dan Beranda).
+4. **Tugas C, E, F, G:** SEMUA SELESAI & TERVERIFIKASI di branch `dev`.
+5. **Siap untuk Review:** Claude Sonnet 5.5 aktif kembali pada pukul 07:50 WIB untuk audit/review komprehensif.

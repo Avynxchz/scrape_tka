@@ -201,11 +201,31 @@ MASTER_CATALOG = {
     # =========================================================================
     "kewirausahaan_paket_1": {
         "slug": "kewirausahaan_paket_1", "mapel_key": "kewirausahaan", "paket": 1, "prefix": "pkk",
-        "name": "Kewirausahaan / PKK (Paket 1)", "jenis": "2", "val": "23", "kategori": "Kejuruan"
+        "name": "Kewirausahaan / PKK (Paket 1)", "jenis": "2", "val": "23", "kategori": "Kejuruan SMK"
     },
     "kewirausahaan_paket_2": {
         "slug": "kewirausahaan_paket_2", "mapel_key": "kewirausahaan", "paket": 2, "prefix": "pkk",
-        "name": "Kewirausahaan / PKK (Paket 2)", "jenis": "2", "val": "103", "kategori": "Kejuruan"
+        "name": "Kewirausahaan / PKK (Paket 2)", "jenis": "2", "val": "103", "kategori": "Kejuruan SMK"
+    },
+    "teknik_mesin_paket_1": {
+        "slug": "teknik_mesin_paket_1", "mapel_key": "teknik_mesin", "paket": 1, "prefix": "tms",
+        "name": "SMK - Teknik Mesin", "jenis": "2", "val": "33", "kategori": "Kejuruan SMK"
+    },
+    "teknik_otomotif_paket_1": {
+        "slug": "teknik_otomotif_paket_1", "mapel_key": "teknik_otomotif", "paket": 1, "prefix": "tot",
+        "name": "SMK - Teknik Otomotif", "jenis": "2", "val": "34", "kategori": "Kejuruan SMK"
+    },
+    "teknik_jaringan_paket_1": {
+        "slug": "teknik_jaringan_paket_1", "mapel_key": "teknik_jaringan", "paket": 1, "prefix": "tkj",
+        "name": "SMK - Teknik Jaringan dan Telekomunikasi", "jenis": "2", "val": "49", "kategori": "Kejuruan SMK"
+    },
+    "akuntansi_paket_1": {
+        "slug": "akuntansi_paket_1", "mapel_key": "akuntansi", "paket": 1, "prefix": "akl",
+        "name": "SMK - Akuntansi dan Keuangan Lembaga", "jenis": "2", "val": "66", "kategori": "Kejuruan SMK"
+    },
+    "manajemen_perkantoran_paket_1": {
+        "slug": "manajemen_perkantoran_paket_1", "mapel_key": "manajemen_perkantoran", "paket": 1, "prefix": "mplb",
+        "name": "SMK - Manajemen Perkantoran dan Layanan Bisnis", "jenis": "2", "val": "65", "kategori": "Kejuruan SMK"
     }
 }
 

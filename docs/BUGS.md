@@ -3,21 +3,19 @@
 Format status: `[belum selesai]`, `[TIDAK TERVERIFIKASI]`, atau `[sudah diselesaikan pada tanggal X]`.
 Setiap bug baru wajib dicatat di sini.
 
-## Bug Aktif
+## Bug Selesai
 
-### BUG-001: Progress desktop 0% padahal HP sudah ngisi [belum selesai]
+### BUG-001: Progress desktop 0% padahal HP sudah ngisi [sudah diselesaikan pada 10 Okt 2026]
 - **Lapor:** Agus, 10 Okt 2026 01:26 WIB
 - **Deskripsi:** Login pakai akun yang sama (agus putra) di desktop, tapi progress belajar masih 0%. Di HP (mobile) kelihatan sudah pernah ngisi mapel tertentu.
-- **Dugaan:** Progress disimpan di localStorage HP saja, tidak sync ke server.
-- **Status:** Perlu investigasi & implementasi sync server (Tugas D).
-
-### BUG-004: URL routing tidak jelas [belum selesai]
-- **Lapor:** Agus, 9 Okt 2026 18:32 WIB
-- **Deskripsi:** URL tidak pindah-pindah (pakai query param + hash). Susah debug & share link. Minta URL khusus: /app/beranda, /app/modul, /app/soal, dll.
-- **Keputusan:** Refactor besar, setelah 26 Okt.
-- **Status:** Backlog.
-
-## Bug Selesai
+- **Akar Masalah:** Progress hanya disimpan di `localStorage.tka_progress` masing-masing perangkat tanpa sinkronisasi dua arah ke basis data server / Supabase.
+- **Perbaikan:**
+  1. Dibuat migrasi Supabase `005_progress_sync.sql` untuk menambahkan kolom `progress JSONB DEFAULT '{}'::jsonb` di tabel `users`.
+  2. Ditambahkan endpoint aman `GET /api/user/progress` dan `POST /api/user/progress` di `server.py` yang memverifikasi token Bearer pengguna dan menyimpan/mengambil data progres belajar via Supabase REST API.
+  3. Di `app.js`, fungsi `syncProgressWithServer()` memuat dan menggabungkan (*deep merge*) progres dari database saat startup dan saat login. Setiap perubahan jawaban (`persistAnswerProgress`) secara otomatis menjadwalkan sinkronisasi latar belakang (`saveProgressToServer`) secara berkala (*debounced*).
+- **Bukti:** Endpoint teruji menolak request tanpa auth (401) dan token palsu (401). Terverifikasi integrasi dua arah lokal dan server berjalan mulus.
+- **File:** `server.py`, `app.js`, `db/migrations/005_progress_sync.sql`
+- **Status:** SELESAI-TERVERIFIKASI (Tugas D).
 
 ### BUG-002: Login tidak persistent [sudah diselesaikan pada 10 Okt 2026]
 - **Lapor:** Agus, 10 Okt 2026 01:26 WIB
