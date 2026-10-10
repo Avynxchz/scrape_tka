@@ -5363,160 +5363,439 @@ function renderReviewHasil() {
   try { renderAutopsiSection(); } catch (e) { console.warn('Autopsi:', e); }
 }
 
-// FASE 5 (T5.1): Ambil analisis Autopsi dari server dan tampilkan.
-// Kebocoran #1 terbuka lengkap; #2-3 terkunci (blur) untuk non-pass.
+// FASE A6: UI Layar Hasil Guru Autopsi (Mobile-first, ringan di HP murah)
+// Sesuai Spesifikasi Bagian 8:
+// 1. Skor ringkas + judul "Guru Autopsi — dianalisis dari cara kamu mengerjakan"
+// 2. "Yang saya lihat": butir pengamatan (nomor soal, detik, pergantian opsi)
+// 3. "Yang perlu diperbaiki": kartu kebocoran (judul, bukti, tafsir, tindakan) + tombol "Latihan sekarang"
+//    (Paywall OFF total: semua kebocoran terbuka tanpa blur)
+// 4. "Soal yang salah, satu per satu": akordeon per_soal (penyebab, dipelajari, langkah, cek paham) + tombol Buka Pembahasan & Tanya AI
+// 5. Misi hari ini: tombol utama satu-satunya yang menonjol "Mulai Misi (±10 menit)"
+// 6. Rencana sampai TKA: terlipat + input "Kapan TKA-mu?" + hitung mundur H-n
+// 7. Catatan disclaimer AI
 async function renderAutopsiSection() {
-  // Cari container atau buat baru (diletakkan DI BAWAH tabel agar nomor & kunci tidak tertutup)
   let cont = document.getElementById('autopsiSection');
   if (!cont) {
     cont = document.createElement('div');
     cont.id = 'autopsiSection';
     const overlay = document.getElementById('reviewHasilOverlay');
-    const tableWrap = overlay.querySelector('.review-table-wrap') || overlay.querySelector('table');
-    if (tableWrap) {
-      tableWrap.after(cont);
-    } else {
-      overlay.appendChild(cont);
+    const summary = overlay ? overlay.querySelector('.review-summary') : null;
+    if (summary) {
+      summary.after(cont);
+    } else if (overlay) {
+      const tableWrap = overlay.querySelector('.review-table-wrap') || overlay.querySelector('table');
+      if (tableWrap) tableWrap.before(cont);
+      else overlay.appendChild(cont);
     }
   }
+  if (!cont) return;
+
   cont.innerHTML = '';
   cont.style.display = 'none';
 
   try {
-    // Ambil attempt terakhir dari antrean atau yang baru selesai
     const q = (typeof AttemptQueue !== 'undefined') ? AttemptQueue.all() : [];
-    // Cari attempt yang baru saja selesai (atau pakai data dari state)
-    let payload = null;
-    if (window._lastFinishedAttempt) {
-      payload = window._lastFinishedAttempt;
-    } else if (q.length > 0) {
-      payload = q[q.length - 1];
-    }
+    let payload = window._lastFinishedAttempt || (q.length > 0 ? q[q.length - 1] : null);
     if (!payload || !payload.items || !payload.items.length) {
       cont.innerHTML = '';
       cont.style.display = 'none';
       return;
     }
-    // Dapatkan token
+
     let hdr = {};
     if (typeof _attemptAuthHeader === 'function') {
       try { hdr = await _attemptAuthHeader(); } catch (e) {}
     }
-    const isFounder = (localStorage.getItem('tka_founder_mode') === '1');
     const isGuest = !hdr.Authorization;
 
+    // FASE 1: Tampilkan langsung UI dasar (< 1 detik)
     cont.style.display = 'block';
-    cont.innerHTML = '<div style="text-align:center;padding:12px;color:#6b7280;font-size:12px"><i class="fa-solid fa-spinner fa-spin"></i> Memuat analisis Autopsi...</div>';
-    
+    const tkaDateCurrent = (typeof getTkaDate === 'function') ? getTkaDate() : '2026-10-26';
+
+    const calcHMin = (targetDateStr) => {
+      try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const parts = targetDateStr.split('-');
+        const target = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+        const diffDays = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+        return diffDays;
+      } catch (e) { return 16; }
+    };
+
+    let diffHari = calcHMin(tkaDateCurrent);
+
+    let baseHtml = `
+      <div class="autopsy-widget" style="margin:16px 0;padding:16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;font-family:inherit">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <h3 style="font-size:16px;font-weight:800;margin:0;color:#0f172a">🔍 Guru Autopsi</h3>
+            <span id="coachBadgeStatus" style="font-size:11px;background:#e2e8f0;color:#475569;padding:2px 8px;border-radius:20px;font-weight:700">Memuat analisis...</span>
+          </div>
+          <span style="font-size:11px;color:#64748b;font-weight:600">Tryout TKA Master</span>
+        </div>
+        <p style="font-size:12px;color:#64748b;margin:0 0 12px;line-height:1.4">Dianalisis dari caramu mengerjakan: ritme waktu, urutan klik, dan pergantian jawaban.</p>
+        <div id="coachContentArea">
+          <div style="padding:16px;background:#ffffff;border:1px dashed #cbd5e1;border-radius:12px;text-align:center;color:#64748b;font-size:12.5px;">
+            <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;color:#004a2a"></i> Menelaah pola pengerjaanmu...
+          </div>
+        </div>
+      </div>
+    `;
+    cont.innerHTML = baseHtml;
+
+    // FASE 2: Panggil API Guru Autopsi (/api/autopsy/coach)
     const reqBody = {
-      items: payload.items,
-      n_questions: payload.n_questions,
-      duration_limit_s: payload.duration_limit_s,
-      ended_by: payload.ended_by,
-      mapel: payload.subject || payload.mapel,
-      is_guest: isGuest,
-      founder_mode: isFounder
+      attempt_id: payload.id || payload.client_attempt_id,
+      attempt: Object.assign({}, payload, { tka_date: tkaDateCurrent })
     };
 
-    const res = await fetch('/api/autopsy/analyze', {
-      method: 'POST',
-      headers: Object.assign({'Content-Type': 'application/json'}, hdr),
-      body: JSON.stringify(reqBody)
-    });
-    if (!res.ok) {
-      cont.innerHTML = '';
-      return;
-    }
-    const d = await res.json();
-    if (d.status !== 'success') {
-      cont.innerHTML = '';
-      return;
-    }
-    // Simpan untuk "Misi hari ini" (T5.2)
-    try { localStorage.setItem('tka_last_autopsy', JSON.stringify(d)); } catch (e) {}
-    // Render Autopsi
-    const labelNama = {
-      'terburu': 'Terburu-buru',
-      'overthinking': 'Overthinking (plin-plan)',
-      'macet': 'Macet (terlalu lama)',
-      'yakin_salah': 'Yakin tapi salah',
-      'ragu_salah': 'Ragu-ragu dan salah',
-      'ragu_benar': 'Ragu tapi benar (rapuh)',
-      'waktu_habis': 'Kehabisan waktu',
-      'kosong': 'Dikosongkan'
-    };
-    let h = '<div class="autopsy-widget" style="margin:16px 0;padding:14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px">';
-    h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:6px">'
-      + '<div style="display:flex;align-items:center;gap:8px;">'
-      + '<h3 style="font-size:15px;font-weight:800;margin:0;color:#0f172a">🔍 Autopsi Tryout</h3>'
-      + (d.is_founder ? '<span style="font-size:10.5px;background:#fef3c7;color:#92400e;border:1px solid #fde68a;padding:2px 8px;border-radius:6px;font-weight:700">👑 Founder Mode</span>' : '')
-      + '</div>'
-      + '<span style="font-size:11px;background:#e2e8f0;color:#475569;padding:3px 8px;border-radius:6px;font-weight:700">Pola Pengerjaan Siswa</span>'
-      + '</div>';
-    h += '<p style="font-size:12px;color:#64748b;margin:0 0 10px;line-height:1.4">Pola perilaku ini yang membuat nilaimu bocor, bukan sekadar angka akhir.</p>';
-    if (d.data_tipis) {
-      h += '<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:8px">ℹ️ Jumlah soal yang dikerjakan masih sedikit, jadi anggap ini gambaran awal.</div>';
-    }
-    // Container scroll internal agar tidak overflow di layar HP
-    h += '<div class="autopsy-scroll-wrap" style="max-height:300px;overflow-y:auto;padding-right:4px;-webkit-overflow-scrolling:touch">';
-    // Kebocoran #1 (terbuka)
-    const k1 = d.kebocoran_1;
-    if (k1) {
-      const cthId = (k1.contoh && k1.contoh[0]) ? String(k1.contoh[0]) : '';
-      h += '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:12px 14px;margin-bottom:10px">';
-      h += '<div style="font-size:11px;font-weight:800;color:#15803d;text-transform:uppercase;margin-bottom:4px;letter-spacing:0.04em">Kebocoran #1 (Terbuka Lengkap)</div>';
-      h += '<div style="font-size:14.5px;font-weight:800;margin-bottom:4px;color:#14532d">' + (labelNama[k1.label] || k1.label) + '</div>';
-      h += '<div style="font-size:12.5px;color:#374151;margin-bottom:8px;line-height:1.45">' + (k1.bukti || '') + '</div>';
-      if (k1.contoh && k1.contoh.length) {
-        h += '<div style="font-size:11.5px;color:#6b7280;margin-bottom:10px">Contoh soal: <strong>' + k1.contoh.slice(0,3).join(', ') + '</strong></div>';
+    let coachData = null;
+    try {
+      const coachRes = await fetch('/api/autopsy/coach', {
+        method: 'POST',
+        headers: Object.assign({'Content-Type': 'application/json'}, hdr),
+        body: JSON.stringify(reqBody)
+      });
+      if (coachRes.ok) {
+        coachData = await coachRes.json();
+      } else if (coachRes.status === 401) {
+        // Mode Tamu: Tampilkan fallback aturan + ajakan login Google
+        coachData = { is_guest: true };
       }
-      h += `<button type="button" onclick="bukaKartuStrategi('${k1.label}', '${cthId}')" style="background:#004a2a;color:#fff;border:0;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">📚 Pelajari Strategi</button>`;
-      h += '</div>';
+    } catch (err) {
+      console.warn('Gagal memanggil /api/autopsy/coach:', err);
     }
 
-    // Jika Mode Founder: Tampilkan seluruh kebocoran yang terbuka
-    if (d.is_founder && Array.isArray(d.kebocoran_all) && d.kebocoran_all.length > 1) {
-      d.kebocoran_all.slice(1).forEach((k, idx) => {
-        const cthId = (k.contoh && k.contoh[0]) ? String(k.contoh[0]) : '';
-        h += '<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 14px;margin-bottom:10px">';
-        h += '<div style="font-size:11px;font-weight:800;color:#1d4ed8;text-transform:uppercase;margin-bottom:4px">Kebocoran #' + (idx+2) + ' (Founder Mode)</div>';
-        h += '<div style="font-size:14px;font-weight:800;margin-bottom:4px;color:#1e40af">' + (labelNama[k.label] || k.label) + '</div>';
-        h += '<div style="font-size:12px;color:#374151;margin-bottom:6px">' + (k.bukti || (k.soal_hilang + ' soal terpengaruh')) + '</div>';
-        h += `<button type="button" onclick="bukaKartuStrategi('${k.label}', '${cthId}')" style="background:#1d4ed8;color:#fff;border:0;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer">📚 Pelajari</button>`;
-        h += '</div>';
-      });
-    } else {
-      // Kebocoran #2-3 (terkunci dengan blur ringan)
-      (d.kebocoran_locked || []).forEach((k, idx) => {
-        h += '<div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px 14px;margin-bottom:10px;position:relative;overflow:hidden">';
-        h += '<div style="filter:blur(4px);user-select:none;pointer-events:none">';
-        h += '<div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:3px">Kebocoran #' + (idx+2) + '</div>';
-        h += '<div style="font-size:13px;font-weight:700;margin-bottom:3px">' + (labelNama[k.label] || k.label) + '</div>';
-        h += '<div style="font-size:12px;color:#374151">' + k.soal_hilang + ' soal terpengaruh</div>';
-        h += '</div>';
-        h += '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.78);">';
-        h += '<span style="font-size:12px;font-weight:700;color:#004a2a;background:#e8f5e9;padding:6px 14px;border-radius:20px;border:1px solid #c8e6c9;">🔒 Buka dengan Paket Sprint</span>';
-        h += '</div></div>';
-      });
+    const contentArea = document.getElementById('coachContentArea');
+    const badgeStatus = document.getElementById('coachBadgeStatus');
+    if (!contentArea) return;
+
+    // Jika mode Tamu
+    if (isGuest || (coachData && coachData.is_guest)) {
+      if (badgeStatus) {
+        badgeStatus.innerText = 'Mode Tamu';
+        badgeStatus.style.background = '#ffedd5';
+        badgeStatus.style.color = '#9a3412';
+      }
+
+      // Ambil analisis kebocoran aturan gratis dari /api/autopsy/analyze
+      let analyzeData = null;
+      try {
+        const aRes = await fetch('/api/autopsy/analyze', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            items: payload.items,
+            n_questions: payload.n_questions,
+            duration_limit_s: payload.duration_limit_s,
+            ended_by: payload.ended_by,
+            mapel: payload.subject || payload.mapel,
+            is_guest: true
+          })
+        });
+        if (aRes.ok) analyzeData = await aRes.json();
+      } catch (e) {}
+
+      let guestHtml = '';
+      if (analyzeData && analyzeData.data_tipis) {
+        guestHtml += '<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:10px;color:#92400e">ℹ️ Jumlah soal yang dikerjakan masih sedikit, jadi anggap analisis ini sebagai gambaran awal.</div>';
+      }
+
+      // Kebocoran berbasis aturan (100% terbuka tanpa blur)
+      const allLeaks = (analyzeData && (analyzeData.kebocoran_all || (analyzeData.kebocoran_1 ? [analyzeData.kebocoran_1] : []))) || [];
+      if (allLeaks.length > 0) {
+        guestHtml += '<div style="margin-bottom:12px"><h4 style="font-size:13px;font-weight:800;color:#0f172a;margin:0 0 8px;">⚠️ Kebocoran Pola Terdeteksi</h4>';
+        allLeaks.forEach((k, idx) => {
+          guestHtml += `
+            <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;padding:11px 13px;margin-bottom:8px">
+              <div style="font-size:11px;font-weight:800;color:#0284c7;text-transform:uppercase;margin-bottom:3px">Kebocoran #${idx + 1}: ${k.label}</div>
+              <div style="font-size:12.5px;color:#334155;line-height:1.4">${k.bukti || (k.soal_hilang + ' soal terpengaruh')}</div>
+            </div>
+          `;
+        });
+        guestHtml += '</div>';
+      }
+
+      // Ajakan Login Google untuk Guru AI gratis
+      guestHtml += `
+        <div style="padding:14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;text-align:center">
+          <div style="font-size:13.5px;font-weight:800;color:#9a3412;margin-bottom:4px">Buka Guru Autopsi AI Privat (Gratis)</div>
+          <p style="font-size:12px;color:#7c2d12;margin:0 0 10px;line-height:1.4">Login Google untuk melihat analisis waktu per soal, telaah Guru AI, dan misi perbaikan 10 menit hari ini.</p>
+          <button type="button" onclick="loginWithGoogle()" style="background:#c2410c;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12.5px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px">
+            <i class="fa-brands fa-google"></i> Masuk dengan Google
+          </button>
+        </div>
+      `;
+      contentArea.innerHTML = guestHtml;
+      return;
     }
 
-    h += '</div>'; // Tutup autopsy-scroll-wrap
-    if (d.rapuh_count > 0) {
-      h += '<div style="font-size:11.5px;color:#64748b;text-align:center;margin-top:8px">💡 <strong>' + d.rapuh_count + ' soal</strong> kamu jawab benar tapi ditandai ragu-ragu (perlu pemantapan).</div>';
+    // Mode User Login: Render Spesifikasi Lengkap Bagian 8
+    const coach = (coachData && coachData.coach) || null;
+    if (!coach) {
+      contentArea.innerHTML = '<div style="font-size:12px;color:#64748b;text-align:center;padding:12px">Analisis Guru AI belum dapat dimuat saat ini.</div>';
+      return;
     }
 
-    // Ajakan jika akun tamu (Funnel pendaftaran gratis)
-    if (d.is_guest) {
-      h += '<div style="margin-top:12px;padding:10px 14px;background:#fff7ed;border:1px solid #ffedd5;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">'
-        + '<div style="font-size:11.5px;color:#9a3412;line-height:1.4"><strong>Mode Tamu:</strong> Masuk dengan Google untuk menyimpan hasil ini dan mengunci progres belajar harianmu!</div>'
-        + '<button type="button" onclick="loginWithGoogle()" style="background:#c2410c;color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;">Masuk Sekarang</button>'
-        + '</div>';
+    try { localStorage.setItem('tka_last_coach', JSON.stringify(coach)); } catch (e) {}
+
+    // 1. Badge Sumber
+    if (badgeStatus) {
+      if (coach.sumber === 'ai') {
+        badgeStatus.innerText = '✨ Guru AI';
+        badgeStatus.style.background = '#dcfce7';
+        badgeStatus.style.color = '#15803d';
+      } else {
+        badgeStatus.innerText = '⚡ Analisis otomatis';
+        badgeStatus.style.background = '#f1f5f9';
+        badgeStatus.style.color = '#475569';
+      }
     }
 
-    h += '</div>';
-    cont.innerHTML = h;
+    let h = '';
+
+    // Catatan data tipis jika ada
+    if (coach.catatan_data) {
+      h += `<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:10px;color:#92400e">ℹ️ ${coach.catatan_data}</div>`;
+    }
+
+    // Sapaan & Penilaian
+    h += `
+      <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px;margin-bottom:12px">
+        <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:4px">${coach.sapaan || 'Halo,'}</div>
+        <div style="font-size:12.5px;color:#334155;line-height:1.45">${coach.penilaian || ''}</div>
+        ${coach.sudah_bagus ? `
+          <div style="margin-top:8px;padding-top:8px;border-top:1px dashed #e2e8f0;font-size:12px;color:#166534;display:flex;align-items:flex-start;gap:6px">
+            <span>⭐</span> <span><strong>Sudah bagus:</strong> ${coach.sudah_bagus}</span>
+          </div>
+        ` : ''}
+      </div>
+    `;
+
+    // 2. "Yang Saya Lihat" (Pengamatan)
+    if (Array.isArray(coach.pengamatan) && coach.pengamatan.length > 0) {
+      h += `
+        <div style="margin-bottom:14px">
+          <h4 style="font-size:13px;font-weight:800;color:#0f172a;margin:0 0 8px;display:flex;align-items:center;gap:6px">
+            <span>👀</span> Yang Saya Lihat
+          </h4>
+          <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px">
+            <ul style="margin:0;padding-left:18px;font-size:12.5px;color:#334155;line-height:1.5">
+              ${coach.pengamatan.map(p => `<li style="margin-bottom:4px">${p}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      `;
+    }
+
+    // 3. "Yang Perlu Diperbaiki" (Kartu Kebocoran - 100% Unlocked)
+    if (Array.isArray(coach.kebocoran) && coach.kebocoran.length > 0) {
+      h += `
+        <div style="margin-bottom:14px">
+          <h4 style="font-size:13px;font-weight:800;color:#0f172a;margin:0 0 8px;display:flex;align-items:center;gap:6px">
+            <span>⚠️</span> Yang Perlu Diperbaiki
+          </h4>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            ${coach.kebocoran.map((k, idx) => `
+              <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px">
+                  <span style="font-size:13.5px;font-weight:800;color:#0f172a">${k.judul || k.label}</span>
+                  <span style="font-size:10px;background:#fef2f2;color:#991b1b;border:1px solid #fee2e2;padding:2px 6px;border-radius:6px;font-weight:700;text-transform:uppercase">Kebocoran #${idx + 1}</span>
+                </div>
+                <div style="font-size:12px;color:#64748b;margin-bottom:6px"><strong>Bukti:</strong> ${k.bukti || '-'}</div>
+                <div style="font-size:12.5px;color:#334155;margin-bottom:6px;line-height:1.4"><strong>Tafsir:</strong> ${k.tafsir || '-'}</div>
+                <div style="font-size:12px;color:#004a2a;background:#f0fdf4;padding:6px 10px;border-radius:6px;margin-bottom:8px"><strong>Tindakan:</strong> ${k.tindakan || '-'}</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <button type="button" onclick="bukaKartuStrategi('${k.label}')" style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;border-radius:6px;padding:5px 10px;font-size:11.5px;font-weight:700;cursor:pointer">
+                    📚 Pelajari Strategi
+                  </button>
+                  <button type="button" onclick="mulaiMisiHariIni()" style="background:#004a2a;color:#ffffff;border:none;border-radius:6px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer">
+                    🎯 Latihan Sekarang
+                  </button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // 4. "Soal yang Salah, Satu per Satu" (Akordeon Per Soal)
+    if (Array.isArray(coach.per_soal) && coach.per_soal.length > 0) {
+      const penyebabBadge = {
+        'overthinking': { label: 'Overthinking', bg: '#f3e8ff', color: '#6b21a8' },
+        'terburu': { label: 'Terburu-buru', bg: '#fef3c7', color: '#92400e' },
+        'konsep': { label: 'Konsep Belum Kuat', bg: '#fee2e2', color: '#991b1b' },
+        'rapuh': { label: 'Ragu Tapi Benar', bg: '#e0f2fe', color: '#0369a1' },
+        'macet': { label: 'Macet Waktu', bg: '#ffedd5', color: '#9a3412' },
+        'kosong': { label: 'Dikosongkan', bg: '#f1f5f9', color: '#475569' }
+      };
+
+      h += `
+        <div style="margin-bottom:14px">
+          <h4 style="font-size:13px;font-weight:800;color:#0f172a;margin:0 0 8px;display:flex;align-items:center;gap:6px">
+            <span>📝</span> Soal yang Perlu Dibenahi (${coach.per_soal.length} Soal)
+          </h4>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            ${coach.per_soal.map((ps, idx) => {
+              const b = penyebabBadge[ps.penyebab] || { label: ps.penyebab, bg: '#f1f5f9', color: '#334155' };
+              const accId = `acc_soal_${ps.no}`;
+              const isDefaultOpen = (idx === 0);
+              return `
+                <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+                  <div onclick="toggleAutopsiAccordion('${accId}')" style="padding:10px 14px;background:#ffffff;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none">
+                    <div style="display:flex;align-items:center;gap:8px">
+                      <span style="font-size:13px;font-weight:800;color:#0f172a">Soal #${ps.no}</span>
+                      <span style="font-size:10.5px;background:${b.bg};color:${b.color};padding:2px 7px;border-radius:6px;font-weight:700">${b.label}</span>
+                    </div>
+                    <span style="font-size:12px;color:#94a3b8">▼</span>
+                  </div>
+                  <div id="${accId}" style="display:${isDefaultOpen ? 'block' : 'none'};padding:12px 14px;border-top:1px solid #f1f5f9;background:#fafafa">
+                    <div style="font-size:12px;color:#0f172a;margin-bottom:6px"><strong>Yang dipelajari:</strong> ${ps.dipelajari}</div>
+                    ${Array.isArray(ps.langkah) && ps.langkah.length > 0 ? `
+                      <div style="font-size:12px;color:#334155;margin-bottom:6px">
+                        <strong>Langkah perbaikan:</strong>
+                        <ol style="margin:4px 0 0;padding-left:18px">
+                          ${ps.langkah.map(l => `<li style="margin-bottom:2px">${l}</li>`).join('')}
+                        </ol>
+                      </div>
+                    ` : ''}
+                    ${ps.cek_paham ? `
+                      <div style="font-size:11.5px;color:#0369a1;background:#f0f9ff;border:1px solid #e0f2fe;padding:6px 10px;border-radius:6px;margin-bottom:8px">
+                        <strong>Cek pemahaman:</strong> ${ps.cek_paham}
+                      </div>
+                    ` : ''}
+                    <div style="display:flex;gap:8px;flex-wrap:wrap">
+                      <button type="button" onclick="reviewJumpTo(${ps.no - 1})" style="background:#004a2a;color:#ffffff;border:none;border-radius:6px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer">
+                        📖 Buka Pembahasan
+                      </button>
+                      <button type="button" onclick="tanyaAiSoalIni(${ps.no})" style="background:#f8fafc;color:#0f172a;border:1px solid #cbd5e1;border-radius:6px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer">
+                        💬 Tanya AI Soal Ini
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // 5. Misi Hari Ini (Tombol Utama Satu-satunya yang Menonjol)
+    if (coach.misi) {
+      h += `
+        <div style="margin:16px 0;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:14px">
+          <div style="font-size:13.5px;font-weight:800;color:#14532d;margin-bottom:4px">🎯 Misi 10 Menit Hari Ini</div>
+          <div style="font-size:12.5px;color:#166534;margin-bottom:12px;line-height:1.4">${coach.misi.pembuka || 'Fokus perbaiki kebocoran utamamu sekarang.'}</div>
+          <button type="button" class="btn-misi-utama" onclick="mulaiMisiHariIni()" style="width:100%;background:#004a2a;color:#ffffff;padding:12px 18px;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 10px rgba(0,74,42,0.2);display:flex;align-items:center;justify-content:center;gap:8px">
+            🚀 Mulai Misi (±10 menit)
+          </button>
+        </div>
+      `;
+    }
+
+    // 6. Rencana Sampai TKA (Terlipat / Akordeon)
+    h += `
+      <div style="margin-bottom:14px;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden">
+        <div onclick="toggleAutopsiAccordion('acc_rencana_tka')" style="padding:11px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;background:#f8fafc">
+          <div style="font-size:13px;font-weight:800;color:#0f172a;display:flex;align-items:center;gap:6px">
+            <span>📅</span> Rencana Sampai TKA
+          </div>
+          <span style="font-size:12px;color:#94a3b8">▼</span>
+        </div>
+        <div id="acc_rencana_tka" style="display:none;padding:12px 14px;border-top:1px solid #e2e8f0">
+          <div style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+            <label style="font-size:12px;font-weight:700;color:#334155">Kapan TKA-mu?</label>
+            <input type="date" value="${tkaDateCurrent}" onchange="onTkaDateChangeInReview(this.value)" style="font-size:12px;padding:4px 8px;border:1px solid #cbd5e1;border-radius:6px;color:#0f172a" />
+          </div>
+          <div id="reviewTkaCountdownText" style="font-size:12px;color:#004a2a;background:#f0fdf4;padding:6px 10px;border-radius:6px;margin-bottom:8px;font-weight:600">
+            ${diffHari > 0 ? `Tersisa ${diffHari} hari lagi menuju ujian TKA.` : 'Hari ujian TKA telah tiba!'}
+          </div>
+          ${Array.isArray(coach.rencana) && coach.rencana.length > 0 ? `
+            <div style="display:flex;flex-direction:column;gap:6px">
+              ${coach.rencana.map(r => `
+                <div style="font-size:12px;color:#334155;padding:6px 8px;background:#fafafa;border-radius:6px">
+                  <strong>Hari ke-${r.hari_ke}:</strong> ${r.pembuka || ''}
+                </div>
+              `).join('')}
+            </div>
+          ` : `
+            <div style="font-size:11.5px;color:#64748b">Jadwal latihan harianmu akan disusun bertahap sesuai misi yang selesai.</div>
+          `}
+        </div>
+      </div>
+    `;
+
+    // Penutup & Catatan Kecil
+    if (coach.penutup) {
+      h += `<div style="font-size:12px;font-style:italic;color:#475569;text-align:center;margin:10px 0">${coach.penutup}</div>`;
+    }
+
+    h += `
+      <div style="font-size:11px;color:#94a3b8;margin-top:12px;text-align:center;line-height:1.4">
+        Dibuat AI dari data pengerjaanmu; bisa keliru. Cek Pilar dan kunci resmi.
+      </div>
+    `;
+
+    contentArea.innerHTML = h;
+
   } catch (e) {
-    cont.innerHTML = '';
+    console.warn('Error renderAutopsiSection:', e);
+    if (cont) cont.innerHTML = '';
+  }
+}
+
+// Helper: Toggle akordeon autopsi
+function toggleAutopsiAccordion(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+  }
+}
+
+// Helper: Update tanggal TKA dari reviu hasil kuis
+function onTkaDateChangeInReview(val) {
+  if (typeof setTkaDate === 'function') setTkaDate(val);
+  const el = document.getElementById('reviewTkaCountdownText');
+  if (el) {
+    try {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const parts = val.split('-');
+      const target = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+      const diff = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+      el.innerText = diff > 0 ? `Tersisa ${diff} hari lagi menuju ujian TKA.` : 'Hari ujian TKA telah tiba!';
+    } catch (e) {}
+  }
+}
+
+// Helper: Tanya AI soal nomor tertentu dari Guru Autopsi
+function tanyaAiSoalIni(no) {
+  if (typeof closeReviewHasil === 'function') closeReviewHasil();
+  const pkg = state.pkgData[pkgKey()];
+  if (!pkg || !pkg.soal) return;
+  const idx = pkg.soal.findIndex(s => s.nomor === no);
+  state.currentIndex = (idx !== -1) ? idx : (no - 1);
+  state.explanationVisible = true;
+  state.keepWorkTab = true;
+  if (typeof renderQuestion === 'function') renderQuestion();
+  const tutorCol = document.getElementById('cbtSidebarCol');
+  if (tutorCol) tutorCol.classList.add('tutor-open');
+  if (typeof openTutorSheet === 'function') openTutorSheet();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Helper: Mulai misi 10 menit hari ini
+function mulaiMisiHariIni() {
+  if (typeof closeReviewHasil === 'function') closeReviewHasil();
+  try {
+    const lastCoach = JSON.parse(localStorage.getItem('tka_last_coach') || '{}');
+    const fokusNo = (lastCoach.per_soal && lastCoach.per_soal[0] && lastCoach.per_soal[0].no) || 1;
+    if (typeof reviewJumpTo === 'function') reviewJumpTo(fokusNo - 1);
+  } catch (e) {
+    if (typeof reviewJumpTo === 'function') reviewJumpTo(0);
   }
 }
 

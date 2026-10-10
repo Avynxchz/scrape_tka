@@ -2493,40 +2493,22 @@ function salinWA() {
                 }
                 # Jika klien kirim is_correct, pakai itu (preview). Server akan validasi ulang via kunci di Fase 6+.
                 result = autopsy_analyzer.analyze(attempt_data)
-                keb = result.get('kebocoran') or []
-                
-                # Mode Founder/Admin: Buka semua kebocoran tanpa terkunci
-                if is_admin:
-                    preview = {
-                        'status': 'success',
-                        'preview': False,
-                        'is_guest': False,
-                        'is_founder': True,
-                        'n_questions': result.get('n_questions'),
-                        'n_answered': result.get('n_answered'),
-                        'n_correct': result.get('n_correct'),
-                        'data_tipis': result.get('data_tipis'),
-                        'kebocoran_1': keb[0] if keb else None,
-                        'kebocoran_all': keb,
-                        'kebocoran_locked': [],
-                        'rapuh_count': len(result.get('rapuh_ids') or []),
-                        'topik_prioritas': result.get('topik_prioritas') or [],
-                    }
-                else:
-                    # Preview gratis (Tamu / Pengguna biasa): kebocoran #1 lengkap, #2-3 terkunci
-                    preview = {
-                        'status': 'success',
-                        'preview': True,
-                        'is_guest': is_guest,
-                        'is_founder': False,
-                        'n_questions': result.get('n_questions'),
-                        'n_answered': result.get('n_answered'),
-                        'n_correct': result.get('n_correct'),
-                        'data_tipis': result.get('data_tipis'),
-                        'kebocoran_1': keb[0] if keb else None,
-                        'kebocoran_locked': [{'label': k.get('label'), 'soal_hilang': k.get('soal_hilang')} for k in keb[1:3]],
-                        'rapuh_count': len(result.get('rapuh_ids') or []),
-                    }
+                # Kebocoran dibuka semua (Paywall OFF sesuai keputusan produk)
+                preview = {
+                    'status': 'success',
+                    'preview': False,
+                    'is_guest': is_guest,
+                    'is_founder': is_admin,
+                    'n_questions': result.get('n_questions'),
+                    'n_answered': result.get('n_answered'),
+                    'n_correct': result.get('n_correct'),
+                    'data_tipis': result.get('data_tipis'),
+                    'kebocoran_1': keb[0] if keb else None,
+                    'kebocoran_all': keb,
+                    'kebocoran_locked': [],
+                    'rapuh_count': len(result.get('rapuh_ids') or []),
+                    'topik_prioritas': result.get('topik_prioritas') or [],
+                }
                 return self._send_json(200, preview)
             except Exception as e:
                 return self._send_500(e, "/api/autopsy/analyze")
