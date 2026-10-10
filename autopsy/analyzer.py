@@ -98,7 +98,7 @@ def _bukti(label, n, jatah_ms, cfg):
     if label == "waktu_habis":
         return f"{n} soal tidak sempat dikerjakan (waktu habis)"
     if label == "kosong":
-        return f"{n} soal dikosongkan"
+        return f"{n} soal belum terjawab"
     return f"{n} soal berlabel {label}"
 
 

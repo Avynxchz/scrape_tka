@@ -755,7 +755,7 @@ function getTkaCardsHtml() {
       const last = JSON.parse(localStorage.getItem('tka_last_autopsy') || 'null');
       if (last && last.kebocoran_1) misi = last.kebocoran_1;
     } catch (e) {}
-    const labelNama = {'terburu':'Terburu-buru','overthinking':'Overthinking','macet':'Macet','yakin_salah':'Yakin tapi salah','ragu_salah':'Ragu-ragu dan salah','waktu_habis':'Kehabisan waktu','kosong':'Dikosongkan'};
+    const labelNama = {'terburu':'Terburu-buru','overthinking':'Overthinking','macet':'Macet','yakin_salah':'Yakin tapi salah','ragu_salah':'Ragu-ragu dan salah','waktu_habis':'Kehabisan waktu','kosong':'Belum terjawab'};
     if (misi) {
       const cthRef = (misi.contoh && misi.contoh[0]) ? String(misi.contoh[0]) : '';
       h += '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
@@ -2826,6 +2826,15 @@ function selectBsAnswer(stmtKey, value) {
   }
 
   renderGridModal();
+
+  // FASE 3 (T3.2): rekam jawaban BS untuk Autopsi
+  try {
+    const stmts = q.pernyataan || [];
+    if (stmts.every(st => sel[st.key])) {
+      const ansStr = stmts.map(st => `${st.key}:${sel[st.key]}`).join(',');
+      AttemptRecorder.onAnswer(q.nomor, ansStr);
+    }
+  } catch (e) {}
 
   // Persist progres nyata (kontrak tka_progress) — simpan saat semua pernyataan terjawab
   persistAnswerProgress(q);
@@ -5115,7 +5124,7 @@ function openFinishModal() {
     msg += `<br><span style="color:var(--warn);"><i class="fa-solid fa-triangle-exclamation"></i> Masih ada <strong>${ragu}</strong> soal ditandai ragu-ragu.</span>`;
   }
   if (belum > 0) {
-    msg += `<br><span style="color:var(--wrong);"><i class="fa-solid fa-circle-exclamation"></i> Ada <strong>${belum}</strong> soal yang belum dijawab.</span>`;
+    msg += `<br><span style="color:var(--wrong);"><i class="fa-solid fa-circle-exclamation"></i> Ada <strong>${belum}</strong> soal yang belum terjawab.</span>`;
   }
   msg += `<br><br>Apakah kamu yakin ingin menyelesaikan tes ini dan melihat reviu hasil nilai beserta seluruh kunci jawaban resmi TKA?`;
 
@@ -5225,10 +5234,10 @@ function renderReviewHasil() {
     if (res.type === 'bs') {
       const kunciMap = parseBsKunci(item);
       const stmts = item.pernyataan || [];
-      const hasAnyAnswer = stmts.some(st => ans && typeof ans === 'object' && !Array.isArray(ans) && ans[st.key]);
-      const allCorrect = res.perStatement.length > 0 && res.perStatement.every(s => s === 'benar');
+      const isAnswered = isQuestionAnswered(item);
+      const allCorrect = isAnswered && res.perStatement.length > 0 && res.perStatement.every(s => s === 'benar');
 
-      if (!hasAnyAnswer) {
+      if (!isAnswered) {
         kosong++;
         statusHtml = '<span class="review-status-badge badge-kosong"><i class="fa-regular fa-circle"></i> Kosong</span>';
       } else if (allCorrect) {
@@ -5657,7 +5666,7 @@ async function renderAutopsiSection() {
         'konsep': { label: 'Konsep Belum Kuat', bg: '#fee2e2', color: '#991b1b' },
         'rapuh': { label: 'Ragu Tapi Benar', bg: '#e0f2fe', color: '#0369a1' },
         'macet': { label: 'Macet Waktu', bg: '#ffedd5', color: '#9a3412' },
-        'kosong': { label: 'Dikosongkan', bg: '#f1f5f9', color: '#475569' }
+        'kosong': { label: 'Belum Terjawab', bg: '#f1f5f9', color: '#475569' }
       };
 
       h += `
