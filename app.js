@@ -1136,43 +1136,16 @@ function showStartPackageConfirmModal(subject, pkg) {
   const meta = SUBJECT_CATALOG[subject] || {};
   const subjName = meta.name || subject;
   const count = (typeof homePkgCount === 'function' ? homePkgCount(subject, _pendingStartPackage.pkg) : 20) || 20;
-  // FASE 3 (T3.4): kuis direkomendasikan login — hasil tryout tersimpan di akun untuk Autopsi.
-  let _bguest = document.getElementById('btnConfirmStartGuest');
-  if (typeof _isLoggedIn === 'function' && !_isLoggedIn()) {
-    _pendingStartPackage = { subject, pkg: parseInt(pkg || 1, 10) };
-    const _t = document.getElementById('startMapelTitle');
-    const _d = document.getElementById('startMapelDesc');
-    const _b = document.getElementById('btnConfirmStartMapel');
-    const _m = document.getElementById('modalKonfirmasiMulaiMapel');
-    if (_t) _t.innerText = 'Login dulu yuk';
-    if (_d) _d.innerHTML = 'Hasil tryout dapat tersimpan di akunmu untuk dianalisis (<strong>Autopsi Belajar</strong>).<br><br>Login dengan Google — gratis &amp; cepat.<br><span style="display:inline-block;margin-top:6px;font-size:12px;color:#6b7280;">Atau coba dulu sebagai Tamu (dapat diklaim setelah selesai kuis).</span>';
-    if (_b) { 
-      _b.innerHTML = '<i class="fa-brands fa-google"></i> Login Google'; 
-      _b.onclick = function() { try { closeStartPackageModal(); if (typeof loginWithGoogle === 'function') loginWithGoogle(); } catch (e) {} }; 
-    }
-    if (!_bguest && _m) {
-      const actions = _m.querySelector('.finish-actions');
-      if (actions) {
-        _bguest = document.createElement('button');
-        _bguest.id = 'btnConfirmStartGuest';
-        _bguest.className = 'btn-finish';
-        _bguest.type = 'button';
-        _bguest.style.cssText = 'flex: 1; background: #f3f4f6; color: #374151; font-size: 13px; font-weight: 600; border: 1px solid #d1d5db; border-radius: 10px; cursor: pointer; padding: 10px 14px; display: inline-flex; align-items: center; justify-content: center; gap: 6px;';
-        _bguest.innerHTML = '<i class="fa-solid fa-user"></i> Coba Tamu';
-        actions.appendChild(_bguest);
-      }
-    }
-    if (_bguest) {
-      _bguest.style.display = 'inline-flex';
-      _bguest.onclick = function() { executeStartPackage(); };
-    }
-    if (_m) { _m.classList.add('open'); if (window.TKAHistory) TKAHistory.push('modal-start'); }
-    return;
-  }
+  // B10: Akses Tamu Sama Rata pada Klik Mapel / Mulai Latihan
+  // Tidak ada blocking login modal bagi tamu. Keduanya (tamu & login) mendapatkan dialog konfirmasi yang identik.
+  const _bguest = document.getElementById('btnConfirmStartGuest');
   if (_bguest) _bguest.style.display = 'none';
-  // Kembalikan tombol ke fungsi semula (setelah pernah jadi tombol login)
+
   const _b0 = document.getElementById('btnConfirmStartMapel');
-  if (_b0) { _b0.innerHTML = '<i class="fa-solid fa-play"></i> Mulai Sekarang'; _b0.onclick = function() { executeStartPackage(); }; }
+  if (_b0) {
+    _b0.innerHTML = '<i class="fa-solid fa-play"></i> Mulai Sekarang';
+    _b0.onclick = function() { executeStartPackage(); };
+  }
   // T2.7: estimasi menit mengikuti timer per paket (bukan 45/50 basi)
   const _jh3 = { matematika: 3.0, bahasa_indonesia: 2.5, bahasa_inggris: 2.5 };
   const minutes = Math.round(count * (_jh3[subject] || 2.4));
