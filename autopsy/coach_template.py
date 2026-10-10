@@ -117,6 +117,7 @@ def generate_template(evidence):
             "label": lbl,
             "judul": copy["judul"][:60],
             "bukti": str(k.get("bukti") or f"{k.get('soal_hilang', 1)} soal terpengaruh")[:200],
+            "contoh": k.get("contoh") or [],
             "tafsir": copy["tafsir"][:200],
             "tindakan": copy["tindakan"][:160],
         })

@@ -5380,7 +5380,19 @@ function renderReviewHasil() {
 // 4. "Soal yang salah, satu per satu": akordeon per_soal (penyebab, dipelajari, langkah, cek paham) + tombol Buka Pembahasan & Tanya AI
 // 5. Misi hari ini: tombol utama satu-satunya yang menonjol "Mulai Misi (±10 menit)"
 // 6. Rencana sampai TKA: terlipat + input "Kapan TKA-mu?" + hitung mundur H-n
-// 7. Catatan disclaimer AI
+// Helper: Format ID mentah soal (misal "matematika:1:1", "matematika:1:3") menjadi "Soal 1, 3, 4"
+function formatContohSoal(contoh) {
+  if (!contoh) return '';
+  const arr = Array.isArray(contoh) ? contoh : [contoh];
+  const nums = arr.map(item => {
+    const s = String(item).trim();
+    const m = s.match(/:(\d+)$/) || s.match(/\d+$/);
+    return m ? (m[1] || m[0]) : s;
+  }).filter(Boolean);
+  if (nums.length === 0) return '';
+  return `Soal ${nums.join(', ')}`;
+}
+
 async function renderAutopsiSection() {
   let cont = document.getElementById('autopsiSection');
   if (!cont) {
@@ -5515,10 +5527,13 @@ async function renderAutopsiSection() {
       if (allLeaks.length > 0) {
         guestHtml += '<div style="margin-bottom:12px"><h4 style="font-size:13px;font-weight:800;color:#0f172a;margin:0 0 8px;">⚠️ Kebocoran Pola Terdeteksi</h4>';
         allLeaks.forEach((k, idx) => {
+          const contohStr = (k.contoh && k.contoh.length) ? formatContohSoal(k.contoh) : '';
+          const buktiClean = (k.bukti || (k.soal_hilang + ' soal terpengaruh')).replace(/\b[a-zA-Z0-9_-]+:\d+:(\d+)\b/g, 'Soal $1');
           guestHtml += `
             <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;padding:11px 13px;margin-bottom:8px">
               <div style="font-size:11px;font-weight:800;color:#0284c7;text-transform:uppercase;margin-bottom:3px">Kebocoran #${idx + 1}: ${k.label}</div>
-              <div style="font-size:12.5px;color:#334155;line-height:1.4">${k.bukti || (k.soal_hilang + ' soal terpengaruh')}</div>
+              <div style="font-size:12.5px;color:#334155;line-height:1.4">${buktiClean}</div>
+              ${contohStr ? `<div style="font-size:11.5px;color:#64748b;margin-top:4px">Contoh soal: <strong>${contohStr}</strong></div>` : ''}
             </div>
           `;
         });
@@ -5605,13 +5620,17 @@ async function renderAutopsiSection() {
             <span>⚠️</span> Yang Perlu Diperbaiki
           </h4>
           <div style="display:flex;flex-direction:column;gap:10px">
-            ${coach.kebocoran.map((k, idx) => `
+            ${coach.kebocoran.map((k, idx) => {
+              const contohStr = (k.contoh && k.contoh.length) ? formatContohSoal(k.contoh) : '';
+              const buktiClean = (k.bukti || '-').replace(/\b[a-zA-Z0-9_-]+:\d+:(\d+)\b/g, 'Soal $1');
+              return `
               <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px">
                   <span style="font-size:13.5px;font-weight:800;color:#0f172a">${k.judul || k.label}</span>
                   <span style="font-size:10px;background:#fef2f2;color:#991b1b;border:1px solid #fee2e2;padding:2px 6px;border-radius:6px;font-weight:700;text-transform:uppercase">Kebocoran #${idx + 1}</span>
                 </div>
-                <div style="font-size:12px;color:#64748b;margin-bottom:6px"><strong>Bukti:</strong> ${k.bukti || '-'}</div>
+                <div style="font-size:12px;color:#64748b;margin-bottom:6px"><strong>Bukti:</strong> ${buktiClean}</div>
+                ${contohStr ? `<div style="font-size:11.5px;color:#64748b;margin-bottom:6px">Contoh soal: <strong>${contohStr}</strong></div>` : ''}
                 <div style="font-size:12.5px;color:#334155;margin-bottom:6px;line-height:1.4"><strong>Tafsir:</strong> ${k.tafsir || '-'}</div>
                 <div style="font-size:12px;color:#004a2a;background:#f0fdf4;padding:6px 10px;border-radius:6px;margin-bottom:8px"><strong>Tindakan:</strong> ${k.tindakan || '-'}</div>
                 <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -5623,7 +5642,8 @@ async function renderAutopsiSection() {
                   </button>
                 </div>
               </div>
-            `).join('')}
+            `;
+            }).join('')}
           </div>
         </div>
       `;

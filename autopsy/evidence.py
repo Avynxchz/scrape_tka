@@ -151,6 +151,7 @@ def build_evidence(attempt, analysis=None, tka_date_iso="2026-10-26",
             "label": leak.get("label"),
             "soal_hilang": int(leak.get("soal_hilang") or 0),
             "bukti": leak.get("bukti", ""),
+            "contoh": leak.get("contoh") or [],
         })
 
     # Pemilihan fokus_soal (maks 8)
