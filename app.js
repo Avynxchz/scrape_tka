@@ -1582,25 +1582,23 @@ async function loadPackageData(pkgNum) {
     if (!state.raguStatus[key]) state.raguStatus[key] = {};
     if (!state.simAnswers[key]) state.simAnswers[key] = {};
     if (!state.chatHistory[key]) state.chatHistory[key] = {};
-    // FASE 3 (T3.5): Pulihkan jawaban & status ragu tersimpan jika user me-refresh tab
+    // B3 & B11: Hanya pulihkan jawaban jika tes memang berstatus selesai (tka_finished)
+    // Sesi baru yang belum selesai selalu mulai dari awal tanpa draft sisa yang mengunci soal
     try {
-      const savedAns = localStorage.getItem('tka_answers_' + key);
-      if (savedAns) state.userAnswers[key] = Object.assign({}, JSON.parse(savedAns), state.userAnswers[key]);
-      const savedRagu = localStorage.getItem('tka_ragu_' + key);
-      if (savedRagu) state.raguStatus[key] = Object.assign({}, JSON.parse(savedRagu), state.raguStatus[key]);
       if (localStorage.getItem('tka_finished_' + key) === 'true') {
         if (!state.testFinished) state.testFinished = {};
         state.testFinished[key] = true;
-      }
-      const savedChecked = localStorage.getItem('tka_checked_' + key);
-      if (savedChecked) {
-        const parsed = JSON.parse(savedChecked);
-        if (parsed && typeof parsed === 'object') {
-          if (!window._answerChecked) window._answerChecked = {};
-          Object.keys(parsed).forEach(nomor => {
-            if (parsed[nomor]) window._answerChecked[key + ':' + nomor] = true;
-          });
-        }
+        const savedAns = localStorage.getItem('tka_answers_' + key);
+        if (savedAns) state.userAnswers[key] = Object.assign({}, JSON.parse(savedAns), state.userAnswers[key]);
+        const savedRagu = localStorage.getItem('tka_ragu_' + key);
+        if (savedRagu) state.raguStatus[key] = Object.assign({}, JSON.parse(savedRagu), state.raguStatus[key]);
+      } else {
+        state.userAnswers[key] = {};
+        state.raguStatus[key] = {};
+        if (state.testFinished) state.testFinished[key] = false;
+        localStorage.removeItem('tka_answers_' + key);
+        localStorage.removeItem('tka_ragu_' + key);
+        localStorage.removeItem('tka_checked_' + key);
       }
     } catch (e) {}
     // Riwayat percakapan tutor soal ini dimuat dari server (resume)
@@ -2245,16 +2243,30 @@ function cleanUiStimulusText(stimText, stimImages) {
           const checkSize = () => {
             const nw = img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
             const nh = img.naturalHeight || parseInt(img.getAttribute('height') || '0', 10);
-            // Hanya anggap diagram jika benar-benar tinggi / bukan strip formula horizontal
             const isFormula = img.hasAttribute('data-latex') || (nh > 0 && nh <= 65);
             if (!isFormula && (nh > 75 || (nw > 280 && nh > 60))) {
               img.classList.remove('opt-math-img');
               img.classList.add('opt-diagram-img');
+              if (zoomBtn) zoomBtn.style.display = 'inline-flex';
             } else {
               img.classList.remove('opt-diagram-img');
               img.classList.add('opt-math-img');
+              if (zoomBtn) zoomBtn.style.display = 'none';
             }
           };
+
+          const zoomBtn = document.createElement('button');
+          zoomBtn.type = 'button';
+          zoomBtn.className = 'opt-zoom-btn';
+          zoomBtn.style.display = 'none'; // default hidden sampai terbukti diagram besar
+          zoomBtn.setAttribute('aria-label', `Perbesar gambar opsi ${opt.key}`);
+          zoomBtn.title = 'Perbesar gambar';
+          zoomBtn.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
+          zoomBtn.onclick = (e) => {
+            e.stopPropagation();
+            openImageLightbox(img.src, `Pilihan Jawaban ${opt.key}`);
+          };
+          img.insertAdjacentElement('afterend', zoomBtn);
 
           if (img.complete && img.naturalWidth > 0) {
             checkSize();
@@ -2264,22 +2276,9 @@ function cleanUiStimulusText(stimText, stimImages) {
 
           img.title = 'Klik untuk memilih opsi';
           img.onclick = (e) => {
-            // Audit Kimi: tap gambar dulu = zoom -> seleksi tak sengaja.
-            // Sekarang: tap gambar = MEMILIH; zoom lewat tombol kaca terpisah.
             e.stopPropagation();
             selectOption(opt.key, isComplex);
           };
-          const zoomBtn = document.createElement('button');
-          zoomBtn.type = 'button';
-          zoomBtn.className = 'opt-zoom-btn';
-          zoomBtn.setAttribute('aria-label', `Perbesar gambar opsi ${opt.key}`);
-          zoomBtn.title = 'Perbesar gambar';
-          zoomBtn.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
-          zoomBtn.onclick = (e) => {
-            e.stopPropagation();
-            openImageLightbox(img.src, `Pilihan Jawaban ${opt.key}`);
-          };
-          img.insertAdjacentElement('afterend', zoomBtn);
         });
       } else if (opt.image) {
         // 2. Tampilkan gambar opsi jika tersedia (grafik atau formula matematika)
@@ -2299,6 +2298,7 @@ function cleanUiStimulusText(stimText, stimImages) {
         const zoomBtn2 = document.createElement('button');
         zoomBtn2.type = 'button';
         zoomBtn2.className = 'opt-zoom-btn';
+        zoomBtn2.style.display = 'none'; // default hidden
         zoomBtn2.setAttribute('aria-label', `Perbesar gambar opsi ${opt.key}`);
         zoomBtn2.title = 'Perbesar gambar';
         zoomBtn2.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
@@ -2312,8 +2312,10 @@ function cleanUiStimulusText(stimText, stimImages) {
         mathImg.onload = () => {
           if (mathImg.naturalHeight > 75 || (mathImg.naturalWidth > 280 && mathImg.naturalHeight > 60)) {
             mathImg.classList.add('opt-diagram-img');
+            zoomBtn2.style.display = 'inline-flex';
           } else {
             mathImg.classList.add('opt-math-img');
+            zoomBtn2.style.display = 'none';
           }
         };
 
@@ -2482,10 +2484,9 @@ function prepareQuestionImages() {
 function selectOption(key, isComplex) {
   const q = getCurrentQuestion();
   if (!q) return;
-  // BUGFIX (10 Okt 2026): kunci opsi setelah jawaban dicek (tidak bisa diubah lagi)
-  try {
-    if (window._answerChecked && window._answerChecked[pkgKey() + ':' + q.nomor]) return;
-  } catch (e) {}
+
+  // B3: Hanya kunci opsi jika tes sudah berstatus selesai
+  if (state.testFinished && state.testFinished[pkgKey()]) return;
 
   if (isComplex) {
     let arr = (state.userAnswers[pkgKey()] || {})[q.nomor] || [];
@@ -2506,8 +2507,6 @@ function selectOption(key, isComplex) {
   try { AttemptRecorder.onAnswer(q.nomor, key); } catch (e) {}
   // FASE D (D1): rekam klik opsi
   try { DetailTracker.onOptionClick(q.nomor, key); } catch (e) {}
-  // FASE 3 (T3.5): simpan jawaban ke localStorage agar tahan refresh
-  try { localStorage.setItem('tka_answers_' + pkgKey(), JSON.stringify(state.userAnswers[pkgKey()])); } catch (e) {}
 
   // Update UI selection classes + aria (audit aksesibilitas)
   const selected = state.userAnswers[pkgKey()][q.nomor];
@@ -2520,10 +2519,6 @@ function selectOption(key, isComplex) {
 
   // Update modal grid
   renderGridModal();
-
-  // Persist progres nyata ke localStorage (kontrak KONTRAK_DATA.md):
-  // tka_progress[subjectKey][pkgNumber][nomorSoal] = { kunci, benar }
-  persistAnswerProgress(q);
 }
 
 // Tulis jawaban yang barusan dipilih ke tka_progress. Dipanggil dari selectOption.
@@ -6591,9 +6586,40 @@ function initMobileChrome() {
   });
 
   document.addEventListener('keydown', (e) => {
+    // Abaikan jika fokus di input / textarea / contenteditable
+    const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target && e.target.isContentEditable)) return;
+    if (e.ctrlKey || e.altKey || e.metaKey) return;
+
     if (e.key === 'Escape') {
       closeTutorSheet();
       closeMobilePanels();
+      return;
+    }
+
+    // B3 Keyboard navigation: hanya aktif saat lembar kuis terbuka (beranda tertutup, tidak ada modal)
+    const homeEl = document.getElementById('homeOverlay');
+    const isHomeOpen = homeEl && !homeEl.classList.contains('home-closed') && homeEl.style.display !== 'none';
+    const isModalOpen = document.querySelector('.modal-overlay.open, .review-overlay.open');
+    if (isHomeOpen || isModalOpen) return;
+
+    const keyUpper = e.key.toUpperCase();
+    if (['A', 'B', 'C', 'D', 'E'].includes(keyUpper)) {
+      const q = (typeof getCurrentQuestion === 'function') ? getCurrentQuestion() : null;
+      if (q) {
+        const isComplex = (q.tipe_soal === 'Pilihan Ganda Kompleks' || q.tipe === 'Pilihan Ganda Kompleks' || (Array.isArray(q.kunci_jawaban) && !statementType(q)));
+        const optEl = document.querySelector(`.option-item[data-key="${keyUpper}"]`);
+        if (optEl) {
+          e.preventDefault();
+          selectOption(keyUpper, isComplex);
+        }
+      }
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      if (typeof navigateQuestion === 'function') navigateQuestion(1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      if (typeof navigateQuestion === 'function') navigateQuestion(-1);
     }
   });
 

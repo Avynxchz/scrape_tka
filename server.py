@@ -2050,6 +2050,23 @@ function salinWA() {
             except Exception as e:
                 return self._send_500(e, "/api/flags")
 
+        if self.path.split('?', 1)[0] == '/api/version':
+            try:
+                commit = os.environ.get("RAILWAY_GIT_COMMIT_SHA") or os.environ.get("GIT_COMMIT_SHA") or ""
+                if not commit:
+                    try:
+                        import subprocess
+                        commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], stderr=subprocess.DEVNULL).decode().strip()
+                    except Exception:
+                        pass
+                return self._send_json(200, {
+                    "status": "success",
+                    "commit": commit,
+                    "time": time.strftime("%Y-%m-%d %H:%M:%S")
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/version")
+
         if self.path.split('?', 1)[0] == '/api/swarm/status':
             try:
                 from pipeline.swarm_manager import swarm_engine
