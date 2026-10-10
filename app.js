@@ -6486,6 +6486,9 @@ function getTimerTotalSeconds() {
 // ============================================================================
 const AttemptRecorder = {
   active: null, _lastQ: null, _lastT: 0,
+  reset() {
+    this.active = null; this._lastQ = null; this._lastT = 0;
+  },
   start(subject, paket, n, duration_s) {
     this.active = { subject, paket, n, duration_s, started_at: Date.now(), items: {} };
     this._lastQ = null; this._lastT = Date.now();
@@ -6497,7 +6500,8 @@ const AttemptRecorder = {
       position: nomor, topic_id: null,
       first_answer: null, final_answer: null,
       active_ms: 0, first_answer_ms: null,
-      change_count: 0, flagged_ragu: false, visit_count: 0, _firstVisitT: 0
+      change_count: 0, flagged_ragu: false, visit_count: 0, _firstVisitT: 0,
+      jejak: []
     };
     return a.items[nomor];
   },
@@ -6514,17 +6518,35 @@ const AttemptRecorder = {
   },
   onAnswer(nomor, answer) {
     const it = this._ensure(nomor); if (!it) return;
+    const now = Date.now();
+    const curActiveMs = (it.active_ms || 0) + (this._lastQ === nomor ? (now - this._lastT) : 0);
+    const t_detik = Math.max(1, Math.round(curActiveMs / 1000));
     const ans = Array.isArray(answer) ? answer.join(',') : String(answer);
+    if (!it.jejak) it.jejak = [];
     if (it.first_answer == null) {
       it.first_answer = ans;
-      it.first_answer_ms = Date.now() - (it._firstVisitT || Date.now());
+      it.first_answer_ms = now - (it._firstVisitT || now);
+      if (it.jejak.length < 5) {
+        it.jejak.push({ t_detik: t_detik, aksi: 'pilih', opsi: ans });
+      }
     } else if (it.final_answer !== ans) {
       it.change_count += 1;
+      if (it.jejak.length < 5) {
+        it.jejak.push({ t_detik: t_detik, aksi: 'ganti', opsi: ans });
+      }
     }
     it.final_answer = ans;
   },
   onRagu(nomor, flagged) {
-    const it = this._ensure(nomor); if (it) it.flagged_ragu = !!flagged;
+    const it = this._ensure(nomor); if (!it) return;
+    const now = Date.now();
+    const curActiveMs = (it.active_ms || 0) + (this._lastQ === nomor ? (now - this._lastT) : 0);
+    const t_detik = Math.max(1, Math.round(curActiveMs / 1000));
+    it.flagged_ragu = !!flagged;
+    if (!it.jejak) it.jejak = [];
+    if (it.jejak.length < 5) {
+      it.jejak.push({ t_detik: t_detik, aksi: 'ragu', opsi: flagged ? 'ragu' : 'batal_ragu' });
+    }
   },
   finish(ended_by) {
     const a = this.active; if (!a) return null;
@@ -6540,9 +6562,17 @@ const AttemptRecorder = {
         position: nomor, topic_id: null,
         first_answer: null, final_answer: null,
         active_ms: 0, first_answer_ms: null,
-        change_count: 0, flagged_ragu: false, visit_count: 0
+        change_count: 0, flagged_ragu: false, visit_count: 0,
+        jejak: []
       };
-      const c = Object.assign({}, it); delete c._firstVisitT;
+      const activeMs = it.active_ms || 0;
+      const c = Object.assign({}, it, {
+        waktu_detik: Math.round(activeMs / 1000),
+        ganti_jawaban: it.change_count || 0,
+        ragu: !!it.flagged_ragu,
+        jejak: (it.jejak || []).slice(0, 5)
+      });
+      delete c._firstVisitT;
       items.push(c);
     }
     const payload = {

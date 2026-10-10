@@ -967,6 +967,72 @@ def _verify_supabase_token(token):
         return False, None
 
 
+def clean_attempt_items(raw_items):
+    """Normalisasi dan sanitasi items attempt secara toleran terhadap bentuk data nyata.
+    Mendukung list, dict bertingkat (mis. {'1': {...}}), atau string JSON.
+    Mengembalikan (ok: bool, error_message: str, clean_items: list[dict])."""
+    if isinstance(raw_items, str):
+        try:
+            raw_items = json.loads(raw_items)
+        except Exception:
+            raw_items = None
+    if isinstance(raw_items, dict):
+        try:
+            raw_items = [v for k, v in sorted(raw_items.items(), key=lambda kv: int(kv[0]) if str(kv[0]).isdigit() else str(kv[0]))]
+        except Exception:
+            raw_items = list(raw_items.values())
+
+    if not isinstance(raw_items, list) or not (1 <= len(raw_items) <= 200):
+        t_name = type(raw_items).__name__
+        l_info = len(raw_items) if hasattr(raw_items, '__len__') else 'N/A'
+        return False, f"Items tidak valid (harus 1-200 soal; tipe={t_name}, panjang={l_info}).", []
+
+    clean_items = []
+    for it in raw_items:
+        if not isinstance(it, dict):
+            continue
+        active_ms = max(0, min(int(it.get("active_ms") or 0), 3600000))
+        change_count = max(0, min(int(it.get("change_count") if it.get("change_count") is not None else it.get("ganti_jawaban") or 0), 100))
+        flagged_ragu = bool(it.get("flagged_ragu") if it.get("flagged_ragu") is not None else it.get("ragu"))
+
+        # Jejak kejadian (maksimal 5 event)
+        raw_jejak = it.get("jejak") or []
+        clean_jejak = []
+        if isinstance(raw_jejak, list):
+            for ev in raw_jejak[:5]:
+                if isinstance(ev, dict):
+                    clean_jejak.append({
+                        "t_detik": max(0, min(int(ev.get("t_detik") or 0), 86400)),
+                        "aksi": str(ev.get("aksi") or "")[:16],
+                        "opsi": (str(ev.get("opsi") or "")[:32]) if ev.get("opsi") is not None else None,
+                    })
+
+        waktu_detik = int(it.get("waktu_detik") if it.get("waktu_detik") is not None else round(active_ms / 1000))
+
+        clean_items.append({
+            "soal_id": str(it.get("soal_id") or "")[:128],
+            "position": int(it.get("position") or 0),
+            "topic_id": (str(it.get("topic_id") or "")[:128] or None),
+            "first_answer": (str(it.get("first_answer") or "")[:64] or None),
+            "final_answer": (str(it.get("final_answer") or "")[:64] or None),
+            "active_ms": active_ms,
+            "first_answer_ms": it.get("first_answer_ms"),
+            "change_count": change_count,
+            "flagged_ragu": flagged_ragu,
+            "visit_count": max(0, min(int(it.get("visit_count") or 0), 1000)),
+            # Ekstensi A1 Guru Autopsi:
+            "waktu_detik": waktu_detik,
+            "ganti_jawaban": change_count,
+            "ragu": flagged_ragu,
+            "jejak": clean_jejak,
+        })
+
+    if not clean_items:
+        return False, "Semua item di dalam items tidak valid.", []
+
+    return True, "", clean_items
+
+
 class AppRequestHandler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=BASE_DIR, **kwargs)
@@ -2085,27 +2151,13 @@ function salinWA() {
                         "message": "Penyimpanan server belum dikonfigurasi "
                                    "(SUPABASE_URL / SUPABASE_ANON_KEY).",
                     })
-                items = payload.get('items')
-                if not isinstance(items, list) or not (1 <= len(items) <= 200):
+                ok_items, err_items, clean_items = clean_attempt_items(payload.get('items'))
+                if not ok_items:
+                    sys.stderr.write(f"[/api/attempts] 400 Bad Request: {err_items}\n")
+                    _log_server_error(ValueError(err_items), context="POST /api/attempts payload.items validation")
                     return self._send_json(400, {
                         "status": "error",
-                        "message": "Items tidak valid (1-200 soal).",
-                    })
-                clean_items = []
-                for it in items:
-                    if not isinstance(it, dict):
-                        continue
-                    clean_items.append({
-                        "soal_id": str(it.get("soal_id") or "")[:128],
-                        "position": int(it.get("position") or 0),
-                        "topic_id": (str(it.get("topic_id") or "")[:128] or None),
-                        "first_answer": (str(it.get("first_answer") or "")[:64] or None),
-                        "final_answer": (str(it.get("final_answer") or "")[:64] or None),
-                        "active_ms": max(0, min(int(it.get("active_ms") or 0), 3600000)),
-                        "first_answer_ms": it.get("first_answer_ms"),
-                        "change_count": max(0, min(int(it.get("change_count") or 0), 100)),
-                        "flagged_ragu": bool(it.get("flagged_ragu")),
-                        "visit_count": max(0, min(int(it.get("visit_count") or 0), 1000)),
+                        "message": err_items,
                     })
                 # Idempotency: client_id dari klien jadi client_attempt_id.
                 # Kirim dua kali dengan client_id sama -> satu baris.
@@ -2160,6 +2212,13 @@ function salinWA() {
                         "attempt_id": (saved[0].get("id") if saved else None),
                     })
                 except urllib.error.HTTPError as e:
+                    if e.code == 409:
+                        # 409 Conflict: client_attempt_id sudah ada (idempotency pengaman akhir)
+                        return self._send_json(200, {
+                            "status": "success",
+                            "duplicate": True,
+                            "message": "Attempt sudah tersimpan sebelumnya.",
+                        })
                     return self._send_json(502, {
                         "status": "error",
                         "message": f"Supabase menolak penyimpanan (HTTP {e.code}).",
