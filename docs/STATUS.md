@@ -4,38 +4,38 @@ Diperbarui: 2026-10-10 11:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 
 ## Posisi Sekarang
 
-### FASE 0: 85% (SELESAI-TERVERIFIKASI)
+### FASE 0: 85% (DALAM PROSES — Branch dev aktif, menunggu gladi & merge ke main)
 - **Terbukti:** Branch `dev` dari `main@3605aab`; dokumen arsitektur di `docs/ARCHITECTURE.md`; feature flag (`feature_flags.py` & `GET /api/flags`, 7 flags default OFF terverifikasi lokal); pemindaian 0 rahasia di repo publik.
 - **Utang:** Flag runtime masih disimpan di SQLite Railway (ephemeral [hilang tiap deploy], perlu migrasi ke Supabase); backup Supabase belum dikonfirmasi oleh Agus; tag release `pre-autopsi-v0` menunggu pembuatan saat merge.
 
-### FASE 1: 90% (SELESAI-TERVERIFIKASI)
+### FASE 1: 90% (DALAM PROSES — Audit jalur kritis & format TKA 2026)
 - **Terbukti:** Audit jalur kritis di `docs/AUDIT.md` (8 temuan A, 6 B, 4 C); pemetaan 9 masalah dari Agus di Lampiran B; audit kesesuaian format ujian TKA 2026 vs §3.1.
 - **Utang:** Pengukuran visual/Lighthouse langsung di browser headless (siap diuji via browser subagent).
 
-### FASE 2: 90% (SELESAI-TERVERIFIKASI)
+### FASE 2: 90% (DALAM PROSES — Utang kebijakan AI & Sentry)
 - **Terbukti:** T2.1 gzip aset statis (app.js 220KB → 57KB, style.css 155KB → 28KB); T2.5/T2.7 salinan landing & FAQ jujur (tanpa klaim durasi palsu); T2.11 verifikasi JWT Supabase di server (`auth_verify.py`); T2.4 kuota utuh saat gagal-kirim terbukti di kode & server (`consume_user_quota` hanya dipanggil saat LLM berhasil); T2.6 tombol & modal "Lapor Bug" terpasang di mobile overflow menu & desktop bar dengan penyimpanan fallback lokal (`/api/bug-reports`) dan Supabase table `bug_reports`.
 - **Utang:** T2.10 penentuan kebijakan provider AI (menunggu Agus); error monitoring Sentry.
 
 ### FASE 3: 100% (SELESAI-TERVERIFIKASI)
 - **Terbukti:** Skema `attempts` + `feature_flags` di Supabase (migrasi 003); AttemptRecorder di `app.js`; endpoint `POST /api/attempts` verifikasi JWT dengan idempotency via client_attempt_id; T3.4 klaim hasil tamu setelah login via Google OAuth & kartu alert dengan tombol "Klaim ke Akun Google"; T3.5 pemulihan kuis setelah refresh/tab tertutup (`tka_answers_<key>`, `tka_ragu_<key>`, `tka_finished_<key>`); sinkronisasi antrean otomatis saat event `online` dan event `tka-login`; BUG-002 login persistent terverifikasi; **BUG-001 (Tugas D) sync progress desktop-mobile dua arah terverifikasi (Supabase kolom users.progress via GET/POST /api/user/progress)**.
+- **Perbaikan Audit (T1, T2, T3):** BUG-006 kunci paket:nomor terverifikasi, persistensi `tka_checked_` tahan reload terverifikasi; BUG-009 URL sinkron hanya saat kuis aktif terverifikasi; isolasi progres per akun (`tka_progress_owner`), penghapusan saat logout, batas 256KB di server.py terverifikasi 100%.
 
-### KEJURUAN SMK: 100% LIVE (5 JURUSAN UTAMA & 25 SOAL SERUPA)
+### KEJURUAN SMK: 100% LIVE (5 JURUSAN UTAMA & 30 SOAL SERUPA A-E)
 - **Terbukti:** 5 mapel kejuruan SMK di sekolah Agus berhasil di-scrape lengkap dengan kunci jawaban otoritatif resmi Pusmendik:
   1. `SMK - Teknik Mesin` (`teknik_mesin_paket_1` - 6 soal, val: 33)
   2. `SMK - Teknik Otomotif` (TKR) (`teknik_otomotif_paket_1` - 6 soal, val: 34)
   3. `SMK - Teknik Jaringan dan Telekomunikasi` (TKJ) (`teknik_jaringan_paket_1` - 6 soal, val: 49)
   4. `SMK - Akuntansi dan Keuangan Lembaga` (AKL) (`akuntansi_paket_1` - 6 soal, val: 66)
   5. `SMK - Manajemen Perkantoran dan Layanan Bisnis` (MPLB) (`manajemen_perkantoran_paket_1` - 6 soal, val: 65)
-- **Soal Serupa (Pilar 5):** 25 butir soal pemantapan baru disuntikkan ke data learning 5 mapel SMK. Audit via `audit_smk.py`: **0 Critical Issues, 0 Warnings**.
+- **Soal Serupa (Pilar 5):** 30 butir soal pemantapan baru (6 butir per mapel SMK) terverifikasi 100% memiliki 5 opsi seragam (A-E), tanpa opsi duplikat, kunci valid, dan pembahasan lengkap.
 - **UI/UX & Metrik Kurikulum:** Banner Beranda Desktop (`home_desktop.html`), Modul Belajar (`modul.html`), dan Progres (`progres.html`) terverifikasi 100% menampilkan **27 Mapel · 49 Paket · 991 Soal**.
 - **Alur Pengguna Baru Desktop:** Smooth scroll tombol "Mulai Sekarang", opsi "Coba Tamu" di modal konfirmasi kuis, filter kategori SMK/Bahasa/Saintek/Soshum, dan pencegahan error HTTP 403 paket 2 SMK teruji 100% PASS (0 console error).
 
 ### PERBAIKAN MASUKAN AGUS: 100% SELESAI & TERVERIFIKASI
-1. **Tombol Bawah Mobile:** Dikembalikan 100% ke tombol "Cek Jawaban", tombol reviu di header HP dihapus bersih.
+1. **Tombol Bawah Mobile:** Dikembalikan 100% ke tombol "Cek Jawaban", tombol reviu di header HP disembunyikan di tampilan mobile (`display: none !important`).
 2. **Formula Matematika KaTeX:** Rendering KaTeX diperluas ke tab pembahasan dan dilindungi dari pemecahan tag `<br>`, seluruh rumus tampil rapi.
 3. **Mapel SMK di Desktop & Modul:** 5 mapel SMK terintegrasi penuh di dashboard, modul carousel, dan progres belajar.
 4. **Alur Tamu Kuis Desktop:** Pengguna baru dapat memilih "Coba Tamu" langsung dari modal konfirmasi tanpa terblokir harus login Google terlebih dahulu.
-
 
 ### FASE 4: 100% (SELESAI-TERVERIFIKASI)
 - **Terbukti:** `autopsy/analyzer.py` (9 label prioritas, 2 flag, kebocoran top-3) + `autopsy/planner.py` (jadwal belajar deterministik hingga H-1) lulus tes otomatis 20/20 di `tests/test_autopsy.py` (8 persona uji sesuai harapan). Kartu materi statis di `content/cards/`.
@@ -46,52 +46,33 @@ Diperbarui: 2026-10-10 11:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 
 ---
 
-## Daftar Bug & Status Verifikasi
-- **BUG-001:** Progress desktop 0% padahal HP sudah ngisi (SELESAI-TERVERIFIKASI — Tugas D: Kolom users.progress di Supabase, endpoint GET/POST /api/user/progress, auto-sync debounce di frontend).
-- **BUG-002:** Login tidak persistent (SELESAI-TERVERIFIKASI — Tugas E: OAuth hash dilindungi dari replaceState, validasi token saat restore, auto-clean hash).
-- **BUG-003:** Layout Autopsi overflow di HP 390x844 (SELESAI-TERVERIFIKASI — Tugas C).
-- **BUG-004:** URL routing tidak jelas (backlog setelah 26 Okt).
-- **BUG-005:** Overlay Beranda nutupin kuis desktop (SELESAI-TERVERIFIKASI — Tugas B).
-- **BUG-006:** Opsi diklik setelah cek (SELESAI-TERVERIFIKASI — Tugas B).
-- **BUG-007:** Teks geser centang (SELESAI-TERVERIFIKASI — Tugas B, diperbaiki langsung di style.css).
-- **BUG-008:** Popup mobile besar (SELESAI-TERVERIFIKASI — Tugas B).
-- **BUG-009:** Kartu Beranda tidak muncul (SELESAI-TERVERIFIKASI — Tugas A).
+## TINDAKAN DATABASE SUPABASE (Untuk Mas Agus)
 
----
-
-## MENUNGGU AGUS (Tindakan di Supabase)
-
-### 1. Eksekusi SQL Perbaikan Tabel Users (Prioritas Utama)
-- **Penyebab masalah:** Tabel `public.users` kosong (`count = 0`) karena RLS policy di Supabase hanya mengizinkan `SELECT` dan `UPDATE`, **tanpa policy `INSERT`**. Saat login Google memanggil `upsert`, database menolak dan error ditelan diam-diam di console browser.
-- **File SQL:** [db/migrations/006_fix_users_policy.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/006_fix_users_policy.sql)
+### 1. Migrasi 007: Tambah Kolom `tka_date` (WAJIB Sebelum Gladi Bersih)
+- **File SQL:** [db/migrations/007_users_tka_date.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/007_users_tka_date.sql)
+- **Isi SQL:**
+  ```sql
+  ALTER TABLE public.users ADD COLUMN IF NOT EXISTS tka_date date;
+  ```
 - **Langkah klik-per-klik untuk Mas Agus:**
   1. Buka browser di HP/Laptop, login ke dashboard Supabase: https://supabase.com/dashboard/project/auhqgzrrgvjbfvzvayzg
-  2. Di bilah menu kiri, ketuk ikon **SQL Editor** (ikon kode `>_`).
-  3. Ketuk tombol **+ New query**.
-  4. Salin dan tempel (paste) seluruh isi file [db/migrations/006_fix_users_policy.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/006_fix_users_policy.sql).
-  5. Ketuk tombol hijau **Run** (atau tekan Ctrl+Enter).
-  6. Hasil benar: Muncul pesan *"Success. No rows returned"*.
+  2. Di bilah menu kiri, klik ikon **SQL Editor** (`>_`).
+  3. Klik tombol **+ New query**.
+  4. Salin dan tempel (paste) kode di atas, lalu klik tombol **Run**.
+  5. Hasil benar: Muncul pesan *"Success. No rows returned"*.
 
-### 2. Cara Cek Hasilnya (Query Pengecekan)
-- Di SQL Editor Supabase, ketik dan jalankan query berikut:
-  ```sql
-  -- Cek jumlah akun yang sekarang sudah masuk:
-  SELECT count(*) FROM public.users;
+### 2. Status Migrasi Sebelumnya (004, 005, 006)
+- **Migrasi 004 & 005:** Skema `attempts` dan penambahan kolom `progress` (TIDAK TERVERIFIKASI langsung dari DB sampai query cek dijalankan).
+- **Migrasi 006 (`006_fix_users_policy.sql`):** Perbaikan RLS Policy INSERT pada tabel `users`. Jika belum dijalankan, jalankan di SQL Editor.
 
-  -- Lihat 5 data user teratas:
-  SELECT id, email, name, last_login_at FROM public.users LIMIT 5;
-  ```
-- **Hasil yang benar:** `count` bernilai **lebih dari 0** (akun Mas Agus & teman-teman yang pernah login otomatis tersinkronisasi).
+### 3. Query Pengecekan Hasil Database (Jalankan di SQL Editor)
+```sql
+-- 1. Cek kolom users (HARUS menghasilkan 2 baris: progress dan tka_date):
+select column_name, data_type 
+from information_schema.columns 
+where table_schema='public' and table_name='users' and column_name in ('progress','tka_date');
 
-### 3. Migrasi Database Lainnya (Bila Belum Dijalankan)
-- [db/migrations/004_attempt_client_id.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/004_attempt_client_id.sql) (Cegah rekam tryout duplikat / idempotency).
-- [db/migrations/005_progress_sync.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/005_progress_sync.sql) (Kolom progress untuk BUG-001 / Tugas D).
-
----
-
-## Langkah Berikutnya
-1. **Prioritas Tambahan (SQL 005 & 006):** SELESAI dijalankan oleh Mas Agus ("Success. No rows returned").
-2. **Tugas D (BUG-001):** SELESAI-TERVERIFIKASI (sinkronisasi progress antar-device dua arah via Supabase).
-3. **Scraping Kejuruan SMK:** SELESAI-TERVERIFIKASI (5 jurusan utama SMK resmi live di CBT dan Beranda).
-4. **Tugas C, E, F, G:** SEMUA SELESAI & TERVERIFIKASI di branch `dev`.
-5. **Siap untuk Review:** Claude Sonnet 5.5 aktif kembali pada pukul 07:50 WIB untuk audit/review komprehensif.
+-- 2. Cek jumlah akun yang terdaftar:
+select count(*) from public.users;
+```
+Hasil benar: Query pertama menghasilkan 2 baris (`progress` tipe jsonb/text, `tka_date` tipe date).

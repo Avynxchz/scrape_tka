@@ -1,5 +1,8 @@
 # HANDOFF — TKA Master Fase 0-5 untuk Antigravity + Gemini
 
+> [!WARNING]
+> **DOKUMEN INI USANG (HISTORIS)** — Rujukan status proyek terkini yang berlaku adalah [docs/STATUS.md](file:///d:/PROJECTS/SCRAPE_TKA_DEV/docs/STATUS.md). Seluruh bug BUG-001 hingga BUG-009 dan Fase 0-5 telah diperbarui sesuai audit 10 Okt 2026.
+
 **Tanggal:** 10 Okt 2026
 **Repo:** https://github.com/Avynxchz/scrape_tka
 **Branch kerja:** `dev` (JANGAN sentuh `main` — masih di `3605aab`, tunggu Agus bilang "MERGE")
