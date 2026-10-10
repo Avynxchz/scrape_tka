@@ -428,6 +428,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateModelPickerUI();
   renderGridModal();
 
+  window.__appInitialized = true;
+
   // Layar pertama: Home dashboard jika bukan direct kuis; jika direct kuis pastikan homeClose()
   if (window.__homeFirst) {
     homeOpen();
@@ -1488,6 +1490,7 @@ window.addEventListener('tka-logout', () => {
 // BUGFIX (10 Okt 2026 - T2/BUG-009): Sinkronisasi URL kuis hanya saat kuis sedang aktif
 function syncQuizUrl() {
   try {
+    if (!window.__appInitialized) return;
     const pkg = state.pkgData && state.pkgData[pkgKey()];
     const q = (pkg && pkg.soal && pkg.soal[state.currentIndex]) || { nomor: state.currentIndex + 1 };
     document.cookie = `active_subject=${state.currentSubject}; path=/; max-age=86400`;
