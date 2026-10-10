@@ -2270,6 +2270,15 @@ body {
   transition: opacity 0.2s ease;
 }
 
+#modalDaftarSoal {
+  z-index: 9999 !important;
+}
+
+#modalDaftarSoal .modal-content {
+  position: relative;
+  z-index: 10000 !important;
+}
+
 .modal-overlay.open {
   opacity: 1;
   pointer-events: auto;
