@@ -561,11 +561,36 @@ const HOME_WATERMARKS = {
 };
 const HOME_PKG_MINUTES = { 1: 45, 2: 50 };
 
+// B9: Mode tamu vs terdaftar & namespace storage
+function isGuestMode() {
+  try {
+    if (sessionStorage.getItem('tka_mode') === 'guest' || localStorage.getItem('tka_guest_session') === 'true') {
+      return true;
+    }
+    const u = (typeof getTKAUser === 'function' ? getTKAUser() : null) || window.TKA_USER;
+    if (u && !u.loggedIn) return true;
+    if (!localStorage.getItem('tka_supabase_auth_token')) return true;
+  } catch (e) {}
+  return false;
+}
+window.isGuestMode = isGuestMode;
+
+function progressStorageKey() {
+  return isGuestMode() ? 'tka_guest_progress' : 'tka_progress';
+}
+window.progressStorageKey = progressStorageKey;
+
+function examStorageKey(type, key) {
+  const prefix = isGuestMode() ? 'tka_guest_' : 'tka_';
+  return prefix + type + '_' + key;
+}
+window.examStorageKey = examStorageKey;
+
 // Progres nyata per paket dari jawaban user yang tersimpan (localStorage)
 function homePkgProgress(subjectKey, pkgNum, total) {
   if (!total) return 0;
   try {
-    const raw = localStorage.getItem('tka_progress');
+    const raw = localStorage.getItem(progressStorageKey());
     const store = raw ? JSON.parse(raw) : {};
     const answered = (store[subjectKey] && store[subjectKey][pkgNum]) || {};
     return Math.min(100, Math.round((Object.keys(answered).length / total) * 100));
@@ -966,10 +991,10 @@ function homeOpen() {
   homeSendDesktopData();
 }
 
-// Ringkasan progres nyata dari localStorage tka_progress
+// Ringkasan progres nyata dari localStorage tka_progress / tka_guest_progress
 function homeProgressSummary() {
   try {
-    const raw = localStorage.getItem('tka_progress');
+    const raw = localStorage.getItem(progressStorageKey());
     const store = raw ? JSON.parse(raw) : {};
     let dikerjakan = 0, benar = 0;
     Object.values(store || {}).forEach(pkgs => {
@@ -1016,10 +1041,10 @@ const PANEL_MODULE_ORDER = [
   'teknik_mesin', 'teknik_otomotif', 'teknik_jaringan', 'akuntansi', 'manajemen_perkantoran'
 ];
 
-// Raw store tka_progress (bentuk persis kontrak, bukan ringkasan)
+// Raw store tka_progress / tka_guest_progress (bentuk persis kontrak, bukan ringkasan)
 function homeProgressStore() {
   try {
-    const r = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+    const r = JSON.parse(localStorage.getItem(progressStorageKey()) || '{}');
     return (r && typeof r === 'object' && !Array.isArray(r)) ? r : {};
   } catch (e) { return {}; }
 }
@@ -1585,20 +1610,29 @@ async function loadPackageData(pkgNum) {
     // B3 & B11: Hanya pulihkan jawaban jika tes memang berstatus selesai (tka_finished)
     // Sesi baru yang belum selesai selalu mulai dari awal tanpa draft sisa yang mengunci soal
     try {
-      if (localStorage.getItem('tka_finished_' + key) === 'true') {
+      const isFin = localStorage.getItem(examStorageKey('finished', key)) === 'true' ||
+                    (!isGuestMode() && localStorage.getItem('tka_finished_' + key) === 'true');
+      if (isFin) {
         if (!state.testFinished) state.testFinished = {};
         state.testFinished[key] = true;
-        const savedAns = localStorage.getItem('tka_answers_' + key);
+        const savedAns = localStorage.getItem(examStorageKey('answers', key)) ||
+                         (!isGuestMode() ? localStorage.getItem('tka_answers_' + key) : null);
         if (savedAns) state.userAnswers[key] = Object.assign({}, JSON.parse(savedAns), state.userAnswers[key]);
-        const savedRagu = localStorage.getItem('tka_ragu_' + key);
+        const savedRagu = localStorage.getItem(examStorageKey('ragu', key)) ||
+                          (!isGuestMode() ? localStorage.getItem('tka_ragu_' + key) : null);
         if (savedRagu) state.raguStatus[key] = Object.assign({}, JSON.parse(savedRagu), state.raguStatus[key]);
       } else {
         state.userAnswers[key] = {};
         state.raguStatus[key] = {};
         if (state.testFinished) state.testFinished[key] = false;
-        localStorage.removeItem('tka_answers_' + key);
-        localStorage.removeItem('tka_ragu_' + key);
-        localStorage.removeItem('tka_checked_' + key);
+        localStorage.removeItem(examStorageKey('answers', key));
+        localStorage.removeItem(examStorageKey('ragu', key));
+        localStorage.removeItem(examStorageKey('checked', key));
+        if (!isGuestMode()) {
+          localStorage.removeItem('tka_answers_' + key);
+          localStorage.removeItem('tka_ragu_' + key);
+          localStorage.removeItem('tka_checked_' + key);
+        }
       }
     } catch (e) {}
     // Riwayat percakapan tutor soal ini dimuat dari server (resume)
@@ -2570,12 +2604,15 @@ function persistAnswerProgress(q) {
       benar = String(ans) === String(q.kunci_jawaban);
     }
 
-    const store = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+    const pKey = progressStorageKey();
+    const store = JSON.parse(localStorage.getItem(pKey) || '{}');
     store[subject] = store[subject] || {};
     store[subject][pkg] = store[subject][pkg] || {};
     store[subject][pkg][q.nomor] = { kunci: q.kunci_jawaban, benar };
-    localStorage.setItem('tka_progress', JSON.stringify(store));
-    scheduleSyncProgressToServer();
+    localStorage.setItem(pKey, JSON.stringify(store));
+    if (!isGuestMode()) {
+      scheduleSyncProgressToServer();
+    }
   } catch (e) { /* localStorage gagal: jangan ganggu UI */ }
 }
 
@@ -2583,6 +2620,7 @@ window._progressServerSynced = false;
 
 let _progressSyncTimer = null;
 function scheduleSyncProgressToServer() {
+  if (isGuestMode()) return;
   if (_progressSyncTimer) clearTimeout(_progressSyncTimer);
   _progressSyncTimer = setTimeout(() => {
     saveProgressToServer();
@@ -2591,6 +2629,7 @@ function scheduleSyncProgressToServer() {
 
 async function saveProgressToServer() {
   try {
+    if (isGuestMode()) return;
     // T3c: hanya boleh POST jika GET sudah sukses (window._progressServerSynced = true)
     if (!window._progressServerSynced) {
       await syncProgressWithServer();
@@ -2611,6 +2650,7 @@ window.saveProgressToServer = saveProgressToServer;
 
 async function syncProgressWithServer() {
   try {
+    if (isGuestMode()) return;
     if (typeof _attemptAuthHeader !== 'function') return;
     const hdr = await _attemptAuthHeader();
     if (!hdr.Authorization) return;
@@ -2836,7 +2876,7 @@ function selectBsAnswer(stmtKey, value) {
   sel[stmtKey] = value;
   state.userAnswers[pkgKey()][q.nomor] = sel;
   // FASE 3 (T3.5): simpan jawaban BS ke localStorage
-  try { localStorage.setItem('tka_answers_' + pkgKey(), JSON.stringify(state.userAnswers[pkgKey()])); } catch (e) {}
+  try { localStorage.setItem(examStorageKey('answers', pkgKey()), JSON.stringify(state.userAnswers[pkgKey()])); } catch (e) {}
 
   // Update tampilan tombol pada baris terkait
   const row = document.querySelector(`.bs-row[data-stmt="${stmtKey}"]`);
@@ -3180,9 +3220,9 @@ function checkUserAnswer() {
   try {
     if (!window._answerChecked) window._answerChecked = {};
     window._answerChecked[pkgKey() + ':' + q.nomor] = true;
-    const curChecked = JSON.parse(localStorage.getItem('tka_checked_' + pkgKey()) || '{}');
+    const curChecked = JSON.parse(localStorage.getItem(examStorageKey('checked', pkgKey())) || '{}');
     curChecked[q.nomor] = true;
-    localStorage.setItem('tka_checked_' + pkgKey(), JSON.stringify(curChecked));
+    localStorage.setItem(examStorageKey('checked', pkgKey()), JSON.stringify(curChecked));
   } catch (e) {}
   showPembahasanAfterCheck();
 }
@@ -5214,8 +5254,12 @@ function selesaiTes() {
   } catch (e) {}
   if (!state.testFinished) state.testFinished = {};
   state.testFinished[pkgKey()] = true;
-  // FASE 3 (T3.5): simpan status finished ke localStorage
-  try { localStorage.setItem('tka_finished_' + pkgKey(), 'true'); } catch (e) {}
+  // FASE 3 (T3.5): simpan status finished & jawaban ke localStorage
+  try {
+    localStorage.setItem(examStorageKey('finished', pkgKey()), 'true');
+    localStorage.setItem(examStorageKey('answers', pkgKey()), JSON.stringify(state.userAnswers[pkgKey()] || {}));
+    localStorage.setItem(examStorageKey('ragu', pkgKey()), JSON.stringify(state.raguStatus[pkgKey()] || {}));
+  } catch (e) {}
   closeFinishModal();
   renderReviewHasil();
 }
@@ -6118,6 +6162,10 @@ function resetSimulasi() {
   try { AttemptRecorder.reset(); } catch (e) {}
   // FASE 3 (T3.5): bersihkan data tersimpan paket ini di localStorage
   try {
+    localStorage.removeItem(examStorageKey('answers', key));
+    localStorage.removeItem(examStorageKey('ragu', key));
+    localStorage.removeItem(examStorageKey('finished', key));
+    localStorage.removeItem(examStorageKey('checked', key));
     localStorage.removeItem('tka_answers_' + key);
     localStorage.removeItem('tka_ragu_' + key);
     localStorage.removeItem('tka_finished_' + key);
@@ -6157,7 +6205,7 @@ function toggleRagu() {
   // FASE 3 (T3.2): rekam flag ragu-ragu
   try { AttemptRecorder.onRagu(q.nomor, !current); } catch (e) {}
   // FASE 3 (T3.5): simpan status ragu ke localStorage agar tahan refresh
-  try { localStorage.setItem('tka_ragu_' + pkgKey(), JSON.stringify(state.raguStatus[pkgKey()])); } catch (e) {}
+  try { localStorage.setItem(examStorageKey('ragu', pkgKey()), JSON.stringify(state.raguStatus[pkgKey()])); } catch (e) {}
   renderGridModal();
 }
 
