@@ -1403,6 +1403,13 @@ function getTutorAuthHeaders() {
     headers['X-User-Logged-In'] = 'true';
     if (user.name) headers['X-User-Name'] = encodeURIComponent(user.name);
   }
+  try {
+    const sessRaw = localStorage.getItem('tka_supabase_auth_token');
+    if (sessRaw) {
+      const sess = JSON.parse(sessRaw);
+      if (sess && sess.access_token) headers['Authorization'] = 'Bearer ' + sess.access_token;
+    }
+  } catch (e) {}
   return headers;
 }
 
@@ -4767,6 +4774,7 @@ async function sendChatMessage(e) {
         subject: state.currentSubject,
         paket: state.currentPkg,
         nomor: q.nomor,
+        attempt_id: (window._lastFinishedAttempt && (window._lastFinishedAttempt.id || window._lastFinishedAttempt.client_attempt_id)) || null,
         // B5: Kirim konteks soal lengkap biar AI tidak salah konteks
         question_id: `${state.currentSubject}_p${state.currentPkg}_n${q.nomor}`,
         question_text: q.pertanyaan || q.teks || '',

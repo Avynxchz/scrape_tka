@@ -241,10 +241,12 @@ def _review_note(sol):
 # Perakitan prompt (beranggar karakter)
 # ---------------------------------------------------------------------------
 def build_tutor_prompt(canon_ctx, solution, official_answer, history_msgs,
-                       user_message, summary=None, subject_name="Matematika"):
+                       user_message, summary=None, subject_name="Matematika",
+                       behavior_context=""):
     """Susun pesan [{role, content}] untuk LLM.
 
     history_msgs: list dict {role, content} TERURUT lama->baru (dari store).
+    behavior_context: string konteks perilaku siswa di soal ini (dari database attempts).
     """
     solution_block = _truncate(_fmt_solution_block(solution), MAX_CTX_CHARS // 2)
     question_block = _truncate(_fmt_question_block(canon_ctx, subject_name),
@@ -277,6 +279,8 @@ def build_tutor_prompt(canon_ctx, solution, official_answer, history_msgs,
         current_message=user_message,
         review_note=_review_note(solution),
     )
+    if behavior_context:
+        system += f"\n\n<student_behavior>\n{behavior_context.strip()}\n</student_behavior>"
     if style_hint:
         system += f"\n\n<focus_hint>{style_hint}</focus_hint>"
 
@@ -316,10 +320,11 @@ def summarize_older(older_msgs, existing_summary):
 
 def generate_tutor_response(canon_ctx, solution, official_answer, history_msgs,
                             user_message, summary=None, subject_name="Matematika",
-                            model=None, image_paths=None):
+                            model=None, image_paths=None, behavior_context=""):
     """Panggil LLM dengan konteks lengkap. Melempar tutor_llm.LLMError saat gagal."""
     messages, meta = build_tutor_prompt(canon_ctx, solution, official_answer,
-                                        history_msgs, user_message, summary, subject_name)
+                                        history_msgs, user_message, summary, subject_name,
+                                        behavior_context=behavior_context)
     reply_or_tuple = tutor_llm.generate(messages, model=model, image_paths=image_paths,
                                         temperature=meta["temperature"], return_meta=True)
     if isinstance(reply_or_tuple, tuple):

@@ -956,6 +956,206 @@ class TestBuildEvidenceStandalone(unittest.TestCase):
 
 
 # ============================================================================
+# 5. SALINAN FUNGSI MURNI FASE B1 DARI server.py (Konteks Perilaku AI Tutor)
+# ============================================================================
+
+def format_student_behavior_context(item_data):
+    """Rakit string konteks perilaku murid untuk satu butir soal (FASE B1).
+    
+    Format:
+    "Konteks perilaku murid di soal ini: [waktu] detik, jawaban [awal]→[akhir], [ragu/tidak ragu]. Sesuaikan penjelasanmu: tanyakan di mana dia berhenti berpikir; jangan langsung kasih jawaban lengkap kalau dia cuma salah baca."
+    """
+    if not item_data or not isinstance(item_data, dict):
+        return ""
+
+    waktu = item_data.get("waktu_detik")
+    if waktu is None:
+        active_ms = item_data.get("active_ms") or 0
+        waktu = round(active_ms / 1000)
+    waktu = int(waktu or 0)
+
+    awal = item_data.get("first_answer") or item_data.get("jawaban_awal") or "-"
+    akhir = item_data.get("final_answer") or item_data.get("jawaban_akhir") or "-"
+
+    is_ragu = bool(item_data.get("ragu") if item_data.get("ragu") is not None
+                   else item_data.get("flagged_ragu"))
+    ragu_str = "ragu" if is_ragu else "tidak ragu"
+
+    ctx = (
+        f"Konteks perilaku murid di soal ini: {waktu} detik, jawaban {awal}→{akhir}, {ragu_str}. "
+        "Sesuaikan penjelasanmu: tanyakan di mana dia berhenti berpikir; jangan langsung kasih jawaban lengkap kalau dia cuma salah baca."
+    )
+
+    change_count = item_data.get("ganti_jawaban") if item_data.get("ganti_jawaban") is not None else item_data.get("change_count")
+    if change_count and int(change_count) > 0:
+        ctx += f" (Murid mengganti jawaban sebanyak {change_count} kali)."
+
+    jejak = item_data.get("jejak") or []
+    if isinstance(jejak, list) and len(jejak) > 1:
+        jejak_parts = []
+        for ev in jejak[:5]:
+            if isinstance(ev, dict):
+                aksi = ev.get("aksi", "event")
+                opsi = f" {ev.get('opsi')}" if ev.get("opsi") else ""
+                t = ev.get("t_detik", 0)
+                jejak_parts.append(f"{aksi}{opsi} ({t}s)")
+        if jejak_parts:
+            ctx += f" Jejak kronologis: {' -> '.join(jejak_parts)}."
+
+    return ctx
+
+
+def find_question_item_in_attempt(items, nomor=None, question_id=None):
+    """Cari dict item spesifik dari daftar items attempt berdasarkan nomor urut (position) atau question_id."""
+    if not items or not isinstance(items, list):
+        return None
+
+    if nomor is not None:
+        try:
+            nomor_int = int(nomor)
+            for it in items:
+                if isinstance(it, dict) and int(it.get("position") or 0) == nomor_int:
+                    return it
+        except (ValueError, TypeError):
+            pass
+
+    if question_id:
+        qid_str = str(question_id).strip()
+        for it in items:
+            if isinstance(it, dict):
+                sid = str(it.get("soal_id") or "").strip()
+                if sid == qid_str or (nomor is not None and sid.endswith(f"_n{nomor}")):
+                    return it
+
+    return None
+
+
+def build_soal_behavior_context(user_id=None, nomor=None, question_id=None, attempt_id=None, fetch_fn=None):
+    """Rakit konteks perilaku untuk AI Tutor dari database attempts."""
+    items = fetch_fn(user_id=user_id, attempt_id=attempt_id) if fetch_fn else []
+    if not items:
+        return ""
+    item = find_question_item_in_attempt(items, nomor=nomor, question_id=question_id)
+    if not item:
+        return ""
+    return format_student_behavior_context(item)
+
+
+# Impor helper prompt tutor untuk pengujian injeksi sistem
+from tutor_engine import build_tutor_prompt
+
+
+# ============================================================================
+# TEST SUITE 6: FASE B1 — Konteks Perilaku Murid ke AI Tutor (7 Test Cases)
+# ============================================================================
+
+class TestTutorBehaviorContextStandalone(unittest.TestCase):
+    def setUp(self):
+        self.item_ragu_ganti = {
+            "soal_id": "matematika_p1_n3",
+            "position": 3,
+            "waktu_detik": 45,
+            "first_answer": "A",
+            "final_answer": "B",
+            "ganti_jawaban": 1,
+            "ragu": True,
+            "jejak": [
+                {"t_detik": 5, "aksi": "pilih", "opsi": "A"},
+                {"t_detik": 25, "aksi": "ganti", "opsi": "B"},
+                {"t_detik": 35, "aksi": "ragu"}
+            ]
+        }
+        self.item_lancar = {
+            "soal_id": "matematika_p1_n1",
+            "position": 1,
+            "waktu_detik": 15,
+            "first_answer": "C",
+            "final_answer": "C",
+            "ganti_jawaban": 0,
+            "ragu": False,
+            "jejak": [
+                {"t_detik": 15, "aksi": "pilih", "opsi": "C"}
+            ]
+        }
+        self.items_attempt = [self.item_lancar, self.item_ragu_ganti]
+
+    def test_1_format_behavior_with_full_jejak(self):
+        """1. Format teks konteks memuat durasi detik, jawaban awal->akhir, status ragu, dan jejak."""
+        ctx = format_student_behavior_context(self.item_ragu_ganti)
+        self.assertIn("Konteks perilaku murid di soal ini: 45 detik, jawaban A→B, ragu.", ctx)
+        self.assertIn("Sesuaikan penjelasanmu: tanyakan di mana dia berhenti berpikir; jangan langsung kasih jawaban lengkap kalau dia cuma salah baca.", ctx)
+        self.assertIn("Murid mengganti jawaban sebanyak 1 kali", ctx)
+        self.assertIn("Jejak kronologis: pilih A (5s) -> ganti B (25s) -> ragu (35s)", ctx)
+
+    def test_2_format_behavior_tidak_ragu_dan_tanpa_ganti(self):
+        """2. Format soal lancar memuat status 'tidak ragu' tanpa kalimat pergantian jawaban."""
+        ctx = format_student_behavior_context(self.item_lancar)
+        self.assertIn("Konteks perilaku murid di soal ini: 15 detik, jawaban C→C, tidak ragu.", ctx)
+        self.assertIn("Sesuaikan penjelasanmu: tanyakan di mana dia berhenti berpikir", ctx)
+        self.assertNotIn("Murid mengganti jawaban", ctx)
+
+    def test_3_find_question_item_by_position(self):
+        """3. Pencarian item berdasarkan nomor posisi (position) menemukan data yang tepat."""
+        found = find_question_item_in_attempt(self.items_attempt, nomor=3)
+        self.assertIsNotNone(found)
+        self.assertEqual(found["position"], 3)
+        self.assertEqual(found["soal_id"], "matematika_p1_n3")
+
+    def test_4_find_question_item_by_soal_id(self):
+        """4. Pencarian item berdasarkan question_id menemukan data yang tepat."""
+        found = find_question_item_in_attempt(self.items_attempt, question_id="matematika_p1_n1")
+        self.assertIsNotNone(found)
+        self.assertEqual(found["position"], 1)
+
+    def test_5_question_not_attempted_returns_empty_context(self):
+        """5. Soal yang belum pernah dikerjakan menghasilkan konteks kosong (string empty)."""
+        mock_fetcher = MagicMock(return_value=self.items_attempt)
+        # Soal nomor 99 belum pernah ada di attempt
+        ctx = build_soal_behavior_context(user_id="user_test", nomor=99, fetch_fn=mock_fetcher)
+        self.assertEqual(ctx, "")
+
+        # Attempt kosong sama sekali
+        mock_empty_fetcher = MagicMock(return_value=[])
+        ctx_empty = build_soal_behavior_context(user_id="user_test", nomor=1, fetch_fn=mock_empty_fetcher)
+        self.assertEqual(ctx_empty, "")
+
+    def test_6_build_soal_behavior_context_with_mock_fetcher(self):
+        """6. Integrasi build_soal_behavior_context dengan mock fetcher database Supabase."""
+        mock_fetcher = MagicMock(return_value=self.items_attempt)
+        ctx = build_soal_behavior_context(user_id="usr_abc", nomor=3, fetch_fn=mock_fetcher)
+        mock_fetcher.assert_called_once_with(user_id="usr_abc", attempt_id=None)
+        self.assertIn("jawaban A→B, ragu", ctx)
+
+    def test_7_system_prompt_injection(self):
+        """7. Injeksi konteks perilaku ke system prompt tutor (tutor_engine.build_tutor_prompt)."""
+        ctx_text = format_student_behavior_context(self.item_ragu_ganti)
+        canon_ctx = {
+            "text": "Jika x + 2 = 5, berapa x?",
+            "options": [{"key": "A", "text": "2"}, {"key": "B", "text": "3"}],
+            "subject": "Matematika"
+        }
+        solution = {"diketahui": "x + 2 = 5", "langkah_penyelesaian": ["x = 3"]}
+        
+        # 1. Dengan behavior_context
+        messages, meta = build_tutor_prompt(
+            canon_ctx, solution, "B", [], "Bantu saya nomor ini",
+            behavior_context=ctx_text
+        )
+        sys_prompt = messages[0]["content"]
+        self.assertIn("<student_behavior>", sys_prompt)
+        self.assertIn("jawaban A→B, ragu", sys_prompt)
+        self.assertIn("Sesuaikan penjelasanmu: tanyakan di mana dia berhenti berpikir", sys_prompt)
+
+        # 2. Tanpa behavior_context (soal baru / belum pernah dikerjakan)
+        messages_clean, _ = build_tutor_prompt(
+            canon_ctx, solution, "B", [], "Bantu saya nomor ini",
+            behavior_context=""
+        )
+        sys_prompt_clean = messages_clean[0]["content"]
+        self.assertNotIn("<student_behavior>", sys_prompt_clean)
+
+
+# ============================================================================
 # RUNNER
 # ============================================================================
 

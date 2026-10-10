@@ -1,5 +1,6 @@
 import re
 import os
+import sys
 import json
 import gzip
 import traceback
@@ -10,6 +11,13 @@ import urllib.error
 import threading
 import time
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
+
+if hasattr(sys.stdout, 'reconfigure'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
 
 import solution_loader  # noqa: E402  (sumber Layer 3: solusi spesifik Claude)
 import tutor_engine    # noqa: E402  (mesin tutor konversasional berbasis LLM)
@@ -1039,6 +1047,125 @@ def clean_attempt_items(raw_items):
         return False, "Semua item di dalam items tidak valid.", []
 
     return True, "", clean_items
+
+
+# ============================================================================
+# FASE B1: Helper Konteks Perilaku Murid per Soal untuk AI Tutor
+# ============================================================================
+
+def format_student_behavior_context(item_data):
+    """Rakit string konteks perilaku murid untuk satu butir soal (FASE B1).
+    
+    Format:
+    "Konteks perilaku murid di soal ini: [waktu] detik, jawaban [awal]→[akhir], [ragu/tidak ragu]. Sesuaikan penjelasanmu: tanyakan di mana dia berhenti berpikir; jangan langsung kasih jawaban lengkap kalau dia cuma salah baca."
+    """
+    if not item_data or not isinstance(item_data, dict):
+        return ""
+
+    waktu = item_data.get("waktu_detik")
+    if waktu is None:
+        active_ms = item_data.get("active_ms") or 0
+        waktu = round(active_ms / 1000)
+    waktu = int(waktu or 0)
+
+    awal = item_data.get("first_answer") or item_data.get("jawaban_awal") or "-"
+    akhir = item_data.get("final_answer") or item_data.get("jawaban_akhir") or "-"
+
+    is_ragu = bool(item_data.get("ragu") if item_data.get("ragu") is not None
+                   else item_data.get("flagged_ragu"))
+    ragu_str = "ragu" if is_ragu else "tidak ragu"
+
+    ctx = (
+        f"Konteks perilaku murid di soal ini: {waktu} detik, jawaban {awal}→{akhir}, {ragu_str}. "
+        "Sesuaikan penjelasanmu: tanyakan di mana dia berhenti berpikir; jangan langsung kasih jawaban lengkap kalau dia cuma salah baca."
+    )
+
+    change_count = item_data.get("ganti_jawaban") if item_data.get("ganti_jawaban") is not None else item_data.get("change_count")
+    if change_count and int(change_count) > 0:
+        ctx += f" (Murid mengganti jawaban sebanyak {change_count} kali)."
+
+    jejak = item_data.get("jejak") or []
+    if isinstance(jejak, list) and len(jejak) > 1:
+        jejak_parts = []
+        for ev in jejak[:5]:
+            if isinstance(ev, dict):
+                aksi = ev.get("aksi", "event")
+                opsi = f" {ev.get('opsi')}" if ev.get("opsi") else ""
+                t = ev.get("t_detik", 0)
+                jejak_parts.append(f"{aksi}{opsi} ({t}s)")
+        if jejak_parts:
+            ctx += f" Jejak kronologis: {' -> '.join(jejak_parts)}."
+
+    return ctx
+
+
+def find_question_item_in_attempt(items, nomor=None, question_id=None):
+    """Cari dict item spesifik dari daftar items attempt berdasarkan nomor urut (position) atau question_id."""
+    if not items or not isinstance(items, list):
+        return None
+
+    if nomor is not None:
+        try:
+            nomor_int = int(nomor)
+            for it in items:
+                if isinstance(it, dict) and int(it.get("position") or 0) == nomor_int:
+                    return it
+        except (ValueError, TypeError):
+            pass
+
+    if question_id:
+        qid_str = str(question_id).strip()
+        for it in items:
+            if isinstance(it, dict):
+                sid = str(it.get("soal_id") or "").strip()
+                if sid == qid_str or (nomor is not None and sid.endswith(f"_n{nomor}")):
+                    return it
+
+    return None
+
+
+def fetch_attempt_items_from_db(user_id=None, attempt_id=None, sb_url=None, sb_svc=None, timeout=5):
+    """Ambil items attempt dari Supabase database."""
+    sb_url = (sb_url or os.environ.get('SUPABASE_URL', '')).rstrip('/')
+    sb_svc = sb_svc or os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+    if not sb_url or not sb_svc:
+        return []
+
+    try:
+        endpoint = None
+        if attempt_id:
+            endpoint = f"{sb_url}/rest/v1/attempts?id=eq.{urllib.parse.quote(str(attempt_id))}&select=items"
+        elif user_id:
+            endpoint = f"{sb_url}/rest/v1/attempts?user_id=eq.{urllib.parse.quote(str(user_id))}&order=created_at.desc&limit=1&select=items"
+
+        if not endpoint:
+            return []
+
+        req = urllib.request.Request(
+            endpoint,
+            headers={"apikey": sb_svc, "Authorization": f"Bearer {sb_svc}"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8") or "[]")
+            if rows and isinstance(rows, list) and rows:
+                raw_items = rows[0].get("items")
+                ok, _, clean_items = clean_attempt_items(raw_items)
+                return clean_items if ok else (raw_items if isinstance(raw_items, list) else [])
+    except Exception as ex:
+        sys.stderr.write(f"[fetch_attempt_items_from_db] Gagal mengambil attempt: {ex}\n")
+        return []
+    return []
+
+
+def build_soal_behavior_context(user_id=None, nomor=None, question_id=None, attempt_id=None, sb_url=None, sb_svc=None):
+    """Rakit konteks perilaku untuk AI Tutor dari database attempts."""
+    items = fetch_attempt_items_from_db(user_id=user_id, attempt_id=attempt_id, sb_url=sb_url, sb_svc=sb_svc)
+    if not items:
+        return ""
+    item = find_question_item_in_attempt(items, nomor=nomor, question_id=question_id)
+    if not item:
+        return ""
+    return format_student_behavior_context(item)
 
 
 class AppRequestHandler(SimpleHTTPRequestHandler):
@@ -2149,13 +2276,38 @@ function salinWA() {
                         "message": "Antrean AI Tutor sedang padat. Tunggu beberapa detik lalu kirim ulang ya!",
                     }, cookie_value=new_cookie)
 
+                # FASE B1: Ambil data attempt murid dari database untuk merakit konteks perilaku
+                behavior_context = ""
+                try:
+                    auth_hdr = self.headers.get('Authorization', '') or ''
+                    token_user = auth_hdr[7:].strip() if auth_hdr.startswith('Bearer ') else ''
+                    target_user_id = None
+                    if token_user:
+                        _vok, _u = _verify_supabase_token(token_user)
+                        if _vok and (_u or {}).get('id'):
+                            target_user_id = _u['id']
+
+                    client_attempt_id = payload.get("attempt_id")
+                    behavior_context = build_soal_behavior_context(
+                        user_id=target_user_id,
+                        nomor=nomor,
+                        question_id=payload.get("question_id"),
+                        attempt_id=client_attempt_id
+                    )
+                    if behavior_context:
+                        print(f"[/api/tutor/chat] Konteks perilaku aktif untuk soal #{nomor}: {behavior_context}")
+                except Exception as _b_err:
+                    sys.stderr.write(f"[/api/tutor/chat] Gagal merakit behavior context: {_b_err}\n")
+                    behavior_context = ""
+
                 try:
                     reply, meta = tutor_engine.generate_tutor_response(
                         ctx["canon_ctx"], ctx["solution"], ctx["official_answer"],
                         history_for_prompt, message, summary=conv.get("summary"),
                         subject_name=ctx["subject_name"],
                         model=model,
-                        image_paths=ctx.get("image_paths", []))
+                        image_paths=ctx.get("image_paths", []),
+                        behavior_context=behavior_context)
                 except tutor_llm.LLMError as e:
                     _refresh_tutor_summary(conv_id)
                     return self._send_json(502, {
