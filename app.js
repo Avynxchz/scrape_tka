@@ -1723,6 +1723,24 @@ function getCurrentQuestion() {
 function renderQuestion() {
   const q = getCurrentQuestion();
   if (!q) return;
+
+  // B2: Pastikan timer dan perekam attempt aktif selama ujian berlangsung
+  const curKey = pkgKey();
+  const testDone = isTestFinished();
+  if (!testDone) {
+    const pkg = state.pkgData[curKey];
+    const totalSoal = (pkg && pkg.soal) ? pkg.soal.length : 40;
+    const durSec = getTimerTotalSeconds();
+    if (typeof SimTimer !== 'undefined') {
+      SimTimer.start(curKey, durSec);
+    }
+    if (typeof AttemptRecorder !== 'undefined') {
+      if (!AttemptRecorder.active || AttemptRecorder.active.subject !== state.currentSubject || AttemptRecorder.active.paket !== state.currentPkg) {
+        AttemptRecorder.start(state.currentSubject, state.currentPkg, totalSoal, durSec);
+      }
+    }
+  }
+
   // FASE 3 (T3.2): rekam kunjungan + waktu aktif per soal
   try { AttemptRecorder.onVisit(q.nomor, q.topik || null); } catch (e) {}
   // FASE D (D1): rekam tampil soal
@@ -5182,6 +5200,7 @@ function evaluateQuestion(item) {
 }
 
 function selesaiTes() {
+  if (typeof SimTimer !== 'undefined') SimTimer.stop();
   // FASE 3 (T3.2/T3.3): simpan attempt ke antrean lalu upload sekali.
   try {
     const _att = AttemptRecorder.finish(window._finishByTimer ? 'timer' : 'user');
@@ -7195,12 +7214,9 @@ function _isLoggedIn() {
     return !!(s && s.access_token);
   } catch (e) { return false; }
 }
-let _simTimerInterval = null;
-
-function _timerStorageKey() {
-  return 'tka_timer_remaining_' + pkgKey();
-}
-
+// ============================================================================
+// B2: SIMULATION TIMER (Timestamp delta Date.now() - Akurat di Background)
+// ============================================================================
 function _fmtTimer(sec) {
   sec = Math.max(0, sec);
   const h = String(Math.floor(sec / 3600)).padStart(2, '0');
@@ -7209,35 +7225,86 @@ function _fmtTimer(sec) {
   return `${h}:${m}:${s}`;
 }
 
-function _tickSimTimer() {
-  const el = document.getElementById('timerText');
-  if (!el) return;
-  let rem = parseInt(localStorage.getItem(_timerStorageKey()), 10);
-  if (isNaN(rem)) rem = getTimerTotalSeconds();
-  if (rem > 0) {
-    rem -= 1;
-    try { localStorage.setItem(_timerStorageKey(), String(rem)); } catch (e) {}
+const SimTimer = {
+  _startTimeMs: null,
+  _totalSeconds: 0,
+  _intervalId: null,
+  _activePkg: null,
+
+  init(pkgKey, durationSec) {
+    this.stop();
+    this._activePkg = pkgKey || (state.currentSubject + ':' + state.currentPkg);
+    this._totalSeconds = Number(durationSec) || getTimerTotalSeconds();
+    this._startTimeMs = Date.now();
+    this.render();
+    this._intervalId = setInterval(() => this.tick(), 1000);
+  },
+
+  start(pkgKey, durationSec) {
+    if (this._activePkg === pkgKey && this._intervalId && this._startTimeMs) {
+      this.render();
+      return;
+    }
+    this.init(pkgKey, durationSec);
+  },
+
+  stop() {
+    if (this._intervalId) {
+      clearInterval(this._intervalId);
+      this._intervalId = null;
+    }
+  },
+
+  reset() {
+    this.stop();
+    this._startTimeMs = null;
+    this._totalSeconds = 0;
+    this._activePkg = null;
+    const el = document.getElementById('timerText');
+    if (el) el.innerText = _fmtTimer(getTimerTotalSeconds());
+    const pill = document.getElementById('timerPill');
+    if (pill) pill.classList.remove('timer-habis');
+  },
+
+  getRemainingSeconds() {
+    if (!this._startTimeMs) return this._totalSeconds || getTimerTotalSeconds();
+    const elapsedSec = Math.floor((Date.now() - this._startTimeMs) / 1000);
+    return Math.max(0, (this._totalSeconds || getTimerTotalSeconds()) - elapsedSec);
+  },
+
+  getElapsedSeconds() {
+    if (!this._startTimeMs) return 0;
+    return Math.floor((Date.now() - this._startTimeMs) / 1000);
+  },
+
+  tick() {
+    const rem = this.getRemainingSeconds();
+    this.render();
+    if (rem <= 0) {
+      this.stop();
+      try {
+        if (!((state.testFinished || {})[pkgKey()])) {
+          window._finishByTimer = true;
+          if (typeof openFinishModal === 'function') openFinishModal();
+          else if (typeof selesaiTes === 'function') selesaiTes();
+        }
+      } catch (e) {}
+    }
+  },
+
+  render() {
+    const el = document.getElementById('timerText');
+    if (!el) return;
+    const rem = this.getRemainingSeconds();
+    el.innerText = _fmtTimer(rem);
+    const pill = document.getElementById('timerPill');
+    if (pill) pill.classList.toggle('timer-habis', rem <= 300);
   }
-  el.innerText = _fmtTimer(rem);
-  const pill = document.getElementById('timerPill');
-  if (pill) pill.classList.toggle('timer-habis', rem <= 300);
-  if (rem <= 0 && _simTimerInterval) {
-    clearInterval(_simTimerInterval);
-    _simTimerInterval = null;
-    // FASE 3: waktu habis -> arahkan selesai (ended_by=timer untuk Autopsi)
-    try {
-      if (!((state.testFinished || {})[pkgKey()])) {
-        window._finishByTimer = true;
-        if (typeof openFinishModal === 'function') openFinishModal();
-        else if (typeof selesaiTes === 'function') selesaiTes();
-      }
-    } catch (e) {}
-  }
-}
+};
+window.SimTimer = SimTimer;
 
 document.addEventListener('DOMContentLoaded', () => {
-  _tickSimTimer();
-  if (!_simTimerInterval) _simTimerInterval = setInterval(_tickSimTimer, 1000);
+  if (typeof SimTimer !== 'undefined') SimTimer.render();
 });
 
 // ==========================================================================
