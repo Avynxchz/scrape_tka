@@ -2338,8 +2338,6 @@ function cleanUiStimulusText(stimText, stimImages) {
   // Sinkronkan status Tes Selesai / Mode Reviu (Pengecekan Nilai & Kunci Jawaban)
   const isFinished = isTestFinished();
   const btnFinishHeader = document.getElementById('btnFinishHeader');
-  const btnMobileReviu = document.getElementById('btnMobileReviuHeader');
-  const btnCheck = document.getElementById('btnCheckAnswer');
   const btnFinishModal = document.querySelector('.btn-finish-from-modal');
 
   if (isFinished) {
@@ -2348,15 +2346,6 @@ function cleanUiStimulusText(stimText, stimImages) {
       btnFinishHeader.title = 'Buka Reviu Nilai & Kunci Jawaban';
       btnFinishHeader.onclick = () => renderReviewHasil();
       btnFinishHeader.classList.add('btn-reviu-active');
-    }
-    if (btnMobileReviu) {
-      btnMobileReviu.style.display = 'inline-flex';
-    }
-    if (btnCheck) {
-      btnCheck.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> <span>Reviu Hasil & Kunci</span>';
-      btnCheck.onclick = () => renderReviewHasil();
-      btnCheck.style.background = '#004a2a';
-      btnCheck.style.color = '#ffffff';
     }
     if (btnFinishModal) {
       btnFinishModal.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Buka Reviu Hasil & Kunci Jawaban';
@@ -2369,9 +2358,19 @@ function cleanUiStimulusText(stimText, stimImages) {
       btnFinishHeader.onclick = () => openFinishModal();
       btnFinishHeader.classList.remove('btn-reviu-active');
     }
-    if (btnMobileReviu) {
-      btnMobileReviu.style.display = 'none';
+    if (btnFinishModal) {
+      btnFinishModal.innerHTML = '<i class="fa-solid fa-flag-checkered"></i> Selesai Tes';
+      btnFinishModal.onclick = () => { closeDaftarModal(); openFinishModal(); };
     }
+  }
+
+  // Tombol Cek Jawaban di bilah bawah selalu bertindak sebagai Cek Jawaban (standar)
+  const btnCheck = document.getElementById('btnCheckAnswer');
+  if (btnCheck) {
+    btnCheck.onclick = () => checkUserAnswer();
+    btnCheck.style.background = '';
+    btnCheck.style.color = '';
+    if (typeof syncCheckLabel === 'function') syncCheckLabel();
   }
 
   // Trigger KaTeX render
@@ -2929,6 +2928,7 @@ function switchWorkTab(tab, sub, opts) {
       setExplanationCollapsed(false);
     }
     switchPembSub(sub || state.pembSub || 'materi', o);
+    renderMath(panePemb);
   }
   syncRail(tab === 'soal' ? 'soal' : (sub || state.pembSub || 'materi'));
   if (o.scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3218,7 +3218,20 @@ function _escHtml(s) {
 }
 
 function _fmtText(s) {
-  let text = _escHtml(s);
+  if (!s) return '';
+  let str = String(s);
+  // Lindungi display math $$...$$ agar baris baru di dalamnya tidak diubah jadi <br>
+  str = str.replace(/\$\$([\s\S]*?)\$\$/g, (m, inner) => {
+    return '$$' + inner.replace(/\n+/g, ' ') + '$$';
+  });
+  let text = _escHtml(str);
+  // Decode kembali karakter math khusus yang di-escape agar KaTeX tidak gagal me-render
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, inner) => {
+    return '$$' + inner.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"') + '$$';
+  });
+  text = text.replace(/\$([^\$\n]+?)\$/g, (m, inner) => {
+    return '$' + inner.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"') + '$';
+  });
   // Bersihkan sisa header markdown (### Judul)
   text = text.replace(/(?:^|\n)#{2,6}\s+\*\*([^*]+)\*\*/g, '\n<strong>$1:</strong>\n');
   text = text.replace(/(?:^|\n)#{2,6}\s+([^\n]+)/g, '\n<strong>$1:</strong>\n');
@@ -5377,24 +5390,31 @@ window.addEventListener('beforeunload', (e) => {
 function renderMath(targetEl) {
   if (typeof window.renderMathInElement !== 'function') return;
   try {
-    const container = targetEl || document.getElementById('cbtExamGrid') || document.querySelector('.cbt-workspace') || document.querySelector('.main-container');
-    if (!container) return;
+    const targets = targetEl
+      ? [targetEl]
+      : [
+          document.getElementById('cbtExamGrid'),
+          document.getElementById('workPanePembahasan'),
+          document.getElementById('practiceCard')
+        ].filter(Boolean);
 
-    // Fast bail-out: Jika tidak ada token matematika sama sekali, lewati parsing KaTeX untuk hemat CPU
-    const text = container.textContent || '';
-    if (!text.includes('$') && !text.includes('\\(') && !text.includes('\\[') && !container.innerHTML.includes('data-latex')) {
-      return;
-    }
+    targets.forEach(container => {
+      // Fast bail-out: Jika tidak ada token matematika sama sekali, lewati parsing KaTeX untuk hemat CPU
+      const text = container.textContent || '';
+      if (!text.includes('$') && !text.includes('\\(') && !text.includes('\\[') && !container.innerHTML.includes('data-latex')) {
+        return;
+      }
 
-    renderMathInElement(container, {
-      delimiters: [
-        { left: '$$', right: '$$', display: true },
-        { left: '$', right: '$', display: false },
-        { left: '\\(', right: '\\)', display: false },
-        { left: '\\[', right: '\\]', display: true }
-      ],
-      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option', 'iframe', 'svg'],
-      throwOnError: false
+      renderMathInElement(container, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option', 'iframe', 'svg'],
+        throwOnError: false
+      });
     });
   } catch (e) {
     console.warn('KaTeX rendering notice:', e);

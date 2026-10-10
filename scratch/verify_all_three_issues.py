@@ -85,9 +85,10 @@ def run_tests():
         page_mob.screenshot(path=os.path.join(ARTIFACTS_DIR, "verify_mobile_quiz_finished.png"))
         print("  -> Screenshot Mobile Kuis Selesai: verify_mobile_quiz_finished.png")
         
-        # Klik tombol Reviu di header mobile untuk membuktikan bisa dibuka kembali kapan saja
+        # Buka kembali reviu lewat modal daftar soal
         page_mob.evaluate("""() => {
-            const b = document.getElementById('btnMobileReviuHeader');
+            openDaftarModal();
+            const b = document.querySelector('.btn-finish-from-modal');
             if (b) b.click();
         }""")
         page_mob.wait_for_timeout(800)
