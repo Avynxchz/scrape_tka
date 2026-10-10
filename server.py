@@ -20,8 +20,12 @@ import feature_flags   # noqa: E402  (feature flags Autopsi/Sprint — FASE 0 T0
 import auth_verify     # noqa: E402  (verifikasi JWT Supabase — FASE 2 T2.11)
 try:
     from autopsy import analyzer as autopsy_analyzer  # noqa: E402  (Fase 4)
+    from autopsy import evidence as autopsy_evidence  # noqa: E402  (Fase A2)
+    from autopsy import coach as autopsy_coach        # noqa: E402  (Fase A3)
 except ImportError:
     autopsy_analyzer = None
+    autopsy_evidence = None
+    autopsy_coach = None
 
 tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
 feature_flags.init_flags()  # tabel feature_flags + seed 7 flag OFF (idempoten)
@@ -31,6 +35,8 @@ feature_flags.init_flags()  # tabel feature_flags + seed 7 flag OFF (idempoten)
 # ============================================================================
 MAX_CONCURRENT_LLM = int(os.environ.get("LLM_MAX_CONCURRENT", "6"))
 _llm_concurrency_semaphore = threading.Semaphore(MAX_CONCURRENT_LLM)
+_COACH_CACHE = {}         # {attempt_id: coach_result_dict}
+_COACH_RATE_LIMIT = {}    # {user_id: [timestamps]}
 
 PORT = int(os.environ.get("PORT", 8080))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -1471,6 +1477,154 @@ function salinWA() {
         except Exception as e:
             return self._send_500(e, "/api/admin/autopsy_full")
 
+    def _handle_get_autopsy_coach(self):
+        """GET /api/autopsy/coach?attempt_id=... — Mengambil hasil Guru Autopsi ter-cache."""
+        try:
+            if autopsy_coach is None:
+                return self._send_json(503, {"status": "error", "message": "Layanan coach belum tersedia."})
+            _auth = self.headers.get('Authorization', '') or ''
+            _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
+            if not _token:
+                return self._send_json(401, {"status": "unauthorized", "message": "Login diperlukan."})
+            _vok, _user = _verify_supabase_token(_token)
+            if not _vok or not (_user or {}).get('id'):
+                return self._send_json(401, {"status": "unauthorized", "message": "Token tidak valid atau sesi berakhir."})
+            user_id = str(_user['id'])
+
+            q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+            attempt_id = (q.get('attempt_id', [''])[0] or '').strip()
+            if not attempt_id:
+                return self._send_json(400, {"status": "error", "message": "attempt_id diperlukan."})
+
+            # Cek memory cache
+            cached = _COACH_CACHE.get(attempt_id)
+            if cached:
+                cached_owner = cached.get("_user_id")
+                if cached_owner and cached_owner != user_id and not self._is_valid_admin():
+                    return self._send_json(403, {"status": "forbidden", "message": "Anda bukan pemilik attempt ini."})
+                res = {k: v for k, v in cached.items() if not k.startswith("_")}
+                return self._send_json(200, {"status": "success", "attempt_id": attempt_id, "coach": res, "cached": True})
+
+            # Ambil dari Supabase
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+            if not sb_url or not sb_svc:
+                return self._send_json(404, {"status": "error", "message": "Hasil coach belum tersedia."})
+
+            req = urllib.request.Request(
+                sb_url + "/rest/v1/attempts?id=eq." + urllib.parse.quote(attempt_id) + "&select=*",
+                headers={"apikey": sb_svc, "Authorization": "Bearer " + sb_svc})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                rows = json.loads(resp.read().decode("utf-8") or "[]")
+            if not rows:
+                return self._send_json(404, {"status": "error", "message": "Attempt tidak ditemukan."})
+
+            att = rows[0]
+            if str(att.get('user_id')) != user_id and not self._is_valid_admin():
+                return self._send_json(403, {"status": "forbidden", "message": "Anda bukan pemilik attempt ini."})
+
+            coach_res = att.get('coach_result')
+            if not coach_res:
+                return self._send_json(404, {"status": "error", "message": "Hasil coach belum dihitung untuk attempt ini."})
+
+            _COACH_CACHE[attempt_id] = {**coach_res, "_user_id": user_id}
+            return self._send_json(200, {"status": "success", "attempt_id": attempt_id, "coach": coach_res, "cached": True})
+        except Exception as e:
+            return self._send_500(e, "GET /api/autopsy/coach")
+
+    def _handle_post_autopsy_coach(self):
+        """POST /api/autopsy/coach — Menjalankan atau mengambil analisis Guru Autopsi."""
+        try:
+            if autopsy_coach is None or autopsy_evidence is None:
+                return self._send_json(503, {"status": "error", "message": "Layanan Guru Autopsi belum tersedia."})
+            _auth = self.headers.get('Authorization', '') or ''
+            _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
+            if not _token:
+                return self._send_json(401, {"status": "unauthorized", "message": "Login diperlukan untuk mengakses Guru Autopsi."})
+            _vok, _user = _verify_supabase_token(_token)
+            if not _vok or not (_user or {}).get('id'):
+                return self._send_json(401, {"status": "unauthorized", "message": "Token tidak valid atau sesi berakhir."})
+            user_id = str(_user['id'])
+
+            # Rate limit check (maks 10 request per menit per user)
+            now = time.time()
+            user_history = _COACH_RATE_LIMIT.setdefault(user_id, [])
+            user_history[:] = [t for t in user_history if now - t < 60]
+            if len(user_history) >= 10:
+                return self._send_json(429, {"status": "error", "message": "Terlalu banyak permintaan Guru Autopsi. Silakan tunggu 1 menit."})
+            user_history.append(now)
+
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            payload = json.loads(post_data) if post_data else {}
+
+            attempt_id = str(payload.get('attempt_id') or '').strip()
+            attempt_data = payload.get('attempt')
+
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+
+            # Jika ada attempt_id, periksa cache dan database
+            if attempt_id:
+                # 1. Cek memory cache
+                cached = _COACH_CACHE.get(attempt_id)
+                if cached:
+                    cached_owner = cached.get("_user_id")
+                    if cached_owner and cached_owner != user_id and not self._is_valid_admin():
+                        return self._send_json(403, {"status": "forbidden", "message": "Anda bukan pemilik attempt ini."})
+                    res = {k: v for k, v in cached.items() if not k.startswith("_")}
+                    return self._send_json(200, {"status": "success", "attempt_id": attempt_id, "coach": res, "cached": True})
+
+                # 2. Ambil attempt dari Supabase
+                if sb_url and sb_svc:
+                    req = urllib.request.Request(
+                        sb_url + "/rest/v1/attempts?id=eq." + urllib.parse.quote(attempt_id) + "&select=*",
+                        headers={"apikey": sb_svc, "Authorization": "Bearer " + sb_svc})
+                    with urllib.request.urlopen(req, timeout=10) as resp:
+                        rows = json.loads(resp.read().decode("utf-8") or "[]")
+                    if not rows:
+                        return self._send_json(404, {"status": "error", "message": "Attempt tidak ditemukan."})
+                    att = rows[0]
+                    # Ownership check (keamanan Bagian 9)
+                    if str(att.get('user_id')) != user_id and not self._is_valid_admin():
+                        return self._send_json(403, {"status": "forbidden", "message": "Anda bukan pemilik attempt ini."})
+                    if att.get('coach_result'):
+                        _COACH_CACHE[attempt_id] = {**att['coach_result'], "_user_id": user_id}
+                        return self._send_json(200, {"status": "success", "attempt_id": attempt_id, "coach": att['coach_result'], "cached": True})
+                    attempt_data = att
+
+            if not attempt_data:
+                return self._send_json(400, {"status": "error", "message": "attempt_id atau payload attempt wajib diisi."})
+
+            # Bangun evidence pack (fungsi murni)
+            evidence = autopsy_evidence.build_evidence(attempt_data)
+
+            # Panggil layanan Guru AI (dengan fallback template otomatis jika LLM/validasi gagal)
+            coach_out, meta = autopsy_coach.generate_coach(evidence)
+
+            # Simpan cache
+            if attempt_id:
+                _COACH_CACHE[attempt_id] = {**coach_out, "_user_id": user_id}
+                if sb_url and sb_svc:
+                    try:
+                        patch_req = urllib.request.Request(
+                            sb_url + "/rest/v1/attempts?id=eq." + urllib.parse.quote(attempt_id),
+                            data=json.dumps({"coach_result": coach_out}).encode("utf-8"),
+                            method="PATCH",
+                            headers={"apikey": sb_svc, "Authorization": "Bearer " + sb_svc, "Content-Type": "application/json"})
+                        urllib.request.urlopen(patch_req, timeout=5)
+                    except Exception:
+                        pass
+
+            return self._send_json(200, {
+                "status": "success",
+                "attempt_id": attempt_id or None,
+                "coach": coach_out,
+                "meta": meta,
+            })
+        except Exception as e:
+            return self._send_500(e, "POST /api/autopsy/coach")
+
     def do_HEAD(self):
         # Samakan proteksi static serving utk HEAD (SimpleHTTPRequestHandler
         # punya do_HEAD bawaan yang akan lolos tanpa cek ini).
@@ -1641,6 +1795,10 @@ function salinWA() {
         # FASE 5 (T5.4): API Autopsi Full (GET)
         if self.path.split('?', 1)[0] == '/api/admin/autopsy_full':
             return self._handle_admin_autopsy_full(payload=None)
+
+        # FASE A3: API Guru Autopsi Cached (GET)
+        if self.path.split('?', 1)[0] == '/api/autopsy/coach':
+            return self._handle_get_autopsy_coach()
 
         # Snapshot konten server-rendered untuk reviewer otomatis (Fase bagikan online):
         # /audit?subject=matematika&paket=1&dari=1&sampai=10  (HTML)
@@ -2309,6 +2467,9 @@ function salinWA() {
                 return self._send_json(200, preview)
             except Exception as e:
                 return self._send_500(e, "/api/autopsy/analyze")
+
+        elif self.path.split('?', 1)[0] == '/api/autopsy/coach':
+            return self._handle_post_autopsy_coach()
 
         elif self.path.split('?', 1)[0] == '/admin/autopsi':
             if PUBLIC_DEMO:
