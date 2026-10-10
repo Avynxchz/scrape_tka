@@ -1515,14 +1515,30 @@ function salinWA() {
                 req = urllib.request.Request(
                     sb_url + "/rest/v1/users?id=eq." + user_id + "&select=progress,tka_date",
                     headers={"apikey": sb_key, "Authorization": "Bearer " + _token})
-                with urllib.request.urlopen(req, timeout=10) as resp:
-                    rows = json.loads(resp.read().decode('utf-8') or '[]')
-                row = rows[0] if rows else {}
-                return self._send_json(200, {
-                    "status": "success",
-                    "progress": row.get("progress") or {},
-                    "tka_date": row.get("tka_date")
-                })
+                try:
+                    with urllib.request.urlopen(req, timeout=10) as resp:
+                        rows = json.loads(resp.read().decode('utf-8') or '[]')
+                    row = rows[0] if rows else {}
+                    return self._send_json(200, {
+                        "status": "success",
+                        "progress": row.get("progress") or {},
+                        "tka_date": row.get("tka_date")
+                    })
+                except urllib.error.HTTPError as he:
+                    # T4b: Fallback bila kolom tka_date belum dibuat di Supabase (HTTP 400)
+                    if he.code == 400:
+                        req_fallback = urllib.request.Request(
+                            sb_url + "/rest/v1/users?id=eq." + user_id + "&select=progress",
+                            headers={"apikey": sb_key, "Authorization": "Bearer " + _token})
+                        with urllib.request.urlopen(req_fallback, timeout=10) as resp_fb:
+                            rows_fb = json.loads(resp_fb.read().decode('utf-8') or '[]')
+                        row_fb = rows_fb[0] if rows_fb else {}
+                        return self._send_json(200, {
+                            "status": "success",
+                            "progress": row_fb.get("progress") or {},
+                            "tka_date": None
+                        })
+                    raise he
             except Exception as e:
                 return self._send_500(e, "/api/user/progress")
 
