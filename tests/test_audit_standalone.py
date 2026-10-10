@@ -78,6 +78,62 @@ def clean_attempt_items(raw_items):
                         "opsi": (str(ev.get("opsi") or "")[:32]) if ev.get("opsi") is not None else None,
                     })
 
+        # D1: Real-time event tracking (jejak_detail, maks 200 event per soal)
+        raw_detail = it.get("jejak_detail") or []
+        clean_detail = []
+        if isinstance(raw_detail, list):
+            for ev in raw_detail:
+                if not isinstance(ev, dict):
+                    continue
+                ts = ev.get("timestamp_ms")
+                tipe = ev.get("tipe")
+                # Validasi: tiap event punya timestamp_ms dan tipe
+                if ts is None or not tipe:
+                    continue
+                try:
+                    ts_val = int(ts)
+                except (ValueError, TypeError):
+                    continue
+                tipe_str = str(tipe).strip()
+                if not tipe_str:
+                    continue
+
+                clean_ev = {
+                    "tipe": tipe_str[:32],
+                    "timestamp_ms": ts_val,
+                }
+                if "soal_no" in ev and ev.get("soal_no") is not None:
+                    try:
+                        clean_ev["soal_no"] = int(ev.get("soal_no"))
+                    except (ValueError, TypeError):
+                        pass
+                if "opsi" in ev and ev.get("opsi") is not None:
+                    clean_ev["opsi"] = str(ev.get("opsi"))[:32]
+                if "waktu_sejak_soal_mulai_ms" in ev and ev.get("waktu_sejak_soal_mulai_ms") is not None:
+                    try:
+                        clean_ev["waktu_sejak_soal_mulai_ms"] = max(0, int(ev.get("waktu_sejak_soal_mulai_ms")))
+                    except (ValueError, TypeError):
+                        pass
+                if "durasi_baca_ms" in ev and ev.get("durasi_baca_ms") is not None:
+                    try:
+                        clean_ev["durasi_baca_ms"] = max(0, int(ev.get("durasi_baca_ms")))
+                    except (ValueError, TypeError):
+                        pass
+                if "depth_pct" in ev and ev.get("depth_pct") is not None:
+                    try:
+                        clean_ev["depth_pct"] = max(0, min(100, int(ev.get("depth_pct"))))
+                    except (ValueError, TypeError):
+                        pass
+                if "scroll_depth" in ev and ev.get("scroll_depth") is not None:
+                    try:
+                        clean_ev["scroll_depth"] = float(ev.get("scroll_depth"))
+                    except (ValueError, TypeError):
+                        pass
+
+                clean_detail.append(clean_ev)
+                if len(clean_detail) >= 200:
+                    break
+
         waktu_detik = int(it.get("waktu_detik") if it.get("waktu_detik") is not None else round(active_ms / 1000))
 
         clean_items.append({
@@ -96,6 +152,8 @@ def clean_attempt_items(raw_items):
             "ganti_jawaban": change_count,
             "ragu": flagged_ragu,
             "jejak": clean_jejak,
+            # Ekstensi D1: Real-time event tracking
+            "jejak_detail": clean_detail,
         })
 
     if not clean_items:
@@ -571,6 +629,74 @@ class TestCleanAttemptItems(unittest.TestCase):
         self.assertEqual(items[0]["active_ms"], 3600000)
         self.assertEqual(items[0]["change_count"], 100)
         self.assertEqual(items[0]["visit_count"], 1000)
+
+    def test_9_jejak_detail_50_events_valid(self):
+        """9. D1: jejak_detail dengan 50 event valid lolos semua."""
+        events_50 = [
+            {
+                "tipe": "option_click" if i % 2 == 0 else "scroll_depth",
+                "timestamp_ms": 1700000000000 + i * 1000,
+                "soal_no": 1,
+                "opsi": "A" if i % 2 == 0 else None,
+                "waktu_sejak_soal_mulai_ms": i * 1000,
+                "depth_pct": 50 if i % 2 == 1 else None
+            }
+            for i in range(50)
+        ]
+        raw = [{
+            "soal_id": "q-d1-50",
+            "jejak_detail": events_50
+        }]
+        ok, err, items = clean_attempt_items(raw)
+        self.assertTrue(ok)
+        self.assertEqual(len(items[0]["jejak_detail"]), 50)
+        self.assertEqual(items[0]["jejak_detail"][0]["tipe"], "option_click")
+        self.assertEqual(items[0]["jejak_detail"][0]["opsi"], "A")
+        self.assertEqual(items[0]["jejak_detail"][49]["timestamp_ms"], 1700000000000 + 49 * 1000)
+
+    def test_10_jejak_detail_missing_timestamp_rejected(self):
+        """10. D1: Event jejak_detail tanpa timestamp_ms ditolak."""
+        raw = [{
+            "soal_id": "q-d1-no-ts",
+            "jejak_detail": [
+                {"tipe": "option_click", "opsi": "B"},  # Tanpa timestamp_ms -> harus ditolak
+                {"tipe": "soal_view", "timestamp_ms": 1700000000100},  # Valid
+                {"tipe": "pembahasan_open", "timestamp_ms": None}  # timestamp_ms None -> ditolak
+            ]
+        }]
+        ok, err, items = clean_attempt_items(raw)
+        self.assertTrue(ok)
+        self.assertEqual(len(items[0]["jejak_detail"]), 1)
+        self.assertEqual(items[0]["jejak_detail"][0]["tipe"], "soal_view")
+
+    def test_11_jejak_detail_missing_tipe_rejected(self):
+        """11. D1: Event jejak_detail tanpa tipe ditolak."""
+        raw = [{
+            "soal_id": "q-d1-no-tipe",
+            "jejak_detail": [
+                {"timestamp_ms": 1700000000200, "opsi": "C"},  # Tanpa tipe -> harus ditolak
+                {"tipe": "", "timestamp_ms": 1700000000300},  # tipe kosong -> ditolak
+                {"tipe": "soal_view", "timestamp_ms": 1700000000400}  # Valid
+            ]
+        }]
+        ok, err, items = clean_attempt_items(raw)
+        self.assertTrue(ok)
+        self.assertEqual(len(items[0]["jejak_detail"]), 1)
+        self.assertEqual(items[0]["jejak_detail"][0]["tipe"], "soal_view")
+
+    def test_12_jejak_detail_capping_max_200(self):
+        """12. D1: jejak_detail dibatasi maksimal 200 event per soal."""
+        events_250 = [
+            {"tipe": "option_click", "timestamp_ms": 1700000000000 + i, "opsi": "D"}
+            for i in range(250)
+        ]
+        raw = [{
+            "soal_id": "q-d1-cap-200",
+            "jejak_detail": events_250
+        }]
+        ok, err, items = clean_attempt_items(raw)
+        self.assertTrue(ok)
+        self.assertEqual(len(items[0]["jejak_detail"]), 200)
 
 
 # ============================================================================

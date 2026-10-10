@@ -1727,6 +1727,8 @@ function renderQuestion() {
   if (!q) return;
   // FASE 3 (T3.2): rekam kunjungan + waktu aktif per soal
   try { AttemptRecorder.onVisit(q.nomor, q.topik || null); } catch (e) {}
+  // FASE D (D1): rekam tampil soal
+  try { DetailTracker.onSoalView(q.nomor); } catch (e) {}
 
   // soal baru tampil: selalu mulai di tab Lembar Soal (kecuali dipaksa review)
   if (!state.keepWorkTab) switchWorkTab('soal', null, { scroll: false });
@@ -2502,6 +2504,8 @@ function selectOption(key, isComplex) {
 
   // FASE 3 (T3.2): rekam jawaban untuk Autopsi
   try { AttemptRecorder.onAnswer(q.nomor, key); } catch (e) {}
+  // FASE D (D1): rekam klik opsi
+  try { DetailTracker.onOptionClick(q.nomor, key); } catch (e) {}
   // FASE 3 (T3.5): simpan jawaban ke localStorage agar tahan refresh
   try { localStorage.setItem('tka_answers_' + pkgKey(), JSON.stringify(state.userAnswers[pkgKey()])); } catch (e) {}
 
@@ -2826,6 +2830,9 @@ function selectBsAnswer(stmtKey, value) {
   }
 
   renderGridModal();
+
+  // FASE D (D1): rekam klik opsi Benar/Salah
+  try { DetailTracker.onOptionClick(q.nomor, `${stmtKey}:${value}`); } catch (e) {}
 
   // FASE 3 (T3.2): rekam jawaban BS untuk Autopsi
   try {
@@ -3187,6 +3194,10 @@ function switchWorkTab(tab, sub, opts) {
   }
 
   if (tab === 'pembahasan') {
+    const curQ = (typeof getCurrentQuestion === 'function') ? getCurrentQuestion() : null;
+    if (curQ && curQ.nomor) {
+      try { DetailTracker.onPembahasanOpen(curQ.nomor); } catch (e) {}
+    }
     if (!o.fromBack && window.TKAHistory) {
       TKAHistory.push('tab-pembahasan');
     }
@@ -3203,6 +3214,8 @@ function switchWorkTab(tab, sub, opts) {
     }
     switchPembSub(sub || state.pembSub || 'materi', o);
     renderMath(panePemb);
+  } else if (tab === 'soal') {
+    try { DetailTracker.closePembahasan(); } catch (e) {}
   }
   syncRail(tab === 'soal' ? 'soal' : (sub || state.pembSub || 'materi'));
   if (o.scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -3285,9 +3298,15 @@ function toggleExplanation() {
   // Floating AI button di desktop dihilangkan (hanya aktif di mobile via CSS)
 
   if (state.explanationVisible) {
+    const curQ = (typeof getCurrentQuestion === 'function') ? getCurrentQuestion() : null;
+    if (curQ && curQ.nomor) {
+      try { DetailTracker.onPembahasanOpen(curQ.nomor); } catch (e) {}
+    }
     // Saat dibuka via tombol Buka Tata Cara, tampilkan langkah penuh
     setExplanationCollapsed(false);
     learnSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    try { DetailTracker.closePembahasan(); } catch (e) {}
   }
 }
 
@@ -6797,6 +6816,134 @@ function getTimerTotalSeconds() {
 // ============================================================================
 // FASE 3 (T3.2/T3.3): Perekam attempt untuk Autopsi
 // Per soal: waktu aktif, jawaban pertama vs akhir, jumlah ganti, flag ragu,
+// ============================================================================
+// FASE D (D1): DetailTracker — Real-time event tracking
+// Catat: option_click, soal_view, scroll_depth, pembahasan_open
+// Disimpan di attempt.jejak_detail (array tidak dibatasi 5)
+// ============================================================================
+const DetailTracker = {
+  eventsBySoal: {},
+  allEvents: [],
+  _soalStartMs: {},
+  _currentPembEvent: null,
+  _scrollMilestones: {},
+
+  reset() {
+    this.closePembahasan();
+    this.eventsBySoal = {};
+    this.allEvents = [];
+    this._soalStartMs = {};
+    this._currentPembEvent = null;
+    this._scrollMilestones = {};
+  },
+
+  _pushEvent(soal_no, ev) {
+    const sNo = Number(soal_no);
+    if (!this.eventsBySoal[sNo]) this.eventsBySoal[sNo] = [];
+    this.eventsBySoal[sNo].push(ev);
+    this.allEvents.push(ev);
+  },
+
+  onSoalView(soal_no) {
+    if (!soal_no) return;
+    this.closePembahasan();
+    const now = Date.now();
+    this._soalStartMs[Number(soal_no)] = now;
+    const ev = {
+      tipe: 'soal_view',
+      soal_no: Number(soal_no),
+      timestamp_ms: now
+    };
+    this._pushEvent(soal_no, ev);
+  },
+
+  onOptionClick(soal_no, opsi) {
+    if (!soal_no) return;
+    const now = Date.now();
+    const start = this._soalStartMs[Number(soal_no)] || now;
+    const waktu_sejak_soal_mulai_ms = Math.max(0, now - start);
+    const ev = {
+      tipe: 'option_click',
+      soal_no: Number(soal_no),
+      opsi: String(opsi || ''),
+      timestamp_ms: now,
+      waktu_sejak_soal_mulai_ms: waktu_sejak_soal_mulai_ms
+    };
+    this._pushEvent(soal_no, ev);
+  },
+
+  onScrollDepth(soal_no, depth_pct) {
+    if (!soal_no) return;
+    const sNo = Number(soal_no);
+    const pct = Math.min(100, Math.max(0, Math.round(depth_pct)));
+    if (!this._scrollMilestones[sNo]) this._scrollMilestones[sNo] = new Set();
+    const milestone = Math.floor(pct / 25) * 25;
+    if (milestone > 0 && !this._scrollMilestones[sNo].has(milestone)) {
+      this._scrollMilestones[sNo].add(milestone);
+      const ev = {
+        tipe: 'scroll_depth',
+        soal_no: sNo,
+        scroll_depth: milestone,
+        depth_pct: milestone,
+        timestamp_ms: Date.now()
+      };
+      this._pushEvent(sNo, ev);
+    }
+  },
+
+  onPembahasanOpen(soal_no) {
+    if (!soal_no) return;
+    this.closePembahasan();
+    const now = Date.now();
+    const ev = {
+      tipe: 'pembahasan_open',
+      soal_no: Number(soal_no),
+      timestamp_ms: now,
+      durasi_baca_ms: 0
+    };
+    this._currentPembEvent = ev;
+    this._pushEvent(soal_no, ev);
+  },
+
+  closePembahasan() {
+    if (this._currentPembEvent) {
+      const dur = Math.max(0, Date.now() - this._currentPembEvent.timestamp_ms);
+      this._currentPembEvent.durasi_baca_ms = dur;
+      this._currentPembEvent = null;
+    }
+  },
+
+  getEvents(soal_no) {
+    this.closePembahasan();
+    const sNo = Number(soal_no);
+    return (this.eventsBySoal[sNo] || []).slice();
+  },
+
+  getAllEvents() {
+    this.closePembahasan();
+    return this.allEvents.slice();
+  }
+};
+
+if (typeof window !== 'undefined') {
+  window.DetailTracker = DetailTracker;
+  let _lastScrollCheck = 0;
+  window.addEventListener('scroll', () => {
+    const now = Date.now();
+    if (now - _lastScrollCheck < 300) return;
+    _lastScrollCheck = now;
+    if (typeof getCurrentQuestion !== 'function') return;
+    const q = getCurrentQuestion();
+    if (!q || !q.nomor) return;
+    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    const pct = (window.scrollY / maxScroll) * 100;
+    try { DetailTracker.onScrollDepth(q.nomor, pct); } catch (e) {}
+  }, { passive: true });
+}
+
+// ============================================================================
+// FASE 3 (T3.2/T3.3): Perekam attempt untuk Autopsi
+// Per soal: waktu aktif, jawaban pertama vs akhir, jumlah ganti, flag ragu,
 // kunjungan ulang. Buffer di localStorage; upload sekali saat "Selesai Tes"
 // (atau saat online kembali). Tanpa login -> tidak direkam (T3.4).
 // ============================================================================
@@ -6804,10 +6951,12 @@ const AttemptRecorder = {
   active: null, _lastQ: null, _lastT: 0,
   reset() {
     this.active = null; this._lastQ = null; this._lastT = 0;
+    try { DetailTracker.reset(); } catch (e) {}
   },
   start(subject, paket, n, duration_s) {
     this.active = { subject, paket, n, duration_s, started_at: Date.now(), items: {} };
     this._lastQ = null; this._lastT = Date.now();
+    try { DetailTracker.reset(); } catch (e) {}
   },
   _ensure(nomor) {
     const a = this.active; if (!a) return null;
@@ -6886,7 +7035,8 @@ const AttemptRecorder = {
         waktu_detik: Math.round(activeMs / 1000),
         ganti_jawaban: it.change_count || 0,
         ragu: !!it.flagged_ragu,
-        jejak: (it.jejak || []).slice(0, 5)
+        jejak: (it.jejak || []).slice(0, 5),
+        jejak_detail: (typeof DetailTracker !== 'undefined' ? DetailTracker.getEvents(nomor) : (it.jejak_detail || []))
       });
       delete c._firstVisitT;
       items.push(c);
@@ -6898,7 +7048,8 @@ const AttemptRecorder = {
       ended_by: ended_by === 'timer' ? 'timer' : 'user',
       started_at: new Date(a.started_at).toISOString(),
       finished_at: new Date(now).toISOString(),
-      items
+      items,
+      jejak_detail: (typeof DetailTracker !== 'undefined' ? DetailTracker.getAllEvents() : [])
     };
     this.active = null; this._lastQ = null;
     return payload;

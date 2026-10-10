@@ -1023,6 +1023,62 @@ def clean_attempt_items(raw_items):
                         "opsi": (str(ev.get("opsi") or "")[:32]) if ev.get("opsi") is not None else None,
                     })
 
+        # D1: Real-time event tracking (jejak_detail, maks 200 event per soal)
+        raw_detail = it.get("jejak_detail") or []
+        clean_detail = []
+        if isinstance(raw_detail, list):
+            for ev in raw_detail:
+                if not isinstance(ev, dict):
+                    continue
+                ts = ev.get("timestamp_ms")
+                tipe = ev.get("tipe")
+                # Validasi: tiap event punya timestamp_ms dan tipe
+                if ts is None or not tipe:
+                    continue
+                try:
+                    ts_val = int(ts)
+                except (ValueError, TypeError):
+                    continue
+                tipe_str = str(tipe).strip()
+                if not tipe_str:
+                    continue
+
+                clean_ev = {
+                    "tipe": tipe_str[:32],
+                    "timestamp_ms": ts_val,
+                }
+                if "soal_no" in ev and ev.get("soal_no") is not None:
+                    try:
+                        clean_ev["soal_no"] = int(ev.get("soal_no"))
+                    except (ValueError, TypeError):
+                        pass
+                if "opsi" in ev and ev.get("opsi") is not None:
+                    clean_ev["opsi"] = str(ev.get("opsi"))[:32]
+                if "waktu_sejak_soal_mulai_ms" in ev and ev.get("waktu_sejak_soal_mulai_ms") is not None:
+                    try:
+                        clean_ev["waktu_sejak_soal_mulai_ms"] = max(0, int(ev.get("waktu_sejak_soal_mulai_ms")))
+                    except (ValueError, TypeError):
+                        pass
+                if "durasi_baca_ms" in ev and ev.get("durasi_baca_ms") is not None:
+                    try:
+                        clean_ev["durasi_baca_ms"] = max(0, int(ev.get("durasi_baca_ms")))
+                    except (ValueError, TypeError):
+                        pass
+                if "depth_pct" in ev and ev.get("depth_pct") is not None:
+                    try:
+                        clean_ev["depth_pct"] = max(0, min(100, int(ev.get("depth_pct"))))
+                    except (ValueError, TypeError):
+                        pass
+                if "scroll_depth" in ev and ev.get("scroll_depth") is not None:
+                    try:
+                        clean_ev["scroll_depth"] = float(ev.get("scroll_depth"))
+                    except (ValueError, TypeError):
+                        pass
+
+                clean_detail.append(clean_ev)
+                if len(clean_detail) >= 200:
+                    break
+
         waktu_detik = int(it.get("waktu_detik") if it.get("waktu_detik") is not None else round(active_ms / 1000))
 
         clean_items.append({
@@ -1041,6 +1097,8 @@ def clean_attempt_items(raw_items):
             "ganti_jawaban": change_count,
             "ragu": flagged_ragu,
             "jejak": clean_jejak,
+            # Ekstensi D1: Real-time event tracking
+            "jejak_detail": clean_detail,
         })
 
     if not clean_items:
