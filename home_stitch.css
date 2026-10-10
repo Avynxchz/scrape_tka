@@ -84,35 +84,45 @@
   border-radius: 999px; background: #22C55E; border: 2px solid #fff;
 }
 .stitch-avatar {
-  width: 36px; height: 36px; border-radius: 999px; background: #004a2a;
+  width: 44px; height: 44px; min-width: 44px; min-height: 44px; border-radius: 999px; background: #004a2a;
   color: #fff; display: grid; place-items: center; flex-shrink: 0;
   border: 2px solid rgba(170,242,194,.4);
+  transition: transform .15s ease, background-color .15s ease;
+  cursor: pointer;
 }
-.stitch-avatar .ms-icon { font-size: 20px; }
+.stitch-avatar:hover { background: #00361f; }
+.stitch-avatar:active { transform: scale(0.95); }
+.stitch-avatar .ms-icon { font-size: 22px; }
 
 /* Login button & User Info di header mobile & desktop */
 .stitch-login-btn {
   background: #004a2a;
   color: #fff;
   border: none;
-  padding: 6px 12px;
-  border-radius: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 10px;
   cursor: pointer;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 13px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
   flex-shrink: 0;
-  transition: background .15s;
+  transition: background .15s, transform .15s;
 }
 .stitch-login-btn:hover {
   background: #1b633e;
 }
+.stitch-login-btn:active {
+  transform: scale(0.96);
+}
 @media (max-width: 480px) {
   .stitch-login-btn {
-    padding: 6px 10px;
-    font-size: 12px;
+    min-height: 44px;
+    padding: 0 12px;
+    font-size: 12.5px;
   }
 }
 #userInfo {
@@ -225,16 +235,17 @@
 
 .stitch-hero-grid { position: relative; z-index: 2; display: grid; grid-template-columns: 7fr 5fr; gap: 8px; align-items: center; }
 .stitch-hero-copy h1, .stitch-hero-copy h2 {
+  font-family: 'Outfit', 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
   font-size: 21px; line-height: 1.25; font-weight: 800; letter-spacing: -0.015em;
   margin: 0 0 6px; color: #FFFFFF;
 }
 .stitch-hero-copy p { font-size: 12.5px; line-height: 1.5; color: #FFFFFF; margin: 0 0 12px; }
 .stitch-cta {
-  display: inline-flex; align-items: center; gap: 6px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   background: #1b633e; color: #FFFFFF; border: 1px solid rgba(255,255,255,0.25); cursor: pointer;
-  border-radius: 999px; padding: 8px 16px;
-  font-size: 12px; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,.35);
-  transition: transform .12s ease, filter .15s ease;
+  border-radius: 999px; min-height: 44px; padding: 10px 18px;
+  font-size: 13px; font-weight: 700; box-shadow: 0 4px 12px rgba(0,0,0,.35);
+  transition: transform .12s ease, filter .15s ease, background-color .15s ease;
 }
 .stitch-cta:hover { filter: brightness(1.15); }
 .stitch-cta:active { transform: scale(.95); }
@@ -385,14 +396,38 @@
 .stitch-mapel-header-title { font-size: 13px; font-weight: 800; color: #0F172A; text-transform: uppercase; letter-spacing: 0.05em; }
 .stitch-mapel-header-count { font-size: 12px; color: #64748B; font-weight: 600; margin-left: 4px; }
 .stitch-btn-atur-mapel {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 5px 12px; border-radius: 999px;
-  background: #EBF6F0; color: #004a2a; border: 1px solid rgba(0,74,42,.2);
-  font-size: 12px; font-weight: 700; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 44px; padding: 8px 16px; border-radius: 999px;
+  background: #EBF6F0; color: #004a2a; border: 1px solid rgba(0,74,42,.25);
+  font-size: 12.5px; font-weight: 700; cursor: pointer;
+  transition: all .15s ease;
+  box-shadow: 0 1px 3px rgba(0,74,42,0.06);
+}
+.stitch-btn-atur-mapel:hover { background: #d3ebd9; border-color: #004a2a; }
+.stitch-btn-atur-mapel:active { transform: scale(0.96); }
+
+.stitch-btn-ruang {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 44px; padding: 8px 14px; border-radius: 10px;
+  background: #f0fdf4; border: 1px solid #bbf7d0; color: #004a2a;
+  font-size: 12px; font-weight: 700; text-decoration: none;
+  transition: all .15s ease;
+  box-shadow: 0 1px 2px rgba(0,74,42,0.04);
+}
+.stitch-btn-ruang:hover { background: #dcfce7; border-color: #86efac; }
+.stitch-btn-ruang:active { transform: scale(0.97); }
+
+.stitch-ai-chip {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 44px; padding: 8px 16px; border-radius: 999px;
+  background: #ffffff; border: 1px solid #bbf7d0; color: #004a2a;
+  font-size: 12.5px; font-weight: 700; text-decoration: none;
+  white-space: nowrap; flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0,74,42,0.06);
   transition: all .15s ease;
 }
-.stitch-btn-atur-mapel:hover { background: #d3ebd9; }
-.stitch-btn-atur-mapel:active { transform: scale(0.96); }
+.stitch-ai-chip:hover { background: #f0fdf4; border-color: #86efac; transform: translateY(-1px); }
+.stitch-ai-chip:active { transform: scale(0.97); }
 
 /* ---------- Card paket (carousel horizontal) ---------- */
 .stitch-cards {

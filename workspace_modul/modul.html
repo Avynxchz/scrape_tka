@@ -14,7 +14,7 @@
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script id="tailwind-config">
@@ -438,8 +438,8 @@ button:active { transform: scale(0.97); }
         </div>
       </div>
       <div class="flex items-center shrink-0">
-        <a href="#" data-nav="akun" aria-label="Buka Akun" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm shrink-0 text-on-primary">
-          <span class="material-symbols-outlined text-[18px]">person</span>
+        <a href="#" data-nav="akun" aria-label="Buka Akun" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-primary flex items-center justify-center shadow-sm shrink-0 text-on-primary">
+          <span class="material-symbols-outlined text-[20px]">person</span>
         </a>
       </div>
     </div>
@@ -713,23 +713,23 @@ button:active { transform: scale(0.97); }
     var actionButtons = s.p2 > 0
       ? '<div class="grid grid-cols-2 gap-2 pt-1">' +
           '<button type="button" data-open data-subject="' + s.key + '" data-pkg="1" aria-label="' + s.nama + ' Paket 1 (' + s.p1 + ' soal)" ' +
-            'class="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
+            'class="min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
             '<span>Paket 1</span><span class="material-symbols-outlined text-[16px]">play_arrow</span>' +
           '</button>' +
           '<button type="button" data-open data-subject="' + s.key + '" data-pkg="2" aria-label="' + s.nama + ' Paket 2 (' + s.p2 + ' soal)" ' +
-            'class="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-surface-card hover:bg-surface-subtle text-primary font-label-md text-label-md font-bold shadow-sm border border-border-subtle">' +
+            'class="min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-surface-card hover:bg-surface-subtle text-primary font-label-md text-label-md font-bold shadow-sm border border-border-subtle">' +
             '<span>Paket 2</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>' +
           '</button>' +
         '</div>'
       : '<div class="grid grid-cols-1 gap-2 pt-1">' +
           '<button type="button" data-open data-subject="' + s.key + '" data-pkg="1" aria-label="' + s.nama + ' Paket 1 (' + s.p1 + ' soal)" ' +
-            'class="w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
+            'class="min-h-[44px] w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
             '<span>Kerjakan Paket 1 (' + s.p1 + ' Soal)</span><span class="material-symbols-outlined text-[16px]">play_arrow</span>' +
           '</button>' +
         '</div>';
 
     var aiRoomButton =
-      '<a href="/ruang/' + s.key + '" target="_top" class="flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-brand-emerald-light/60 hover:bg-brand-emerald-light text-primary font-label-md text-label-md font-bold border border-primary/20 transition-colors" style="text-decoration:none;">' +
+      '<a href="/ruang/' + s.key + '" target="_top" class="min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-brand-emerald-light/60 hover:bg-brand-emerald-light text-primary font-label-md text-label-md font-bold border border-primary/20 transition-colors" style="text-decoration:none;">' +
         '<span class="material-symbols-outlined text-[16px]">smart_toy</span>' +
         '<span>Ruang AI ' + s.nama + '</span>' +
       '</a>';

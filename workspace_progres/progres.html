@@ -8,7 +8,7 @@
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
 
   <!-- Tailwind CSS CDN -->
@@ -406,8 +406,8 @@
         </div>
 
         <div class="flex items-center shrink-0">
-          <button type="button" onclick="handleNavTab('akun')" aria-label="Buka Akun" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm text-white cursor-pointer">
-            <span class="material-symbols-outlined text-[18px]">person</span>
+          <button type="button" onclick="handleNavTab('akun')" aria-label="Buka Akun" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-primary flex items-center justify-center shadow-sm text-white cursor-pointer transition-transform active:scale-95">
+            <span class="material-symbols-outlined text-[20px]">person</span>
           </button>
         </div>
       </div>
@@ -428,8 +428,8 @@
               <span class="w-1.5 h-1.5 rounded-full bg-accent-mint animate-pulse"></span>
               <span>AI: 5/hari</span>
             </div>
-            <button onclick="confirmReset()" aria-label="Reset riwayat" title="Reset riwayat" class="w-8 h-8 rounded-full flex items-center justify-center text-text-muted hover:text-error hover:bg-error-container/30 transition-colors">
-              <span class="material-symbols-outlined text-[18px]">restart_alt</span>
+            <button onclick="confirmReset()" aria-label="Reset riwayat" title="Reset riwayat" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full flex items-center justify-center text-text-muted hover:text-error hover:bg-error-container/30 transition-colors">
+              <span class="material-symbols-outlined text-[20px]">restart_alt</span>
             </button>
           </div>
         </div>
@@ -1001,8 +1001,8 @@
             '    <p class="text-xs text-text-muted leading-relaxed">Selesaikan minimal 1 paket latihan untuk melihat analisis streak, waktu belajar, dan akurasi per mata pelajaran.</p>',
             '  </div>',
             '  <div class="pt-1">',
-            '    <button onclick="window.openPackage(\'matematika\', 1)" class="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-1.5">',
-            '      <span class="material-symbols-outlined text-[16px]">play_circle</span>',
+            '    <button onclick="window.openPackage(\'matematika\', 1)" class="w-full min-h-[44px] py-2.5 rounded-xl bg-primary hover:bg-primary-container text-white font-bold text-xs shadow-sm transition-all flex items-center justify-center gap-1.5">',
+            '      <span class="material-symbols-outlined text-[18px]">play_circle</span>',
             '      <span>Mulai Latihan Paket 1</span>',
             '    </button>',
             '  </div>',
@@ -1173,7 +1173,7 @@
               '      <p class="text-[10px] text-text-muted truncate">Paket 1: ' + s.p1Total + ' soal • Paket 2: ' + s.p2Total + ' soal</p>',
               '    </div>',
               '  </div>',
-              '  <button onclick="window.openPackage(\'' + s.key + '\', 1)" class="flex-shrink-0 px-3 py-1 rounded-lg bg-brand-emerald-light hover:bg-primary hover:text-white text-primary text-xs font-bold transition-all">',
+              '  <button onclick="window.openPackage(\'' + s.key + '\', 1)" class="flex-shrink-0 min-h-[44px] min-w-[56px] inline-flex items-center justify-center px-3 py-1 rounded-lg bg-brand-emerald-light hover:bg-primary hover:text-white text-primary text-xs font-bold transition-all">',
               '    Mulai',
               '  </button>',
               '</div>'

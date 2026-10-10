@@ -850,13 +850,13 @@ function getTkaCardsHtml() {
     const tkaD = new Date(tka + 'T00:00:00');
     const diff = Math.round((tkaD - today) / 86400000);
     const label = diff > 0 ? 'H-' + diff : (diff === 0 ? 'Hari H!' : 'Lewat ' + (-diff) + ' hari');
-    let h = '<div id="tkaCardWrap" style="margin:0 0 16px;position:relative;z-index:1">';
-    h += '<div style="background:linear-gradient(135deg,#004a2a,#006b3f);color:#fff;border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">'
-      + '<div><div style="font-size:12px;opacity:0.9">Tanggal TKA kamu</div>'
-      + '<div style="font-size:22px;font-weight:800">' + label + '</div></div>'
-      + '<label style="font-size:12px;display:flex;align-items:center;gap:8px">Ubah: '
+    let h = '<div id="tkaCardWrap" style="margin:0 0 14px;position:relative;z-index:1">';
+    h += '<div style="background:linear-gradient(135deg,#00361f 0%,#004a2a 55%,#155e37 100%);color:#fff;border-radius:14px;padding:14px 16px;border:1px solid rgba(255,255,255,0.18);box-shadow:0 4px 14px rgba(0,74,42,0.12);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">'
+      + '<div><div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#86efac;display:flex;align-items:center;gap:5px;"><span class="material-symbols-outlined" style="font-size:15px;color:#22C55E;">event_upcoming</span>Tanggal Ujian TKA</div>'
+      + '<div style="font-family:\'Outfit\',\'Plus Jakarta Sans\',sans-serif;font-size:24px;font-weight:800;letter-spacing:-0.02em;color:#ffffff;line-height:1.1;margin-top:2px">' + label + '</div></div>'
+      + '<label style="font-size:12px;color:#d1fae5;display:flex;align-items:center;gap:8px;font-weight:600"><span>Ubah:</span>'
       + '<input type="date" min="2026-10-10" max="2026-11-29" value="' + tka + '" '
-      + 'style="min-height:44px;min-width:44px;padding:8px 10px;border-radius:8px;border:0;font-size:13px;box-sizing:border-box" onchange="setTkaDate(this.value);renderHome()">'
+      + 'style="min-height:44px;min-width:44px;padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.25);background:#ffffff;color:#0f172a;font-size:13px;font-weight:600;box-sizing:border-box;outline:none;" onchange="setTkaDate(this.value);renderHome()">'
       + '</label></div></div>';
     // Misi hari ini
     let misi = null;
@@ -867,17 +867,18 @@ function getTkaCardsHtml() {
     const labelNama = {'terburu':'Terburu-buru','overthinking':'Overthinking','macet':'Macet','yakin_salah':'Yakin tapi salah','ragu_salah':'Ragu-ragu dan salah','waktu_habis':'Kehabisan waktu','kosong':'Belum terjawab'};
     if (misi) {
       const cthRef = (misi.contoh && misi.contoh[0]) ? String(misi.contoh[0]) : '';
-      h += '<div id="dailyMissionCard" class="stitch-mission-card" style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
-        + '<div style="font-size:12px;font-weight:700;color:#b45309;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
-        + '<div style="font-size:15px;font-weight:700;margin-bottom:4px;color:#92400e">Perbaiki: ' + (labelNama[misi.label] || misi.label) + '</div>'
-        + '<div style="font-size:13px;color:#6b7280;margin-bottom:10px">' + (misi.bukti || '') + '</div>'
-        + `<button type="button" onclick="bukaKartuStrategi('${misi.label}', '${cthRef}')" style="background:#b45309;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">📖 Pelajari Strategi Misi</button>`
+      h += '<div id="dailyMissionCard" class="stitch-mission-card" style="background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);border:1px solid #fde68a;border-radius:14px;padding:16px;margin:0 0 14px;box-shadow:0 2px 8px rgba(180,83,9,0.06);">'
+        + '<div style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:#fde68a;color:#92400e;font-size:11px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:6px;">🎯 Misi Hari Ini</div>'
+        + '<div style="font-family:\'Outfit\',\'Plus Jakarta Sans\',sans-serif;font-size:16px;font-weight:800;margin-bottom:4px;color:#78350f;">Fokus Perbaikan: ' + (labelNama[misi.label] || misi.label) + '</div>'
+        + '<div style="font-size:13px;color:#92400e;line-height:1.45;margin-bottom:12px;">' + (misi.bukti || '') + '</div>'
+        + `<button type="button" onclick="bukaKartuStrategi('${misi.label}', '${cthRef}')" style="min-height:44px;background:#b45309;color:#fff;border:none;border-radius:10px;padding:8px 16px;font-size:12.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 2px 6px rgba(180,83,9,0.25);transition:all .15s ease;"><span>📖 Pelajari Strategi Misi</span><span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span></button>`
         + '</div>';
     } else {
-      h += '<div id="dailyMissionCard" class="stitch-mission-card" style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
-        + '<div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
-        + '<div style="font-size:13px;color:#6b7280;margin-bottom:10px">Selesaikan 1 tryout untuk mengidentifikasi kebocoran skor dan membuka misi belajarmu.</div>'
-        + '<button type="button" onclick="homeClose();" style="background:#004a2a;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;">🚀 Mulai Latihan Tryout</button>'
+      h += '<div id="dailyMissionCard" class="stitch-mission-card" style="background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%);border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin:0 0 14px;box-shadow:0 2px 8px rgba(15,23,42,0.04);">'
+        + '<div style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:#e2e8f0;color:#475569;font-size:11px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:6px;">🎯 Misi Hari Ini</div>'
+        + '<div style="font-family:\'Outfit\',\'Plus Jakarta Sans\',sans-serif;font-size:15px;font-weight:700;color:#0f172a;margin-bottom:4px;">Mulai Latihan untuk Buka Misi</div>'
+        + '<div style="font-size:13px;color:#64748b;line-height:1.45;margin-bottom:12px;">Selesaikan 1 tryout untuk mengidentifikasi kebocoran skor dan membuka misi belajarmu.</div>'
+        + '<button type="button" onclick="homeClose();" style="min-height:44px;background:#004a2a;color:#fff;border:none;border-radius:10px;padding:8px 18px;font-size:12.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 2px 6px rgba(0,74,42,0.2);transition:all .15s ease;"><span>🚀 Mulai Latihan Tryout</span><span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span></button>'
         + '</div>';
     }
     return h;
@@ -941,21 +942,21 @@ window.dismissGuestLoginPrompt = dismissGuestLoginPrompt;
 function getGuestLoginBannerHtml() {
   if (!shouldShowGuestLoginPrompt()) return '';
   return `
-    <div id="guestLoginBanner" class="guest-login-banner" style="background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 100%);border:1px solid #bbf7d0;border-radius:12px;padding:12px 14px;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 2px 8px rgba(0,74,42,0.06);position:relative;z-index:2;">
+    <div id="guestLoginBanner" class="guest-login-banner" style="background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 100%);border:1px solid #bbf7d0;border-radius:14px;padding:12px 14px;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 2px 8px rgba(0,74,42,0.06);position:relative;z-index:2;">
       <div style="display:flex;align-items:center;gap:10px;flex:1;">
-        <div style="width:32px;height:32px;border-radius:8px;background:#004a2a;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:#004a2a;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;box-shadow:0 2px 6px rgba(0,74,42,0.2);">
           <i class="fa-solid fa-cloud-arrow-up"></i>
         </div>
         <div>
-          <div style="font-size:13px;font-weight:700;color:#064e3b;margin-bottom:2px;">Login dulu yuk</div>
-          <div style="font-size:11.5px;color:#047857;line-height:1.4;">Simpan hasil latihan dan progres belajarmu secara permanen antar perangkat.</div>
+          <div style="font-size:13.5px;font-weight:800;color:#064e3b;margin-bottom:2px;">Simpan Progres Belajarmu</div>
+          <div style="font-size:11.5px;color:#047857;line-height:1.4;">Login Google untuk sinkronisasi nilai dan riwayat tryout antar perangkat.</div>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
-        <button type="button" onclick="loginWithGoogle()" style="background:#004a2a;color:#fff;border:0;border-radius:8px;padding:7px 11px;font-size:11.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;">
-          <i class="fa-brands fa-google"></i> Login
+        <button type="button" onclick="loginWithGoogle()" style="min-height:44px;background:#004a2a;color:#fff;border:0;border-radius:10px;padding:0 14px;font-size:12.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 6px rgba(0,74,42,0.2);transition:all .15s ease;">
+          <i class="fa-brands fa-google"></i> <span>Login</span>
         </button>
-        <button type="button" id="btnDismissGuestBanner" onclick="dismissGuestLoginPrompt()" style="background:transparent;color:#6b7280;border:0;border-radius:8px;padding:6px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;" title="Nanti saja" aria-label="Tutup ajakan login">
+        <button type="button" id="btnDismissGuestBanner" onclick="dismissGuestLoginPrompt()" style="min-width:44px;min-height:44px;background:transparent;color:#6b7280;border:0;border-radius:10px;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:color .15s;" title="Nanti saja" aria-label="Tutup ajakan login">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
@@ -1011,7 +1012,7 @@ function renderHome() {
               <span class="stitch-sec-sub">${meta.category}</span>
             </div>
           </div>
-          <a href="/ruang/${k}" class="stitch-btn-ruang" style="display:inline-flex;align-items:center;gap:5px;background:#f0fdf4;border:1px solid #bbf7d0;color:#004a2a;padding:5px 10px;border-radius:8px;font-size:11px;font-weight:700;text-decoration:none;"><span class="material-symbols-outlined" style="font-size:14px;color:#059669;">smart_toy</span>Ruang ${meta.shortName}</a>
+          <a href="/ruang/${k}" class="stitch-btn-ruang"><span class="material-symbols-outlined" style="font-size:16px;color:#059669;">smart_toy</span><span>Ruang ${meta.shortName}</span></a>
         </div>
         <div class="stitch-cards">${cards}</div>
       </section>`;
@@ -1020,7 +1021,7 @@ function renderHome() {
   // B12: Quick access chips untuk Ruang AI per Mapel
   const aiRoomsChips = selectedKeys.map(k => {
     const meta = SUBJECT_UI_META[k] || { shortName: k };
-    return `<a href="/ruang/${k}" class="stitch-ai-chip" style="display:inline-flex;align-items:center;gap:5px;padding:7px 12px;border-radius:999px;background:#ffffff;border:1px solid #bbf7d0;color:#004a2a;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0;box-shadow:0 1px 3px rgba(0,74,42,0.06);"><span class="material-symbols-outlined" style="font-size:15px;color:#059669;">smart_toy</span><span>Ruang ${meta.shortName}</span></a>`;
+    return `<a href="/ruang/${k}" class="stitch-ai-chip"><span class="material-symbols-outlined" style="font-size:16px;color:#059669;">smart_toy</span><span>Ruang ${meta.shortName}</span></a>`;
   }).join('');
 
   const aiRoomsBarHtml = `
