@@ -1,6 +1,6 @@
 # STATUS — TKA Master (Autopsi + Sprint Pass)
 
-Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN SENTUH)
+Diperbarui: 2026-10-10 11:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN SENTUH)
 
 ## Posisi Sekarang
 
@@ -19,23 +19,22 @@ Diperbarui: 2026-10-10 03:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 ### FASE 3: 100% (SELESAI-TERVERIFIKASI)
 - **Terbukti:** Skema `attempts` + `feature_flags` di Supabase (migrasi 003); AttemptRecorder di `app.js`; endpoint `POST /api/attempts` verifikasi JWT dengan idempotency via client_attempt_id; T3.4 klaim hasil tamu setelah login via Google OAuth & kartu alert dengan tombol "Klaim ke Akun Google"; T3.5 pemulihan kuis setelah refresh/tab tertutup (`tka_answers_<key>`, `tka_ragu_<key>`, `tka_finished_<key>`); sinkronisasi antrean otomatis saat event `online` dan event `tka-login`; BUG-002 login persistent terverifikasi; **BUG-001 (Tugas D) sync progress desktop-mobile dua arah terverifikasi (Supabase kolom users.progress via GET/POST /api/user/progress)**.
 
-### KEJURUAN SMK: 100% LIVE (5 JURUSAN UTAMA)
+### KEJURUAN SMK: 100% LIVE (5 JURUSAN UTAMA & 25 SOAL SERUPA)
 - **Terbukti:** 5 mapel kejuruan SMK di sekolah Agus berhasil di-scrape lengkap dengan kunci jawaban otoritatif resmi Pusmendik:
   1. `SMK - Teknik Mesin` (`teknik_mesin_paket_1` - 6 soal, val: 33)
   2. `SMK - Teknik Otomotif` (TKR) (`teknik_otomotif_paket_1` - 6 soal, val: 34)
   3. `SMK - Teknik Jaringan dan Telekomunikasi` (TKJ) (`teknik_jaringan_paket_1` - 6 soal, val: 49)
   4. `SMK - Akuntansi dan Keuangan Lembaga` (AKL) (`akuntansi_paket_1` - 6 soal, val: 66)
   5. `SMK - Manajemen Perkantoran dan Layanan Bisnis` (MPLB) (`manajemen_perkantoran_paket_1` - 6 soal, val: 65)
-- **UI/UX & Modul Desktop:** Terdaftar di `MASTER_CATALOG`, `SUBJECT_CATALOG`, dan `SUBJECT_UI_META` kategori `"Kejuruan SMK"`. Beranda Desktop (`home_desktop.html`), Modul Belajar (`workspace_modul/modul.html`), dan Progres (`workspace_progres/progres.html`) terintegrasi 100% dengan total 991 butir soal.
+- **Soal Serupa (Pilar 5):** 25 butir soal pemantapan baru disuntikkan ke data learning 5 mapel SMK. Audit via `audit_smk.py`: **0 Critical Issues, 0 Warnings**.
+- **UI/UX & Metrik Kurikulum:** Banner Beranda Desktop (`home_desktop.html`), Modul Belajar (`modul.html`), dan Progres (`progres.html`) terverifikasi 100% menampilkan **27 Mapel · 49 Paket · 991 Soal**.
+- **Alur Pengguna Baru Desktop:** Smooth scroll tombol "Mulai Sekarang", opsi "Coba Tamu" di modal konfirmasi kuis, filter kategori SMK/Bahasa/Saintek/Soshum, dan pencegahan error HTTP 403 paket 2 SMK teruji 100% PASS (0 console error).
 
-### PERBAIKAN MASUKAN AGUS (3 MASALAH UTAMA): 100% SELESAI & TERVERIFIKASI
-1. **Masalah 1 (Mapel SMK di Desktop):** Beranda Desktop, Modul Belajar, dan Progres & Analitik menampilkan filter & kartu 5 mapel kejuruan SMK secara konsisten.
-2. **Masalah 2 (Solusi 5 Pilar & Konteks AI Mapel SMK):** File Layer 3 solusi resmi Pusmendik dibuat di `data/solution_sources/`, terdaftar di `registry.json`, dan terinjeksi ke semua data learning SMK. Audit via `audit_smk.py`: 0 Critical Issues.
-3. **Masalah 3 (Pengecekan Nilai Tertutup Tryout & Terpotong):**
-   - Tabel Reviu Mobile kini 100% responsif 4 kolom berdampingan tanpa terpotong horizontal di HP 360-390px.
-   - Peringatan akun tamu dirampingkan, Autopsi dipindahkan ke bawah tabel agar baris soal langsung tampil.
-   - Tombol Reviu Hasil terpasang di header mobile (`[📊 Reviu]`), header desktop (`[📊 Reviu Hasil]`), dan bilah aksi bawah kuis (`[📊 Reviu Hasil & Kunci]`), sehingga siswa dapat bolak-balik antara kuis/pembahasan dan hasil tryout dengan 1 klik.
-   - Penutupan iframe overlay desktop kuis langsung otomatis saat membuka kuis via URL parameter.
+### PERBAIKAN MASUKAN AGUS: 100% SELESAI & TERVERIFIKASI
+1. **Tombol Bawah Mobile:** Dikembalikan 100% ke tombol "Cek Jawaban", tombol reviu di header HP dihapus bersih.
+2. **Formula Matematika KaTeX:** Rendering KaTeX diperluas ke tab pembahasan dan dilindungi dari pemecahan tag `<br>`, seluruh rumus tampil rapi.
+3. **Mapel SMK di Desktop & Modul:** 5 mapel SMK terintegrasi penuh di dashboard, modul carousel, dan progres belajar.
+4. **Alur Tamu Kuis Desktop:** Pengguna baru dapat memilih "Coba Tamu" langsung dari modal konfirmasi tanpa terblokir harus login Google terlebih dahulu.
 
 
 ### FASE 4: 100% (SELESAI-TERVERIFIKASI)
