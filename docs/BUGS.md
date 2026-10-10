@@ -39,11 +39,14 @@ Setiap bug baru wajib dicatat di sini.
 - **File:** `app.js`
 - **Status:** SELESAI-TERVERIFIKASI (Tugas C).
 
-### BUG-009: Kartu Beranda tidak muncul [sudah diselesaikan pada 10 Okt 2026]
-- **Lapor:** Gemini / Agus, 10 Okt 2026
-- **Deskripsi:** Kartu Beranda ("Tanggal TKA kamu" dan "Misi hari ini") tidak muncul saat reload / buka ulang. Penyebab: di `app.js` ~baris 361 `window.__homeFirst = !window.location.hash.startsWith('#soal-')`; fungsi `renderQuestion()` menulis `#soal-N` ke URL (baris ~1599), sehingga saat dibuka ulang dengan hash, `window.__homeFirst` bernilai false dan melewati `homeOpen()`, menyebabkan `#hoMain` kosong.
-- **Solusi:** Ganti jadi `window.__homeFirst = true;`.
-- **Bukti:** Terverifikasi via Chromium headless ukuran HP 390x844 untuk dua URL (`/app` dan `/app?subject=matematika&paket=1#soal-1`), dua-duanya memuat kartu "Tanggal TKA kamu" dan "Misi hari ini".
+### BUG-009: Kartu Beranda tidak muncul saat reload dari Beranda [sudah diselesaikan pada 10 Okt 2026]
+- **Lapor:** Gemini / Agus & Audit Claude Sonnet, 10 Okt 2026
+- **Deskripsi:** Kartu Beranda ("Tanggal TKA kamu" dan "Misi hari ini") tidak muncul saat reload jika URL kuis sempat tertulis saat Beranda masih terbuka. Pada kode awal, `renderQuestion()` langsung menulis parameter kuis (`?subject=...#soal-N`) ke URL bahkan saat Beranda terbuka, sehingga reload dari Beranda dianggap kuis langsung dan melewati `homeOpen()`.
+- **Solusi:** 
+  1. Penulisan URL dipisahkan ke fungsi `syncQuizUrl()` yang hanya dipanggil jika Beranda tertutup (`!homeIsOpen()`) dan saat kuis dimulai (`homeClose()`).
+  2. Saat user kembali ke Beranda (`homeOpen()`), URL dibersihkan kembali ke `/app` (tanpa menghapus query OAuth jika ada) sehingga reload dari Beranda selalu menampilkan Beranda dan kartu lengkap.
+  3. Jika user sedang aktif mengerjakan kuis (URL kuis aktif), reload tetap langsung masuk ke kuis dengan memulihkan jawaban.
+- **Bukti:** Terverifikasi via Chromium headless (390x844 dan 1280x800) untuk 5 skenario (a-e): buka /app tanpa parameter, refresh di Beranda, refresh saat kuis berjalan, link langsung kuis, dan navigasi balik ke Beranda dari kuis.
 - **File:** `app.js`
 - **Status:** SELESAI-TERVERIFIKASI.
 

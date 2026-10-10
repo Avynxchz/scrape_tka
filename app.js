@@ -945,6 +945,13 @@ function homeOpen() {
   document.body.style.overflow = 'hidden';
   // Kembali ke beranda: hapus tanda mode kuis
   delete document.body.dataset.quizMode;
+  try {
+    const hasOAuthHash = window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('refresh_token=') || window.location.hash.includes('error_description='));
+    const hasOAuthSearch = window.location.search && (window.location.search.includes('code=') || window.location.search.includes('error='));
+    if (!hasOAuthHash && !hasOAuthSearch && (window.location.search || window.location.hash)) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  } catch (e) {}
   renderHome();
   homeShowPanel('beranda'); // default yang tampil: Beranda
   // prefetch jumlah soal semua mapel; render ulang saat selesai biar angka lengkap
@@ -1476,6 +1483,26 @@ window.addEventListener('tka-logout', () => {
   sendPanelData('beranda');
 });
 
+// BUGFIX (10 Okt 2026 - T2/BUG-009): Sinkronisasi URL kuis hanya saat kuis sedang aktif
+function syncQuizUrl() {
+  try {
+    const pkg = state.pkgData && state.pkgData[pkgKey()];
+    const q = (pkg && pkg.soal && pkg.soal[state.currentIndex]) || { nomor: state.currentIndex + 1 };
+    document.cookie = `active_subject=${state.currentSubject}; path=/; max-age=86400`;
+    document.cookie = `active_paket=${state.currentPkg}; path=/; max-age=86400`;
+    const targetUrl = `?subject=${encodeURIComponent(state.currentSubject)}&paket=${state.currentPkg}`;
+    const hasOAuthHash = window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('refresh_token=') || window.location.hash.includes('error_description='));
+    const hasOAuthSearch = window.location.search && (window.location.search.includes('code=') || window.location.search.includes('error='));
+    if (!hasOAuthHash && !hasOAuthSearch) {
+      const currentTarget = `${targetUrl}#soal-${q.nomor}`;
+      if (window.location.search !== targetUrl || window.location.hash !== `#soal-${q.nomor}`) {
+        window.history.replaceState(null, '', currentTarget);
+      }
+    }
+  } catch (e) {}
+}
+window.syncQuizUrl = syncQuizUrl;
+
 function homeClose() {
   const ov = document.getElementById('homeOverlay');
   if (!ov) return;
@@ -1486,6 +1513,7 @@ function homeClose() {
   // Tandai mode kuis: di desktop, pemilih mapel & paket disembunyikan
   // (user sudah memilih di beranda, tidak perlu ganti-ganti di tengah kuis)
   document.body.dataset.quizMode = '1';
+  syncQuizUrl();
 }
 
 // BUGFIX (9 Okt 2026): overlay beranda tidak menutupi kuis saat akses via URL langsung atau dalam kuis
@@ -1734,16 +1762,9 @@ function renderQuestion() {
   if (mProgressFill) mProgressFill.style.width = `${Math.round(((state.currentIndex + 1) / total) * 100)}%`;
 
   // Sync cookie and URL for persistent subject/paket context across browser and server
-  try {
-    document.cookie = `active_subject=${state.currentSubject}; path=/; max-age=86400`;
-    document.cookie = `active_paket=${state.currentPkg}; path=/; max-age=86400`;
-    const targetUrl = `?subject=${encodeURIComponent(state.currentSubject)}&paket=${state.currentPkg}`;
-    const hasOAuthHash = window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('refresh_token=') || window.location.hash.includes('error_description='));
-    const hasOAuthSearch = window.location.search && (window.location.search.includes('code=') || window.location.search.includes('error='));
-    if (!hasOAuthHash && !hasOAuthSearch && window.location.search !== targetUrl) {
-      window.history.replaceState(null, '', `${targetUrl}#soal-${q.nomor}`);
-    }
-  } catch (e) {}
+  if (typeof homeIsOpen === 'function' && !homeIsOpen() && !window.__homeFirst) {
+    syncQuizUrl();
+  }
 
   // Set dataset attributes for scoped question styling
   const card = document.querySelector('.cbt-question-card');
