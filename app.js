@@ -2036,6 +2036,7 @@ function cleanUiStimulusText(stimText, stimImages) {
 
     // Lightbox click handler & responsive size validator untuk seluruh gambar stimulus
     stimDiv.querySelectorAll('img').forEach(img => {
+      if (typeof attachImageFallback === 'function') attachImageFallback(img, 'Gambar Stimulus');
       img.title = 'Klik untuk memperbesar gambar stimulus';
       img.style.cursor = 'zoom-in';
       img.onclick = () => openImageLightbox(img.src, 'Gambar Stimulus');
@@ -2130,6 +2131,7 @@ function cleanUiStimulusText(stimText, stimImages) {
 
     // Lightbox click handler & responsive size validator untuk seluruh gambar pertanyaan/prompt
     promptDiv.querySelectorAll('img').forEach(img => {
+      if (typeof attachImageFallback === 'function') attachImageFallback(img, 'Gambar Soal');
       img.title = 'Klik untuk memperbesar gambar soal';
       img.style.cursor = 'zoom-in';
       img.onclick = () => openImageLightbox(img.src, 'Gambar Soal');
@@ -2177,6 +2179,7 @@ function cleanUiStimulusText(stimText, stimImages) {
         imgWrap.className = 'stimulus-img-container prompt-img-wrap';
         const img = document.createElement('img');
         img.src = `${pkgPath}${pImg.rel_path || 'images/' + pImg.filename}`;
+        if (typeof attachImageFallback === 'function') attachImageFallback(img, 'Gambar Soal');
         img.className = 'stimulus-img';
         img.title = 'Klik untuk memperbesar gambar soal';
         img.style.cursor = 'zoom-in';
@@ -2258,6 +2261,7 @@ function cleanUiStimulusText(stimText, stimImages) {
 
         // Pasang event lightbox dan klasifikasi ukuran gambar pilihan
         body.querySelectorAll('img').forEach(img => {
+          if (typeof attachImageFallback === 'function') attachImageFallback(img, 'Gambar Pilihan ' + opt.key);
           const checkSize = () => {
             const nw = img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
             const nh = img.naturalHeight || parseInt(img.getAttribute('height') || '0', 10);
@@ -2308,6 +2312,7 @@ function cleanUiStimulusText(stimText, stimImages) {
         }
         mathImg.src = `${base}${rel}?v=41`;
         mathImg.alt = `Pilihan ${opt.key}`;
+        if (typeof attachImageFallback === 'function') attachImageFallback(mathImg, 'Gambar Pilihan ' + opt.key);
         mathImg.title = 'Klik untuk memilih opsi';
         mathImg.onclick = (e) => {
           e.stopPropagation();
@@ -6258,6 +6263,79 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
+// ==========================================================================
+// B4: UNIVERSAL IMAGE FALLBACK & RETRY
+// ==========================================================================
+function attachImageFallback(img, label) {
+  if (!img || img.dataset.fallbackBound === 'true') return;
+  img.dataset.fallbackBound = 'true';
+
+  img.addEventListener('error', function onImgError() {
+    if (img.dataset.hasFallback === 'true') return;
+    img.dataset.hasFallback = 'true';
+    img.style.display = 'none';
+
+    const fallbackDiv = document.createElement('div');
+    fallbackDiv.className = 'img-fallback-box';
+    fallbackDiv.setAttribute('role', 'alert');
+
+    const latex = img.getAttribute('data-latex') || '';
+    let latexPreview = '';
+    if (latex) {
+      const cleanLatex = latex.replace(/^"|"$/g, '');
+      latexPreview = `<div class="img-fallback-latex">$${cleanLatex}$</div>`;
+    }
+
+    const imgLabel = label || img.getAttribute('alt') || 'Gambar';
+    fallbackDiv.innerHTML = `
+      <div class="img-fallback-content">
+        <div class="img-fallback-msg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>${imgLabel} gagal dimuat</span>
+        </div>
+        ${latexPreview}
+        <button type="button" class="img-fallback-retry" title="Coba muat ulang gambar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          Coba Lagi
+        </button>
+      </div>
+    `;
+
+    const retryBtn = fallbackDiv.querySelector('.img-fallback-retry');
+    if (retryBtn) {
+      retryBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const origSrc = img.dataset.origSrc || img.src.split('?')[0];
+        img.dataset.origSrc = origSrc;
+        fallbackDiv.remove();
+        img.dataset.hasFallback = 'false';
+        img.style.display = '';
+        img.src = `${origSrc}?retry=${Date.now()}`;
+      });
+    }
+
+    img.insertAdjacentElement('afterend', fallbackDiv);
+    if (latex && typeof renderMath === 'function') {
+      renderMath(fallbackDiv);
+    }
+  });
+}
+
+// Global capturing listener as an extra safety net for dynamic images
+window.addEventListener('error', (e) => {
+  if (e.target && e.target.tagName === 'IMG' && !e.target.dataset.fallbackBound) {
+    attachImageFallback(e.target, e.target.getAttribute('alt') || 'Gambar');
+  }
+}, true);
 
 // ===== Fase 2: Mobile UX =====
 // Top bar (menu mapel/paket + overflow), sticky bottom bar, tutor bottom sheet.
