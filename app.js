@@ -2424,7 +2424,7 @@ function selectOption(key, isComplex) {
   if (!q) return;
   // BUGFIX (10 Okt 2026): kunci opsi setelah jawaban dicek (tidak bisa diubah lagi)
   try {
-    if (window._answerChecked && window._answerChecked[q.nomor]) return;
+    if (window._answerChecked && window._answerChecked[pkgKey() + ':' + q.nomor]) return;
   } catch (e) {}
 
   if (isComplex) {
@@ -2906,10 +2906,10 @@ function checkUserAnswer() {
   `;
 
   state.explanationVisible = true;
-  // BUGFIX (10 Okt 2026): tandai sudah dicek agar opsi terkunci
+  // BUGFIX (10 Okt 2026): tandai sudah dicek agar opsi terkunci spesifik per mapel dan paket
   try {
     if (!window._answerChecked) window._answerChecked = {};
-    window._answerChecked[q.nomor] = true;
+    window._answerChecked[pkgKey() + ':' + q.nomor] = true;
   } catch (e) {}
   showPembahasanAfterCheck();
 }
