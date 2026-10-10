@@ -531,6 +531,11 @@ SUBJECT_NAMES = {
     "fisika": "Fisika",
     "kimia": "Kimia",
     "biologi": "Biologi",
+    "teknik_mesin": "Teknik Mesin (SMK)",
+    "teknik_otomotif": "Teknik Otomotif (SMK)",
+    "teknik_jaringan": "Teknik Jaringan dan Telekomunikasi (SMK)",
+    "akuntansi": "Akuntansi dan Keuangan Lembaga (SMK)",
+    "manajemen_perkantoran": "Manajemen Perkantoran dan Layanan Bisnis (SMK)",
 }
 
 
