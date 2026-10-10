@@ -14,6 +14,8 @@
   display: flex; flex-direction: column;
   overflow-y: auto; overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(72px + env(safe-area-inset-bottom, 16px));
+  box-sizing: border-box;
 }
 .home-overlay.home-hidden {
   display: none !important;
@@ -118,10 +120,11 @@
   align-items: center;
   gap: 6px;
   flex-shrink: 0;
+  max-width: 175px;
 }
 #userInfo .user-avatar-img {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   flex-shrink: 0;
   cursor: pointer;
@@ -129,7 +132,7 @@
   object-fit: cover;
 }
 #userInfo .user-name {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
@@ -142,7 +145,12 @@
   flex-shrink: 0;
   font-size: 11px;
   font-weight: 600;
-  padding: 4px 8px;
+  padding: 6px 8px;
+  min-height: 36px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid #E2E8F0;
   border-radius: 6px;
   background: #fff;
@@ -156,15 +164,16 @@
 }
 @media (max-width: 640px) {
   #userInfo .user-name {
-    display: none !important;
+    display: inline-block !important;
+    max-width: 85px !important;
   }
   #userInfo {
-    max-width: 95px !important;
+    max-width: 170px !important;
   }
 }
 
 /* ---------- Konten utama ---------- */
-.stitch-main { flex: 1; width: 100%; padding: 16px 16px 116px; background: #f6fafe; }
+.stitch-main { flex: 1; width: 100%; padding: 16px 16px calc(120px + env(safe-area-inset-bottom, 16px)); box-sizing: border-box; background: #f6fafe; }
 
 /* ---------- Hero card hijau ---------- */
 /* ---------- Hero card hijau (Carousel Hero Reusable) ---------- */

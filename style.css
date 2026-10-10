@@ -3701,7 +3701,7 @@ html, body {
   }
 
   .qcard-body {
-    padding: 16px;
+    padding: 16px 16px 180px !important;
   }
 
   .cbt-stimulus-col {
@@ -3725,6 +3725,8 @@ html, body {
   .options-list {
     gap: 10px;
     margin-top: 18px;
+    padding-bottom: 24px !important;
+    padding-right: 48px !important;
   }
 
   .option-item {
@@ -5675,12 +5677,14 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
-  padding: 8px 14px !important;
+  padding: 8px 12px !important;
   background: #F8FAFC !important;
   border-bottom: 1px solid #E2E8F0 !important;
   flex-shrink: 0 !important;
   position: relative !important;
-  overflow: visible !important;
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   z-index: 110 !important;
 }
 
@@ -5692,16 +5696,18 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
 /* Tombol Chat Baru di Bar Aksi */
 .ai-top-actions-bar .btn-new-chat-tutor {
   flex-shrink: 0 !important;
-  height: 32px !important;
-  padding: 0 12px !important;
-  border-radius: 20px !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  padding: 0 14px !important;
+  border-radius: 22px !important;
   background: #FFFFFF !important;
   border: 1px solid #CBD5E1 !important;
   color: #004a2a !important;
-  font-size: 11.5px !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
   display: inline-flex !important;
   align-items: center !important;
+  justify-content: center !important;
   gap: 5px !important;
   cursor: pointer !important;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
@@ -5904,13 +5910,28 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   display: flex !important;
   align-items: center !important;
   gap: 6px !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
   flex-wrap: nowrap !important;
   overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-x: contain !important;
   scrollbar-width: none !important;
-  padding: 0 !important;
+  padding: 0 8px 0 0 !important;
   margin: 0 !important;
 }
 .ai-top-actions-bar .quick-chips::-webkit-scrollbar { display: none !important; }
+.ai-top-actions-bar .quick-chips .chip-btn {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  min-height: 44px !important;
+  padding: 8px 14px !important;
+  font-size: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
 
 /* 2. Styling Chat Container & Bubbles */
 .chat-messages {

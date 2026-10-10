@@ -741,13 +741,13 @@ function getTkaCardsHtml() {
     const tkaD = new Date(tka + 'T00:00:00');
     const diff = Math.round((tkaD - today) / 86400000);
     const label = diff > 0 ? 'H-' + diff : (diff === 0 ? 'Hari H!' : 'Lewat ' + (-diff) + ' hari');
-    let h = '<div style="margin:0 0 12px">';
+    let h = '<div id="tkaCardWrap" style="margin:0 0 16px;position:relative;z-index:1">';
     h += '<div style="background:linear-gradient(135deg,#004a2a,#006b3f);color:#fff;border-radius:12px;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">'
       + '<div><div style="font-size:12px;opacity:0.9">Tanggal TKA kamu</div>'
       + '<div style="font-size:22px;font-weight:800">' + label + '</div></div>'
       + '<label style="font-size:12px;display:flex;align-items:center;gap:8px">Ubah: '
       + '<input type="date" min="2026-10-10" max="2026-11-29" value="' + tka + '" '
-      + 'style="padding:6px 8px;border-radius:8px;border:0;font-size:13px" onchange="setTkaDate(this.value);renderHome()">'
+      + 'style="min-height:44px;min-width:44px;padding:8px 10px;border-radius:8px;border:0;font-size:13px;box-sizing:border-box" onchange="setTkaDate(this.value);renderHome()">'
       + '</label></div></div>';
     // Misi hari ini
     let misi = null;

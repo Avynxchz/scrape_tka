@@ -409,7 +409,12 @@ function updateLoginUI(isLoggedIn) {
   
   const effectiveUser = currentUser || window.currentUser;
   if (isLoggedIn && effectiveUser) {
-    const userName = effectiveUser.user_metadata?.full_name || effectiveUser.email;
+    let cleanName = effectiveUser.user_metadata?.full_name || effectiveUser.user_metadata?.name || '';
+    if (!cleanName && effectiveUser.email) {
+      const prefix = effectiveUser.email.split('@')[0] || '';
+      cleanName = prefix ? (prefix.charAt(0).toUpperCase() + prefix.slice(1)) : '';
+    }
+    const userName = cleanName || 'Siswa TKA';
     const avatarUrl = effectiveUser.user_metadata?.avatar_url || '';
     
     // Simpan global biar bisa diakses semua bagian app
@@ -429,13 +434,12 @@ function updateLoginUI(isLoggedIn) {
     
     if (userInfo) {
       userInfo.style.display = 'flex';
-      const shortName = userName.length > 15 ? userName.substring(0, 15) + '…' : userName;
       userInfo.innerHTML = `
         <img src="${avatarUrl}" onclick="if(typeof homeShowPanel==='function')homeShowPanel('akun')"
              class="user-avatar-img"
              title="Buka Akun (${userName})" alt="Avatar">
         <span class="user-name" onclick="if(typeof homeShowPanel==='function')homeShowPanel('akun')"
-              title="${userName}">${shortName}</span>
+              title="${userName}">${userName}</span>
         <button onclick="showLogoutConfirmationModal()" class="user-logout-btn" type="button" title="Keluar dari akun">Keluar</button>
       `;
     }
