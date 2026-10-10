@@ -37,6 +37,11 @@ except ImportError:
     autopsy_coach = None
     autopsy_quota = None
 
+try:
+    import ai_room  # noqa: E402  (Fase D2/D3: AI Room per Mapel)
+except ImportError:
+    ai_room = None
+
 tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
 feature_flags.init_flags()  # tabel feature_flags + seed 7 flag OFF (idempoten)
 
@@ -1869,6 +1874,97 @@ function salinWA() {
         except Exception as e:
             return self._send_500(e, "GET /api/autopsy/quota")
 
+    def _handle_get_ai_room_context(self, mapel):
+        """GET /api/ai-room/<mapel>/context — Agregat performa se-mapel user (D2)."""
+        try:
+            if ai_room is None:
+                return self._send_json(503, {"status": "error", "message": "Layanan AI Room belum tersedia."})
+
+            clean_mapel = urllib.parse.unquote(str(mapel or "")).strip().lower()
+            _auth = self.headers.get('Authorization', '') or ''
+            _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
+
+            if not _token:
+                # Mode tamu / belum login: kembalikan agregat kosong agar UI dapat menampilkan preview ramah
+                empty_aggr = ai_room.calculate_mapel_aggregates([], clean_mapel)
+                return self._send_json(200, {
+                    "status": "success",
+                    "is_guest": True,
+                    "context": empty_aggr,
+                    "message": "Login Google untuk melihat analisis penuh dari latihanmu."
+                })
+
+            _vok, _user = _verify_supabase_token(_token)
+            if not _vok or not (_user or {}).get('id'):
+                return self._send_json(401, {"status": "unauthorized", "message": "Token tidak valid atau sesi berakhir."})
+
+            user_id = str(_user['id'])
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+
+            attempts = ai_room.fetch_supabase_attempts(user_id, clean_mapel, sb_url, sb_svc)
+            aggregates = ai_room.calculate_mapel_aggregates(attempts, clean_mapel)
+
+            # Penting: jangan kirim raw items ke klien
+            return self._send_json(200, {
+                "status": "success",
+                "is_guest": False,
+                "context": aggregates
+            })
+        except Exception as e:
+            return self._send_500(e, f"GET /api/ai-room/{mapel}/context")
+
+    def _handle_post_ai_room_chat(self, mapel):
+        """POST /api/ai-room/<mapel>/chat — Chat dengan Guru AI Room berkonteks penuh (D3)."""
+        try:
+            if ai_room is None:
+                return self._send_json(503, {"status": "error", "message": "Layanan AI Room belum tersedia."})
+
+            clean_mapel = urllib.parse.unquote(str(mapel or "")).strip().lower()
+            _auth = self.headers.get('Authorization', '') or ''
+            _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
+
+            user_id = None
+            is_guest = True
+            if _token:
+                _vok, _user = _verify_supabase_token(_token)
+                if _vok and (_user or {}).get('id'):
+                    user_id = str(_user['id'])
+                    is_guest = False
+
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            payload = json.loads(post_data) if post_data else {}
+
+            user_message = str(payload.get('message') or '').strip()
+            if not user_message:
+                return self._send_json(400, {"status": "error", "message": "Pesan pertanyaan tidak boleh kosong."})
+
+            chat_history = payload.get('history') or []
+
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+
+            # Ambil attempt user jika logged in
+            attempts = []
+            if user_id and sb_url and sb_svc:
+                attempts = ai_room.fetch_supabase_attempts(user_id, clean_mapel, sb_url, sb_svc)
+
+            aggregates = ai_room.calculate_mapel_aggregates(attempts, clean_mapel)
+            last_wrong = ai_room.get_last_wrong_questions(attempts, clean_mapel, limit=5)
+
+            # Panggil LLM (pakai fungsi coach yang sudah ada, tanpa memotong kuota tutor)
+            res = ai_room.chat_ai_room(aggregates, last_wrong, user_message, chat_history=chat_history)
+
+            return self._send_json(200, {
+                "status": "success",
+                "reply": res["reply"],
+                "model": res.get("model"),
+                "is_guest": is_guest
+            })
+        except Exception as e:
+            return self._send_500(e, f"POST /api/ai-room/{mapel}/chat")
+
     def do_HEAD(self):
         # Samakan proteksi static serving utk HEAD (SimpleHTTPRequestHandler
         # punya do_HEAD bawaan yang akan lolos tanpa cek ini).
@@ -2048,6 +2144,11 @@ function salinWA() {
         if self.path.split('?', 1)[0] == '/api/autopsy/quota':
             return self._handle_get_autopsy_quota()
 
+        # FASE D2: API AI Room Context (GET /api/ai-room/<mapel>/context)
+        m_ai_room_ctx = re.match(r"^/api/ai-room/([^/]+)/context$", self.path.split("?", 1)[0])
+        if m_ai_room_ctx:
+            return self._handle_get_ai_room_context(m_ai_room_ctx.group(1))
+
         # Snapshot konten server-rendered untuk reviewer otomatis (Fase bagikan online):
         # /audit?subject=matematika&paket=1&dari=1&sampai=10  (HTML)
         # /audit.txt?...                                      (teks polos)
@@ -2077,6 +2178,21 @@ function salinWA() {
         route_path = urllib.parse.urlparse(self.path).path or '/'
         if len(route_path) > 1 and route_path.endswith('/'):
             route_path = route_path.rstrip('/')
+
+        # FASE D2: Halaman Ruang Mapel (/ruang/<mapel>)
+        if route_path == '/ruang' or route_path.startswith('/ruang/'):
+            ruang_file = os.path.join(BASE_DIR, 'ruang.html')
+            if os.path.isfile(ruang_file):
+                try:
+                    with open(ruang_file, 'rb') as fh:
+                        page_body = fh.read()
+                    return self._send_body(200, 'text/html; charset=utf-8', page_body,
+                                            {'Cache-Control': 'no-cache'})
+                except (BrokenPipeError, ConnectionResetError):
+                    return
+                except Exception as e:
+                    return self._send_500(e, "/ruang")
+
         page_routes = {
             '/': 'landing.html',
             '/app': 'index.html',
@@ -2725,6 +2841,11 @@ function salinWA() {
 
         elif self.path.split('?', 1)[0] == '/api/autopsy/coach':
             return self._handle_post_autopsy_coach()
+
+        # FASE D3: API AI Room Chat (POST /api/ai-room/<mapel>/chat)
+        elif re.match(r"^/api/ai-room/([^/]+)/chat$", self.path.split("?", 1)[0]):
+            m_ai_room_chat = re.match(r"^/api/ai-room/([^/]+)/chat$", self.path.split("?", 1)[0])
+            return self._handle_post_ai_room_chat(m_ai_room_chat.group(1))
 
         elif self.path.split('?', 1)[0] == '/admin/autopsi':
             if PUBLIC_DEMO:

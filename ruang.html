@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Ruang Mapel - AI Coach | TKA Master</title>
+  <meta name="description" content="AI Subject Room & Coaching per Mapel dengan analisis performa komprehensif.">
+
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- KaTeX for formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    :root {
+      --primary: #1b633e;
+      --primary-hover: #155132;
+      --primary-light: #e8f5ed;
+      --primary-glow: rgba(27, 99, 62, 0.15);
+      --slate-900: #0f172a;
+      --slate-800: #1e293b;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --slate-50: #f8fafc;
+      --amber-600: #d97706;
+      --amber-50: #fffbeb;
+      --amber-200: #fde68a;
+      --rose-600: #e11d48;
+      --rose-50: #fff1f2;
+      --radius-sm: 8px;
+      --radius-md: 14px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 14px -2px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 10px 25px -3px rgba(15, 23, 42, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;
+      color: var(--slate-900);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Top App Header (Mobile-first 390px) */
+    .room-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--slate-200);
+      box-shadow: var(--shadow-sm);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      height: 60px;
+    }
+
+    .room-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .btn-back {
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-full);
+      background: var(--slate-100);
+      border: 1px solid var(--slate-200);
+      color: var(--slate-700);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 15px;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .btn-back:hover {
+      background: var(--slate-200);
+      color: var(--slate-900);
+    }
+
+    .room-title-block {
+      min-width: 0;
+    }
+    .room-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--slate-900);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .room-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--primary-light);
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Main Content Wrapper */
+    .room-main {
+      flex: 1;
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 14px 14px 100px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Summary Card (D2) */
+    .summary-card {
+      background: #ffffff;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+    .summary-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #1b633e, #10b981, #f59e0b);
+    }
+
+    .summary-headline {
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 600;
+      color: var(--slate-800);
+      margin-bottom: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+    }
+    .summary-headline .highlight-soal {
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .summary-headline .highlight-acc {
+      color: #059669;
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .summary-headline .highlight-weak {
+      color: var(--rose-600);
+      font-weight: 700;
+      background: var(--rose-50);
+      padding: 2px 8px;
+      border-radius: 6px;
+    }
+
+    /* Metrics Grid / Chips */
+    .metrics-chips {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+    }
+    @media (max-width: 420px) {
+      .metrics-chips {
+        grid-template-columns: 1fr;
+      }
+    }
+    .chip-item {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .chip-label {
+      font-size: 11px;
+      color: var(--slate-500);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .chip-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--slate-900);
+      word-break: break-word;
+    }
+    .pola-banner {
+      margin-top: 10px;
+      background: var(--amber-50);
+      border: 1px solid var(--amber-200);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      font-size: 12px;
+      color: #92400e;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      line-height: 1.45;
+    }
+    .pola-banner i {
+      color: var(--amber-600);
+      font-size: 14px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* Chat Section (D3) */
+    .chat-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .chat-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Message Item */
+    .msg-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      animation: msgSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes msgSlideIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .msg-row.user {
+      justify-content: flex-end;
+    }
+
+    .avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .avatar.coach {
+      background: linear-gradient(135deg, #1b633e, #10b981);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(27, 99, 62, 0.25);
+    }
+
+    .msg-bubble {
+      max-width: 86%;
+      padding: 12px 14px;
+      border-radius: var(--radius-lg);
+      font-size: 13.5px;
+      line-height: 1.55;
+      word-wrap: break-word;
+      position: relative;
+    }
+    .msg-row.coach .msg-bubble {
+      background: #ffffff;
+      color: var(--slate-900);
+      border: 1px solid var(--slate-200);
+      border-top-left-radius: 4px;
+      box-shadow: var(--shadow-sm);
+    }
+    .msg-row.user .msg-bubble {
+      background: var(--primary);
+      color: #ffffff;
+      border-top-right-radius: 4px;
+      box-shadow: 0 3px 10px rgba(27, 99, 62, 0.2);
+    }
+
+    .msg-bubble p {
+      margin-bottom: 8px;
+    }
+    .msg-bubble p:last-child {
+      margin-bottom: 0;
+    }
+    .msg-bubble ul, .msg-bubble ol {
+      margin-left: 18px;
+      margin-bottom: 8px;
+    }
+    .msg-bubble strong {
+      font-weight: 700;
+    }
+
+    /* Typing Animation */
+    .typing-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 6px;
+    }
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--slate-400);
+      border-radius: 50%;
+      animation: typingBounce 1.3s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.5; }
+      40% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    /* Quick Action Chips */
+    .quick-chips-wrapper {
+      margin-top: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .quick-chip {
+      background: #ffffff;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-full);
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--slate-700);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .quick-chip:hover, .quick-chip:active {
+      background: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-1px);
+    }
+
+    /* Fixed Bottom Input Bar (Safe-area compliant) */
+    .chat-bar-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--slate-200);
+      padding: 10px 14px;
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
+      z-index: 40;
+    }
+    .chat-bar-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+    }
+    .chat-textarea {
+      flex: 1;
+      min-height: 44px;
+      max-height: 120px;
+      padding: 10px 14px;
+      border: 1.5px solid var(--slate-200);
+      border-radius: 22px;
+      font-family: inherit;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--slate-900);
+      background: #ffffff;
+      resize: none;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .chat-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+    .btn-send {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-full);
+      background: var(--primary);
+      border: none;
+      color: #ffffff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+      box-shadow: 0 3px 10px rgba(27, 99, 62, 0.25);
+    }
+    .btn-send:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+    .btn-send:disabled {
+      background: var(--slate-300);
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    /* Skeleton Loading State */
+    .skeleton {
+      background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+      background-size: 200% 100%;
+      animation: skeletonLoading 1.5s infinite;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    @keyframes skeletonLoading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header class="room-header">
+    <div class="room-header-left">
+      <a href="/app" class="btn-back" title="Kembali ke Aplikasi" id="btnBack">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+      <div class="room-title-block">
+        <h1 class="room-title" id="roomTitle">
+          <i class="fa-solid fa-graduation-cap" style="color: var(--primary);"></i>
+          <span>Ruang Mapel</span>
+        </h1>
+      </div>
+    </div>
+    <div>
+      <span class="room-badge">
+        <i class="fa-solid fa-sparkles"></i> AI Room
+      </span>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="room-main">
+
+    <!-- Kartu Ringkasan Performa (D2) -->
+    <section class="summary-card" id="summaryCard">
+      <div class="summary-headline" id="summaryHeadline">
+        Kamu sudah kerjakan <span class="highlight-soal" id="sumTotalSoal"><span class="skeleton" style="width: 28px; height: 16px;"></span></span> soal · 
+        Akurasi <span class="highlight-acc" id="sumAkurasi"><span class="skeleton" style="width: 36px; height: 16px;"></span></span> · 
+        Topik terlemah: <span class="highlight-weak" id="sumTopikWeak"><span class="skeleton" style="width: 80px; height: 16px;"></span></span>
+      </div>
+
+      <!-- Detail Metrics Chips -->
+      <div class="metrics-chips">
+        <div class="chip-item">
+          <span class="chip-label"><i class="fa-regular fa-clock"></i> Rata-rata Waktu</span>
+          <span class="chip-value" id="valWaktu">-- detik/soal</span>
+        </div>
+        <div class="chip-item">
+          <span class="chip-label"><i class="fa-solid fa-award"></i> Topik Terkuat</span>
+          <span class="chip-value" id="valKuat" style="color: #059669;">--</span>
+        </div>
+      </div>
+
+      <!-- Pola Belajar Banner -->
+      <div class="pola-banner" id="polaBanner">
+        <i class="fa-solid fa-chart-line"></i>
+        <span id="txtPola">Memuat analisis pola pengerjaan soal...</span>
+      </div>
+    </section>
+
+    <!-- Chat Interface (D3) -->
+    <section class="chat-section">
+      <div class="chat-stream" id="chatStream">
+        <!-- Initial Welcome Message from AI Coach -->
+        <div class="msg-row coach" id="welcomeMsg">
+          <div class="avatar coach"><i class="fa-solid fa-robot"></i></div>
+          <div class="msg-bubble">
+            <p><strong>Halo! Selamat datang di Ruang <span class="mapel-label">Mapel</span>.</strong></p>
+            <p id="welcomeGreeting">Sedang menyiapkan konteks belajarmu...</p>
+            
+            <!-- Quick Suggestion Chips -->
+            <div class="quick-chips-wrapper" id="quickChips">
+              <button class="quick-chip" onclick="sendQuickPrompt('Bagaimana strategi paling efektif untuk menaikkan akurasi di topik terlemah saya?')">
+                <i class="fa-solid fa-bullseye" style="color: #e11d48;"></i> Strategi topik terlemah
+              </button>
+              <button class="quick-chip" onclick="sendQuickPrompt('Bahas dan analisis 5 soal terakhir yang salah saya kerjakan!')">
+                <i class="fa-solid fa-magnifying-glass" style="color: #1b633e;"></i> Bedah 5 salah terakhir
+              </button>
+              <button class="quick-chip" onclick="sendQuickPrompt('Bagaimana cara mengatasi pola kesalahan saya agar tidak terulang?')">
+                <i class="fa-solid fa-stopwatch" style="color: #d97706;"></i> Evaluasi pola kesalahan
+              </button>
+              <button class="quick-chip" onclick="sendQuickPrompt('Berikan 1 contoh soal konsep beserta trik pengerjaannya.')">
+                <i class="fa-solid fa-lightbulb" style="color: #2563eb;"></i> Contoh soal & trik konsep
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Pinned Bottom Input Bar (390px Mobile-First) -->
+  <div class="chat-bar-container">
+    <div class="chat-bar-inner">
+      <textarea 
+        id="chatInput" 
+        class="chat-textarea" 
+        placeholder="Tanya strategi, rumus, atau konsep mapel ini..." 
+        rows="1"
+        onkeydown="handleInputKey(event)"
+      ></textarea>
+      <button id="btnSend" class="btn-send" onclick="sendChatMessage()" title="Kirim Pesan">
+        <i class="fa-solid fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    // Inisialisasi State Halaman
+    const chatHistory = [];
+    let currentMapelSlug = 'matematika';
+    let roomContext = null;
+    let isSending = false;
+
+    // Deteksi Mapel dari Path URL (/ruang/<mapel>) atau Query Param
+    function detectMapelSlug() {
+      const pathParts = window.location.pathname.split('/').filter(Boolean);
+      // Path format: /ruang/matematika -> parts: ['ruang', 'matematika']
+      if (pathParts.length >= 2 && pathParts[0] === 'ruang') {
+        return pathParts[1].toLowerCase();
+      }
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('mapel')) {
+        return params.get('mapel').toLowerCase();
+      }
+      return 'matematika';
+    }
+
+    // Ambil Token Auth Supabase dari localStorage
+    function getAuthToken() {
+      try {
+        const raw = localStorage.getItem('tka_supabase_auth_token');
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && parsed.access_token) return parsed.access_token;
+        }
+      } catch (e) {}
+      // Fallback sb- token
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('sb-') && key.endsWith('-auth-token')) {
+          try {
+            const data = JSON.parse(localStorage.getItem(key));
+            if (data && data.access_token) return data.access_token;
+          } catch (e) {}
+        }
+      }
+      return null;
+    }
+
+    // Format Text Markdown Sederhana
+    function formatMarkdown(text) {
+      if (!text) return '';
+      let escaped = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      
+      // Bold
+      escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      // Italic
+      escaped = escaped.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      // Inline Code
+      escaped = escaped.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px;">$1</code>');
+      // Newlines to <br> or paragraphs
+      return escaped.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+    }
+
+    // Render KaTeX jika ada formula matematika
+    function renderMathFormulas(element) {
+      if (window.renderMathInElement) {
+        try {
+          renderMathInElement(element, {
+            delimiters: [
+              { left: '$$', right: '$$', display: true },
+              { left: '$', right: '$', display: false }
+            ],
+            throwOnError: false
+          });
+        } catch (e) {}
+      }
+    }
+
+    // Muat Agregat Konteks dari Server (GET /api/ai-room/<mapel>/context)
+    async function loadRoomContext() {
+      currentMapelSlug = detectMapelSlug();
+      const token = getAuthToken();
+      const headers = { 'Accept': 'application/json' };
+      if (token) headers['Authorization'] = 'Bearer ' + token;
+
+      try {
+        const res = await fetch(`/api/ai-room/${currentMapelSlug}/context`, { headers });
+        const json = await res.json();
+        if (res.ok && json.status === 'success') {
+          roomContext = json.context || {};
+          renderSummaryCard(roomContext);
+          updateWelcomeMessage(roomContext);
+        } else {
+          showFallbackContext();
+        }
+      } catch (err) {
+        showFallbackContext();
+      }
+    }
+
+    function renderSummaryCard(ctx) {
+      const dispName = ctx.display_name || currentMapelSlug.replace(/_/g, ' ').toUpperCase();
+      document.getElementById('roomTitle').querySelector('span').innerText = `Ruang ${dispName}`;
+      document.title = `Ruang ${dispName} - AI Coach | TKA Master`;
+      document.querySelectorAll('.mapel-label').forEach(el => el.innerText = dispName);
+
+      document.getElementById('sumTotalSoal').innerText = ctx.total_soal || 0;
+      document.getElementById('sumAkurasi').innerText = `${ctx.akurasi || 0}%`;
+
+      const weakList = ctx.topik_terlemah || [];
+      const weakStr = weakList.length > 0 ? weakList.join(', ') : 'Belum ada data';
+      document.getElementById('sumTopikWeak').innerText = weakStr;
+
+      document.getElementById('valWaktu').innerText = `${ctx.waktu_rata2_per_soal || 0}s / soal`;
+      const strongList = ctx.topik_terkuat || [];
+      document.getElementById('valKuat').innerText = strongList.length > 0 ? strongList.join(', ') : 'Belum ada';
+
+      if (ctx.pola) {
+        document.getElementById('txtPola').innerText = ctx.pola;
+      }
+    }
+
+    function updateWelcomeMessage(ctx) {
+      const disp = ctx.display_name || 'Mata Pelajaran ini';
+      const weak = (ctx.topik_terlemah || [])[0] || 'materi utama';
+      const total = ctx.total_soal || 0;
+      const acc = ctx.akurasi || 0;
+
+      let msg = '';
+      if (total > 0) {
+        msg = `Berdasarkan rekam jejakmu, kamu sudah menyelesaikan <strong>${total} butir soal</strong> dengan akurasi <strong>${acc}%</strong>. ` +
+              `Fokus utama kita saat ini adalah menguatkan topik <strong>${weak}</strong>. ` +
+              `Ada materi atau pola soal yang ingin kita bedah bersama sekarang?`;
+      } else {
+        msg = `Selamat datang! Di ruang ini, aku akan menganalisis setiap performa latihanmu di <strong>${disp}</strong>. ` +
+              `Kamu bisa menanyakan konsep, trik cepat, atau strategi belajar. Apa yang ingin kamu pelajari hari ini?`;
+      }
+      document.getElementById('welcomeGreeting').innerHTML = msg;
+    }
+
+    function showFallbackContext() {
+      const disp = currentMapelSlug.replace(/_/g, ' ').toUpperCase();
+      document.getElementById('roomTitle').querySelector('span').innerText = `Ruang ${disp}`;
+      document.getElementById('sumTotalSoal').innerText = '0';
+      document.getElementById('sumAkurasi').innerText = '0%';
+      document.getElementById('sumTopikWeak').innerText = 'Belum ada';
+      document.getElementById('valWaktu').innerText = '0s / soal';
+      document.getElementById('valKuat').innerText = 'Belum ada';
+      document.getElementById('txtPola').innerText = 'Mulai kerjakan tryout untuk mengaktifkan analisis performa.';
+      document.getElementById('welcomeGreeting').innerText = `Selamat datang di Ruang ${disp}. Tanyakan apa saja seputar materi ini!`;
+    }
+
+    // Kirim Pesan Cepat dari Chip Saran
+    function sendQuickPrompt(promptText) {
+      const input = document.getElementById('chatInput');
+      input.value = promptText;
+      sendChatMessage();
+    }
+
+    // Kirim Pesan Chat (POST /api/ai-room/<mapel>/chat)
+    async function sendChatMessage() {
+      if (isSending) return;
+      const input = document.getElementById('chatInput');
+      const text = (input.value || '').trim();
+      if (!text) return;
+
+      input.value = '';
+      input.style.height = '44px';
+      isSending = true;
+      document.getElementById('btnSend').disabled = true;
+
+      // 1. Tampilkan pesan user di stream
+      appendMessage('user', text);
+      chatHistory.push({ role: 'user', content: text });
+
+      // 2. Tampilkan typing indicator dari Coach
+      const typingEl = showTypingIndicator();
+
+      // 3. Panggil API backend
+      const token = getAuthToken();
+      const headers = { 'Content-Type': 'application/json' };
+      if (token) headers['Authorization'] = 'Bearer ' + token;
+
+      try {
+        const res = await fetch(`/api/ai-room/${currentMapelSlug}/chat`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({
+            message: text,
+            history: chatHistory.slice(-6)
+          })
+        });
+
+        const data = await res.json();
+        typingEl.remove();
+
+        if (res.ok && data.status === 'success') {
+          const reply = data.reply || 'Maaf, belum ada respons dari AI.';
+          appendMessage('coach', reply);
+          chatHistory.push({ role: 'assistant', content: reply });
+        } else {
+          const errMsg = data.message || 'Gagal menghubungi Guru AI. Silakan coba lagi.';
+          appendMessage('coach', `⚠️ *${errMsg}*`);
+        }
+      } catch (err) {
+        typingEl.remove();
+        appendMessage('coach', '⚠️ Koneksi internet terganggu. Silakan periksa jaringanmu dan kirim ulang.');
+      } finally {
+        isSending = false;
+        document.getElementById('btnSend').disabled = false;
+        input.focus();
+      }
+    }
+
+    function appendMessage(role, text) {
+      const stream = document.getElementById('chatStream');
+      const row = document.createElement('div');
+      row.className = `msg-row ${role}`;
+
+      if (role === 'coach') {
+        const av = document.createElement('div');
+        av.className = 'avatar coach';
+        av.innerHTML = '<i class="fa-solid fa-robot"></i>';
+        row.appendChild(av);
+      }
+
+      const bubble = document.createElement('div');
+      bubble.className = 'msg-bubble';
+      bubble.innerHTML = formatMarkdown(text);
+      row.appendChild(bubble);
+
+      stream.appendChild(row);
+      renderMathFormulas(bubble);
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+
+    function showTypingIndicator() {
+      const stream = document.getElementById('chatStream');
+      const row = document.createElement('div');
+      row.className = 'msg-row coach';
+      row.id = 'activeTypingRow';
+
+      const av = document.createElement('div');
+      av.className = 'avatar coach';
+      av.innerHTML = '<i class="fa-solid fa-robot"></i>';
+      row.appendChild(av);
+
+      const bubble = document.createElement('div');
+      bubble.className = 'msg-bubble';
+      bubble.innerHTML = `
+        <div class="typing-indicator">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </div>
+      `;
+      row.appendChild(bubble);
+
+      stream.appendChild(row);
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+      return row;
+    }
+
+    function handleInputKey(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendChatMessage();
+      }
+    }
+
+    // Auto-resize Textarea
+    const chatInput = document.getElementById('chatInput');
+    chatInput.addEventListener('input', function() {
+      this.style.height = '44px';
+      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+    });
+
+    // Inisialisasi Saat Dokumen Siap
+    document.addEventListener('DOMContentLoaded', () => {
+      loadRoomContext();
+    });
+  </script>
+</body>
+</html>

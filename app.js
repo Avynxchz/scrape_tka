@@ -5789,6 +5789,17 @@ async function renderAutopsiSection() {
       h += `<div style="font-size:12px;font-style:italic;color:#475569;text-align:center;margin:10px 0">${coach.penutup}</div>`;
     }
 
+    // Tombol Masuk Ruang Mapel (D2/D3)
+    const mapelKey = state.currentSubject || payload.subject || payload.mapel || 'matematika';
+    const mapelTitle = (SUBJECT_CATALOG[mapelKey] && SUBJECT_CATALOG[mapelKey].title) || mapelKey.toUpperCase();
+    h += `
+      <div style="margin:12px 0">
+        <a href="/ruang/${mapelKey}" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#ffffff;border:1.5px solid #1b633e;color:#1b633e;padding:11px 16px;border-radius:12px;text-decoration:none;font-weight:700;font-size:13px;box-shadow:0 2px 6px rgba(27,99,62,0.08);transition:all 0.2s">
+          <i class="fa-solid fa-graduation-cap"></i> Masuk Ruang ${mapelTitle} (Konsultasi Penuh)
+        </a>
+      </div>
+    `;
+
     h += `
       <div style="font-size:11px;color:#94a3b8;margin-top:12px;text-align:center;line-height:1.4">
         Dibuat AI dari data pengerjaanmu; bisa keliru. Cek Pilar dan kunci resmi.
