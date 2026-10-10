@@ -6596,3 +6596,75 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
     font-size: 14px !important;
   }
 }
+
+/* RESPONSIVE AI TUTOR MOBILE SAAT KEYBOARD AKTIF */
+@media (max-width: 899px) {
+  body.keyboard-active .ai-top-actions-bar {
+    display: none !important;
+  }
+  body.keyboard-active .ai-tutor-header {
+    padding: 6px 12px !important;
+  }
+  body.keyboard-active .tutor-sub,
+  body.keyboard-active .tutor-quota-badge,
+  body.keyboard-active .btn-refresh-quota {
+    display: none !important;
+  }
+  body.keyboard-active #chatQuestionCard {
+    display: none !important;
+  }
+  body.keyboard-active .chat-messages {
+    flex: 1 1 auto !important;
+  }
+  body.keyboard-active .chat-input-area {
+    padding: 8px 12px !important;
+  }
+}
+
+/* ACCORDION RINGKAS PEMBAHASAN 5 PILAR MOBILE */
+.pillar-accordion-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+.pillar-accordion-header {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: var(--surface);
+  user-select: none;
+}
+.pillar-accordion-header:hover {
+  background: var(--surface-hover, #f1f5f9);
+}
+.pillar-accordion-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pillar-chevron {
+  transition: transform 0.2s ease;
+  color: var(--text-3);
+  font-size: 13px;
+}
+.pillar-accordion-card.is-open .pillar-chevron {
+  transform: rotate(180deg);
+}
+.pillar-accordion-body {
+  display: none;
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+}
+.pillar-accordion-card.is-open .pillar-accordion-body {
+  display: block;
+}
+
+/* Modal Kartu Strategi Belajar (Autopsi Tryout) */
+#modalKartuStrategi {
+  z-index: 200;
+}

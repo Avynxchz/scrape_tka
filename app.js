@@ -478,7 +478,7 @@ const SUBJECT_UI_META = {
   },
   sejarah: {
     name: 'Sejarah (Peminatan)', shortName: 'Sejarah', chip: 'SEJARAH',
-    icon: 'landmark', theme: 'purple', category: 'Soshum'
+    icon: 'history_edu', theme: 'purple', category: 'Soshum'
   },
   antropologi: {
     name: 'Antropologi (Peminatan)', shortName: 'Antropologi', chip: 'ANTROPOLOGI',
@@ -757,14 +757,19 @@ function getTkaCardsHtml() {
     } catch (e) {}
     const labelNama = {'terburu':'Terburu-buru','overthinking':'Overthinking','macet':'Macet','yakin_salah':'Yakin tapi salah','ragu_salah':'Ragu-ragu dan salah','waktu_habis':'Kehabisan waktu','kosong':'Dikosongkan'};
     if (misi) {
+      const cthRef = (misi.contoh && misi.contoh[0]) ? String(misi.contoh[0]) : '';
       h += '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
         + '<div style="font-size:12px;font-weight:700;color:#b45309;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
-        + '<div style="font-size:15px;font-weight:700;margin-bottom:4px">Perbaiki: ' + (labelNama[misi.label] || misi.label) + '</div>'
-        + '<div style="font-size:13px;color:#6b7280">' + (misi.bukti || '') + '</div></div>';
+        + '<div style="font-size:15px;font-weight:700;margin-bottom:4px;color:#92400e">Perbaiki: ' + (labelNama[misi.label] || misi.label) + '</div>'
+        + '<div style="font-size:13px;color:#6b7280;margin-bottom:10px">' + (misi.bukti || '') + '</div>'
+        + `<button type="button" onclick="bukaKartuStrategi('${misi.label}', '${cthRef}')" style="background:#b45309;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">📖 Pelajari Strategi Misi</button>`
+        + '</div>';
     } else {
       h += '<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px;margin:0 0 12px">'
         + '<div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
-        + '<div style="font-size:13px;color:#6b7280">Kerjakan 1 tryout untuk membuka misi harianmu.</div></div>';
+        + '<div style="font-size:13px;color:#6b7280;margin-bottom:10px">Selesaikan 1 tryout untuk mengidentifikasi kebocoran skor dan membuka misi belajarmu.</div>'
+        + '<button type="button" onclick="homeClose();" style="background:#004a2a;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;">🚀 Mulai Latihan Tryout</button>'
+        + '</div>';
     }
     return h;
   } catch (e) { return ''; }
@@ -2172,13 +2177,21 @@ function cleanUiStimulusText(stimText, stimImages) {
     if (opts.length === 0 && q.pernyataan && q.pernyataan.length > 0) {
       renderBsStatements(q, currentSelection || {}, optionsContainer);
     } else {
+      if (isComplex) {
+        const complexNotice = document.createElement('div');
+        complexNotice.className = 'complex-notice-pill';
+        const numKeys = Array.isArray(q.kunci_jawaban) ? q.kunci_jawaban.length : 2;
+        complexNotice.style.cssText = 'background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:8px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;font-size:12.5px;color:#0369a1;font-weight:700;';
+        complexNotice.innerHTML = `<i class="fa-solid fa-square-check" style="font-size:16px;color:#0284c7;"></i> <span>Pilihan Ganda Kompleks · Jawaban benar lebih dari satu (Pilih ${numKeys} Opsi)</span>`;
+        optionsContainer.appendChild(complexNotice);
+      }
       opts.forEach(opt => {
       const isSelected = isComplex
         ? (Array.isArray(currentSelection) && currentSelection.includes(opt.key))
         : (currentSelection === opt.key);
 
       const optItem = document.createElement('div');
-      optItem.className = `option-item ${isSelected ? 'selected' : ''}`;
+      optItem.className = `option-item ${isComplex ? 'complex-opt' : ''} ${isSelected ? 'selected' : ''}`;
       optItem.dataset.key = opt.key;
       optItem.dataset.optKey = opt.key;
       // Aksesibilitas (audit Kimi/Qwen): opsi sebagai kontrol semantik radio/checkbox
@@ -2194,12 +2207,14 @@ function cleanUiStimulusText(stimText, stimImages) {
         }
       };
 
-      // Key indicator
+      // Key indicator (Kotak untuk PG Kompleks, Bulat untuk PG Biasa)
       const indicator = document.createElement('div');
-      indicator.className = 'opt-indicator';
-      indicator.innerText = opt.key;
+      indicator.className = `opt-indicator ${isComplex ? 'is-checkbox' : ''}`;
       if (isComplex) {
         indicator.style.borderRadius = '6px';
+        indicator.innerHTML = isSelected ? '<i class="fa-solid fa-check" style="font-size:11px;"></i>' : opt.key;
+      } else {
+        indicator.innerText = opt.key;
       }
       optItem.appendChild(indicator);
 
@@ -2860,63 +2875,75 @@ function checkUserAnswer() {
 
     const kunci = parseBsKunci(q);
     let benar = 0;
+    let tableRowsHtml = '';
+
     stmts.forEach(st => {
-      const row = document.querySelector(`.bs-row[data-stmt="${st.key}"]`);
-      if (!row) return;
-      const isRight = sel[st.key] === kunci[st.key];
+      const userVal = sel[st.key] || '-';
+      const targetVal = kunci[st.key] || '-';
+      const isRight = (userVal === targetVal);
       if (isRight) benar++;
-      row.classList.toggle('correct', isRight);
-      row.classList.toggle('incorrect', !isRight);
+
+      const row = document.querySelector(`.bs-row[data-stmt="${st.key}"]`);
+      if (row) {
+        row.classList.toggle('correct', isRight);
+        row.classList.toggle('incorrect', !isRight);
+      }
+
+      tableRowsHtml += `
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:6px 8px;font-weight:700;color:#1e293b;text-align:center;">${st.key}</td>
+          <td style="padding:6px 8px;color:#334155;text-align:center;">${userVal}</td>
+          <td style="padding:6px 8px;font-weight:700;color:#0f172a;text-align:center;">${targetVal}</td>
+          <td style="padding:6px 8px;text-align:center;">
+            ${isRight 
+              ? '<span style="color:#15803d;font-weight:700;background:#dcfce7;padding:3px 8px;border-radius:6px;font-size:11px;">✅ Tepat</span>'
+              : '<span style="color:#b91c1c;font-weight:700;background:#fee2e2;padding:3px 8px;border-radius:6px;font-size:11px;">❌ Berbeda</span>'}
+          </td>
+        </tr>
+      `;
     });
 
     feedback.style.display = 'flex';
-    if (benar === stmts.length) {
-      feedback.className = 'feedback-banner success';
-      feedback.innerHTML = `
-        <div class="fb-card-inner">
-          <div class="fb-main-info">
-            <div class="fb-status-badge correct">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Sempurna! Semua ${stmts.length} Pernyataan Benar!</span>
-            </div>
-            <div class="fb-text-msg">Analisis logikamu tepat. Mau mengecek pembahasan materi lengkapnya?</div>
+    const isAllRight = (benar === stmts.length);
+    feedback.className = `feedback-banner ${isAllRight ? 'success' : 'danger'}`;
+    feedback.innerHTML = `
+      <div class="fb-card-inner">
+        <div class="fb-main-info" style="width:100%;">
+          <div class="fb-status-badge ${isAllRight ? 'correct' : 'incorrect'}">
+            <i class="fa-solid ${isAllRight ? 'fa-circle-check' : 'fa-circle-info'}"></i>
+            <span>${isAllRight ? 'Sempurna! Semua Pernyataan Sesuai Kunci' : `${benar} dari ${stmts.length} Pernyataan Tepat`}</span>
           </div>
-          <div class="fb-action-buttons">
-            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
-              <i class="fa-solid fa-lightbulb"></i>
-              <span>Lihat Pembahasan</span>
-            </button>
-            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
-              <span>Soal Berikutnya</span>
-              <i class="fa-solid fa-arrow-right"></i>
-            </button>
+          <div class="fb-text-msg" style="margin-bottom:8px;">
+            ${isAllRight 
+              ? 'Analisis logikamu untuk setiap pernyataan tepat sekali!' 
+              : 'Berikut perbandingan pilihan jawabanmu dengan kunci resmi TKA Pusmendik:'}
           </div>
-        </div>
-      `;
-    } else {
-      feedback.className = 'feedback-banner danger';
-      feedback.innerHTML = `
-        <div class="fb-card-inner">
-          <div class="fb-main-info">
-            <div class="fb-status-badge incorrect">
-              <i class="fa-solid fa-circle-xmark"></i>
-              <span>${benar} dari ${stmts.length} Pernyataan Benar</span>
-            </div>
-            <div class="fb-text-msg">Baris bertanda merah belum tepat. Mau mengecek pembahasan dan penjelasannya?</div>
-          </div>
-          <div class="fb-action-buttons">
-            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
-              <i class="fa-solid fa-lightbulb"></i>
-              <span>Lihat Pembahasan</span>
-            </button>
-            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
-              <span>Soal Berikutnya</span>
-              <i class="fa-solid fa-arrow-right"></i>
-            </button>
+          <div style="overflow-x:auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;padding:6px;margin:8px 0 12px;">
+            <table style="width:100%;border-collapse:collapse;font-size:12px;">
+              <thead>
+                <tr style="background:#f8fafc;border-bottom:1px solid #cbd5e1;color:#475569;font-size:11px;text-transform:uppercase;">
+                  <th style="padding:6px;text-align:center;">Baris</th>
+                  <th style="padding:6px;text-align:center;">Pilihan Kamu</th>
+                  <th style="padding:6px;text-align:center;">Kunci Resmi</th>
+                  <th style="padding:6px;text-align:center;">Hasil</th>
+                </tr>
+              </thead>
+              <tbody>${tableRowsHtml}</tbody>
+            </table>
           </div>
         </div>
-      `;
-    }
+        <div class="fb-action-buttons">
+          <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>Lihat Pembahasan</span>
+          </button>
+          <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+            <span>Soal Berikutnya</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    `;
 
     state.explanationVisible = true;
     showPembahasanAfterCheck();
@@ -2934,52 +2961,178 @@ function checkUserAnswer() {
   let isCorrect = false;
 
   const targetArr = Array.isArray(correctKey) ? correctKey : (correctKey ? [correctKey] : []);
+  const userArr = Array.isArray(currentSelection) ? currentSelection : (currentSelection ? [currentSelection] : []);
+
   if (isComplex) {
-    const sortedUser = [...currentSelection].sort().join(',');
+    const sortedUser = [...userArr].sort().join(',');
     const sortedTarget = [...targetArr].sort().join(',');
-    isCorrect = sortedUser === sortedTarget;
-  } else {
-    isCorrect = currentSelection === correctKey;
-  }
+    isCorrect = (sortedUser === sortedTarget);
 
-  // Highlight options
-  document.querySelectorAll('.option-item').forEach(el => {
-    const k = el.dataset.key;
-    const isTarget = isComplex ? targetArr.includes(k) : (k === correctKey);
-    el.classList.toggle('correct', isTarget);
-    if (!isTarget && el.classList.contains('selected')) {
-      el.classList.add('incorrect');
+    const benarDipilih = userArr.filter(k => targetArr.includes(k));
+    const salahDipilih = userArr.filter(k => !targetArr.includes(k));
+    const belumDipilih = targetArr.filter(k => !userArr.includes(k));
+    const totalOpts = (q.pilihan_jawaban || []).length || 5;
+
+    // Highlight options di layar
+    document.querySelectorAll('.option-item').forEach(el => {
+      const k = el.dataset.key;
+      const isTarget = targetArr.includes(k);
+      const isUserPick = userArr.includes(k);
+      el.classList.toggle('correct', isTarget);
+      if (isUserPick && !isTarget) {
+        el.classList.add('incorrect');
+      }
+    });
+
+    feedback.style.display = 'flex';
+    if (isCorrect) {
+      feedback.className = 'feedback-banner success';
+      feedback.innerHTML = `
+        <div class="fb-card-inner">
+          <div class="fb-main-info">
+            <div class="fb-status-badge correct">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Luar Biasa! Jawabanmu Benar Sempurna!</span>
+            </div>
+            <div class="fb-text-msg">
+              Kamu berhasil memilih seluruh kunci jawaban yang tepat: <strong>(${targetArr.join(', ')})</strong>.
+            </div>
+          </div>
+          <div class="fb-action-buttons">
+            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Lihat Pembahasan</span>
+            </button>
+            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+              <span>Soal Berikutnya</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    } else if (userArr.length >= totalOpts && salahDipilih.length > 0) {
+      // Siswa mencentang semua opsi tanpa membaca
+      feedback.className = 'feedback-banner danger';
+      feedback.innerHTML = `
+        <div class="fb-card-inner">
+          <div class="fb-main-info">
+            <div class="fb-status-badge incorrect">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>Semua Opsi Terpilih</span>
+            </div>
+            <div class="fb-text-msg">
+              Kamu mencentang seluruh opsi. Kunci jawaban resmi hanya <strong>(${targetArr.join(', ')})</strong>. Skor proporsional: 0%.
+            </div>
+          </div>
+          <div class="fb-action-buttons">
+            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Lihat Pembahasan</span>
+            </button>
+            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+              <span>Soal Berikutnya</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    } else if (benarDipilih.length > 0 && salahDipilih.length === 0) {
+      // Siswa tepat memilih 1 dari 2 (seperti kasus Agus memilih E pada soal A & E)
+      const pct = Math.round((benarDipilih.length / targetArr.length) * 100);
+      feedback.className = 'feedback-banner warn';
+      feedback.innerHTML = `
+        <div class="fb-card-inner">
+          <div class="fb-main-info">
+            <div class="fb-status-badge warn" style="background:#fef3c7;color:#b45309;">
+              <i class="fa-solid fa-circle-half-stroke"></i>
+              <span>Sebagian Benar (${benarDipilih.length} dari ${targetArr.length} Jawaban — ${pct}%)</span>
+            </div>
+            <div class="fb-text-msg">
+              Pilihan kamu <strong>(${benarDipilih.join(', ')})</strong> tepat! Namun soal ini memiliki lebih dari satu jawaban benar. Kunci resmi lengkapnya adalah <strong>(${targetArr.join(', ')})</strong>. Opsi <strong>(${belumDipilih.join(', ')})</strong> belum kamu pilih.
+            </div>
+          </div>
+          <div class="fb-action-buttons">
+            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Lihat Pembahasan</span>
+            </button>
+            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+              <span>Soal Berikutnya</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    } else {
+      // Ada opsi yang keliru
+      feedback.className = 'feedback-banner danger';
+      feedback.innerHTML = `
+        <div class="fb-card-inner">
+          <div class="fb-main-info">
+            <div class="fb-status-badge incorrect">
+              <i class="fa-solid fa-circle-xmark"></i>
+              <span>Jawaban Belum Tepat</span>
+            </div>
+            <div class="fb-text-msg">
+              Pilihanmu: <strong>(${userArr.join(', ')})</strong>.<br>
+              ${benarDipilih.length ? `Opsi tepat: <strong>(${benarDipilih.join(', ')})</strong>. ` : ''}
+              Kunci jawaban resmi yang benar adalah <strong>(${targetArr.join(', ')})</strong>.
+            </div>
+          </div>
+          <div class="fb-action-buttons">
+            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Lihat Pembahasan</span>
+            </button>
+            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+              <span>Soal Berikutnya</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
     }
-  });
+  } else {
+    // Pilihan Ganda Biasa (Single Option)
+    isCorrect = (currentSelection === correctKey);
 
-  const kunciStr = Array.isArray(correctKey) ? correctKey.join(', ') : (correctKey || '-');
-  feedback.style.display = 'flex';
-  feedback.className = `feedback-banner ${isCorrect ? 'success' : 'danger'}`;
-  feedback.innerHTML = `
-    <div class="fb-card-inner">
-      <div class="fb-main-info">
-        <div class="fb-status-badge ${isCorrect ? 'correct' : 'incorrect'}">
-          <i class="fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
-          <span>${isCorrect ? 'Jawaban Kamu Benar!' : 'Jawaban Belum Tepat'}</span>
+    document.querySelectorAll('.option-item').forEach(el => {
+      const k = el.dataset.key;
+      const isTarget = (k === correctKey);
+      el.classList.toggle('correct', isTarget);
+      if (!isTarget && el.classList.contains('selected')) {
+        el.classList.add('incorrect');
+      }
+    });
+
+    feedback.style.display = 'flex';
+    feedback.className = `feedback-banner ${isCorrect ? 'success' : 'danger'}`;
+    feedback.innerHTML = `
+      <div class="fb-card-inner">
+        <div class="fb-main-info">
+          <div class="fb-status-badge ${isCorrect ? 'correct' : 'incorrect'}">
+            <i class="fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
+            <span>${isCorrect ? 'Jawaban Kamu Benar!' : 'Jawaban Belum Tepat'}</span>
+          </div>
+          <div class="fb-text-msg">
+            ${isCorrect 
+              ? 'Pilihan jawabanmu tepat sekali! Ingin memperdalam rumus atau materi pada soal ini?' 
+              : `Kunci jawaban yang benar adalah <strong>${correctKey || '-'}</strong>. Mau mengecek pembahasan langkahnya?`}
+          </div>
         </div>
-        <div class="fb-text-msg">
-          ${isCorrect 
-            ? 'Pilihan jawabanmu tepat sekali! Ingin memperdalam rumus atau materi pada soal ini?' 
-            : `Kunci jawaban yang benar adalah <strong>${kunciStr}</strong>. Mau mengecek pembahasan langkahnya?`}
+        <div class="fb-action-buttons">
+          <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>Lihat Pembahasan</span>
+          </button>
+          <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+            <span>Soal Berikutnya</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
         </div>
       </div>
-      <div class="fb-action-buttons">
-        <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
-          <i class="fa-solid fa-lightbulb"></i>
-          <span>Lihat Pembahasan</span>
-        </button>
-        <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
-          <span>Soal Berikutnya</span>
-          <i class="fa-solid fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
-  `;
+    `;
+  }
 
   state.explanationVisible = true;
   // BUGFIX (10 Okt 2026): tandai sudah dicek agar opsi terkunci spesifik per mapel dan paket (tahan refresh via localStorage)
@@ -3681,6 +3834,7 @@ async function _applyCanonicalSolution(q) {
     }
 
     renderMath();
+    try { setupPillarAccordions(); } catch (e) {}
   } catch (err) {
     if (seq !== _solutionReqSeq) return;
     console.warn('Solution (kanonis) tidak tersedia:', err);
@@ -5080,15 +5234,17 @@ function renderReviewHasil() {
       const partsAnda = stmts.map(st => {
         const picked = (ans && typeof ans === 'object' && !Array.isArray(ans)) ? ans[st.key] : null;
         if (!picked) {
-          return `<strong>${st.key}</strong> (&mdash;)`;
+          return `<strong>${st.key}:</strong> <span style="color:#94a3b8;">&mdash;</span>`;
         }
         const isRight = picked === kunciMap[st.key];
-        const color = isRight ? 'var(--accent)' : 'var(--wrong)';
-        return `<strong>${st.key}</strong> (<span style="color:${color}; font-weight:600;">${picked}</span>)`;
+        const badge = isRight 
+          ? `<span style="color:#15803d;font-weight:700;">✅ ${picked}</span>`
+          : `<span style="color:#dc2626;font-weight:700;">❌ ${picked}</span>`;
+        return `<strong>${st.key}:</strong> ${badge}`;
       });
 
       const partsKunci = stmts.map(st => {
-        return `<strong>${st.key}</strong> (<span style="color:var(--accent); font-weight:600;">${kunciMap[st.key] || '&mdash;'}</span>)`;
+        return `<strong>${st.key}:</strong> <span style="font-weight:700;color:#004a2a;">${kunciMap[st.key] || '&mdash;'}</span>`;
       });
 
       andaHtml = `<div class="review-ans-multiline">${partsAnda.join('<br>')}</div>`;
@@ -5244,25 +5400,28 @@ async function renderAutopsiSection() {
     // Dapatkan token
     let hdr = {};
     if (typeof _attemptAuthHeader === 'function') {
-      hdr = await _attemptAuthHeader();
+      try { hdr = await _attemptAuthHeader(); } catch (e) {}
     }
-    if (!hdr.Authorization) {
-      cont.innerHTML = '';
-      cont.style.display = 'none';
-      return;
-    }
+    const isFounder = (localStorage.getItem('tka_founder_mode') === '1');
+    const isGuest = !hdr.Authorization;
+
     cont.style.display = 'block';
-    cont.innerHTML = '<div style="text-align:center;padding:12px;color:#6b7280;font-size:12px">Memuat analisis Autopsi...</div>';
+    cont.innerHTML = '<div style="text-align:center;padding:12px;color:#6b7280;font-size:12px"><i class="fa-solid fa-spinner fa-spin"></i> Memuat analisis Autopsi...</div>';
+    
+    const reqBody = {
+      items: payload.items,
+      n_questions: payload.n_questions,
+      duration_limit_s: payload.duration_limit_s,
+      ended_by: payload.ended_by,
+      mapel: payload.subject || payload.mapel,
+      is_guest: isGuest,
+      founder_mode: isFounder
+    };
+
     const res = await fetch('/api/autopsy/analyze', {
       method: 'POST',
       headers: Object.assign({'Content-Type': 'application/json'}, hdr),
-      body: JSON.stringify({
-        items: payload.items,
-        n_questions: payload.n_questions,
-        duration_limit_s: payload.duration_limit_s,
-        ended_by: payload.ended_by,
-        mapel: payload.subject || payload.mapel
-      })
+      body: JSON.stringify(reqBody)
     });
     if (!res.ok) {
       cont.innerHTML = '';
@@ -5286,51 +5445,210 @@ async function renderAutopsiSection() {
       'waktu_habis': 'Kehabisan waktu',
       'kosong': 'Dikosongkan'
     };
-    let h = '<div class="autopsy-widget" style="margin:12px 0;padding:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px">';
-    h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">'
-      + '<h3 style="font-size:15px;font-weight:700;margin:0;color:#0f172a">🔍 Autopsi Tryout</h3>'
-      + '<span style="font-size:11px;background:#e2e8f0;color:#475569;padding:2px 6px;border-radius:4px;font-weight:600">Pola Pengerjaan</span>'
+    let h = '<div class="autopsy-widget" style="margin:16px 0;padding:14px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px">';
+    h += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:6px">'
+      + '<div style="display:flex;align-items:center;gap:8px;">'
+      + '<h3 style="font-size:15px;font-weight:800;margin:0;color:#0f172a">🔍 Autopsi Tryout</h3>'
+      + (d.is_founder ? '<span style="font-size:10.5px;background:#fef3c7;color:#92400e;border:1px solid #fde68a;padding:2px 8px;border-radius:6px;font-weight:700">👑 Founder Mode</span>' : '')
+      + '</div>'
+      + '<span style="font-size:11px;background:#e2e8f0;color:#475569;padding:3px 8px;border-radius:6px;font-weight:700">Pola Pengerjaan Siswa</span>'
       + '</div>';
-    h += '<p style="font-size:12px;color:#64748b;margin:0 0 10px;line-height:1.4">Pola ini yang bikin skor bocor, bukan sekadar nilai akhir.</p>';
+    h += '<p style="font-size:12px;color:#64748b;margin:0 0 10px;line-height:1.4">Pola perilaku ini yang membuat nilaimu bocor, bukan sekadar angka akhir.</p>';
     if (d.data_tipis) {
-      h += '<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:8px">Datanya masih sedikit, jadi anggap ini gambaran awal.</div>';
+      h += '<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:8px">ℹ️ Jumlah soal yang dikerjakan masih sedikit, jadi anggap ini gambaran awal.</div>';
     }
     // Container scroll internal agar tidak overflow di layar HP
-    h += '<div class="autopsy-scroll-wrap" style="max-height:260px;overflow-y:auto;padding-right:4px;-webkit-overflow-scrolling:touch">';
+    h += '<div class="autopsy-scroll-wrap" style="max-height:300px;overflow-y:auto;padding-right:4px;-webkit-overflow-scrolling:touch">';
     // Kebocoran #1 (terbuka)
     const k1 = d.kebocoran_1;
     if (k1) {
-      h += '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:10px 12px;margin-bottom:8px">';
-      h += '<div style="font-size:11px;font-weight:700;color:#15803d;text-transform:uppercase;margin-bottom:4px">Kebocoran #1 (terbuka)</div>';
-      h += '<div style="font-size:14px;font-weight:700;margin-bottom:4px;color:#14532d">' + (labelNama[k1.label] || k1.label) + '</div>';
-      h += '<div style="font-size:12px;color:#374151;margin-bottom:6px;line-height:1.4">' + (k1.bukti || '') + '</div>';
+      const cthId = (k1.contoh && k1.contoh[0]) ? String(k1.contoh[0]) : '';
+      h += '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:12px 14px;margin-bottom:10px">';
+      h += '<div style="font-size:11px;font-weight:800;color:#15803d;text-transform:uppercase;margin-bottom:4px;letter-spacing:0.04em">Kebocoran #1 (Terbuka Lengkap)</div>';
+      h += '<div style="font-size:14.5px;font-weight:800;margin-bottom:4px;color:#14532d">' + (labelNama[k1.label] || k1.label) + '</div>';
+      h += '<div style="font-size:12.5px;color:#374151;margin-bottom:8px;line-height:1.45">' + (k1.bukti || '') + '</div>';
       if (k1.contoh && k1.contoh.length) {
-        h += '<div style="font-size:11px;color:#6b7280;margin-bottom:6px">Contoh: ' + k1.contoh.slice(0,3).join(', ') + '</div>';
+        h += '<div style="font-size:11.5px;color:#6b7280;margin-bottom:10px">Contoh soal: <strong>' + k1.contoh.slice(0,3).join(', ') + '</strong></div>';
       }
-      h += '<button onclick="alert(\'Fitur Pelajari segera hadir\')" style="background:#004a2a;color:#fff;border:0;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:600;cursor:pointer">📚 Pelajari</button>';
+      h += `<button type="button" onclick="bukaKartuStrategi('${k1.label}', '${cthId}')" style="background:#004a2a;color:#fff;border:0;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;">📚 Pelajari Strategi</button>`;
       h += '</div>';
     }
-    // Kebocoran #2-3 (terkunci)
-    (d.kebocoran_locked || []).forEach((k, idx) => {
-      h += '<div style="background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px 12px;margin-bottom:8px;position:relative;overflow:hidden">';
-      h += '<div style="filter:blur(4px);user-select:none;pointer-events:none">';
-      h += '<div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:3px">Kebocoran #' + (idx+2) + '</div>';
-      h += '<div style="font-size:13px;font-weight:700;margin-bottom:3px">' + (labelNama[k.label] || k.label) + '</div>';
-      h += '<div style="font-size:12px;color:#374151">' + k.soal_hilang + ' soal terpengaruh</div>';
-      h += '</div>';
-      h += '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.75)">';
-      h += '<span style="font-size:12px;font-weight:600;color:#374151">🔒 Buka dengan Paket Sprint</span>';
-      h += '</div></div>';
-    });
+
+    // Jika Mode Founder: Tampilkan seluruh kebocoran yang terbuka
+    if (d.is_founder && Array.isArray(d.kebocoran_all) && d.kebocoran_all.length > 1) {
+      d.kebocoran_all.slice(1).forEach((k, idx) => {
+        const cthId = (k.contoh && k.contoh[0]) ? String(k.contoh[0]) : '';
+        h += '<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 14px;margin-bottom:10px">';
+        h += '<div style="font-size:11px;font-weight:800;color:#1d4ed8;text-transform:uppercase;margin-bottom:4px">Kebocoran #' + (idx+2) + ' (Founder Mode)</div>';
+        h += '<div style="font-size:14px;font-weight:800;margin-bottom:4px;color:#1e40af">' + (labelNama[k.label] || k.label) + '</div>';
+        h += '<div style="font-size:12px;color:#374151;margin-bottom:6px">' + (k.bukti || (k.soal_hilang + ' soal terpengaruh')) + '</div>';
+        h += `<button type="button" onclick="bukaKartuStrategi('${k.label}', '${cthId}')" style="background:#1d4ed8;color:#fff;border:0;border-radius:6px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer">📚 Pelajari</button>`;
+        h += '</div>';
+      });
+    } else {
+      // Kebocoran #2-3 (terkunci dengan blur ringan)
+      (d.kebocoran_locked || []).forEach((k, idx) => {
+        h += '<div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:12px 14px;margin-bottom:10px;position:relative;overflow:hidden">';
+        h += '<div style="filter:blur(4px);user-select:none;pointer-events:none">';
+        h += '<div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:3px">Kebocoran #' + (idx+2) + '</div>';
+        h += '<div style="font-size:13px;font-weight:700;margin-bottom:3px">' + (labelNama[k.label] || k.label) + '</div>';
+        h += '<div style="font-size:12px;color:#374151">' + k.soal_hilang + ' soal terpengaruh</div>';
+        h += '</div>';
+        h += '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.78);">';
+        h += '<span style="font-size:12px;font-weight:700;color:#004a2a;background:#e8f5e9;padding:6px 14px;border-radius:20px;border:1px solid #c8e6c9;">🔒 Buka dengan Paket Sprint</span>';
+        h += '</div></div>';
+      });
+    }
+
     h += '</div>'; // Tutup autopsy-scroll-wrap
     if (d.rapuh_count > 0) {
-      h += '<div style="font-size:11px;color:#64748b;text-align:center;margin-top:6px">' + d.rapuh_count + ' soal kamu jawab benar tapi ragu-ragu (rapuh).</div>';
+      h += '<div style="font-size:11.5px;color:#64748b;text-align:center;margin-top:8px">💡 <strong>' + d.rapuh_count + ' soal</strong> kamu jawab benar tapi ditandai ragu-ragu (perlu pemantapan).</div>';
     }
+
+    // Ajakan jika akun tamu (Funnel pendaftaran gratis)
+    if (d.is_guest) {
+      h += '<div style="margin-top:12px;padding:10px 14px;background:#fff7ed;border:1px solid #ffedd5;border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;">'
+        + '<div style="font-size:11.5px;color:#9a3412;line-height:1.4"><strong>Mode Tamu:</strong> Masuk dengan Google untuk menyimpan hasil ini dan mengunci progres belajar harianmu!</div>'
+        + '<button type="button" onclick="loginWithGoogle()" style="background:#c2410c;color:#fff;border:none;border-radius:6px;padding:6px 12px;font-size:11.5px;font-weight:700;cursor:pointer;white-space:nowrap;">Masuk Sekarang</button>'
+        + '</div>';
+    }
+
     h += '</div>';
     cont.innerHTML = h;
   } catch (e) {
     cont.innerHTML = '';
   }
+}
+
+// Buka Modal Kartu Strategi Belajar
+function bukaKartuStrategi(label, contohSoalRef) {
+  const modal = document.getElementById('modalKartuStrategi');
+  const titleEl = document.getElementById('kartuStrategiTitle');
+  const badgeEl = document.getElementById('kartuStrategiBadge');
+  const iconEl = document.getElementById('kartuStrategiIcon');
+  const iconWrap = document.getElementById('kartuStrategiIconWrap');
+  const contentEl = document.getElementById('kartuStrategiContent');
+  const btnLatih = document.getElementById('btnAksiLatihSoal');
+  if (!modal || !contentEl) return;
+
+  const STRATEGI = {
+    'terburu': {
+      title: 'Strategi Anti-Ceroboh & Cek Ulang',
+      badge: 'PANDUAN ANTI-CEROBOH',
+      icon: 'fa-bolt',
+      theme: '#b45309',
+      bg: '#fef3c7',
+      points: [
+        '<strong>1. Tunjuk yang ditanyakan:</strong> Sebelum klik jawaban, baca sekali lagi kalimat terakhir: apakah mencari <em>nilai x</em>, <em>pernyataan yang salah</em>, atau <em>simpulan utama</em>?',
+        '<strong>2. Cek tanda (+/−) dan satuan:</strong> Pada langkah akhir pengerjaan, luangkan 5 detik untuk memeriksa kembali simbol minus/positif.',
+        '<strong>3. Jangan ganti jawaban karena ragu sesaat:</strong> Jawaban pertama yang sudah dihitung matang biasanya 80% lebih akurat daripada hasil tebakan mendadak.',
+        '<strong>4. Beri tanda Ragu-ragu:</strong> Jika masih bimbang, tandai Ragu-ragu lalu lanjutkan dulu ke soal lain yang lebih mudah.',
+        '<strong>5. Evaluasi sisa waktu:</strong> Gunakan 5 menit terakhir khusus meninjau nomor bertanda ragu-ragu.'
+      ]
+    },
+    'overthinking': {
+      title: 'Strategi Keyakinan & Konsistensi Logika',
+      badge: 'KONTROL OVERTHINKING',
+      icon: 'fa-brain',
+      theme: '#7c3aed',
+      bg: '#ede9fe',
+      points: [
+        '<strong>1. Percayai analisis pertamamu:</strong> Data rekaman menunjukkan pilihan awalmu sebenarnya sudah benar sebelum kamu ganti.',
+        '<strong>2. Aturan pergantian jawaban:</strong> Hanya ganti pilihan jika kamu menemukan bukti konkret salah membaca teks atau salah rumus matematika.',
+        '<strong>3. Abaikan distractor rumit:</strong> Opsi pengecoh sering sengaja memakai kata-kata ilmiah panjang untuk menggoyahkan keyakinanmu.',
+        '<strong>4. Selesaikan sekali tuntas:</strong> Jika logika langkahmu sudah terbukti di kertas buram, kunci dan pindah ke nomor berikutnya.'
+      ]
+    },
+    'macet': {
+      title: 'Strategi Manajemen Waktu (Anti-Macet)',
+      badge: 'MANAJEMEN WAKTU',
+      icon: 'fa-stopwatch',
+      theme: '#b91c1c',
+      bg: '#fee2e2',
+      points: [
+        '<strong>1. Aturan maksimal 2 menit:</strong> Jika dalam 2 menit kamu belum menemukan arah rumus/ide pokok, segera beri tanda Ragu-ragu dan tinggalkan.',
+        '<strong>2. Semua soal punya bobot sama:</strong> Menghabiskan 8 menit untuk 1 soal sulit akan mengorbankan 3 soal mudah di nomor akhir.',
+        '<strong>3. Checkpoint waktu ujian:</strong> Pastikan pada menit ke-30 kamu sudah menyelesaikan minimal sepertiga total soal.',
+        '<strong>4. Kerjakan soal yang kamu kuasai lebih dulu:</strong> Mengamankan poin mudah membangun rasa percaya diri di ruang ujian.'
+      ]
+    },
+    'waktu_habis': {
+      title: 'Strategi Pencegahan Waktu Habis',
+      badge: 'SPEED & TIMING',
+      icon: 'fa-hourglass-end',
+      theme: '#c2410c',
+      bg: '#ffedd5',
+      points: [
+        '<strong>1. Ketahui jatah per soal:</strong> Rata-rata kamu punya waktu 2.5 hingga 3 menit per nomor.',
+        '<strong>2. Pantau sisa waktu:</strong> Tengok indikator timer setiap selesai 5 nomor soal.',
+        '<strong>3. Menit terakhir:</strong> Di sisa waktu 3 menit, pastikan tidak ada nomor yang tertinggal kosong tanpa jawaban.'
+      ]
+    },
+    'yakin_salah': {
+      title: 'Strategi Fondasi Teori & Konsep Kunci',
+      badge: 'PENGUATAN TEORI',
+      icon: 'fa-compass',
+      theme: '#047857',
+      bg: '#d1fae5',
+      points: [
+        '<strong>1. Buka kembali Pilar 1 & Pilar 3:</strong> Pelajari definisi dasar dan mengapa konsep rumus tersebut diterapkan pada soal ini.',
+        '<strong>2. Waspadai jebakan opsi:</strong> Jawaban yang terasa familiar sering kali merupakan hasil jebakan salah tafsir.',
+        '<strong>3. Latih Soal Serupa:</strong> Selesaikan 2-3 latihan soal pemantapan dengan tipe yang sama.'
+      ]
+    }
+  };
+
+  const st = STRATEGI[label] || STRATEGI['terburu'];
+  titleEl.innerText = st.title;
+  badgeEl.innerText = st.badge;
+  badgeEl.style.color = st.theme;
+  iconEl.className = 'fa-solid ' + st.icon;
+  iconWrap.style.background = st.bg;
+  iconWrap.style.color = st.theme;
+
+  contentEl.innerHTML = '<ul style="margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;">'
+    + st.points.map(p => `<li style="padding-left:14px;position:relative;line-height:1.5;">${p}</li>`).join('')
+    + '</ul>';
+
+  if (contohSoalRef && btnLatih) {
+    btnLatih.style.display = 'inline-flex';
+    btnLatih.onclick = () => pelajariSoalBocor(contohSoalRef);
+  } else if (btnLatih) {
+    btnLatih.style.display = 'none';
+  }
+
+  modal.classList.add('open');
+  if (window.TKAHistory) TKAHistory.push('modal-kartu-strategi');
+}
+
+function tutupKartuStrategi() {
+  const modal = document.getElementById('modalKartuStrategi');
+  if (modal) modal.classList.remove('open');
+}
+
+// Buka pembahasan dari soal yang teridentifikasi bocor
+function pelajariSoalBocor(contohSoalRef) {
+  tutupKartuStrategi();
+  closeReviewHasil();
+  const pkg = state.pkgData[pkgKey()];
+  if (!pkg || !pkg.soal) return;
+
+  let targetIdx = 0;
+  // Ekstrak nomor dari format id atau string
+  const m = String(contohSoalRef).match(/\d+$/);
+  const targetNo = m ? parseInt(m[0], 10) : null;
+
+  if (targetNo) {
+    const idx = pkg.soal.findIndex(s => s.nomor === targetNo);
+    if (idx !== -1) targetIdx = idx;
+  }
+
+  state.currentIndex = targetIdx;
+  state.explanationVisible = true;
+  state.keepWorkTab = true;
+  renderQuestion();
+  switchWorkTab('pembahasan', 'materi', { scroll: true });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Klik baris reviu -> lompat ke soal terkait (pembahasan terbuka)
@@ -6744,5 +7062,131 @@ async function sendBugReport() {
     }
   }
 }
+
+// ==========================================================================
+// ACCORDION PEMBAHASAN 5 PILAR & MOBILE KEYBOARD HANDLER & DAILY STREAK
+// ==========================================================================
+
+function setupPillarAccordions() {
+  try {
+    const pilarConfigs = [
+      { id: 'symbolsBox', bodyId: 'symbolsContainer' },
+      { id: 'whyConceptBox', bodyId: 'whyConceptContainer' },
+      { cls: 'steps-section-card', bodyId: 'stepsContainer' },
+      { cls: 'tips-box', bodyId: 'tipsContainer' }
+    ];
+
+    pilarConfigs.forEach(cfg => {
+      let card = null;
+      if (cfg.id) card = document.getElementById(cfg.id);
+      else if (cfg.cls) card = document.querySelector('.' + cfg.cls);
+      if (!card) return;
+
+      const header = card.querySelector('.pillar-header-row');
+      if (!header || header.dataset.accordionInit) return;
+      header.dataset.accordionInit = '1';
+
+      header.style.cursor = 'pointer';
+      header.style.display = 'flex';
+      header.style.alignItems = 'center';
+      header.style.justifyContent = 'space-between';
+      header.title = 'Klik untuk membuka / menutup rincian pilar ini';
+
+      let chevron = header.querySelector('.pillar-chevron');
+      if (!chevron) {
+        chevron = document.createElement('i');
+        chevron.className = 'fa-solid fa-chevron-down pillar-chevron';
+        chevron.style.marginLeft = 'auto';
+        chevron.style.padding = '6px';
+        chevron.style.color = '#64748b';
+        chevron.style.transition = 'transform 0.2s ease';
+        header.appendChild(chevron);
+      }
+
+      const bodyEl = card.querySelector('.symbols-grid, .why-text-body, .timeline-steps, .tips-text, #' + cfg.bodyId);
+      if (!bodyEl) return;
+
+      // Di mobile (<= 899px): ciutkan default pilar 2-5 agar tidak banjir teks (Pilar 1 tetap terbuka)
+      const isMobile = (window.innerWidth <= 899);
+      if (isMobile) {
+        bodyEl.style.display = 'none';
+        chevron.style.transform = 'rotate(0deg)';
+        card.classList.remove('is-open');
+      } else {
+        bodyEl.style.display = 'block';
+        chevron.style.transform = 'rotate(180deg)';
+        card.classList.add('is-open');
+      }
+
+      header.onclick = (e) => {
+        e.stopPropagation();
+        const isOpen = (bodyEl.style.display !== 'none');
+        if (isOpen) {
+          bodyEl.style.display = 'none';
+          chevron.style.transform = 'rotate(0deg)';
+          card.classList.remove('is-open');
+        } else {
+          bodyEl.style.display = 'block';
+          chevron.style.transform = 'rotate(180deg)';
+          card.classList.add('is-open');
+          if (typeof renderMath === 'function') renderMath(bodyEl);
+        }
+      };
+    });
+  } catch (e) {
+    console.warn('setupPillarAccordions error:', e);
+  }
+}
+window.setupPillarAccordions = setupPillarAccordions;
+
+function initMobileKeyboardTutorHandler() {
+  const inp = document.getElementById('chatInput');
+  if (!inp) return;
+  inp.addEventListener('focus', () => {
+    document.body.classList.add('keyboard-active');
+    setTimeout(() => {
+      const msgBox = document.getElementById('chatMessages');
+      if (msgBox) msgBox.scrollTop = msgBox.scrollHeight;
+    }, 200);
+  });
+  inp.addEventListener('blur', () => {
+    document.body.classList.remove('keyboard-active');
+  });
+}
+
+function recordDailyStudyActivity() {
+  try {
+    const today = new Date().toISOString().slice(0, 10);
+    const lastActive = localStorage.getItem('tka_last_active_date');
+    let streak = parseInt(localStorage.getItem('tka_study_streak') || '0', 10);
+
+    if (lastActive) {
+      if (lastActive === today) {
+        // Sudah aktif hari ini
+      } else {
+        const lastDate = new Date(lastActive);
+        const curDate = new Date(today);
+        const diffDays = Math.round((curDate - lastDate) / (1000 * 60 * 60 * 24));
+        if (diffDays === 1) {
+          streak += 1;
+        } else {
+          streak = 1;
+        }
+      }
+    } else {
+      streak = 1;
+    }
+
+    localStorage.setItem('tka_last_active_date', today);
+    localStorage.setItem('tka_study_streak', String(streak));
+  } catch (e) {}
+}
+window.recordDailyStudyActivity = recordDailyStudyActivity;
+
+document.addEventListener('DOMContentLoaded', () => {
+  initMobileKeyboardTutorHandler();
+  recordDailyStudyActivity();
+  setTimeout(setupPillarAccordions, 1500);
+});
 
 

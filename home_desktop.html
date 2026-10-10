@@ -1382,14 +1382,19 @@
     } catch (e) {}
     var labelNama = {'terburu':'Terburu-buru','overthinking':'Overthinking','macet':'Macet','yakin_salah':'Yakin tapi salah','ragu_salah':'Ragu-ragu dan salah','waktu_habis':'Kehabisan waktu','kosong':'Dikosongkan'};
     if (misi) {
+      var cthRef = (misi.contoh && misi.contoh[0]) ? String(misi.contoh[0]) : '';
       h += '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:14px 16px">'
         + '<div style="font-size:12px;font-weight:700;color:#b45309;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
         + '<div style="font-size:15px;font-weight:700;margin-bottom:4px;color:#111">Perbaiki: ' + (labelNama[misi.label] || misi.label) + '</div>'
-        + '<div style="font-size:13px;color:#6b7280">' + (misi.bukti || '') + '</div></div>';
+        + '<div style="font-size:13px;color:#6b7280;margin-bottom:10px">' + (misi.bukti || '') + '</div>'
+        + '<button type="button" onclick="if(window.parent&&window.parent.bukaKartuStrategi){window.parent.bukaKartuStrategi(\'' + misi.label + '\',\'' + cthRef + '\');}else if(typeof bukaKartuStrategi===\'function\'){bukaKartuStrategi(\'' + misi.label + '\',\'' + cthRef + '\');}else{alert(\'Misi: Perbaiki pola ' + (labelNama[misi.label]||misi.label) + '\');}" style="background:#b45309;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;">📖 Pelajari Strategi Misi</button>'
+        + '</div>';
     } else {
       h += '<div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:14px 16px">'
         + '<div style="font-size:12px;font-weight:700;color:#6b7280;text-transform:uppercase;margin-bottom:6px">🎯 Misi hari ini</div>'
-        + '<div style="font-size:13px;color:#6b7280">Kerjakan 1 tryout untuk membuka misi harianmu.</div></div>';
+        + '<div style="font-size:13px;color:#6b7280;margin-bottom:10px">Selesaikan 1 tryout untuk mengidentifikasi kebocoran skor dan membuka misi belajarmu.</div>'
+        + '<button type="button" onclick="window.scrollTo({top:500,behavior:\'smooth\'});" style="background:#004a2a;color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11.5px;font-weight:700;cursor:pointer;">🚀 Pilih Mapel Simulasi</button>'
+        + '</div>';
     }
     h += '</div>';
     return h;

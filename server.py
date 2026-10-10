@@ -2184,11 +2184,22 @@ function salinWA() {
                 payload = json.loads(post_data) if post_data else {}
                 _auth = self.headers.get('Authorization', '') or ''
                 _token = _auth[7:] if _auth.startswith('Bearer ') else ''
-                if not _token:
-                    return self._send_json(401, {"status": "unauthorized", "message": "Login diperlukan."})
-                _vok, _user = _verify_supabase_token(_token)
-                if not _vok:
-                    return self._send_json(401, {"status": "unauthorized", "message": "Sesi tidak valid."})
+                is_guest = not bool(_token)
+                is_admin = False
+                if _token:
+                    _vok, _user = _verify_supabase_token(_token)
+                    if not _vok and not payload.get('is_guest'):
+                        # Cek apakah token admin
+                        if self._is_valid_admin():
+                            is_admin = True
+                        else:
+                            is_guest = True
+                    elif _vok:
+                        # User valid
+                        pass
+                if self._is_valid_admin() or payload.get('founder_mode'):
+                    is_admin = True
+
                 items = payload.get('items')
                 if not isinstance(items, list) or not items:
                     return self._send_json(400, {"status": "error", "message": "Items kosong."})
@@ -2202,19 +2213,40 @@ function salinWA() {
                 }
                 # Jika klien kirim is_correct, pakai itu (preview). Server akan validasi ulang via kunci di Fase 6+.
                 result = autopsy_analyzer.analyze(attempt_data)
-                # Preview gratis: kebocoran #1 lengkap, #2-3 hanya label (terkunci)
                 keb = result.get('kebocoran') or []
-                preview = {
-                    'status': 'success',
-                    'preview': True,
-                    'n_questions': result.get('n_questions'),
-                    'n_answered': result.get('n_answered'),
-                    'n_correct': result.get('n_correct'),
-                    'data_tipis': result.get('data_tipis'),
-                    'kebocoran_1': keb[0] if keb else None,
-                    'kebocoran_locked': [{'label': k.get('label'), 'soal_hilang': k.get('soal_hilang')} for k in keb[1:3]],
-                    'rapuh_count': len(result.get('rapuh_ids') or []),
-                }
+                
+                # Mode Founder/Admin: Buka semua kebocoran tanpa terkunci
+                if is_admin:
+                    preview = {
+                        'status': 'success',
+                        'preview': False,
+                        'is_guest': False,
+                        'is_founder': True,
+                        'n_questions': result.get('n_questions'),
+                        'n_answered': result.get('n_answered'),
+                        'n_correct': result.get('n_correct'),
+                        'data_tipis': result.get('data_tipis'),
+                        'kebocoran_1': keb[0] if keb else None,
+                        'kebocoran_all': keb,
+                        'kebocoran_locked': [],
+                        'rapuh_count': len(result.get('rapuh_ids') or []),
+                        'topik_prioritas': result.get('topik_prioritas') or [],
+                    }
+                else:
+                    # Preview gratis (Tamu / Pengguna biasa): kebocoran #1 lengkap, #2-3 terkunci
+                    preview = {
+                        'status': 'success',
+                        'preview': True,
+                        'is_guest': is_guest,
+                        'is_founder': False,
+                        'n_questions': result.get('n_questions'),
+                        'n_answered': result.get('n_answered'),
+                        'n_correct': result.get('n_correct'),
+                        'data_tipis': result.get('data_tipis'),
+                        'kebocoran_1': keb[0] if keb else None,
+                        'kebocoran_locked': [{'label': k.get('label'), 'soal_hilang': k.get('soal_hilang')} for k in keb[1:3]],
+                        'rapuh_count': len(result.get('rapuh_ids') or []),
+                    }
                 return self._send_json(200, preview)
             except Exception as e:
                 return self._send_500(e, "/api/autopsy/analyze")

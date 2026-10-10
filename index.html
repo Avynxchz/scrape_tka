@@ -955,6 +955,35 @@
     </div>
   </div>
 
+  <!-- Modal Kartu Strategi Belajar (Autopsi Tryout) -->
+  <div class="modal-overlay" id="modalKartuStrategi" onclick="tutupKartuStrategi()">
+    <div class="modal-content" style="max-width: 520px; text-align: left; padding: 22px 20px;" onclick="event.stopPropagation()">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div id="kartuStrategiIconWrap" style="width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: #e0f2fe; color: #0369a1;">
+            <i class="fa-solid fa-shield-halved" id="kartuStrategiIcon"></i>
+          </div>
+          <div>
+            <span id="kartuStrategiBadge" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0369a1;">PANDUAN STRATEGI</span>
+            <h3 id="kartuStrategiTitle" style="font-size: 17px; font-weight: 800; color: #0f172a; margin: 2px 0 0;">Kartu Strategi Belajar</h3>
+          </div>
+        </div>
+        <button type="button" onclick="tutupKartuStrategi()" style="background: none; border: none; font-size: 18px; color: #94a3b8; cursor: pointer; padding: 4px;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="kartuStrategiContent" style="font-size: 13.5px; line-height: 1.6; color: #334155; margin-bottom: 18px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 16px;"></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end;">
+        <button type="button" id="btnAksiLatihSoal" style="display: none; background: #004a2a; color: #fff; border: none; border-radius: 8px; padding: 9px 16px; font-size: 12.5px; font-weight: 700; cursor: pointer;">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Pembahasan Soal Ini
+        </button>
+        <button type="button" onclick="tutupKartuStrategi()" style="background: #e2e8f0; color: #334155; border: none; border-radius: 8px; padding: 9px 16px; font-size: 12.5px; font-weight: 700; cursor: pointer;">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Floating Jump to AI Tutor Button (Mobile only) -->
   <button id="btnFloatingAi" class="floating-ai-jump" onclick="scrollToAiTutor()" aria-label="Tanya AI Tutor">
     <i class="fa-solid fa-comments"></i>

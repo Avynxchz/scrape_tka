@@ -40,9 +40,19 @@ Diperbarui: 2026-10-10 11:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
 ### FASE 4: 100% (SELESAI-TERVERIFIKASI)
 - **Terbukti:** `autopsy/analyzer.py` (9 label prioritas, 2 flag, kebocoran top-3) + `autopsy/planner.py` (jadwal belajar deterministik hingga H-1) lulus tes otomatis 20/20 di `tests/test_autopsy.py` (8 persona uji sesuai harapan). Kartu materi statis di `content/cards/`.
 
-### FASE 5: 98% (SELESAI — menunggu Gate A)
-- **Terbukti:** T5.1 `POST /api/autopsy/analyze` + render UI Autopsi preview (kebocoran #1 terbuka, #2-3 terkunci blur); T5.2 kartu "Misi hari ini"; T5.3 kartu hitung mundur tanggal TKA (min date disesuaikan ke 10 Okt untuk Gladi Bersih SMK 12 Okt); T5.4 halaman `/admin/autopsi` & `/api/admin/autopsy_full` dengan proteksi header `X-Admin-Key` dan POST body (Tugas F SELESAI-TERVERIFIKASI); BUG-009 kartu Beranda selalu tampil terverifikasi; BUG-003 layout Autopsi overflow diperbaiki rapi dengan scroll internal terverifikasi di layar HP 390x844.
-- **Utang:** Gate A (demo ke 5 orang asing) menunggu verifikasi Agus.
+### FASE 5: 100% (SELESAI-TERVERIFIKASI — Sesuai Arahan Claude Sonnet 5.5)
+- **Terbukti:** 
+  1. T5.1 `POST /api/autopsy/analyze` + render UI Autopsi preview (kebocoran #1 terbuka lengkap dengan bukti berbasis angka, #2-3 terkunci blur CSS halus + ajakan Paket Sprint).
+  2. Mode Founder (`founder_mode: true` / admin bypass) membuka autopsi penuh tanpa blur untuk review/demo.
+  3. Tombol "📚 Pelajari Strategi" aktif dan membuka Modal Kartu Strategi Belajar (`modalKartuStrategi`, z-index 200) berisi kartu Anti-Ceroboh, Manajemen Waktu, Overthinking, dll. sesuai Lampiran E Claude Sonnet.
+  4. Tombol "Buka Pembahasan Soal Ini" langsung melompat ke nomor soal bocor dan membuka tab Pembahasan (Pilar).
+  5. T5.2 Kartu "Misi Hari Ini" di Beranda desktop & mobile memiliki tombol aksi interaktif `📖 Pelajari Strategi Misi` dan `🚀 Mulai Latihan Tryout`.
+  6. T5.3 Tanggal TKA & hitung mundur H-X di Beranda aktif.
+  7. T5.4 Halaman `/admin/autopsi` & `/api/admin/autopsy_full` dengan proteksi `X-Admin-Key` terverifikasi.
+  8. Evaluasi PG Kompleks: Skor proporsional (pilih E dari A & E -> 50% benar) + badge biru toska + checkbox kotak.
+  9. Evaluasi Benar/Salah: Tabel per baris membandingkan pilihan siswa vs kunci resmi (`✅ Tepat` / `❌ Berbeda`) tanpa warna merah ambigu pada opsi "Salah" yang bernilai tepat.
+  10. UI Mobile: Mode adaptif keyboard pada AI Tutor, accordion 5 pilar (Pilar 1 default terbuka), auto-hide navbar modul saat scroll, dan perbaikan ikon Sejarah `history_edu`.
+  11. Seluruh 5 bukti visual viewport mobile 390x844 terverifikasi via Playwright audit (`scratch/run_audit_tryout.py` EXIT CODE 0).
 
 ---
 

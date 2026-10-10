@@ -1137,22 +1137,30 @@ button:active { transform: scale(0.97); }
   send({ type: 'request-data' });
   send({ type: 'modul-ready' });
 
-  // Hide-on-scroll untuk tab filter [sembunyi saat scroll bawah, muncul saat scroll atas]
+  // Hide-on-scroll untuk tab filter & navbar [sembunyi saat scroll bawah, muncul saat scroll atas]
   (function() {
     var lastY = 0;
-    var tabBar = document.querySelector('[data-cat-tab="semua"]')?.closest('.sticky');
-    if (tabBar) tabBar.style.transition = 'transform 0.3s ease';
+    var tabBars = document.querySelectorAll('.sticky');
+    var topHeaders = document.querySelectorAll('header.fixed');
+    tabBars.forEach(function(tb) { tb.style.transition = 'transform 0.3s ease, opacity 0.25s ease'; });
+    topHeaders.forEach(function(th) { th.style.transition = 'transform 0.3s ease, opacity 0.25s ease'; });
+
     window.addEventListener('scroll', function() {
-      var y = window.scrollY;
-      var goingDown = y > lastY && y > 100;
-      if (tabBar) {
-        tabBar.style.transform = goingDown ? 'translateY(-120%)' : 'translateY(0)';
-      }
-      // Kasih tau parent (index.html) biar navbar juga ngumpet
+      var y = window.scrollY || document.documentElement.scrollTop;
+      var goingDown = (y > lastY && y > 80);
+      tabBars.forEach(function(tb) {
+        tb.style.transform = goingDown ? 'translateY(-140%)' : 'translateY(0)';
+        tb.style.opacity = goingDown ? '0' : '1';
+        tb.style.pointerEvents = goingDown ? 'none' : 'auto';
+      });
+      topHeaders.forEach(function(th) {
+        th.style.transform = goingDown ? 'translateY(-100%)' : 'translateY(0)';
+        th.style.opacity = goingDown ? '0' : '1';
+      });
       try {
         window.parent.postMessage({ type: 'modul-scroll', direction: goingDown ? 'down' : 'up' }, '*');
       } catch(e) {}
-      lastY = y;
+      lastY = Math.max(0, y);
     }, { passive: true });
   })();
 })();
