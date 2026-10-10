@@ -284,6 +284,36 @@ class TestCoachValidator(unittest.TestCase):
         self.assertFalse(ok)
         self.assertIn("bahasa Indonesia", reason)
 
+    def test_k1_score_and_count_hallucination_rejected(self):
+        """K1: LLM halusinasi skor atau jumlah salah/benar harus ditolak & fallback ke template."""
+        evidence_k1 = copy.deepcopy(self.evidence)
+        evidence_k1["skor_pct"] = 20
+        evidence_k1["n_benar"] = 4
+        evidence_k1["n_salah"] = 16
+        evidence_k1["n_soal"] = 20
+
+        # 1. Output LLM halusinasi 'Skor 0%' dengan '20 soal salah'
+        hallucinated_out = copy.deepcopy(self.valid_out)
+        hallucinated_out["penilaian"] = "Skor 0% dengan 20 soal salah. Kamu perlu banyak berlatih lagi agar lebih baik."
+        ok, reason = coach.validate_coach_output(hallucinated_out, evidence_k1)
+        self.assertFalse(ok, "Output dengan Skor 0% seharusnya ditolak!")
+        self.assertIn("Halusinasi", reason)
+
+        # 2. Output yang benar 'Skor 20%' dengan '4 soal benar dan 16 soal salah'
+        correct_out = copy.deepcopy(self.valid_out)
+        correct_out["penilaian"] = "Skor kamu 20% dengan 4 soal benar dan 16 soal salah. Ada pola yang bisa diperbaiki."
+        ok_corr, reason_corr = coach.validate_coach_output(correct_out, evidence_k1)
+        self.assertTrue(ok_corr, f"Output benar harus lolos: {reason_corr}")
+
+        # 3. Test generate_coach fallback ke template saat LLM menghasilkan Skor 0%
+        with patch("autopsy.coach.tutor_llm.generate_with_meta", return_value=(json.dumps(hallucinated_out), {"model": "test-mock-llm"})):
+            res, meta = coach.generate_coach(evidence_k1)
+            self.assertEqual(res["sumber"], "template")
+            self.assertIn("validation_error", meta["alasan"])
+            self.assertEqual(res["versi"], "coach_output_v1")
+            # Template output harus menampilkan skor asli yang benar (20%)
+            self.assertIn("20%", res["penilaian"])
+
 
 class TestCoachTemplate(unittest.TestCase):
     """Pengujian Template Cadangan Deterministik (coach_template)."""

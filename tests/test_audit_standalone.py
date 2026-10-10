@@ -289,6 +289,86 @@ def validate_coach_output(data, evidence):
     if len(unknown_numbers) > 2:
         return False, f"Terlalu banyak angka tidak dikenal di luar data: {unknown_numbers}"
 
+    # 11. Validasi Halusinasi Skor & Jumlah Soal Benar/Salah (K1)
+    ev_skor_pct = evidence.get("skor_pct")
+    ev_n_benar = evidence.get("n_benar")
+    ev_n_salah = evidence.get("n_salah")
+    if ev_n_salah is None and evidence.get("n_soal") is not None and ev_n_benar is not None:
+        try:
+            ev_n_salah = int(evidence.get("n_soal")) - int(ev_n_benar)
+        except (ValueError, TypeError):
+            pass
+
+    if ev_skor_pct is not None:
+        try:
+            ev_skor_pct = int(round(float(ev_skor_pct)))
+        except (ValueError, TypeError):
+            ev_skor_pct = None
+
+    if ev_n_benar is not None:
+        try:
+            ev_n_benar = int(ev_n_benar)
+        except (ValueError, TypeError):
+            ev_n_benar = None
+
+    if ev_n_salah is not None:
+        try:
+            ev_n_salah = int(ev_n_salah)
+        except (ValueError, TypeError):
+            ev_n_salah = None
+
+    narrative_parts = []
+    for k in ["sapaan", "penilaian", "sudah_bagus", "penutup", "catatan_data"]:
+        if data.get(k):
+            narrative_parts.append(str(data[k]))
+    for p in (data.get("pengamatan") or []):
+        narrative_parts.append(str(p))
+    for kb in (data.get("kebocoran") or []):
+        if isinstance(kb, dict):
+            for f in ["judul", "bukti", "tafsir", "tindakan"]:
+                if kb.get(f):
+                    narrative_parts.append(str(kb[f]))
+    for ps in (data.get("per_soal") or []):
+        if isinstance(ps, dict):
+            for f in ["dipelajari", "cek_paham"]:
+                if ps.get(f):
+                    narrative_parts.append(str(ps[f]))
+            for l in (ps.get("langkah") or []):
+                narrative_parts.append(str(l))
+    if isinstance(data.get("misi"), dict) and data["misi"].get("pembuka"):
+        narrative_parts.append(str(data["misi"]["pembuka"]))
+
+    narrative_text = " ".join(narrative_parts).lower()
+
+    # 11a. Cek pola "Skor X%" atau "skor X%"
+    if ev_skor_pct is not None:
+        for sm in re.finditer(r"\bskor(?:mu)?\b[^\d%]{0,15}(\d+)\s*%", narrative_text):
+            claimed_skor = int(sm.group(1))
+            if claimed_skor != ev_skor_pct:
+                return False, f"Halusinasi skor: output menyebut Skor {claimed_skor}% padahal evidence skor_pct={ev_skor_pct}"
+
+    # 11b. Cek pola "Y soal salah" atau "Y salah"
+    if ev_n_salah is not None:
+        for sm in re.finditer(r"\b(\d+)\s+(?:butir\s+|nomor\s+)?(?:soal\s+)?salah\b", narrative_text):
+            claimed_salah = int(sm.group(1))
+            if claimed_salah != ev_n_salah:
+                return False, f"Halusinasi jumlah salah: output menyebut {claimed_salah} salah padahal evidence n_salah={ev_n_salah}"
+        for sm in re.finditer(r"(?:jawaban\s+)?salah\s*:\s*(\d+)\b", narrative_text):
+            claimed_salah = int(sm.group(1))
+            if claimed_salah != ev_n_salah:
+                return False, f"Halusinasi jumlah salah: output menyebut {claimed_salah} salah padahal evidence n_salah={ev_n_salah}"
+
+    # 11c. Cek pola "Z soal benar" atau "Z benar"
+    if ev_n_benar is not None:
+        for bm in re.finditer(r"\b(\d+)\s+(?:butir\s+|nomor\s+)?(?:soal\s+)?benar\b", narrative_text):
+            claimed_benar = int(bm.group(1))
+            if claimed_benar != ev_n_benar:
+                return False, f"Halusinasi jumlah benar: output menyebut {claimed_benar} benar padahal evidence n_benar={ev_n_benar}"
+        for bm in re.finditer(r"(?:jawaban\s+)?benar\s*:\s*(\d+)\b", narrative_text):
+            claimed_benar = int(bm.group(1))
+            if claimed_benar != ev_n_benar:
+                return False, f"Halusinasi jumlah benar: output menyebut {claimed_benar} benar padahal evidence n_benar={ev_n_benar}"
+
     return True, ""
 
 
@@ -864,6 +944,27 @@ class TestValidateCoachOutput(unittest.TestCase):
         ok, reason = validate_coach_output(data, self.evidence)
         self.assertFalse(ok)
         self.assertIn("bahasa Indonesia", reason)
+
+    def test_11_k1_score_and_count_hallucination_rejected(self):
+        """11. K1: LLM halusinasi skor atau jumlah salah/benar harus ditolak & fallback ke template."""
+        evidence_k1 = dict(self.evidence)
+        evidence_k1["skor_pct"] = 20
+        evidence_k1["n_benar"] = 4
+        evidence_k1["n_salah"] = 16
+        evidence_k1["n_soal"] = 20
+
+        # Output LLM halusinasi 'Skor 0%' dengan '20 soal salah'
+        hallucinated_out = self._sample_valid_output()
+        hallucinated_out["penilaian"] = "Skor 0% dengan 20 soal salah. Kamu perlu banyak berlatih lagi agar lebih baik."
+        ok, reason = validate_coach_output(hallucinated_out, evidence_k1)
+        self.assertFalse(ok, "Output dengan Skor 0% seharusnya ditolak!")
+        self.assertIn("Halusinasi", reason)
+
+        # Output yang benar 'Skor 20%' dengan '4 soal benar dan 16 soal salah'
+        correct_out = self._sample_valid_output()
+        correct_out["penilaian"] = "Skor kamu 20% dengan 4 soal benar dan 16 soal salah. Ada pola yang bisa diperbaiki."
+        ok_corr, reason_corr = validate_coach_output(correct_out, evidence_k1)
+        self.assertTrue(ok_corr, f"Output benar harus lolos: {reason_corr}")
 
 
 # ============================================================================
