@@ -54,11 +54,30 @@ Diperbarui: 2026-10-10 11:55 WIB · Branch: `dev` · `main` di `3605aab` (JANGAN
   10. UI Mobile: Mode adaptif keyboard pada AI Tutor, accordion 5 pilar (Pilar 1 default terbuka), auto-hide navbar modul saat scroll, dan perbaikan ikon Sejarah `history_edu`.
   11. Seluruh 5 bukti visual viewport mobile 390x844 terverifikasi via Playwright audit (`scratch/run_audit_tryout.py` EXIT CODE 0).
 
+### GURU AUTOPSI (FASE A0–A8): 100% (SELESAI-TERVERIFIKASI)
+- **Terbukti:** 
+  1. **A0:** Rencana kerja dan pre-mortem di `docs/COACH_PLAN.md`, prompt persona di `autopsy/coach_prompt_v1.txt`.
+  2. **A1:** Normalisasi `clean_attempt_items()` toleran di `server.py`, perekaman riwayat `jejak` (pilih, ganti, ragu) di `app.js`.
+  3. **A2:** Evidence Builder `autopsy/evidence.py` menghasilkan `coach_input_v1` terkompresi (~750 token).
+  4. **A3:** Layanan Guru AI `autopsy/coach.py` + endpoint `/api/autopsy/coach` dengan validasi ketat skema 6.3 dan circuit breaker.
+  5. **A4/A5:** Template deterministik `autopsy/coach_template.py` + kuota harian database Supabase `autopsy/quota.py` (bebas SQLite).
+  6. **A6:** UI Layar Hasil Guru Autopsi mobile-first 390px di `app.js`, paywall & blur OFF, date picker H-n, misi 10 menit, tanya AI per soal.
+  7. **A7:** Pengujian 3 persona, uji gagal 6 skenario, uji injeksi prompt, uji otorisasi di `docs/eval/coach_v1.md` dan `tests/test_eval_a7.py` (120/120 tes lulus).
+  8. **A8:** Laporan final serah terima dan panduan uji HP mandiri untuk Mas Agus di `reports/COACH-A.md`.
+
 ---
 
 ## TINDAKAN DATABASE SUPABASE (Untuk Mas Agus)
 
-### 1. Migrasi 007: Tambah Kolom `tka_date` (WAJIB Sebelum Gladi Bersih)
+### 1. Migrasi 008: Tambah Kolom `coach_result` pada tabel `attempts` (Direkomendasikan)
+- **File SQL:** [db/migrations/008_attempts_coach_result.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/008_attempts_coach_result.sql)
+- **Isi SQL:**
+  ```sql
+  ALTER TABLE public.attempts ADD COLUMN IF NOT EXISTS coach_result jsonb;
+  ```
+- **Langkah di Supabase:** Buka SQL Editor, paste kode di atas, klik **Run**.
+
+### 2. Migrasi 007: Tambah Kolom `tka_date` (WAJIB Sebelum Gladi Bersih)
 - **File SQL:** [db/migrations/007_users_tka_date.sql](file:///d:/PROJECTS/SCRAPE_TKA_DEV/db/migrations/007_users_tka_date.sql)
 - **Isi SQL:**
   ```sql
