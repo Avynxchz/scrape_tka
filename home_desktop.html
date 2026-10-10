@@ -143,13 +143,16 @@
               Wajib (3)
             </button>
 <button class="filter-btn px-space-sm py-1.5 rounded-lg hover:bg-surface-container hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors bg-surface-subtle text-on-surface-variant" type="button" data-cat="saintek">
-              Saintek (IPA)
+              Saintek (3)
             </button>
 <button class="filter-btn px-space-sm py-1.5 rounded-lg hover:bg-surface-container hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors bg-surface-subtle text-on-surface-variant" type="button" data-cat="soshum">
-              Soshum (IPS)
+              Soshum (6)
+            </button>
+<button class="filter-btn px-space-sm py-1.5 rounded-lg hover:bg-surface-container hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors bg-surface-subtle text-on-surface-variant" type="button" data-cat="lanjut">
+              Tingkat Lanjut (3)
             </button>
 <button class="filter-btn px-space-sm py-1.5 rounded-lg hover:bg-surface-container hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors bg-surface-subtle text-on-surface-variant" type="button" data-cat="bahasa">
-              Bahasa
+              Bahasa & Lintas Minat (7)
             </button>
 <button class="filter-btn px-space-sm py-1.5 rounded-lg hover:bg-surface-container hover:text-on-surface font-label-md text-label-md whitespace-nowrap transition-colors bg-surface-subtle text-on-surface-variant font-bold text-primary" type="button" data-cat="smk">
               Kejuruan SMK (5)
@@ -954,33 +957,177 @@
     },
   };
 
-  // ========== Fitur Atur Mapel & Filter Kategori ==========
+  // ========== Fitur Atur Mapel & Filter Kategori (27 Mapel Lengkap KONTRAK_DATA) ==========
   var ALL_MAPEL_OPTIONS = [
+    // Wajib (3)
     { id: 'matematika', name: 'Matematika (Wajib)', cat: 'wajib', icon: 'calculate' },
     { id: 'bahasa_indonesia', name: 'Bahasa Indonesia (Wajib)', cat: 'wajib', icon: 'menu_book' },
     { id: 'bahasa_inggris', name: 'Bahasa Inggris (Wajib)', cat: 'wajib', icon: 'language' },
-    { id: 'ppkn', name: 'PPKn (Wajib)', cat: 'wajib', icon: 'account_balance' },
+    // Saintek (3)
     { id: 'fisika', name: 'Fisika (Peminatan)', cat: 'saintek', icon: 'bolt' },
     { id: 'kimia', name: 'Kimia (Peminatan)', cat: 'saintek', icon: 'science' },
     { id: 'biologi', name: 'Biologi (Peminatan)', cat: 'saintek', icon: 'psychology' },
-    { id: 'matematika_lanjut', name: 'Matematika Lanjut', cat: 'saintek', icon: 'functions' },
+    // Soshum (6)
     { id: 'ekonomi', name: 'Ekonomi & Sosial', cat: 'soshum', icon: 'query_stats' },
     { id: 'geografi', name: 'Geografi (Soshum)', cat: 'soshum', icon: 'public' },
     { id: 'sosiologi', name: 'Sosiologi (Soshum)', cat: 'soshum', icon: 'groups' },
     { id: 'sejarah', name: 'Sejarah (Soshum)', cat: 'soshum', icon: 'history_edu' },
+    { id: 'antropologi', name: 'Antropologi (Soshum)', cat: 'soshum', icon: 'diversity_3' },
     { id: 'kewirausahaan', name: 'Kewirausahaan (PKWU)', cat: 'soshum', icon: 'storefront' },
+    // Tingkat Lanjut (3)
+    { id: 'matematika_lanjut', name: 'Matematika Lanjut', cat: 'lanjut', icon: 'functions' },
+    { id: 'bahasa_indonesia_lanjut', name: 'B. Indonesia Lanjut', cat: 'lanjut', icon: 'auto_stories' },
+    { id: 'bahasa_inggris_lanjut', name: 'B. Inggris Lanjut', cat: 'lanjut', icon: 'translate' },
+    // Bahasa & Lintas Minat (7)
+    { id: 'ppkn', name: 'PPKn (Lintas Minat)', cat: 'bahasa', icon: 'account_balance' },
     { id: 'bahasa_arab', name: 'Bahasa Arab', cat: 'bahasa', icon: 'translate' },
     { id: 'bahasa_jepang', name: 'Bahasa Jepang', cat: 'bahasa', icon: 'translate' },
     { id: 'bahasa_jerman', name: 'Bahasa Jerman', cat: 'bahasa', icon: 'translate' },
     { id: 'bahasa_prancis', name: 'Bahasa Prancis', cat: 'bahasa', icon: 'translate' },
     { id: 'bahasa_mandarin', name: 'Bahasa Mandarin', cat: 'bahasa', icon: 'translate' },
     { id: 'bahasa_korea', name: 'Bahasa Korea', cat: 'bahasa', icon: 'translate' },
+    // Kejuruan SMK (5)
     { id: 'teknik_mesin', name: 'SMK - Teknik Mesin', cat: 'smk', icon: 'precision_manufacturing' },
     { id: 'teknik_otomotif', name: 'SMK - Teknik Otomotif', cat: 'smk', icon: 'directions_car' },
     { id: 'teknik_jaringan', name: 'SMK - Teknik Jaringan & Telkom', cat: 'smk', icon: 'lan' },
     { id: 'akuntansi', name: 'SMK - Akuntansi & Keuangan', cat: 'smk', icon: 'account_balance_wallet' },
     { id: 'manajemen_perkantoran', name: 'SMK - Manajemen Perkantoran', cat: 'smk', icon: 'business_center' }
   ];
+
+  // 19 Mapel yang dibangun dinamis setelah 8 section statis
+  var EXTRA_MAPEL_DEFS = [
+    // Wajib (2)
+    { id: 'bahasa_indonesia', name: 'Bahasa Indonesia (Wajib)', cat: 'wajib', icon: 'menu_book', p1: 20, p2: 25, p1Min: 45, p2Min: 35, desc: 'Literasi Membaca & Menulis — soal resmi Pusmendik' },
+    { id: 'bahasa_inggris', name: 'Bahasa Inggris (Wajib)', cat: 'wajib', icon: 'language', p1: 20, p2: 25, p1Min: 45, p2Min: 35, desc: 'Reading Comprehension & Grammar — soal resmi Pusmendik' },
+    // Saintek (2)
+    { id: 'kimia', name: 'Kimia (Peminatan)', cat: 'saintek', icon: 'science', p1: 20, p2: 24, p1Min: 45, p2Min: 35, desc: 'Struktur Atom, Stoikiometri & Reaksi — soal resmi Pusmendik' },
+    { id: 'biologi', name: 'Biologi (Peminatan)', cat: 'saintek', icon: 'psychology', p1: 20, p2: 29, p1Min: 45, p2Min: 35, desc: 'Sel, Genetika & Keanekaragaman Hayati — soal resmi Pusmendik' },
+    // Soshum (5)
+    { id: 'geografi', name: 'Geografi (Soshum)', cat: 'soshum', icon: 'public', p1: 10, p2: 29, p1Min: 30, p2Min: 35, desc: 'Litosfer, Atmosfer & Penginderaan Jauh — soal resmi Pusmendik' },
+    { id: 'sosiologi', name: 'Sosiologi (Soshum)', cat: 'soshum', icon: 'groups', p1: 20, p2: 30, p1Min: 45, p2Min: 35, desc: 'Struktur Sosial, Konflik & Perubahan — soal resmi Pusmendik' },
+    { id: 'sejarah', name: 'Sejarah (Soshum)', cat: 'soshum', icon: 'history_edu', p1: 10, p2: 29, p1Min: 30, p2Min: 35, desc: 'Sejarah Nasional & Peradaban Dunia — soal resmi Pusmendik' },
+    { id: 'antropologi', name: 'Antropologi (Soshum)', cat: 'soshum', icon: 'diversity_3', p1: 10, p2: 30, p1Min: 30, p2Min: 35, desc: 'Etnografi & Keragaman Budaya — soal resmi Pusmendik' },
+    { id: 'kewirausahaan', name: 'Kewirausahaan (PKWU)', cat: 'soshum', icon: 'storefront', p1: 10, p2: 30, p1Min: 30, p2Min: 35, desc: 'Perencanaan Usaha & Inovasi Produk — soal resmi Pusmendik' },
+    // Tingkat Lanjut (3)
+    { id: 'matematika_lanjut', name: 'Matematika Lanjut', cat: 'lanjut', icon: 'functions', p1: 20, p2: 25, p1Min: 45, p2Min: 35, desc: 'Kalkulus, Polinomial & Vektor — soal resmi Pusmendik' },
+    { id: 'bahasa_indonesia_lanjut', name: 'B. Indonesia Lanjut', cat: 'lanjut', icon: 'auto_stories', p1: 10, p2: 29, p1Min: 30, p2Min: 35, desc: 'Kajian Sastra & Bahasa Lanjutan — soal resmi Pusmendik' },
+    { id: 'bahasa_inggris_lanjut', name: 'B. Inggris Lanjut', cat: 'lanjut', icon: 'translate', p1: 10, p2: 29, p1Min: 30, p2Min: 35, desc: 'Advanced Text & Academic Context — soal resmi Pusmendik' },
+    // Bahasa & Lintas Minat (7)
+    { id: 'ppkn', name: 'PPKn (Lintas Minat)', cat: 'bahasa', icon: 'account_balance', p1: 20, p2: 29, p1Min: 45, p2Min: 35, desc: 'Ideologi Pancasila & Konstitusi — soal resmi Pusmendik' },
+    { id: 'bahasa_arab', name: 'Bahasa Arab', cat: 'bahasa', icon: 'translate', p1: 10, p2: 29, p1Min: 30, p2Min: 35, desc: 'Tata Bahasa & Teks Bahasa Arab — soal resmi Pusmendik' },
+    { id: 'bahasa_jepang', name: 'Bahasa Jepang', cat: 'bahasa', icon: 'translate', p1: 10, p2: 29, p1Min: 30, p2Min: 35, desc: 'Tata Bahasa & Membaca Bahasa Jepang — soal resmi Pusmendik' },
+    { id: 'bahasa_jerman', name: 'Bahasa Jerman', cat: 'bahasa', icon: 'translate', p1: 10, p2: 29, p1Min: 30, p2Min: 35, desc: 'Leseverstehen & Grammatik Jerman — soal resmi Pusmendik' },
+    { id: 'bahasa_prancis', name: 'Bahasa Prancis', cat: 'bahasa', icon: 'translate', p1: 10, p2: 29, p1Min: 30, p2Min: 35, desc: 'Compréhension & Vocabulaire Prancis — soal resmi Pusmendik' },
+    { id: 'bahasa_mandarin', name: 'Bahasa Mandarin', cat: 'bahasa', icon: 'translate', p1: 10, p2: 29, p1Min: 30, p2Min: 35, desc: 'Hanyu Pinyin & Membaca Mandarin — soal resmi Pusmendik' },
+    { id: 'bahasa_korea', name: 'Bahasa Korea', cat: 'bahasa', icon: 'translate', p1: 10, p2: 29, p1Min: 30, p2Min: 35, desc: 'Hangeul & Tata Bahasa Korea — soal resmi Pusmendik' }
+  ];
+
+  function buildDynamicSubjectSections() {
+    var templateSec = document.querySelector('.subject-section[data-subject="ekonomi"]');
+    if (!templateSec) return;
+    var container = templateSec.parentElement;
+    if (!container) return;
+
+    EXTRA_MAPEL_DEFS.forEach(function (m) {
+      if (document.querySelector('.subject-section[data-subject="' + m.id + '"]')) return;
+      var clone = templateSec.cloneNode(true);
+      clone.setAttribute('data-subject', m.id);
+      clone.setAttribute('data-category', m.cat);
+      clone.classList.add('pt-space-xs');
+
+      // Title & Icon & Desc
+      var iconSpan = clone.querySelector('.material-symbols-outlined');
+      if (iconSpan) iconSpan.textContent = m.icon;
+      var titleH2 = clone.querySelector('h2');
+      if (titleH2) titleH2.textContent = m.name;
+      var descP = clone.querySelector('p');
+      if (descP) descP.textContent = m.desc || (m.name + ' — soal resmi Pusmendik');
+
+      // Header button / link
+      var headerRight = clone.querySelector('.btn-see-all-modul');
+      if (headerRight) {
+        headerRight.addEventListener('click', function (e) {
+          e.preventDefault();
+          BRIDGE.send({ type: 'nav', path: 'modul-belajar' });
+        });
+      }
+
+      // Cards (Paket 1 & Paket 2)
+      var cards = clone.querySelectorAll('.grid > div.relative');
+      if (cards.length >= 2) {
+        var cleanChipName = m.name.replace(/\s*\(.*\)/, '').toUpperCase();
+        // Paket 1
+        var c1 = cards[0];
+        c1.dataset.subject = m.id;
+        c1.dataset.pkg = '1';
+        c1.style.cursor = 'pointer';
+        c1.setAttribute('role', 'button');
+        c1.setAttribute('tabindex', '0');
+        c1.setAttribute('aria-label', m.name + ' Paket 1');
+
+        var chip1 = c1.querySelector('span.rounded-full.bg-brand-emerald-light');
+        if (chip1) chip1.textContent = cleanChipName;
+
+        c1.querySelectorAll('span').forEach(function (s) {
+          if (/(\d+|—)\s*Soal/.test(s.textContent)) {
+            var ic = s.querySelector('span.material-symbols-outlined');
+            s.innerHTML = (ic ? ic.outerHTML : '<span class="material-symbols-outlined text-[15px]">format_list_numbered</span>') + ' ' + m.p1 + ' Soal';
+          }
+          if (/(\d+|—)\s*Menit/.test(s.textContent)) {
+            var ic = s.querySelector('span.material-symbols-outlined');
+            s.innerHTML = (ic ? ic.outerHTML : '<span class="material-symbols-outlined text-[15px]">timer</span>') + ' ' + m.p1Min + ' Menit';
+          }
+        });
+
+        // Paket 2
+        var c2 = cards[1];
+        c2.dataset.subject = m.id;
+        c2.dataset.pkg = '2';
+        c2.style.cursor = 'pointer';
+        c2.setAttribute('role', 'button');
+        c2.setAttribute('tabindex', '0');
+        c2.setAttribute('aria-label', m.name + ' Paket 2');
+
+        var chip2 = c2.querySelector('span.rounded-full.bg-brand-emerald-light');
+        if (chip2) chip2.textContent = cleanChipName;
+
+        c2.querySelectorAll('span').forEach(function (s) {
+          if (/(\d+|—)\s*Soal/.test(s.textContent)) {
+            var ic = s.querySelector('span.material-symbols-outlined');
+            s.innerHTML = (ic ? ic.outerHTML : '<span class="material-symbols-outlined text-[15px]">format_list_numbered</span>') + ' ' + m.p2 + ' Soal';
+          }
+          if (/(\d+|—)\s*Menit/.test(s.textContent)) {
+            var ic = s.querySelector('span.material-symbols-outlined');
+            s.innerHTML = (ic ? ic.outerHTML : '<span class="material-symbols-outlined text-[15px]">timer</span>') + ' ' + m.p2Min + ' Menit';
+          }
+        });
+
+        // Click handler untuk cards
+        [c1, c2].forEach(function (card) {
+          var act = function () {
+            var subj = card.dataset.subject, pkg = parseInt(card.dataset.pkg || '1', 10);
+            if (!subj) return;
+            BRIDGE.send({ type: 'open-package', subject: subj, pkg: pkg });
+          };
+          card.addEventListener('click', act);
+          card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); act(); }
+          });
+          var btn = card.querySelector('button');
+          if (btn) {
+            btn.addEventListener('click', function(e) {
+              e.stopPropagation();
+              act();
+            });
+          }
+        });
+      }
+
+      // Default hidden sampai difilter / diatur
+      clone.style.display = 'none';
+      container.appendChild(clone);
+    });
+  }
 
   function getDeskChosenSubjects() {
     try {
@@ -1059,15 +1206,17 @@
       if (category === 'all' || category === 'semua' || category === 'semua mapel') {
         var isChosen = chosen.indexOf(s) !== -1;
         sec.style.display = isChosen ? 'flex' : 'none';
-      } else if (category.indexOf('wajib') !== -1 && cat === 'wajib') {
+      } else if (category === 'wajib' && cat === 'wajib') {
         sec.style.display = 'flex';
-      } else if (category.indexOf('saintek') !== -1 && cat === 'saintek') {
+      } else if (category === 'saintek' && cat === 'saintek') {
         sec.style.display = 'flex';
-      } else if (category.indexOf('soshum') !== -1 && cat === 'soshum') {
+      } else if (category === 'soshum' && cat === 'soshum') {
         sec.style.display = 'flex';
-      } else if (category.indexOf('bahasa') !== -1 && cat === 'bahasa') {
+      } else if ((category === 'lanjut' || category.indexOf('lanjut') !== -1) && cat === 'lanjut') {
         sec.style.display = 'flex';
-      } else if (category.indexOf('smk') !== -1 && cat === 'smk') {
+      } else if ((category === 'bahasa' || category.indexOf('bahasa') !== -1) && cat === 'bahasa') {
+        sec.style.display = 'flex';
+      } else if ((category === 'smk' || category.indexOf('smk') !== -1) && cat === 'smk') {
         sec.style.display = 'flex';
       } else {
         sec.style.display = 'none';
@@ -1191,6 +1340,10 @@
       }
     }
   } catch (e) {}
+
+  // Bangun section mapel tambahan (19 mapel) dan terapkan mapel terpilih
+  buildDynamicSubjectSections();
+  applyVisibleSubjects(getDeskChosenSubjects());
 
   BRIDGE.send({ type: 'home-desktop-ready' });
   window.__homeDesktopBridge = BRIDGE;
