@@ -396,15 +396,15 @@
   </header>
 
 
-  <!-- FASE 3: Dialog konfirmasi keluar ke beranda -->
-  <div class="modal-overlay exit-confirm-overlay" id="exitConfirmModal" onclick="closeExitConfirm(event)">
-    <div class="exit-confirm-card" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Konfirmasi kembali ke beranda">
-      <div class="exit-confirm-icon"><i class="fa-solid fa-house"></i></div>
-      <h3 class="exit-confirm-title">Yakin ingin keluar ke beranda?</h3>
-      <p class="exit-confirm-text">Jawabanmu akan disimpan otomatis di perangkat ini dan bisa dilanjutkan kapan saja.</p>
+  <!-- FASE 3 / B8 / B11: Dialog konfirmasi keluar ke beranda -->
+  <div class="modal-overlay exit-confirm-overlay" id="exitConfirmModal" onclick="closeExitConfirm(true)">
+    <div class="exit-confirm-card" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Konfirmasi keluar">
+      <div class="exit-confirm-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <h3 class="exit-confirm-title" id="exitConfirmTitle">Keluar ke beranda?</h3>
+      <p class="exit-confirm-text" id="exitConfirmText">Progress yang belum selesai akan hilang. Progress baru tersimpan setelah kamu klik Selesai Tes.</p>
       <div class="exit-confirm-actions">
-        <button type="button" class="exit-btn-ya" onclick="doExitToBeranda()"><i class="fa-solid fa-check"></i> Ya, ke beranda</button>
-        <button type="button" class="exit-btn-tidak" onclick="closeExitConfirm(true)"><i class="fa-solid fa-xmark"></i> Tidak</button>
+        <button type="button" class="exit-btn-tidak" id="exitBtnBatal" onclick="closeExitConfirm(true)"><i class="fa-solid fa-arrow-left"></i> Tetap di sini</button>
+        <button type="button" class="exit-btn-ya" id="exitBtnKeluar" onclick="confirmExitAction()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar</button>
       </div>
     </div>
   </div>

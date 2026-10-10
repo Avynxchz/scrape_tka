@@ -725,6 +725,10 @@ function saveSubjectPickerModal() {
   setUserSelectedSubjects(checked);
   closeSubjectPickerModal();
 }
+window.openSubjectPickerModal = openSubjectPickerModal;
+window.closeSubjectPickerModal = closeSubjectPickerModal;
+window.openSubjectModal = openSubjectPickerModal;
+window.closeSubjectModal = closeSubjectPickerModal;
 
 function createSubjectPickerModalDOM() {
   const div = document.createElement('div');
@@ -1670,7 +1674,19 @@ function updateSubjectUI() {
 // Switch active subject (from header dropdown)
 async function switchSubject(subjectKey) {
   if (!SUBJECT_CATALOG[subjectKey] || state.currentSubject === subjectKey) return;
+  if (!isTestFinished() && Object.keys(state.userAnswers[pkgKey()] || {}).length > 0) {
+    requestExit(async () => {
+      discardUnfinishedProgress(pkgKey());
+      await performSwitchSubject(subjectKey);
+    });
+    const sel = document.getElementById('subjectSelect');
+    if (sel) sel.value = state.currentSubject;
+    return;
+  }
+  await performSwitchSubject(subjectKey);
+}
 
+async function performSwitchSubject(subjectKey) {
   state.currentSubject = subjectKey;
   state.currentPkg = 1;
   state.currentIndex = 0;
@@ -1691,7 +1707,17 @@ async function switchSubject(subjectKey) {
 // Switch between Paket 1 and Paket 2 (within active subject)
 async function switchPackage(pkgNum) {
   if (state.currentPkg === pkgNum) return;
+  if (!isTestFinished() && Object.keys(state.userAnswers[pkgKey()] || {}).length > 0) {
+    requestExit(async () => {
+      discardUnfinishedProgress(pkgKey());
+      await performSwitchPackage(pkgNum);
+    });
+    return;
+  }
+  await performSwitchPackage(pkgNum);
+}
 
+async function performSwitchPackage(pkgNum) {
   await loadPackageData(pkgNum);
   const key = pkgKey(pkgNum);
   if (!state.pkgData[key] || !state.pkgData[key].soal || state.pkgData[key].soal.length === 0) {
@@ -1718,33 +1744,80 @@ function isTestFinished() {
   return Boolean(state.testFinished && state.testFinished[pkgKey()]);
 }
 
-function askExitToBeranda() {
+let _pendingExitAction = null;
+
+function requestExit(onConfirm) {
   if (isTestFinished()) {
-    doExitToBeranda();
+    if (typeof onConfirm === 'function') onConfirm();
+    else doExitToBeranda();
     return;
   }
+  _pendingExitAction = onConfirm || (() => doExitToBeranda());
   const modal = document.getElementById('exitConfirmModal');
-  if (modal) modal.classList.add('open');
+  if (modal) {
+    modal.classList.add('open');
+    if (window.TKAHistory) TKAHistory.push('modal-exit');
+  }
 }
+window.requestExit = requestExit;
+
+function askExitToBeranda() {
+  requestExit(() => doExitToBeranda());
+}
+window.askExitToBeranda = askExitToBeranda;
 
 function closeExitConfirm(keepHere) {
   const modal = document.getElementById('exitConfirmModal');
   if (modal) modal.classList.remove('open');
-  if (keepHere === true) return;
+  if (keepHere) {
+    _pendingExitAction = null;
+  }
 }
+window.closeExitConfirm = closeExitConfirm;
+
+function confirmExitAction() {
+  closeExitConfirm(false);
+  const action = _pendingExitAction || (() => doExitToBeranda());
+  _pendingExitAction = null;
+  action();
+}
+window.confirmExitAction = confirmExitAction;
 
 function doExitToBeranda() {
-  closeExitConfirm();
-  try {
-    const q = getCurrentQuestion();
-    if (q && typeof persistAnswerProgress === 'function') {
-      persistAnswerProgress(q);
-    }
-  } catch (e) {}
-  // jawaban sudah tersimpan otomatis; buka panel Beranda (overlay)
+  closeExitConfirm(false);
+  const key = pkgKey();
+  // B11: Jika tes belum selesai, buang draft jawaban yang belum selesai (jangan simpan progres palsu)
+  if (!isTestFinished()) {
+    discardUnfinishedProgress(key);
+  }
+  // Buka panel Beranda (overlay)
   if (!homeIsOpen()) homeOpen();
   else homeShowPanel('beranda');
 }
+window.doExitToBeranda = doExitToBeranda;
+
+function discardUnfinishedProgress(key) {
+  try {
+    if (state.userAnswers) state.userAnswers[key] = {};
+    if (state.raguStatus) state.raguStatus[key] = {};
+    if (state.simAnswers) state.simAnswers[key] = {};
+    state.currentIndex = 0;
+    state.explanationVisible = false;
+    localStorage.removeItem(examStorageKey('answers', key));
+    localStorage.removeItem(examStorageKey('ragu', key));
+    localStorage.removeItem(examStorageKey('checked', key));
+    localStorage.removeItem('tka_answers_' + key);
+    localStorage.removeItem('tka_ragu_' + key);
+    localStorage.removeItem('tka_checked_' + key);
+    localStorage.removeItem('tka_timer_remaining_' + key);
+    if (window._answerChecked) {
+      Object.keys(window._answerChecked).forEach(k => {
+        if (k.startsWith(key + ':')) delete window._answerChecked[k];
+      });
+    }
+  } catch (e) {}
+}
+window.discardUnfinishedProgress = discardUnfinishedProgress;
 
 // Get current question object
 function getCurrentQuestion() {
@@ -2578,8 +2651,53 @@ function selectOption(key, isComplex) {
   renderGridModal();
 }
 
-// Tulis jawaban yang barusan dipilih ke tka_progress. Dipanggil dari selectOption.
+// B11: Komet progres seluruh paket sekaligus HANYA saat user menekan "Selesai Tes"
+function commitPackageProgressOnFinish(subject, pkgNum) {
+  try {
+    const pkg = state.pkgData[subject + ':' + pkgNum];
+    if (!pkg || !pkg.soal) return;
+    const userAns = state.userAnswers[subject + ':' + pkgNum] || {};
+    const pKey = progressStorageKey();
+    const store = JSON.parse(localStorage.getItem(pKey) || '{}');
+    store[subject] = store[subject] || {};
+    store[subject][pkgNum] = store[subject][pkgNum] || {};
+
+    pkg.soal.forEach(q => {
+      const ans = userAns[q.nomor];
+      if (ans === undefined || ans === null || ans === '') return;
+      const stmt = statementType(q);
+      let benar = false;
+      if (stmt) {
+        if (typeof ans === 'object' && !Array.isArray(ans)) {
+          const stmts = q.pernyataan || [];
+          if (stmts.every(st => ans[st.key])) {
+            const kunci = parseBsKunci(q);
+            benar = stmts.every(st => ans[st.key] === kunci[st.key]);
+          }
+        }
+      } else if (Array.isArray(q.kunci_jawaban)) {
+        if (Array.isArray(ans) && ans.length > 0) {
+          const k = q.kunci_jawaban.map(String);
+          benar = ans.length === k.length && ans.every(x => k.includes(String(x)));
+        }
+      } else {
+        benar = String(ans) === String(q.kunci_jawaban);
+      }
+      store[subject][pkgNum][q.nomor] = { kunci: q.kunci_jawaban, benar };
+    });
+
+    localStorage.setItem(pKey, JSON.stringify(store));
+    if (!isGuestMode()) {
+      scheduleSyncProgressToServer();
+    }
+  } catch (e) {}
+}
+window.commitPackageProgressOnFinish = commitPackageProgressOnFinish;
+
+// Tulis jawaban ke tka_progress / tka_guest_progress.
+// B11: Progres paket hanya dikomit saat "Selesai Tes" (commitPackageProgressOnFinish).
 function persistAnswerProgress(q) {
+  if (!isTestFinished()) return;
   try {
     const subject = state.currentSubject;
     const pkg = Number(state.currentPkg) || 1;
@@ -2589,14 +2707,12 @@ function persistAnswerProgress(q) {
     const stmt = statementType(q);
     let benar = false;
     if (stmt) {
-      // Soal pernyataan: simpan setelah semua pernyataan dijawab; benar = semua cocok kunci
       if (typeof ans !== 'object' || Array.isArray(ans)) return;
       const stmts = q.pernyataan || [];
       if (!stmts.every(st => ans[st.key])) return;
       const kunci = parseBsKunci(q);
       benar = stmts.every(st => ans[st.key] === kunci[st.key]);
     } else if (Array.isArray(q.kunci_jawaban)) {
-      // Pilihan Ganda Kompleks: himpunan jawaban == himpunan kunci
       if (!Array.isArray(ans) || ans.length === 0) return;
       const k = q.kunci_jawaban.map(String);
       benar = ans.length === k.length && ans.every(x => k.includes(String(x)));
@@ -5254,6 +5370,8 @@ function selesaiTes() {
   } catch (e) {}
   if (!state.testFinished) state.testFinished = {};
   state.testFinished[pkgKey()] = true;
+  // B11: Komet progres seluruh paket sekaligus HANYA saat selesai tes
+  commitPackageProgressOnFinish(state.currentSubject, state.currentPkg);
   // FASE 3 (T3.5): simpan status finished & jawaban ke localStorage
   try {
     localStorage.setItem(examStorageKey('finished', pkgKey()), 'true');
@@ -7685,27 +7803,38 @@ const TKAHistory = {
     }
 
     // 6. Modal Logout (jika ada)
-    const logoutModal = document.getElementById('modalKonfirmasiLogout');
-    if (logoutModal && logoutModal.classList.contains('open')) {
-      if (typeof closeLogoutModal === 'function') closeLogoutModal();
+    const logoutModal = document.getElementById('tkaLogoutModal') || document.getElementById('modalKonfirmasiLogout');
+    if (logoutModal && logoutModal.parentNode) {
+      const cancelBtn = logoutModal.querySelector('#tkaLogoutCancelBtn');
+      if (cancelBtn) cancelBtn.click();
+      else logoutModal.remove();
       return true;
     }
 
-    // 7. Modal Exit Confirm (jika ada)
+    // 7. Modal Exit Confirm (jika ada): tutup modal dan tetap di kuis
     const exitModal = document.getElementById('exitConfirmModal');
     if (exitModal && exitModal.classList.contains('open')) {
-      if (typeof closeExitConfirm === 'function') closeExitConfirm();
+      if (typeof closeExitConfirm === 'function') closeExitConfirm(true);
       return true;
     }
 
-    // 8. Bottom Sheet AI Tutor di Mobile
+    // 8. Modal Atur Mapel (subjectModalBackdrop)
+    const subModal = document.getElementById('subjectModalBackdrop');
+    if (subModal && (subModal.classList.contains('active') || subModal.style.display !== 'none')) {
+      if (typeof closeSubjectPickerModal === 'function') closeSubjectPickerModal();
+      else if (typeof closeSubjectModal === 'function') closeSubjectModal();
+      else subModal.style.display = 'none';
+      return true;
+    }
+
+    // 9. Bottom Sheet AI Tutor di Mobile
     const tutorCol = document.getElementById('cbtSidebarCol');
     if (tutorCol && tutorCol.classList.contains('tutor-open')) {
       if (typeof closeTutorSheet === 'function') closeTutorSheet();
       return true;
     }
 
-    // 9. Tab Pembahasan -> Kembali ke Lembar Soal
+    // 10. Tab Pembahasan -> Kembali ke Lembar Soal
     const pPemb = document.getElementById('workPanePembahasan');
     if (pPemb && pPemb.classList.contains('active')) {
       if (typeof switchWorkTab === 'function') {
@@ -7714,30 +7843,40 @@ const TKAHistory = {
       return true;
     }
 
-    // 10. Jika mode kuis aktif & Beranda terbuka -> tutup Beranda
-    if (document.body.dataset.quizMode === '1' && typeof homeIsOpen === 'function' && homeIsOpen()) {
-      if (typeof homeClose === 'function') homeClose();
-      return true;
-    }
-
     // 11. Jika sedang mengerjakan kuis di Lembar Soal:
-    // Cegah keluar web tiba-tiba saat tombol Back HP ditekan. Tampilkan konfirmasi selesai tes.
+    // Cegah keluar web tiba-tiba saat tombol Back HP ditekan. Panggil requestExit().
     if (document.body.dataset.quizMode === '1') {
-      if (typeof openFinishModal === 'function') {
-        openFinishModal();
+      if (typeof isTestFinished === 'function' && isTestFinished()) {
+        if (typeof doExitToBeranda === 'function') doExitToBeranda();
+      } else {
+        if (typeof requestExit === 'function') {
+          requestExit(() => doExitToBeranda());
+        }
       }
       return true;
     }
 
-    // 12. Jika di Beranda Mobile dan panel bukan 'beranda' (misal di Modul/Progres/Akun)
-    if (typeof homeActivePanel !== 'undefined' && homeActivePanel !== 'beranda') {
-      if (typeof homeShowPanel === 'function') {
-        homeShowPanel('beranda');
+    // 12. Jika di Beranda / Dashboard:
+    if (typeof homeIsOpen === 'function' && homeIsOpen()) {
+      if (typeof homeActivePanel !== 'undefined' && homeActivePanel !== 'beranda') {
+        if (typeof homeShowPanel === 'function') {
+          homeShowPanel('beranda');
+        }
+        return true;
       }
-      return true;
+      // Di Beranda utama: tekan sekali lagi dalam 2 detik untuk keluar
+      const now = Date.now();
+      if (this._lastBackPressTime && (now - this._lastBackPressTime < 2000)) {
+        return false; // biarkan browser keluar
+      } else {
+        this._lastBackPressTime = now;
+        if (typeof showMiniToast === 'function') {
+          showMiniToast('Tekan sekali lagi untuk keluar');
+        }
+        return true;
+      }
     }
 
-    // Jika tidak ada modal atau kuis aktif, biarkan browser bertindak normal
     return false;
   }
 };
