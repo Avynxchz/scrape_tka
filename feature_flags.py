@@ -25,11 +25,11 @@ DB_PATH = os.environ.get("TUTOR_DB_PATH", os.path.join(BASE_DIR, "data", "ai_tut
 
 # 7 flag awal, semua OFF (brief Bagian 4.7 / T0.7).
 DEFAULT_FLAGS = {
-    "autopsy_logging": False,   # Fase 3: rekam perilaku per soal
-    "autopsy_preview": False,   # Fase 5: layar Autopsi (preview gratis)
-    "autopsy_full": False,      # Fase 5/6: Autopsi penuh (pemegang pass)
+    "autopsy_logging": True,    # Fase 3: rekam perilaku per soal
+    "autopsy_preview": True,    # Fase 5: layar Autopsi (preview gratis)
+    "autopsy_full": True,       # Fase 5/6: Autopsi penuh (pemegang pass)
     "paywall": False,           # Fase 6: alur beli Paket Sprint
-    "ai_narrative": False,      # Fase 7: narasi AI untuk Autopsi (berbayar)
+    "ai_narrative": True,       # Fase 7: narasi AI untuk Autopsi
     "referral": False,          # Fase 6: kode referral/afiliasi
     "wa_notify": False,         # Fase 6: notifikasi WA otomatis (opsional)
 }
@@ -63,9 +63,10 @@ def init_flags():
             now = time.strftime("%Y-%m-%dT%H:%M:%S")
             for name, enabled in DEFAULT_FLAGS.items():
                 conn.execute(
-                    "INSERT OR IGNORE INTO feature_flags (name, enabled, rollout_pct, updated_at)"
-                    " VALUES (?, ?, 100, ?)",
-                    (name, 1 if enabled else 0, now),
+                    "INSERT INTO feature_flags (name, enabled, rollout_pct, updated_at)"
+                    " VALUES (?, ?, 100, ?)"
+                    " ON CONFLICT(name) DO UPDATE SET enabled = ?, updated_at = ?",
+                    (name, 1 if enabled else 0, now, 1 if enabled else 0, now),
                 )
             conn.commit()
         finally:

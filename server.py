@@ -2837,6 +2837,7 @@ function salinWA() {
                 # Jika klien kirim is_correct, pakai itu (preview). Server akan validasi ulang via kunci di Fase 6+.
                 result = autopsy_analyzer.analyze(attempt_data)
                 # Kebocoran dibuka semua (Paywall OFF sesuai keputusan produk)
+                keb = result.get('kebocoran') or []
                 preview = {
                     'status': 'success',
                     'preview': False,

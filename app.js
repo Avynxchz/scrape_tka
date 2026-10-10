@@ -5463,10 +5463,45 @@ async function renderAutopsiSection() {
   try {
     const q = (typeof AttemptQueue !== 'undefined') ? AttemptQueue.all() : [];
     let payload = window._lastFinishedAttempt || (q.length > 0 ? q[q.length - 1] : null);
+
+    const curKey = pkgKey();
+    const pkg = (state.pkgData && state.pkgData[curKey]) ? state.pkgData[curKey] : null;
+    const totalSoal = (pkg && pkg.soal) ? pkg.soal.length : 40;
+
+    // B1: Tangani edge case: data waktu kosong, semua soal dikosongkan, tes tanpa jawaban, atau reload
     if (!payload || !payload.items || !payload.items.length) {
-      cont.innerHTML = '';
-      cont.style.display = 'none';
-      return;
+      const savedAns = (state.userAnswers && state.userAnswers[curKey]) || {};
+      const savedRagu = (state.raguStatus && state.raguStatus[curKey]) || {};
+      const items = [];
+      for (let i = 1; i <= totalSoal; i++) {
+        const ans = savedAns[i] || null;
+        items.push({
+          soal_id: `${state.currentSubject}:${state.currentPkg}:${i}`,
+          position: i,
+          topic_id: (pkg && pkg.soal && pkg.soal[i - 1]) ? (pkg.soal[i - 1].topik || null) : null,
+          first_answer: ans ? (Array.isArray(ans) ? ans.join(',') : String(ans)) : null,
+          final_answer: ans ? (Array.isArray(ans) ? ans.join(',') : String(ans)) : null,
+          active_ms: 0,
+          waktu_detik: 0,
+          change_count: 0,
+          flagged_ragu: !!savedRagu[i],
+          visit_count: ans ? 1 : 0,
+          jejak: []
+        });
+      }
+      payload = {
+        id: 'att_edge_' + Date.now(),
+        client_attempt_id: 'att_edge_' + Date.now(),
+        subject: state.currentSubject,
+        mapel: state.currentSubject,
+        paket: state.currentPkg,
+        n_questions: totalSoal,
+        duration_limit_s: getTimerTotalSeconds(),
+        ended_by: 'user',
+        items: items,
+        created_at: new Date().toISOString()
+      };
+      window._lastFinishedAttempt = payload;
     }
 
     let hdr = {};
@@ -5492,16 +5527,30 @@ async function renderAutopsiSection() {
 
     let diffHari = calcHMin(tkaDateCurrent);
 
+    // Hitung ringkasan waktu pengerjaan dari items (hasil B2)
+    let totalWaktuSec = 0;
+    let soalTerjawab = 0;
+    (payload.items || []).forEach(it => {
+      totalWaktuSec += (it.waktu_detik || Math.round((it.active_ms || 0) / 1000));
+      if (it.final_answer) soalTerjawab++;
+    });
+    const avgSecPerSoal = Math.round(totalWaktuSec / Math.max(1, soalTerjawab || 1));
+
     let baseHtml = `
       <div class="autopsy-widget" style="margin:16px 0;padding:16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;font-family:inherit">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:8px;">
           <div style="display:flex;align-items:center;gap:8px;">
-            <h3 style="font-size:16px;font-weight:800;margin:0;color:#0f172a">🔍 Guru Autopsi</h3>
+            <h3 style="font-size:15px;font-weight:800;margin:0;color:#0f172a">🔍 Guru Autopsi — dianalisis dari cara kamu mengerjakan</h3>
             <span id="coachBadgeStatus" style="font-size:11px;background:#e2e8f0;color:#475569;padding:2px 8px;border-radius:20px;font-weight:700">Memuat analisis...</span>
           </div>
           <span style="font-size:11px;color:#64748b;font-weight:600">Tryout TKA Master</span>
         </div>
-        <p style="font-size:12px;color:#64748b;margin:0 0 12px;line-height:1.4">Dianalisis dari caramu mengerjakan: ritme waktu, urutan klik, dan pergantian jawaban.</p>
+        <p style="font-size:12px;color:#64748b;margin:0 0 10px;line-height:1.4">Dianalisis dari caramu mengerjakan: ritme waktu, urutan klik, dan pergantian jawaban.</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:8px 12px;background:#f1f5f9;border-radius:8px;font-size:12px;color:#334155;flex-wrap:wrap;">
+          <span>⏱️ Total Waktu: <strong>${Math.floor(totalWaktuSec / 60)}m ${totalWaktuSec % 60}s</strong></span>
+          <span>📊 Rata-rata/soal: <strong>${avgSecPerSoal}s</strong></span>
+          <span>🎯 Terjawab: <strong>${soalTerjawab}/${totalSoal}</strong></span>
+        </div>
         <div id="coachContentArea">
           <div style="padding:16px;background:#ffffff;border:1px dashed #cbd5e1;border-radius:12px;text-align:center;color:#64748b;font-size:12.5px;">
             <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;color:#004a2a"></i> Menelaah pola pengerjaanmu...
@@ -5585,6 +5634,13 @@ async function renderAutopsiSection() {
           `;
         });
         guestHtml += '</div>';
+      } else {
+        guestHtml += `
+          <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:12px">
+            <div style="font-size:12.5px;font-weight:700;color:#0f172a;margin-bottom:4px">📝 Pengamatan Guru Autopsi</div>
+            <div style="font-size:12px;color:#64748b;line-height:1.4">Kamu menyelesaikan tes ini dengan ${soalTerjawab} dari ${totalSoal} soal terjawab. Kerjakan lebih banyak soal dengan ritme stabil agar kebocoran waktu dan pola menebak dapat terpetakan secara lengkap.</div>
+          </div>
+        `;
       }
 
       // Ajakan Login Google untuk Guru AI gratis
