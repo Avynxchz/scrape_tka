@@ -829,6 +829,60 @@ function setTkaDate(v) {
     }
   } catch (e) {}
 }
+
+// B6: SessionStorage untuk Login Prompt / Banner Tamu di Beranda
+function shouldShowGuestLoginPrompt() {
+  if (!isGuestMode()) return false;
+  try {
+    if (sessionStorage.getItem('tka_guest_dismiss_login_prompt') === 'true' ||
+        sessionStorage.getItem('tka_login_prompt_dismissed') === 'true') {
+      return false;
+    }
+  } catch (e) {}
+  return true;
+}
+window.shouldShowGuestLoginPrompt = shouldShowGuestLoginPrompt;
+
+function dismissGuestLoginPrompt() {
+  try {
+    sessionStorage.setItem('tka_guest_dismiss_login_prompt', 'true');
+    sessionStorage.setItem('tka_login_prompt_dismissed', 'true');
+  } catch (e) {}
+  const banner = document.getElementById('guestLoginBanner');
+  if (banner) {
+    banner.style.opacity = '0';
+    banner.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+    banner.style.transform = 'translateY(-6px)';
+    setTimeout(() => { if (banner && banner.parentNode) banner.parentNode.removeChild(banner); }, 200);
+  }
+}
+window.dismissGuestLoginPrompt = dismissGuestLoginPrompt;
+
+function getGuestLoginBannerHtml() {
+  if (!shouldShowGuestLoginPrompt()) return '';
+  return `
+    <div id="guestLoginBanner" class="guest-login-banner" style="background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 100%);border:1px solid #bbf7d0;border-radius:12px;padding:12px 14px;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 2px 8px rgba(0,74,42,0.06);position:relative;z-index:2;">
+      <div style="display:flex;align-items:center;gap:10px;flex:1;">
+        <div style="width:32px;height:32px;border-radius:8px;background:#004a2a;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#064e3b;margin-bottom:2px;">Login dulu yuk</div>
+          <div style="font-size:11.5px;color:#047857;line-height:1.4;">Simpan hasil latihan dan progres belajarmu secara permanen antar perangkat.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+        <button type="button" onclick="loginWithGoogle()" style="background:#004a2a;color:#fff;border:0;border-radius:8px;padding:7px 11px;font-size:11.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;">
+          <i class="fa-brands fa-google"></i> Login
+        </button>
+        <button type="button" id="btnDismissGuestBanner" onclick="dismissGuestLoginPrompt()" style="background:transparent;color:#6b7280;border:0;border-radius:8px;padding:6px;font-size:13px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;" title="Nanti saja" aria-label="Tutup ajakan login">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
 function renderHome() {
   const main = document.getElementById('hoMain');
   if (!main) return;
@@ -883,8 +937,10 @@ function renderHome() {
   }).join('');
 
   // FASE 5 (T5.2, T5.3): kartu countdown + misi di atas daftar mapel
+  // B6: Banner ajakan login tamu di Beranda (disimpan di sessionStorage saat ditutup)
+  const guestBannerHtml = getGuestLoginBannerHtml();
   const tkaCardsHtml = getTkaCardsHtml();
-  main.innerHTML = tkaCardsHtml + `
+  main.innerHTML = guestBannerHtml + tkaCardsHtml + `
     <div class="stitch-mapel-header">
       <div class="stitch-mapel-header-left">
         <span class="stitch-mapel-header-title">Mapel Pilihanmu</span>
@@ -1216,6 +1272,8 @@ window.addEventListener('message', async (e) => {
         sendPanelData(hit[1]);
       }
     }
+  } else if (d.type === 'dismiss-guest-prompt') {
+    if (typeof dismissGuestLoginPrompt === 'function') dismissGuestLoginPrompt();
   } else if (d.type === 'login-google') {
     // Iframe (home_desktop/akun) minta login Google — jalankan di window utama
     // (Google blokir OAuth dalam iframe). supabase_auth.js dimuat di parent.

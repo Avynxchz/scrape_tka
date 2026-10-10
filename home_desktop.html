@@ -169,14 +169,19 @@
 </div>
 
 <!-- Banner Jaminan Privasi & Keamanan Siswa -->
-<div class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-brand-emerald-light/70 border border-accent-mint/30 text-emerald-900 text-xs font-semibold shadow-xs">
+<div id="deskPrivacyBanner" class="w-full flex items-center justify-between px-4 py-2.5 rounded-xl bg-brand-emerald-light/70 border border-accent-mint/30 text-emerald-900 text-xs font-semibold shadow-xs">
   <div class="flex items-center gap-2">
     <span class="material-symbols-outlined text-primary text-[20px]">verified_user</span>
     <span>Privasi &amp; Keamanan Terjamin 100%: Progresmu tersimpan di perangkat ini. Jika kamu login Google, progres dan hasil tryout juga disimpan di akunmu agar bisa dibuka di perangkat lain.</span>
   </div>
-  <span class="text-emerald-700 text-[11px] font-bold uppercase tracking-wider hidden md:inline-flex items-center gap-1">
-    <span class="w-1.5 h-1.5 rounded-full bg-accent-mint"></span> Aman
-  </span>
+  <div class="flex items-center gap-3">
+    <span class="text-emerald-700 text-[11px] font-bold uppercase tracking-wider hidden md:inline-flex items-center gap-1">
+      <span class="w-1.5 h-1.5 rounded-full bg-accent-mint"></span> Aman
+    </span>
+    <button type="button" id="btnDismissDeskBanner" onclick="dismissDeskGuestBanner()" class="text-emerald-800 hover:text-emerald-950 px-1 py-0.5 rounded cursor-pointer transition-colors" title="Tutup" aria-label="Tutup banner">
+      <span class="material-symbols-outlined text-[16px]">close</span>
+    </button>
+  </div>
 </div>
 
 <!-- MATA PELAJARAN 1: MATEMATIKA (WAJIB) -->
@@ -1344,6 +1349,25 @@
   // Bangun section mapel tambahan (19 mapel) dan terapkan mapel terpilih
   buildDynamicSubjectSections();
   applyVisibleSubjects(getDeskChosenSubjects());
+
+  // B6: SessionStorage dismiss untuk banner privasi / ajakan login tamu di desktop
+  window.dismissDeskGuestBanner = function () {
+    try {
+      sessionStorage.setItem('tka_guest_dismiss_login_prompt', 'true');
+      sessionStorage.setItem('tka_login_prompt_dismissed', 'true');
+      BRIDGE.send({ type: 'dismiss-guest-prompt' });
+    } catch (e) {}
+    var b = document.getElementById('deskPrivacyBanner');
+    if (b) b.style.display = 'none';
+  };
+
+  try {
+    if (sessionStorage.getItem('tka_guest_dismiss_login_prompt') === 'true' ||
+        sessionStorage.getItem('tka_login_prompt_dismissed') === 'true') {
+      var b = document.getElementById('deskPrivacyBanner');
+      if (b) b.style.display = 'none';
+    }
+  } catch (e) {}
 
   BRIDGE.send({ type: 'home-desktop-ready' });
   window.__homeDesktopBridge = BRIDGE;
