@@ -972,8 +972,6 @@ def _verify_supabase_token(token):
     try:
         if not token:
             return False, None
-        if token.startswith("test_token_") or token == "dummy_jwt_token_for_user_test_12345":
-            return True, {"id": "usr_test_12345", "email": "murid_tka@example.com"}
         sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
         sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
         if not sb_url or not sb_key:
