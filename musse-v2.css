@@ -325,3 +325,83 @@
 /* (countdown udah ada di header v2 yang kompak) */
 .stitch-hero { display: none !important; }
 #tkaCardWrap > div:first-child { display: none !important; }
+
+/* ============ NOTION/VERCEL STYLE OVERHAUL ============ */
+/* Prinsip: border tipis ganti shadow, radius kecil, whitespace lega, hijau cuma buat aksen penting */
+
+/* ---- 1. Header ultra-minimal ---- */
+.stitch-topbar, .stitch-header {
+  background: #fff !important;
+  border-bottom: 1px solid #EAEAEA !important;
+  box-shadow: none !important;
+}
+/* Sembunyikan teks BERANDA di sebelah logo & tombol keluar di header */
+.stitch-brand-sub, .stitch-logout-btn { display: none !important; }
+
+/* ---- 2. Card: border ganti shadow, radius 6-8px ---- */
+.stitch-card,
+.stitch-mission-card,
+.mv2-feature,
+.mv2-subject,
+.mv2-resume {
+  box-shadow: none !important;
+  border: 1px solid #EAEAEA !important;
+  border-radius: 8px !important;
+}
+.stitch-card { border-radius: 8px !important; }
+
+/* ---- 3. Misi Hari Ini: putih/abu muda, bukan kuning ---- */
+.stitch-mission-card {
+  background: #F7F7F9 !important;
+  border: 1px solid #EAEAEA !important;
+}
+.stitch-mission-card [style*="fffbeb"],
+.stitch-mission-card [style*="fef3c7"] { background: transparent !important; }
+
+/* ---- 4. Tombol: radius kecil 4-6px ---- */
+.btn, button[class*="btn"],
+.mv2-resume-btn,
+.stitch-btn-ruang {
+  border-radius: 6px !important;
+}
+/* Tombol sekunder: ghost style */
+.stitch-btn-ruang {
+  background: #fff !important;
+  border: 1px solid #EAEAEA !important;
+  color: #0f172a !important;
+  box-shadow: none !important;
+}
+
+/* ---- 5. Progress bar: tipis 3px, tajam ---- */
+.stitch-bar, .mv2-progress-mini {
+  height: 3px !important;
+  border-radius: 2px !important;
+  background: #EAEAEA !important;
+}
+.stitch-bar > span, .mv2-progress-mini > span {
+  border-radius: 2px !important;
+}
+
+/* ---- 6. Whitespace lebih lega ---- */
+.stitch-section { margin-bottom: 28px !important; }
+.mv2-section-title { margin: 24px 0 12px !important; }
+.mv2-features { gap: 12px !important; padding-bottom: 12px !important; }
+.mv2-subject-grid { gap: 12px !important; }
+
+/* ---- 7. Hero: hijau cuma buat aksen penting ---- */
+.stitch-hero {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  border: 1px solid #EAEAEA !important;
+}
+
+/* ---- 8. Tipografi tegas ---- */
+body { font-family: 'Inter', 'Plus Jakarta Sans', system-ui, sans-serif !important; }
+.mv2-greet, .stitch-card h3, .mv2-section-title {
+  letter-spacing: -0.01em !important;
+}
+
+/* [notion-style] Komponen v2: hilangkan pill, jadi kotak tajam */
+.mv2-stat { border-radius: 6px !important; }
+.mv2-feature-icon { font-size: 24px !important; }
+.mv2-resume { border-radius: 8px !important; }
