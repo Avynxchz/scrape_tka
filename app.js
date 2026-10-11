@@ -5885,6 +5885,8 @@ function showAutopsiSpotlight() {
     if (document.getElementById('autopsiSpotlight')) return; // jangan duplikat
     const overlay = document.getElementById('reviewHasilOverlay');
     if (!overlay) return;
+    // Masukkan ke DALAM .review-container (bukan langsung di overlay yang display:flex)
+    const container = overlay.querySelector('.review-container') || overlay;
     const banner = document.createElement('div');
     banner.id = 'autopsiSpotlight';
     banner.className = 'autopsi-spotlight';
@@ -5896,7 +5898,7 @@ function showAutopsiSpotlight() {
       '</div>' +
       '<button class="spotlight-cta" onclick="scrollToAutopsi()">Lihat <i class="fa-solid fa-arrow-down"></i></button>' +
       '<button class="spotlight-close" onclick="this.parentElement.style.display=\'none\'" aria-label="Tutup">×</button>';
-    overlay.insertBefore(banner, overlay.firstChild);
+    container.insertBefore(banner, container.firstChild);
   } catch (e) {}
 }
 function scrollToAutopsi() {
