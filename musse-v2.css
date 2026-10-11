@@ -1,0 +1,217 @@
+/* ==========================================================================
+   MUSSE Design System v2 — Mobile-first redesign
+   Dibuat: 2026-10-11 (redesign total di dev)
+   Prinsip: bersih, segar, energik — bukan korporat membosankan.
+   Mobile-first: semua di bawah ini untuk HP, @media (min-width:768px) untuk desktop.
+   ========================================================================== */
+
+:root {
+  /* ---- Brand: Emerald (pertumbuhan, segar, belajar) ---- */
+  --musse-950: #06281c;
+  --musse-900: #0a3a28;
+  --musse-800: #004a2a;
+  --musse-700: #046c3f;
+  --musse-600: #059669;
+  --musse-500: #10b981;
+  --musse-400: #34d399;
+  --musse-300: #6ee7b7;
+  --musse-200: #a7f3d0;
+  --musse-100: #d1fae5;
+  --musse-50:  #ecfdf5;
+
+  /* ---- Accent: Amber (energi, CTA, highlight) ---- */
+  --amber-600: #d97706;
+  --amber-500: #f59e0b;
+  --amber-400: #fbbf24;
+  --amber-100: #fef3c7;
+
+  /* ---- AI: Indigo (fitur AI, Autopsi, Tutor) ---- */
+  --ai-700: #4338ca;
+  --ai-600: #4f46e5;
+  --ai-500: #6366f1;
+  --ai-100: #e0e7ff;
+
+  /* ---- Neutrals: Slate ---- */
+  --slate-950: #020617;
+  --slate-900: #0f172a;
+  --slate-700: #334155;
+  --slate-500: #64748b;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --slate-50:  #f8fafc;
+
+  /* ---- Semantic ---- */
+  --success: var(--musse-500);
+  --warning: var(--amber-500);
+  --danger: #ef4444;
+  --info: var(--ai-500);
+
+  /* ---- Typography ---- */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 34px;
+
+  /* ---- Spacing & Shape ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+
+  /* ---- Shadows (lembut, berlapis) ---- */
+  --shadow-sm: 0 1px 2px rgba(2, 6, 23, 0.06);
+  --shadow-md: 0 4px 12px rgba(2, 6, 23, 0.08);
+  --shadow-lg: 0 8px 24px rgba(2, 6, 23, 0.12);
+  --shadow-glow-green: 0 4px 20px rgba(16, 185, 129, 0.25);
+  --shadow-glow-amber: 0 4px 20px rgba(245, 158, 11, 0.25);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+}
+
+/* ---- Base reset (mobile-first) ---- */
+.musse-v2, .musse-v2 * { box-sizing: border-box; }
+.musse-v2 {
+  font-family: var(--font-sans);
+  color: var(--slate-900);
+  background: var(--slate-50);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* ---- Buttons ---- */
+.btn-musse {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-weight: 700; border: none; cursor: pointer;
+  border-radius: var(--radius-full);
+  padding: 12px 24px; font-size: var(--text-base);
+  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast);
+}
+.btn-musse:active { transform: scale(0.97); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--musse-600), var(--musse-500));
+  color: #fff; box-shadow: var(--shadow-glow-green);
+}
+.btn-accent {
+  background: linear-gradient(135deg, var(--amber-500), var(--amber-400));
+  color: var(--slate-950); box-shadow: var(--shadow-glow-amber);
+}
+.btn-ai {
+  background: linear-gradient(135deg, var(--ai-600), var(--ai-500));
+  color: #fff;
+}
+.btn-ghost {
+  background: transparent; color: var(--musse-700);
+  border: 1.5px solid var(--musse-200);
+}
+
+/* ---- Cards ---- */
+.card-musse {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 16px;
+  border: 1px solid var(--slate-100);
+  transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal);
+}
+.card-musse.tappable:active { transform: scale(0.98); }
+@media (hover: hover) {
+  .card-musse.tappable:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+}
+
+/* ---- Section titles ---- */
+.section-title {
+  font-size: var(--text-lg); font-weight: 800; color: var(--slate-900);
+  margin: 0 0 4px 0; letter-spacing: -0.01em;
+}
+.section-sub {
+  font-size: var(--text-sm); color: var(--slate-500); margin: 0 0 12px 0;
+}
+
+/* ---- Entrance animations ---- */
+@keyframes musse-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes musse-fade-in {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes musse-pop {
+  0% { opacity: 0; transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.anim-fade-up { animation: musse-fade-up var(--duration-slow) var(--ease-out) both; }
+.anim-fade-in { animation: musse-fade-in var(--duration-normal) ease both; }
+.anim-pop { animation: musse-pop var(--duration-normal) var(--ease-out) both; }
+/* Stagger: pakai style="--d:1" dst. */
+.anim-fade-up[style*="--d"] { animation-delay: calc(var(--d, 0) * 60ms); }
+
+/* ---- Badges / pills ---- */
+.pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: var(--text-xs); font-weight: 700;
+  padding: 4px 10px; border-radius: var(--radius-full);
+}
+.pill-green { background: var(--musse-100); color: var(--musse-800); }
+.pill-amber { background: var(--amber-100); color: var(--amber-600); }
+.pill-ai { background: var(--ai-100); color: var(--ai-700); }
+.pill-slate { background: var(--slate-100); color: var(--slate-500); }
+
+/* ---- [muse-fix] Tab filter: scroll horizontal, jangan potong teks ---- */
+.musse-tabs, [class*="catTabs"], [class*="filter-tabs"] {
+  display: flex; gap: 8px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; padding-bottom: 4px;
+}
+.musse-tabs::-webkit-scrollbar, [class*="catTabs"]::-webkit-scrollbar { display: none; }
+.musse-tabs > *, [class*="catTabs"] > * { flex-shrink: 0; white-space: nowrap; }
+
+/* ---- [muse-fix] Flex truncation: min-width 0 dari akar ---- */
+.musse-v2 .flex-min0, .review-header > div, .ai-tutor-title { min-width: 0; }
+
+/* ---- [muse-fix] Modal login ---- */
+.tka-modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(2, 6, 23, 0.55); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.tka-modal-card {
+  background: #fff; border-radius: var(--radius-xl);
+  padding: 28px 24px; max-width: 360px; width: 100%;
+  text-align: center; box-shadow: var(--shadow-lg);
+}
+.tka-modal-card h3 { font-size: var(--text-xl); font-weight: 800; margin: 0 0 8px 0; }
+.tka-login-sub { font-size: var(--text-sm); color: var(--slate-500); margin: 0 0 12px 0; }
+.tka-login-benefits {
+  list-style: none; padding: 0; margin: 0 0 20px 0; text-align: left;
+  font-size: var(--text-sm); color: var(--slate-700);
+}
+.tka-login-benefits li { padding: 6px 0; }
+.tka-google-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 12px; border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-full); background: #fff; cursor: pointer;
+  font-size: var(--text-base); font-weight: 700; color: var(--slate-900);
+  transition: box-shadow var(--duration-fast), transform var(--duration-fast);
+}
+.tka-google-btn:hover { box-shadow: var(--shadow-md); }
+.tka-google-btn:active { transform: scale(0.98); }
+.tka-login-cancel {
+  margin-top: 12px; background: none; border: none; cursor: pointer;
+  font-size: var(--text-sm); color: var(--slate-500);
+}
+.tka-spinner {
+  width: 36px; height: 36px; margin: 0 auto 12px;
+  border: 3px solid var(--musse-100); border-top-color: var(--musse-600);
+  border-radius: 50%; animation: tka-spin 0.8s linear infinite;
+}
+@keyframes tka-spin { to { transform: rotate(360deg); } }
