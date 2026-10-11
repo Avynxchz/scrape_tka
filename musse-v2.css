@@ -215,3 +215,45 @@
   border-radius: 50%; animation: tka-spin 0.8s linear infinite;
 }
 @keyframes tka-spin { to { transform: rotate(360deg); } }
+
+/* ---- [redesign] Kartu mapel: lebih ramping & mencolok ---- */
+.stitch-card {
+  min-height: 140px !important;
+  padding: 14px !important;
+  width: 240px !important;
+}
+.stitch-card h3 {
+  font-size: 19px !important;
+  font-weight: 800 !important;
+}
+.stitch-card::before {
+  height: 4px !important;
+}
+/* Progress bar lebih tebal & jelas */
+.stitch-bar {
+  height: 8px !important;
+  border-radius: 99px !important;
+}
+.stitch-bar > span.on {
+  background: linear-gradient(90deg, #059669, #34d399) !important;
+}
+
+/* ---- [redesign] Section spacing lebih rapat ---- */
+.stitch-section {
+  margin-bottom: 20px !important;
+}
+.stitch-sec-head {
+  margin-bottom: 10px !important;
+}
+
+/* ---- [redesign] Hero carousel lebih ramping ---- */
+.stitch-hero {
+  padding: 16px 14px 14px !important;
+  margin-bottom: 12px !important;
+}
+
+/* ---- [redesign] Chip lebih berani ---- */
+.stitch-chip {
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+}
