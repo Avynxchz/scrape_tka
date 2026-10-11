@@ -161,4 +161,194 @@ select:focus-visible,
   body[data-quiz-mode="1"] .package-tabs {
     display: none !important;
   }
+
+  /* ============================================================
+     D1. AI TUTOR DESKTOP — 2-KOLOM (SOAL DI KIRI, CHAT DI KANAN)
+     Lebar Chat Panel: 400px (antara 380-420px sesuai spec),
+     Kartu Soal: fleksibel di sisi kiri dengan scroll mandiri.
+     ============================================================ */
+  #pembSubAI {
+    display: block;
+    width: 100%;
+  }
+
+  #pembSubAI .cbt-sidebar-col {
+    position: static !important;
+    height: auto !important;
+    border: none !important;
+    background: transparent !important;
+    width: 100% !important;
+    transform: none !important;
+    box-shadow: none !important;
+    z-index: 1 !important;
+  }
+
+  #pembSubAI .ai-tutor-card {
+    display: grid !important;
+    grid-template-columns: minmax(420px, 1fr) 400px !important;
+    grid-template-rows: auto auto 1fr auto !important;
+    grid-template-areas:
+      "soal header"
+      "soal actions"
+      "soal messages"
+      "soal input" !important;
+    height: calc(100vh - 285px) !important;
+    min-height: 480px !important;
+    max-height: 720px !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06) !important;
+    overflow: hidden !important;
+  }
+
+  /* KIRI: Lembar / Pratinjau Soal Lengkap */
+  #pembSubAI #chatQuestionCard {
+    grid-area: soal !important;
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 100% !important;
+    height: 100% !important;
+    border-right: 1px solid #e2e8f0 !important;
+    border-bottom: none !important;
+    background: #f8fafc !important;
+    overflow: hidden !important;
+  }
+
+  #pembSubAI #chatQuestionToggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 18px !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    cursor: default !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    color: #004a2a !important;
+  }
+
+  #pembSubAI #chatQuestionChevron {
+    display: none !important;
+  }
+
+  #pembSubAI #chatQuestionBody {
+    flex: 1 !important;
+    display: block !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    padding: 20px 24px !important;
+    background: #ffffff !important;
+    font-size: 14.5px !important;
+    line-height: 1.65 !important;
+    color: #1e293b !important;
+  }
+
+  /* KANAN: Header AI Tutor */
+  #pembSubAI .ai-tutor-header {
+    grid-area: header !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 16px !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  #pembSubAI .ai-tutor-header .btn-close-sheet {
+    display: none !important;
+  }
+
+  #pembSubAI .tutor-sheet-handle {
+    display: none !important;
+  }
+
+  /* KANAN: Bar Aksi Atas (Chat Baru, Model, Chips Cepat) */
+  #pembSubAI .ai-top-actions-bar {
+    grid-area: actions !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 14px !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    overflow-x: auto !important;
+  }
+
+  /* KANAN: Riwayat Chat */
+  #pembSubAI .chat-messages {
+    grid-area: messages !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    padding: 14px 16px !important;
+    background: #ffffff !important;
+    gap: 10px !important;
+  }
+
+  /* KANAN: Input Composer Pinned di Bawah */
+  #pembSubAI .chat-input-area {
+    grid-area: input !important;
+    padding: 10px 14px 10px !important;
+    background: #ffffff !important;
+    border-top: 1px solid #e2e8f0 !important;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  #pembSubAI .chat-input-form {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: #f1f5f9 !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 12px !important;
+    padding: 3px 6px 3px 12px !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+  }
+
+  #pembSubAI .chat-input-form:focus-within {
+    border-color: #004a2a !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(0, 74, 42, 0.12) !important;
+  }
+
+  #pembSubAI .chat-input-form input {
+    flex: 1 !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    font-size: 13px !important;
+    color: #0f172a !important;
+    padding: 6px 0 !important;
+  }
+
+  #pembSubAI .btn-send-chat {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 8px !important;
+    background: #004a2a !important;
+    color: #ffffff !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: transform 0.15s, background-color 0.15s !important;
+    flex-shrink: 0 !important;
+  }
+
+  #pembSubAI .btn-send-chat:hover {
+    background: #1b633e !important;
+    transform: scale(1.04) !important;
+  }
+
+  #pembSubAI .ai-disclaimer {
+    font-size: 10.5px !important;
+    color: #94a3b8 !important;
+    text-align: center !important;
+    margin-top: 4px !important;
+    margin-bottom: 0 !important;
+  }
 }
