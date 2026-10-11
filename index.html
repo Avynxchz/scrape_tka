@@ -518,6 +518,10 @@
           <button class="pemb-sub" id="psub-ai" type="button" onclick="switchPembSub('ai')">
             <i class="fa-solid fa-robot"></i><span>Tanya AI</span>
           </button>
+          <!-- [muse-fix] Mode ringkas: pembahasan singkat padat, default aktif -->
+          <button class="pemb-sub pemb-mode-toggle" id="pembModeToggle" type="button" onclick="togglePembahasanMode()" title="Ubah mode tampilan pembahasan">
+            <i class="fa-solid fa-compress"></i><span id="pembModeLabel">Ringkas</span>
+          </button>
         </div>
 
         <!-- Ringkasan hasil cek jawaban (duplikat banner agar terlihat di tab ini) -->
