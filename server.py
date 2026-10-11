@@ -2176,6 +2176,43 @@ function salinWA() {
             except Exception as e:
                 return self._send_500(e, "/api/user/progress")
 
+        if self.path.split('?', 1)[0] == '/api/payment/status':
+            try:
+                import payment_service
+                is_enabled = payment_service.is_payment_enabled()
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[7:] if _auth.startswith('Bearer ') else ''
+                if not _token:
+                    return self._send_json(401, {
+                        "status": "unauthorized",
+                        "message": "Wajib login untuk melihat status pembayaran."
+                    })
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok or not _user:
+                    return self._send_json(401, {
+                        "status": "unauthorized",
+                        "message": "Wajib login untuk melihat status pembayaran."
+                    })
+                user_id = _user['id']
+                res = payment_service.check_user_pass_status(user_id)
+                res["status"] = "success"
+                res["payment_enabled"] = is_enabled
+                return self._send_json(200, res)
+            except Exception as e:
+                return self._send_500(e, "/api/payment/status")
+
+        if self.path.split('?', 1)[0] == '/api/payment/config':
+            try:
+                import payment_service
+                return self._send_json(200, {
+                    "status": "success",
+                    "payment_enabled": payment_service.is_payment_enabled(),
+                    "price": 14900,
+                    "product_name": "Sprint Pass TKA"
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/payment/config")
+
         # Dashboard pengunjung (khusus server utama / bukan demo publik)
         if self.path.split('?', 1)[0] in ADMIN_VISITOR_PATHS:
             if PUBLIC_DEMO:
@@ -3029,6 +3066,101 @@ function salinWA() {
                 })
             except Exception as e:
                 return self._send_500(e, "/api/admin/flags")
+
+        elif self.path == '/api/payment/create':
+            try:
+                import payment_service
+                if not payment_service.is_payment_enabled():
+                    return self._send_json(403, {
+                        "status": "forbidden",
+                        "message": "Fitur pembayaran belum diaktifkan selama masa beta."
+                    })
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[7:] if _auth.startswith('Bearer ') else ''
+                if not _token:
+                    return self._send_json(401, {
+                        "status": "unauthorized",
+                        "message": "Wajib login untuk membeli Sprint Pass."
+                    })
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok or not _user:
+                    return self._send_json(401, {
+                        "status": "unauthorized",
+                        "message": "Wajib login untuk membeli Sprint Pass."
+                    })
+                user_id = _user['id']
+
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+                try:
+                    payload = json.loads(post_data) if post_data else {}
+                except Exception:
+                    payload = {}
+
+                tka_date_raw = payload.get('tka_date')
+                ok, tka_date_or_err = payment_service.validate_tka_date(tka_date_raw)
+                if not ok:
+                    return self._send_json(400, {
+                        "status": "error",
+                        "message": tka_date_or_err
+                    })
+                tka_date = tka_date_or_err
+
+                # Idempotensi: periksa order pending yang masih aktif
+                existing = payment_service.find_active_pending_payment(user_id)
+                if existing and existing.get('payment_url'):
+                    return self._send_json(200, {
+                        "status": "success",
+                        "payment_url": existing['payment_url'],
+                        "order_id": existing.get('order_id', ''),
+                        "reused": True
+                    })
+
+                order_id = payment_service.generate_order_id(user_id)
+                user_email = _user.get('email', '')
+                meta = _user.get('user_metadata') or {}
+                user_name = meta.get('full_name') or meta.get('name') or (user_email.split('@')[0] if user_email else 'Siswa musse')
+
+                ok_mid, payment_url, err_mid = payment_service.create_midtrans_payment_link(
+                    order_id, user_id, user_email, user_name, tka_date, gross_amount=14900
+                )
+                if not ok_mid or not payment_url:
+                    return self._send_json(500, {
+                        "status": "error",
+                        "message": err_mid or "Gagal membuat tautan pembayaran Midtrans."
+                    })
+
+                payment_service.save_payment_to_db(order_id, user_id, tka_date, 14900, payment_url)
+                return self._send_json(200, {
+                    "status": "success",
+                    "payment_url": payment_url,
+                    "order_id": order_id
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/payment/create")
+
+        elif self.path == '/api/payment/webhook':
+            try:
+                import payment_service
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+                try:
+                    payload = json.loads(post_data) if post_data else {}
+                except Exception:
+                    payload = {}
+
+                ok, status_code, msg = payment_service.handle_webhook_notification(payload)
+                if not ok:
+                    return self._send_json(status_code, {
+                        "status": "error",
+                        "message": msg
+                    })
+                return self._send_json(200, {
+                    "status": "ok",
+                    "message": msg
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/payment/webhook")
 
         else:
             self.send_response(404)
