@@ -587,5 +587,82 @@ select:focus-visible,
     background: #ffffff !important;
     border-top: 1px solid #f1f5f9 !important;
   }
+
+  /* ============================================================
+     D5. PERBAIKI FRAMING/LAG DI LAPTOP (60FPS PERFORMANCE OPTIMIZATION)
+     - Kurangi animasi berat di desktop (gunakan transform/opacity saja).
+     - Tambahkan will-change dan transform: translateZ(0) di elemen yang dianimasikan.
+     - Ringankan/hilangkan filter blur dan multi-layer shadow berat.
+     - GPU compositing & layout containment untuk eliminasi repaint thrashing.
+     ============================================================ */
+  /* 1. Header Desktop: Ganti backdrop-blur mahal dengan solid background yang bersih */
+  header.fixed {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* 2. Ringankan blur dekoratif di Hero agar GPU laptop tidak bottleneck */
+  .blur-3xl, .blur-2xl, .blur-xl {
+    filter: none !important;
+    opacity: 0.12 !important;
+  }
+
+  /* 3. Ribbon metrik hero: ganti backdrop-blur dengan RGBA semi-transparan yang ringan */
+  .bg-brand-emerald-dark\/40.backdrop-blur-md,
+  .bg-brand-emerald-dark\/40,
+  .backdrop-blur-md {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(11, 30, 19, 0.75) !important;
+  }
+
+  /* 4. Hardware acceleration (GPU compositing) untuk kartu paket & elemen interaktif */
+  .dk-pkg {
+    transform: translateZ(0) !important;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .dk-pkg:hover {
+    transform: translateY(-3px) translateZ(0) !important;
+    box-shadow: 0 10px 24px rgba(0, 74, 42, 0.12) !important;
+  }
+
+  /* 5. Isolasi layout untuk setiap section mapel agar scrolling tidak memicu repaint global */
+  .dk-col-main > .dk-subject {
+    contain: layout style;
+  }
+
+  /* 6. Sticky aside pada dashboard desktop */
+  aside.lg\:col-span-4 {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* 7. Halaman Tryout / CBT Soal: akselerasi GPU & transform compositing */
+  .cbt-question-card,
+  .cbt-main-col,
+  #workPaneSoal {
+    transform: translateZ(0);
+  }
+
+  /* 8. AI Tutor & Review Popups: akselerasi transform */
+  #reviewHasilOverlay .review-container,
+  #pembSubAI .ai-tutor-card {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  /* 9. Smooth scrolling tanpa layout thrashing */
+  html {
+    scroll-behavior: smooth;
+  }
 }
+
 

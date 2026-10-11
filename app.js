@@ -1716,13 +1716,19 @@ window.homeIsOpen = homeIsOpen;
 function homeToggle() { homeIsOpen() ? homeClose() : homeOpen(); }
 window.homeToggle = homeToggle;
 
-// Carousel dots hero
 (function () {
   const track = document.getElementById('hoHeroTrack'), dots = document.getElementById('hoHeroDots');
   if (!track || !dots) return;
+  let _heroTrackRaf = false;
   track.addEventListener('scroll', () => {
-    const i = Math.round(track.scrollLeft / (track.scrollWidth / track.children.length));
-    [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i));
+    if (_heroTrackRaf) return;
+    _heroTrackRaf = true;
+    requestAnimationFrame(() => {
+      _heroTrackRaf = false;
+      if (!track.children.length) return;
+      const i = Math.round(track.scrollLeft / (track.scrollWidth / track.children.length));
+      [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i));
+    });
   }, { passive: true });
 })();
 
@@ -7449,16 +7455,22 @@ const DetailTracker = {
 if (typeof window !== 'undefined') {
   window.DetailTracker = DetailTracker;
   let _lastScrollCheck = 0;
+  let _scrollRafPending = false;
   window.addEventListener('scroll', () => {
     const now = Date.now();
-    if (now - _lastScrollCheck < 300) return;
+    if (now - _lastScrollCheck < 250) return;
     _lastScrollCheck = now;
-    if (typeof getCurrentQuestion !== 'function') return;
-    const q = getCurrentQuestion();
-    if (!q || !q.nomor) return;
-    const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    const pct = (window.scrollY / maxScroll) * 100;
-    try { DetailTracker.onScrollDepth(q.nomor, pct); } catch (e) {}
+    if (_scrollRafPending) return;
+    _scrollRafPending = true;
+    requestAnimationFrame(() => {
+      _scrollRafPending = false;
+      if (typeof getCurrentQuestion !== 'function') return;
+      const q = getCurrentQuestion();
+      if (!q || !q.nomor) return;
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const pct = (window.scrollY / maxScroll) * 100;
+      try { DetailTracker.onScrollDepth(q.nomor, pct); } catch (e) {}
+    });
   }, { passive: true });
 }
 
