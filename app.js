@@ -5722,13 +5722,30 @@ function renderReviewHasil() {
 // 4. "Soal yang salah, satu per satu": akordeon per_soal (penyebab, dipelajari, langkah, cek paham) + tombol Buka Pembahasan & Tanya AI
 // 5. Misi hari ini: tombol utama satu-satunya yang menonjol "Mulai Misi (±10 menit)"
 // 6. Rencana sampai TKA: terlipat + input "Kapan TKA-mu?" + hitung mundur H-n
+// Helper: Bersihkan teks autopsi dari ID teknis mentah atau pilar_refs (K2)
+function cleanAutopsiText(str) {
+  if (str === null || str === undefined) return '';
+  let s = String(str);
+  // 1. Pola spesifik rujukan pilar mentah: "Cek pilar_refs: bahasa_indonesia:1:1#5." atau "Lihat pilar_refs: ..."
+  s = s.replace(/(?:(?:cek|lihat|buka|periksa)\s+)?pilar_refs:\s*[a-zA-Z0-9_:#-]+/gi, 'Lihat pembahasan Pilar');
+  // 2. String pilar_refs yang berdiri sendiri
+  s = s.replace(/pilar_refs/gi, 'pembahasan Pilar');
+  // 3. Pola ID dengan nomor pilar: mapel:paket:nomor#pilar (misal bahasa_indonesia:1:1#5 -> Pilar 5 Soal 1)
+  s = s.replace(/\b[a-zA-Z0-9_-]+:\d+:(\d+)#(\d+)\b/g, 'Pilar $2 Soal $1');
+  // 4. Pola ID soal: mapel:paket:nomor (misal bahasa_indonesia:1:5 -> Soal 5)
+  s = s.replace(/\b[a-zA-Z0-9_-]+:\d+:(\d+)\b/g, 'Soal $1');
+  // 5. Prefix nama mapel teknis mentah dengan titik dua (misal "bahasa_indonesia: ")
+  s = s.replace(/\b(bahasa_indonesia|bahasa_inggris|matematika|fisika|kimia|biologi|ekonomi|sosiologi|geografi|sejarah|antropologi|tpa|tps):\s*/gi, '');
+  return s;
+}
+
 // Helper: Format ID mentah soal (misal "matematika:1:1", "matematika:1:3") menjadi "Soal 1, 3, 4"
 function formatContohSoal(contoh) {
   if (!contoh) return '';
   const arr = Array.isArray(contoh) ? contoh : [contoh];
   const nums = arr.map(item => {
-    const s = String(item).trim();
-    const m = s.match(/:(\d+)$/) || s.match(/\d+$/);
+    const s = cleanAutopsiText(item).trim();
+    const m = s.match(/:(\d+)(?:#\d+)?$/) || s.match(/\b(?:Soal\s+)?(\d+)\b/i);
     return m ? (m[1] || m[0]) : s;
   }).filter(Boolean);
   if (nums.length === 0) return '';
@@ -5924,10 +5941,11 @@ async function renderAutopsiSection() {
         guestHtml += '<div style="margin-bottom:12px"><h4 style="font-size:13px;font-weight:800;color:#0f172a;margin:0 0 8px;">⚠️ Kebocoran Pola Terdeteksi</h4>';
         allLeaks.forEach((k, idx) => {
           const contohStr = (k.contoh && k.contoh.length) ? formatContohSoal(k.contoh) : '';
-          const buktiClean = (k.bukti || (k.soal_hilang + ' soal terpengaruh')).replace(/\b[a-zA-Z0-9_-]+:\d+:(\d+)\b/g, 'Soal $1');
+          const buktiClean = cleanAutopsiText(k.bukti || (k.soal_hilang + ' soal terpengaruh'));
+          const labelClean = cleanAutopsiText(k.label || '');
           guestHtml += `
             <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;padding:11px 13px;margin-bottom:8px">
-              <div style="font-size:11px;font-weight:800;color:#0284c7;text-transform:uppercase;margin-bottom:3px">Kebocoran #${idx + 1}: ${k.label}</div>
+              <div style="font-size:11px;font-weight:800;color:#0284c7;text-transform:uppercase;margin-bottom:3px">Kebocoran #${idx + 1}: ${labelClean}</div>
               <div style="font-size:12.5px;color:#334155;line-height:1.4">${buktiClean}</div>
               ${contohStr ? `<div style="font-size:11.5px;color:#64748b;margin-top:4px">Contoh soal: <strong>${contohStr}</strong></div>` : ''}
             </div>
@@ -5986,17 +6004,17 @@ async function renderAutopsiSection() {
 
     // Catatan data tipis jika ada
     if (coach.catatan_data) {
-      h += `<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:10px;color:#92400e">ℹ️ ${coach.catatan_data}</div>`;
+      h += `<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:10px;color:#92400e">ℹ️ ${cleanAutopsiText(coach.catatan_data)}</div>`;
     }
 
     // Sapaan & Penilaian
     h += `
       <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px;margin-bottom:12px">
-        <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:4px">${coach.sapaan || 'Halo,'}</div>
-        <div style="font-size:12.5px;color:#334155;line-height:1.45">${coach.penilaian || ''}</div>
+        <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:4px">${cleanAutopsiText(coach.sapaan || 'Halo,')}</div>
+        <div style="font-size:12.5px;color:#334155;line-height:1.45">${cleanAutopsiText(coach.penilaian || '')}</div>
         ${coach.sudah_bagus ? `
           <div style="margin-top:8px;padding-top:8px;border-top:1px dashed #e2e8f0;font-size:12px;color:#166534;display:flex;align-items:flex-start;gap:6px">
-            <span>⭐</span> <span><strong>Sudah bagus:</strong> ${coach.sudah_bagus}</span>
+            <span>⭐</span> <span><strong>Sudah bagus:</strong> ${cleanAutopsiText(coach.sudah_bagus)}</span>
           </div>
         ` : ''}
       </div>
@@ -6011,7 +6029,7 @@ async function renderAutopsiSection() {
           </h4>
           <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px">
             <ul style="margin:0;padding-left:18px;font-size:12.5px;color:#334155;line-height:1.5">
-              ${coach.pengamatan.map(p => `<li style="margin-bottom:4px">${p}</li>`).join('')}
+              ${coach.pengamatan.map(p => `<li style="margin-bottom:4px">${cleanAutopsiText(p)}</li>`).join('')}
             </ul>
           </div>
         </div>
@@ -6028,17 +6046,20 @@ async function renderAutopsiSection() {
           <div style="display:flex;flex-direction:column;gap:10px">
             ${coach.kebocoran.map((k, idx) => {
               const contohStr = (k.contoh && k.contoh.length) ? formatContohSoal(k.contoh) : '';
-              const buktiClean = (k.bukti || '-').replace(/\b[a-zA-Z0-9_-]+:\d+:(\d+)\b/g, 'Soal $1');
+              const buktiClean = cleanAutopsiText(k.bukti || '-');
+              const judulClean = cleanAutopsiText(k.judul || k.label || '');
+              const tafsirClean = cleanAutopsiText(k.tafsir || '-');
+              const tindakanClean = cleanAutopsiText(k.tindakan || '-');
               return `
               <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px">
                 <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px">
-                  <span style="font-size:13.5px;font-weight:800;color:#0f172a">${k.judul || k.label}</span>
+                  <span style="font-size:13.5px;font-weight:800;color:#0f172a">${judulClean}</span>
                   <span style="font-size:10px;background:#fef2f2;color:#991b1b;border:1px solid #fee2e2;padding:2px 6px;border-radius:6px;font-weight:700;text-transform:uppercase">Kebocoran #${idx + 1}</span>
                 </div>
                 <div style="font-size:12px;color:#64748b;margin-bottom:6px"><strong>Bukti:</strong> ${buktiClean}</div>
                 ${contohStr ? `<div style="font-size:11.5px;color:#64748b;margin-bottom:6px">Contoh soal: <strong>${contohStr}</strong></div>` : ''}
-                <div style="font-size:12.5px;color:#334155;margin-bottom:6px;line-height:1.4"><strong>Tafsir:</strong> ${k.tafsir || '-'}</div>
-                <div style="font-size:12px;color:#004a2a;background:#f0fdf4;padding:6px 10px;border-radius:6px;margin-bottom:8px"><strong>Tindakan:</strong> ${k.tindakan || '-'}</div>
+                <div style="font-size:12.5px;color:#334155;margin-bottom:6px;line-height:1.4"><strong>Tafsir:</strong> ${tafsirClean}</div>
+                <div style="font-size:12px;color:#004a2a;background:#f0fdf4;padding:6px 10px;border-radius:6px;margin-bottom:8px"><strong>Tindakan:</strong> ${tindakanClean}</div>
                 <div style="display:flex;gap:8px;flex-wrap:wrap">
                   <button type="button" onclick="bukaKartuStrategi('${k.label}')" style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;border-radius:6px;padding:5px 10px;font-size:11.5px;font-weight:700;cursor:pointer">
                     📚 Pelajari Strategi
@@ -6076,6 +6097,9 @@ async function renderAutopsiSection() {
               const b = penyebabBadge[ps.penyebab] || { label: ps.penyebab, bg: '#f1f5f9', color: '#334155' };
               const accId = `acc_soal_${ps.no}`;
               const isDefaultOpen = (idx === 0);
+              const dipelajariClean = cleanAutopsiText(ps.dipelajari || '');
+              const langkahClean = (Array.isArray(ps.langkah) ? ps.langkah : []).map(l => cleanAutopsiText(l));
+              const cekPahamClean = cleanAutopsiText(ps.cek_paham || '');
               return `
                 <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
                   <div onclick="toggleAutopsiAccordion('${accId}')" style="padding:10px 14px;background:#ffffff;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none">
@@ -6086,18 +6110,18 @@ async function renderAutopsiSection() {
                     <span style="font-size:12px;color:#94a3b8">▼</span>
                   </div>
                   <div id="${accId}" style="display:${isDefaultOpen ? 'block' : 'none'};padding:12px 14px;border-top:1px solid #f1f5f9;background:#fafafa">
-                    <div style="font-size:12px;color:#0f172a;margin-bottom:6px"><strong>Yang dipelajari:</strong> ${ps.dipelajari}</div>
-                    ${Array.isArray(ps.langkah) && ps.langkah.length > 0 ? `
+                    <div style="font-size:12px;color:#0f172a;margin-bottom:6px"><strong>Yang dipelajari:</strong> ${dipelajariClean}</div>
+                    ${langkahClean.length > 0 ? `
                       <div style="font-size:12px;color:#334155;margin-bottom:6px">
                         <strong>Langkah perbaikan:</strong>
                         <ol style="margin:4px 0 0;padding-left:18px">
-                          ${ps.langkah.map(l => `<li style="margin-bottom:2px">${l}</li>`).join('')}
+                          ${langkahClean.map(l => `<li style="margin-bottom:2px">${l}</li>`).join('')}
                         </ol>
                       </div>
                     ` : ''}
-                    ${ps.cek_paham ? `
+                    ${cekPahamClean ? `
                       <div style="font-size:11.5px;color:#0369a1;background:#f0f9ff;border:1px solid #e0f2fe;padding:6px 10px;border-radius:6px;margin-bottom:8px">
-                        <strong>Cek pemahaman:</strong> ${ps.cek_paham}
+                        <strong>Cek pemahaman:</strong> ${cekPahamClean}
                       </div>
                     ` : ''}
                     <div style="display:flex;gap:8px;flex-wrap:wrap">
@@ -6122,7 +6146,7 @@ async function renderAutopsiSection() {
       h += `
         <div style="margin:16px 0;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:14px">
           <div style="font-size:13.5px;font-weight:800;color:#14532d;margin-bottom:4px">🎯 Misi 10 Menit Hari Ini</div>
-          <div style="font-size:12.5px;color:#166534;margin-bottom:12px;line-height:1.4">${coach.misi.pembuka || 'Fokus perbaiki kebocoran utamamu sekarang.'}</div>
+          <div style="font-size:12.5px;color:#166534;margin-bottom:12px;line-height:1.4">${cleanAutopsiText(coach.misi.pembuka || 'Fokus perbaiki kebocoran utamamu sekarang.')}</div>
           <button type="button" class="btn-misi-utama" onclick="mulaiMisiHariIni()" style="width:100%;background:#004a2a;color:#ffffff;padding:12px 18px;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 10px rgba(0,74,42,0.2);display:flex;align-items:center;justify-content:center;gap:8px">
             🚀 Mulai Misi (±10 menit)
           </button>
@@ -6151,7 +6175,7 @@ async function renderAutopsiSection() {
             <div style="display:flex;flex-direction:column;gap:6px">
               ${coach.rencana.map(r => `
                 <div style="font-size:12px;color:#334155;padding:6px 8px;background:#fafafa;border-radius:6px">
-                  <strong>Hari ke-${r.hari_ke}:</strong> ${r.pembuka || ''}
+                  <strong>Hari ke-${r.hari_ke}:</strong> ${cleanAutopsiText(r.pembuka || '')}
                 </div>
               `).join('')}
             </div>
@@ -6164,7 +6188,7 @@ async function renderAutopsiSection() {
 
     // Penutup & Catatan Kecil
     if (coach.penutup) {
-      h += `<div style="font-size:12px;font-style:italic;color:#475569;text-align:center;margin:10px 0">${coach.penutup}</div>`;
+      h += `<div style="font-size:12px;font-style:italic;color:#475569;text-align:center;margin:10px 0">${cleanAutopsiText(coach.penutup)}</div>`;
     }
 
     // Tombol Masuk Ruang Mapel (D2/D3)
