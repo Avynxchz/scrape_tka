@@ -25,6 +25,8 @@ from unittest.mock import patch, MagicMock
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+os.environ.setdefault("VISITOR_ADMIN_KEY", "test_admin_key_dummy_12345")
+
 import ai_room
 import server
 

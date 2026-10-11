@@ -5503,7 +5503,40 @@ function selesaiTes() {
   try {
     const _att = AttemptRecorder.finish(window._finishByTimer ? 'timer' : 'user');
     window._finishByTimer = false;
-    if (_att) { window._lastFinishedAttempt = _att; AttemptQueue.push(_att); syncAttempts(); }
+    if (_att) {
+      // Hitung is_correct, n_correct, dan score secara akurat dari evaluasi soal resmi
+      try {
+        const curKey = pkgKey();
+        const pkg = (state.pkgData && state.pkgData[curKey]) ? state.pkgData[curKey] : null;
+        let n_benar = 0;
+        if (pkg && pkg.soal && Array.isArray(_att.items)) {
+          _att.items.forEach(it => {
+            const qItem = pkg.soal.find(s => s.nomor === it.position) || pkg.soal[it.position - 1];
+            if (qItem && typeof evaluateQuestion === 'function') {
+              const ev = evaluateQuestion(qItem);
+              const isCorr = (ev.type === 'bs')
+                ? (isQuestionAnswered(qItem) && ev.perStatement.length > 0 && ev.perStatement.every(s => s === 'benar'))
+                : (ev.status === 'benar');
+              it.is_correct = !!isCorr;
+            }
+            if (it.is_correct) n_benar++;
+          });
+          _att.n_correct = n_benar;
+          _att.score = Math.round((100 * n_benar) / Math.max(1, _att.n_questions || pkg.soal.length));
+        }
+      } catch (errEval) {
+        console.warn('Gagal evaluasi skor attempt:', errEval);
+      }
+      window._lastFinishedAttempt = _att;
+      // Simpan riwayat attempt terbaru di localStorage agar instan terbaca di Ruang AI
+      try {
+        const rec = JSON.parse(localStorage.getItem('tka_recent_attempts') || '[]');
+        rec.unshift(_att);
+        localStorage.setItem('tka_recent_attempts', JSON.stringify(rec.slice(0, 20)));
+      } catch (errRec) {}
+      AttemptQueue.push(_att);
+      syncAttempts();
+    }
   } catch (e) {}
   if (!state.testFinished) state.testFinished = {};
   state.testFinished[pkgKey()] = true;
@@ -5791,14 +5824,25 @@ async function renderAutopsiSection() {
       const savedAns = (state.userAnswers && state.userAnswers[curKey]) || {};
       const savedRagu = (state.raguStatus && state.raguStatus[curKey]) || {};
       const items = [];
+      let n_benar_fallback = 0;
       for (let i = 1; i <= totalSoal; i++) {
         const ans = savedAns[i] || null;
+        let isCorr = false;
+        const qItem = (pkg && pkg.soal) ? (pkg.soal.find(s => s.nomor === i) || pkg.soal[i - 1]) : null;
+        if (qItem && typeof evaluateQuestion === 'function') {
+          const ev = evaluateQuestion(qItem);
+          isCorr = (ev.type === 'bs')
+            ? (isQuestionAnswered(qItem) && ev.perStatement.length > 0 && ev.perStatement.every(s => s === 'benar'))
+            : (ev.status === 'benar');
+        }
+        if (isCorr) n_benar_fallback++;
         items.push({
           soal_id: `${state.currentSubject}:${state.currentPkg}:${i}`,
           position: i,
-          topic_id: (pkg && pkg.soal && pkg.soal[i - 1]) ? (pkg.soal[i - 1].topik || null) : null,
+          topic_id: qItem ? (qItem.topik || null) : null,
           first_answer: ans ? (Array.isArray(ans) ? ans.join(',') : String(ans)) : null,
           final_answer: ans ? (Array.isArray(ans) ? ans.join(',') : String(ans)) : null,
+          is_correct: isCorr,
           active_ms: 0,
           waktu_detik: 0,
           change_count: 0,
@@ -5816,6 +5860,8 @@ async function renderAutopsiSection() {
         n_questions: totalSoal,
         duration_limit_s: getTimerTotalSeconds(),
         ended_by: 'user',
+        n_correct: n_benar_fallback,
+        score: Math.round((100 * n_benar_fallback) / Math.max(1, totalSoal)),
         items: items,
         created_at: new Date().toISOString()
       };
@@ -5881,7 +5927,11 @@ async function renderAutopsiSection() {
     // FASE 2: Panggil API Guru Autopsi (/api/autopsy/coach)
     const reqBody = {
       attempt_id: payload.id || payload.client_attempt_id,
-      attempt: Object.assign({}, payload, { tka_date: tkaDateCurrent })
+      attempt: Object.assign({}, payload, { 
+        tka_date: tkaDateCurrent,
+        score: payload.score,
+        n_correct: payload.n_correct
+      })
     };
 
     let coachData = null;
@@ -5988,7 +6038,17 @@ async function renderAutopsiSection() {
       return;
     }
 
-    try { localStorage.setItem('tka_last_coach', JSON.stringify(coach)); } catch (e) {}
+    try { 
+      localStorage.setItem('tka_last_coach', JSON.stringify(coach));
+      localStorage.setItem('tka_last_autopsy', JSON.stringify({
+        subject: payload.subject || payload.mapel,
+        paket: payload.paket || 1,
+        score: payload.score,
+        n_correct: payload.n_correct,
+        kebocoran_1: (coach.kebocoran && coach.kebocoran[0]) || null,
+        coach: coach
+      }));
+    } catch (e) {}
     if (coach) {
       updateDailyMissionFromAutopsy(coach, payload.subject || payload.mapel, payload.paket || 1);
     }
@@ -7554,6 +7614,8 @@ const AttemptRecorder = {
     // Isi item untuk SEMUA soal (1..n); yang tak dikunjungi dapat nilai nol.
     // Ini mencegah "Items tidak valid" saat user selesai tanpa buka semua soal.
     const items = [];
+    let n_benar = 0;
+    let evalAvailable = false;
     for (let nomor = 1; nomor <= a.n; nomor++) {
       const it = a.items[nomor] || {
         soal_id: a.subject + ':' + a.paket + ':' + nomor,
@@ -7564,7 +7626,25 @@ const AttemptRecorder = {
         jejak: []
       };
       const activeMs = it.active_ms || 0;
+      let isCorr = false;
+      try {
+        const curKey = (a.subject || '') + '_' + (a.paket || 1);
+        const pkg = (typeof state !== 'undefined' && state.pkgData) ? (state.pkgData[curKey] || (typeof pkgKey === 'function' ? state.pkgData[pkgKey()] : null)) : null;
+        if (pkg && pkg.soal && typeof evaluateQuestion === 'function') {
+          evalAvailable = true;
+          const qItem = pkg.soal.find(s => s.nomor === nomor) || pkg.soal[nomor - 1];
+          if (qItem) {
+            const ev = evaluateQuestion(qItem);
+            isCorr = (ev.type === 'bs')
+              ? (isQuestionAnswered(qItem) && ev.perStatement.length > 0 && ev.perStatement.every(s => s === 'benar'))
+              : (ev.status === 'benar');
+          }
+        }
+      } catch (e) {}
+      if (isCorr) n_benar++;
+
       const c = Object.assign({}, it, {
+        is_correct: isCorr,
         waktu_detik: Math.round(activeMs / 1000),
         ganti_jawaban: it.change_count || 0,
         ragu: !!it.flagged_ragu,
@@ -7574,6 +7654,7 @@ const AttemptRecorder = {
       delete c._firstVisitT;
       items.push(c);
     }
+    const scoreVal = evalAvailable ? Math.round((100 * n_benar) / Math.max(1, a.n)) : null;
     const payload = {
       client_id: 'att_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
       subject: a.subject, paket: a.paket,
@@ -7581,6 +7662,8 @@ const AttemptRecorder = {
       ended_by: ended_by === 'timer' ? 'timer' : 'user',
       started_at: new Date(a.started_at).toISOString(),
       finished_at: new Date(now).toISOString(),
+      score: scoreVal,
+      n_correct: evalAvailable ? n_benar : null,
       items,
       jejak_detail: (typeof DetailTracker !== 'undefined' ? DetailTracker.getAllEvents() : [])
     };

@@ -317,7 +317,7 @@ def get_last_wrong_questions(attempts, mapel_slug, limit=5):
     return wrong_questions
 
 
-def fetch_supabase_attempts(user_id, mapel_slug, sb_url, sb_key):
+def fetch_supabase_attempts(user_id, mapel_slug, sb_url, sb_key, user_token=None):
     """Ambil daftar attempt user untuk mapel tertentu dari Supabase REST.
     
     Catatan (K3): Untuk pengguna berstatus TAMU (user_id kosong atau None),
@@ -328,18 +328,22 @@ def fetch_supabase_attempts(user_id, mapel_slug, sb_url, sb_key):
         return []
 
     clean_mapel = str(mapel_slug or "").strip().lower().replace("-", "_")
+    mapel_pattern = clean_mapel.replace("_", "%")
+    auth_bearer = user_token or sb_key
+    apikey = sb_key or user_token
+
     try:
         query_url = (
             f"{sb_url}/rest/v1/attempts?user_id=eq.{urllib.parse.quote(str(user_id))}"
-            f"&mapel=ilike.{urllib.parse.quote(clean_mapel)}"
+            f"&mapel=ilike.%{urllib.parse.quote(mapel_pattern)}%"
             f"&order=finished_at.desc,started_at.desc"
             f"&select=id,mapel,paket,n_questions,score,items,started_at,finished_at"
         )
         req = urllib.request.Request(
             query_url,
             headers={
-                "apikey": sb_key,
-                "Authorization": f"Bearer {sb_key}"
+                "apikey": apikey,
+                "Authorization": f"Bearer {auth_bearer}"
             }
         )
         with urllib.request.urlopen(req, timeout=10) as resp:
