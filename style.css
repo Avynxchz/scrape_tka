@@ -6791,3 +6791,62 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
 .img-fallback-retry:active svg {
   transform: rotate(180deg);
 }
+
+/* [muse-fix] Mode Ringkas pembahasan: toggle + tombol expander */
+.pemb-mode-toggle {
+  margin-left: auto;
+  border: 1px solid var(--border, #e5e7eb);
+  background: var(--bg-soft, #f8fafc);
+}
+.pemb-mode-toggle:hover { color: var(--accent); border-color: var(--accent); }
+.btn-link-expander {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--accent, #4f46e5);
+  background: transparent;
+  color: var(--accent, #4f46e5);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-link-expander:hover { background: var(--accent, #4f46e5); color: #fff; }
+
+/* [muse-fix] Spotlight Autopsi — banner pengarah ke analisis (opsi A) */
+.autopsi-spotlight {
+  display: flex; align-items: center; gap: 12px;
+  margin: 0 0 12px 0; padding: 14px 16px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: 14px; color: #fff;
+  box-shadow: 0 4px 16px rgba(79,70,229,.35);
+  animation: spotlightPulse 2s ease-in-out infinite;
+  flex-shrink: 0; box-sizing: border-box; width: 100%;
+}
+@keyframes spotlightPulse {
+  0%,100% { box-shadow: 0 4px 16px rgba(79,70,229,.35); }
+  50% { box-shadow: 0 4px 28px rgba(79,70,229,.6); }
+}
+.autopsi-spotlight .spotlight-icon { font-size: 28px; }
+.autopsi-spotlight .spotlight-text { flex: 1; min-width: 0; }
+.autopsi-spotlight .spotlight-title { font-weight: 800; font-size: 15px; line-height: 1.3; overflow-wrap: break-word; }
+.autopsi-spotlight .spotlight-sub { font-size: 12px; opacity: .9; margin-top: 2px; line-height: 1.4; }
+.autopsi-spotlight .spotlight-cta {
+  background: #fff; color: #4f46e5; border: none; border-radius: 999px;
+  padding: 8px 16px; font-weight: 700; font-size: 13px; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
+}
+.autopsi-spotlight .spotlight-close {
+  background: transparent; border: none; color: #fff; font-size: 20px;
+  cursor: pointer; opacity: .7; padding: 4px;
+}
+@media (max-width: 480px) {
+  .autopsi-spotlight { margin: 0 0 10px 0; padding: 10px 12px; gap: 8px; }
+  .autopsi-spotlight .spotlight-icon { font-size: 22px; }
+  .autopsi-spotlight .spotlight-title { font-size: 13px; }
+  .autopsi-spotlight .spotlight-sub { display: none; }
+  .autopsi-spotlight .spotlight-cta { padding: 6px 10px; font-size: 12px; }
+  .autopsi-spotlight .spotlight-close { font-size: 18px; }
+}

@@ -1,0 +1,327 @@
+/* ==========================================================================
+   MUSSE Design System v2 — Mobile-first redesign
+   Dibuat: 2026-10-11 (redesign total di dev)
+   Prinsip: bersih, segar, energik — bukan korporat membosankan.
+   Mobile-first: semua di bawah ini untuk HP, @media (min-width:768px) untuk desktop.
+   ========================================================================== */
+
+:root {
+  /* ---- Brand: Emerald (pertumbuhan, segar, belajar) ---- */
+  --musse-950: #06281c;
+  --musse-900: #0a3a28;
+  --musse-800: #004a2a;
+  --musse-700: #046c3f;
+  --musse-600: #059669;
+  --musse-500: #10b981;
+  --musse-400: #34d399;
+  --musse-300: #6ee7b7;
+  --musse-200: #a7f3d0;
+  --musse-100: #d1fae5;
+  --musse-50:  #ecfdf5;
+
+  /* ---- Accent: Amber (energi, CTA, highlight) ---- */
+  --amber-600: #d97706;
+  --amber-500: #f59e0b;
+  --amber-400: #fbbf24;
+  --amber-100: #fef3c7;
+
+  /* ---- AI: Indigo (fitur AI, Autopsi, Tutor) ---- */
+  --ai-700: #4338ca;
+  --ai-600: #4f46e5;
+  --ai-500: #6366f1;
+  --ai-100: #e0e7ff;
+
+  /* ---- Neutrals: Slate ---- */
+  --slate-950: #020617;
+  --slate-900: #0f172a;
+  --slate-700: #334155;
+  --slate-500: #64748b;
+  --slate-300: #cbd5e1;
+  --slate-200: #e2e8f0;
+  --slate-100: #f1f5f9;
+  --slate-50:  #f8fafc;
+
+  /* ---- Semantic ---- */
+  --success: var(--musse-500);
+  --warning: var(--amber-500);
+  --danger: #ef4444;
+  --info: var(--ai-500);
+
+  /* ---- Typography ---- */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --text-xs: 11px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-lg: 18px;
+  --text-xl: 22px;
+  --text-2xl: 28px;
+  --text-3xl: 34px;
+
+  /* ---- Spacing & Shape ---- */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 999px;
+
+  /* ---- Shadows (lembut, berlapis) ---- */
+  --shadow-sm: 0 1px 2px rgba(2, 6, 23, 0.06);
+  --shadow-md: 0 4px 12px rgba(2, 6, 23, 0.08);
+  --shadow-lg: 0 8px 24px rgba(2, 6, 23, 0.12);
+  --shadow-glow-green: 0 4px 20px rgba(16, 185, 129, 0.25);
+  --shadow-glow-amber: 0 4px 20px rgba(245, 158, 11, 0.25);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+}
+
+/* ---- Base reset (mobile-first) ---- */
+.musse-v2, .musse-v2 * { box-sizing: border-box; }
+.musse-v2 {
+  font-family: var(--font-sans);
+  color: var(--slate-900);
+  background: var(--slate-50);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* ---- Buttons ---- */
+.btn-musse {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-weight: 700; border: none; cursor: pointer;
+  border-radius: var(--radius-full);
+  padding: 12px 24px; font-size: var(--text-base);
+  transition: transform var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast);
+}
+.btn-musse:active { transform: scale(0.97); }
+.btn-primary {
+  background: linear-gradient(135deg, var(--musse-600), var(--musse-500));
+  color: #fff; box-shadow: var(--shadow-glow-green);
+}
+.btn-accent {
+  background: linear-gradient(135deg, var(--amber-500), var(--amber-400));
+  color: var(--slate-950); box-shadow: var(--shadow-glow-amber);
+}
+.btn-ai {
+  background: linear-gradient(135deg, var(--ai-600), var(--ai-500));
+  color: #fff;
+}
+.btn-ghost {
+  background: transparent; color: var(--musse-700);
+  border: 1.5px solid var(--musse-200);
+}
+
+/* ---- Cards ---- */
+.card-musse {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: 16px;
+  border: 1px solid var(--slate-100);
+  transition: transform var(--duration-normal) var(--ease-out), box-shadow var(--duration-normal);
+}
+.card-musse.tappable:active { transform: scale(0.98); }
+@media (hover: hover) {
+  .card-musse.tappable:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+}
+
+/* ---- Section titles ---- */
+.section-title {
+  font-size: var(--text-lg); font-weight: 800; color: var(--slate-900);
+  margin: 0 0 4px 0; letter-spacing: -0.01em;
+}
+.section-sub {
+  font-size: var(--text-sm); color: var(--slate-500); margin: 0 0 12px 0;
+}
+
+/* ---- Entrance animations ---- */
+@keyframes musse-fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes musse-fade-in {
+  from { opacity: 0; } to { opacity: 1; }
+}
+@keyframes musse-pop {
+  0% { opacity: 0; transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.anim-fade-up { animation: musse-fade-up var(--duration-slow) var(--ease-out) both; }
+.anim-fade-in { animation: musse-fade-in var(--duration-normal) ease both; }
+.anim-pop { animation: musse-pop var(--duration-normal) var(--ease-out) both; }
+/* Stagger: pakai style="--d:1" dst. */
+.anim-fade-up[style*="--d"] { animation-delay: calc(var(--d, 0) * 60ms); }
+
+/* ---- Badges / pills ---- */
+.pill {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: var(--text-xs); font-weight: 700;
+  padding: 4px 10px; border-radius: var(--radius-full);
+}
+.pill-green { background: var(--musse-100); color: var(--musse-800); }
+.pill-amber { background: var(--amber-100); color: var(--amber-600); }
+.pill-ai { background: var(--ai-100); color: var(--ai-700); }
+.pill-slate { background: var(--slate-100); color: var(--slate-500); }
+
+/* ---- [muse-fix] Tab filter: scroll horizontal, jangan potong teks ---- */
+.musse-tabs, [class*="catTabs"], [class*="filter-tabs"] {
+  display: flex; gap: 8px;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; padding-bottom: 4px;
+}
+.musse-tabs::-webkit-scrollbar, [class*="catTabs"]::-webkit-scrollbar { display: none; }
+.musse-tabs > *, [class*="catTabs"] > * { flex-shrink: 0; white-space: nowrap; }
+
+/* ---- [muse-fix] Flex truncation: min-width 0 dari akar ---- */
+.musse-v2 .flex-min0, .review-header > div, .ai-tutor-title { min-width: 0; }
+
+/* ---- [muse-fix] Modal login ---- */
+.tka-modal-overlay {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(2, 6, 23, 0.55); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.tka-modal-card {
+  background: #fff; border-radius: var(--radius-xl);
+  padding: 28px 24px; max-width: 360px; width: 100%;
+  text-align: center; box-shadow: var(--shadow-lg);
+}
+.tka-modal-card h3 { font-size: var(--text-xl); font-weight: 800; margin: 0 0 8px 0; }
+.tka-login-sub { font-size: var(--text-sm); color: var(--slate-500); margin: 0 0 12px 0; }
+.tka-login-benefits {
+  list-style: none; padding: 0; margin: 0 0 20px 0; text-align: left;
+  font-size: var(--text-sm); color: var(--slate-700);
+}
+.tka-login-benefits li { padding: 6px 0; }
+.tka-google-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  width: 100%; padding: 12px; border: 1.5px solid var(--slate-200);
+  border-radius: var(--radius-full); background: #fff; cursor: pointer;
+  font-size: var(--text-base); font-weight: 700; color: var(--slate-900);
+  transition: box-shadow var(--duration-fast), transform var(--duration-fast);
+}
+.tka-google-btn:hover { box-shadow: var(--shadow-md); }
+.tka-google-btn:active { transform: scale(0.98); }
+.tka-login-cancel {
+  margin-top: 12px; background: none; border: none; cursor: pointer;
+  font-size: var(--text-sm); color: var(--slate-500);
+}
+.tka-spinner {
+  width: 36px; height: 36px; margin: 0 auto 12px;
+  border: 3px solid var(--musse-100); border-top-color: var(--musse-600);
+  border-radius: 50%; animation: tka-spin 0.8s linear infinite;
+}
+@keyframes tka-spin { to { transform: rotate(360deg); } }
+
+/* ---- [redesign] Kartu mapel: lebih ramping & mencolok ---- */
+.stitch-card {
+  min-height: 140px !important;
+  padding: 14px !important;
+  width: 240px !important;
+}
+.stitch-card h3 {
+  font-size: 19px !important;
+  font-weight: 800 !important;
+}
+.stitch-card::before {
+  height: 4px !important;
+}
+/* Progress bar lebih tebal & jelas */
+.stitch-bar {
+  height: 8px !important;
+  border-radius: 99px !important;
+}
+.stitch-bar > span.on {
+  background: linear-gradient(90deg, #059669, #34d399) !important;
+}
+
+/* ---- [redesign] Section spacing lebih rapat ---- */
+.stitch-section {
+  margin-bottom: 20px !important;
+}
+.stitch-sec-head {
+  margin-bottom: 10px !important;
+}
+
+/* ---- [redesign] Hero carousel lebih ramping ---- */
+.stitch-hero {
+  padding: 16px 14px 14px !important;
+  margin-bottom: 12px !important;
+}
+
+/* ---- [redesign] Chip lebih berani ---- */
+.stitch-chip {
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* ============ BERANDA V2 ============ */
+/* Header kompak: sapaan + streak + countdown dalam 1 baris */
+.mv2-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 4px; margin-bottom: 8px;
+}
+.mv2-greet { font-size: 18px; font-weight: 800; color: #0f172a; }
+.mv2-greet small { display: block; font-size: 12px; font-weight: 500; color: #64748b; }
+.mv2-stats { display: flex; gap: 8px; }
+.mv2-stat {
+  display: flex; align-items: center; gap: 4px;
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 99px;
+  padding: 6px 12px; font-size: 13px; font-weight: 700; color: #0f172a;
+}
+.mv2-stat .fire { color: #f97316; }
+
+/* Lanjutkan Belajar */
+.mv2-resume {
+  background: linear-gradient(135deg, #004a2a, #059669);
+  border-radius: 16px; padding: 16px; color: #fff;
+  margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;
+}
+.mv2-resume-info { font-size: 13px; opacity: 0.9; }
+.mv2-resume-title { font-size: 16px; font-weight: 800; margin: 2px 0; }
+.mv2-resume-btn {
+  background: #fff; color: #004a2a; border: none; border-radius: 10px;
+  padding: 10px 18px; font-weight: 800; font-size: 14px; cursor: pointer;
+}
+
+/* Jelajahi Fitur: horizontal scroll 4 kartu */
+.mv2-section-title { font-size: 15px; font-weight: 800; color: #0f172a; margin: 16px 0 8px; padding: 0 4px; }
+.mv2-features {
+  display: flex; gap: 10px; overflow-x: auto; padding: 4px 4px 8px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.mv2-features::-webkit-scrollbar { display: none; }
+.mv2-feature {
+  flex: 0 0 132px; background: #fff; border: 1px solid #e2e8f0;
+  border-radius: 14px; padding: 14px 12px; text-align: center; cursor: pointer;
+  transition: transform 0.15s;
+}
+.mv2-feature:active { transform: scale(0.96); }
+.mv2-feature-icon { font-size: 28px; margin-bottom: 6px; }
+.mv2-feature-name { font-size: 13px; font-weight: 800; color: #0f172a; }
+.mv2-feature-desc { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+/* Mapel grid 2 kolom */
+.mv2-subject-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 4px;
+}
+.mv2-subject {
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 14px;
+  padding: 14px; cursor: pointer; text-align: left;
+}
+.mv2-subject-icon { font-size: 24px; margin-bottom: 6px; }
+.mv2-subject-name { font-size: 14px; font-weight: 800; color: #0f172a; }
+.mv2-subject-meta { font-size: 11px; color: #64748b; margin-top: 2px; }
+.mv2-progress-mini { height: 6px; background: #f1f5f9; border-radius: 99px; margin-top: 8px; overflow: hidden; }
+.mv2-progress-mini > span { display: block; height: 100%; background: linear-gradient(90deg, #059669, #34d399); border-radius: 99px; }
+
+/* Sembunyikan carousel hero lama di v2 */
+.mv2-hide { display: none !important; }
+
+/* [redesign v2] Sembunyikan hero carousel lama & kartu tanggal gede */
+/* (countdown udah ada di header v2 yang kompak) */
+.stitch-hero { display: none !important; }
+#tkaCardWrap > div:first-child { display: none !important; }

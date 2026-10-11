@@ -337,7 +337,9 @@ const state = {
   tutorConvId: null,
   tutorProvider: null,
   selectedTutorModel: localStorage.getItem('tka_tutor_model') || 'qwen-groq',
-  explanationVisible: false
+  explanationVisible: false,
+  // [muse-fix] Mode pembahasan: 'ringkas' (default, singkat padat) | 'lengkap'
+  pembahasanMode: (function() { try { return localStorage.getItem('tka_pembahasan_mode') || 'ringkas'; } catch (e) { return 'ringkas'; } })()
 };
 
 function pkgKey(pkg = state.currentPkg) {
@@ -891,6 +893,13 @@ function getTkaDate() {
     const d = localStorage.getItem('tka_date');
     if (d && /^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
   } catch (e) {}
+  // [muse-fix] Pra-gladi: default ke 12 Okt 2026 (gladi bersih) selama hari ini
+  // belum lewat 12 Okt; setelahnya default ke 26 Okt 2026 (TKA).
+  try {
+    const n = new Date();
+    const ymd = n.getFullYear() + '-' + String(n.getMonth() + 1).padStart(2, '0') + '-' + String(n.getDate()).padStart(2, '0');
+    if (ymd <= '2026-10-12') return '2026-10-12';
+  } catch (e) {}
   return '2026-10-26';
 }
 function setTkaDate(v) {
@@ -962,6 +971,87 @@ function getGuestLoginBannerHtml() {
       </div>
     </div>
   `;
+}
+
+// ============ BERANDA V2 ============
+// Header kompak: sapaan + streak + countdown
+function getV2HeaderHtml() {
+  try {
+    const tka = getTkaDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+    const tkaD = new Date(tka + 'T00:00:00');
+    const diff = Math.round((tkaD - today) / 86400000);
+    const label = diff > 0 ? 'H-' + diff : (diff === 0 ? 'Hari H!' : 'Lewat ' + (-diff) + 'h');
+    // streak dari localStorage
+    let streak = 0;
+    try { streak = parseInt(localStorage.getItem('tka_streak') || '0', 10) || 0; } catch (e) {}
+    const hour = new Date().getHours();
+    const greet = hour < 11 ? 'Selamat pagi' : (hour < 15 ? 'Selamat siang' : (hour < 19 ? 'Selamat sore' : 'Selamat malam'));
+    return '<div class="mv2-header">'
+      + '<div class="mv2-greet">' + greet + ' 👋<small>Siap latihan hari ini?</small></div>'
+      + '<div class="mv2-stats">'
+      + '<span class="mv2-stat"><span class="fire">🔥</span>' + streak + '</span>'
+      + '<span class="mv2-stat">📅 ' + label + '</span>'
+      + '</div></div>';
+  } catch (e) { return ''; }
+}
+
+// Lanjutkan Belajar: cari paket dengan progres 0 < x < 100
+function getV2ResumeHtml() {
+  try {
+    const raw = localStorage.getItem(progressStorageKey());
+    const store = raw ? JSON.parse(raw) : {};
+    for (const subj of Object.keys(store)) {
+      const pkgs = store[subj] || {};
+      for (const pkg of Object.keys(pkgs)) {
+        const answered = Object.keys(pkgs[pkg] || {}).length;
+        const total = (STATIC_SOAL_COUNTS[subj] && STATIC_SOAL_COUNTS[subj][pkg]) || 20;
+        if (answered > 0 && answered < total) {
+          const meta = (typeof SUBJECT_UI_META !== 'undefined' && SUBJECT_UI_META[subj]) || {};
+          const name = meta.shortName || subj;
+          return '<div class="mv2-resume">'
+            + '<div><div class="mv2-resume-info">Lanjutkan belajarmu</div>'
+            + '<div class="mv2-resume-title">' + name + ' Paket ' + pkg + '</div>'
+            + '<div class="mv2-resume-info">Soal ' + answered + '/' + total + '</div></div>'
+            + '<button class="mv2-resume-btn" onclick="v2ResumeQuiz(\'' + subj + '\',' + pkg + ')">Lanjut →</button>'
+            + '</div>';
+        }
+      }
+    }
+  } catch (e) {}
+  return '';
+}
+function v2ResumeQuiz(subject, pkg) {
+  homeClose();
+  if (state.currentSubject !== subject) switchSubject(subject).then(() => switchPackage(pkg));
+  else switchPackage(pkg);
+}
+
+// Jelajahi Fitur: 4 kartu discovery
+function getV2FeaturesHtml() {
+  const features = [
+    { icon: '🤖', name: 'AI Tutor', desc: 'Tanya apa aja', action: "openTutorPanel()" },
+    { icon: '📝', name: 'Tryout', desc: 'Simulasi full', action: "v2GoTryout()" },
+    { icon: '🧠', name: 'Ruang AI', desc: 'Diskusi mapel', action: "v2GoRuangAI()" },
+    { icon: '📊', name: 'Autopsi', desc: 'Analisis kelemahan', action: "v2GoAutopsi()" },
+  ];
+  let h = '<div class="mv2-section-title">Jelajahi Fitur</div><div class="mv2-features">';
+  features.forEach(f => {
+    h += '<div class="mv2-feature" onclick="' + f.action + '">'
+      + '<div class="mv2-feature-icon">' + f.icon + '</div>'
+      + '<div class="mv2-feature-name">' + f.name + '</div>'
+      + '<div class="mv2-feature-desc">' + f.desc + '</div></div>';
+  });
+  return h + '</div>';
+}
+function v2GoTryout() { homeClose(); window.scrollTo(0, 0); }
+function v2GoRuangAI() { if (typeof homeShowPanel === 'function') homeShowPanel('modul'); }
+function v2GoAutopsi() {
+  try {
+    const last = JSON.parse(localStorage.getItem('tka_last_autopsy') || 'null');
+    if (last) { homeClose(); /* TODO: buka hasil terakhir */ }
+    else alert('Selesaikan 1 tryout dulu untuk membuka Autopsi!');
+  } catch (e) { alert('Selesaikan 1 tryout dulu untuk membuka Autopsi!'); }
 }
 
 function renderHome() {
@@ -1040,12 +1130,14 @@ function renderHome() {
   // B6: Banner ajakan login tamu di Beranda (disimpan di sessionStorage saat ditutup)
   const guestBannerHtml = getGuestLoginBannerHtml();
   const tkaCardsHtml = getTkaCardsHtml();
-  main.innerHTML = guestBannerHtml + tkaCardsHtml + aiRoomsBarHtml + `
-    <div class="stitch-mapel-header">
-      <div class="stitch-mapel-header-left">
-        <span class="stitch-mapel-header-title">Mapel Pilihanmu</span>
-        <span class="stitch-mapel-header-count">(${selectedKeys.length} Mapel)</span>
-      </div>
+  // [redesign v2] Struktur baru: header kompak + lanjutkan + fitur
+  const v2Header = getV2HeaderHtml();
+  const v2Resume = getV2ResumeHtml();
+  const v2Features = getV2FeaturesHtml();
+  main.innerHTML = v2Header + v2Resume + guestBannerHtml + tkaCardsHtml + v2Features + aiRoomsBarHtml + `
+    <div class="mv2-section-title">Mapel Pilihanmu (${selectedKeys.length})</div>
+    <div class="stitch-mapel-header" style="margin-bottom:8px;">
+      <div></div>
       <button type="button" class="stitch-btn-atur-mapel" id="btnAturMapel" onclick="openSubjectPickerModal()" aria-label="Atur Mapel Pilihan">
         <span class="ms-icon ms-16">tune</span><span>Atur Mapel</span>
       </button>
@@ -1297,9 +1389,22 @@ function showStartPackageConfirmModal(subject, pkg) {
   const _bguest = document.getElementById('btnConfirmStartGuest');
   if (_bguest) _bguest.style.display = 'none';
 
+  // [muse-fix] Kalau paket sudah pernah selesai, tawarkan ulangi dari 0
+  let alreadyDone = false;
+  try {
+    const tKey = subject + ':' + _pendingStartPackage.pkg;
+    alreadyDone = localStorage.getItem(examStorageKey('finished', tKey)) === 'true' ||
+                  (!isGuestMode() && localStorage.getItem('tka_finished_' + tKey) === 'true');
+  } catch (e) {}
+  _pendingStartPackage._retry = alreadyDone;
+
   const _b0 = document.getElementById('btnConfirmStartMapel');
   if (_b0) {
-    _b0.innerHTML = '<i class="fa-solid fa-play"></i> Mulai Sekarang';
+    if (alreadyDone) {
+      _b0.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Ya, Ulangi dari Awal';
+    } else {
+      _b0.innerHTML = '<i class="fa-solid fa-play"></i> Mulai Sekarang';
+    }
     _b0.onclick = function() { executeStartPackage(); };
   }
   // T2.7: estimasi menit mengikuti timer per paket (bukan 45/50 basi)
@@ -1311,12 +1416,21 @@ function showStartPackageConfirmModal(subject, pkg) {
   const modal = document.getElementById('modalKonfirmasiMulaiMapel');
   
   if (titleEl) {
-    titleEl.innerText = `Mulai Belajar ${subjName}?`;
+    if (_pendingStartPackage._retry) {
+      titleEl.innerText = `Ulangi ${subjName} Paket ${_pendingStartPackage.pkg}?`;
+    } else {
+      titleEl.innerText = `Mulai Belajar ${subjName}?`;
+    }
   }
   if (descEl) {
-    descEl.innerHTML = `Kamu akan memulai pengerjaan latihan <strong>${subjName} &middot; Paket ${_pendingStartPackage.pkg}</strong>.<br>`
-      + `Terdiri dari <strong>${count} Soal</strong> dengan estimasi waktu <strong>${minutes} Menit</strong>.<br><br>`
-      + `Jawaban dan nilai kamu otomatis tersimpan di dalam progres belajar.`;
+    if (_pendingStartPackage._retry) {
+      descEl.innerHTML = `Kamu sudah pernah menyelesaikan <strong>${subjName} &middot; Paket ${_pendingStartPackage.pkg}</strong>.<br><br>`
+        + `Apakah kamu ingin mengulang dari awal? <strong>Data &amp; nilai paket ini akan di-reset dari 0.</strong>`;
+    } else {
+      descEl.innerHTML = `Kamu akan memulai pengerjaan latihan <strong>${subjName} &middot; Paket ${_pendingStartPackage.pkg}</strong>.<br>`
+        + `Terdiri dari <strong>${count} Soal</strong> dengan estimasi waktu <strong>${minutes} Menit</strong>.<br><br>`
+        + `Jawaban dan nilai kamu otomatis tersimpan di dalam progres belajar.`;
+    }
   }
   if (modal) {
     modal.classList.add('open');
@@ -1333,12 +1447,17 @@ function closeStartPackageModal() {
 async function executeStartPackage() {
   if (!_pendingStartPackage) return;
   const target = { ..._pendingStartPackage };
+  const wantRetry = !!target._retry;
   closeStartPackageModal();
   // Beranda ditutup setelah konfirmasi mulai belajar
   if (typeof homeClose === 'function') homeClose();
   try {
     if (state.currentSubject !== target.subject) await switchSubject(target.subject);
     await switchPackage(target.pkg);
+    // [muse-fix] Ulangi paket: reset dulu data & nilai lama dari 0
+    if (wantRetry && typeof resetSimulasi === 'function') {
+      try { resetSimulasi(); } catch (e) {}
+    }
     // FASE 3 (T3.2): mulai perekaman attempt
     try {
       const _pkg = state.pkgData[pkgKey()];
@@ -3532,6 +3651,54 @@ function switchWorkTab(tab, sub, opts) {
   if (o.scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// [muse-fix] Mode Ringkas pembahasan: singkat, jelas, padat (default).
+// Ringkas = hanya kunci + inti "mengapa" (dipotong 2 kalimat) + tombol buka lengkap.
+// Lengkap = semua 5 pilar seperti semula. Preferensi tersimpan di localStorage.
+function togglePembahasanMode() {
+  const next = state.pembahasanMode === 'ringkas' ? 'lengkap' : 'ringkas';
+  state.pembahasanMode = next;
+  try { localStorage.setItem('tka_pembahasan_mode', next); } catch (e) {}
+  applyPembahasanMode();
+}
+
+function applyPembahasanMode() {
+  const ringkas = state.pembahasanMode !== 'lengkap';
+  const label = document.getElementById('pembModeLabel');
+  if (label) label.innerText = ringkas ? 'Ringkas' : 'Lengkap';
+  const toggle = document.getElementById('pembModeToggle');
+  if (toggle) {
+    const ic = toggle.querySelector('i');
+    if (ic) ic.className = ringkas ? 'fa-solid fa-compress' : 'fa-solid fa-expand';
+  }
+  const expBody = document.getElementById('expBody');
+  if (!expBody) return;
+  // ID seksi pilar yang disembunyikan di mode ringkas
+  const detailIds = ['conceptBox', 'symbolsBox', 'stepsContainer', 'tipsContainer', 'canonicalVisualBox'];
+  detailIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = ringkas ? 'none' : '';
+  });
+  // Potong "mengapa" jadi 2 kalimat pertama di mode ringkas
+  const whyEl = document.getElementById('whyConceptContainer');
+  if (whyEl) {
+    if (!whyEl.dataset.fullHtml) whyEl.dataset.fullHtml = whyEl.innerHTML;
+    if (ringkas && whyEl.dataset.fullHtml) {
+      const tmp = document.createElement('div');
+      tmp.innerHTML = whyEl.dataset.fullHtml;
+      const txt = (tmp.textContent || '').trim();
+      const m = txt.match(/^([^.!?]+[.!?])\s*([^.!?]+[.!?])?/);
+      const short = m ? (m[1] + (m[2] ? ' ' + m[2] : '')) : txt.slice(0, 220);
+      whyEl.innerHTML = '<p>' + _escHtml(short) + '</p>' +
+        '<button type="button" class="btn-link-expander" onclick="togglePembahasanMode()">' +
+        '<i class="fa-solid fa-book-open"></i> Lihat pembahasan lengkap</button>';
+    } else if (!ringkas && whyEl.dataset.fullHtml) {
+      whyEl.innerHTML = whyEl.dataset.fullHtml;
+    }
+  }
+  try { if (typeof renderMath === 'function') renderMath(expBody); } catch (e) {}
+}
+window.togglePembahasanMode = togglePembahasanMode;
+
 function switchPembSub(sub, opts) {
   const o = opts || {};
   if (sub !== 'materi' && sub !== 'ai') sub = 'materi';
@@ -4181,6 +4348,8 @@ async function _applyCanonicalSolution(q) {
 
     renderMath();
     try { setupPillarAccordions(); } catch (e) {}
+    // [muse-fix] Terapkan mode ringkas/lengkap setelah render
+    try { applyPembahasanMode(); } catch (e) {}
   } catch (err) {
     if (seq !== _solutionReqSeq) return;
     console.warn('Solution (kanonis) tidak tersedia:', err);
@@ -5750,6 +5919,8 @@ function renderReviewHasil() {
 
   // FASE 5 (T5.1): tampilkan Autopsi setelah review dirender
   try { renderAutopsiSection(); } catch (e) { console.warn('Autopsi:', e); }
+  // [muse-fix] Spotlight Autopsi (opsi A): tampilkan banner pengarah
+  try { setTimeout(showAutopsiSpotlight, 800); } catch (e) {}
 }
 
 // FASE A6: UI Layar Hasil Guru Autopsi (Mobile-first, ringan di HP murah)
@@ -5790,6 +5961,36 @@ function formatContohSoal(contoh) {
   if (nums.length === 0) return '';
   return `Soal ${nums.join(', ')}`;
 }
+
+// [muse-fix] Spotlight Autopsi (opsi A): banner pengarah setelah tryout selesai
+function showAutopsiSpotlight() {
+  try {
+    if (document.getElementById('autopsiSpotlight')) return; // jangan duplikat
+    const overlay = document.getElementById('reviewHasilOverlay');
+    if (!overlay) return;
+    // Masukkan ke DALAM .review-container (bukan langsung di overlay yang display:flex)
+    const container = overlay.querySelector('.review-container') || overlay;
+    const banner = document.createElement('div');
+    banner.id = 'autopsiSpotlight';
+    banner.className = 'autopsi-spotlight';
+    banner.innerHTML =
+      '<div class="spotlight-icon">🔍</div>' +
+      '<div class="spotlight-text">' +
+        '<div class="spotlight-title">Lihat Autopsi Tryout-mu!</div>' +
+        '<div class="spotlight-sub">AI menganalisis cara kamu mengerjakan — temukan kebocoran terbesarmu</div>' +
+      '</div>' +
+      '<button class="spotlight-cta" onclick="scrollToAutopsi()">Lihat <i class="fa-solid fa-arrow-down"></i></button>' +
+      '<button class="spotlight-close" onclick="this.parentElement.style.display=\'none\'" aria-label="Tutup">×</button>';
+    container.insertBefore(banner, container.firstChild);
+  } catch (e) {}
+}
+function scrollToAutopsi() {
+  try {
+    const el = document.getElementById('autopsiSection');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (e) {}
+}
+window.scrollToAutopsi = scrollToAutopsi;
 
 async function renderAutopsiSection() {
   let cont = document.getElementById('autopsiSection');
