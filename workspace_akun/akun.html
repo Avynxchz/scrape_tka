@@ -213,6 +213,67 @@ button:active { transform: scale(0.97); }
             </div>
           </div>
 
+          <!-- SPRINT PASS MUSSE (Rp14.900) DESKTOP -->
+          <div id="d-sprint-pass-card" class="bg-surface-card rounded-xl shadow-sm border border-border-subtle p-space-lg flex flex-col gap-space-md">
+            <div class="flex items-center justify-between pb-space-xs border-b border-border-subtle">
+              <div class="flex items-center gap-space-xs">
+                <span class="material-symbols-outlined text-primary text-[24px]">workspace_premium</span>
+                <h3 class="font-headline-sm text-headline-sm text-text-primary">Sprint Pass musse</h3>
+              </div>
+              <span id="d-pass-badge" class="font-label-caps text-label-caps text-on-surface-variant bg-surface-subtle px-2.5 py-1 rounded-full font-bold">Masa Beta</span>
+            </div>
+
+            <!-- Konten Status Aktif -->
+            <div id="d-pass-active-view" class="hidden p-space-md rounded-xl bg-brand-emerald-light/80 border border-primary/20 flex flex-col gap-2">
+              <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-[22px]">check_circle</span>
+                <span class="font-label-lg text-label-lg font-bold text-primary" id="d-pass-active-title">Sprint Pass aktif</span>
+              </div>
+              <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                Akses penuh tanpa batas seluruh paket latihan soal TKA dan konsultasi AI Tutor aktif sampai hari ujian kamu.
+              </p>
+            </div>
+
+            <!-- Konten Belum Aktif / Form Beli -->
+            <div id="d-pass-inactive-view" class="flex flex-col gap-space-md">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm p-space-md rounded-xl bg-surface-subtle">
+                <div class="flex flex-col">
+                  <span class="font-label-lg text-label-lg text-text-primary font-bold">Paket Latihan Intensif (Sprint Pass)</span>
+                  <p class="font-body-sm text-body-sm text-text-muted mt-0.5">
+                    Sekali bayar <strong>Rp14.900</strong> &mdash; aktif tanpa batas hingga tanggal ujian TKA pilihanmu.
+                  </p>
+                  <span class="text-xs text-text-muted mt-1" id="d-pass-status-text">Status: belum aktif</span>
+                </div>
+                <div class="text-right shrink-0">
+                  <span class="text-lg font-black text-primary font-outfit">Rp14.900</span>
+                  <span class="text-xs text-text-muted block">sekali bayar</span>
+                </div>
+              </div>
+
+              <!-- Form Pemilihan Tanggal TKA & Tombol Pembayaran (Hanya Muncul Bila PAYMENT_ENABLED=1) -->
+              <div id="d-pass-buy-section" class="hidden flex flex-col gap-space-sm pt-1">
+                <label for="d-tka-date-input" class="font-label-md text-label-md font-semibold text-text-primary flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-[18px] text-primary">calendar_month</span>
+                  Pilih Tanggal Ujian TKA Kamu:
+                </label>
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm">
+                  <input type="date" id="d-tka-date-input" class="px-space-md py-2.5 rounded-lg border border-border-subtle bg-white text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                  <button id="d-btn-buy-pass" type="button" onclick="handleBuySprintPass('desktop')" class="px-space-lg py-2.5 rounded-lg bg-primary text-white hover:bg-primary-container font-label-lg text-label-lg font-bold transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer">
+                    <span class="material-symbols-outlined text-[20px]">credit_card</span>
+                    <span>Aktifkan Sprint Pass &mdash; Rp14.900</span>
+                  </button>
+                </div>
+                <div id="d-pass-feedback" class="text-xs mt-1 hidden"></div>
+              </div>
+
+              <!-- Pesan Beta Jika Pembayaran Belum Diaktifkan -->
+              <div id="d-pass-beta-note" class="p-space-sm rounded-lg bg-brand-emerald-light/60 flex items-center gap-2 text-xs text-primary font-medium">
+                <span class="material-symbols-outlined text-[18px]">verified</span>
+                <span>Selama masa beta, seluruh materi dan AI Tutor dapat diakses gratis tanpa perlu aktivasi.</span>
+              </div>
+            </div>
+          </div>
+
           <!-- Preferensi (fitur menyusul) -->
           <div class="bg-surface-card rounded-xl shadow-sm border border-border-subtle p-space-lg flex flex-col gap-space-md">
             <div class="flex items-center justify-between pb-space-xs">
@@ -409,6 +470,60 @@ button:active { transform: scale(0.97); }
             </div>
           </div>
           <span class="px-space-xs py-0.5 rounded-full bg-badge-amber-bg text-badge-amber-text font-label-caps text-label-caps flex-shrink-0">Beta</span>
+        </div>
+      </section>
+
+      <!-- SPRINT PASS MUSSE (Rp14.900) MOBILE -->
+      <section id="m-sprint-pass-card" class="bg-surface-card rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+        <div class="flex items-center justify-between pb-1">
+          <div class="flex items-center gap-space-xs">
+            <div class="w-8 h-8 rounded-full bg-brand-emerald-light flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-[18px]">workspace_premium</span>
+            </div>
+            <div>
+              <h3 class="font-label-lg text-label-lg text-text-primary font-bold">Sprint Pass musse</h3>
+              <p class="font-label-caps text-label-caps text-text-muted" id="m-pass-subtitle">Akses sampai hari ujian TKA</p>
+            </div>
+          </div>
+          <span id="m-pass-badge" class="px-2 py-0.5 rounded-full bg-surface-subtle text-text-muted font-label-caps text-label-caps">Belum aktif</span>
+        </div>
+
+        <!-- Tampilan Aktif Mobile -->
+        <div id="m-pass-active-view" class="hidden p-space-sm rounded-lg bg-brand-emerald-light/80 border border-primary/20 flex flex-col gap-1 mt-1">
+          <div class="flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-primary text-[18px]">check_circle</span>
+            <span class="text-xs font-bold text-primary" id="m-pass-active-title">Sprint Pass aktif</span>
+          </div>
+          <p class="text-[11px] text-on-surface-variant leading-snug">
+            Akses penuh tanpa batas hingga ujian TKA selesai.
+          </p>
+        </div>
+
+        <!-- Tampilan Belum Aktif Mobile -->
+        <div id="m-pass-inactive-view" class="flex flex-col gap-space-xs mt-1">
+          <div class="flex items-center justify-between p-space-xs bg-surface-subtle rounded-lg px-2.5">
+            <span class="text-xs text-text-muted" id="m-pass-status-text">Status: belum aktif</span>
+            <span class="text-sm font-black text-primary font-outfit">Rp14.900</span>
+          </div>
+
+          <!-- Form Beli Mobile (Hanya Tampil Jika PAYMENT_ENABLED=1) -->
+          <div id="m-pass-buy-section" class="hidden flex flex-col gap-2 mt-1">
+            <label for="m-tka-date-input" class="text-xs font-semibold text-text-primary">
+              Pilih Tanggal Ujian TKA:
+            </label>
+            <input type="date" id="m-tka-date-input" class="w-full px-3 py-2 rounded-lg border border-border-subtle bg-white text-text-primary text-xs focus:outline-none focus:ring-1 focus:ring-primary" />
+            <button id="m-btn-buy-pass" type="button" onclick="handleBuySprintPass('mobile')" class="w-full py-2.5 rounded-lg bg-primary text-white font-label-md text-label-md font-bold transition-all shadow-sm flex items-center justify-center gap-1.5 cursor-pointer">
+              <span class="material-symbols-outlined text-[18px]">credit_card</span>
+              <span>Aktifkan Sprint Pass &mdash; Rp14.900</span>
+            </button>
+            <div id="m-pass-feedback" class="text-[11px] mt-0.5 hidden"></div>
+          </div>
+
+          <!-- Info Beta Mobile -->
+          <div id="m-pass-beta-note" class="p-2 rounded-lg bg-brand-emerald-light/60 flex items-center gap-1.5 text-[11px] text-primary font-medium mt-1">
+            <span class="material-symbols-outlined text-[16px] shrink-0">verified</span>
+            <span>Masa beta: semua paket soal gratis tanpa biaya.</span>
+          </div>
         </div>
       </section>
 
@@ -756,7 +871,234 @@ button:active { transform: scale(0.97); }
     document.querySelectorAll('[data-d-stat-mapel], [data-m-stat-mapel]').forEach(function (el) { el.textContent = s.mapel; });
   }
 
-  function renderAll() { renderProfile(); renderQuota(); renderStats(); }
+  function renderAll() { renderProfile(); renderQuota(); renderStats(); fetchPaymentStatus(); }
+
+  /* ---------- SPRINT PASS MIDTRANS LOGIC ---------- */
+  var PAYMENT_STATE = { active: false, pass_expires_at: null, payment_enabled: false };
+
+  function initTkaDatePicker() {
+    var today = new Date();
+    var yyyy = today.getFullYear();
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var dd = String(today.getDate()).padStart(2, '0');
+    var minDate = yyyy + '-' + mm + '-' + dd;
+
+    var maxYear = today.getFullYear() + 1;
+    var maxDate = maxYear + '-' + mm + '-' + dd;
+
+    var dInp = document.getElementById('d-tka-date-input');
+    if (dInp) {
+      dInp.min = minDate;
+      dInp.max = maxDate;
+      if (!dInp.value) dInp.value = minDate;
+    }
+    var mInp = document.getElementById('m-tka-date-input');
+    if (mInp) {
+      mInp.min = minDate;
+      mInp.max = maxDate;
+      if (!mInp.value) mInp.value = minDate;
+    }
+  }
+
+  function formatPassDate(isoStr) {
+    if (!isoStr) return '';
+    try {
+      var d = new Date(isoStr);
+      var months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+      return d.getDate() + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
+    } catch (e) {
+      return isoStr.substring(0, 10);
+    }
+  }
+
+  function renderPaymentCard(data) {
+    PAYMENT_STATE = data || { active: false, pass_expires_at: null, payment_enabled: false };
+    var active = !!PAYMENT_STATE.active;
+    var expStr = PAYMENT_STATE.pass_expires_at ? formatPassDate(PAYMENT_STATE.pass_expires_at) : '';
+    var enabled = !!PAYMENT_STATE.payment_enabled;
+
+    // Desktop elements
+    var dActiveView = document.getElementById('d-pass-active-view');
+    var dInactiveView = document.getElementById('d-pass-inactive-view');
+    var dBuySec = document.getElementById('d-pass-buy-section');
+    var dBetaNote = document.getElementById('d-pass-beta-note');
+    var dBadge = document.getElementById('d-pass-badge');
+    var dActiveTitle = document.getElementById('d-pass-active-title');
+    var dStatusText = document.getElementById('d-pass-status-text');
+
+    if (active) {
+      if (dActiveView) dActiveView.classList.remove('hidden');
+      if (dInactiveView) dInactiveView.classList.add('hidden');
+      if (dBadge) {
+        dBadge.textContent = 'Aktif';
+        dBadge.className = 'font-label-caps text-label-caps text-white bg-primary px-2.5 py-1 rounded-full font-bold';
+      }
+      if (dActiveTitle) dActiveTitle.textContent = 'Sprint Pass aktif sampai ' + expStr;
+    } else {
+      if (dActiveView) dActiveView.classList.add('hidden');
+      if (dInactiveView) dInactiveView.classList.remove('hidden');
+      if (dStatusText) dStatusText.textContent = 'Status: belum aktif';
+      if (dBadge) {
+        dBadge.textContent = enabled ? 'Belum aktif' : 'Masa Beta';
+        dBadge.className = 'font-label-caps text-label-caps text-on-surface-variant bg-surface-subtle px-2.5 py-1 rounded-full font-bold';
+      }
+      if (enabled) {
+        if (dBuySec) dBuySec.classList.remove('hidden');
+        if (dBetaNote) dBetaNote.classList.add('hidden');
+      } else {
+        if (dBuySec) dBuySec.classList.add('hidden');
+        if (dBetaNote) dBetaNote.classList.remove('hidden');
+      }
+    }
+
+    // Mobile elements
+    var mActiveView = document.getElementById('m-pass-active-view');
+    var mInactiveView = document.getElementById('m-pass-inactive-view');
+    var mBuySec = document.getElementById('m-pass-buy-section');
+    var mBetaNote = document.getElementById('m-pass-beta-note');
+    var mBadge = document.getElementById('m-pass-badge');
+    var mActiveTitle = document.getElementById('m-pass-active-title');
+    var mStatusText = document.getElementById('m-pass-status-text');
+
+    if (active) {
+      if (mActiveView) mActiveView.classList.remove('hidden');
+      if (mInactiveView) mInactiveView.classList.add('hidden');
+      if (mBadge) {
+        mBadge.textContent = 'Aktif';
+        mBadge.className = 'px-2 py-0.5 rounded-full bg-primary text-white font-label-caps text-label-caps font-bold';
+      }
+      if (mActiveTitle) mActiveTitle.textContent = 'Sprint Pass aktif sampai ' + expStr;
+    } else {
+      if (mActiveView) mActiveView.classList.add('hidden');
+      if (mInactiveView) mInactiveView.classList.remove('hidden');
+      if (mStatusText) mStatusText.textContent = 'Status: belum aktif';
+      if (mBadge) {
+        mBadge.textContent = enabled ? 'Belum aktif' : 'Masa Beta';
+        mBadge.className = 'px-2 py-0.5 rounded-full bg-surface-subtle text-text-muted font-label-caps text-label-caps';
+      }
+      if (enabled) {
+        if (mBuySec) mBuySec.classList.remove('hidden');
+        if (mBetaNote) mBetaNote.classList.add('hidden');
+      } else {
+        if (mBuySec) mBuySec.classList.add('hidden');
+        if (mBetaNote) mBetaNote.classList.remove('hidden');
+      }
+    }
+  }
+
+  async function getAuthTokenAsync() {
+    try {
+      if (window.parent && window.parent !== window && typeof window.parent.getFreshToken === 'function') {
+        var pt = await window.parent.getFreshToken();
+        if (pt) return pt;
+      }
+    } catch (e) {}
+    try {
+      if (typeof window.getFreshToken === 'function') {
+        var t = await window.getFreshToken();
+        if (t) return t;
+      }
+    } catch (e) {}
+    try {
+      var raw = localStorage.getItem('tka_supabase_auth_token');
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.access_token) return parsed.access_token;
+        if (parsed && parsed.currentSession && parsed.currentSession.access_token) return parsed.currentSession.access_token;
+      }
+    } catch (e) {}
+    return null;
+  }
+
+  async function fetchPaymentStatus() {
+    try {
+      var token = await getAuthTokenAsync();
+      var headers = token ? { 'Authorization': 'Bearer ' + token } : {};
+      var resp = await fetch('/api/payment/status', { headers: headers });
+      if (resp.status === 200) {
+        var data = await resp.json();
+        renderPaymentCard(data);
+      } else if (resp.status === 401) {
+        var cfgResp = await fetch('/api/payment/config');
+        if (cfgResp.ok) {
+          var cfg = await cfgResp.json();
+          renderPaymentCard({ active: false, payment_enabled: cfg.payment_enabled, is_guest: true });
+        }
+      }
+    } catch (err) {
+      console.warn('Gagal cek status pembayaran:', err);
+    }
+  }
+
+  window.handleBuySprintPass = async function (deviceType) {
+    var isDesktop = deviceType === 'desktop';
+    var inpId = isDesktop ? 'd-tka-date-input' : 'm-tka-date-input';
+    var btnId = isDesktop ? 'd-btn-buy-pass' : 'm-btn-buy-pass';
+    var fbId = isDesktop ? 'd-pass-feedback' : 'm-pass-feedback';
+
+    var inp = document.getElementById(inpId);
+    var btn = document.getElementById(btnId);
+    var fb = document.getElementById(fbId);
+
+    function showFeedback(msg, isError) {
+      if (!fb) return;
+      fb.textContent = msg;
+      fb.className = isError ? 'text-xs text-red-600 font-medium block' : 'text-xs text-primary font-medium block';
+    }
+
+    var isLogin = !!(PROFILE && (PROFILE.login || PROFILE.loggedIn));
+    if (!isLogin) {
+      showFeedback('Silakan login dengan Google terlebih dahulu untuk membeli Sprint Pass.', true);
+      loginFromAkun();
+      return;
+    }
+
+    var selectedDate = inp ? inp.value : '';
+    if (!selectedDate) {
+      showFeedback('Pilih tanggal ujian TKA kamu terlebih dahulu.', true);
+      return;
+    }
+
+    var token = await getAuthTokenAsync();
+    if (!token) {
+      showFeedback('Sesi login kedaluwarsa. Silakan login ulang.', true);
+      loginFromAkun();
+      return;
+    }
+
+    if (btn) {
+      btn.disabled = true;
+      btn.classList.add('opacity-70');
+      btn.innerHTML = '<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Membuat Tautan...</span>';
+    }
+
+    try {
+      var resp = await fetch('/api/payment/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify({ tka_date: selectedDate })
+      });
+
+      var resData = await resp.json();
+      if (resp.ok && resData.status === 'success' && resData.payment_url) {
+        showFeedback('Tautan pembayaran berhasil dibuat! Mengalihkan ke Midtrans...', false);
+        window.open(resData.payment_url, '_blank');
+      } else {
+        showFeedback(resData.message || 'Gagal membuat tautan pembayaran.', true);
+      }
+    } catch (err) {
+      showFeedback('Gagal terhubung ke server pembayaran: ' + err.message, true);
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.classList.remove('opacity-70');
+        btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">credit_card</span><span>Aktifkan Sprint Pass &mdash; Rp14.900</span>';
+      }
+    }
+  };
 
   /* ---------- interaksi ---------- */
   document.addEventListener('click', function (e) {
@@ -906,6 +1248,7 @@ button:active { transform: scale(0.97); }
   } catch (e) {}
 
   initAkunTextScale();
+  initTkaDatePicker();
   renderAll();
   send({ type: 'request-data' });
   send({ type: 'akun-ready' });
