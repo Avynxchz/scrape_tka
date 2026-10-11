@@ -186,24 +186,11 @@ async function syncUserToDB(user) {
 }
 
 // Login dengan Google
+// [muse-fix] loginWithGoogle kini tampilkan modal benefit dulu (bukan langsung OAuth)
 async function loginWithGoogle() {
-  sessionStorage.removeItem('tka_mode');
-  localStorage.removeItem('tka_guest_session');
-  if (!supabaseClient) {
-    showLoginModal('loading');
-    return;
-  }
-  const { error } = await supabaseClient.auth.signInWithOAuth({
-    provider: 'google',
-    options: {
-      redirectTo: window.location.origin + '/app'
-    }
-  });
-  if (error) {
-    showLoginModal('error', error.message);
-  }
+  showLoginModal();
+  return;
 }
-
 // [muse-fix] Modal login yang proper (ganti alert kasar)
 function showLoginModal(state, errMsg) {
   let m = document.getElementById('tkaLoginModal');
