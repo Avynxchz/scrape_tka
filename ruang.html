@@ -298,37 +298,110 @@
       max-width: 86%;
       padding: 12px 14px;
       border-radius: var(--radius-lg);
-      font-size: 13.5px;
-      line-height: 1.55;
+      font-size: 14px;
+      line-height: 1.62;
       word-wrap: break-word;
       position: relative;
     }
     .msg-row.coach .msg-bubble {
       background: #ffffff;
-      color: var(--slate-900);
-      border: 1px solid var(--slate-200);
+      color: #0f172a;
+      border: 1px solid #e2e8f0;
       border-top-left-radius: 4px;
-      box-shadow: var(--shadow-sm);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
     .msg-row.user .msg-bubble {
       background: var(--primary);
       color: #ffffff;
       border-top-right-radius: 4px;
-      box-shadow: 0 3px 10px rgba(27, 99, 62, 0.2);
+      box-shadow: 0 2px 8px rgba(27, 99, 62, 0.18);
     }
 
-    .msg-bubble p {
-      margin-bottom: 8px;
+    .msg-bubble p.chat-p, .msg-bubble p {
+      margin: 0 0 10px 0;
+      line-height: 1.62;
     }
-    .msg-bubble p:last-child {
+    .msg-bubble p.chat-p:last-child, .msg-bubble p:last-child {
       margin-bottom: 0;
     }
-    .msg-bubble ul, .msg-bubble ol {
-      margin-left: 18px;
-      margin-bottom: 8px;
+    .msg-bubble .chat-heading-1 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 14px 0 6px 0;
+      line-height: 1.35;
+    }
+    .msg-bubble .chat-heading-2 {
+      font-size: 15px;
+      font-weight: 750;
+      color: #0f172a;
+      margin: 12px 0 6px 0;
+      line-height: 1.35;
+    }
+    .msg-bubble .chat-heading-3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1b633e;
+      margin: 12px 0 6px 0;
+      line-height: 1.35;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .msg-bubble ul.chat-list {
+      margin: 6px 0 10px 0;
+      padding-left: 18px;
+      list-style-type: disc;
+    }
+    .msg-bubble ul.chat-list li {
+      margin-bottom: 5px;
+      line-height: 1.55;
+      color: #1e293b;
+    }
+    .msg-bubble ul.chat-list li::marker {
+      color: #1b633e;
+    }
+    .msg-bubble ol.chat-list-num {
+      margin: 6px 0 10px 0;
+      padding-left: 18px;
+      list-style-type: decimal;
+    }
+    .msg-bubble ol.chat-list-num li {
+      margin-bottom: 5px;
+      line-height: 1.55;
+      color: #1e293b;
+    }
+    .msg-bubble blockquote.chat-quote {
+      margin: 8px 0;
+      padding: 6px 12px;
+      background: #f8fafc;
+      border-left: 3px solid #1b633e;
+      border-radius: 4px;
+      font-style: italic;
+      color: #334155;
+    }
+    .msg-bubble .chat-code-block {
+      background: #0f172a;
+      color: #f8fafc;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-family: ui-monospace, monospace;
+      font-size: 12.5px;
+      overflow-x: auto;
+      margin: 8px 0;
+    }
+    .msg-bubble .chat-inline-code {
+      background: #f1f5f9;
+      color: #0f172a;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: ui-monospace, monospace;
+      font-size: 12.5px;
+      border: 1px solid #e2e8f0;
     }
     .msg-bubble strong {
       font-weight: 700;
+      color: inherit;
     }
 
     /* Typing Animation */
@@ -672,22 +745,155 @@
       return null;
     }
 
-    // Format Text Markdown Sederhana
+    // Format Text Markdown Modern & Rapi (Chat AI Coach)
     function formatMarkdown(text) {
       if (!text) return '';
-      let escaped = text
+      
+      // 1. Simpan code blocks (``` ... ```)
+      const codeBlocks = [];
+      let processed = text.replace(/```([\s\S]*?)```/g, function(match, code) {
+        const idx = codeBlocks.length;
+        codeBlocks.push(code.trim());
+        return `@@@CODEBLOCK_${idx}@@@`;
+      });
+
+      // 2. Escape HTML entities dasar
+      processed = processed
         .replace(/&/g, '&amp;')
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
-      
-      // Bold
-      escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      // Italic
-      escaped = escaped.replace(/\*(.*?)\*/g, '<em>$1</em>');
-      // Inline Code
-      escaped = escaped.replace(/`([^`]+)`/g, '<code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-size:12px;">$1</code>');
-      // Newlines to <br> or paragraphs
-      return escaped.split('\n\n').map(p => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
+
+      // Helper untuk formatting inline teks
+      function inlineFormat(str) {
+        // Bold: **teks**
+        str = str.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+        // Italic: *teks* (hindari salah match bullet point)
+        str = str.replace(/(^|[^*])\*([^*\n]+?)\*([^*]|$)/g, '$1<em>$2</em>$3');
+        // Inline code: `code`
+        str = str.replace(/`([^`]+)`/g, '<code class="chat-inline-code">$1</code>');
+        return str;
+      }
+
+      // 3. Parse block by block / line by line
+      const lines = processed.split(/\r?\n/);
+      const output = [];
+      let inUl = false;
+      let inOl = false;
+      let inQuote = false;
+      let currentP = [];
+
+      function flushP() {
+        if (currentP.length > 0) {
+          output.push(`<p class="chat-p">${currentP.map(inlineFormat).join('<br>')}</p>`);
+          currentP = [];
+        }
+      }
+
+      function closeLists() {
+        if (inUl) { output.push('</ul>'); inUl = false; }
+        if (inOl) { output.push('</ol>'); inOl = false; }
+        if (inQuote) { output.push('</blockquote>'); inQuote = false; }
+      }
+
+      for (let i = 0; i < lines.length; i++) {
+        const rawLine = lines[i];
+        const trimmed = rawLine.trim();
+
+        // Check codeblock placeholder
+        if (trimmed.startsWith('@@@CODEBLOCK_') && trimmed.endsWith('@@@')) {
+          flushP();
+          closeLists();
+          const idx = parseInt(trimmed.replace('@@@CODEBLOCK_', '').replace('@@@', ''), 10);
+          const codeContent = codeBlocks[idx] || '';
+          output.push(`<pre class="chat-code-block"><code>${codeContent}</code></pre>`);
+          continue;
+        }
+
+        // Baris kosong memisahkan paragraf dan list
+        if (!trimmed) {
+          flushP();
+          closeLists();
+          continue;
+        }
+
+        // Heading 3: ### Heading
+        const h3Match = trimmed.match(/^###\s+(.+)$/);
+        if (h3Match) {
+          flushP();
+          closeLists();
+          output.push(`<div class="chat-heading-3"><i class="fa-solid fa-chevron-right" style="font-size:10px;opacity:0.7"></i> ${inlineFormat(h3Match[1])}</div>`);
+          continue;
+        }
+
+        // Heading 2: ## Heading
+        const h2Match = trimmed.match(/^##\s+(.+)$/);
+        if (h2Match) {
+          flushP();
+          closeLists();
+          output.push(`<div class="chat-heading-2">${inlineFormat(h2Match[1])}</div>`);
+          continue;
+        }
+
+        // Heading 1: # Heading
+        const h1Match = trimmed.match(/^#\s+(.+)$/);
+        if (h1Match) {
+          flushP();
+          closeLists();
+          output.push(`<div class="chat-heading-1">${inlineFormat(h1Match[1])}</div>`);
+          continue;
+        }
+
+        // Blockquote: > Quote
+        const quoteMatch = trimmed.match(/^>\s*(.+)$/);
+        if (quoteMatch) {
+          flushP();
+          if (!inQuote) {
+            closeLists();
+            output.push('<blockquote class="chat-quote">');
+            inQuote = true;
+          }
+          output.push(`${inlineFormat(quoteMatch[1])}<br>`);
+          continue;
+        } else if (inQuote) {
+          output.push('</blockquote>');
+          inQuote = false;
+        }
+
+        // Bullet List: * Item atau - Item atau • Item
+        const ulMatch = trimmed.match(/^[*•\-]\s+(.+)$/);
+        if (ulMatch) {
+          flushP();
+          if (inOl) { output.push('</ol>'); inOl = false; }
+          if (!inUl) {
+            output.push('<ul class="chat-list">');
+            inUl = true;
+          }
+          output.push(`<li>${inlineFormat(ulMatch[1])}</li>`);
+          continue;
+        }
+
+        // Ordered List: 1. Item
+        const olMatch = trimmed.match(/^\d+\.\s+(.+)$/);
+        if (olMatch) {
+          flushP();
+          if (inUl) { output.push('</ul>'); inUl = false; }
+          if (!inOl) {
+            output.push('<ol class="chat-list-num">');
+            inOl = true;
+          }
+          output.push(`<li>${inlineFormat(olMatch[1])}</li>`);
+          continue;
+        }
+
+        // Teks biasa
+        closeLists();
+        currentP.push(trimmed);
+      }
+
+      flushP();
+      closeLists();
+
+      return output.join('\n');
     }
 
     // Render KaTeX jika ada formula matematika

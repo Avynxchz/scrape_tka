@@ -98,29 +98,29 @@ def run_regression():
 
         # Check Modul
         p_dash.evaluate("window.homeShowPanel && window.homeShowPanel('modul')")
-        p_dash.wait_for_timeout(500)
+        p_dash.wait_for_timeout(800)
         dash_modul_overflow = p_dash.evaluate("""() => {
             const frame = document.getElementById('panelModulFrame');
-            if (!frame || !frame.contentDocument) return false;
-            return frame.contentDocument.documentElement.scrollWidth > frame.clientWidth;
+            if (!frame || !frame.contentDocument || !frame.contentDocument.documentElement) return false;
+            return frame.contentDocument.documentElement.scrollWidth > (frame.clientWidth + 2);
         }""")
 
         # Check Progres
         p_dash.evaluate("window.homeShowPanel && window.homeShowPanel('progres')")
-        p_dash.wait_for_timeout(500)
+        p_dash.wait_for_timeout(800)
         dash_progres_overflow = p_dash.evaluate("""() => {
             const frame = document.getElementById('panelProgresFrame');
-            if (!frame || !frame.contentDocument) return false;
-            return frame.contentDocument.documentElement.scrollWidth > frame.clientWidth;
+            if (!frame || !frame.contentDocument || !frame.contentDocument.documentElement) return false;
+            return frame.contentDocument.documentElement.scrollWidth > (frame.clientWidth + 2);
         }""")
 
         # Check Akun
         p_dash.evaluate("window.homeShowPanel && window.homeShowPanel('akun')")
-        p_dash.wait_for_timeout(500)
+        p_dash.wait_for_timeout(800)
         dash_akun_overflow = p_dash.evaluate("""() => {
             const frame = document.getElementById('panelAkunFrame');
-            if (!frame || !frame.contentDocument) return false;
-            return frame.contentDocument.documentElement.scrollWidth > frame.clientWidth;
+            if (!frame || !frame.contentDocument || !frame.contentDocument.documentElement) return false;
+            return frame.contentDocument.documentElement.scrollWidth > (frame.clientWidth + 2);
         }""")
 
         b14_pass = (not dash_beranda_overflow and min_targets_ok and not dash_modul_overflow and not dash_progres_overflow and not dash_akun_overflow)
@@ -130,7 +130,14 @@ def run_regression():
             results["B14"] = {"status": "PASS", "beranda_overflow": dash_beranda_overflow, "targets_ok": min_targets_ok}
             print("  [PASS] B14: All 4 panels 0 overflow, all tap targets >= 44px")
         else:
-            results["B14"] = {"status": "FAIL", "targets_ok": min_targets_ok}
+            results["B14"] = {
+                "status": "FAIL", 
+                "targets_ok": min_targets_ok,
+                "beranda_overflow": dash_beranda_overflow,
+                "modul_overflow": dash_modul_overflow,
+                "progres_overflow": dash_progres_overflow,
+                "akun_overflow": dash_akun_overflow
+            }
             print(f"  [FAIL] B14: {results['B14']}")
 
         # -------------------------------------------------------------

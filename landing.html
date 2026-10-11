@@ -49,12 +49,18 @@ tailwind.config = {
 }
 </script>
 <style>
-  html{scroll-behavior:auto;overflow-x:hidden}
-  body{font-family:Geist,ui-sans-serif,system-ui,sans-serif;background:#FAF8F4;color:#101B15;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  html{scroll-behavior:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+  body{font-family:Geist,ui-sans-serif,system-ui,sans-serif;background:#FAF8F4;color:#101B15;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-overflow-scrolling:touch}
   h1,h2,h3{font-family:Outfit,Geist,sans-serif}
   .serifit{font-family:"Instrument Serif",Georgia,serif;font-style:italic}
-  .btn{transition:all .2s ease;cursor:pointer}
+  .btn{transition:all .2s ease;cursor:pointer;touch-action:manipulation}
   .btn:active{transform:scale(.97)}
+  @media (max-width: 768px) {
+    #cara, #fitur, #statistik, #paket, #faq {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 600px;
+    }
+  }
   /* --- fade-up umum: default = frame akhir (terlihat); .motion menyembunyikan dulu --- */
   .motion [data-anim]{opacity:0;transform:translateY(16px)}
   /* --- Phone scrub screens --- */
@@ -178,7 +184,7 @@ tailwind.config = {
         </a>
       </div>
       <div data-anim class="mt-6 flex flex-wrap items-center gap-y-2 gap-x-4 text-[12px] font-semibold text-mute">
-        <span class="inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 22 Mapel Pusmendik</span>
+        <span class="inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 27 Mapel Pusmendik</span>
         <span class="inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Kunci Jawaban Resmi</span>
         <span class="inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Guru Autopsi AI</span>
       </div>
@@ -268,7 +274,7 @@ tailwind.config = {
           </div>
           <div class="mt-4 flex flex-wrap gap-1.5">
             <span class="rounded-full bg-mint px-3 py-1.5 text-[11.5px] font-semibold text-pine">Matematika Wajib · Paket 1</span>
-            <span class="rounded-full bg-white px-3 py-1.5 text-[11.5px] font-semibold text-mute ring-1 ring-line">+21 mapel lain</span>
+            <span class="rounded-full bg-white px-3 py-1.5 text-[11.5px] font-semibold text-mute ring-1 ring-line">+26 mapel lain</span>
           </div>
         </div>
       </div>
@@ -457,16 +463,16 @@ tailwind.config = {
     <h2 data-anim class="mt-2 text-[30px] font-extrabold tracking-tight text-pine sm:text-[36px]">Angka yang <span class="serifit font-normal text-amber">jelas.</span></h2>
     <div data-anim class="mt-10 grid grid-cols-3 gap-4">
       <div class="rounded-2xl border border-line bg-white p-5 sm:p-7">
-        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="960">0</span>+</p>
+        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="990">0</span>+</p>
         <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Soal latihan dengan pembahasan</p>
       </div>
       <div class="rounded-2xl border border-line bg-white p-5 sm:p-7">
-        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="22">0</span></p>
+        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="27">0</span></p>
         <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Mata pelajaran TKA</p>
       </div>
       <div class="rounded-2xl border border-line bg-white p-5 sm:p-7">
-        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="44">0</span></p>
-        <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Paket soal resmi per mapel</p>
+        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="49">0</span></p>
+        <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Paket simulasi resmi terverifikasi</p>
       </div>
     </div>
   </div>
@@ -511,7 +517,11 @@ tailwind.config = {
             <h3 class="text-[17px] font-bold">Pro</h3>
             <span class="rounded-full bg-amber px-2.5 py-1 text-[11px] font-bold text-ink">Gratis selama beta</span>
           </div>
-          <p class="mt-3"><span class="text-[34px] font-extrabold tracking-tight">Rp20.000</span><span class="text-[13px] text-white/60"> /bulan</span></p>
+          <p class="mt-3 flex items-baseline gap-2 flex-wrap">
+            <span class="text-[18px] sm:text-[20px] font-bold text-white/50 line-through">Rp14.900</span>
+            <span class="text-[34px] font-extrabold tracking-tight text-white">Rp0</span>
+            <span class="text-[13px] text-white/70">/bulan</span>
+          </p>
           <ul class="mt-5 space-y-2.5 text-[14px] text-white/85">
             <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>100 tanya AI Tutor per hari</li>
             <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Semua fitur Tamu &amp; Terdaftar</li>
@@ -536,7 +546,7 @@ tailwind.config = {
       <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Dari mana sumber soalnya?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Soal, kunci, dan tampilan berasal dari publikasi resmi TKA Pusmendik Kemendikdasmen, lalu dilengkapi pembahasan langkah demi langkah yang disusun otomatis dengan bantuan AI. Pembahasan bisa mengandung kesalahan — selalu bandingkan dengan kunci resmi yang ditampilkan. Platform ini bukan situs resmi pemerintah.</p></details>
       <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Apakah perlu membuat akun?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Tidak. Bisa langsung latihan sebagai tamu. Login Google sudah tersedia dan menambah kuota AI Tutor harian menjadi 25 pertanyaan.</p></details>
       <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Kapan kuota AI Tutor direset?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Setiap hari pukul 00.00 WIB. Satu pertanyaan ke AI Tutor mengurangi satu kuota. Jika jawaban gagal dikirim karena gangguan jaringan, kuota <strong>tidak</strong> terpotong.</p></details>
-      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Bagaimana cara berlangganan Pro?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Selama masa beta, seluruh fitur Pro dapat dipakai gratis. Sistem pembayaran akan diumumkan kemudian dengan harga Rp20.000 per bulan.</p></details>
+      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Bagaimana cara berlangganan Pro?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Selama masa beta, seluruh fitur Pro dapat dipakai gratis (Rp0). Harga normal nantinya hanya Rp14.900 per bulan.</p></details>
     </div>
   </div>
 </section>
@@ -597,9 +607,10 @@ tailwind.config = {
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ---------- Lenis smooth scroll + ScrollTrigger ---------- */
+  /* ---------- Lenis smooth scroll + ScrollTrigger (Desktop Only) ---------- */
+  var isMobileDevice = window.innerWidth < 768 || ('ontouchstart' in window && window.innerWidth < 1024);
   var lenis = null;
-  if (!reduced && window.Lenis) {
+  if (!reduced && window.Lenis && !isMobileDevice) {
     lenis = new Lenis({ autoRaf: false, duration: 1.1 });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function (t) { lenis.raf(t * 1000); });

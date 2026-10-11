@@ -374,9 +374,9 @@ button:active { transform: scale(0.97); }
           <span class="text-[9px] font-bold text-text-muted uppercase tracking-wider truncate mt-0.5">AKUN</span>
         </div>
       </div>
-      <div class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm shrink-0 overflow-hidden cursor-pointer" id="m-header-avatar-wrap">
+      <div id="m-header-avatar-wrap" class="rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm shrink-0 overflow-hidden cursor-pointer" style="width:36px;height:36px;min-width:36px;min-height:36px;max-width:36px;max-height:36px;border-radius:50%;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;">
         <span class="material-symbols-outlined text-[20px]" id="m-header-avatar-icon">person</span>
-        <img id="m-header-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;">
+        <img id="m-header-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;position:absolute;top:0;left:0;">
       </div>
     </div>
   </header>
@@ -387,9 +387,9 @@ button:active { transform: scale(0.97); }
       <section class="bg-surface-card rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col gap-space-md">
         <div class="absolute -right-10 -top-10 w-36 h-36 rounded-full bg-brand-emerald-light/50 pointer-events-none"></div>
         <div class="flex items-center gap-space-md relative z-10">
-          <div class="relative w-16 h-16 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-on-primary overflow-hidden" id="m-avatar-wrap">
+          <div class="relative rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-on-primary overflow-hidden" id="m-avatar-wrap" style="width:64px;height:64px;min-width:64px;min-height:64px;max-width:64px;max-height:64px;border-radius:50%;overflow:hidden;position:relative;">
             <span class="material-symbols-outlined text-[32px]" id="m-avatar-icon">person</span>
-            <img id="m-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;">
+            <img id="m-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;position:absolute;top:0;left:0;">
           </div>
           <div class="flex flex-col min-w-0 flex-1">
             <div class="flex items-center justify-between gap-space-xs">
@@ -614,7 +614,7 @@ button:active { transform: scale(0.97); }
     var nama = (PROFILE && (PROFILE.nama || PROFILE.name)) || 'Tamu';
     var login = !!(PROFILE && (PROFILE.login || PROFILE.loggedIn));
     var email = (PROFILE && PROFILE.email) || '';
-    var avatar = (PROFILE && (PROFILE.avatar || PROFILE.avatar_url)) || '';
+    var avatar = (PROFILE && (PROFILE.avatar || PROFILE.avatar_url || (PROFILE.user_metadata && PROFILE.user_metadata.avatar_url))) || '';
 
     // Nama & Subtitle: Khusus Desktop dijadikan teks Putih sesuai permintaan user
     document.querySelectorAll('[data-d-name]').forEach(function (el) {
@@ -896,7 +896,7 @@ button:active { transform: scale(0.97); }
           nama: su.name,
           name: su.name,
           email: su.email,
-          avatar: su.avatar,
+          avatar: su.avatar || su.avatar_url || (su.user_metadata && (su.user_metadata.avatar_url || su.user_metadata.picture)),
           login: true,
           loggedIn: true,
           sub: su.email
