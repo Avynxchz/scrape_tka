@@ -973,6 +973,87 @@ function getGuestLoginBannerHtml() {
   `;
 }
 
+// ============ BERANDA V2 ============
+// Header kompak: sapaan + streak + countdown
+function getV2HeaderHtml() {
+  try {
+    const tka = getTkaDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+    const tkaD = new Date(tka + 'T00:00:00');
+    const diff = Math.round((tkaD - today) / 86400000);
+    const label = diff > 0 ? 'H-' + diff : (diff === 0 ? 'Hari H!' : 'Lewat ' + (-diff) + 'h');
+    // streak dari localStorage
+    let streak = 0;
+    try { streak = parseInt(localStorage.getItem('tka_streak') || '0', 10) || 0; } catch (e) {}
+    const hour = new Date().getHours();
+    const greet = hour < 11 ? 'Selamat pagi' : (hour < 15 ? 'Selamat siang' : (hour < 19 ? 'Selamat sore' : 'Selamat malam'));
+    return '<div class="mv2-header">'
+      + '<div class="mv2-greet">' + greet + ' 👋<small>Siap latihan hari ini?</small></div>'
+      + '<div class="mv2-stats">'
+      + '<span class="mv2-stat"><span class="fire">🔥</span>' + streak + '</span>'
+      + '<span class="mv2-stat">📅 ' + label + '</span>'
+      + '</div></div>';
+  } catch (e) { return ''; }
+}
+
+// Lanjutkan Belajar: cari paket dengan progres 0 < x < 100
+function getV2ResumeHtml() {
+  try {
+    const raw = localStorage.getItem(progressStorageKey());
+    const store = raw ? JSON.parse(raw) : {};
+    for (const subj of Object.keys(store)) {
+      const pkgs = store[subj] || {};
+      for (const pkg of Object.keys(pkgs)) {
+        const answered = Object.keys(pkgs[pkg] || {}).length;
+        const total = (STATIC_SOAL_COUNTS[subj] && STATIC_SOAL_COUNTS[subj][pkg]) || 20;
+        if (answered > 0 && answered < total) {
+          const meta = (typeof SUBJECT_UI_META !== 'undefined' && SUBJECT_UI_META[subj]) || {};
+          const name = meta.shortName || subj;
+          return '<div class="mv2-resume">'
+            + '<div><div class="mv2-resume-info">Lanjutkan belajarmu</div>'
+            + '<div class="mv2-resume-title">' + name + ' Paket ' + pkg + '</div>'
+            + '<div class="mv2-resume-info">Soal ' + answered + '/' + total + '</div></div>'
+            + '<button class="mv2-resume-btn" onclick="v2ResumeQuiz(\'' + subj + '\',' + pkg + ')">Lanjut →</button>'
+            + '</div>';
+        }
+      }
+    }
+  } catch (e) {}
+  return '';
+}
+function v2ResumeQuiz(subject, pkg) {
+  homeClose();
+  if (state.currentSubject !== subject) switchSubject(subject).then(() => switchPackage(pkg));
+  else switchPackage(pkg);
+}
+
+// Jelajahi Fitur: 4 kartu discovery
+function getV2FeaturesHtml() {
+  const features = [
+    { icon: '🤖', name: 'AI Tutor', desc: 'Tanya apa aja', action: "openTutorPanel()" },
+    { icon: '📝', name: 'Tryout', desc: 'Simulasi full', action: "v2GoTryout()" },
+    { icon: '🧠', name: 'Ruang AI', desc: 'Diskusi mapel', action: "v2GoRuangAI()" },
+    { icon: '📊', name: 'Autopsi', desc: 'Analisis kelemahan', action: "v2GoAutopsi()" },
+  ];
+  let h = '<div class="mv2-section-title">Jelajahi Fitur</div><div class="mv2-features">';
+  features.forEach(f => {
+    h += '<div class="mv2-feature" onclick="' + f.action + '">'
+      + '<div class="mv2-feature-icon">' + f.icon + '</div>'
+      + '<div class="mv2-feature-name">' + f.name + '</div>'
+      + '<div class="mv2-feature-desc">' + f.desc + '</div></div>';
+  });
+  return h + '</div>';
+}
+function v2GoTryout() { homeClose(); window.scrollTo(0, 0); }
+function v2GoRuangAI() { if (typeof homeShowPanel === 'function') homeShowPanel('modul'); }
+function v2GoAutopsi() {
+  try {
+    const last = JSON.parse(localStorage.getItem('tka_last_autopsy') || 'null');
+    if (last) { homeClose(); /* TODO: buka hasil terakhir */ }
+    else alert('Selesaikan 1 tryout dulu untuk membuka Autopsi!');
+  } catch (e) { alert('Selesaikan 1 tryout dulu untuk membuka Autopsi!'); }
+}
+
 function renderHome() {
   const main = document.getElementById('hoMain');
   if (!main) return;
@@ -1049,12 +1130,14 @@ function renderHome() {
   // B6: Banner ajakan login tamu di Beranda (disimpan di sessionStorage saat ditutup)
   const guestBannerHtml = getGuestLoginBannerHtml();
   const tkaCardsHtml = getTkaCardsHtml();
-  main.innerHTML = guestBannerHtml + tkaCardsHtml + aiRoomsBarHtml + `
-    <div class="stitch-mapel-header">
-      <div class="stitch-mapel-header-left">
-        <span class="stitch-mapel-header-title">Mapel Pilihanmu</span>
-        <span class="stitch-mapel-header-count">(${selectedKeys.length} Mapel)</span>
-      </div>
+  // [redesign v2] Struktur baru: header kompak + lanjutkan + fitur
+  const v2Header = getV2HeaderHtml();
+  const v2Resume = getV2ResumeHtml();
+  const v2Features = getV2FeaturesHtml();
+  main.innerHTML = v2Header + v2Resume + guestBannerHtml + tkaCardsHtml + v2Features + aiRoomsBarHtml + `
+    <div class="mv2-section-title">Mapel Pilihanmu (${selectedKeys.length})</div>
+    <div class="stitch-mapel-header" style="margin-bottom:8px;">
+      <div></div>
       <button type="button" class="stitch-btn-atur-mapel" id="btnAturMapel" onclick="openSubjectPickerModal()" aria-label="Atur Mapel Pilihan">
         <span class="ms-icon ms-16">tune</span><span>Atur Mapel</span>
       </button>

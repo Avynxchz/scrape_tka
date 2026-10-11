@@ -257,3 +257,71 @@
   font-weight: 800 !important;
   letter-spacing: 0.02em !important;
 }
+
+/* ============ BERANDA V2 ============ */
+/* Header kompak: sapaan + streak + countdown dalam 1 baris */
+.mv2-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 4px; margin-bottom: 8px;
+}
+.mv2-greet { font-size: 18px; font-weight: 800; color: #0f172a; }
+.mv2-greet small { display: block; font-size: 12px; font-weight: 500; color: #64748b; }
+.mv2-stats { display: flex; gap: 8px; }
+.mv2-stat {
+  display: flex; align-items: center; gap: 4px;
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 99px;
+  padding: 6px 12px; font-size: 13px; font-weight: 700; color: #0f172a;
+}
+.mv2-stat .fire { color: #f97316; }
+
+/* Lanjutkan Belajar */
+.mv2-resume {
+  background: linear-gradient(135deg, #004a2a, #059669);
+  border-radius: 16px; padding: 16px; color: #fff;
+  margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;
+}
+.mv2-resume-info { font-size: 13px; opacity: 0.9; }
+.mv2-resume-title { font-size: 16px; font-weight: 800; margin: 2px 0; }
+.mv2-resume-btn {
+  background: #fff; color: #004a2a; border: none; border-radius: 10px;
+  padding: 10px 18px; font-weight: 800; font-size: 14px; cursor: pointer;
+}
+
+/* Jelajahi Fitur: horizontal scroll 4 kartu */
+.mv2-section-title { font-size: 15px; font-weight: 800; color: #0f172a; margin: 16px 0 8px; padding: 0 4px; }
+.mv2-features {
+  display: flex; gap: 10px; overflow-x: auto; padding: 4px 4px 8px;
+  scrollbar-width: none; -webkit-overflow-scrolling: touch;
+}
+.mv2-features::-webkit-scrollbar { display: none; }
+.mv2-feature {
+  flex: 0 0 132px; background: #fff; border: 1px solid #e2e8f0;
+  border-radius: 14px; padding: 14px 12px; text-align: center; cursor: pointer;
+  transition: transform 0.15s;
+}
+.mv2-feature:active { transform: scale(0.96); }
+.mv2-feature-icon { font-size: 28px; margin-bottom: 6px; }
+.mv2-feature-name { font-size: 13px; font-weight: 800; color: #0f172a; }
+.mv2-feature-desc { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+/* Mapel grid 2 kolom */
+.mv2-subject-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 0 4px;
+}
+.mv2-subject {
+  background: #fff; border: 1px solid #e2e8f0; border-radius: 14px;
+  padding: 14px; cursor: pointer; text-align: left;
+}
+.mv2-subject-icon { font-size: 24px; margin-bottom: 6px; }
+.mv2-subject-name { font-size: 14px; font-weight: 800; color: #0f172a; }
+.mv2-subject-meta { font-size: 11px; color: #64748b; margin-top: 2px; }
+.mv2-progress-mini { height: 6px; background: #f1f5f9; border-radius: 99px; margin-top: 8px; overflow: hidden; }
+.mv2-progress-mini > span { display: block; height: 100%; background: linear-gradient(90deg, #059669, #34d399); border-radius: 99px; }
+
+/* Sembunyikan carousel hero lama di v2 */
+.mv2-hide { display: none !important; }
+
+/* [redesign v2] Sembunyikan hero carousel lama & kartu tanggal gede */
+/* (countdown udah ada di header v2 yang kompak) */
+.stitch-hero { display: none !important; }
+#tkaCardWrap > div:first-child { display: none !important; }
