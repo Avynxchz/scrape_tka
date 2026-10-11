@@ -4,21 +4,24 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>Modul Belajar · TKA Master</title>
+<title>Modul Belajar · musse</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/favicon.png">
+<link rel="apple-touch-icon" href="/assets/brand/favicon.png">
 <!--
-  HALAMAN MODUL — TKA Master (deliverable: file tunggal, CSS+JS inline)
+  HALAMAN MODUL — musse (deliverable: file tunggal, CSS+JS inline)
   Wilayah kerja: workspace_modul/ (lihat ATURAN_AI.md)
-  Data angka: KONTRAK_DATA.md (22 mapel · 44 paket · 961 soal). Progres dibaca
+  Data angka: KONTRAK_DATA.md (27 mapel · 49 paket · 991 soal). Progres dibaca
   dari localStorage "tka_progress". Kirim ke parent:
     { type:'open-package', subject, pkg } | { type:'nav', path } | { type:'request-data' }
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script id="tailwind-config">
-tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"tertiary-fixed":"#ffdcc3","outline":"#707971","primary-container":"#1b633e","on-surface-variant":"#404942","outline-variant":"#bfc9bf","primary-fixed":"#aaf2c2","tertiary":"#643300","surface-canvas":"#F8FAFC","surface-subtle":"#F1F5F9","surface-variant":"#dfe3e7","border-subtle":"#E2E8F0","surface-dim":"#d6dade","on-secondary-fixed":"#141e1a","on-secondary-container":"#5c6762","tertiary-fixed-dim":"#ffb77d","on-tertiary-fixed-variant":"#6e3900","surface-container-highest":"#dfe3e7","surface-tint":"#246b45","on-surface":"#171c1f","tertiary-container":"#864700","on-secondary":"#ffffff","surface-container-low":"#f0f4f8","secondary-container":"#dae5df","surface-bright":"#f6fafe","on-primary-container":"#96ddae","surface":"#f6fafe","text-muted":"#64748B","on-primary":"#ffffff","accent-mint":"#22C55E","brand-emerald-light":"#EBF6F0","on-background":"#171c1f","background":"#f6fafe","on-tertiary":"#ffffff","brand-emerald-dark":"#0B1E13","on-secondary-fixed-variant":"#3f4945","on-error":"#ffffff","on-tertiary-container":"#ffc190","inverse-surface":"#2c3134","badge-amber-bg":"#FEF3C7","on-tertiary-fixed":"#2f1500","surface-card":"#FFFFFF","secondary":"#56615c","on-primary-fixed-variant":"#00522f","primary":"#004a2a","error-container":"#ffdad6","secondary-fixed-dim":"#bec9c3","badge-amber-text":"#92400E","surface-container":"#eaeef2","on-primary-fixed":"#002110","on-error-container":"#93000a","inverse-primary":"#8fd6a8","surface-container-high":"#e4e9ed","text-primary":"#0F172A","surface-container-lowest":"#ffffff","error":"#ba1a1a","border-focus":"#1B633E","primary-fixed-dim":"#8fd6a8","inverse-on-surface":"#edf1f5","secondary-fixed":"#dae5df"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-2xs":"0.25rem","gutter":"1rem","space-md":"1rem","gutter-tablet":"1.5rem","margin":"1rem","margin-tablet":"2rem","space-2xl":"4rem","space-lg":"1.5rem","space-xs":"0.375rem","space-sm":"0.5rem","margin-desktop":"3rem","gutter-desktop":"2rem","space-xl":"2.5rem"},"fontFamily":{"headline-lg-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-caps":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-xl":["Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-sm":["Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-xl-mobile":["Plus Jakarta Sans"]},"fontSize":{"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"700"}],"headline-lg":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"700"}],"label-caps":["11px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.03em","fontWeight":"800"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.025em","fontWeight":"800"}]}}}};
+tailwind.config = {"darkMode":"class","theme":{"extend":{"colors":{"tertiary-fixed":"#ffdcc3","outline":"#707971","primary-container":"#23633e","on-surface-variant":"#404942","outline-variant":"#bfc9bf","primary-fixed":"#aaf2c2","tertiary":"#643300","surface-canvas":"#F8FAFC","surface-subtle":"#F1F5F9","surface-variant":"#dfe3e7","border-subtle":"#E2E8F0","surface-dim":"#d6dade","on-secondary-fixed":"#141e1a","on-secondary-container":"#5c6762","tertiary-fixed-dim":"#ffb77d","on-tertiary-fixed-variant":"#6e3900","surface-container-highest":"#dfe3e7","surface-tint":"#2d7d4f","on-surface":"#171c1f","tertiary-container":"#f5a623","on-secondary":"#ffffff","surface-container-low":"#f0f4f8","secondary-container":"#dae5df","surface-bright":"#f6fafe","on-primary-container":"#96ddae","surface":"#f6fafe","text-muted":"#64748B","on-primary":"#ffffff","accent-mint":"#2d7d4f","brand-emerald-light":"#EBF6F0","on-background":"#171c1f","background":"#f6fafe","on-tertiary":"#ffffff","brand-emerald-dark":"#0B1E13","on-secondary-fixed-variant":"#3f4945","on-error":"#ffffff","on-tertiary-container":"#ffffff","inverse-surface":"#2c3134","badge-amber-bg":"#FEF3C7","on-tertiary-fixed":"#2f1500","surface-card":"#FFFFFF","secondary":"#56615c","on-primary-fixed-variant":"#00522f","primary":"#2d7d4f","error-container":"#ffdad6","secondary-fixed-dim":"#bec9c3","badge-amber-text":"#92400E","surface-container":"#eaeef2","on-primary-fixed":"#002110","on-error-container":"#93000a","inverse-primary":"#8fd6a8","surface-container-high":"#e4e9ed","text-primary":"#0F172A","surface-container-lowest":"#ffffff","error":"#ba1a1a","border-focus":"#2d7d4f","primary-fixed-dim":"#8fd6a8","inverse-on-surface":"#edf1f5","secondary-fixed":"#dae5df"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"space-2xs":"0.25rem","gutter":"1rem","space-md":"1rem","gutter-tablet":"1.5rem","margin":"1rem","margin-tablet":"2rem","space-2xl":"4rem","space-lg":"1.5rem","space-xs":"0.375rem","space-sm":"0.5rem","margin-desktop":"3rem","gutter-desktop":"2rem","space-xl":"2.5rem"},"fontFamily":{"headline-lg-mobile":["Plus Jakarta Sans"],"headline-lg":["Plus Jakarta Sans"],"label-md":["Plus Jakarta Sans"],"headline-md":["Plus Jakarta Sans"],"label-caps":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"headline-xl":["Outfit","Plus Jakarta Sans"],"body-sm":["Plus Jakarta Sans"],"headline-sm":["Outfit","Plus Jakarta Sans"],"label-lg":["Plus Jakarta Sans"],"headline-xl-mobile":["Outfit","Plus Jakarta Sans"]},"fontSize":{"headline-lg-mobile":["24px",{"lineHeight":"32px","letterSpacing":"-0.015em","fontWeight":"700"}],"headline-lg":["30px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"700"}],"label-md":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"600"}],"headline-md":["20px",{"lineHeight":"28px","letterSpacing":"-0.01em","fontWeight":"700"}],"label-caps":["11px",{"lineHeight":"16px","letterSpacing":"0.08em","fontWeight":"700"}],"body-lg":["16px",{"lineHeight":"26px","fontWeight":"400"}],"body-md":["14px",{"lineHeight":"22px","fontWeight":"400"}],"headline-xl":["36px",{"lineHeight":"44px","letterSpacing":"-0.03em","fontWeight":"800"}],"body-sm":["13px",{"lineHeight":"18px","fontWeight":"400"}],"headline-sm":["18px",{"lineHeight":"26px","fontWeight":"600"}],"label-lg":["14px",{"lineHeight":"20px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-xl-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.025em","fontWeight":"800"}]}}}};
 </script>
 <style>
 @layer base {
@@ -145,12 +148,10 @@ button:active { transform: scale(0.97); }
   <header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
     <div class="h-20 w-full max-w-7xl mx-auto px-gutter-desktop flex items-center justify-between gap-space-md">
       <div class="flex items-center gap-space-xl">
-        <a href="#" data-nav="beranda" class="flex items-center gap-space-sm group">
-          <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
-            <span class="material-symbols-outlined text-[24px]">school</span>
-          </div>
+        <a href="#" data-nav="beranda" class="flex items-center gap-2.5 group">
+          <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-10 h-10 object-contain drop-shadow-sm group-hover:scale-105 transition-transform" />
           <div class="flex flex-col text-left">
-            <span class="font-headline-sm text-headline-sm text-primary leading-tight tracking-tight group-hover:text-primary-container transition-colors">TKA Master</span>
+            <span class="font-headline-sm text-headline-sm text-primary leading-tight tracking-tight font-black font-outfit group-hover:text-primary-container transition-colors">musse</span>
             <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">SIMULASI &amp; LATIHAN PUSMENDIK</span>
           </div>
         </a>
@@ -195,9 +196,9 @@ button:active { transform: scale(0.97); }
         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-space-md mt-1">
           <div class="flex flex-col gap-space-2xs max-w-3xl">
             <h1 class="font-headline-xl text-headline-xl text-on-surface tracking-tight">Modul Belajar</h1>
-            <p class="font-label-lg text-label-lg text-primary font-bold">22 Mapel · 44 Paket · 961 Soal</p>
+            <p class="font-label-lg text-label-lg text-primary font-bold">27 Mapel · 49 Paket · 991 Soal</p>
             <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
-              Bank paket soal 22 mata pelajaran TKA. Pilih mapel, kerjakan paketnya, dan gunakan AI Tutor saat terbuntuan.
+              Bank paket soal 27 mata pelajaran TKA (termasuk 5 Kejuruan SMK). Pilih mapel, kerjakan paketnya, dan gunakan AI Tutor saat terbuntuan.
             </p>
           </div>
           <div class="flex items-center gap-space-xs shrink-0">
@@ -220,13 +221,13 @@ button:active { transform: scale(0.97); }
           </div>
           <div>
             <div class="flex items-baseline gap-2">
-              <span class="font-headline-lg text-headline-lg text-on-surface font-extrabold">22</span>
+              <span class="font-headline-lg text-headline-lg text-on-surface font-extrabold">27</span>
               <span class="font-label-lg text-label-lg text-on-surface-variant">Mata Pelajaran</span>
             </div>
             <div class="flex items-center gap-1.5 mt-1 font-body-sm text-body-sm text-on-surface-variant">
-              <span class="font-semibold text-primary">44 Paket</span>
+              <span class="font-semibold text-primary">49 Paket</span>
               <span>•</span>
-              <span>961 Butir Soal</span>
+              <span>991 Butir Soal</span>
             </div>
           </div>
         </div>
@@ -238,7 +239,7 @@ button:active { transform: scale(0.97); }
           <div>
             <div class="flex items-baseline gap-1.5">
               <span class="font-headline-lg text-headline-lg text-on-surface font-extrabold" data-done-num>0</span>
-              <span class="font-headline-sm text-headline-sm text-on-surface-variant font-medium">/ 961 Soal</span>
+              <span class="font-headline-sm text-headline-sm text-on-surface-variant font-medium">/ 991 Soal</span>
             </div>
             <div class="w-full bg-surface-container h-2 rounded-full mt-2.5 overflow-hidden">
               <div class="bg-primary h-full rounded-full" data-done-bar style="width: 0%;"></div>
@@ -296,6 +297,7 @@ button:active { transform: scale(0.97); }
             <button type="button" data-cat-tab="soshum" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Soshum</button>
             <button type="button" data-cat-tab="lanjut" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Lanjut</button>
             <button type="button" data-cat-tab="bahasa" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Bahasa &amp; Lintas Minat</button>
+            <button type="button" data-cat-tab="smk" class="px-4 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-bold text-primary shrink-0 whitespace-nowrap">Kejuruan SMK (5)</button>
           </div>
           <div class="relative w-full lg:w-64 shrink-0">
             <input type="search" data-search aria-label="Cari nama mapel" placeholder="Cari mapel..."
@@ -387,11 +389,9 @@ button:active { transform: scale(0.97); }
     <div class="max-w-7xl mx-auto px-6 lg:px-12 py-space-xl">
       <div class="grid grid-cols-1 md:grid-cols-3 gap-space-xl">
         <div class="flex flex-col gap-space-sm">
-          <div class="flex items-center gap-space-sm">
-            <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary">
-              <span class="material-symbols-outlined text-[20px]">school</span>
-            </div>
-            <span class="font-headline-sm text-headline-sm text-on-surface font-bold">TKA Master</span>
+          <div class="flex items-center gap-2.5">
+            <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-8 h-8 object-contain" />
+            <span class="font-headline-sm text-headline-sm text-on-surface font-black font-outfit">musse</span>
           </div>
           <p class="font-body-sm text-body-sm text-text-muted leading-relaxed">
             Portal belajar mandiri pihak ketiga untuk latihan soal dengan format TKA Pusmendik Kemendikdasmen. Konten disiapkan untuk keperluan persiapan akademis.
@@ -413,8 +413,8 @@ button:active { transform: scale(0.97); }
         </div>
       </div>
       <div class="mt-space-lg pt-space-md border-t border-border-subtle flex flex-col md:flex-row items-center justify-between gap-space-sm text-text-muted font-body-sm text-body-sm">
-        <p>© 2026 TKA Master. Bukan situs resmi Pusmendik / Kemendikdasmen.</p>
-        <p class="font-label-md text-label-md">22 Mapel · 44 Paket · 961 Soal</p>
+        <p>© 2026 musse. Bukan situs resmi Pusmendik / Kemendikdasmen.</p>
+        <p class="font-label-md text-label-md">27 Mapel · 49 Paket · 991 Soal</p>
       </div>
     </div>
   </footer>
@@ -427,18 +427,16 @@ button:active { transform: scale(0.97); }
 
   <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-[#E2E8F0]">
     <div class="h-14 px-gutter flex items-center justify-between max-w-[480px] mx-auto">
-      <div class="flex items-center gap-space-xs min-w-0" data-nav="beranda" role="button">
-        <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary shadow-sm shrink-0">
-          <span class="material-symbols-outlined text-[18px]">school</span>
-        </div>
+      <div class="flex items-center gap-2 min-w-0" data-nav="beranda" role="button">
+        <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-8 h-8 object-contain shrink-0" />
         <div class="flex flex-col min-w-0">
-          <span class="text-sm font-bold text-primary tracking-tight leading-none truncate">TKA Master</span>
+          <span class="text-sm font-black text-primary tracking-tight leading-none truncate">musse</span>
           <span class="text-[9px] font-bold text-text-muted uppercase tracking-wider truncate mt-0.5">MODUL BELAJAR</span>
         </div>
       </div>
       <div class="flex items-center shrink-0">
-        <a href="#" data-nav="akun" aria-label="Buka Akun" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-sm shrink-0 text-on-primary">
-          <span class="material-symbols-outlined text-[18px]">person</span>
+        <a href="#" data-nav="akun" aria-label="Buka Akun" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-full bg-primary flex items-center justify-center shadow-sm shrink-0 text-on-primary">
+          <span class="material-symbols-outlined text-[20px]">person</span>
         </a>
       </div>
     </div>
@@ -465,7 +463,7 @@ button:active { transform: scale(0.97); }
               <div class="grid grid-cols-[1fr_auto] gap-2 items-center">
                 <div class="flex flex-col space-y-1">
                   <h2 class="text-xl font-extrabold text-white leading-tight">Modul &amp; Bank Soal</h2>
-                  <p class="text-xs text-white leading-relaxed">22 mapel komprehensif standar Pusmendik dengan AI Tutor.</p>
+                  <p class="text-xs text-white leading-relaxed">27 mapel komprehensif standar Pusmendik dengan AI Tutor.</p>
                 </div>
                 <div class="shrink-0 flex items-center justify-center pl-1">
                   <!-- SVG Maskot Robot Membaca Buku -->
@@ -514,15 +512,15 @@ button:active { transform: scale(0.97); }
               </div>
               <div class="grid grid-cols-3 gap-2 pt-1">
                 <div class="flex flex-col bg-white/10 rounded-xl p-2 text-center">
-                  <span class="font-headline-sm text-white font-extrabold leading-tight">22</span>
+                  <span class="font-headline-sm text-white font-extrabold leading-tight">27</span>
                   <span class="text-[10px] font-bold text-white uppercase tracking-wider mt-0.5">Mapel</span>
                 </div>
                 <div class="flex flex-col bg-white/10 rounded-xl p-2 text-center">
-                  <span class="font-headline-sm text-white font-extrabold leading-tight">44</span>
+                  <span class="font-headline-sm text-white font-extrabold leading-tight">49</span>
                   <span class="text-[10px] font-bold text-white uppercase tracking-wider mt-0.5">Paket</span>
                 </div>
                 <div class="flex flex-col bg-white/10 rounded-xl p-2 text-center">
-                  <span class="font-headline-sm text-white font-extrabold leading-tight">961</span>
+                  <span class="font-headline-sm text-white font-extrabold leading-tight">991</span>
                   <span class="text-[10px] font-bold text-white uppercase tracking-wider mt-0.5">Soal</span>
                 </div>
               </div>
@@ -564,19 +562,20 @@ button:active { transform: scale(0.97); }
       </section>
 
       <!-- Bar filter sticky -->
-      <div class="sticky top-16 z-40 bg-surface py-2 -mx-1 px-1 rounded-xl">
+      <div class="sticky top-16 z-40 bg-surface py-2 rounded-xl">
         <div class="bg-surface-card rounded-2xl p-2.5 shadow-sm border border-border-subtle flex flex-col gap-2.5">
-          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar" aria-label="Filter kategori mapel">
-            <button type="button" data-cat-tab="semua" class="px-3.5 py-2 rounded-lg bg-primary text-on-primary font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap shadow-sm">Semua</button>
-            <button type="button" data-cat-tab="wajib" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Wajib</button>
-            <button type="button" data-cat-tab="saintek" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Saintek</button>
-            <button type="button" data-cat-tab="soshum" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Soshum</button>
-            <button type="button" data-cat-tab="lanjut" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Lanjut</button>
-            <button type="button" data-cat-tab="bahasa" class="px-3.5 py-2 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Bahasa &amp; Lintas Minat</button>
+          <div class="flex items-center gap-2 overflow-x-auto no-scrollbar overscroll-x-contain pr-4" aria-label="Filter kategori mapel">
+            <button type="button" data-cat-tab="semua" class="px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center rounded-xl bg-primary text-on-primary font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap shadow-sm">Semua</button>
+            <button type="button" data-cat-tab="wajib" class="px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Wajib</button>
+            <button type="button" data-cat-tab="saintek" class="px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Saintek</button>
+            <button type="button" data-cat-tab="soshum" class="px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Soshum</button>
+            <button type="button" data-cat-tab="lanjut" class="px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Lanjut</button>
+            <button type="button" data-cat-tab="bahasa" class="px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-semibold shrink-0 whitespace-nowrap">Bahasa &amp; Lintas Minat</button>
+            <button type="button" data-cat-tab="smk" class="px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center rounded-xl bg-surface-container-low text-on-surface-variant hover:text-on-surface font-label-md text-label-md font-bold text-primary shrink-0 whitespace-nowrap">Kejuruan SMK (5)</button>
           </div>
           <div class="relative w-full">
             <input type="search" data-search aria-label="Cari nama mapel" placeholder="Cari mapel..."
-              class="w-full bg-surface-container-low focus:bg-surface-card text-on-surface font-body-sm text-body-sm pl-9 pr-3 py-2.5 rounded-xl outline-none border border-transparent focus:border-border-subtle">
+              class="w-full bg-surface-container-low focus:bg-surface-card text-on-surface font-body-sm text-body-sm pl-9 pr-3 py-2.5 min-h-[44px] rounded-xl outline-none border border-transparent focus:border-border-subtle box-border">
             <span class="material-symbols-outlined text-[16px] text-text-muted absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none">search</span>
           </div>
         </div>
@@ -626,7 +625,8 @@ button:active { transform: scale(0.97); }
     { id: 'saintek', num: 2, tab: 'Saintek', nama: 'Saintek (Peminatan)',         desc: 'Peminatan rumpun IPA sesuai jurusan tujuan.' },
     { id: 'soshum', num: 3, tab: 'Soshum', nama: 'Soshum (Peminatan)',           desc: 'Peminatan rumpun IPS sesuai jurusan tujuan.' },
     { id: 'lanjut', num: 4, tab: 'Lanjut', nama: 'Tingkat Lanjut',               desc: 'Matematika dan bahasa tingkat lanjut.' },
-    { id: 'bahasa', num: 5, tab: 'Bahasa & Lintas Minat', nama: 'Bahasa Asing & Lintas Minat', desc: 'PPKn dan bahasa asing lintas minat.' }
+    { id: 'bahasa', num: 5, tab: 'Bahasa & Lintas Minat', nama: 'Bahasa Asing & Lintas Minat', desc: 'PPKn dan bahasa asing lintas minat.' },
+    { id: 'smk',    num: 6, tab: 'Kejuruan SMK', nama: 'Kejuruan SMK (Peminatan)', desc: 'Konsentrasi keahlian Teknik Mesin, Otomotif, TKJ, Akuntansi, dan MPLB.' }
   ];
 
   var SUBJECTS = [
@@ -651,10 +651,15 @@ button:active { transform: scale(0.97); }
     { key: 'bahasa_jerman',           nama: 'Bahasa Jerman',           p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
     { key: 'bahasa_prancis',          nama: 'Bahasa Prancis',          p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
     { key: 'bahasa_mandarin',         nama: 'Bahasa Mandarin',         p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
-    { key: 'bahasa_korea',            nama: 'Bahasa Korea',            p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' }
+    { key: 'bahasa_korea',            nama: 'Bahasa Korea',            p1: 10, p2: 29, cat: 'bahasa',  icon: 'translate' },
+    { key: 'teknik_mesin',            nama: 'SMK - Teknik Mesin',      p1: 6,  p2: 0,  cat: 'smk',     icon: 'precision_manufacturing' },
+    { key: 'teknik_otomotif',         nama: 'SMK - Teknik Otomotif',   p1: 6,  p2: 0,  cat: 'smk',     icon: 'directions_car' },
+    { key: 'teknik_jaringan',         nama: 'SMK - Teknik Jaringan & Telko', p1: 6, p2: 0, cat: 'smk', icon: 'router' },
+    { key: 'akuntansi',               nama: 'SMK - Akuntansi & Keuangan', p1: 6, p2: 0, cat: 'smk',   icon: 'account_balance' },
+    { key: 'manajemen_perkantoran',   nama: 'SMK - Manajemen Perkantoran', p1: 6, p2: 0, cat: 'smk', icon: 'business_center' }
   ];
 
-  var TOTAL_SOAL = 961; // hasil jumlah tabel (terverifikasi saat build)
+  var TOTAL_SOAL = 991; // 961 umum + 30 SMK (resmi Pusmendik)
 
   /* ================= BRIDGE ke app utama ================= */
   function send(payload) {
@@ -697,6 +702,35 @@ button:active { transform: scale(0.97); }
   function cardHTML(s) {
     var prog =
       '<div class="hidden flex-col gap-1.5" data-progs="' + s.key + '"></div>';
+    var paketBadges = s.p2 > 0
+      ? '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold">Paket 1 · ' + s.p1 + ' soal</span>' +
+        '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold">Paket 2 · ' + s.p2 + ' soal</span>'
+      : '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-brand-emerald-light text-primary font-label-md text-label-md font-bold">Paket 1 · ' + s.p1 + ' soal (Resmi Pusmendik)</span>';
+
+    var actionButtons = s.p2 > 0
+      ? '<div class="grid grid-cols-2 gap-2 pt-1">' +
+          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="1" aria-label="' + s.nama + ' Paket 1 (' + s.p1 + ' soal)" ' +
+            'class="min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
+            '<span>Paket 1</span><span class="material-symbols-outlined text-[16px]">play_arrow</span>' +
+          '</button>' +
+          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="2" aria-label="' + s.nama + ' Paket 2 (' + s.p2 + ' soal)" ' +
+            'class="min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-surface-card hover:bg-surface-subtle text-primary font-label-md text-label-md font-bold shadow-sm border border-border-subtle">' +
+            '<span>Paket 2</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>' +
+          '</button>' +
+        '</div>'
+      : '<div class="grid grid-cols-1 gap-2 pt-1">' +
+          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="1" aria-label="' + s.nama + ' Paket 1 (' + s.p1 + ' soal)" ' +
+            'class="min-h-[44px] w-full flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
+            '<span>Kerjakan Paket 1 (' + s.p1 + ' Soal)</span><span class="material-symbols-outlined text-[16px]">play_arrow</span>' +
+          '</button>' +
+        '</div>';
+
+    var aiRoomButton =
+      '<a href="/ruang/' + s.key + '" target="_top" class="min-h-[44px] flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-brand-emerald-light/60 hover:bg-brand-emerald-light text-primary font-label-md text-label-md font-bold border border-primary/20 transition-colors" style="text-decoration:none;">' +
+        '<span class="material-symbols-outlined text-[16px]">smart_toy</span>' +
+        '<span>Ruang AI ' + s.nama + '</span>' +
+      '</a>';
+
     return (
       '<article class="bg-surface-card rounded-2xl border border-border-subtle shadow-sm p-4 md:p-5 flex flex-col gap-3 lift" ' +
         'data-card data-nama="' + (s.nama + ' ' + s.key.split('_').join(' ')).toLowerCase() + '">' +
@@ -707,20 +741,11 @@ button:active { transform: scale(0.97); }
           '<h3 class="font-headline-sm text-headline-sm text-on-surface leading-tight min-w-0">' + s.nama + '</h3>' +
         '</div>' +
         '<div class="flex flex-wrap gap-1.5">' +
-          '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold">Paket 1 · ' + s.p1 + ' soal</span>' +
-          '<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md font-semibold">Paket 2 · ' + s.p2 + ' soal</span>' +
+          paketBadges +
         '</div>' +
         prog +
-        '<div class="grid grid-cols-2 gap-2 pt-1">' +
-          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="1" aria-label="' + s.nama + ' Paket 1 (' + s.p1 + ' soal)" ' +
-            'class="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-primary hover:bg-primary-container text-on-primary font-label-md text-label-md font-bold shadow-sm">' +
-            '<span>Paket 1</span><span class="material-symbols-outlined text-[16px]">play_arrow</span>' +
-          '</button>' +
-          '<button type="button" data-open data-subject="' + s.key + '" data-pkg="2" aria-label="' + s.nama + ' Paket 2 (' + s.p2 + ' soal)" ' +
-            'class="flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl bg-surface-card hover:bg-surface-subtle text-primary font-label-md text-label-md font-bold shadow-sm border border-border-subtle">' +
-            '<span>Paket 2</span><span class="material-symbols-outlined text-[16px]">arrow_forward</span>' +
-          '</button>' +
-        '</div>' +
+        actionButtons +
+        aiRoomButton +
       '</article>'
     );
   }
@@ -728,7 +753,10 @@ button:active { transform: scale(0.97); }
   function sectionHTML(c, twoCols) {
     var subs = SUBJECTS.filter(function (s) { return s.cat === c.id; });
     var nSoal = 0, nPaket = 0;
-    subs.forEach(function (s) { nSoal += s.p1 + s.p2; nPaket += 2; });
+    subs.forEach(function (s) {
+      nSoal += s.p1 + s.p2;
+      nPaket += (s.p2 > 0 ? 2 : 1);
+    });
     return (
       '<section class="flex flex-col gap-3 md:gap-4 fade-in" data-cat-section="' + c.id + '">' +
         '<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">' +
@@ -1113,22 +1141,30 @@ button:active { transform: scale(0.97); }
   send({ type: 'request-data' });
   send({ type: 'modul-ready' });
 
-  // Hide-on-scroll untuk tab filter [sembunyi saat scroll bawah, muncul saat scroll atas]
+  // Hide-on-scroll untuk tab filter & navbar [sembunyi saat scroll bawah, muncul saat scroll atas]
   (function() {
     var lastY = 0;
-    var tabBar = document.querySelector('[data-cat-tab="semua"]')?.closest('.sticky');
-    if (tabBar) tabBar.style.transition = 'transform 0.3s ease';
+    var tabBars = document.querySelectorAll('.sticky');
+    var topHeaders = document.querySelectorAll('header.fixed');
+    tabBars.forEach(function(tb) { tb.style.transition = 'transform 0.3s ease, opacity 0.25s ease'; });
+    topHeaders.forEach(function(th) { th.style.transition = 'transform 0.3s ease, opacity 0.25s ease'; });
+
     window.addEventListener('scroll', function() {
-      var y = window.scrollY;
-      var goingDown = y > lastY && y > 100;
-      if (tabBar) {
-        tabBar.style.transform = goingDown ? 'translateY(-120%)' : 'translateY(0)';
-      }
-      // Kasih tau parent (index.html) biar navbar juga ngumpet
+      var y = window.scrollY || document.documentElement.scrollTop;
+      var goingDown = (y > lastY && y > 80);
+      tabBars.forEach(function(tb) {
+        tb.style.transform = goingDown ? 'translateY(-140%)' : 'translateY(0)';
+        tb.style.opacity = goingDown ? '0' : '1';
+        tb.style.pointerEvents = goingDown ? 'none' : 'auto';
+      });
+      topHeaders.forEach(function(th) {
+        th.style.transform = goingDown ? 'translateY(-100%)' : 'translateY(0)';
+        th.style.opacity = goingDown ? '0' : '1';
+      });
       try {
         window.parent.postMessage({ type: 'modul-scroll', direction: goingDown ? 'down' : 'up' }, '*');
       } catch(e) {}
-      lastY = y;
+      lastY = Math.max(0, y);
     }, { passive: true });
   })();
 })();

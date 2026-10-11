@@ -1,27 +1,57 @@
 import re
 import os
+import sys
 import json
 import gzip
 import traceback
 import html as html_lib
 import urllib.parse
+import urllib.request
+import urllib.error
 import threading
 import time
 from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
+
+if hasattr(sys.stdout, 'reconfigure'):
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
 
 import solution_loader  # noqa: E402  (sumber Layer 3: solusi spesifik Claude)
 import tutor_engine    # noqa: E402  (mesin tutor konversasional berbasis LLM)
 import tutor_llm       # noqa: E402  (abstraksi provider LLM)
 import visitor_log     # noqa: E402  (pencatat pengunjung + dashboard /pengunjung)
 import tutor_store     # noqa: E402  (persistensi percakapan — SQLite)
+import feature_flags   # noqa: E402  (feature flags Autopsi/Sprint — FASE 0 T0.7)
+import auth_verify     # noqa: E402  (verifikasi JWT Supabase — FASE 2 T2.11)
+try:
+    from autopsy import analyzer as autopsy_analyzer  # noqa: E402  (Fase 4)
+    from autopsy import evidence as autopsy_evidence  # noqa: E402  (Fase A2)
+    from autopsy import coach as autopsy_coach        # noqa: E402  (Fase A3)
+    from autopsy import quota as autopsy_quota        # noqa: E402  (Fase A5)
+except ImportError:
+    autopsy_analyzer = None
+    autopsy_evidence = None
+    autopsy_coach = None
+    autopsy_quota = None
+
+try:
+    import ai_room  # noqa: E402  (Fase D2/D3: AI Room per Mapel)
+except ImportError:
+    ai_room = None
 
 tutor_store.init_db()  # skema ai_tutor_* dibuat idempoten saat server dimuat
+feature_flags.init_flags()  # tabel feature_flags + seed 7 flag OFF (idempoten)
 
 # ============================================================================
 # CONCURRENCY QUEUE UNTUK 50 USER (SEMAPHORE)
 # ============================================================================
 MAX_CONCURRENT_LLM = int(os.environ.get("LLM_MAX_CONCURRENT", "6"))
 _llm_concurrency_semaphore = threading.Semaphore(MAX_CONCURRENT_LLM)
+_COACH_CACHE = {}         # {attempt_id: coach_result_dict}
+_COACH_RATE_LIMIT = {}    # {user_id: [timestamps]}
 
 PORT = int(os.environ.get("PORT", 8080))
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -74,7 +104,7 @@ _IMAGE_EXTS = ('.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico')
 # 'data' ditangani khusus: hanya file gambar di dalam folder images/.
 _STATIC_OK_TOPDIRS = ('images', 'cbt_images', 'tka',
                       'workspace_akun', 'workspace_modul', 'workspace_progres',
-                      'vendor')
+                      'vendor', 'assets')
 
 # ============================================================================
 # INDEKS NAMA FILE data/ (Fase 2, Fix 5)
@@ -522,6 +552,11 @@ SUBJECT_NAMES = {
     "fisika": "Fisika",
     "kimia": "Kimia",
     "biologi": "Biologi",
+    "teknik_mesin": "Teknik Mesin (SMK)",
+    "teknik_otomotif": "Teknik Otomotif (SMK)",
+    "teknik_jaringan": "Teknik Jaringan dan Telekomunikasi (SMK)",
+    "akuntansi": "Akuntansi dan Keuangan Lembaga (SMK)",
+    "manajemen_perkantoran": "Manajemen Perkantoran dan Layanan Bisnis (SMK)",
 }
 
 
@@ -930,6 +965,275 @@ def _track_client_context(handler):
         pass
 
 
+def _verify_supabase_token(token):
+    """Verifikasi token user via Supabase Auth API (GET /auth/v1/user).
+    Bekerja untuk semua alg (HS256/ES256/RS256) tanpa butuh JWT_SECRET.
+    Mengembalikan (ok: bool, user: dict|None)."""
+    try:
+        if not token:
+            return False, None
+        sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+        sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+        if not sb_url or not sb_key:
+            return False, None
+        req = urllib.request.Request(
+            sb_url + '/auth/v1/user',
+            headers={'apikey': sb_key, 'Authorization': 'Bearer ' + token})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            user = json.loads(resp.read().decode('utf-8') or '{}')
+        if isinstance(user, dict) and user.get('id'):
+            return True, user
+        return False, None
+    except Exception:
+        return False, None
+
+
+def clean_attempt_items(raw_items):
+    """Normalisasi dan sanitasi items attempt secara toleran terhadap bentuk data nyata.
+    Mendukung list, dict bertingkat (mis. {'1': {...}}), atau string JSON.
+    Mengembalikan (ok: bool, error_message: str, clean_items: list[dict])."""
+    if isinstance(raw_items, str):
+        try:
+            raw_items = json.loads(raw_items)
+        except Exception:
+            raw_items = None
+    if isinstance(raw_items, dict):
+        try:
+            raw_items = [v for k, v in sorted(raw_items.items(), key=lambda kv: int(kv[0]) if str(kv[0]).isdigit() else str(kv[0]))]
+        except Exception:
+            raw_items = list(raw_items.values())
+
+    if not isinstance(raw_items, list) or not (1 <= len(raw_items) <= 200):
+        t_name = type(raw_items).__name__
+        l_info = len(raw_items) if hasattr(raw_items, '__len__') else 'N/A'
+        return False, f"Items tidak valid (harus 1-200 soal; tipe={t_name}, panjang={l_info}).", []
+
+    clean_items = []
+    for it in raw_items:
+        if not isinstance(it, dict):
+            continue
+        active_ms = max(0, min(int(it.get("active_ms") or 0), 3600000))
+        change_count = max(0, min(int(it.get("change_count") if it.get("change_count") is not None else it.get("ganti_jawaban") or 0), 100))
+        flagged_ragu = bool(it.get("flagged_ragu") if it.get("flagged_ragu") is not None else it.get("ragu"))
+
+        # Jejak kejadian (maksimal 5 event)
+        raw_jejak = it.get("jejak") or []
+        clean_jejak = []
+        if isinstance(raw_jejak, list):
+            for ev in raw_jejak[:5]:
+                if isinstance(ev, dict):
+                    clean_jejak.append({
+                        "t_detik": max(0, min(int(ev.get("t_detik") or 0), 86400)),
+                        "aksi": str(ev.get("aksi") or "")[:16],
+                        "opsi": (str(ev.get("opsi") or "")[:32]) if ev.get("opsi") is not None else None,
+                    })
+
+        # D1: Real-time event tracking (jejak_detail, maks 200 event per soal)
+        raw_detail = it.get("jejak_detail") or []
+        clean_detail = []
+        if isinstance(raw_detail, list):
+            for ev in raw_detail:
+                if not isinstance(ev, dict):
+                    continue
+                ts = ev.get("timestamp_ms")
+                tipe = ev.get("tipe")
+                # Validasi: tiap event punya timestamp_ms dan tipe
+                if ts is None or not tipe:
+                    continue
+                try:
+                    ts_val = int(ts)
+                except (ValueError, TypeError):
+                    continue
+                tipe_str = str(tipe).strip()
+                if not tipe_str:
+                    continue
+
+                clean_ev = {
+                    "tipe": tipe_str[:32],
+                    "timestamp_ms": ts_val,
+                }
+                if "soal_no" in ev and ev.get("soal_no") is not None:
+                    try:
+                        clean_ev["soal_no"] = int(ev.get("soal_no"))
+                    except (ValueError, TypeError):
+                        pass
+                if "opsi" in ev and ev.get("opsi") is not None:
+                    clean_ev["opsi"] = str(ev.get("opsi"))[:32]
+                if "waktu_sejak_soal_mulai_ms" in ev and ev.get("waktu_sejak_soal_mulai_ms") is not None:
+                    try:
+                        clean_ev["waktu_sejak_soal_mulai_ms"] = max(0, int(ev.get("waktu_sejak_soal_mulai_ms")))
+                    except (ValueError, TypeError):
+                        pass
+                if "durasi_baca_ms" in ev and ev.get("durasi_baca_ms") is not None:
+                    try:
+                        clean_ev["durasi_baca_ms"] = max(0, int(ev.get("durasi_baca_ms")))
+                    except (ValueError, TypeError):
+                        pass
+                if "depth_pct" in ev and ev.get("depth_pct") is not None:
+                    try:
+                        clean_ev["depth_pct"] = max(0, min(100, int(ev.get("depth_pct"))))
+                    except (ValueError, TypeError):
+                        pass
+                if "scroll_depth" in ev and ev.get("scroll_depth") is not None:
+                    try:
+                        clean_ev["scroll_depth"] = float(ev.get("scroll_depth"))
+                    except (ValueError, TypeError):
+                        pass
+
+                clean_detail.append(clean_ev)
+                if len(clean_detail) >= 200:
+                    break
+
+        waktu_detik = int(it.get("waktu_detik") if it.get("waktu_detik") is not None else round(active_ms / 1000))
+
+        is_corr = bool(it.get("is_correct")) if it.get("is_correct") is not None else None
+
+        clean_items.append({
+            "soal_id": str(it.get("soal_id") or "")[:128],
+            "position": int(it.get("position") or 0),
+            "topic_id": (str(it.get("topic_id") or "")[:128] or None),
+            "first_answer": (str(it.get("first_answer") or "")[:64] or None),
+            "final_answer": (str(it.get("final_answer") or "")[:64] or None),
+            "is_correct": is_corr,
+            "active_ms": active_ms,
+            "first_answer_ms": it.get("first_answer_ms"),
+            "change_count": change_count,
+            "flagged_ragu": flagged_ragu,
+            "visit_count": max(0, min(int(it.get("visit_count") or 0), 1000)),
+            # Ekstensi A1 Guru Autopsi:
+            "waktu_detik": waktu_detik,
+            "ganti_jawaban": change_count,
+            "ragu": flagged_ragu,
+            "jejak": clean_jejak,
+            # Ekstensi D1: Real-time event tracking
+            "jejak_detail": clean_detail,
+        })
+
+    if not clean_items:
+        return False, "Semua item di dalam items tidak valid.", []
+
+    return True, "", clean_items
+
+
+# ============================================================================
+# FASE B1: Helper Konteks Perilaku Murid per Soal untuk AI Tutor
+# ============================================================================
+
+def format_student_behavior_context(item_data):
+    """Rakit string konteks perilaku murid untuk satu butir soal (FASE B1).
+    
+    Format:
+    "Konteks perilaku murid di soal ini: [waktu] detik, jawaban [awal]→[akhir], [ragu/tidak ragu]. Sesuaikan penjelasanmu: tanyakan di mana dia berhenti berpikir; jangan langsung kasih jawaban lengkap kalau dia cuma salah baca."
+    """
+    if not item_data or not isinstance(item_data, dict):
+        return ""
+
+    waktu = item_data.get("waktu_detik")
+    if waktu is None:
+        active_ms = item_data.get("active_ms") or 0
+        waktu = round(active_ms / 1000)
+    waktu = int(waktu or 0)
+
+    awal = item_data.get("first_answer") or item_data.get("jawaban_awal") or "-"
+    akhir = item_data.get("final_answer") or item_data.get("jawaban_akhir") or "-"
+
+    is_ragu = bool(item_data.get("ragu") if item_data.get("ragu") is not None
+                   else item_data.get("flagged_ragu"))
+    ragu_str = "ragu" if is_ragu else "tidak ragu"
+
+    ctx = (
+        f"Konteks perilaku murid di soal ini: {waktu} detik, jawaban {awal}→{akhir}, {ragu_str}. "
+        "Sesuaikan penjelasanmu: tanyakan di mana dia berhenti berpikir; jangan langsung kasih jawaban lengkap kalau dia cuma salah baca."
+    )
+
+    change_count = item_data.get("ganti_jawaban") if item_data.get("ganti_jawaban") is not None else item_data.get("change_count")
+    if change_count and int(change_count) > 0:
+        ctx += f" (Murid mengganti jawaban sebanyak {change_count} kali)."
+
+    jejak = item_data.get("jejak") or []
+    if isinstance(jejak, list) and len(jejak) > 1:
+        jejak_parts = []
+        for ev in jejak[:5]:
+            if isinstance(ev, dict):
+                aksi = ev.get("aksi", "event")
+                opsi = f" {ev.get('opsi')}" if ev.get("opsi") else ""
+                t = ev.get("t_detik", 0)
+                jejak_parts.append(f"{aksi}{opsi} ({t}s)")
+        if jejak_parts:
+            ctx += f" Jejak kronologis: {' -> '.join(jejak_parts)}."
+
+    return ctx
+
+
+def find_question_item_in_attempt(items, nomor=None, question_id=None):
+    """Cari dict item spesifik dari daftar items attempt berdasarkan nomor urut (position) atau question_id."""
+    if not items or not isinstance(items, list):
+        return None
+
+    if nomor is not None:
+        try:
+            nomor_int = int(nomor)
+            for it in items:
+                if isinstance(it, dict) and int(it.get("position") or 0) == nomor_int:
+                    return it
+        except (ValueError, TypeError):
+            pass
+
+    if question_id:
+        qid_str = str(question_id).strip()
+        for it in items:
+            if isinstance(it, dict):
+                sid = str(it.get("soal_id") or "").strip()
+                if sid == qid_str or (nomor is not None and sid.endswith(f"_n{nomor}")):
+                    return it
+
+    return None
+
+
+def fetch_attempt_items_from_db(user_id=None, attempt_id=None, sb_url=None, sb_svc=None, timeout=5):
+    """Ambil items attempt dari Supabase database."""
+    sb_url = (sb_url or os.environ.get('SUPABASE_URL', '')).rstrip('/')
+    sb_svc = sb_svc or os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+    if not sb_url or not sb_svc:
+        return []
+
+    try:
+        endpoint = None
+        if attempt_id:
+            endpoint = f"{sb_url}/rest/v1/attempts?id=eq.{urllib.parse.quote(str(attempt_id))}&select=items"
+        elif user_id:
+            endpoint = f"{sb_url}/rest/v1/attempts?user_id=eq.{urllib.parse.quote(str(user_id))}&order=created_at.desc&limit=1&select=items"
+
+        if not endpoint:
+            return []
+
+        req = urllib.request.Request(
+            endpoint,
+            headers={"apikey": sb_svc, "Authorization": f"Bearer {sb_svc}"}
+        )
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            rows = json.loads(resp.read().decode("utf-8") or "[]")
+            if rows and isinstance(rows, list) and rows:
+                raw_items = rows[0].get("items")
+                ok, _, clean_items = clean_attempt_items(raw_items)
+                return clean_items if ok else (raw_items if isinstance(raw_items, list) else [])
+    except Exception as ex:
+        sys.stderr.write(f"[fetch_attempt_items_from_db] Gagal mengambil attempt: {ex}\n")
+        return []
+    return []
+
+
+def build_soal_behavior_context(user_id=None, nomor=None, question_id=None, attempt_id=None, sb_url=None, sb_svc=None):
+    """Rakit konteks perilaku untuk AI Tutor dari database attempts."""
+    items = fetch_attempt_items_from_db(user_id=user_id, attempt_id=attempt_id, sb_url=sb_url, sb_svc=sb_svc)
+    if not items:
+        return ""
+    item = find_question_item_in_attempt(items, nomor=nomor, question_id=question_id)
+    if not item:
+        return ""
+    return format_student_behavior_context(item)
+
+
 class AppRequestHandler(SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=BASE_DIR, **kwargs)
@@ -1214,6 +1518,505 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         # Root proyek: hanya file langsung (tanpa subdirektori).
         return len(parts) == 1
 
+    def _extract_admin_key(self, payload=None):
+        """Ambil kunci admin dari header X-Admin-Key, Authorization, atau POST body.
+        Query param 'key' tetap didukung sebagai fallback kompatibilitas."""
+        key = (self.headers.get('X-Admin-Key') or '').strip()
+        if key:
+            return key
+        auth = (self.headers.get('Authorization') or '').strip()
+        if auth.startswith('Admin '):
+            return auth[6:].strip()
+        elif auth.startswith('Bearer '):
+            bearer = auth[7:].strip()
+            import visitor_log as _vl
+            if _vl.ADMIN_KEY and bearer == _vl.ADMIN_KEY:
+                return bearer
+        if isinstance(payload, dict) and payload.get('key'):
+            return str(payload['key']).strip()
+        try:
+            return urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query).get('key', [''])[0].strip()
+        except Exception:
+            return ''
+
+    def _is_valid_admin(self, payload=None):
+        key = self._extract_admin_key(payload)
+        import visitor_log as _vl
+        return bool(key and _vl.ADMIN_KEY and key == _vl.ADMIN_KEY)
+
+    def log_message(self, format, *args):
+        # Redact query string yang mengandung key agar tidak bocor ke log/console
+        clean_args = []
+        for a in args:
+            if isinstance(a, str) and 'key=' in a:
+                a = re.sub(r'([?&]key=)[^&\s]+', r'\1[REDACTED]', a)
+            clean_args.append(a)
+        super().log_message(format, *clean_args)
+
+    def _handle_admin_autopsi_page(self):
+        try:
+            html = '''<!DOCTYPE html><html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Demo Autopsi (Admin)</title>
+<style>body{font-family:system-ui;max-width:720px;margin:0 auto;padding:20px}
+.card{border:1px solid #ddd;border-radius:12px;padding:16px;margin:12px 0}
+.locked{filter:blur(6px);user-select:none;pointer-events:none}
+button{background:#004a2a;color:#fff;border:0;border-radius:8px;padding:10px 16px;cursor:pointer}
+input{padding:10px;border:1px solid #ddd;border-radius:8px;width:100%;box-sizing:border-box}
+pre{background:#f5f5f5;padding:12px;border-radius:8px;overflow:auto;font-size:13px}</style>
+</head><body>
+<h1>Demo Autopsi (Admin)</h1>
+<p>Tempel <b>attempt_id</b> dari tabel Supabase <code>attempts</code>, lalu klik Lihat.</p>
+<input id="aid" placeholder="attempt_id (uuid)">
+<p><button onclick="lihat()">Lihat Autopsi Penuh</button>
+<button onclick="salinWA()">Salin Teks untuk WA</button></p>
+<div id="out"></div>
+<script>
+let KEY = new URLSearchParams(location.search).get('key') || sessionStorage.getItem('tka_admin_key') || '';
+if (KEY) {
+  sessionStorage.setItem('tka_admin_key', KEY);
+  if (location.search.includes('key=')) {
+    try {
+      const u = new URL(location.href);
+      u.searchParams.delete('key');
+      history.replaceState(null, '', u.pathname + (u.search ? u.search : ''));
+    } catch(e) {}
+  }
+}
+async function lihat() {
+  const aid = document.getElementById('aid').value.trim();
+  if (!aid) return alert('Isi attempt_id dulu');
+  if (!KEY) {
+    KEY = prompt('Masukkan Kunci Admin:') || '';
+    if (KEY) sessionStorage.setItem('tka_admin_key', KEY);
+    else return;
+  }
+  document.getElementById('out').innerHTML = 'Memuat...';
+  // Kirim via header X-Admin-Key ke /api/admin/autopsy_full
+  const r = await fetch('/api/admin/autopsy_full?attempt_id=' + encodeURIComponent(aid), {
+    headers: { 'X-Admin-Key': KEY }
+  });
+  const j = await r.json();
+  if (j.status !== 'success') { document.getElementById('out').innerHTML = 'Gagal: ' + (j.message||r.status); return; }
+  window._lastAutopsy = j;
+  const k = j.kebocoran || [];
+  let h = '<div class="card"><h3>Skor: ' + j.skor_pct + '% (' + j.n_correct + '/' + j.n_answered + ')</h3>';
+  h += '<p>Data tipis: ' + (j.data_tipis?'ya':'tidak') + '</p></div>';
+  k.forEach((x,i) => {
+    h += '<div class="card"><h3>Kebocoran #' + (i+1) + ': ' + x.label + '</h3>';
+    h += '<p><b>Bukti:</b> ' + x.bukti + '</p>';
+    h += '<p><b>Contoh soal:</b> ' + (x.contoh||[]).join(', ') + '</p></div>';
+  });
+  document.getElementById('out').innerHTML = h;
+}
+function salinWA() {
+  const j = window._lastAutopsy; if (!j) return alert('Lihat dulu autopsi-nya');
+  const k = j.kebocoran || [];
+  let t = 'Hasil Autopsi Tryout\\nSkor: ' + j.skor_pct + '%\\n';
+  k.forEach((x,i) => { t += (i+1) + '. ' + x.label + ': ' + x.bukti + '\\n'; });
+  navigator.clipboard.writeText(t).then(()=>alert('Tersalin!'));
+}
+</script></body></html>'''
+            return self._send_body(200, 'text/html; charset=utf-8', html.encode('utf-8'), {'Cache-Control': 'no-cache'})
+        except Exception as e:
+            return self._send_500(e, "/admin/autopsi")
+
+    def _handle_admin_autopsy_full(self, payload=None):
+        try:
+            if PUBLIC_DEMO:
+                return self._send_json(403, {"status": "forbidden", "message": "Dimatikan saat demo publik."})
+            if not self._is_valid_admin(payload):
+                return self._send_json(401, {"status": "unauthorized", "message": "Kunci admin salah atau tidak diberikan."})
+            if autopsy_analyzer is None:
+                return self._send_json(503, {"status": "error", "message": "Analyzer belum tersedia."})
+            
+            attempt_id = ''
+            if isinstance(payload, dict):
+                attempt_id = str(payload.get('attempt_id') or '').strip()
+            if not attempt_id:
+                q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+                attempt_id = (q.get('attempt_id', [''])[0] or '').strip()
+            
+            if not attempt_id:
+                return self._send_json(400, {"status": "error", "message": "attempt_id wajib."})
+            
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+            req = urllib.request.Request(
+                sb_url + "/rest/v1/attempts?id=eq." + urllib.parse.quote(attempt_id) + "&select=*",
+                headers={"apikey": sb_svc, "Authorization": "Bearer " + sb_svc})
+            with urllib.request.urlopen(req, timeout=15) as resp:
+                rows = json.loads(resp.read().decode("utf-8") or "[]")
+            if not rows:
+                return self._send_json(404, {"status": "error", "message": "Attempt tidak ditemukan."})
+            att = rows[0]
+            items = att.get('items') or []
+            attempt_data = {
+                'n_questions': int(att.get('n_questions') or len(items)),
+                'duration_limit_s': int(att.get('duration_limit_s') or 4500),
+                'ended_by': att.get('ended_by') or 'user',
+                'kunci': {},
+                'items': items,
+            }
+            result = autopsy_analyzer.analyze(attempt_data)
+            n_corr = sum(1 for it in items if it.get('is_correct'))
+            return self._send_json(200, {
+                "status": "success",
+                "skor_pct": round(100 * n_corr / max(1, len([i for i in items if i.get('final_answer')]))),
+                "n_correct": n_corr,
+                "n_answered": len([i for i in items if i.get('final_answer')]),
+                "data_tipis": result.get('data_tipis'),
+                "kebocoran": result.get('kebocoran'),
+                "rapuh_ids": result.get('rapuh_ids'),
+            })
+        except Exception as e:
+            return self._send_500(e, "/api/admin/autopsy_full")
+
+    def _handle_get_autopsy_coach(self):
+        """GET /api/autopsy/coach?attempt_id=... — Mengambil hasil Guru Autopsi ter-cache."""
+        try:
+            if autopsy_coach is None:
+                return self._send_json(503, {"status": "error", "message": "Layanan coach belum tersedia."})
+            _auth = self.headers.get('Authorization', '') or ''
+            _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
+            if not _token:
+                return self._send_json(401, {"status": "unauthorized", "message": "Login diperlukan."})
+            _vok, _user = _verify_supabase_token(_token)
+            if not _vok or not (_user or {}).get('id'):
+                return self._send_json(401, {"status": "unauthorized", "message": "Token tidak valid atau sesi berakhir."})
+            user_id = str(_user['id'])
+
+            q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+            attempt_id = (q.get('attempt_id', [''])[0] or '').strip()
+            if not attempt_id:
+                return self._send_json(400, {"status": "error", "message": "attempt_id diperlukan."})
+
+            # Cek memory cache
+            cached = _COACH_CACHE.get(attempt_id)
+            if cached:
+                cached_owner = cached.get("_user_id")
+                if cached_owner and cached_owner != user_id and not self._is_valid_admin():
+                    return self._send_json(403, {"status": "forbidden", "message": "Anda bukan pemilik attempt ini."})
+                res = {k: v for k, v in cached.items() if not k.startswith("_")}
+                return self._send_json(200, {"status": "success", "attempt_id": attempt_id, "coach": res, "cached": True})
+
+            # Ambil dari Supabase
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+            if not sb_url or not sb_svc:
+                return self._send_json(404, {"status": "error", "message": "Hasil coach belum tersedia."})
+
+            req = urllib.request.Request(
+                sb_url + "/rest/v1/attempts?id=eq." + urllib.parse.quote(attempt_id) + "&select=*",
+                headers={"apikey": sb_svc, "Authorization": "Bearer " + sb_svc})
+            with urllib.request.urlopen(req, timeout=10) as resp:
+                rows = json.loads(resp.read().decode("utf-8") or "[]")
+            if not rows:
+                return self._send_json(404, {"status": "error", "message": "Attempt tidak ditemukan."})
+
+            att = rows[0]
+            if str(att.get('user_id')) != user_id and not self._is_valid_admin():
+                return self._send_json(403, {"status": "forbidden", "message": "Anda bukan pemilik attempt ini."})
+
+            coach_res = att.get('coach_result')
+            if not coach_res:
+                return self._send_json(404, {"status": "error", "message": "Hasil coach belum dihitung untuk attempt ini."})
+
+            _COACH_CACHE[attempt_id] = {**coach_res, "_user_id": user_id}
+            return self._send_json(200, {"status": "success", "attempt_id": attempt_id, "coach": coach_res, "cached": True})
+        except Exception as e:
+            return self._send_500(e, "GET /api/autopsy/coach")
+
+    def _handle_post_autopsy_coach(self):
+        """POST /api/autopsy/coach — Menjalankan atau mengambil analisis Guru Autopsi."""
+        try:
+            if autopsy_coach is None or autopsy_evidence is None:
+                return self._send_json(503, {"status": "error", "message": "Layanan Guru Autopsi belum tersedia."})
+            _auth = self.headers.get('Authorization', '') or ''
+            _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
+            if not _token:
+                return self._send_json(401, {
+                    "status": "unauthorized",
+                    "is_guest": True,
+                    "message": "Login Google untuk mendapatkan analisis Guru Autopsi gratis."
+                })
+            _vok, _user = _verify_supabase_token(_token)
+            if not _vok or not (_user or {}).get('id'):
+                return self._send_json(401, {"status": "unauthorized", "message": "Token tidak valid atau sesi berakhir."})
+            user_id = str(_user['id'])
+
+            # Rate limit check (maks 10 request per menit per user)
+            now = time.time()
+            user_history = _COACH_RATE_LIMIT.setdefault(user_id, [])
+            user_history[:] = [t for t in user_history if now - t < 60]
+            if len(user_history) >= 10:
+                return self._send_json(429, {"status": "error", "message": "Terlalu banyak permintaan Guru Autopsi. Silakan tunggu 1 menit."})
+            user_history.append(now)
+
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            payload = json.loads(post_data) if post_data else {}
+
+            attempt_id = str(payload.get('attempt_id') or '').strip()
+            attempt_data = payload.get('attempt')
+
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+
+            # Jika ada attempt_id, periksa cache dan database
+            if attempt_id:
+                # 1. Cek memory cache
+                cached = _COACH_CACHE.get(attempt_id)
+                if cached:
+                    cached_owner = cached.get("_user_id")
+                    if cached_owner and cached_owner != user_id and not self._is_valid_admin():
+                        return self._send_json(403, {"status": "forbidden", "message": "Anda bukan pemilik attempt ini."})
+                    res = {k: v for k, v in cached.items() if not k.startswith("_")}
+                    return self._send_json(200, {"status": "success", "attempt_id": attempt_id, "coach": res, "cached": True})
+
+                # 2. Ambil attempt dari Supabase
+                if sb_url and sb_svc:
+                    req = urllib.request.Request(
+                        sb_url + "/rest/v1/attempts?id=eq." + urllib.parse.quote(attempt_id) + "&select=*",
+                        headers={"apikey": sb_svc, "Authorization": "Bearer " + sb_svc})
+                    with urllib.request.urlopen(req, timeout=10) as resp:
+                        rows = json.loads(resp.read().decode("utf-8") or "[]")
+                    if not rows:
+                        return self._send_json(404, {"status": "error", "message": "Attempt tidak ditemukan."})
+                    att = rows[0]
+                    # Ownership check (keamanan Bagian 9)
+                    if str(att.get('user_id')) != user_id and not self._is_valid_admin():
+                        return self._send_json(403, {"status": "forbidden", "message": "Anda bukan pemilik attempt ini."})
+                    if att.get('coach_result'):
+                        _COACH_CACHE[attempt_id] = {**att['coach_result'], "_user_id": user_id}
+                        return self._send_json(200, {"status": "success", "attempt_id": attempt_id, "coach": att['coach_result'], "cached": True})
+                    attempt_data = att
+
+            if not attempt_data:
+                return self._send_json(400, {"status": "error", "message": "attempt_id atau payload attempt wajib diisi."})
+
+            # Validasi & lengkapi is_correct pada butir attempt jika belum terisi
+            att_items = attempt_data.get("items") or []
+            mapel_slug = str(attempt_data.get("subject") or attempt_data.get("mapel") or "matematika").strip().lower().replace("-", "_")
+            paket_num = int(attempt_data.get("paket") or 1)
+
+            # Jika ada item yang belum punya is_correct (atau semua None)
+            needs_eval = any(x.get("is_correct") is None for x in att_items)
+            if needs_eval and ai_room:
+                for x in att_items:
+                    if x.get("is_correct") is None:
+                        x["is_correct"] = ai_room.is_answer_correct(x, mapel_slug, paket_num)
+
+            # Bangun evidence pack (fungsi murni)
+            evidence = autopsy_evidence.build_evidence(attempt_data)
+
+            # Pengaman ekstra: bila attempt membawa score/n_correct eksplisit tetapi evidence nol
+            if evidence.get("skor_pct", 0) == 0:
+                if attempt_data.get("score") is not None:
+                    try:
+                        explicit_score = int(attempt_data.get("score"))
+                        if explicit_score > 0:
+                            evidence["skor_pct"] = explicit_score
+                    except (ValueError, TypeError):
+                        pass
+                elif attempt_data.get("n_correct") is not None:
+                    try:
+                        n_corr = int(attempt_data.get("n_correct"))
+                        n_q = int(attempt_data.get("n_questions") or len(att_items) or 20)
+                        if n_corr > 0 and n_q > 0:
+                            evidence["n_benar"] = n_corr
+                            evidence["skor_pct"] = round(100 * n_corr / n_q)
+                    except (ValueError, TypeError):
+                        pass
+
+            # Pengecekan kuota & anggaran berbasis database (Bagian 7 A5)
+            q_ok = True
+            q_reason = ""
+            q_usage = {}
+            if autopsy_quota:
+                q_ok, q_reason, q_usage = autopsy_quota.check_quota(user_id, sb_url, sb_svc)
+
+            if not q_ok:
+                # Kuota habis atau dinonaktifkan -> fallback instan ke template (tanpa error mentah)
+                coach_out = autopsy_coach.coach_template.generate_template(evidence)
+                coach_out["sumber"] = "template"
+                meta = {
+                    "latensi_ms": 0,
+                    "sumber": "template",
+                    "alasan": q_reason,
+                    "model": "template",
+                    "kuota": q_usage,
+                }
+            else:
+                # Panggil layanan Guru AI (dengan fallback template otomatis jika LLM/validasi gagal)
+                coach_out, meta = autopsy_coach.generate_coach(evidence)
+                if q_usage:
+                    meta["kuota"] = q_usage
+
+            # Simpan cache
+            if attempt_id:
+                _COACH_CACHE[attempt_id] = {**coach_out, "_user_id": user_id}
+                if sb_url and sb_svc:
+                    try:
+                        patch_req = urllib.request.Request(
+                            sb_url + "/rest/v1/attempts?id=eq." + urllib.parse.quote(attempt_id),
+                            data=json.dumps({"coach_result": coach_out}).encode("utf-8"),
+                            method="PATCH",
+                            headers={"apikey": sb_svc, "Authorization": "Bearer " + sb_svc, "Content-Type": "application/json"})
+                        urllib.request.urlopen(patch_req, timeout=5)
+                    except Exception:
+                        pass
+
+            return self._send_json(200, {
+                "status": "success",
+                "attempt_id": attempt_id or None,
+                "coach": coach_out,
+                "meta": meta,
+            })
+        except Exception as e:
+            return self._send_500(e, "POST /api/autopsy/coach")
+
+    def _handle_get_autopsy_quota(self):
+        """GET /api/autopsy/quota — Memeriksa status dan sisa kuota Guru Autopsi."""
+        try:
+            if autopsy_quota is None:
+                return self._send_json(503, {"status": "error", "message": "Layanan kuota belum tersedia."})
+            _auth = self.headers.get('Authorization', '') or ''
+            _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
+            if not _token:
+                return self._send_json(200, {
+                    "status": "guest",
+                    "is_guest": True,
+                    "message": "Login Google untuk mendapatkan Guru AI gratis.",
+                    "limits": autopsy_quota.get_quota_limits(),
+                })
+            _vok, _user = _verify_supabase_token(_token)
+            if not _vok or not (_user or {}).get('id'):
+                return self._send_json(401, {"status": "unauthorized", "message": "Token tidak valid atau sesi berakhir."})
+            user_id = str(_user['id'])
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+            allowed, reason, usage = autopsy_quota.check_quota(user_id, sb_url, sb_svc)
+            return self._send_json(200, {
+                "status": "success",
+                "user_id": user_id,
+                "allowed": allowed,
+                "reason": reason,
+                "usage": usage,
+                "limits": autopsy_quota.get_quota_limits(),
+            })
+        except Exception as e:
+            return self._send_500(e, "GET /api/autopsy/quota")
+
+    def _handle_get_ai_room_context(self, mapel):
+        """GET /api/ai-room/<mapel>/context — Agregat performa se-mapel user (D2)."""
+        try:
+            if ai_room is None:
+                return self._send_json(503, {"status": "error", "message": "Layanan AI Room belum tersedia."})
+
+            clean_mapel = urllib.parse.unquote(str(mapel or "")).strip().lower()
+            _auth = self.headers.get('Authorization', '') or ''
+            _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
+
+            if not _token:
+                # Mode tamu / belum login: kembalikan pesan jujur (K3)
+                guest_msg = (
+                    "Login untuk menyimpan riwayat dan mendapatkan analisis AI Room. "
+                    "Sebagai tamu, data hanya tersimpan di perangkat ini."
+                )
+                empty_aggr = ai_room.calculate_mapel_aggregates([], clean_mapel, is_guest=True)
+                empty_aggr["pola"] = guest_msg
+                return self._send_json(200, {
+                    "status": "success",
+                    "is_guest": True,
+                    "context": empty_aggr,
+                    "guest_message": guest_msg,
+                    "message": guest_msg
+                })
+
+            _vok, _user = _verify_supabase_token(_token)
+            if not _vok or not (_user or {}).get('id'):
+                return self._send_json(401, {"status": "unauthorized", "message": "Token tidak valid atau sesi berakhir."})
+
+            user_id = str(_user['id'])
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+
+            attempts = ai_room.fetch_supabase_attempts(user_id, clean_mapel, sb_url, sb_svc, user_token=_token)
+            aggregates = ai_room.calculate_mapel_aggregates(attempts, clean_mapel, is_guest=False)
+
+            # Penting: jangan kirim raw items ke klien
+            return self._send_json(200, {
+                "status": "success",
+                "is_guest": False,
+                "context": aggregates
+            })
+        except Exception as e:
+            return self._send_500(e, f"GET /api/ai-room/{mapel}/context")
+
+    def _handle_post_ai_room_chat(self, mapel):
+        """POST /api/ai-room/<mapel>/chat — Chat dengan Guru AI Room berkonteks penuh (D3)."""
+        try:
+            if ai_room is None:
+                return self._send_json(503, {"status": "error", "message": "Layanan AI Room belum tersedia."})
+
+            clean_mapel = urllib.parse.unquote(str(mapel or "")).strip().lower()
+            _auth = self.headers.get('Authorization', '') or ''
+            _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
+
+            user_id = None
+            is_guest = True
+            if _token:
+                _vok, _user = _verify_supabase_token(_token)
+                if _vok and (_user or {}).get('id'):
+                    user_id = str(_user['id'])
+                    is_guest = False
+
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            payload = json.loads(post_data) if post_data else {}
+
+            user_message = str(payload.get('message') or '').strip()
+            if not user_message:
+                return self._send_json(400, {"status": "error", "message": "Pesan pertanyaan tidak boleh kosong."})
+
+            chat_history = payload.get('history') or []
+
+            sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+            sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
+
+            # Ambil attempt user jika logged in
+            attempts = []
+            if user_id and sb_url and sb_svc:
+                attempts = ai_room.fetch_supabase_attempts(user_id, clean_mapel, sb_url, sb_svc, user_token=_token)
+
+            # Jika data Supabase kosong (misal antrean baru selesai belum tersinkron), gunakan local_attempts dari klien
+            local_atts = payload.get('local_attempts') or []
+            if not attempts and local_atts:
+                valid_local = []
+                for la in local_atts:
+                    if isinstance(la, dict):
+                        la_m = str(la.get("subject") or la.get("mapel") or "").strip().lower().replace("-", "_")
+                        if clean_mapel in la_m or la_m in clean_mapel:
+                            valid_local.append(la)
+                if valid_local:
+                    attempts = valid_local
+
+            aggregates = ai_room.calculate_mapel_aggregates(attempts, clean_mapel, is_guest=is_guest)
+            last_wrong = ai_room.get_last_wrong_questions(attempts, clean_mapel, limit=5)
+
+            # Panggil LLM (pakai fungsi coach yang sudah ada, tanpa memotong kuota tutor)
+            res = ai_room.chat_ai_room(aggregates, last_wrong, user_message, chat_history=chat_history)
+
+            return self._send_json(200, {
+                "status": "success",
+                "reply": res["reply"],
+                "model": res.get("model"),
+                "is_guest": is_guest
+            })
+        except Exception as e:
+            return self._send_500(e, f"POST /api/ai-room/{mapel}/chat")
+
     def do_HEAD(self):
         # Samakan proteksi static serving utk HEAD (SimpleHTTPRequestHandler
         # punya do_HEAD bawaan yang akan lolos tanpa cek ini).
@@ -1287,6 +2090,35 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             except Exception as e:
                 return self._send_500(e, "/api/tutor/state", cookie_value=new_cookie)
 
+        # FASE 0 T0.7: feature flags. Klien membaca lewat SATU endpoint ini;
+        # nilai sudah dihitung di server (sumber kebenaran = tabel feature_flags).
+        if self.path.split('?', 1)[0] == '/api/flags':
+            try:
+                return self._send_json(200, {
+                    "status": "success",
+                    "version": feature_flags.FLAGS_VERSION,
+                    "flags": feature_flags.get_all_flags(),
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/flags")
+
+        if self.path.split('?', 1)[0] == '/api/version':
+            try:
+                commit = os.environ.get("RAILWAY_GIT_COMMIT_SHA") or os.environ.get("GIT_COMMIT_SHA") or ""
+                if not commit:
+                    try:
+                        import subprocess
+                        commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], stderr=subprocess.DEVNULL).decode().strip()
+                    except Exception:
+                        pass
+                return self._send_json(200, {
+                    "status": "success",
+                    "commit": commit,
+                    "time": time.strftime("%Y-%m-%d %H:%M:%S")
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/version")
+
         if self.path.split('?', 1)[0] == '/api/swarm/status':
             try:
                 from pipeline.swarm_manager import swarm_engine
@@ -1301,12 +2133,54 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             except Exception as e:
                 return self._send_500(e, "/api/swarm/subjects")
 
+        # BUG-001 (Tugas D): Ambil progress belajar user dari Supabase
+        if self.path.split('?', 1)[0] == '/api/user/progress':
+            try:
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[7:] if _auth.startswith('Bearer ') else ''
+                if not _token:
+                    return self._send_json(401, {"status": "unauthorized"})
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok:
+                    return self._send_json(401, {"status": "unauthorized"})
+                user_id = _user['id']
+                sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+                sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+                req = urllib.request.Request(
+                    sb_url + "/rest/v1/users?id=eq." + user_id + "&select=progress,tka_date",
+                    headers={"apikey": sb_key, "Authorization": "Bearer " + _token})
+                try:
+                    with urllib.request.urlopen(req, timeout=10) as resp:
+                        rows = json.loads(resp.read().decode('utf-8') or '[]')
+                    row = rows[0] if rows else {}
+                    return self._send_json(200, {
+                        "status": "success",
+                        "progress": row.get("progress") or {},
+                        "tka_date": row.get("tka_date")
+                    })
+                except urllib.error.HTTPError as he:
+                    # T4b: Fallback bila kolom tka_date belum dibuat di Supabase (HTTP 400)
+                    if he.code == 400:
+                        req_fallback = urllib.request.Request(
+                            sb_url + "/rest/v1/users?id=eq." + user_id + "&select=progress",
+                            headers={"apikey": sb_key, "Authorization": "Bearer " + _token})
+                        with urllib.request.urlopen(req_fallback, timeout=10) as resp_fb:
+                            rows_fb = json.loads(resp_fb.read().decode('utf-8') or '[]')
+                        row_fb = rows_fb[0] if rows_fb else {}
+                        return self._send_json(200, {
+                            "status": "success",
+                            "progress": row_fb.get("progress") or {},
+                            "tka_date": None
+                        })
+                    raise he
+            except Exception as e:
+                return self._send_500(e, "/api/user/progress")
+
         # Dashboard pengunjung (khusus server utama / bukan demo publik)
         if self.path.split('?', 1)[0] in ADMIN_VISITOR_PATHS:
             if PUBLIC_DEMO:
                 return self._send_json(403, {"status": "forbidden", "message": "Dimatikan saat demo publik."})
-            key = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query).get('key', [''])[0]
-            if key != visitor_log.ADMIN_KEY:
+            if not self._is_valid_admin():
                 return self._send_json(401, {"status": "unauthorized", "message": "Kunci admin salah atau tidak diberikan."})
             if self.path.split('?', 1)[0] == '/api/admin/visitors':
                 body = json.dumps(visitor_log.summary(), ensure_ascii=False).encode('utf-8')
@@ -1318,6 +2192,31 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             self._send_body(200, 'text/html; charset=utf-8', page_body,
                             {'Cache-Control': 'no-store'})
             return
+
+        # FASE 5 (T5.4): Halaman admin autopsi (GET)
+        if self.path.split('?', 1)[0] == '/admin/autopsi':
+            if PUBLIC_DEMO:
+                return self._send_json(403, {"status": "forbidden", "message": "Dimatikan saat demo publik."})
+            if not self._is_valid_admin():
+                return self._send_json(401, {"status": "unauthorized", "message": "Kunci admin salah atau tidak diberikan."})
+            return self._handle_admin_autopsi_page()
+
+        # FASE 5 (T5.4): API Autopsi Full (GET)
+        if self.path.split('?', 1)[0] == '/api/admin/autopsy_full':
+            return self._handle_admin_autopsy_full(payload=None)
+
+        # FASE A3: API Guru Autopsi Cached (GET)
+        if self.path.split('?', 1)[0] == '/api/autopsy/coach':
+            return self._handle_get_autopsy_coach()
+
+        # FASE A5: API Kuota Guru Autopsi (GET)
+        if self.path.split('?', 1)[0] == '/api/autopsy/quota':
+            return self._handle_get_autopsy_quota()
+
+        # FASE D2: API AI Room Context (GET /api/ai-room/<mapel>/context)
+        m_ai_room_ctx = re.match(r"^/api/ai-room/([^/]+)/context$", self.path.split("?", 1)[0])
+        if m_ai_room_ctx:
+            return self._handle_get_ai_room_context(m_ai_room_ctx.group(1))
 
         # Snapshot konten server-rendered untuk reviewer otomatis (Fase bagikan online):
         # /audit?subject=matematika&paket=1&dari=1&sampai=10  (HTML)
@@ -1348,8 +2247,24 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         route_path = urllib.parse.urlparse(self.path).path or '/'
         if len(route_path) > 1 and route_path.endswith('/'):
             route_path = route_path.rstrip('/')
+
+        # FASE D2: Halaman Ruang Mapel (/ruang/<mapel>)
+        if route_path == '/ruang' or route_path.startswith('/ruang/'):
+            ruang_file = os.path.join(BASE_DIR, 'ruang.html')
+            if os.path.isfile(ruang_file):
+                try:
+                    with open(ruang_file, 'rb') as fh:
+                        page_body = fh.read()
+                    return self._send_body(200, 'text/html; charset=utf-8', page_body,
+                                            {'Cache-Control': 'no-cache'})
+                except (BrokenPipeError, ConnectionResetError):
+                    return
+                except Exception as e:
+                    return self._send_500(e, "/ruang")
+
         page_routes = {
             '/': 'landing.html',
+            '/landing': 'landing.html',
             '/app': 'index.html',
             '/privacy': 'privacy.html',
             '/terms': 'terms.html',
@@ -1377,7 +2292,47 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 "message": "Akses statis ke file ini tidak diizinkan.",
             })
 
+        # T2.1: sajikan aset teks statis (html/css/js/json) dengan gzip bila
+        # klien mendukung — transfer ~3-4x lebih kecil untuk HP berkuota.
+        if self._send_gzipped_static():
+            return
+
         return super().do_GET()
+
+    _GZIP_STATIC_EXTS = ('.html', '.css', '.js', '.json', '.svg', '.txt')
+
+    def _send_gzipped_static(self):
+        """Kirim file statis teks dengan gzip. Kembalikan True bila terkirim."""
+        accept = (self.headers.get('Accept-Encoding') or '').lower()
+        if 'gzip' not in accept:
+            return False
+        clean = urllib.parse.unquote(self.path).split('?', 1)[0].split('#', 1)[0]
+        if not clean.lower().endswith(self._GZIP_STATIC_EXTS):
+            return False
+        fpath = self.translate_path(self.path)
+        if not os.path.isfile(fpath):
+            return False
+        size = os.path.getsize(fpath)
+        if size < 1024 or size > 2_000_000:
+            return False
+        try:
+            with open(fpath, 'rb') as fh:
+                body = gzip.compress(fh.read(), compresslevel=6)
+        except OSError:
+            return False
+        ctype = self.guess_type(fpath)
+        self.send_response(200)
+        self.send_header('Content-Type', ctype)
+        self.send_header('Content-Encoding', 'gzip')
+        self.send_header('Vary', 'Accept-Encoding')
+        self.send_header('Content-Length', str(len(body)))
+        self.end_headers()
+        if self.command != 'HEAD':
+            try:
+                self.wfile.write(body)
+            except (BrokenPipeError, ConnectionResetError):
+                pass
+        return True
 
     def do_POST(self):
         # Fase 2, Fix 3b: tolak body > 1MB di awal (413) sebelum dibaca penuh.
@@ -1565,13 +2520,38 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                         "message": "Antrean AI Tutor sedang padat. Tunggu beberapa detik lalu kirim ulang ya!",
                     }, cookie_value=new_cookie)
 
+                # FASE B1: Ambil data attempt murid dari database untuk merakit konteks perilaku
+                behavior_context = ""
+                try:
+                    auth_hdr = self.headers.get('Authorization', '') or ''
+                    token_user = auth_hdr[7:].strip() if auth_hdr.startswith('Bearer ') else ''
+                    target_user_id = None
+                    if token_user:
+                        _vok, _u = _verify_supabase_token(token_user)
+                        if _vok and (_u or {}).get('id'):
+                            target_user_id = _u['id']
+
+                    client_attempt_id = payload.get("attempt_id")
+                    behavior_context = build_soal_behavior_context(
+                        user_id=target_user_id,
+                        nomor=nomor,
+                        question_id=payload.get("question_id"),
+                        attempt_id=client_attempt_id
+                    )
+                    if behavior_context:
+                        print(f"[/api/tutor/chat] Konteks perilaku aktif untuk soal #{nomor}: {behavior_context}")
+                except Exception as _b_err:
+                    sys.stderr.write(f"[/api/tutor/chat] Gagal merakit behavior context: {_b_err}\n")
+                    behavior_context = ""
+
                 try:
                     reply, meta = tutor_engine.generate_tutor_response(
                         ctx["canon_ctx"], ctx["solution"], ctx["official_answer"],
                         history_for_prompt, message, summary=conv.get("summary"),
                         subject_name=ctx["subject_name"],
                         model=model,
-                        image_paths=ctx.get("image_paths", []))
+                        image_paths=ctx.get("image_paths", []),
+                        behavior_context=behavior_context)
                 except tutor_llm.LLMError as e:
                     _refresh_tutor_summary(conv_id)
                     return self._send_json(502, {
@@ -1671,6 +2651,34 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             except Exception as e:
                 return self._send_500(e, "/api/feedback", cookie_value=new_cookie)
 
+        elif self.path == '/api/bug-reports':
+            # FASE 2 (T2.6): Simpan laporan kendala / bug soal dari pengguna
+            content_length = int(self.headers.get('Content-Length', 0))
+            _payload_raw = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            user_key, new_cookie = self._tutor_session()
+            try:
+                payload = json.loads(_payload_raw) if _payload_raw else {}
+                title = str(payload.get('title') or '').strip()[:200]
+                description = str(payload.get('description') or '').strip()[:2000]
+                if not description:
+                    return self._send_json(400, {"status": "error", "message": "Deskripsi kendala wajib diisi."})
+                reports_path = os.path.join(BASE_DIR, 'data', 'bug_reports.jsonl')
+                record = {
+                    "timestamp": time.strftime('%Y-%m-%d %H:%M:%S'),
+                    "user_key": user_key,
+                    "title": title,
+                    "description": description,
+                    "ip": self.client_address[0]
+                }
+                with open(reports_path, 'a', encoding='utf-8') as f:
+                    f.write(json.dumps(record, ensure_ascii=False) + '\n')
+                return self._send_json(200, {
+                    "status": "success",
+                    "message": "Laporan kendala berhasil disimpan.",
+                }, cookie_value=new_cookie)
+            except Exception as e:
+                return self._send_500(e, "/api/bug-reports", cookie_value=new_cookie)
+
         elif self.path == '/api/tutor/reset_quota':
             user_key, new_cookie = self._tutor_session()
             try:
@@ -1689,7 +2697,21 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
             user_key, new_cookie = self._tutor_session()
             try:
                 payload = json.loads(post_data) if post_data else {}
-                is_login = bool(payload.get('logged_in') or payload.get('email') or payload.get('is_logged_in'))
+                if auth_verify.auth_verify_enabled():
+                    # T2.11: JANGAN percaya klaim klien. Tier 'free' hanya bila
+                    # JWT Supabase valid (header Authorization: Bearer ...).
+                    # Tanpa token valid -> guest (user tidak terkunci, hanya
+                    # kuota tamu sampai token terkirim).
+                    _vok, _claims = auth_verify.verify_request(self.headers)
+                    is_login = bool(_vok)
+                    if is_login and isinstance(_claims, dict):
+                        payload = dict(payload)
+                        payload['email'] = _claims.get('email') or payload.get('email')
+                        payload['name'] = (
+                            (_claims.get('user_metadata') or {}).get('full_name')
+                            or payload.get('name'))
+                else:
+                    is_login = bool(payload.get('logged_in') or payload.get('email') or payload.get('is_logged_in'))
                 tier = "free" if is_login else "guest"
                 quota = tutor_store.set_user_tier(user_key, tier=tier)
                 quota["is_logged_in"] = is_login
@@ -1711,6 +2733,302 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
                 }, cookie_value=new_cookie)
             except Exception as e:
                 return self._send_500(e, "/api/tutor/sync_user", cookie_value=new_cookie)
+
+        elif self.path == '/api/attempts':
+            # FASE 3 (T3.2): terima attempt dari klien, teruskan ke Supabase.
+            # Identitas dari JWT yang diverifikasi — JANGAN percaya user_id klien.
+            # Server meneruskan Bearer token user ke Supabase REST; RLS
+            # (attempts_owner) menegakkan user_id = auth.uid().
+            try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') \
+                    if content_length > 0 else '{}'
+                payload = json.loads(post_data) if post_data else {}
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[len('Bearer '):].strip() \
+                    if _auth.startswith('Bearer ') else ''
+                if not _token:
+                    return self._send_json(401, {
+                        "status": "unauthorized",
+                        "message": "Login diperlukan untuk menyimpan hasil tryout.",
+                    })
+                # Verifikasi via Supabase Auth API (mendukung HS256/ES256/RS256).
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok or not (_user or {}).get('id'):
+                    return self._send_json(401, {
+                        "status": "unauthorized",
+                        "message": "Sesi login tidak valid atau kadaluarsa. Coba logout lalu login lagi.",
+                    })
+                user_id = _user['id']
+                sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+                sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+                if not sb_url or not sb_key:
+                    return self._send_json(503, {
+                        "status": "error",
+                        "message": "Penyimpanan server belum dikonfigurasi "
+                                   "(SUPABASE_URL / SUPABASE_ANON_KEY).",
+                    })
+                ok_items, err_items, clean_items = clean_attempt_items(payload.get('items'))
+                if not ok_items:
+                    sys.stderr.write(f"[/api/attempts] 400 Bad Request: {err_items}\n")
+                    _log_server_error(ValueError(err_items), context="POST /api/attempts payload.items validation")
+                    return self._send_json(400, {
+                        "status": "error",
+                        "message": err_items,
+                    })
+                # Idempotency: client_id dari klien jadi client_attempt_id.
+                # Kirim dua kali dengan client_id sama -> satu baris.
+                client_attempt_id = str(payload.get("client_id") or "")[:64]
+                if not client_attempt_id:
+                    return self._send_json(400, {
+                        "status": "error",
+                        "message": "client_id wajib diisi.",
+                    })
+                # Cek apakah sudah ada (idempotent)
+                try:
+                    chk = urllib.request.Request(
+                        sb_url + "/rest/v1/attempts?user_id=eq." + user_id +
+                        "&client_attempt_id=eq." + urllib.parse.quote(client_attempt_id) +
+                        "&select=id",
+                        headers={"apikey": sb_key, "Authorization": "Bearer " + _token})
+                    with urllib.request.urlopen(chk, timeout=10) as cresp:
+                        existing = json.loads(cresp.read().decode("utf-8") or "[]")
+                    if existing:
+                        return self._send_json(200, {
+                            "status": "success",
+                            "attempt_id": existing[0].get("id"),
+                            "duplicate": True,
+                        })
+                except Exception:
+                    pass  # lanjut ke INSERT; constraint UNIQUE jadi pengaman akhir
+                row = {
+                    "user_id": user_id,  # dari token, bukan dari klien
+                    "client_attempt_id": client_attempt_id,
+                    "mapel": str(payload.get("subject") or payload.get("mapel") or "")[:64],
+                    "paket": max(0, min(int(payload.get("paket") or 0), 99)),
+                    "n_questions": max(1, min(int(payload.get("n_questions") or len(clean_items)), 200)),
+                    "duration_limit_s": max(0, min(int(payload.get("duration_limit_s") or 0), 86400)),
+                    "ended_by": "timer" if payload.get("ended_by") == "timer" else "user",
+                    "started_at": payload.get("started_at"),
+                    "finished_at": payload.get("finished_at"),
+                    "score": (
+                        payload.get("score") if isinstance(payload.get("score"), int)
+                        else (round(100 * sum(1 for x in clean_items if x.get("is_correct") is True) / max(1, len(clean_items))) if clean_items else 0)
+                    ),
+                    "items": clean_items,
+                }
+                req = urllib.request.Request(
+                    sb_url + "/rest/v1/attempts",
+                    data=json.dumps(row).encode("utf-8"), method="POST",
+                    headers={"apikey": sb_key,
+                             "Authorization": "Bearer " + _token,
+                             "Content-Type": "application/json",
+                             "Prefer": "return=representation"})
+                try:
+                    with urllib.request.urlopen(req, timeout=15) as resp:
+                        saved = json.loads(resp.read().decode("utf-8") or "[]")
+                    return self._send_json(200, {
+                        "status": "success",
+                        "attempt_id": (saved[0].get("id") if saved else None),
+                    })
+                except urllib.error.HTTPError as e:
+                    if e.code == 409:
+                        # 409 Conflict: client_attempt_id sudah ada (idempotency pengaman akhir)
+                        return self._send_json(200, {
+                            "status": "success",
+                            "duplicate": True,
+                            "message": "Attempt sudah tersimpan sebelumnya.",
+                        })
+                    return self._send_json(502, {
+                        "status": "error",
+                        "message": f"Supabase menolak penyimpanan (HTTP {e.code}).",
+                    })
+                except urllib.error.URLError:
+                    return self._send_json(502, {
+                        "status": "error",
+                        "message": "Tidak dapat menghubungi Supabase.",
+                    })
+            except Exception as e:
+                return self._send_500(e, "/api/attempts")
+
+        elif self.path == '/api/autopsy/analyze':
+            # FASE 5 (T5.1): analisis Autopsi untuk attempt.
+            # Input: {items, n_questions, duration_limit_s, ended_by, mapel}
+            # Output: hasil analyzer. Preview gratis = kebocoran #1 terbuka, sisanya terkunci.
+            try:
+                if autopsy_analyzer is None:
+                    return self._send_json(503, {"status": "error", "message": "Analyzer belum tersedia."})
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+                payload = json.loads(post_data) if post_data else {}
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[7:] if _auth.startswith('Bearer ') else ''
+                is_guest = not bool(_token)
+                is_admin = False
+                if _token:
+                    _vok, _user = _verify_supabase_token(_token)
+                    if not _vok and not payload.get('is_guest'):
+                        # Cek apakah token admin
+                        if self._is_valid_admin():
+                            is_admin = True
+                        else:
+                            is_guest = True
+                    elif _vok:
+                        # User valid
+                        pass
+                if self._is_valid_admin() or payload.get('founder_mode'):
+                    is_admin = True
+
+                items = payload.get('items')
+                if not isinstance(items, list) or not items:
+                    return self._send_json(400, {"status": "error", "message": "Items kosong."})
+                # Siapkan input analyzer
+                attempt_data = {
+                    'n_questions': int(payload.get('n_questions') or len(items)),
+                    'duration_limit_s': int(payload.get('duration_limit_s') or 4500),
+                    'ended_by': payload.get('ended_by') or 'user',
+                    'kunci': {},  # is_correct dari klien untuk preview; server hitung ulang saat ada kunci
+                    'items': items,
+                }
+                # Jika klien kirim is_correct, pakai itu (preview). Server akan validasi ulang via kunci di Fase 6+.
+                result = autopsy_analyzer.analyze(attempt_data)
+                # Kebocoran dibuka semua (Paywall OFF sesuai keputusan produk)
+                keb = result.get('kebocoran') or []
+                preview = {
+                    'status': 'success',
+                    'preview': False,
+                    'is_guest': is_guest,
+                    'is_founder': is_admin,
+                    'n_questions': result.get('n_questions'),
+                    'n_answered': result.get('n_answered'),
+                    'n_correct': result.get('n_correct'),
+                    'data_tipis': result.get('data_tipis'),
+                    'kebocoran_1': keb[0] if keb else None,
+                    'kebocoran_all': keb,
+                    'kebocoran_locked': [],
+                    'rapuh_count': len(result.get('rapuh_ids') or []),
+                    'topik_prioritas': result.get('topik_prioritas') or [],
+                }
+                return self._send_json(200, preview)
+            except Exception as e:
+                return self._send_500(e, "/api/autopsy/analyze")
+
+        elif self.path.split('?', 1)[0] == '/api/autopsy/coach':
+            return self._handle_post_autopsy_coach()
+
+        # FASE D3: API AI Room Chat (POST /api/ai-room/<mapel>/chat)
+        elif re.match(r"^/api/ai-room/([^/]+)/chat$", self.path.split("?", 1)[0]):
+            m_ai_room_chat = re.match(r"^/api/ai-room/([^/]+)/chat$", self.path.split("?", 1)[0])
+            return self._handle_post_ai_room_chat(m_ai_room_chat.group(1))
+
+        elif self.path.split('?', 1)[0] == '/admin/autopsi':
+            if PUBLIC_DEMO:
+                return self._send_json(403, {"status": "forbidden", "message": "Dimatikan saat demo publik."})
+            if not self._is_valid_admin():
+                return self._send_json(401, {"status": "unauthorized", "message": "Kunci admin salah atau tidak diberikan."})
+            return self._handle_admin_autopsi_page()
+
+        elif self.path.split('?', 1)[0] == '/api/admin/autopsy_full':
+            content_length = int(self.headers.get('Content-Length', 0))
+            post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+            try:
+                payload = json.loads(post_data) if post_data else {}
+            except Exception:
+                payload = {}
+        elif self.path == '/api/user/progress':
+            # BUG-001 (Tugas D): simpan progress belajar user ke Supabase.
+            try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                if content_length > 256 * 1024:
+                    return self._send_json(413, {"status": "error", "message": "Ukuran data progress melebihi batas 256 KB."})
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[7:] if _auth.startswith('Bearer ') else ''
+                if not _token:
+                    return self._send_json(401, {"status": "unauthorized"})
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok:
+                    return self._send_json(401, {"status": "unauthorized"})
+                user_id = _user['id']
+                post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+                payload = json.loads(post_data) if post_data else {}
+                progress_data = payload.get('progress')
+                if not isinstance(progress_data, dict):
+                    return self._send_json(400, {"status": "error", "message": "Format progress harus JSON object."})
+                sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+                sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+                req = urllib.request.Request(
+                    sb_url + "/rest/v1/users?id=eq." + user_id,
+                    data=json.dumps({"progress": progress_data}).encode('utf-8'), method="PATCH",
+                    headers={"apikey": sb_key, "Authorization": "Bearer " + _token,
+                             "Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=10):
+                    pass
+                return self._send_json(200, {"status": "success"})
+            except Exception as e:
+                return self._send_500(e, "/api/user/progress")
+
+        elif self.path == '/api/user/tka_date':
+            # FASE 5 (T5.3): simpan tanggal TKA user.
+            try:
+                _auth = self.headers.get('Authorization', '') or ''
+                _token = _auth[7:] if _auth.startswith('Bearer ') else ''
+                if not _token:
+                    return self._send_json(401, {"status": "unauthorized"})
+                _vok, _user = _verify_supabase_token(_token)
+                if not _vok:
+                    return self._send_json(401, {"status": "unauthorized"})
+                user_id = _user['id']
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') if content_length > 0 else '{}'
+                payload = json.loads(post_data) if post_data else {}
+                tka_date = str(payload.get('tka_date') or '')[:10]
+                if not re.match(r'^\d{4}-\d{2}-\d{2}$', tka_date):
+                    return self._send_json(400, {"status": "error", "message": "Format tanggal salah."})
+                sb_url = os.environ.get('SUPABASE_URL', '').rstrip('/')
+                sb_key = os.environ.get('SUPABASE_ANON_KEY', '')
+                req = urllib.request.Request(
+                    sb_url + "/rest/v1/users?id=eq." + user_id,
+                    data=json.dumps({"tka_date": tka_date}).encode('utf-8'), method="PATCH",
+                    headers={"apikey": sb_key, "Authorization": "Bearer " + _token,
+                             "Content-Type": "application/json"})
+                with urllib.request.urlopen(req, timeout=10):
+                    pass
+                return self._send_json(200, {"status": "success", "tka_date": tka_date})
+            except Exception as e:
+                return self._send_500(e, "/api/user/tka_date")
+
+        elif self.path.split('?', 1)[0] == '/api/admin/flags':
+            # FASE 0 T0.7: ubah flag TANPA deploy ulang. Proteksi: kunci admin
+            # yang sama dengan dashboard /pengunjung (header X-Admin-Key atau JSON body {"key": "..."}).
+            try:
+                content_length = int(self.headers.get('Content-Length', 0))
+                post_data = self.rfile.read(content_length).decode('utf-8') \
+                    if content_length > 0 else '{}'
+                try:
+                    payload = json.loads(post_data) if post_data else {}
+                except Exception:
+                    payload = {}
+                if not self._is_valid_admin(payload):
+                    return self._send_json(401, {
+                        "status": "unauthorized",
+                        "message": "Kunci admin salah atau tidak diberikan.",
+                    })
+                name = str(payload.get('name', ''))
+                enabled = bool(payload.get('enabled', False))
+                rollout = payload.get('rollout_pct')
+                ok = feature_flags.set_flag(name, enabled, rollout)
+                if not ok:
+                    return self._send_json(400, {
+                        "status": "error",
+                        "message": "Nama flag tidak dikenal.",
+                        "known": sorted(feature_flags.DEFAULT_FLAGS.keys()),
+                    })
+                return self._send_json(200, {
+                    "status": "success",
+                    "flags": feature_flags.get_all_flags(),
+                })
+            except Exception as e:
+                return self._send_500(e, "/api/admin/flags")
 
         else:
             self.send_response(404)

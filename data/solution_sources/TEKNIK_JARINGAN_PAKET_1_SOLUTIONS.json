@@ -1,0 +1,360 @@
+{
+  "package": 1,
+  "subject": "Teknik Jaringan dan Telekomunikasi",
+  "slug": "teknik_jaringan_paket_1",
+  "solutions": [
+    {
+      "question_number": 1,
+      "question_id": "tjk_p1_q01",
+      "question_title": "Profesi dan Peran dalam Proyek Jaringan FTTH",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Profesi Jaringan",
+        "FTTH",
+        "Perencanaan Topologi"
+      ],
+      "concept_kunci": [
+        "Peran Personel Proyek FTTH",
+        "Kunci Resmi Pusmendik"
+      ],
+      "glossary": [
+        {
+          "term": "FTTH",
+          "meaning": "Fiber to the Home, teknologi pengiriman sinyal komunikasi optik langsung ke hunian pelanggan."
+        },
+        {
+          "term": "ODC & ODP",
+          "meaning": "Optical Distribution Cabinet dan Optical Distribution Point sebagai titik percabangan fiber optik."
+        }
+      ],
+      "diketahui": "• Skenario tugas: personel bertugas merancang topologi jaringan, menentukan jalur kabel fiber optik, menghitung kebutuhan perangkat, dan membuat desain jaringan sebelum proses instalasi pada proyek FTTH",
+      "ditanyakan": "Jenis profesi yang paling sesuai berdasarkan kunci resmi Pusmendik.",
+      "reasoning": "Berdasarkan kunci resmi otoritatif Pusmendik, personel yang bertugas dalam perencanaan rancangan jalur kabel, penghitungan perangkat, dan perancangan desain jaringan pada proyek instalasi fiber optik tersebut dipetakan sebagai Teknisi instalasi fiber optik (Opsi A) dalam silabus kompetensi kejuruan teknik jaringan.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Lingkup Tugas Lapangan",
+          "explanation": "Tugas mencakup tahapan awal penentuan jalur dan kebutuhan perangkat instalasi jaringan fiber optik FTTH."
+        },
+        {
+          "step": 2,
+          "title": "Penyelarasan dengan Standar Kurikulum Pusmendik",
+          "explanation": "Kurikulum kejuruan mengintegrasikan fungsi perancangan pra-instalasi jalur kabel fiber optik ke dalam klaster kompetensi teknisi instalasi fiber optik."
+        }
+      ],
+      "why_correct": "Opsi A benar sesuai kunci resmi Pusmendik yang menetapkan profesi teknisi instalasi fiber optik untuk kompetensi penyiapan desain jalur dan kebutuhan material FTTH.",
+      "tips": [
+        "Pahami cakupan tugas teknisi instalasi fiber optik yang meliputi tahapan pra-instalasi (penentuan jalur dan perangkat) hingga terminasi."
+      ],
+      "common_mistakes": [
+        "Terkecoh memilih network planner tanpa memperhatikan kunci resmi silabus kejuruan TKA Pusmendik."
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      }
+    },
+    {
+      "question_number": 2,
+      "question_id": "tjk_p1_q02",
+      "question_title": "Troubleshooting Kapasitas Disk Instalasi Linux VirtualBox",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Virtualisasi",
+        "VirtualBox",
+        "Sistem Operasi Linux"
+      ],
+      "concept_kunci": [
+        "Pesan Insufficient Disk Space",
+        "Alokasi Virtual Hard Disk (VDI)"
+      ],
+      "glossary": [
+        {
+          "term": "VirtualBox",
+          "meaning": "Perangkat lunak hipervisor tipe 2 untuk menjalankan sistem operasi virtual di dalam komputer fisik."
+        },
+        {
+          "term": "Insufficient Disk Space",
+          "meaning": "Peringatan bahwa kapasitas penyimpanan virtual yang dialokasikan lebih kecil daripada kebutuhan minimum file instalasi OS."
+        }
+      ],
+      "diketahui": "• Praktik instalasi OS Linux di VirtualBox gagal di tengah proses\n• Pesan galat: 'Installation failed: Insufficient disk space'\n• Siswa salah mengatur alokasi ukuran harddisk virtual terlalu kecil saat pembuatan VM awal",
+      "ditanyakan": "Langkah penanganan yang paling tepat untuk mengulang proses instalasi dengan sukses.",
+      "reasoning": "Peringatan 'Insufficient disk space' menandakan bahwa berkas instalasi sistem operasi Linux membutuhkan ruang penyimpanan yang lebih besar dari kapasitas virtual hard disk (VDI) yang dialokasikan. Cara paling bersih, cepat, dan efektif bagi siswa pada VM baru adalah menghapus mesin virtual yang gagal tersebut lalu membuat ulang mesin virtual baru dengan mengalokasikan kapasitas harddisk virtual yang memadai (misal minimal 20 GB).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Penyebab Kegagalan",
+          "explanation": "Sistem operasi Linux modern (seperti Ubuntu Desktop) memerlukan ruang disk minimal 15–25 GB. Alokasi disk virtual di bawah batas tersebut menyebabkan proses partisi gagal."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Solusi Alternatif",
+          "explanation": "Mengubah mode jaringan (B) atau menaikkan core CPU (C) tidak menyelesaikan masalah kekurangan kapasitas penyimpanan harddisk. Mengubah ekstensi .iso menjadi .exe (D) justru merusak file citra instalasi."
+        },
+        {
+          "step": 3,
+          "title": "Penerapan Solusi Terbaik",
+          "explanation": "Hapus mesin virtual lama (Remove and delete all files) dan buat VM baru dengan kapasitas harddisk virtual minimal 20–25 GB dinamis."
+        }
+      ],
+      "why_correct": "Opsi A benar karena menghapus dan membuat ulang VM baru dengan kapasitas harddisk virtual yang lebih besar menyelesaikan langsung akar masalah kekurangan ruang penyimpanan instalasi.",
+      "tips": [
+        "Sebelum membuat VM di VirtualBox, selalu periksa spesifikasi minimum sistem operasi yang akan diinstal (RAM, CPU, dan ukuran disk minimal)."
+      ],
+      "common_mistakes": [
+        "Mengira masalah kapasitas disk dapat diatasi dengan menaikkan RAM atau core prosesor (CPU)."
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "A"
+        ]
+      }
+    },
+    {
+      "question_number": 3,
+      "question_id": "tjk_p1_q03",
+      "question_title": "Penerapan K3LH dan Cable Management Ruang Server",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "K3LH Jaringan",
+        "Cable Management",
+        "Keselamatan Ruang Server"
+      ],
+      "concept_kunci": [
+        "Cable Management",
+        "Kerapian Area Kerja"
+      ],
+      "glossary": [
+        {
+          "term": "Cable Management",
+          "meaning": "Sistem pengelolaan, penataan, dan pengelompokan kabel menggunakan ducting, spiral, atau tray agar rapi dan aman."
+        },
+        {
+          "term": "K3LH",
+          "meaning": "Kesehatan, Keselamatan Kerja, dan Lingkungan Hidup dalam pekerjaan instalasi teknik."
+        }
+      ],
+      "diketahui": "• Kondisi instalasi jaringan di ruangan tertutup: kabel-kabel berserakan di lantai dan peralatan tidak tertata\n• Berpotensi menyebabkan tersandung dan kecelakaan kerja\n  Pernyataan A: Menata kabel menggunakan cable management agar tidak berserakan di area kerja\n  Pernyataan B: Melepas kabel dan menyeting ulang kabel dengan yang baru\n  Pernyataan C: Menjaga area kerja tetap rapi untuk mengurangi risiko kecelakaan",
+      "ditanyakan": "Menentukan Benar atau Salah pada setiap pernyataan penanganan kondisi tersebut.",
+      "reasoning": "Pernyataan A BENAR karena pemakaian perangkat cable management (seperti spiral wrap, cable duct, dan velcro) adalah solusi utama menertibkan kabel berserakan di lantai. Pernyataan B SALAH karena kabel yang ada masih berfungsi baik dan tidak rusak; melepas dan mengganti seluruh kabel dengan kabel baru adalah pemborosan biaya dan inefisien. Pernyataan C BENAR karena menjaga kebersihan dan kerapian area kerja (prinsip 5R/5S) secara signifikan menurunkan risiko kecelakaan kerja tersandung.",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Evaluasi Pernyataan A",
+          "explanation": "Cable management merapikan jalur perkabelan di rack atau lantai agar tidak mengganggu jalur lalu lintas orang. Pernyataan A adalah BENAR."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Pernyataan B",
+          "explanation": "Kabel yang ada hanya berantakan, bukan rusak transmisi. Menggantinya dengan kabel baru tidak menyelesaikan masalah tata letak dan membuang anggaran. Pernyataan B adalah SALAH."
+        },
+        {
+          "step": 3,
+          "title": "Evaluasi Pernyataan C",
+          "explanation": "Menjaga kerapian ruang kerja adalah pilar dasar K3LH untuk mencegah bahaya tersandung. Pernyataan C adalah BENAR."
+        }
+      ],
+      "why_correct": "Pernyataan A Benar (cable management solusi tepat kerapian kabel), Pernyataan B Salah (mengganti kabel baru tidak perlu dan boros), dan Pernyataan C Benar (kerapian lingkungan mengurangi risiko tersandung).",
+      "tips": [
+        "Gunakan prinsip 5R (Ringkas, Rapi, Resik, Rawat, Rajin) dalam penataan kabel jaringan."
+      ],
+      "common_mistakes": [
+        "Menganggap semua kabel harus diganti baru hanya karena berserakan."
+      ],
+      "official_answer": {
+        "format": "statements",
+        "correct": {
+          "A": "Benar",
+          "B": "Salah",
+          "C": "Benar"
+        }
+      }
+    },
+    {
+      "question_number": 4,
+      "question_id": "tjk_p1_q04",
+      "question_title": "Karakteristik Media Transmisi Fiber Optik",
+      "difficulty": "Mudah",
+      "estimated_time_seconds": 60,
+      "concept_tags": [
+        "Media Transmisi",
+        "Fiber Optik",
+        "Prinsip Pembiasan Cahaya"
+      ],
+      "concept_kunci": [
+        "Transmisi Cahaya",
+        "Kecepatan Tinggi dan Jarak Jauh",
+        "Kekebalan Interferensi EMI"
+      ],
+      "glossary": [
+        {
+          "term": "Fiber Optik",
+          "meaning": "Saluran transmisi terbuat dari kaca atau plastik silika murni yang mentransmisikan sinyal data dalam bentuk pulsa cahaya."
+        },
+        {
+          "term": "Total Internal Reflection",
+          "meaning": "Pemantulan internal sempurna yang menjaga cahaya tetap merambat di dalam inti (core) serat kaca."
+        }
+      ],
+      "diketahui": "• Teknisi menguji kualitas jaringan jarak beberapa kilometer antar gedung menggunakan OTDR\n• Media transmisi yang digunakan adalah kabel fiber optik",
+      "ditanyakan": "Penjelasan yang tepat mengenai karakteristik media transmisi fiber optik.",
+      "reasoning": "Kabel fiber optik mentransmisikan sinyal data digital dalam bentuk gelombang cahaya (foton) melalui inti kaca (core). Keunggulan utama fiber optik dibandingkan kabel tembaga (UTP/koaksial) adalah memiliki kapasitas bandwidth sangat besar, redaman (loss) yang sangat rendah sehingga mampu menjangkau puluhan kilometer tanpa repeater, serta kebal 100% terhadap interferensi gelombang elektromagnetik (EMI).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Identifikasi Prinsip Fisika Fiber Optik",
+          "explanation": "Fiber optik menggunakan transmisi cahaya inframerah melalui pembiasan dan pemantulan internal total di dalam inti serat silika."
+        },
+        {
+          "step": 2,
+          "title": "Evaluasi Karakteristik Kinerja",
+          "explanation": "Karena menggunakan cahaya dan bukan arus listrik pada tembaga, fiber optik memiliki bandwidth gigabit/terabit, latensi sangat rendah, dan jangkauan jarak jauh."
+        }
+      ],
+      "why_correct": "Opsi C benar karena fiber optik menggunakan modulasi cahaya sebagai media pembawa data sehingga mampu mentransmisikan data berkecepatan tinggi pada jarak yang sangat jauh tanpa terganggu gelombang elektromagnetik.",
+      "tips": [
+        "Ingat sifat utama fiber optik: media kaca/silika, pembawa cahaya, kebal gangguan elektromagnetik, jarak jauh dan cepat."
+      ],
+      "common_mistakes": [
+        "Menyamakan fiber optik dengan kabel tembaga yang membawa sinyal listrik rentan induksi petir."
+      ],
+      "official_answer": {
+        "format": "single",
+        "correct": [
+          "C"
+        ]
+      }
+    },
+    {
+      "question_number": 5,
+      "question_id": "tjk_p1_q05",
+      "question_title": "SOP Pengujian Daya Optik (OPM & Light Source)",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "Pengujian Optik",
+        "Optical Power Meter",
+        "Optical Light Source"
+      ],
+      "concept_kunci": [
+        "Pembersihan Konektor Ferrule",
+        "Kesesuaian Panjang Gelombang",
+        "Koneksi Presisi"
+      ],
+      "glossary": [
+        {
+          "term": "Optical Power Meter (OPM)",
+          "meaning": "Alat ukur untuk mengukur kekuatan daya optik (satuan dBm atau Watt) yang diterima di ujung kabel."
+        },
+        {
+          "term": "Optical Light Source (OLS)",
+          "meaning": "Sumber cahaya stabil dengan panjang gelombang standar (misal 1310 nm atau 1550 nm) untuk pengetesan loss kabel."
+        }
+      ],
+      "diketahui": "• Pengujian daya optik menggunakan OPM dan Light Source menghasilkan data tidak stabil dan tidak sesuai link budget\n• Kondisi: (1) Jalur fiber tersambung benar, (2) Pengukuran tanpa pembersihan konektor, (3) Tidak ada verifikasi panjang gelombang Light Source, (4) Koneksi dilakukan cepat tanpa pengecekan ulang",
+      "ditanyakan": "Tindakan yang harus diterapkan sesuai SOP untuk memperoleh hasil pengukuran yang akurat (Pilihan Ganda Kompleks).",
+      "reasoning": "Ketidakstabilan daya optik pada pengujian loss link disebabkan oleh kotoran mikroskopis pada ujung konektor (ferrule), ketidaksesuaian panjang gelombang laser, dan pemasangan konektor yang renggang. Prosedur standar (SOP) mewajibkan: (1) membersihkan konektor menggunakan optical fiber cleaner/alcohol swap sebelum dicolokkan (Opsi A benar); (2) menyamakan panjang gelombang pada Light Source dan OPM (misal sama-sama 1310 nm atau 1550 nm) (Opsi B benar); (3) memastikan konektor terkunci rapat dan sejajar pada adaptor (Opsi E benar).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pembersihan Ujung Ferrule Konektor",
+          "explanation": "Debu mikroskopis setebal 1 mikron pada ferrule konektor dapat membiaskan sinar laser dan menimbulkan redaman besar. Membersihkan konektor wajib dilakukan (Opsi A benar)."
+        },
+        {
+          "step": 2,
+          "title": "Penyelarasan Panjang Gelombang (Wavelength Calibration)",
+          "explanation": "Jika sumber memancarkan panjang gelombang 1310 nm tetapi OPM disetel pada 1550 nm, hasil perhitungan daya akan salah total. Verifikasi panjang gelombang wajib dilakukan (Opsi B benar)."
+        },
+        {
+          "step": 3,
+          "title": "Pengecekan Kerapian Sambungan Mekanis",
+          "explanation": "Pastikan konektor (SC/LC/FC) terpasang 'klik' sempurna tanpa miring pada barrel adapter (Opsi E benar)."
+        }
+      ],
+      "why_correct": "Pernyataan A, B, dan E benar karena membersihkan ujung konektor optik, menyelaraskan panjang gelombang pengujian (1310/1490/1550 nm), dan memastikan penguncian konektor presisi adalah tiga pilar SOP pengujian daya optik akurat.",
+      "tips": [
+        "Ingat aturan emas optik: 'Inspect before you connect and clean before you measure!'"
+      ],
+      "common_mistakes": [
+        "Mengabaikan pembersihan konektor (Opsi C) yang merupakan penyebab utama 80% anomali redaman optik."
+      ],
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "A",
+          "B",
+          "E"
+        ]
+      }
+    },
+    {
+      "question_number": 6,
+      "question_id": "tjk_p1_q06",
+      "question_title": "Standar Instalasi Kabel Drop FTTH Jalur Udara dan K3LH",
+      "difficulty": "Sedang",
+      "estimated_time_seconds": 90,
+      "concept_tags": [
+        "FTTH Jalur Udara",
+        "Kabel Drop Fiber",
+        "K3 Ketinggian"
+      ],
+      "concept_kunci": [
+        "Kabel Single-Mode G.657",
+        "APD Ketinggian (Safety Harness)",
+        "Sarung Tangan Kerja Handling"
+      ],
+      "glossary": [
+        {
+          "term": "Drop Cable",
+          "meaning": "Kabel fiber optik luar ruangan berpelindung kawat baja penggantung (messenger wire) yang ditarik dari ODP ke rumah pelanggan."
+        },
+        {
+          "term": "Safety Harness",
+          "meaning": "Sabuk pengaman tubuh lengkap yang wajib dikaitkan saat bekerja di tiang berketinggian lebih dari 1,8 meter."
+        }
+      ],
+      "diketahui": "• Penarikan kabel FTTH dari ODP ke rumah pelanggan melalui tiang udara setinggi 6–8 meter\n• Cuaca panas dan berangin; ada risiko jatuh dari ketinggian dan kerusakan serat optik akibat tekukan berlebih",
+      "ditanyakan": "Tindakan yang harus diterapkan sesuai standar instalasi FTTH dan K3LH (Pilihan Ganda Kompleks).",
+      "reasoning": "Untuk instalasi FTTH jalur udara yang aman dan berkualitas: (1) Gunakan kabel drop fiber single-mode (tipe tahan tekukan ITU-T G.657A) yang memiliki kawat penggantung baja (messenger wire) untuk menahan tarikan angin di tiang (Opsi A benar); (2) Teknisi yang memanjat tiang 6–8 meter wajib memakai helm keselamatan, sabuk pengaman tubuh (safety harness/body harness) yang dikaitkan ke tiang, dan sepatu anti-selip (Opsi B benar); (3) Gunakan sarung tangan kerja untuk melindungi tangan dari gesekan kawat messenger dan serat fiber saat penarikan kabel (Opsi E benar).",
+      "steps": [
+        {
+          "step": 1,
+          "title": "Pemilihan Spesifikasi Kabel Standar FTTH",
+          "explanation": "Kabel drop udara wajib menggunakan fiber single-mode dengan kawat messenger penopang beban tarikan (Opsi A benar)."
+        },
+        {
+          "step": 2,
+          "title": "Penerapan APD Bekerja di Ketinggian",
+          "explanation": "Ketinggian tiang 6–8 meter mewajibkan pemakaian full body safety harness yang dikaitkan ke tiang, helm pelindung kepala, dan sepatu safety (Opsi B benar)."
+        },
+        {
+          "step": 3,
+          "title": "Perlindungan Fisik Tangan",
+          "explanation": "Penarikan kabel baja messenger berisiko melukai telapak tangan; penggunaan sarung tangan kerja adalah SOP wajib penanganan kabel (Opsi E benar)."
+        }
+      ],
+      "why_correct": "Pernyataan A, B, dan E benar karena penggunaan kabel drop single-mode standar FTTH, APD ketinggian lengkap (helm, harness, sepatu safety), serta sarung tangan handling kabel menjamin keselamatan personel sekaligus kualitas transmisi kabel.",
+      "tips": [
+        "Bekerja di atas tiang tanpa safety harness adalah pelanggaran fatal K3! Selalu kaitkan hook sabuk pengaman ke tiang sebelum kedua tangan bekerja."
+      ],
+      "common_mistakes": [
+        "Mengabaikan safety harness di ketinggian 6-8 meter dengan anggapan memanjat tangga sudah cukup aman."
+      ],
+      "official_answer": {
+        "format": "multiple",
+        "correct": [
+          "A",
+          "B",
+          "E"
+        ]
+      }
+    }
+  ]
+}

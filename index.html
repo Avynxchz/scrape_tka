@@ -2,9 +2,12 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TKA Master - Simulasi Ujian & AI Tutor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>musse - Simulasi Ujian &amp; AI Tutor</title>
   <meta name="description" content="Platform belajar interaktif dan simulasi ujian TKA Pusmendik Kemendikdasmen dilengkapi pembahasan langkah terstruktur dan AI Tutor cerdas.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/brand/favicon.png">
   
   <!-- Google Fonts: Inter (UI chrome; font konten soal tidak diubah) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,7 +30,7 @@
   <!-- Fase 5: poles visual khusus desktop -->
   <link rel="stylesheet" href="desktop-improve.css?v=1">
   <!-- Stitch home: font & ikon (scoped di .home-overlay) -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
   <link rel="stylesheet" href="home_stitch.css?v=2">
   <!-- Fase 5: polesan khusus desktop (>=901px) — tidak menyentuh mobile -->
@@ -77,16 +80,16 @@
        Muncul sebelum soal; klik card Paket -> masuk soal.
        Data mapel di-inject dari app.js (SUBJECT_CATALOG).
 ============================================================ -->
-  <div id="homeOverlay" class="home-overlay" role="dialog" aria-label="Beranda TKA Master">
+  <div id="homeOverlay" class="home-overlay" role="dialog" aria-label="Beranda musse">
    <!-- PANEL BERANDA (default) — versi mobile .stitch-* + iframe desktop -->
    <div id="panelBeranda" class="home-panel panel-active" data-panel="beranda">
     <header class="stitch-fixed-top">
       <div class="stitch-header-row">
         <div class="stitch-brand-wrap">
-          <div class="stitch-brand-logo"><span class="ms-icon">school</span></div>
+          <div class="stitch-brand-logo" style="background:transparent;box-shadow:none;padding:0;overflow:hidden;"><img src="/assets/brand/musse_mascot_trans.png" alt="musse" style="width:34px;height:34px;object-fit:contain;"></div>
           <div class="stitch-brand-text">
-            <span class="stitch-brand-title">TKA Master</span>
-            <span class="stitch-brand-sub">BERANDA</span>
+            <span class="stitch-brand-title" style="font-family:'Outfit',sans-serif;font-weight:900;letter-spacing:-0.02em;">musse</span>
+            <span class="stitch-brand-sub" style="color:#f5a623;">BERANDA</span>
           </div>
         </div>
         <div class="stitch-header-actions">
@@ -243,22 +246,22 @@
       </div>
     </nav>
       <!-- Desktop (>=900px): dashboard versi Stitch desktop via iframe -->
-    <iframe id="homeDesktopFrame" class="home-desktop-frame" src="/home_desktop.html" title="Beranda TKA Master (Desktop)"></iframe>
+    <iframe id="homeDesktopFrame" class="home-desktop-frame" src="/home_desktop.html" title="Beranda musse (Desktop)"></iframe>
    </div><!-- /#panelBeranda -->
 
    <!-- PANEL MODUL — file mandiri (Tailwind sendiri), wajib iframe biar CSS-nya tidak konflik -->
    <div id="panelModul" class="home-panel" data-panel="modul">
-     <iframe id="panelModulFrame" class="home-panel-frame" src="/workspace_modul/modul.html" title="Modul Belajar TKA Master"></iframe>
+     <iframe id="panelModulFrame" class="home-panel-frame" src="/workspace_modul/modul.html" title="Modul Belajar musse"></iframe>
    </div>
 
    <!-- PANEL PROGRES — file mandiri, wajib iframe -->
    <div id="panelProgres" class="home-panel" data-panel="progres">
-     <iframe id="panelProgresFrame" class="home-panel-frame" src="/workspace_progres/progres.html" title="Progres &amp; Analitik TKA Master"></iframe>
+     <iframe id="panelProgresFrame" class="home-panel-frame" src="/workspace_progres/progres.html" title="Progres &amp; Analitik musse"></iframe>
    </div>
 
    <!-- PANEL AKUN — file mandiri, wajib iframe -->
    <div id="panelAkun" class="home-panel" data-panel="akun">
-     <iframe id="panelAkunFrame" class="home-panel-frame" src="/workspace_akun/akun.html" title="Akun &amp; Preferensi TKA Master"></iframe>
+     <iframe id="panelAkunFrame" class="home-panel-frame" src="/workspace_akun/akun.html" title="Akun &amp; Preferensi musse"></iframe>
    </div>
   </div>
 
@@ -272,10 +275,11 @@
       </button>
 
       <!-- Left: Logo & Brand -->
-      <div class="brand">
+      <div class="brand" style="display:flex;align-items:center;gap:8px;">
+        <img src="/assets/brand/musse_mascot_trans.png" alt="musse" style="width:32px;height:32px;object-fit:contain;">
         <div class="brand-text">
-          <span class="brand-title" id="brandTitle">TKA Master</span>
-          <span class="brand-subtitle" id="brandSubtitle">Simulasi Ujian & AI Tutor</span>
+          <span class="brand-title" id="brandTitle" style="font-family:'Outfit',sans-serif;font-weight:900;">musse</span>
+          <span class="brand-subtitle" id="brandSubtitle">Simulasi Ujian &amp; AI Tutor</span>
         </div>
       </div>
 
@@ -344,7 +348,6 @@
           <span id="timerText">01:45:00</span>
         </div>
 
-        <!-- Mobile: overflow menu -->
         <button class="m-icon-btn" id="btnMobileOverflow" aria-label="Menu lainnya" title="Menu lainnya">
           <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
@@ -354,6 +357,9 @@
           </button>
           <button type="button" onclick="closeMobilePanels(); openFinishModal();">
             <i class="fa-solid fa-flag-checkered"></i> Selesai Tes
+          </button>
+          <button type="button" onclick="closeMobilePanels(); openBugReportModal();">
+            <i class="fa-solid fa-bug"></i> Lapor Bug
           </button>
           <div class="overflow-text-scale-row" id="overflowTextScaleRow">
             <div class="scale-label">
@@ -366,6 +372,12 @@
             </div>
           </div>
         </div>
+
+        <!-- Lapor Bug Button (Desktop) -->
+        <button class="btn-bug-report" id="btnLaporBug" type="button" onclick="openBugReportModal()" title="Laporkan kendala pada soal ini">
+          <i class="fa-solid fa-bug"></i>
+          <span>Lapor Bug</span>
+        </button>
 
         <!-- Daftar Soal Button -->
         <button class="btn-daftar-soal" id="btnOpenDaftarSoal" onclick="openDaftarModal()">
@@ -388,15 +400,15 @@
   </header>
 
 
-  <!-- FASE 3: Dialog konfirmasi keluar ke beranda -->
-  <div class="modal-overlay exit-confirm-overlay" id="exitConfirmModal" onclick="closeExitConfirm(event)">
-    <div class="exit-confirm-card" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Konfirmasi kembali ke beranda">
-      <div class="exit-confirm-icon"><i class="fa-solid fa-house"></i></div>
-      <h3 class="exit-confirm-title">Yakin ingin keluar ke beranda?</h3>
-      <p class="exit-confirm-text">Jawabanmu akan disimpan otomatis di perangkat ini dan bisa dilanjutkan kapan saja.</p>
+  <!-- FASE 3 / B8 / B11: Dialog konfirmasi keluar ke beranda -->
+  <div class="modal-overlay exit-confirm-overlay" id="exitConfirmModal" onclick="closeExitConfirm(true)">
+    <div class="exit-confirm-card" onclick="event.stopPropagation()" role="dialog" aria-modal="true" aria-label="Konfirmasi keluar">
+      <div class="exit-confirm-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <h3 class="exit-confirm-title" id="exitConfirmTitle">Keluar ke beranda?</h3>
+      <p class="exit-confirm-text" id="exitConfirmText">Progress yang belum selesai akan hilang. Progress baru tersimpan setelah kamu klik Selesai Tes.</p>
       <div class="exit-confirm-actions">
-        <button type="button" class="exit-btn-ya" onclick="doExitToBeranda()"><i class="fa-solid fa-check"></i> Ya, ke beranda</button>
-        <button type="button" class="exit-btn-tidak" onclick="closeExitConfirm(true)"><i class="fa-solid fa-xmark"></i> Tidak</button>
+        <button type="button" class="exit-btn-tidak" id="exitBtnBatal" onclick="closeExitConfirm(true)"><i class="fa-solid fa-arrow-left"></i> Tetap di sini</button>
+        <button type="button" class="exit-btn-ya" id="exitBtnKeluar" onclick="confirmExitAction()"><i class="fa-solid fa-arrow-right-from-bracket"></i> Keluar</button>
       </div>
     </div>
   </div>
@@ -475,7 +487,7 @@
                 <i class="fa-solid fa-circle-check"></i>
                 <span>Cek Jawaban & Pembahasan</span>
               </button>
-              <button class="btn-action btn-ragu" id="btnRagu" onclick="toggleRagu()">
+              <button class="btn-action btn-ragu" id="btnRagu" onclick="toggleRagu()" title="Tandai kalau kamu ragu-ragu — dipakai untuk analisis Autopsi belajarmu">
                 <input type="checkbox" id="chkRagu" pointer-events="none">
                 <i class="fa-regular fa-circle-question"></i>
                 <span>Ragu-ragu</span>
@@ -851,6 +863,10 @@
       </div>
       <h2 class="finish-title" id="startMapelTitle">Mulai Belajar Mapel?</h2>
       <p class="finish-text" id="startMapelDesc" style="line-height: 1.55; margin-top: 6px;"></p>
+      <p class="finish-text" style="font-size: 12px; color: #6b7280; line-height: 1.5; margin-top: 10px; padding: 8px 10px; background: #f9fafb; border-radius: 8px;">
+        <i class="fa-solid fa-shield-halved" style="color: #059669;"></i>
+        Waktu dan pola jawabanmu direkam untuk analisis belajar (Autopsi). Data tidak dijual. <a href="/privacy" style="color: #059669; text-decoration: underline;">Selengkapnya</a>
+      </p>
       <div class="finish-actions" style="display: flex; gap: 10px; margin-top: 20px;">
         <button class="btn-finish btn-finish-back" type="button" onclick="closeStartPackageModal()" style="flex: 1;">
           <i class="fa-solid fa-xmark"></i> Batal
@@ -943,6 +959,35 @@
     </div>
   </div>
 
+  <!-- Modal Kartu Strategi Belajar (Autopsi Tryout) -->
+  <div class="modal-overlay" id="modalKartuStrategi" onclick="tutupKartuStrategi()">
+    <div class="modal-content" style="max-width: 520px; text-align: left; padding: 22px 20px;" onclick="event.stopPropagation()">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <div id="kartuStrategiIconWrap" style="width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; background: #e0f2fe; color: #0369a1;">
+            <i class="fa-solid fa-shield-halved" id="kartuStrategiIcon"></i>
+          </div>
+          <div>
+            <span id="kartuStrategiBadge" style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #0369a1;">PANDUAN STRATEGI</span>
+            <h3 id="kartuStrategiTitle" style="font-size: 17px; font-weight: 800; color: #0f172a; margin: 2px 0 0;">Kartu Strategi Belajar</h3>
+          </div>
+        </div>
+        <button type="button" onclick="tutupKartuStrategi()" style="background: none; border: none; font-size: 18px; color: #94a3b8; cursor: pointer; padding: 4px;">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div id="kartuStrategiContent" style="font-size: 13.5px; line-height: 1.6; color: #334155; margin-bottom: 18px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 16px;"></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: flex-end;">
+        <button type="button" id="btnAksiLatihSoal" style="display: none; background: #004a2a; color: #fff; border: none; border-radius: 8px; padding: 9px 16px; font-size: 12.5px; font-weight: 700; cursor: pointer;">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i> Buka Pembahasan Soal Ini
+        </button>
+        <button type="button" onclick="tutupKartuStrategi()" style="background: #e2e8f0; color: #334155; border: none; border-radius: 8px; padding: 9px 16px; font-size: 12.5px; font-weight: 700; cursor: pointer;">
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Floating Jump to AI Tutor Button (Mobile only) -->
   <button id="btnFloatingAi" class="floating-ai-jump" onclick="scrollToAiTutor()" aria-label="Tanya AI Tutor">
     <i class="fa-solid fa-comments"></i>
@@ -978,8 +1023,43 @@
     <div class="fb-error" id="fbError" style="display: none;"></div>
   </div>
 
+  <!-- Modal Lapor Bug Soal / Sistem (T2.6) -->
+  <div class="modal-overlay" id="modalLaporBug" onclick="closeBugReportModal(event)">
+    <div class="modal-content" style="max-width: 440px; background: #ffffff; border-radius: 16px; padding: 20px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15);" onclick="event.stopPropagation()">
+      <div class="modal-header" style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <i class="fa-solid fa-bug" style="color:#ef4444;font-size:18px;"></i>
+          <h3 style="margin:0;font-size:17px;font-weight:700;">Laporkan Kendala</h3>
+        </div>
+        <button class="modal-close-btn" onclick="closeBugReportModal()" title="Tutup" style="background:none; border:none; font-size:24px; cursor:pointer; color:#94a3b8;">&times;</button>
+      </div>
+      <div class="modal-body" style="padding:0;">
+        <p style="font-size:13px;color:#64748b;margin:0 0 12px 0;">Menemukan soal yang keliru, gambar rusak, atau kendala sistem? Beritahu kami agar segera diperbaiki.</p>
+        <div style="margin-bottom:12px;">
+          <label style="display:block;font-size:12px;font-weight:600;color:#334155;margin-bottom:4px;">Kategori Masalah</label>
+          <select id="bugCategory" style="width:100%;height:38px;border:1px solid #cbd5e1;border-radius:8px;padding:0 10px;font-size:13px;background:#fff;">
+            <option value="Soal / Kunci / Pembahasan Keliru">Soal / Kunci / Pembahasan Keliru</option>
+            <option value="Gambar Soal Rusak / Tidak Muncul">Gambar Soal Rusak / Tidak Muncul</option>
+            <option value="Pilihan Jawaban Bermasalah">Pilihan Jawaban Bermasalah</option>
+            <option value="Tampilan / UI Rusak di HP">Tampilan / UI Rusak di HP</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+        <div style="margin-bottom:14px;">
+          <label style="display:block;font-size:12px;font-weight:600;color:#334155;margin-bottom:4px;">Deskripsi Kendala</label>
+          <textarea id="bugDescription" rows="3" placeholder="Tuliskan detail kendala atau nomor soal yang bermasalah..." style="width:100%;border:1px solid #cbd5e1;border-radius:8px;padding:8px 10px;font-size:13px;box-sizing:border-box;font-family:inherit;resize:none;"></textarea>
+        </div>
+        <div id="bugReportMsg" style="display:none;font-size:13px;margin-bottom:12px;padding:8px 12px;border-radius:8px;"></div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;">
+          <button type="button" onclick="closeBugReportModal()" style="height:38px;padding:0 16px;background:#f1f5f9;border:1px solid #cbd5e1;border-radius:8px;font-size:13px;font-weight:600;color:#475569;cursor:pointer;">Batal</button>
+          <button id="btnSubmitBug" type="button" onclick="sendBugReport()" style="height:38px;padding:0 18px;background:#004a2a;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;">Kirim Laporan</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Scripts -->
-  <script src="app.js?v=48"></script>
+  <script src="app.js?v=49"></script>
   <script src="supabase_auth.js?v=1"></script>
 </body>
 </html>

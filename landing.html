@@ -3,33 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>TKA Master — Latihan Soal TKA &amp; AI Tutor</title>
+<title>musse — Latihan Soal TKA &amp; AI Tutor</title>
 <meta name="description" content="Latihan soal TKA Pusmendik dengan pembahasan langkah demi langkah dan AI Tutor. Simulasi ujian dengan timer. Gratis selama masa beta.">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon.png">
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/assets/brand/favicon.png">
 <script>
 /* pasang class gerak sedini mungkin: cegah FOUC sebelum GSAP init */
 document.documentElement.classList.add(window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduced' : 'motion');
+
+// B9: Auto-detect session saat membuka landing page
+(function checkLandingSession() {
+  try {
+    const isGuest = sessionStorage.getItem('tka_mode') === 'guest' || localStorage.getItem('tka_guest_session') === 'true';
+    const token = localStorage.getItem('tka_supabase_auth_token');
+    const rawUser = localStorage.getItem('tka_user');
+    const isEverLoggedIn = localStorage.getItem('tka_device_logged_in') === 'true';
+
+    // Jika ada sesi login aktif di perangkat dan tidak sedang dalam mode tamu:
+    if (!isGuest && token && rawUser && isEverLoggedIn) {
+      const u = JSON.parse(rawUser);
+      if (u && u.loggedIn) {
+        const params = new URLSearchParams(window.location.search);
+        if (!params.has('stay')) {
+          // Redirect langsung via replaceState/location.replace agar back tidak loop ke landing
+          window.location.replace('/app');
+          return;
+        }
+      }
+    }
+  } catch (e) {}
+})();
 </script>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
 <script>
 tailwind.config = {
   theme: { extend: {
-    colors: { pine:'#0B3D2E', pine2:'#0E4A38', moss:'#15803D', mint:'#E7F3EC', mist:'#F2F7F3',
-              amber:'#F59E0B', cream:'#FAF8F4', ink:'#101B15', mute:'#5F6F66', line:'#E4E9E5' },
-    fontFamily: { sans:['Geist','ui-sans-serif','system-ui','sans-serif'], serifit:['"Instrument Serif"','Georgia','serif'] },
+    colors: { pine:'#2d7d4f', pine2:'#246942', moss:'#2d7d4f', mint:'#EAF4EE', mist:'#F4F7F5',
+              amber:'#f5a623', cream:'#FAF8F4', ink:'#101B15', mute:'#5F6F66', line:'#E4E9E5' },
+    fontFamily: { sans:['Geist','ui-sans-serif','system-ui','sans-serif'], outfit:['Outfit','sans-serif'], serifit:['"Instrument Serif"','Georgia','serif'] },
     borderRadius: { '2xl':'16px' }
   }}
 }
 </script>
 <style>
-  html{scroll-behavior:auto}
-  body{font-family:Geist,ui-sans-serif,system-ui,sans-serif;background:#FAF8F4;color:#101B15;-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+  body{font-family:Geist,ui-sans-serif,system-ui,sans-serif;background:#FAF8F4;color:#101B15;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-overflow-scrolling:touch}
+  h1,h2,h3{font-family:Outfit,Geist,sans-serif}
   .serifit{font-family:"Instrument Serif",Georgia,serif;font-style:italic}
+  .btn{transition:all .2s ease;cursor:pointer;touch-action:manipulation}
   .btn:active{transform:scale(.97)}
+  @media (max-width: 768px) {
+    #cara, #fitur, #statistik, #paket, #faq {
+      content-visibility: auto;
+      contain-intrinsic-size: 1px 600px;
+    }
+  }
   /* --- fade-up umum: default = frame akhir (terlihat); .motion menyembunyikan dulu --- */
   .motion [data-anim]{opacity:0;transform:translateY(16px)}
   /* --- Phone scrub screens --- */
@@ -80,44 +114,45 @@ tailwind.config = {
 <!-- ============================================================
      KOMPONEN: HEADER / NAV
 ============================================================ -->
-<header class="sticky top-0 z-40 bg-pine text-white">
+<header class="sticky top-0 z-40 bg-pine/95 backdrop-blur-md text-white border-b border-white/10 shadow-sm">
   <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
-    <a href="/" class="flex items-center gap-2.5">
-      <span class="grid h-9 w-9 place-items-center rounded-2xl bg-white/10 ring-1 ring-white/15">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg>
-      </span>
-      <span class="text-[17px] font-bold tracking-tight">TKA Master</span>
+    <a href="/" class="flex items-center gap-2.5 group">
+      <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-10 h-10 object-contain drop-shadow-sm group-hover:scale-105 transition-transform">
+      <div class="flex flex-col">
+        <span class="text-[20px] font-black tracking-tight text-white group-hover:text-amber transition-colors font-outfit leading-none">musse</span>
+        <span class="text-[9px] uppercase tracking-wider font-bold text-[#f5a623] mt-0.5">CBT SIMULASI &amp; AI</span>
+      </div>
     </a>
-    <nav class="hidden items-center gap-7 text-sm text-white/80 md:flex">
-      <a href="#fitur" class="hover:text-white">Fitur</a>
-      <a href="#paket" class="hover:text-white">Harga</a>
-      <a href="#faq" class="hover:text-white">FAQ</a>
+    <nav class="hidden items-center gap-7 text-sm font-medium text-white/80 md:flex">
+      <a href="#fitur" class="hover:text-white transition-colors">Fitur</a>
+      <a href="#paket" class="hover:text-white transition-colors">Harga</a>
+      <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
     </nav>
     <div class="flex items-center gap-2 sm:gap-3">
-      <button onclick="if(typeof loginWithGoogle==='function')loginWithGoogle();else location.href='/app'" class="btn inline-flex items-center gap-1.5 rounded-2xl bg-white/15 px-3 py-1.5 text-xs font-semibold text-white ring-1 ring-white/20 hover:bg-white/25 md:hidden">
-        <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.5 1.9 7.1l3.7 2.8C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.6 14.1c-.2-.7-.4-1.4-.4-2.1s.1-1.4.4-2.1L1.9 7.1C.7 9.5 0 10.7 0 12s.7 2.5 1.9 4.9l3.7-2.8z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2-6.4-4.8L1.9 16.3C3.7 20.2 7.5 23 12 23z"/></svg>
+      <button id="landingLoginBtnMobile" onclick="sessionStorage.removeItem('tka_mode'); localStorage.removeItem('tka_guest_session'); if(typeof loginWithGoogle==='function')loginWithGoogle();else location.href='/app?mode=login'" class="btn inline-flex items-center justify-center gap-1.5 min-h-[44px] rounded-xl bg-white/15 px-3.5 py-2 text-xs font-bold text-white ring-1 ring-white/25 hover:bg-white/25 shadow-sm md:hidden">
+        <svg width="15" height="15" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.5 1.9 7.1l3.7 2.8C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.6 14.1c-.2-.7-.4-1.4-.4-2.1s.1-1.4.4-2.1L1.9 7.1C.7 9.5 0 10.7 0 12s.7 2.5 1.9 4.9l3.7-2.8z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2-6.4-4.8L1.9 16.3C3.7 20.2 7.5 23 12 23z"/></svg>
         <span>Login</span>
       </button>
-      <button onclick="if(typeof loginWithGoogle==='function')loginWithGoogle();else location.href='/app'" class="btn hidden rounded-2xl bg-white px-4 py-2 text-sm font-semibold text-pine md:inline-flex items-center gap-2 shadow-sm">
+      <button id="landingLoginBtnDesktop" onclick="sessionStorage.removeItem('tka_mode'); localStorage.removeItem('tka_guest_session'); if(typeof loginWithGoogle==='function')loginWithGoogle();else location.href='/app?mode=login'" class="btn hidden rounded-xl bg-white px-4 py-2.5 min-h-[44px] text-sm font-bold text-pine md:inline-flex items-center gap-2 shadow-sm hover:bg-emerald-50 transition-colors">
         <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.5 1.9 7.1l3.7 2.8C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.6 14.1c-.2-.7-.4-1.4-.4-2.1s.1-1.4.4-2.1L1.9 7.1C.7 9.5 0 10.7 0 12s.7 2.5 1.9 4.9l3.7-2.8z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2-6.4-4.8L1.9 16.3C3.7 20.2 7.5 23 12 23z"/></svg>
         <span>Login Google</span>
       </button>
-      <a href="/app" class="btn hidden rounded-2xl bg-white/15 ring-1 ring-white/20 hover:bg-white/25 px-4 py-2 text-sm font-semibold text-white md:inline-block">Mulai Latihan</a>
-      <button id="btnMenu" class="btn grid h-10 w-10 place-items-center rounded-2xl bg-white/10 ring-1 ring-white/15 md:hidden" aria-label="Buka menu" aria-expanded="false">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <a href="/app" class="btn hidden rounded-xl bg-white/15 ring-1 ring-white/25 hover:bg-white/25 px-4 py-2.5 min-h-[44px] text-sm font-bold text-white md:inline-flex items-center transition-colors">Mulai Latihan</a>
+      <button id="btnMenu" class="btn grid h-11 w-11 place-items-center rounded-xl bg-white/10 ring-1 ring-white/20 md:hidden hover:bg-white/15" aria-label="Buka menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
       </button>
     </div>
   </div>
-  <div id="mnu" class="mnu absolute inset-x-0 top-16 border-t border-white/10 bg-pine px-5 py-4 md:hidden">
+  <div id="mnu" class="mnu absolute inset-x-0 top-16 border-t border-white/10 bg-pine px-5 py-4 md:hidden shadow-xl">
     <div class="flex flex-col text-[15px]">
-      <a href="#fitur" class="mnu-l border-b border-white/10 py-3 text-white/85">Fitur</a>
-      <a href="#paket" class="mnu-l border-b border-white/10 py-3 text-white/85">Harga</a>
-      <a href="#faq" class="mnu-l py-3 text-white/85">FAQ</a>
-      <button onclick="if(typeof loginWithGoogle==='function')loginWithGoogle();else location.href='/app'" class="mnu-l mt-3 flex items-center justify-center gap-2 rounded-2xl bg-white py-3 text-center font-semibold text-pine shadow-sm">
+      <a href="#fitur" class="mnu-l border-b border-white/10 py-3.5 text-white/85 font-medium">Fitur</a>
+      <a href="#paket" class="mnu-l border-b border-white/10 py-3.5 text-white/85 font-medium">Harga</a>
+      <a href="#faq" class="mnu-l py-3.5 text-white/85 font-medium">FAQ</a>
+      <button id="landingLoginBtnMenu" onclick="sessionStorage.removeItem('tka_mode'); localStorage.removeItem('tka_guest_session'); if(typeof loginWithGoogle==='function')loginWithGoogle();else location.href='/app?mode=login'" class="mnu-l mt-3 min-h-[48px] flex items-center justify-center gap-2 rounded-xl bg-white py-3 text-center font-bold text-pine shadow-sm">
         <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#EA4335" d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.5 1.9 7.1l3.7 2.8C6.5 7.4 9 5 12 5z"/><path fill="#4285F4" d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z"/><path fill="#FBBC05" d="M5.6 14.1c-.2-.7-.4-1.4-.4-2.1s.1-1.4.4-2.1L1.9 7.1C.7 9.5 0 10.7 0 12s.7 2.5 1.9 4.9l3.7-2.8z"/><path fill="#34A853" d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2-6.4-4.8L1.9 16.3C3.7 20.2 7.5 23 12 23z"/></svg>
         <span>Login Google</span>
       </button>
-      <a href="/app" class="mnu-l mt-2 block rounded-2xl bg-white/10 ring-1 ring-white/20 py-3 text-center font-semibold text-white">Mulai Latihan</a>
+      <a href="/app" class="mnu-l mt-2 min-h-[48px] flex items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/20 py-3 text-center font-bold text-white">Mulai Latihan</a>
     </div>
   </div>
 </header>
@@ -127,29 +162,33 @@ tailwind.config = {
 <!-- ============================================================
      KOMPONEN: HERO (HP melayang + chip parallax)
 ============================================================ -->
-<section class="relative overflow-hidden bg-cream">
-  <div class="pointer-events-none absolute -top-24 right-[-15%] h-72 w-72 rounded-full bg-mint blur-3xl"></div>
-  <div class="pointer-events-none absolute bottom-10 left-[-12%] h-56 w-56 rounded-full bg-amber/10 blur-3xl"></div>
+<section class="relative overflow-hidden bg-gradient-to-b from-cream via-cream to-white">
+  <div class="pointer-events-none absolute -top-24 right-[-15%] h-80 w-80 rounded-full bg-emerald-200/50 blur-3xl"></div>
+  <div class="pointer-events-none absolute bottom-10 left-[-12%] h-64 w-64 rounded-full bg-amber/15 blur-3xl"></div>
   <div class="relative mx-auto max-w-6xl px-5 pb-16 pt-10 lg:grid lg:grid-cols-2 lg:items-center lg:gap-10 lg:pt-16">
     <div class="max-w-xl">
-      <span data-anim class="inline-flex items-center gap-2 rounded-2xl bg-mint px-3 py-1.5 text-[12.5px] font-semibold text-pine ring-1 ring-moss/15">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/></svg>
-        Selama beta, semua fitur Pro gratis
-      </span>
-      <h1 data-anim class="mt-4 text-[40px] font-extrabold leading-[1.05] tracking-tight text-pine sm:text-[52px]">
-        Latihan soal TKA, <span class="serifit font-normal text-amber">tanpa panik.</span>
+      <div data-anim class="inline-flex items-center gap-2 rounded-full bg-emerald-100/90 border border-emerald-300/80 px-3.5 py-1.5 text-[12.5px] font-bold text-emerald-900 shadow-xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+        <span>Akses Gratis Penuh Masa Beta</span>
+      </div>
+      <h1 data-anim class="mt-4 text-[42px] sm:text-[54px] font-black leading-[1.06] tracking-tight text-pine font-outfit">
+        Latihan soal TKA, <span class="serifit font-normal text-amber italic">tanpa panik.</span>
       </h1>
-      <p data-anim class="mt-3 text-[15.5px] leading-relaxed text-mute">Soal &amp; kunci resmi Pusmendik, simulasi ujian ber-timer, dan AI Tutor — satu aplikasi.</p>
+      <p data-anim class="mt-3.5 text-[16px] leading-relaxed text-mute">Soal &amp; kunci resmi Pusmendik, simulasi ujian ber-timer, dan Guru Autopsi AI — dalam satu platform yang fokus dan tenang.</p>
       <div data-anim class="mt-7 flex flex-wrap items-center gap-3">
-        <a href="/app" class="btn inline-flex items-center gap-2 rounded-2xl bg-pine px-6 py-3.5 text-[15px] font-semibold text-white shadow-lg shadow-pine/20">
-          Mulai latihan
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        <a id="heroCtaPrimary" href="/app" class="btn inline-flex items-center justify-center gap-2 min-h-[48px] rounded-2xl bg-gradient-to-r from-emerald-900 via-pine to-pine2 px-6 py-3.5 text-[15px] font-bold text-white shadow-xl shadow-pine/25 hover:shadow-pine/40 hover:-translate-y-0.5 transition-all">
+          <span>Mulai Latihan</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
         </a>
-        <a href="/app" class="btn inline-flex items-center gap-2 rounded-2xl px-5 py-3.5 text-[15px] font-semibold text-pine ring-1 ring-line hover:bg-mist">
-          Coba tanpa login
+        <a id="heroCtaGuest" href="/app?mode=tamu" onclick="sessionStorage.setItem('tka_mode','guest'); localStorage.setItem('tka_guest_session','true');" class="btn inline-flex items-center justify-center gap-2 min-h-[48px] rounded-2xl bg-white px-5 py-3.5 text-[15px] font-bold text-pine border border-emerald-700/20 shadow-sm hover:bg-emerald-50 hover:border-emerald-700/40 transition-all">
+          <span>Coba tanpa login</span>
         </a>
       </div>
-      <p data-anim class="mt-5 text-[13px] text-mute">Tanpa pendaftaran · Kuota AI Tutor 5 pertanyaan/hari untuk tamu</p>
+      <div data-anim class="mt-6 flex flex-wrap items-center gap-y-2 gap-x-4 text-[12px] font-semibold text-mute">
+        <span class="inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> 27 Mapel Pusmendik</span>
+        <span class="inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Kunci Jawaban Resmi</span>
+        <span class="inline-flex items-center gap-1.5"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Guru Autopsi AI</span>
+      </div>
     </div>
 
     <div class="relative mt-12 flex justify-center lg:mt-0">
@@ -157,13 +196,13 @@ tailwind.config = {
         <div class="relative w-[290px] rounded-[2.4rem] bg-pine p-2.5 shadow-2xl shadow-pine/30 sm:w-[310px]">
           <div class="overflow-hidden rounded-[1.9rem] bg-white">
             <div class="flex items-center justify-between bg-pine px-4 py-2.5 text-white">
-              <span class="text-[11px] font-bold">TKA Master</span>
-              <span class="rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-bold ring-1 ring-white/15">45:00</span>
+              <span class="text-[11px] font-bold">musse</span>
+              <span class="rounded-full bg-white/10 px-2 py-0.5 text-[9px] font-bold ring-1 ring-white/15">75:00</span>
             </div>
             <div class="space-y-3 p-4">
               <div class="flex items-center justify-between rounded-2xl bg-mist px-3.5 py-2">
                 <span class="text-[10.5px] font-bold text-ink">Matematika (Wajib)</span>
-                <span class="rounded-full bg-pine px-2.5 py-1 text-[9.5px] font-bold text-white">Paket 1</span>
+                <span class="rounded-full bg-pine px-2.5 py-1 text-[9.5px] font-bold text-white">Paket 2</span>
               </div>
               <div class="rounded-2xl bg-mint p-3.5">
                 <p class="text-[11px] font-semibold text-pine">AI Tutor · Matematika</p>
@@ -176,7 +215,7 @@ tailwind.config = {
               <div class="rounded-2xl bg-mist p-3.5">
                 <div class="flex items-center justify-between">
                   <p class="text-[11px] font-semibold text-ink">Simulasi Ujian</p>
-                  <span class="text-[9.5px] font-semibold text-moss">45:00 · Soal 4/40</span>
+                  <span class="text-[9.5px] font-semibold text-moss">75:00 · Soal 4/25</span>
                 </div>
                 <div class="mt-2 grid grid-cols-6 gap-1.5">
                   <span class="grid h-6 place-items-center rounded-md bg-moss text-[9px] font-bold text-white">1</span>
@@ -198,7 +237,7 @@ tailwind.config = {
           <span class="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-mint align-middle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3z"/></svg></span>AI Tutor
         </div>
         <div class="chipf absolute -right-14 top-40 hidden rounded-2xl bg-white px-3.5 py-2 text-[12px] font-semibold text-pine shadow-lg shadow-pine/10 ring-1 ring-line sm:block" data-speed="-52">
-          <span class="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-mint align-middle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Timer 45:00
+          <span class="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-mint align-middle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>Timer 75:00
         </div>
         <div class="chipf absolute -left-10 bottom-14 hidden rounded-2xl bg-white px-3.5 py-2 text-[12px] font-semibold text-pine shadow-lg shadow-pine/10 ring-1 ring-line sm:block" data-speed="-40">
           <span class="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-mint align-middle"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#15803D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-2zm0 0a2 2 0 0 1 2-2h13"/></svg></span>Pembahasan
@@ -236,7 +275,7 @@ tailwind.config = {
           </div>
           <div class="mt-4 flex flex-wrap gap-1.5">
             <span class="rounded-full bg-mint px-3 py-1.5 text-[11.5px] font-semibold text-pine">Matematika Wajib · Paket 1</span>
-            <span class="rounded-full bg-white px-3 py-1.5 text-[11.5px] font-semibold text-mute ring-1 ring-line">+21 mapel lain</span>
+            <span class="rounded-full bg-white px-3 py-1.5 text-[11.5px] font-semibold text-mute ring-1 ring-line">+26 mapel lain</span>
           </div>
         </div>
       </div>
@@ -253,8 +292,8 @@ tailwind.config = {
           </div>
           <div class="mt-4 inline-flex items-center gap-2 rounded-2xl bg-pine px-3.5 py-2 text-white">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-            <span class="text-[12.5px] font-bold tabular-nums">45:00</span>
-            <span class="text-[11px] text-white/60">· 40 soal</span>
+            <span class="text-[12.5px] font-bold tabular-nums">75:00</span>
+            <span class="text-[11px] text-white/60">· 25 soal</span>
           </div>
         </div>
       </div>
@@ -337,7 +376,7 @@ tailwind.config = {
                     <svg width="26" height="26" viewBox="0 0 26 26" class="-rotate-90"><circle cx="13" cy="13" r="10" fill="none" stroke="#E4E9E5" stroke-width="3"/><g class="ring-spin"><circle cx="13" cy="13" r="10" fill="none" stroke="#15803D" stroke-width="3" stroke-linecap="round" stroke-dasharray="20 43"/></g></svg>
                     <span class="text-[11.5px] font-bold tabular-nums text-ink">44:12</span>
                   </span>
-                  <span class="rounded-full bg-mint px-2.5 py-1 text-[10px] font-bold text-pine" id="examProg">Soal 4/40</span>
+                  <span class="rounded-full bg-mint px-2.5 py-1 text-[10px] font-bold text-pine" id="examProg">Soal 4/25</span>
                 </div>
                 <div class="flex-1 space-y-3 px-4 py-3">
                   <p class="text-[11.5px] font-semibold leading-relaxed text-ink">4. Titik puncak dari f(x) = x² − 4x + 3 adalah …</p>
@@ -396,8 +435,8 @@ tailwind.config = {
           <h3 class="mt-2 text-[26px] font-extrabold tracking-tight text-pine sm:text-[30px]">Suasana ujian yang <span class="serifit font-normal text-amber">sesungguhnya.</span></h3>
           <p class="mt-3 max-w-md text-[15px] leading-relaxed text-mute">Persis hari-H: timer jalan, kamu yang kendalikan.</p>
           <ul class="mt-5 space-y-2.5 text-[14px] text-ink/80">
-            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Timer 45:00 + progres soal</li>
-            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Navigasi grid 40 soal</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Timer 75:00 + progres soal</li>
+            <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Navigasi grid 25 soal</li>
             <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Penanda ragu-ragu</li>
           </ul>
         </div>
@@ -425,16 +464,16 @@ tailwind.config = {
     <h2 data-anim class="mt-2 text-[30px] font-extrabold tracking-tight text-pine sm:text-[36px]">Angka yang <span class="serifit font-normal text-amber">jelas.</span></h2>
     <div data-anim class="mt-10 grid grid-cols-3 gap-4">
       <div class="rounded-2xl border border-line bg-white p-5 sm:p-7">
-        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="960">0</span>+</p>
+        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="990">0</span>+</p>
         <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Soal latihan dengan pembahasan</p>
       </div>
       <div class="rounded-2xl border border-line bg-white p-5 sm:p-7">
-        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="22">0</span></p>
+        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="27">0</span></p>
         <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Mata pelajaran TKA</p>
       </div>
       <div class="rounded-2xl border border-line bg-white p-5 sm:p-7">
-        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="44">0</span></p>
-        <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Paket soal resmi per mapel</p>
+        <p class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[42px]"><span class="cnt" data-to="49">0</span></p>
+        <p class="mt-1 text-[12px] leading-snug text-mute sm:text-[13.5px]">Paket simulasi resmi terverifikasi</p>
       </div>
     </div>
   </div>
@@ -470,7 +509,7 @@ tailwind.config = {
             <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>5 tanya AI Tutor per hari</li>
             <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-moss" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Simulasi ujian dengan timer</li>
           </ul>
-          <a href="/app" class="btn mt-6 block rounded-2xl bg-mint py-3.5 text-center text-[15px] font-bold text-pine">Mulai tanpa daftar</a>
+          <a id="cardFreeCta" href="/app?mode=tamu" onclick="sessionStorage.setItem('tka_mode','guest'); localStorage.setItem('tka_guest_session','true');" class="btn mt-6 block rounded-2xl bg-mint py-3.5 text-center text-[15px] font-bold text-pine">Mulai tanpa daftar</a>
           <p class="mt-4 text-[12.5px] leading-relaxed text-mute">Setelah login: kuota 25 tanya/hari + riwayat tersimpan.</p>
         </div>
 
@@ -479,13 +518,17 @@ tailwind.config = {
             <h3 class="text-[17px] font-bold">Pro</h3>
             <span class="rounded-full bg-amber px-2.5 py-1 text-[11px] font-bold text-ink">Gratis selama beta</span>
           </div>
-          <p class="mt-3"><span class="text-[34px] font-extrabold tracking-tight">Rp20.000</span><span class="text-[13px] text-white/60"> /bulan</span></p>
+          <p class="mt-3 flex items-baseline gap-2 flex-wrap">
+            <span class="text-[18px] sm:text-[20px] font-bold text-white/50 line-through">Rp14.900</span>
+            <span class="text-[34px] font-extrabold tracking-tight text-white">Rp0</span>
+            <span class="text-[13px] text-white/70">/bulan</span>
+          </p>
           <ul class="mt-5 space-y-2.5 text-[14px] text-white/85">
             <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>100 tanya AI Tutor per hari</li>
             <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Semua fitur Tamu &amp; Terdaftar</li>
             <li class="flex gap-2.5"><svg class="mt-0.5 shrink-0 text-amber" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Mendukung pengembangan berlanjut</li>
           </ul>
-          <a href="/app" class="btn mt-6 block rounded-2xl bg-white py-3.5 text-center text-[15px] font-bold text-pine">Coba sekarang (beta)</a>
+          <a id="cardPremCta" href="/app" class="btn mt-6 block rounded-2xl bg-white py-3.5 text-center text-[15px] font-bold text-pine">Coba sekarang (beta)</a>
           <p class="mt-4 text-[12.5px] leading-relaxed text-white/60">Selama beta, semua fitur Pro gratis.</p>
         </div>
       </div>
@@ -500,10 +543,11 @@ tailwind.config = {
   <div class="mx-auto max-w-3xl px-5">
     <h2 data-anim class="text-[30px] font-extrabold tracking-tight text-pine sm:text-[36px]">Pertanyaan <span class="serifit font-normal text-amber">umum.</span></h2>
     <div data-anim class="mt-8 divide-y divide-line rounded-2xl border border-line bg-white">
+      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Berapa biaya AI Tutor?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Setiap jawaban AI Tutor membutuhkan biaya komputasi server (sekitar Rp10&ndash;50 per jawaban). Selama masa beta, kamu mendapat kuota <strong>gratis 25 pertanyaan/hari</strong> setelah login. Kalau suatu saat ada kuota berbayar, akan diumumkan dulu &mdash; tidak ada biaya diam-diam.</p></details>
       <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Dari mana sumber soalnya?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Soal, kunci, dan tampilan berasal dari publikasi resmi TKA Pusmendik Kemendikdasmen, lalu dilengkapi pembahasan langkah demi langkah yang disusun otomatis dengan bantuan AI. Pembahasan bisa mengandung kesalahan — selalu bandingkan dengan kunci resmi yang ditampilkan. Platform ini bukan situs resmi pemerintah.</p></details>
-      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Apakah perlu membuat akun?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Tidak. Bisa langsung latihan sebagai tamu. Fitur akun login sedang dikembangkan dan akan menambah kuota AI Tutor harian.</p></details>
-      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Kapan kuota AI Tutor direset?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Setiap hari pukul 00.00 WIB. Satu pertanyaan ke AI Tutor mengurangi satu kuota, berlaku juga untuk jawaban yang gagal dikirim karena gangguan jaringan.</p></details>
-      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Bagaimana cara berlangganan Pro?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Selama masa beta, seluruh fitur Pro dapat dipakai gratis. Sistem pembayaran akan diumumkan kemudian dengan harga Rp20.000 per bulan.</p></details>
+      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Apakah perlu membuat akun?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Tidak. Bisa langsung latihan sebagai tamu. Login Google sudah tersedia dan menambah kuota AI Tutor harian menjadi 25 pertanyaan.</p></details>
+      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Kapan kuota AI Tutor direset?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Setiap hari pukul 00.00 WIB. Satu pertanyaan ke AI Tutor mengurangi satu kuota. Jika jawaban gagal dikirim karena gangguan jaringan, kuota <strong>tidak</strong> terpotong.</p></details>
+      <details class="group p-5"><summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-[15px] font-semibold text-pine">Bagaimana cara berlangganan Pro?<svg class="chev shrink-0 transition-transform group-open:rotate-90" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></summary><p class="mt-3 text-[14px] leading-relaxed text-mute">Selama masa beta, seluruh fitur Pro dapat dipakai gratis (Rp0). Harga normal nantinya hanya Rp14.900 per bulan.</p></details>
     </div>
   </div>
 </section>
@@ -530,19 +574,35 @@ tailwind.config = {
 <footer class="border-t border-white/10 bg-pine pb-24 pt-10 text-white/60 md:pb-10">
   <div class="mx-auto max-w-6xl px-5">
     <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-      <span class="text-[13px] text-white/60">TKA Master — platform latihan mandiri.</span>
+      <div class="flex items-center gap-2.5">
+        <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-7 h-7 object-contain opacity-90">
+        <span class="text-[16px] font-black text-white font-outfit">musse</span>
+        <span class="text-[13px] text-white/60">— platform latihan mandiri.</span>
+      </div>
       <nav class="flex flex-wrap gap-x-6 gap-y-2 text-[13px]"><a href="/privacy" class="hover:text-white">Privasi</a><a href="/terms" class="hover:text-white">Syarat</a><a href="/app" class="hover:text-white">Masukan via aplikasi</a></nav>
     </div>
-    <p class="mt-6 text-[12px] leading-relaxed text-white/40">© 2026 TKA Master. TKA Master bukan situs resmi Kemendikdasmen. Nama TKA dan materi ujian adalah milik pemegang hak masing-masing.</p>
+    <p class="mt-6 text-[12px] leading-relaxed text-white/40">© 2026 musse. musse bukan situs resmi Kemendikdasmen. Nama TKA dan materi ujian adalah milik pemegang hak masing-masing.</p>
   </div>
 </footer>
 
-<nav class="tabbar fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white/95 backdrop-blur md:hidden" aria-label="Navigasi bawah">
-  <div class="grid grid-cols-4 pt-1.5 text-[10.5px] font-semibold">
-    <a href="#beranda" class="flex flex-col items-center gap-0.5 py-1 text-pine"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2h-4v-6h-6v6H5a2 2 0 0 1-2-2z"/></svg>Beranda</a>
-    <a href="#fitur" class="flex flex-col items-center gap-0.5 py-1 text-mute"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>Fitur</a>
-    <a href="#paket" class="flex flex-col items-center gap-0.5 py-1 text-mute"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="m2 7 10 4 10-4-10-4z"/><path d="M12 11v9"/></svg>Harga</a>
-    <a href="#faq" class="flex flex-col items-center gap-0.5 py-1 text-mute"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .3c0 1.7-2.5 2.2-2.5 3.7"/><path d="M12 17h.01"/></svg>FAQ</a>
+<nav class="tabbar fixed inset-x-0 bottom-0 z-40 border-t border-line/80 bg-white/95 backdrop-blur-md md:hidden shadow-[0_-4px_16px_rgba(0,0,0,0.04)]" aria-label="Navigasi bawah">
+  <div class="grid grid-cols-4 py-1 text-[11px] font-bold">
+    <a href="#beranda" class="flex flex-col items-center justify-center min-h-[48px] gap-1 py-1 text-pine hover:text-emerald-800 transition-colors">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7v9a2 2 0 0 1-2 2h-4v-6h-6v6H5a2 2 0 0 1-2-2z"/></svg>
+      <span>Beranda</span>
+    </a>
+    <a href="#fitur" class="flex flex-col items-center justify-center min-h-[48px] gap-1 py-1 text-mute hover:text-pine transition-colors">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+      <span>Fitur</span>
+    </a>
+    <a href="#paket" class="flex flex-col items-center justify-center min-h-[48px] gap-1 py-1 text-mute hover:text-pine transition-colors">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-6"/><path d="m2 7 10 4 10-4-10-4z"/><path d="M12 11v9"/></svg>
+      <span>Harga</span>
+    </a>
+    <a href="#faq" class="flex flex-col items-center justify-center min-h-[48px] gap-1 py-1 text-mute hover:text-pine transition-colors">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .3c0 1.7-2.5 2.2-2.5 3.7"/><path d="M12 17h.01"/></svg>
+      <span>FAQ</span>
+    </a>
   </div>
 </nav>
 
@@ -552,9 +612,10 @@ tailwind.config = {
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   gsap.registerPlugin(ScrollTrigger);
 
-  /* ---------- Lenis smooth scroll + ScrollTrigger ---------- */
+  /* ---------- Lenis smooth scroll + ScrollTrigger (Desktop Only) ---------- */
+  var isMobileDevice = window.innerWidth < 768 || ('ontouchstart' in window && window.innerWidth < 1024);
   var lenis = null;
-  if (!reduced && window.Lenis) {
+  if (!reduced && window.Lenis && !isMobileDevice) {
     lenis = new Lenis({ autoRaf: false, duration: 1.1 });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
@@ -782,5 +843,47 @@ tailwind.config = {
 })();
 </script>
 <script src="supabase_auth.js?v=2"></script>
+<script>
+// B9: Update Landing UI jika user sedang login dan membuka dengan ?stay=1
+(function updateLandingSessionUI() {
+  function applySessionUI() {
+    try {
+      const isGuest = sessionStorage.getItem('tka_mode') === 'guest' || localStorage.getItem('tka_guest_session') === 'true';
+      const token = localStorage.getItem('tka_supabase_auth_token');
+      const rawUser = localStorage.getItem('tka_user');
+      const isEverLoggedIn = localStorage.getItem('tka_device_logged_in') === 'true';
+
+      if (!isGuest && token && rawUser && isEverLoggedIn) {
+        const u = JSON.parse(rawUser);
+        if (u && u.loggedIn) {
+          const btns = [
+            document.getElementById('landingLoginBtnMobile'),
+            document.getElementById('landingLoginBtnDesktop'),
+            document.getElementById('landingLoginBtnMenu')
+          ];
+          btns.forEach(function(b) {
+            if (!b) return;
+            b.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> <span>Lanjut ke Beranda</span>';
+            b.onclick = function() { window.location.href = '/app'; };
+          });
+          const gCta = document.getElementById('heroCtaGuest');
+          if (gCta) gCta.style.display = 'none';
+          const freeCta = document.getElementById('cardFreeCta');
+          if (freeCta) {
+            freeCta.textContent = 'Buka Aplikasi';
+            freeCta.href = '/app';
+            freeCta.removeAttribute('onclick');
+          }
+        }
+      }
+    } catch (e) {}
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applySessionUI);
+  } else {
+    applySessionUI();
+  }
+})();
+</script>
 </body>
 </html>

@@ -1,13 +1,13 @@
 /* ==========================================================================
-   TKA MASTER CBT - V0 MINIMALIST DESIGN SYSTEM
-   Clean, modern, crisp, and pedagogical design inspired by Linear & Notion
+   musse CBT - DESIGN SYSTEM
+   Clean, modern, crisp, and pedagogical design
    ========================================================================== */
 
 :root {
   /* Fonts — --font-ui HANYA untuk chrome (nav, label, tombol, heading).
      --font-content = font soal, opsi, math (KaTeX): JANGAN diubah dan
      JANGAN dipasangkan ke elemen chrome. Tidak ada font di * selector. */
-  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-ui: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-content: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-heading: var(--font-ui);
   --font-sans: var(--font-ui); /* alias lama utk rule yang sudah ada */
@@ -22,25 +22,28 @@
   --text: #1C1917;
   --text-2: #57534E;
   --text-3: #78716C;
-  --accent: #1F6F4A;
-  --accent-hover: #185A3B;
+  --accent: #2d7d4f;
+  --accent-hover: #23633e;
   --accent-tint: #EDF5F0;
   --accent-border: #BFDCCB;
+  --accent-orange: #f5a623;
+  --accent-orange-hover: #e09419;
+  --accent-orange-tint: #fef7ec;
   --wrong: #B42318;
   --wrong-hover: #912018;
   --wrong-tint: #FEF3F2;
   --wrong-border: #F2C6C3;
-  --warn: #B54708;
+  --warn: #f5a623;
   --warn-tint: #FFFAEB;
-  --warn-border: #EBD9B4;
-  --navbar: #004a2a;
-  --navbar-border: #00351e;
+  --warn-border: #fde68a;
+  --navbar: #2d7d4f;
+  --navbar-border: #23633e;
   --navbar-surface: rgba(255, 255, 255, 0.1);
   --navbar-text: #ffffff;
   --navbar-text-2: #aaf2c2;
-  --btn-primary-bg: #18181B;
+  --btn-primary-bg: #2d7d4f;
   --btn-primary-text: #FFFFFF;
-  --btn-primary-hover: #2D2D30;
+  --btn-primary-hover: #23633e;
 
   /* Legacy aliases — dipetakan ke token baru agar seluruh rule lama ikut netral */
   --bg-page: var(--bg);
@@ -380,6 +383,28 @@ body {
   color: #ffffff;
 }
 
+.btn-bug-report {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+  padding: 7px 12px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-bug-report:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+  color: #dc2626;
+}
+
 .user-avatar {
   width: 34px;
   height: 34px;
@@ -505,7 +530,11 @@ body {
   overflow-y: auto; overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 }
-.home-overlay.home-hidden { display: none; }
+.home-overlay.home-hidden {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
 
 /* Shell: layar HP (sheet putih) di tengah background krem */
 .ho-shell {
@@ -820,13 +849,18 @@ body {
   color: #06281C;
 }
 
-.option-item.selected::after {
+.option-item::after {
   content: "\f00c";
   font-family: "Font Awesome 6 Free";
   font-weight: 900;
   margin-left: auto;
   color: var(--accent);
   font-size: 14px;
+  visibility: hidden; /* Reserve space sejak awal agar teks tidak geser (BUG-007) */
+}
+
+.option-item.selected::after {
+  visibility: visible;
 }
 
 .option-item.correct {
@@ -2239,6 +2273,15 @@ body {
   transition: opacity 0.2s ease;
 }
 
+#modalDaftarSoal {
+  z-index: 9999 !important;
+}
+
+#modalDaftarSoal .modal-content {
+  position: relative;
+  z-index: 10000 !important;
+}
+
 .modal-overlay.open {
   opacity: 1;
   pointer-events: auto;
@@ -2379,7 +2422,11 @@ body {
 .bs-table {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  max-width: 100%;
   margin-top: 18px;
 }
 
@@ -2420,6 +2467,26 @@ body {
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
+  min-height: 36px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+@media (max-width: 899px) {
+  .bs-header,
+  .bs-row {
+    min-width: 460px;
+  }
+  .bs-btn {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-weight: 600;
+  }
 }
 
 .bs-btn.active {
@@ -2755,8 +2822,9 @@ body {
   overflow-y: auto;
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  margin-bottom: 18px;
-  max-height: 48vh;
+  margin-bottom: 14px;
+  min-height: 250px;
+  max-height: 58vh;
 }
 
 .review-table {
@@ -2913,6 +2981,14 @@ body {
   background: rgba(255, 255, 255, 0.18);
   color: #ffffff;
   border-color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-finish-header.btn-reviu-active {
+  background: #004a2a !important;
+  color: #ffffff !important;
+  border: 1px solid #22c55e !important;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.35) !important;
+  font-weight: 700 !important;
 }
 
 .btn-nav-finish {
@@ -3491,6 +3567,7 @@ html, body {
 
   .btn-daftar-soal,
   .btn-finish-header,
+  .btn-bug-report,
   .user-avatar {
     display: none !important;
   }
@@ -3627,7 +3704,7 @@ html, body {
   }
 
   .qcard-body {
-    padding: 16px;
+    padding: 16px 16px 70px !important;
   }
 
   .cbt-stimulus-col {
@@ -3651,6 +3728,8 @@ html, body {
   .options-list {
     gap: 10px;
     margin-top: 18px;
+    padding-bottom: 8px !important;
+    padding-right: 48px !important;
   }
 
   .option-item {
@@ -5601,12 +5680,14 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
-  padding: 8px 14px !important;
+  padding: 8px 12px !important;
   background: #F8FAFC !important;
   border-bottom: 1px solid #E2E8F0 !important;
   flex-shrink: 0 !important;
   position: relative !important;
-  overflow: visible !important;
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
   z-index: 110 !important;
 }
 
@@ -5618,16 +5699,18 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
 /* Tombol Chat Baru di Bar Aksi */
 .ai-top-actions-bar .btn-new-chat-tutor {
   flex-shrink: 0 !important;
-  height: 32px !important;
-  padding: 0 12px !important;
-  border-radius: 20px !important;
+  min-height: 44px !important;
+  height: 44px !important;
+  padding: 0 14px !important;
+  border-radius: 22px !important;
   background: #FFFFFF !important;
   border: 1px solid #CBD5E1 !important;
   color: #004a2a !important;
-  font-size: 11.5px !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
   display: inline-flex !important;
   align-items: center !important;
+  justify-content: center !important;
   gap: 5px !important;
   cursor: pointer !important;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05) !important;
@@ -5830,13 +5913,28 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   display: flex !important;
   align-items: center !important;
   gap: 6px !important;
+  flex: 1 1 0% !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
   flex-wrap: nowrap !important;
   overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior-x: contain !important;
   scrollbar-width: none !important;
-  padding: 0 !important;
+  padding: 0 8px 0 0 !important;
   margin: 0 !important;
 }
 .ai-top-actions-bar .quick-chips::-webkit-scrollbar { display: none !important; }
+.ai-top-actions-bar .quick-chips .chip-btn {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  min-height: 44px !important;
+  padding: 8px 14px !important;
+  font-size: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
 
 /* 2. Styling Chat Container & Bubbles */
 .chat-messages {
@@ -6253,85 +6351,157 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
    FIX TEKS PANJANG TERPECAH VERTIKAL (MOBILE ONLY: <=899px)
    ========================================================================== */
 @media (max-width: 899px) {
-  /* 1. Modal Reviu Hasil Simulasi: anti kolom sempit & huruf jatuh ke bawah */
+  /* 1. Modal Reviu Hasil Simulasi: 4 kolom pas di layar HP, nomor & kunci tampak jelas */
   .review-container {
-    padding: 18px 14px 14px !important;
-    width: 95% !important;
-    max-width: 480px !important;
+    padding: 14px 12px 14px !important;
+    width: 96% !important;
+    max-width: 540px !important;
+    max-height: 94vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .review-header {
+    margin-bottom: 8px !important;
+    padding-bottom: 8px !important;
+  }
+  .review-header h2 {
+    font-size: 15px !important;
   }
   .review-header > div {
     min-width: 0 !important;
     flex: 1 !important;
   }
   .review-header p {
-    display: -webkit-box !important;
-    -webkit-line-clamp: 2 !important;
-    -webkit-box-orient: vertical !important;
+    font-size: 12px !important;
+    white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
   }
   .review-close {
     flex-shrink: 0 !important;
+    padding: 4px 8px !important;
   }
   .review-summary {
-    gap: 6px !important;
-    margin-bottom: 14px !important;
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 4px !important;
+    margin-bottom: 8px !important;
   }
   .review-card {
-    padding: 8px 4px !important;
+    padding: 6px 2px !important;
     min-width: 0 !important;
+    text-align: center !important;
+    border-radius: 8px !important;
   }
-  .review-card i {
-    font-size: 13px !important;
+  .review-card-icon-wrap {
+    display: none !important;
   }
   .review-card-num,
   .review-persen {
-    font-size: 18px !important;
+    font-size: 16px !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
   }
   .review-card-label {
-    font-size: 9.5px !important;
-    letter-spacing: 0.02em !important;
+    font-size: 9px !important;
+    letter-spacing: 0.01em !important;
+    margin-top: 2px !important;
   }
   .review-table-wrap {
-    overflow-x: auto !important;
+    flex: 1 !important;
+    min-height: 220px !important;
+    max-height: 52vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
     -webkit-overflow-scrolling: touch !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 10px !important;
+    margin-bottom: 10px !important;
   }
   .review-table {
-    min-width: 550px !important;
     width: 100% !important;
-    table-layout: auto !important;
+    min-width: 0 !important;
+    table-layout: fixed !important;
+    font-size: 12px !important;
+  }
+  .review-table thead th {
+    padding: 8px 4px !important;
+    font-size: 10px !important;
+    letter-spacing: 0.02em !important;
+  }
+  .review-table tbody td {
+    padding: 8px 4px !important;
+    vertical-align: middle !important;
   }
   .review-table thead th:nth-child(1),
   .review-table tbody td:nth-child(1) {
-    width: 44px !important;
-    min-width: 44px !important;
+    width: 34px !important;
+    min-width: 34px !important;
+    max-width: 34px !important;
     text-align: center !important;
-    padding: 10px 6px !important;
+    font-weight: 700 !important;
+    padding: 8px 2px !important;
   }
   .review-table thead th:nth-child(2),
   .review-table tbody td:nth-child(2) {
-    width: 92px !important;
-    min-width: 92px !important;
-    padding: 10px 8px !important;
+    width: 72px !important;
+    min-width: 72px !important;
+    max-width: 72px !important;
+    text-align: center !important;
+    padding: 8px 2px !important;
+  }
+  .review-status-badge {
+    padding: 2px 5px !important;
+    font-size: 10px !important;
+    letter-spacing: 0 !important;
+  }
+  .review-status-badge i {
+    font-size: 9px !important;
   }
   .review-table thead th:nth-child(3),
   .review-table tbody td:nth-child(3) {
-    min-width: 170px !important;
-    padding: 10px 10px !important;
+    width: calc(50% - 53px) !important;
+    padding: 8px 4px !important;
     white-space: normal !important;
-    word-break: normal !important;
+    word-break: break-word !important;
     overflow-wrap: break-word !important;
+    font-size: 11.5px !important;
   }
   .review-table thead th:nth-child(4),
   .review-table tbody td:nth-child(4) {
-    min-width: 240px !important;
-    padding: 10px 10px !important;
+    width: calc(50% - 53px) !important;
+    padding: 8px 4px !important;
     white-space: normal !important;
-    word-break: normal !important;
+    word-break: break-word !important;
     overflow-wrap: break-word !important;
+    font-size: 11.5px !important;
+    font-weight: 700 !important;
+    color: var(--accent) !important;
   }
   .review-table thead th:nth-child(4) {
+    font-weight: 600 !important;
+    color: var(--text-3) !important;
+  }
+  .review-ans, .review-key {
+    font-size: 11.5px !important;
+    line-height: 1.35 !important;
+  }
+  .review-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 8px !important;
+    padding-top: 4px !important;
+  }
+  .review-actions .btn-review-act {
+    padding: 10px 8px !important;
+    font-size: 12px !important;
+    justify-content: center !important;
     white-space: nowrap !important;
+  }
+  .review-actions .btn-review-danger {
+    grid-column: span 2 !important;
+    padding: 8px !important;
+    font-size: 11.5px !important;
   }
 
   /* 2. Header Soal Mobile: hapus batas 170px magic number, cegah pemotongan teks */
@@ -6419,5 +6589,205 @@ body[data-active-subject="sosiologi"][data-active-paket="paket_1"][data-active-n
   }
 }
 
+/* === FIX 2026-10-09: popup mobile + layout shift (LANGKAH 2.3, 2.4) === */
+@media (max-width: 480px) {
+  /* 2.3: popup tidak boleh lebih tinggi dari layar; konten scroll di dalam */
+  .modal-content {
+    max-height: 88vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px;
+    margin: 0 8px;
+  }
+  .finish-modal {
+    max-height: 88vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Review overlay: badge dan konten tidak kepotong */
+  #reviewHasilOverlay .review-container {
+    max-height: 92vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+/* 2.4: cegah teks bergeser (layout shift) */
+/* Timer: lebar tetap, angka tabular */
+.timer-display, #timerText, .sim-timer {
+  font-variant-numeric: tabular-nums;
+  min-width: 4.5em;
+  display: inline-block;
+  text-align: center;
+}
+/* Gambar soal: reservasi ruang agar tidak melompat saat load */
+.soal-image, .question-image img, .pembahasan img {
+  max-width: 100%;
+  height: auto;
+  aspect-ratio: auto;
+}
+/* Tombol dengan ikon: lebar ikon tetap agar teks tidak geser */
+.btn-check-answer, .btn-ragu {
+  min-width: 0;
+}
+.btn-check-answer .icon, .btn-ragu .icon {
+  width: 1.2em;
+  display: inline-block;
+  text-align: center;
+}
 
+/* BUGFIX (10 Okt 2026 - BUG-007): reserve space centang kini langsung ditangani di .option-item::after */
+.option-item::after {
+  visibility: hidden;
+}
+.option-item.selected::after {
+  visibility: visible;
+}
 
+/* BUGFIX (10 Okt 2026): popup mobile terlalu besar */
+@media (max-width: 640px) {
+  .modal-content, .popup-content, [role="dialog"] .dialog-content {
+    max-width: calc(100vw - 32px) !important;
+    max-height: calc(100vh - 80px) !important;
+    margin: 16px !important;
+    padding: 16px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* RESPONSIVE AI TUTOR MOBILE SAAT KEYBOARD AKTIF */
+@media (max-width: 899px) {
+  body.keyboard-active .ai-top-actions-bar {
+    display: none !important;
+  }
+  body.keyboard-active .ai-tutor-header {
+    padding: 6px 12px !important;
+  }
+  body.keyboard-active .tutor-sub,
+  body.keyboard-active .tutor-quota-badge,
+  body.keyboard-active .btn-refresh-quota {
+    display: none !important;
+  }
+  body.keyboard-active #chatQuestionCard {
+    display: none !important;
+  }
+  body.keyboard-active .chat-messages {
+    flex: 1 1 auto !important;
+  }
+  body.keyboard-active .chat-input-area {
+    padding: 8px 12px !important;
+  }
+}
+
+/* ACCORDION RINGKAS PEMBAHASAN 5 PILAR MOBILE */
+.pillar-accordion-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg-card);
+  margin-bottom: 12px;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+.pillar-accordion-header {
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background: var(--surface);
+  user-select: none;
+}
+.pillar-accordion-header:hover {
+  background: var(--surface-hover, #f1f5f9);
+}
+.pillar-accordion-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.pillar-chevron {
+  transition: transform 0.2s ease;
+  color: var(--text-3);
+  font-size: 13px;
+}
+.pillar-accordion-card.is-open .pillar-chevron {
+  transform: rotate(180deg);
+}
+.pillar-accordion-body {
+  display: none;
+  padding: 14px 16px;
+  border-top: 1px solid var(--border);
+}
+.pillar-accordion-card.is-open .pillar-accordion-body {
+  display: block;
+}
+
+/* Modal Kartu Strategi Belajar (Autopsi Tryout) */
+#modalKartuStrategi {
+  z-index: 200;
+}
+
+/* ==========================================================================
+   B4: Universal Image Fallback & Retry (Clean Mobile & Desktop UI)
+   ========================================================================== */
+.img-fallback-box {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  background: var(--bg-card, #f8fafc);
+  border: 1.5px dashed var(--border, #cbd5e1);
+  border-radius: 10px;
+  margin: 10px auto;
+  max-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+.img-fallback-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-2, #64748b);
+}
+.img-fallback-msg svg {
+  color: #ef4444;
+  flex-shrink: 0;
+}
+.img-fallback-latex {
+  margin: 8px 0;
+  padding: 6px 12px;
+  background: var(--bg-surface, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  color: var(--text-1, #0f172a);
+}
+.img-fallback-retry {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+  padding: 6px 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2563eb;
+  background: rgba(37, 99, 235, 0.08);
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.img-fallback-retry:hover {
+  background: rgba(37, 99, 235, 0.16);
+  border-color: #2563eb;
+}
+.img-fallback-retry svg {
+  transition: transform 0.3s ease;
+}
+.img-fallback-retry:active svg {
+  transform: rotate(180deg);
+}

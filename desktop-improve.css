@@ -161,4 +161,508 @@ select:focus-visible,
   body[data-quiz-mode="1"] .package-tabs {
     display: none !important;
   }
+
+  /* ============================================================
+     D1. AI TUTOR DESKTOP — 2-KOLOM (SOAL DI KIRI, CHAT DI KANAN)
+     Lebar Chat Panel: 400px (antara 380-420px sesuai spec),
+     Kartu Soal: fleksibel di sisi kiri dengan scroll mandiri.
+     ============================================================ */
+  #pembSubAI {
+    display: block;
+    width: 100%;
+  }
+
+  #pembSubAI .cbt-sidebar-col {
+    position: static !important;
+    height: auto !important;
+    border: none !important;
+    background: transparent !important;
+    width: 100% !important;
+    transform: none !important;
+    box-shadow: none !important;
+    z-index: 1 !important;
+  }
+
+  #pembSubAI .ai-tutor-card {
+    display: grid !important;
+    grid-template-columns: minmax(420px, 1fr) 400px !important;
+    grid-template-rows: auto auto 1fr auto !important;
+    grid-template-areas:
+      "soal header"
+      "soal actions"
+      "soal messages"
+      "soal input" !important;
+    height: calc(100vh - 285px) !important;
+    min-height: 480px !important;
+    max-height: 720px !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06) !important;
+    overflow: hidden !important;
+  }
+
+  /* KIRI: Lembar / Pratinjau Soal Lengkap */
+  #pembSubAI #chatQuestionCard {
+    grid-area: soal !important;
+    display: flex !important;
+    flex-direction: column !important;
+    max-height: 100% !important;
+    height: 100% !important;
+    border-right: 1px solid #e2e8f0 !important;
+    border-bottom: none !important;
+    background: #f8fafc !important;
+    overflow: hidden !important;
+  }
+
+  #pembSubAI #chatQuestionToggle {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 18px !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    cursor: default !important;
+    font-size: 13.5px !important;
+    font-weight: 700 !important;
+    color: #004a2a !important;
+  }
+
+  #pembSubAI #chatQuestionChevron {
+    display: none !important;
+  }
+
+  #pembSubAI #chatQuestionBody {
+    flex: 1 !important;
+    display: block !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    padding: 20px 24px !important;
+    background: #ffffff !important;
+    font-size: 14.5px !important;
+    line-height: 1.65 !important;
+    color: #1e293b !important;
+  }
+
+  /* KANAN: Header AI Tutor */
+  #pembSubAI .ai-tutor-header {
+    grid-area: header !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 16px !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  #pembSubAI .ai-tutor-header .btn-close-sheet {
+    display: none !important;
+  }
+
+  #pembSubAI .tutor-sheet-handle {
+    display: none !important;
+  }
+
+  /* KANAN: Bar Aksi Atas (Chat Baru, Model, Chips Cepat) */
+  #pembSubAI .ai-top-actions-bar {
+    grid-area: actions !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 8px 14px !important;
+    background: #f8fafc !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    overflow-x: auto !important;
+  }
+
+  /* KANAN: Riwayat Chat */
+  #pembSubAI .chat-messages {
+    grid-area: messages !important;
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 !important;
+    min-height: 0 !important;
+    overflow-y: auto !important;
+    padding: 14px 16px !important;
+    background: #ffffff !important;
+    gap: 10px !important;
+  }
+
+  /* KANAN: Input Composer Pinned di Bawah */
+  #pembSubAI .chat-input-area {
+    grid-area: input !important;
+    padding: 10px 14px 10px !important;
+    background: #ffffff !important;
+    border-top: 1px solid #e2e8f0 !important;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.02) !important;
+  }
+
+  #pembSubAI .chat-input-form {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    background: #f1f5f9 !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 12px !important;
+    padding: 3px 6px 3px 12px !important;
+    transition: border-color 0.2s, box-shadow 0.2s !important;
+  }
+
+  #pembSubAI .chat-input-form:focus-within {
+    border-color: #004a2a !important;
+    background: #ffffff !important;
+    box-shadow: 0 0 0 3px rgba(0, 74, 42, 0.12) !important;
+  }
+
+  #pembSubAI .chat-input-form input {
+    flex: 1 !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+    font-size: 13px !important;
+    color: #0f172a !important;
+    padding: 6px 0 !important;
+  }
+
+  #pembSubAI .btn-send-chat {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 8px !important;
+    background: #004a2a !important;
+    color: #ffffff !important;
+    border: none !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+    transition: transform 0.15s, background-color 0.15s !important;
+    flex-shrink: 0 !important;
+  }
+
+  #pembSubAI .btn-send-chat:hover {
+    background: #1b633e !important;
+    transform: scale(1.04) !important;
+  }
+
+  #pembSubAI .ai-disclaimer {
+    font-size: 10.5px !important;
+    color: #94a3b8 !important;
+    text-align: center !important;
+    margin-top: 4px !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ============================================================
+     D2. POPUP REVIEW HASIL DESKTOP
+     - Modal lebar lega (max-width: 1040px)
+     - Kartu skor 4 kolom sejajar rapi
+     - Kartu Guru Autopsi lebar penuh & padding cukup
+     - Tabel hasil proporsional & nyaman dibaca, 0 overflow
+     ============================================================ */
+  #reviewHasilOverlay {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 32px 24px !important;
+  }
+
+  #reviewHasilOverlay .review-container {
+    width: 94% !important;
+    max-width: 1040px !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    padding: 30px 36px !important;
+    border-radius: 20px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 24px 64px rgba(15, 23, 42, 0.22) !important;
+    background: #ffffff !important;
+  }
+
+  /* Header Popup Review */
+  #reviewHasilOverlay .review-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    margin-bottom: 20px !important;
+    padding-bottom: 14px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  #reviewHasilOverlay .review-header h2 {
+    font-size: 22px !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  #reviewHasilOverlay .review-header h2 i {
+    color: #004a2a !important;
+  }
+
+  #reviewHasilOverlay .review-header p {
+    font-size: 13.5px !important;
+    color: #64748b !important;
+    margin-top: 4px !important;
+  }
+
+  /* Kartu Skor 4 Kolom Sejajar Rapi */
+  #reviewHasilOverlay .review-summary {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 16px !important;
+    margin-bottom: 24px !important;
+  }
+
+  #reviewHasilOverlay .review-card {
+    padding: 18px 16px !important;
+    border-radius: 16px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 6px !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+  }
+
+  #reviewHasilOverlay .review-card-icon-wrap {
+    display: flex !important;
+    width: 40px !important;
+    height: 40px !important;
+    border-radius: 12px !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 18px !important;
+    margin-bottom: 4px !important;
+  }
+
+  #reviewHasilOverlay .review-card-num,
+  #reviewHasilOverlay .review-persen {
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    line-height: 1.1 !important;
+  }
+
+  #reviewHasilOverlay .review-card-label {
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+  }
+
+  /* Kartu Guru Autopsi: Lebar Penuh, Padding Cukup */
+  #reviewHasilOverlay #autopsiSection {
+    margin-bottom: 24px !important;
+    width: 100% !important;
+  }
+
+  #reviewHasilOverlay .autopsy-widget {
+    margin: 0 0 20px 0 !important;
+    padding: 24px 28px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 2px 12px rgba(15, 23, 42, 0.03) !important;
+  }
+
+  #reviewHasilOverlay .autopsy-widget h3 {
+    font-size: 17px !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+  }
+
+  /* Tabel Hasil: Lebar Nyaman & Tidak Sempit */
+  #reviewHasilOverlay .review-table-wrap {
+    width: 100% !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 14px !important;
+    background: #ffffff !important;
+    margin-bottom: 24px !important;
+    max-height: 420px !important;
+    overflow-y: auto !important;
+    overflow-x: auto !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.02) !important;
+  }
+
+  #reviewHasilOverlay .review-table {
+    width: 100% !important;
+    min-width: 720px !important;
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+    font-size: 13.5px !important;
+  }
+
+  #reviewHasilOverlay .review-table thead th {
+    background: #f8fafc !important;
+    color: #475569 !important;
+    font-weight: 700 !important;
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    padding: 14px 18px !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 2 !important;
+  }
+
+  #reviewHasilOverlay .review-table tbody td {
+    padding: 14px 18px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    vertical-align: middle !important;
+    line-height: 1.5 !important;
+  }
+
+  #reviewHasilOverlay .review-table tbody tr:hover {
+    background: #f8fafc !important;
+  }
+
+  /* Tombol Aksi di Bawah Review */
+  #reviewHasilOverlay .review-actions {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-top: 10px !important;
+    padding-top: 16px !important;
+    border-top: 1px solid #f1f5f9 !important;
+  }
+
+  #reviewHasilOverlay .btn-review-act {
+    padding: 12px 22px !important;
+    border-radius: 12px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    flex: initial !important;
+  }
+
+  /* ============================================================
+     D4. PARITAS MOBILE -> DESKTOP: LEMBAR SOAL & PEMBAHASAN TERPUSAT RAPI
+     ============================================================ */
+  .cbt-main-col {
+    max-width: 1040px !important;
+    margin: 0 auto !important;
+    width: 100% !important;
+  }
+
+  .cbt-question-card {
+    border-radius: 16px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04) !important;
+    overflow: hidden !important;
+  }
+
+  .qcard-header {
+    padding: 16px 28px !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+  }
+
+  .qcard-body {
+    padding: 24px 28px !important;
+  }
+
+  .cbt-stimulus-col {
+    padding: 20px 24px !important;
+    border-radius: 14px !important;
+    background: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+
+  .cbt-stimulus-col .stimulus-content {
+    font-size: 15px !important;
+    line-height: 1.7 !important;
+    color: #1e293b !important;
+  }
+
+  .prompt-text {
+    font-size: 15.5px !important;
+    line-height: 1.65 !important;
+    color: #0f172a !important;
+  }
+
+  .qcard-actions {
+    padding: 16px 28px !important;
+    background: #ffffff !important;
+    border-top: 1px solid #f1f5f9 !important;
+  }
+
+  /* ============================================================
+     D5. PERBAIKI FRAMING/LAG DI LAPTOP (60FPS PERFORMANCE OPTIMIZATION)
+     - Kurangi animasi berat di desktop (gunakan transform/opacity saja).
+     - Tambahkan will-change dan transform: translateZ(0) di elemen yang dianimasikan.
+     - Ringankan/hilangkan filter blur dan multi-layer shadow berat.
+     - GPU compositing & layout containment untuk eliminasi repaint thrashing.
+     ============================================================ */
+  /* 1. Header Desktop: Ganti backdrop-blur mahal dengan solid background yang bersih */
+  header.fixed {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: #ffffff !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* 2. Ringankan blur dekoratif di Hero agar GPU laptop tidak bottleneck */
+  .blur-3xl, .blur-2xl, .blur-xl {
+    filter: none !important;
+    opacity: 0.12 !important;
+  }
+
+  /* 3. Ribbon metrik hero: ganti backdrop-blur dengan RGBA semi-transparan yang ringan */
+  .bg-brand-emerald-dark\/40.backdrop-blur-md,
+  .bg-brand-emerald-dark\/40,
+  .backdrop-blur-md {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: rgba(11, 30, 19, 0.75) !important;
+  }
+
+  /* 4. Hardware acceleration (GPU compositing) untuk kartu paket & elemen interaktif */
+  .dk-pkg {
+    transform: translateZ(0) !important;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .dk-pkg:hover {
+    transform: translateY(-3px) translateZ(0) !important;
+    box-shadow: 0 10px 24px rgba(0, 74, 42, 0.12) !important;
+  }
+
+  /* 5. Isolasi layout untuk setiap section mapel agar scrolling tidak memicu repaint global */
+  .dk-col-main > .dk-subject {
+    contain: layout style;
+  }
+
+  /* 6. Sticky aside pada dashboard desktop */
+  aside.lg\:col-span-4 {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  /* 7. Halaman Tryout / CBT Soal: akselerasi GPU & transform compositing */
+  .cbt-question-card,
+  .cbt-main-col,
+  #workPaneSoal {
+    transform: translateZ(0);
+  }
+
+  /* 8. AI Tutor & Review Popups: akselerasi transform */
+  #reviewHasilOverlay .review-container,
+  #pembSubAI .ai-tutor-card {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  /* 9. Smooth scrolling tanpa layout thrashing */
+  html {
+    scroll-behavior: smooth;
+  }
 }
+
+

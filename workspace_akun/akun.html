@@ -4,9 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>Akun · TKA Master</title>
+<title>Akun · musse</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/favicon.png">
+<link rel="apple-touch-icon" href="/assets/brand/favicon.png">
 <!--
-  HALAMAN AKUN — TKA Master (file mandiri, CSS/JS inline, Tailwind CDN).
+  HALAMAN AKUN — musse (file mandiri, CSS/JS inline, Tailwind CDN).
   Pola sama dengan workspace_modul/modul.html: dua versi (#akunDesktop >=900px,
   #akunMobile <900px), bridge postMessage ke parent.
   KEJUJURAN DATA (prinsip project): sistem login belum ada -> profil tampil
@@ -19,7 +22,7 @@
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../vendor/tw-akun.css">
 
@@ -60,12 +63,10 @@ button:active { transform: scale(0.97); }
   <header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
     <div class="h-20 w-full max-w-7xl mx-auto px-gutter-desktop flex items-center justify-between gap-space-md">
       <div class="flex items-center gap-space-xl">
-        <a href="#" data-nav="beranda" class="flex items-center gap-space-sm group">
-          <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
-            <span class="material-symbols-outlined text-[24px]">school</span>
-          </div>
+        <a href="#" data-nav="beranda" class="flex items-center gap-2.5 group">
+          <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-10 h-10 object-contain drop-shadow-sm group-hover:scale-105 transition-transform" />
           <div class="flex flex-col">
-            <span class="font-headline-sm text-headline-sm text-primary leading-tight tracking-tight group-hover:text-primary-container transition-colors">TKA Master</span>
+            <span class="font-headline-sm text-headline-sm text-primary leading-tight tracking-tight font-black font-outfit group-hover:text-primary-container transition-colors">musse</span>
             <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">SIMULASI &amp; LATIHAN PUSMENDIK</span>
           </div>
         </a>
@@ -291,7 +292,7 @@ button:active { transform: scale(0.97); }
               <div class="flex flex-col">
                 <span class="font-label-md text-label-md font-bold text-primary">Jaminan Keamanan &amp; Privasi 100%</span>
                 <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
-                  TKA Master menjunjung tinggi privasi siswa. Data login dan riwayat latihan Anda dienkripsi secara aman, tersimpan di perangkat Anda, dan <strong>tidak akan pernah dijual atau dibagikan ke pihak ketiga</strong>.
+                  musse menjunjung tinggi privasi siswa. Data login dan riwayat latihan Anda dienkripsi secara aman, tersimpan di perangkat Anda, dan <strong>tidak akan pernah dijual atau dibagikan ke pihak ketiga</strong>.
                 </p>
               </div>
             </div>
@@ -365,18 +366,16 @@ button:active { transform: scale(0.97); }
 <div id="akunMobile">
   <header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-[#E2E8F0]">
     <div class="h-14 px-gutter flex items-center justify-between max-w-md mx-auto">
-      <div class="flex items-center gap-space-xs cursor-pointer" data-nav="beranda">
-        <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary shadow-sm shrink-0">
-          <span class="material-symbols-outlined text-[18px]">school</span>
-        </div>
+      <div class="flex items-center gap-2 cursor-pointer" data-nav="beranda">
+        <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-8 h-8 object-contain shrink-0" />
         <div class="flex flex-col min-w-0">
-          <span class="text-sm font-bold text-primary tracking-tight leading-none truncate">TKA Master</span>
+          <span class="text-sm font-black text-primary tracking-tight leading-none truncate font-outfit">musse</span>
           <span class="text-[9px] font-bold text-text-muted uppercase tracking-wider truncate mt-0.5">AKUN</span>
         </div>
       </div>
-      <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm shrink-0 overflow-hidden" id="m-header-avatar-wrap">
-        <span class="material-symbols-outlined text-[18px]" id="m-header-avatar-icon">person</span>
-        <img id="m-header-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;">
+      <div id="m-header-avatar-wrap" class="rounded-full bg-primary flex items-center justify-center text-on-primary shadow-sm shrink-0 overflow-hidden cursor-pointer" style="width:36px;height:36px;min-width:36px;min-height:36px;max-width:36px;max-height:36px;border-radius:50%;overflow:hidden;position:relative;display:flex;align-items:center;justify-content:center;">
+        <span class="material-symbols-outlined text-[20px]" id="m-header-avatar-icon">person</span>
+        <img id="m-header-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;position:absolute;top:0;left:0;">
       </div>
     </div>
   </header>
@@ -387,9 +386,9 @@ button:active { transform: scale(0.97); }
       <section class="bg-surface-card rounded-xl p-space-md shadow-sm relative overflow-hidden flex flex-col gap-space-md">
         <div class="absolute -right-10 -top-10 w-36 h-36 rounded-full bg-brand-emerald-light/50 pointer-events-none"></div>
         <div class="flex items-center gap-space-md relative z-10">
-          <div class="relative w-16 h-16 rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-on-primary overflow-hidden" id="m-avatar-wrap">
+          <div class="relative rounded-full bg-primary flex items-center justify-center flex-shrink-0 text-on-primary overflow-hidden" id="m-avatar-wrap" style="width:64px;height:64px;min-width:64px;min-height:64px;max-width:64px;max-height:64px;border-radius:50%;overflow:hidden;position:relative;">
             <span class="material-symbols-outlined text-[32px]" id="m-avatar-icon">person</span>
-            <img id="m-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;">
+            <img id="m-avatar-img" src="" alt="Avatar" style="display:none;width:100%;height:100%;object-fit:cover;border-radius:50%;position:absolute;top:0;left:0;">
           </div>
           <div class="flex flex-col min-w-0 flex-1">
             <div class="flex items-center justify-between gap-space-xs">
@@ -481,10 +480,10 @@ button:active { transform: scale(0.97); }
                 <span class="font-body-sm text-body-sm text-text-muted truncate">Skala keterbacaan soal, AI, &amp; menu</span>
               </div>
             </div>
-            <div class="flex items-center gap-1.5 bg-surface-subtle p-1 rounded-lg border border-border-subtle shrink-0">
-              <button type="button" class="w-8 h-8 rounded-md bg-surface-card text-text-primary font-bold text-xs shadow-xs hover:bg-white active:scale-95 flex items-center justify-center border border-border-subtle cursor-pointer" id="btnAkunScaleDec" onclick="stepAkunScale(-1)" aria-label="Kecilkan teks">A-</button>
-              <span class="text-xs font-bold text-primary px-2 min-w-[42px] text-center" id="akunScaleIndicator">100%</span>
-              <button type="button" class="w-8 h-8 rounded-md bg-surface-card text-text-primary font-bold text-xs shadow-xs hover:bg-white active:scale-95 flex items-center justify-center border border-border-subtle cursor-pointer" id="btnAkunScaleInc" onclick="stepAkunScale(1)" aria-label="Besarkan teks">A+</button>
+            <div class="flex items-center gap-1.5 bg-surface-subtle p-1 rounded-xl border border-border-subtle shrink-0">
+              <button type="button" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg bg-surface-card text-text-primary font-bold text-sm shadow-xs hover:bg-white active:scale-95 flex items-center justify-center border border-border-subtle cursor-pointer transition-transform" id="btnAkunScaleDec" onclick="stepAkunScale(-1)" aria-label="Kecilkan teks">A-</button>
+              <span class="text-xs font-bold text-primary px-2 min-w-[44px] text-center" id="akunScaleIndicator">100%</span>
+              <button type="button" class="w-11 h-11 min-w-[44px] min-h-[44px] rounded-lg bg-surface-card text-text-primary font-bold text-sm shadow-xs hover:bg-white active:scale-95 flex items-center justify-center border border-border-subtle cursor-pointer transition-transform" id="btnAkunScaleInc" onclick="stepAkunScale(1)" aria-label="Besarkan teks">A+</button>
             </div>
           </div>
         </div>
@@ -524,7 +523,7 @@ button:active { transform: scale(0.97); }
                   <span class="material-symbols-outlined text-[20px]">info</span>
                 </div>
                 <div class="flex flex-col min-w-0">
-                  <span class="font-label-lg text-label-lg text-text-primary truncate">Tentang TKA Master</span>
+                  <span class="font-label-lg text-label-lg text-text-primary truncate">Tentang musse</span>
                   <span class="font-body-sm text-body-sm text-text-muted truncate">Masa beta &middot; Format TKA Pusmendik</span>
                 </div>
               </div>
@@ -614,7 +613,7 @@ button:active { transform: scale(0.97); }
     var nama = (PROFILE && (PROFILE.nama || PROFILE.name)) || 'Tamu';
     var login = !!(PROFILE && (PROFILE.login || PROFILE.loggedIn));
     var email = (PROFILE && PROFILE.email) || '';
-    var avatar = (PROFILE && (PROFILE.avatar || PROFILE.avatar_url)) || '';
+    var avatar = (PROFILE && (PROFILE.avatar || PROFILE.avatar_url || (PROFILE.user_metadata && PROFILE.user_metadata.avatar_url))) || '';
 
     // Nama & Subtitle: Khusus Desktop dijadikan teks Putih sesuai permintaan user
     document.querySelectorAll('[data-d-name]').forEach(function (el) {
@@ -627,7 +626,7 @@ button:active { transform: scale(0.97); }
     });
     var dSub = document.querySelector('[data-d-sub]');
     if (dSub) {
-      dSub.textContent = login ? (email || 'Siswa TKA Master (Google Login)') : 'Profil siswa akan terisi setelah login Google.';
+      dSub.textContent = login ? (email || 'Siswa musse (Google Login)') : 'Profil siswa akan terisi setelah login Google.';
       dSub.style.color = '#cbd5e1';
     }
     var mSub = document.querySelector('[data-m-sub]');
@@ -896,7 +895,7 @@ button:active { transform: scale(0.97); }
           nama: su.name,
           name: su.name,
           email: su.email,
-          avatar: su.avatar,
+          avatar: su.avatar || su.avatar_url || (su.user_metadata && (su.user_metadata.avatar_url || su.user_metadata.picture)),
           login: true,
           loggedIn: true,
           sub: su.email

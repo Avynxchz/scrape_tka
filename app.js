@@ -270,6 +270,56 @@ const SUBJECT_CATALOG = {
       2: 'data/bahasa_korea/paket_2/'
     },
     welcome: `Halo! Saya <strong>AI Tutor TKA Bahasa Korea</strong>. Masih bingung dengan hangeul, partikel, tata bahasa (munbeop), atau pemahaman bacaan pada soal ini? Tanyakan langsung di bawah ya!`
+  },
+  teknik_mesin: {
+    name: 'SMK - Teknik Mesin',
+    json: {
+      1: 'data/teknik_mesin_paket_1_learning.json'
+    },
+    imgBase: {
+      1: 'data/teknik_mesin/paket_1/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Teknik Mesin</strong>. Ada kendala dalam memahami prinsip pemesinan, K3 bengkel, toleransi suaian, atau material teknik di soal ini? Tanyakan langsung di bawah ya!`
+  },
+  teknik_otomotif: {
+    name: 'SMK - Teknik Otomotif (TKR)',
+    json: {
+      1: 'data/teknik_otomotif_paket_1_learning.json'
+    },
+    imgBase: {
+      1: 'data/teknik_otomotif/paket_1/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Teknik Otomotif</strong>. Butuh penjelasan mengenai sistem kelistrikan bodi, mesin kendaraan ringan, chasis, atau perawatan otomotif? Tanyakan langsung di bawah ya!`
+  },
+  teknik_jaringan: {
+    name: 'SMK - Teknik Jaringan & Telekomunikasi (TKJ)',
+    json: {
+      1: 'data/teknik_jaringan_paket_1_learning.json'
+    },
+    imgBase: {
+      1: 'data/teknik_jaringan/paket_1/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Teknik Jaringan Komputer & Telekomunikasi (TKJ)</strong>. Bingung dengan subnetting, routing, konfigurasi mikrotik/cisco, atau transmisi fiber optik? Tanyakan langsung di bawah ya!`
+  },
+  akuntansi: {
+    name: 'SMK - Akuntansi & Keuangan Lembaga',
+    json: {
+      1: 'data/akuntansi_paket_1_learning.json'
+    },
+    imgBase: {
+      1: 'data/akuntansi/paket_1/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Akuntansi & Keuangan Lembaga</strong>. Ada pertanyaan seputar jurnal penyesuaian, buku besar, neraca lajur, atau laporan keuangan? Tanyakan langsung di bawah ya!`
+  },
+  manajemen_perkantoran: {
+    name: 'SMK - Manajemen Perkantoran & Layanan Bisnis (MPLB)',
+    json: {
+      1: 'data/manajemen_perkantoran_paket_1_learning.json'
+    },
+    imgBase: {
+      1: 'data/manajemen_perkantoran/paket_1/'
+    },
+    welcome: `Halo! Saya <strong>AI Tutor TKA Manajemen Perkantoran & Layanan Bisnis (MPLB)</strong>. Butuh bantuan memahami tata kelola administrasi surat, kearsipan elektronik, atau etika pelayanan kantor? Tanyakan langsung di bawah ya!`
   }
 };
 
@@ -357,8 +407,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const paramSub = urlParams.get('subject');
   const paramPkg = parseInt(urlParams.get('paket') || '1', 10);
-  // Home overlay tampil pertama kecuali user langsung menuju soal tertentu (#soal-N)
-  window.__homeFirst = !window.location.hash.startsWith('#soal-');
+  
+  // Tampilkan beranda hanya jika tidak ada parameter mapel di URL
+  const isDirectQuiz = Boolean(paramSub || (window.location.hash && window.location.hash.includes('soal-')));
+  window.__homeFirst = !isDirectQuiz;
 
   await syncDynamicCatalog();
 
@@ -376,10 +428,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateModelPickerUI();
   renderGridModal();
 
-  // Layar pertama: Home dashboard (kecuali langsung diarahkan ke soal via #soal-N)
-  if (window.__homeFirst) homeOpen();
+  window.__appInitialized = true;
+
+  // Layar pertama: Home dashboard jika bukan direct kuis; jika direct kuis pastikan homeClose()
+  if (window.__homeFirst) {
+    homeOpen();
+  } else {
+    homeClose();
+  }
+  try { syncProgressWithServer(); } catch (e) {}
 });
-// 22 Mata Pelajaran TKA Master — Meta UI, Ikon Unik Material Symbols, & Tema Warna Harmonis
+// 22 Mata Pelajaran musse — Meta UI, Ikon Unik Material Symbols, & Tema Warna Harmonis
 const SUBJECT_UI_META = {
   matematika: {
     name: 'Matematika (Wajib)', shortName: 'Matematika', chip: 'MATEMATIKA',
@@ -419,7 +478,7 @@ const SUBJECT_UI_META = {
   },
   sejarah: {
     name: 'Sejarah (Peminatan)', shortName: 'Sejarah', chip: 'SEJARAH',
-    icon: 'landmark', theme: 'purple', category: 'Soshum'
+    icon: 'history_edu', theme: 'purple', category: 'Soshum'
   },
   antropologi: {
     name: 'Antropologi (Peminatan)', shortName: 'Antropologi', chip: 'ANTROPOLOGI',
@@ -468,6 +527,26 @@ const SUBJECT_UI_META = {
   bahasa_korea: {
     name: 'Bahasa Korea', shortName: 'B. Korea', chip: 'B. KOREA',
     icon: 'stars', theme: 'pink', category: 'Bahasa Asing'
+  },
+  teknik_mesin: {
+    name: 'SMK - Teknik Mesin', shortName: 'Teknik Mesin', chip: 'MESIN',
+    icon: 'build', theme: 'slate', category: 'Kejuruan SMK'
+  },
+  teknik_otomotif: {
+    name: 'SMK - Teknik Otomotif (TKR)', shortName: 'Teknik Otomotif', chip: 'OTOMOTIF',
+    icon: 'directions_car', theme: 'amber', category: 'Kejuruan SMK'
+  },
+  teknik_jaringan: {
+    name: 'SMK - Teknik Jaringan & Telekomunikasi (TKJ)', shortName: 'TKJ', chip: 'TKJ',
+    icon: 'router', theme: 'cyan', category: 'Kejuruan SMK'
+  },
+  akuntansi: {
+    name: 'SMK - Akuntansi & Keuangan Lembaga', shortName: 'Akuntansi (AKL)', chip: 'AKUNTANSI',
+    icon: 'account_balance', theme: 'teal', category: 'Kejuruan SMK'
+  },
+  manajemen_perkantoran: {
+    name: 'SMK - Manajemen Perkantoran & Layanan Bisnis (MPLB)', shortName: 'MPLB', chip: 'MPLB',
+    icon: 'business_center', theme: 'indigo', category: 'Kejuruan SMK'
   }
 };
 window.SUBJECT_UI_META = SUBJECT_UI_META;
@@ -482,11 +561,36 @@ const HOME_WATERMARKS = {
 };
 const HOME_PKG_MINUTES = { 1: 45, 2: 50 };
 
+// B9: Mode tamu vs terdaftar & namespace storage
+function isGuestMode() {
+  try {
+    if (sessionStorage.getItem('tka_mode') === 'guest' || localStorage.getItem('tka_guest_session') === 'true') {
+      return true;
+    }
+    const u = (typeof getTKAUser === 'function' ? getTKAUser() : null) || window.TKA_USER;
+    if (u && !u.loggedIn) return true;
+    if (!localStorage.getItem('tka_supabase_auth_token')) return true;
+  } catch (e) {}
+  return false;
+}
+window.isGuestMode = isGuestMode;
+
+function progressStorageKey() {
+  return isGuestMode() ? 'tka_guest_progress' : 'tka_progress';
+}
+window.progressStorageKey = progressStorageKey;
+
+function examStorageKey(type, key) {
+  const prefix = isGuestMode() ? 'tka_guest_' : 'tka_';
+  return prefix + type + '_' + key;
+}
+window.examStorageKey = examStorageKey;
+
 // Progres nyata per paket dari jawaban user yang tersimpan (localStorage)
 function homePkgProgress(subjectKey, pkgNum, total) {
   if (!total) return 0;
   try {
-    const raw = localStorage.getItem('tka_progress');
+    const raw = localStorage.getItem(progressStorageKey());
     const store = raw ? JSON.parse(raw) : {};
     const answered = (store[subjectKey] && store[subjectKey][pkgNum]) || {};
     return Math.min(100, Math.round((Object.keys(answered).length / total) * 100));
@@ -520,7 +624,12 @@ const STATIC_SOAL_COUNTS = {
   bahasa_jerman: { 1: 10, 2: 29 },
   bahasa_prancis: { 1: 10, 2: 29 },
   bahasa_mandarin: { 1: 10, 2: 29 },
-  bahasa_korea: { 1: 10, 2: 29 }
+  bahasa_korea: { 1: 10, 2: 29 },
+  teknik_mesin: { 1: 6 },
+  teknik_otomotif: { 1: 6 },
+  teknik_jaringan: { 1: 6 },
+  akuntansi: { 1: 6 },
+  manajemen_perkantoran: { 1: 6 }
 };
 const HOME_SOAL_COUNTS = Object.assign({}, STATIC_SOAL_COUNTS);
 
@@ -616,6 +725,10 @@ function saveSubjectPickerModal() {
   setUserSelectedSubjects(checked);
   closeSubjectPickerModal();
 }
+window.openSubjectPickerModal = openSubjectPickerModal;
+window.closeSubjectPickerModal = closeSubjectPickerModal;
+window.openSubjectModal = openSubjectPickerModal;
+window.closeSubjectModal = closeSubjectPickerModal;
 
 function createSubjectPickerModalDOM() {
   const div = document.createElement('div');
@@ -648,6 +761,209 @@ window.openSubjectPickerModal = openSubjectPickerModal;
 window.closeSubjectPickerModal = closeSubjectPickerModal;
 window.saveSubjectPickerModal = saveSubjectPickerModal;
 
+// B5: Invalidate Daily Mission & Rekam Kebocoran Autopsi ke Misi Hari Ini
+function updateDailyMissionFromAutopsy(autopsyData, subject, pkg) {
+  try {
+    let k1 = null;
+    if (autopsyData) {
+      if (autopsyData.kebocoran_1) {
+        k1 = autopsyData.kebocoran_1;
+      } else if (Array.isArray(autopsyData.kebocoran) && autopsyData.kebocoran[0]) {
+        k1 = {
+          label: autopsyData.kebocoran[0].label,
+          bukti: autopsyData.kebocoran[0].bukti || autopsyData.kebocoran[0].judul || '',
+          contoh: autopsyData.kebocoran[0].contoh || []
+        };
+      } else if (Array.isArray(autopsyData.kebocoran_all) && autopsyData.kebocoran_all[0]) {
+        k1 = autopsyData.kebocoran_all[0];
+      }
+    }
+    
+    // Fallback lokal jika API belum/tidak mengembalikan kebocoran eksplisit
+    if (!k1) {
+      const pKey = (subject || state.currentSubject) + ':' + (pkg || state.currentPkg);
+      const pkgData = (state.pkgData && state.pkgData[pKey]) || {};
+      const soalList = pkgData.soal || [];
+      const userAnswers = (state.userAnswers && state.userAnswers[pKey]) || {};
+      let wrongCount = 0;
+      let firstWrongNo = 1;
+      
+      soalList.forEach(s => {
+        const ans = userAnswers[s.nomor];
+        const correct = s.kunci_jawaban;
+        const isRight = Array.isArray(correct) ? correct.includes(ans) : (ans === correct);
+        if (!isRight) {
+          wrongCount++;
+          if (wrongCount === 1) firstWrongNo = s.nomor;
+        }
+      });
+      
+      if (wrongCount > 0) {
+        k1 = {
+          label: 'terburu',
+          bukti: `${wrongCount} soal perlu diperbaiki ritme pengerjaannya`,
+          contoh: [firstWrongNo]
+        };
+      }
+    }
+
+    if (k1) {
+      localStorage.setItem('tka_last_autopsy', JSON.stringify({
+        kebocoran_1: k1,
+        subject: subject || state.currentSubject,
+        paket: pkg || state.currentPkg,
+        updated_at: Date.now()
+      }));
+    }
+    invalidateDailyMission();
+  } catch (e) {
+    console.warn('Gagal update daily mission:', e);
+  }
+}
+window.updateDailyMissionFromAutopsy = updateDailyMissionFromAutopsy;
+
+function invalidateDailyMission() {
+  try {
+    if (typeof renderHome === 'function') {
+      renderHome();
+    }
+    if (typeof homeSendDesktopData === 'function') {
+      homeSendDesktopData();
+    }
+    const dFrame = document.getElementById('homeDesktopFrame');
+    if (dFrame && dFrame.contentWindow) {
+      try {
+        dFrame.contentWindow.postMessage({ type: 'refresh-daily-mission' }, '*');
+      } catch (e) {}
+    }
+  } catch (e) {
+    console.warn('Gagal invalidate daily mission:', e);
+  }
+}
+window.invalidateDailyMission = invalidateDailyMission;
+
+// FASE 5 (T5.2, T5.3): HTML kartu countdown + misi (return string, bukan prepend).
+function getTkaCardsHtml() {
+  try {
+    const tka = getTkaDate();
+    const today = new Date(); today.setHours(0,0,0,0);
+    const tkaD = new Date(tka + 'T00:00:00');
+    const diff = Math.round((tkaD - today) / 86400000);
+    const label = diff > 0 ? 'H-' + diff : (diff === 0 ? 'Hari H!' : 'Lewat ' + (-diff) + ' hari');
+    let h = '<div id="tkaCardWrap" style="margin:0 0 14px;position:relative;z-index:1">';
+    h += '<div style="background:linear-gradient(135deg,#00361f 0%,#004a2a 55%,#155e37 100%);color:#fff;border-radius:14px;padding:14px 16px;border:1px solid rgba(255,255,255,0.18);box-shadow:0 4px 14px rgba(0,74,42,0.12);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">'
+      + '<div><div style="font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#86efac;display:flex;align-items:center;gap:5px;"><span class="material-symbols-outlined" style="font-size:15px;color:#22C55E;">event_upcoming</span>Tanggal Ujian TKA</div>'
+      + '<div style="font-family:\'Outfit\',\'Plus Jakarta Sans\',sans-serif;font-size:24px;font-weight:800;letter-spacing:-0.02em;color:#ffffff;line-height:1.1;margin-top:2px">' + label + '</div></div>'
+      + '<label style="font-size:12px;color:#d1fae5;display:flex;align-items:center;gap:8px;font-weight:600"><span>Ubah:</span>'
+      + '<input type="date" min="2026-10-10" max="2026-11-29" value="' + tka + '" '
+      + 'style="min-height:44px;min-width:44px;padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.25);background:#ffffff;color:#0f172a;font-size:13px;font-weight:600;box-sizing:border-box;outline:none;" onchange="setTkaDate(this.value);renderHome()">'
+      + '</label></div></div>';
+    // Misi hari ini
+    let misi = null;
+    try {
+      const last = JSON.parse(localStorage.getItem('tka_last_autopsy') || 'null');
+      if (last && last.kebocoran_1) misi = last.kebocoran_1;
+    } catch (e) {}
+    const labelNama = {'terburu':'Terburu-buru','overthinking':'Overthinking','macet':'Macet','yakin_salah':'Yakin tapi salah','ragu_salah':'Ragu-ragu dan salah','waktu_habis':'Kehabisan waktu','kosong':'Belum terjawab'};
+    if (misi) {
+      const cthRef = (misi.contoh && misi.contoh[0]) ? String(misi.contoh[0]) : '';
+      h += '<div id="dailyMissionCard" class="stitch-mission-card" style="background:linear-gradient(135deg,#fffbeb 0%,#fef3c7 100%);border:1px solid #fde68a;border-radius:14px;padding:16px;margin:0 0 14px;box-shadow:0 2px 8px rgba(180,83,9,0.06);">'
+        + '<div style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:#fde68a;color:#92400e;font-size:11px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:6px;">🎯 Misi Hari Ini</div>'
+        + '<div style="font-family:\'Outfit\',\'Plus Jakarta Sans\',sans-serif;font-size:16px;font-weight:800;margin-bottom:4px;color:#78350f;">Fokus Perbaikan: ' + (labelNama[misi.label] || misi.label) + '</div>'
+        + '<div style="font-size:13px;color:#92400e;line-height:1.45;margin-bottom:12px;">' + (misi.bukti || '') + '</div>'
+        + `<button type="button" onclick="bukaKartuStrategi('${misi.label}', '${cthRef}')" style="min-height:44px;background:#b45309;color:#fff;border:none;border-radius:10px;padding:8px 16px;font-size:12.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 2px 6px rgba(180,83,9,0.25);transition:all .15s ease;"><span>📖 Pelajari Strategi Misi</span><span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span></button>`
+        + '</div>';
+    } else {
+      h += '<div id="dailyMissionCard" class="stitch-mission-card" style="background:linear-gradient(135deg,#ffffff 0%,#f8fafc 100%);border:1px solid #e2e8f0;border-radius:14px;padding:16px;margin:0 0 14px;box-shadow:0 2px 8px rgba(15,23,42,0.04);">'
+        + '<div style="display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:999px;background:#e2e8f0;color:#475569;font-size:11px;font-weight:800;letter-spacing:0.04em;text-transform:uppercase;margin-bottom:6px;">🎯 Misi Hari Ini</div>'
+        + '<div style="font-family:\'Outfit\',\'Plus Jakarta Sans\',sans-serif;font-size:15px;font-weight:700;color:#0f172a;margin-bottom:4px;">Mulai Latihan untuk Buka Misi</div>'
+        + '<div style="font-size:13px;color:#64748b;line-height:1.45;margin-bottom:12px;">Selesaikan 1 tryout untuk mengidentifikasi kebocoran skor dan membuka misi belajarmu.</div>'
+        + '<button type="button" onclick="homeClose();" style="min-height:44px;background:#004a2a;color:#fff;border:none;border-radius:10px;padding:8px 18px;font-size:12.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 2px 6px rgba(0,74,42,0.2);transition:all .15s ease;"><span>🚀 Mulai Latihan Tryout</span><span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span></button>'
+        + '</div>';
+    }
+    return h;
+  } catch (e) { return ''; }
+}
+
+// FASE 5 (T5.3): Date picker "Tanggal TKA kamu?" + hitung mundur H-n.
+function getTkaDate() {
+  try {
+    const d = localStorage.getItem('tka_date');
+    if (d && /^\d{4}-\d{2}-\d{2}$/.test(d)) return d;
+  } catch (e) {}
+  return '2026-10-26';
+}
+function setTkaDate(v) {
+  try { localStorage.setItem('tka_date', v); } catch (e) {}
+  // Sync ke server (best effort)
+  try {
+    if (typeof _attemptAuthHeader === 'function') {
+      _attemptAuthHeader().then(hdr => {
+        if (hdr.Authorization) {
+          fetch('/api/user/tka_date', {
+            method: 'POST',
+            headers: Object.assign({'Content-Type': 'application/json'}, hdr),
+            body: JSON.stringify({tka_date: v})
+          }).catch(()=>{});
+        }
+      });
+    }
+  } catch (e) {}
+}
+
+// B6: SessionStorage untuk Login Prompt / Banner Tamu di Beranda
+function shouldShowGuestLoginPrompt() {
+  if (!isGuestMode()) return false;
+  try {
+    if (sessionStorage.getItem('tka_guest_dismiss_login_prompt') === 'true' ||
+        sessionStorage.getItem('tka_login_prompt_dismissed') === 'true') {
+      return false;
+    }
+  } catch (e) {}
+  return true;
+}
+window.shouldShowGuestLoginPrompt = shouldShowGuestLoginPrompt;
+
+function dismissGuestLoginPrompt() {
+  try {
+    sessionStorage.setItem('tka_guest_dismiss_login_prompt', 'true');
+    sessionStorage.setItem('tka_login_prompt_dismissed', 'true');
+  } catch (e) {}
+  const banner = document.getElementById('guestLoginBanner');
+  if (banner) {
+    banner.style.opacity = '0';
+    banner.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+    banner.style.transform = 'translateY(-6px)';
+    setTimeout(() => { if (banner && banner.parentNode) banner.parentNode.removeChild(banner); }, 200);
+  }
+}
+window.dismissGuestLoginPrompt = dismissGuestLoginPrompt;
+
+function getGuestLoginBannerHtml() {
+  if (!shouldShowGuestLoginPrompt()) return '';
+  return `
+    <div id="guestLoginBanner" class="guest-login-banner" style="background:linear-gradient(135deg,#f0fdf4 0%,#ecfdf5 100%);border:1px solid #bbf7d0;border-radius:14px;padding:12px 14px;margin:0 0 14px;display:flex;align-items:center;justify-content:space-between;gap:10px;box-shadow:0 2px 8px rgba(0,74,42,0.06);position:relative;z-index:2;">
+      <div style="display:flex;align-items:center;gap:10px;flex:1;">
+        <div style="width:36px;height:36px;border-radius:10px;background:#004a2a;color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;box-shadow:0 2px 6px rgba(0,74,42,0.2);">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+        </div>
+        <div>
+          <div style="font-size:13.5px;font-weight:800;color:#064e3b;margin-bottom:2px;">Simpan Progres Belajarmu</div>
+          <div style="font-size:11.5px;color:#047857;line-height:1.4;">Login Google untuk sinkronisasi nilai dan riwayat tryout antar perangkat.</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">
+        <button type="button" onclick="loginWithGoogle()" style="min-height:44px;background:#004a2a;color:#fff;border:0;border-radius:10px;padding:0 14px;font-size:12.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 6px rgba(0,74,42,0.2);transition:all .15s ease;">
+          <i class="fa-brands fa-google"></i> <span>Login</span>
+        </button>
+        <button type="button" id="btnDismissGuestBanner" onclick="dismissGuestLoginPrompt()" style="min-width:44px;min-height:44px;background:transparent;color:#6b7280;border:0;border-radius:10px;font-size:14px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;transition:color .15s;" title="Nanti saja" aria-label="Tutup ajakan login">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    </div>
+  `;
+}
+
 function renderHome() {
   const main = document.getElementById('hoMain');
   if (!main) return;
@@ -663,7 +979,8 @@ function renderHome() {
       category: 'Mapel'
     };
     const wm = HOME_WATERMARKS[k] || HOME_WATERMARKS._default;
-    const cards = [1, 2].map(pkg => {
+    const availablePkgs = SUBJECT_CATALOG[k] && SUBJECT_CATALOG[k].json ? Object.keys(SUBJECT_CATALOG[k].json).map(Number) : [1, 2];
+    const cards = availablePkgs.map(pkg => {
       const n = homePkgCount(k, pkg);
       const total = n || 20;
       const pct = homePkgProgress(k, pkg, total);
@@ -687,7 +1004,7 @@ function renderHome() {
 
     return `
       <section class="stitch-section" data-subject="${k}">
-        <div class="stitch-sec-head">
+        <div class="stitch-sec-head" style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
           <div class="stitch-sec-title">
             <span class="stitch-iconchip stitch-iconchip--${meta.theme}"><span class="ms-icon">${meta.icon}</span></span>
             <div>
@@ -695,12 +1012,35 @@ function renderHome() {
               <span class="stitch-sec-sub">${meta.category}</span>
             </div>
           </div>
+          <a href="/ruang/${k}" class="stitch-btn-ruang"><span class="material-symbols-outlined" style="font-size:16px;color:#059669;">smart_toy</span><span>Ruang ${meta.shortName}</span></a>
         </div>
         <div class="stitch-cards">${cards}</div>
       </section>`;
   }).join('');
 
-  main.innerHTML = `
+  // B12: Quick access chips untuk Ruang AI per Mapel
+  const aiRoomsChips = selectedKeys.map(k => {
+    const meta = SUBJECT_UI_META[k] || { shortName: k };
+    return `<a href="/ruang/${k}" class="stitch-ai-chip"><span class="material-symbols-outlined" style="font-size:16px;color:#059669;">smart_toy</span><span>Ruang ${meta.shortName}</span></a>`;
+  }).join('');
+
+  const aiRoomsBarHtml = `
+    <div id="aiRoomsBar" style="margin:0 0 14px;padding:12px 14px;background:linear-gradient(135deg,#f0fdf4 0%,#ffffff 100%);border:1px solid #bbf7d0;border-radius:14px;box-shadow:0 2px 8px rgba(0,74,42,0.04);">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+        <span style="font-size:12px;font-weight:800;color:#064e3b;display:flex;align-items:center;gap:6px;"><span class="material-symbols-outlined" style="font-size:17px;color:#059669;">forum</span>Ruang AI per Mapel</span>
+        <span style="font-size:11px;color:#047857;font-weight:600;">Konsultasi Materi</span>
+      </div>
+      <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:2px;-webkit-overflow-scrolling:touch;scrollbar-width:none;">
+        ${aiRoomsChips}
+      </div>
+    </div>
+  `;
+
+  // FASE 5 (T5.2, T5.3): kartu countdown + misi di atas daftar mapel
+  // B6: Banner ajakan login tamu di Beranda (disimpan di sessionStorage saat ditutup)
+  const guestBannerHtml = getGuestLoginBannerHtml();
+  const tkaCardsHtml = getTkaCardsHtml();
+  main.innerHTML = guestBannerHtml + tkaCardsHtml + aiRoomsBarHtml + `
     <div class="stitch-mapel-header">
       <div class="stitch-mapel-header-left">
         <span class="stitch-mapel-header-title">Mapel Pilihanmu</span>
@@ -720,6 +1060,12 @@ function renderHome() {
       homeClose();
       if (state.currentSubject !== subject) await switchSubject(subject);
       await switchPackage(pkg);
+      // FASE 3 (T3.2): mulai perekaman attempt (jalur kartu langsung / mobile)
+      try {
+        const _pkg = state.pkgData[pkgKey()];
+        const _n = (_pkg && _pkg.soal) ? _pkg.soal.length : 0;
+        AttemptRecorder.start(subject, pkg, _n, getTimerTotalSeconds());
+      } catch (e) {}
     });
   });
 
@@ -786,9 +1132,18 @@ function homeOpen() {
   const ov = document.getElementById('homeOverlay');
   if (!ov) return;
   ov.classList.remove('home-hidden');
+  ov.style.display = '';
+  ov.style.pointerEvents = '';
   document.body.style.overflow = 'hidden';
   // Kembali ke beranda: hapus tanda mode kuis
   delete document.body.dataset.quizMode;
+  try {
+    const hasOAuthHash = window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('refresh_token=') || window.location.hash.includes('error_description='));
+    const hasOAuthSearch = window.location.search && (window.location.search.includes('code=') || window.location.search.includes('error='));
+    if (!hasOAuthHash && !hasOAuthSearch && (window.location.search || window.location.hash)) {
+      window.history.replaceState(null, '', window.location.pathname);
+    }
+  } catch (e) {}
   renderHome();
   homeShowPanel('beranda'); // default yang tampil: Beranda
   // prefetch jumlah soal semua mapel; render ulang saat selesai biar angka lengkap
@@ -796,10 +1151,10 @@ function homeOpen() {
   homeSendDesktopData();
 }
 
-// Ringkasan progres nyata dari localStorage tka_progress
+// Ringkasan progres nyata dari localStorage tka_progress / tka_guest_progress
 function homeProgressSummary() {
   try {
-    const raw = localStorage.getItem('tka_progress');
+    const raw = localStorage.getItem(progressStorageKey());
     const store = raw ? JSON.parse(raw) : {};
     let dikerjakan = 0, benar = 0;
     Object.values(store || {}).forEach(pkgs => {
@@ -837,13 +1192,19 @@ function homeSendDesktopData() {
   }));
 }
 
-// Urutan 22 mapel sesuai daftar KONTRAK_DATA.md (dipakai panel Modul & Progres)
-const PANEL_MODULE_ORDER = ['matematika', 'bahasa_indonesia', 'bahasa_inggris', 'fisika', 'kimia', 'biologi', 'ekonomi', 'geografi', 'sosiologi', 'sejarah', 'antropologi', 'kewirausahaan', 'matematika_lanjut', 'bahasa_indonesia_lanjut', 'bahasa_inggris_lanjut', 'ppkn', 'bahasa_arab', 'bahasa_jepang', 'bahasa_jerman', 'bahasa_prancis', 'bahasa_mandarin', 'bahasa_korea'];
+// Urutan 22 mapel umum + 5 mapel SMK sesuai kurikulum Pusmendik (dipakai panel Modul & Progres)
+const PANEL_MODULE_ORDER = [
+  'matematika', 'bahasa_indonesia', 'bahasa_inggris', 'fisika', 'kimia', 'biologi',
+  'ekonomi', 'geografi', 'sosiologi', 'sejarah', 'antropologi', 'kewirausahaan',
+  'matematika_lanjut', 'bahasa_indonesia_lanjut', 'bahasa_inggris_lanjut',
+  'ppkn', 'bahasa_arab', 'bahasa_jepang', 'bahasa_jerman', 'bahasa_prancis', 'bahasa_mandarin', 'bahasa_korea',
+  'teknik_mesin', 'teknik_otomotif', 'teknik_jaringan', 'akuntansi', 'manajemen_perkantoran'
+];
 
-// Raw store tka_progress (bentuk persis kontrak, bukan ringkasan)
+// Raw store tka_progress / tka_guest_progress (bentuk persis kontrak, bukan ringkasan)
 function homeProgressStore() {
   try {
-    const r = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+    const r = JSON.parse(localStorage.getItem(progressStorageKey()) || '{}');
     return (r && typeof r === 'object' && !Array.isArray(r)) ? r : {};
   } catch (e) { return {}; }
 }
@@ -931,7 +1292,19 @@ function showStartPackageConfirmModal(subject, pkg) {
   const meta = SUBJECT_CATALOG[subject] || {};
   const subjName = meta.name || subject;
   const count = (typeof homePkgCount === 'function' ? homePkgCount(subject, _pendingStartPackage.pkg) : 20) || 20;
-  const minutes = _pendingStartPackage.pkg === 1 ? 45 : 50;
+  // B10: Akses Tamu Sama Rata pada Klik Mapel / Mulai Latihan
+  // Tidak ada blocking login modal bagi tamu. Keduanya (tamu & login) mendapatkan dialog konfirmasi yang identik.
+  const _bguest = document.getElementById('btnConfirmStartGuest');
+  if (_bguest) _bguest.style.display = 'none';
+
+  const _b0 = document.getElementById('btnConfirmStartMapel');
+  if (_b0) {
+    _b0.innerHTML = '<i class="fa-solid fa-play"></i> Mulai Sekarang';
+    _b0.onclick = function() { executeStartPackage(); };
+  }
+  // T2.7: estimasi menit mengikuti timer per paket (bukan 45/50 basi)
+  const _jh3 = { matematika: 3.0, bahasa_indonesia: 2.5, bahasa_inggris: 2.5 };
+  const minutes = Math.round(count * (_jh3[subject] || 2.4));
   
   const titleEl = document.getElementById('startMapelTitle');
   const descEl = document.getElementById('startMapelDesc');
@@ -966,6 +1339,12 @@ async function executeStartPackage() {
   try {
     if (state.currentSubject !== target.subject) await switchSubject(target.subject);
     await switchPackage(target.pkg);
+    // FASE 3 (T3.2): mulai perekaman attempt
+    try {
+      const _pkg = state.pkgData[pkgKey()];
+      const _n = (_pkg && _pkg.soal) ? _pkg.soal.length : 0;
+      AttemptRecorder.start(target.subject, target.pkg, _n, getTimerTotalSeconds());
+    } catch (e) {}
   } catch (err) {
     console.error('Gagal membuka paket mapel:', err);
   }
@@ -993,6 +1372,8 @@ window.addEventListener('message', async (e) => {
         sendPanelData(hit[1]);
       }
     }
+  } else if (d.type === 'dismiss-guest-prompt') {
+    if (typeof dismissGuestLoginPrompt === 'function') dismissGuestLoginPrompt();
   } else if (d.type === 'login-google') {
     // Iframe (home_desktop/akun) minta login Google — jalankan di window utama
     // (Google blokir OAuth dalam iframe). supabase_auth.js dimuat di parent.
@@ -1182,6 +1563,13 @@ function getTutorAuthHeaders() {
     headers['X-User-Logged-In'] = 'true';
     if (user.name) headers['X-User-Name'] = encodeURIComponent(user.name);
   }
+  try {
+    const sessRaw = localStorage.getItem('tka_supabase_auth_token');
+    if (sessRaw) {
+      const sess = JSON.parse(sessRaw);
+      if (sess && sess.access_token) headers['Authorization'] = 'Bearer ' + sess.access_token;
+    }
+  } catch (e) {}
   return headers;
 }
 
@@ -1189,9 +1577,19 @@ function getTutorAuthHeaders() {
 async function syncTutorUserToServer(user) {
   try {
     const isLogin = !!(user && user.loggedIn);
+    // T2.11: sertakan Supabase access token agar server bisa memverifikasi
+    // login bila AUTH_VERIFY=1. Tanpa token, server menganggap tamu (aman).
+    let authHeader = {};
+    try {
+      const sessRaw = localStorage.getItem('tka_supabase_auth_token');
+      if (sessRaw) {
+        const sess = JSON.parse(sessRaw);
+        if (sess && sess.access_token) authHeader = { 'Authorization': 'Bearer ' + sess.access_token };
+      }
+    } catch (e) {}
     const res = await fetch('/api/tutor/sync_user', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: Object.assign({ 'Content-Type': 'application/json' }, authHeader),
       body: JSON.stringify({
         logged_in: isLogin,
         is_logged_in: isLogin,
@@ -1241,10 +1639,16 @@ window.addEventListener('tka-login', (e) => {
     syncTutorUserToServer(user);
     sendPanelData('akun');
     sendPanelData('beranda');
+    // FASE 3 (T3.4): Tamu-claim — klaim antrean hasil tryout yang dikerjakan saat mode tamu
+    try {
+      setTimeout(syncAttempts, 500);
+    } catch (e) {}
   }
 });
 
 window.addEventListener('tka-logout', () => {
+  _progressServerSynced = false;
+  window._progressServerSynced = false;
   state.akunProfile = null;
   state.tutorQuota = { remaining: 5, daily_limit: 5, tier: 'guest', is_logged_in: false };
   if (typeof updateTutorQuotaUI === 'function') {
@@ -1255,15 +1659,52 @@ window.addEventListener('tka-logout', () => {
   sendPanelData('beranda');
 });
 
+// BUGFIX (10 Okt 2026 - T2/BUG-009): Sinkronisasi URL kuis hanya saat kuis sedang aktif
+function syncQuizUrl() {
+  try {
+    if (!window.__appInitialized) return;
+    const pkg = state.pkgData && state.pkgData[pkgKey()];
+    const q = (pkg && pkg.soal && pkg.soal[state.currentIndex]) || { nomor: state.currentIndex + 1 };
+    document.cookie = `active_subject=${state.currentSubject}; path=/; max-age=86400`;
+    document.cookie = `active_paket=${state.currentPkg}; path=/; max-age=86400`;
+    const targetUrl = `?subject=${encodeURIComponent(state.currentSubject)}&paket=${state.currentPkg}`;
+    const hasOAuthHash = window.location.hash && (window.location.hash.includes('access_token=') || window.location.hash.includes('refresh_token=') || window.location.hash.includes('error_description='));
+    const hasOAuthSearch = window.location.search && (window.location.search.includes('code=') || window.location.search.includes('error='));
+    if (!hasOAuthHash && !hasOAuthSearch) {
+      const currentTarget = `${targetUrl}#soal-${q.nomor}`;
+      if (window.location.search !== targetUrl || window.location.hash !== `#soal-${q.nomor}`) {
+        window.history.replaceState(null, '', currentTarget);
+      }
+    }
+  } catch (e) {}
+}
+window.syncQuizUrl = syncQuizUrl;
+
 function homeClose() {
   const ov = document.getElementById('homeOverlay');
   if (!ov) return;
   ov.classList.add('home-hidden');
+  ov.style.display = 'none';
+  ov.style.pointerEvents = 'none';
   document.body.style.overflow = '';
   // Tandai mode kuis: di desktop, pemilih mapel & paket disembunyikan
   // (user sudah memilih di beranda, tidak perlu ganti-ganti di tengah kuis)
   document.body.dataset.quizMode = '1';
+  syncQuizUrl();
 }
+
+// BUGFIX (9 Okt 2026): overlay beranda tidak menutupi kuis saat akses via URL langsung atau dalam kuis
+(function() {
+  try {
+    var q = new URLSearchParams(window.location.search);
+    if (q.get('subject')) {
+      homeClose();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', homeClose);
+      }
+    }
+  } catch (e) {}
+})();
 
 function homeIsOpen() {
   const ov = document.getElementById('homeOverlay');
@@ -1275,13 +1716,19 @@ window.homeIsOpen = homeIsOpen;
 function homeToggle() { homeIsOpen() ? homeClose() : homeOpen(); }
 window.homeToggle = homeToggle;
 
-// Carousel dots hero
 (function () {
   const track = document.getElementById('hoHeroTrack'), dots = document.getElementById('hoHeroDots');
   if (!track || !dots) return;
+  let _heroTrackRaf = false;
   track.addEventListener('scroll', () => {
-    const i = Math.round(track.scrollLeft / (track.scrollWidth / track.children.length));
-    [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i));
+    if (_heroTrackRaf) return;
+    _heroTrackRaf = true;
+    requestAnimationFrame(() => {
+      _heroTrackRaf = false;
+      if (!track.children.length) return;
+      const i = Math.round(track.scrollLeft / (track.scrollWidth / track.children.length));
+      [...dots.children].forEach((d, j) => d.classList.toggle('on', j === i));
+    });
   }, { passive: true });
 })();
 
@@ -1290,6 +1737,7 @@ async function loadPackageData(pkgNum) {
   const key = pkgKey(pkgNum);
   if (state.pkgData[key]) return;
   const subject = SUBJECT_CATALOG[state.currentSubject];
+  if (!subject || !subject.json || !subject.json[pkgNum]) return;
   try {
     const res = await fetch(`${subject.json[pkgNum]}?t=${Date.now()}`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -1300,6 +1748,34 @@ async function loadPackageData(pkgNum) {
     if (!state.raguStatus[key]) state.raguStatus[key] = {};
     if (!state.simAnswers[key]) state.simAnswers[key] = {};
     if (!state.chatHistory[key]) state.chatHistory[key] = {};
+    // B3 & B11: Hanya pulihkan jawaban jika tes memang berstatus selesai (tka_finished)
+    // Sesi baru yang belum selesai selalu mulai dari awal tanpa draft sisa yang mengunci soal
+    try {
+      const isFin = localStorage.getItem(examStorageKey('finished', key)) === 'true' ||
+                    (!isGuestMode() && localStorage.getItem('tka_finished_' + key) === 'true');
+      if (isFin) {
+        if (!state.testFinished) state.testFinished = {};
+        state.testFinished[key] = true;
+        const savedAns = localStorage.getItem(examStorageKey('answers', key)) ||
+                         (!isGuestMode() ? localStorage.getItem('tka_answers_' + key) : null);
+        if (savedAns) state.userAnswers[key] = Object.assign({}, JSON.parse(savedAns), state.userAnswers[key]);
+        const savedRagu = localStorage.getItem(examStorageKey('ragu', key)) ||
+                          (!isGuestMode() ? localStorage.getItem('tka_ragu_' + key) : null);
+        if (savedRagu) state.raguStatus[key] = Object.assign({}, JSON.parse(savedRagu), state.raguStatus[key]);
+      } else {
+        state.userAnswers[key] = {};
+        state.raguStatus[key] = {};
+        if (state.testFinished) state.testFinished[key] = false;
+        localStorage.removeItem(examStorageKey('answers', key));
+        localStorage.removeItem(examStorageKey('ragu', key));
+        localStorage.removeItem(examStorageKey('checked', key));
+        if (!isGuestMode()) {
+          localStorage.removeItem('tka_answers_' + key);
+          localStorage.removeItem('tka_ragu_' + key);
+          localStorage.removeItem('tka_checked_' + key);
+        }
+      }
+    } catch (e) {}
     // Riwayat percakapan tutor soal ini dimuat dari server (resume)
     syncTutorConversation();
   } catch (err) {
@@ -1313,7 +1789,7 @@ function updateSubjectUI() {
 
   document.title = `Simulasi TKA ${meta.name} - Platform Belajar Interaktif`;
   // Audit Manus: brand tetap konsisten dengan landing, mapel jadi konteks sekunder
-  document.getElementById('brandTitle').innerText = 'TKA Master';
+  document.getElementById('brandTitle').innerText = 'musse';
   const brandSub = document.getElementById('brandSubtitle');
   if (brandSub) brandSub.innerText = `Simulasi ${meta.name} · Paket ${state.currentPkg}`;
   document.getElementById('aiTutorTitle').innerText = `Tanya AI Tutor ${meta.name}`;
@@ -1335,13 +1811,29 @@ function updateSubjectUI() {
 // Switch active subject (from header dropdown)
 async function switchSubject(subjectKey) {
   if (!SUBJECT_CATALOG[subjectKey] || state.currentSubject === subjectKey) return;
+  if (!isTestFinished() && Object.keys(state.userAnswers[pkgKey()] || {}).length > 0) {
+    requestExit(async () => {
+      discardUnfinishedProgress(pkgKey());
+      await performSwitchSubject(subjectKey);
+    });
+    const sel = document.getElementById('subjectSelect');
+    if (sel) sel.value = state.currentSubject;
+    return;
+  }
+  await performSwitchSubject(subjectKey);
+}
 
+async function performSwitchSubject(subjectKey) {
   state.currentSubject = subjectKey;
   state.currentPkg = 1;
   state.currentIndex = 0;
   state.explanationVisible = false;
 
-  await Promise.all([loadPackageData(1), loadPackageData(2)]);
+  const loads = [loadPackageData(1)];
+  if (SUBJECT_CATALOG[subjectKey]?.json?.[2]) {
+    loads.push(loadPackageData(2));
+  }
+  await Promise.all(loads);
 
   document.getElementById('subjectSelect').value = subjectKey;
   updateSubjectUI();
@@ -1352,7 +1844,17 @@ async function switchSubject(subjectKey) {
 // Switch between Paket 1 and Paket 2 (within active subject)
 async function switchPackage(pkgNum) {
   if (state.currentPkg === pkgNum) return;
+  if (!isTestFinished() && Object.keys(state.userAnswers[pkgKey()] || {}).length > 0) {
+    requestExit(async () => {
+      discardUnfinishedProgress(pkgKey());
+      await performSwitchPackage(pkgNum);
+    });
+    return;
+  }
+  await performSwitchPackage(pkgNum);
+}
 
+async function performSwitchPackage(pkgNum) {
   await loadPackageData(pkgNum);
   const key = pkgKey(pkgNum);
   if (!state.pkgData[key] || !state.pkgData[key].soal || state.pkgData[key].soal.length === 0) {
@@ -1379,33 +1881,80 @@ function isTestFinished() {
   return Boolean(state.testFinished && state.testFinished[pkgKey()]);
 }
 
-function askExitToBeranda() {
+let _pendingExitAction = null;
+
+function requestExit(onConfirm) {
   if (isTestFinished()) {
-    doExitToBeranda();
+    if (typeof onConfirm === 'function') onConfirm();
+    else doExitToBeranda();
     return;
   }
+  _pendingExitAction = onConfirm || (() => doExitToBeranda());
   const modal = document.getElementById('exitConfirmModal');
-  if (modal) modal.classList.add('open');
+  if (modal) {
+    modal.classList.add('open');
+    if (window.TKAHistory) TKAHistory.push('modal-exit');
+  }
 }
+window.requestExit = requestExit;
+
+function askExitToBeranda() {
+  requestExit(() => doExitToBeranda());
+}
+window.askExitToBeranda = askExitToBeranda;
 
 function closeExitConfirm(keepHere) {
   const modal = document.getElementById('exitConfirmModal');
   if (modal) modal.classList.remove('open');
-  if (keepHere === true) return;
+  if (keepHere) {
+    _pendingExitAction = null;
+  }
 }
+window.closeExitConfirm = closeExitConfirm;
+
+function confirmExitAction() {
+  closeExitConfirm(false);
+  const action = _pendingExitAction || (() => doExitToBeranda());
+  _pendingExitAction = null;
+  action();
+}
+window.confirmExitAction = confirmExitAction;
 
 function doExitToBeranda() {
-  closeExitConfirm();
-  try {
-    const q = getCurrentQuestion();
-    if (q && typeof persistAnswerProgress === 'function') {
-      persistAnswerProgress(q);
-    }
-  } catch (e) {}
-  // jawaban sudah tersimpan otomatis; buka panel Beranda (overlay)
+  closeExitConfirm(false);
+  const key = pkgKey();
+  // B11: Jika tes belum selesai, buang draft jawaban yang belum selesai (jangan simpan progres palsu)
+  if (!isTestFinished()) {
+    discardUnfinishedProgress(key);
+  }
+  // Buka panel Beranda (overlay)
   if (!homeIsOpen()) homeOpen();
   else homeShowPanel('beranda');
 }
+window.doExitToBeranda = doExitToBeranda;
+
+function discardUnfinishedProgress(key) {
+  try {
+    if (state.userAnswers) state.userAnswers[key] = {};
+    if (state.raguStatus) state.raguStatus[key] = {};
+    if (state.simAnswers) state.simAnswers[key] = {};
+    state.currentIndex = 0;
+    state.explanationVisible = false;
+    localStorage.removeItem(examStorageKey('answers', key));
+    localStorage.removeItem(examStorageKey('ragu', key));
+    localStorage.removeItem(examStorageKey('checked', key));
+    localStorage.removeItem('tka_answers_' + key);
+    localStorage.removeItem('tka_ragu_' + key);
+    localStorage.removeItem('tka_checked_' + key);
+    localStorage.removeItem('tka_timer_remaining_' + key);
+    if (window._answerChecked) {
+      Object.keys(window._answerChecked).forEach(k => {
+        if (k.startsWith(key + ':')) delete window._answerChecked[k];
+      });
+    }
+  } catch (e) {}
+}
+window.discardUnfinishedProgress = discardUnfinishedProgress;
 
 // Get current question object
 function getCurrentQuestion() {
@@ -1418,6 +1967,28 @@ function getCurrentQuestion() {
 function renderQuestion() {
   const q = getCurrentQuestion();
   if (!q) return;
+
+  // B2: Pastikan timer dan perekam attempt aktif selama ujian berlangsung
+  const curKey = pkgKey();
+  const testDone = isTestFinished();
+  if (!testDone) {
+    const pkg = state.pkgData[curKey];
+    const totalSoal = (pkg && pkg.soal) ? pkg.soal.length : 40;
+    const durSec = getTimerTotalSeconds();
+    if (typeof SimTimer !== 'undefined') {
+      SimTimer.start(curKey, durSec);
+    }
+    if (typeof AttemptRecorder !== 'undefined') {
+      if (!AttemptRecorder.active || AttemptRecorder.active.subject !== state.currentSubject || AttemptRecorder.active.paket !== state.currentPkg) {
+        AttemptRecorder.start(state.currentSubject, state.currentPkg, totalSoal, durSec);
+      }
+    }
+  }
+
+  // FASE 3 (T3.2): rekam kunjungan + waktu aktif per soal
+  try { AttemptRecorder.onVisit(q.nomor, q.topik || null); } catch (e) {}
+  // FASE D (D1): rekam tampil soal
+  try { DetailTracker.onSoalView(q.nomor); } catch (e) {}
 
   // soal baru tampil: selalu mulai di tab Lembar Soal (kecuali dipaksa review)
   if (!state.keepWorkTab) switchWorkTab('soal', null, { scroll: false });
@@ -1470,14 +2041,9 @@ function renderQuestion() {
   if (mProgressFill) mProgressFill.style.width = `${Math.round(((state.currentIndex + 1) / total) * 100)}%`;
 
   // Sync cookie and URL for persistent subject/paket context across browser and server
-  try {
-    document.cookie = `active_subject=${state.currentSubject}; path=/; max-age=86400`;
-    document.cookie = `active_paket=${state.currentPkg}; path=/; max-age=86400`;
-    const targetUrl = `?subject=${encodeURIComponent(state.currentSubject)}&paket=${state.currentPkg}`;
-    if (window.location.search !== targetUrl) {
-      window.history.replaceState(null, '', `${targetUrl}#soal-${q.nomor}`);
-    }
-  } catch (e) {}
+  if (typeof homeIsOpen === 'function' && !homeIsOpen() && !window.__homeFirst) {
+    syncQuizUrl();
+  }
 
   // Set dataset attributes for scoped question styling
   const card = document.querySelector('.cbt-question-card');
@@ -1714,6 +2280,7 @@ function cleanUiStimulusText(stimText, stimImages) {
 
     // Lightbox click handler & responsive size validator untuk seluruh gambar stimulus
     stimDiv.querySelectorAll('img').forEach(img => {
+      if (typeof attachImageFallback === 'function') attachImageFallback(img, 'Gambar Stimulus');
       img.title = 'Klik untuk memperbesar gambar stimulus';
       img.style.cursor = 'zoom-in';
       img.onclick = () => openImageLightbox(img.src, 'Gambar Stimulus');
@@ -1808,6 +2375,7 @@ function cleanUiStimulusText(stimText, stimImages) {
 
     // Lightbox click handler & responsive size validator untuk seluruh gambar pertanyaan/prompt
     promptDiv.querySelectorAll('img').forEach(img => {
+      if (typeof attachImageFallback === 'function') attachImageFallback(img, 'Gambar Soal');
       img.title = 'Klik untuk memperbesar gambar soal';
       img.style.cursor = 'zoom-in';
       img.onclick = () => openImageLightbox(img.src, 'Gambar Soal');
@@ -1855,6 +2423,7 @@ function cleanUiStimulusText(stimText, stimImages) {
         imgWrap.className = 'stimulus-img-container prompt-img-wrap';
         const img = document.createElement('img');
         img.src = `${pkgPath}${pImg.rel_path || 'images/' + pImg.filename}`;
+        if (typeof attachImageFallback === 'function') attachImageFallback(img, 'Gambar Soal');
         img.className = 'stimulus-img';
         img.title = 'Klik untuk memperbesar gambar soal';
         img.style.cursor = 'zoom-in';
@@ -1880,13 +2449,21 @@ function cleanUiStimulusText(stimText, stimImages) {
     if (opts.length === 0 && q.pernyataan && q.pernyataan.length > 0) {
       renderBsStatements(q, currentSelection || {}, optionsContainer);
     } else {
+      if (isComplex) {
+        const complexNotice = document.createElement('div');
+        complexNotice.className = 'complex-notice-pill';
+        const numKeys = Array.isArray(q.kunci_jawaban) ? q.kunci_jawaban.length : 2;
+        complexNotice.style.cssText = 'background:#f0f9ff;border:1px solid #bae6fd;border-radius:10px;padding:8px 14px;margin-bottom:12px;display:flex;align-items:center;gap:10px;font-size:12.5px;color:#0369a1;font-weight:700;';
+        complexNotice.innerHTML = `<i class="fa-solid fa-square-check" style="font-size:16px;color:#0284c7;"></i> <span>Pilihan Ganda Kompleks · Jawaban benar lebih dari satu (Pilih ${numKeys} Opsi)</span>`;
+        optionsContainer.appendChild(complexNotice);
+      }
       opts.forEach(opt => {
       const isSelected = isComplex
         ? (Array.isArray(currentSelection) && currentSelection.includes(opt.key))
         : (currentSelection === opt.key);
 
       const optItem = document.createElement('div');
-      optItem.className = `option-item ${isSelected ? 'selected' : ''}`;
+      optItem.className = `option-item ${isComplex ? 'complex-opt' : ''} ${isSelected ? 'selected' : ''}`;
       optItem.dataset.key = opt.key;
       optItem.dataset.optKey = opt.key;
       // Aksesibilitas (audit Kimi/Qwen): opsi sebagai kontrol semantik radio/checkbox
@@ -1902,12 +2479,14 @@ function cleanUiStimulusText(stimText, stimImages) {
         }
       };
 
-      // Key indicator
+      // Key indicator (Kotak untuk PG Kompleks, Bulat untuk PG Biasa)
       const indicator = document.createElement('div');
-      indicator.className = 'opt-indicator';
-      indicator.innerText = opt.key;
+      indicator.className = `opt-indicator ${isComplex ? 'is-checkbox' : ''}`;
       if (isComplex) {
         indicator.style.borderRadius = '6px';
+        indicator.innerHTML = isSelected ? '<i class="fa-solid fa-check" style="font-size:11px;"></i>' : opt.key;
+      } else {
+        indicator.innerText = opt.key;
       }
       optItem.appendChild(indicator);
 
@@ -1926,19 +2505,34 @@ function cleanUiStimulusText(stimText, stimImages) {
 
         // Pasang event lightbox dan klasifikasi ukuran gambar pilihan
         body.querySelectorAll('img').forEach(img => {
+          if (typeof attachImageFallback === 'function') attachImageFallback(img, 'Gambar Pilihan ' + opt.key);
           const checkSize = () => {
             const nw = img.naturalWidth || parseInt(img.getAttribute('width') || '0', 10);
             const nh = img.naturalHeight || parseInt(img.getAttribute('height') || '0', 10);
-            // Hanya anggap diagram jika benar-benar tinggi / bukan strip formula horizontal
             const isFormula = img.hasAttribute('data-latex') || (nh > 0 && nh <= 65);
             if (!isFormula && (nh > 75 || (nw > 280 && nh > 60))) {
               img.classList.remove('opt-math-img');
               img.classList.add('opt-diagram-img');
+              if (zoomBtn) zoomBtn.style.display = 'inline-flex';
             } else {
               img.classList.remove('opt-diagram-img');
               img.classList.add('opt-math-img');
+              if (zoomBtn) zoomBtn.style.display = 'none';
             }
           };
+
+          const zoomBtn = document.createElement('button');
+          zoomBtn.type = 'button';
+          zoomBtn.className = 'opt-zoom-btn';
+          zoomBtn.style.display = 'none'; // default hidden sampai terbukti diagram besar
+          zoomBtn.setAttribute('aria-label', `Perbesar gambar opsi ${opt.key}`);
+          zoomBtn.title = 'Perbesar gambar';
+          zoomBtn.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
+          zoomBtn.onclick = (e) => {
+            e.stopPropagation();
+            openImageLightbox(img.src, `Pilihan Jawaban ${opt.key}`);
+          };
+          img.insertAdjacentElement('afterend', zoomBtn);
 
           if (img.complete && img.naturalWidth > 0) {
             checkSize();
@@ -1948,22 +2542,9 @@ function cleanUiStimulusText(stimText, stimImages) {
 
           img.title = 'Klik untuk memilih opsi';
           img.onclick = (e) => {
-            // Audit Kimi: tap gambar dulu = zoom -> seleksi tak sengaja.
-            // Sekarang: tap gambar = MEMILIH; zoom lewat tombol kaca terpisah.
             e.stopPropagation();
             selectOption(opt.key, isComplex);
           };
-          const zoomBtn = document.createElement('button');
-          zoomBtn.type = 'button';
-          zoomBtn.className = 'opt-zoom-btn';
-          zoomBtn.setAttribute('aria-label', `Perbesar gambar opsi ${opt.key}`);
-          zoomBtn.title = 'Perbesar gambar';
-          zoomBtn.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
-          zoomBtn.onclick = (e) => {
-            e.stopPropagation();
-            openImageLightbox(img.src, `Pilihan Jawaban ${opt.key}`);
-          };
-          img.insertAdjacentElement('afterend', zoomBtn);
         });
       } else if (opt.image) {
         // 2. Tampilkan gambar opsi jika tersedia (grafik atau formula matematika)
@@ -1975,6 +2556,7 @@ function cleanUiStimulusText(stimText, stimImages) {
         }
         mathImg.src = `${base}${rel}?v=41`;
         mathImg.alt = `Pilihan ${opt.key}`;
+        if (typeof attachImageFallback === 'function') attachImageFallback(mathImg, 'Gambar Pilihan ' + opt.key);
         mathImg.title = 'Klik untuk memilih opsi';
         mathImg.onclick = (e) => {
           e.stopPropagation();
@@ -1983,6 +2565,7 @@ function cleanUiStimulusText(stimText, stimImages) {
         const zoomBtn2 = document.createElement('button');
         zoomBtn2.type = 'button';
         zoomBtn2.className = 'opt-zoom-btn';
+        zoomBtn2.style.display = 'none'; // default hidden
         zoomBtn2.setAttribute('aria-label', `Perbesar gambar opsi ${opt.key}`);
         zoomBtn2.title = 'Perbesar gambar';
         zoomBtn2.innerHTML = '<i class="fa-solid fa-magnifying-glass-plus"></i>';
@@ -1996,8 +2579,10 @@ function cleanUiStimulusText(stimText, stimImages) {
         mathImg.onload = () => {
           if (mathImg.naturalHeight > 75 || (mathImg.naturalWidth > 280 && mathImg.naturalHeight > 60)) {
             mathImg.classList.add('opt-diagram-img');
+            zoomBtn2.style.display = 'inline-flex';
           } else {
             mathImg.classList.add('opt-math-img');
+            zoomBtn2.style.display = 'none';
           }
         };
 
@@ -2105,6 +2690,44 @@ function cleanUiStimulusText(stimText, stimImages) {
   // Sinkronkan status ciut/tampil Tata Cara
   setExplanationCollapsed(state.explanationCollapsed);
 
+  // Sinkronkan status Tes Selesai / Mode Reviu (Pengecekan Nilai & Kunci Jawaban)
+  const isFinished = isTestFinished();
+  const btnFinishHeader = document.getElementById('btnFinishHeader');
+  const btnFinishModal = document.querySelector('.btn-finish-from-modal');
+
+  if (isFinished) {
+    if (btnFinishHeader) {
+      btnFinishHeader.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> <span>Reviu Hasil</span>';
+      btnFinishHeader.title = 'Buka Reviu Nilai & Kunci Jawaban';
+      btnFinishHeader.onclick = () => renderReviewHasil();
+      btnFinishHeader.classList.add('btn-reviu-active');
+    }
+    if (btnFinishModal) {
+      btnFinishModal.innerHTML = '<i class="fa-solid fa-clipboard-check"></i> Buka Reviu Hasil & Kunci Jawaban';
+      btnFinishModal.onclick = () => { closeDaftarModal(); renderReviewHasil(); };
+    }
+  } else {
+    if (btnFinishHeader) {
+      btnFinishHeader.innerHTML = '<i class="fa-solid fa-flag-checkered"></i> <span>Selesai Tes</span>';
+      btnFinishHeader.title = 'Selesai dan lihat hasil tes';
+      btnFinishHeader.onclick = () => openFinishModal();
+      btnFinishHeader.classList.remove('btn-reviu-active');
+    }
+    if (btnFinishModal) {
+      btnFinishModal.innerHTML = '<i class="fa-solid fa-flag-checkered"></i> Selesai Tes';
+      btnFinishModal.onclick = () => { closeDaftarModal(); openFinishModal(); };
+    }
+  }
+
+  // Tombol Cek Jawaban di bilah bawah selalu bertindak sebagai Cek Jawaban (standar)
+  const btnCheck = document.getElementById('btnCheckAnswer');
+  if (btnCheck) {
+    btnCheck.onclick = () => checkUserAnswer();
+    btnCheck.style.background = '';
+    btnCheck.style.color = '';
+    if (typeof syncCheckLabel === 'function') syncCheckLabel();
+  }
+
   // Trigger KaTeX render
   renderMath();
   prepareQuestionImages();
@@ -2129,6 +2752,9 @@ function selectOption(key, isComplex) {
   const q = getCurrentQuestion();
   if (!q) return;
 
+  // B3: Hanya kunci opsi jika tes sudah berstatus selesai
+  if (state.testFinished && state.testFinished[pkgKey()]) return;
+
   if (isComplex) {
     let arr = (state.userAnswers[pkgKey()] || {})[q.nomor] || [];
     if (!Array.isArray(arr)) arr = [arr];
@@ -2144,6 +2770,11 @@ function selectOption(key, isComplex) {
     state.userAnswers[pkgKey()][q.nomor] = key;
   }
 
+  // FASE 3 (T3.2): rekam jawaban untuk Autopsi
+  try { AttemptRecorder.onAnswer(q.nomor, key); } catch (e) {}
+  // FASE D (D1): rekam klik opsi
+  try { DetailTracker.onOptionClick(q.nomor, key); } catch (e) {}
+
   // Update UI selection classes + aria (audit aksesibilitas)
   const selected = state.userAnswers[pkgKey()][q.nomor];
   document.querySelectorAll('.option-item').forEach(el => {
@@ -2155,14 +2786,55 @@ function selectOption(key, isComplex) {
 
   // Update modal grid
   renderGridModal();
-
-  // Persist progres nyata ke localStorage (kontrak KONTRAK_DATA.md):
-  // tka_progress[subjectKey][pkgNumber][nomorSoal] = { kunci, benar }
-  persistAnswerProgress(q);
 }
 
-// Tulis jawaban yang barusan dipilih ke tka_progress. Dipanggil dari selectOption.
+// B11: Komet progres seluruh paket sekaligus HANYA saat user menekan "Selesai Tes"
+function commitPackageProgressOnFinish(subject, pkgNum) {
+  try {
+    const pkg = state.pkgData[subject + ':' + pkgNum];
+    if (!pkg || !pkg.soal) return;
+    const userAns = state.userAnswers[subject + ':' + pkgNum] || {};
+    const pKey = progressStorageKey();
+    const store = JSON.parse(localStorage.getItem(pKey) || '{}');
+    store[subject] = store[subject] || {};
+    store[subject][pkgNum] = store[subject][pkgNum] || {};
+
+    pkg.soal.forEach(q => {
+      const ans = userAns[q.nomor];
+      if (ans === undefined || ans === null || ans === '') return;
+      const stmt = statementType(q);
+      let benar = false;
+      if (stmt) {
+        if (typeof ans === 'object' && !Array.isArray(ans)) {
+          const stmts = q.pernyataan || [];
+          if (stmts.every(st => ans[st.key])) {
+            const kunci = parseBsKunci(q);
+            benar = stmts.every(st => ans[st.key] === kunci[st.key]);
+          }
+        }
+      } else if (Array.isArray(q.kunci_jawaban)) {
+        if (Array.isArray(ans) && ans.length > 0) {
+          const k = q.kunci_jawaban.map(String);
+          benar = ans.length === k.length && ans.every(x => k.includes(String(x)));
+        }
+      } else {
+        benar = String(ans) === String(q.kunci_jawaban);
+      }
+      store[subject][pkgNum][q.nomor] = { kunci: q.kunci_jawaban, benar };
+    });
+
+    localStorage.setItem(pKey, JSON.stringify(store));
+    if (!isGuestMode()) {
+      scheduleSyncProgressToServer();
+    }
+  } catch (e) {}
+}
+window.commitPackageProgressOnFinish = commitPackageProgressOnFinish;
+
+// Tulis jawaban ke tka_progress / tka_guest_progress.
+// B11: Progres paket hanya dikomit saat "Selesai Tes" (commitPackageProgressOnFinish).
 function persistAnswerProgress(q) {
+  if (!isTestFinished()) return;
   try {
     const subject = state.currentSubject;
     const pkg = Number(state.currentPkg) || 1;
@@ -2172,14 +2844,12 @@ function persistAnswerProgress(q) {
     const stmt = statementType(q);
     let benar = false;
     if (stmt) {
-      // Soal pernyataan: simpan setelah semua pernyataan dijawab; benar = semua cocok kunci
       if (typeof ans !== 'object' || Array.isArray(ans)) return;
       const stmts = q.pernyataan || [];
       if (!stmts.every(st => ans[st.key])) return;
       const kunci = parseBsKunci(q);
       benar = stmts.every(st => ans[st.key] === kunci[st.key]);
     } else if (Array.isArray(q.kunci_jawaban)) {
-      // Pilihan Ganda Kompleks: himpunan jawaban == himpunan kunci
       if (!Array.isArray(ans) || ans.length === 0) return;
       const k = q.kunci_jawaban.map(String);
       benar = ans.length === k.length && ans.every(x => k.includes(String(x)));
@@ -2187,13 +2857,125 @@ function persistAnswerProgress(q) {
       benar = String(ans) === String(q.kunci_jawaban);
     }
 
-    const store = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+    const pKey = progressStorageKey();
+    const store = JSON.parse(localStorage.getItem(pKey) || '{}');
     store[subject] = store[subject] || {};
     store[subject][pkg] = store[subject][pkg] || {};
     store[subject][pkg][q.nomor] = { kunci: q.kunci_jawaban, benar };
-    localStorage.setItem('tka_progress', JSON.stringify(store));
+    localStorage.setItem(pKey, JSON.stringify(store));
+    if (!isGuestMode()) {
+      scheduleSyncProgressToServer();
+    }
   } catch (e) { /* localStorage gagal: jangan ganggu UI */ }
 }
+
+window._progressServerSynced = false;
+
+let _progressSyncTimer = null;
+function scheduleSyncProgressToServer() {
+  if (isGuestMode()) return;
+  if (_progressSyncTimer) clearTimeout(_progressSyncTimer);
+  _progressSyncTimer = setTimeout(() => {
+    saveProgressToServer();
+  }, 1200);
+}
+
+async function saveProgressToServer() {
+  try {
+    if (isGuestMode()) return;
+    // T3c: hanya boleh POST jika GET sudah sukses (window._progressServerSynced = true)
+    if (!window._progressServerSynced) {
+      await syncProgressWithServer();
+      if (!window._progressServerSynced) return;
+    }
+    if (typeof _attemptAuthHeader !== 'function') return;
+    const hdr = await _attemptAuthHeader();
+    if (!hdr.Authorization) return;
+    const store = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+    await fetch('/api/user/progress', {
+      method: 'POST',
+      headers: Object.assign({ 'Content-Type': 'application/json' }, hdr),
+      body: JSON.stringify({ progress: store })
+    });
+  } catch (e) {}
+}
+window.saveProgressToServer = saveProgressToServer;
+
+async function syncProgressWithServer() {
+  try {
+    if (isGuestMode()) return;
+    if (typeof _attemptAuthHeader !== 'function') return;
+    const hdr = await _attemptAuthHeader();
+    if (!hdr.Authorization) return;
+
+    // T3a: Identifikasi akun yang sedang login
+    const u = (typeof getTKAUser === 'function' ? getTKAUser() : null) || window.TKA_USER || {};
+    const currentOwner = u.email || u.id || (typeof currentUser !== 'undefined' && currentUser && currentUser.email) || 'user';
+    const savedOwner = localStorage.getItem('tka_progress_owner');
+
+    const res = await fetch('/api/user/progress', {
+      headers: hdr
+    });
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data.status === 'success') {
+      _progressServerSynced = true;
+      window._progressServerSynced = true;
+      const serverProgress = data.progress || {};
+      let finalProgress = {};
+
+      if (savedOwner && savedOwner !== currentOwner) {
+        // T3a: Akun berbeda di perangkat yang sama (misal komputer lab)!
+        // Buang data lokal akun sebelumnya, gunakan data bersih milik akun ini dari server.
+        finalProgress = serverProgress;
+      } else if (!savedOwner) {
+        // Data dari tamu yang baru pertama kali login: gabungkan (merge) ke server
+        const localProgress = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+        finalProgress = Object.assign({}, localProgress);
+        for (const [sub, pkgs] of Object.entries(serverProgress)) {
+          if (!finalProgress[sub]) finalProgress[sub] = {};
+          for (const [pkgNo, questions] of Object.entries(pkgs)) {
+            if (!finalProgress[sub][pkgNo]) finalProgress[sub][pkgNo] = {};
+            for (const [qNo, qVal] of Object.entries(questions)) {
+              if (!finalProgress[sub][pkgNo][qNo]) {
+                finalProgress[sub][pkgNo][qNo] = qVal;
+              }
+            }
+          }
+        }
+      } else {
+        // Akun yang sama: gabungkan local dan server
+        const localProgress = JSON.parse(localStorage.getItem('tka_progress') || '{}');
+        finalProgress = Object.assign({}, localProgress);
+        for (const [sub, pkgs] of Object.entries(serverProgress)) {
+          if (!finalProgress[sub]) finalProgress[sub] = {};
+          for (const [pkgNo, questions] of Object.entries(pkgs)) {
+            if (!finalProgress[sub][pkgNo]) finalProgress[sub][pkgNo] = {};
+            for (const [qNo, qVal] of Object.entries(questions)) {
+              if (!finalProgress[sub][pkgNo][qNo]) {
+                finalProgress[sub][pkgNo][qNo] = qVal;
+              }
+            }
+          }
+        }
+      }
+
+      localStorage.setItem('tka_progress', JSON.stringify(finalProgress));
+      localStorage.setItem('tka_progress_owner', currentOwner);
+
+      if (data.tka_date && !localStorage.getItem('tka_date')) {
+        localStorage.setItem('tka_date', data.tka_date);
+      }
+
+      if (typeof renderHome === 'function') renderHome();
+      saveProgressToServer();
+    }
+  } catch (e) {
+    console.warn("syncProgressWithServer failed:", e);
+  }
+}
+window.syncProgressWithServer = syncProgressWithServer;
+window.addEventListener('tka-login', () => { syncProgressWithServer(); });
 
 // ==================== SOAL PERNYATAAN (Benar/Salah & Pernyataan-Label) ====================
 
@@ -2346,6 +3128,8 @@ function selectBsAnswer(stmtKey, value) {
   const sel = (cur && typeof cur === 'object' && !Array.isArray(cur)) ? { ...cur } : {};
   sel[stmtKey] = value;
   state.userAnswers[pkgKey()][q.nomor] = sel;
+  // FASE 3 (T3.5): simpan jawaban BS ke localStorage
+  try { localStorage.setItem(examStorageKey('answers', pkgKey()), JSON.stringify(state.userAnswers[pkgKey()])); } catch (e) {}
 
   // Update tampilan tombol pada baris terkait
   const row = document.querySelector(`.bs-row[data-stmt="${stmtKey}"]`);
@@ -2357,6 +3141,18 @@ function selectBsAnswer(stmtKey, value) {
   }
 
   renderGridModal();
+
+  // FASE D (D1): rekam klik opsi Benar/Salah
+  try { DetailTracker.onOptionClick(q.nomor, `${stmtKey}:${value}`); } catch (e) {}
+
+  // FASE 3 (T3.2): rekam jawaban BS untuk Autopsi
+  try {
+    const stmts = q.pernyataan || [];
+    if (stmts.every(st => sel[st.key])) {
+      const ansStr = stmts.map(st => `${st.key}:${sel[st.key]}`).join(',');
+      AttemptRecorder.onAnswer(q.nomor, ansStr);
+    }
+  } catch (e) {}
 
   // Persist progres nyata (kontrak tka_progress) — simpan saat semua pernyataan terjawab
   persistAnswerProgress(q);
@@ -2413,63 +3209,75 @@ function checkUserAnswer() {
 
     const kunci = parseBsKunci(q);
     let benar = 0;
+    let tableRowsHtml = '';
+
     stmts.forEach(st => {
-      const row = document.querySelector(`.bs-row[data-stmt="${st.key}"]`);
-      if (!row) return;
-      const isRight = sel[st.key] === kunci[st.key];
+      const userVal = sel[st.key] || '-';
+      const targetVal = kunci[st.key] || '-';
+      const isRight = (userVal === targetVal);
       if (isRight) benar++;
-      row.classList.toggle('correct', isRight);
-      row.classList.toggle('incorrect', !isRight);
+
+      const row = document.querySelector(`.bs-row[data-stmt="${st.key}"]`);
+      if (row) {
+        row.classList.toggle('correct', isRight);
+        row.classList.toggle('incorrect', !isRight);
+      }
+
+      tableRowsHtml += `
+        <tr style="border-bottom:1px solid #e2e8f0;">
+          <td style="padding:6px 8px;font-weight:700;color:#1e293b;text-align:center;">${st.key}</td>
+          <td style="padding:6px 8px;color:#334155;text-align:center;">${userVal}</td>
+          <td style="padding:6px 8px;font-weight:700;color:#0f172a;text-align:center;">${targetVal}</td>
+          <td style="padding:6px 8px;text-align:center;">
+            ${isRight 
+              ? '<span style="color:#15803d;font-weight:700;background:#dcfce7;padding:3px 8px;border-radius:6px;font-size:11px;">✅ Tepat</span>'
+              : '<span style="color:#b91c1c;font-weight:700;background:#fee2e2;padding:3px 8px;border-radius:6px;font-size:11px;">❌ Berbeda</span>'}
+          </td>
+        </tr>
+      `;
     });
 
     feedback.style.display = 'flex';
-    if (benar === stmts.length) {
-      feedback.className = 'feedback-banner success';
-      feedback.innerHTML = `
-        <div class="fb-card-inner">
-          <div class="fb-main-info">
-            <div class="fb-status-badge correct">
-              <i class="fa-solid fa-circle-check"></i>
-              <span>Sempurna! Semua ${stmts.length} Pernyataan Benar!</span>
-            </div>
-            <div class="fb-text-msg">Analisis logikamu tepat. Mau mengecek pembahasan materi lengkapnya?</div>
+    const isAllRight = (benar === stmts.length);
+    feedback.className = `feedback-banner ${isAllRight ? 'success' : 'danger'}`;
+    feedback.innerHTML = `
+      <div class="fb-card-inner">
+        <div class="fb-main-info" style="width:100%;">
+          <div class="fb-status-badge ${isAllRight ? 'correct' : 'incorrect'}">
+            <i class="fa-solid ${isAllRight ? 'fa-circle-check' : 'fa-circle-info'}"></i>
+            <span>${isAllRight ? 'Sempurna! Semua Pernyataan Sesuai Kunci' : `${benar} dari ${stmts.length} Pernyataan Tepat`}</span>
           </div>
-          <div class="fb-action-buttons">
-            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
-              <i class="fa-solid fa-lightbulb"></i>
-              <span>Lihat Pembahasan</span>
-            </button>
-            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
-              <span>Soal Berikutnya</span>
-              <i class="fa-solid fa-arrow-right"></i>
-            </button>
+          <div class="fb-text-msg" style="margin-bottom:8px;">
+            ${isAllRight 
+              ? 'Analisis logikamu untuk setiap pernyataan tepat sekali!' 
+              : 'Berikut perbandingan pilihan jawabanmu dengan kunci resmi TKA Pusmendik:'}
           </div>
-        </div>
-      `;
-    } else {
-      feedback.className = 'feedback-banner danger';
-      feedback.innerHTML = `
-        <div class="fb-card-inner">
-          <div class="fb-main-info">
-            <div class="fb-status-badge incorrect">
-              <i class="fa-solid fa-circle-xmark"></i>
-              <span>${benar} dari ${stmts.length} Pernyataan Benar</span>
-            </div>
-            <div class="fb-text-msg">Baris bertanda merah belum tepat. Mau mengecek pembahasan dan penjelasannya?</div>
-          </div>
-          <div class="fb-action-buttons">
-            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
-              <i class="fa-solid fa-lightbulb"></i>
-              <span>Lihat Pembahasan</span>
-            </button>
-            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
-              <span>Soal Berikutnya</span>
-              <i class="fa-solid fa-arrow-right"></i>
-            </button>
+          <div style="overflow-x:auto;background:#ffffff;border:1px solid #e2e8f0;border-radius:8px;padding:6px;margin:8px 0 12px;">
+            <table style="width:100%;border-collapse:collapse;font-size:12px;">
+              <thead>
+                <tr style="background:#f8fafc;border-bottom:1px solid #cbd5e1;color:#475569;font-size:11px;text-transform:uppercase;">
+                  <th style="padding:6px;text-align:center;">Baris</th>
+                  <th style="padding:6px;text-align:center;">Pilihan Kamu</th>
+                  <th style="padding:6px;text-align:center;">Kunci Resmi</th>
+                  <th style="padding:6px;text-align:center;">Hasil</th>
+                </tr>
+              </thead>
+              <tbody>${tableRowsHtml}</tbody>
+            </table>
           </div>
         </div>
-      `;
-    }
+        <div class="fb-action-buttons">
+          <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>Lihat Pembahasan</span>
+          </button>
+          <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+            <span>Soal Berikutnya</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    `;
 
     state.explanationVisible = true;
     showPembahasanAfterCheck();
@@ -2487,54 +3295,188 @@ function checkUserAnswer() {
   let isCorrect = false;
 
   const targetArr = Array.isArray(correctKey) ? correctKey : (correctKey ? [correctKey] : []);
+  const userArr = Array.isArray(currentSelection) ? currentSelection : (currentSelection ? [currentSelection] : []);
+
   if (isComplex) {
-    const sortedUser = [...currentSelection].sort().join(',');
+    const sortedUser = [...userArr].sort().join(',');
     const sortedTarget = [...targetArr].sort().join(',');
-    isCorrect = sortedUser === sortedTarget;
+    isCorrect = (sortedUser === sortedTarget);
+
+    const benarDipilih = userArr.filter(k => targetArr.includes(k));
+    const salahDipilih = userArr.filter(k => !targetArr.includes(k));
+    const belumDipilih = targetArr.filter(k => !userArr.includes(k));
+    const totalOpts = (q.pilihan_jawaban || []).length || 5;
+
+    // Highlight options di layar
+    document.querySelectorAll('.option-item').forEach(el => {
+      const k = el.dataset.key;
+      const isTarget = targetArr.includes(k);
+      const isUserPick = userArr.includes(k);
+      el.classList.toggle('correct', isTarget);
+      if (isUserPick && !isTarget) {
+        el.classList.add('incorrect');
+      }
+    });
+
+    feedback.style.display = 'flex';
+    if (isCorrect) {
+      feedback.className = 'feedback-banner success';
+      feedback.innerHTML = `
+        <div class="fb-card-inner">
+          <div class="fb-main-info">
+            <div class="fb-status-badge correct">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>Luar Biasa! Jawabanmu Benar Sempurna!</span>
+            </div>
+            <div class="fb-text-msg">
+              Kamu berhasil memilih seluruh kunci jawaban yang tepat: <strong>(${targetArr.join(', ')})</strong>.
+            </div>
+          </div>
+          <div class="fb-action-buttons">
+            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Lihat Pembahasan</span>
+            </button>
+            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+              <span>Soal Berikutnya</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    } else if (userArr.length >= totalOpts && salahDipilih.length > 0) {
+      // Siswa mencentang semua opsi tanpa membaca
+      feedback.className = 'feedback-banner danger';
+      feedback.innerHTML = `
+        <div class="fb-card-inner">
+          <div class="fb-main-info">
+            <div class="fb-status-badge incorrect">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>Semua Opsi Terpilih</span>
+            </div>
+            <div class="fb-text-msg">
+              Kamu mencentang seluruh opsi. Kunci jawaban resmi hanya <strong>(${targetArr.join(', ')})</strong>. Skor proporsional: 0%.
+            </div>
+          </div>
+          <div class="fb-action-buttons">
+            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Lihat Pembahasan</span>
+            </button>
+            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+              <span>Soal Berikutnya</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    } else if (benarDipilih.length > 0 && salahDipilih.length === 0) {
+      // Siswa tepat memilih 1 dari 2 (seperti kasus Agus memilih E pada soal A & E)
+      const pct = Math.round((benarDipilih.length / targetArr.length) * 100);
+      feedback.className = 'feedback-banner warn';
+      feedback.innerHTML = `
+        <div class="fb-card-inner">
+          <div class="fb-main-info">
+            <div class="fb-status-badge warn" style="background:#fef3c7;color:#b45309;">
+              <i class="fa-solid fa-circle-half-stroke"></i>
+              <span>Sebagian Benar (${benarDipilih.length} dari ${targetArr.length} Jawaban — ${pct}%)</span>
+            </div>
+            <div class="fb-text-msg">
+              Pilihan kamu <strong>(${benarDipilih.join(', ')})</strong> tepat! Namun soal ini memiliki lebih dari satu jawaban benar. Kunci resmi lengkapnya adalah <strong>(${targetArr.join(', ')})</strong>. Opsi <strong>(${belumDipilih.join(', ')})</strong> belum kamu pilih.
+            </div>
+          </div>
+          <div class="fb-action-buttons">
+            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Lihat Pembahasan</span>
+            </button>
+            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+              <span>Soal Berikutnya</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    } else {
+      // Ada opsi yang keliru
+      feedback.className = 'feedback-banner danger';
+      feedback.innerHTML = `
+        <div class="fb-card-inner">
+          <div class="fb-main-info">
+            <div class="fb-status-badge incorrect">
+              <i class="fa-solid fa-circle-xmark"></i>
+              <span>Jawaban Belum Tepat</span>
+            </div>
+            <div class="fb-text-msg">
+              Pilihanmu: <strong>(${userArr.join(', ')})</strong>.<br>
+              ${benarDipilih.length ? `Opsi tepat: <strong>(${benarDipilih.join(', ')})</strong>. ` : ''}
+              Kunci jawaban resmi yang benar adalah <strong>(${targetArr.join(', ')})</strong>.
+            </div>
+          </div>
+          <div class="fb-action-buttons">
+            <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+              <i class="fa-solid fa-lightbulb"></i>
+              <span>Lihat Pembahasan</span>
+            </button>
+            <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+              <span>Soal Berikutnya</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      `;
+    }
   } else {
-    isCorrect = currentSelection === correctKey;
+    // Pilihan Ganda Biasa (Single Option)
+    isCorrect = (currentSelection === correctKey);
+
+    document.querySelectorAll('.option-item').forEach(el => {
+      const k = el.dataset.key;
+      const isTarget = (k === correctKey);
+      el.classList.toggle('correct', isTarget);
+      if (!isTarget && el.classList.contains('selected')) {
+        el.classList.add('incorrect');
+      }
+    });
+
+    feedback.style.display = 'flex';
+    feedback.className = `feedback-banner ${isCorrect ? 'success' : 'danger'}`;
+    feedback.innerHTML = `
+      <div class="fb-card-inner">
+        <div class="fb-main-info">
+          <div class="fb-status-badge ${isCorrect ? 'correct' : 'incorrect'}">
+            <i class="fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
+            <span>${isCorrect ? 'Jawaban Kamu Benar!' : 'Jawaban Belum Tepat'}</span>
+          </div>
+          <div class="fb-text-msg">
+            ${isCorrect 
+              ? 'Pilihan jawabanmu tepat sekali! Ingin memperdalam rumus atau materi pada soal ini?' 
+              : `Kunci jawaban yang benar adalah <strong>${correctKey || '-'}</strong>. Mau mengecek pembahasan langkahnya?`}
+          </div>
+        </div>
+        <div class="fb-action-buttons">
+          <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
+            <i class="fa-solid fa-lightbulb"></i>
+            <span>Lihat Pembahasan</span>
+          </button>
+          <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
+            <span>Soal Berikutnya</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    `;
   }
 
-  // Highlight options
-  document.querySelectorAll('.option-item').forEach(el => {
-    const k = el.dataset.key;
-    const isTarget = isComplex ? targetArr.includes(k) : (k === correctKey);
-    el.classList.toggle('correct', isTarget);
-    if (!isTarget && el.classList.contains('selected')) {
-      el.classList.add('incorrect');
-    }
-  });
-
-  const kunciStr = Array.isArray(correctKey) ? correctKey.join(', ') : (correctKey || '-');
-  feedback.style.display = 'flex';
-  feedback.className = `feedback-banner ${isCorrect ? 'success' : 'danger'}`;
-  feedback.innerHTML = `
-    <div class="fb-card-inner">
-      <div class="fb-main-info">
-        <div class="fb-status-badge ${isCorrect ? 'correct' : 'incorrect'}">
-          <i class="fa-solid ${isCorrect ? 'fa-circle-check' : 'fa-circle-xmark'}"></i>
-          <span>${isCorrect ? 'Jawaban Kamu Benar!' : 'Jawaban Belum Tepat'}</span>
-        </div>
-        <div class="fb-text-msg">
-          ${isCorrect 
-            ? 'Pilihan jawabanmu tepat sekali! Ingin memperdalam rumus atau materi pada soal ini?' 
-            : `Kunci jawaban yang benar adalah <strong>${kunciStr}</strong>. Mau mengecek pembahasan langkahnya?`}
-        </div>
-      </div>
-      <div class="fb-action-buttons">
-        <button type="button" class="btn-fb-action btn-fb-pembahasan" onclick="kePembahasanDariCheck()">
-          <i class="fa-solid fa-lightbulb"></i>
-          <span>Lihat Pembahasan</span>
-        </button>
-        <button type="button" class="btn-fb-action btn-fb-next" onclick="navigateQuestion(1)">
-          <span>Soal Berikutnya</span>
-          <i class="fa-solid fa-arrow-right"></i>
-        </button>
-      </div>
-    </div>
-  `;
-
   state.explanationVisible = true;
+  // BUGFIX (10 Okt 2026): tandai sudah dicek agar opsi terkunci spesifik per mapel dan paket (tahan refresh via localStorage)
+  try {
+    if (!window._answerChecked) window._answerChecked = {};
+    window._answerChecked[pkgKey() + ':' + q.nomor] = true;
+    const curChecked = JSON.parse(localStorage.getItem(examStorageKey('checked', pkgKey())) || '{}');
+    curChecked[q.nomor] = true;
+    localStorage.setItem(examStorageKey('checked', pkgKey()), JSON.stringify(curChecked));
+  } catch (e) {}
   showPembahasanAfterCheck();
 }
 
@@ -2563,6 +3505,10 @@ function switchWorkTab(tab, sub, opts) {
   }
 
   if (tab === 'pembahasan') {
+    const curQ = (typeof getCurrentQuestion === 'function') ? getCurrentQuestion() : null;
+    if (curQ && curQ.nomor) {
+      try { DetailTracker.onPembahasanOpen(curQ.nomor); } catch (e) {}
+    }
     if (!o.fromBack && window.TKAHistory) {
       TKAHistory.push('tab-pembahasan');
     }
@@ -2578,6 +3524,9 @@ function switchWorkTab(tab, sub, opts) {
       setExplanationCollapsed(false);
     }
     switchPembSub(sub || state.pembSub || 'materi', o);
+    renderMath(panePemb);
+  } else if (tab === 'soal') {
+    try { DetailTracker.closePembahasan(); } catch (e) {}
   }
   syncRail(tab === 'soal' ? 'soal' : (sub || state.pembSub || 'materi'));
   if (o.scroll !== false) window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2660,9 +3609,15 @@ function toggleExplanation() {
   // Floating AI button di desktop dihilangkan (hanya aktif di mobile via CSS)
 
   if (state.explanationVisible) {
+    const curQ = (typeof getCurrentQuestion === 'function') ? getCurrentQuestion() : null;
+    if (curQ && curQ.nomor) {
+      try { DetailTracker.onPembahasanOpen(curQ.nomor); } catch (e) {}
+    }
     // Saat dibuka via tombol Buka Tata Cara, tampilkan langkah penuh
     setExplanationCollapsed(false);
     learnSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    try { DetailTracker.closePembahasan(); } catch (e) {}
   }
 }
 
@@ -2867,7 +3822,20 @@ function _escHtml(s) {
 }
 
 function _fmtText(s) {
-  let text = _escHtml(s);
+  if (!s) return '';
+  let str = String(s);
+  // Lindungi display math $$...$$ agar baris baru di dalamnya tidak diubah jadi <br>
+  str = str.replace(/\$\$([\s\S]*?)\$\$/g, (m, inner) => {
+    return '$$' + inner.replace(/\n+/g, ' ') + '$$';
+  });
+  let text = _escHtml(str);
+  // Decode kembali karakter math khusus yang di-escape agar KaTeX tidak gagal me-render
+  text = text.replace(/\$\$([\s\S]*?)\$\$/g, (m, inner) => {
+    return '$$' + inner.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"') + '$$';
+  });
+  text = text.replace(/\$([^\$\n]+?)\$/g, (m, inner) => {
+    return '$' + inner.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"') + '$';
+  });
   // Bersihkan sisa header markdown (### Judul)
   text = text.replace(/(?:^|\n)#{2,6}\s+\*\*([^*]+)\*\*/g, '\n<strong>$1:</strong>\n');
   text = text.replace(/(?:^|\n)#{2,6}\s+([^\n]+)/g, '\n<strong>$1:</strong>\n');
@@ -3212,6 +4180,7 @@ async function _applyCanonicalSolution(q) {
     }
 
     renderMath();
+    try { setupPillarAccordions(); } catch (e) {}
   } catch (err) {
     if (seq !== _solutionReqSeq) return;
     console.warn('Solution (kanonis) tidak tersedia:', err);
@@ -3669,7 +4638,7 @@ function updateChatQuestionCard(q) {
         q.stimulus.images.forEach(sImg => {
           const sRel = (sImg.rel_path || `images/${sImg.filename}`).replace(/^\.?\//, '');
           const sSrc = `${pkgPath}${sRel}?v=41`;
-          html += `<img src="${sSrc}" alt="Stimulus" style="max-width:100%;max-height:120px;border-radius:6px;border:1px solid #e5e7eb;cursor:zoom-in" onclick="openImageLightbox('${sSrc}', 'Gambar Stimulus')" />`;
+          html += `<img loading="lazy" src="${sSrc}" alt="Stimulus" style="max-width:100%;max-height:120px;border-radius:6px;border:1px solid #e5e7eb;cursor:zoom-in" onclick="openImageLightbox('${sSrc}', 'Gambar Stimulus')" />`;
         });
         html += '</div>';
       }
@@ -3696,7 +4665,7 @@ function updateChatQuestionCard(q) {
       q.pertanyaan.images.forEach(pImg => {
         const pRel = (pImg.rel_path || `images/${pImg.filename}`).replace(/^\.?\//, '');
         const pSrc = `${pkgPath}${pRel}?v=41`;
-        html += `<img src="${pSrc}" alt="Gambar Soal" style="max-width:100%;max-height:120px;border-radius:6px;border:1px solid #e5e7eb;cursor:zoom-in" onclick="openImageLightbox('${pSrc}', 'Gambar Soal')" />`;
+        html += `<img loading="lazy" src="${pSrc}" alt="Gambar Soal" style="max-width:100%;max-height:120px;border-radius:6px;border:1px solid #e5e7eb;cursor:zoom-in" onclick="openImageLightbox('${pSrc}', 'Gambar Soal')" />`;
       });
       html += '</div>';
     }
@@ -3716,7 +4685,7 @@ function updateChatQuestionCard(q) {
           let rel = (o.image.rel_path || `images/${o.image.filename}`).replace(/^\.?\//, '');
           if (base.endsWith('images/') && rel.startsWith('images/')) rel = rel.substring(7);
           const imgSrc = `${base}${rel}?v=41`;
-          optBody = `<div style="display:flex;align-items:center;gap:6px"><img src="${imgSrc}" alt="Opsi ${o.key}" style="max-height:48px;max-width:240px;border-radius:4px" />${o.text ? `<span>${_fmtText(o.text)}</span>` : ''}</div>`;
+          optBody = `<div style="display:flex;align-items:center;gap:6px"><img loading="lazy" src="${imgSrc}" alt="Opsi ${o.key}" style="max-height:48px;max-width:240px;border-radius:4px" />${o.text ? `<span>${_fmtText(o.text)}</span>` : ''}</div>`;
         } else if (o.latex) {
           optBody = `$${o.latex}$`;
         } else if (o.text) {
@@ -4144,6 +5113,7 @@ async function sendChatMessage(e) {
         subject: state.currentSubject,
         paket: state.currentPkg,
         nomor: q.nomor,
+        attempt_id: (window._lastFinishedAttempt && (window._lastFinishedAttempt.id || window._lastFinishedAttempt.client_attempt_id)) || null,
         // B5: Kirim konteks soal lengkap biar AI tidak salah konteks
         question_id: `${state.currentSubject}_p${state.currentPkg}_n${q.nomor}`,
         question_text: q.pertanyaan || q.teks || '',
@@ -4484,7 +5454,7 @@ function openFinishModal() {
     msg += `<br><span style="color:var(--warn);"><i class="fa-solid fa-triangle-exclamation"></i> Masih ada <strong>${ragu}</strong> soal ditandai ragu-ragu.</span>`;
   }
   if (belum > 0) {
-    msg += `<br><span style="color:var(--wrong);"><i class="fa-solid fa-circle-exclamation"></i> Ada <strong>${belum}</strong> soal yang belum dijawab.</span>`;
+    msg += `<br><span style="color:var(--wrong);"><i class="fa-solid fa-circle-exclamation"></i> Ada <strong>${belum}</strong> soal yang belum terjawab.</span>`;
   }
   msg += `<br><br>Apakah kamu yakin ingin menyelesaikan tes ini dan melihat reviu hasil nilai beserta seluruh kunci jawaban resmi TKA?`;
 
@@ -4528,15 +5498,80 @@ function evaluateQuestion(item) {
 }
 
 function selesaiTes() {
+  if (typeof SimTimer !== 'undefined') SimTimer.stop();
+  // FASE 3 (T3.2/T3.3): simpan attempt ke antrean lalu upload sekali.
+  try {
+    const _att = AttemptRecorder.finish(window._finishByTimer ? 'timer' : 'user');
+    window._finishByTimer = false;
+    if (_att) {
+      // Hitung is_correct, n_correct, dan score secara akurat dari evaluasi soal resmi
+      try {
+        const curKey = pkgKey();
+        const pkg = (state.pkgData && state.pkgData[curKey]) ? state.pkgData[curKey] : null;
+        let n_benar = 0;
+        if (pkg && pkg.soal && Array.isArray(_att.items)) {
+          _att.items.forEach(it => {
+            const qItem = pkg.soal.find(s => s.nomor === it.position) || pkg.soal[it.position - 1];
+            if (qItem && typeof evaluateQuestion === 'function') {
+              const ev = evaluateQuestion(qItem);
+              const isCorr = (ev.type === 'bs')
+                ? (isQuestionAnswered(qItem) && ev.perStatement.length > 0 && ev.perStatement.every(s => s === 'benar'))
+                : (ev.status === 'benar');
+              it.is_correct = !!isCorr;
+            }
+            if (it.is_correct) n_benar++;
+          });
+          _att.n_correct = n_benar;
+          _att.score = Math.round((100 * n_benar) / Math.max(1, _att.n_questions || pkg.soal.length));
+        }
+      } catch (errEval) {
+        console.warn('Gagal evaluasi skor attempt:', errEval);
+      }
+      window._lastFinishedAttempt = _att;
+      // Simpan riwayat attempt terbaru di localStorage agar instan terbaca di Ruang AI
+      try {
+        const rec = JSON.parse(localStorage.getItem('tka_recent_attempts') || '[]');
+        rec.unshift(_att);
+        localStorage.setItem('tka_recent_attempts', JSON.stringify(rec.slice(0, 20)));
+      } catch (errRec) {}
+      AttemptQueue.push(_att);
+      syncAttempts();
+    }
+  } catch (e) {}
   if (!state.testFinished) state.testFinished = {};
   state.testFinished[pkgKey()] = true;
+  // B11: Komet progres seluruh paket sekaligus HANYA saat selesai tes
+  commitPackageProgressOnFinish(state.currentSubject, state.currentPkg);
+  // B5: Invalidate & perbarui misi hari ini segera saat tes selesai
+  updateDailyMissionFromAutopsy(null, state.currentSubject, state.currentPkg);
+  // FASE 3 (T3.5): simpan status finished & jawaban ke localStorage
+  try {
+    localStorage.setItem(examStorageKey('finished', pkgKey()), 'true');
+    localStorage.setItem(examStorageKey('answers', pkgKey()), JSON.stringify(state.userAnswers[pkgKey()] || {}));
+    localStorage.setItem(examStorageKey('ragu', pkgKey()), JSON.stringify(state.raguStatus[pkgKey()] || {}));
+  } catch (e) {}
   closeFinishModal();
   renderReviewHasil();
 }
 
 function renderReviewHasil() {
+  if (typeof homeClose === 'function') homeClose();
   const pkg = state.pkgData[pkgKey()];
   if (!pkg || !pkg.soal) return;
+  // FASE 3 (T3.3): indikator status simpan hasil
+  try {
+    if (!document.getElementById('attemptSyncBadge')) {
+      const _b = document.createElement('div');
+      _b.id = 'attemptSyncBadge';
+      _b.setAttribute('data-fase3', '1');
+      const _rh = document.querySelector('#reviewHasilOverlay .review-header');
+      if (_rh) { _rh.after(_b); }
+      else { const _ov = document.getElementById('reviewHasilOverlay'); if (_ov) _ov.prepend(_b); }
+    }
+    updateAttemptBadge();
+    // Retry otomatis: janji ke user — buka halaman review = coba kirim lagi.
+    try { syncAttempts(); } catch (e2) {}
+  } catch (e) {}
   const soalList = pkg.soal;
   const subjectMeta = SUBJECT_CATALOG[state.currentSubject] || {};
   const pkgPath = (subjectMeta.imgBase && subjectMeta.imgBase[state.currentPkg]) || `data/${state.currentSubject}/paket_${state.currentPkg}/`;
@@ -4563,7 +5598,7 @@ function renderReviewHasil() {
         if (base.endsWith('images/') && rel.startsWith('images/')) {
           rel = rel.substring(7);
         }
-        return `<img src="${base}${rel}" alt="Opsi ${k}" style="max-height:48px; max-width:140px; vertical-align:middle; border-radius:4px; border:1px solid var(--border); background:#fff; padding:2px; display:inline-block;" />`;
+        return `<img loading="lazy" src="${base}${rel}" alt="Opsi ${k}" style="max-height:48px; max-width:140px; vertical-align:middle; border-radius:4px; border:1px solid var(--border); background:#fff; padding:2px; display:inline-block;" />`;
       }
       return '';
     };
@@ -4571,10 +5606,10 @@ function renderReviewHasil() {
     if (res.type === 'bs') {
       const kunciMap = parseBsKunci(item);
       const stmts = item.pernyataan || [];
-      const hasAnyAnswer = stmts.some(st => ans && typeof ans === 'object' && !Array.isArray(ans) && ans[st.key]);
-      const allCorrect = res.perStatement.length > 0 && res.perStatement.every(s => s === 'benar');
+      const isAnswered = isQuestionAnswered(item);
+      const allCorrect = isAnswered && res.perStatement.length > 0 && res.perStatement.every(s => s === 'benar');
 
-      if (!hasAnyAnswer) {
+      if (!isAnswered) {
         kosong++;
         statusHtml = '<span class="review-status-badge badge-kosong"><i class="fa-regular fa-circle"></i> Kosong</span>';
       } else if (allCorrect) {
@@ -4588,15 +5623,17 @@ function renderReviewHasil() {
       const partsAnda = stmts.map(st => {
         const picked = (ans && typeof ans === 'object' && !Array.isArray(ans)) ? ans[st.key] : null;
         if (!picked) {
-          return `<strong>${st.key}</strong> (&mdash;)`;
+          return `<strong>${st.key}:</strong> <span style="color:#94a3b8;">&mdash;</span>`;
         }
         const isRight = picked === kunciMap[st.key];
-        const color = isRight ? 'var(--accent)' : 'var(--wrong)';
-        return `<strong>${st.key}</strong> (<span style="color:${color}; font-weight:600;">${picked}</span>)`;
+        const badge = isRight 
+          ? `<span style="color:#15803d;font-weight:700;">✅ ${picked}</span>`
+          : `<span style="color:#dc2626;font-weight:700;">❌ ${picked}</span>`;
+        return `<strong>${st.key}:</strong> ${badge}`;
       });
 
       const partsKunci = stmts.map(st => {
-        return `<strong>${st.key}</strong> (<span style="color:var(--accent); font-weight:600;">${kunciMap[st.key] || '&mdash;'}</span>)`;
+        return `<strong>${st.key}:</strong> <span style="font-weight:700;color:#004a2a;">${kunciMap[st.key] || '&mdash;'}</span>`;
       });
 
       andaHtml = `<div class="review-ans-multiline">${partsAnda.join('<br>')}</div>`;
@@ -4710,6 +5747,722 @@ function renderReviewHasil() {
 
   // Trigger KaTeX untuk render rumus matematika di tabel hasil
   renderMath(document.getElementById('reviewTableBody'));
+
+  // FASE 5 (T5.1): tampilkan Autopsi setelah review dirender
+  try { renderAutopsiSection(); } catch (e) { console.warn('Autopsi:', e); }
+}
+
+// FASE A6: UI Layar Hasil Guru Autopsi (Mobile-first, ringan di HP murah)
+// Sesuai Spesifikasi Bagian 8:
+// 1. Skor ringkas + judul "Guru Autopsi — dianalisis dari cara kamu mengerjakan"
+// 2. "Yang saya lihat": butir pengamatan (nomor soal, detik, pergantian opsi)
+// 3. "Yang perlu diperbaiki": kartu kebocoran (judul, bukti, tafsir, tindakan) + tombol "Latihan sekarang"
+//    (Paywall OFF total: semua kebocoran terbuka tanpa blur)
+// 4. "Soal yang salah, satu per satu": akordeon per_soal (penyebab, dipelajari, langkah, cek paham) + tombol Buka Pembahasan & Tanya AI
+// 5. Misi hari ini: tombol utama satu-satunya yang menonjol "Mulai Misi (±10 menit)"
+// 6. Rencana sampai TKA: terlipat + input "Kapan TKA-mu?" + hitung mundur H-n
+// Helper: Bersihkan teks autopsi dari ID teknis mentah atau pilar_refs (K2)
+function cleanAutopsiText(str) {
+  if (str === null || str === undefined) return '';
+  let s = String(str);
+  // 1. Pola spesifik rujukan pilar mentah: "Cek pilar_refs: bahasa_indonesia:1:1#5." atau "Lihat pilar_refs: ..."
+  s = s.replace(/(?:(?:cek|lihat|buka|periksa)\s+)?pilar_refs:\s*[a-zA-Z0-9_:#-]+/gi, 'Lihat pembahasan Pilar');
+  // 2. String pilar_refs yang berdiri sendiri
+  s = s.replace(/pilar_refs/gi, 'pembahasan Pilar');
+  // 3. Pola ID dengan nomor pilar: mapel:paket:nomor#pilar (misal bahasa_indonesia:1:1#5 -> Pilar 5 Soal 1)
+  s = s.replace(/\b[a-zA-Z0-9_-]+:\d+:(\d+)#(\d+)\b/g, 'Pilar $2 Soal $1');
+  // 4. Pola ID soal: mapel:paket:nomor (misal bahasa_indonesia:1:5 -> Soal 5)
+  s = s.replace(/\b[a-zA-Z0-9_-]+:\d+:(\d+)\b/g, 'Soal $1');
+  // 5. Prefix nama mapel teknis mentah dengan titik dua (misal "bahasa_indonesia: ")
+  s = s.replace(/\b(bahasa_indonesia|bahasa_inggris|matematika|fisika|kimia|biologi|ekonomi|sosiologi|geografi|sejarah|antropologi|tpa|tps):\s*/gi, '');
+  return s;
+}
+
+// Helper: Format ID mentah soal (misal "matematika:1:1", "matematika:1:3") menjadi "Soal 1, 3, 4"
+function formatContohSoal(contoh) {
+  if (!contoh) return '';
+  const arr = Array.isArray(contoh) ? contoh : [contoh];
+  const nums = arr.map(item => {
+    const s = cleanAutopsiText(item).trim();
+    const m = s.match(/:(\d+)(?:#\d+)?$/) || s.match(/\b(?:Soal\s+)?(\d+)\b/i);
+    return m ? (m[1] || m[0]) : s;
+  }).filter(Boolean);
+  if (nums.length === 0) return '';
+  return `Soal ${nums.join(', ')}`;
+}
+
+async function renderAutopsiSection() {
+  let cont = document.getElementById('autopsiSection');
+  if (!cont) {
+    cont = document.createElement('div');
+    cont.id = 'autopsiSection';
+    const overlay = document.getElementById('reviewHasilOverlay');
+    const summary = overlay ? overlay.querySelector('.review-summary') : null;
+    if (summary) {
+      summary.after(cont);
+    } else if (overlay) {
+      const tableWrap = overlay.querySelector('.review-table-wrap') || overlay.querySelector('table');
+      if (tableWrap) tableWrap.before(cont);
+      else overlay.appendChild(cont);
+    }
+  }
+  if (!cont) return;
+
+  cont.innerHTML = '';
+  cont.style.display = 'none';
+
+  try {
+    const q = (typeof AttemptQueue !== 'undefined') ? AttemptQueue.all() : [];
+    let payload = window._lastFinishedAttempt || (q.length > 0 ? q[q.length - 1] : null);
+
+    const curKey = pkgKey();
+    const pkg = (state.pkgData && state.pkgData[curKey]) ? state.pkgData[curKey] : null;
+    const totalSoal = (pkg && pkg.soal) ? pkg.soal.length : 40;
+
+    // B1: Tangani edge case: data waktu kosong, semua soal dikosongkan, tes tanpa jawaban, atau reload
+    if (!payload || !payload.items || !payload.items.length) {
+      const savedAns = (state.userAnswers && state.userAnswers[curKey]) || {};
+      const savedRagu = (state.raguStatus && state.raguStatus[curKey]) || {};
+      const items = [];
+      let n_benar_fallback = 0;
+      for (let i = 1; i <= totalSoal; i++) {
+        const ans = savedAns[i] || null;
+        let isCorr = false;
+        const qItem = (pkg && pkg.soal) ? (pkg.soal.find(s => s.nomor === i) || pkg.soal[i - 1]) : null;
+        if (qItem && typeof evaluateQuestion === 'function') {
+          const ev = evaluateQuestion(qItem);
+          isCorr = (ev.type === 'bs')
+            ? (isQuestionAnswered(qItem) && ev.perStatement.length > 0 && ev.perStatement.every(s => s === 'benar'))
+            : (ev.status === 'benar');
+        }
+        if (isCorr) n_benar_fallback++;
+        items.push({
+          soal_id: `${state.currentSubject}:${state.currentPkg}:${i}`,
+          position: i,
+          topic_id: qItem ? (qItem.topik || null) : null,
+          first_answer: ans ? (Array.isArray(ans) ? ans.join(',') : String(ans)) : null,
+          final_answer: ans ? (Array.isArray(ans) ? ans.join(',') : String(ans)) : null,
+          is_correct: isCorr,
+          active_ms: 0,
+          waktu_detik: 0,
+          change_count: 0,
+          flagged_ragu: !!savedRagu[i],
+          visit_count: ans ? 1 : 0,
+          jejak: []
+        });
+      }
+      payload = {
+        id: 'att_edge_' + Date.now(),
+        client_attempt_id: 'att_edge_' + Date.now(),
+        subject: state.currentSubject,
+        mapel: state.currentSubject,
+        paket: state.currentPkg,
+        n_questions: totalSoal,
+        duration_limit_s: getTimerTotalSeconds(),
+        ended_by: 'user',
+        n_correct: n_benar_fallback,
+        score: Math.round((100 * n_benar_fallback) / Math.max(1, totalSoal)),
+        items: items,
+        created_at: new Date().toISOString()
+      };
+      window._lastFinishedAttempt = payload;
+    }
+
+    let hdr = {};
+    if (typeof _attemptAuthHeader === 'function') {
+      try { hdr = await _attemptAuthHeader(); } catch (e) {}
+    }
+    const isGuest = !hdr.Authorization;
+
+    // FASE 1: Tampilkan langsung UI dasar (< 1 detik)
+    cont.style.display = 'block';
+    const tkaDateCurrent = (typeof getTkaDate === 'function') ? getTkaDate() : '2026-10-26';
+
+    const calcHMin = (targetDateStr) => {
+      try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const parts = targetDateStr.split('-');
+        const target = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+        const diffDays = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+        return diffDays;
+      } catch (e) { return 16; }
+    };
+
+    let diffHari = calcHMin(tkaDateCurrent);
+
+    // Hitung ringkasan waktu pengerjaan dari items (hasil B2)
+    let totalWaktuSec = 0;
+    let soalTerjawab = 0;
+    (payload.items || []).forEach(it => {
+      totalWaktuSec += (it.waktu_detik || Math.round((it.active_ms || 0) / 1000));
+      if (it.final_answer) soalTerjawab++;
+    });
+    const avgSecPerSoal = Math.round(totalWaktuSec / Math.max(1, soalTerjawab || 1));
+
+    let baseHtml = `
+      <div class="autopsy-widget" style="margin:16px 0;padding:16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:14px;font-family:inherit">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <h3 style="font-size:15px;font-weight:800;margin:0;color:#0f172a">🔍 Guru Autopsi — dianalisis dari cara kamu mengerjakan</h3>
+            <span id="coachBadgeStatus" style="font-size:11px;background:#e2e8f0;color:#475569;padding:2px 8px;border-radius:20px;font-weight:700">Memuat analisis...</span>
+          </div>
+          <span style="font-size:11px;color:#64748b;font-weight:600">Simulasi musse</span>
+        </div>
+        <p style="font-size:12px;color:#64748b;margin:0 0 10px;line-height:1.4">Dianalisis dari caramu mengerjakan: ritme waktu, urutan klik, dan pergantian jawaban.</p>
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:8px 12px;background:#f1f5f9;border-radius:8px;font-size:12px;color:#334155;flex-wrap:wrap;">
+          <span>⏱️ Total Waktu: <strong>${Math.floor(totalWaktuSec / 60)}m ${totalWaktuSec % 60}s</strong></span>
+          <span>📊 Rata-rata/soal: <strong>${avgSecPerSoal}s</strong></span>
+          <span>🎯 Terjawab: <strong>${soalTerjawab}/${totalSoal}</strong></span>
+        </div>
+        <div id="coachContentArea">
+          <div style="padding:16px;background:#ffffff;border:1px dashed #cbd5e1;border-radius:12px;text-align:center;color:#64748b;font-size:12.5px;">
+            <i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;color:#004a2a"></i> Menelaah pola pengerjaanmu...
+          </div>
+        </div>
+      </div>
+    `;
+    cont.innerHTML = baseHtml;
+
+    // FASE 2: Panggil API Guru Autopsi (/api/autopsy/coach)
+    const reqBody = {
+      attempt_id: payload.id || payload.client_attempt_id,
+      attempt: Object.assign({}, payload, { 
+        tka_date: tkaDateCurrent,
+        score: payload.score,
+        n_correct: payload.n_correct
+      })
+    };
+
+    let coachData = null;
+    try {
+      const coachRes = await fetch('/api/autopsy/coach', {
+        method: 'POST',
+        headers: Object.assign({'Content-Type': 'application/json'}, hdr),
+        body: JSON.stringify(reqBody)
+      });
+      if (coachRes.ok) {
+        coachData = await coachRes.json();
+      } else if (coachRes.status === 401) {
+        // Mode Tamu: Tampilkan fallback aturan + ajakan login Google
+        coachData = { is_guest: true };
+      }
+    } catch (err) {
+      console.warn('Gagal memanggil /api/autopsy/coach:', err);
+    }
+
+    const contentArea = document.getElementById('coachContentArea');
+    const badgeStatus = document.getElementById('coachBadgeStatus');
+    if (!contentArea) return;
+
+    // Jika mode Tamu
+    if (isGuest || (coachData && coachData.is_guest)) {
+      if (badgeStatus) {
+        badgeStatus.innerText = 'Mode Tamu';
+        badgeStatus.style.background = '#ffedd5';
+        badgeStatus.style.color = '#9a3412';
+      }
+
+      // Ambil analisis kebocoran aturan gratis dari /api/autopsy/analyze
+      let analyzeData = null;
+      try {
+        const aRes = await fetch('/api/autopsy/analyze', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            items: payload.items,
+            n_questions: payload.n_questions,
+            duration_limit_s: payload.duration_limit_s,
+            ended_by: payload.ended_by,
+            mapel: payload.subject || payload.mapel,
+            is_guest: true
+          })
+        });
+        if (aRes.ok) {
+          analyzeData = await aRes.json();
+          if (analyzeData) {
+            updateDailyMissionFromAutopsy(analyzeData, payload.subject || payload.mapel, payload.paket || 1);
+          }
+        }
+      } catch (e) {}
+
+      let guestHtml = '';
+      if (analyzeData && analyzeData.data_tipis) {
+        guestHtml += '<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:10px;color:#92400e">ℹ️ Jumlah soal yang dikerjakan masih sedikit, jadi anggap analisis ini sebagai gambaran awal.</div>';
+      }
+
+      // Kebocoran berbasis aturan (100% terbuka tanpa blur)
+      const allLeaks = (analyzeData && (analyzeData.kebocoran_all || (analyzeData.kebocoran_1 ? [analyzeData.kebocoran_1] : []))) || [];
+      if (allLeaks.length > 0) {
+        guestHtml += '<div style="margin-bottom:12px"><h4 style="font-size:13px;font-weight:800;color:#0f172a;margin:0 0 8px;">⚠️ Kebocoran Pola Terdeteksi</h4>';
+        allLeaks.forEach((k, idx) => {
+          const contohStr = (k.contoh && k.contoh.length) ? formatContohSoal(k.contoh) : '';
+          const buktiClean = cleanAutopsiText(k.bukti || (k.soal_hilang + ' soal terpengaruh'));
+          const labelClean = cleanAutopsiText(k.label || '');
+          guestHtml += `
+            <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;padding:11px 13px;margin-bottom:8px">
+              <div style="font-size:11px;font-weight:800;color:#0284c7;text-transform:uppercase;margin-bottom:3px">Kebocoran #${idx + 1}: ${labelClean}</div>
+              <div style="font-size:12.5px;color:#334155;line-height:1.4">${buktiClean}</div>
+              ${contohStr ? `<div style="font-size:11.5px;color:#64748b;margin-top:4px">Contoh soal: <strong>${contohStr}</strong></div>` : ''}
+            </div>
+          `;
+        });
+        guestHtml += '</div>';
+      } else {
+        guestHtml += `
+          <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;padding:12px;margin-bottom:12px">
+            <div style="font-size:12.5px;font-weight:700;color:#0f172a;margin-bottom:4px">📝 Pengamatan Guru Autopsi</div>
+            <div style="font-size:12px;color:#64748b;line-height:1.4">Kamu menyelesaikan tes ini dengan ${soalTerjawab} dari ${totalSoal} soal terjawab. Kerjakan lebih banyak soal dengan ritme stabil agar kebocoran waktu dan pola menebak dapat terpetakan secara lengkap.</div>
+          </div>
+        `;
+      }
+
+      // Ajakan Login Google untuk Guru AI gratis
+      guestHtml += `
+        <div style="padding:14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;text-align:center">
+          <div style="font-size:13.5px;font-weight:800;color:#9a3412;margin-bottom:4px">Buka Guru Autopsi AI Privat (Gratis)</div>
+          <p style="font-size:12px;color:#7c2d12;margin:0 0 10px;line-height:1.4">Login Google untuk melihat analisis waktu per soal, telaah Guru AI, dan misi perbaikan 10 menit hari ini.</p>
+          <button type="button" onclick="loginWithGoogle()" style="background:#c2410c;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12.5px;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;gap:6px">
+            <i class="fa-brands fa-google"></i> Masuk dengan Google
+          </button>
+        </div>
+      `;
+      contentArea.innerHTML = guestHtml;
+      return;
+    }
+
+    // Mode User Login: Render Spesifikasi Lengkap Bagian 8
+    const coach = (coachData && coachData.coach) || null;
+    if (!coach) {
+      contentArea.innerHTML = '<div style="font-size:12px;color:#64748b;text-align:center;padding:12px">Analisis Guru AI belum dapat dimuat saat ini.</div>';
+      return;
+    }
+
+    try { 
+      localStorage.setItem('tka_last_coach', JSON.stringify(coach));
+      localStorage.setItem('tka_last_autopsy', JSON.stringify({
+        subject: payload.subject || payload.mapel,
+        paket: payload.paket || 1,
+        score: payload.score,
+        n_correct: payload.n_correct,
+        kebocoran_1: (coach.kebocoran && coach.kebocoran[0]) || null,
+        coach: coach
+      }));
+    } catch (e) {}
+    if (coach) {
+      updateDailyMissionFromAutopsy(coach, payload.subject || payload.mapel, payload.paket || 1);
+    }
+
+    // 1. Badge Sumber
+    if (badgeStatus) {
+      if (coach.sumber === 'ai') {
+        badgeStatus.innerText = '✨ Guru AI';
+        badgeStatus.style.background = '#dcfce7';
+        badgeStatus.style.color = '#15803d';
+      } else {
+        badgeStatus.innerText = '⚡ Analisis otomatis';
+        badgeStatus.style.background = '#f1f5f9';
+        badgeStatus.style.color = '#475569';
+      }
+    }
+
+    let h = '';
+
+    // Catatan data tipis jika ada
+    if (coach.catatan_data) {
+      h += `<div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:8px 10px;font-size:12px;margin-bottom:10px;color:#92400e">ℹ️ ${cleanAutopsiText(coach.catatan_data)}</div>`;
+    }
+
+    // Sapaan & Penilaian
+    h += `
+      <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px;margin-bottom:12px">
+        <div style="font-size:13px;font-weight:700;color:#0f172a;margin-bottom:4px">${cleanAutopsiText(coach.sapaan || 'Halo,')}</div>
+        <div style="font-size:12.5px;color:#334155;line-height:1.45">${cleanAutopsiText(coach.penilaian || '')}</div>
+        ${coach.sudah_bagus ? `
+          <div style="margin-top:8px;padding-top:8px;border-top:1px dashed #e2e8f0;font-size:12px;color:#166534;display:flex;align-items:flex-start;gap:6px">
+            <span>⭐</span> <span><strong>Sudah bagus:</strong> ${cleanAutopsiText(coach.sudah_bagus)}</span>
+          </div>
+        ` : ''}
+      </div>
+    `;
+
+    // 2. "Yang Saya Lihat" (Pengamatan)
+    if (Array.isArray(coach.pengamatan) && coach.pengamatan.length > 0) {
+      h += `
+        <div style="margin-bottom:14px">
+          <h4 style="font-size:13px;font-weight:800;color:#0f172a;margin:0 0 8px;display:flex;align-items:center;gap:6px">
+            <span>👀</span> Yang Saya Lihat
+          </h4>
+          <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;padding:10px 14px">
+            <ul style="margin:0;padding-left:18px;font-size:12.5px;color:#334155;line-height:1.5">
+              ${coach.pengamatan.map(p => `<li style="margin-bottom:4px">${cleanAutopsiText(p)}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      `;
+    }
+
+    // 3. "Yang Perlu Diperbaiki" (Kartu Kebocoran - 100% Unlocked)
+    if (Array.isArray(coach.kebocoran) && coach.kebocoran.length > 0) {
+      h += `
+        <div style="margin-bottom:14px">
+          <h4 style="font-size:13px;font-weight:800;color:#0f172a;margin:0 0 8px;display:flex;align-items:center;gap:6px">
+            <span>⚠️</span> Yang Perlu Diperbaiki
+          </h4>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            ${coach.kebocoran.map((k, idx) => {
+              const contohStr = (k.contoh && k.contoh.length) ? formatContohSoal(k.contoh) : '';
+              const buktiClean = cleanAutopsiText(k.bukti || '-');
+              const judulClean = cleanAutopsiText(k.judul || k.label || '');
+              const tafsirClean = cleanAutopsiText(k.tafsir || '-');
+              const tindakanClean = cleanAutopsiText(k.tindakan || '-');
+              return `
+              <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;padding:12px 14px">
+                <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px">
+                  <span style="font-size:13.5px;font-weight:800;color:#0f172a">${judulClean}</span>
+                  <span style="font-size:10px;background:#fef2f2;color:#991b1b;border:1px solid #fee2e2;padding:2px 6px;border-radius:6px;font-weight:700;text-transform:uppercase">Kebocoran #${idx + 1}</span>
+                </div>
+                <div style="font-size:12px;color:#64748b;margin-bottom:6px"><strong>Bukti:</strong> ${buktiClean}</div>
+                ${contohStr ? `<div style="font-size:11.5px;color:#64748b;margin-bottom:6px">Contoh soal: <strong>${contohStr}</strong></div>` : ''}
+                <div style="font-size:12.5px;color:#334155;margin-bottom:6px;line-height:1.4"><strong>Tafsir:</strong> ${tafsirClean}</div>
+                <div style="font-size:12px;color:#004a2a;background:#f0fdf4;padding:6px 10px;border-radius:6px;margin-bottom:8px"><strong>Tindakan:</strong> ${tindakanClean}</div>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <button type="button" onclick="bukaKartuStrategi('${k.label}')" style="background:#f1f5f9;color:#334155;border:1px solid #cbd5e1;border-radius:6px;padding:5px 10px;font-size:11.5px;font-weight:700;cursor:pointer">
+                    📚 Pelajari Strategi
+                  </button>
+                  <button type="button" onclick="mulaiMisiHariIni()" style="background:#004a2a;color:#ffffff;border:none;border-radius:6px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer">
+                    🎯 Latihan Sekarang
+                  </button>
+                </div>
+              </div>
+            `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // 4. "Soal yang Salah, Satu per Satu" (Akordeon Per Soal)
+    if (Array.isArray(coach.per_soal) && coach.per_soal.length > 0) {
+      const penyebabBadge = {
+        'overthinking': { label: 'Overthinking', bg: '#f3e8ff', color: '#6b21a8' },
+        'terburu': { label: 'Terburu-buru', bg: '#fef3c7', color: '#92400e' },
+        'konsep': { label: 'Konsep Belum Kuat', bg: '#fee2e2', color: '#991b1b' },
+        'rapuh': { label: 'Ragu Tapi Benar', bg: '#e0f2fe', color: '#0369a1' },
+        'macet': { label: 'Macet Waktu', bg: '#ffedd5', color: '#9a3412' },
+        'kosong': { label: 'Belum Terjawab', bg: '#f1f5f9', color: '#475569' }
+      };
+
+      h += `
+        <div style="margin-bottom:14px">
+          <h4 style="font-size:13px;font-weight:800;color:#0f172a;margin:0 0 8px;display:flex;align-items:center;gap:6px">
+            <span>📝</span> Soal yang Perlu Dibenahi (${coach.per_soal.length} Soal)
+          </h4>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            ${coach.per_soal.map((ps, idx) => {
+              const b = penyebabBadge[ps.penyebab] || { label: ps.penyebab, bg: '#f1f5f9', color: '#334155' };
+              const accId = `acc_soal_${ps.no}`;
+              const isDefaultOpen = (idx === 0);
+              const dipelajariClean = cleanAutopsiText(ps.dipelajari || '');
+              const langkahClean = (Array.isArray(ps.langkah) ? ps.langkah : []).map(l => cleanAutopsiText(l));
+              const cekPahamClean = cleanAutopsiText(ps.cek_paham || '');
+              return `
+                <div style="background:#ffffff;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden">
+                  <div onclick="toggleAutopsiAccordion('${accId}')" style="padding:10px 14px;background:#ffffff;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none">
+                    <div style="display:flex;align-items:center;gap:8px">
+                      <span style="font-size:13px;font-weight:800;color:#0f172a">Soal #${ps.no}</span>
+                      <span style="font-size:10.5px;background:${b.bg};color:${b.color};padding:2px 7px;border-radius:6px;font-weight:700">${b.label}</span>
+                    </div>
+                    <span style="font-size:12px;color:#94a3b8">▼</span>
+                  </div>
+                  <div id="${accId}" style="display:${isDefaultOpen ? 'block' : 'none'};padding:12px 14px;border-top:1px solid #f1f5f9;background:#fafafa">
+                    <div style="font-size:12px;color:#0f172a;margin-bottom:6px"><strong>Yang dipelajari:</strong> ${dipelajariClean}</div>
+                    ${langkahClean.length > 0 ? `
+                      <div style="font-size:12px;color:#334155;margin-bottom:6px">
+                        <strong>Langkah perbaikan:</strong>
+                        <ol style="margin:4px 0 0;padding-left:18px">
+                          ${langkahClean.map(l => `<li style="margin-bottom:2px">${l}</li>`).join('')}
+                        </ol>
+                      </div>
+                    ` : ''}
+                    ${cekPahamClean ? `
+                      <div style="font-size:11.5px;color:#0369a1;background:#f0f9ff;border:1px solid #e0f2fe;padding:6px 10px;border-radius:6px;margin-bottom:8px">
+                        <strong>Cek pemahaman:</strong> ${cekPahamClean}
+                      </div>
+                    ` : ''}
+                    <div style="display:flex;gap:8px;flex-wrap:wrap">
+                      <button type="button" onclick="reviewJumpTo(${ps.no - 1})" style="background:#004a2a;color:#ffffff;border:none;border-radius:6px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer">
+                        📖 Buka Pembahasan
+                      </button>
+                      <button type="button" onclick="tanyaAiSoalIni(${ps.no})" style="background:#f8fafc;color:#0f172a;border:1px solid #cbd5e1;border-radius:6px;padding:5px 12px;font-size:11.5px;font-weight:700;cursor:pointer">
+                        💬 Tanya AI Soal Ini
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // 5. Misi Hari Ini (Tombol Utama Satu-satunya yang Menonjol)
+    if (coach.misi) {
+      h += `
+        <div style="margin:16px 0;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:14px;padding:14px">
+          <div style="font-size:13.5px;font-weight:800;color:#14532d;margin-bottom:4px">🎯 Misi 10 Menit Hari Ini</div>
+          <div style="font-size:12.5px;color:#166534;margin-bottom:12px;line-height:1.4">${cleanAutopsiText(coach.misi.pembuka || 'Fokus perbaiki kebocoran utamamu sekarang.')}</div>
+          <button type="button" class="btn-misi-utama" onclick="mulaiMisiHariIni()" style="width:100%;background:#004a2a;color:#ffffff;padding:12px 18px;border:none;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;box-shadow:0 4px 10px rgba(0,74,42,0.2);display:flex;align-items:center;justify-content:center;gap:8px">
+            🚀 Mulai Misi (±10 menit)
+          </button>
+        </div>
+      `;
+    }
+
+    // 6. Rencana Sampai TKA (Terlipat / Akordeon)
+    h += `
+      <div style="margin-bottom:14px;background:#ffffff;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden">
+        <div onclick="toggleAutopsiAccordion('acc_rencana_tka')" style="padding:11px 14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;background:#f8fafc">
+          <div style="font-size:13px;font-weight:800;color:#0f172a;display:flex;align-items:center;gap:6px">
+            <span>📅</span> Rencana Sampai TKA
+          </div>
+          <span style="font-size:12px;color:#94a3b8">▼</span>
+        </div>
+        <div id="acc_rencana_tka" style="display:none;padding:12px 14px;border-top:1px solid #e2e8f0">
+          <div style="margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+            <label style="font-size:12px;font-weight:700;color:#334155">Kapan TKA-mu?</label>
+            <input type="date" value="${tkaDateCurrent}" onchange="onTkaDateChangeInReview(this.value)" style="font-size:12px;padding:4px 8px;border:1px solid #cbd5e1;border-radius:6px;color:#0f172a" />
+          </div>
+          <div id="reviewTkaCountdownText" style="font-size:12px;color:#004a2a;background:#f0fdf4;padding:6px 10px;border-radius:6px;margin-bottom:8px;font-weight:600">
+            ${diffHari > 0 ? `Tersisa ${diffHari} hari lagi menuju ujian TKA.` : 'Hari ujian TKA telah tiba!'}
+          </div>
+          ${Array.isArray(coach.rencana) && coach.rencana.length > 0 ? `
+            <div style="display:flex;flex-direction:column;gap:6px">
+              ${coach.rencana.map(r => `
+                <div style="font-size:12px;color:#334155;padding:6px 8px;background:#fafafa;border-radius:6px">
+                  <strong>Hari ke-${r.hari_ke}:</strong> ${cleanAutopsiText(r.pembuka || '')}
+                </div>
+              `).join('')}
+            </div>
+          ` : `
+            <div style="font-size:11.5px;color:#64748b">Jadwal latihan harianmu akan disusun bertahap sesuai misi yang selesai.</div>
+          `}
+        </div>
+      </div>
+    `;
+
+    // Penutup & Catatan Kecil
+    if (coach.penutup) {
+      h += `<div style="font-size:12px;font-style:italic;color:#475569;text-align:center;margin:10px 0">${cleanAutopsiText(coach.penutup)}</div>`;
+    }
+
+    // Tombol Masuk Ruang Mapel (D2/D3)
+    const mapelKey = state.currentSubject || payload.subject || payload.mapel || 'matematika';
+    const mapelTitle = (SUBJECT_CATALOG[mapelKey] && SUBJECT_CATALOG[mapelKey].title) || mapelKey.toUpperCase();
+    h += `
+      <div style="margin:12px 0">
+        <a href="/ruang/${mapelKey}" style="display:flex;align-items:center;justify-content:center;gap:8px;background:#ffffff;border:1.5px solid #1b633e;color:#1b633e;padding:11px 16px;border-radius:12px;text-decoration:none;font-weight:700;font-size:13px;box-shadow:0 2px 6px rgba(27,99,62,0.08);transition:all 0.2s">
+          <i class="fa-solid fa-graduation-cap"></i> Masuk Ruang ${mapelTitle} (Konsultasi Penuh)
+        </a>
+      </div>
+    `;
+
+    h += `
+      <div style="font-size:11px;color:#94a3b8;margin-top:12px;text-align:center;line-height:1.4">
+        Dibuat AI dari data pengerjaanmu; bisa keliru. Cek Pilar dan kunci resmi.
+      </div>
+    `;
+
+    contentArea.innerHTML = h;
+
+  } catch (e) {
+    console.warn('Error renderAutopsiSection:', e);
+    if (cont) cont.innerHTML = '';
+  }
+}
+
+// Helper: Toggle akordeon autopsi
+function toggleAutopsiAccordion(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.style.display = (el.style.display === 'none' || el.style.display === '') ? 'block' : 'none';
+  }
+}
+
+// Helper: Update tanggal TKA dari reviu hasil kuis
+function onTkaDateChangeInReview(val) {
+  if (typeof setTkaDate === 'function') setTkaDate(val);
+  const el = document.getElementById('reviewTkaCountdownText');
+  if (el) {
+    try {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const parts = val.split('-');
+      const target = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+      const diff = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+      el.innerText = diff > 0 ? `Tersisa ${diff} hari lagi menuju ujian TKA.` : 'Hari ujian TKA telah tiba!';
+    } catch (e) {}
+  }
+}
+
+// Helper: Tanya AI soal nomor tertentu dari Guru Autopsi
+function tanyaAiSoalIni(no) {
+  if (typeof closeReviewHasil === 'function') closeReviewHasil();
+  const pkg = state.pkgData[pkgKey()];
+  if (!pkg || !pkg.soal) return;
+  const idx = pkg.soal.findIndex(s => s.nomor === no);
+  state.currentIndex = (idx !== -1) ? idx : (no - 1);
+  state.explanationVisible = true;
+  state.keepWorkTab = true;
+  if (typeof renderQuestion === 'function') renderQuestion();
+  const tutorCol = document.getElementById('cbtSidebarCol');
+  if (tutorCol) tutorCol.classList.add('tutor-open');
+  if (typeof openTutorSheet === 'function') openTutorSheet();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Helper: Mulai misi 10 menit hari ini
+function mulaiMisiHariIni() {
+  if (typeof closeReviewHasil === 'function') closeReviewHasil();
+  try {
+    const lastCoach = JSON.parse(localStorage.getItem('tka_last_coach') || '{}');
+    const fokusNo = (lastCoach.per_soal && lastCoach.per_soal[0] && lastCoach.per_soal[0].no) || 1;
+    if (typeof reviewJumpTo === 'function') reviewJumpTo(fokusNo - 1);
+  } catch (e) {
+    if (typeof reviewJumpTo === 'function') reviewJumpTo(0);
+  }
+}
+
+// Buka Modal Kartu Strategi Belajar
+function bukaKartuStrategi(label, contohSoalRef) {
+  const modal = document.getElementById('modalKartuStrategi');
+  const titleEl = document.getElementById('kartuStrategiTitle');
+  const badgeEl = document.getElementById('kartuStrategiBadge');
+  const iconEl = document.getElementById('kartuStrategiIcon');
+  const iconWrap = document.getElementById('kartuStrategiIconWrap');
+  const contentEl = document.getElementById('kartuStrategiContent');
+  const btnLatih = document.getElementById('btnAksiLatihSoal');
+  if (!modal || !contentEl) return;
+
+  const STRATEGI = {
+    'terburu': {
+      title: 'Strategi Anti-Ceroboh & Cek Ulang',
+      badge: 'PANDUAN ANTI-CEROBOH',
+      icon: 'fa-bolt',
+      theme: '#b45309',
+      bg: '#fef3c7',
+      points: [
+        '<strong>1. Tunjuk yang ditanyakan:</strong> Sebelum klik jawaban, baca sekali lagi kalimat terakhir: apakah mencari <em>nilai x</em>, <em>pernyataan yang salah</em>, atau <em>simpulan utama</em>?',
+        '<strong>2. Cek tanda (+/−) dan satuan:</strong> Pada langkah akhir pengerjaan, luangkan 5 detik untuk memeriksa kembali simbol minus/positif.',
+        '<strong>3. Jangan ganti jawaban karena ragu sesaat:</strong> Jawaban pertama yang sudah dihitung matang biasanya 80% lebih akurat daripada hasil tebakan mendadak.',
+        '<strong>4. Beri tanda Ragu-ragu:</strong> Jika masih bimbang, tandai Ragu-ragu lalu lanjutkan dulu ke soal lain yang lebih mudah.',
+        '<strong>5. Evaluasi sisa waktu:</strong> Gunakan 5 menit terakhir khusus meninjau nomor bertanda ragu-ragu.'
+      ]
+    },
+    'overthinking': {
+      title: 'Strategi Keyakinan & Konsistensi Logika',
+      badge: 'KONTROL OVERTHINKING',
+      icon: 'fa-brain',
+      theme: '#7c3aed',
+      bg: '#ede9fe',
+      points: [
+        '<strong>1. Percayai analisis pertamamu:</strong> Data rekaman menunjukkan pilihan awalmu sebenarnya sudah benar sebelum kamu ganti.',
+        '<strong>2. Aturan pergantian jawaban:</strong> Hanya ganti pilihan jika kamu menemukan bukti konkret salah membaca teks atau salah rumus matematika.',
+        '<strong>3. Abaikan distractor rumit:</strong> Opsi pengecoh sering sengaja memakai kata-kata ilmiah panjang untuk menggoyahkan keyakinanmu.',
+        '<strong>4. Selesaikan sekali tuntas:</strong> Jika logika langkahmu sudah terbukti di kertas buram, kunci dan pindah ke nomor berikutnya.'
+      ]
+    },
+    'macet': {
+      title: 'Strategi Manajemen Waktu (Anti-Macet)',
+      badge: 'MANAJEMEN WAKTU',
+      icon: 'fa-stopwatch',
+      theme: '#b91c1c',
+      bg: '#fee2e2',
+      points: [
+        '<strong>1. Aturan maksimal 2 menit:</strong> Jika dalam 2 menit kamu belum menemukan arah rumus/ide pokok, segera beri tanda Ragu-ragu dan tinggalkan.',
+        '<strong>2. Semua soal punya bobot sama:</strong> Menghabiskan 8 menit untuk 1 soal sulit akan mengorbankan 3 soal mudah di nomor akhir.',
+        '<strong>3. Checkpoint waktu ujian:</strong> Pastikan pada menit ke-30 kamu sudah menyelesaikan minimal sepertiga total soal.',
+        '<strong>4. Kerjakan soal yang kamu kuasai lebih dulu:</strong> Mengamankan poin mudah membangun rasa percaya diri di ruang ujian.'
+      ]
+    },
+    'waktu_habis': {
+      title: 'Strategi Pencegahan Waktu Habis',
+      badge: 'SPEED & TIMING',
+      icon: 'fa-hourglass-end',
+      theme: '#c2410c',
+      bg: '#ffedd5',
+      points: [
+        '<strong>1. Ketahui jatah per soal:</strong> Rata-rata kamu punya waktu 2.5 hingga 3 menit per nomor.',
+        '<strong>2. Pantau sisa waktu:</strong> Tengok indikator timer setiap selesai 5 nomor soal.',
+        '<strong>3. Menit terakhir:</strong> Di sisa waktu 3 menit, pastikan tidak ada nomor yang tertinggal kosong tanpa jawaban.'
+      ]
+    },
+    'yakin_salah': {
+      title: 'Strategi Fondasi Teori & Konsep Kunci',
+      badge: 'PENGUATAN TEORI',
+      icon: 'fa-compass',
+      theme: '#047857',
+      bg: '#d1fae5',
+      points: [
+        '<strong>1. Buka kembali Pilar 1 & Pilar 3:</strong> Pelajari definisi dasar dan mengapa konsep rumus tersebut diterapkan pada soal ini.',
+        '<strong>2. Waspadai jebakan opsi:</strong> Jawaban yang terasa familiar sering kali merupakan hasil jebakan salah tafsir.',
+        '<strong>3. Latih Soal Serupa:</strong> Selesaikan 2-3 latihan soal pemantapan dengan tipe yang sama.'
+      ]
+    }
+  };
+
+  const st = STRATEGI[label] || STRATEGI['terburu'];
+  titleEl.innerText = st.title;
+  badgeEl.innerText = st.badge;
+  badgeEl.style.color = st.theme;
+  iconEl.className = 'fa-solid ' + st.icon;
+  iconWrap.style.background = st.bg;
+  iconWrap.style.color = st.theme;
+
+  contentEl.innerHTML = '<ul style="margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;">'
+    + st.points.map(p => `<li style="padding-left:14px;position:relative;line-height:1.5;">${p}</li>`).join('')
+    + '</ul>';
+
+  if (contohSoalRef && btnLatih) {
+    btnLatih.style.display = 'inline-flex';
+    btnLatih.onclick = () => pelajariSoalBocor(contohSoalRef);
+  } else if (btnLatih) {
+    btnLatih.style.display = 'none';
+  }
+
+  modal.classList.add('open');
+  if (window.TKAHistory) TKAHistory.push('modal-kartu-strategi');
+}
+
+function tutupKartuStrategi() {
+  const modal = document.getElementById('modalKartuStrategi');
+  if (modal) modal.classList.remove('open');
+}
+
+// Buka pembahasan dari soal yang teridentifikasi bocor
+function pelajariSoalBocor(contohSoalRef) {
+  tutupKartuStrategi();
+  closeReviewHasil();
+  const pkg = state.pkgData[pkgKey()];
+  if (!pkg || !pkg.soal) return;
+
+  let targetIdx = 0;
+  // Ekstrak nomor dari format id atau string
+  const m = String(contohSoalRef).match(/\d+$/);
+  const targetNo = m ? parseInt(m[0], 10) : null;
+
+  if (targetNo) {
+    const idx = pkg.soal.findIndex(s => s.nomor === targetNo);
+    if (idx !== -1) targetIdx = idx;
+  }
+
+  state.currentIndex = targetIdx;
+  state.explanationVisible = true;
+  state.keepWorkTab = true;
+  renderQuestion();
+  switchWorkTab('pembahasan', 'materi', { scroll: true });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // Klik baris reviu -> lompat ke soal terkait (pembahasan terbuka)
@@ -4725,6 +6478,8 @@ function reviewJumpTo(idx) {
 
 function closeReviewHasil() {
   document.getElementById('reviewHasilOverlay').classList.remove('open');
+  if (typeof homeClose === 'function') homeClose();
+  if (typeof renderQuestion === 'function') renderQuestion();
 }
 
 // Kembali ke beranda dari modal konfirmasi selesai tes
@@ -4752,12 +6507,37 @@ function reviewKeBeranda() {
 function resetSimulasi() {
   const key = pkgKey();
   if (state.testFinished) state.testFinished[key] = false;
+  // FASE 3 (T3.2): reset perekam saat ulangi
+  try { AttemptRecorder.reset(); } catch (e) {}
+  // FASE 3 (T3.5): bersihkan data tersimpan paket ini di localStorage
+  try {
+    localStorage.removeItem(examStorageKey('answers', key));
+    localStorage.removeItem(examStorageKey('ragu', key));
+    localStorage.removeItem(examStorageKey('finished', key));
+    localStorage.removeItem(examStorageKey('checked', key));
+    localStorage.removeItem('tka_answers_' + key);
+    localStorage.removeItem('tka_ragu_' + key);
+    localStorage.removeItem('tka_finished_' + key);
+    localStorage.removeItem('tka_timer_remaining_' + key);
+    localStorage.removeItem('tka_checked_' + key);
+    if (window._answerChecked) {
+      Object.keys(window._answerChecked).forEach(k => {
+        if (k.startsWith(key + ':')) delete window._answerChecked[k];
+      });
+    }
+  } catch (e) {}
   state.userAnswers[key] = {};
   state.raguStatus[key] = {};
   state.simAnswers[key] = {};
   state.currentIndex = 0;
   state.explanationVisible = false;
   closeReviewHasil();
+  // FASE 3: ulangi = rekaman attempt baru
+  try {
+    const _pkg = state.pkgData[pkgKey()];
+    const _n = (_pkg && _pkg.soal) ? _pkg.soal.length : 0;
+    AttemptRecorder.start(state.currentSubject, state.currentPkg, _n, getTimerTotalSeconds());
+  } catch (e) {}
   renderQuestion();
   renderGridModal();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -4771,6 +6551,10 @@ function toggleRagu() {
   const current = !!state.raguStatus[pkgKey()][q.nomor];
   state.raguStatus[pkgKey()][q.nomor] = !current;
   document.getElementById('chkRagu').checked = !current;
+  // FASE 3 (T3.2): rekam flag ragu-ragu
+  try { AttemptRecorder.onRagu(q.nomor, !current); } catch (e) {}
+  // FASE 3 (T3.5): simpan status ragu ke localStorage agar tahan refresh
+  try { localStorage.setItem(examStorageKey('ragu', pkgKey()), JSON.stringify(state.raguStatus[pkgKey()])); } catch (e) {}
   renderGridModal();
 }
 
@@ -4853,24 +6637,31 @@ window.addEventListener('beforeunload', (e) => {
 function renderMath(targetEl) {
   if (typeof window.renderMathInElement !== 'function') return;
   try {
-    const container = targetEl || document.getElementById('cbtExamGrid') || document.querySelector('.cbt-workspace') || document.querySelector('.main-container');
-    if (!container) return;
+    const targets = targetEl
+      ? [targetEl]
+      : [
+          document.getElementById('cbtExamGrid'),
+          document.getElementById('workPanePembahasan'),
+          document.getElementById('practiceCard')
+        ].filter(Boolean);
 
-    // Fast bail-out: Jika tidak ada token matematika sama sekali, lewati parsing KaTeX untuk hemat CPU
-    const text = container.textContent || '';
-    if (!text.includes('$') && !text.includes('\\(') && !text.includes('\\[') && !container.innerHTML.includes('data-latex')) {
-      return;
-    }
+    targets.forEach(container => {
+      // Fast bail-out: Jika tidak ada token matematika sama sekali, lewati parsing KaTeX untuk hemat CPU
+      const text = container.textContent || '';
+      if (!text.includes('$') && !text.includes('\\(') && !text.includes('\\[') && !container.innerHTML.includes('data-latex')) {
+        return;
+      }
 
-    renderMathInElement(container, {
-      delimiters: [
-        { left: '$$', right: '$$', display: true },
-        { left: '$', right: '$', display: false },
-        { left: '\\(', right: '\\)', display: false },
-        { left: '\\[', right: '\\]', display: true }
-      ],
-      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option', 'iframe', 'svg'],
-      throwOnError: false
+      renderMathInElement(container, {
+        delimiters: [
+          { left: '$$', right: '$$', display: true },
+          { left: '$', right: '$', display: false },
+          { left: '\\(', right: '\\)', display: false },
+          { left: '\\[', right: '\\]', display: true }
+        ],
+        ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code', 'option', 'iframe', 'svg'],
+        throwOnError: false
+      });
     });
   } catch (e) {
     console.warn('KaTeX rendering notice:', e);
@@ -4925,6 +6716,79 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
+// ==========================================================================
+// B4: UNIVERSAL IMAGE FALLBACK & RETRY
+// ==========================================================================
+function attachImageFallback(img, label) {
+  if (!img || img.dataset.fallbackBound === 'true') return;
+  img.dataset.fallbackBound = 'true';
+
+  img.addEventListener('error', function onImgError() {
+    if (img.dataset.hasFallback === 'true') return;
+    img.dataset.hasFallback = 'true';
+    img.style.display = 'none';
+
+    const fallbackDiv = document.createElement('div');
+    fallbackDiv.className = 'img-fallback-box';
+    fallbackDiv.setAttribute('role', 'alert');
+
+    const latex = img.getAttribute('data-latex') || '';
+    let latexPreview = '';
+    if (latex) {
+      const cleanLatex = latex.replace(/^"|"$/g, '');
+      latexPreview = `<div class="img-fallback-latex">$${cleanLatex}$</div>`;
+    }
+
+    const imgLabel = label || img.getAttribute('alt') || 'Gambar';
+    fallbackDiv.innerHTML = `
+      <div class="img-fallback-content">
+        <div class="img-fallback-msg">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>${imgLabel} gagal dimuat</span>
+        </div>
+        ${latexPreview}
+        <button type="button" class="img-fallback-retry" title="Coba muat ulang gambar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          Coba Lagi
+        </button>
+      </div>
+    `;
+
+    const retryBtn = fallbackDiv.querySelector('.img-fallback-retry');
+    if (retryBtn) {
+      retryBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const origSrc = img.dataset.origSrc || img.src.split('?')[0];
+        img.dataset.origSrc = origSrc;
+        fallbackDiv.remove();
+        img.dataset.hasFallback = 'false';
+        img.style.display = '';
+        img.src = `${origSrc}?retry=${Date.now()}`;
+      });
+    }
+
+    img.insertAdjacentElement('afterend', fallbackDiv);
+    if (latex && typeof renderMath === 'function') {
+      renderMath(fallbackDiv);
+    }
+  });
+}
+
+// Global capturing listener as an extra safety net for dynamic images
+window.addEventListener('error', (e) => {
+  if (e.target && e.target.tagName === 'IMG' && !e.target.dataset.fallbackBound) {
+    attachImageFallback(e.target, e.target.getAttribute('alt') || 'Gambar');
+  }
+}, true);
 
 // ===== Fase 2: Mobile UX =====
 // Top bar (menu mapel/paket + overflow), sticky bottom bar, tutor bottom sheet.
@@ -5272,9 +7136,40 @@ function initMobileChrome() {
   });
 
   document.addEventListener('keydown', (e) => {
+    // Abaikan jika fokus di input / textarea / contenteditable
+    const tag = (e.target && e.target.tagName) ? e.target.tagName.toUpperCase() : '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target && e.target.isContentEditable)) return;
+    if (e.ctrlKey || e.altKey || e.metaKey) return;
+
     if (e.key === 'Escape') {
       closeTutorSheet();
       closeMobilePanels();
+      return;
+    }
+
+    // B3 Keyboard navigation: hanya aktif saat lembar kuis terbuka (beranda tertutup, tidak ada modal)
+    const homeEl = document.getElementById('homeOverlay');
+    const isHomeOpen = homeEl && !homeEl.classList.contains('home-closed') && homeEl.style.display !== 'none';
+    const isModalOpen = document.querySelector('.modal-overlay.open, .review-overlay.open');
+    if (isHomeOpen || isModalOpen) return;
+
+    const keyUpper = e.key.toUpperCase();
+    if (['A', 'B', 'C', 'D', 'E'].includes(keyUpper)) {
+      const q = (typeof getCurrentQuestion === 'function') ? getCurrentQuestion() : null;
+      if (q) {
+        const isComplex = (q.tipe_soal === 'Pilihan Ganda Kompleks' || q.tipe === 'Pilihan Ganda Kompleks' || (Array.isArray(q.kunci_jawaban) && !statementType(q)));
+        const optEl = document.querySelector(`.option-item[data-key="${keyUpper}"]`);
+        if (optEl) {
+          e.preventDefault();
+          selectOption(keyUpper, isComplex);
+        }
+      }
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      if (typeof navigateQuestion === 'function') navigateQuestion(1);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      if (typeof navigateQuestion === 'function') navigateQuestion(-1);
     }
   });
 
@@ -5490,13 +7385,398 @@ document.addEventListener('DOMContentLoaded', initFeedback);
 })();
 
 // ===== Timer simulasi: hitung mundur nyata + persist per paket (audit Kimi P1) =====
-const TIMER_TOTAL_SECONDS = 105 * 60; // 01:45:00
-let _simTimerInterval = null;
-
-function _timerStorageKey() {
-  return 'tka_timer_remaining_' + pkgKey();
+// T2.7: timer mengikuti format resmi TKA 2026 (brief §3.1): jatah per soal
+// matematika 3,0 mnt · B.Indonesia/B.Inggris 2,5 mnt · mapel pilihan 2,4 mnt.
+// Timer per paket = jumlah soal x jatah (MTK P2: 25x3 = 75 mnt = pas resmi).
+const TIMER_TOTAL_SECONDS = 105 * 60; // fallback bila data paket belum dimuat
+const _JATAH_MENIT_PER_SOAL = { matematika: 3.0, bahasa_indonesia: 2.5, bahasa_inggris: 2.5 };
+function _jatahMenit(subject) { return _JATAH_MENIT_PER_SOAL[subject] || 2.4; }
+function getTimerTotalSeconds() {
+  try {
+    const pkg = state.pkgData[pkgKey()];
+    const n = (pkg && pkg.soal) ? pkg.soal.length : 0;
+    if (n > 0) return Math.round(n * _jatahMenit(state.currentSubject) * 60);
+  } catch (e) {}
+  return TIMER_TOTAL_SECONDS;
 }
 
+// ============================================================================
+// FASE 3 (T3.2/T3.3): Perekam attempt untuk Autopsi
+// Per soal: waktu aktif, jawaban pertama vs akhir, jumlah ganti, flag ragu,
+// ============================================================================
+// FASE D (D1): DetailTracker — Real-time event tracking
+// Catat: option_click, soal_view, scroll_depth, pembahasan_open
+// Disimpan di attempt.jejak_detail (array tidak dibatasi 5)
+// ============================================================================
+const DetailTracker = {
+  eventsBySoal: {},
+  allEvents: [],
+  _soalStartMs: {},
+  _currentPembEvent: null,
+  _scrollMilestones: {},
+
+  reset() {
+    this.closePembahasan();
+    this.eventsBySoal = {};
+    this.allEvents = [];
+    this._soalStartMs = {};
+    this._currentPembEvent = null;
+    this._scrollMilestones = {};
+  },
+
+  _pushEvent(soal_no, ev) {
+    const sNo = Number(soal_no);
+    if (!this.eventsBySoal[sNo]) this.eventsBySoal[sNo] = [];
+    this.eventsBySoal[sNo].push(ev);
+    this.allEvents.push(ev);
+  },
+
+  onSoalView(soal_no) {
+    if (!soal_no) return;
+    this.closePembahasan();
+    const now = Date.now();
+    this._soalStartMs[Number(soal_no)] = now;
+    const ev = {
+      tipe: 'soal_view',
+      soal_no: Number(soal_no),
+      timestamp_ms: now
+    };
+    this._pushEvent(soal_no, ev);
+  },
+
+  onOptionClick(soal_no, opsi) {
+    if (!soal_no) return;
+    const now = Date.now();
+    const start = this._soalStartMs[Number(soal_no)] || now;
+    const waktu_sejak_soal_mulai_ms = Math.max(0, now - start);
+    const ev = {
+      tipe: 'option_click',
+      soal_no: Number(soal_no),
+      opsi: String(opsi || ''),
+      timestamp_ms: now,
+      waktu_sejak_soal_mulai_ms: waktu_sejak_soal_mulai_ms
+    };
+    this._pushEvent(soal_no, ev);
+  },
+
+  onScrollDepth(soal_no, depth_pct) {
+    if (!soal_no) return;
+    const sNo = Number(soal_no);
+    const pct = Math.min(100, Math.max(0, Math.round(depth_pct)));
+    if (!this._scrollMilestones[sNo]) this._scrollMilestones[sNo] = new Set();
+    const milestone = Math.floor(pct / 25) * 25;
+    if (milestone > 0 && !this._scrollMilestones[sNo].has(milestone)) {
+      this._scrollMilestones[sNo].add(milestone);
+      const ev = {
+        tipe: 'scroll_depth',
+        soal_no: sNo,
+        scroll_depth: milestone,
+        depth_pct: milestone,
+        timestamp_ms: Date.now()
+      };
+      this._pushEvent(sNo, ev);
+    }
+  },
+
+  onPembahasanOpen(soal_no) {
+    if (!soal_no) return;
+    this.closePembahasan();
+    const now = Date.now();
+    const ev = {
+      tipe: 'pembahasan_open',
+      soal_no: Number(soal_no),
+      timestamp_ms: now,
+      durasi_baca_ms: 0
+    };
+    this._currentPembEvent = ev;
+    this._pushEvent(soal_no, ev);
+  },
+
+  closePembahasan() {
+    if (this._currentPembEvent) {
+      const dur = Math.max(0, Date.now() - this._currentPembEvent.timestamp_ms);
+      this._currentPembEvent.durasi_baca_ms = dur;
+      this._currentPembEvent = null;
+    }
+  },
+
+  getEvents(soal_no) {
+    this.closePembahasan();
+    const sNo = Number(soal_no);
+    return (this.eventsBySoal[sNo] || []).slice();
+  },
+
+  getAllEvents() {
+    this.closePembahasan();
+    return this.allEvents.slice();
+  }
+};
+
+if (typeof window !== 'undefined') {
+  window.DetailTracker = DetailTracker;
+  let _lastScrollCheck = 0;
+  let _scrollRafPending = false;
+  window.addEventListener('scroll', () => {
+    const now = Date.now();
+    if (now - _lastScrollCheck < 250) return;
+    _lastScrollCheck = now;
+    if (_scrollRafPending) return;
+    _scrollRafPending = true;
+    requestAnimationFrame(() => {
+      _scrollRafPending = false;
+      if (typeof getCurrentQuestion !== 'function') return;
+      const q = getCurrentQuestion();
+      if (!q || !q.nomor) return;
+      const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      const pct = (window.scrollY / maxScroll) * 100;
+      try { DetailTracker.onScrollDepth(q.nomor, pct); } catch (e) {}
+    });
+  }, { passive: true });
+}
+
+// ============================================================================
+// FASE 3 (T3.2/T3.3): Perekam attempt untuk Autopsi
+// Per soal: waktu aktif, jawaban pertama vs akhir, jumlah ganti, flag ragu,
+// kunjungan ulang. Buffer di localStorage; upload sekali saat "Selesai Tes"
+// (atau saat online kembali). Tanpa login -> tidak direkam (T3.4).
+// ============================================================================
+const AttemptRecorder = {
+  active: null, _lastQ: null, _lastT: 0,
+  reset() {
+    this.active = null; this._lastQ = null; this._lastT = 0;
+    try { DetailTracker.reset(); } catch (e) {}
+  },
+  start(subject, paket, n, duration_s) {
+    this.active = { subject, paket, n, duration_s, started_at: Date.now(), items: {} };
+    this._lastQ = null; this._lastT = Date.now();
+    try { DetailTracker.reset(); } catch (e) {}
+  },
+  _ensure(nomor) {
+    const a = this.active; if (!a) return null;
+    if (!a.items[nomor]) a.items[nomor] = {
+      soal_id: a.subject + ':' + a.paket + ':' + nomor,
+      position: nomor, topic_id: null,
+      first_answer: null, final_answer: null,
+      active_ms: 0, first_answer_ms: null,
+      change_count: 0, flagged_ragu: false, visit_count: 0, _firstVisitT: 0,
+      jejak: []
+    };
+    return a.items[nomor];
+  },
+  onVisit(nomor, topic_id) {
+    const a = this.active; if (!a) return;
+    const now = Date.now();
+    if (this._lastQ != null && a.items[this._lastQ])
+      a.items[this._lastQ].active_ms += now - this._lastT;
+    const it = this._ensure(nomor);
+    if (!it._firstVisitT) it._firstVisitT = now;
+    if (topic_id) it.topic_id = topic_id;
+    it.visit_count += 1;
+    this._lastQ = nomor; this._lastT = now;
+  },
+  onAnswer(nomor, answer) {
+    const it = this._ensure(nomor); if (!it) return;
+    const now = Date.now();
+    const curActiveMs = (it.active_ms || 0) + (this._lastQ === nomor ? (now - this._lastT) : 0);
+    const t_detik = Math.max(1, Math.round(curActiveMs / 1000));
+    const ans = Array.isArray(answer) ? answer.join(',') : String(answer);
+    if (!it.jejak) it.jejak = [];
+    if (it.first_answer == null) {
+      it.first_answer = ans;
+      it.first_answer_ms = now - (it._firstVisitT || now);
+      if (it.jejak.length < 5) {
+        it.jejak.push({ t_detik: t_detik, aksi: 'pilih', opsi: ans });
+      }
+    } else if (it.final_answer !== ans) {
+      it.change_count += 1;
+      if (it.jejak.length < 5) {
+        it.jejak.push({ t_detik: t_detik, aksi: 'ganti', opsi: ans });
+      }
+    }
+    it.final_answer = ans;
+  },
+  onRagu(nomor, flagged) {
+    const it = this._ensure(nomor); if (!it) return;
+    const now = Date.now();
+    const curActiveMs = (it.active_ms || 0) + (this._lastQ === nomor ? (now - this._lastT) : 0);
+    const t_detik = Math.max(1, Math.round(curActiveMs / 1000));
+    it.flagged_ragu = !!flagged;
+    if (!it.jejak) it.jejak = [];
+    if (it.jejak.length < 5) {
+      it.jejak.push({ t_detik: t_detik, aksi: 'ragu', opsi: flagged ? 'ragu' : 'batal_ragu' });
+    }
+  },
+  finish(ended_by) {
+    const a = this.active; if (!a) return null;
+    const now = Date.now();
+    if (this._lastQ != null && a.items[this._lastQ])
+      a.items[this._lastQ].active_ms += now - this._lastT;
+    // Isi item untuk SEMUA soal (1..n); yang tak dikunjungi dapat nilai nol.
+    // Ini mencegah "Items tidak valid" saat user selesai tanpa buka semua soal.
+    const items = [];
+    let n_benar = 0;
+    let evalAvailable = false;
+    for (let nomor = 1; nomor <= a.n; nomor++) {
+      const it = a.items[nomor] || {
+        soal_id: a.subject + ':' + a.paket + ':' + nomor,
+        position: nomor, topic_id: null,
+        first_answer: null, final_answer: null,
+        active_ms: 0, first_answer_ms: null,
+        change_count: 0, flagged_ragu: false, visit_count: 0,
+        jejak: []
+      };
+      const activeMs = it.active_ms || 0;
+      let isCorr = false;
+      try {
+        const curKey = (a.subject || '') + '_' + (a.paket || 1);
+        const pkg = (typeof state !== 'undefined' && state.pkgData) ? (state.pkgData[curKey] || (typeof pkgKey === 'function' ? state.pkgData[pkgKey()] : null)) : null;
+        if (pkg && pkg.soal && typeof evaluateQuestion === 'function') {
+          evalAvailable = true;
+          const qItem = pkg.soal.find(s => s.nomor === nomor) || pkg.soal[nomor - 1];
+          if (qItem) {
+            const ev = evaluateQuestion(qItem);
+            isCorr = (ev.type === 'bs')
+              ? (isQuestionAnswered(qItem) && ev.perStatement.length > 0 && ev.perStatement.every(s => s === 'benar'))
+              : (ev.status === 'benar');
+          }
+        }
+      } catch (e) {}
+      if (isCorr) n_benar++;
+
+      const c = Object.assign({}, it, {
+        is_correct: isCorr,
+        waktu_detik: Math.round(activeMs / 1000),
+        ganti_jawaban: it.change_count || 0,
+        ragu: !!it.flagged_ragu,
+        jejak: (it.jejak || []).slice(0, 5),
+        jejak_detail: (typeof DetailTracker !== 'undefined' ? DetailTracker.getEvents(nomor) : (it.jejak_detail || []))
+      });
+      delete c._firstVisitT;
+      items.push(c);
+    }
+    const scoreVal = evalAvailable ? Math.round((100 * n_benar) / Math.max(1, a.n)) : null;
+    const payload = {
+      client_id: 'att_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8),
+      subject: a.subject, paket: a.paket,
+      n_questions: a.n, duration_limit_s: a.duration_s,
+      ended_by: ended_by === 'timer' ? 'timer' : 'user',
+      started_at: new Date(a.started_at).toISOString(),
+      finished_at: new Date(now).toISOString(),
+      score: scoreVal,
+      n_correct: evalAvailable ? n_benar : null,
+      items,
+      jejak_detail: (typeof DetailTracker !== 'undefined' ? DetailTracker.getAllEvents() : [])
+    };
+    this.active = null; this._lastQ = null;
+    return payload;
+  }
+};
+
+const AttemptQueue = {
+  KEY: 'tka_attempt_queue',
+  all() { try { return JSON.parse(localStorage.getItem(this.KEY) || '[]'); } catch (e) { return []; } },
+  _save(q) { try { localStorage.setItem(this.KEY, JSON.stringify(q)); } catch (e) {} try { updateAttemptBadge(); } catch (e2) {} },
+  push(att) { if (!att) return; const q = this.all(); q.push(att); this._save(q); },
+  remove(client_id) { this._save(this.all().filter(x => x.client_id !== client_id)); },
+  clear() { this._save([]); },
+  count() { return this.all().length; }
+};
+
+async function _attemptAuthHeader() {
+  // Ambil token segar via getSession() (otomatis refresh jika kedaluwarsa).
+  try {
+    if (typeof getFreshToken === 'function') {
+      const t = await getFreshToken();
+      if (t) return { 'Authorization': 'Bearer ' + t };
+    }
+  } catch (e) {}
+  // Fallback: baca mentah dari localStorage
+  try {
+    const s = localStorage.getItem('tka_supabase_auth_token');
+    if (s) { const sess = JSON.parse(s); if (sess && sess.access_token) return { 'Authorization': 'Bearer ' + sess.access_token }; }
+  } catch (e) {}
+  return {};
+}
+
+let _syncAttemptsInFlight = false;
+async function syncAttempts() {
+  if (_syncAttemptsInFlight) return; // cegah kirim ganda bersamaan
+  _syncAttemptsInFlight = true;
+  try {
+  const q = AttemptQueue.all();
+  if (!q.length) { try { updateAttemptBadge(); } catch (e) {} return; }
+  for (const att of q) {
+    try {
+      const sendOnce = async (hdr) => await fetch('/api/attempts', {
+        method: 'POST',
+        headers: Object.assign({ 'Content-Type': 'application/json' }, hdr),
+        body: JSON.stringify(att)
+      });
+      let res = await sendOnce(await _attemptAuthHeader());
+      // Jika 401, coba refresh token sekali lalu kirim ulang.
+      if (res.status === 401 && typeof refreshTokenNow === 'function') {
+        try {
+          const t = await refreshTokenNow();
+          if (t) res = await sendOnce({ 'Authorization': 'Bearer ' + t });
+        } catch (e) {}
+      }
+      if (res.ok) { AttemptQueue.remove(att.client_id); }
+      else if (res.status === 400) {
+        // 400 = data rusak permanen -> karantina (hapus dari antrean) agar tidak macet.
+        try { const _ej = await res.json(); if (_ej && _ej.message) syncAttempts._lastErr = String(_ej.message).slice(0, 90); }
+        catch (e) { syncAttempts._lastErr = 'HTTP 400'; }
+        AttemptQueue.remove(att.client_id);
+        continue;
+      }
+      else {
+        try { const _ej = await res.json(); if (_ej && _ej.message) syncAttempts._lastErr = String(_ej.message).slice(0, 90); }
+        catch (e) { syncAttempts._lastErr = 'HTTP ' + res.status; }
+        break;
+      }
+    } catch (e) { break; }
+  }
+  try { updateAttemptBadge(); } catch (e) {}
+  } finally { _syncAttemptsInFlight = false; }
+}
+
+function updateAttemptBadge() {
+  try {
+    const el = document.getElementById('attemptSyncBadge');
+    if (!el) return;
+    const n = AttemptQueue.count();
+    const logged = _isLoggedIn();
+    if (!logged && n > 0) {
+      el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:11.5px;font-weight:600;margin:6px 0 10px;padding:7px 12px;border-radius:10px;border:1px solid #fed7aa;background:#fff7ed;color:#c2410c;';
+      el.innerHTML = '<span style="display:flex;align-items:center;gap:6px;">&#9888; <strong>Mode Tamu</strong> (' + n + ' hasil di HP)</span>' +
+        '<button type="button" onclick="loginWithGoogle()" style="background:#004a2a;color:#fff;border:none;padding:5px 12px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;">Klaim ke Google</button>';
+      return;
+    }
+    const ok = n === 0;
+    el.style.cssText = 'text-align:center;font-size:12px;font-weight:700;margin:6px 0 8px;padding:6px 12px;border-radius:8px;border:1px solid;' +
+      (ok ? 'background:#f0fdf4;color:#15803d;border-color:#bbf7d0;'
+          : 'background:#fffbeb;color:#b45309;border-color:#fde68a;');
+    el.innerHTML = ok ? '&#10003; Hasil tersimpan di akunmu'
+      : '&#9203; ' + n + ' hasil menunggu upload' +
+        (syncAttempts._lastErr ? ' <small style="font-weight:400">(' + syncAttempts._lastErr + ')</small>'
+                              : ' <small style="font-weight:400">(akan dikirim otomatis)</small>');
+  } catch (e) {}
+}
+
+window.addEventListener('online', () => { try { syncAttempts(); } catch (e) {} });
+document.addEventListener('DOMContentLoaded', () => { try { setTimeout(syncAttempts, 3000); } catch (e) {} });
+
+// FASE 3 (T3.4): status login
+function _isLoggedIn() {
+  try {
+    const u = JSON.parse(localStorage.getItem('tka_user') || 'null');
+    if (u && u.loggedIn) return true;
+    const s = JSON.parse(localStorage.getItem('tka_supabase_auth_token') || 'null');
+    return !!(s && s.access_token);
+  } catch (e) { return false; }
+}
+// ============================================================================
+// B2: SIMULATION TIMER (Timestamp delta Date.now() - Akurat di Background)
+// ============================================================================
 function _fmtTimer(sec) {
   sec = Math.max(0, sec);
   const h = String(Math.floor(sec / 3600)).padStart(2, '0');
@@ -5505,27 +7785,86 @@ function _fmtTimer(sec) {
   return `${h}:${m}:${s}`;
 }
 
-function _tickSimTimer() {
-  const el = document.getElementById('timerText');
-  if (!el) return;
-  let rem = parseInt(localStorage.getItem(_timerStorageKey()), 10);
-  if (isNaN(rem)) rem = TIMER_TOTAL_SECONDS;
-  if (rem > 0) {
-    rem -= 1;
-    try { localStorage.setItem(_timerStorageKey(), String(rem)); } catch (e) {}
+const SimTimer = {
+  _startTimeMs: null,
+  _totalSeconds: 0,
+  _intervalId: null,
+  _activePkg: null,
+
+  init(pkgKey, durationSec) {
+    this.stop();
+    this._activePkg = pkgKey || (state.currentSubject + ':' + state.currentPkg);
+    this._totalSeconds = Number(durationSec) || getTimerTotalSeconds();
+    this._startTimeMs = Date.now();
+    this.render();
+    this._intervalId = setInterval(() => this.tick(), 1000);
+  },
+
+  start(pkgKey, durationSec) {
+    if (this._activePkg === pkgKey && this._intervalId && this._startTimeMs) {
+      this.render();
+      return;
+    }
+    this.init(pkgKey, durationSec);
+  },
+
+  stop() {
+    if (this._intervalId) {
+      clearInterval(this._intervalId);
+      this._intervalId = null;
+    }
+  },
+
+  reset() {
+    this.stop();
+    this._startTimeMs = null;
+    this._totalSeconds = 0;
+    this._activePkg = null;
+    const el = document.getElementById('timerText');
+    if (el) el.innerText = _fmtTimer(getTimerTotalSeconds());
+    const pill = document.getElementById('timerPill');
+    if (pill) pill.classList.remove('timer-habis');
+  },
+
+  getRemainingSeconds() {
+    if (!this._startTimeMs) return this._totalSeconds || getTimerTotalSeconds();
+    const elapsedSec = Math.floor((Date.now() - this._startTimeMs) / 1000);
+    return Math.max(0, (this._totalSeconds || getTimerTotalSeconds()) - elapsedSec);
+  },
+
+  getElapsedSeconds() {
+    if (!this._startTimeMs) return 0;
+    return Math.floor((Date.now() - this._startTimeMs) / 1000);
+  },
+
+  tick() {
+    const rem = this.getRemainingSeconds();
+    this.render();
+    if (rem <= 0) {
+      this.stop();
+      try {
+        if (!((state.testFinished || {})[pkgKey()])) {
+          window._finishByTimer = true;
+          if (typeof openFinishModal === 'function') openFinishModal();
+          else if (typeof selesaiTes === 'function') selesaiTes();
+        }
+      } catch (e) {}
+    }
+  },
+
+  render() {
+    const el = document.getElementById('timerText');
+    if (!el) return;
+    const rem = this.getRemainingSeconds();
+    el.innerText = _fmtTimer(rem);
+    const pill = document.getElementById('timerPill');
+    if (pill) pill.classList.toggle('timer-habis', rem <= 300);
   }
-  el.innerText = _fmtTimer(rem);
-  const pill = document.getElementById('timerPill');
-  if (pill) pill.classList.toggle('timer-habis', rem <= 300);
-  if (rem <= 0 && _simTimerInterval) {
-    clearInterval(_simTimerInterval);
-    _simTimerInterval = null;
-  }
-}
+};
+window.SimTimer = SimTimer;
 
 document.addEventListener('DOMContentLoaded', () => {
-  _tickSimTimer();
-  if (!_simTimerInterval) _simTimerInterval = setInterval(_tickSimTimer, 1000);
+  if (typeof SimTimer !== 'undefined') SimTimer.render();
 });
 
 // ==========================================================================
@@ -5681,6 +8020,13 @@ const TKAHistory = {
   },
 
   handleBack() {
+    // 0. Modal Lapor Bug
+    const bugModal = document.getElementById('modalLaporBug');
+    if (bugModal && bugModal.classList.contains('open')) {
+      if (typeof closeBugReportModal === 'function') closeBugReportModal();
+      return true;
+    }
+
     // 1. Lightbox Gambar Zoom
     const lbModal = document.getElementById('imageLightboxModal');
     if (lbModal && lbModal.classList.contains('open')) {
@@ -5717,27 +8063,38 @@ const TKAHistory = {
     }
 
     // 6. Modal Logout (jika ada)
-    const logoutModal = document.getElementById('modalKonfirmasiLogout');
-    if (logoutModal && logoutModal.classList.contains('open')) {
-      if (typeof closeLogoutModal === 'function') closeLogoutModal();
+    const logoutModal = document.getElementById('tkaLogoutModal') || document.getElementById('modalKonfirmasiLogout');
+    if (logoutModal && logoutModal.parentNode) {
+      const cancelBtn = logoutModal.querySelector('#tkaLogoutCancelBtn');
+      if (cancelBtn) cancelBtn.click();
+      else logoutModal.remove();
       return true;
     }
 
-    // 7. Modal Exit Confirm (jika ada)
+    // 7. Modal Exit Confirm (jika ada): tutup modal dan tetap di kuis
     const exitModal = document.getElementById('exitConfirmModal');
     if (exitModal && exitModal.classList.contains('open')) {
-      if (typeof closeExitConfirm === 'function') closeExitConfirm();
+      if (typeof closeExitConfirm === 'function') closeExitConfirm(true);
       return true;
     }
 
-    // 8. Bottom Sheet AI Tutor di Mobile
+    // 8. Modal Atur Mapel (subjectModalBackdrop)
+    const subModal = document.getElementById('subjectModalBackdrop');
+    if (subModal && (subModal.classList.contains('active') || subModal.style.display !== 'none')) {
+      if (typeof closeSubjectPickerModal === 'function') closeSubjectPickerModal();
+      else if (typeof closeSubjectModal === 'function') closeSubjectModal();
+      else subModal.style.display = 'none';
+      return true;
+    }
+
+    // 9. Bottom Sheet AI Tutor di Mobile
     const tutorCol = document.getElementById('cbtSidebarCol');
     if (tutorCol && tutorCol.classList.contains('tutor-open')) {
       if (typeof closeTutorSheet === 'function') closeTutorSheet();
       return true;
     }
 
-    // 9. Tab Pembahasan -> Kembali ke Lembar Soal
+    // 10. Tab Pembahasan -> Kembali ke Lembar Soal
     const pPemb = document.getElementById('workPanePembahasan');
     if (pPemb && pPemb.classList.contains('active')) {
       if (typeof switchWorkTab === 'function') {
@@ -5746,30 +8103,40 @@ const TKAHistory = {
       return true;
     }
 
-    // 10. Jika mode kuis aktif & Beranda terbuka -> tutup Beranda
-    if (document.body.dataset.quizMode === '1' && typeof homeIsOpen === 'function' && homeIsOpen()) {
-      if (typeof homeClose === 'function') homeClose();
-      return true;
-    }
-
     // 11. Jika sedang mengerjakan kuis di Lembar Soal:
-    // Cegah keluar web tiba-tiba saat tombol Back HP ditekan. Tampilkan konfirmasi selesai tes.
+    // Cegah keluar web tiba-tiba saat tombol Back HP ditekan. Panggil requestExit().
     if (document.body.dataset.quizMode === '1') {
-      if (typeof openFinishModal === 'function') {
-        openFinishModal();
+      if (typeof isTestFinished === 'function' && isTestFinished()) {
+        if (typeof doExitToBeranda === 'function') doExitToBeranda();
+      } else {
+        if (typeof requestExit === 'function') {
+          requestExit(() => doExitToBeranda());
+        }
       }
       return true;
     }
 
-    // 12. Jika di Beranda Mobile dan panel bukan 'beranda' (misal di Modul/Progres/Akun)
-    if (typeof homeActivePanel !== 'undefined' && homeActivePanel !== 'beranda') {
-      if (typeof homeShowPanel === 'function') {
-        homeShowPanel('beranda');
+    // 12. Jika di Beranda / Dashboard:
+    if (typeof homeIsOpen === 'function' && homeIsOpen()) {
+      if (typeof homeActivePanel !== 'undefined' && homeActivePanel !== 'beranda') {
+        if (typeof homeShowPanel === 'function') {
+          homeShowPanel('beranda');
+        }
+        return true;
       }
-      return true;
+      // Di Beranda utama: tekan sekali lagi dalam 2 detik untuk keluar
+      const now = Date.now();
+      if (this._lastBackPressTime && (now - this._lastBackPressTime < 2000)) {
+        return false; // biarkan browser keluar
+      } else {
+        this._lastBackPressTime = now;
+        if (typeof showMiniToast === 'function') {
+          showMiniToast('Tekan sekali lagi untuk keluar');
+        }
+        return true;
+      }
     }
 
-    // Jika tidak ada modal atau kuis aktif, biarkan browser bertindak normal
     return false;
   }
 };
@@ -5780,4 +8147,228 @@ if (document.readyState === 'loading') {
 } else {
   TKAHistory.init();
 }
+
+// ==================== FASE 2 / T2.6: Modal Lapor Bug Soal & Sistem ====================
+function openBugReportModal() {
+  const modal = document.getElementById('modalLaporBug');
+  if (!modal) return;
+  const desc = document.getElementById('bugDescription');
+  const msg = document.getElementById('bugReportMsg');
+  if (desc) desc.value = '';
+  if (msg) {
+    msg.style.display = 'none';
+    msg.innerText = '';
+  }
+  const btn = document.getElementById('btnSubmitBug');
+  if (btn) {
+    btn.disabled = false;
+    btn.innerText = 'Kirim Laporan';
+  }
+  modal.classList.add('open');
+  if (window.TKAHistory) {
+    window.TKAHistory.push('modal-lapor-bug');
+  }
+}
+
+function closeBugReportModal(e) {
+  if (e && e.target && e.target !== e.currentTarget) return;
+  const modal = document.getElementById('modalLaporBug');
+  if (modal) modal.classList.remove('open');
+}
+
+async function sendBugReport() {
+  const cat = document.getElementById('bugCategory') ? document.getElementById('bugCategory').value : 'Umum';
+  const descEl = document.getElementById('bugDescription');
+  const desc = descEl ? descEl.value.trim() : '';
+  const msg = document.getElementById('bugReportMsg');
+  const btn = document.getElementById('btnSubmitBug');
+  if (!desc) {
+    if (msg) {
+      msg.style.display = 'block';
+      msg.style.background = '#fef2f2';
+      msg.style.color = '#dc2626';
+      msg.innerText = 'Mohon tuliskan penjelasan kendala terlebih dahulu.';
+    }
+    return;
+  }
+  const q = (typeof getCurrentQuestion === 'function') ? getCurrentQuestion() : null;
+  const subj = state.currentSubject || 'unknown';
+  const pkg = state.currentPkg || '1';
+  const qNo = q ? q.nomor : '-';
+  const title = `[${cat}] Mapel ${subj} Paket ${pkg} Soal #${qNo}`;
+  const fullDesc = `Mapel: ${subj}\nPaket: ${pkg}\nNomor: ${qNo}\nKategori: ${cat}\nKendala: ${desc}\nURL: ${window.location.href}`;
+
+  if (btn) {
+    btn.disabled = true;
+    btn.innerText = 'Mengirim...';
+  }
+  try {
+    let ok = false;
+    if (typeof submitBugReport === 'function') {
+      try {
+        const timeoutPromise = new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), 2000));
+        ok = await Promise.race([submitBugReport(title, fullDesc), timeoutPromise]);
+      } catch (e) {
+        ok = false;
+      }
+    }
+    // Jika belum berhasil atau tanpa Supabase, kirim ke server local fallback
+    if (!ok) {
+      const res = await fetch('/api/bug-reports', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, description: fullDesc })
+      });
+      ok = res.ok;
+    }
+
+    if (msg) {
+      msg.style.display = 'block';
+      msg.style.background = '#f0fdf4';
+      msg.style.color = '#15803d';
+      msg.innerText = 'Terima kasih! Laporan kendala berhasil dikirim.';
+    }
+    setTimeout(() => {
+      closeBugReportModal();
+    }, 1200);
+  } catch (err) {
+    if (msg) {
+      msg.style.display = 'block';
+      msg.style.background = '#fef2f2';
+      msg.style.color = '#dc2626';
+      msg.innerText = 'Gagal mengirim laporan: ' + (err.message || 'Error koneksi');
+    }
+    if (btn) {
+      btn.disabled = false;
+      btn.innerText = 'Kirim Laporan';
+    }
+  }
+}
+
+// ==========================================================================
+// ACCORDION PEMBAHASAN 5 PILAR & MOBILE KEYBOARD HANDLER & DAILY STREAK
+// ==========================================================================
+
+function setupPillarAccordions() {
+  try {
+    const pilarConfigs = [
+      { id: 'symbolsBox', bodyId: 'symbolsContainer' },
+      { id: 'whyConceptBox', bodyId: 'whyConceptContainer' },
+      { cls: 'steps-section-card', bodyId: 'stepsContainer' },
+      { cls: 'tips-box', bodyId: 'tipsContainer' }
+    ];
+
+    pilarConfigs.forEach(cfg => {
+      let card = null;
+      if (cfg.id) card = document.getElementById(cfg.id);
+      else if (cfg.cls) card = document.querySelector('.' + cfg.cls);
+      if (!card) return;
+
+      const header = card.querySelector('.pillar-header-row');
+      if (!header || header.dataset.accordionInit) return;
+      header.dataset.accordionInit = '1';
+
+      header.style.cursor = 'pointer';
+      header.style.display = 'flex';
+      header.style.alignItems = 'center';
+      header.style.justifyContent = 'space-between';
+      header.title = 'Klik untuk membuka / menutup rincian pilar ini';
+
+      let chevron = header.querySelector('.pillar-chevron');
+      if (!chevron) {
+        chevron = document.createElement('i');
+        chevron.className = 'fa-solid fa-chevron-down pillar-chevron';
+        chevron.style.marginLeft = 'auto';
+        chevron.style.padding = '6px';
+        chevron.style.color = '#64748b';
+        chevron.style.transition = 'transform 0.2s ease';
+        header.appendChild(chevron);
+      }
+
+      const bodyEl = card.querySelector('.symbols-grid, .why-text-body, .timeline-steps, .tips-text, #' + cfg.bodyId);
+      if (!bodyEl) return;
+
+      // Di mobile (<= 899px): ciutkan default pilar 2-5 agar tidak banjir teks (Pilar 1 tetap terbuka)
+      const isMobile = (window.innerWidth <= 899);
+      if (isMobile) {
+        bodyEl.style.display = 'none';
+        chevron.style.transform = 'rotate(0deg)';
+        card.classList.remove('is-open');
+      } else {
+        bodyEl.style.display = 'block';
+        chevron.style.transform = 'rotate(180deg)';
+        card.classList.add('is-open');
+      }
+
+      header.onclick = (e) => {
+        e.stopPropagation();
+        const isOpen = (bodyEl.style.display !== 'none');
+        if (isOpen) {
+          bodyEl.style.display = 'none';
+          chevron.style.transform = 'rotate(0deg)';
+          card.classList.remove('is-open');
+        } else {
+          bodyEl.style.display = 'block';
+          chevron.style.transform = 'rotate(180deg)';
+          card.classList.add('is-open');
+          if (typeof renderMath === 'function') renderMath(bodyEl);
+        }
+      };
+    });
+  } catch (e) {
+    console.warn('setupPillarAccordions error:', e);
+  }
+}
+window.setupPillarAccordions = setupPillarAccordions;
+
+function initMobileKeyboardTutorHandler() {
+  const inp = document.getElementById('chatInput');
+  if (!inp) return;
+  inp.addEventListener('focus', () => {
+    document.body.classList.add('keyboard-active');
+    setTimeout(() => {
+      const msgBox = document.getElementById('chatMessages');
+      if (msgBox) msgBox.scrollTop = msgBox.scrollHeight;
+    }, 200);
+  });
+  inp.addEventListener('blur', () => {
+    document.body.classList.remove('keyboard-active');
+  });
+}
+
+function recordDailyStudyActivity() {
+  try {
+    const today = new Date().toISOString().slice(0, 10);
+    const lastActive = localStorage.getItem('tka_last_active_date');
+    let streak = parseInt(localStorage.getItem('tka_study_streak') || '0', 10);
+
+    if (lastActive) {
+      if (lastActive === today) {
+        // Sudah aktif hari ini
+      } else {
+        const lastDate = new Date(lastActive);
+        const curDate = new Date(today);
+        const diffDays = Math.round((curDate - lastDate) / (1000 * 60 * 60 * 24));
+        if (diffDays === 1) {
+          streak += 1;
+        } else {
+          streak = 1;
+        }
+      }
+    } else {
+      streak = 1;
+    }
+
+    localStorage.setItem('tka_last_active_date', today);
+    localStorage.setItem('tka_study_streak', String(streak));
+  } catch (e) {}
+}
+window.recordDailyStudyActivity = recordDailyStudyActivity;
+
+document.addEventListener('DOMContentLoaded', () => {
+  initMobileKeyboardTutorHandler();
+  recordDailyStudyActivity();
+  setTimeout(setupPillarAccordions, 1500);
+});
+
 

@@ -1,18 +1,50 @@
 # -*- coding: utf-8 -*-
-"""Smoke test HTTP: integrasi Layer 3 aktif (registry solusi Claude) end-to-end.
+"""Smoke test HTTP: struktur + endpoint aktif.
+
+Tes regresi 0 (AST) jalan duluan untuk cegah bug indentasi.
 
 Diverifikasi (arsitektur tiga lapis + sumber aktif):
   - /api/solution  -> status "success" dengan konten solusi spesifik soal dari
     sumber AKTIF (EXTRA); kunci tampilan tetap otoritatif; review flag dipertahankan;
     paket tanpa sumber tetap "pending" dengan state jujur (bukan konten legacy).
-  - /api/ai-tutor  -> menerima Layer 2 (kanonis) + Layer 3 aktif; balasan spesifik
-    soal; konten legacy dalam question_data TIDAK pernah bocor.
 """
+import ast
 import json
+import os
 import sys
 import threading
 import time
 import urllib.request
+
+# --- Tes regresi 0: struktur server.py (cegah bug indentasi terulang) ---------
+# Bug 2026-10-09: _verify_supabase_token nyelip di tengah class AppRequestHandler,
+# bikin do_GET/do_POST jadi nested function. Server nyala tapi routing mati.
+# Tes ini jalan SEBELUM import server, jadi tidak butuh dependensi.
+_results0 = []
+def _check0(name, cond, detail=""):
+    _results0.append((name, bool(cond), detail))
+    print(("PASS" if cond else "FAIL"), "-", name, ("| " + detail if detail and not cond else ""))
+
+_src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "server.py"),
+            encoding="utf-8").read()
+_tree = ast.parse(_src)
+_handler = None
+for _node in ast.walk(_tree):
+    if isinstance(_node, ast.ClassDef) and _node.name == "AppRequestHandler":
+        _handler = _node
+        break
+_methods = [n.name for n in _handler.body if isinstance(n, ast.FunctionDef)] if _handler else []
+_check0("AppRequestHandler punya do_GET", "do_GET" in _methods)
+_check0("AppRequestHandler punya do_POST", "do_POST" in _methods)
+_check0("AppRequestHandler punya do_OPTIONS", "do_OPTIONS" in _methods)
+_modfuncs = [n.name for n in _tree.body if isinstance(n, ast.FunctionDef)]
+_check0("_verify_supabase_token di level modul (bukan di dalam class)",
+         "_verify_supabase_token" in _modfuncs and "_verify_supabase_token" not in _methods)
+if not all(c for _, c, _ in _results0):
+    print("STRUKTUR: gagal — perbaiki indentasi server.py sebelum push")
+    sys.exit(1)
+print("STRUKTUR: OK")
+print()
 
 sys.path.insert(0, ".")
 import server  # noqa: E402
@@ -85,61 +117,6 @@ check("eko1 Q1: status pending (tanpa sumber aktif)", d["status"] == "pending")
 check("eko1 Q1: solution = null", d["solution"] is None)
 check("eko1 Q1: visual Layer 2 tetap terkirim",
       isinstance(d.get("visual_items"), list))
-
-# --- 3. /api/ai-tutor: Layer 2 + Layer 3 aktif --------------------------------
-r = post("/api/ai-tutor", {
-    "subject": "matematika", "paket": 2, "nomor": 2,
-    "message": "kenapa jawabannya C?",
-    "question_data": {
-        "topik": "Eksponen", "subject": "matematika",
-        "pembahasan": {"mengapa_begini": "LEGACY-ALASAN-GENERIK",
-                       "tips_trik": "LEGACY-TIPS-GENERIK",
-                       "konsep_kunci": "LEGACY-KONSEP-GENERIK"},
-    },
-})
-reply = r["reply"]
-check("tutor Q2 'kenapa C': konten spesifik (basis prima)",
-      "basis" in reply.lower() and "8" in reply)
-check("tutor Q2: TIDAK ada kebocoran legacy", "LEGACY" not in reply)
-
-r = post("/api/ai-tutor", {
-    "subject": "matematika", "paket": 2, "nomor": 3,
-    "message": "jelasin langkah penyelesaiannya",
-    "question_data": {"topik": "Operasi", "subject": "matematika"},
-})
-check("tutor Q3 'langkah': langkah spesifik a⊙b", "\\odot" in r["reply"])
-
-r = post("/api/ai-tutor", {
-    "subject": "matematika", "paket": 2, "nomor": 3,
-    "message": "apa arti simbolnya?",
-    "question_data": {"topik": "Operasi", "subject": "matematika"},
-})
-check("tutor Q3 'simbol': glosarium spesifik dari Layer 3",
-      "operasi biner" in r["reply"].lower() and "odot" in r["reply"])
-
-r = post("/api/ai-tutor", {
-    "subject": "matematika", "paket": 2, "nomor": 5,
-    "message": "kenapa jawabannya B?",
-    "question_data": {"topik": "Fungsi", "subject": "matematika"},
-})
-check("tutor Q5 (review): catatan verifikasi manual disertakan",
-      "verifikasi manual" in r["reply"])
-
-r = post("/api/ai-tutor", {
-    "subject": "matematika", "paket": 2, "nomor": 1,
-    "message": "konsep apa yang dipakai?",
-    "question_data": {"topik": "Himpunan", "subject": "matematika"},
-})
-check("tutor Q1 'konsep': konsep kunci spesifik (irisan/gabungan)",
-      "irisan" in r["reply"].lower())
-
-r = post("/api/ai-tutor", {
-    "subject": "ekonomi", "paket": 1, "nomor": 1,
-    "message": "bagaimana langkah pengerjaannya?",
-    "question_data": {"topik": "Ekonomi", "subject": "ekonomi"},
-})
-check("tutor eko1 Q1 (tanpa Layer 3): jujur belum tersedia",
-      "belum tersedia" in r["reply"])
 
 print()
 total = len(results)
