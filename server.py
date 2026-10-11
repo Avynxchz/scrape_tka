@@ -2333,6 +2333,10 @@ function salinWA() {
             '/app': 'index.html',
             '/privacy': 'privacy.html',
             '/terms': 'terms.html',
+            # [seo] Halaman SEO (Google + AI)
+            '/soal-matematika-tka': 'seo-matematika.html',
+            '/soal-geografi-tka': 'seo-geografi.html',
+            '/kisi-kisi-tka-2026': 'seo-kisi-kisi.html',
         }
         target_page = page_routes.get(route_path)
         if target_page:
