@@ -5836,6 +5836,8 @@ function renderReviewHasil() {
 
   // FASE 5 (T5.1): tampilkan Autopsi setelah review dirender
   try { renderAutopsiSection(); } catch (e) { console.warn('Autopsi:', e); }
+  // [muse-fix] Spotlight Autopsi (opsi A): tampilkan banner pengarah
+  try { setTimeout(showAutopsiSpotlight, 800); } catch (e) {}
 }
 
 // FASE A6: UI Layar Hasil Guru Autopsi (Mobile-first, ringan di HP murah)
@@ -5876,6 +5878,34 @@ function formatContohSoal(contoh) {
   if (nums.length === 0) return '';
   return `Soal ${nums.join(', ')}`;
 }
+
+// [muse-fix] Spotlight Autopsi (opsi A): banner pengarah setelah tryout selesai
+function showAutopsiSpotlight() {
+  try {
+    if (document.getElementById('autopsiSpotlight')) return; // jangan duplikat
+    const overlay = document.getElementById('reviewHasilOverlay');
+    if (!overlay) return;
+    const banner = document.createElement('div');
+    banner.id = 'autopsiSpotlight';
+    banner.className = 'autopsi-spotlight';
+    banner.innerHTML =
+      '<div class="spotlight-icon">🔍</div>' +
+      '<div class="spotlight-text">' +
+        '<div class="spotlight-title">Lihat Autopsi Tryout-mu!</div>' +
+        '<div class="spotlight-sub">AI menganalisis cara kamu mengerjakan — temukan kebocoran terbesarmu</div>' +
+      '</div>' +
+      '<button class="spotlight-cta" onclick="scrollToAutopsi()">Lihat <i class="fa-solid fa-arrow-down"></i></button>' +
+      '<button class="spotlight-close" onclick="this.parentElement.style.display=\'none\'" aria-label="Tutup">×</button>';
+    overlay.insertBefore(banner, overlay.firstChild);
+  } catch (e) {}
+}
+function scrollToAutopsi() {
+  try {
+    const el = document.getElementById('autopsiSection');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (e) {}
+}
+window.scrollToAutopsi = scrollToAutopsi;
 
 async function renderAutopsiSection() {
   let cont = document.getElementById('autopsiSection');
