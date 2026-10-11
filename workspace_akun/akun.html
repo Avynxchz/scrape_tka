@@ -4,9 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="light">
-<title>Akun · TKA Master</title>
+<title>Akun · musse</title>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/favicon.png">
+<link rel="apple-touch-icon" href="/assets/brand/favicon.png">
 <!--
-  HALAMAN AKUN — TKA Master (file mandiri, CSS/JS inline, Tailwind CDN).
+  HALAMAN AKUN — musse (file mandiri, CSS/JS inline, Tailwind CDN).
   Pola sama dengan workspace_modul/modul.html: dua versi (#akunDesktop >=900px,
   #akunMobile <900px), bridge postMessage ke parent.
   KEJUJURAN DATA (prinsip project): sistem login belum ada -> profil tampil
@@ -60,12 +63,10 @@ button:active { transform: scale(0.97); }
   <header class="fixed top-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)]">
     <div class="h-20 w-full max-w-7xl mx-auto px-gutter-desktop flex items-center justify-between gap-space-md">
       <div class="flex items-center gap-space-xl">
-        <a href="#" data-nav="beranda" class="flex items-center gap-space-sm group">
-          <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
-            <span class="material-symbols-outlined text-[24px]">school</span>
-          </div>
+        <a href="#" data-nav="beranda" class="flex items-center gap-2.5 group">
+          <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-10 h-10 object-contain drop-shadow-sm group-hover:scale-105 transition-transform" />
           <div class="flex flex-col">
-            <span class="font-headline-sm text-headline-sm text-primary leading-tight tracking-tight group-hover:text-primary-container transition-colors">TKA Master</span>
+            <span class="font-headline-sm text-headline-sm text-primary leading-tight tracking-tight font-black font-outfit group-hover:text-primary-container transition-colors">musse</span>
             <span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">SIMULASI &amp; LATIHAN PUSMENDIK</span>
           </div>
         </a>
@@ -291,7 +292,7 @@ button:active { transform: scale(0.97); }
               <div class="flex flex-col">
                 <span class="font-label-md text-label-md font-bold text-primary">Jaminan Keamanan &amp; Privasi 100%</span>
                 <p class="font-body-sm text-body-sm text-on-surface-variant mt-1 leading-relaxed">
-                  TKA Master menjunjung tinggi privasi siswa. Data login dan riwayat latihan Anda dienkripsi secara aman, tersimpan di perangkat Anda, dan <strong>tidak akan pernah dijual atau dibagikan ke pihak ketiga</strong>.
+                  musse menjunjung tinggi privasi siswa. Data login dan riwayat latihan Anda dienkripsi secara aman, tersimpan di perangkat Anda, dan <strong>tidak akan pernah dijual atau dibagikan ke pihak ketiga</strong>.
                 </p>
               </div>
             </div>
@@ -365,12 +366,10 @@ button:active { transform: scale(0.97); }
 <div id="akunMobile">
   <header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-[#E2E8F0]">
     <div class="h-14 px-gutter flex items-center justify-between max-w-md mx-auto">
-      <div class="flex items-center gap-space-xs cursor-pointer" data-nav="beranda">
-        <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-on-primary shadow-sm shrink-0">
-          <span class="material-symbols-outlined text-[18px]">school</span>
-        </div>
+      <div class="flex items-center gap-2 cursor-pointer" data-nav="beranda">
+        <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-8 h-8 object-contain shrink-0" />
         <div class="flex flex-col min-w-0">
-          <span class="text-sm font-bold text-primary tracking-tight leading-none truncate">TKA Master</span>
+          <span class="text-sm font-black text-primary tracking-tight leading-none truncate font-outfit">musse</span>
           <span class="text-[9px] font-bold text-text-muted uppercase tracking-wider truncate mt-0.5">AKUN</span>
         </div>
       </div>
@@ -524,7 +523,7 @@ button:active { transform: scale(0.97); }
                   <span class="material-symbols-outlined text-[20px]">info</span>
                 </div>
                 <div class="flex flex-col min-w-0">
-                  <span class="font-label-lg text-label-lg text-text-primary truncate">Tentang TKA Master</span>
+                  <span class="font-label-lg text-label-lg text-text-primary truncate">Tentang musse</span>
                   <span class="font-body-sm text-body-sm text-text-muted truncate">Masa beta &middot; Format TKA Pusmendik</span>
                 </div>
               </div>
@@ -627,7 +626,7 @@ button:active { transform: scale(0.97); }
     });
     var dSub = document.querySelector('[data-d-sub]');
     if (dSub) {
-      dSub.textContent = login ? (email || 'Siswa TKA Master (Google Login)') : 'Profil siswa akan terisi setelah login Google.';
+      dSub.textContent = login ? (email || 'Siswa musse (Google Login)') : 'Profil siswa akan terisi setelah login Google.';
       dSub.style.color = '#cbd5e1';
     }
     var mSub = document.querySelector('[data-m-sub]');

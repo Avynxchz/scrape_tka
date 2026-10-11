@@ -1,4 +1,4 @@
-// Supabase Auth untuk TKA Master
+// Supabase Auth untuk musse
 // Login Google + manajemen user tier
 
 const SUPABASE_URL = 'https://auhqgzrrgvjbfvzvayzg.supabase.co';

@@ -104,7 +104,7 @@ _IMAGE_EXTS = ('.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg', '.ico')
 # 'data' ditangani khusus: hanya file gambar di dalam folder images/.
 _STATIC_OK_TOPDIRS = ('images', 'cbt_images', 'tka',
                       'workspace_akun', 'workspace_modul', 'workspace_progres',
-                      'vendor')
+                      'vendor', 'assets')
 
 # ============================================================================
 # INDEKS NAMA FILE data/ (Fase 2, Fix 5)
@@ -2266,6 +2266,7 @@ function salinWA() {
 
         page_routes = {
             '/': 'landing.html',
+            '/landing': 'landing.html',
             '/app': 'index.html',
             '/privacy': 'privacy.html',
             '/terms': 'terms.html',

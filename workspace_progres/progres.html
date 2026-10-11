@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Progres Belajar — TKA Master</title>
+  <title>Progres Belajar — musse</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/brand/favicon.png">
   
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,11 +22,12 @@
       theme: {
         extend: {
           colors: {
-            "primary": "#004a2a",
-            "primary-container": "#1b633e",
-            "accent-mint": "#22C55E",
+            "primary": "#2d7d4f",
+            "primary-container": "#23633e",
+            "accent-mint": "#2d7d4f",
             "tertiary-fixed": "#ffdcc3",
             "tertiary": "#643300",
+            "tertiary-container": "#f5a623",
             "surface": "#f6fafe",
             "surface-card": "#FFFFFF",
             "border-subtle": "#E2E8F0",
@@ -188,13 +192,11 @@
       <div class="h-20 w-full max-w-7xl mx-auto px-8 flex items-center justify-between gap-6">
 
         <div class="flex items-center gap-10">
-          <div class="flex items-center gap-3 cursor-pointer group" onclick="handleNavTab('beranda')">
-            <div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm">
-              <span class="material-symbols-outlined text-2xl">school</span>
-            </div>
+          <div class="flex items-center gap-2.5 cursor-pointer group" onclick="handleNavTab('beranda')">
+            <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-10 h-10 object-contain drop-shadow-sm group-hover:scale-105 transition-transform" />
             <div class="flex flex-col">
-              <span class="text-lg font-semibold leading-[26px] tracking-[-0.01em] text-primary">TKA Master</span>
-              <span class="text-[11px] leading-4 font-bold text-on-surface-variant uppercase tracking-[0.08em]">SIMULASI &amp; LATIHAN PUSMENDIK</span>
+              <span class="text-xl font-black leading-none text-primary font-outfit group-hover:text-primary-container transition-colors">musse</span>
+              <span class="text-[9.5px] leading-tight font-bold text-on-surface-variant uppercase tracking-wider mt-0.5">SIMULASI &amp; LATIHAN PUSMENDIK</span>
             </div>
           </div>
 
@@ -376,11 +378,12 @@
     <footer class="w-full bg-surface-card border-t border-border-subtle py-6">
       <div class="max-w-7xl mx-auto px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
         <div class="flex items-center gap-2">
-          <span class="font-bold text-primary">TKA Master</span>
+          <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-5 h-5 object-contain" />
+          <span class="font-bold text-primary font-outfit">musse</span>
           <span>• Portal latihan mandiri format TKA Pusmendik</span>
         </div>
         <div class="flex items-center gap-4">
-          <span>© 2026 TKA Master Indonesia.</span>
+          <span>© 2026 musse Indonesia.</span>
         </div>
       </div>
     </footer>
@@ -395,12 +398,10 @@
     <!-- Mobile Fixed Header -->
     <header class="fixed top-0 left-0 right-0 z-50 pt-safe bg-surface/90 backdrop-blur-xl border-b border-[#E2E8F0] shadow-xs">
       <div class="h-14 px-4 flex items-center justify-between gap-2 max-w-md mx-auto">
-        <div class="flex items-center gap-2.5 min-w-0" onclick="handleNavTab('beranda')" role="button">
-          <div class="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white flex-shrink-0 shadow-sm">
-            <span class="material-symbols-outlined text-[18px]">school</span>
-          </div>
+        <div class="flex items-center gap-2 min-w-0 cursor-pointer" onclick="handleNavTab('beranda')" role="button">
+          <img src="/assets/brand/musse_mascot_trans.png" alt="musse" class="w-8 h-8 object-contain flex-shrink-0" />
           <div class="flex flex-col min-w-0">
-            <span class="text-sm font-bold text-primary tracking-tight leading-none truncate">TKA Master</span>
+            <span class="text-sm font-black text-primary tracking-tight leading-none truncate">musse</span>
             <span class="text-[9px] font-bold text-text-muted uppercase tracking-wider truncate mt-0.5">PROGRES BELAJAR</span>
           </div>
         </div>

@@ -438,7 +438,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
   try { syncProgressWithServer(); } catch (e) {}
 });
-// 22 Mata Pelajaran TKA Master — Meta UI, Ikon Unik Material Symbols, & Tema Warna Harmonis
+// 22 Mata Pelajaran musse — Meta UI, Ikon Unik Material Symbols, & Tema Warna Harmonis
 const SUBJECT_UI_META = {
   matematika: {
     name: 'Matematika (Wajib)', shortName: 'Matematika', chip: 'MATEMATIKA',
@@ -1789,7 +1789,7 @@ function updateSubjectUI() {
 
   document.title = `Simulasi TKA ${meta.name} - Platform Belajar Interaktif`;
   // Audit Manus: brand tetap konsisten dengan landing, mapel jadi konteks sekunder
-  document.getElementById('brandTitle').innerText = 'TKA Master';
+  document.getElementById('brandTitle').innerText = 'musse';
   const brandSub = document.getElementById('brandSubtitle');
   if (brandSub) brandSub.innerText = `Simulasi ${meta.name} · Paket ${state.currentPkg}`;
   document.getElementById('aiTutorTitle').innerText = `Tanya AI Tutor ${meta.name}`;
@@ -5907,7 +5907,7 @@ async function renderAutopsiSection() {
             <h3 style="font-size:15px;font-weight:800;margin:0;color:#0f172a">🔍 Guru Autopsi — dianalisis dari cara kamu mengerjakan</h3>
             <span id="coachBadgeStatus" style="font-size:11px;background:#e2e8f0;color:#475569;padding:2px 8px;border-radius:20px;font-weight:700">Memuat analisis...</span>
           </div>
-          <span style="font-size:11px;color:#64748b;font-weight:600">Tryout TKA Master</span>
+          <span style="font-size:11px;color:#64748b;font-weight:600">Simulasi musse</span>
         </div>
         <p style="font-size:12px;color:#64748b;margin:0 0 10px;line-height:1.4">Dianalisis dari caramu mengerjakan: ritme waktu, urutan klik, dan pergantian jawaban.</p>
         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;padding:8px 12px;background:#f1f5f9;border-radius:8px;font-size:12px;color:#334155;flex-wrap:wrap;">

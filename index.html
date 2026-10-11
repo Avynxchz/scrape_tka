@@ -2,9 +2,12 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TKA Master - Simulasi Ujian & AI Tutor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>musse - Simulasi Ujian &amp; AI Tutor</title>
   <meta name="description" content="Platform belajar interaktif dan simulasi ujian TKA Pusmendik Kemendikdasmen dilengkapi pembahasan langkah terstruktur dan AI Tutor cerdas.">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon.png">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/assets/brand/favicon.png">
   
   <!-- Google Fonts: Inter (UI chrome; font konten soal tidak diubah) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,16 +80,16 @@
        Muncul sebelum soal; klik card Paket -> masuk soal.
        Data mapel di-inject dari app.js (SUBJECT_CATALOG).
 ============================================================ -->
-  <div id="homeOverlay" class="home-overlay" role="dialog" aria-label="Beranda TKA Master">
+  <div id="homeOverlay" class="home-overlay" role="dialog" aria-label="Beranda musse">
    <!-- PANEL BERANDA (default) — versi mobile .stitch-* + iframe desktop -->
    <div id="panelBeranda" class="home-panel panel-active" data-panel="beranda">
     <header class="stitch-fixed-top">
       <div class="stitch-header-row">
         <div class="stitch-brand-wrap">
-          <div class="stitch-brand-logo"><span class="ms-icon">school</span></div>
+          <div class="stitch-brand-logo" style="background:transparent;box-shadow:none;padding:0;overflow:hidden;"><img src="/assets/brand/musse_mascot_trans.png" alt="musse" style="width:34px;height:34px;object-fit:contain;"></div>
           <div class="stitch-brand-text">
-            <span class="stitch-brand-title">TKA Master</span>
-            <span class="stitch-brand-sub">BERANDA</span>
+            <span class="stitch-brand-title" style="font-family:'Outfit',sans-serif;font-weight:900;letter-spacing:-0.02em;">musse</span>
+            <span class="stitch-brand-sub" style="color:#f5a623;">BERANDA</span>
           </div>
         </div>
         <div class="stitch-header-actions">
@@ -243,22 +246,22 @@
       </div>
     </nav>
       <!-- Desktop (>=900px): dashboard versi Stitch desktop via iframe -->
-    <iframe id="homeDesktopFrame" class="home-desktop-frame" src="/home_desktop.html" title="Beranda TKA Master (Desktop)"></iframe>
+    <iframe id="homeDesktopFrame" class="home-desktop-frame" src="/home_desktop.html" title="Beranda musse (Desktop)"></iframe>
    </div><!-- /#panelBeranda -->
 
    <!-- PANEL MODUL — file mandiri (Tailwind sendiri), wajib iframe biar CSS-nya tidak konflik -->
    <div id="panelModul" class="home-panel" data-panel="modul">
-     <iframe id="panelModulFrame" class="home-panel-frame" src="/workspace_modul/modul.html" title="Modul Belajar TKA Master"></iframe>
+     <iframe id="panelModulFrame" class="home-panel-frame" src="/workspace_modul/modul.html" title="Modul Belajar musse"></iframe>
    </div>
 
    <!-- PANEL PROGRES — file mandiri, wajib iframe -->
    <div id="panelProgres" class="home-panel" data-panel="progres">
-     <iframe id="panelProgresFrame" class="home-panel-frame" src="/workspace_progres/progres.html" title="Progres &amp; Analitik TKA Master"></iframe>
+     <iframe id="panelProgresFrame" class="home-panel-frame" src="/workspace_progres/progres.html" title="Progres &amp; Analitik musse"></iframe>
    </div>
 
    <!-- PANEL AKUN — file mandiri, wajib iframe -->
    <div id="panelAkun" class="home-panel" data-panel="akun">
-     <iframe id="panelAkunFrame" class="home-panel-frame" src="/workspace_akun/akun.html" title="Akun &amp; Preferensi TKA Master"></iframe>
+     <iframe id="panelAkunFrame" class="home-panel-frame" src="/workspace_akun/akun.html" title="Akun &amp; Preferensi musse"></iframe>
    </div>
   </div>
 
@@ -272,10 +275,11 @@
       </button>
 
       <!-- Left: Logo & Brand -->
-      <div class="brand">
+      <div class="brand" style="display:flex;align-items:center;gap:8px;">
+        <img src="/assets/brand/musse_mascot_trans.png" alt="musse" style="width:32px;height:32px;object-fit:contain;">
         <div class="brand-text">
-          <span class="brand-title" id="brandTitle">TKA Master</span>
-          <span class="brand-subtitle" id="brandSubtitle">Simulasi Ujian & AI Tutor</span>
+          <span class="brand-title" id="brandTitle" style="font-family:'Outfit',sans-serif;font-weight:900;">musse</span>
+          <span class="brand-subtitle" id="brandSubtitle">Simulasi Ujian &amp; AI Tutor</span>
         </div>
       </div>
 

@@ -1,13 +1,13 @@
 /* ==========================================================================
-   TKA MASTER CBT - V0 MINIMALIST DESIGN SYSTEM
-   Clean, modern, crisp, and pedagogical design inspired by Linear & Notion
+   musse CBT - DESIGN SYSTEM
+   Clean, modern, crisp, and pedagogical design
    ========================================================================== */
 
 :root {
   /* Fonts — --font-ui HANYA untuk chrome (nav, label, tombol, heading).
      --font-content = font soal, opsi, math (KaTeX): JANGAN diubah dan
      JANGAN dipasangkan ke elemen chrome. Tidak ada font di * selector. */
-  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-ui: 'Outfit', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-content: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-heading: var(--font-ui);
   --font-sans: var(--font-ui); /* alias lama utk rule yang sudah ada */
@@ -22,25 +22,28 @@
   --text: #1C1917;
   --text-2: #57534E;
   --text-3: #78716C;
-  --accent: #1F6F4A;
-  --accent-hover: #185A3B;
+  --accent: #2d7d4f;
+  --accent-hover: #23633e;
   --accent-tint: #EDF5F0;
   --accent-border: #BFDCCB;
+  --accent-orange: #f5a623;
+  --accent-orange-hover: #e09419;
+  --accent-orange-tint: #fef7ec;
   --wrong: #B42318;
   --wrong-hover: #912018;
   --wrong-tint: #FEF3F2;
   --wrong-border: #F2C6C3;
-  --warn: #B54708;
+  --warn: #f5a623;
   --warn-tint: #FFFAEB;
-  --warn-border: #EBD9B4;
-  --navbar: #004a2a;
-  --navbar-border: #00351e;
+  --warn-border: #fde68a;
+  --navbar: #2d7d4f;
+  --navbar-border: #23633e;
   --navbar-surface: rgba(255, 255, 255, 0.1);
   --navbar-text: #ffffff;
   --navbar-text-2: #aaf2c2;
-  --btn-primary-bg: #18181B;
+  --btn-primary-bg: #2d7d4f;
   --btn-primary-text: #FFFFFF;
-  --btn-primary-hover: #2D2D30;
+  --btn-primary-hover: #23633e;
 
   /* Legacy aliases — dipetakan ke token baru agar seluruh rule lama ikut netral */
   --bg-page: var(--bg);

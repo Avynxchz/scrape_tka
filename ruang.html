@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Ruang Mapel - AI Coach | TKA Master</title>
+  <title>Ruang Mapel - AI Coach | musse</title>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="192x192" href="/assets/brand/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/brand/favicon.png">
   <meta name="description" content="AI Subject Room & Coaching per Mapel dengan analisis performa komprehensif.">
 
   <!-- Google Fonts: Plus Jakarta Sans -->
@@ -21,10 +24,11 @@
 
   <style>
     :root {
-      --primary: #1b633e;
-      --primary-hover: #155132;
-      --primary-light: #e8f5ed;
-      --primary-glow: rgba(27, 99, 62, 0.15);
+      --primary: #2d7d4f;
+      --primary-hover: #23633e;
+      --primary-light: #eaf4ee;
+      --primary-glow: rgba(45, 125, 79, 0.18);
+      --accent-orange: #f5a623;
       --slate-900: #0f172a;
       --slate-800: #1e293b;
       --slate-700: #334155;
@@ -289,9 +293,9 @@
       flex-shrink: 0;
     }
     .avatar.coach {
-      background: linear-gradient(135deg, #1b633e, #10b981);
+      background: linear-gradient(135deg, #2d7d4f, #f5a623);
       color: #ffffff;
-      box-shadow: 0 2px 6px rgba(27, 99, 62, 0.25);
+      box-shadow: 0 2px 6px rgba(45, 125, 79, 0.25);
     }
 
     .msg-bubble {
@@ -575,15 +579,15 @@
         <i class="fa-solid fa-arrow-left"></i>
       </a>
       <div class="room-title-block">
-        <h1 class="room-title" id="roomTitle">
-          <i class="fa-solid fa-graduation-cap" style="color: var(--primary);"></i>
+        <h1 class="room-title" id="roomTitle" style="display:flex;align-items:center;gap:6px;">
+          <img src="/assets/brand/musse_mascot_trans.png" alt="musse" style="width:24px;height:24px;object-fit:contain;flex-shrink:0;" />
           <span>Ruang Mapel</span>
         </h1>
       </div>
     </div>
     <div>
-      <span class="room-badge">
-        <i class="fa-solid fa-sparkles"></i> AI Room
+      <span class="room-badge" style="background:#fef7ec;color:#c2780e;border:1px solid #fde68a;">
+        <i class="fa-solid fa-sparkles" style="color:#f5a623;"></i> musse AI
       </span>
     </div>
   </header>
@@ -1026,7 +1030,7 @@
       if (rTitle && rTitle.querySelector('span')) {
         rTitle.querySelector('span').innerText = `Ruang ${dispName}`;
       }
-      document.title = `Ruang ${dispName} - AI Coach | TKA Master`;
+      document.title = `Ruang ${dispName} - AI Coach | musse`;
       document.querySelectorAll('.mapel-label').forEach(el => el.innerText = dispName);
 
       const noticeEl = document.getElementById('guestRoomNotice');
