@@ -118,6 +118,54 @@ class TestMidtransPaymentUnit(unittest.TestCase):
             else:
                 os.environ.pop("MIDTRANS_IS_PRODUCTION", None)
 
+    def test_client_key_as_server_key_rejected(self):
+        old_key = os.environ.get("MIDTRANS_SERVER_KEY")
+        try:
+            os.environ["MIDTRANS_SERVER_KEY"] = "SB-Mid-client-abc12345"
+            ok, _, err = payment_service.create_midtrans_payment_link(
+                "SPRINT-test-1", "user-1", "test@test.com", "Test", "2026-11-20"
+            )
+            self.assertFalse(ok)
+            self.assertIn("Client Key", err)
+        finally:
+            if old_key is not None:
+                os.environ["MIDTRANS_SERVER_KEY"] = old_key
+            else:
+                os.environ.pop("MIDTRANS_SERVER_KEY", None)
+
+    def test_sandbox_mode_requires_sb_prefix(self):
+        old_key = os.environ.get("MIDTRANS_SERVER_KEY")
+        old_prod = os.environ.get("MIDTRANS_IS_PRODUCTION")
+        try:
+            os.environ["MIDTRANS_SERVER_KEY"] = "Mid-server-prodkey123"
+            os.environ["MIDTRANS_IS_PRODUCTION"] = "0"
+            ok, _, err = payment_service.create_midtrans_payment_link(
+                "SPRINT-test-1", "user-1", "test@test.com", "Test", "2026-11-20"
+            )
+            self.assertFalse(ok)
+            self.assertIn("SB-Mid-server-", err)
+        finally:
+            if old_key is not None:
+                os.environ["MIDTRANS_SERVER_KEY"] = old_key
+            else:
+                os.environ.pop("MIDTRANS_SERVER_KEY", None)
+            if old_prod is not None:
+                os.environ["MIDTRANS_IS_PRODUCTION"] = old_prod
+            else:
+                os.environ.pop("MIDTRANS_IS_PRODUCTION", None)
+
+    def test_quote_sanitization_in_config(self):
+        old_key = os.environ.get("MIDTRANS_SERVER_KEY")
+        try:
+            os.environ["MIDTRANS_SERVER_KEY"] = '"SB-Mid-server-quotedkey"'
+            cfg = payment_service.get_midtrans_config()
+            self.assertEqual(cfg["server_key"], "SB-Mid-server-quotedkey")
+        finally:
+            if old_key is not None:
+                os.environ["MIDTRANS_SERVER_KEY"] = old_key
+            else:
+                os.environ.pop("MIDTRANS_SERVER_KEY", None)
+
 
 
 class TestMidtransPaymentEndpoints(unittest.TestCase):

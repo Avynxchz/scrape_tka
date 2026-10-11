@@ -28,9 +28,10 @@ def is_payment_enabled():
 
 def get_midtrans_config():
     """Ambil konfigurasi Midtrans dari environment variable."""
-    server_key = os.environ.get("MIDTRANS_SERVER_KEY", "").strip()
-    client_key = os.environ.get("MIDTRANS_CLIENT_KEY", "").strip()
-    is_prod = os.environ.get("MIDTRANS_IS_PRODUCTION", "0").strip() == "1"
+    server_key = os.environ.get("MIDTRANS_SERVER_KEY", "").strip().strip('"\'').strip()
+    client_key = os.environ.get("MIDTRANS_CLIENT_KEY", "").strip().strip('"\'').strip()
+    is_prod_raw = os.environ.get("MIDTRANS_IS_PRODUCTION", "0").strip().strip('"\'').strip().lower()
+    is_prod = is_prod_raw in ("1", "true", "yes")
     base_url = "https://api.midtrans.com" if is_prod else "https://api.sandbox.midtrans.com"
     return {
         "server_key": server_key,
@@ -47,7 +48,7 @@ def verify_midtrans_signature(order_id, status_code, gross_amount, signature_key
     """
     if not signature_key:
         return False
-    key = server_key or os.environ.get("MIDTRANS_SERVER_KEY", "").strip()
+    key = server_key or os.environ.get("MIDTRANS_SERVER_KEY", "").strip().strip('"\'').strip()
     if not key:
         return False
     raw_str = f"{order_id}{status_code}{gross_amount}{key}"
@@ -158,6 +159,16 @@ def create_midtrans_payment_link(order_id, user_id, user_email, user_name, tka_d
     if not server_key:
         return False, None, "MIDTRANS_SERVER_KEY belum dikonfigurasi di server."
 
+    # Validasi awal tipe dan lingkungan kredensial
+    if "-client-" in server_key.lower():
+        return False, None, "Kredensial keliru: MIDTRANS_SERVER_KEY yang dipasang adalah Client Key. Harap gunakan Server Key dari Midtrans Dashboard (Settings > Access Keys)."
+
+    if not cfg["is_prod"] and not server_key.startswith("SB-"):
+        return False, None, "Kredensial tidak cocok: Mode Sandbox aktif (MIDTRANS_IS_PRODUCTION=0), tetapi MIDTRANS_SERVER_KEY tidak diawali 'SB-'. Harap gunakan Server Key Sandbox (diawali 'SB-Mid-server-')."
+
+    if cfg["is_prod"] and server_key.startswith("SB-"):
+        return False, None, "Kredensial tidak cocok: Mode Production aktif (MIDTRANS_IS_PRODUCTION=1), tetapi MIDTRANS_SERVER_KEY menggunakan kunci Sandbox ('SB-...')."
+
     endpoint = f"{cfg['base_url']}/v1/payment-links"
     auth_bytes = f"{server_key}:".encode("utf-8")
     basic_auth = base64.b64encode(auth_bytes).decode("utf-8")
@@ -209,6 +220,12 @@ def create_midtrans_payment_link(order_id, user_id, user_email, user_name, tka_d
             return False, None, "Midtrans tidak mengembalikan payment_url."
     except urllib.error.HTTPError as e:
         err_body = e.read().decode("utf-8", errors="ignore")
+        if e.code == 401:
+            return False, None, (
+                f"HTTP 401 Midtrans: Kunci MIDTRANS_SERVER_KEY ditolak oleh Midtrans Sandbox. "
+                f"Pastikan menyalin 'Server Key' (diawali SB-Mid-server-...) dari menu Settings > Access Keys di dashboard Midtrans Sandbox, "
+                f"dan pastikan tidak ada tanda kutip di environment variable Railway."
+            )
         return False, None, f"HTTP {e.code} Midtrans: {err_body}"
     except Exception as e:
         return False, None, f"Gagal menghubungi Midtrans: {str(e)}"
