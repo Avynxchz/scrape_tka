@@ -713,9 +713,78 @@
 <span class="font-body-sm text-body-sm text-text-muted leading-tight">Umpan balik per butir instan</span>
 </div>
 </div>
-<span class="material-symbols-outlined text-accent-mint text-[18px]">check</span>
 </div>
 </div>
+
+<!-- D3: Ringkasan Guru Autopsi Terakhir -->
+<div id="deskGuruAutopsiCard" class="bg-surface-card rounded-2xl p-space-md shadow-sm flex flex-col gap-space-sm border border-emerald-100/80">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-space-xs">
+      <div class="w-8 h-8 rounded-full bg-brand-emerald-light text-primary flex items-center justify-center">
+        <span class="material-symbols-outlined text-[18px]">neurology</span>
+      </div>
+      <div>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface">Guru Autopsi AI</h3>
+        <p class="font-body-sm text-body-sm text-text-muted">Diagnosis Evaluasi Pengerjaan</p>
+      </div>
+    </div>
+    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-label-caps text-label-caps font-bold" id="deskAutopsiBadge">Siap</span>
+  </div>
+  <div id="deskAutopsiBody" class="flex flex-col gap-2 pt-1">
+    <!-- Diisi otomatis oleh renderDeskAutopsiSummary() -->
+  </div>
+</div>
+
+<!-- D3: Akses AI Room per Mapel -->
+<div id="deskAiRoomsCard" class="bg-surface-card rounded-2xl p-space-md shadow-sm flex flex-col gap-space-sm border border-emerald-100/80">
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-space-xs">
+      <div class="w-8 h-8 rounded-full bg-brand-emerald-light text-primary flex items-center justify-center">
+        <span class="material-symbols-outlined text-[18px]">forum</span>
+      </div>
+      <div>
+        <h3 class="font-headline-sm text-headline-sm text-on-surface">Ruang Diskusi AI</h3>
+        <p class="font-body-sm text-body-sm text-text-muted">Tanya &amp; diskusi konsep per mapel</p>
+      </div>
+    </div>
+    <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-label-caps text-label-caps font-bold">24/7 Aktif</span>
+  </div>
+  <div class="grid grid-cols-2 gap-2 pt-1" id="deskAiRoomsList">
+    <a href="/ruang/matematika" target="_top" class="flex items-center gap-2 p-2.5 rounded-xl bg-surface-subtle hover:bg-brand-emerald-light text-on-surface hover:text-primary transition-all text-xs font-bold border border-transparent hover:border-emerald-200" style="text-decoration:none;">
+      <span class="material-symbols-outlined text-[18px] text-primary">calculate</span>
+      <span>R. Matematika</span>
+    </a>
+    <a href="/ruang/fisika" target="_top" class="flex items-center gap-2 p-2.5 rounded-xl bg-surface-subtle hover:bg-brand-emerald-light text-on-surface hover:text-primary transition-all text-xs font-bold border border-transparent hover:border-emerald-200" style="text-decoration:none;">
+      <span class="material-symbols-outlined text-[18px] text-primary">bolt</span>
+      <span>R. Fisika</span>
+    </a>
+    <a href="/ruang/kimia" target="_top" class="flex items-center gap-2 p-2.5 rounded-xl bg-surface-subtle hover:bg-brand-emerald-light text-on-surface hover:text-primary transition-all text-xs font-bold border border-transparent hover:border-emerald-200" style="text-decoration:none;">
+      <span class="material-symbols-outlined text-[18px] text-primary">science</span>
+      <span>R. Kimia</span>
+    </a>
+    <a href="/ruang/biologi" target="_top" class="flex items-center gap-2 p-2.5 rounded-xl bg-surface-subtle hover:bg-brand-emerald-light text-on-surface hover:text-primary transition-all text-xs font-bold border border-transparent hover:border-emerald-200" style="text-decoration:none;">
+      <span class="material-symbols-outlined text-[18px] text-primary">psychology</span>
+      <span>R. Biologi</span>
+    </a>
+    <a href="/ruang/ekonomi" target="_top" class="flex items-center gap-2 p-2.5 rounded-xl bg-surface-subtle hover:bg-brand-emerald-light text-on-surface hover:text-primary transition-all text-xs font-bold border border-transparent hover:border-emerald-200" style="text-decoration:none;">
+      <span class="material-symbols-outlined text-[18px] text-primary">trending_up</span>
+      <span>R. Ekonomi</span>
+    </a>
+    <a href="/ruang/bahasa_indonesia" target="_top" class="flex items-center gap-2 p-2.5 rounded-xl bg-surface-subtle hover:bg-brand-emerald-light text-on-surface hover:text-primary transition-all text-xs font-bold border border-transparent hover:border-emerald-200" style="text-decoration:none;">
+      <span class="material-symbols-outlined text-[18px] text-primary">menu_book</span>
+      <span>R. B. Indonesia</span>
+    </a>
+    <a href="/ruang/bahasa_inggris" target="_top" class="flex items-center gap-2 p-2.5 rounded-xl bg-surface-subtle hover:bg-brand-emerald-light text-on-surface hover:text-primary transition-all text-xs font-bold border border-transparent hover:border-emerald-200" style="text-decoration:none;">
+      <span class="material-symbols-outlined text-[18px] text-primary">language</span>
+      <span>R. B. Inggris</span>
+    </a>
+    <a href="/ruang/matematika_lanjut" target="_top" class="flex items-center gap-2 p-2.5 rounded-xl bg-surface-subtle hover:bg-brand-emerald-light text-on-surface hover:text-primary transition-all text-xs font-bold border border-transparent hover:border-emerald-200" style="text-decoration:none;">
+      <span class="material-symbols-outlined text-[18px] text-primary">functions</span>
+      <span>R. Mat. Lanjut</span>
+    </a>
+  </div>
+</div>
+
 <!-- Kartu Estimasi (jujur, tanpa data karangan) -->
 <div class="bg-surface-card rounded-2xl p-space-md shadow-sm flex flex-col gap-space-sm">
 <div class="flex items-center gap-space-xs">
@@ -1353,6 +1422,86 @@
   // Bangun section mapel tambahan (19 mapel) dan terapkan mapel terpilih
   buildDynamicSubjectSections();
   applyVisibleSubjects(getDeskChosenSubjects());
+
+  // D3: Render Ringkasan Guru Autopsi Terakhir di Desktop
+  function renderDeskAutopsiSummary() {
+    var body = document.getElementById('deskAutopsiBody');
+    var badge = document.getElementById('deskAutopsiBadge');
+    if (!body) return;
+
+    var lastAutopsy = null;
+    var lastCoach = null;
+    try { lastAutopsy = JSON.parse(localStorage.getItem('tka_last_autopsy') || 'null'); } catch (e) {}
+    try { lastCoach = JSON.parse(localStorage.getItem('tka_last_coach') || 'null'); } catch (e) {}
+
+    var labelNama = {
+      'terburu': 'Pola Terburu-buru',
+      'overthinking': 'Pola Overthinking',
+      'macet': 'Pola Macet & Kehabisan Waktu',
+      'yakin_salah': 'Yakin tapi Salah',
+      'ragu_salah': 'Ragu-ragu & Salah',
+      'waktu_habis': 'Kehabisan Waktu',
+      'kosong': 'Soal Dikosongkan'
+    };
+
+    if (lastAutopsy && lastAutopsy.kebocoran_1) {
+      if (badge) {
+        badge.innerText = 'Hasil Terakhir';
+        badge.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 font-label-caps text-label-caps font-bold';
+      }
+      var k1 = lastAutopsy.kebocoran_1;
+      var subjName = (lastAutopsy.subject || 'Matematika').replace(/_/g, ' ');
+      subjName = subjName.charAt(0).toUpperCase() + subjName.slice(1);
+      var pkg = lastAutopsy.paket || 1;
+      var lbl = labelNama[k1.label] || k1.label || 'Kebocoran Terdeteksi';
+      var bukti = k1.bukti || (k1.contoh ? 'Terdeteksi pada pengerjaan Soal ' + k1.contoh.join(', ') : 'Terdeteksi dari analisis waktu dan klik');
+
+      body.innerHTML = 
+        '<div class="bg-amber-50/90 border border-amber-200/90 rounded-xl p-3 flex flex-col gap-1.5">' +
+          '<div class="flex items-center justify-between text-xs">' +
+            '<span class="font-bold text-amber-900 uppercase tracking-wide">🎯 Kebocoran Skor</span>' +
+            '<span class="text-amber-800 font-semibold">' + subjName + ' · Paket ' + pkg + '</span>' +
+          '</div>' +
+          '<div class="text-sm font-bold text-amber-950">' + lbl + '</div>' +
+          '<div class="text-xs text-amber-900/80 leading-relaxed">' + bukti + '</div>' +
+        '</div>' +
+        '<a href="/ruang/' + (lastAutopsy.subject || 'matematika') + '" target="_top" class="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-primary text-white font-bold text-xs hover:bg-primary-container transition-colors shadow-sm" style="text-decoration:none;">' +
+          '<span class="material-symbols-outlined text-[16px]">smart_toy</span>' +
+          '<span>Konsultasi ke Ruang AI (' + subjName + ')</span>' +
+        '</a>';
+    } else {
+      if (badge) {
+        badge.innerText = 'Siap Digunakan';
+        badge.className = 'inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 font-label-caps text-label-caps font-bold';
+      }
+      body.innerHTML = 
+        '<div class="bg-surface-subtle rounded-xl p-3 text-xs text-text-muted leading-relaxed flex flex-col gap-1.5">' +
+          '<p class="m-0">Selesaikan 1 tryout untuk mengidentifikasi kebocoran skor dan mendapatkan rekomendasi strategi dari Guru Autopsi AI.</p>' +
+          '<div class="text-primary font-bold pt-1 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">lightbulb</span> Coba Paket 1 Matematika atau Fisika</div>' +
+        '</div>';
+    }
+  }
+
+  // D3: Tambahkan tombol Ruang AI di header tiap section mapel desktop
+  function addDeskSubjectAiRoomLinks() {
+    document.querySelectorAll('.subject-section').forEach(function(sec) {
+      var subj = sec.getAttribute('data-subject');
+      if (!subj) return;
+      var headRight = sec.querySelector('.flex.items-center.justify-between');
+      if (headRight && !sec.querySelector('.btn-desk-ruang-ai')) {
+        var link = document.createElement('a');
+        link.className = 'btn-desk-ruang-ai inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-emerald-light hover:bg-emerald-100 text-primary font-bold text-xs transition-colors shadow-xs';
+        link.href = '/ruang/' + subj;
+        link.target = '_top';
+        link.style.textDecoration = 'none';
+        link.innerHTML = '<span class="material-symbols-outlined text-[16px]">smart_toy</span><span>Ruang AI</span>';
+        headRight.appendChild(link);
+      }
+    });
+  }
+
+  renderDeskAutopsiSummary();
+  addDeskSubjectAiRoomLinks();
 
   // B6: SessionStorage dismiss untuk banner privasi / ajakan login tamu di desktop
   window.dismissDeskGuestBanner = function () {
