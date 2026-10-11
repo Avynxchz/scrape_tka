@@ -1239,6 +1239,10 @@ class AppRequestHandler(SimpleHTTPRequestHandler):
         super().__init__(*args, directory=BASE_DIR, **kwargs)
 
     def end_headers(self):
+        # [muse-fix] Set cookie internal untuk bypass redirect preview (30 hari)
+        if getattr(self, '_set_internal_cookie', False):
+            self.send_header('Set-Cookie', 'tka_internal=1; Path=/; Max-Age=2592000; SameSite=Lax')
+            self._set_internal_cookie = False
         # Disable caching for html/js/css/json and root so frontend changes are always picked up immediately
         clean = self.path.split('?', 1)[0].split('#', 1)[0].lower()
         if clean.endswith(('.html', '.js', '.css', '.json')) or clean in ('', '/'):
@@ -2025,7 +2029,31 @@ function salinWA() {
                                          "message": "Akses statis ke file ini tidak diizinkan."})
         return super().do_HEAD()
 
+    def _maybe_redirect_preview(self):
+        """[muse-fix] Redirect pengunjung umum dari domain preview ke produksi.
+        Preview khusus internal (kita). Bypass: ?internal=1 (sekali, lalu cookie 30 hari)
+        atau cookie tka_internal=1. Return True jika sudah redirect (caller harus return)."""
+        host = (self.headers.get('Host') or '').split(':')[0].strip().lower()
+        if 'tka-master-preview' not in host:
+            return False
+        query = urllib.parse.urlparse(self.path).query
+        params = urllib.parse.parse_qs(query)
+        cookies = self.headers.get('Cookie') or ''
+        if params.get('internal') == ['1']:
+            self._set_internal_cookie = True
+            return False
+        if 'tka_internal=1' in cookies:
+            return False
+        target = 'https://tka-master.up.railway.app' + self.path
+        self.send_response(302)
+        self.send_header('Location', target)
+        self.send_header('Cache-Control', 'no-store')
+        self.end_headers()
+        return True
+
     def do_GET(self):
+        if self._maybe_redirect_preview():
+            return
         _track_client_context(self)
         _did, _need_ck = visitor_log.record(self)
         self._visitor_did = _did
