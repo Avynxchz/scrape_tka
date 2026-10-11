@@ -150,7 +150,7 @@ def find_active_pending_payment(user_id, sb_url=None, sb_svc=None):
 
 def create_midtrans_payment_link(order_id, user_id, user_email, user_name, tka_date, gross_amount=14900):
     """
-    Panggil API Midtrans Create Payment Link (/v2/payment-links).
+    Panggil API Midtrans Create Payment Link (/v1/payment-links).
     Mengembalikan (ok: bool, payment_url: str|None, error_msg: str|None)
     """
     cfg = get_midtrans_config()
@@ -158,7 +158,7 @@ def create_midtrans_payment_link(order_id, user_id, user_email, user_name, tka_d
     if not server_key:
         return False, None, "MIDTRANS_SERVER_KEY belum dikonfigurasi di server."
 
-    endpoint = f"{cfg['base_url']}/v2/payment-links"
+    endpoint = f"{cfg['base_url']}/v1/payment-links"
     auth_bytes = f"{server_key}:".encode("utf-8")
     basic_auth = base64.b64encode(auth_bytes).decode("utf-8")
 
@@ -203,7 +203,7 @@ def create_midtrans_payment_link(order_id, user_id, user_email, user_name, tka_d
     try:
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read().decode("utf-8") or "{}")
-            payment_url = data.get("payment_url") or data.get("redirect_url")
+            payment_url = data.get("payment_url") or data.get("payment_link_url") or data.get("redirect_url")
             if payment_url:
                 return True, payment_url, None
             return False, None, "Midtrans tidak mengembalikan payment_url."

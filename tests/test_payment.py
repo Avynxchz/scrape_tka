@@ -13,6 +13,7 @@ import hashlib
 import json
 import os
 import unittest
+from unittest import mock
 import urllib.error
 import urllib.request
 
@@ -84,6 +85,39 @@ class TestMidtransPaymentUnit(unittest.TestCase):
         self.assertFalse(payment_service.verify_midtrans_signature(
             order_id, status_code, gross_amount, "invalid_sig_12345", server_key=server_key
         ))
+
+    @unittest.mock.patch("urllib.request.urlopen")
+    def test_create_midtrans_payment_link_v1_endpoint(self, mock_urlopen):
+        mock_resp = unittest.mock.MagicMock()
+        mock_resp.read.return_value = json.dumps({
+            "payment_url": "https://app.sandbox.midtrans.com/payment-links/1647"
+        }).encode("utf-8")
+        mock_resp.__enter__.return_value = mock_resp
+        mock_urlopen.return_value = mock_resp
+
+        old_key = os.environ.get("MIDTRANS_SERVER_KEY")
+        old_prod = os.environ.get("MIDTRANS_IS_PRODUCTION")
+        try:
+            os.environ["MIDTRANS_SERVER_KEY"] = "SB-Mid-server-testkey"
+            os.environ["MIDTRANS_IS_PRODUCTION"] = "0"
+            ok, url, err = payment_service.create_midtrans_payment_link(
+                "SPRINT-test-1", "user-1234", "test@musse.id", "Test User", "2026-11-20"
+            )
+            self.assertTrue(ok)
+            self.assertEqual(url, "https://app.sandbox.midtrans.com/payment-links/1647")
+            call_args = mock_urlopen.call_args
+            req_sent = call_args[0][0]
+            self.assertEqual(req_sent.full_url, "https://api.sandbox.midtrans.com/v1/payment-links")
+        finally:
+            if old_key is not None:
+                os.environ["MIDTRANS_SERVER_KEY"] = old_key
+            else:
+                os.environ.pop("MIDTRANS_SERVER_KEY", None)
+            if old_prod is not None:
+                os.environ["MIDTRANS_IS_PRODUCTION"] = old_prod
+            else:
+                os.environ.pop("MIDTRANS_IS_PRODUCTION", None)
+
 
 
 class TestMidtransPaymentEndpoints(unittest.TestCase):
