@@ -681,11 +681,16 @@
 
     function renderSummaryCard(ctx) {
       const dispName = ctx.display_name || currentMapelSlug.replace(/_/g, ' ').toUpperCase();
-      document.getElementById('roomTitle').querySelector('span').innerText = `Ruang ${dispName}`;
+      const rTitle = document.getElementById('roomTitle');
+      if (rTitle && rTitle.querySelector('span')) {
+        rTitle.querySelector('span').innerText = `Ruang ${dispName}`;
+      }
       document.title = `Ruang ${dispName} - AI Coach | TKA Master`;
       document.querySelectorAll('.mapel-label').forEach(el => el.innerText = dispName);
 
       const noticeEl = document.getElementById('guestRoomNotice');
+      const honestMsg = ctx.guest_message || ctx.pola || 'Login untuk menyimpan riwayat dan mendapatkan analisis AI Room. Sebagai tamu, data hanya tersimpan di perangkat ini.';
+
       if (ctx.is_guest) {
         if (noticeEl) noticeEl.style.display = 'block';
         const headlineEl = document.getElementById('summaryHeadline');
@@ -697,27 +702,32 @@
             </div>
           `;
         }
-        document.getElementById('sumTopikWeak').innerText = 'Perlu Login';
-        document.getElementById('valWaktu').innerText = 'Lokal di browser';
-        document.getElementById('valKuat').innerText = 'Perlu Login';
-        const honestMsg = ctx.guest_message || ctx.pola || 'Login untuk menyimpan riwayat dan mendapatkan analisis AI Room. Sebagai tamu, data hanya tersimpan di perangkat ini.';
-        document.getElementById('txtPola').innerText = honestMsg;
+        const valW = document.getElementById('valWaktu');
+        if (valW) valW.innerText = 'Lokal di browser';
+        const valK = document.getElementById('valKuat');
+        if (valK) valK.innerText = 'Perlu Login';
+        const txtP = document.getElementById('txtPola');
+        if (txtP) txtP.innerText = honestMsg;
       } else {
         if (noticeEl) noticeEl.style.display = 'none';
-        document.getElementById('sumTotalSoal').innerText = ctx.total_soal || 0;
-        document.getElementById('sumAkurasi').innerText = `${ctx.akurasi || 0}%`;
+        const sTot = document.getElementById('sumTotalSoal');
+        if (sTot) sTot.innerText = ctx.total_soal || 0;
+        const sAcc = document.getElementById('sumAkurasi');
+        if (sAcc) sAcc.innerText = `${ctx.akurasi || 0}%`;
 
         const weakList = ctx.topik_terlemah || [];
         const weakStr = weakList.length > 0 ? weakList.join(', ') : 'Belum terdeteksi';
-        document.getElementById('sumTopikWeak').innerText = weakStr;
+        const sWeak = document.getElementById('sumTopikWeak');
+        if (sWeak) sWeak.innerText = weakStr;
 
-        document.getElementById('valWaktu').innerText = `${ctx.waktu_rata2_per_soal || 0}s / soal`;
+        const valW = document.getElementById('valWaktu');
+        if (valW) valW.innerText = `${ctx.waktu_rata2_per_soal || 0}s / soal`;
         const strongList = ctx.topik_terkuat || [];
-        document.getElementById('valKuat').innerText = strongList.length > 0 ? strongList.join(', ') : 'Belum terdeteksi';
+        const valK = document.getElementById('valKuat');
+        if (valK) valK.innerText = strongList.length > 0 ? strongList.join(', ') : 'Belum terdeteksi';
 
-        if (ctx.pola) {
-          document.getElementById('txtPola').innerText = ctx.pola;
-        }
+        const txtP = document.getElementById('txtPola');
+        if (txtP && ctx.pola) txtP.innerText = ctx.pola;
       }
     }
 
