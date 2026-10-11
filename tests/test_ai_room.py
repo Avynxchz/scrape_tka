@@ -159,6 +159,9 @@ class TestAIRoomEndpoints(unittest.TestCase):
         self.assertIn("context", res)
         self.assertEqual(res["context"]["mapel"], "matematika")
         self.assertEqual(res["context"]["total_soal"], 0)
+        self.assertIn("guest_message", res)
+        self.assertIn("Login untuk menyimpan riwayat", res["guest_message"])
+        self.assertIn("Sebagai tamu, data hanya tersimpan di perangkat ini.", res["guest_message"])
 
     @patch("ai_room.fetch_supabase_attempts")
     @patch("server._verify_supabase_token")

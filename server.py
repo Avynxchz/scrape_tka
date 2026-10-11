@@ -1885,13 +1885,19 @@ function salinWA() {
             _token = _auth[7:].strip() if _auth.startswith('Bearer ') else ''
 
             if not _token:
-                # Mode tamu / belum login: kembalikan agregat kosong agar UI dapat menampilkan preview ramah
-                empty_aggr = ai_room.calculate_mapel_aggregates([], clean_mapel)
+                # Mode tamu / belum login: kembalikan pesan jujur (K3)
+                guest_msg = (
+                    "Login untuk menyimpan riwayat dan mendapatkan analisis AI Room. "
+                    "Sebagai tamu, data hanya tersimpan di perangkat ini."
+                )
+                empty_aggr = ai_room.calculate_mapel_aggregates([], clean_mapel, is_guest=True)
+                empty_aggr["pola"] = guest_msg
                 return self._send_json(200, {
                     "status": "success",
                     "is_guest": True,
                     "context": empty_aggr,
-                    "message": "Login Google untuk melihat analisis penuh dari latihanmu."
+                    "guest_message": guest_msg,
+                    "message": guest_msg
                 })
 
             _vok, _user = _verify_supabase_token(_token)
@@ -1903,7 +1909,7 @@ function salinWA() {
             sb_svc = os.environ.get('SUPABASE_SERVICE_KEY', '') or os.environ.get('SUPABASE_ANON_KEY', '')
 
             attempts = ai_room.fetch_supabase_attempts(user_id, clean_mapel, sb_url, sb_svc)
-            aggregates = ai_room.calculate_mapel_aggregates(attempts, clean_mapel)
+            aggregates = ai_room.calculate_mapel_aggregates(attempts, clean_mapel, is_guest=False)
 
             # Penting: jangan kirim raw items ke klien
             return self._send_json(200, {
@@ -1950,7 +1956,7 @@ function salinWA() {
             if user_id and sb_url and sb_svc:
                 attempts = ai_room.fetch_supabase_attempts(user_id, clean_mapel, sb_url, sb_svc)
 
-            aggregates = ai_room.calculate_mapel_aggregates(attempts, clean_mapel)
+            aggregates = ai_room.calculate_mapel_aggregates(attempts, clean_mapel, is_guest=is_guest)
             last_wrong = ai_room.get_last_wrong_questions(attempts, clean_mapel, limit=5)
 
             # Panggil LLM (pakai fungsi coach yang sudah ada, tanpa memotong kuota tutor)

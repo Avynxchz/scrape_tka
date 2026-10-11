@@ -156,7 +156,7 @@ def is_answer_correct(item, mapel_slug, paket=1):
     return str(user_ans).strip().upper() == str(kunci).strip().upper()
 
 
-def calculate_mapel_aggregates(attempts, mapel_slug):
+def calculate_mapel_aggregates(attempts, mapel_slug, is_guest=False):
     """Hitung agregat performa user untuk satu mapel (D2).
     
     TIDAK mengembalikan raw items agar privasi dan bandwidth optimal.
@@ -243,10 +243,15 @@ def calculate_mapel_aggregates(attempts, mapel_slug):
     )
     topik_terkuat = [t[0] for t in sorted_strong[:3] if t[1]["akurasi_pct"] >= 50]
 
-    # Analisis pola belajar
+    # Analisis pola belajar (K3: Pesan jujur dan jelas bagi mode tamu vs akun login)
     pola = "Data belajar stabil, pertahankan konsistensi latihan."
-    if total_soal == 0:
-        pola = "Belum ada riwayat pengerjaan. Kerjakan latihan untuk memetakan performa."
+    if is_guest:
+        pola = (
+            "Login untuk menyimpan riwayat dan mendapatkan analisis AI Room. "
+            "Sebagai tamu, data hanya tersimpan di perangkat ini."
+        )
+    elif total_soal == 0:
+        pola = "Belum ada riwayat pengerjaan di akun ini. Kerjakan latihan untuk memetakan performa."
     elif total_salah > 0:
         if (salah_soal_lama / total_salah) >= 0.4:
             pola = "Sering salah di soal >60 detik (indikasi kebuntuan analisa rumus/langkah)."
@@ -270,7 +275,8 @@ def calculate_mapel_aggregates(attempts, mapel_slug):
         "akurasi_per_topik": akurasi_per_topik,
         "topik_terlemah": topik_terlemah,
         "topik_terkuat": topik_terkuat,
-        "pola": pola
+        "pola": pola,
+        "is_guest": is_guest
     }
 
 
@@ -312,7 +318,12 @@ def get_last_wrong_questions(attempts, mapel_slug, limit=5):
 
 
 def fetch_supabase_attempts(user_id, mapel_slug, sb_url, sb_key):
-    """Ambil daftar attempt user untuk mapel tertentu dari Supabase REST."""
+    """Ambil daftar attempt user untuk mapel tertentu dari Supabase REST.
+    
+    Catatan (K3): Untuk pengguna berstatus TAMU (user_id kosong atau None),
+    fungsi ini mengembalikan [] karena attempt tryout tamu hanya disimpan di localStorage
+    perangkat pengguna dan tidak dikirimkan ke server Supabase.
+    """
     if not user_id or not sb_url or not sb_key:
         return []
 

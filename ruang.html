@@ -487,6 +487,23 @@
   <!-- Main Container -->
   <main class="room-main">
 
+    <!-- Banner Pemberitahuan Mode Tamu (K3) -->
+    <div id="guestRoomNotice" style="display:none;background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:12px 16px;margin-bottom:14px;box-shadow:var(--shadow-sm);">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:240px;">
+          <div style="font-size:13px;font-weight:800;color:#9a3412;margin-bottom:4px;display:flex;align-items:center;gap:6px">
+            <i class="fa-solid fa-circle-info"></i> Mode Tamu Aktif
+          </div>
+          <p style="font-size:12.5px;color:#7c2d12;margin:0;line-height:1.45" id="guestNoticeText">
+            Login untuk menyimpan riwayat dan mendapatkan analisis AI Room. Sebagai tamu, data hanya tersimpan di perangkat ini.
+          </p>
+        </div>
+        <a href="/app" style="background:#c2410c;color:#ffffff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px;box-shadow:0 2px 6px rgba(194,65,12,0.25);">
+          <i class="fa-brands fa-google"></i> Masuk Akun
+        </a>
+      </div>
+    </div>
+
     <!-- Kartu Ringkasan Performa (D2) -->
     <section class="summary-card" id="summaryCard">
       <div class="summary-headline" id="summaryHeadline">
@@ -650,6 +667,8 @@
         const json = await res.json();
         if (res.ok && json.status === 'success') {
           roomContext = json.context || {};
+          roomContext.is_guest = !!(json.is_guest || !token);
+          roomContext.guest_message = json.guest_message || json.message;
           renderSummaryCard(roomContext);
           updateWelcomeMessage(roomContext);
         } else {
@@ -666,19 +685,39 @@
       document.title = `Ruang ${dispName} - AI Coach | TKA Master`;
       document.querySelectorAll('.mapel-label').forEach(el => el.innerText = dispName);
 
-      document.getElementById('sumTotalSoal').innerText = ctx.total_soal || 0;
-      document.getElementById('sumAkurasi').innerText = `${ctx.akurasi || 0}%`;
+      const noticeEl = document.getElementById('guestRoomNotice');
+      if (ctx.is_guest) {
+        if (noticeEl) noticeEl.style.display = 'block';
+        const headlineEl = document.getElementById('summaryHeadline');
+        if (headlineEl) {
+          headlineEl.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;">
+              <span style="font-weight:700;color:#9a3412"><i class="fa-solid fa-circle-info"></i> Mode Tamu</span>
+              <span style="font-size:12px;color:#c2410c">Data riwayat hanya tersimpan di perangkat ini</span>
+            </div>
+          `;
+        }
+        document.getElementById('sumTopikWeak').innerText = 'Perlu Login';
+        document.getElementById('valWaktu').innerText = 'Lokal di browser';
+        document.getElementById('valKuat').innerText = 'Perlu Login';
+        const honestMsg = ctx.guest_message || ctx.pola || 'Login untuk menyimpan riwayat dan mendapatkan analisis AI Room. Sebagai tamu, data hanya tersimpan di perangkat ini.';
+        document.getElementById('txtPola').innerText = honestMsg;
+      } else {
+        if (noticeEl) noticeEl.style.display = 'none';
+        document.getElementById('sumTotalSoal').innerText = ctx.total_soal || 0;
+        document.getElementById('sumAkurasi').innerText = `${ctx.akurasi || 0}%`;
 
-      const weakList = ctx.topik_terlemah || [];
-      const weakStr = weakList.length > 0 ? weakList.join(', ') : 'Belum ada data';
-      document.getElementById('sumTopikWeak').innerText = weakStr;
+        const weakList = ctx.topik_terlemah || [];
+        const weakStr = weakList.length > 0 ? weakList.join(', ') : 'Belum terdeteksi';
+        document.getElementById('sumTopikWeak').innerText = weakStr;
 
-      document.getElementById('valWaktu').innerText = `${ctx.waktu_rata2_per_soal || 0}s / soal`;
-      const strongList = ctx.topik_terkuat || [];
-      document.getElementById('valKuat').innerText = strongList.length > 0 ? strongList.join(', ') : 'Belum ada';
+        document.getElementById('valWaktu').innerText = `${ctx.waktu_rata2_per_soal || 0}s / soal`;
+        const strongList = ctx.topik_terkuat || [];
+        document.getElementById('valKuat').innerText = strongList.length > 0 ? strongList.join(', ') : 'Belum terdeteksi';
 
-      if (ctx.pola) {
-        document.getElementById('txtPola').innerText = ctx.pola;
+        if (ctx.pola) {
+          document.getElementById('txtPola').innerText = ctx.pola;
+        }
       }
     }
 
@@ -690,7 +729,29 @@
 
       let msg = '';
       const chipsEl = document.getElementById('quickChips');
-      if (total > 0) {
+      if (ctx.is_guest) {
+        msg = `Selamat datang di <strong>Ruang ${disp}</strong>!<br>` +
+              `<div style="margin-top:8px;padding:9px 12px;background:#fff7ed;border-left:3px solid #c2410c;border-radius:6px;font-size:12.5px;color:#9a3412;line-height:1.45">` +
+              `<strong>Pemberitahuan Tamu:</strong> Login untuk menyimpan riwayat dan mendapatkan analisis AI Room. Sebagai tamu, data hanya tersimpan di perangkat ini.` +
+              `</div><br>` +
+              `Kamu tetap bisa bertanya konsep materi, bedah rumus cepat, atau konsultasi materi di ruang ini bersama AI Coach!`;
+        if (chipsEl) {
+          chipsEl.innerHTML = `
+            <button class="quick-chip" onclick="sendQuickPrompt('Jelaskan materi dan konsep penting yang paling sering keluar di ${disp}!')">
+              <i class="fa-solid fa-lightbulb" style="color: #2563eb;"></i> Konsep sering keluar
+            </button>
+            <button class="quick-chip" onclick="sendQuickPrompt('Berikan ringkasan rumus dan trik cepat pengerjaan soal ${disp}.')">
+              <i class="fa-solid fa-bolt" style="color: #d97706;"></i> Rumus & trik cepat
+            </button>
+            <button class="quick-chip" onclick="sendQuickPrompt('Bagaimana cara paling efektif belajar ${disp} dari nol?')">
+              <i class="fa-solid fa-graduation-cap" style="color: #059669;"></i> Panduan belajar ${disp}
+            </button>
+            <a class="quick-chip" href="/app" style="text-decoration:none;display:inline-flex;align-items:center;color:inherit;">
+              <i class="fa-brands fa-google" style="color: #c2410c;"></i> Login untuk simpan progres
+            </a>
+          `;
+        }
+      } else if (total > 0) {
         msg = `Berdasarkan rekam jejakmu, kamu sudah menyelesaikan <strong>${total} butir soal</strong> dengan akurasi <strong>${acc}%</strong>. ` +
               `Fokus utama kita saat ini adalah menguatkan topik <strong>${weak}</strong>. ` +
               `Ada materi atau pola soal yang ingin kita bedah bersama sekarang?`;
@@ -736,13 +797,19 @@
     function showFallbackContext() {
       const disp = currentMapelSlug.replace(/_/g, ' ').toUpperCase();
       document.getElementById('roomTitle').querySelector('span').innerText = `Ruang ${disp}`;
-      document.getElementById('sumTotalSoal').innerText = '0';
-      document.getElementById('sumAkurasi').innerText = '0%';
-      document.getElementById('sumTopikWeak').innerText = 'Belum ada';
-      document.getElementById('valWaktu').innerText = '0s / soal';
-      document.getElementById('valKuat').innerText = 'Belum ada';
-      document.getElementById('txtPola').innerText = 'Mulai kerjakan tryout untuk mengaktifkan analisis performa.';
-      updateWelcomeMessage({ display_name: disp, total_soal: 0 });
+      const token = getAuthToken();
+      if (!token) {
+        renderSummaryCard({ is_guest: true, display_name: disp });
+        updateWelcomeMessage({ is_guest: true, display_name: disp });
+      } else {
+        document.getElementById('sumTotalSoal').innerText = '0';
+        document.getElementById('sumAkurasi').innerText = '0%';
+        document.getElementById('sumTopikWeak').innerText = 'Belum terdeteksi';
+        document.getElementById('valWaktu').innerText = '0s / soal';
+        document.getElementById('valKuat').innerText = 'Belum terdeteksi';
+        document.getElementById('txtPola').innerText = 'Mulai kerjakan tryout untuk mengaktifkan analisis performa.';
+        updateWelcomeMessage({ display_name: disp, total_soal: 0, is_guest: false });
+      }
     }
 
     // Kirim Pesan Cepat dari Chip Saran
